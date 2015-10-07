@@ -1,0 +1,10 @@
+<template name='index'>
+  <p>Welcome to the experiment.</p>
+
+  {{#each opportunities}}
+    <p>{{ title }}</p>
+    <p>{{ url }}</p>
+    <p>{{ currentBid }}</p>
+    <p>{{ closingDate }}</p>
+  {{/each}}
+</template>
