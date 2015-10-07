@@ -17,7 +17,11 @@ nav.usa-site-navbar a {
 }
 
 footer {
-  margin-top: 100px;
+  margin-top: 50px;
+}
+
+.center {
+  text-align: center;
 }
 
 .issue-icon {
@@ -27,8 +31,8 @@ footer {
 
 .bid-button {
   padding: 5px 8px;
-  background-color: #2e8540;
   white-space: nowrap;
+  background-color: #2e8540;
 }
 
 .table-container {
@@ -51,4 +55,28 @@ footer {
 
 .table-bids {
   min-width: 150px;
+}
+
+.make-bid-grid {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.make-bid-grid p {
+  margin: 0;
+  line-height: 1em;
+}
+
+.current-bid-amount {
+  font-size: 40px;
+  color: #2e8540;
+}
+
+#your-bid-amount {
+  max-width: 250px;
+  margin: auto;
+}
+
+.usa-button-big {
+  background-color: #2e8540;
 }
