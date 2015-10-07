@@ -1,0 +1,21 @@
+
+nav.usa-site-navbar {
+  background: gray;
+  padding: 10px;
+}
+
+nav.usa-site-navbar a {
+  position: relative;
+  top: -15px;
+  margin-left: 14px;
+  font-size: 30px;
+  color: #fff;
+}
+
+#logo {
+  line-height: 0;
+}
+
+footer {
+  margin-top: 100px;
+}
