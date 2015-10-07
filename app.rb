@@ -14,4 +14,7 @@ class App < Sinatra::Base
     erb :"my-bids"
   end
   
+  get '/bid-submitted' do
+    erb :"bid-submitted"
+  end
 end
