@@ -19,3 +19,36 @@ nav.usa-site-navbar a {
 footer {
   margin-top: 100px;
 }
+
+.issue-icon {
+  width: 25px;
+  max-width: none;
+}
+
+.bid-button {
+  padding: 5px 8px;
+  background-color: #2e8540;
+  white-space: nowrap;
+}
+
+.table-container {
+  width: 100%;
+  overflow: scroll;
+}
+
+.table-open-issue-list {
+  min-width: 600px;
+}
+
+.table-open-issue-list h1 {
+  font-size: 20px;
+  margin: 0 0 10px 0;
+}
+
+.table-open-issue-list p {
+  margin: 0;
+}
+
+.table-bids {
+  min-width: 150px;
+}
