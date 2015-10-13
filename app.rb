@@ -5,16 +5,16 @@ class App < Sinatra::Base
   get '/' do
     erb :index
   end
-  
+
   get '/make-bid' do
-    erb :"make-bid"
+    erb :make_bid
   end
-  
+
   get '/my-bids' do
-    erb :"my-bids"
+    erb :my_bids
   end
-  
+
   get '/bid-submitted' do
-    erb :"bid-submitted"
+    erb :bid_submitted
   end
 end
