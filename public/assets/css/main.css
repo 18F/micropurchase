@@ -88,3 +88,21 @@ footer {
 .usa-button-big {
   background-color: #2e8540;
 }
+
+.header-account {
+  float: right;
+  position: relative;
+  top: 15px;
+  color: #fff;
+}
+
+.header-account span {
+  position: relative;
+  top: -8px;
+}
+
+.header-account button {
+  margin: 0;
+  position: relative;
+  top: 8px;
+}
