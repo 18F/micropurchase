@@ -16,6 +16,7 @@ GEM
       tzinfo (~> 1.1)
     arel (6.0.3)
     builder (3.2.2)
+    chronic (0.10.2)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
     hashie (3.4.2)
@@ -62,6 +63,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  chronic
   omniauth
   omniauth-github
   pg
