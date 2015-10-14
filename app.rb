@@ -2,8 +2,11 @@ require 'bundler/setup'
 require 'sinatra/base'
 require 'omniauth'
 require 'omniauth-github'
+require 'sinatra/activerecord'
 
 class App < Sinatra::Base
+  register Sinatra::ActiveRecordExtension
+  set :database_file, 'database.yml'
   enable :sessions
   use OmniAuth::Builder do
     provider :github,
@@ -17,6 +20,7 @@ class App < Sinatra::Base
       !session[:uid].nil?
     end
   end
+
 
   before do
     # we do not want to redirect to twitter when the path info starts
