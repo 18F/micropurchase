@@ -39,8 +39,8 @@ class App < Sinatra::Base
   end
 
   get '/auth/failure' do
-  # omniauth redirects to /auth/failure when it encounters a problem
-  # so you can implement this as you please
+    # omniauth redirects to /auth/failure when it encounters a problem
+    # so you can implement this as you please
   end
 
   get '/logout' do
