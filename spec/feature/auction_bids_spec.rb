@@ -1,10 +1,10 @@
 require_relative '../feature_helper'
 
 RSpec.describe 'Auction bids, REST style' do
-  describe '/auctions/:auction_id/bids/new' do
-    let(:current_bidder) { Bidder.create(github_id: '12345')}
-    let(:auction) { Auction.create(title: 'Refactor this disaster') }
+  let(:current_bidder) { Bidder.create(github_id: '12345')}
+  let(:auction) { Auction.create(title: 'Refactor this disaster') }
 
+  describe '/auctions/:auction_id/bids/new' do
     context 'when there are no bids' do
       it 'should render the bid information' do
         get "/auctions/#{auction.id}/bids/new", {}, session_authentication
@@ -39,6 +39,26 @@ RSpec.describe 'Auction bids, REST style' do
       end
 
       it 'should maybe do something slightly different??'
+    end
+  end
+
+  describe 'post /actions/:auction_id/bids' do
+    context 'when there are no other bids' do
+      it 'render success' do
+        post "/auctions/#{auction.id}/bids", {amount: 3000.00}, session_authentication
+        expect(last_response.body).to include('Bid Submitted!')
+      end
+
+      it "creats a bid for the current user and is the current bid"
+    end
+
+    context 'when the bid is lower than the current bid' do
+    end
+
+    context 'when the bid is higher than the current bid' do
+    end
+
+    context 'when the bid is the same as current bid' do
     end
   end
 end

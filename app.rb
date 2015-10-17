@@ -88,4 +88,11 @@ class App < Sinatra::Base
     erb :auctions_bids_new
   end
 
+  post '/auctions/:auction_id/bids' do
+    # find the auction
+    # create a new bid for the current bidder
+    # render some confirmation
+    erb :auctions_bids_created
+  end
+
 end
