@@ -4,6 +4,11 @@ require 'omniauth'
 require 'omniauth-github'
 require 'sinatra/activerecord'
 
+require_relative 'models/auction'
+require_relative 'models/bid'
+require_relative 'models/bidder'
+
+
 class App < Sinatra::Base
   register Sinatra::ActiveRecordExtension
   set :database_file, 'database.yml'
@@ -62,4 +67,15 @@ class App < Sinatra::Base
   get '/bid-submitted' do
     erb :bid_submitted
   end
+
+  # -------
+  # RESTful routes
+  #
+  get '/auctions/:auction_id/bids/new' do
+    # get the auction
+    # get the current bid amount
+    # render some stuff, or return json and let the front end do it?
+    erb :auctions_bids_new
+  end
+
 end
