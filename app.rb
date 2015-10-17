@@ -66,12 +66,8 @@ class App < Sinatra::Base
     erb :index
   end
 
-  get '/my-bids' do
-    erb :my_bids
-  end
-
   # -------
-  # RESTful routes
+  # RESTful routes auction bids
   #
   get '/auctions/:auction_id/bids/new' do
     # get the auction
@@ -87,4 +83,9 @@ class App < Sinatra::Base
     erb :auctions_bids_created
   end
 
+  # RESTful routes bids un-nested from auction and scoped to current user
+  get '/bids' do
+    # get all my bids
+    erb :bids_index
+  end
 end
