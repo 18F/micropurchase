@@ -16,7 +16,7 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
-ENV['RACK_TEST'] = 'test'
+ENV['RACK_ENV'] = 'test'
 require File.dirname(__FILE__) + "/../app"
 Dir.glob(File.dirname(__FILE__) + "/support/*.rb").each { |f| require f }
 #

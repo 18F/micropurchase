@@ -13,6 +13,16 @@ class App < Sinatra::Base
   register Sinatra::ActiveRecordExtension
   set :database_file, 'database.yml'
   enable :sessions
+
+  puts 'rack env'
+  puts ENV['RACK_ENV']
+
+  configure :test do
+    ActiveRecord::Base.logger = Logger.new(
+      File.new(File.dirname(__FILE__) + '/log/test.log', 'w')
+    )
+  end
+
   use OmniAuth::Builder do
     provider :github,
              ENV['MPT_3500_GITHUB_KEY'],
