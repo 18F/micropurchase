@@ -1,7 +1,7 @@
 require_relative '../feature_helper'
 
 RSpec.describe 'Auction bids, REST style' do
-  let(:current_bidder) { Bidder.create(github_id: '12345')}
+  let(:current_bidder) { User.create(github_id: '12345')}
   let(:auction) { Auction.create(title: 'Refactor this disaster') }
 
   describe '/auctions/:auction_id/bids/new' do
