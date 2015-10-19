@@ -8,14 +8,12 @@ require 'json'
 require_relative 'models/auction'
 require_relative 'models/bid'
 require_relative 'models/bidder'
+require_relative 'models/authenticator'
 
 class App < Sinatra::Base
   register Sinatra::ActiveRecordExtension
   set :database_file, 'database.yml'
   enable :sessions
-
-  puts 'rack env'
-  puts ENV['RACK_ENV']
 
   configure :test do
     ActiveRecord::Base.logger = Logger.new(
