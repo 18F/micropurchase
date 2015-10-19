@@ -10,6 +10,7 @@ require_relative 'models/bid'
 require_relative 'models/user'
 require_relative 'models/authenticator'
 
+
 class App < Sinatra::Base
   use Rack::MethodOverride
   register Sinatra::ActiveRecordExtension
