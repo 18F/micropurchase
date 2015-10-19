@@ -11,6 +11,7 @@ require_relative 'models/user'
 require_relative 'models/authenticator'
 
 class App < Sinatra::Base
+  use Rack::MethodOverride
   register Sinatra::ActiveRecordExtension
   set :database_file, 'database.yml'
   enable :sessions
@@ -70,8 +71,22 @@ class App < Sinatra::Base
   get '/users/:id/edit' do
     begin
       @user = User.find(params[:id])
-      halt(400) if @user.id != session[:user_id]
+      halt(403) if @user.id != session[:user_id]
       erb :users_edit
+    rescue ActiveRecord::RecordNotFound
+      halt(404)
+    end
+  end
+
+  put '/users/:id' do
+    begin
+      @user = User.find(params[:id])
+      halt(403) if @user.id != session[:user_id]
+      @user.update_attributes({
+        sam_id: params[:sam_id],
+        duns_id: params[:duns_id]
+      })
+      redirect to('/')
     rescue ActiveRecord::RecordNotFound
       halt(404)
     end
@@ -95,5 +110,13 @@ class App < Sinatra::Base
   get '/bids' do
     # get all my bids
     erb :bids_index
+  end
+
+  error 403 do
+    'Access forbidden'
+  end
+
+  error 404 do
+    'Record not found'
   end
 end
