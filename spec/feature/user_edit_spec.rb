@@ -24,6 +24,7 @@ RSpec.describe 'User edit flow' do
       expect(last_response.body).to include('SAM')
     end
   end
+
   describe 'put /users/:id' do
     let(:user) { User.create }
 
