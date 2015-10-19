@@ -4,10 +4,25 @@ require 'omniauth'
 require 'omniauth-github'
 require 'sinatra/activerecord'
 
+require_relative 'models/auction'
+require_relative 'models/bid'
+require_relative 'models/bidder'
+
+
 class App < Sinatra::Base
   register Sinatra::ActiveRecordExtension
   set :database_file, 'database.yml'
   enable :sessions
+
+  puts 'rack env'
+  puts ENV['RACK_ENV']
+
+  configure :test do
+    ActiveRecord::Base.logger = Logger.new(
+      File.new(File.dirname(__FILE__) + '/log/test.log', 'w')
+    )
+  end
+
   use OmniAuth::Builder do
     provider :github,
              ENV['MPT_3500_GITHUB_KEY'],
@@ -39,8 +54,8 @@ class App < Sinatra::Base
   end
 
   get '/auth/failure' do
-  # omniauth redirects to /auth/failure when it encounters a problem
-  # so you can implement this as you please
+    # omniauth redirects to /auth/failure when it encounters a problem
+    # so you can implement this as you please
   end
 
   get '/logout' do
@@ -51,15 +66,26 @@ class App < Sinatra::Base
     erb :index
   end
 
-  get '/make-bid' do
-    erb :make_bid
+  # -------
+  # RESTful routes auction bids
+  #
+  get '/auctions/:auction_id/bids/new' do
+    # get the auction
+    # get the current bid amount
+    # render some stuff, or return json and let the front end do it?
+    erb :auctions_bids_new
   end
 
-  get '/my-bids' do
-    erb :my_bids
+  post '/auctions/:auction_id/bids' do
+    # find the auction
+    # create a new bid for the current bidder
+    # render some confirmation
+    erb :auctions_bids_created
   end
 
-  get '/bid-submitted' do
-    erb :bid_submitted
+  # RESTful routes bids un-nested from auction and scoped to current user
+  get '/bids' do
+    # get all my bids
+    erb :bids_index
   end
 end
