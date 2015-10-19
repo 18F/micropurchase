@@ -62,7 +62,7 @@ class App < Sinatra::Base
   get '/users/:id/edit' do
     begin
       @user = User.find(params[:id])
-      halt(403) if @user.id != session[:user_id]
+      halt(400) if @user.id != session[:user_id]
       erb :users_edit
     rescue ActiveRecord::RecordNotFound
       halt(404)
