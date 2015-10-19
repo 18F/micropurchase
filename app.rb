@@ -7,7 +7,7 @@ require 'json'
 
 require_relative 'models/auction'
 require_relative 'models/bid'
-require_relative 'models/bidder'
+require_relative 'models/user'
 require_relative 'models/authenticator'
 
 class App < Sinatra::Base
@@ -48,7 +48,7 @@ class App < Sinatra::Base
   get '/auth/github/callback' do
     session[:uid] = env['omniauth.auth']['uid']
     # this is the main endpoint to your application
-    redirect to('/')
+    redirect to(Authenticator.new(env['omniauth.auth'], session).perform)
   end
 
   get '/auth/failure' do
@@ -67,6 +67,16 @@ class App < Sinatra::Base
   # -------
   # RESTful routes auction bids
   #
+  get '/users/:id/edit' do
+    begin
+      @user = User.find(params[:id])
+      halt(400) if @user.id != session[:user_id]
+      erb :users_edit
+    rescue ActiveRecord::RecordNotFound
+      halt(404)
+    end
+  end
+
   get '/auctions/:auction_id/bids/new' do
     # get the auction
     # get the current bid amount
