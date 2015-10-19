@@ -1,10 +1,8 @@
 # MPT3500
 
-18F's Micro-purchase Threshold experiment. [Read more »](https://18f.gsa.gov/2015/10/13/open-source-micropurchasing/)
+This app will be used to manage bids for 18F's [micro-purchase threshold experiment](https://18f.gsa.gov/2015/10/13/open-source-micropurchasing/). Vendors will be able to view open issues and bid on them, given they have GitHub accounts and are registered on [SAM.gov](https://www.sam.gov).
 
-This is a Ruby/Sinatra application using Active Record and PostgreSQL.
-
-Start the app using `rackup`. Run tests using `rspec`.
+This is a Ruby/Sinatra application using Active Record and PostgreSQL. Start the app using `rackup`. Run tests using `rspec`.
 
 ## Public domain
 
