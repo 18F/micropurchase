@@ -8,7 +8,7 @@ RSpec.describe 'Sign in via github' do
   describe '/auth/github/callback' do
     it 'should store the github uid in the session' do
       get '/auth/github/callback'
-      expect(last_request.env['rack.session'][:uid]).to eq('12345')
+      expect(last_request.env['rack.session'][:user_id]).to_not eq(nil)
     end
 
     it 'should redirect to edit the user' do
@@ -22,7 +22,7 @@ RSpec.describe 'Sign in via github' do
         get '/auth/github/callback'
       }.to change { User.count }.by(1)
       user = User.last
-      expect(user.github_id).to eq('12345')
+      expect(user.github_id).to eq(current_user_uid)
     end
   end
 end

@@ -29,26 +29,16 @@ class App < Sinatra::Base
   end
 
   helpers do
-    # define a current_user method, so we can be sure if an user is authenticated
     def current_user
-      !session[:uid].nil?
+      @current_user ||= User.where(id: session[:user_id]).first
+    end
+
+    def require_authentication
+      redirect to('/auth/github') unless current_user
     end
   end
 
-
-  before do
-    # we do not want to redirect to twitter when the path info starts
-    # with /auth/
-    pass if request.path_info =~ /^\/auth\//
-
-    # /auth/twitter is captured by omniauth:
-    # when the path info matches /auth/twitter, omniauth will redirect to twitter
-    redirect to('/auth/github') unless current_user
-  end
-
   get '/auth/github/callback' do
-    session[:uid] = env['omniauth.auth']['uid']
-    # this is the main endpoint to your application
     redirect to(Authenticator.new(env['omniauth.auth'], session).perform)
   end
 
@@ -58,7 +48,7 @@ class App < Sinatra::Base
   end
 
   get '/logout' do
-    session[:uid] = nil
+    session.clear
   end
 
   get '/' do
@@ -79,6 +69,8 @@ class App < Sinatra::Base
   end
 
   put '/users/:id' do
+    require_authentication
+
     begin
       @user = User.find(params[:id])
       halt(403) if @user.id != session[:user_id]
@@ -100,6 +92,7 @@ class App < Sinatra::Base
   end
 
   post '/auctions/:auction_id/bids' do
+    require_authentication
     # find the auction
     # create a new bid for the current bidder
     # render some confirmation

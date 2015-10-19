@@ -13,7 +13,7 @@ RSpec.describe 'User edit flow' do
       expect(last_response.status).to eq(404)
     end
 
-    it 'raises a 400 when user is not in session' do
+    it 'raises a 403 when user is not in session' do
       get "/users/#{user.id}/edit", {}, session_authentication(user.id + 1000)
       expect(last_response.status).to eq(403)
     end
@@ -28,13 +28,14 @@ RSpec.describe 'User edit flow' do
   describe 'put /users/:id' do
     let(:user) { User.create }
 
-    it 'raises a 404 when user is not found' do
-      put '/users/101', {sam_id: '1111', duns_id: '2222'}, session_authentication
-      expect(last_response.status).to eq(404)
+    it 'redirects to authentication when not logged in' do
+      put '/users/101', {sam_id: '1111', duns_id: '2222'}
+      expect(last_response).to be_redirect
+      expect(last_response.location).to include('auth/github')
     end
 
-    it 'raises a 400 when user is not in session' do
-      put "/users/#{user.id}", {sam_id: '1111', duns_id: '2222'}, session_authentication(user.id + 1000)
+    it 'raises a 403 when user is not in session' do
+      put "/users/#{user.id}", {sam_id: '1111', duns_id: '2222'}, session_authentication(User.create.id)
       expect(last_response.status).to eq(403)
     end
 

@@ -13,12 +13,12 @@ RSpec.describe 'Bids, REST style' do
     }
 
     it 'shows my bids' do
-      get '/bids', {}, session_authentication
+      get '/bids', {}, session_authentication(current_bidder.id)
       expect(last_response.body).to include('$1,000')
     end
 
     it 'doesnt show other peoples bids' do
-      get '/bids', {}, session_authentication
+      get '/bids', {}, session_authentication(current_bidder.id)
       expect(last_response.body).not_to include('$2,000')
     end
   end
