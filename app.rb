@@ -3,11 +3,11 @@ require 'sinatra/base'
 require 'omniauth'
 require 'omniauth-github'
 require 'sinatra/activerecord'
+require 'json'
 
 require_relative 'models/auction'
 require_relative 'models/bid'
 require_relative 'models/bidder'
-
 
 class App < Sinatra::Base
   register Sinatra::ActiveRecordExtension

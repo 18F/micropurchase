@@ -1,0 +1,10 @@
+---
+applications:
+- name: micropurchase
+  memory: 128M
+  instances: 1
+  domain: 18f.gov
+  hostname: micropurchase
+  buildpack: https://github.com/ddollar/heroku-buildpack-multi.git
+  services:
+    - micropurchase-psql
