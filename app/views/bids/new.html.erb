@@ -1,0 +1,38 @@
+<h1>Bidding on...</h1>
+
+<div class="table-container">
+  <table class="usa-table-borderless table-open-issue-list make-bid-table">
+    <tbody>
+
+      <tr>
+        <td scope="row"><img src="/assets/img/issue-icon.png" alt="issue-icon" class="issue-icon" /></td>
+        <td>
+          <h1>Refactor this disaster</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed bibendum pharetra felis, in consectetur tortor semper sed. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Cras eget metus libero. Proin commodo faucibus arcu vel cursus.</p>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+<div class="usa-grid make-bid-grid">
+  <div class="usa-width-one-half">
+    <h2>Current bid:</h2>
+    <p class="current-bid-amount">$1,000.50</p>
+  </div>
+
+  <div class="usa-width-one-half">
+    <label for="your-bid-amount"><h2>Your bid:</h2></label>
+    <p>
+      <input id="your-bid-amount" name="your-bid-amount" type="text">
+    </p>
+  </div>
+</div>
+
+<div class="center">
+  <a href="/"><button class="usa-button-big usa-button-gray" type="button">Cancel</button></a>
+  <a href="/auctions/<%= params[:auction_id] %>/bids"><button class="usa-button-big" type="button">Submit Bid »</button></a>
+</div>
+
+
