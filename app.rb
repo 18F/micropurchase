@@ -11,7 +11,6 @@ require_relative 'models/bidder'
 
 class App < Sinatra::Base
   register Sinatra::ActiveRecordExtension
-  set :database_file, 'database.yml'
   enable :sessions
 
   puts 'rack env'
