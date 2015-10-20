@@ -6,5 +6,5 @@ Rails.application.routes.draw do
   end
 
   resources :bids, only: [:index]
-  resources :users, only: [:edit]
+  resources :users, only: [:edit, :update]
 end
