@@ -1,7 +1,7 @@
 require 'bundler/setup'
 require 'chronic'
 require_relative './../models/auction'
-require_relative './../models/bidder'
+require_relative './../models/user'
 require_relative './../models/bid'
 
 
@@ -19,7 +19,7 @@ auction.save
 
 # github_id can be discovered using the github api:
 #
-bidder = Bidder.new({
+bidder = User.new({
   github_id: '86790',
   duns_id: 'DUNS1234',
   sam_id: 'SAM1234'
