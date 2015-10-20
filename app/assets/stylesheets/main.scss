@@ -1,0 +1,109 @@
+
+nav.usa-site-navbar {
+  background: gray;
+  padding: 10px;
+}
+
+nav.usa-site-navbar a {
+  position: relative;
+  top: -15px;
+  margin-left: 14px;
+  font-size: 30px;
+  color: #fff;
+}
+
+#logo {
+  line-height: 0;
+}
+
+hr {
+  border: .5px solid #5b616b;
+}
+
+footer {
+  margin-top: 50px;
+}
+
+.center {
+  text-align: center;
+}
+
+.issue-icon {
+  width: 25px;
+  max-width: none;
+}
+
+.bid-button {
+  padding: 5px 8px;
+  white-space: nowrap;
+  background-color: #2e8540;
+}
+
+.table-container {
+  width: 100%;
+  overflow: scroll;
+}
+
+.table-open-issue-list {
+  min-width: 600px;
+}
+
+.table-open-issue-list h1 {
+  font-size: 20px;
+  margin: 0 0 10px 0;
+}
+
+.table-open-issue-list p {
+  margin: 0;
+}
+
+.table-bids {
+  min-width: 150px;
+}
+
+.make-bid-table {
+  margin-bottom: 20px;
+}
+
+.make-bid-grid {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.make-bid-grid p {
+  margin: 0;
+  line-height: 1.2em;
+}
+
+.current-bid-amount {
+  font-size: 40px;
+  color: #2e8540;
+}
+
+#your-bid-amount {
+  max-width: 250px;
+  margin: auto;
+}
+
+.usa-button-big {
+  background-color: #2e8540;
+}
+
+.header-account {
+  float: right;
+  position: relative;
+  top: 15px;
+  color: #fff;
+}
+
+.header-account span {
+  position: relative;
+  top: -8px;
+}
+
+.header-account button {
+  margin: 0;
+  position: relative;
+  top: 8px;
+}
+
