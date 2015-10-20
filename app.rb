@@ -9,6 +9,8 @@ require_relative 'models/auction'
 require_relative 'models/bid'
 require_relative 'models/user'
 require_relative 'models/authenticator'
+require_relative 'models/admins'
+
 
 class App < Sinatra::Base
   use Rack::MethodOverride
@@ -43,8 +45,8 @@ class App < Sinatra::Base
   end
 
   get '/auth/failure' do
-    # omniauth redirects to /auth/failure when it encounters a problem
-    # so you can implement this as you please
+    # omniauth redirect on auth failure
+    halt(403)
   end
 
   get '/logout' do
@@ -70,7 +72,6 @@ class App < Sinatra::Base
 
   put '/users/:id' do
     require_authentication
-
     begin
       @user = User.find(params[:id])
       halt(403) if @user.id != session[:user_id]

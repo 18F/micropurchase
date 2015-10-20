@@ -18,7 +18,7 @@ class Authenticator < Struct.new(:auth_hash, :session)
   end
 
   def redirect_url
-    "/users/#{user.id}/edit"
+    admin? ? '/' : "/users/#{user.id}/edit"
   end
 
   def github_id
@@ -31,5 +31,9 @@ class Authenticator < Struct.new(:auth_hash, :session)
 
   def created_user
     User.create(github_id: github_id)
+  end
+
+  def admin?
+    Admins.verify?(github_id)
   end
 end
