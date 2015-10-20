@@ -1,4 +1,5 @@
 # MPT3500
+<a href="https://codeclimate.com/github/18F/mpt3500"><img src="https://codeclimate.com/github/18F/mpt3500/badges/gpa.svg" /></a>
 
 This app will be used to manage bids for 18F's [micro-purchase threshold experiment](https://18f.gsa.gov/2015/10/13/open-source-micropurchasing/). Vendors will be able to view open issues and bid on them, given they have GitHub accounts and are registered on [SAM.gov](https://www.sam.gov).
 
