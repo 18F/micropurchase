@@ -4,6 +4,7 @@ require_relative './spec_helper'
 
 module FeatureMixin
   include Rack::Test::Methods
+
   def app
     App
   end
@@ -15,13 +16,12 @@ module FeatureMixin
   end
 
   OmniAuth.config.test_mode = true
-  OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
-    :provider => 'github',
-    :uid => current_user_uid
-  })
 end
 
 RSpec.configure do |config|
   config.include FeatureMixin
+  config.before do
+    mock_github
+  end
 end
 

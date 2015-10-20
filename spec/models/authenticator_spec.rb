@@ -60,4 +60,25 @@ RSpec.describe Authenticator do
       expect(authenticator.perform).to eq("/users/#{user.id}/edit")
     end
   end
+
+  context 'when the user is an admin' do
+    let(:admin_uid) { Admins.github_ids.first }
+
+    let(:auth_hash) {
+      OmniAuth::AuthHash.new({
+        :provider => 'github',
+        :uid => admin_uid,
+        :info => {
+          name: 'Kane',
+          email: 'email@gemal.com',
+          image: 'github-image.png'
+        }
+      })
+    }
+
+
+    it 'has the redirect url as home' do
+      expect(authenticator.perform).to eq("/")
+    end
+  end
 end

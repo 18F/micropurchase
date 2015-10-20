@@ -11,10 +11,17 @@ RSpec.describe 'Sign in via github' do
       expect(last_request.env['rack.session'][:user_id]).to_not eq(nil)
     end
 
-    it 'should redirect to edit the user' do
+    it 'should redirect to edit the user when not an admin' do
       get '/auth/github/callback'
       expect(last_response).to be_redirect
       expect(last_response.location).to eq("http://example.org/users/#{User.last.id}/edit")
+    end
+
+    it 'should redirect to home when an admin' do
+      mock_github(uid: Admins.github_ids.first)
+      get '/auth/github/callback'
+      expect(last_response).to be_redirect
+      expect(last_response.location).to eq("http://example.org/")
     end
 
     it 'should create a new user' do
