@@ -11,7 +11,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: test-postgres_development
+  database: micropurchase_development
   pool: 5
   username:
   password:
