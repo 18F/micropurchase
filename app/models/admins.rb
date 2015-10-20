@@ -8,7 +8,7 @@ class Admins
   end
 
   def self.github_ids
-    @github_ids ||= YAML.load(File.read(File.expand_path("../../config/admins.yml", __FILE__)))['github_ids']
+    @github_ids ||= YAML.load(File.read(File.expand_path("../../../config/admins.yml", __FILE__)))['github_ids']
   end
 
   def self.verify?(uid)
