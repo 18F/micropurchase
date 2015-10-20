@@ -9,6 +9,7 @@ require_relative 'models/auction'
 require_relative 'models/bid'
 require_relative 'models/user'
 require_relative 'models/authenticator'
+require_relative 'models/admins'
 
 
 class App < Sinatra::Base
