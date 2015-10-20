@@ -1,5 +1,5 @@
 require 'sinatra/activerecord'
 
-class Bidder < ActiveRecord::Base
+class User < ActiveRecord::Base
   has_many :bids
 end

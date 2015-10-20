@@ -1,0 +1,14 @@
+<h2>Please enter your SAM and/or D.U.N.S id</h2>
+
+<form action="/users/<%= @user.id %>" method='POST'>
+  <input type='hidden' name='_method' value='put'>
+
+  <label for="sam_id">SAM id:</label>
+  <input id="sam_id" name="sam_id" type="text" value="<%= @user.sam_id %>">
+
+  <label for="duns_id">D.U.N.S id:</label>
+  <input id="duns_id" name="duns_id" type="text" value='<%= @user.duns_id %>'>
+
+  <input type='submit' value='Save'>
+</form>
+

@@ -1,5 +1,5 @@
-def session_authentication
-  {'rack.session' => {uid: current_user_uid}}
+def session_authentication(user_id=nil)
+  {'rack.session' => {user_id: user_id}}
 end
 
 def current_user_uid
