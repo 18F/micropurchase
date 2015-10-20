@@ -42,10 +42,12 @@ test:
   username:
   password:
 
-# production:
-#   adapter: postgresql
-#   encoding: unicode
-#   database: test-postgres_production
-#   pool: 5
-#   username:
-#   password:
+production:
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  host: <%= JSON.parse( ENV['VCAP_SERVICES'] )['rds'].first['credentials']['hostname'] rescue 'localhost' %>
+  port: <%= JSON.parse( ENV['VCAP_SERVICES'] )['rds'].first['credentials']['port'] rescue 3306 %>
+  database: <%= JSON.parse( ENV['VCAP_SERVICES'] )['rds'].first['credentials']['name'] rescue '' %>
+  username: <%= JSON.parse( ENV['VCAP_SERVICES'] )['rds'].first['credentials']['username'] rescue '' %>
+  password: <%= JSON.parse( ENV['VCAP_SERVICES'] )['rds'].first['credentials']['password'] rescue '' %>

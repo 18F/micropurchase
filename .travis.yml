@@ -1,0 +1,21 @@
+language: ruby
+before_script:
+  - bundle exec rake db:create
+  - bundle exec rake db:migrate
+script: bundle exec rspec
+
+addons:
+  postgresql: "9.3"
+
+deploy:
+  provider:
+    provider: cloudfoundry
+  api: https://api.cloud.gov
+  username: deploy-agile-bpa
+  password:
+    secure: bYG90NfRO1AK+a6NI9tGRRsU5yxCrAn08zBwac2tMk+BGQw2kTSRtdpwi2Rl6fLZh4riTmJEur0m38/HwrMsykliJIEC+0R20XM9csbS0AHtGLFBTKil7GgpmI2QacUT9hTp7KIXYHCvHh1YsOVws4pvoAjrjMSEu2sgGdSSwEE83Z4Ewl7JvrGwrtvia11jR9ULXsC1oANp8cQqQvbFvYegMrUOuCFr1+Vm/vQIdVsxajB8Ii3YQcVhXMYlRrQkrk1eXzX2twqUcGj5q7htao2SivX8nSv1ePqKDm8UmvXNYfFgvZNO3Rccernz/O3UcmLcDkJUU8B5/aBN9LnlOQJ0PHBWsAyP13cwjT8zgS50cvbBUOs20D2R8aRM3XCSOQ5+1Ss6fsUq9w48leAzNkNM47p7KlxwrTKM9i7b2RvQQMD1JVPlZw321sGDU/4dbbqS6F2CZLCNO0W7sZ4ddpltCJbdF/4mH3oeb+TvNxbpX8aKpz9IB7Lhb81v0xLD59V7nS9L9fpp4s2MXsSoejcXL3OOGF2/XC0pwIiJD+j00hIyZDAauWxkB6JT7eqd5im61tJxDPpqMsX7hCLRGnufvdzBEEccIYfEC5lj8LiU3E9hl8m0haB1pdhOK93pyiI93rMo/Pn/DcDkS5JTkyN9oX9iZoXcp6i1tsrd1xA=
+  organization: agile-bpa
+  space: production
+  on:
+    repo: 18F/mpt3500
+    branch: master
