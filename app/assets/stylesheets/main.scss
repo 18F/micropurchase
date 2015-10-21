@@ -1,3 +1,37 @@
+$color-green: #2e8540;
+
+.issue-list-item {
+  .issue-icon {
+    padding-top: 0.75rem;
+  }
+
+  .issue-title {
+    margin-top: 1rem;
+    font-size: 2rem;
+  }
+
+  .issue-bids-info {
+    p {
+      margin: 0;
+      padding: 0;
+    }
+
+    a.usa-button {
+      padding: 0.5rem 1rem;
+      white-space: nowrap;
+      background-color: $color-green;
+
+      &:hover {
+        background-color: darken($color-green, 10);
+      }
+
+      &:active {
+        background-color: darken($color-green, 20);
+      }
+    }
+  }
+}
+
 
 nav.usa-site-navbar {
   background: gray;
@@ -17,7 +51,7 @@ nav.usa-site-navbar a {
 }
 
 hr {
-  border: .5px solid #5b616b;
+  border: 1px solid #5b616b;
 }
 
 footer {

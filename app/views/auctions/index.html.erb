@@ -1,17 +1,14 @@
+<h1>Welcome to 18F's Micropurchase experiment.</h1>
 
-<h1>Welcome to 18F's Micro-purchase Threshold experiment.</h1>
-
-<a href="/my-bids">View my bids »</a>
+<a href="/bids">View my bids »</a>
 
 <h2>Here are current issues open for bid:</h2>
 
-<div class="table-container">
-  <table class="usa-table-borderless table-open-issue-list">
-    <tbody>
-      <% 6.times do %>
-        <%= render partial: '/bids/bid_row_cell' %>
-      <% end %>
-    </tbody>
-  </table>
+<div class="usa-grid-full">
+  <hr class='usa-size-one-whole'>
+  <% @auctions.each do |auction| %>
+    <%= render partial: 'list_item', locals: {auction: auction} %>
+    <hr>
+  <% end %>
 </div>
 
