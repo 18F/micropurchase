@@ -2,7 +2,7 @@ language: ruby
 before_script:
   - bundle exec rake db:create
   - bundle exec rake db:migrate
-script: bundle exec rspec
+script: bundle exec rake spec
 
 addons:
   postgresql: "9.3"
@@ -17,5 +17,5 @@ deploy:
   organization: agile-bpa
   space: production
   on:
-    repo: 18F/mpt3500
+    repo: 18F/micropurchase
     branch: master
