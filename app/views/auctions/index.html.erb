@@ -9,23 +9,7 @@
   <table class="usa-table-borderless table-open-issue-list">
     <tbody>
       <% 6.times do %>
-      <tr>
-        <td scope="row">
-          <%= image_tag "issue-icon.png", alt: 'issue-icon', class: 'issue-icon' %>
-        </td>
-        <td>
-          <h1>Create README</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed bibendum pharetra felis, in consectetur tortor semper sed. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Cras eget metus libero. Proin commodo faucibus arcu vel cursus.</p>
-        </td>
-        <td class="table-bids">
-          <p>Current Bid:</p>
-          <p>$2,100</p>
-          <p>12 hrs left</p>
-          <p>
-            <a href="/make-bid"><button class="bid-button">Bid »</button></a>
-          </p>
-        </td>
-      </tr>
+        <%= render partial: '/bids/bid_row_cell' %>
       <% end %>
     </tbody>
   </table>
