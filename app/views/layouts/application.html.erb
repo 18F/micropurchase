@@ -20,7 +20,7 @@
       <div class="usa-grid">
         <div class="usa-width-one-whole">
           <span class="usa-disclaimer-official">
-            <img class="usa-flag_icon" alt="US flag signifying that this is a United States Federal Government website" src="/assets/us-web-design-standards/img/us_flag_small.png">
+            <%= image_tag 'us_flag_small.png', class: 'usa-flag_icon', alt: "US flag signifying that this is a United States Federal Government website" %>
             An official website of the United States Government
           </span>
         </div>
@@ -31,8 +31,8 @@
       <div class="usa-grid">
         <div class="usa-width-one-whole">
           <div class="logo" id="logo">
-            <img src="/assets/img/18f-logo.svg" alt="18f-logo" width="50" />
-            <a href="/" accesskey="1" title="Home" aria-label="Home">MPT3500</a>
+            <%= image_tag "18f-logo.svg", width: '50', alt: "18f-logo" %>
+            <a href="/" accesskey="1" title="Home" aria-label="Home">Micropurchase</a>
 
             <div class="header-account">
               <% if @current_user %>
@@ -61,7 +61,7 @@
     <div class="usa-footer-secondary_section">
       <div class="usa-grid">
         <div class="usa-footer-logo">
-          <img class="usa-footer-slim-logo-img" src="/assets/img/18f-logo.svg" alt="Logo image">
+          <%= image_tag "18f-logo.svg", class: 'usa-footer-slim-logo-img', alt: 'Logo image' %>
           <h3 class="usa-footer-slim-logo-heading">18F</h3>
         </div>
       </div>
