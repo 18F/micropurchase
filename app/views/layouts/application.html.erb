@@ -2,7 +2,15 @@
 <html>
 <head>
   <title>Micropurchase</title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= stylesheet_link_tag    'application', media: 'all', debug: true %>
+  <%= javascript_include_tag "application", debug: true %>
+  <%#<script src="/assets/us-web-design-standards/js/vendor/jquery-1.11.3.min.js"></script>%>
+  <!--[if lt IE 9]>
+  <script src="/designstandards/assets/js/vendor/selectivizr-min.js"></script>
+  <script src="/designstandards/assets/js/vendor/respond.js"></script>
+  <script src="/designstandards/assets/js/vendor/rem.min.js"></script>
+  <![endif]-->
+  <%#<script src="/assets/us-web-design-standards/js/components.js"></script>%>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -27,8 +35,10 @@
             <a href="/" accesskey="1" title="Home" aria-label="Home">MPT3500</a>
 
             <div class="header-account">
-              <span>Logged in as Alan</span>
-              <a href="/logout"><button class="usa-button-outline-inverse">Logout</button></a>
+              <% if @current_user %>
+                <span>Logged in as <%= @current_user.name %></span>
+                <a href="/logout"><button class="usa-button-outline-inverse">Logout</button></a>
+              <% end %>
             </div>
           </div>
         </div>
@@ -57,13 +67,5 @@
       </div>
     </div>
   </footer>
-
-  <script src="/assets/us-web-design-standards/js/vendor/jquery-1.11.3.min.js"></script>
-  <!--[if lt IE 9]>
-  <script src="/designstandards/assets/js/vendor/selectivizr-min.js"></script>
-  <script src="/designstandards/assets/js/vendor/respond.js"></script>
-  <script src="/designstandards/assets/js/vendor/rem.min.js"></script>
-  <![endif]-->
-  <script src="/assets/us-web-design-standards/js/components.js"></script>
 </body>
 </html>

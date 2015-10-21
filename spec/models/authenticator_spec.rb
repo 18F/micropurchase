@@ -32,6 +32,12 @@ RSpec.describe Authenticator do
       }.to_not change { User.count }
     end
 
+    it 'updates the user with additional data' do
+      authenticator.perform
+      user.reload
+      expect(user.name).to eq('Kane')
+    end
+
     it 'signs in the user into the session' do
       authenticator.perform
       expect(session[:user_id]).to eq(user.id)
@@ -49,6 +55,7 @@ RSpec.describe Authenticator do
       expect {
         authenticator.perform
       }.to change { User.count }
+      expect(user.name).to eq('Kane')
     end
 
     it 'signs in the user into the session' do
