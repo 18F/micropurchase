@@ -10,11 +10,15 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     raise AuthorizationError if current_user != @user
 
-    @user.update_attributes({
-      sam_id:   params[:sam_id],
-      duns_id:  params[:duns_id]
-    })
+    @user.update_attributes(user_params)
 
     redirect_to '/'
+  end
+
+
+  private
+
+  def user_params
+    params.require(:user).permit(:duns_id)
   end
 end

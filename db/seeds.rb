@@ -20,16 +20,15 @@ auction.save
 
 # github_id can be discovered using the github api:
 #
-bidder = User.new({
-  github_id: '86790',
-  duns_id: 'DUNS1234',
-  sam_id: 'SAM1234'
-})
-bidder.save
-
-bid = Bid.new({
-  auction_id: auction.id,
-  bidder_id: bidder.id,
-  amount: 3450.0
-})
-bid.save
+# bidder = User.new({
+#   github_id: '86790',
+#   duns_id: 'DUNS1234'
+# })
+# bidder.save
+#
+# bid = Bid.new({
+#   auction_id: auction.id,
+#   bidder_id: bidder.id,
+#   amount: 3450.0
+# })
+# bid.save

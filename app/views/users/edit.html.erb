@@ -1,13 +1,9 @@
-<h2>Please enter your SAM and/or D.U.N.S id</h2>
+<h2>Please enter your DUNS Number:</h2>
 
-<form action="/users/<%= @user.id %>" method='POST'>
-  <input type='hidden' name='_method' value='put'>
-  <label for="sam_id">SAM id:</label>
-  <input id="sam_id" name="sam_id" type="text" value="<%= @user.sam_id %>">
+<%= form_for @user, method: :put do |f| %>
 
-  <label for="duns_id">D.U.N.S id:</label>
-  <input id="duns_id" name="duns_id" type="text" value='<%= @user.duns_id %>'>
+  <%= f.label :duns_id, 'DUNS Number' %>
+  <%= f.text_field :duns_id %>
 
-  <input type='submit' value='Save'>
-</form>
-
+  <%= f.submit 'Save' %>
+<% end %>
