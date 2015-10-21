@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   resources :users, only: [:edit, :update]
 
   get '/auth/:provider/callback', to: 'authentications#create'
+  get '/logout', to: 'authentications#destroy'
 end
