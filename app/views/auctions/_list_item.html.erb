@@ -1,0 +1,23 @@
+<div class='usa-width-one-whole issue-list-item'>
+  <div class='usa-width-one-twelfth center'>
+    <%= image_tag "issue-icon.png", alt: 'issue-icon', class: 'issue-icon' %>
+  </div>
+  <div class='usa-width-three-fourths'>
+    <h4 class='issue-title'><%= auction.title %></h4>
+    <p class='issue-description'>
+      <%= auction.description %>
+    </p>
+  </div>
+  <div class='usa-width-one-sixth issue-bids-info'>
+    <% if auction.bids? %>
+      <p>Current Bid:</p>
+      <p><%= number_to_currency(auction.current_bid_amount) %></p>
+    <% else %>
+      <p>No bids yet</p>
+    <% end %>
+    <p>Ends in <%= distance_of_time_in_words(Time.now, auction.end_datetime) %></p>
+    <p>
+      <a href="/auctions/<%= auction.id %>/bids/new" class='usa-button'>Bid »</a>
+    </p>
+  </div>
+</div>
