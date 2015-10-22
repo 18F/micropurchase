@@ -30,5 +30,5 @@ end
 
 group :production do
   gem 'cf-app-utils'
+  gem 'rails_12factor'
 end
-
