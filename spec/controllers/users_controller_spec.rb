@@ -28,7 +28,7 @@ RSpec.describe UsersController, type: :controller do
   describe '#edit' do
     it 'redirects to authenticate when not logged in' do
       allow(controller).to receive(:current_user).and_return(nil)
-      put :update, {id: user.id, user: {duns_id: '222'}}
+      put :update, {id: user.id, user: {duns_number: '222'}}
       expect(response).to be_redirect
       expect(response.location).to include('auth')
     end
@@ -37,26 +37,26 @@ RSpec.describe UsersController, type: :controller do
       allow(controller).to receive(:current_user).and_return(user)
       user_id = user.id + 1000
       expect {
-        put :update, {id: user_id, user: {duns_id: '222'}}
+        put :update, {id: user_id, user: {duns_number: '222'}}
       }.to raise_error(ActiveRecord::RecordNotFound)
     end
 
     it 'raises a 403 when user is not in session' do
       allow(controller).to receive(:current_user).and_return(User.create)
-      put :update, {id: user.id, user: {duns_id: '222'}}
+      put :update, {id: user.id, user: {duns_number: '222'}}
       expect(response.status).to eq(403)
     end
 
     it 'update the user when current user is the user' do
       allow(controller).to receive(:current_user).and_return(user)
-      put :update, {id: user.id, user: {duns_id: '222'}}
+      put :update, {id: user.id, user: {duns_number: '222'}}
       user.reload
-      expect(user.duns_id).to eq('222')
+      expect(user.duns_number).to eq('222')
     end
 
     it 'redirects back home after successful edit' do
       allow(controller).to receive(:current_user).and_return(user)
-      put :update, {id: user.id, user: {duns_id: '222'}}
+      put :update, {id: user.id, user: {duns_number: '222'}}
       expect(response).to be_redirect
       expect(response.location).to eq('http://test.host/')
     end
