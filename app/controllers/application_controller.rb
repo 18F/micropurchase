@@ -13,8 +13,8 @@ class ApplicationController < ActionController::Base
     should_redirect
   end
 
-  class AuthorizationError < StandardError; end
-  rescue_from AuthorizationError do
-    render text: "Access Denied", status: 403
+  rescue_from UnauthorizedError do |error|
+    flash[:error] = error.message || "Unauthorized"
+    redirect_to '/'
   end
 end

@@ -1,32 +1,46 @@
 <h1>Bidding on...</h1>
 
-<div class="table-container">
-  <table class="usa-table-borderless table-open-issue-list make-bid-table">
-    <tbody>
-
-      <%= render partial: 'bid_row_cell' %>
-
-    </tbody>
-  </table>
-</div>
-
-<div class="usa-grid make-bid-grid">
-  <div class="usa-width-one-half">
-    <h2>Current bid:</h2>
-    <p class="current-bid-amount">$1,000.50</p>
+<hr>
+<div class='usa-width-one-whole issue-list-item'>
+  <div class='usa-width-one-twelfth center'>
+    <%= image_tag "issue-icon.png", alt: 'issue-icon', class: 'issue-icon' %>
   </div>
-
-  <div class="usa-width-one-half">
-    <label for="your-bid-amount"><h2>Your bid:</h2></label>
-    <p>
-      <input id="your-bid-amount" name="your-bid-amount" type="text">
+  <div class='usa-width-three-fourths'>
+    <h4 class='issue-title'><%= @auction.title %></h4>
+    <p class='issue-description'>
+      <%= @auction.description %>
     </p>
+    <% if @auction.available? %>
+      <h4>Ends in <%= distance_of_time_in_words(Time.now, @auction.end_datetime) %></h4>
+    <% end %>
   </div>
 </div>
+<hr>
 
-<div class="center">
-  <a href="/"><button class="usa-button-big usa-button-gray" type="button">Cancel</button></a>
-  <a href="/auctions/<%= params[:auction_id] %>/bids"><button class="usa-button-big" type="button">Submit Bid »</button></a>
-</div>
+<% if @auction.available? %>
+  <%= form_for @bid, url: "/auctions/#{params[:auction_id]}/bids", html: {class: 'bid-form'} do |f| %>
+    <div class='usa-width-one-whole'>
+      <div class="usa-width-one-half">
+        <h2 class='center'>Current bid:</h2>
+        <% if @auction.bids? %>
+          <p class="current-bid-amount center"><%= number_to_currency(@auction.current_bid_amount) %></p>
+        <% else %>
+        <% end %>
+      </div>
 
+      <div class="usa-width-one-half">
+        <h2 class='center'><label for="your-bid-amount">Your bid:</label></h2>
+        <%= f.text_field :amount %>
+      </div>
+    </div>
 
+    <div class='usa-width-one-whole'>
+      <div class='button-wrapper'>
+        <a href='/' class='usa-button usa-button-big usa-button-gray cancel'>Cancel</a>
+        <%= f.submit 'Submit', class: 'usa-button-big usa-button-green submit' %>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <h2>Bidding is closed</h2>
+<% end %>

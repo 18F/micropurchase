@@ -4,13 +4,11 @@
   <title>Micropurchase</title>
   <%= stylesheet_link_tag    'application', media: 'all', debug: true %>
   <%= javascript_include_tag "application", debug: true %>
-  <%#<script src="/assets/us-web-design-standards/js/vendor/jquery-1.11.3.min.js"></script>%>
   <!--[if lt IE 9]>
   <script src="/designstandards/assets/js/vendor/selectivizr-min.js"></script>
   <script src="/designstandards/assets/js/vendor/respond.js"></script>
   <script src="/designstandards/assets/js/vendor/rem.min.js"></script>
   <![endif]-->
-  <%#<script src="/assets/us-web-design-standards/js/components.js"></script>%>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -49,6 +47,14 @@
 
   <div class="usa-grid">
     <div class="usa-width-one-whole">
+      <% if flash[:error] %>
+      <div class="usa-alert usa-alert-error" role="alert">
+        <div class="usa-alert-body">
+          <h3 class="usa-alert-heading">Sorry, <%= flash[:error] %>!</h3>
+        </div>
+      </div>
+      <% end %>
+
       <%= yield %>
     </div>
   </div>

@@ -15,5 +15,12 @@ module Presenter
     def bids
       __getobj__.bids.to_a
     end
+
+    def available?
+      !!(
+        (start_datetime && (start_datetime <= Time.now)) &&
+          (end_datetime && (end_datetime >= Time.now))
+      )
+    end
   end
 end
