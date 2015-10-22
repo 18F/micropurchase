@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     raise AuthorizationError if current_user != @user
 
-    @user.update_attributes(user_params)
+    @user.update(user_params)
 
     redirect_to '/'
   end
