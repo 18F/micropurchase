@@ -18,6 +18,10 @@ gem 'omniauth-github'
 
 gem 'chronic'
 
+gem 'paper_trail', '~> 4.0.0'
+
+gem 'rails_admin'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
