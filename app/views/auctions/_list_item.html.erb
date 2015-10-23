@@ -10,9 +10,9 @@
   </div>
   <div class='usa-width-one-sixth issue-bids-info'>
     <% if auction.available? %>
-      <%= render partial: '/auctions/bids_and_form' %>
+      <%= render partial: 'auctions/bids_and_form', locals: {auction: auction} %>
     <% else %>
-      <%= render partial: 'auctions/winning_bid' %>
+      <%= render partial: 'auctions/winning_bid', locals: {auction: auction} %>
     <% end %>
   </div>
 </div>
