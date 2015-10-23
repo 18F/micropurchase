@@ -1,9 +1,11 @@
-<h2>Please enter your DUNS Number:</h2>
+<h1>Complete your Account</h1>
+
+<p>Enter your DUNS number. Remember, <a href='https://sam.gov'>SAM.gov</a> registration is required to place bids. If you need help, email us at <%= mail_to 'micropurchase@gsa.gov' %>.</p>
 
 <%= form_for @user, method: :put do |f| %>
 
   <%= f.label :duns_number, 'DUNS Number' %>
   <%= f.text_field :duns_number %>
 
-  <%= f.submit 'Save' %>
+  <%= f.submit 'Submit' %>
 <% end %>
