@@ -10,6 +10,8 @@
   </div>
   <div class='usa-width-one-sixth issue-bids-info'>
     <% if auction.available? %>
+      <p>Current bid:</p>
+      <p><%= number_to_currency(auction.current_bid_amount) %></p>
       <%= render partial: 'auctions/bids_and_form', locals: {auction: auction} %>
     <% else %>
       <%= render partial: 'auctions/winning_bid', locals: {auction: auction} %>
