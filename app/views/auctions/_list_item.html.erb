@@ -9,15 +9,10 @@
     </p>
   </div>
   <div class='usa-width-one-sixth issue-bids-info'>
-    <% if auction.bids? %>
-      <p>Current Bid:</p>
-      <p><%= number_to_currency(auction.current_bid_amount) %></p>
+    <% if auction.available? %>
+      <%= render partial: 'auctions/bids_and_form', locals: {auction: auction} %>
     <% else %>
-      <p>No bids yet</p>
+      <%= render partial: 'auctions/winning_bid', locals: {auction: auction} %>
     <% end %>
-    <p>Ends in <%= distance_of_time_in_words(Time.now, auction.end_datetime) %></p>
-    <p>
-      <a href="/auctions/<%= auction.id %>/bids/new" class='usa-button'>Bid »</a>
-    </p>
   </div>
 </div>

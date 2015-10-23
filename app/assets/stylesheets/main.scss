@@ -19,16 +19,41 @@ $color-green: #2e8540;
     a.usa-button {
       padding: 0.5rem 1rem;
       white-space: nowrap;
-      background-color: $color-green;
-
-      &:hover {
-        background-color: darken($color-green, 10);
-      }
-
-      &:active {
-        background-color: darken($color-green, 20);
-      }
     }
+  }
+}
+
+/* not sure what's up, but the usa-button-green seems to have blue hover ?? 
+ * so a little loving help below:
+ * */
+.usa-button.usa-button-green,
+.usa-button-big.usa-button-green {
+  background-color: $color-green;
+
+  &:hover {
+    background-color: darken($color-green, 10);
+  }
+
+  &:active {
+    background-color: darken($color-green, 20);
+  }
+}
+
+.bid-form {
+  max-width: none;
+
+  .cancel, .submit {
+    float: left;
+    margin: 0;
+  }
+
+  .cancel {
+    margin-right: 2rem;
+  }
+
+  .button-wrapper {
+    margin: 0 auto;
+    width: 260px;
   }
 }
 
@@ -110,6 +135,7 @@ footer {
 }
 
 .current-bid-amount {
+  margin-top: 0;
   font-size: 40px;
   color: #2e8540;
 }
@@ -117,10 +143,6 @@ footer {
 #your-bid-amount {
   max-width: 250px;
   margin: auto;
-}
-
-.usa-button-big {
-  background-color: #2e8540;
 }
 
 .header-account {

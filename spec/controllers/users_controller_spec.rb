@@ -11,10 +11,11 @@ RSpec.describe UsersController, type: :controller do
       }.to raise_error(ActiveRecord::RecordNotFound)
     end
 
-    it 'raises a 403 when user is not in session' do
+    it 'handles it as unauthorized when user is not in session' do
       allow(controller).to receive(:current_user).and_return(User.create)
       get :edit, {id: user.id}
-      expect(response.status).to eq(403)
+      expect(response).to redirect_to('/')
+      expect(flash[:error]).to match(/unauthorized/i)
     end
 
     it 'render the form when the user is found and same as in session' do
@@ -41,10 +42,11 @@ RSpec.describe UsersController, type: :controller do
       }.to raise_error(ActiveRecord::RecordNotFound)
     end
 
-    it 'raises a 403 when user is not in session' do
+    it 'handles as unauthorized when user is not in session' do
       allow(controller).to receive(:current_user).and_return(User.create)
       put :update, {id: user.id, user: {duns_number: '222'}}
-      expect(response.status).to eq(403)
+      expect(response).to redirect_to('/')
+      expect(flash[:error]).to match(/unauthorized/i)
     end
 
     it 'update the user when current user is the user' do

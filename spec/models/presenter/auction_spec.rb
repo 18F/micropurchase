@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Presenter::Auction do
-  let(:auction) { Presenter::Auction.new(ar_auction_mock) }
-  let(:ar_auction_mock) {
+  let(:auction) { Presenter::Auction.new(ar_auction) }
+  let(:ar_auction) {
     double('AR Auction', {
       bids: bids,
       start_datetime: Time.now - 1.day,
@@ -53,6 +53,32 @@ RSpec.describe Presenter::Auction do
 
     it 'return the bid with the lowest amount' do
       expect(auction.current_bid).to eq(bids[1])
+    end
+  end
+
+  describe '#available?' do
+    context 'when the auction has expired' do
+      let(:ar_auction) { Auction.new(start_datetime: Time.now - 5.days, end_datetime: Time.now - 3.day) }
+
+      it 'should be false' do
+        expect(auction.available?).to eq(false)
+      end
+    end
+
+    context 'when the auction has not started yet' do
+      let(:ar_auction) { Auction.new(start_datetime: Time.now + 5.days, end_datetime: Time.now + 7.days) }
+
+      it 'should be false' do
+        expect(auction.available?).to eq(false)
+      end
+    end
+
+    context 'when between dates' do
+      let(:ar_auction) { Auction.new(start_datetime: Time.now - 5.days, end_datetime: Time.now + 3.day) }
+
+      it 'should be false' do
+        expect(auction.available?).to eq(true)
+      end
     end
   end
 end
