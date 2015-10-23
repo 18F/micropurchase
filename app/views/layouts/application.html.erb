@@ -33,9 +33,11 @@
             <a href="/" accesskey="1" title="Home" aria-label="Home">Micropurchase</a>
 
             <div class="header-account">
-              <% if @current_user %>
-                <span>Logged in as <%= @current_user.name %></span>
+              <% if current_user %>
+                <span>Logged in as <%= current_user.name %></span>
                 <a href="/logout"><button class="usa-button-outline-inverse">Logout</button></a>
+              <% else %>
+                <a href="/login"><button class="usa-button-outline-inverse">Login</button></a>
               <% end %>
             </div>
           </div>
