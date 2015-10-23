@@ -1,16 +1,11 @@
-
 <h1>My Bids</h1>
 
 <a href="/">« Back to open issues</a>
 
-<div class="table-container">
-  <table class="usa-table-borderless table-open-issue-list">
-    <tbody>
-
-      <tr>
-        <%= render partial: 'bid_row_cell' %>
-      </tr>
-    </tbody>
-  </table>
+<div class="usa-grid-full">
+  <hr class='usa-size-one-whole'>
+  <% @auctions.each do |auction| %>
+    <%= render partial: '/auctions/list_item', locals: {auction: auction} %>
+    <hr>
+  <% end %>
 </div>
-
