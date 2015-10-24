@@ -1,0 +1,24 @@
+<h1>Auctions</h1>
+
+<div class='usa-grid-full'>
+<hr>
+<% @auctions.each do |auction| %>
+  <a href="/admin/auctions/<%= auction.id %>"><h3 class='usa-width-one-whole'><%= auction.title %></h3></a>
+  <div class='usa-width-one-whole'>
+    <div class='usa-width-one-sixth'>
+      <% if auction.available? %>
+        <%= image_tag "issue-icon", class: 'issue-icon' %>
+      <% else %>
+        <span class=''>not live</span>
+      <% end %>
+    </div>
+    <div class='usa-width-one-fourth'>
+      <b>Starts:</b> <%= auction.start_datetime.to_s(:long) %>
+    </div>
+    <div class='usa-width-one-fourth'>
+      <b>Ends:</b> <%= auction.end_datetime.to_s(:long) %>
+    </div>
+  </div>
+  <hr>
+<% end %>
+</div>

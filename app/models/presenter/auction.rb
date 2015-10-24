@@ -1,11 +1,28 @@
 module Presenter
   class Auction < SimpleDelegator
+    def current_bid?
+      !!current_bid_record
+    end
+
     def current_bid
-      @current_bid ||= bids.sort_by{|bid| [bid.amount, bid.created_at, bid.id]}.first
+      return Presenter::Bid::Null.new unless current_bid_record
+      Presenter::Bid.new(current_bid_record)
     end
 
     def current_bid_amount
-      current_bid && current_bid.amount
+      current_bid.amount
+    end
+
+    def current_bidder_name
+      current_bid.bidder_name
+    end
+
+    def current_bidder_duns_number
+      current_bid.bidder_duns_number
+    end
+
+    def current_bid_time
+      current_bid.time
     end
 
     def bids?
@@ -13,7 +30,7 @@ module Presenter
     end
 
     def bids
-      __getobj__.bids.to_a
+      __getobj__.bids.to_a.map{|bid| Presenter::Bid.new(bid) }
     end
 
     def available?
@@ -21,6 +38,12 @@ module Presenter
         (start_datetime && (start_datetime <= Time.now)) &&
           (end_datetime && (end_datetime >= Time.now))
       )
+    end
+
+    private
+
+    def current_bid_record
+      @current_bid_record ||= bids.sort_by{|bid| [bid.amount, bid.created_at, bid.id]}.first
     end
   end
 end
