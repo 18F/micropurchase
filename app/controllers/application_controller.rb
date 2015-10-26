@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   def require_authentication
     should_redirect = !current_user
-    redirect_to '/auth/github' if should_redirect
+    redirect_to '/login' if should_redirect
     should_redirect
   end
 

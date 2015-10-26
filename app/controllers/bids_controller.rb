@@ -9,6 +9,7 @@ class BidsController < ApplicationController
   end
 
   def new
+    require_authentication
     @auction = Presenter::Auction.new(Auction.find(params[:auction_id]))
     @bid = Bid.new
   end

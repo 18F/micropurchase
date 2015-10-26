@@ -3,16 +3,22 @@
     <%= image_tag "issue-icon.png", alt: 'issue-icon', class: 'issue-icon' %>
   </div>
   <div class='usa-width-three-fourths'>
-    <h4 class='issue-title'><%= auction.title %></h4>
+    <h4 class='issue-title'>
+      <a href="/auctions/<%= auction.id %>"><%= auction.title %></a>
+    </h4>
     <p class='issue-description'>
       <%= auction.description %>
     </p>
   </div>
   <div class='usa-width-one-sixth issue-bids-info'>
     <% if auction.available? %>
-      <p>Current bid:</p>
-      <p><%= number_to_currency(auction.current_bid_amount) %></p>
       <%= render partial: 'auctions/bids_and_form', locals: {auction: auction} %>
+      <p>
+        <a href="/auctions/<%= auction.id %>/bids/new" class='usa-button usa-button-green'>Bid »</a>
+      </p>
+      <p>
+        <a href="/auctions/<%= auction.id %>" class='usa-button usa-button-blue'>Details »</a>
+      </p>
     <% else %>
       <%= render partial: 'auctions/winning_bid', locals: {auction: auction} %>
     <% end %>

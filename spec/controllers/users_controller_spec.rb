@@ -31,7 +31,7 @@ RSpec.describe UsersController, type: :controller do
       allow(controller).to receive(:current_user).and_return(nil)
       put :update, {id: user.id, user: {duns_number: '222'}}
       expect(response).to be_redirect
-      expect(response.location).to include('auth')
+      expect(response.location).to eq('http://test.host/login')
     end
 
     it 'raises a ActiveRecord::RecordNotFound when user is not found' do

@@ -11,13 +11,26 @@ RSpec.describe BidsController, controller: true do
   }
 
   describe '#new' do
-    before do
-      allow(controller).to receive(:current_user).and_return(current_bidder)
+    context 'when logged in' do
+      before do
+        allow(controller).to receive(:current_user).and_return(current_bidder)
+      end
+
+      it 'should render the bid information' do
+        get :new, auction_id: auction.id
+        expect(response).to render_template(:new)
+      end
     end
 
-    it 'should render the bid information' do
-      get :new, auction_id: auction.id
-      expect(response).to render_template(:new)
+    context 'when logged out' do
+      before do
+        allow(controller).to receive(:current_user).and_return(nil)
+      end
+
+      it 'should redirect to /login' do
+        get :new, auction_id: auction.id
+        expect(response).to redirect_to("/login")
+      end
     end
   end
 
@@ -25,7 +38,7 @@ RSpec.describe BidsController, controller: true do
     context 'when not logged in' do
       it 'redirects to authenticate' do
         post :create, auction_id: auction.id, bid: {amount: 1000.00}
-        expect(response).to redirect_to("/auth/github")
+        expect(response).to redirect_to("/login")
       end
     end
 
@@ -49,4 +62,3 @@ RSpec.describe BidsController, controller: true do
     end
   end
 end
-
