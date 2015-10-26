@@ -1,4 +1,9 @@
-<h1>Auctions</h1>
+<h1>
+  <div class='usa-width-three-fourths'>Auctions</div>
+  <div class='usa-width-one-forth right'>
+    <a class='usa-button usa-button-green' href="/admin/auctions/new">Create a new auction</a>
+  </div>
+</h1>
 
 <div class='usa-grid-full'>
 <hr>
@@ -13,10 +18,10 @@
       <% end %>
     </div>
     <div class='usa-width-one-fourth'>
-      <b>Starts:</b> <%= auction.start_datetime.to_s(:long) %>
+      <b>Starts:</b> <%= Presenter::DcTime.convert(auction.start_datetime).to_s(:long) %>
     </div>
     <div class='usa-width-one-fourth'>
-      <b>Ends:</b> <%= auction.end_datetime.to_s(:long) %>
+      <b>Ends:</b> <%= Presenter::DcTime.convert(auction.end_datetime).to_s(:long) %>
     </div>
   </div>
   <hr>
