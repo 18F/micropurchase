@@ -1,0 +1,29 @@
+<h1>Auction Details (<a href="<%= @auction.issue_url %>">view on GitHub</a>)</h1>
+
+<div class="usa-grid-full">
+  <hr class='usa-size-one-whole'>
+  <div class='usa-width-one-whole issue-list-item'>
+    <div class='usa-width-one-twelfth center'>
+      <%= image_tag "issue-icon.png", alt: 'issue-icon', class: 'issue-icon' %>
+    </div>
+    <div class='usa-width-three-fourths'>
+      <h4 class='issue-title'>
+        <a href="/auctions/<%= @auction.id %>"><%= @auction.title %></a>
+      </h4>
+      <p class='issue-description'>
+        <%= @auction.description %>
+      </p>
+    </div>
+    <div class='usa-width-one-sixth issue-bids-info'>
+      <% if @auction.available? %>
+        <%= render partial: 'auctions/bids_and_form', locals: {auction: @auction} %>
+        <p>
+          <a href="/auctions/<%= @auction.id %>/bids/new" class='usa-button usa-button-green'>Bid »</a>
+        </p>
+      <% else %>
+        <%= render partial: 'auctions/winning_bid', locals: {auction: @auction} %>
+      <% end %>
+    </div>
+  </div>
+  <hr />
+</div>

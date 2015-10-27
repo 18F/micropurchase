@@ -5,6 +5,3 @@
   <p>No bids yet</p>
 <% end %>
 <p>Ends in <%= distance_of_time_in_words(Time.now, auction.end_datetime) %></p>
-<p>
-  <a href="/auctions/<%= auction.id %>/bids/new" class='usa-button usa-button-green'>Bid »</a>
-</p>
