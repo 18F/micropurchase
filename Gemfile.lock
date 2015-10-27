@@ -49,9 +49,12 @@ GEM
       xpath (~> 2.0)
     cf-app-utils (0.6)
     chronic (0.10.2)
+    codeclimate-test-reporter (0.4.8)
+      simplecov (>= 0.7.1, < 1.0.0)
     coderay (1.1.0)
     debug_inspector (0.0.2)
     diff-lcs (1.2.5)
+    docile (1.1.5)
     erubis (2.7.0)
     execjs (2.6.0)
     faraday (0.9.2)
@@ -152,6 +155,11 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    simplecov (0.10.0)
+      docile (~> 1.1.0)
+      json (~> 1.8)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.0)
     slop (3.6.0)
     sprockets (3.4.0)
       rack (> 1, < 3)
@@ -183,6 +191,7 @@ DEPENDENCIES
   capybara
   cf-app-utils
   chronic
+  codeclimate-test-reporter
   omniauth
   omniauth-github
   pg
