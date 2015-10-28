@@ -14,6 +14,13 @@ class ApplicationController < ActionController::Base
     should_redirect
   end
 
+  def require_admin
+    require_authentication and return
+    is_admin = Admins.verify?(current_user.github_id)
+    raise UnauthorizedError, 'must be an admin' unless is_admin
+    is_admin
+  end
+
   rescue_from UnauthorizedError do |error|
     flash[:error] = error.message || "Unauthorized"
     redirect_to '/'

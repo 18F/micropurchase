@@ -19,6 +19,7 @@ gem 'omniauth-github'
 gem 'chronic'
 
 group :development, :test do
+  gem 'capybara'
   gem 'rspec-rails'
   gem 'capybara'
   gem 'byebug'

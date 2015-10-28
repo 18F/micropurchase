@@ -13,8 +13,8 @@ RSpec.describe Presenter::Auction do
   describe '#current_bid when there are no bids' do
     let(:bids) { [] }
 
-    it 'return nil' do
-      expect(auction.current_bid).to be_nil
+    it 'return a null bid' do
+      expect(auction.current_bid).to be_a(Presenter::Bid::Null)
     end
   end
 
