@@ -1,9 +1,7 @@
 module Presenter
   class Bid < SimpleDelegator
     def time
-      converted = DcTime.new(created_at).convert
-      return null unless converted
-      converted.to_s(:long)
+      DcTime.convert_and_format(created_at)
     end
 
     def bidder_duns_number
@@ -20,6 +18,7 @@ module Presenter
 
     class Null
       NULL = "&nbsp;".html_safe
+
       def time
         NULL
       end

@@ -19,7 +19,7 @@ RSpec.describe AdminCreateAuction do
         }
       }
 
-      it 'drops the price down to 3500' do
+      it 'drops the price down to the bid upper limit' do
         creator.perform
         expect(auction.start_price).to eq(3400.99)
       end
@@ -39,7 +39,7 @@ RSpec.describe AdminCreateAuction do
         }
       }
 
-      it 'bumps the price to 3500' do
+      it 'bumps the price to the bid upper limit' do
         creator.perform
         expect(auction.start_price).to eq(3400.99)
       end
@@ -58,7 +58,7 @@ RSpec.describe AdminCreateAuction do
         }
       }
 
-      it 'makes the price to 3500' do
+      it 'makes the price the bid upper limit' do
         creator.perform
         expect(auction.start_price).to eq(3400.99)
       end
@@ -133,6 +133,7 @@ RSpec.describe AdminCreateAuction do
             github_repo: 'github url',
             start_datetime: 'Nov 3, 2015',
             end_datetime: '11/10/2015',
+            issue_url: 'issue url'
           }
         }
       }
@@ -142,6 +143,7 @@ RSpec.describe AdminCreateAuction do
         expect(auction.title).to eq(params[:auction][:title])
         expect(auction.description).to eq(params[:auction][:description])
         expect(auction.github_repo).to eq(params[:auction][:github_repo])
+        expect(auction.issue_url).to eq(params[:auction][:issue_url])
       end
     end
   end

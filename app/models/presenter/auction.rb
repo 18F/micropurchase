@@ -30,13 +30,21 @@ module Presenter
     end
 
     def bids
-      __getobj__.bids.to_a.map{|bid| Presenter::Bid.new(bid) }
+      model.bids.to_a.map{|bid| Presenter::Bid.new(bid) }
+    end
+
+    def starts_at
+      DcTime.convert_and_format(model.start_datetime)
+    end
+
+    def ends_at
+      DcTime.convert_and_format(model.end_datetime)
     end
 
     def available?
       !!(
-        (start_datetime && (start_datetime <= Time.now)) &&
-          (end_datetime && (end_datetime >= Time.now))
+        (model.start_datetime && (model.start_datetime <= Time.now)) &&
+          (model.end_datetime && (model.end_datetime >= Time.now))
       )
     end
 
@@ -44,6 +52,10 @@ module Presenter
 
     def current_bid_record
       @current_bid_record ||= bids.sort_by{|bid| [bid.amount, bid.created_at, bid.id]}.first
+    end
+
+    def model
+      __getobj__
     end
   end
 end

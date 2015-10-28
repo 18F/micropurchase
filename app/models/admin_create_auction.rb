@@ -12,13 +12,14 @@ class AdminCreateAuction < Struct.new(:params)
       title: title,
       description: description,
       github_repo: github_repo,
+      issue_url: issue_url,
       start_datetime: start_datetime,
       end_datetime: end_datetime,
       start_price: start_price
     }
   end
 
-  [:title, :description, :github_repo].each do |key|
+  [:title, :description, :github_repo, :issue_url].each do |key|
     define_method key do
       params[:auction][key]
     end

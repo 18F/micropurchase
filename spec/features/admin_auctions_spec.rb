@@ -23,9 +23,10 @@ RSpec.feature "AdminAuctions", type: :feature do
     title = 'Build the micropurchase thing'
     fill_in("auction_title", with: title)
     fill_in("auction_description", with: 'and the admin related stuff')
-
     fill_in("auction_start_datetime", with: (Time.now + 3.days).strftime("%m/%d/%Y"))
     fill_in("auction_end_datetime", with: (Time.now - 3.days).strftime("%m/%d/%Y"))
+    fill_in("auction_github_repo", with: "https://github.com/18F/calc")
+    fill_in("auction_issue_url", with: "https://github.com/18F/calc/issues/255")
     click_on("Submit")
 
     expect(page).to have_text(@auction.title)
