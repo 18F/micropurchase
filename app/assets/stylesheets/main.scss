@@ -170,11 +170,13 @@ footer {
 .header-account span {
   position: relative;
   top: -8px;
+  right: 10px;
 }
 
-.header-account button {
+.header-account a.usa-button {
   margin: 0;
   position: relative;
-  top: 8px;
+  top: -10px;
+  font-size: 20px;
 }
 

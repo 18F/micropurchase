@@ -5,7 +5,10 @@ end
 def github_auth_hash(opts={})
   OmniAuth::AuthHash.new({
     :provider => 'github',
-    :uid => current_user_uid
+    :uid => current_user_uid,
+    :info => {
+      :name => 'Doris Doogooder'
+    }
   }.merge(opts))
 end
 
