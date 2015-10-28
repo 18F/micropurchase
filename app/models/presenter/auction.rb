@@ -34,11 +34,11 @@ module Presenter
     end
 
     def starts_at
-      DcTime.convert_and_format(model.start_datetime)
+      Presenter::DcTime.convert_and_format(model.start_datetime)
     end
 
     def ends_at
-      DcTime.convert_and_format(model.end_datetime)
+      Presenter::DcTime.convert_and_format(model.end_datetime)
     end
 
     def available?

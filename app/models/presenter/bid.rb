@@ -1,7 +1,7 @@
 module Presenter
   class Bid < SimpleDelegator
     def time
-      DcTime.convert_and_format(created_at)
+      Presenter::DcTime.convert_and_format(created_at)
     end
 
     def bidder_duns_number
