@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/18F/micropurchase/badges/gpa.svg)](https://codeclimate.com/github/18F/micropurchase) [![Test Coverage](https://codeclimate.com/github/18F/micropurchase/badges/coverage.svg)](https://codeclimate.com/github/18F/micropurchase/coverage)
+
 # Micropurchase
 
 This app will be used to manage bids for 18F's [micro-purchase threshold experiment](https://18f.gsa.gov/2015/10/13/open-source-micropurchasing/). Vendors will be able to view open issues and bid on them, given they have GitHub accounts and are registered on [SAM.gov](https://www.sam.gov).

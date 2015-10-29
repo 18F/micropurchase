@@ -18,6 +18,10 @@ gem 'omniauth-github'
 
 gem 'chronic'
 
+group :test do
+  gem "codeclimate-test-reporter", require: nil
+end
+
 group :development, :test do
   gem 'capybara'
   gem 'rspec-rails'

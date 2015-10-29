@@ -6,6 +6,8 @@ script: bundle exec rake spec
 
 addons:
   postgresql: "9.3"
+  code_climate:
+      repo_token: 2ad0d3196c872832cf5d6b34c83bf21dbf0a30e2191ba036be003b01e417a6a1
 
 deploy:
   provider:
