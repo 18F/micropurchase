@@ -2,9 +2,22 @@ require 'rails_helper'
 
 RSpec.describe AuctionsController, controller: true do
   describe '#index' do
-    it 'should render the list of auctions' do
+    it 'assigns presented auctions' do
+      auction_record = Auction.create
       get :index
-      expect(response).to render_template(:index)
+      auction = assigns(:auctions).first
+      expect(auction).to be_a(Presenter::Auction)
+      expect(auction.id).to eq(auction_record.id)
+    end
+  end
+
+  describe '#show' do
+    it 'assigns presented auction' do
+      auction_record = Auction.create
+      get :show, id: auction_record.id
+      auction = assigns(:auction)
+      expect(auction).to be_a(Presenter::Auction)
+      expect(auction.id).to eq(auction_record.id)
     end
   end
 end
