@@ -1,8 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe AdminCreateAuction do
-  let(:creator) { AdminCreateAuction.new(params) }
-  let(:auction) { creator.auction }
+RSpec.describe AuctionParser do
+  let(:parser) { AuctionParser.new(params) }
+  let(:auction) { parser.auction }
+  let(:attributes) { parser.attributes }
 
   describe '#perform' do
     context 'when the price is too high' do
@@ -20,8 +21,7 @@ RSpec.describe AdminCreateAuction do
       }
 
       it 'drops the price down to the bid upper limit' do
-        creator.perform
-        expect(auction.start_price).to eq(3400.99)
+        expect(attributes[:start_price]).to eq(3400.99)
       end
     end
 
@@ -40,8 +40,7 @@ RSpec.describe AdminCreateAuction do
       }
 
       it 'bumps the price to the bid upper limit' do
-        creator.perform
-        expect(auction.start_price).to eq(3400.99)
+        expect(attributes[:start_price]).to eq(3400.99)
       end
     end
 
@@ -59,8 +58,7 @@ RSpec.describe AdminCreateAuction do
       }
 
       it 'makes the price the bid upper limit' do
-        creator.perform
-        expect(auction.start_price).to eq(3400.99)
+        expect(attributes[:start_price]).to eq(3400.99)
       end
     end
 
@@ -78,9 +76,8 @@ RSpec.describe AdminCreateAuction do
       }
 
       it 'uses the time and date' do
-        creator.perform
-        expect(auction.start_datetime.utc.to_s).to  eq(Time.parse('Nov 3, 2015 15:15 EST').utc.to_s)
-        expect(auction.end_datetime.utc.to_s).to    eq(Time.parse("Nov 10, 2015 14:15 EST").utc.to_s)
+        expect(attributes[:start_datetime].utc.to_s).to  eq(Time.parse('Nov 3, 2015 15:15 EST').utc.to_s)
+        expect(attributes[:end_datetime].utc.to_s).to    eq(Time.parse("Nov 10, 2015 14:15 EST").utc.to_s)
       end
     end
 
@@ -98,9 +95,8 @@ RSpec.describe AdminCreateAuction do
       }
 
       it 'uses the time and date' do
-        creator.perform
-        expect(auction.start_datetime.utc.to_s).to eq(Time.parse('Nov 3, 2015 0:00 EST').utc.to_s)
-        expect(auction.end_datetime.utc.to_s).to   eq(Time.parse("Nov 10, 2015 0:00 EST").utc.to_s)
+        expect(attributes[:start_datetime].utc.to_s).to eq(Time.parse('Nov 3, 2015 0:00 EST').utc.to_s)
+        expect(attributes[:end_datetime].utc.to_s).to   eq(Time.parse("Nov 10, 2015 0:00 EST").utc.to_s)
       end
     end
 
@@ -119,7 +115,7 @@ RSpec.describe AdminCreateAuction do
 
       it 'raise an error' do
         expect {
-          creator.perform
+          attributes
         }.to raise_error(ArgumentError)
       end
     end
@@ -139,11 +135,10 @@ RSpec.describe AdminCreateAuction do
       }
 
       it 'stores the right stuff' do
-        creator.perform
-        expect(auction.title).to eq(params[:auction][:title])
-        expect(auction.description).to eq(params[:auction][:description])
-        expect(auction.github_repo).to eq(params[:auction][:github_repo])
-        expect(auction.issue_url).to eq(params[:auction][:issue_url])
+        expect(attributes[:title]).to eq(params[:auction][:title])
+        expect(attributes[:description]).to eq(params[:auction][:description])
+        expect(attributes[:github_repo]).to eq(params[:auction][:github_repo])
+        expect(attributes[:issue_url]).to eq(params[:auction][:issue_url])
       end
     end
   end
