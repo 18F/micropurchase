@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe PlaceBid do
   let(:place_bid) { PlaceBid.new(params, current_user) }
   let(:current_user) { double('bidder', id: 111) }
-  let(:amount) {  1005.012 }
+  let(:amount) { 1005 }
   let(:params) {
     {
       auction_id: auction_id,
@@ -44,6 +44,21 @@ RSpec.describe PlaceBid do
     end
   end
 
+  context 'when the bid amount is in increments small than one dollar' do
+    let(:auction) {
+      Auction.create({
+        start_datetime: Time.now - 3.days,
+        end_datetime: Time.now + 7.days
+      })
+    }
+    let(:amount) {1000.99}
+    it 'should raise an authorization error' do
+      expect {
+        place_bid.perform
+      }.to raise_error(UnauthorizedError)
+    end
+  end
+
   context 'when the bid amount is too high' do
     let(:auction) {
       Auction.create({
@@ -51,7 +66,7 @@ RSpec.describe PlaceBid do
         end_datetime: Time.now + 7.days
       })
     }
-    let(:amount) { 3500 }
+    let(:amount) { 3600 }
 
     it 'should raise an authorization error' do
       expect {
@@ -97,7 +112,7 @@ RSpec.describe PlaceBid do
     it 'rounds the amount to two decimal places' do
       place_bid.perform
       bid.reload
-      expect(bid.amount).to eq(1005.01)
+      expect(bid.amount).to eq(1005)
     end
   end
 end
