@@ -1,12 +1,4 @@
-class AdminCreateAuction < Struct.new(:params)
-  attr_reader :auction
-
-  def perform
-    @auction = Auction.create(attributes)
-  end
-
-  private
-
+class AuctionParser < Struct.new(:params)
   def attributes
     {
       title: title,

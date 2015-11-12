@@ -8,8 +8,14 @@
 <div class='usa-grid-full'>
 <hr>
 <% @auctions.each do |auction| %>
-  <a href="/admin/auctions/<%= auction.id %>"><h3 class='usa-width-one-whole'><%= auction.title %></h3></a>
-  <div class='usa-width-one-whole'>
+  <div class='usa-width-one-whole auction-name'>
+    <a class='usa-width-three-fourths' href="/admin/auctions/<%= auction.id %>">
+      <h3><%= auction.title %></h3>
+    </a>
+    <a class='usa-width-one-fourth' href="/admin/auctions/<%= auction.id %>/edit">Edit</a>
+  </div>
+
+  <div class='usa-width-one-whole auction-details'>
     <div class='usa-width-one-sixth'>
       <% if auction.available? %>
         <%= image_tag "issue-icon", class: 'issue-icon' %>

@@ -15,11 +15,24 @@ module Admin
     end
 
     def create
-      AdminCreateAuction.new(params).perform
+      CreateAuction.new(params).perform
       redirect_to "/admin/auctions"
     rescue ArgumentError => e
       flash[:error] = e.message
       redirect_to "/admin/auctions" # render edit
+    end
+
+    def update
+      auction = Auction.find(params[:id])
+      UpdateAuction.new(auction, params).perform
+      redirect_to "/admin/auctions"
+    rescue ArgumentError => e
+      flash[:error] = e.message
+      redirect_to "/admin/auctions"
+    end
+
+    def edit
+      @auction = Auction.find(params[:id])
     end
   end
 end

@@ -35,4 +35,18 @@ RSpec.feature "AdminAuctions", type: :feature do
       Presenter::DcTime.convert(Time.now + 3.days).beginning_of_day.to_s(:long)
     )
   end
+
+  scenario "updating an auction" do
+    visit "/admin/auctions"
+    click_on("Edit")
+
+    title = 'Build the micropurchase thing'
+    fill_in("auction_title", with: title)
+    fill_in("auction_description", with: 'and the admin related stuff')
+    fill_in("auction_github_repo", with: "https://github.com/18F/calc")
+    fill_in("auction_issue_url", with: "https://github.com/18F/calc/issues/255")
+    click_on("Submit")
+
+    expect(page).to have_text("Build the micropurchase thing")
+  end
 end
