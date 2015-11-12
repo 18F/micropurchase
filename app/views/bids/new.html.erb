@@ -24,6 +24,7 @@
         <h2 class='center'>Current bid:</h2>
         <% if @auction.bids? %>
           <p class="current-bid-amount center"><%= number_to_currency(@auction.current_bid_amount) %></p>
+          <h3 class="center">You are currently the winning bidder.</h3>
         <% else %>
           <p class="current-bid-amount center">No bids yet.</p>
         <% end %>
