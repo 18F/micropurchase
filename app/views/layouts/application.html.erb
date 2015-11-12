@@ -35,9 +35,9 @@
             <div class="header-account">
               <% if current_user %>
                 <span>Logged in as <%= current_user.name %></span>
-                <a href="/logout"><button class="usa-button-outline-inverse">Logout</button></a>
+                <a class="usa-button usa-button-outline-inverse" href="/logout">Logout</a>
               <% else %>
-                <a href="/login"><button class="usa-button-outline-inverse">Login</button></a>
+                <a href="/login" class="usa-button usa-button-outline-inverse">Login</a>
               <% end %>
             </div>
           </div>

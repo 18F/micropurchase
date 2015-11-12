@@ -26,7 +26,7 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
-  describe '#edit' do
+  describe '#update' do
     it 'redirects to authenticate when not logged in' do
       allow(controller).to receive(:current_user).and_return(nil)
       put :update, {id: user.id, user: {duns_number: '222'}}
