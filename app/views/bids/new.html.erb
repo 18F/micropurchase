@@ -25,6 +25,7 @@
         <% if @auction.bids? %>
           <p class="current-bid-amount center"><%= number_to_currency(@auction.current_bid_amount) %></p>
         <% else %>
+          <p class="current-bid-amount center">No bids yet.</p>
         <% end %>
       </div>
 
