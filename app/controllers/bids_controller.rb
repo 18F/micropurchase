@@ -1,7 +1,14 @@
 class BidsController < ApplicationController
-  before_filter :require_authentication
+  before_filter :require_authentication, except: [:index]
 
   def index
+    @auctions = Auction
+      .joins(:bids)
+      .uniq
+      .map {|auction| Presenter::Auction.new(auction) }
+  end
+
+  def my_bids
     @auctions = Auction
       .joins(:bids)
       .where(bids: {bidder_id: current_user.id})

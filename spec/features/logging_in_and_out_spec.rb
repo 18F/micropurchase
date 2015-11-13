@@ -40,7 +40,7 @@ RSpec.feature "logging in and out of the app", type: :feature do
   end
 
   scenario "User logs in when viewing protected or specific information" do
-    visit "/bids"
+    visit "/my-bids"
 
     expect(page).to have_content("Authorize with GitHub")
 

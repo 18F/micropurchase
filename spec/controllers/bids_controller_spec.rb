@@ -10,7 +10,7 @@ RSpec.describe BidsController, controller: true do
     })
   }
 
-  describe '#index' do
+  describe '/my-bids' do
     context 'when logged out' do
       before do
         allow(controller).to receive(:current_user).and_return(nil)
@@ -29,7 +29,7 @@ RSpec.describe BidsController, controller: true do
 
       it 'should assign auctions that current user have bidded on, presented' do
         bid = auction.bids.create(bidder_id: current_bidder.id)
-        get :index
+        get :"my_bids"
         assigned_auction = assigns(:auctions).first
         expect(assigned_auction).to be_a(Presenter::Auction)
         expect(assigned_auction.id).to eq(auction.id)
@@ -37,7 +37,7 @@ RSpec.describe BidsController, controller: true do
 
       it 'should not assign auctions that the current user has not bidded on' do
         auction.bids.create(bidder_id: 123)
-        get :index
+        get :"my_bids"
         expect(assigns(:auctions)).to be_empty
       end
     end
