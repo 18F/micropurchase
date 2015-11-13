@@ -1,4 +1,4 @@
-def create_current_auction
+def create_bidless_auction
   @auction = Auction.create({
     start_datetime: Time.now - 3.days,
     end_datetime: Time.now + 3.days,
@@ -9,6 +9,11 @@ def create_current_auction
   })
   @bidder = User.create(github_id: 'uid', duns_number: 'duns')
 
+  return @auction, @bidder
+end
+
+def create_current_auction
+  @auction, @bidder = create_bidless_auction
   @auction.bids.create(bidder: @bidder, amount: 1000)
 end
 

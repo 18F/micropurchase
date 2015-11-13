@@ -55,5 +55,34 @@ RSpec.feature "bidder interacts with auction", type: :feature do
     # returns us back to the bid page
     expect(page).to have_content("Current bid:")
     expect(page).to have_content("$999.00")
+    expect(page).to have_content("You are currently the winning bidder.")
   end
+
+
+
+  scenario "Is not the current winning bidder" do
+    create_bidless_auction
+
+    visit "/"
+    sign_in_bidder
+
+    click_on("Bid »")
+    expect(page).not_to have_content("Authorize with GitHub")
+    expect(page).to have_content("Current bid:")
+    expect(page).to have_content("No bids yet.")
+    expect(page).not_to have_content("You are currently the winning bidder.")
+  end
+
+  scenario "Bidding on a bid-less auction while logged in" do
+    create_bidless_auction
+
+    visit "/"
+    sign_in_bidder
+
+    click_on("Bid »")
+    expect(page).not_to have_content("Authorize with GitHub")
+    expect(page).to have_content("Current bid:")
+    expect(page).to have_content("No bids yet.")
+  end
+
 end
