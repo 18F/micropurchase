@@ -9,7 +9,11 @@ module Presenter
     end
 
     def bidder_name
-      bidder.name || null
+      if Presenter::Auction.new(auction).available?
+        '[Name witheld until the auction ends]'
+      else
+        bidder.name || null
+      end
     end
 
     def null

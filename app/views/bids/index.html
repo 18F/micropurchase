@@ -1,0 +1,22 @@
+<h1>Bids for "<%= @auction.title %>"</h1>
+
+<a href="/auctions/<%= @auction.id %>">« Back to auction</a>
+
+<table class="usa-table-borderless">
+  <thead>
+    <tr>
+      <th scope="col">Bidder</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Date (Eastern Standard Time)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @auction.bids.sort_by {|b| b.created_at}.reverse.each do |bid| %>
+      <tr>
+        <td><%= bid.bidder_name %></td>
+        <td><%= number_to_currency(bid.amount) %></td>
+        <td><%= Presenter::DcTime.convert_and_format(bid.created_at) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

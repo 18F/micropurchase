@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe BidsController, controller: true do
-  let(:current_bidder) { User.create(github_id: '12345')}
+  let(:current_bidder) {
+    User.create(github_id: '12345', name: 'Bob The Bidder')
+  }
   let(:auction) {
     Auction.create({
       title: 'Refactor this disaster',
@@ -63,6 +65,39 @@ RSpec.describe BidsController, controller: true do
       it 'should redirect to /login' do
         get :new, auction_id: auction.id
         expect(response).to redirect_to("/login")
+      end
+    end
+  end
+
+  describe '#index' do
+    let(:bids) {
+      [3400, 3000, 1800].map do |amount|
+        Bid.create({
+          auction_id: auction.id,
+          amount: amount,
+          bidder_id: current_bidder.id
+        })
+      end
+    }
+    context 'when logged in' do
+      before do
+        allow(controller).to receive(:current_user).and_return(current_bidder)
+      end
+
+      it 'renders the template' do
+        get :index, auction_id: auction.id
+        expect(response).to render_template(:index)
+      end
+    end
+
+    context 'when logged out' do
+      before do
+        allow(controller).to receive(:current_user).and_return(nil)
+      end
+
+      it 'renders the template' do
+        get :index, auction_id: auction.id
+        expect(response).to render_template(:index)
       end
     end
   end

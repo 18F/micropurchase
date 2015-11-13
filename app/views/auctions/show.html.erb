@@ -23,6 +23,12 @@
       <% else %>
         <%= render partial: 'auctions/winning_bid', locals: {auction: @auction} %>
       <% end %>
+      <%=
+        link_to(
+          pluralize(@auction.bids.length, 'bids'),
+          auction_bids_path(@auction.id)
+        )
+      %>
     </div>
   </div>
   <hr />

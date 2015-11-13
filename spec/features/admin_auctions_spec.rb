@@ -11,7 +11,12 @@ RSpec.feature "AdminAuctions", type: :feature do
     expect(page).not_to have_text('must be an admin')
     expect(page).to have_text(@auction.title)
     click_on(@auction.title)
-    expect(page).to have_text('$1,000')
+    auction = Presenter::Auction.new(@auction)
+    current_bid_amount = ApplicationController.helpers.number_to_currency(
+      auction.current_bid.amount
+    )
+
+    expect(page).to have_text(current_bid_amount)
     expect(page).to have_text(@auction.description)
   end
 
@@ -32,7 +37,8 @@ RSpec.feature "AdminAuctions", type: :feature do
     expect(page).to have_text(@auction.title)
     expect(page).to have_text("Build the micropurchase thing")
     expect(page).to have_text(
-      Presenter::DcTime.convert(Time.now + 3.days).beginning_of_day.to_s(:long)
+      Presenter::DcTime.convert(Time.now + 3.days).
+        beginning_of_day.strftime(Presenter::DcTime::FORMAT)
     )
   end
 
