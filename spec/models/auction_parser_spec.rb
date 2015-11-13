@@ -21,7 +21,7 @@ RSpec.describe AuctionParser do
       }
 
       it 'drops the price down to the bid upper limit' do
-        expect(attributes[:start_price]).to eq(3400.99)
+        expect(attributes[:start_price]).to eq(3500.00)
       end
     end
 
@@ -40,7 +40,7 @@ RSpec.describe AuctionParser do
       }
 
       it 'bumps the price to the bid upper limit' do
-        expect(attributes[:start_price]).to eq(3400.99)
+        expect(attributes[:start_price]).to eq(3500.00)
       end
     end
 
@@ -58,7 +58,7 @@ RSpec.describe AuctionParser do
       }
 
       it 'makes the price the bid upper limit' do
-        expect(attributes[:start_price]).to eq(3400.99)
+        expect(attributes[:start_price]).to eq(3500.00)
       end
     end
 

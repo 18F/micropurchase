@@ -1,5 +1,5 @@
 class PlaceBid < Struct.new(:params,:current_user)
-  BID_LIMIT = 3400.99
+  BID_LIMIT = 3500.00
 
   attr_reader :bid
 
@@ -27,6 +27,10 @@ class PlaceBid < Struct.new(:params,:current_user)
   end
 
   def validate_bid_data
+    if amount.to_i != amount
+      raise UnauthorizedError, 'Bids must be in increments of one dollar'
+    end
+
     if !auction_available?
       raise UnauthorizedError, 'Auction not available'
     end
