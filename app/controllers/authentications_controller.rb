@@ -1,6 +1,7 @@
 class AuthenticationsController < ApplicationController
   def create
-    redirect_to(Authenticator.new(request.env['omniauth.auth'], session).perform)
+    path = Authenticator.new(request.env['omniauth.auth'], session).perform
+    redirect_to(path)
   end
 
   def destroy

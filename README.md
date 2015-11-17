@@ -97,6 +97,35 @@ cf push
 
 Pull requests merged into the `master` branch will be automatically deployed to https://micropurchase.18f.gov.
 
+## Security Scans
+
+This repository uses two tools to provide a total of three types of automated security checks:
+
+- [Brakeman](http://brakemanscanner.org/) provides static code analysis.
+- [Hakiri](https://hakiri.io/) is used to ensure the Rails/Ruby versions contain no known CVEs.
+- Hakiri is used to ensure the gems declared in the Gemfile contain no known CVEs.
+
+All security scans are built into the test suite. `bundle exec rake spec` will run them. To run the security scans ad hoc:
+
+Brakeman:
+```
+bundle exec brakeman
+```
+
+Hakiri for Ruby/Rails versions:
+```
+bundle exec hakiri system:scan -m hakiri_manifest.json
+```
+
+Hakiri for Gemfile dependency versions:
+```
+bundle exec hakiri gemfile:scan
+```
+
+### Ignored Brakeman warnings
+
+Sometimes Brakeman will report a false positive. In cases like these, the warnings will be ignored. Ignored warnings are declared in `config/brakeman.ignore`. This file contains a machine-readable list of all ignored warnings. Any ignored warning will contain a note explaining (or linking to an explanation of) why the warning is ignored.
+
 ## Public domain
 
 This project is in the worldwide [public domain](LICENSE.md). As stated in [CONTRIBUTING](CONTRIBUTING.md):
