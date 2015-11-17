@@ -30,6 +30,7 @@ group :development, :test do
   gem 'byebug'
   gem 'pry'
   gem 'timecop'
+  gem 'brakeman', :require => false
 end
 
 group :development do
