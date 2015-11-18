@@ -1,20 +1,20 @@
 language: ruby
 before_script:
-  - bundle exec rake db:create
-  - bundle exec rake db:migrate
+- bundle exec rake db:create
+- bundle exec rake db:migrate
 script: bundle exec rake spec
-
 addons:
-  postgresql: "9.3"
+  postgresql: '9.3'
   code_climate:
-      repo_token: 2ad0d3196c872832cf5d6b34c83bf21dbf0a30e2191ba036be003b01e417a6a1
+    repo_token: 2ad0d3196c872832cf5d6b34c83bf21dbf0a30e2191ba036be003b01e417a6a1
 
+edge: true
 deploy:
   provider: cloudfoundry
   api: https://api.cloud.gov
   username: deploy-agile-bpa
   password:
-    secure: bYG90NfRO1AK+a6NI9tGRRsU5yxCrAn08zBwac2tMk+BGQw2kTSRtdpwi2Rl6fLZh4riTmJEur0m38/HwrMsykliJIEC+0R20XM9csbS0AHtGLFBTKil7GgpmI2QacUT9hTp7KIXYHCvHh1YsOVws4pvoAjrjMSEu2sgGdSSwEE83Z4Ewl7JvrGwrtvia11jR9ULXsC1oANp8cQqQvbFvYegMrUOuCFr1+Vm/vQIdVsxajB8Ii3YQcVhXMYlRrQkrk1eXzX2twqUcGj5q7htao2SivX8nSv1ePqKDm8UmvXNYfFgvZNO3Rccernz/O3UcmLcDkJUU8B5/aBN9LnlOQJ0PHBWsAyP13cwjT8zgS50cvbBUOs20D2R8aRM3XCSOQ5+1Ss6fsUq9w48leAzNkNM47p7KlxwrTKM9i7b2RvQQMD1JVPlZw321sGDU/4dbbqS6F2CZLCNO0W7sZ4ddpltCJbdF/4mH3oeb+TvNxbpX8aKpz9IB7Lhb81v0xLD59V7nS9L9fpp4s2MXsSoejcXL3OOGF2/XC0pwIiJD+j00hIyZDAauWxkB6JT7eqd5im61tJxDPpqMsX7hCLRGnufvdzBEEccIYfEC5lj8LiU3E9hl8m0haB1pdhOK93pyiI93rMo/Pn/DcDkS5JTkyN9oX9iZoXcp6i1tsrd1xA=
+    secure: GNmqOzyJPfmuUKiSr+uwvU2N6787MPWvzisPorVH5AqDpIaUlgLOOidq/A68U3+FQaCqusqshSvQSk0c0qMzYS89kHG43bIle4EJLpbRVL1kPNHiuMfLgnBs5iz38SoxH6n7yXDqCI8lNhiBm+sE0/P7jgIX9OZ2sOWej5lmz66Toj0Mtw/csrIUzai6iFPoLepVvaVsXDUm96Y6295LE7dC+ShA9v9AZUhYp5OtodiktKL6+WnjK9c1gSZdhPmpaK4yBtk052GhqNvUDKqy4dBlA67yf/+18/WodOwzsyZF8C/m58vymQ2KicYRG47xeHk9jvQx9CzvSGBCFny3yae51QJ3LEPVNzZIltLijUpU7QmQHNUMek5h6qPMExjH53cewHkUFBRIAYiUcuW6YR26sJ/dBGzqvuNFasamLun8uRg+9Rhx5jBXGAUp6y+BcYKjFfZBJZEyGVHlXpSawXd9xfb2rpw0ocCjQ4CjztPOv6y0AGZtRjIogpBY3102iuB6eT1c7TmJXYQVPH/baQwNmM5ANxV6axqHC/oa71ibCi/UslgrlOKp1myt25wAJOQ2pciCD5HjIfsa5DYrYK8qY2/fa4ntC+NZJNAZQffRA6qUlsYll7u6tddaPxABDOQJiEXiXWwl3DojO3JMcqzWiIrJR1qPU2HuhuPGR/g=
   organization: agile-bpa
   space: production
   on:
