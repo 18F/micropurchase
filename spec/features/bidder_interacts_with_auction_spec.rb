@@ -171,9 +171,18 @@ RSpec.feature "bidder interacts with auction", type: :feature do
       end
 
       # check the "amount" column
-      amount = ApplicationController.helpers.number_to_currency(bid.amount)
-      within(:xpath, cel_xpath(row_number, 2)) do
-        expect(page).to have_content(amount)
+      if i == 0
+        # ensure the first row bid amount includes an asterisk
+        amount = ApplicationController.helpers.number_to_currency(bid.amount)
+        within(:xpath, cel_xpath(row_number, 2)) do
+          expect(page).to have_content("#{amount} *")
+        end
+      else
+        amount = ApplicationController.helpers.number_to_currency(bid.amount)
+        within(:xpath, cel_xpath(row_number, 2)) do
+          expect(page).to have_content(amount)
+          expect(page).not_to have_content("#{amount} *")
+        end
       end
 
       # check the "date" column

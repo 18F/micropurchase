@@ -11,12 +11,19 @@
     </tr>
   </thead>
   <tbody>
-    <% @auction.bids.sort_by {|b| b.created_at}.reverse.each do |bid| %>
+    <% @auction.bids.sort_by {|b| b.created_at}.reverse.each_with_index do |bid, i| %>
       <tr>
         <td><%= bid.bidder_name %></td>
-        <td><%= number_to_currency(bid.amount) %></td>
+        <% if i == 0 %>
+          <td><%= number_to_currency(bid.amount) %> &#42;</td>
+        <% else %>
+          <td><%= number_to_currency(bid.amount) %></td>
+        <% end %>
         <td><%= Presenter::DcTime.convert_and_format(bid.created_at) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<p>
+  &#42; - winning bid
+</p>
