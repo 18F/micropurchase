@@ -4,12 +4,28 @@
 
 This is a web application used to manage the bidding process for 18F's [micro-purchase threshold experiment](https://18f.gsa.gov/2015/10/13/open-source-micropurchasing/). The platform will allow vendors to bid on open opportunities with 18F, track their bids, and learn of the winning bidder. So long as vendors are registered on [SAM.gov](https://www.sam.gov) and have GitHub accounts, they will be able to view open opportunities and bid on them.
 
-With this application, a vendor will be able to view the full list of open micro-purchasing opportunities, access bid histories, and place bids on services requested by 18F. All bids will start under $3,500 and each project will specify the desired product and method of delivery. 
+With this application, a vendor will be able to view the full list of open micro-purchasing opportunities, access bid histories, and place bids on services requested by 18F. All bids will start under $3,500 and each project will specify the desired product and method of delivery.
 
-This is a Ruby/Rails application using ActiveRecord and PostgreSQL. This repo contains the front end of a web app that integrates GitHub and SAM.gov. For more information on setting up the back end of the web app, see below. 
+This is a Ruby/Rails application using ActiveRecord and PostgreSQL. This repo contains the front end of a web app that integrates GitHub and SAM.gov. For more information on setting up the back end of the web app, see below.
 
+## Documentation
+
+### Methods and classes
+
+Currently, there is no RDoc-style documentation for the methods and classes in this Rails app. We anticipate fixing this.
+
+### Database Schema
+
+We are keeping a version-controlled Entity Relationship Diagram (ERD) located in`docs/erd.pdf`. Any new change to the database schema must include an update to this diagram. You can automatically update the diagram by running (follow the local development instructions below if you don't have the app setup locally):
+
+```
+bundle exec erd
+```
+
+Updating the ERD requires Graphiz. Installation instructions are [here](http://voormedia.github.io/rails-erd/install.html).
 
 ## Local Development
+
 The application is running Ruby 2.2.3 and Rails 4.2.4. Libraries are all
 available via gems.
 

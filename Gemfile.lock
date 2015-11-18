@@ -48,6 +48,7 @@ GEM
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
     cf-app-utils (0.6)
+    choice (0.2.0)
     chronic (0.10.2)
     codeclimate-test-reporter (0.4.8)
       simplecov (>= 0.7.1, < 1.0.0)
@@ -118,6 +119,11 @@ GEM
       activesupport (>= 4.2.0.beta, < 5.0)
       nokogiri (~> 1.6.0)
       rails-deprecated_sanitizer (>= 1.0.1)
+    rails-erd (1.4.4)
+      activerecord (>= 3.2)
+      activesupport (>= 3.2)
+      choice (~> 0.2.0)
+      ruby-graphviz (~> 1.2)
     rails-html-sanitizer (1.0.2)
       loofah (~> 2.0)
     rails_12factor (0.0.3)
@@ -148,6 +154,7 @@ GEM
       rspec-mocks (~> 3.3.0)
       rspec-support (~> 3.3.0)
     rspec-support (3.3.0)
+    ruby-graphviz (1.2.2)
     sass (3.4.19)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -200,6 +207,7 @@ DEPENDENCIES
   pg
   pry
   rails (= 4.2.4)
+  rails-erd
   rails_12factor
   rspec-rails
   sass-rails (~> 5.0)
