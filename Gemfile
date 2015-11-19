@@ -32,6 +32,7 @@ end
 
 group :development do
   gem 'web-console', '~> 2.0'
+  gem 'rails-erd'
 end
 
 group :production do
