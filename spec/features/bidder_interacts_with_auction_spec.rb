@@ -1,6 +1,34 @@
 require 'rails_helper'
 
 RSpec.feature "bidder interacts with auction", type: :feature do
+  scenario "Viewing auction list and navigating to bid history" do
+    create_current_auction
+
+    visit "/"
+
+    number_of_bids = "#{@auction.bids.length} bids"
+    expect(page).to have_content(number_of_bids)
+
+    click_on(number_of_bids)
+
+    h1_text = "Bids for \"#{@auction.title}\""
+    expect(page).to have_content(h1_text)
+  end
+
+  scenario "Viewing auction detail page and navigating to bid history" do
+    create_current_auction
+
+    visit auction_path(@auction.id)
+
+    number_of_bids = "#{@auction.bids.length} bids"
+    expect(page).to have_content(number_of_bids)
+
+    click_on(number_of_bids)
+
+    h1_text = "Bids for \"#{@auction.title}\""
+    expect(page).to have_content(h1_text)
+  end
+
   scenario "Viewing auction list and detail view as a logged out user" do
     create_current_auction
 
@@ -85,4 +113,83 @@ RSpec.feature "bidder interacts with auction", type: :feature do
     expect(page).to have_content("No bids yet.")
   end
 
+  scenario "Viewing bid history for running auction" do
+    Timecop.scale(36000) do
+      create_running_auction
+    end
+    path = auction_bids_path(@auction.id)
+    visit path
+
+    # sort the bids so that newest is first
+    bids = @auction.bids.sort_by {|bid| bid.created_at}.reverse
+
+    # ensure the table has the correct content, in the correct order
+    bids.each_with_index do |bid, i|
+      row_number = i + 1
+      unredacted_bidder_name = bid.bidder.name
+      bid = Presenter::Bid.new(bid)
+
+      # check the "name" column
+      within(:xpath, cel_xpath(row_number, 1)) do
+        expect(page).not_to have_content(unredacted_bidder_name)
+        expect(page).to have_content("[Name witheld until the auction ends]")
+      end
+
+      # check the "amount" column
+      amount = ApplicationController.helpers.number_to_currency(bid.amount)
+      within(:xpath, cel_xpath(row_number, 2)) do
+        expect(page).to have_content(amount)
+      end
+
+      # check the "date" column
+      within(:xpath, cel_xpath(row_number, 3)) do
+        expect(page).to have_content(bid.time)
+      end
+
+    end
+  end
+
+  scenario "Viewing bid history for a closed auction" do
+    Timecop.scale(36000) do
+      create_closed_auction
+    end
+    path = auction_bids_path(@auction.id)
+    visit path
+
+    # sort the bids so that newest is first
+    bids = @auction.bids.sort_by {|bid| bid.created_at}.reverse
+
+    # ensure the table has the correct content, in the correct order
+    bids.each_with_index do |bid, i|
+      row_number = i + 1
+      unredacted_bidder_name = bid.bidder.name
+      bid = Presenter::Bid.new(bid)
+
+      # check the "name" column
+      within(:xpath, cel_xpath(row_number, 1)) do
+        expect(page).to have_content(unredacted_bidder_name)
+      end
+
+      # check the "amount" column
+      if i == 0
+        # ensure the first row bid amount includes an asterisk
+        amount = ApplicationController.helpers.number_to_currency(bid.amount)
+        within(:xpath, cel_xpath(row_number, 2)) do
+          expect(page).to have_content("#{amount} *")
+        end
+      else
+        amount = ApplicationController.helpers.number_to_currency(bid.amount)
+        within(:xpath, cel_xpath(row_number, 2)) do
+          expect(page).to have_content(amount)
+          expect(page).not_to have_content("#{amount} *")
+        end
+      end
+
+      # check the "date" column
+      within(:xpath, cel_xpath(row_number, 3)) do
+        expect(page).to have_content(bid.time)
+      end
+
+    end
+  end
 end

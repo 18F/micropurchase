@@ -1,0 +1,25 @@
+<h1>Bids for "<%= @auction.title %>"</h1>
+
+<a href="/auctions/<%= @auction.id %>">« Back to auction</a>
+
+<table class="usa-table-borderless">
+  <thead>
+    <tr>
+      <th scope="col">Bidder</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Date (Eastern Standard Time)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @auction.bids.each_with_index do |bid, i| %>
+      <tr>
+        <td><%= bid.bidder_name %></td>
+        <td><%= content_for_row(i, bid) %></td>
+        <td><%= Presenter::DcTime.convert_and_format(bid.created_at) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<p>
+  &#42; - winning bid
+</p>

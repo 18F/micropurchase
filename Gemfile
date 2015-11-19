@@ -26,8 +26,10 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'capybara-screenshot'
   gem 'byebug'
   gem 'pry'
+  gem 'timecop'
 end
 
 group :development do
