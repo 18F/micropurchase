@@ -1,0 +1,4 @@
+{
+    "ruby": { "command": "ruby -v" },
+    "ruby-on-rails": { "command": "bundle exec rails -v" }
+}
