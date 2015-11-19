@@ -30,7 +30,10 @@ module Presenter
     end
 
     def bids
-      model.bids.to_a.map{|bid| Presenter::Bid.new(bid) }
+      model.bids.to_a
+        .map {|bid| Presenter::Bid.new(bid)}
+        .sort_by {|bid| bid.created_at}
+        .reverse
     end
 
     def starts_at

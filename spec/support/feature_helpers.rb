@@ -78,13 +78,6 @@ def show_page
   %x(launchy http://localhost:3000/capybara.html)
 end
 
-def expect_cel_to_have_content(page, row_number, column_number, content)
-  xpath = "//table/tbody/tr[#{row_number}]/td[#{column_number}]"
-  within(:xpath, xpath) do
-    expect(page).to have_content(content)
-  end
-end
-
 def cel_xpath(row_number, column_number)
   "//table/tbody/tr[#{row_number}]/td[#{column_number}]"
 end

@@ -73,9 +73,9 @@ RSpec.describe BidsController, controller: true do
     let(:bids) {
       [3400, 3000, 1800].map do |amount|
         Bid.create({
-          auction_id: auction.id,
+          auction: auction,
           amount: amount,
-          bidder_id: current_bidder.id
+          bidder: current_bidder
         })
       end
     }
