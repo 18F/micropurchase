@@ -5,7 +5,7 @@ class Authenticator < Struct.new(:auth_hash, :session)
     find_or_create_user
     update_user
     sign_in
-    redirect_url
+    redirect_hash
   end
 
   private
@@ -24,8 +24,22 @@ class Authenticator < Struct.new(:auth_hash, :session)
     session[:user_id] = user.id
   end
 
-  def redirect_url
-    admin? ? '/' : "/users/#{user.id}/edit"
+  def redirect_hash
+    # protects redirects as outlined here:
+    # http://brakemanscanner.org/docs/warning_types/redirect/
+    index_hash = {
+      controller: :auctions,
+      action: :index,
+      only_path: true
+    }
+    edit_users_hash = {
+      controller: :users,
+      action: :edit,
+      id: user.id,
+      only_path: true
+    }
+
+    admin? ? index_hash : edit_users_hash
   end
 
   def found_user
