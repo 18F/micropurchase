@@ -1,4 +1,4 @@
-[![Code Climate](https://codeclimate.com/github/18F/micropurchase/badges/gpa.svg)](https://codeclimate.com/github/18F/micropurchase) [![Test Coverage](https://codeclimate.com/github/18F/micropurchase/badges/coverage.svg)](https://codeclimate.com/github/18F/micropurchase/coverage)
+[![Code Climate](https://codeclimate.com/github/18F/micropurchase/badges/gpa.svg)](https://codeclimate.com/github/18F/micropurchase) [![Test Coverage](https://codeclimate.com/github/18F/micropurchase/badges/coverage.svg)](https://codeclimate.com/github/18F/micropurchase/coverage) [![Dependency Status](https://gemnasium.com/18F/micropurchase.svg)](https://gemnasium.com/18F/micropurchase) [![security](https://hakiri.io/github/18F/micropurchase/master.svg)](https://hakiri.io/github/18F/micropurchase/master)
 
 # Micropurchase
 
