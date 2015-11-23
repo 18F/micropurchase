@@ -10,7 +10,7 @@
 <% @auctions.each do |auction| %>
   <div class='usa-width-one-whole auction-name'>
     <a class='usa-width-three-fourths' href="/admin/auctions/<%= auction.id %>">
-      <h3><%= auction.title %></h3>
+      <h2><%= auction.title %></h2>
     </a>
     <a class='usa-width-one-fourth' href="/admin/auctions/<%= auction.id %>/edit">Edit</a>
   </div>

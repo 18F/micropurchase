@@ -16,3 +16,4 @@
 
 /coverage
 /public/capybara.html
+.env

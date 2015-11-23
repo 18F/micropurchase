@@ -6,12 +6,12 @@
     <%= image_tag "issue-icon.png", alt: 'issue-icon', class: 'issue-icon' %>
   </div>
   <div class='usa-width-three-fourths'>
-    <h4 class='issue-title'><%= @auction.title %></h4>
+    <h2 class='issue-title'><%= @auction.title %></h2>
     <p class='issue-description'>
       <%= @auction.description %>
     </p>
     <% if @auction.available? %>
-      <h4>Ends in <%= distance_of_time_in_words(Time.now, @auction.end_datetime) %></h4>
+      <h3>Ends in <%= distance_of_time_in_words(Time.now, @auction.end_datetime) %></h3>
     <% end %>
   </div>
 </div>
