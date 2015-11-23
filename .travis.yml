@@ -19,4 +19,4 @@ deploy:
   space: production
   on:
     repo: 18F/micropurchase
-    branch: travis
+    branch: master
