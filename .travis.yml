@@ -7,16 +7,16 @@ addons:
   postgresql: '9.3'
   code_climate:
     repo_token: 2ad0d3196c872832cf5d6b34c83bf21dbf0a30e2191ba036be003b01e417a6a1
-
 edge: true
 deploy:
-  provider: cloudfoundry
+  provider:
+    provider: cloudfoundry
   api: https://api.cloud.gov
   username: deploy-agile-bpa
   password:
-    secure: GNmqOzyJPfmuUKiSr+uwvU2N6787MPWvzisPorVH5AqDpIaUlgLOOidq/A68U3+FQaCqusqshSvQSk0c0qMzYS89kHG43bIle4EJLpbRVL1kPNHiuMfLgnBs5iz38SoxH6n7yXDqCI8lNhiBm+sE0/P7jgIX9OZ2sOWej5lmz66Toj0Mtw/csrIUzai6iFPoLepVvaVsXDUm96Y6295LE7dC+ShA9v9AZUhYp5OtodiktKL6+WnjK9c1gSZdhPmpaK4yBtk052GhqNvUDKqy4dBlA67yf/+18/WodOwzsyZF8C/m58vymQ2KicYRG47xeHk9jvQx9CzvSGBCFny3yae51QJ3LEPVNzZIltLijUpU7QmQHNUMek5h6qPMExjH53cewHkUFBRIAYiUcuW6YR26sJ/dBGzqvuNFasamLun8uRg+9Rhx5jBXGAUp6y+BcYKjFfZBJZEyGVHlXpSawXd9xfb2rpw0ocCjQ4CjztPOv6y0AGZtRjIogpBY3102iuB6eT1c7TmJXYQVPH/baQwNmM5ANxV6axqHC/oa71ibCi/UslgrlOKp1myt25wAJOQ2pciCD5HjIfsa5DYrYK8qY2/fa4ntC+NZJNAZQffRA6qUlsYll7u6tddaPxABDOQJiEXiXWwl3DojO3JMcqzWiIrJR1qPU2HuhuPGR/g=
+    secure: jLlZemPNZV9WK8xprl68YLPTlQOlbSgjZmbE/POtG34kD3aJPnT1hxysAQamEJsgxJTqYCP+0dVzmrqu6ITSBTguO5E23u87SrV4vCal/l0U2yLlC0HAc4KOCDK52XKcE7c/u0bxD138kvSJSdGaJDvzwHe6j7MvOMemeHQRynEWJGZwJezo7ZY4zdlJHBnqDBFL8UfnAWXVTKbc+1/LKUojDlaVUVoNG+i63/08giCtXNijgE9d4ZAXJEj+3h/XrZ2u2x0w9YyZrFPCoxAVNTN3EXoqZw3kOFpX1wHRSWzprxpUX4QqXnBCQwohKSJ+vkl2cXjOx9SrJ2huPGQ4Lsfw8wiRXxiRPvOvL6W3kbJb4FDYBArA8SIYy57wH6z76ngYf1YgLAgkwDqkT5DOBeKBt5kEBdfCpUctqqATz9hC/5NKroR9lNNyRDdlV0zyV5npq56JAzxXk0MC0IvivczeY1lYEBQvqIbZZ6XJQI0qNpusZvZ3ifGbYjGo00mKXlEIpPhHaLkZ4/8F6sWWJE3DXqeLygqdD8O7z95neSO0E2wKj5N3g+d5gDFfhdqjxprEM1WGHmb/2veGx4EBrypLaOjqPpFQSbtrb7F7ioAQoD45NRhYQNIlY9NpqY/Ev5zgscPwvddxxUxKOkBBNHuG6OEVQcXwvnQ1O1P3VkU=
   organization: agile-bpa
   space: production
   on:
     repo: 18F/micropurchase
-    branch: master
+    branch: travis
