@@ -67,7 +67,11 @@ def sign_in_bidder
 end
 
 def create_authed_bidder
-  @bidder = User.create(github_id: current_user_uid, duns_number: 'DUNS-123')
+  @bidder = User.create(
+    github_id: current_user_uid,
+    duns_number: 'DUNS-123',
+    email: 'doris@doogooder.io'
+  )
 end
 
 def show_page

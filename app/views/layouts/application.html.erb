@@ -46,13 +46,7 @@
 
   <div class="usa-grid">
     <div class="usa-width-one-whole">
-      <% if flash[:error] %>
-      <div class="usa-alert usa-alert-error" role="alert">
-        <div class="usa-alert-body">
-          <h3 class="usa-alert-heading">Sorry, <%= flash[:error] %>!</h3>
-        </div>
-      </div>
-      <% end %>
+      <%= flash_errors %>
 
       <%= yield %>
     </div>
