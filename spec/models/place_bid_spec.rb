@@ -97,6 +97,23 @@ RSpec.describe PlaceBid do
     end
   end
 
+  context 'when the bid amount is equal to the current bid price' do
+    let(:auction) {
+      Presenter::Auction.new(Auction.create({
+        start_datetime: Time.now - 3.days,
+        end_datetime: Time.now + 7.days
+      }))
+    }
+    let(:amount) { 400 }
+
+    it 'should raise an authorization error' do
+      allow(auction).to receive(:current_bid_amount).and_return(400)
+      expect {
+        place_bid.perform
+      }.to raise_error(UnauthorizedError)
+    end
+  end
+
   context 'when the bid amount is negative' do
     let(:auction) {
       Auction.create({
