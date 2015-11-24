@@ -3,6 +3,11 @@ require 'rails_helper'
 RSpec.describe PlaceBid do
   let(:place_bid) { PlaceBid.new(params, current_user) }
   let(:current_user) { double('bidder', id: 111) }
+  let(:bidders) {
+    5.times.map do |i|
+      double('bidder', id: i+1)
+    end
+  }
   let(:amount) { 1005 }
   let(:params) {
     {
@@ -59,7 +64,7 @@ RSpec.describe PlaceBid do
     end
   end
 
-  context 'when the bid amount is too high' do
+  context 'when the bid amount is above the starting price' do
     let(:auction) {
       Auction.create({
         start_datetime: Time.now - 3.days,
@@ -75,7 +80,40 @@ RSpec.describe PlaceBid do
     end
   end
 
-  context 'when the bid amount is too low' do
+  context 'when the bid amount is above the current bid price' do
+    let(:auction) {
+      Presenter::Auction.new(Auction.create({
+        start_datetime: Time.now - 3.days,
+        end_datetime: Time.now + 7.days
+      }))
+    }
+    let(:amount) { 405 }
+
+    it 'should raise an authorization error' do
+      allow(auction).to receive(:current_bid_amount).and_return(400)
+      expect {
+        place_bid.perform
+      }.to raise_error(UnauthorizedError)
+    end
+  end
+
+  context 'when the bid amount is negative' do
+    let(:auction) {
+      Auction.create({
+        start_datetime: Time.now - 3.days,
+        end_datetime: Time.now + 7.days
+      })
+    }
+    let(:amount) { '-10' }
+
+    it 'should raise an authorization error' do
+      expect {
+        place_bid.perform
+      }.to raise_error(UnauthorizedError)
+    end
+  end
+
+  context 'when the bid amount is 0' do
     let(:auction) {
       Auction.create({
         start_datetime: Time.now - 3.days,
