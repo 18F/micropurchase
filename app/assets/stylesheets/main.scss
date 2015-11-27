@@ -1,6 +1,12 @@
 $color-green: #2e8540;
 $color-primary-alt-darkest: #046b99;
 
+.usa-alert-warning {
+  background-color: #fff1d2;
+  background-image: url('../assets/images/warning.svg'); 
+}
+
+
 .issue-list-item {
   .issue-icon {
     padding-top: 0.75rem;
@@ -17,6 +23,11 @@ $color-primary-alt-darkest: #046b99;
       padding: 0;
     }
 
+    .current-bid-header {
+      font-size: 1.7rem;
+      font-weight: 700;
+    }
+
     a.usa-button {
       padding: 0.5rem 1rem;
       white-space: nowrap;
@@ -24,7 +35,7 @@ $color-primary-alt-darkest: #046b99;
   }
 }
 
-/* not sure what's up, but the usa-button-green seems to have blue hover ?? 
+/* not sure what's up, but the usa-button-green seems to have blue hover ??
  * so a little loving help below:
  * */
 .usa-button.usa-button-green,
@@ -183,4 +194,3 @@ footer {
   top: -10px;
   font-size: 20px;
 }
-

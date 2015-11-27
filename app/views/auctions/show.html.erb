@@ -7,9 +7,9 @@
       <%= image_tag "issue-icon.png", alt: 'issue-icon', class: 'issue-icon' %>
     </div>
     <div class='usa-width-three-fourths'>
-      <h2 class='issue-title'>
+      <h3 class='issue-title'>
         <a href="/auctions/<%= @auction.id %>"><%= @auction.title %></a>
-      </h2>
+      </h3>
       <p class='issue-description'>
         <%= @auction.description %>
       </p>
@@ -23,12 +23,7 @@
       <% else %>
         <%= render partial: 'auctions/winning_bid', locals: {auction: @auction} %>
       <% end %>
-      <%=
-        link_to(
-          pluralize(@auction.bids.length, 'bid'),
-          auction_bids_path(@auction.id)
-        )
-      %>
+
     </div>
   </div>
   <hr />

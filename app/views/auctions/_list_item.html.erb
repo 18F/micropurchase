@@ -22,13 +22,5 @@
     <% else %>
       <%= render partial: 'auctions/winning_bid', locals: {auction: auction} %>
     <% end %>
-    <p>
-      <%=
-        link_to(
-          pluralize(auction.bids.count, 'bid'),
-          auction_bids_path(auction.id)
-        )
-      %>
-    </p>
   </div>
 </div>
