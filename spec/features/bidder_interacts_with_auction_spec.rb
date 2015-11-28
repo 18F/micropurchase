@@ -43,7 +43,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
 
     # going via another link
     visit "/"
-    click_on("Details »")
+    click_on("View details »")
     page.find("a[href='#{@auction.issue_url}']")
 
     # logging in via bid click
