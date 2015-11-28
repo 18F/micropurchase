@@ -1,26 +1,26 @@
 <div class='usa-width-one-whole issue-list-item'>
-  <div class='usa-width-one-twelfth center'>
-    <%= image_tag "issue-icon.png", alt: 'issue-icon', class: 'issue-icon' %>
+  <div class="usa-grid">
+    <div class='usa-width-one-whole issue-label'>
+      <h3 class='issue-title'>
+        <span class="usa-label-big">Open</span> <a href="/auctions/<%= auction.id %>"><%= auction.title %></a>
+      </h3>
+      <p class='issue-description'>
+        <%= auction.description %> <a href="/auctions/<%= auction.id %>">View details »</a>
+      </p>
+    </div>
   </div>
-  <div class='usa-width-three-fourths'>
-    <h3 class='issue-title'>
-      <a href="/auctions/<%= auction.id %>"><%= auction.title %></a>
-    </h3>
-    <p class='issue-description'>
-      <%= auction.description %>
-    </p>
-  </div>
-  <div class='usa-width-one-sixth issue-bids-info'>
+<div class="usa-grid issue-bid-details">
+  <div class='usa-width-one-whole issue-bids-info'>
+    <div class="usa-grid-full">
     <% if auction.available? %>
       <%= render partial: 'auctions/bids_and_form', locals: {auction: auction} %>
-      <p>
+      <div class="usa-width-one-third">
         <a href="/auctions/<%= auction.id %>/bids/new" class='usa-button usa-button-green'>Bid »</a>
-      </p>
-      <p>
-        <a href="/auctions/<%= auction.id %>" class='usa-button usa-button-blue'>Details »</a>
-      </p>
+      </div>
     <% else %>
       <%= render partial: 'auctions/winning_bid', locals: {auction: auction} %>
     <% end %>
   </div>
+  </div>
+</div>
 </div>

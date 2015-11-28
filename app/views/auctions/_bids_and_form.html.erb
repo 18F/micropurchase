@@ -1,14 +1,25 @@
+<div class="usa-width-one-third current-bid-box">
+  <div class="current-bid-box-children">
 <% if auction.bids? %>
-  <span class="current-bid-header">Current Bid:</span>
-  <p><strong><%= number_to_currency(auction.current_bid_amount) %></strong>
-    <%=
+    <span class="current-bid-header">Current Bid:</span>
+    <span class="current-bid"><%= number_to_currency(auction.current_bid_amount) %>  </span>
+    <span class=""><%=
     link_to(
       pluralize(auction.bids.length, 'bid'),
       auction_bids_path(auction.id)
     )
     %>
-  </p>
+  </span>
 <% else %>
   <p>No bids yet</p>
 <% end %>
-<p>Ends in <%= distance_of_time_in_words(Time.now, auction.end_datetime) %></p>
+</div>
+</div>
+
+<div class="usa-width-one-third bid-deadline-box">
+  <div class="bid-deadline-box-children">
+  <span class="bid-deadline">
+    Bid Deadline:  <%= distance_of_time_in_words(Time.now, auction.end_datetime) %> left
+  </span>
+</div>
+</div>

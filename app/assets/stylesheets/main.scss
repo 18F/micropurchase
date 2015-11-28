@@ -1,35 +1,60 @@
 $color-green: #2e8540;
 $color-primary-alt-darkest: #046b99;
+$color-gray: #f1f1f1;
 
 .usa-alert-warning {
   background-color: #fff1d2;
-  background-image: url('../assets/images/warning.svg'); 
+  background-image: asset-url("warning.svg");
 }
 
-
 .issue-list-item {
-  .issue-icon {
-    padding-top: 0.75rem;
+  .issue-label {
+    margin-top: 0.75rem;
   }
 
   .issue-title {
     margin-top: 1rem;
     font-size: 2rem;
   }
+  .issue-bid-details {
+    background-color: $color-gray;
 
-  .issue-bids-info {
-    p {
-      margin: 0;
-      padding: 0;
+    .current-bid-box {
+      height: 5rem;
+      position: relative;
+
+      .current-bid-box-children {
+        position: relative;
+        top: 50%;
+        margin-top: -2rem;
+
+
+        .current-bid-header {
+          font-weight: 400;
+        }
+        .current-bid {
+          font-size: 3rem;
+          font-weight: 700;
+        }
+
+      }
     }
 
-    .current-bid-header {
-      font-size: 1.7rem;
-      font-weight: 700;
+    .bid-deadline-box {
+      height: 5rem;
+      position: relative;
+
+      .bid-deadline-box-children {
+        position: relative;
+        top: 50%;
+        margin-top: -0.5rem;
+
+      }
     }
 
     a.usa-button {
-      padding: 0.5rem 1rem;
+      margin-top: 1.5rem;
+      padding: 0.5rem 2rem;
       white-space: nowrap;
     }
   }
