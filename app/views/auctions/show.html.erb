@@ -1,30 +1,50 @@
-<h1>Auction Details (<a href="<%= @auction.issue_url %>">view on GitHub</a>)</h1>
+<% if flash["bid"] %>
+<div class="usa-alert usa-alert-success">
+  <div class="usa-alert-body">
+    <h3 class="usa-alert-heading">Bid Submitted! You currently have the winning bid.</h3>
+    <p class="usa-alert-text">If your bid is selected as the winner, we will contact you with further instructions. <a href="/my-bids">View your bids »</a></p>
+  </div>
+</div>
+<% end %>
 
 <div class="usa-grid-full">
-  <hr class='usa-size-one-whole'>
-  <div class='usa-width-one-whole issue-list-item'>
-    <div class='usa-width-one-twelfth center'>
-      <%= image_tag "issue-icon.png", alt: 'issue-icon', class: 'issue-icon' %>
-    </div>
-    <div class='usa-width-three-fourths'>
-      <h3 class='issue-title'>
-        <a href="/auctions/<%= @auction.id %>"><%= @auction.title %></a>
-      </h3>
-      <p class='issue-description'>
-        <%= @auction.description %>
-      </p>
-    </div>
-    <div class='usa-width-one-sixth issue-bids-info'>
-      <% if @auction.available? %>
-        <%= render partial: 'auctions/bids_and_form', locals: {auction: @auction} %>
-        <p>
-          <a href="/auctions/<%= @auction.id %>/bids/new" class='usa-button usa-button-green'>Bid »</a>
-        </p>
-      <% else %>
-        <%= render partial: 'auctions/winning_bid', locals: {auction: @auction} %>
-      <% end %>
-
+    <p><a href="/">« Back to open projects</a></p>
+    <div class="usa-width-two-thirds auction-description">
+    <h1>Auction Details</h1>
+    <div class="github-issue">
+      <%= @auction.description %>
     </div>
   </div>
-  <hr />
+  <div class="usa-width-one-third">
+    <div class="auction-detail-panel">
+      <div class="auction-info">
+      <p>Status:</p>
+      <p><% if @auction.available? %>Open<% else %>Closed<% end %></p>
+      <hr/>
+      <p>Current Bid:</p>
+      <p><span class="bid-amount"><%= number_to_currency(@auction.current_bid_amount) %></span>
+        <span class=""><%=
+        link_to(
+          pluralize(@auction.bids.length, 'bid'),
+          auction_bids_path(@auction.id)
+        )
+        %>
+        </span>
+      </p>
+      <hr/>
+      <p>Bid deadline:</p>
+      <p><%= @auction.end_datetime.strftime("%m/%d/%Y at %I:%M %Z") %></p>
+      <hr/>
+      <p>
+        <a href="/auctions/<%= @auction.id %>/bids/new" class='usa-button usa-button-green'>Bid »</a>
+      </p>
+    </div>
+      <div class="auction-more-info">
+        <p><a href="#">Ask a Question »</a></p>
+        <p><a href="<%= @auction.issue_url %>">View on GitHub »</a></p>
+        <p><a href="mailto:micropurchase@gsa.gov">Have feedback? Email micropurchase@gsa.gov</a></p>
+      </div>
+    </div>
+  </div>
+
 </div>

@@ -6,6 +6,51 @@ $color-gray: #f1f1f1;
   background-color: #fff1d2;
   background-image: asset-url("warning.svg");
 }
+.usa-alert-success {
+  background-image: asset-url("success.svg");
+}
+
+.auction-description {
+  h1 {
+    margin-top: 0;
+  }
+}
+
+.auction-detail-panel {
+  border: 1px solid;
+
+  .auction-info {
+    margin-top: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    font-size: 2.5rem;
+
+    .bid-amount {
+      font-size: 4rem;
+      font-weight: 600;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .auction-more-info {
+
+    background-color: $color-primary-alt-darkest;
+
+    p {
+      padding: 1rem 3rem;
+      font-size: 2.4rem;
+      font-weight: 400;
+      margin-bottom: 0rem;
+    }
+
+    a {
+      color: #fff;
+    }
+  }
+}
 
 .issue-list-item {
   .issue-label {
