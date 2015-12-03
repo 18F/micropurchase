@@ -55,7 +55,7 @@ development:
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-test:
+test: &test
   <<: *default
   database: micropurchase_test
 
@@ -87,3 +87,6 @@ production:
   database: <%= JSON.parse( ENV['VCAP_SERVICES'] )['rds'].first['credentials']['name'] rescue '' %>
   username: <%= JSON.parse( ENV['VCAP_SERVICES'] )['rds'].first['credentials']['username'] rescue '' %>
   password: <%= JSON.parse( ENV['VCAP_SERVICES'] )['rds'].first['credentials']['password'] rescue '' %>
+
+cucumber:
+  <<: *test

@@ -26,10 +26,15 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
+
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner', require: false
+
   gem 'capybara'
   gem 'capybara-screenshot'
   gem 'byebug'
   gem 'pry'
+
   gem 'timecop'
   gem 'brakeman', require: false
   gem 'hakiri',  require: false
