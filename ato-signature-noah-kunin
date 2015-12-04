@@ -1,0 +1,75 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+18F Micropurchases Platform Authorization Decision 
+Product Owner: David Zvenyach | System Owner: Alan deLevie
+
+Thru: 
+Noah Kunin
+Infrastructure Director, 18F
+Designated Authorizing Official
+
+
+From: 
+Aaron Snow
+Deputy Associate Administrator, 18F
+Authorizing Official
+
+Subject: Authority to operate for https://micropurchase.18f.gov/
+ 
+A scoped security assessment of this system has been performed by the 18F DevOps team in accordance with 18F methodologies to detect vulnerabilities in sites managed by second or third parties.
+ 
+The micropurchases platform is used to manage the bidding process for 18F's micro-purchase threshold experiments. The platform will allow vendors to bid on open opportunities with 18F, track their bids, and learn of the winning bidder. So long as vendors are registered on SAM.gov and have GitHub accounts, they will be able to view open opportunities and bid on them.
+
+With this application, a vendor will be able to view the full list of open micro-purchasing opportunities, access bid histories, and place bids on services requested by 18F. All bids will start under $3,500 and each project will specify the desired product and method of delivery.
+
+Using NIST FIPS 199 methodology, this system has been given the following security categories if the following are lost:
+
+Confidentiality: n/a
+Integrity: Low
+Availability: Low
+
+The system contains only publicly available information for general consumption and overall meets the requirements in Guidelines for Granting Authority to Operate 18F Hosted Open Data Systems. 
+ 
+Based on the results from automated scans of the infrastructure, operating system, code base, and attack surface area, I have determined that the risk to agency operations, data, or assets resulting from the operation of the system is acceptable.
+
+Accordingly, I am issuing an authorization to operate the system in its existing environment through December 3rd, 2016 under the following conditions:
+ 
+The security boundary of the underlying infrastructure or the system will not be significantly altered; changes will require re-assessment. 
+The security authorization of the information system will remain in effect through the date above, as long as the system falls under the definition of an OpenData system and any critical security issues identified as a result of continuous monitoring are remediated immediately.
+
+Relevant repository: https://micropurchase.18f.gov/
+
+System Security Plan: https://github.com/18F/micropurchase/blob/authority-to-operate/system-security-plan.yml
+
+Approved:
+
+PGP Signature
+
+Aaron Snow
+Deputy Associate Administrator, 18F
+
+Thru:
+
+PGP Signature
+
+Noah Kunin
+Infrastructure Director, 18F
+-----BEGIN PGP SIGNATURE-----
+Version: Keybase OpenPGP v2.0.49
+Comment: https://keybase.io/crypto
+
+wsFcBAABCgAGBQJWYTS9AAoJEEy1TmhB3FxbeSgP/3QgrMtBVcNfVgs9H+wId2Vl
+i+qvjYMz7lfxBZxSPslLQrWB2ZgzCZdYDP8UU4msf5W33loBaDM/EBIX8HmLa9NI
+2+abCi9aQxzqsoAmxqq29v7wyIjy9DGVHkM1COGt7vPZ2bnFAOWO2rag2rWrxG2A
+AlG5yeOeiX4ADXcEX5PSt4+M8SA47kXsOrxWB5t21YUxMFU50PlyhUHE3bicx55V
+mGcJqmVXuA7RvOLjZ4vivDaShA2ljhQLHETEwnifBJR8x3Gt1D1ir4qRgegpKNJq
+V1cL4JEsGkXjHwVZXaMy9XRWFHnF+SlxsFimUxNdzQNLGMlEjp+RcoXnApTpuex+
+BSGEI6OE/AGtfneP+qhdA9RzkMGW4kdyR1tMv69OVkgICBu0YZf82BK+1HgUsxCj
+pOUS8Pu6Om+8GBSrkKqaOxSxk7zRzNDkDYA3+vqFxfrjLpeag8E2Gl/SsGTxsY/Q
+GAuw52J3iefd90dzlRnulCmYayhnYWcpY48+GFKDARM07CF6ihTSmJzITgI1RIvn
+bjf0JDOe7oCykuV7a0Aw3qcRWsEtoj59T/fk7Rln3yBj9umTAQAsRgk021D2YpVq
+NFrKjYM9aDqDr8DqQp8CTECD8t2/vAjIkX4LnesW9oMWXHezQHjQPH8KD1VEKbKY
+u5yhAoMoaxzXLvrcxxqU
+=HyfU
+-----END PGP SIGNATURE-----
