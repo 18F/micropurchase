@@ -44,7 +44,7 @@ staff:
         email: alan.delevie@gsa.gov
 leveraged-authorizations:
 - https://www.fedramp.gov/marketplace/compliant-systems/amazon-web-services-aws-eastwest-us-public-cloud/
-purpose: https://github.com/18F/doi-extractives-data#why
+purpose: https://github.com/18F/micropurchase#micropurchase
 components: https://github.com/18F/micropurchase
 diagram: https://github.com/18F/micropurchase/issues/94
 network-architecture: n/a
