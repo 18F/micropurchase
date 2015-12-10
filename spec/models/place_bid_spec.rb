@@ -90,7 +90,24 @@ RSpec.describe PlaceBid do
     let(:amount) { 405 }
 
     it 'should raise an authorization error' do
-      allow(auction).to receive(:current_bid_amount).and_return(400)
+      allow_any_instance_of(Presenter::Auction).to receive_message_chain(:current_bid, :amount).and_return(400)
+      expect {
+        place_bid.perform
+      }.to raise_error(UnauthorizedError)
+    end
+  end
+
+  context 'when the bid amount is above the auction start price and there are no bids' do
+    let(:auction) {
+      Presenter::Auction.new(Auction.create({
+        start_datetime: Time.now - 3.days,
+        end_datetime: Time.now + 7.days
+      }))
+    }
+    let(:amount) { 3600 }
+
+    it 'should raise an authorization error' do
+      allow_any_instance_of(Presenter::Auction).to receive(:current_bid).and_return(Presenter::Bid::Null.new)
       expect {
         place_bid.perform
       }.to raise_error(UnauthorizedError)
@@ -107,7 +124,24 @@ RSpec.describe PlaceBid do
     let(:amount) { 400 }
 
     it 'should raise an authorization error' do
-      allow(auction).to receive(:current_bid_amount).and_return(400)
+      allow_any_instance_of(Presenter::Auction).to receive_message_chain(:current_bid, :amount).and_return(400)
+      expect {
+        place_bid.perform
+      }.to raise_error(UnauthorizedError)
+    end
+  end
+
+  context 'when the bid amount is equal to the auction start price and there are no bids' do
+    let(:auction) {
+      Presenter::Auction.new(Auction.create({
+        start_datetime: Time.now - 3.days,
+        end_datetime: Time.now + 7.days
+      }))
+    }
+    let(:amount) { 3500 }
+
+    it 'should raise an authorization error' do
+      allow_any_instance_of(Presenter::Auction).to receive(:current_bid).and_return(Presenter::Bid::Null.new)
       expect {
         place_bid.perform
       }.to raise_error(UnauthorizedError)
