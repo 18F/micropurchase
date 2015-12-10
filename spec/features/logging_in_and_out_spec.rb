@@ -13,6 +13,7 @@ RSpec.feature "logging in and out of the app", type: :feature do
 
     expect(page).to have_content("Enter your DUNS number")
     fill_in("user_duns_number", with: "123-duns")
+    fill_in("user_email", with: "doris@doogooder.io")
     click_on('Submit')
 
     expect(page.current_path).to eq("/")
@@ -47,5 +48,53 @@ RSpec.feature "logging in and out of the app", type: :feature do
     click_on("Authorize with GitHub")
     expect(page).to have_content("Doris Doogooder")
     expect(page).to have_content("Logout")
+  end
+
+  scenario "User views and edits their information" do
+    visit "/"
+
+    create_authed_bidder
+
+    click_on "Login"
+    expect(page).to have_content("Authorize with GitHub")
+
+    click_on("Authorize with GitHub")
+    visit edit_user_path @bidder
+
+    email_field = find_field("Email Address")
+    duns_field = find_field("DUNS Number")
+
+    expect(email_field.value).to eq("doris@doogooder.io")
+    expect(duns_field.value).to eq("DUNS-123")
+
+    fill_in("Email Address", with: "doris@doogooder.com")
+    click_on('Submit')
+
+    visit edit_user_path @bidder
+    expect(email_field.value).to eq("doris@doogooder.com")
+  end
+
+  scenario "User tries to enter an invalid email address" do
+    visit "/"
+
+    create_authed_bidder
+
+    click_on "Login"
+    expect(page).to have_content("Authorize with GitHub")
+
+    click_on("Authorize with GitHub")
+    visit edit_user_path @bidder
+
+    email_field = find_field("Email Address")
+    duns_field = find_field("DUNS Number")
+
+    expect(email_field.value).to eq("doris@doogooder.io")
+    expect(duns_field.value).to eq("DUNS-123")
+
+    fill_in("Email Address", with: "doris_the_nonvalid_email_address_person")
+    click_on('Submit')
+
+    expect(page).to have_content("Email is invalid")
+    expect(page).to have_css("div.usa-alert.usa-alert-error")
   end
 end

@@ -9,16 +9,20 @@ class UsersController < ApplicationController
 
     @user = User.find(params[:id])
     raise UnauthorizedError if current_user != @user
-
     @user.update(user_params)
 
-    redirect_to '/'
+    if @user.save
+      redirect_to '/'
+    else
+      flash[:error] = @user.errors.full_messages.to_sentence
+      render :edit
+    end
   end
 
 
   private
 
   def user_params
-    params.require(:user).permit(:duns_number)
+    params.require(:user).permit(:duns_number, :email)
   end
 end

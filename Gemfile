@@ -18,6 +18,7 @@ gem 'omniauth'
 gem 'omniauth-github'
 
 gem 'chronic'
+gem 'email_validator'
 
 group :test do
   gem "codeclimate-test-reporter", require: nil
