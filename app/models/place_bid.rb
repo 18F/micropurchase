@@ -1,5 +1,6 @@
 class PlaceBid < Struct.new(:params,:current_user)
   BID_LIMIT = 3500.00
+  BID_INCREMENT = 1.0
 
   attr_reader :bid
 
@@ -26,6 +27,10 @@ class PlaceBid < Struct.new(:params,:current_user)
     Presenter::Auction.new(auction).available?
   end
 
+  def current_max_bid
+    Presenter::Auction.new(auction).current_max_bid
+  end
+
   def validate_bid_data
     if amount.to_i != amount
       raise UnauthorizedError, 'Bids must be in increments of one dollar'
@@ -41,6 +46,10 @@ class PlaceBid < Struct.new(:params,:current_user)
 
     if amount <= 0
       raise UnauthorizedError, 'Bid amount out of range'
+    end
+
+    if amount > current_max_bid
+      raise UnauthorizedError, "Bids cannot be greater than the current max bid"
     end
   end
 

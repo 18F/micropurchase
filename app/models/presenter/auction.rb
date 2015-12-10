@@ -9,6 +9,14 @@ module Presenter
       Presenter::Bid.new(current_bid_record)
     end
 
+    def current_max_bid
+      if current_bid.is_a?(Presenter::Bid::Null)
+        return start_price - PlaceBid::BID_INCREMENT
+      else
+        return current_bid.amount - PlaceBid::BID_INCREMENT
+      end
+    end
+
     def current_bid_amount
       current_bid.amount
     end
