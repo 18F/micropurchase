@@ -128,7 +128,8 @@ RSpec.describe BidsController, controller: true do
       it "creates creates a bid and redirects to the new bid page" do
         expect(PlaceBid).to receive(:new).with(anything, current_bidder).and_return(place_bid)
         post :create, request_params
-        expect(response).to redirect_to("/auctions/#{auction.id}/bids/new")
+        expect(flash[:bid]).to eq("success")
+        expect(response).to redirect_to("/auctions/#{auction.id}")
       end
 
       it "adds a flash error when the bid is bad" do

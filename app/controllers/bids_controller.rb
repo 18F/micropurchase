@@ -22,7 +22,8 @@ class BidsController < ApplicationController
 
   def create
     PlaceBid.new(params, current_user).perform
-    redirect_to "/auctions/#{params[:auction_id]}/bids/new"
+    flash[:bid] = "success"
+    redirect_to "/auctions/#{params[:auction_id]}"
   rescue UnauthorizedError => e
     flash[:error] = e.message
     redirect_to "/auctions/#{params[:auction_id]}/bids/new"

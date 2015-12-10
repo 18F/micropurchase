@@ -1,8 +1,26 @@
-<h1>Welcome to 18F’s micro-purchase experiment.</h1>
+<h1>Welcome!</h1>
+<div class="usa-font-lead">
+  <p>The Micro-purchase Marketplace is the place to bid on open-source issues from the 18F team. <a href="https://18f.gsa.gov/2015/11/06/micro-purchase-lessons/">Learn more about this experiment »</a></p>
+  <p>Be sure to <a href="/login">register your company</a> before placing a bid. If you have any questions, please email us at <a href="mailto:micropurchase@gsa.gov">micropurchase@gsa.gov</a>.</p>
+</div>
 
-<a href="/my-bids">View my bids »</a>
+<h2>Issues open for bid</h2>
 
-<h2>Here are the current issues open for bidding:</h2>
+<% if current_user %>
+
+  <a href="/my-bids">View my bids »</a>
+
+<% else %>
+
+  <div class="usa-alert usa-alert-warning" role="alert">
+     <div class="usa-alert-body">
+       <h3 class="usa-alert-heading">Please Login to Place Bid</h3>
+       <p class="usa-alert-text">To place a bid, you must first be a <a href="/login">registered bidder</a>.</p>
+     </div>
+   </div>
+
+<% end %>
+
 
 <div class="usa-grid-full">
   <hr class='usa-size-one-whole'>

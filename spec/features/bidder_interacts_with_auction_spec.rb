@@ -43,7 +43,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
 
     # going via another link
     visit "/"
-    click_on("Details »")
+    click_on("View details »")
     page.find("a[href='#{@auction.issue_url}']")
 
     # logging in via bid click
@@ -63,7 +63,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
     click_on("Submit")
 
     # returns us back to the bid page
-    expect(page).to have_content("Current bid:")
+    expect(page).to have_content("Current Bid:")
     expect(page).to have_content("$800.00")
   end
 
@@ -81,9 +81,9 @@ RSpec.feature "bidder interacts with auction", type: :feature do
     click_on("Submit")
 
     # returns us back to the bid page
-    expect(page).to have_content("Current bid:")
+    expect(page).to have_content("Current Bid:")
     expect(page).to have_content("$999.00")
-    expect(page).to have_content("You are currently the winning bidder.")
+    expect(page).to have_content("You currently have the winning bid.")
   end
 
 
