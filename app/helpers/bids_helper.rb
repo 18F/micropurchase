@@ -6,4 +6,10 @@ module BidsHelper
       number_to_currency(bid.amount)
     end
   end
+
+  def user_is_winning_bidder?(user, auction)
+    return false if !auction.current_bid?
+
+    user.id == auction.current_bid.bidder_id
+  end
 end
