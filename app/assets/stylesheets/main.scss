@@ -16,6 +16,12 @@ $color-gray: #f1f1f1;
   }
 }
 
+.hero {
+  width: 100%;
+  background-color: $color-gray;
+  margin-top: -45px;
+}
+
 .auction-detail-panel {
   border: 1px solid;
 
