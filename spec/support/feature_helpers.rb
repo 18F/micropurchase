@@ -35,6 +35,7 @@ def create_current_auction
     increment = index * 10
     @auction.bids.create(bidder: bidder, amount: 3499 - increment)
   end
+  return @auction, @bidders
 end
 
 def create_closed_auction
@@ -43,6 +44,7 @@ def create_closed_auction
     increment = index * 10
     @auction.bids.create(bidder: bidder, amount: 3499 - increment)
   end
+  return @auction, @bidders
 end
 
 def create_running_auction
@@ -51,6 +53,7 @@ def create_running_auction
     increment = index * 10
     @auction.bids.create(bidder: bidder, amount: 3499 - increment)
   end
+  return @auction, @bidders
 end
 
 def sign_in_admin

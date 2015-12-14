@@ -15,6 +15,20 @@ RSpec.feature "bidder interacts with auction", type: :feature do
     expect(page).to have_content(h1_text)
   end
 
+  scenario "Viewing an open auction" do
+    current_auction, _bids = create_current_auction
+    visit auction_path(current_auction)
+
+    expect(page).to have_content("Open")
+  end
+
+  scenario "Viewing a closed auction" do
+    closed_auction, _bids = create_closed_auction
+    visit auction_path(closed_auction)
+
+    expect(page).to have_content("Closed")
+  end
+
   scenario "Viewing auction detail page and navigating to bid history" do
     create_current_auction
 
