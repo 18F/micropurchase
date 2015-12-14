@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root 'landing#index'
+  root 'auctions#index'
+  get '/landing', to: 'landing#index'
 
   resources :auctions, only: [:index, :show] do
     resources :bids, only: [:new, :create, :index]
