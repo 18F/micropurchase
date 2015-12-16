@@ -1,0 +1,22 @@
+<h1>Users</h1>
+
+<table class="usa-table-borderless">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">DUNS Number</th>
+      <th scope="col">GitHub ID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.duns_number %></td>
+        <td><%= link_to(user.github_id, user.github_json_url) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
