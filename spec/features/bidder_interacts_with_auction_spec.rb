@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 RSpec.feature "bidder interacts with auction", type: :feature do
+  scenario "There are no auctions" do
+    visit "/"
+
+    expect(page).to have_content("There are no auctions yet.")
+  end
+
   scenario "Viewing auction list and navigating to bid history" do
     create_current_auction
 
