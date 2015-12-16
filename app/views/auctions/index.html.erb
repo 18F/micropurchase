@@ -24,8 +24,12 @@
 
 <div class="usa-grid-full">
   <hr class='usa-size-one-whole'>
-  <% @auctions.each do |auction| %>
-    <%= render partial: 'list_item', locals: {auction: auction} %>
-    <hr>
+  <% if @auctions.empty? %>
+    <p>There are no auctions yet.</p>
+  <% else %>
+    <% @auctions.each do |auction| %>
+      <%= render partial: 'list_item', locals: {auction: auction} %>
+      <hr>
+    <% end %>
   <% end %>
 </div>
