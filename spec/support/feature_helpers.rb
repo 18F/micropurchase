@@ -60,9 +60,10 @@ def sign_in_admin
 end
 
 def sign_in_bidder
+  @bidder = create_authed_bidder
   click_on "Login"
   click_on("Authorize with GitHub")
-  fill_in("user_duns_number", with: "123-duns")
+  fill_in("user_duns_number", with: @bidder.duns_number)
   click_on('Submit')
 end
 

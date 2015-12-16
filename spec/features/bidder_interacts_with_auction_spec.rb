@@ -88,7 +88,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
 
 
 
-  scenario "Is not the current winning bidder" do
+  scenario "Is not the current winning bidder with no bids" do
     create_bidless_auction
 
     visit "/"
@@ -99,6 +99,23 @@ RSpec.feature "bidder interacts with auction", type: :feature do
     expect(page).to have_content("Current bid:")
     expect(page).to have_content("No bids yet.")
     expect(page).not_to have_content("You are currently the winning bidder.")
+
+    fill_in("bid_amount", with: '999')
+    click_on("Submit")
+  end
+
+  scenario "Is not the current winning bidder with bids from other users" do
+    create_current_auction
+
+    visit "/"
+    sign_in_bidder
+
+    click_on("Bid »")
+
+    expect(page).not_to have_content("Authorize with GitHub")
+    expect(page).to have_content("Current bid:")
+    expect(page).not_to have_content("You are currently the winning bidder.")
+    expect(page).to have_content("You are currently not the winning bidder.")
   end
 
   scenario "Bidding on a bid-less auction while logged in" do
