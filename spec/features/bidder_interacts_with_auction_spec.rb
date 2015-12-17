@@ -4,7 +4,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
   scenario "There are no auctions" do
     visit "/"
 
-    expect(page).to have_content("There are no auctions yet.")
+    expect(page).to have_content("There are no current open auctions on the site. Please check back soon to view micropurchase opportunities.")
   end
 
   scenario "Viewing auction list and navigating to bid history" do

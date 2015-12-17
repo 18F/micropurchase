@@ -25,7 +25,7 @@
 <div class="usa-grid-full">
   <hr class='usa-size-one-whole'>
   <% if @auctions.empty? %>
-    <p>There are no auctions yet.</p>
+    <p class="usa-font-lead">There are no current open auctions on the site. Please check back soon to view micropurchase opportunities.</p>
   <% else %>
     <% @auctions.each do |auction| %>
       <%= render partial: 'list_item', locals: {auction: auction} %>
