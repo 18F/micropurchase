@@ -180,6 +180,18 @@ RSpec.feature "bidder interacts with auction", type: :feature do
     end
   end
 
+  scenario "Viewing auction page for a closed auction" do
+    create_closed_auction
+    auction = Presenter::Auction.new(@auction)
+    visit auction_bids_path(auction.id)
+
+    expect(page).to have_content("Winning Bid (#{auction.current_bidder.name}):")
+    expect(page).not_to have_content("Current Bid:")
+
+    expect(page).to have_content("Auction ended at:")
+    expect(page).not_to have_content("Bid deadline:")
+  end
+
   scenario "Viewing bid history for a closed auction" do
     Timecop.scale(36000) do
       create_closed_auction
