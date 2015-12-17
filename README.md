@@ -33,8 +33,8 @@ available via gems.
 * Talk to someone of the team to get the authentication secret and key
   for the github account we are using for authentication. You will want
 to put these variables in your environment: `export
-GITHUB_KEY=the-magic-key-given-you` and `export
-GITHUB_SECRET=another-magic-key`.
+MPT_3500_GITHUB_KEY=the-magic-key-given-you` and `export
+MPT_3500_GITHUB_SECRET=another-magic-key`.
 * create your test and development databases: `bundle exec rake
   db:create:all db:migrate db:test:prepare`
 * start the local server with `bundle exec rails s`
