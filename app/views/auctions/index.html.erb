@@ -24,8 +24,12 @@
 
 <div class="usa-grid-full">
   <hr class='usa-size-one-whole'>
-  <% @auctions.each do |auction| %>
-    <%= render partial: 'list_item', locals: {auction: auction} %>
-    <hr>
+  <% if @auctions.empty? %>
+    <p class="usa-font-lead">There are no current open auctions on the site. Please check back soon to view micropurchase opportunities.</p>
+  <% else %>
+    <% @auctions.each do |auction| %>
+      <%= render partial: 'list_item', locals: {auction: auction} %>
+      <hr>
+    <% end %>
   <% end %>
 </div>
