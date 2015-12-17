@@ -1,3 +1,12 @@
+def create_user
+  @user = User.create({
+    email: 'bob@thebuiler.io',
+    duns_number: '0000123456789',
+    name: 'Bob T. Builder',
+    github_id: '12345'
+  })
+end
+
 def create_bidless_auction(end_datetime: Time.now + 3.days)
   @auction = Auction.create({
     start_datetime: Time.now - 3.days,
