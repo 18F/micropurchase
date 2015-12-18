@@ -2,22 +2,22 @@
   <label for='auction_title'>Title</label>
   <%= f.text_field :title %>
 
-  <label for='auction_github_repo'>Github Repo Url</label>
+  <label for='auction_github_repo'>GitHub Repo Url</label>
   <%= f.text_field :github_repo %>
 
-  <label for='auction_issue_url'>Github Issue Url</label>
+  <label for='auction_issue_url'>GitHub Issue Url</label>
   <%= f.text_field :issue_url %>
 
   <label for='auction_description'>Description</label>
   <%= f.text_field :description %>
 
-  <label for='auction_description'>Start Date</label>
+  <label for='auction_description'>Start date</label>
   <%= f.text_field :start_datetime %>
 
-  <label for='auction_description'>End Date</label>
+  <label for='auction_description'>End date</label>
   <%= f.text_field :end_datetime %>
 
-  <label for='auction_start_price'>Start Price</label>
+  <label for='auction_start_price'>Start price</label>
   <%= f.text_field(:start_price, value: '3500') %>
 
   <%= f.submit value: 'Submit' %>
