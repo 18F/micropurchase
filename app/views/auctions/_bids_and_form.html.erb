@@ -1,7 +1,7 @@
 <div class="usa-width-one-third current-bid-box">
   <div class="current-bid-box-children">
 <% if auction.bids? %>
-    <span class="current-bid-header">Current Bid:</span>
+    <span class="current-bid-header">Current bid:</span>
     <span class="current-bid"><%= number_to_currency(auction.current_bid_amount) %>  </span>
     <span class=""><%=
     link_to(
