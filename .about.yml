@@ -1,0 +1,119 @@
+---
+# .about.yml project metadata
+#
+# Short name that acts as the project identifier (required)
+name: Micropurchase 
+
+# Full proper name of the project (required)
+full_name: 18F Micropurchasing Platform
+
+# The type of content in the repo
+# values: app, docs, policy
+type: app
+
+# Describes whether a project team, working group/guild, etc. owns the repo (required)
+# values: guild, working-group, project
+owner_type: project
+
+# Name of the main project repo if this is a sub-repo; name of the working group/guild repo if this is a working group/guild subproject
+#parent:
+
+# Maturity stage of the project (required)
+# values: discovery, alpha, beta, live
+stage: alpha
+
+# Whether or not the project is actively maintained (required)
+# values: active, deprecated
+status: active
+
+# Description of the project
+description: |
+This is a web application used to manage the bidding process for 18F's micro-purchase threshold experiment. The platform will allow vendors to bid on open opportunities with 18F, track their bids, and learn of the winning bidder. 
+# Should be 'true' if the project has a continuous build (required)
+# values: true, false
+testable: true
+
+# Team members contributing to the project (required)
+# Items:
+# - github: GitHub user name
+#   id: Internal team identifier/user name
+#   role: Team member's role; leads should be designated as 'lead'
+team:
+- github: allalala
+  id: Alla Goldman Seiffert
+  role: Product Manager
+  
+- github: vzvenyach
+  id: V. David Zvenyach
+  role: Product Owner
+  
+- github: harrisj
+  id: Jacob Harris
+  role: Developer
+
+- github: adelevie
+  id: Alan DeLevie
+  role: Lead Developer
+
+- github: ddotrollins
+  id: Duane Rollins
+  role: User Experience Lead
+
+# Partners for whom the project is developed
+partners:
+- 18F
+
+# Brief descriptions of significant project developments
+#milestones:
+#-
+Launching minimum viable product for October 2015 micro purchase.
+#-
+Launching alpha bidding platform in December 2015.
+
+# Technologies used to build the project
+Ruby/Rails application using ActiveRecord and PostgreSQL.
+
+# Brief description of the project's outcomes
+#impact:
+We've long known at 18F that opening our source code from day one improves our ability to deliver. But we want to show that opening our source code improves our ability to contract for digital services. We also want to see whether this is a sustainable way to engage small businesses and non-traditional contractors in the government space.
+
+# Services used to supply project status information
+# Items:
+# - name: Name of the service
+#   category: Type of the service
+#   url: URL for detailed information
+#   badge: URL for the status badge
+#services:
+#-
+
+# Licenses that apply to the project and/or its components (required)
+# Items by property name pattern:
+#   .*:
+#     name: Name of the license from the Software Package Data Exchange (SPDX): https://spdx.org/licenses/
+#     url: URL for the text of the license
+licenses:
+  dashboard:
+    name: CC0-1.0
+    url: https://github.com/18F/team_api/blob/master/LICENSE.md
+
+# Blogs or websites associated with project development
+#blog:
+#-
+https://18f.gsa.gov/2015/11/06/micro-purchase-lessons/
+#-
+https://18f.gsa.gov/2015/10/26/micro-purchase-criteria-announcement/
+#-
+https://18f.gsa.gov/2015/10/13/open-source-micropurchasing/
+
+# Links to project artifacts
+# Items:
+# - url: URL for the link
+#   text: Anchor text for the link
+links:
+- url: https://micropurchase.18f.gov
+  text: Micropurchase Platfrom 
+
+# Email addresses of points-of-contact
+contact:
+- url: mailto:alla.goldman@gsa.gov
+  text: Alla Goldman Seiffert
