@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'rails_helper'
 
 RSpec.feature "bidder interacts with auction", type: :feature do
@@ -55,7 +56,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
     # seeing auction list
     visit "/"
     expect(page).to have_content(@auction.title)
-    expect(page).to have_content("Current Bid:")
+    expect(page).to have_content("Current bid:")
 
     # going to the auction detail page
     click_on(@auction.title)
