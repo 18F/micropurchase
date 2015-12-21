@@ -1,23 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe BidsController, controller: true do
-  let(:current_bidder) {
-    User.create(github_id: '12345', name: 'Bob The Bidder')
-  }
-  let(:auction) {
-    Auction.create({
-      title: 'Refactor this disaster',
-      start_datetime: Time.now - 4.days,
-      end_datetime: Time.now + 3.days
-    })
-  }
+  let(:current_bidder) { FactoryGirl.create(:user) }
+  let(:auction) { FactoryGirl.create(:current_auction) }
 
   describe '/my-bids' do
     context 'when logged out' do
-      before do
-        allow(controller).to receive(:current_user).and_return(nil)
-      end
-
       it 'should redirect to /login' do
         get :new, auction_id: auction.id
         expect(response).to redirect_to("/login")
@@ -25,21 +13,17 @@ RSpec.describe BidsController, controller: true do
     end
 
     context 'when logged in' do
-      before do
-        allow(controller).to receive(:current_user).and_return(current_bidder)
-      end
-
       it 'should assign auctions that current user have bidded on, presented' do
         bid = auction.bids.create(bidder_id: current_bidder.id)
-        get :"my_bids"
+        get :my_bids, {}, {user_id: current_bidder.id}
         assigned_auction = assigns(:auctions).first
         expect(assigned_auction).to be_a(Presenter::Auction)
         expect(assigned_auction.id).to eq(auction.id)
       end
 
       it 'should not assign auctions that the current user has not bidded on' do
-        auction.bids.create(bidder_id: 123)
-        get :"my_bids"
+        auction.bids.create(bidder_id: current_bidder.id + 127)
+        get :my_bids, {}, {user_id: current_bidder.id}
         expect(assigns(:auctions)).to be_empty
       end
     end
@@ -47,21 +31,13 @@ RSpec.describe BidsController, controller: true do
 
   describe '#new' do
     context 'when logged in' do
-      before do
-        allow(controller).to receive(:current_user).and_return(current_bidder)
-      end
-
       it 'should render the bid information' do
-        get :new, auction_id: auction.id
+        get :new, {auction_id: auction.id}, {user_id: current_bidder.id}
         expect(response).to render_template(:new)
       end
     end
 
     context 'when logged out' do
-      before do
-        allow(controller).to receive(:current_user).and_return(nil)
-      end
-
       it 'should redirect to /login' do
         get :new, auction_id: auction.id
         expect(response).to redirect_to("/login")
@@ -70,31 +46,14 @@ RSpec.describe BidsController, controller: true do
   end
 
   describe '#index' do
-    let(:bids) {
-      [3400, 3000, 1800].map do |amount|
-        Bid.create({
-          auction: auction,
-          amount: amount,
-          bidder: current_bidder
-        })
-      end
-    }
     context 'when logged in' do
-      before do
-        allow(controller).to receive(:current_user).and_return(current_bidder)
-      end
-
       it 'renders the template' do
-        get :index, auction_id: auction.id
+        get :index, {auction_id: auction.id}, {user_id: current_bidder.id }
         expect(response).to render_template(:index)
       end
     end
 
     context 'when logged out' do
-      before do
-        allow(controller).to receive(:current_user).and_return(nil)
-      end
-
       it 'renders the template' do
         get :index, auction_id: auction.id
         expect(response).to render_template(:index)
