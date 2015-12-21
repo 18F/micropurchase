@@ -35,6 +35,9 @@ group :development, :test do
   gem 'byebug'
   gem 'pry'
 
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
+  gem 'faker'
   gem 'timecop'
   gem 'brakeman', require: false
   gem 'hakiri',  require: false
