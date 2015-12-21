@@ -63,7 +63,7 @@ $ cf push
 Create the database service:
 
 ```
-$ cf create-service rds shared-psql micropurchase
+$ cf create-service rds shared-psql micropurchase-psql
 ```
 
 Set environment variables with `cf set-env`:
