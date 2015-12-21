@@ -8,14 +8,25 @@ addons:
   code_climate:
     repo_token: 2ad0d3196c872832cf5d6b34c83bf21dbf0a30e2191ba036be003b01e417a6a1
 edge: true
+
 deploy:
-  provider: cloudfoundry
-  api: https://api.cloud.gov
-  username: deploy-agile-bpa
-  password:
-    secure: jLlZemPNZV9WK8xprl68YLPTlQOlbSgjZmbE/POtG34kD3aJPnT1hxysAQamEJsgxJTqYCP+0dVzmrqu6ITSBTguO5E23u87SrV4vCal/l0U2yLlC0HAc4KOCDK52XKcE7c/u0bxD138kvSJSdGaJDvzwHe6j7MvOMemeHQRynEWJGZwJezo7ZY4zdlJHBnqDBFL8UfnAWXVTKbc+1/LKUojDlaVUVoNG+i63/08giCtXNijgE9d4ZAXJEj+3h/XrZ2u2x0w9YyZrFPCoxAVNTN3EXoqZw3kOFpX1wHRSWzprxpUX4QqXnBCQwohKSJ+vkl2cXjOx9SrJ2huPGQ4Lsfw8wiRXxiRPvOvL6W3kbJb4FDYBArA8SIYy57wH6z76ngYf1YgLAgkwDqkT5DOBeKBt5kEBdfCpUctqqATz9hC/5NKroR9lNNyRDdlV0zyV5npq56JAzxXk0MC0IvivczeY1lYEBQvqIbZZ6XJQI0qNpusZvZ3ifGbYjGo00mKXlEIpPhHaLkZ4/8F6sWWJE3DXqeLygqdD8O7z95neSO0E2wKj5N3g+d5gDFfhdqjxprEM1WGHmb/2veGx4EBrypLaOjqPpFQSbtrb7F7ioAQoD45NRhYQNIlY9NpqY/Ev5zgscPwvddxxUxKOkBBNHuG6OEVQcXwvnQ1O1P3VkU=
-  organization: agile-bpa
-  space: production
-  on:
-    repo: 18F/micropurchase
-    branch: master
+  - provider: cloudfoundry
+    api: https://api.cloud.gov
+    username: deploy-agile-bpa
+    password:
+      secure: jLlZemPNZV9WK8xprl68YLPTlQOlbSgjZmbE/POtG34kD3aJPnT1hxysAQamEJsgxJTqYCP+0dVzmrqu6ITSBTguO5E23u87SrV4vCal/l0U2yLlC0HAc4KOCDK52XKcE7c/u0bxD138kvSJSdGaJDvzwHe6j7MvOMemeHQRynEWJGZwJezo7ZY4zdlJHBnqDBFL8UfnAWXVTKbc+1/LKUojDlaVUVoNG+i63/08giCtXNijgE9d4ZAXJEj+3h/XrZ2u2x0w9YyZrFPCoxAVNTN3EXoqZw3kOFpX1wHRSWzprxpUX4QqXnBCQwohKSJ+vkl2cXjOx9SrJ2huPGQ4Lsfw8wiRXxiRPvOvL6W3kbJb4FDYBArA8SIYy57wH6z76ngYf1YgLAgkwDqkT5DOBeKBt5kEBdfCpUctqqATz9hC/5NKroR9lNNyRDdlV0zyV5npq56JAzxXk0MC0IvivczeY1lYEBQvqIbZZ6XJQI0qNpusZvZ3ifGbYjGo00mKXlEIpPhHaLkZ4/8F6sWWJE3DXqeLygqdD8O7z95neSO0E2wKj5N3g+d5gDFfhdqjxprEM1WGHmb/2veGx4EBrypLaOjqPpFQSbtrb7F7ioAQoD45NRhYQNIlY9NpqY/Ev5zgscPwvddxxUxKOkBBNHuG6OEVQcXwvnQ1O1P3VkU=
+    organization: agile-bpa
+    space: production
+    on:
+      repo: 18F/micropurchase
+      branch: master
+  - provider: cloudfoundry
+    api: https://api.cloud.gov
+    username: deploy-agile-bpa
+    password:
+      secure: jLlZemPNZV9WK8xprl68YLPTlQOlbSgjZmbE/POtG34kD3aJPnT1hxysAQamEJsgxJTqYCP+0dVzmrqu6ITSBTguO5E23u87SrV4vCal/l0U2yLlC0HAc4KOCDK52XKcE7c/u0bxD138kvSJSdGaJDvzwHe6j7MvOMemeHQRynEWJGZwJezo7ZY4zdlJHBnqDBFL8UfnAWXVTKbc+1/LKUojDlaVUVoNG+i63/08giCtXNijgE9d4ZAXJEj+3h/XrZ2u2x0w9YyZrFPCoxAVNTN3EXoqZw3kOFpX1wHRSWzprxpUX4QqXnBCQwohKSJ+vkl2cXjOx9SrJ2huPGQ4Lsfw8wiRXxiRPvOvL6W3kbJb4FDYBArA8SIYy57wH6z76ngYf1YgLAgkwDqkT5DOBeKBt5kEBdfCpUctqqATz9hC/5NKroR9lNNyRDdlV0zyV5npq56JAzxXk0MC0IvivczeY1lYEBQvqIbZZ6XJQI0qNpusZvZ3ifGbYjGo00mKXlEIpPhHaLkZ4/8F6sWWJE3DXqeLygqdD8O7z95neSO0E2wKj5N3g+d5gDFfhdqjxprEM1WGHmb/2veGx4EBrypLaOjqPpFQSbtrb7F7ioAQoD45NRhYQNIlY9NpqY/Ev5zgscPwvddxxUxKOkBBNHuG6OEVQcXwvnQ1O1P3VkU=
+    organization: agile-bpa
+    space: staging
+    on:
+      repo: 18F/micropurchase
+      branch: develop
