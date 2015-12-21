@@ -59,6 +59,11 @@ module Presenter
       )
     end
 
+    def user_is_winning_bidder?(user)
+      return false if !current_bid?
+      user.id == current_bid.bidder_id
+    end
+    
     private
 
     def current_bid_record
