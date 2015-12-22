@@ -1,7 +1,9 @@
-<h1>Welcome!</h1>
-<div class="usa-font-lead">
-  <p>The Micro-purchase Marketplace is the place to bid on open-source issues from the 18F team. <a href="https://18f.gsa.gov/2015/11/06/micro-purchase-lessons/">Learn more about this experiment »</a></p>
-  <p>Be sure to <a href="<%= login_path %>">register your company</a> before placing a bid. If you have any questions, please email us at <a href="mailto:micropurchase@gsa.gov">micropurchase@gsa.gov</a>.</p>
+<div class="usa-width-full">
+  <h1>Welcome!</h1>
+  <div class="usa-font-lead">
+    <p>The Micro-purchase Marketplace is the place to bid on open-source issues from the 18F team. <a href="https://18f.gsa.gov/2015/11/06/micro-purchase-lessons/">Learn more about this experiment »</a></p>
+    <p>Be sure to <a href="<%= login_path %>">register your company</a> before placing a bid. If you have any questions, please email us at <a href="mailto:micropurchase@gsa.gov">micropurchase@gsa.gov</a>.</p>
+  </div>
 </div>
 
 <h2>Issues open for bid</h2>
@@ -12,7 +14,7 @@
 
 <% else %>
 
-  <div class="usa-alert usa-alert-warning" role="alert">
+  <div class="usa-alert usa-alert-info" role="alert">
      <div class="usa-alert-body">
        <h3 class="usa-alert-heading">Please Login to Place Bid</h3>
        <p class="usa-alert-text">To place a bid, you must first be a <a href="<%= login_path %>">registered bidder</a>.</p>
@@ -23,13 +25,13 @@
 
 
 <div class="usa-grid-full">
-  <hr class='usa-size-one-whole'>
+<!--   <hr class='usa-size-one-whole'> -->
   <% if @auctions.empty? %>
     <p class="usa-font-lead">There are no current open auctions on the site. Please check back soon to view micropurchase opportunities.</p>
   <% else %>
     <% @auctions.each do |auction| %>
       <%= render partial: 'list_item', locals: {auction: auction} %>
-      <hr>
+<!--       <hr> -->
     <% end %>
   <% end %>
 </div>
