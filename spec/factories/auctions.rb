@@ -29,5 +29,9 @@ FactoryGirl.define do
       end_datetime { Time.now + 1.day }
       with_bidders
     end
+
+    factory :future_auction do
+      start_datetime { Time.now + 1.day }
+    end
   end
 end
