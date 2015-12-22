@@ -49,6 +49,7 @@
               <% if current_user %>
                 <span>Logged in as <%= current_user.name %></span>
                 <a class="usa-button usa-button-outline-inverse" href="/logout">Logout</a>
+                <a class="usa-button usa-button-outline-inverse" href="/users/<%= current_user.id %>/edit">Edit Profile</a>
               <% else %>
                 <a href="/login" class="usa-button usa-button-outline-inverse">Login</a>
               <% end %>

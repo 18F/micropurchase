@@ -1,6 +1,24 @@
 require 'rails_helper'
 
 RSpec.feature "logging in and out of the app", type: :feature do
+  scenario "User logs in and clicks edit profile link" do
+    visit "/"
+
+    create_authed_bidder
+
+    click_on "Login"
+    expect(page).to have_content("Authorize with GitHub")
+
+    click_on("Authorize with GitHub")
+
+    expect(page).to have_content("Edit Profile")
+    click_on("Edit Profile")
+
+    expect(page).to have_content("Complete your Account")
+    expect(page).to have_content("DUNS Number")
+    expect(page).to have_content("Email Address")
+  end
+
   scenario "New user logs in, created and logs out via header link" do
     visit "/"
 
