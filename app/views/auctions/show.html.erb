@@ -18,11 +18,11 @@
   <div class="usa-width-one-third">
     <div class="auction-detail-panel">
       <div class="auction-info">
-      <p>Status:</p>
-      <p><% if @auction.available? %>Open<% else %>Closed<% end %></p>
-      <hr/>
-      <p>Current Bid:</p>
-      <p><span class="bid-amount"><%= number_to_currency(@auction.current_bid_amount) %></span>
+      <p class="auction-label">Status:</p>
+      <p class="auction-label-info"><% if @auction.available? %>Open<% else %>Closed<% end %></p>
+<!--       <hr/> -->
+      <p class="auction-label">Current Bid:</p>
+      <p class="auction-label-info"><span class="bid-amount"><%= number_to_currency(@auction.current_bid_amount) %></span>
         <span class=""><%=
         link_to(
           pluralize(@auction.bids.length, 'bid'),
@@ -31,18 +31,24 @@
         %>
         </span>
       </p>
-      <hr/>
-      <p>Bid deadline:</p>
-      <p><%= @auction.end_datetime.strftime("%m/%d/%Y at %I:%M %Z") %></p>
-      <hr/>
+  <!--     <hr/> -->
+      <p class="auction-label">Bid deadline:</p>
+      <p class="auction-label-info"><%= @auction.end_datetime.strftime("%m/%d/%Y at %I:%M %Z") %></p>
+   <!--    <hr/> -->
       <p>
-        <a href="/auctions/<%= @auction.id %>/bids/new" class='usa-button usa-button-green'>Bid »</a>
+        <a href="/auctions/<%= @auction.id %>/bids/new" class='usa-button usa-button'>BID »</a>
       </p>
     </div>
       <div class="auction-more-info">
-        <p><a href="#">Ask a Question »</a></p>
-        <p><a href="<%= @auction.issue_url %>">View on GitHub »</a></p>
-        <p><a href="mailto:micropurchase@gsa.gov">Have feedback? Email micropurchase@gsa.gov</a></p>
+<!--         <p><a href="#">Ask a Question »</a></p> -->
+        <p>
+          <i class="fa fa-github"></i>
+          <a href="<%= @auction.issue_url %>">View on GitHub »</a>
+        </p>
+        <p>
+          <!-- <i class="fa fa-envelope"></i> -->
+          <a href="mailto:micropurchase@gsa.gov">Have feedback? Email micropurchase@gsa.gov</a>
+        </p>
       </div>
     </div>
   </div>
