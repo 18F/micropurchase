@@ -2,25 +2,16 @@ require 'rails_helper'
 
 RSpec.describe Presenter::Auction do
   let(:auction) { Presenter::Auction.new(ar_auction) }
-  let(:ar_auction) {
-    double('AR Auction', {
-      bids: bids,
-      start_datetime: Time.now - 1.day,
-      end_datetime: Time.now + 1.day
-    })
-  }
+  let(:ar_auction) { FactoryGirl.create(:auction) }
 
   describe '#current_bid when there are no bids' do
-    let(:bids) { [] }
-
     it 'return a null bid' do
       expect(auction.current_bid).to be_a(Presenter::Bid::Null)
     end
   end
 
   describe '#current_bid when there is only one bid in the timeframe' do
-    let(:bid) { Bid.create }
-    let(:bids) { [bid] }
+    let!(:bid) { FactoryGirl.create(:bid, auction_id: ar_auction.id) }
 
     it 'return that bid' do
       expect(auction.current_bid).to eq(bid)
@@ -28,10 +19,10 @@ RSpec.describe Presenter::Auction do
   end
 
   describe '#current_bid when there are multiple bids of different amounts' do
-    let(:bids) {
+    let!(:bids) {
       [
-        Bid.create(amount: 20.00),
-        Bid.create(amount: 10.00)
+        FactoryGirl.create(:bid, auction_id: ar_auction.id, amount: 20),
+        FactoryGirl.create(:bid, auction_id: ar_auction.id, amount: 10)
       ]
     }
 
@@ -41,11 +32,11 @@ RSpec.describe Presenter::Auction do
   end
 
   describe '#current_bid when there are multiple bids with the same amount' do
-    let(:bids) {
+    let!(:bids) {
       collection = [
-        Bid.create(amount: 10.00),
-        Bid.create(amount: 10.00),
-        Bid.create(amount: 10.00)
+        FactoryGirl.create(:bid, auction_id: ar_auction.id, amount: 10.00),
+        FactoryGirl.create(:bid, auction_id: ar_auction.id, amount: 10.00),
+        FactoryGirl.create(:bid, auction_id: ar_auction.id, amount: 10.00)
       ]
       collection[1].update_attribute(:created_at, (Time.now - 3.hours).utc)
       collection
@@ -58,7 +49,7 @@ RSpec.describe Presenter::Auction do
 
   describe '#available?' do
     context 'when the auction has expired' do
-      let(:ar_auction) { Auction.new(start_datetime: Time.now - 5.days, end_datetime: Time.now - 3.day) }
+      let(:ar_auction) { FactoryGirl.create(:closed_auction) }
 
       it 'should be false' do
         expect(auction.available?).to eq(false)
@@ -66,7 +57,7 @@ RSpec.describe Presenter::Auction do
     end
 
     context 'when the auction has not started yet' do
-      let(:ar_auction) { Auction.new(start_datetime: Time.now + 5.days, end_datetime: Time.now + 7.days) }
+      let(:ar_auction) { FactoryGirl.create(:future_auction) }
 
       it 'should be false' do
         expect(auction.available?).to eq(false)
@@ -74,7 +65,7 @@ RSpec.describe Presenter::Auction do
     end
 
     context 'when between dates' do
-      let(:ar_auction) { Auction.new(start_datetime: Time.now - 5.days, end_datetime: Time.now + 3.day) }
+      let(:ar_auction) { FactoryGirl.create(:auction) }
 
       it 'should be false' do
         expect(auction.available?).to eq(true)
