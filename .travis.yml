@@ -30,3 +30,4 @@ deploy:
     on:
       repo: 18F/micropurchase
       branch: develop
+    manifest: manifest-staging
