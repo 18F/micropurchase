@@ -1,6 +1,6 @@
 class PlaceBid < Struct.new(:params,:current_user)
-  BID_LIMIT = 3500.00
-  BID_INCREMENT = 1.0
+  BID_LIMIT = 3500
+  BID_INCREMENT = 1
 
   attr_reader :bid
 
