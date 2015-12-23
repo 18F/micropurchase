@@ -1,67 +1,31 @@
 def create_user
-  @user = User.create({
-    email: 'bob@thebuiler.io',
-    duns_number: '0000123456789',
-    name: 'Bob T. Builder',
-    github_id: '12345'
-  })
+  @user = FactoryGirl.create(:user)
 end
 
 def create_bidless_auction(end_datetime: Time.now + 3.days)
-  @auction = Auction.create({
-    start_datetime: Time.now - 3.days,
-    end_datetime: end_datetime,
-    title: 'Oh no, fix the world',
-    description: 'it is broken!',
-    issue_url: 'https://github.com/18F/calc/issues/255',
-    github_repo: 'https://github.com/18F/calc'
-  })
-  @bidders = [
-    User.create(
-      github_id: 'uid',
-      duns_number: 'duns',
-      name: 'Bob the Bidder'
-    ),
-    User.create(
-      github_id: 'uid_2',
-      duns_number: 'duns_2',
-      name: 'Mary the Maker'
-    ),
-    User.create(
-      github_id: 'uid_3',
-      duns_number: 'duns_3',
-      name: 'Carl the Contractor'
-    )
-  ]
-
-
+  @auction = FactoryGirl.create(:auction, end_datetime: Time.now + 3.days)
+  @bidders = []
+  
   return @auction, @bidders
 end
 
 def create_current_auction
-  @auction, @bidders = create_bidless_auction
-  @bidders.each_with_index do |bidder, index|
-    increment = index * 10
-    @auction.bids.create(bidder: bidder, amount: 3499 - increment)
-  end
+  @auction = FactoryGirl.create(:current_auction)
+  @bidders = @auction.bids
+  
   return @auction, @bidders
 end
 
 def create_closed_auction
-  @auction, @bidders = create_bidless_auction(end_datetime: Time.now - 1.days)
-  @bidders.each_with_index do |bidder, index|
-    increment = index * 10
-    @auction.bids.create(bidder: bidder, amount: 3499 - increment)
-  end
+  @auction = FactoryGirl.create(:closed_auction)
+  @bidders = @auction.bids
   return @auction, @bidders
 end
 
 def create_running_auction
-  @auction, @bidders = create_bidless_auction(end_datetime: Time.now + 1.days)
-  @bidders.each_with_index do |bidder, index|
-    increment = index * 10
-    @auction.bids.create(bidder: bidder, amount: 3499 - increment)
-  end
+  @auction = FactoryGirl.create(:running_auction)
+  @bidders = @auction.bids
+
   return @auction, @bidders
 end
 
@@ -80,11 +44,7 @@ def sign_in_bidder
 end
 
 def create_authed_bidder
-  @bidder = User.create(
-    github_id: current_user_uid,
-    duns_number: 'DUNS-123',
-    email: 'doris@doogooder.io'
-  )
+  @bidder = FactoryGirl.create(:user, github_id: current_user_uid)
 end
 
 def show_page

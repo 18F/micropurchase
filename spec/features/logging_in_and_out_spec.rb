@@ -55,7 +55,7 @@ RSpec.feature "logging in and out of the app", type: :feature do
 
     # another bad UX, users have to see this entry point regardless of whether they have a duns number
     expect(page).to have_content("Enter your DUNS number")
-    expect(page.find('#user_duns_number').value).to eq('DUNS-123')
+    expect(page.find('#user_duns_number').value).to eq(@bidder.duns_number)
   end
 
   scenario "User logs in when viewing protected or specific information" do
@@ -64,7 +64,7 @@ RSpec.feature "logging in and out of the app", type: :feature do
     expect(page).to have_content("Authorize with GitHub")
 
     click_on("Authorize with GitHub")
-    expect(page).to have_content("Doris Doogooder")
+    expect(page).to have_content('Doris Doogooder')
     expect(page).to have_content("Logout")
   end
 
@@ -82,8 +82,8 @@ RSpec.feature "logging in and out of the app", type: :feature do
     email_field = find_field("Email Address")
     duns_field = find_field("DUNS Number")
 
-    expect(email_field.value).to eq("doris@doogooder.io")
-    expect(duns_field.value).to eq("DUNS-123")
+    expect(email_field.value).to eq(@bidder.email)
+    expect(duns_field.value).to eq(@bidder.duns_number)
 
     fill_in("Email Address", with: "doris@doogooder.com")
     click_on('Submit')
@@ -106,8 +106,8 @@ RSpec.feature "logging in and out of the app", type: :feature do
     email_field = find_field("Email Address")
     duns_field = find_field("DUNS Number")
 
-    expect(email_field.value).to eq("doris@doogooder.io")
-    expect(duns_field.value).to eq("DUNS-123")
+    expect(email_field.value).to eq(@bidder.email)
+    expect(duns_field.value).to eq(@bidder.duns_number)
 
     fill_in("Email Address", with: "doris_the_nonvalid_email_address_person")
     click_on('Submit')
