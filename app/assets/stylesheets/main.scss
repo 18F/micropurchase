@@ -1,10 +1,12 @@
 $color-green: #2e8540;
 $color-primary-alt-darkest: #046b99;
 $color-gray: #f1f1f1;
+$primary-darkest: #112E51;
+$gray-cool-light: #dce4ef;
 
-.usa-alert-warning {
-  background-color: #fff1d2;
-  background-image: asset-url("warning.svg");
+.usa-alert-info {
+  background-image: asset-url("info.svg");
+  margin-bottom: 30px;
 }
 .usa-alert-success {
   background-image: asset-url("success.svg");
@@ -17,18 +19,13 @@ $color-gray: #f1f1f1;
 }
 
 .auction-detail-panel {
-  border: 1px solid;
+  border: 1px solid #ccc;
 
   .auction-info {
     margin-top: 2rem;
     padding-left: 2rem;
     padding-right: 2rem;
-    font-size: 2.5rem;
-
-    .bid-amount {
-      font-size: 4rem;
-      font-weight: 600;
-    }
+    font-size: 2rem;
 
     p {
       margin: 0;
@@ -37,19 +34,40 @@ $color-gray: #f1f1f1;
 
   .auction-more-info {
 
-    background-color: $color-primary-alt-darkest;
+    background-color: $primary-darkest;
+    margin-top: 30px;
+    padding-top: 10px;
+    padding-bottom: 30px;
 
     p {
-      padding: 1rem 3rem;
-      font-size: 2.4rem;
-      font-weight: 400;
-      margin-bottom: 0rem;
+      padding: 1rem 3rem 0 3rem;
+      font-size: 1.7rem;
+      margin: 0;
     }
 
     a {
-      color: #fff;
+      color: white;
+      text-decoration: none;
+    }
+
+    i {
+      color: white;
+      margin-right: 5px;
     }
   }
+}
+
+.auction-label {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.auction-label-info {
+  padding-bottom: 20px;
+}
+
+.bid-button {
+  margin-bottom: 30px;
 }
 
 .issue-list-item {
@@ -63,6 +81,7 @@ $color-gray: #f1f1f1;
   }
   .issue-bid-details {
     background-color: $color-gray;
+    padding: 1.5rem 3rem;
 
     .current-bid-box {
       height: 5rem;
@@ -101,6 +120,11 @@ $color-gray: #f1f1f1;
       margin-top: 1.5rem;
       padding: 0.5rem 2rem;
       white-space: nowrap;
+    }
+
+    p {
+      display: inline;
+      margin-right: 40px;
     }
   }
 }
@@ -141,17 +165,13 @@ $color-gray: #f1f1f1;
 
 
 nav.usa-site-navbar {
-  background: gray;
+  background: $primary-darkest;
   padding: 10px;
 }
 
 body.admin {
   nav.usa-site-navbar {
     background: $color-primary-alt-darkest;
-  }
-
-  .usa-footer-secondary_section {
-    background: lighten($color-primary-alt-darkest, 50);
   }
 
   .current-bid-headline {
@@ -263,4 +283,55 @@ footer {
   position: relative;
   top: -10px;
   font-size: 20px;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  font-family: "Source Sans Pro", "Helvetica", "Arial", sans-serif;
+}
+
+.usa-footer-primary-section {
+  background: $gray-cool-light;
+}
+
+.usa-footer-secondary-section {
+  background: $primary-darkest;
+}
+
+.intro {
+  background: #222;
+  padding: 40px 40px;
+}
+
+.usa-width-one-whole .issue-list-item {
+  border: 1px solid #ccc;
+}
+
+.usa-label-big {
+  background-color: #00a6d2;
+}
+
+a {
+  color: #00a6d2;
+}
+
+a:visited {
+  color: #046b99;
+}
+
+.usa-footer-secondary_section {
+    background-color: $primary-darkest;
+}
+
+.usa-footer-secondary_section a {
+    color: white;
+    line-height: 1.8;
+}
+
+.usa-footer-secondary_section h2 {
+    margin-bottom: 0px;
+    color: white;
+}
+
+.usa-button-primary-alt {
+  color: white;
 }
