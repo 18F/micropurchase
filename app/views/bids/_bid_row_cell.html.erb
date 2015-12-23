@@ -11,7 +11,7 @@
     <p>$2,100</p>
     <p>12 hrs left</p>
     <p>
-      <a href="/auctions/<%= params[:auction_id] %>/bids/new"><button class="bid-button">Bid »</button></a>
+      <a href="<%= new_auction_bid_path(auction) %>"><button class="bid-button">Bid »</button></a>
     </p>
   </td>
 </tr>

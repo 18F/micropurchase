@@ -1,7 +1,7 @@
 <h1>
   <div class='usa-width-three-fourths'>Auctions</div>
   <div class='usa-width-one-forth right'>
-    <a class='usa-button usa-button-green' href="/admin/auctions/new">Create a new auction</a>
+    <a class='usa-button usa-button-green' href="<%= new_admin_auction_path %>">Create a new auction</a>
   </div>
 </h1>
 
@@ -9,10 +9,10 @@
 <hr>
 <% @auctions.each do |auction| %>
   <div class='usa-width-one-whole auction-name'>
-    <a class='usa-width-three-fourths' href="/admin/auctions/<%= auction.id %>">
+    <a class='usa-width-three-fourths' href="<%= admin_auction_path(auction) %>">
       <h2><%= auction.title %></h2>
     </a>
-    <a class='usa-width-one-fourth' href="/admin/auctions/<%= auction.id %>/edit">Edit</a>
+    <a class='usa-width-one-fourth' href="<%= edit_admin_auction_path(auction) %>">Edit</a>
   </div>
 
   <div class='usa-width-one-whole auction-details'>
