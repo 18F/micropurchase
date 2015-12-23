@@ -1,7 +1,7 @@
 ---
 applications:
 - name: micropurchase
-  memory: 128M
+  memory: 256M
   instances: 1
   domain: 18f.gov
   host: micropurchase
