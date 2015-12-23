@@ -48,7 +48,8 @@
             <div class="header-account">
               <% if current_user %>
                 <span>Logged in as <%= current_user.name %></span>
-                <a class="usa-button usa-button-outline-inverse" href="/logout">Logout</a>
+                <a class="usa-button usa-button-outline-inverse" href="<%= logout_path %>">Logout</a>
+                <a class="usa-button usa-button-outline-inverse" href="<%= edit_user_path(current_user) %>">Edit Profile</a>
               <% else %>
                 <a href="/login" class="usa-button usa-button-outline-inverse">Login</a>
               <% end %>
