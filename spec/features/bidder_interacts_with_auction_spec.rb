@@ -68,7 +68,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
     page.find("a[href='#{@auction.issue_url}']")
 
     # logging in via bid click
-    click_on("Bid »")
+    click_on("BID")
     expect(page).to have_content("Authorize with GitHub")
     click_on("Authorize with GitHub")
     # completing user profile
