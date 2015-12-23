@@ -4,6 +4,16 @@ $color-gray: #f1f1f1;
 $primary-darkest: #112E51;
 $gray-cool-light: #dce4ef;
 
+textarea#auction_summary {
+  width: 500px;
+  height: 150px;
+}
+
+textarea#auction_description {
+  width: 500px;
+  height: 500px;
+}
+
 .usa-alert-info {
   background-image: asset-url("info.svg");
   margin-bottom: 30px;

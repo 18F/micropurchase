@@ -12,7 +12,7 @@
     <div class="usa-width-two-thirds auction-description">
     <h1>Auction Details</h1>
     <div class="github-issue">
-      <%= @auction.description %>
+      <%=h raw @auction.html_description %>
     </div>
   </div>
   <div class="usa-width-one-third">

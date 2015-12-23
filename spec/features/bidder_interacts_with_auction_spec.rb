@@ -15,6 +15,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
 
     number_of_bids = "#{@auction.bids.length} bids"
     expect(page).to have_content(number_of_bids)
+    expect(page).to have_content(@auction.summary)
 
     click_on(number_of_bids)
 
