@@ -23,7 +23,7 @@ RSpec.feature "AdminAuctions", type: :feature do
   scenario "adding an auction" do
     visit "/admin/auctions"
     expect(page).not_to have_text('must be an admin')
-    find('a.usa-button-green').click
+    find_link('Create a new auction').click
 
     title = 'Build the micropurchase thing'
     fill_in("auction_title", with: title)
