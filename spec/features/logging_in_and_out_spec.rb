@@ -14,7 +14,7 @@ RSpec.feature "logging in and out of the app", type: :feature do
     expect(page).to have_content("Edit Profile")
     click_on("Edit Profile")
 
-    expect(page).to have_content("Complete your Account")
+    expect(page).to have_content("Complete your account")
     expect(page).to have_content("DUNS Number")
     expect(page).to have_content("Email Address")
   end
