@@ -31,6 +31,7 @@ RSpec.feature "AdminAuctions", type: :feature do
     fill_in("auction_start_datetime", with: Presenter::DcTime.convert(Time.now + 3.days).strftime("%m/%d/%Y"))
     fill_in("auction_end_datetime", with: Presenter::DcTime.convert(Time.now - 3.days).strftime("%m/%d/%Y"))
     fill_in("auction_github_repo", with: "https://github.com/18F/calc")
+    fill_in("auction_summary", with: "The Summary!")
     fill_in("auction_issue_url", with: "https://github.com/18F/calc/issues/255")
     click_on("Submit")
 
@@ -48,11 +49,25 @@ RSpec.feature "AdminAuctions", type: :feature do
 
     title = 'Build the micropurchase thing'
     fill_in("auction_title", with: title)
-    fill_in("auction_description", with: 'and the admin related stuff')
-    fill_in("auction_github_repo", with: "https://github.com/18F/calc")
-    fill_in("auction_issue_url", with: "https://github.com/18F/calc/issues/255")
+
+    description = 'and the admin related stuff'
+    fill_in("auction_description", with: description)
+
+    github_repo = "https://github.com/18F/calc"
+    fill_in("auction_github_repo", with: github_repo)
+
+    summary = "The Summary!"
+    fill_in("auction_summary", with: summary)
+
+    issue_url = "https://github.com/18F/calc/issues/255"
+    fill_in("auction_issue_url", with: issue_url)
     click_on("Submit")
 
-    expect(page).to have_text("Build the micropurchase thing")
+    expect(page).to have_text(title)
+
+    click_on(title)
+
+    expect(page).to have_text(summary)
+    expect(page).to have_text(description)
   end
 end

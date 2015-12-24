@@ -15,7 +15,8 @@
     <b>Ends:</b> <%= Presenter::DcTime.convert(@auction.end_datetime).to_s(:long) %>
   </div>
 </div>
-<p><%= @auction.description %></p>
+<p><%=h raw @auction.html_summary %></p>
+<p><%=h raw @auction.html_description %></p>
 <hr>
 <div class='usa-grid'>
   <% if @auction.current_bid? %>
