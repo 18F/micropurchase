@@ -9,8 +9,8 @@ FactoryGirl.define do
 
     trait :with_bidders do
       after(:build) do |instance|
-        (1..4).each do |i|
-          amount = 3499 - (20 * i) - rand(10)
+        (1..rand(10)).each do |i|
+          amount = 3499 - (100 * i) - rand(30)
           instance.bids << FactoryGirl.create(:bid, auction: instance, amount: amount)
         end
       end
