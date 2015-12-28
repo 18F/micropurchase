@@ -166,6 +166,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
     bids.each_with_index do |bid, i|
       row_number = i + 1
       unredacted_bidder_name = bid.bidder.name
+      unredacted_bidder_duns = bid.bidder.duns_number
       bid = Presenter::Bid.new(bid)
 
       # check the "name" column
@@ -174,14 +175,19 @@ RSpec.feature "bidder interacts with auction", type: :feature do
         expect(page).to have_content("[Name witheld until the auction ends]")
       end
 
+      within(:xpath, cel_xpath(row_number, 2)) do
+        expect(page).not_to have_content(unredacted_bidder_duns)
+        expect(page).to have_content("[Witheld]")
+      end
+
       # check the "amount" column
       amount = ApplicationController.helpers.number_to_currency(bid.amount)
-      within(:xpath, cel_xpath(row_number, 2)) do
+      within(:xpath, cel_xpath(row_number, 3)) do
         expect(page).to have_content(amount)
       end
 
       # check the "date" column
-      within(:xpath, cel_xpath(row_number, 3)) do
+      within(:xpath, cel_xpath(row_number, 4)) do
         expect(page).to have_content(bid.time)
       end
 
@@ -202,6 +208,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
     bids.each_with_index do |bid, i|
       row_number = i + 1
       unredacted_bidder_name = bid.bidder.name
+      unredacted_bidder_duns = bid.bidder.duns_number
       bid = Presenter::Bid.new(bid)
 
       # check the "name" column
@@ -209,23 +216,27 @@ RSpec.feature "bidder interacts with auction", type: :feature do
         expect(page).to have_content(unredacted_bidder_name)
       end
 
+      within(:xpath, cel_xpath(row_number, 2)) do
+        expect(page).to have_content(unredacted_bidder_duns)
+      end
+
       # check the "amount" column
       if i == 0
         # ensure the first row bid amount includes an asterisk
         amount = ApplicationController.helpers.number_to_currency(bid.amount)
-        within(:xpath, cel_xpath(row_number, 2)) do
+        within(:xpath, cel_xpath(row_number, 3)) do
           expect(page).to have_content("#{amount} *")
         end
       else
         amount = ApplicationController.helpers.number_to_currency(bid.amount)
-        within(:xpath, cel_xpath(row_number, 2)) do
+        within(:xpath, cel_xpath(row_number, 3)) do
           expect(page).to have_content(amount)
           expect(page).not_to have_content("#{amount} *")
         end
       end
 
       # check the "date" column
-      within(:xpath, cel_xpath(row_number, 3)) do
+      within(:xpath, cel_xpath(row_number, 4)) do
         expect(page).to have_content(bid.time)
       end
 

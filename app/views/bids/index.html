@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th scope="col">Bidder</th>
+      <th scope="col">DUNS</th>
       <th scope="col">Amount</th>
       <th scope="col">Date (Eastern Standard Time)</th>
     </tr>
@@ -14,6 +15,7 @@
     <% @auction.bids.each_with_index do |bid, i| %>
       <tr>
         <td><%= bid.bidder_name %></td>
+        <td><%= bid.bidder_duns_number %></td>
         <td><%= content_for_row(i, bid) %></td>
         <td><%= Presenter::DcTime.convert_and_format(bid.created_at) %></td>
       </tr>
