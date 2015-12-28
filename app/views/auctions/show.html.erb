@@ -19,16 +19,22 @@
     <div class="auction-detail-panel">
       <div class="auction-info">
       <p class="auction-label">Status:</p>
-      <p class="auction-label-info"><% if @auction.available? %>Open<% else %>Closed<% end %></p>
+      <p class="auction-label-info"><%= auction_status(@auction) %></p>
+      <!--       <hr/> -->
+      <% if @auction.over? && @auction.bids? %>
+        <p class="auction-label">Winner:</p>
+        <p class="auction-label-info"><% if @auction.user_is_winning_bidder?(current_user) %>You are the winner!<% else %><%= @auction.current_bid.bidder_name %><% end %></p>
+
+      <% end %>
       <p class="auction-label">Current Bid:</p>
       <p class="auction-label-info"><span class="bid-amount"><%= number_to_currency(@auction.current_bid_amount) %></span>
-        <span class=""><%=
-        link_to(
-          pluralize(@auction.bids.length, 'bid'),
-          auction_bids_path(@auction.id)
-        )
-        %>
-        </span>
+          <span class=""><%=
+            link_to(
+                    pluralize(@auction.bids.length, 'bid'),
+                    auction_bids_path(@auction.id)
+            )
+           %>
+          </span>
       </p>
       <p class="auction-label">Bid deadline:</p>
       <p class="auction-label-info"><%= @auction.end_datetime.strftime("%m/%d/%Y at %I:%M %Z") %></p>
