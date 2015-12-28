@@ -49,7 +49,7 @@ RSpec.describe Presenter::Auction do
 
   describe '#available?' do
     context 'when the auction has expired' do
-      let(:ar_auction) { FactoryGirl.create(:closed_auction) }
+      let(:ar_auction) { FactoryGirl.create(:auction, :closed) }
 
       it 'should be false' do
         expect(auction.available?).to eq(false)
@@ -57,7 +57,7 @@ RSpec.describe Presenter::Auction do
     end
 
     context 'when the auction has not started yet' do
-      let(:ar_auction) { FactoryGirl.create(:future_auction) }
+      let(:ar_auction) { FactoryGirl.create(:auction, :future) }
 
       it 'should be false' do
         expect(auction.available?).to eq(false)
