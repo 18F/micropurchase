@@ -9,6 +9,12 @@ def create_bidless_auction(end_datetime: Time.now + 3.days)
   return @auction, @bidders
 end
 
+def create_closed_bidless_auction
+  create_bidless_auction
+  @auction.end_datetime = Time.now - 1.day
+  @auction.save
+end
+
 def create_current_auction
   @auction = FactoryGirl.create(:auction, :with_bidders)
   @bidders = @auction.bids
