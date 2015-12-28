@@ -63,11 +63,31 @@ module Presenter
       return false if !current_bid?
       user.id == current_bid.bidder_id
     end
-    
+
+    def html_description
+      return '' if description.blank?
+      markdown.render(description)
+    end
+
+    def html_summary
+      return '' if summary.blank?
+      markdown.render(summary)
+    end
+
     private
 
     def current_bid_record
       @current_bid_record ||= bids.sort_by{|bid| [bid.amount, bid.created_at, bid.id]}.first
+    end
+
+    def markdown
+      # FIXME: Do we want the lax_spacing?
+      @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML,
+                                            no_intra_emphasis: true,
+                                            autolink: true,
+                                            tables: true,
+                                            fenced_code_blocks: true,
+                                            lax_spacing: true)
     end
 
     def model

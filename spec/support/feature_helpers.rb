@@ -3,29 +3,22 @@ def create_user
 end
 
 def create_bidless_auction(end_datetime: Time.now + 3.days)
-  @auction = FactoryGirl.create(:auction, end_datetime: Time.now + 3.days)
+  @auction = FactoryGirl.create(:auction, end_datetime: end_datetime)
   @bidders = []
   
   return @auction, @bidders
 end
 
 def create_current_auction
-  @auction = FactoryGirl.create(:current_auction)
+  @auction = FactoryGirl.create(:auction, :with_bidders)
   @bidders = @auction.bids
   
   return @auction, @bidders
 end
 
 def create_closed_auction
-  @auction = FactoryGirl.create(:closed_auction)
+  @auction = FactoryGirl.create(:auction, :closed, :with_bidders)
   @bidders = @auction.bids
-  return @auction, @bidders
-end
-
-def create_running_auction
-  @auction = FactoryGirl.create(:running_auction)
-  @bidders = @auction.bids
-
   return @auction, @bidders
 end
 

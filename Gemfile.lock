@@ -201,6 +201,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
+    redcarpet (3.3.3)
     rest-client (1.8.0)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
@@ -302,6 +303,7 @@ DEPENDENCIES
   rails (= 4.2.4)
   rails-erd
   rails_12factor
+  redcarpet
   rspec-rails
   sass-rails (~> 5.0)
   timecop

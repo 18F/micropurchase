@@ -5,7 +5,7 @@
         <span class="usa-label-big">Open</span> <a href="<%= auction_path(auction) %>"><%= auction.title %></a>
       </h3>
       <p class='issue-description'>
-        <%= auction.description %> <a href="<%= auction_path(auction) %>">View details »</a>
+        <%=h raw auction.html_summary %><a href="<%= auction_path(auction) %>">View details »</a>
       </p>
     </div>
   </div>
