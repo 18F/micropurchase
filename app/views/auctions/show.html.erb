@@ -23,7 +23,7 @@
       <!--       <hr/> -->
       <% if @auction.over? && @auction.bids? %>
         <p class="auction-label">Winner:</p>
-        <p class="auction-label-info"><% if @auction.user_is_winning_bidder?(current_user) %>You are the winner!<% else %><%= @auction.current_bid.bidder_name %><% end %></p>
+        <p class="auction-label-info"><% if current_user && @auction.user_is_winning_bidder?(current_user) %>You are the winner!<% else %><%= @auction.current_bid.bidder_name %><% end %></p>
 
       <% end %>
       <p class="auction-label">Current Bid:</p>
