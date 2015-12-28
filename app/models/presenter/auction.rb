@@ -59,6 +59,10 @@ module Presenter
       )
     end
 
+    def over?
+      model.end_datetime < Time.now
+    end
+
     def user_is_winning_bidder?(user)
       return false if !current_bid?
       user.id == current_bid.bidder_id
