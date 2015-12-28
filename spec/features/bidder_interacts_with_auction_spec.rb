@@ -154,7 +154,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
 
   scenario "Viewing bid history for running auction" do
     Timecop.scale(36000) do
-      create_running_auction
+      create_current_auction
     end
     path = auction_bids_path(@auction.id)
     visit path

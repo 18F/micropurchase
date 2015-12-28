@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe BidsController, controller: true do
   let(:current_bidder) { FactoryGirl.create(:user) }
-  let(:auction) { FactoryGirl.create(:current_auction) }
+  let(:auction) { FactoryGirl.create(:auction) }
 
   describe '/my-bids' do
     context 'when logged out' do

@@ -16,21 +16,15 @@ FactoryGirl.define do
       end
     end
     
-    factory :current_auction do
-      with_bidders
-    end
-
-    factory :closed_auction do
+    trait :closed do
       end_datetime { Time.now - 1.day }
+    end
+
+    trait :running do
       with_bidders
     end
 
-    factory :running_auction do
-      end_datetime { Time.now + 1.day }
-      with_bidders
-    end
-
-    factory :future_auction do
+    trait :future do
       start_datetime { Time.now + 1.day }
     end
   end
