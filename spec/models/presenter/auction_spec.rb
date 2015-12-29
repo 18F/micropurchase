@@ -47,6 +47,46 @@ RSpec.describe Presenter::Auction do
     end
   end
 
+  describe '#user_is_winning_bidder?' do
+    let(:ar_auction) { FactoryGirl.create(:auction, :with_bidders) }
+
+    context 'when the user is currently the winner' do
+      let(:bidder) { auction.bids.first.bidder }
+
+      it 'should return true' do
+        expect(auction.user_is_winning_bidder?(bidder)).to be_truthy
+      end
+    end
+
+    context 'when the user is not the current winner' do
+      let(:bidder) { auction.bids.last.bidder }
+
+      it 'should return false' do
+        expect(auction.user_is_winning_bidder?(bidder)).to be_falsey
+      end
+    end
+  end
+
+  describe '#user_is_bidder?' do
+    let(:ar_auction) { FactoryGirl.create(:auction, :with_bidders) }
+    
+    context 'when the user has placed a bid on the project' do
+      let(:bidder) { auction.bids.last.bidder }
+
+      it 'should return true' do
+        expect(auction.user_is_bidder?(bidder)).to be_truthy
+      end
+    end
+
+    context 'when the user has not placed a bid on the project' do
+      let(:bidder) { FactoryGirl.create(:user) }
+
+      it 'should return false' do
+        expect(auction.user_is_bidder?(bidder)).to be_falsey
+      end
+    end
+  end
+  
   describe '#available?' do
     context 'when the auction has expired' do
       let(:ar_auction) { FactoryGirl.create(:auction, :closed) }
@@ -75,7 +115,7 @@ RSpec.describe Presenter::Auction do
 
   describe '#over?' do
     context 'when the auction has expired' do
-      let(:ar_auction) { FactoryGirl.create(:closed_auction) }
+      let(:ar_auction) { FactoryGirl.create(:auction, :closed) }
 
       it 'should be true' do
         expect(auction).to be_over
@@ -91,7 +131,7 @@ RSpec.describe Presenter::Auction do
     end
 
     context 'when the auction has not started' do
-      let(:ar_auction) { FactoryGirl.create(:future_auction) }
+      let(:ar_auction) { FactoryGirl.create(:auction, :future) }
       
       it 'should be false' do
         expect(auction).to_not be_over

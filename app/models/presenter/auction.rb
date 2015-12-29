@@ -68,6 +68,10 @@ module Presenter
       user.id == current_bid.bidder_id
     end
 
+    def user_is_bidder?(user)
+      bids.detect {|b| user.id == b.bidder_id } != nil
+    end
+    
     def html_description
       return '' if description.blank?
       markdown.render(description)
