@@ -13,6 +13,15 @@
       <h2><%= auction.title %></h2>
     </a>
     <a class='usa-width-one-fourth' href="<%= edit_admin_auction_path(auction) %>">Edit</a>
+    <%=
+      button_to 'Destroy',
+        {
+          controller: "auctions",
+          action: "destroy",
+          id: auction.id
+        },
+        method: :delete
+    %>
   </div>
 
   <div class='usa-width-one-whole auction-details'>

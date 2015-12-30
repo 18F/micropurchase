@@ -6,6 +6,16 @@ RSpec.feature "AdminAuctions", type: :feature do
     sign_in_admin
   end
 
+  scenario "deleting an auction from the admin panel" do
+    visit "/admin/auctions"
+
+    expect(page).to have_selector(:link_or_button, 'Destroy')
+
+    click_on("Destroy")
+
+    expect(page).to_not have_text(@auction.title)
+  end
+
   scenario "visiting the admin auctions list and then an auction" do
     visit "/admin/auctions"
     expect(page).not_to have_text('must be an admin')
