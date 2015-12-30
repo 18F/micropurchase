@@ -43,7 +43,7 @@ def sign_in_bidder
 end
 
 def create_authed_bidder
-  @bidder = FactoryGirl.create(:user, github_id: current_user_uid)
+  @bidder = FactoryGirl.create(:user, github_id: current_user_uid, name: 'Doris Doogooder')
 end
 
 def show_page

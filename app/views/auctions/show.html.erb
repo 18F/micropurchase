@@ -1,11 +1,4 @@
-<% if flash["bid"] %>
-<div class="usa-alert usa-alert-success">
-  <div class="usa-alert-body">
-    <h3 class="usa-alert-heading">Bid Submitted! You currently have the winning bid.</h3>
-    <p class="usa-alert-text">If your bid is selected as the winner, we will contact you with further instructions. <a href="<%= my_bids_path %>">View your bids »</a></p>
-  </div>
-</div>
-<% end %>
+<%= render partial: 'win_header', locals: {auction: @auction} %>
 
 <div class="usa-grid-full">
   <p><a href="<%= root_path %>">« Back to open projects</a></p>
@@ -22,10 +15,10 @@
       <p class="auction-label-info"><%= auction_status(@auction) %></p>
       <!--       <hr/> -->
       <% if @auction.over? && @auction.bids? %>
-        <p class="auction-label">Winner:</p>
-        <p class="auction-label-info"><% if current_user && @auction.user_is_winning_bidder?(current_user) %>You are the winner!<% else %><%= @auction.current_bid.bidder_name %><% end %></p>
+        <p class="auction-label">Winning bid (<%= @auction.current_bidder_name %>):</p>
+      <% else %>
+        <p class="auction-label">Current bid:</p>
       <% end %>
-      <p class="auction-label">Current Bid:</p>
       <p class="auction-label-info"><span class="bid-amount"><%= number_to_currency(@auction.current_bid_amount) %></span>
           <span class=""><%=
             link_to(
@@ -35,7 +28,7 @@
            %>
           </span>
       </p>
-      <p class="auction-label">Bid deadline:</p>
+      <p class="auction-label"><% if @auction.over? %>Auction ended at:<% else %>Bid deadline:<% end %></p>
       <p class="auction-label-info"><%= @auction.end_datetime.strftime("%m/%d/%Y at %I:%M %Z") %></p>
       <p>
         <a href="<%= new_auction_bid_path(@auction) %>" class='usa-button usa-button'>BID »</a>
