@@ -59,11 +59,19 @@ module Presenter
       )
     end
 
+    def over?
+      model.end_datetime < Time.now
+    end
+
     def user_is_winning_bidder?(user)
       return false if !current_bid?
       user.id == current_bid.bidder_id
     end
 
+    def user_is_bidder?(user)
+      bids.detect {|b| user.id == b.bidder_id } != nil
+    end
+    
     def html_description
       return '' if description.blank?
       markdown.render(description)

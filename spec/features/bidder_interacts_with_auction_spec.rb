@@ -85,7 +85,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
     click_on("Submit")
 
     # returns us back to the bid page
-    expect(page).to have_content("Current Bid:")
+    expect(page).to have_content("Current bid:")
     expect(page).to have_content("$800.00")
   end
 
@@ -103,7 +103,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
     click_on("Submit")
 
     # returns us back to the bid page
-    expect(page).to have_content("Current Bid:")
+    expect(page).to have_content("Current bid:")
     expect(page).to have_content("$999.00")
     expect(page).to have_content("You currently have the winning bid.")
   end
@@ -193,6 +193,103 @@ RSpec.feature "bidder interacts with auction", type: :feature do
 
     end
   end
+
+  scenario "Viewing auction page for a closed auction where a user is not authenticated" do
+    create_closed_auction
+    auction = Presenter::Auction.new(@auction)
+    visit auction_path(auction.id)
+
+    expect(page).to have_css('.usa-alert-info')
+    expect(page).to have_css('.auction-alert')
+    expect(page).to have_content("Winning bid (#{auction.current_bidder_name}):")
+    expect(page).not_to have_content("Current bid:")
+
+    expect(page).to have_content("Auction ended at:")
+    expect(page).not_to have_content("Bid deadline:")
+  end
+
+  scenario "Viewing auction page for a closed auction where authenticated user is the winner" do
+    create_closed_auction
+
+    visit "/"
+    sign_in_bidder
+
+    bid = nil
+    Timecop.freeze(@auction.end_datetime) do
+      bid = @auction.bids.create(bidder_id: @bidder.id, amount: 1)
+    end
+    expect(bid).to be_valid
+    @auction.reload
+    
+    auction = Presenter::Auction.new(@auction)
+
+    expect(auction.current_bidder_name).to eq(@bidder.name)
+    visit auction_path(auction.id)
+
+    expect(page).to have_css('.usa-alert-success')
+    expect(page).to have_content("You are the winner")
+    expect(page).to have_content("Winning bid (#{auction.current_bidder_name}):")
+    expect(page).not_to have_content("Current bid:")
+
+    expect(page).to have_content("Auction ended at:")
+    expect(page).not_to have_content("Bid deadline:")
+  end
+
+  scenario "Viewing auction page for a closed auction where authenticated user is not the winner" do
+    create_closed_auction
+
+    visit '/'
+    sign_in_bidder
+
+    auction = Presenter::Auction.new(@auction)
+
+    bid = nil
+    Timecop.freeze(@auction.start_datetime) do
+      bid = @auction.bids.create(bidder_id: @bidder.id, amount: 3498)
+    end
+    expect(bid).to be_valid
+    
+    visit auction_path(auction.id)
+
+    expect(page).to have_css('.usa-alert-error')
+    expect(page).to have_content("You are not the winner")
+    expect(page).to have_content("Winning bid (#{auction.current_bidder_name}):")
+    expect(page).not_to have_content("Current bid:")
+
+    expect(page).to have_content("Auction ended at:")
+    expect(page).not_to have_content("Bid deadline:")    
+  end
+
+scenario "Viewing auction page for a closed auction where authenticated user has not placed bids" do
+    create_closed_auction
+    auction = Presenter::Auction.new(@auction)
+
+    visit '/'
+    sign_in_bidder
+
+    visit auction_path(auction.id)
+
+    expect(page).to_not have_css('.usa-alert-error')
+    expect(page).to_not have_content("You are not the winner")
+    expect(page).to have_content("Winning bid (#{auction.current_bidder_name}):")
+    expect(page).not_to have_content("Current bid:")
+
+    expect(page).to have_content("Auction ended at:")
+    expect(page).not_to have_content("Bid deadline:")    
+  end
+
+  scenario "Viewing auction page for a closed auction with no bidders" do
+    create_closed_bidless_auction
+    auction = Presenter::Auction.new(@auction)
+    visit auction_path(auction.id)
+
+    expect(page).to have_content("This auction ended with no bids.")
+    expect(page).to have_content("Current bid:")
+
+    expect(page).to have_content("Auction ended at:")
+    expect(page).not_to have_content("Bid deadline:")
+  end
+
 
   scenario "Viewing bid history for a closed auction" do
     Timecop.scale(36000) do
