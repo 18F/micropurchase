@@ -4,8 +4,7 @@ module Admin
 
     def index
       all_users = User.all.map {|user| Presenter::User.new(user)}
-      @admins = all_users.select {|u| u.is_admin?}
-      @users = all_users.select {|u| !u.is_admin?}
+      @admins, @users = all_users.partition {|u| u.is_admin?}
     end
 
     def show
