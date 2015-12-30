@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe PlaceBid do
   let(:place_bid) { PlaceBid.new(params, current_user) }
-  let(:current_user) { FactoryGirl.create(:user, id: 111) }
+  let(:current_user) { FactoryGirl.create(:user) }
   let(:amount) { 1005 }
   let(:params) {
     {
