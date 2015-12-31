@@ -2,10 +2,11 @@ def create_user
   @user = FactoryGirl.create(:user)
 end
 
+# rubocop:disable Style/RedundantReturn
 def create_bidless_auction(end_datetime: Time.now + 3.days)
   @auction = FactoryGirl.create(:auction, end_datetime: end_datetime)
   @bidders = []
-  
+
   return @auction, @bidders
 end
 
@@ -18,15 +19,17 @@ end
 def create_current_auction
   @auction = FactoryGirl.create(:auction, :with_bidders)
   @bidders = @auction.bids
-  
+
   return @auction, @bidders
 end
 
 def create_closed_auction
   @auction = FactoryGirl.create(:auction, :closed, :with_bidders)
   @bidders = @auction.bids
+
   return @auction, @bidders
 end
+# rubocop:enable Style/RedundantReturn
 
 def sign_in_admin
   mock_github(uid: Admins.github_ids.first)
@@ -51,7 +54,7 @@ def show_page
   # requires the local server to be running
   # for more info: https://coderwall.com/p/jsutlq/capybara-s-save_and_open_page-with-css-and-js
   save_page Rails.root.join('public', 'capybara.html')
-  %x(launchy http://localhost:3000/capybara.html)
+  `launchy http://localhost:3000/capybara.html`
 end
 
 def cel_xpath(row_number, column_number)

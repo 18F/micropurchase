@@ -1,4 +1,4 @@
-class PlaceBid < Struct.new(:params,:current_user)
+class PlaceBid < Struct.new(:params, :current_user)
   BID_LIMIT = 3500
   BID_INCREMENT = 1
 
@@ -10,11 +10,11 @@ class PlaceBid < Struct.new(:params,:current_user)
   end
 
   def create_bid
-    @bid ||= Bid.create({
+    @bid ||= Bid.create(
       amount: amount,
       bidder_id: current_user.id,
       auction_id: auction.id
-    })
+    )
   end
 
   private
@@ -31,27 +31,29 @@ class PlaceBid < Struct.new(:params,:current_user)
     Presenter::Auction.new(auction).current_max_bid
   end
 
+  # rubocop:disable Style/IfUnlessModifier, Style/GuardClause
   def validate_bid_data
     if amount.to_i != amount
-      raise UnauthorizedError, 'Bids must be in increments of one dollar'
+      fail UnauthorizedError, 'Bids must be in increments of one dollar'
     end
 
-    if !auction_available?
-      raise UnauthorizedError, 'Auction not available'
+    unless auction_available?
+      fail UnauthorizedError, 'Auction not available'
     end
 
     if amount > BID_LIMIT
-      raise UnauthorizedError, 'Bid too high'
+      fail UnauthorizedError, 'Bid too high'
     end
 
     if amount <= 0
-      raise UnauthorizedError, 'Bid amount out of range'
+      fail UnauthorizedError, 'Bid amount out of range'
     end
 
     if amount > current_max_bid
-      raise UnauthorizedError, "Bids cannot be greater than the current max bid"
+      fail UnauthorizedError, "Bids cannot be greater than the current max bid"
     end
   end
+  # rubocop:enable Style/IfUnlessModifier, Style/GuardClause
 
   def amount
     (params[:bid] && params[:bid][:amount]).to_f.round(2)

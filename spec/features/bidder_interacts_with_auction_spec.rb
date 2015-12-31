@@ -5,7 +5,8 @@ RSpec.feature "bidder interacts with auction", type: :feature do
   scenario "There are no auctions" do
     visit "/"
 
-    expect(page).to have_content("There are no current open auctions on the site. Please check back soon to view micropurchase opportunities.")
+    expect(page).to have_content("There are no current open auctions on the site. " \
+                                 "Please check back soon to view micropurchase opportunities.")
   end
 
   scenario "Viewing auction list and navigating to bid history" do
@@ -108,8 +109,6 @@ RSpec.feature "bidder interacts with auction", type: :feature do
     expect(page).to have_content("You currently have the winning bid.")
   end
 
-
-
   scenario "Is not the current winning bidder with no bids" do
     create_bidless_auction
 
@@ -153,14 +152,14 @@ RSpec.feature "bidder interacts with auction", type: :feature do
   end
 
   scenario "Viewing bid history for running auction" do
-    Timecop.scale(36000) do
+    Timecop.scale(3_600) do
       create_current_auction
     end
     path = auction_bids_path(@auction.id)
     visit path
 
     # sort the bids so that newest is first
-    bids = @auction.bids.sort_by {|bid| bid.created_at}.reverse
+    bids = @auction.bids.sort_by(&:created_at).reverse
 
     # ensure the table has the correct content, in the correct order
     bids.each_with_index do |bid, i|
@@ -190,7 +189,6 @@ RSpec.feature "bidder interacts with auction", type: :feature do
       within(:xpath, cel_xpath(row_number, 4)) do
         expect(page).to have_content(bid.time)
       end
-
     end
   end
 
@@ -220,7 +218,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
     end
     expect(bid).to be_valid
     @auction.reload
-    
+
     auction = Presenter::Auction.new(@auction)
 
     expect(auction.current_bidder_name).to eq(@bidder.name)
@@ -248,7 +246,6 @@ RSpec.feature "bidder interacts with auction", type: :feature do
       bid = @auction.bids.create(bidder_id: @bidder.id, amount: 3498)
     end
     expect(bid).to be_valid
-    
     visit auction_path(auction.id)
 
     expect(page).to have_css('.usa-alert-error')
@@ -257,10 +254,10 @@ RSpec.feature "bidder interacts with auction", type: :feature do
     expect(page).not_to have_content("Current bid:")
 
     expect(page).to have_content("Auction ended at:")
-    expect(page).not_to have_content("Bid deadline:")    
+    expect(page).not_to have_content("Bid deadline:")
   end
 
-scenario "Viewing auction page for a closed auction where authenticated user has not placed bids" do
+  scenario "Viewing auction page for a closed auction where authenticated user has not placed bids" do
     create_closed_auction
     auction = Presenter::Auction.new(@auction)
 
@@ -275,7 +272,7 @@ scenario "Viewing auction page for a closed auction where authenticated user has
     expect(page).not_to have_content("Current bid:")
 
     expect(page).to have_content("Auction ended at:")
-    expect(page).not_to have_content("Bid deadline:")    
+    expect(page).not_to have_content("Bid deadline:")
   end
 
   scenario "Viewing auction page for a closed auction with no bidders" do
@@ -290,16 +287,15 @@ scenario "Viewing auction page for a closed auction where authenticated user has
     expect(page).not_to have_content("Bid deadline:")
   end
 
-
   scenario "Viewing bid history for a closed auction" do
-    Timecop.scale(36000) do
+    Timecop.scale(3_600) do
       create_closed_auction
     end
     path = auction_bids_path(@auction.id)
     visit path
 
     # sort the bids so that newest is first
-    bids = @auction.bids.sort_by {|bid| bid.created_at}.reverse
+    bids = @auction.bids.sort_by(&:created_at).reverse
 
     # ensure the table has the correct content, in the correct order
     bids.each_with_index do |bid, i|
@@ -336,7 +332,6 @@ scenario "Viewing auction page for a closed auction where authenticated user has
       within(:xpath, cel_xpath(row_number, 4)) do
         expect(page).to have_content(bid.time)
       end
-
     end
   end
 end

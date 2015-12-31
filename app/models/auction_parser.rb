@@ -28,8 +28,9 @@ class AuctionParser < Struct.new(:params)
 
   def parse_time(time)
     parsed_time = Chronic.parse(time)
-    raise ArgumentError.new("Missing or poorly formatted time: '#{time}'") if !parsed_time
-    if !time.match(/\d{1,2}:\d{2}/)
+    fail ArgumentError, "Missing or poorly formatted time: '#{time}'" unless parsed_time
+
+    unless time.match(/\d{1,2}:\d{2}/)
       parsed_time = parsed_time.beginning_of_day
     end
     parsed_time.utc
@@ -37,9 +38,8 @@ class AuctionParser < Struct.new(:params)
 
   def start_price
     price = params[:auction][:start_price].to_f
-    if price > PlaceBid::BID_LIMIT || price <= 0
-      price = PlaceBid::BID_LIMIT
-    end
+    price = PlaceBid::BID_LIMIT if price > PlaceBid::BID_LIMIT || price <= 0
+
     price
   end
 end

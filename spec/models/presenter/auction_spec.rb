@@ -19,12 +19,12 @@ RSpec.describe Presenter::Auction do
   end
 
   describe '#current_bid when there are multiple bids of different amounts' do
-    let!(:bids) {
+    let!(:bids) do
       [
         FactoryGirl.create(:bid, auction_id: ar_auction.id, amount: 20),
         FactoryGirl.create(:bid, auction_id: ar_auction.id, amount: 10)
       ]
-    }
+    end
 
     it 'return the bid with the lowest amount' do
       expect(auction.current_bid).to eq(bids.last)
@@ -32,7 +32,7 @@ RSpec.describe Presenter::Auction do
   end
 
   describe '#current_bid when there are multiple bids with the same amount' do
-    let!(:bids) {
+    let!(:bids) do
       collection = [
         FactoryGirl.create(:bid, auction_id: ar_auction.id, amount: 10.00),
         FactoryGirl.create(:bid, auction_id: ar_auction.id, amount: 10.00),
@@ -40,7 +40,7 @@ RSpec.describe Presenter::Auction do
       ]
       collection[1].update_attribute(:created_at, (Time.now - 3.hours).utc)
       collection
-    }
+    end
 
     it 'return the bid with the lowest amount' do
       expect(auction.current_bid).to eq(bids[1])
@@ -69,7 +69,7 @@ RSpec.describe Presenter::Auction do
 
   describe '#user_is_bidder?' do
     let(:ar_auction) { FactoryGirl.create(:auction, :with_bidders) }
-    
+
     context 'when the user has placed a bid on the project' do
       let(:bidder) { auction.bids.last.bidder }
 
@@ -86,7 +86,7 @@ RSpec.describe Presenter::Auction do
       end
     end
   end
-  
+
   describe '#available?' do
     context 'when the auction has expired' do
       let(:ar_auction) { FactoryGirl.create(:auction, :closed) }
@@ -132,7 +132,7 @@ RSpec.describe Presenter::Auction do
 
     context 'when the auction has not started' do
       let(:ar_auction) { FactoryGirl.create(:auction, :future) }
-      
+
       it 'should be false' do
         expect(auction).to_not be_over
       end
@@ -141,7 +141,7 @@ RSpec.describe Presenter::Auction do
 
   describe "#html_summary" do
     let(:summary) { nil }
-    let(:auction) { Presenter::Auction.new(FactoryGirl.build(:auction,  summary: summary)) }
+    let(:auction) { Presenter::Auction.new(FactoryGirl.build(:auction, summary: summary)) }
 
     it 'should return an empty string if the summary is blank' do
       expect(auction.html_summary).to be_blank
@@ -180,7 +180,7 @@ RSpec.describe Presenter::Auction do
     end
 
     context 'table rendering' do
-      let(:summary) { "First Header  | Second Header\n------------- | -------------\nContent Cell  | Content Cell\nContent Cell  | Content Cell\n" }
+      let(:summary) { "First Header|Second Header\n------------- | -------------\nContent Cell  | Content Cell\n" }
 
       it 'should render a table element' do
         expect(auction.html_summary).to match('<table>')
@@ -229,7 +229,7 @@ RSpec.describe Presenter::Auction do
     end
 
     context 'table rendering' do
-      let(:description) { "First Header  | Second Header\n------------- | -------------\nContent Cell  | Content Cell\nContent Cell  | Content Cell\n" }
+      let(:description) { "First Header|Second Header\n------------- | -------------\nContent Cell  | Content Cell\n" }
 
       it 'should render a table element' do
         expect(auction.html_description).to match('<table>')

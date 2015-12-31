@@ -1,7 +1,7 @@
 module Presenter
   class Auction < SimpleDelegator
     def current_bid?
-      !!current_bid_record
+      current_bid_record != nil
     end
 
     def current_bid
@@ -38,10 +38,10 @@ module Presenter
     end
 
     def bids
-      model.bids.to_a
-        .map {|bid| Presenter::Bid.new(bid)}
-        .sort_by {|bid| bid.created_at}
-        .reverse
+      model.bids.to_a.
+        map {|bid| Presenter::Bid.new(bid) }.
+        sort_by(&:created_at).
+        reverse
     end
 
     def starts_at
@@ -52,26 +52,28 @@ module Presenter
       Presenter::DcTime.convert_and_format(model.end_datetime)
     end
 
+    # rubocop:disable Style/DoubleNegation
     def available?
       !!(
         (model.start_datetime && (model.start_datetime <= Time.now)) &&
           (model.end_datetime && (model.end_datetime >= Time.now))
       )
     end
+    # rubocop:enable Style/DoubleNegation
 
     def over?
       model.end_datetime < Time.now
     end
 
     def user_is_winning_bidder?(user)
-      return false if !current_bid?
+      return false unless current_bid?
       user.id == current_bid.bidder_id
     end
 
     def user_is_bidder?(user)
       bids.detect {|b| user.id == b.bidder_id } != nil
     end
-    
+
     def html_description
       return '' if description.blank?
       markdown.render(description)
@@ -85,7 +87,7 @@ module Presenter
     private
 
     def current_bid_record
-      @current_bid_record ||= bids.sort_by{|bid| [bid.amount, bid.created_at, bid.id]}.first
+      @current_bid_record ||= bids.sort_by {|bid| [bid.amount, bid.created_at, bid.id] }.first
     end
 
     def markdown
