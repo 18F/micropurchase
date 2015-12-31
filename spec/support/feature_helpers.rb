@@ -23,6 +23,17 @@ def create_current_auction
   return @auction, @bidders
 end
 
+def create_closed_and_current_auctions(closed: 5, current: 5)
+  @current_auctions = current.times.to_a.map do
+    FactoryGirl.create(:auction, :running, title: Faker::Commerce.product_name)
+  end
+  @closed_auctions = closed.times.to_a.map do
+    FactoryGirl.create(:auction, :closed, title: Faker::Commerce.product_name)
+  end
+
+  return @current_auctions, @closed_auctions
+end
+
 def create_closed_auction
   @auction = FactoryGirl.create(:auction, :closed, :with_bidders)
   @bidders = @auction.bids

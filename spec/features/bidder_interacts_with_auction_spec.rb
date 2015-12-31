@@ -2,6 +2,20 @@
 require 'rails_helper'
 
 RSpec.feature "bidder interacts with auction", type: :feature do
+  scenario "There are some open auctions and some closed auctions" do
+    create_closed_and_current_auctions
+
+    visit "/"
+
+    @current_auctions.each do |current_auction|
+      expect(page).to have_content(current_auction.title)
+    end
+
+    @closed_auctions.each do |closed_auction|
+      expect(page).to_not have_content(closed_auction.title)
+    end
+  end
+
   scenario "There are no auctions" do
     visit "/"
 
