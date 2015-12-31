@@ -22,6 +22,15 @@ module Admin
       redirect_to "/admin/auctions" # render edit
     end
 
+    def destroy
+      auction = Auction.find(params[:id])
+      DestroyAuction.new(auction).perform
+      redirect_to "/admin/auctions"
+    rescue ArgumentError => e
+      flash[:error] = e.message
+      redirect_to "/admin/auctions"
+    end
+
     def update
       auction = Auction.find(params[:id])
       UpdateAuction.new(auction, params).perform
