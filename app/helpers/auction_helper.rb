@@ -6,4 +6,16 @@ module AuctionHelper
       'Closed'
     end
   end
+
+  def auction_label(auction)
+    if auction.expiring?
+      'Expiring'
+    elsif auction.over?
+      'Closed'
+    elsif auction.future?
+      'Coming Soon'
+    else
+      'Open'
+    end
+  end
 end

@@ -2,7 +2,7 @@
   <div class="usa-grid">
     <div class='usa-width-one-whole issue-label'>
       <h3 class='issue-title'>
-        <span class="usa-label-big">Open</span> <a href="<%= auction_path(auction) %>"><%= auction.title %></a>
+        <span class="usa-label-big"><%= auction_label(auction) %></span> <a href="<%= auction_path(auction) %>"><%= auction.title %></a>
       </h3>
       <p class='issue-description'>
         <%=h raw auction.html_summary %><a href="<%= auction_path(auction) %>">View details »</a>
@@ -13,10 +13,16 @@
   <div class='usa-width-one-whole issue-bids-info'>
     <div class="usa-grid-full">
     <% if auction.available? %>
-      <%= render partial: 'auctions/bids_and_form', locals: {auction: auction} %>
+    <%= render partial: 'auctions/bids_and_form', locals: {auction: auction} %>
+
       <div class="usa-width-one-third">
-        <a href="<%= new_auction_bid_path(auction) %>" class='usa-button'>Bid »</a>
+        <% if auction.available? %>
+          <a href="<%= new_auction_bid_path(auction) %>" class='usa-button'>Bid »</a>
+        <% else %>
+          <a href="#" class='usa-button usa-button-disabled'>Closed</a>
+        <% end %>
       </div>
+
     <% else %>
       <%= render partial: 'auctions/winning_bid', locals: {auction: auction} %>
     <% end %>
