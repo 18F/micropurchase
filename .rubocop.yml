@@ -11,6 +11,8 @@ AllCops:
     - "**/Cheffile"
   Exclude:
     - 'db/schema.rb'
+    - 'db/migrate/*'
+    - 'lib/tasks/cucumber.rake'
 
 Lint/ParenthesesAsGroupedExpression:
   Description: Checks for method calls with a space before the opening parenthesis.
@@ -22,6 +24,13 @@ Metrics/ClassLength:
   Enabled: true
   CountComments: false
   Max: 100
+
+
+Metrics/AbcSize:
+  # The ABC size is a calculated magnitude, so this number can be a Fixnum or
+  # a Float.
+  Max: 15
+  Enabled: false
 
 Metrics/LineLength:
   Description: Limit lines to 120 characters.
@@ -46,6 +55,10 @@ Metrics/ModuleLength:
   CountComments: false
   Max: 100
 
+Style/MultilineBlockLayout:
+  Description: 'Ensures newlines after multiline block do statements.'
+  Enabled: false
+  
 Rails/HasAndBelongsToMany:
   Description: Prefer has_many :through to has_and_belongs_to_many.
   Enabled: true
@@ -91,12 +104,12 @@ Style/DotPosition:
 
 Style/ExtraSpacing:
   Description: Do not use unnecessary spacing.
-  Enabled: false
+  Enabled: true
 
 Style/TrailingWhitespace:
   Description: 'Avoid trailing whitespace.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-trailing-whitespace'
-  Enabled: false
+  Enabled: true
 
 Style/GuardClause:
   Description: Check for conditionals that can be replaced with guard clauses
@@ -112,3 +125,35 @@ Style/StringLiterals:
   SupportedStyles:
   - single_quotes
   - double_quotes
+
+Style/SpaceBeforeBlockBraces:
+  EnforcedStyle: space
+  SupportedStyles:
+    - space
+    - no_space
+
+Style/SpaceInsideBlockBraces:
+  EnforcedStyle: space
+  SupportedStyles:
+    - space
+    - no_space
+  # Valid values are: space, no_space
+  EnforcedStyleForEmptyBraces: no_space
+  # Space between { and |. Overrides EnforcedStyle if there is a conflict.
+  SpaceBeforeBlockParameters: false
+
+Style/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
+  EnforcedStyleForEmptyBraces: no_space
+  SupportedStyles:
+    - space
+    - no_space
+
+Style/SpaceInsideStringInterpolation:
+  EnforcedStyle: no_space
+  SupportedStyles:
+    - space
+    - no_space
+    
+Style/StructInheritance:
+  Enabled: false
