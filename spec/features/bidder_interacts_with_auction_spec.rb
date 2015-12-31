@@ -7,12 +7,22 @@ RSpec.feature "bidder interacts with auction", type: :feature do
 
     visit "/"
 
-    @current_auctions.each do |current_auction|
-      expect(page).to have_content(current_auction.title)
+    binding.pry
+
+    @current_auctions.each_with_index do |current_auction, i|
+      i = i + 1
+      within("div.issue-list-item:nth-child(#{i})") do
+        expect(page).to have_content("Bid")
+        expect(page).to_not have_content("Closed")
+      end
     end
 
-    @closed_auctions.each do |closed_auction|
-      expect(page).to_not have_content(closed_auction.title)
+    @closed_auctions.each_with_index do |closed_auction, i|
+      i = i + 1
+      within("div.issue-list-item:nth-child(#{i})") do
+        expect(page).to_not have_content("Bid")
+        expect(page).to have_content("Closed")
+      end
     end
   end
 
