@@ -13,6 +13,7 @@ module ApplicationHelper
       end
     end
     flash.clear
-    return result
+
+    result
   end
 end

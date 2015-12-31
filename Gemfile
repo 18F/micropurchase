@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 gem 'pg'
@@ -41,7 +40,7 @@ group :development, :test do
   gem 'faker'
   gem 'timecop'
   gem 'brakeman', require: false
-  gem 'hakiri',  require: false
+  gem 'hakiri', require: false
 end
 
 group :development do

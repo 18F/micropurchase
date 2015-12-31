@@ -8,11 +8,11 @@ class BidsController < ApplicationController
   end
 
   def my_bids
-    @auctions = Auction
-      .joins(:bids)
-      .where(bids: {bidder_id: current_user.id})
-      .uniq
-      .map {|auction| Presenter::Auction.new(auction) }
+    @auctions = Auction.
+                joins(:bids).
+                where(bids: {bidder_id: current_user.id}).
+                uniq.
+                map {|auction| Presenter::Auction.new(auction) }
   end
 
   def new

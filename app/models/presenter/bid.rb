@@ -23,7 +23,7 @@ module Presenter
     def presenter_auction
       @presenter_auction ||= Presenter::Auction.new(auction)
     end
-    
+
     def null
       Null::NULL
     end

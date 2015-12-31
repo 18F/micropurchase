@@ -6,7 +6,7 @@ module Presenter
       time.in_time_zone(ActiveSupport::TimeZone['Eastern Time (US & Canada)'])
     end
 
-    def convert_and_format(format=FORMAT)
+    def convert_and_format(format = FORMAT)
       return Bid::Null::NULL unless time
       convert.strftime(format)
     end
@@ -15,7 +15,7 @@ module Presenter
       new(time).convert
     end
 
-    def self.convert_and_format(time, format=FORMAT)
+    def self.convert_and_format(time, format = FORMAT)
       new(time).convert_and_format(format)
     end
   end

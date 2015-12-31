@@ -3,7 +3,7 @@ module Admin
     before_filter :require_admin
 
     def index
-      @auctions = Auction.all.map{|auction| Presenter::Auction.new(auction) }
+      @auctions = Auction.all.map {|auction| Presenter::Auction.new(auction) }
     end
 
     def show

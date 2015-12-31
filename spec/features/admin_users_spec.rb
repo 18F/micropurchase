@@ -22,6 +22,6 @@ RSpec.feature "AdminUsers", type: :feature do
     number_of_users.times { create_user }
     visit "/admin/users"
     expect(page).to have_text("Users (#{number_of_users}")
-    expect(page).to have_text("Admins (#{1}")
+    expect(page).to have_text("Admins (1)")
   end
 end
