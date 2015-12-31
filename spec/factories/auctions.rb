@@ -27,6 +27,10 @@ FactoryGirl.define do
       with_bidders
     end
 
+    trait :expiring do
+      end_datetime { Time.now + 3.hours }
+    end
+
     trait :future do
       start_datetime { Time.now + 1.day }
     end
