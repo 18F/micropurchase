@@ -20,6 +20,7 @@ gem 'omniauth-github'
 gem 'chronic'
 gem 'email_validator'
 gem 'redcarpet'
+gem 'puma'
 
 group :test do
   gem "codeclimate-test-reporter", require: nil
@@ -29,7 +30,6 @@ group :development, :test do
   gem 'rspec-rails'
 
   gem 'cucumber-rails', require: false
-  gem 'database_cleaner', require: false
 
   gem 'capybara'
   gem 'capybara-screenshot'
