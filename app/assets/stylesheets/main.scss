@@ -1,8 +1,11 @@
 $color-green: #2e8540;
+$color-primary-alt: #02bfe7;
 $color-primary-alt-darkest: #046b99;
+$color-primary-alt-lightest: #e1f3f8;
 $color-gray: #f1f1f1;
 $primary-darkest: #112E51;
 $gray-cool-light: #dce4ef;
+$color-gray-dark: #323a45;
 
 textarea#auction_summary {
   width: 500px;
@@ -21,6 +24,23 @@ textarea#auction_description {
 .usa-alert-success {
   background-image: asset-url("success.svg");
 }
+
+.auction-label-expiring {
+    background-color: $color-primary-alt-darkest !important;
+}
+
+.auction-label-over {
+    background-color: $color-gray-dark !important;
+}
+
+.auction-label-future {
+    background-color: $color-green !important;
+}
+
+.usa-label-big .auction-label-open {
+    background-color: $color-primary-alt !important;
+}
+
 
 .auction-description {
   h1 {

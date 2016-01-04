@@ -7,6 +7,18 @@ module AuctionHelper
     end
   end
 
+  def auction_label_class(auction)
+    if auction.expiring?
+      'auction-label-expiring'
+    elsif auction.over?
+      'auction-label-over'
+    elsif auction.future?
+      'auction-label-future'
+    else
+      'auction-label-open'
+    end
+  end
+  
   def auction_label(auction)
     if auction.expiring?
       'Expiring'
