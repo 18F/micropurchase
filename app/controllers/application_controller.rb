@@ -18,18 +18,20 @@ class ApplicationController < ActionController::Base
 
   def require_admin
     require_authentication and return
-    fail UnauthorizedError, 'must be an admin' unless is_admin?
+    is_admin = Admins.verify?(github_id)
+    fail UnauthorizedError::MustBeAdmin unless is_admin
+
+    is_admin
+  end
+
+  rescue_from 'UnauthorizedError::MustBeAdmin' do |error|
+    message = error.message || "Unauthorized"
+    handle_error(message)
   end
 
   rescue_from UnauthorizedError do |error|
     message = error.message || "Unauthorized"
-
-    if html_request?
-      flash[:error] = message
-      redirect_to '/'
-    elsif api_request?
-      render json: {error: message}, status: 404
-    end
+    handle_error(message)
   end
 
   def html_request?
@@ -41,7 +43,7 @@ class ApplicationController < ActionController::Base
   end
 
   def api_key
-    request.headers['HTTP_API_KEY']
+    key = request.headers['HTTP_API_KEY']
   end
 
   def github_id_from_api_key(api_key)
@@ -49,7 +51,7 @@ class ApplicationController < ActionController::Base
       client = Octokit::Client.new(access_token: api_key)
       client.user.id
     rescue Octokit::Unauthorized => e
-      fail UnauthorizedError, "Error authenticating via GitHub: #{e.message}"
+      fail UnauthorizedError::GitHubAuthenticationError, "Error authenticating via GitHub: #{e.message}"
     end
   end
 
@@ -62,21 +64,30 @@ class ApplicationController < ActionController::Base
   def set_current_user_to_api_user!
     user = User.where(github_id: github_id).first
     if user.nil?
-      fail UnauthorizedError, 'User not found'
+      fail UnauthorizedError::UserNotFound
     else
       @current_user = user
     end
   end
 
   def github_id
-    if html_request?
+    if html_request? && current_user
       current_user.github_id
     elsif api_request?
       github_id_from_api_key(api_key)
+    else
+      nil
     end
   end
 
-  def is_admin?
-    Admins.verify?(github_id)
+  private
+
+  def handle_error(message)
+    if html_request?
+      flash[:error] = message
+      redirect_to '/'
+    elsif api_request?
+      render json: {error: message}, status: 404
+    end
   end
 end
