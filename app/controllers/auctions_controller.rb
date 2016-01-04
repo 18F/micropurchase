@@ -1,6 +1,6 @@
 class AuctionsController < ApplicationController
   def index
-    @auctions = Auction.all.includes(:bids).map {|auction| Presenter::Auction.new(auction) }
+    @auctions = Auction.in_reverse_chron_order.with_bids.map {|auction| Presenter::Auction.new(auction) }
   end
 
   def show
