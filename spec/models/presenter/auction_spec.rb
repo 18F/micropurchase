@@ -87,55 +87,46 @@ RSpec.describe Presenter::Auction do
     end
   end
 
-  describe '#available?' do
+  describe 'boolean methods' do
     context 'when the auction has expired' do
       let(:ar_auction) { FactoryGirl.create(:auction, :closed) }
 
-      it 'should be false' do
-        expect(auction).to_not be_available
-      end
+      specify { expect(auction).to_not be_available }
+      specify { expect(auction).to_not be_expiring }
+      specify { expect(auction).to_not be_future }
+      specify { expect(auction).to be_over }
     end
 
     context 'when the auction has not started yet' do
-      let(:ar_auction) { FactoryGirl.create(:auction, :future) }
-
-      it 'should be false' do
-        expect(auction).to_not be_available
+      let(:ar_auction) do
+        FactoryGirl.create(:auction,
+                           :future,
+                           start_datetime: 1.hour.from_now,
+                           end_datetime: 3.hours.from_now)
       end
+
+      specify { expect(auction).to_not be_available }
+      specify { expect(auction).to_not be_expiring }
+      specify { expect(auction).to be_future }
+      specify { expect(auction).to_not be_over }
     end
 
-    context 'when between dates' do
+    context 'when the auction is happening' do
       let(:ar_auction) { FactoryGirl.create(:auction) }
 
-      it 'should be false' do
-        expect(auction).to be_available
-      end
-    end
-  end
-
-  describe '#over?' do
-    context 'when the auction has expired' do
-      let(:ar_auction) { FactoryGirl.create(:auction, :closed) }
-
-      it 'should be true' do
-        expect(auction).to be_over
-      end
+      specify { expect(auction).to be_available }
+      specify { expect(auction).to_not be_expiring }
+      specify { expect(auction).to_not be_future }
+      specify { expect(auction).to_not be_over }
     end
 
-    context 'when the auction is still running' do
-      let(:ar_auction) { FactoryGirl.create(:auction) }
+    context 'when the auction is closing soon' do
+      let(:ar_auction) { FactoryGirl.create(:auction, :expiring) }
 
-      it 'should not be true' do
-        expect(auction).to_not be_over
-      end
-    end
-
-    context 'when the auction has not started' do
-      let(:ar_auction) { FactoryGirl.create(:auction, :future) }
-
-      it 'should be false' do
-        expect(auction).to_not be_over
-      end
+      specify { expect(auction).to be_available }
+      specify { expect(auction).to be_expiring }
+      specify { expect(auction).to_not be_future }
+      specify { expect(auction).to_not be_over }
     end
   end
 

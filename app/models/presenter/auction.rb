@@ -65,6 +65,14 @@ module Presenter
       model.end_datetime < Time.now
     end
 
+    def future?
+      model.start_datetime > Time.now
+    end
+
+    def expiring?
+      available? && model.end_datetime < 12.hours.from_now
+    end
+
     def user_is_winning_bidder?(user)
       return false unless current_bid?
       user.id == current_bid.bidder_id
