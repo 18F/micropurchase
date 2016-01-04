@@ -10,7 +10,11 @@
 
 <% if current_user %>
 
-  <a href="<%= my_bids_path %>">View my bids »</a>
+  <% if current_user.sam_account? %>
+    <a href="<%= my_bids_path %>">View my bids »</a>
+  <% else %>
+    <%= render partial: 'components/no_sam_header' %>
+  <% end %>
 
 <% else %>
 
