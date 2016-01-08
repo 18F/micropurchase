@@ -1,8 +1,4 @@
-<% if current_user && !current_user.sam_account? %>
-  <%= render partial: 'components/no_sam_header' %>
-<% else %>
-  <%= render partial: 'win_header', locals: {auction: @auction} %>
-<% end %>
+<%= render partial: 'win_header', locals: {auction: @auction} %>
 
 <div class="usa-grid-full">
   <p><a href="<%= root_path %>">« Back to open projects</a></p>

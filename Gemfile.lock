@@ -126,7 +126,6 @@ GEM
     highline (1.7.8)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
-    httpclient (2.7.1)
     i18n (0.7.0)
     json (1.8.3)
     jwt (1.5.2)
@@ -246,9 +245,6 @@ GEM
     ruby_parser (3.7.2)
       sexp_processor (~> 4.1)
     safe_yaml (1.0.4)
-    samwise (0.2.3)
-      faraday
-      httpclient
     sass (3.4.20)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -326,7 +322,6 @@ DEPENDENCIES
   redcarpet
   rspec-rails
   rubocop
-  samwise (~> 0.2.3)
   sass-rails (~> 5.0)
   timecop
   uglifier (>= 1.3.0)
