@@ -4,26 +4,34 @@ module Presenter
       Presenter::DcTime.convert_and_format(created_at)
     end
 
-    def bidder_duns_number
+    def veiled_bidder_duns_number
       if presenter_auction.available?
         '[Witheld]'
       else
-        bidder.duns_number || null
+        bidder_duns_number
+      end
+    end
+
+    def bidder_duns_number
+      bidder.duns_number || null
+    end
+
+    def veiled_bidder_name
+      if presenter_auction.available?
+        '[Name witheld until the auction ends]'
+      else
+        bidder_name
       end
     end
 
     def bidder_name
-      if presenter_auction.available?
-        '[Name witheld until the auction ends]'
-      else
-        bidder.name || null
-      end
+      bidder.name || null
     end
 
     def presenter_auction
       @presenter_auction ||= Presenter::Auction.new(auction)
     end
-    
+
     def null
       Null::NULL
     end

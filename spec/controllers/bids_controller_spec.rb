@@ -15,7 +15,8 @@ RSpec.describe BidsController, controller: true do
     context 'when logged in' do
       it 'should assign auctions that current user have bidded on, presented' do
         bid = auction.bids.create(bidder_id: current_bidder.id)
-        get :my_bids, {}, {user_id: current_bidder.id}
+        expect(bid).to be_valid
+        get :my_bids, {}, user_id: current_bidder.id
         assigned_auction = assigns(:auctions).first
         expect(assigned_auction).to be_a(Presenter::Auction)
         expect(assigned_auction.id).to eq(auction.id)
@@ -23,7 +24,7 @@ RSpec.describe BidsController, controller: true do
 
       it 'should not assign auctions that the current user has not bidded on' do
         auction.bids.create(bidder_id: current_bidder.id + 127)
-        get :my_bids, {}, {user_id: current_bidder.id}
+        get :my_bids, {}, user_id: current_bidder.id
         expect(assigns(:auctions)).to be_empty
       end
     end
@@ -32,7 +33,7 @@ RSpec.describe BidsController, controller: true do
   describe '#new' do
     context 'when logged in' do
       it 'should render the bid information' do
-        get :new, {auction_id: auction.id}, {user_id: current_bidder.id}
+        get :new, {auction_id: auction.id}, user_id: current_bidder.id
         expect(response).to render_template(:new)
       end
     end
@@ -48,7 +49,7 @@ RSpec.describe BidsController, controller: true do
   describe '#index' do
     context 'when logged in' do
       it 'renders the template' do
-        get :index, {auction_id: auction.id}, {user_id: current_bidder.id }
+        get :index, {auction_id: auction.id}, user_id: current_bidder.id
         expect(response).to render_template(:index)
       end
     end
@@ -77,12 +78,12 @@ RSpec.describe BidsController, controller: true do
 
       let(:bid) { auction.bids.first }
       let(:place_bid) { double('place bid object', perform: true) }
-      let(:request_params) {
+      let(:request_params) do
         {
           auction_id: auction.id,
           bid: {amount: 3000.50}
         }
-      }
+      end
 
       it "creates creates a bid and redirects to the new bid page" do
         expect(PlaceBid).to receive(:new).with(anything, current_bidder).and_return(place_bid)
@@ -92,7 +93,8 @@ RSpec.describe BidsController, controller: true do
       end
 
       it "adds a flash error when the bid is bad" do
-        expect(PlaceBid).to receive(:new).with(anything, current_bidder).and_raise(UnauthorizedError.new("Bad bid, sucker!"))
+        expect(PlaceBid).to receive(:new).with(anything, current_bidder).
+          and_raise(UnauthorizedError.new("Bad bid, sucker!"))
         post :create, request_params
         expect(flash[:error]).to eq("Bad bid, sucker!")
         expect(response).to redirect_to("/auctions/#{auction.id}/bids/new")

@@ -23,7 +23,7 @@ require 'capybara-screenshot/rspec'
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+Dir[Rails.root.join('spec/support/**/*.rb')].each {|f| require f }
 
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
@@ -55,7 +55,6 @@ RSpec.configure do |config|
 
   OmniAuth.config.test_mode = true
   DatabaseCleaner.strategy = :transaction
-  
   #  config.include FactoryGirl::Syntax::Methods
 
   config.before(:suite) do
@@ -66,7 +65,7 @@ RSpec.configure do |config|
       DatabaseCleaner.clean
     end
   end
-  
+
   config.before do
     mock_github
   end

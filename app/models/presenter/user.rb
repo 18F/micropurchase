@@ -4,7 +4,7 @@ module Presenter
       "https://api.github.com/user/#{github_id}"
     end
 
-    def is_admin?
+    def admin?
       Admins.verify?(model.github_id)
     end
 

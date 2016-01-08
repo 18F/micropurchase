@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 gem 'pg'
@@ -20,6 +19,7 @@ gem 'omniauth-github'
 gem 'chronic'
 gem 'email_validator'
 gem 'redcarpet'
+gem 'puma'
 
 group :test do
   gem "codeclimate-test-reporter", require: nil
@@ -29,7 +29,6 @@ group :development, :test do
   gem 'rspec-rails'
 
   gem 'cucumber-rails', require: false
-  gem 'database_cleaner', require: false
 
   gem 'capybara'
   gem 'capybara-screenshot'
@@ -41,12 +40,13 @@ group :development, :test do
   gem 'faker'
   gem 'timecop'
   gem 'brakeman', require: false
-  gem 'hakiri',  require: false
+  gem 'hakiri', require: false
 end
 
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'rails-erd'
+  gem 'rubocop'
 end
 
 group :production do

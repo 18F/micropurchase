@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe ApplicationController, controller: true do
   describe '#require_admin' do
     let(:current_user) { nil }
-    
     before do
       allow(controller).to receive(:current_user).and_return(current_user)
     end
@@ -19,9 +18,7 @@ RSpec.describe ApplicationController, controller: true do
       let(:current_user) { FactoryGirl.create(:user) }
 
       it 'raises an authorization error' do
-        expect {
-          controller.require_admin
-        }.to raise_error(UnauthorizedError)
+        expect { controller.require_admin }.to raise_error(UnauthorizedError)
       end
     end
 
@@ -30,9 +27,7 @@ RSpec.describe ApplicationController, controller: true do
 
       it 'lets the request pass through' do
         expect(controller).to_not receive(:redirect_to)
-        expect {
-          controller.require_admin
-        }.not_to raise_error
+        expect { controller.require_admin }.not_to raise_error
       end
     end
   end

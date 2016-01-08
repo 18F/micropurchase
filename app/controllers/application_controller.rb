@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   def require_admin
     require_authentication and return
     is_admin = Admins.verify?(current_user.github_id)
-    raise UnauthorizedError, 'must be an admin' unless is_admin
+    fail UnauthorizedError, 'must be an admin' unless is_admin
     is_admin
   end
 

@@ -2,8 +2,9 @@ FactoryGirl.define do
   factory :auction do
     start_datetime { Time.now - 3.days }
     end_datetime { Time.now + 3.days }
-    title 'Oh no, fix the world'
-    description 'it is broken!'
+    title { Faker::Company.catch_phrase }
+    summary { Faker::Lorem.paragraph }
+    description { Faker::Lorem.paragraphs(3, true) }
     issue_url 'https://github.com/18F/calc/issues/255'
     github_repo 'https://github.com/18F/calc'
 
@@ -25,6 +26,10 @@ FactoryGirl.define do
 
     trait :running do
       with_bidders
+    end
+
+    trait :expiring do
+      end_datetime { Time.now + 3.hours }
     end
 
     trait :future do

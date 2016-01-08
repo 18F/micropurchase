@@ -7,7 +7,7 @@ RSpec.describe AuctionParser do
 
   describe '#perform' do
     context 'when the price is too high' do
-      let(:params) {
+      let(:params) do
         {
           auction: {
             title: 'title',
@@ -18,7 +18,7 @@ RSpec.describe AuctionParser do
             start_price: 3500.01
           }
         }
-      }
+      end
 
       it 'drops the price down to the bid upper limit' do
         expect(attributes[:start_price]).to eq(3500.00)
@@ -26,7 +26,7 @@ RSpec.describe AuctionParser do
     end
 
     context 'when the price is too low' do
-      let(:params) {
+      let(:params) do
         {
           auction: {
             title: 'title',
@@ -37,7 +37,7 @@ RSpec.describe AuctionParser do
             start_price: 0
           }
         }
-      }
+      end
 
       it 'bumps the price to the bid upper limit' do
         expect(attributes[:start_price]).to eq(3500.00)
@@ -45,17 +45,17 @@ RSpec.describe AuctionParser do
     end
 
     context 'when the price is not present' do
-      let(:params) {
+      let(:params) do
         {
           auction: {
             title: 'title',
             description: 'description',
             github_repo: 'github url',
             start_datetime: 'Nov 3, 2015',
-            end_datetime: '11/10/2015',
+            end_datetime: '11/10/2015'
           }
         }
-      }
+      end
 
       it 'makes the price the bid upper limit' do
         expect(attributes[:start_price]).to eq(3500.00)
@@ -63,65 +63,65 @@ RSpec.describe AuctionParser do
     end
 
     context 'when an exact time is passed for start/end time' do
-      let(:params) {
+      let(:params) do
         {
           auction: {
             title: 'title',
             description: 'description',
             github_repo: 'github url',
             start_datetime: 'Nov 3, 2015 15:15',
-            end_datetime: '11/10/2015 2:15pm',
+            end_datetime: '11/10/2015 2:15pm'
           }
         }
-      }
+      end
 
       it 'uses the time and date' do
-        expect(attributes[:start_datetime].utc.to_s).to  eq(Time.parse('Nov 3, 2015 15:15 EST').utc.to_s)
-        expect(attributes[:end_datetime].utc.to_s).to    eq(Time.parse("Nov 10, 2015 14:15 EST").utc.to_s)
+        expect(attributes[:start_datetime].utc.to_s).
+          to eq(Time.parse('Nov 3, 2015 15:15 EST').utc.to_s)
+        expect(attributes[:end_datetime].utc.to_s).
+          to eq(Time.parse("Nov 10, 2015 14:15 EST").utc.to_s)
       end
     end
 
     context 'when only a date is passed for start/end time' do
-      let(:params) {
+      let(:params) do
         {
           auction: {
             title: 'title',
             description: 'description',
             github_repo: 'github url',
             start_datetime: 'Nov 3, 2015',
-            end_datetime: '11/10/2015',
+            end_datetime: '11/10/2015'
           }
         }
-      }
+      end
 
       it 'uses the time and date' do
         expect(attributes[:start_datetime].utc.to_s).to eq(Time.parse('Nov 3, 2015 0:00 EST').utc.to_s)
-        expect(attributes[:end_datetime].utc.to_s).to   eq(Time.parse("Nov 10, 2015 0:00 EST").utc.to_s)
+        expect(attributes[:end_datetime].utc.to_s).to eq(Time.parse("Nov 10, 2015 0:00 EST").utc.to_s)
       end
     end
 
     context 'when the start or end date is missing' do
-      let(:params) {
+      let(:params) do
         {
           auction: {
             title: 'title',
             description: 'description',
             github_repo: 'github url',
             start_datetime: '',
-            end_datetime: '',
+            end_datetime: ''
           }
         }
-      }
+      end
 
       it 'raise an error' do
-        expect {
-          attributes
-        }.to raise_error(ArgumentError)
+        expect { attributes }.to raise_error(ArgumentError)
       end
     end
 
     context 'with other data' do
-      let(:params) {
+      let(:params) do
         {
           auction: {
             title: 'title',
@@ -132,7 +132,7 @@ RSpec.describe AuctionParser do
             issue_url: 'issue url'
           }
         }
-      }
+      end
 
       it 'stores the right stuff' do
         expect(attributes[:title]).to eq(params[:auction][:title])

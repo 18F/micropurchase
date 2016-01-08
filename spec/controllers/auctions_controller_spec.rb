@@ -21,4 +21,3 @@ RSpec.describe AuctionsController, controller: true do
     end
   end
 end
-

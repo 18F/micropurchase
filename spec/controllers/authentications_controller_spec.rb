@@ -23,9 +23,7 @@ RSpec.describe AuthenticationsController do
 
     it 'should create a new user' do
       request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
-      expect {
-        get :create, provider: 'github'
-      }.to change { User.count }.by(1)
+      expect { get :create, provider: 'github' }.to change { User.count }.by(1)
       user = User.last
       expect(user.github_id).to eq(current_user_uid)
     end

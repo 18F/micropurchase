@@ -3,7 +3,7 @@ module Admin
     before_filter :require_admin
 
     def index
-      @auctions = Auction.all.map{|auction| Presenter::Auction.new(auction) }
+      @auctions = Auction.all.map {|auction| Presenter::Auction.new(auction) }
     end
 
     def show
@@ -20,6 +20,15 @@ module Admin
     rescue ArgumentError => e
       flash[:error] = e.message
       redirect_to "/admin/auctions" # render edit
+    end
+
+    def destroy
+      auction = Auction.find(params[:id])
+      DestroyAuction.new(auction).perform
+      redirect_to "/admin/auctions"
+    rescue ArgumentError => e
+      flash[:error] = e.message
+      redirect_to "/admin/auctions"
     end
 
     def update

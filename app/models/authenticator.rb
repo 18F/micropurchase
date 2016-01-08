@@ -15,9 +15,7 @@ class Authenticator < Struct.new(:auth_hash, :session)
   end
 
   def update_user
-    user.update_attributes({
-      name: name
-    })
+    user.update_attribute(:name, name)
   end
 
   def sign_in
