@@ -15,9 +15,11 @@ class UsersController < ApplicationController
   def update
     require_authentication and return
 
-    @user = User.find(params[:id])
+    @user = Presenter::User.new(User.find(params[:id]))
     fail UnauthorizedError if current_user != @user
-    @user.update(user_params)
+    #@user.update(user_params)
+
+    UpdateUser.new(@user, user_params).perform
 
     if @user.save
       redirect_to root_path
@@ -33,7 +35,7 @@ class UsersController < ApplicationController
     redirect_to(session[:return_to] || root_path)
     session[:return_to] = nil
   end
-  
+
   def user_params
     params.require(:user).permit(:duns_number, :email)
   end
