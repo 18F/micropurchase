@@ -16,13 +16,12 @@
     <%= render partial: 'auctions/bids_and_form', locals: {auction: auction} %>
 
       <div class="usa-width-one-third">
-        <% if auction.available? %>
+        <% if auction.available? && (!current_user || current_user.sam_account?) %>
           <a href="<%= new_auction_bid_path(auction) %>" class='usa-button'>Bid »</a>
         <% else %>
-          <a href="#" class='usa-button usa-button-disabled'>Closed</a>
+          <a href="#" class='usa-button usa-button-disabled'>Bid</a>
         <% end %>
       </div>
-
     <% else %>
       <%= render partial: 'auctions/winning_bid', locals: {auction: auction} %>
     <% end %>
