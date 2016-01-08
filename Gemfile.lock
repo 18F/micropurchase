@@ -246,7 +246,7 @@ GEM
     ruby_parser (3.7.2)
       sexp_processor (~> 4.1)
     safe_yaml (1.0.4)
-    samwise (0.2.3)
+    samwise (0.2.5)
       faraday
       httpclient
     sass (3.4.20)
@@ -326,7 +326,7 @@ DEPENDENCIES
   redcarpet
   rspec-rails
   rubocop
-  samwise (~> 0.2.3)
+  samwise (~> 0.2.5)
   sass-rails (~> 5.0)
   timecop
   uglifier (>= 1.3.0)

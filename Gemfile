@@ -20,7 +20,7 @@ gem 'chronic'
 gem 'email_validator'
 gem 'redcarpet'
 gem 'puma'
-gem 'samwise', '~> 0.2.3'
+gem 'samwise', '~> 0.2.5'
 
 group :test do
   gem "codeclimate-test-reporter", require: nil
