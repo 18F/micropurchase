@@ -3,9 +3,8 @@ namespace :sam do
     User.not_in_sam.each do |user|
       id = "#{user.name}/#{user.duns_number}: "
       begin
-        user.save_sam_status
-        if user.changed?
-          user.save!
+        sam_status = user.save_sam_status
+        if sam_status == true
           id += 'DUNS *is* in SAM.gov'
         else
           id += 'DUNS *not* found in SAM.gov'

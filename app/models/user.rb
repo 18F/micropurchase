@@ -9,8 +9,10 @@ class User < ActiveRecord::Base
     return if sam_account?
     self.sam_account = registered_on_sam?
     save!
+
+    self.sam_account
   end
-  
+
   private
 
   def clear_sam_status_if_duns_changed
