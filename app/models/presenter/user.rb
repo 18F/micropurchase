@@ -8,6 +8,14 @@ module Presenter
       Admins.verify?(model.github_id)
     end
 
+    def in_sam?
+      if model.sam_account == true
+        'Yes'
+      else
+        'No'
+      end
+    end
+
     def model
       __getobj__
     end
