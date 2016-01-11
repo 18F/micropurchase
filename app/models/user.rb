@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   before_save :clear_sam_status_if_duns_changed
 
   scope :not_in_sam, -> { where(sam_account: false) }
-
+  scope :blank_name, -> { where(name: [nil, '']) }
   def save_sam_status
     return if sam_account?
     self.sam_account = registered_on_sam?
