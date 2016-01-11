@@ -78,6 +78,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
       visit auction_path(current_auction)
 
       expect(page).to have_content("Open")
+      expect(page).to have_content(current_auction.end_datetime.strftime('%m/%d/%Y at %I:%M %p %Z'))
     end
 
     scenario "Viewing a closed auction" do
