@@ -1,11 +1,12 @@
 <div class="usa-alert usa-alert-error auction-alert">
-  <div class="usa-alert-body"><h3>Your DUNS is not registered with SAM</h3></div>
-  <p class="usa-alert-text">You will not be able to bid on any auctions until:
+  <div class="usa-alert-body"><h3>Your DUNS is not registered with SAM*</h3></div>
+  <div class="usa-alert-text">
+    <p>You will not be able to bid on any auctions until:</p>
     <ol>
       <li>You have registered on <a href="https://www.sam.gov/">SAM.gov</a></li>
       <li>Your SAM.gov account is "active" in the system. Check your status using <a href="https://www.sam.gov/sam/helpPage/SAM_Reg_Status_Help_Page.html">the SAM.gov status checker</a></li>
       <li>You have <a href="<%= edit_user_path(current_user) %>">entered your DUNS number into your profile</a> on this micro-purchase platform.</li>
     </ol>
-
-
+    <p>*NOTE: We periodically check if all users are listed in SAM.gov. It may be possible that you registered after the most recent check. However, we will always run a check at least once per day.</p>
+  </div>
 </div>
