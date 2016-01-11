@@ -56,11 +56,6 @@ class PlaceBid < Struct.new(:params, :current_user)
   # rubocop:enable Style/IfUnlessModifier, Style/GuardClause
 
   def amount
-    params_amount = params[:bid][:amount]
-
-    # ensures that "1,000" does not save as "1"
-    params_amount = params_amount.gsub(',', '') if params_amount.is_a?(String)
-
-    (params[:bid] && params_amount).to_f.round(2)
+    (params[:bid] && params[:bid][:amount]).to_f.round(2)
   end
 end
