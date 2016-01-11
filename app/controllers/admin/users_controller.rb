@@ -5,6 +5,7 @@ module Admin
     def index
       all_users = User.all.map {|user| Presenter::User.new(user) }
       @admins, @users = all_users.partition(&:admin?)
+      @admin_report = AdminReport.new(users: all_users)
     end
 
     def show

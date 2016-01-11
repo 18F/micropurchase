@@ -6,6 +6,7 @@
       <th scope="col">Name</th>
       <th scope="col">Email</th>
       <th scope="col">DUNS Number</th>
+      <th scope="col">In SAM.gov?</th>
       <th scope="col">GitHub ID</th>
     </tr>
   </thead>
@@ -15,13 +16,16 @@
         <td><%= user.name %></td>
         <td><%= user.email %></td>
         <td><%= user.duns_number %></td>
+        <td><%= user.in_sam? %></td>
         <td><%= link_to(user.github_id, user.github_json_url) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<h2>Users (<%= @users.length %>)</h2>
+<h2>
+  Users (<%= @users.length %>); w/ DUNS (<%= @admin_report.non_admin_users_with_duns.length %>); In SAM (<%= @admin_report.non_admin_users_in_sam.length %>)
+</h2>
 
 <table class="usa-table-borderless">
   <thead>
@@ -29,6 +33,7 @@
       <th scope="col">Name</th>
       <th scope="col">Email</th>
       <th scope="col">DUNS Number</th>
+      <th scope="col">In SAM.gov?</th>
       <th scope="col">GitHub ID</th>
     </tr>
   </thead>
@@ -38,6 +43,7 @@
         <td><%= user.name %></td>
         <td><%= user.email %></td>
         <td><%= user.duns_number %></td>
+        <td><%= user.in_sam? %></td>
         <td><%= link_to(user.github_id, user.github_json_url) %></td>
       </tr>
     <% end %>
