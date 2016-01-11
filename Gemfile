@@ -20,6 +20,7 @@ gem 'chronic'
 gem 'email_validator'
 gem 'redcarpet'
 gem 'puma'
+gem 'samwise', github: '18f/samwise', branch: 'micropurchase-compatibility'
 
 group :test do
   gem "codeclimate-test-reporter", require: nil

@@ -1,5 +1,14 @@
 <h1>Complete your account</h1>
 
+<% if flash[:notice] %>
+<div class="usa-alert usa-alert-warning">
+  <div class="usa-alert-body">
+    <h3 class="usa-alert-heading">DUNS Issue</h3>
+    <p class="usa-alert-text"><%= flash[:notice] %></p>
+  </div>
+</div>
+<% end %>
+
 <p>Enter your DUNS number. Remember, <a href='https://sam.gov'>SAM.gov</a> registration is required to place bids. If you need help, email us at <%= mail_to 'micropurchase@gsa.gov' %>.</p>
 
 <%= form_for @user, method: :put do |f| %>

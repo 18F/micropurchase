@@ -83,7 +83,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
     scenario "Viewing a closed auction" do
       closed_auction, _bids = create_closed_auction
       visit auction_path(closed_auction)
-
+      
       expect(page).to have_content("Closed")
     end
 
@@ -102,10 +102,47 @@ RSpec.feature "bidder interacts with auction", type: :feature do
     end
   end
 
+  scenario "Viewing auction list and detail view as a logged out user" do
+    create_current_auction
+    
+    # seeing auction list
+    visit "/"
+    expect(page).to have_content(@auction.title)
+    expect(page).to have_content("Current bid:")
+
+    # going to the auction detail page
+    click_on(@auction.title)
+    page.find("a[href='#{@auction.issue_url}']")
+
+    # going via another link
+    visit "/"
+    click_on("View details »")
+    page.find("a[href='#{@auction.issue_url}']")
+
+    # logging in via bid click
+    click_on("BID")
+    @bidder = create_authed_bidder
+    expect(page).to have_content("Authorize with GitHub")
+    click_on("Authorize with GitHub")
+    click_on('Submit')
+
+    # bad ui brings us back to the home page :(
+    click_on("Bid »")
+    expect(page).to have_content("Current bid:")
+
+    # fill in the form
+    fill_in("bid_amount", with: '800')
+    click_on("Submit")
+
+    # returns us back to the bid page
+    expect(page).to have_content("Current bid:")
+    expect(page).to have_content("$800.00")
+  end
+
   context "placing bids" do
     scenario "Viewing auction list and detail view as a logged out user" do
       create_current_auction
-
+      @bidder = create_authed_bidder
       # seeing auction list
       visit "/"
       expect(page).to have_content(@auction.title)
@@ -125,7 +162,6 @@ RSpec.feature "bidder interacts with auction", type: :feature do
       expect(page).to have_content("Authorize with GitHub")
       click_on("Authorize with GitHub")
       # completing user profile
-      fill_in("user_duns_number", with: "123-duns")
       click_on('Submit')
 
       # bad ui brings us back to the home page :(
@@ -203,6 +239,44 @@ RSpec.feature "bidder interacts with auction", type: :feature do
     end
   end
 
+  context "when a user's DUNS is not registered in SAM" do
+    scenario "Viewing the auctions index page" do
+      create_current_auction
+
+      @bidder = create_authed_bidder
+      @bidder.update_attributes(sam_account: false)
+      visit '/'
+
+      click_on "Login"
+      click_on("Authorize with GitHub")
+
+      click_on('Submit')
+
+      expect(page).to_not have_content("Bid »")
+      expect(page).to have_content('Your DUNS is not registered with SAM')
+
+      expect(page).to have_link('SAM.gov', href: 'https://www.sam.gov/')
+      expect(page).to have_link('the SAM.gov status checker', href: 'https://www.sam.gov/sam/helpPage/SAM_Reg_Status_Help_Page.html')
+      expect(page).to have_link('entered your DUNS number into your profile', href: edit_user_path(@bidder))
+    end
+
+    scenario "Viewing the auction detail page" do
+      create_current_auction
+      
+      visit '/'
+      sign_in_bidder
+      @bidder.update_attributes(sam_account: false)
+
+      visit auction_path(@auction)
+      expect(page).to_not have_content("Bid »")
+      expect(page).to have_content('Your DUNS is not registered with SAM')
+
+      expect(page).to have_link('SAM.gov', href: 'https://www.sam.gov/')
+      expect(page).to have_link('the SAM.gov status checker', href: 'https://www.sam.gov/sam/helpPage/SAM_Reg_Status_Help_Page.html')
+      expect(page).to have_link('entered your DUNS number into your profile', href: edit_user_path(@bidder))
+    end
+  end
+  
   scenario "Viewing bid history for running auction" do
     Timecop.scale(3_600) do
       create_current_auction

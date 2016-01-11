@@ -8,4 +8,4 @@ applications:
   buildpack: https://github.com/ddollar/heroku-buildpack-multi.git
   services:
     - micropurchase-psql
-  command: bundle exec rake cf:on_first_instance db:migrate && bundle exec puma
+  command: null
