@@ -15,6 +15,7 @@ RSpec.feature "logging in and out of the app", type: :feature do
     click_on("Edit Profile")
 
     expect(page).to have_content("Complete your account")
+    expect(page).to have_content("Name")
     expect(page).to have_content("DUNS Number")
     expect(page).to have_content("Email Address")
   end
@@ -29,7 +30,9 @@ RSpec.feature "logging in and out of the app", type: :feature do
     expect(page).to have_content("Doris Doogooder")
     expect(page).to have_content("Logout")
 
+    new_name = Faker::Name.name
     expect(page).to have_content("Enter your DUNS number")
+    fill_in("user_name", with: new_name)
     fill_in("user_duns_number", with: "123-duns")
     fill_in("user_email", with: "doris@doogooder.io")
     click_on('Submit')
@@ -37,7 +40,7 @@ RSpec.feature "logging in and out of the app", type: :feature do
     expect(page.current_path).to eq("/")
 
     click_on("Logout")
-    expect(page).not_to have_content("Doris Doogooder")
+    expect(page).not_to have_content(new_name)
     expect(page).to have_content("Login")
   end
 
