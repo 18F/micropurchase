@@ -6,7 +6,7 @@ module Presenter
 
     def veiled_bidder_duns_number
       if presenter_auction.available?
-        '[Witheld]'
+        '[Withheld]'
       else
         bidder_duns_number
       end
@@ -18,7 +18,7 @@ module Presenter
 
     def veiled_bidder_name
       if presenter_auction.available?
-        '[Name witheld until the auction ends]'
+        '[Name withheld until the auction ends]'
       else
         bidder_name
       end
