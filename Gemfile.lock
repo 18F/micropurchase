@@ -1,10 +1,9 @@
 GIT
   remote: git://github.com/18f/samwise.git
-  revision: 94b9578fe4ce1a7899c8069010667a2343c3b64a
+  revision: fdc61a38e9749445cc5ead7761c7f340c7107a4b
   branch: micropurchase-compatibility
   specs:
     samwise (0.2.6)
-      faraday
       httpclient
 
 GEM
