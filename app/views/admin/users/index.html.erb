@@ -23,7 +23,9 @@
   </tbody>
 </table>
 
-<h2>Users (<%= @users.length %>)</h2>
+<h2>
+  Users (<%= @users.length %>); w/ DUNS (<%= @admin_report.non_admin_users_with_duns.length %>); In SAM (<%= @admin_report.non_admin_users_in_sam.length %>)
+</h2>
 
 <table class="usa-table-borderless">
   <thead>

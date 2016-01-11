@@ -3,10 +3,10 @@ applications:
   command: curl https://18f-tmate-bootstrap.s3.amazonaws.com/tmate-debug-init.sh |
     sh
   domain: 18f.gov
-  host: micropurchase-staging
+  host: micropurchase
   instances: 1
   memory: 512M
   name: micropurchase-ssh
   no-route: true
   services:
-  - micropurchase-staging-psql
+  - micropurchase-psql
