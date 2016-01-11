@@ -15,6 +15,7 @@ RSpec.feature "AdminUsers", type: :feature do
     expect(page).to have_text(user.email)
     expect(page).to have_text(user.name)
     expect(page).to have_text(user.github_id)
+    expect(page).to have_text(user.in_sam?)
   end
 
   scenario "counting the number of users and admins" do
