@@ -83,7 +83,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
     scenario "Viewing a closed auction" do
       closed_auction, _bids = create_closed_auction
       visit auction_path(closed_auction)
-      
+
       expect(page).to have_content("Closed")
     end
 
@@ -104,7 +104,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
 
   scenario "Viewing auction list and detail view as a logged out user" do
     create_current_auction
-    
+
     # seeing auction list
     visit "/"
     expect(page).to have_content(@auction.title)
@@ -262,7 +262,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
 
     scenario "Viewing the auction detail page" do
       create_current_auction
-      
+
       visit '/'
       sign_in_bidder
       @bidder.update_attributes(sam_account: false)
@@ -276,7 +276,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
       expect(page).to have_link('entered your DUNS number into your profile', href: edit_user_path(@bidder))
     end
   end
-  
+
   scenario "Viewing bid history for running auction" do
     Timecop.scale(3_600) do
       create_current_auction
@@ -456,7 +456,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
             expect(page).not_to have_content("#{amount} *")
           end
         end
- 
+
         # check the "date" column
         within(:xpath, cel_xpath(row_number, 4)) do
           expect(page).to have_content(bid.time)

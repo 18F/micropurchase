@@ -117,6 +117,16 @@ RSpec.describe PlaceBid do
     end
   end
 
+  context 'when the bid amount has a comma' do
+    let(:bid)    { place_bid.bid }
+    let(:amount) { '1,000.00' }
+
+    it 'should disregard the comma' do
+      place_bid.perform
+      expect(bid.amount).to eq(1000)
+    end
+  end
+
   context 'when all the data is great' do
     let(:bid) { place_bid.bid }
 
