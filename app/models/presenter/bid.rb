@@ -4,8 +4,8 @@ module Presenter
       Presenter::DcTime.convert_and_format(created_at)
     end
 
-    def veiled_bidder_duns_number
-      if presenter_auction.available?
+    def veiled_bidder_duns_number(show_user = nil)
+      if presenter_auction.available? && bidder != show_user
         '[Withheld]'
       else
         bidder_duns_number
@@ -16,8 +16,8 @@ module Presenter
       bidder.duns_number || null
     end
 
-    def veiled_bidder_name
-      if presenter_auction.available?
+    def veiled_bidder_name(show_user = nil)
+      if presenter_auction.available? && bidder != show_user
         '[Name withheld until the auction ends]'
       else
         bidder_name
