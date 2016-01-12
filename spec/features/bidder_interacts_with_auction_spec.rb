@@ -78,6 +78,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
       visit auction_path(current_auction)
 
       expect(page).to have_content("Open")
+      expect(page).to have_content(current_auction.end_datetime.strftime('%m/%d/%Y at %I:%M %p %Z'))
     end
 
     scenario "Viewing a closed auction" do
@@ -297,12 +298,12 @@ RSpec.feature "bidder interacts with auction", type: :feature do
       # check the "name" column
       within(:xpath, cel_xpath(row_number, 1)) do
         expect(page).not_to have_content(unredacted_bidder_name)
-        expect(page).to have_content("[Name witheld until the auction ends]")
+        expect(page).to have_content("[Name withheld until the auction ends]")
       end
 
       within(:xpath, cel_xpath(row_number, 2)) do
         expect(page).not_to have_content(unredacted_bidder_duns)
-        expect(page).to have_content("[Witheld]")
+        expect(page).to have_content("[Withheld]")
       end
 
       # check the "amount" column

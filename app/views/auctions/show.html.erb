@@ -33,7 +33,7 @@
           </span>
       </p>
       <p class="auction-label"><% if @auction.over? %>Auction ended at:<% else %>Bid deadline:<% end %></p>
-      <p class="auction-label-info"><%= @auction.end_datetime.strftime("%m/%d/%Y at %I:%M %Z") %></p>
+      <p class="auction-label-info"><%= @auction.end_datetime.strftime("%m/%d/%Y at %I:%M %p %Z") %></p>
       <p>
         <a href="<%= new_auction_bid_path(@auction) %>" class='usa-button usa-button'>BID »</a>
       </p>
