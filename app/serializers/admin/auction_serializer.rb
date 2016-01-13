@@ -1,5 +1,7 @@
 module Admin
   class AuctionSerializer < ActiveModel::Serializer
+    has_many :bids, seralizer: Admin::BidSerializer
+
     attributes :issue_url,      :start_price,
                :start_datetime, :end_datetime,
                :title,          :description,
