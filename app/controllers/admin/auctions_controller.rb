@@ -4,10 +4,24 @@ module Admin
 
     def index
       @auctions = Auction.all.map {|auction| Presenter::Auction.new(auction) }
+
+      respond_to do |format|
+        format.html
+        format.json do
+          render json: @auctions, each_serializer: Admin::AuctionSerializer
+        end
+      end
     end
 
     def show
       @auction = Presenter::Auction.new(Auction.find(params[:id]))
+
+      respond_to do |format|
+        format.html
+        format.json do
+          render json: @auction, serializer: Admin::AuctionSerializer
+        end
+      end
     end
 
     def new
