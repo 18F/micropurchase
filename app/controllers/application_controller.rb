@@ -17,7 +17,14 @@ class ApplicationController < ActionController::Base
   end
 
   def require_admin
-    require_authentication and return
+    if html_request?
+      # if the request is via the web UI,
+      # we need 'and return' to ensure the redirect happens.
+      require_authentication and return
+    elsif api_request?
+      # otherwise, if it's an API request, we don't need to redirect.
+      require_authentication
+    end
     is_admin = Admins.verify?(github_id)
     fail UnauthorizedError::MustBeAdmin unless is_admin
 
@@ -74,7 +81,11 @@ class ApplicationController < ActionController::Base
     if html_request? && current_user
       current_user.github_id
     elsif api_request?
-      github_id_from_api_key(api_key)
+      begin
+        return github_id_from_api_key(api_key)
+      rescue UnauthorizedError::GitHubAuthenticationError => e
+        return nil
+      end
     else
       nil
     end

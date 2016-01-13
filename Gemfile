@@ -23,7 +23,6 @@ gem 'puma'
 gem 'samwise', github: '18f/samwise', branch: 'micropurchase-compatibility'
 gem 'octokit', '~> 4.0'
 
-
 group :test do
   gem "codeclimate-test-reporter", require: nil
 end
