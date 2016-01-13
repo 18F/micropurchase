@@ -29,29 +29,78 @@ module Admin
     end
 
     def create
-      CreateAuction.new(params).perform
-      redirect_to "/admin/auctions"
+      auction = CreateAuction.new(params).perform
+      auction = Presenter::Auction.new(auction)
+
+      respond_to do |format|
+        format.html { redirect_to "/admin/auctions" }
+        format.json do
+          render json: auction, serializer: Admin::AuctionSerializer
+        end
+      end
     rescue ArgumentError => e
-      flash[:error] = e.message
-      redirect_to "/admin/auctions" # render edit
+      respond_to do |format|
+        message = e.message
+
+        format.html do
+          flash[:error] = message
+          redirect_to "/admin/auctions" # render edit
+        end
+        format.json do
+          render json: {error: message}
+        end
+      end
     end
 
     def destroy
-      auction = Auction.find(params[:id])
+      id = params[:id].dup
+      auction = Auction.find(id)
       DestroyAuction.new(auction).perform
-      redirect_to "/admin/auctions"
+
+      respond_to do |format|
+        format.html { redirect_to "/admin/auctions" }
+        format.json do
+          render json: {message: "Successfully deleted Auction ##{id}"}
+        end
+      end
     rescue ArgumentError => e
-      flash[:error] = e.message
-      redirect_to "/admin/auctions"
+      message = e.message
+
+      respond_to do |format|
+        format.html do
+          flash[:error] = e.message
+          redirect_to "/admin/auctions"
+        end
+        format.json do
+          render json: {error: message}
+        end
+      end
     end
 
     def update
       auction = Auction.find(params[:id])
       UpdateAuction.new(auction, params).perform
-      redirect_to "/admin/auctions"
+      auction.reload
+      auction = Presenter::Auction.new(auction)
+
+      respond_to do |format|
+        format.html { redirect_to "/admin/auctions" }
+        format.json do
+          render json: auction, serializer: Admin::AuctionSerializer
+        end
+      end
     rescue ArgumentError => e
-      flash[:error] = e.message
-      redirect_to "/admin/auctions"
+      message = e.message
+
+      respond_to do |format|
+        format.html do
+          flash[:error] = message
+          redirect_to "/admin/auctions"
+        end
+        format.html do
+          render json: {error: message}
+        end
+      end
     end
 
     def edit
