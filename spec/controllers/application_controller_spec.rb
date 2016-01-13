@@ -9,6 +9,7 @@ RSpec.describe ApplicationController, controller: true do
 
     context 'when the API key is absent' do
       before do
+        allow_any_instance_of(Octokit::Client).to receive(:user).and_raise(Octokit::Unauthorized)
         allow(controller).to receive(:api_key).and_return(nil)
       end
 
@@ -43,6 +44,7 @@ RSpec.describe ApplicationController, controller: true do
 
     context 'when the API key is absent' do
       before do
+        allow_any_instance_of(Octokit::Client).to receive(:user).and_raise(Octokit::Unauthorized)
         allow(controller).to receive(:api_key).and_return(nil)
       end
 
