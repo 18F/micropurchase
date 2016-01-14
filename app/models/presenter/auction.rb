@@ -1,5 +1,7 @@
 module Presenter
   class Auction < SimpleDelegator
+    include ActiveModel::SerializerSupport
+
     def current_bid?
       current_bid_record != nil
     end

@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 gem 'pg'
+gem 'sprockets-rails', '~> 2.3.3'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'us_web_design_standards'
@@ -21,6 +22,9 @@ gem 'email_validator'
 gem 'redcarpet'
 gem 'puma'
 gem 'samwise', github: '18f/samwise', branch: 'micropurchase-compatibility'
+gem 'octokit', '~> 4.0'
+
+gem 'active_model_serializers'
 
 group :test do
   gem "codeclimate-test-reporter", require: nil
