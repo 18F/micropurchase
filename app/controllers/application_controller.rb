@@ -41,6 +41,11 @@ class ApplicationController < ActionController::Base
     handle_error(message)
   end
 
+  rescue_from 'UnauthorizedError::UserNotFound' do |error|
+    message = error.message || "User not found"
+    handle_error(message)
+  end
+
   def html_request?
     request.format.symbol == :html
   end

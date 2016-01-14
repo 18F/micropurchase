@@ -27,6 +27,8 @@ gem 'active_model_serializers'
 
 group :test do
   gem "codeclimate-test-reporter", require: nil
+  gem 'webmock'
+  gem 'json-schema'
 end
 
 group :development, :test do
