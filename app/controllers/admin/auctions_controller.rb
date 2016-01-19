@@ -39,17 +39,7 @@ module Admin
         end
       end
     rescue ArgumentError => e
-      respond_to do |format|
-        message = e.message
-
-        format.html do
-          flash[:error] = message
-          redirect_to "/admin/auctions" # render edit
-        end
-        format.json do
-          render json: {error: message}
-        end
-      end
+      respond_error(e)
     end
 
     def destroy
@@ -64,17 +54,7 @@ module Admin
         end
       end
     rescue ArgumentError => e
-      message = e.message
-
-      respond_to do |format|
-        format.html do
-          flash[:error] = e.message
-          redirect_to "/admin/auctions"
-        end
-        format.json do
-          render json: {error: message}
-        end
-      end
+      respond_error(e)
     end
 
     def update
@@ -90,21 +70,27 @@ module Admin
         end
       end
     rescue ArgumentError => e
-      message = e.message
-
-      respond_to do |format|
-        format.html do
-          flash[:error] = message
-          redirect_to "/admin/auctions"
-        end
-        format.html do
-          render json: {error: message}
-        end
-      end
+      respond_error(e)
     end
 
     def edit
       @auction = Auction.find(params[:id])
+    end
+  end
+
+  private
+
+  def respond_error(exception)
+    message = exception.message
+
+    respond_to do |format|
+      format.html do
+        flash[:error] = message
+        redirect_to "/admin/auctions"
+      end
+      format.html do
+        render json: {error: message}
+      end
     end
   end
 end
