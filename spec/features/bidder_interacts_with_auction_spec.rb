@@ -84,7 +84,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
     scenario "Viewing a closed auction" do
       closed_auction, _bids = create_closed_auction
       visit auction_path(closed_auction)
-      
+
       expect(page).to have_content("Closed")
     end
 
@@ -105,7 +105,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
 
   scenario "Viewing auction list and detail view as a logged out user" do
     create_current_auction
-    
+
     # seeing auction list
     visit "/"
     expect(page).to have_content(@auction.title)
@@ -263,7 +263,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
 
     scenario "Viewing the auction detail page" do
       create_current_auction
-      
+
       visit '/'
       sign_in_bidder
       @bidder.update_attributes(sam_account: false)
@@ -277,7 +277,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
       expect(page).to have_link('entered your DUNS number into your profile', href: edit_user_path(@bidder))
     end
   end
-  
+
   scenario "Viewing bid history for running auction" do
     Timecop.scale(3_600) do
       create_current_auction
@@ -418,9 +418,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
 
   context "an auction's bid history" do
     scenario "Viewing bid history for a closed auction" do
-      Timecop.scale(3_600) do
-        create_closed_auction
-      end
+      create_closed_auction
       path = auction_bids_path(@auction.id)
       visit path
 
@@ -457,7 +455,115 @@ RSpec.feature "bidder interacts with auction", type: :feature do
             expect(page).not_to have_content("#{amount} *")
           end
         end
- 
+
+        # check the "date" column
+        within(:xpath, cel_xpath(row_number, 4)) do
+          expect(page).to have_content(bid.time)
+        end
+      end
+    end
+
+    scenario 'Viewing bid history for an open auction' do
+      # auction with the current logged in bidder
+      auction = FactoryGirl.create(:auction, :with_bidders)
+
+      path = auction_bids_path(auction.id)
+      visit path
+
+      # sort the bids so that newest is first
+      bids = auction.bids.sort_by(&:created_at).reverse
+
+      # ensure the table has the correct content, in the correct order
+      bids.each_with_index do |bid, i|
+        row_number = i + 1
+        bidder_name = '[Name withheld until the auction ends]'
+        bidder_duns = '[Withheld]'
+        bid = Presenter::Bid.new(bid)
+
+        # check the "name" column
+        within(:xpath, cel_xpath(row_number, 1)) do
+          expect(page).to have_content(bidder_name)
+        end
+
+        within(:xpath, cel_xpath(row_number, 2)) do
+          expect(page).to have_content(bidder_duns)
+        end
+
+        # check the "amount" column
+        if i == 0
+          # ensure the first row bid amount includes an asterisk
+          amount = ApplicationController.helpers.number_to_currency(bid.amount)
+          within(:xpath, cel_xpath(row_number, 3)) do
+            expect(page).to have_content("#{amount} *")
+          end
+        else
+          amount = ApplicationController.helpers.number_to_currency(bid.amount)
+          within(:xpath, cel_xpath(row_number, 3)) do
+            expect(page).to have_content(amount)
+            expect(page).not_to have_content("#{amount} *")
+          end
+        end
+
+        # check the "date" column
+        within(:xpath, cel_xpath(row_number, 4)) do
+          expect(page).to have_content(bid.time)
+        end
+      end
+    end
+
+    scenario 'Viewing bid history for an open auction where the current user has bid' do
+      visit '/'
+      sign_in_bidder
+
+      # auction with the current logged in bidder
+      auction = FactoryGirl.create(:auction, :with_bidders)
+
+      # sort the bids so that newest is first
+      bids = auction.bids.sort_by(&:created_at).reverse
+      b = bids.first
+      b.update_attribute(:bidder_id, @bidder.id)
+
+      path = auction_bids_path(auction.id)
+      visit path
+
+      # ensure the table has the correct content, in the correct order
+      bids.each_with_index do |bid, i|
+        row_number = i + 1
+
+        if bid.bidder == @bidder
+          bidder_name = bid.bidder.name
+          bidder_duns = bid.bidder.duns_number
+        else
+          bidder_name = '[Name withheld until the auction ends]'
+          bidder_duns = '[Withheld]'
+        end
+
+        bid = Presenter::Bid.new(bid)
+
+        # check the "name" column
+        within(:xpath, cel_xpath(row_number, 1)) do
+          expect(page).to have_content(bidder_name)
+        end
+
+        within(:xpath, cel_xpath(row_number, 2)) do
+          expect(page).to have_content(bidder_duns)
+        end
+
+        # check the "amount" column
+        if i == 0
+          # ensure the first row bid amount includes an asterisk
+          amount = ApplicationController.helpers.number_to_currency(bid.amount)
+          within(:xpath, cel_xpath(row_number, 3)) do
+            expect(page).to have_content("#{amount} *")
+          end
+        else
+          amount = ApplicationController.helpers.number_to_currency(bid.amount)
+          within(:xpath, cel_xpath(row_number, 3)) do
+            expect(page).to have_content(amount)
+            expect(page).not_to have_content("#{amount} *")
+          end
+        end
+
         # check the "date" column
         within(:xpath, cel_xpath(row_number, 4)) do
           expect(page).to have_content(bid.time)
