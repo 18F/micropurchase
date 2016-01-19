@@ -50,16 +50,14 @@ class ApplicationController < ActionController::Base
   end
 
   def api_key
-    key = request.headers['HTTP_API_KEY']
+    request.headers['HTTP_API_KEY']
   end
 
   def github_id_from_api_key(api_key)
-    begin
-      client = Octokit::Client.new(access_token: api_key)
-      client.user.id
-    rescue Octokit::Unauthorized => e
-      fail UnauthorizedError::GitHubAuthenticationError, "Error authenticating via GitHub: #{e.message}"
-    end
+    client = Octokit::Client.new(access_token: api_key)
+    client.user.id
+  rescue Octokit::Unauthorized => e
+    raise UnauthorizedError::GitHubAuthenticationError, "Error authenticating via GitHub: #{e.message}"
   end
 
   def redirect_if_not_logged_in!
@@ -83,12 +81,11 @@ class ApplicationController < ActionController::Base
     elsif api_request?
       begin
         return github_id_from_api_key(api_key)
-      rescue UnauthorizedError::GitHubAuthenticationError => e
+      rescue UnauthorizedError::GitHubAuthenticationError
         return nil
       end
-    else
-      nil
     end
+    # returns nil otherwise
   end
 
   private

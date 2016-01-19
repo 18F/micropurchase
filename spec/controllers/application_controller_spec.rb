@@ -21,11 +21,11 @@ RSpec.describe ApplicationController, controller: true do
     end
 
     context 'when the API key belongs to a non-registered person' do
-      let(:github_id) {'1111'}
+      let(:github_id) { '1111' }
       before do
-        allow(controller).to receive(:github_id)
-                              .and_return(github_id)
-                              .and_wrap_original { github_id }
+        allow(controller).to receive(:github_id).
+          and_return(github_id).
+          and_wrap_original { github_id }
       end
 
       it 'raises an authorization error' do
@@ -62,18 +62,18 @@ RSpec.describe ApplicationController, controller: true do
       before do
         FactoryGirl.create(:user, github_id: github_id)
 
-        allow(controller).to receive(:github_id_from_api_key)
-                              .and_return(github_id)
-                              .and_wrap_original { github_id }
+        allow(controller).to receive(:github_id_from_api_key).
+          and_return(github_id).
+          and_wrap_original { github_id }
 
-        allow(controller).to receive(:api_key)
-                              .and_return(api_key)
-                              .and_wrap_original { api_key }
+        allow(controller).to receive(:api_key).
+          and_return(api_key).
+          and_wrap_original { api_key }
 
-        allow(Admins).to receive(:verify?)
-                          .with(github_id)
-                          .and_return(false)
-                          .and_wrap_original { false }
+        allow(Admins).to receive(:verify?).
+          with(github_id).
+          and_return(false).
+          and_wrap_original { false }
       end
 
       it 'raises an authorization error' do
@@ -88,13 +88,13 @@ RSpec.describe ApplicationController, controller: true do
       before do
         FactoryGirl.create(:user, github_id: github_id)
 
-        allow(controller).to receive(:github_id)
-                              .and_return(github_id)
-                              .and_wrap_original { github_id }
+        allow(controller).to receive(:github_id).
+          and_return(github_id).
+          and_wrap_original { github_id }
 
-        allow(Admins).to receive(:verify?)
-                          .with(github_id)
-                          .and_return(true)
+        allow(Admins).to receive(:verify?).
+          with(github_id).
+          and_return(true)
       end
 
       it 'does not raise an error' do

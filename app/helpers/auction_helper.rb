@@ -18,7 +18,7 @@ module AuctionHelper
       'auction-label-open'
     end
   end
-  
+
   def auction_label(auction)
     if auction.expiring?
       'Expiring'

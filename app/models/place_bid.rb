@@ -57,7 +57,7 @@ class PlaceBid < Struct.new(:params, :current_user)
 
   def amount
     params_amount = params[:bid][:amount]
-    params_amount = params_amount.gsub(',', '') if params_amount.is_a?(String)
+    params_amount = params_amount.delete(',') if params_amount.is_a?(String)
 
     (params[:bid] && params_amount).to_f.round(2)
   end

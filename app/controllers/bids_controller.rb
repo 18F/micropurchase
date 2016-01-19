@@ -27,7 +27,7 @@ class BidsController < ApplicationController
   end
 
   def create
-    raise UnauthorizedError, "You must have a valid SAM.gov account to place a bid" unless current_user.sam_account?
+    fail UnauthorizedError, "You must have a valid SAM.gov account to place a bid" unless current_user.sam_account?
     PlaceBid.new(params, current_user).perform
     flash[:bid] = "success"
     redirect_to "/auctions/#{params[:auction_id]}"
