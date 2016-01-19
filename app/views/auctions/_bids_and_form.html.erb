@@ -20,6 +20,9 @@
   <div class="bid-deadline-box-children">
   <span class="bid-deadline">
     Bid Deadline:  <%= distance_of_time_in_words(Time.now, auction.end_datetime) %> left
+  </span><br/>
+  <span class="bid-deadline">
+    Bid start time: <%= auction_human_start_time(auction.start_datetime) %>
   </span>
 </div>
 </div>

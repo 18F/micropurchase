@@ -30,4 +30,12 @@ module AuctionHelper
       'Open'
     end
   end
+
+  def auction_human_start_time(auction_time)
+    if auction_time < Time.now
+      "#{distance_of_time_in_words(Time.now, auction_time)} ago"
+    else
+      "in #{distance_of_time_in_words(Time.now, auction_time)}"
+    end
+  end
 end
