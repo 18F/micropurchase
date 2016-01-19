@@ -42,7 +42,8 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it 'update the user when current user is the user' do
-      put :update, {id: user.id, user: {duns_number: '222'}}, user_id: user.id
+      new_name = Faker::Name.name
+      put :update, {id: user.id, user: {name: new_name, duns_number: '222'}}, user_id: user.id
       user.reload
       expect(user.duns_number).to eq('222')
     end

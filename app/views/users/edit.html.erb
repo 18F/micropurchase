@@ -13,6 +13,9 @@
 
 <%= form_for @user, method: :put do |f| %>
 
+  <%= f.label :name, 'Name' %>
+  <%= f.text_field :name %>
+
   <%= f.label :duns_number, 'DUNS Number' %>
   <%= f.text_field :duns_number %>
 
