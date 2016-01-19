@@ -6,11 +6,11 @@ class AdminReport
   end
 
   def non_admin_users
-    @users.select {|u| !Admins.verify?(u.github_id)}
+    @users.select {|u| !Admins.verify?(u.github_id) }
   end
 
   def admin_users
-    @users.select {|u| Admins.verify?(u.github_id)}
+    @users.select {|u| Admins.verify?(u.github_id) }
   end
 
   def quick_stats
@@ -23,10 +23,10 @@ class AdminReport
   end
 
   def non_admin_users_with_duns
-    non_admin_users.select {|u| u.duns_number?}
+    non_admin_users.select(&:duns_number?)
   end
 
   def non_admin_users_in_sam
-    non_admin_users.select {|u| u.sam_account == true}
+    non_admin_users.select(&:sam_account?)
   end
 end

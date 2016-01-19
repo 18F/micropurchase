@@ -25,8 +25,6 @@ RSpec.describe 'rake sam:check' do
       end
     end
 
-    
-
     it 'should make sam_account true for users who have DUNSes in sam' do
       allow(User).to receive(:registered_on_sam?).and_wrap_original { false }
       allow(User).to receive(:registered_on_sam?).with(duns: @valid_users.first.duns_number).and_return(true)
@@ -36,11 +34,10 @@ RSpec.describe 'rake sam:check' do
       expect do
         Rake::Task['sam:check'].invoke
       end.to_not raise_error
-      
+
       @valid_users.each(&:reload)
       expect(User.where(sam_account: true).count).to eq(@valid_users.length)
       expect(@valid_users).to all(be_sam_account)
-
     end
   end
 end
