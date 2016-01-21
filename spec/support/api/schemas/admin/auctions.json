@@ -14,11 +14,17 @@
           "start_price",
           "start_datetime",
           "end_datetime",
+          "delivery_deadline",
+          "delivery_url",
+          "cap_proposal_url",
+          "awardee_paid_status",
+          "notes",
           "title",
           "description",
           "created_at",
           "updated_at",
           "summary",
+          "billable_to",
           "id"
         ],
         "properties": {
@@ -39,6 +45,26 @@
           },
           "end_datetime": {
             "type": "date-time",
+            "minLength": 1
+          },
+          "delivery_deadline": {
+            "type": "date-time",
+            "minLength": 1
+          },
+          "delivery_url": {
+            "type": ["string", "null"],
+            "minLength": 1
+          },
+          "cap_proposal_url": {
+            "type": ["string", "null"],
+            "minLength": 1
+          },
+          "awardee_paid_status": {
+            "type": ["string", "null"],
+            "minLength": 1
+          },
+          "notes": {
+            "type": ["string", "null"],
             "minLength": 1
           },
           "title": {
@@ -63,6 +89,9 @@
           },
           "id": {
             "type": "number"
+          },
+          "billable_to": {
+            "type": "string"
           },
           "bids": {
             "type": "array",

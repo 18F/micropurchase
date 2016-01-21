@@ -3,23 +3,27 @@ class BidsController < ApplicationController
   skip_before_action :verify_authenticity_token, if: :api_request?
 
   def index
-    @auction = Presenter::Auction.new(
-      Auction.includes(:bids, :bidders).find(params[:auction_id])
-    )
+    # @auction = Presenter::Auction.new(
+    #   Auction.includes(:bids, :bidders).find(params[:auction_id])
+    # )
+    auction = AuctionQuery.new
+                .with_bids_and_bidders
+                .published
+                .find(params[:auction_id])
+    @auction = Presenter::Auction.new(auction)
   end
 
   def my_bids
-    @auctions = Auction.
-                joins(:bids).
-                where(bids: {bidder_id: current_user.id}).
-                uniq.
-                map {|auction| Presenter::Auction.new(auction) }
+    @auctions = AuctionQuery.new
+                .my_bids(current_user.id)
+                .map {|auction| Presenter::Auction.new(auction)}
   end
 
   def new
     # check if user is valid
     if current_user.sam_account?
-      @auction = Presenter::Auction.new(Auction.find(params[:auction_id]))
+      auction = AuctionQuery.new.public_find(params[:auction_id])
+      @auction = Presenter::Auction.new(auction)
       @bid = Bid.new
     else
       session[:return_to] = request.fullpath
@@ -48,6 +52,14 @@ class BidsController < ApplicationController
       end
     rescue UnauthorizedError => e
       respond_error(e, redirect_path: "/auctions/#{params[:auction_id]}/bids/new")
+    end
+  end
+
+  rescue_from 'ActiveRecord::RecordNotFound' do
+    respond_to do |format|
+      format.html do
+        raise ActionController::RoutingError.new('Not Found')
+      end
     end
   end
 

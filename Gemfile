@@ -25,10 +25,13 @@ gem 'octokit', '~> 4.0'
 
 gem 'active_model_serializers'
 
+gem 'business_time'
+
 group :test do
   gem "codeclimate-test-reporter", require: nil
   gem 'webmock'
   gem 'json-schema'
+  gem 'db-query-matchers'
 end
 
 group :development, :test do

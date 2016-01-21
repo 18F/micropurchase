@@ -1,21 +1,52 @@
 class AuctionParser < Struct.new(:params)
   def attributes
+    general_attributes.merge({
+      start_datetime: start_datetime,
+      end_datetime: end_datetime,
+      start_price: start_price
+    })
+  end
+
+  def general_attributes
     {
+      type: type,
       title: title,
       description: description,
       summary: summary,
       github_repo: github_repo,
       issue_url: issue_url,
-      start_datetime: start_datetime,
-      end_datetime: end_datetime,
-      start_price: start_price
+      delivery_deadline: delivery_deadline,
+      delivery_url: delivery_url,
+      cap_proposal_url: cap_proposal_url,
+      awardee_paid_status: awardee_paid_status,
+      notes: notes,
+      billable_to: billable_to,
+      result: result
     }
   end
 
-  [:title, :description, :summary, :github_repo, :issue_url].each do |key|
+  [
+    :type,
+    :title,
+    :description,
+    :summary,
+    :github_repo,
+    :issue_url,
+    :awardee_paid_status,
+    :awardee_paid_at,
+    :delivery_url,
+    :cap_proposal_url,
+    :notes,
+    :billable_to,
+    :result
+  ].each do |key|
     define_method key do
       params[:auction][key]
     end
+  end
+
+  def delivery_deadline
+    parse_time(params[:auction][:delivery_deadline])
   end
 
   def start_datetime
@@ -27,6 +58,7 @@ class AuctionParser < Struct.new(:params)
   end
 
   def parse_time(time)
+    return nil if time.nil?
     parsed_time = Chronic.parse(time)
     fail ArgumentError, "Missing or poorly formatted time: '#{time}'" unless parsed_time
 
