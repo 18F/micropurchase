@@ -21,6 +21,10 @@ module Decorator
       fetch
       @user.save
     end
+
+    def name
+      @user.name
+    end
     
     private
 
