@@ -8,12 +8,12 @@ module Admin
                :created_at,
                :updated_at
 
-     def created_at
-       object.created_at.iso8601
-     end
+    def created_at
+      object.created_at.iso8601 rescue nil
+    end
 
-     def updated_at
-       object.created_at.iso8601
-     end
+    def updated_at
+      object.updated_at.iso8601 rescue nil
+    end
   end
 end

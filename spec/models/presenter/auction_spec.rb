@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Presenter::Auction do
-  let(:auction) { Presenter::Auction.new(ar_auction) }
   let(:ar_auction) { FactoryGirl.create(:auction) }
+  let(:auction) { Presenter::Auction.new(ar_auction) }
 
   describe '#current_bid when there are no bids' do
     it 'return a null bid' do

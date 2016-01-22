@@ -19,51 +19,45 @@ RSpec.describe Admin::AuctionsController do
     }
   end
 
-  context 'when the API key is invalid' do
-    let(:api_key) { FakeGitHub::INVALID_API_KEY }
-
+  describe 'GET /admin/auctions' do
     before do
-      get '/admin/auctions', nil, headers
+      get admin_auctions_path, nil, headers
     end
 
-    it 'returns a 404 HTTP response' do
-      expect(response.status).to eq 404
+    context 'when the API key is invalid' do
+      let(:api_key) { FakeGitHub::INVALID_API_KEY }
+
+      it 'returns a 404 HTTP response' do
+        expect(response.status).to eq 404
+      end
+    end
+
+    context 'when the API key is missing' do
+      let(:api_key) { nil }
+
+      it 'returns a 404 HTTP response' do
+        expect(response.status).to eq 404
+      end
+    end
+
+    context 'when the API key is valid' do
+      let(:api_key) { FakeGitHub::VALID_API_KEY }
+
+      it 'returns a 200 HTTP response' do
+        expect(response.status).to eq 200
+      end
+
+      it 'returns valid auctions' do
+        expect(response).to match_response_schema('admin/auctions')
+      end
+
+      it 'returns iso8601 dates' do
+        expect(json_auctions.map {|a| a['created_at']}).to all(be_iso8601)
+        expect(json_auctions.map {|a| a['updated_at']}).to all(be_iso8601)
+        expect(json_auctions.map {|a| a['start_datetime']}).to all(be_iso8601)
+        expect(json_auctions.map {|a| a['end_datetime']}).to all(be_iso8601)
+      end
     end
   end
 
-  context 'when the API key is missing' do
-    let(:api_key) { nil }
-
-    before do
-      get '/admin/auctions', nil, headers
-    end
-
-    it 'returns a 404 HTTP response' do
-      expect(response.status).to eq 404
-    end
-  end
-
-  context 'when the API key is valid' do
-    let(:api_key) { FakeGitHub::VALID_API_KEY }
-
-    before do
-      get '/admin/auctions', nil, headers
-    end
-
-    it 'returns a 200 HTTP response' do
-      expect(response.status).to eq 200
-    end
-
-    it 'returns valid auctions' do
-      expect(response).to match_response_schema('admin/auctions')
-    end
-
-    it 'returns iso8601 dates' do
-      # until I can figure out how to validate iso8601 with json-schema:
-      expect(json_auctions.first['created_at']).to eq(auctions.first.created_at.iso8601)
-      expect(json_auctions.first['updated_at']).to eq(auctions.first.updated_at.iso8601)
-      expect(json_auctions.first['start_datetime']).to eq(auctions.first.start_datetime.iso8601)
-      expect(json_auctions.first['end_datetime']).to eq(auctions.first.end_datetime.iso8601)
-    end
-  end
 end
