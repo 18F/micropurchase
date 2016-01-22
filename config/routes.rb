@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'authentications#create'
   get '/login', to: 'logins#index'
   get '/logout', to: 'authentications#destroy'
+  get '/faq', to: 'logins#faq'
 end
