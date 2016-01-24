@@ -13,7 +13,7 @@ class BidSerializer < ActiveModel::Serializer
   end
 
   def bidder
-    object.veiled_bidder
+    object.veiled_bidder(scope)
   end
 
   def created_at

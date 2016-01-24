@@ -6,7 +6,8 @@ module Admin
                :email,
                :sam_account,
                :created_at,
-               :updated_at
+               :updated_at,
+               :id
 
     def created_at
       object.created_at.iso8601 rescue nil
