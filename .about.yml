@@ -83,8 +83,23 @@ We've long known at 18F that opening our source code from day one improves our a
 #   category: Type of the service
 #   url: URL for detailed information
 #   badge: URL for the status badge
-#services:
-#-
+services:
+- name: Code Climate
+  category: code quality
+  url: https://codeclimate.com/github/18F/micropurchase
+  badge: https://codeclimate.com/github/18F/micropurchase/badges/gpa.svg
+- name: Code Climate Coverage
+  category: code coverage
+  url: https://codeclimate.com/github/18F/micropurchase/coverage
+  badge: https://codeclimate.com/github/18F/micropurchase/badges/coverage.svg
+- name: Gemnasium
+  category: dependency management
+  url: https://gemnasium.com/18F/micropurchase
+  badge: https://gemnasium.com/18F/micropurchase.svg
+- name: Hakiri
+  category: security
+  url: https://hakiri.io/github/18F/micropurchase/master
+  badge: https://hakiri.io/github/18F/micropurchase/master.svg
 
 # Licenses that apply to the project and/or its components (required)
 # Items by property name pattern:
