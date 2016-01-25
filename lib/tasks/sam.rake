@@ -14,6 +14,5 @@ namespace :sam do
       end
       puts id unless Rails.env.test?
     end
-
   end
 end

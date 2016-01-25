@@ -139,7 +139,7 @@ RSpec.describe Presenter::Auction do
       expect(Auction.in_reverse_chron_order).to eq([auction2, auction1, auction3])
     end
   end
-  
+
   describe "#html_summary" do
     let(:summary) { nil }
     let(:auction) { Presenter::Auction.new(FactoryGirl.build(:auction, summary: summary)) }

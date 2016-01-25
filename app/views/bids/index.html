@@ -14,8 +14,8 @@
   <tbody>
     <% @auction.bids.each_with_index do |bid, i| %>
       <tr>
-        <td><%= bid.veiled_bidder_name %></td>
-        <td><%= bid.veiled_bidder_duns_number %></td>
+        <td><%= bid.veiled_bidder_name(current_user) %></td>
+        <td><%= bid.veiled_bidder_duns_number(current_user) %></td>
         <td><%= content_for_row(i, bid) %></td>
         <td><%= Presenter::DcTime.convert_and_format(bid.created_at) %></td>
       </tr>
