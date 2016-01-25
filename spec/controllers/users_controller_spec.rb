@@ -29,26 +29,19 @@ RSpec.describe UsersController, type: :controller do
       expect(response.location).to eq('http://test.host/login')
     end
 
-    it 'raises a ActiveRecord::RecordNotFound when user is not found' do
-      user_id = user.id + 1000
-      expect { put :update, {id: user_id, user: {duns_number: '222'}}, user_id: user.id }.
-        to raise_error(ActiveRecord::RecordNotFound)
+    it 'uses the UpdateUser class to update the user' do
+      expect_any_instance_of(UpdateUser).to receive(:save).and_return(false)
+      put :update, {id: user.id, user: {duns_number: '222'}}, user_id: user.id
     end
 
-    it 'handles as unauthorized when user is not in session' do
-      put :update, {id: user.id, user: {duns_number: '222'}}, user_id: FactoryGirl.create(:user).id
-      expect(response).to redirect_to('/')
-      expect(flash[:error]).to match(/unauthorized/i)
-    end
-
-    it 'update the user when current user is the user' do
-      new_name = Faker::Name.name
-      put :update, {id: user.id, user: {name: new_name, duns_number: '222'}}, user_id: user.id
-      user.reload
-      expect(user.duns_number).to eq('222')
+    it 'rerenders edit when the update fails' do
+      expect_any_instance_of(UpdateUser).to receive(:save).and_return(false)
+      put :update, {id: user.id, user: {duns_number: '222'}}, user_id: user.id
+      expect(response).to render_template(:edit)
     end
 
     it 'redirects back home after successful edit' do
+      expect_any_instance_of(UpdateUser).to receive(:save).and_return(true)
       put :update, {id: user.id, user: {duns_number: '222'}}, user_id: user.id
       expect(response).to be_redirect
       expect(response.location).to eq('http://test.host/')

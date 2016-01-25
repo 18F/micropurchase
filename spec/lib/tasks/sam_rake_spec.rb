@@ -2,42 +2,29 @@ require 'rails_helper'
 require 'rake'
 
 RSpec.describe 'rake sam:check' do
+  let(:reckoner) { double('sam account reckoner', set: true, clear: false) }
+
   before do
+    allow(SamAccountReckoner).to receive(:new).and_return(reckoner)
     Micropurchase::Application.load_tasks
   end
 
-  context 'when the database contains users with a mix of valid and invalid DUNSes' do
-    let(:valid_duns) { '130477032' }
-    before do
-      @nil_users = []
-      5.times do
-        @nil_users << FactoryGirl.create(:user, duns_number: nil, sam_account: false)
-      end
+  context 'when the sam_account for the user is false' do
+    let!(:user) { FactoryGirl.create(:user, :with_duns_in_sam, sam_account: false) }
 
-      @valid_users = []
-      5.times do
-        @valid_users << FactoryGirl.create(:user, :with_duns_in_sam, sam_account: false)
-      end
-
-      @miss_users = []
-      5.times do
-        @miss_users << FactoryGirl.create(:user, :with_duns_not_in_sam, sam_account: false)
-      end
+    it 'uses the SamAccountReckoner to determine whether the account is valid' do
+      expect(SamAccountReckoner).to receive(:new).with(user).and_return(reckoner)
+      expect(reckoner).to receive(:set)
+      Rake::Task['sam:check'].invoke
     end
+  end
 
-    it 'should make sam_account true for users who have DUNSes in sam' do
-      allow(User).to receive(:registered_on_sam?).and_wrap_original { false }
-      allow(User).to receive(:registered_on_sam?).with(duns: @valid_users.first.duns_number).and_return(true)
+  context 'when the sam_account is true for the user' do
+    let!(:user) { FactoryGirl.create(:user, :with_duns_in_sam, sam_account: true) }
 
-      expect(User.where(sam_account: true).count).to eq(0)
-
-      expect do
-        Rake::Task['sam:check'].invoke
-      end.to_not raise_error
-
-      @valid_users.each(&:reload)
-      expect(User.where(sam_account: true).count).to eq(@valid_users.length)
-      expect(@valid_users).to all(be_sam_account)
+    it 'does not use the reckoner and keeps the account as it is' do
+      expect(reckoner).to_not receive(:set)
+      Rake::Task['sam:check'].invoke
     end
   end
 end
