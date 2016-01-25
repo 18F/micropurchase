@@ -5,3 +5,8 @@
 <% else %>
   <p>No bids</p>
 <% end %>
+<% unless auction.over? %>
+  <span class="bid-deadline">
+    Bid start time: <%= auction_human_start_time(auction.start_datetime) %>
+  </span>
+<% end %>
