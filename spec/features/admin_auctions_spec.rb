@@ -7,6 +7,7 @@ RSpec.feature "AdminAuctions", type: :feature do
   end
 
   scenario "deleting an auction from the admin panel" do
+    skip 'We are disabling this feature for now'
     visit "/admin/auctions"
 
     expect(page).to have_selector(:link_or_button, 'Destroy')
