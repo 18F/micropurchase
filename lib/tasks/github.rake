@@ -1,8 +1,9 @@
 namespace :github do
   task fetch: :environment do
-    Decorator::GithubInfo.missing.each do |user|
+    GithubReckoner.unreckoned.each do |user|
       puts user.name
-      user.save
+      GithubReckoner.new(user).set
+      user.save!
     end
   end
 end
