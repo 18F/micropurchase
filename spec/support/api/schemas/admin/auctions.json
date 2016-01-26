@@ -101,6 +101,9 @@
                 "bidder": {
                   "type": "object",
                   "properties": {
+                    "id": {
+                      "type": ["number", "null"]
+                    },
                     "github_id": {
                       "type": "string",
                       "minLength": 1
@@ -136,7 +139,8 @@
                     "created_at",
                     "updated_at",
                     "email",
-                    "sam_account"
+                    "sam_account",
+                    "id"
                   ]
                 }
               }

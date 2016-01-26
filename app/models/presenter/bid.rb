@@ -4,10 +4,6 @@ module Presenter
       Presenter::DcTime.convert_and_format(created_at)
     end
 
-    # def bidder
-    #   Presenter::User.new(model.bidder)
-    # end
-
     def veiled_bidder_attribute(attribute, show_user = nil, message: nil)
       if presenter_auction.available? && bidder != show_user
         message
