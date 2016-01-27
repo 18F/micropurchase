@@ -4,24 +4,24 @@ module Presenter
       Presenter::DcTime.convert_and_format(created_at)
     end
 
-    def veiled_bidder_duns_number(show_user = nil)
+    def veiled_bidder_attribute(attribute, show_user = nil, message: nil)
       if presenter_auction.available? && bidder != show_user
-        '[Withheld]'
+        message
       else
-        bidder_duns_number
+        bidder.send(attribute) || null
+      end
+    end
+
+    def veiled_bidder(show_user = nil, message: nil)
+      if presenter_auction.available? && bidder != show_user
+        Presenter::VeiledBidder.new(message: message)
+      else
+        bidder
       end
     end
 
     def bidder_duns_number
       bidder.duns_number || null
-    end
-
-    def veiled_bidder_name(show_user = nil)
-      if presenter_auction.available? && bidder != show_user
-        '[Name withheld until the auction ends]'
-      else
-        bidder_name
-      end
     end
 
     def bidder_name
@@ -34,6 +34,10 @@ module Presenter
 
     def null
       Null::NULL
+    end
+
+    def model
+      __getobj__
     end
 
     class Null
