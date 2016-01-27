@@ -8,7 +8,7 @@ module Admin
       respond_to do |format|
         format.html
         format.json do
-          render json: @auctions, each_serializer: AuctionSerializer
+          render json: @auctions, each_serializer: Admin::AuctionSerializer
         end
       end
     end
@@ -19,7 +19,7 @@ module Admin
       respond_to do |format|
         format.html
         format.json do
-          render json: @auction, serializer: AuctionSerializer
+          render json: @auction, serializer: Admin::AuctionSerializer
         end
       end
     end
@@ -35,7 +35,7 @@ module Admin
       respond_to do |format|
         format.html { redirect_to "/admin/auctions" }
         format.json do
-          render json: auction, serializer: AuctionSerializer
+          render json: auction, serializer: Admin::AuctionSerializer
         end
       end
     rescue ArgumentError => e
@@ -66,7 +66,7 @@ module Admin
       respond_to do |format|
         format.html { redirect_to "/admin/auctions" }
         format.json do
-          render json: auction, serializer: AuctionSerializer
+          render json: auction, serializer: Admin::AuctionSerializer
         end
       end
     rescue ArgumentError => e

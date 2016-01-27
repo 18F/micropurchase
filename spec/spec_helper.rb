@@ -91,9 +91,4 @@ RSpec.configure do |config|
   # test failures related to randomization by passing the same `--seed` value
   # as the one that triggered the failure.
   # Kernel.srand config.seed
-
-  # see https://docs.travis-ci.com/user/code-climate/#Common-Problems
-  config.after(:suite) do
-    WebMock.disable_net_connect!(:allow => 'codeclimate.com')
-  end
 end
