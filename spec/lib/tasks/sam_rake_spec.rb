@@ -2,7 +2,6 @@ require 'rails_helper'
 require 'rake'
 
 RSpec.describe 'rake sam:check' do
-  let(:reckoner) { double('sam account reckoner', set: true, clear: false) }
 
   before do
     allow(SamAccountReckoner).to receive(:new).and_return(reckoner)
@@ -11,11 +10,20 @@ RSpec.describe 'rake sam:check' do
 
   context 'when the sam_account for the user is false' do
     let!(:user) { FactoryGirl.create(:user, :with_duns_in_sam, sam_account: false) }
-
+    let(:reckoner) { SamAccountReckoner.new(user) }
+    
     it 'uses the SamAccountReckoner to determine whether the account is valid' do
+      expect(SamAccountReckoner.unreckoned).to_not be_empty
+
+      # need to return same user record because mocking
+      expect(SamAccountReckoner).to receive(:unreckoned).and_return([user])
       expect(SamAccountReckoner).to receive(:new).with(user).and_return(reckoner)
-      expect(reckoner).to receive(:set)
+      expect(reckoner).to receive(:user_in_sam?).and_return(true)
+
       Rake::Task['sam:check'].invoke
+
+      expect(user).to be_sam_account
+      expect(User.where(sam_account: false)).to be_empty
     end
   end
 
