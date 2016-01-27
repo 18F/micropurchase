@@ -1,0 +1,141 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "admin_report": {
+      "type": "object",
+      "properties": {
+        "quick_stats": {
+          "type": "object",
+          "properties": {
+            "total_users": {
+              "type": "number"
+            },
+            "users_with_duns": {
+              "type": "number"
+            },
+            "users_in_sam": {
+              "type": "number"
+            },
+            "notes": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "total_users",
+            "users_with_duns",
+            "users_in_sam",
+            "notes"
+          ]
+        },
+        "non_admin_users": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
+            "required": [
+              "id",
+              "github_id",
+              "duns_number",
+              "name",
+              "created_at",
+              "updated_at",
+              "email",
+              "sam_account"
+            ],
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "github_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "duns_number": {
+                "type": "string",
+                "minLength": 1
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "created_at": {
+                "type": "date-time",
+                "minLength": 1
+              },
+              "updated_at": {
+                "type": "date-time",
+                "minLength": 1
+              },
+              "email": {
+                "type": "string",
+                "minLength": 1
+              },
+              "sam_account": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "admin_users": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
+            "required": [
+              "id",
+              "github_id",
+              "duns_number",
+              "name",
+              "created_at",
+              "updated_at",
+              "email",
+              "sam_account"
+            ],
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "github_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "duns_number": {
+                "type": "string",
+                "minLength": 1
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "created_at": {
+                "type": "date-time",
+                "minLength": 1
+              },
+              "updated_at": {
+                "type": "date-time",
+                "minLength": 1
+              },
+              "email": {
+                "type": "string"
+              },
+              "sam_account": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "quick_stats",
+        "non_admin_users",
+        "admin_users"
+      ]
+    }
+  },
+  "required": [
+    "admin_report"
+  ]
+}
