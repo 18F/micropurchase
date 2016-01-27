@@ -1,5 +1,6 @@
 class BidsController < ApplicationController
   before_filter :require_authentication, except: [:index]
+  skip_before_action :verify_authenticity_token, if: :api_request?
 
   def index
     @auction = Presenter::Auction.new(
