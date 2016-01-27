@@ -27,35 +27,12 @@ class BidsController < ApplicationController
   end
 
   def create
-    begin
-      fail UnauthorizedError, "You must have a valid SAM.gov account to place a bid" unless current_user.sam_account?
-      @bid = Presenter::Bid.new(PlaceBid.new(params, current_user).perform)
-
-      respond_to do |format|
-        format.html do
-          flash[:bid] = "success"
-          redirect_to "/auctions/#{params[:auction_id]}"
-        end
-        format.json do
-          render json: @bid, serializer: BidSerializer
-        end
-      end
-    rescue UnauthorizedError => e
-      respond_error(e, redirect_path: "/auctions/#{params[:auction_id]}/bids/new")
-    end
-  end
-
-  private
-
-  def respond_error(error, redirect_path: '/')
-    respond_to do |format|
-      format.html do
-        flash[:error] = error.message
-        redirect_to redirect_path
-      end
-      format.json do
-        render json: {error: error.message}, status: 403
-      end
-    end
+    fail UnauthorizedError, "You must have a valid SAM.gov account to place a bid" unless current_user.sam_account?
+    PlaceBid.new(params, current_user).perform
+    flash[:bid] = "success"
+    redirect_to "/auctions/#{params[:auction_id]}"
+  rescue UnauthorizedError => e
+    flash[:error] = e.message
+    redirect_to "/auctions/#{params[:auction_id]}/bids/new"
   end
 end

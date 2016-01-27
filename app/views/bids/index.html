@@ -14,24 +14,8 @@
   <tbody>
     <% @auction.bids.each_with_index do |bid, i| %>
       <tr>
-        <td>
-          <%=
-            bid.veiled_bidder_attribute(
-              :name,
-              current_user,
-              message: '[Name withheld until the auction ends]'
-            )
-          %>
-        </td>
-        <td>
-          <%=
-            bid.veiled_bidder_attribute(
-              :duns_number,
-              current_user,
-              message: '[Withheld]'
-            )
-          %>
-        </td>
+        <td><%= bid.veiled_bidder_name(current_user) %></td>
+        <td><%= bid.veiled_bidder_duns_number(current_user) %></td>
         <td><%= content_for_row(i, bid) %></td>
         <td><%= Presenter::DcTime.convert_and_format(bid.created_at) %></td>
       </tr>
