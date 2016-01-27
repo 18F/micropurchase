@@ -29,6 +29,7 @@ RSpec.describe 'rake sam:check' do
 
   context 'when the sam_account is true for the user' do
     let!(:user) { FactoryGirl.create(:user, :with_duns_in_sam, sam_account: true) }
+    let(:reckoner) { SamAccountReckoner.new(user) }
 
     it 'does not use the reckoner and keeps the account as it is' do
       expect(reckoner).to_not receive(:set)
