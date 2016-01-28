@@ -25,7 +25,13 @@ module Admin
     end
 
     def new
-      @auction = Auction.new
+      if params[:auction]
+        parser = AuctionParser.new(params)
+        auction = Auction.new(parser.general_attributes)
+      else
+        auction = Auction.new
+      end
+      @view_model = ViewModel::AdminAuctionForm.new(auction)
     end
 
     def create
@@ -74,7 +80,8 @@ module Admin
     end
 
     def edit
-      @auction = Auction.find(params[:id])
+      auction = Auction.find(params[:id])
+      @view_model = ViewModel::AdminAuctionForm.new(auction)
     end
   end
 

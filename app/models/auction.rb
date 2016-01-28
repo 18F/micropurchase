@@ -4,6 +4,8 @@ class Auction < ActiveRecord::Base
 
   self.inheritance_column = :__disabled
 
+  TYPES = ['reverse', 'buy now']
+
   scope :in_reverse_chron_order, -> { order('end_datetime DESC') }
   scope :with_bids, -> { includes(:bids) }
 end
