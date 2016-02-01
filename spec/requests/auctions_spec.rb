@@ -73,7 +73,6 @@ RSpec.describe AuctionsController do
             expect(bidder['github_id']).to   eq(nil)
             expect(bidder['created_at']).to  eq(nil)
             expect(bidder['updated_at']).to  eq(nil)
-            expect(bidder['email']).to       eq(nil)
             expect(bidder['sam_account']).to eq(nil)
           end
         end
@@ -100,7 +99,6 @@ RSpec.describe AuctionsController do
             expect(bidder['github_id']).to_not   eq(nil)
             expect(bidder['created_at']).to_not  eq(nil)
             expect(bidder['updated_at']).to_not  eq(nil)
-            expect(bidder['email']).to_not       eq(nil)
             expect(bidder['sam_account']).to_not eq(nil)
           end
 
