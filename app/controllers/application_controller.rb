@@ -66,6 +66,8 @@ class ApplicationController < ActionController::Base
   end
 
   def github_id_from_api_key(api_key)
+    return nil if api_key.nil?
+
     client = Octokit::Client.new(access_token: api_key)
     client.user.id
   rescue Octokit::Unauthorized => e
