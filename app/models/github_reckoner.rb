@@ -15,13 +15,13 @@ class GithubReckoner < Struct.new(:user)
   private
 
   def github_response
-    client = Octokit::Client.new
     client.user(user.github_id)
   rescue Octokit::Error
     {}
   end
 
   def client
-    @client ||= Octokit::Client.new
+    @client ||= Octokit::Client.new(client_id: ENV['MPT_3500_GITHUB_KEY'],
+                                    client_secret: ENV['MPT_3500_GITHUB_SECRET'])
   end
 end
