@@ -1,4 +1,12 @@
+<% content_for :data_tags do %>
+  <meta name="twitter:label1" value="Active Auctions">
+  <meta name="twitter:data1" value="<%= @auctions.count { |i| i.start_datetime < Time.now && Time.now < i.end_datetime } %>">
+  <meta name="twitter:label2" value="Coming Auctions">
+  <meta name="twitter:data2" value="<%= @auctions.count { |i| Time.now < i.start_datetime } %>">
+<% end %>
+
 <div class="usa-width-full">
+
   <h1>Welcome!</h1>
   <div class="usa-font-lead">
     <p>The Micro-purchase Marketplace is the place to bid on open-source issues from the 18F team. <a href="https://18f.gsa.gov/2015/11/06/micro-purchase-lessons/">Learn more about this experiment »</a></p>

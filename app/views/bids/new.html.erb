@@ -1,3 +1,15 @@
+<% content_for :title do %>18F Micro-purchase - New bid<% end %>
+<% content_for :description do %>
+<% if @auction.available? %>
+Place a bid for "<%= @auction.title %>". The current bid is <%= number_to_currency(@auction.current_bid_amount) %>.
+<% else %>
+Bidding on this auction closed on <%= @auction.end_datetime %>. The winning bid was <%= number_to_currency(@auction.current_bid_amount) %>.
+<% end %>
+<% end %>
+<% content_for :data_tags do %>
+<%= render partial: '/components/data_tags', locals: {auction: @auction} %>
+<% end %>
+
 <h1>Bidding on...</h1>
 
 <hr>
