@@ -116,9 +116,6 @@
                       "type": ["string", "null"],
                       "minLength": 1
                     },
-                    "email": {
-                      "type": ["string", "null"]
-                    },
                     "sam_account": {
                       "type": ["boolean", "null"]
                     },
@@ -135,7 +132,6 @@
                     "github_id",
                     "duns_number",
                     "name",
-                    "email",
                     "sam_account",
                     "created_at",
                     "updated_at",
