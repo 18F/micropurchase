@@ -26,19 +26,32 @@ Updating the ERD requires Graphiz. Installation instructions are [here](http://v
 
 ## Local Development
 
+### Setting up and running the app
+
 The application is running Ruby 2.2.3 and Rails 4.2.4. Libraries are all
 available via gems.
 
-* `bundle` to get your gem dependencies installed
-* Talk to someone of the team to get the authentication secret and key
-  for the github account we are using for authentication. You will want
-to put these variables in your environment: `export
-MPT_3500_GITHUB_KEY=the-magic-key-given-you` and `export
-MPT_3500_GITHUB_SECRET=another-magic-key`.
-* create your test and development databases: `bundle exec rake
-  db:create:all db:migrate db:test:prepare`
-* start the local server with `bundle exec rails s`
+```
+git clone git@github.com:18F/micropurchase.git
+cd micropurchase
+bundle install
+bundle exec rake db:create:all db:migrate db:test:prepare
+bundle exec rake db:seed
+foreman start -p 3000
+```
 
+### Setting up GitHub OAuth
+
+To set up GitHub authentication for creating user accounts and logging in, set up a [new developer application](https://github.com/settings/applications/new). The "Application name" and "Homepage URL" can be whatever you'd like, but the "Authorization callback URL" should be `http://localhost:3000`.
+
+Once you register the application, you'll receive a Client ID and a Client Secret. Put them into a `.env` file at the root of the application, like this:
+
+```
+MPT_3500_GITHUB_KEY="your-client-id"
+MPT_3500_GITHUB_SECRET="your-client-secret"
+```
+
+Make sure to restart the server to register those environmental variables.
 
 ### Testing
 
