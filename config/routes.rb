@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   root 'auctions#index'
 
   resources :auctions, only: [:index, :show] do
-    resources :bids, only: [:new, :create, :index]
+    resources :bids, only: [:new, :create, :index] do
+      collection do
+        post :confirm
+      end
+    end
   end
 
   resources :bids, only: [:index]
