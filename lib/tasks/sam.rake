@@ -1,11 +1,12 @@
 namespace :sam do
   task check: :environment do
-    User.where(sam_account: false).each do |user|
+    SamAccountReckoner.unreckoned.each do |user|
       id = "#{user.name}/#{user.duns_number}: "
       begin
         sam_status = SamAccountReckoner.new(user).set
-        if sam_status == true
+        if sam_status
           id += 'DUNS *is* in SAM.gov'
+          user.save
         else
           id += 'DUNS *not* found in SAM.gov'
         end
