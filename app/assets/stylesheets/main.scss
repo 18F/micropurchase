@@ -216,8 +216,7 @@ textarea#auction_description {
   max-width: none;
 
   .cancel, .submit {
-    float: left;
-    margin: 0;
+      display: inline-block;
   }
 
   .cancel {
@@ -226,7 +225,7 @@ textarea#auction_description {
 
   .button-wrapper {
     margin: 0 auto;
-    width: 260px;
+    width: 400px;
   }
 }
 

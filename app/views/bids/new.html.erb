@@ -38,12 +38,10 @@
       </div>
     </div>
 <p>Note that all users who submit bids consent to the publication of their GitHub usernames, DUNS numbers, and bid amounts following the conclusion of the bidding process.</p>
-    <div class='usa-width-one-whole'>
       <div class='button-wrapper'>
         <a href='<%= root_path %>' class='usa-button usa-button-big usa-button-gray cancel'>Cancel</a>
         <%= f.submit 'Submit', class: 'usa-button-big usa-button submit' %>
       </div>
-    </div>
   <% end %>
 <% else %>
   <h2>Bidding is closed</h2>
