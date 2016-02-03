@@ -4,7 +4,7 @@ FactoryGirl.define do
     end_datetime { Time.now + 3.days }
     title { Faker::Company.catch_phrase }
     summary { Faker::Lorem.paragraph }
-    description { Faker::Lorem.paragraphs(3, true) }
+    description { Faker::Lorem.paragraphs(3, true).join("\n\n") }
     issue_url 'https://github.com/18F/calc/issues/255'
     github_repo 'https://github.com/18F/calc'
 
