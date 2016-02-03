@@ -1,0 +1,10 @@
+<div class='usa-width-one-whole issue-list-item'>
+  <h2 class='issue-title'><%= auction.title %></h2>
+  <p class='issue-description'>
+    <%=h raw auction.html_description %>
+  </p>
+  <% if auction.available? %>
+  <h3>Ends in <%= distance_of_time_in_words(Time.now, auction.end_datetime) %></h3>
+  <% end %>
+</div>
+<hr>
