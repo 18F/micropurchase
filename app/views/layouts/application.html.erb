@@ -2,11 +2,28 @@
 <html lang="en">
 <head>
   <!-- test content -->
-  <title>Micro-purchase</title>
+  <meta charset="utf-8">
+  <title><%= yield(:title).presence || "18F - Micro-purchase" %></title>
+  <meta property="og:title" content="<%= yield(:title).presence || "18F - Micro-purchase" %>">
   <%= stylesheet_link_tag    'application', media: 'all', debug: true %>
   <%= javascript_include_tag "application", debug: true %>
   <%= csrf_meta_tags %>
   <%= favicon_link_tag %>
+
+  <!-- Meta tags -->
+  <meta name="twitter:site" content="@18F">
+  <meta name="twitter:creator" content="@18F">
+  <meta property="og:site_name" content="18F - Micro-purchase" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://micropurchase.18f.gov" />
+  <link rel="canonical" href="https://micropurchase.18f.gov" />
+
+  <meta name="description" content="<%= yield(:description).presence || "The Micro-purchase Marketplace is the place to bid on open-source issues from the 18F team." %>">
+  <meta property="og:description" content="<%= yield(:description).presence || "The Micro-purchase Marketplace is the place to bid on open-source issues from the 18F team." %>">
+
+  <meta name="twitter:card" content="summary">
+
+  <%= yield :data_tags %>
 
   <!-- Add 18F GA snippet -->
   <script>

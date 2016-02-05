@@ -1,3 +1,10 @@
+<% content_for :title do %>18F Micro-purchase - <%= @auction.title %><% end %>
+<% content_for :description do %><%= @auction.summary %><% end %>
+<% content_for :data_tags do %>
+<%= render partial: '/components/data_tags', locals: {auction: @auction} %>
+<% end %>
+
+
 <% if current_user && !current_user.sam_account? %>
   <%= render partial: 'components/no_sam_header' %>
 <% else %>
