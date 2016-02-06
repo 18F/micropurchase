@@ -1,0 +1,8 @@
+<%= form_for [:admin, @view_model.auction], method: 'get', url: @view_model.general_form_action do |f| %>
+  <label for='auction_type'>Auction Type</label>
+  <%= f.select :type, Auction::TYPES %>
+
+  <%= render partial: "general_attributes", locals: {f: f} %>
+
+  <%= f.submit value: 'Next' %>
+<% end %>

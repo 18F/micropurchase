@@ -1,0 +1,12 @@
+<%= form_for [:admin, @view_model.auction] do |f| %>
+  <label for='auction_type'>Auction Type</label>
+  <%= f.text_field :type, value: @view_model.type, disabled: true %>
+
+  <%= render partial: @view_model.type_partial, locals: {f: f} %>
+
+  <hr>
+
+  <%= render partial: "general_attributes", locals: {f: f} %>
+
+  <%= f.submit value: 'Save' %>
+<% end %>

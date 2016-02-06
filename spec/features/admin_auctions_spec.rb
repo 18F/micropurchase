@@ -31,23 +31,28 @@ RSpec.feature "AdminAuctions", type: :feature do
     expect(page).to have_text(@auction.description)
   end
 
-  scenario "adding an auction" do
+  scenario "adding a reverse auction" do
     visit "/admin/auctions"
     expect(page).not_to have_text('must be an admin')
     find_link('Create a new auction').click
 
     title = 'Build the micropurchase thing'
+
     fill_in("auction_title", with: title)
     fill_in("auction_description", with: 'and the admin related stuff')
-    fill_in("auction_start_datetime", with: Presenter::DcTime.convert(Time.now + 3.days).strftime("%m/%d/%Y"))
-    fill_in("auction_end_datetime", with: Presenter::DcTime.convert(Time.now - 3.days).strftime("%m/%d/%Y"))
     fill_in("auction_github_repo", with: "https://github.com/18F/calc")
     fill_in("auction_summary", with: "The Summary!")
     fill_in("auction_issue_url", with: "https://github.com/18F/calc/issues/255")
-    click_on("Submit")
+    click_on("Next")
 
-    expect(page).to have_text(@auction.title)
-    expect(page).to have_text("Build the micropurchase thing")
+    find_field('auction_type').should have_content('reverse')
+    find_field('auction_title').should have_content(@auction.title)
+    find_field('auction_description').should have_content("Build the micropurchase thing")
+
+    fill_in("auction_start_datetime", with: Presenter::DcTime.convert(Time.now + 3.days).strftime("%m/%d/%Y"))
+    fill_in("auction_end_datetime", with: Presenter::DcTime.convert(Time.now - 3.days).strftime("%m/%d/%Y"))
+    click_no("Save")
+
     expect(page).to have_text(
       Presenter::DcTime.convert(Time.now + 3.days).
         beginning_of_day.strftime(Presenter::DcTime::FORMAT)
@@ -72,7 +77,7 @@ RSpec.feature "AdminAuctions", type: :feature do
 
     issue_url = "https://github.com/18F/calc/issues/255"
     fill_in("auction_issue_url", with: issue_url)
-    click_on("Submit")
+    click_on("Save")
 
     expect(page).to have_text(title)
 
