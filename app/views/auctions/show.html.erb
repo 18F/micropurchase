@@ -1,7 +1,7 @@
 <% content_for :title do %>18F Micro-purchase - <%= @auction.title %><% end %>
 <% content_for :description do %><%= @auction.summary %><% end %>
 <% content_for :data_tags do %>
-<%= render partial: '/components/data_tags', locals: {auction: @auction} %>
+<%= render partial: '/auctions/data_tags', locals: {auction: @auction} %>
 <% end %>
 
 
