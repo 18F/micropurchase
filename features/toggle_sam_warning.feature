@@ -13,7 +13,7 @@ Feature: Toggling visibility on the sam status warning
     When I sign in and verify my account information
     Then I should see an alert warning me that my SAM registration is not complete
 
-  @wip
+  @wip @javascript
   Scenario: Toggling the sam status warning
     Given I am a user without a verified sam account
     When I sign in and verify my account information

@@ -35,6 +35,7 @@ group :development, :test do
   gem 'rspec-rails'
 
   gem 'cucumber-rails', require: false
+  gem 'poltergeist'
 
   gem 'capybara'
   gem 'capybara-screenshot'
