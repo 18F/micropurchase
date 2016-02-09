@@ -12,7 +12,7 @@ module Presenter
         'Open'
       end
 
-      def status_tag_data
+      def tag_data_value_status
         "#{distance_of_time_in_words(Time.now, auction.end_datetime)} left"
       end
 

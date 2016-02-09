@@ -104,7 +104,7 @@ module Presenter
     end
 
 
-    delegate :label_class, :label, :status_tag_data, :tag_data_label_2, :tag_data_value_2,
+    delegate :label_class, :label, :tag_data_value_status, :tag_data_label_2, :tag_data_value_2,
       to: :status_presenter
 
     def human_start_time

@@ -11,7 +11,7 @@ module Presenter
         'Closed'
       end
 
-      def status_tag_data
+      def tag_data_value_status
         label
       end
 

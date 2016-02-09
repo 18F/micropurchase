@@ -11,7 +11,7 @@ module Presenter
         'Coming Soon'
       end
 
-      def status_tag_data
+      def tag_data_value_status
         auction.human_start_time
       end
 
