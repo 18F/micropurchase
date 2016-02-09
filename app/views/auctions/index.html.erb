@@ -1,8 +1,8 @@
 <% content_for :data_tags do %>
   <meta name="twitter:label1" value="Active Auctions">
-  <meta name="twitter:data1" value="<%= @view_model.auctions.count { |i| i.start_datetime < Time.now && Time.now < i.end_datetime } %>">
+  <meta name="twitter:data1" value="<%= @view_model.active_auction_count %>">
   <meta name="twitter:label2" value="Coming Auctions">
-  <meta name="twitter:data2" value="<%= @view_model.auctions.count { |i| Time.now < i.start_datetime } %>">
+  <meta name="twitter:data2" value="<%= @view_model.upcoming_auction_count %>">
 <% end %>
 
 <div class="usa-width-full">
@@ -15,23 +15,8 @@
 
 <h2>Issues open for bid</h2>
 
-<% if current_user %>
-  <% if current_user.sam_account? %>
-    <%= render partial: '/components/sam_verified_header' %>
-  <% else %>
-    <%= render partial: '/components/no_sam_verification_header' %>
-  <% end %>
-<% else %>
-  <%= render partial: '/components/no_current_user_header' %>
-<% end %>
-
+<%= render partial: @view_model.header_partial %>
 
 <div class="usa-grid-full">
-  <% if @view_model.auctions.empty? %>
-    <%= render partial: 'empty_auctions' %>
-  <% else %>
-    <% @view_model.auctions.each do |auction| %>
-      <%= render partial: 'list_item', locals: {auction: auction} %>
-    <% end %>
-  <% end %>
+  <%= render partial: @view_model.auctions_list_partial %>
 </div>
