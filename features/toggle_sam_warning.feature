@@ -12,3 +12,11 @@ Feature: Toggling visibility on the sam status warning
     Given I am a user without a verified sam account
     When I sign in and verify my account information
     Then I should see an alert warning me that my SAM registration is not complete
+
+  @wip
+  Scenario: Toggling the sam status warning
+    Given I am a user without a verified sam account
+    When I sign in and verify my account information
+    When I collapse the alert warning me about my SAM registrtation
+    Then I will not see the alert
+    And I will see an link to expand the alert
