@@ -2,7 +2,7 @@
   <div class="usa-grid">
     <div class='usa-width-one-whole issue-label'>
       <h3 class='issue-title'>
-        <span class="usa-label <%= auction_label_class(auction) %>"><%= auction_label(auction) %></span> <a href="<%= auction_path(auction) %>"><%= auction.title %></a>
+        <span class="usa-label-big <%= auction.label_class %>"><%= auction.label %></span> <a href="<%= auction_path(auction) %>"><%= auction.title %></a>
       </h3>
       <p class='issue-description'>
         <%=h raw auction.html_summary %><a href="<%= auction_path(auction) %>">View details »</a>

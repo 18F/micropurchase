@@ -1,6 +1,7 @@
 module Presenter
   class Auction < SimpleDelegator
     include ActiveModel::SerializerSupport
+    include ActionView::Helpers::DateHelper
 
     def current_bid?
       current_bid_record != nil
@@ -92,6 +93,47 @@ module Presenter
     def html_summary
       return '' if summary.blank?
       markdown.render(summary)
+    end
+
+    def status
+      if available?
+        'Open'
+      else
+        'Closed'
+      end
+    end
+
+    def label_class
+      if expiring?
+        'auction-label-expiring'
+      elsif over?
+        'auction-label-over'
+      elsif future?
+        'auction-label-future'
+      else
+        'auction-label-open'
+      end
+    end
+
+    def label
+      if expiring?
+        'Expiring'
+      elsif over?
+        'Closed'
+      elsif future?
+        'Coming Soon'
+      else
+        'Open'
+      end
+    end
+
+    def human_start_time
+      if start_datetime < Time.now
+        # this method comes from the included date helpers
+        "#{distance_of_time_in_words(Time.now, start_datetime)} ago"
+      else
+        "in #{distance_of_time_in_words(Time.now, start_datetime)}"
+      end
     end
 
     private

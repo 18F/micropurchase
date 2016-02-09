@@ -23,7 +23,7 @@
     <div class="auction-detail-panel">
       <div class="auction-info">
       <p class="auction-label">Status:</p>
-      <p class="auction-label-info"><%= auction_status(@auction) %></p>
+      <p class="auction-label-info"><%= @auction.status %></p>
       <!--       <hr/> -->
       <% if @auction.over? && @auction.bids? %>
         <p class="auction-label">Winning bid (<%= @auction.current_bidder_name %>):</p>
