@@ -1,0 +1,18 @@
+<meta name="twitter:label1" value="Status">
+<% if @auction.expiring? %>
+  <meta name="twitter:data1" value="<%= distance_of_time_in_words(Time.now, @auction.end_datetime) %> left">
+  <meta name="twitter:label2" value="Bidding">
+  <meta name="twitter:data2" value="<%= number_to_currency(@auction.current_bid_amount) %> - <%= @auction.bids.length %> bids">
+<% elsif @auction.over? %>
+  <meta name="twitter:data1" value="<%= auction.label %>">
+  <meta name="twitter:label2" value="Winning Bid">
+  <meta name="twitter:data2" value="<%= number_to_currency(@auction.current_bid_amount) %>">
+<% elsif @auction.future? %>
+  <meta name="twitter:data1" value="Starts <%= auction.human_start_time %>">
+  <meta name="twitter:label2" value="Starting bid">
+  <meta name="twitter:data2" value="<%= number_to_currency(@auction.start_price) %>">
+<% else %>
+  <meta name="twitter:data1" value="<%= distance_of_time_in_words(Time.now, @auction.end_datetime) %> left">
+  <meta name="twitter:label2" value="Bidding">
+  <meta name="twitter:data2" value="<%= number_to_currency(@auction.current_bid_amount) %> - <%= @auction.bids.length %> bids">
+<% end %>
