@@ -103,29 +103,9 @@ module Presenter
       end
     end
 
-    def label_class
-      if expiring?
-        'auction-label-expiring'
-      elsif over?
-        'auction-label-over'
-      elsif future?
-        'auction-label-future'
-      else
-        'auction-label-open'
-      end
-    end
 
-    def label
-      if expiring?
-        'Expiring'
-      elsif over?
-        'Closed'
-      elsif future?
-        'Coming Soon'
-      else
-        'Open'
-      end
-    end
+    delegate :label_class, :label,
+      to: :status_presenter
 
     def human_start_time
       if start_datetime < Time.now
@@ -137,6 +117,23 @@ module Presenter
     end
 
     private
+
+    def status_presenter_class
+      status_name = if expiring?
+                      'Expiring'
+                    elsif over?
+                      'Over'
+                    elsif future?
+                      'Future'
+                    else
+                      'Open'
+                    end
+      "::Presenter::AuctionStatus::#{status_name}".constantize
+    end
+
+    def status_presenter
+      @status_presenter ||= status_presenter_class.new(self)
+    end
 
     def current_bid_record
       @current_bid_record ||= bids.sort_by {|bid| [bid.amount, bid.created_at, bid.id] }.first
