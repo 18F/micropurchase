@@ -11,12 +11,12 @@ class AuctionsController < ApplicationController
   end
 
   def show
-    @auction = Presenter::Auction.new(Auction.find(params[:id]))
+    @view_model = ViewModel::AuctionShow.new(current_user, Auction.find(params[:id]))
 
     respond_to do |format|
       format.html
       format.json do
-        render json: @auction, serializer: AuctionSerializer
+        render json: @view_model.auction, serializer: AuctionSerializer
       end
     end
   end

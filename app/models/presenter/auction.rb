@@ -2,6 +2,7 @@ module Presenter
   class Auction < SimpleDelegator
     include ActiveModel::SerializerSupport
     include ActionView::Helpers::DateHelper
+      include ActionView::Helpers::NumberHelper
 
     def current_bid?
       current_bid_record != nil
@@ -20,24 +21,18 @@ module Presenter
       end
     end
 
-    def current_bid_amount
-      current_bid.amount
-    end
+    delegate :amount, :time,
+      to: :current_bid, prefix: :current_bid
 
-    def current_bidder_name
-      current_bid.bidder_name
-    end
+    delegate :bidder_name, :bidder_duns_number,
+      to: :current_bid, prefix: :current
 
-    def current_bidder_duns_number
-      current_bid.bidder_duns_number
-    end
-
-    def current_bid_time
-      current_bid.time
+    def current_bid_amount_as_currency
+      number_to_currency(current_bid_amount)
     end
 
     def bids?
-      bids.size > 0
+      bid_count > 0
     end
 
     def bids
@@ -45,6 +40,10 @@ module Presenter
         map {|bid| Presenter::Bid.new(bid) }.
         sort_by(&:created_at).
         reverse
+    end
+
+    def bid_count
+      bids.size
     end
 
     def starts_at
@@ -58,8 +57,8 @@ module Presenter
     # rubocop:disable Style/DoubleNegation
     def available?
       !!(
-        (model.start_datetime && (model.start_datetime <= Time.now)) &&
-          (model.end_datetime && (model.end_datetime >= Time.now))
+        (model.start_datetime && !future?) &&
+          (model.end_datetime && !over?)
       )
     end
     # rubocop:enable Style/DoubleNegation

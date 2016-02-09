@@ -21,7 +21,7 @@ module Presenter
       end
 
       def tag_data_value_2
-        "#{number_to_currency(auction.current_bid_amount)} - #{auction.bids.length} bids"
+        "#{auction.current_bid_amount_as_currency} - #{auction.bid_count} bids"
       end
     end
   end
