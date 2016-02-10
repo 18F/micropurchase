@@ -79,23 +79,23 @@ textarea#auction_description {
 
 .github-issue {
   h1 {
-	  line-height: 1.1em;
-	  margin-top: 0.2em;
-	  margin-bottom: 0.5em;
+	  line-height: 1.1rem;
+	  margin-top: 0.2rem;
+	  margin-bottom: 0.5rem;
   }
 
   h2, h3, h4, h5, h6 {
-	  line-height: 1.1em;
-	  margin-top: 0.2em;
-	  margin-bottom: 0.1em;
+	  line-height: 1.1rem;
+	  margin-top: 0.2rem;
+	  margin-bottom: 0.1rem;
   }
 
   p, li {
-	  line-height: 1.3em;
+	  line-height: 1.3rem;
   }
 
   ul {
-	  margin-bottom: 0.5em;
+	  margin-bottom: 0.5rem;
   }
 }
 
@@ -169,8 +169,6 @@ textarea#auction_description {
       .current-bid-box-children {
         position: relative;
         top: 50%;
-        /* margin-top: -1rem; */
-
 
         .current-bid-header {
           font-weight: 400;
@@ -330,7 +328,7 @@ footer {
 
 .make-bid-grid p {
   margin: 0;
-  line-height: 1.2em;
+  line-height: 1.129411765rem;
 }
 
 .current-bid-amount {
