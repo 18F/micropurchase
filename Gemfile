@@ -48,6 +48,10 @@ group :development, :test do
   gem 'timecop'
   gem 'brakeman', require: false
   gem 'hakiri', require: false
+
+  gem 'dotenv-rails'
+
+  gem 'jasmine'
 end
 
 group :development do
