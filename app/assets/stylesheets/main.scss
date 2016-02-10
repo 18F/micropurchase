@@ -21,8 +21,12 @@ body {
     font-size: 1.0625rem;
 }
 
-p,li,span,label,input,button {
+p,li,span,button {
     font-size: 1.0625rem;
+}
+
+.usa-font-lead p {
+    font-size: 1.882352941rem;
 }
 
 textarea#auction_summary {
