@@ -13,6 +13,18 @@ $color-gold: #fdb81e;
 $color-cool-blue: #205493;
 $color-purple: #4c2c92;
 
+html {
+    font-size: 16px;
+}
+
+body {
+    font-size: 1.0625rem;
+}
+
+p,li,span,label,input,button {
+    font-size: 1.0625rem;
+}
+
 textarea#auction_summary {
   width: 500px;
   height: 150px;
@@ -150,43 +162,44 @@ textarea#auction_description {
   }
   .issue-bid-details {
     background-color: $color-gray;
-    padding: 1.5rem 3rem;
+    padding: 2rem 3rem;
 
     .current-bid-box {
-      height: 5rem;
       position: relative;
 
       .current-bid-box-children {
         position: relative;
         top: 50%;
-        margin-top: -2rem;
+        /* margin-top: -1rem; */
 
 
         .current-bid-header {
           font-weight: 400;
         }
         .current-bid {
-          font-size: 3rem;
+          font-size: 1.3rem;
           font-weight: 700;
+        }
+
+        .current-bid-link {
+            white-space: nowrap;
         }
 
       }
     }
 
     .bid-deadline-box {
-
       .bid-deadline-box-children {
         position: relative;
         top: 50%;
-        margin-top: -0.5rem;
-
+        margin-bottom: 0.5rem;
       }
     }
 
     a.usa-button {
-      margin-top: 1.5rem;
-      padding: 0.5rem 2rem;
-      white-space: nowrap;
+        margin-top: 0;
+        padding: 0.5rem 2rem;
+        white-space: nowrap;
     }
 
     p {
