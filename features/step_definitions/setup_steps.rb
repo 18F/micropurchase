@@ -22,3 +22,11 @@ When(/^I sign in and verify my account information/) do
   step "I sign in"
   click_on "Submit"
 end
+
+Given(/^there is an open auction$/) do
+  @auction = Auction.create(start_datetime: Time.now - 3.days, end_datetime: Time.now + 3.days, title: 'an auction')
+end
+
+When(/^I visit a the open auction$/) do
+  visit "/auctions/#{@auction.id}"
+end
