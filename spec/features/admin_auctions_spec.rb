@@ -49,6 +49,7 @@ RSpec.feature "AdminAuctions", type: :feature do
     fill_in("auction_end_datetime", with: Presenter::DcTime.convert(Time.now - 3.days).strftime("%m/%d/%Y"))
     fill_in("auction_delivery_deadline", with: Presenter::DcTime.convert(Time.now + 5.days).strftime("%m/%d/%Y"))
     fill_in("auction_billable_to", with: "the tock line item for CALC")
+    select("published", from: "auction_published")
 
     click_on("Create")
 

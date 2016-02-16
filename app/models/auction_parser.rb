@@ -19,6 +19,7 @@ class AuctionParser < Struct.new(:params)
       delivery_url: delivery_url,
       cap_proposal_url: cap_proposal_url,
       awardee_paid_status: awardee_paid_status,
+      published: published,
       notes: notes,
       billable_to: billable_to,
       result: result
@@ -33,6 +34,7 @@ class AuctionParser < Struct.new(:params)
     :github_repo,
     :issue_url,
     :awardee_paid_status,
+    :published,
     :awardee_paid_at,
     :delivery_url,
     :cap_proposal_url,
