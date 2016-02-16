@@ -27,6 +27,11 @@ class BidsController < ApplicationController
     end
   end
 
+  def confirm
+    @auction = Presenter::Auction.new(Auction.find(params[:auction_id]))
+    @bid = Presenter::Bid.new(PlaceBid.new(params, current_user).dry_run)
+  end
+
   def create
     begin
       fail UnauthorizedError, "You must have a valid SAM.gov account to place a bid" unless current_user.sam_account?

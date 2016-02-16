@@ -12,25 +12,10 @@ Bidding on this auction closed on <%= @auction.end_datetime %>. The winning bid 
 
 <h1>Bidding on...</h1>
 
-<hr>
-<div class='usa-width-one-whole issue-list-item'>
-  <div class='usa-width-one-twelfth center'>
-    <%= image_tag "issue-icon.png", alt: 'issue-icon', class: 'issue-icon' %>
-  </div>
-  <div class='usa-width-three-fourths'>
-    <h2 class='issue-title'><%= @auction.title %></h2>
-    <p class='issue-description'>
-      <%=h raw @auction.html_description %>
-    </p>
-    <% if @auction.available? %>
-      <h3>Ends in <%= distance_of_time_in_words(Time.now, @auction.end_datetime) %></h3>
-    <% end %>
-  </div>
-</div>
-<hr>
+<%= render partial: 'auction_info', locals: { auction: @auction } %>
 
 <% if @auction.available? %>
-  <%= form_for @bid, url: "/auctions/#{params[:auction_id]}/bids", html: {class: 'bid-form'} do |f| %>
+  <%= form_for @bid, url: confirm_auction_bids_path(@auction), html: {class: 'bid-form'} do |f| %>
     <div class='usa-width-one-whole'>
       <div class="usa-width-one-half">
         <h2 class='center'>Current bid:</h2>
@@ -50,12 +35,10 @@ Bidding on this auction closed on <%= @auction.end_datetime %>. The winning bid 
       </div>
     </div>
 <p>Note that all users who submit bids consent to the publication of their GitHub usernames, DUNS numbers, and bid amounts following the conclusion of the bidding process.</p>
-    <div class='usa-width-one-whole'>
       <div class='button-wrapper'>
         <a href='<%= root_path %>' class='usa-button usa-button-big usa-button-gray cancel'>Cancel</a>
         <%= f.submit 'Submit', class: 'usa-button-big usa-button submit' %>
       </div>
-    </div>
   <% end %>
 <% else %>
   <h2>Bidding is closed</h2>

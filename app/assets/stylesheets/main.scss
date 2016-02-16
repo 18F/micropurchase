@@ -230,8 +230,7 @@ textarea#auction_description {
   max-width: none;
 
   .cancel, .submit {
-    float: left;
-    margin: 0;
+      display: inline-block;
   }
 
   .cancel {
@@ -240,7 +239,7 @@ textarea#auction_description {
 
   .button-wrapper {
     margin: 0 auto;
-    width: 260px;
+    width: 400px;
   }
 }
 
@@ -383,9 +382,11 @@ h1, h2, h3, h4, h5, h6, p {
   padding: 40px 40px;
 }
 
+/*
 .usa-width-one-whole .issue-list-item {
   border: 1px solid #ccc;
 }
+*/
 
 .usa-label-big {
   background-color: #00a6d2;

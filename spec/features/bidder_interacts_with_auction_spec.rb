@@ -136,6 +136,10 @@ RSpec.feature "bidder interacts with auction", type: :feature do
     fill_in("bid_amount", with: '800')
     click_on("Submit")
 
+    # takes us to confirmation page
+    expect(page).to have_content("Confirm your bid: $800")
+    click_on("Confirm")
+    
     # returns us back to the bid page
     expect(page).to have_content("Current bid:")
     expect(page).to have_content("$800.00")
@@ -174,6 +178,10 @@ RSpec.feature "bidder interacts with auction", type: :feature do
       fill_in("bid_amount", with: '800')
       click_on("Submit")
 
+      # takes us to confirmation page
+      expect(page).to have_content("Confirm your bid: $800")
+      click_on("Confirm")
+
       # returns us back to the bid page
       expect(page).to have_content("Current bid:")
       expect(page).to have_content("$800.00")
@@ -192,6 +200,10 @@ RSpec.feature "bidder interacts with auction", type: :feature do
       fill_in("bid_amount", with: '999')
       click_on("Submit")
 
+      # takes us to confirmation page
+      expect(page).to have_content("Confirm your bid: $999")
+      click_on("Confirm")
+      
       # returns us back to the bid page
       expect(page).to have_content("Current bid:")
       expect(page).to have_content("$999.00")
