@@ -16,7 +16,7 @@
         <%= link_to(auction.title, admin_auction_path(auction)) %>
         (<%= link_to('edit', edit_admin_auction_path(auction)) %>)
       </td>
-      <td><%= auction.delivery_deadline %></td>
+      <td><%= auction.delivery_deadline_expires_in %></td>
       <td><%= auction.delivery_url %></td>
       <td><%= auction.result %></td>
       <td><%= auction.cap_proposal_url %></td>

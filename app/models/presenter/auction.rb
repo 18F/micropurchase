@@ -1,9 +1,11 @@
+require 'action_view'
+
+
 module Presenter
   class Auction < SimpleDelegator
     include ActiveModel::SerializerSupport
     include ActionView::Helpers::DateHelper
     include ActionView::Helpers::NumberHelper
-
 
     def current_bid?
       current_bid_record != nil
@@ -53,6 +55,33 @@ module Presenter
 
     def ends_at
       Presenter::DcTime.convert_and_format(model.end_datetime)
+    end
+
+    def starts_in
+      distance = distance_of_time_in_words(Time.now, model.start_datetime)
+      if model.start_datetime < Time.now
+        "#{distance} ago"
+      else
+        "in #{distance}"
+      end
+    end
+
+    def ends_in
+      distance = distance_of_time_in_words(Time.now, model.end_datetime)
+      if model.end_datetime < Time.now
+        "#{distance} ago"
+      else
+        "in #{distance}"
+      end
+    end
+
+    def delivery_deadline_expires_in
+      distance = distance_of_time_in_words(Time.now, model.delivery_deadline)
+      if model.delivery_deadline < Time.now
+        "#{distance} ago"
+      else
+        "in #{distance}"
+      end
     end
 
     # rubocop:disable Style/DoubleNegation
