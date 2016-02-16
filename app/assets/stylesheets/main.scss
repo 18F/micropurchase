@@ -417,3 +417,18 @@ a:visited {
 .usa-button-primary-alt {
   color: white;
 }
+
+.warning-hide-trigger,
+.warning-show-trigger .warning-trigger {
+  float: right;
+}
+
+.warning-message {
+  display: inline-block;
+  padding-left: 5rem;
+  margin: 0;
+}
+
+.usa-alert {
+  margin-bottom: 2rem;
+}

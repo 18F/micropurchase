@@ -2,7 +2,8 @@ module Presenter
   class Auction < SimpleDelegator
     include ActiveModel::SerializerSupport
     include ActionView::Helpers::DateHelper
-      include ActionView::Helpers::NumberHelper
+    include ActionView::Helpers::NumberHelper
+
 
     def current_bid?
       current_bid_record != nil
@@ -101,7 +102,6 @@ module Presenter
         'Closed'
       end
     end
-
 
     delegate :label_class, :label, :tag_data_value_status, :tag_data_label_2, :tag_data_value_2,
       to: :status_presenter

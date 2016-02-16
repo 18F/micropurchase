@@ -31,7 +31,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
       visit '/'
 
       within(:css, 'div.issue-list-item') do
-        within(:css, 'span.usa-label') do
+        within(:css, 'span.usa-label-big') do
           expect(page).to have_content('Closed')
         end
       end
@@ -45,7 +45,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
       visit '/'
 
       within(:css, 'div.issue-list-item') do
-        within(:css, 'span.usa-label') do
+        within(:css, 'span.usa-label-big') do
           expect(page).to have_content('Expiring')
         end
       end
@@ -59,7 +59,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
       visit '/'
 
       within(:css, 'div.issue-list-item') do
-        within(:css, 'span.usa-label') do
+        within(:css, 'span.usa-label-big') do
           expect(page).to have_content('Coming Soon')
         end
       end
@@ -139,7 +139,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
     # takes us to confirmation page
     expect(page).to have_content("Confirm your bid: $800")
     click_on("Confirm")
-    
+
     # returns us back to the bid page
     expect(page).to have_content("Current bid:")
     expect(page).to have_content("$800.00")
@@ -203,7 +203,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
       # takes us to confirmation page
       expect(page).to have_content("Confirm your bid: $999")
       click_on("Confirm")
-      
+
       # returns us back to the bid page
       expect(page).to have_content("Current bid:")
       expect(page).to have_content("$999.00")
