@@ -11,3 +11,7 @@ Rails.application.config.assets.version = (ENV["ASSETS_VERSION"] || "1.0")
 # Rails.application.config.assets.precompile += %w( search.js )
 
 Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'images')
+
+#Rails.application.config.assets.paths << USWebDesignStandards::Assets.images_path
+
+#Rails.application.config.assets.precompile += ["us_web_design_standards_gem/**/*.png", "us_web_design_standards_gem/**/*.svg"]
