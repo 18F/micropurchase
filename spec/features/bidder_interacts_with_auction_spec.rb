@@ -31,7 +31,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
       visit '/'
 
       within(:css, 'div.issue-list-item') do
-        within(:css, 'span.usa-label-big') do
+        within(:css, 'span.usa-label') do
           expect(page).to have_content('Closed')
         end
       end
@@ -45,7 +45,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
       visit '/'
 
       within(:css, 'div.issue-list-item') do
-        within(:css, 'span.usa-label-big') do
+        within(:css, 'span.usa-label') do
           expect(page).to have_content('Expiring')
         end
       end
@@ -59,7 +59,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
       visit '/'
 
       within(:css, 'div.issue-list-item') do
-        within(:css, 'span.usa-label-big') do
+        within(:css, 'span.usa-label') do
           expect(page).to have_content('Coming Soon')
         end
       end

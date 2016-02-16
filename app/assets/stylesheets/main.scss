@@ -13,6 +13,22 @@ $color-gold: #fdb81e;
 $color-cool-blue: #205493;
 $color-purple: #4c2c92;
 
+html {
+    font-size: 16px;
+}
+
+body {
+    font-size: 1.0625rem;
+}
+
+p,li,span,button {
+    font-size: 1.0625rem;
+}
+
+.usa-font-lead p {
+    font-size: 1.882352941rem;
+}
+
 textarea#auction_summary {
   width: 500px;
   height: 150px;
@@ -67,23 +83,23 @@ textarea#auction_description {
 
 .github-issue {
   h1 {
-	  line-height: 1.1em;
-	  margin-top: 0.2em;
-	  margin-bottom: 0.5em;
+	  line-height: 1.1rem;
+	  margin-top: 0.2rem;
+	  margin-bottom: 0.5rem;
   }
 
   h2, h3, h4, h5, h6 {
-	  line-height: 1.1em;
-	  margin-top: 0.2em;
-	  margin-bottom: 0.1em;
+	  line-height: 1.1rem;
+	  margin-top: 0.2rem;
+	  margin-bottom: 0.1rem;
   }
 
   p, li {
-	  line-height: 1.3em;
+	  line-height: 1.3rem;
   }
 
   ul {
-	  margin-bottom: 0.5em;
+	  margin-bottom: 0.5rem;
   }
 }
 
@@ -110,7 +126,6 @@ textarea#auction_description {
 
     p {
       padding: 1rem 3rem 0 3rem;
-      font-size: 1.7rem;
       margin: 0;
     }
 
@@ -150,43 +165,42 @@ textarea#auction_description {
   }
   .issue-bid-details {
     background-color: $color-gray;
-    padding: 1.5rem 3rem;
+    padding: 2rem 3rem;
 
     .current-bid-box {
-      height: 5rem;
       position: relative;
 
       .current-bid-box-children {
         position: relative;
         top: 50%;
-        margin-top: -2rem;
-
 
         .current-bid-header {
           font-weight: 400;
         }
         .current-bid {
-          font-size: 3rem;
+          font-size: 1.3rem;
           font-weight: 700;
+        }
+
+        .current-bid-link {
+            white-space: nowrap;
         }
 
       }
     }
 
     .bid-deadline-box {
-
       .bid-deadline-box-children {
         position: relative;
         top: 50%;
-        margin-top: -0.5rem;
-
+        margin-bottom: 0.5rem;
       }
     }
 
     a.usa-button {
-      margin-top: 1.5rem;
-      padding: 0.5rem 2rem;
-      white-space: nowrap;
+        margin-top: 0;
+        padding: 0.5rem 2rem;
+        white-space: nowrap;
     }
 
     p {
@@ -318,7 +332,7 @@ footer {
 
 .make-bid-grid p {
   margin: 0;
-  line-height: 1.2em;
+  line-height: 1.129411765rem;
 }
 
 .current-bid-amount {
