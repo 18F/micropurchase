@@ -22,7 +22,7 @@
     Bid Deadline:  <%= distance_of_time_in_words(Time.now, auction.end_datetime) %> left
   </span><br/>
   <span class="bid-deadline">
-    Auction Start: <%= auction_human_start_time(auction.start_datetime) %>
+    Bid start time: <%= auction.human_start_time %>
   </span>
 </div>
 </div>

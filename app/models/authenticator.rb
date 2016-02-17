@@ -25,19 +25,25 @@ class Authenticator < Struct.new(:auth_hash, :session)
   def redirect_hash
     # protects redirects as outlined here:
     # http://brakemanscanner.org/docs/warning_types/redirect/
-    index_hash = {
+
+    admin? ? admin_path_hash : bidder_path_hash
+  end
+
+  def admin_path_hash
+    {
       controller: :auctions,
       action: :index,
       only_path: true
     }
-    edit_users_hash = {
+  end
+
+  def bidder_path_hash
+    {
       controller: :users,
       action: :edit,
       id: user.id,
       only_path: true
     }
-
-    admin? ? index_hash : edit_users_hash
   end
 
   def found_user

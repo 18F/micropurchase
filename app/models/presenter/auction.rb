@@ -1,6 +1,9 @@
 module Presenter
   class Auction < SimpleDelegator
     include ActiveModel::SerializerSupport
+    include ActionView::Helpers::DateHelper
+    include ActionView::Helpers::NumberHelper
+
 
     def current_bid?
       current_bid_record != nil
@@ -19,24 +22,18 @@ module Presenter
       end
     end
 
-    def current_bid_amount
-      current_bid.amount
-    end
+    delegate :amount, :time,
+      to: :current_bid, prefix: :current_bid
 
-    def current_bidder_name
-      current_bid.bidder_name
-    end
+    delegate :bidder_name, :bidder_duns_number,
+      to: :current_bid, prefix: :current
 
-    def current_bidder_duns_number
-      current_bid.bidder_duns_number
-    end
-
-    def current_bid_time
-      current_bid.time
+    def current_bid_amount_as_currency
+      number_to_currency(current_bid_amount)
     end
 
     def bids?
-      bids.size > 0
+      bid_count > 0
     end
 
     def bids
@@ -44,6 +41,10 @@ module Presenter
         map {|bid| Presenter::Bid.new(bid) }.
         sort_by(&:created_at).
         reverse
+    end
+
+    def bid_count
+      bids.size
     end
 
     def starts_at
@@ -57,8 +58,8 @@ module Presenter
     # rubocop:disable Style/DoubleNegation
     def available?
       !!(
-        (model.start_datetime && (model.start_datetime <= Time.now)) &&
-          (model.end_datetime && (model.end_datetime >= Time.now))
+        (model.start_datetime && !future?) &&
+          (model.end_datetime && !over?)
       )
     end
     # rubocop:enable Style/DoubleNegation
@@ -94,7 +95,44 @@ module Presenter
       markdown.render(summary)
     end
 
+    def status
+      if available?
+        'Open'
+      else
+        'Closed'
+      end
+    end
+
+    delegate :label_class, :label, :tag_data_value_status, :tag_data_label_2, :tag_data_value_2,
+      to: :status_presenter
+
+    def human_start_time
+      if start_datetime < Time.now
+        # this method comes from the included date helpers
+        "#{distance_of_time_in_words(Time.now, start_datetime)} ago"
+      else
+        "in #{distance_of_time_in_words(Time.now, start_datetime)}"
+      end
+    end
+
     private
+
+    def status_presenter_class
+      status_name = if expiring?
+                      'Expiring'
+                    elsif over?
+                      'Over'
+                    elsif future?
+                      'Future'
+                    else
+                      'Open'
+                    end
+      "::Presenter::AuctionStatus::#{status_name}".constantize
+    end
+
+    def status_presenter
+      @status_presenter ||= status_presenter_class.new(self)
+    end
 
     def current_bid_record
       @current_bid_record ||= bids.sort_by {|bid| [bid.amount, bid.created_at, bid.id] }.first

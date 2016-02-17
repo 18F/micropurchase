@@ -4,7 +4,7 @@ require 'action_view'
 RSpec.feature "Pages have meta tags", type: :feature do
   include ActionView::Helpers::DateHelper
   include ActionView::Helpers::NumberHelper
-  include AuctionHelper
+
   scenario 'Main page meta tags' do
     create_closed_and_current_auctions
     @auction = FactoryGirl.create(:auction, :future)
@@ -31,10 +31,6 @@ RSpec.feature "Pages have meta tags", type: :feature do
     expect(page).to have_css("meta[property='og:title'][content='18F Micro-purchase - #{@auction.title}']", :visible => false)
     expect(page).to have_css("meta[name='description'][content='#{@auction.summary}']", :visible => false)
     expect(page).to have_css("meta[property='og:description'][content='#{@auction.summary}']", :visible => false)
-    expect(page).to have_css("meta[name='twitter:label1'][value='Status']", :visible => false)
-    expect(page).to have_css("meta[name='twitter:data1'][value='#{distance_of_time_in_words(Time.now, @auction.end_datetime)} left']", :visible => false)
-    expect(page).to have_css("meta[name='twitter:label2'][value='Bidding']", :visible => false)
-    expect(page).to have_css("meta[name='twitter:data2'][value='#{number_to_currency(@auction.current_bid_amount)} - #{@auction.bids.length} bids']", :visible => false)
   end
 
   scenario "Closed auction meta tags" do
@@ -47,10 +43,6 @@ RSpec.feature "Pages have meta tags", type: :feature do
     expect(page).to have_css("meta[property='og:title'][content='18F Micro-purchase - #{@auction.title}']", :visible => false)
     expect(page).to have_css("meta[name='description'][content='#{@auction.summary}']", :visible => false)
     expect(page).to have_css("meta[property='og:description'][content='#{@auction.summary}']", :visible => false)
-    expect(page).to have_css("meta[name='twitter:label1'][value='Status']", :visible => false)
-    expect(page).to have_css("meta[name='twitter:data1'][value='#{auction_label(@auction)}']", :visible => false)
-    expect(page).to have_css("meta[name='twitter:label2'][value='Winning Bid']", :visible => false)
-    expect(page).to have_css("meta[name='twitter:data2'][value='#{number_to_currency(@auction.current_bid_amount)}']", :visible => false)
   end
 
   scenario "Edit profile meta tags" do

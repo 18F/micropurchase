@@ -28,8 +28,13 @@ Updating the ERD requires Graphiz. Installation instructions are [here](http://v
 
 ### Setting up and running the app
 
-The application is running Ruby 2.2.3 and Rails 4.2.4. Libraries are all
-available via gems.
+The application is running Ruby 2.2.3 and Rails 4.2.4. Most of the
+libraries are avalilable as gems.
+
+Testing with javascript and capybara on Travis CI requires some
+[Poltergeist](https://github.com/teampoltergeist/poltergeist).
+
+You can install poltergeist via `brew install phantomjs`
 
 ```
 git clone git@github.com:18F/micropurchase.git

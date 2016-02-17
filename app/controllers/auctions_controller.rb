@@ -1,22 +1,22 @@
 class AuctionsController < ApplicationController
   def index
-    @auctions = Auction.in_reverse_chron_order.with_bids.map {|auction| Presenter::Auction.new(auction) }
+    @view_model = ViewModel::AuctionsIndex.new(current_user, Auction.in_reverse_chron_order.with_bids)
 
     respond_to do |format|
       format.html
       format.json do
-        render json: @auctions, each_serializer: AuctionSerializer
+        render json: @view_model.auctions, each_serializer: AuctionSerializer
       end
     end
   end
 
   def show
-    @auction = Presenter::Auction.new(Auction.find(params[:id]))
+    @view_model = ViewModel::AuctionShow.new(current_user, Auction.find(params[:id]))
 
     respond_to do |format|
       format.html
       format.json do
-        render json: @auction, serializer: AuctionSerializer
+        render json: @view_model.auction, serializer: AuctionSerializer
       end
     end
   end

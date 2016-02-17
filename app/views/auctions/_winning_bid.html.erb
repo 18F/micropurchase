@@ -7,6 +7,6 @@
 <% end %>
 <% unless auction.over? %>
   <span class="bid-deadline">
-    Bid start time: <%= auction_human_start_time(auction.start_datetime) %>
+    Bid start time: <%= auction.human_start_time %>
   </span>
 <% end %>

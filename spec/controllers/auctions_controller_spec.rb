@@ -5,7 +5,7 @@ RSpec.describe AuctionsController, controller: true do
     it 'assigns presented auctions' do
       auction_record = FactoryGirl.create(:auction)
       get :index
-      auction = assigns(:auctions).first
+      auction = assigns(:view_model).auctions.first
       expect(auction).to be_a(Presenter::Auction)
       expect(auction.id).to eq(auction_record.id)
     end
@@ -15,7 +15,7 @@ RSpec.describe AuctionsController, controller: true do
     it 'assigns presented auction' do
       auction_record = FactoryGirl.create(:auction)
       get :show, id: auction_record.id
-      auction = assigns(:auction)
+      auction = assigns(:view_model).auction
       expect(auction).to be_a(Presenter::Auction)
       expect(auction.id).to eq(auction_record.id)
     end

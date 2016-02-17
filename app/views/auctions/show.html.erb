@@ -1,56 +1,46 @@
-<% content_for :title do %>18F Micro-purchase - <%= @auction.title %><% end %>
-<% content_for :description do %><%= @auction.summary %><% end %>
+<% content_for :title do %>18F Micro-purchase - <%= @view_model.auction_title %><% end %>
+<% content_for :description do %><%= @view_model.auction_summary %><% end %>
 <% content_for :data_tags do %>
-<%= render partial: '/components/data_tags', locals: {auction: @auction} %>
+  <%= render partial: '/auctions/data_tags', locals: {auction: @view_model.auction} %>
 <% end %>
 
-
-<% if current_user && !current_user.sam_account? %>
-  <%= render partial: 'components/no_sam_header' %>
-<% else %>
-  <%= render partial: 'win_header', locals: {auction: @auction} %>
-<% end %>
+<%= render partial: @view_model.current_user_header_partial, locals: {auction: @view_model.auction} %>
 
 <div class="usa-grid-full">
   <p><a href="<%= root_path %>">« Back to open projects</a></p>
   <div class="usa-width-two-thirds auction-description">
     <h1>Auction Details</h1>
     <div class="github-issue">
-      <%=h raw @auction.html_description %>
+      <%=h raw @view_model.auction_html_description %>
     </div>
   </div>
   <div class="usa-width-one-third">
     <div class="auction-detail-panel">
       <div class="auction-info">
       <p class="auction-label">Status:</p>
-      <p class="auction-label-info"><%= auction_status(@auction) %></p>
-      <!--       <hr/> -->
-      <% if @auction.over? && @auction.bids? %>
-        <p class="auction-label">Winning bid (<%= @auction.current_bidder_name %>):</p>
-      <% else %>
-        <p class="auction-label">Current bid:</p>
-      <% end %>
-      <p class="auction-label-info"><span class="bid-amount"><%= number_to_currency(@auction.current_bid_amount) %></span>
+      <p class="auction-label-info"><%= @view_model.auction_status %></p>
+      <p class="auction-label"><%= @view_model.auction_status_label %></p>
+      <p class="auction-label-info"><span class="bid-amount"><%= @view_model.auction_current_bid_amount_as_currency %></span>
           <span class=""><%=
             link_to(
-                    pluralize(@auction.bids.length, 'bid'),
-                    auction_bids_path(@auction.id)
+              @view_model.auction_link_text,
+              auction_bids_path(@view_model.auction_id)
             )
            %>
           </span>
       </p>
-      <p class="auction-label"><% if @auction.over? %>Auction ended at:<% else %>Bid deadline:<% end %></p>
-      <p class="auction-label-info"><%= @auction.end_datetime.strftime("%m/%d/%Y at %I:%M %p %Z") %></p>
-      <p class="auction-label"><% if @auction.over? %>Auction started at:<% else %>Bid start time:<% end %></p>
-      <p class="auction-label-info"><%= @auction.start_datetime.strftime("%m/%d/%Y at %I:%M %p %Z") %></p>
+      <p class="auction-label"><%= @view_model.auction_deadline_label %></p>
+      <p class="auction-label-info"><%= @view_model.auction_formatted_end_time %></p>
+      <p class="auction-label"><%= @view_model.auction_start_label %></p>
+      <p class="auction-label-info"><%= @view_model.auction_formatted_start_time %></p>
       <p>
-        <a href="<%= new_auction_bid_path(@auction) %>" class='usa-button usa-button'>BID »</a>
+        <a href="<%= new_auction_bid_path(@view_model.auction) %>" class='usa-button usa-button'>BID »</a>
       </p>
     </div>
       <div class="auction-more-info">
         <p>
           <i class="fa fa-github"></i>
-          <a href="<%= @auction.issue_url %>">View on GitHub »</a>
+          <a href="<%= @view_model.auction_issue_url %>">View on GitHub »</a>
         </p>
         <p>
           <a href="mailto:micropurchase@gsa.gov">Have feedback? Email micropurchase@gsa.gov</a>
