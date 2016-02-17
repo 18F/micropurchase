@@ -36,12 +36,49 @@ RSpec.describe BidsController, controller: true do
         get :new, {auction_id: auction.id}, user_id: current_bidder.id
         expect(response).to render_template(:new)
       end
+
+      context 'when the auction is published' do
+        let(:auction) { FactoryGirl.create(:auction, :published) }
+
+        it 'renders the template' do
+          get :new, {auction_id: auction.id}, user_id: current_bidder.id
+          expect(response).to render_template(:new)
+        end
+      end
+
+      context 'when the auction is unpublished' do
+        let(:auction) { FactoryGirl.create(:auction, :unpublished) }
+
+        it 'should raise a routing error' do
+          expect do
+            get :new, {auction_id: auction.id}, user_id: current_bidder.id
+          end.to raise_error ActionController::RoutingError
+        end
+      end
     end
 
     context 'when logged out' do
       it 'should redirect to /login' do
         get :new, auction_id: auction.id
         expect(response).to redirect_to("/login")
+      end
+
+      context 'when the auction is published' do
+        let(:auction) { FactoryGirl.create(:auction, :published) }
+
+        it 'renders the template' do
+          get :new, auction_id: auction.id
+          expect(response).to redirect_to("/login")
+        end
+      end
+
+      context 'when the auction is unpublished' do
+        let(:auction) { FactoryGirl.create(:auction, :unpublished) }
+
+        it 'should raise a routing error' do
+          get :new, auction_id: auction.id
+          expect(response).to redirect_to("/login")
+        end
       end
     end
   end
@@ -58,6 +95,25 @@ RSpec.describe BidsController, controller: true do
       it 'renders the template' do
         get :index, auction_id: auction.id
         expect(response).to render_template(:index)
+      end
+    end
+
+    context 'when the auction is published' do
+      let(:auction) { FactoryGirl.create(:auction, :published) }
+
+      it 'renders the template' do
+        get :index, auction_id: auction.id
+        expect(response).to render_template(:index)
+      end
+    end
+
+    context 'when the auction is unpublished' do
+      let(:auction) { FactoryGirl.create(:auction, :unpublished) }
+
+      it 'should raise a routing error' do
+        expect do
+          get :index, auction_id: auction.id
+        end.to raise_error ActionController::RoutingError
       end
     end
   end

@@ -1,6 +1,7 @@
 class AuctionsController < ApplicationController
   def index
-    @view_model = ViewModel::AuctionsIndex.new(current_user, Auction.in_reverse_chron_order.with_bids)
+    collection = AuctionQuery.new.public_index
+    @view_model = ViewModel::AuctionsIndex.new(current_user, collection)
 
     respond_to do |format|
       format.html
@@ -11,12 +12,21 @@ class AuctionsController < ApplicationController
   end
 
   def show
-    @view_model = ViewModel::AuctionShow.new(current_user, Auction.find(params[:id]))
+    auction = AuctionQuery.new.public_find(params[:id])
+    @view_model = ViewModel::AuctionShow.new(current_user, auction)
 
     respond_to do |format|
       format.html
       format.json do
         render json: @view_model.auction, serializer: AuctionSerializer
+      end
+    end
+  end
+
+  rescue_from 'ActiveRecord::RecordNotFound' do
+    respond_to do |format|
+      format.html do
+        raise ActionController::RoutingError.new('Not Found')
       end
     end
   end

@@ -1,3 +1,7 @@
-<h1>Create a new auction</h1>
+<h1>Create auction</h1>
+<%= form_for [:admin, @auction] do |f| %>
 
-<%= render partial: 'form' %>
+  <%= render partial: 'general_attributes', locals: {f: f} %>
+
+  <%= f.submit value: 'Create' %>
+<% end %>

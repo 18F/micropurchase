@@ -3,6 +3,29 @@ require 'rails_helper'
 
 RSpec.feature "bidder interacts with auction", type: :feature do
   context 'viewing the auctions index page' do
+    scenario "There are unpublished auctions and visiting the auctions index" do
+      @unpublished_auction = FactoryGirl.create(:auction, :unpublished)
+      @published_auction = FactoryGirl.create(:auction, :published)
+
+      visit "/"
+
+      expect(page).to have_text(@published_auction.title)
+      expect(page).to_not have_text(@unpublished_auction.title)
+    end
+
+    scenario "There are unpublished auctions and visiting auctions#show" do
+      @unpublished_auction = FactoryGirl.create(:auction, :unpublished)
+      @published_auction = FactoryGirl.create(:auction, :published)
+
+      visit auction_path(@published_auction)
+
+      expect(page).to have_text(@published_auction.description)
+
+      expect do
+        visit auction_path(@unpublished_auction)
+      end.to raise_error ActionController::RoutingError
+    end
+
     scenario "There are no auctions" do
       visit "/"
 

@@ -29,6 +29,11 @@ p,li,span,button {
     font-size: 1.882352941rem;
 }
 
+input[disabled] {
+  color: lighten($color-gray-dark, 50%);
+  border-color: lighten($color-gray-dark, 50%);
+}
+
 textarea#auction_summary {
   width: 500px;
   height: 150px;

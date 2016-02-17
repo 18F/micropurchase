@@ -24,8 +24,21 @@ module Admin
       end
     end
 
+    def preview
+      @auction = Presenter::Auction.new(Auction.find(params[:id]))
+
+      render 'auctions/show'
+    end
+
     def new
-      @auction = Auction.new
+      if params[:auction]
+        parser = AuctionParser.new(params)
+        auction = Auction.new(parser.general_attributes)
+      else
+        auction = Auction.new
+      end
+      #@view_model = ViewModel::AdminAuctionForm.new(auction)
+      @auction = Presenter::Auction.new(auction)
     end
 
     def create
@@ -74,23 +87,25 @@ module Admin
     end
 
     def edit
-      @auction = Auction.find(params[:id])
+      auction = Auction.find(params[:id])
+      @auction = Presenter::Auction.new(auction)
+    end
+
+    private
+
+    def respond_error(exception)
+      message = exception.message
+
+      respond_to do |format|
+        format.html do
+          flash[:error] = message
+          redirect_to "/admin/auctions"
+        end
+        format.html do
+          render json: {error: message}
+        end
+      end
     end
   end
 
-  private
-
-  def respond_error(exception)
-    message = exception.message
-
-    respond_to do |format|
-      format.html do
-        flash[:error] = message
-        redirect_to "/admin/auctions"
-      end
-      format.html do
-        render json: {error: message}
-      end
-    end
-  end
 end

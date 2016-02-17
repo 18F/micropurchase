@@ -1,3 +1,9 @@
-<h1>Edit the auction</h1>
+<h1>Editing auction</h1>
+<%= form_for [:admin, @auction], method: 'put' do |f| %>
 
-<%= render partial: 'form' %>
+  <%= render partial: 'general_attributes', locals: {f: f} %>
+
+  <%= render partial: 'edit_attributes', locals: {f: f} %>
+
+  <%= f.submit value: 'Update' %>
+<% end %>
