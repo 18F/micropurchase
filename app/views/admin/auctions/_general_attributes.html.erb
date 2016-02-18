@@ -33,3 +33,6 @@
 
 <label for='auction_published'>Published?</label>
 <%= f.select :published, Auction.publisheds.keys.to_a %>
+
+<label for='auction_notes'>Notes</label>
+<%= f.text_area :notes %>
