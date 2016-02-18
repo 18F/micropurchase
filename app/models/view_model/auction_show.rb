@@ -13,7 +13,7 @@ module ViewModel
     end
 
     def current_user_header_partial
-      current_user_has_no_sam_verification? ? "/components/no_sam_verification_header" : "win_header"
+      current_user_has_no_sam_verification? ? "components/no_sam_verification_header" : "auctions/win_header"
     end
 
     def auction_link_text
