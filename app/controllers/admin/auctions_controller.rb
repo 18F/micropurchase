@@ -25,7 +25,8 @@ module Admin
     end
 
     def preview
-      @auction = Presenter::Auction.new(Auction.find(params[:id]))
+      auction = Auction.find(params[:id])
+      @view_model = ViewModel::AuctionShow.new(current_user, auction)
 
       render 'auctions/show'
     end
