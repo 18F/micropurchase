@@ -9,6 +9,7 @@ FactoryGirl.define do
     duns_number { Faker::Company.duns_number }
     github_id 123_456
     sam_account true
+    credit_card_form_url 'https://some-website.com/pay'
 
     factory :admin_user do
       github_id { Admins.github_ids.first }

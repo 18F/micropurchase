@@ -13,6 +13,27 @@ $color-gold: #fdb81e;
 $color-cool-blue: #205493;
 $color-purple: #4c2c92;
 
+html {
+    font-size: 16px;
+}
+
+body {
+    font-size: 1.0625rem;
+}
+
+p,li,span,button {
+    font-size: 1.0625rem;
+}
+
+.usa-font-lead p {
+    font-size: 1.882352941rem;
+}
+
+input[disabled] {
+  color: lighten($color-gray-dark, 50%);
+  border-color: lighten($color-gray-dark, 50%);
+}
+
 textarea#auction_summary {
   width: 500px;
   height: 150px;
@@ -110,7 +131,6 @@ textarea#auction_description {
 
     p {
       padding: 1rem 3rem 0 3rem;
-      font-size: 1.7rem;
       margin: 0;
     }
 
@@ -150,43 +170,42 @@ textarea#auction_description {
   }
   .issue-bid-details {
     background-color: $color-gray;
-    padding: 1.5rem 3rem;
+    padding: 2rem 3rem;
 
     .current-bid-box {
-      height: 5rem;
       position: relative;
 
       .current-bid-box-children {
         position: relative;
         top: 50%;
-        margin-top: -2rem;
-
 
         .current-bid-header {
           font-weight: 400;
         }
         .current-bid {
-          font-size: 3rem;
+          font-size: 1.3rem;
           font-weight: 700;
+        }
+
+        .current-bid-link {
+            white-space: nowrap;
         }
 
       }
     }
 
     .bid-deadline-box {
-
       .bid-deadline-box-children {
         position: relative;
         top: 50%;
-        margin-top: -0.5rem;
-
+        margin-bottom: 0.5rem;
       }
     }
 
     a.usa-button {
-      margin-top: 1.5rem;
-      padding: 0.5rem 2rem;
-      white-space: nowrap;
+        margin-top: 0;
+        padding: 0.5rem 2rem;
+        white-space: nowrap;
     }
 
     p {
@@ -216,8 +235,7 @@ textarea#auction_description {
   max-width: none;
 
   .cancel, .submit {
-    float: left;
-    margin: 0;
+      display: inline-block;
   }
 
   .cancel {
@@ -226,7 +244,7 @@ textarea#auction_description {
 
   .button-wrapper {
     margin: 0 auto;
-    width: 260px;
+    width: 400px;
   }
 }
 
@@ -318,7 +336,7 @@ footer {
 
 .make-bid-grid p {
   margin: 0;
-  line-height: 1.2em;
+  line-height: 1.129411765rem;
 }
 
 .current-bid-amount {
@@ -369,9 +387,11 @@ h1, h2, h3, h4, h5, h6, p {
   padding: 40px 40px;
 }
 
+/*
 .usa-width-one-whole .issue-list-item {
   border: 1px solid #ccc;
 }
+*/
 
 .usa-label-big {
   background-color: #00a6d2;
@@ -401,4 +421,19 @@ a:visited {
 
 .usa-button-primary-alt {
   color: white;
+}
+
+.warning-hide-trigger,
+.warning-show-trigger .warning-trigger {
+  float: right;
+}
+
+.warning-message {
+  display: inline-block;
+  padding-left: 5rem;
+  margin: 0;
+}
+
+.usa-alert {
+  margin-bottom: 2rem;
 }

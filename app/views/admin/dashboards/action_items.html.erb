@@ -1,0 +1,29 @@
+<h2>Delivery past due</h2>
+<%=
+  render partial: 'admin/auctions/auctions_action_items_table',
+    locals: {auctions: @delivery_past_due}
+%>
+
+<h2>Evaluation needed</h2>
+<%=
+  render partial: 'admin/auctions/auctions_action_items_table',
+    locals: {auctions: @evaluation_needed}
+%>
+
+<h2>Payment needed</h2>
+<%=
+  render partial: 'admin/auctions/auctions_action_items_table',
+    locals: {auctions: @payment_needed}
+%>
+
+<h2>Payment pending</h2>
+<%=
+  render partial: 'admin/auctions/auctions_action_items_table',
+    locals: {auctions: @payment_pending}
+%>
+
+<h2>Complete &amp; successful</h2>
+<%=
+  render partial: 'admin/auctions/auctions_action_items_table',
+    locals: {auctions: @complete_and_successful}
+%>

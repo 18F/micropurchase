@@ -25,10 +25,13 @@ gem 'octokit', '~> 4.0'
 
 gem 'active_model_serializers'
 
+gem 'business_time'
+
 group :test do
   gem "codeclimate-test-reporter", require: nil
   gem 'webmock'
   gem 'json-schema'
+  gem 'db-query-matchers'
 end
 
 group :development, :test do
@@ -47,6 +50,10 @@ group :development, :test do
   gem 'timecop'
   gem 'brakeman', require: false
   gem 'hakiri', require: false
+
+  gem 'dotenv-rails'
+
+  gem 'jasmine'
 end
 
 group :development do

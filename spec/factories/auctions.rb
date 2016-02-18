@@ -2,11 +2,19 @@ FactoryGirl.define do
   factory :auction do
     start_datetime { Time.now - 3.days }
     end_datetime { Time.now + 3.days }
+    delivery_deadline { 5.business_days.after(end_datetime) }
+    delivery_url { nil }
+    awardee_paid_status { :not_paid }
+    result { :not_applicable }
     title { Faker::Company.catch_phrase }
     summary { Faker::Lorem.paragraph }
-    description { Faker::Lorem.paragraphs(3, true) }
+    description { Faker::Lorem.paragraphs(3, true).join("\n\n") }
     issue_url 'https://github.com/18F/calc/issues/255'
     github_repo 'https://github.com/18F/calc'
+    notes 'The auction went well!'
+    billable_to 'Tock'
+    cap_proposal_url { nil }
+    published { :published }
 
     trait :with_bidders do
       ignore do
@@ -33,7 +41,21 @@ FactoryGirl.define do
     end
 
     trait :closed do
-      end_datetime { Time.now - 1.day }
+      end_datetime { Time.now - 2.days }
+    end
+
+    trait :delivered do
+      closed
+      delivery_url { 'https://github.com/foo/bar' }
+    end
+
+    trait :not_delivered do
+      delivery_url { nil }
+    end
+
+    trait :paid do
+      delivered
+      awardee_paid_status { :paid }
     end
 
     trait :running do
@@ -46,6 +68,77 @@ FactoryGirl.define do
 
     trait :future do
       start_datetime { Time.now + 1.day }
+    end
+
+    trait :delivery_deadline_expired do
+      closed
+      delivery_deadline { end_datetime + 1.day }
+    end
+
+    trait :accepted do
+      result { :accepted }
+    end
+
+    trait :rejected do
+      result { :rejected }
+    end
+
+    trait :paid do
+      awardee_paid_status { :paid }
+    end
+
+    trait :not_paid do
+      awardee_paid_status { :not_paid }
+    end
+
+    trait :cap_submitted do
+      cap_proposal_url { 'https://cap.18f.gov/proposals/2486' }
+    end
+
+    trait :not_evaluated do
+      result { :not_applicable }
+    end
+
+    trait :published do
+      published { :published }
+    end
+
+    trait :unpublished do
+      published { :unpublished }
+    end
+
+    trait :complete_and_successful do
+      with_bidders
+      delivery_deadline_expired
+      delivered
+      accepted
+      cap_submitted
+      paid
+    end
+
+    trait :payment_pending do
+      delivery_deadline_expired
+      delivered
+      accepted
+      cap_submitted
+      not_paid
+    end
+
+    trait :payment_needed do
+      delivery_deadline_expired
+      delivered
+      accepted
+    end
+
+    trait :evaluation_needed do
+      delivery_deadline_expired
+      delivered
+      not_evaluated
+    end
+
+    trait :delivery_past_due do
+      delivery_deadline_expired
+      not_delivered
     end
   end
 end

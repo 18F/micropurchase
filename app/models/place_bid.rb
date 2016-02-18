@@ -9,6 +9,11 @@ class PlaceBid < Struct.new(:params, :current_user)
     create_bid
   end
 
+  def dry_run
+    validate_bid_data
+    unsaveable_bid
+  end
+
   def create_bid
     @bid ||= Bid.create(
       amount: amount,
@@ -17,6 +22,17 @@ class PlaceBid < Struct.new(:params, :current_user)
     )
   end
 
+  def unsaveable_bid
+    @bid ||= Bid.new(
+      amount: amount,
+      bidder_id: current_user.id,
+      auction_id: auction.id
+    )
+
+    @bid.readonly!
+    @bid
+  end
+  
   private
 
   def auction

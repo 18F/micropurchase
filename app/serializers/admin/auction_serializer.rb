@@ -7,15 +7,25 @@ module Admin
                :start_price,
                :start_datetime,
                :end_datetime,
+               :delivery_deadline,
+               :delivery_url,
+               :cap_proposal_url,
+               :awardee_paid_status,
                :title,
                :description,
                :id,
                :created_at,
                :updated_at,
-               :summary
+               :notes,
+               :summary,
+               :billable_to
+
+    def delivery_deadline
+      object.delivery_deadline.iso8601
+    end
 
     def created_at
-     object.created_at.iso8601
+      object.created_at.iso8601
     end
 
     def updated_at

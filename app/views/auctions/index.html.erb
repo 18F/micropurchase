@@ -1,3 +1,10 @@
+<% content_for :data_tags do %>
+  <meta name="twitter:label1" value="Active Auctions">
+  <meta name="twitter:data1" value="<%= @view_model.active_auction_count %>">
+  <meta name="twitter:label2" value="Coming Auctions">
+  <meta name="twitter:data2" value="<%= @view_model.upcoming_auction_count %>">
+<% end %>
+
 <div class="usa-width-full">
   <h1>Welcome!</h1>
   <div class="usa-font-lead">
@@ -8,34 +15,8 @@
 
 <h2>Issues open for bid</h2>
 
-<% if current_user %>
-
-  <% if current_user.sam_account? %>
-    <a href="<%= my_bids_path %>">View my bids »</a>
-  <% else %>
-    <%= render partial: 'components/no_sam_header' %>
-  <% end %>
-
-<% else %>
-
-  <div class="usa-alert usa-alert-info" role="alert">
-     <div class="usa-alert-body">
-       <h3 class="usa-alert-heading">Please Login to Place Bid</h3>
-       <p class="usa-alert-text">To place a bid, you must first be a <a href="<%= login_path %>">registered bidder</a>.</p>
-     </div>
-   </div>
-
-<% end %>
-
+<%= render partial: @view_model.header_partial %>
 
 <div class="usa-grid-full">
-<!--   <hr class='usa-size-one-whole'> -->
-  <% if @auctions.empty? %>
-    <p class="usa-font-lead">There are no current open auctions on the site. Please check back soon to view micropurchase opportunities.</p>
-  <% else %>
-    <% @auctions.each do |auction| %>
-      <%= render partial: 'list_item', locals: {auction: auction} %>
-<!--       <hr> -->
-    <% end %>
-  <% end %>
+  <%= render partial: @view_model.auctions_list_partial %>
 </div>

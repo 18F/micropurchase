@@ -1,0 +1,28 @@
+<table class="admin-auctions-table">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Billable to</th>
+      <th scope="col">Start time</th>
+      <th scope="col">End time</th>
+      <th scope="col">Starting price</th>
+      <th scope="col">Delivery Deadline</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% auctions.each do |auction| %>
+    <tr>
+      <td>
+        <%= link_to(auction.title, admin_auction_path(auction)) %>
+        (<%= link_to('edit', edit_admin_auction_path(auction)) %>)
+        (<%= link_to('preview', "/admin/auctions/#{auction.id}/preview") %>)
+      </td>
+      <td><%= auction.billable_to %></td>
+      <td><%= auction.start_datetime %></td>
+      <td><%= auction.end_datetime %></td>
+      <td><%= auction.start_price %></td>
+      <td><%= auction.delivery_deadline %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
