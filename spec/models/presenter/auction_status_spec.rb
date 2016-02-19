@@ -4,11 +4,11 @@ RSpec.describe Presenter::Auction do
   let(:presenter) { Presenter::Auction.new(auction) }
 
   context "when the auction is expiring soon" do
-    let(:auction) {
+    let(:auction) do
       a = Auction.new(start_datetime: Time.now - 3.day, end_datetime: Time.now + 3.hours, start_price: 3500)
       a.bids.build(amount: 3000)
       a
-    }
+    end
 
     it "has a twitter status data value with human readable time expression" do
       expect(presenter.tag_data_value_status).to eq("about 3 hours left")
@@ -24,11 +24,11 @@ RSpec.describe Presenter::Auction do
   end
 
   context "when the auction is in progress" do
-    let(:auction) {
+    let(:auction) do
       a = Auction.new(start_datetime: Time.now - 3.day, end_datetime: Time.now + 2.days, start_price: 3500)
       a.bids.build(amount: 3000)
       a
-    }
+    end
 
     it "has a twitter status data value with human readable time expression" do
       expect(presenter.tag_data_value_status).to eq("2 days left")
@@ -44,11 +44,11 @@ RSpec.describe Presenter::Auction do
   end
 
   context "when the auction is in the future" do
-    let(:auction) {
+    let(:auction) do
       a = Auction.new(start_datetime: Time.now + 3.day, end_datetime: Time.now + 5.hours, start_price: 3500)
       a.bids.build(amount: 3000)
       a
-    }
+    end
 
     it "has a twitter status data value with human readable time expression" do
       expect(presenter.tag_data_value_status).to eq("in 3 days")
@@ -64,11 +64,11 @@ RSpec.describe Presenter::Auction do
   end
 
   context "when the auction is over" do
-    let(:auction) {
+    let(:auction) do
       a = Auction.new(start_datetime: Time.now - 5.day, end_datetime: Time.now - 5.hours, start_price: 3500)
       a.bids.build(amount: 3000)
       a
-    }
+    end
 
     it "has a twitter status data value with human readable time expression" do
       expect(presenter.tag_data_value_status).to eq("Closed")
@@ -82,6 +82,4 @@ RSpec.describe Presenter::Auction do
       expect(presenter.tag_data_value_2).to eq("$3,000.00")
     end
   end
-
 end
-

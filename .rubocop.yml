@@ -58,7 +58,7 @@ Metrics/ModuleLength:
 Style/MultilineBlockLayout:
   Description: 'Ensures newlines after multiline block do statements.'
   Enabled: false
-  
+
 Rails/HasAndBelongsToMany:
   Description: Prefer has_many :through to has_and_belongs_to_many.
   Enabled: true
@@ -75,10 +75,10 @@ Rails/TimeZone:
   # The value `always` means that `Time` should be used with `zone`.
   # The value `acceptable` allows usage of `in_time_zone` instead of `zone`.
   Enabled: true
-  EnforcedStyle: always
+  EnforcedStyle: strict
   SupportedStyles:
-    - always
-    - acceptable
+    - strict
+    - flexible
 
 Style/AndOr:
   Description: Use &&/|| instead of and/or.
@@ -97,10 +97,20 @@ Style/DotPosition:
   Description: Checks the position of the dot in multi-line method calls.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#consistent-multi-line-chains
   Enabled: true
-  EnforcedStyle: trailing
+  EnforcedStyle: leading
   SupportedStyles:
   - leading
   - trailing
+
+Style/NumericLiterals:
+  Enabled: false
+
+Style/SignalException:
+  EnforcedStyle: semantic
+  SupportedStyles:
+    - only_raise
+    - only_fail
+    - semantic
 
 Style/ExtraSpacing:
   Description: Do not use unnecessary spacing.
@@ -154,6 +164,6 @@ Style/SpaceInsideStringInterpolation:
   SupportedStyles:
     - space
     - no_space
-    
+
 Style/StructInheritance:
   Enabled: false

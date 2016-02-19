@@ -1,10 +1,11 @@
+# coding: utf-8
 Given(/^I am a user with a verified SAM account$/) do
-  @user = User.create(sam_account: true, duns_number: 'duns123', github_id: '123451')
+  @user = FactoryGirl.create(:user, sam_account: true, duns_number: 'duns123', github_id: '123451')
   sign_in(@user)
 end
 
 Given(/^I am a user without a verified sam account$/) do
-  @user = User.create(sam_account: false, duns_number: 'duns123', github_id: '123451')
+  @user = FactoryGirl.create(:user, sam_account: false, duns_number: 'duns123', github_id: '123451')
   sign_in(@user)
 end
 
@@ -24,7 +25,10 @@ When(/^I sign in and verify my account information/) do
 end
 
 Given(/^there is an open auction$/) do
-  @auction = Auction.create(start_datetime: Time.now - 3.days, end_datetime: Time.now + 3.days, title: 'an auction')
+  @auction = FactoryGirl.create(:auction,
+                                start_datetime: Time.now - 3.days,
+                                end_datetime: Time.now + 3.days,
+                                title: 'an auction')
 end
 
 When(/^I visit a the open auction$/) do

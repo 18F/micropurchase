@@ -29,7 +29,7 @@ module Admin
     end
 
     def updated_at
-     object.created_at.iso8601
+      object.created_at.iso8601
     end
 
     def end_datetime

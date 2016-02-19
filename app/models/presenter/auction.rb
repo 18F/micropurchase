@@ -1,6 +1,5 @@
 require 'action_view'
 
-
 module Presenter
   class Auction < SimpleDelegator
     include ActiveModel::SerializerSupport
@@ -25,10 +24,10 @@ module Presenter
     end
 
     delegate :amount, :time,
-      to: :current_bid, prefix: :current_bid
+             to: :current_bid, prefix: :current_bid
 
     delegate :bidder_name, :bidder_duns_number,
-      to: :current_bid, prefix: :current
+             to: :current_bid, prefix: :current
 
     def current_bid_amount_as_currency
       number_to_currency(current_bid_amount)
@@ -39,10 +38,10 @@ module Presenter
     end
 
     def bids
-      model.bids.to_a.
-        map {|bid| Presenter::Bid.new(bid) }.
-        sort_by(&:created_at).
-        reverse
+      model.bids.to_a
+           .map {|bid| Presenter::Bid.new(bid) }
+           .sort_by(&:created_at)
+           .reverse
     end
 
     def bid_count
@@ -133,7 +132,7 @@ module Presenter
     end
 
     delegate :label_class, :label, :tag_data_value_status, :tag_data_label_2, :tag_data_value_2,
-      to: :status_presenter
+             to: :status_presenter
 
     def human_start_time
       if start_datetime < Time.now

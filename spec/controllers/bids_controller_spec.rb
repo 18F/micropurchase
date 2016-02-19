@@ -149,8 +149,8 @@ RSpec.describe BidsController, controller: true do
       end
 
       it "adds a flash error when the bid is bad" do
-        expect(PlaceBid).to receive(:new).with(anything, current_bidder).
-          and_raise(UnauthorizedError.new("Bad bid, sucker!"))
+        expect(PlaceBid).to receive(:new).with(anything, current_bidder)
+          .and_raise(UnauthorizedError.new("Bad bid, sucker!"))
         post :create, request_params
         expect(flash[:error]).to eq("Bad bid, sucker!")
         expect(response).to redirect_to("/auctions/#{auction.id}/bids/new")

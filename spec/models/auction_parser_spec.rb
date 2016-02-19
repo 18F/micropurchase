@@ -76,10 +76,10 @@ RSpec.describe AuctionParser do
       end
 
       it 'uses the time and date' do
-        expect(attributes[:start_datetime].utc.to_s).
-          to eq(Time.parse('Nov 3, 2015 15:15 EST').utc.to_s)
-        expect(attributes[:end_datetime].utc.to_s).
-          to eq(Time.parse("Nov 10, 2015 14:15 EST").utc.to_s)
+        expect(attributes[:start_datetime].utc.to_s)
+          .to eq(Time.parse('Nov 3, 2015 15:15 EST').utc.to_s)
+        expect(attributes[:end_datetime].utc.to_s)
+          .to eq(Time.parse("Nov 10, 2015 14:15 EST").utc.to_s)
       end
     end
 

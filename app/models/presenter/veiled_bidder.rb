@@ -3,7 +3,7 @@ module Presenter
     include ActiveModel::SerializerSupport
 
     def initialize(message: nil)
-      @message
+      @message = message
     end
 
     def id

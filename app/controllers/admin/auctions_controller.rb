@@ -38,7 +38,7 @@ module Admin
       else
         auction = Auction.new
       end
-      #@view_model = ViewModel::AdminAuctionForm.new(auction)
+      # @view_model = ViewModel::AdminAuctionForm.new(auction)
       @auction = Presenter::Auction.new(auction)
     end
 
@@ -108,5 +108,4 @@ module Admin
       end
     end
   end
-
 end

@@ -32,7 +32,7 @@ class PlaceBid < Struct.new(:params, :current_user)
     @bid.readonly!
     @bid
   end
-  
+
   private
 
   def auction

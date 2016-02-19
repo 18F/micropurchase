@@ -1,6 +1,6 @@
 module Presenter
   class DcTime < Struct.new(:time)
-    FORMAT = "%B %d, %Y %r"
+    FORMAT = "%B %d, %Y %r".freeze
     def convert
       return unless time
       time.in_time_zone(ActiveSupport::TimeZone['Eastern Time (US & Canada)'])

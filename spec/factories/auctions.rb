@@ -33,7 +33,7 @@ FactoryGirl.define do
 
       after(:create) do |auction, evaluator|
         evaluator.bidder_ids.each_with_index do |bidder_id, index|
-          lowest_bid = auction.bids.sort_by {|b| b.amount}.first
+          lowest_bid = auction.bids.sort_by(&:amount).first
           amount = lowest_bid.amount - (10 * index) - rand(10)
           auction.bids << FactoryGirl.create(:bid, bidder_id: bidder_id, auction: auction, amount: amount)
         end

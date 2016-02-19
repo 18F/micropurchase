@@ -6,7 +6,7 @@ class Auction < ActiveRecord::Base
   enum awardee_paid_status: {not_paid: 0, paid: 1}
   enum published: {unpublished: 0, published: 1}
 
-
+  # Disable STI
   self.inheritance_column = :__disabled
 
   scope :in_reverse_chron_order, -> { order('end_datetime DESC') }
