@@ -94,6 +94,6 @@ RSpec.configure do |config|
 
   # see https://docs.travis-ci.com/user/code-climate/#Common-Problems
   config.after(:suite) do
-    WebMock.disable_net_connect!(:allow => 'codeclimate.com')
+    WebMock.disable_net_connect!(allow: 'codeclimate.com')
   end
 end

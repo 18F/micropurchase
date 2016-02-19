@@ -4,14 +4,14 @@ RSpec.describe UpdateUser do
   let(:updater) { UpdateUser.new(params, current_user) }
   let(:current_user) { User.create(duns_number: '12341', sam_account: true) }
 
-  let(:params) {
-    ActionController::Parameters.new({
+  let(:params) do
+    ActionController::Parameters.new(
       id: user_id,
       user: {
         duns_number: 'new-new'
       }
-    })
-  }
+    )
+  end
 
   context 'when current user is not the same as the user being edited' do
     let(:user) { User.create }
@@ -32,11 +32,9 @@ RSpec.describe UpdateUser do
 
   context 'when the params are insufficient' do
     let(:user_id) { current_user.id }
-    let(:params) {
-      ActionController::Parameters.new({
-        id: user_id
-      })
-    }
+    let(:params) do
+      ActionController::Parameters.new(id: user_id)
+    end
 
     it 'raises some param related error' do
       expect { updater.save }.to raise_error(ActionController::ParameterMissing)

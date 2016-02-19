@@ -7,16 +7,16 @@ class BidsController < ApplicationController
     #   Auction.includes(:bids, :bidders).find(params[:auction_id])
     # )
     auction = AuctionQuery.new
-                .with_bids_and_bidders
-                .published
-                .find(params[:auction_id])
+                          .with_bids_and_bidders
+                          .published
+                          .find(params[:auction_id])
     @auction = Presenter::Auction.new(auction)
   end
 
   def my_bids
     @auctions = AuctionQuery.new
-                .my_bids(current_user.id)
-                .map {|auction| Presenter::Auction.new(auction)}
+                            .my_bids(current_user.id)
+                            .map {|auction| Presenter::Auction.new(auction) }
   end
 
   def new
@@ -37,28 +37,26 @@ class BidsController < ApplicationController
   end
 
   def create
-    begin
-      fail UnauthorizedError, "You must have a valid SAM.gov account to place a bid" unless current_user.sam_account?
-      @bid = Presenter::Bid.new(PlaceBid.new(params, current_user).perform)
+    fail UnauthorizedError, "You must have a valid SAM.gov account to place a bid" unless current_user.sam_account?
+    @bid = Presenter::Bid.new(PlaceBid.new(params, current_user).perform)
 
-      respond_to do |format|
-        format.html do
-          flash[:bid] = "success"
-          redirect_to "/auctions/#{params[:auction_id]}"
-        end
-        format.json do
-          render json: @bid, serializer: BidSerializer
-        end
+    respond_to do |format|
+      format.html do
+        flash[:bid] = "success"
+        redirect_to "/auctions/#{params[:auction_id]}"
       end
-    rescue UnauthorizedError => e
-      respond_error(e, redirect_path: "/auctions/#{params[:auction_id]}/bids/new")
+      format.json do
+        render json: @bid, serializer: BidSerializer
+      end
     end
+  rescue UnauthorizedError => e
+    respond_error(e, redirect_path: "/auctions/#{params[:auction_id]}/bids/new")
   end
 
   rescue_from 'ActiveRecord::RecordNotFound' do
     respond_to do |format|
       format.html do
-        raise ActionController::RoutingError.new('Not Found')
+        fail ActionController::RoutingError, 'Not Found'
       end
     end
   end

@@ -25,7 +25,10 @@ When(/^I sign in and verify my account information/) do
 end
 
 Given(/^there is an open auction$/) do
-  @auction = FactoryGirl.create(:auction, start_datetime: Time.now - 3.days, end_datetime: Time.now + 3.days, title: 'an auction')
+  @auction = FactoryGirl.create(:auction,
+                                start_datetime: Time.now - 3.days,
+                                end_datetime: Time.now + 3.days,
+                                title: 'an auction')
 end
 
 When(/^I visit a the open auction$/) do

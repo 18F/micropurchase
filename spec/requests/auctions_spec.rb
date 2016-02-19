@@ -84,10 +84,10 @@ RSpec.describe AuctionsController do
           end
 
           let(:authenticated_users_bid) do
-            json_response['auction']['bids'].find {|b| b['bidder_id'] == user.id}
+            json_response['auction']['bids'].find {|b| b['bidder_id'] == user.id }
           end
           let(:all_the_other_bids) do
-            json_response['auction']['bids'].select {|b| b['bidder_id'] != user.id}
+            json_response['auction']['bids'].select {|b| b['bidder_id'] != user.id }
           end
 
           it 'does not veil the bids from the authenticated user' do
@@ -174,10 +174,10 @@ RSpec.describe AuctionsController do
       end
 
       it 'returns iso8601 dates' do
-        expect(json_auctions.map {|a| a['created_at']}).to all(be_iso8601)
-        expect(json_auctions.map {|a| a['updated_at']}).to all(be_iso8601)
-        expect(json_auctions.map {|a| a['start_datetime']}).to all(be_iso8601)
-        expect(json_auctions.map {|a| a['end_datetime']}).to all(be_iso8601)
+        expect(json_auctions.map {|a| a['created_at'] }).to all(be_iso8601)
+        expect(json_auctions.map {|a| a['updated_at'] }).to all(be_iso8601)
+        expect(json_auctions.map {|a| a['start_datetime'] }).to all(be_iso8601)
+        expect(json_auctions.map {|a| a['end_datetime'] }).to all(be_iso8601)
       end
 
       context 'and the auction is running' do

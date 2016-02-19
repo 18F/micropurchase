@@ -5,8 +5,9 @@ module ViewModel
     end
 
     delegate :title, :summary, :html_description, :status, :id, :bid_count, :current_bid_amount_as_currency,
-      :issue_url,
-        to: :auction, prefix: true
+             :issue_url,
+             to: :auction,
+             prefix: true
 
     def auction_status_label
       auction_won? ? "Winning bid (#{auction.current_bidder_name}):" : "Current bid:"

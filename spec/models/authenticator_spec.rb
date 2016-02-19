@@ -39,11 +39,11 @@ RSpec.describe Authenticator do
     end
 
     it 'returns the redirect path' do
-      expect(authenticator.perform).
-        to eq(controller: :users,
-              action: :edit,
-              id: user.id,
-              only_path: true)
+      expect(authenticator.perform)
+        .to eq(controller: :users,
+               action: :edit,
+               id: user.id,
+               only_path: true)
     end
   end
 
@@ -61,11 +61,11 @@ RSpec.describe Authenticator do
     end
 
     it 'returns the redirect path' do
-      expect(authenticator.perform).
-        to eq(controller: :users,
-              action: :edit,
-              id: user.id,
-              only_path: true)
+      expect(authenticator.perform)
+        .to eq(controller: :users,
+               action: :edit,
+               id: user.id,
+               only_path: true)
     end
   end
 
@@ -83,10 +83,10 @@ RSpec.describe Authenticator do
     end
 
     it 'has the redirect url as home' do
-      expect(authenticator.perform).
-        to eq(controller: :auctions,
-              action: :index,
-              only_path: true)
+      expect(authenticator.perform)
+        .to eq(controller: :auctions,
+               action: :index,
+               only_path: true)
     end
   end
 end

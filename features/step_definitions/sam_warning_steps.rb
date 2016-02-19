@@ -20,7 +20,6 @@ Then(/^I will see a link to expand the warning$/) do
   expect(page).not_to have_content("collapse")
 end
 
-
 Then(/^I will see that the warning is still collapsed$/) do
   step "I will see a link to expand the warning"
 end
