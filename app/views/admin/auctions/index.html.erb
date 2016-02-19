@@ -6,7 +6,7 @@
 </h1>
 
 <div class='usa-grid-full'>
-<hr>
+
 <% @auctions.each do |auction| %>
   <div class='usa-width-one-whole auction-name'>
     <a class='usa-width-three-fourths' href="<%= admin_auction_path(auction) %>">
@@ -39,6 +39,5 @@
       <b>Ends:</b> <%= auction.ends_at %>
     </div>
   </div>
-  <hr>
 <% end %>
 </div>
