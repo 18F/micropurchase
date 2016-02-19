@@ -1,6 +1,4 @@
 class AuctionSerializer < ActiveModel::Serializer
-  has_many :bids, serializer: BidSerializer
-
   attributes :issue_url,
              :github_repo,
              :start_price,
@@ -9,9 +7,15 @@ class AuctionSerializer < ActiveModel::Serializer
              :title,
              :description,
              :id,
+             :bids,
              :created_at,
              :updated_at,
              :summary
+
+  def bids
+    bids = object.veiled_bids(scope)
+    bids.map {|bid| BidSerializer.new(bid, {scope: scope, root: false})}
+  end
 
   def created_at
     object.created_at.iso8601

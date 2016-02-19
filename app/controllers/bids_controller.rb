@@ -3,9 +3,6 @@ class BidsController < ApplicationController
   skip_before_action :verify_authenticity_token, if: :api_request?
 
   def index
-    # @auction = Presenter::Auction.new(
-    #   Auction.includes(:bids, :bidders).find(params[:auction_id])
-    # )
     auction = AuctionQuery.new
                           .with_bids_and_bidders
                           .published
@@ -14,9 +11,11 @@ class BidsController < ApplicationController
   end
 
   def my_bids
-    @auctions = AuctionQuery.new
-                            .my_bids(current_user.id)
-                            .map {|auction| Presenter::Auction.new(auction) }
+    @bids = Bid
+              .where(bidder_id: current_user.id)
+              .includes(:auction)
+              .all
+              .map {|bid| Presenter::Bid.new(bid)}
   end
 
   def new

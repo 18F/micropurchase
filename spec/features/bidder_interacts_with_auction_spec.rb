@@ -13,6 +13,190 @@ RSpec.feature "bidder interacts with auction", type: :feature do
       expect(page).to_not have_text(@unpublished_auction.title)
     end
 
+    scenario 'Viewing the various auction rules pages' do
+      single_bid = FactoryGirl.create(:auction, :running, :single_bid)
+      multi_bid = FactoryGirl.create(:auction, :running, :multi_bid)
+
+      visit '/'
+
+      expect(page).to have_content('Multi-bid')
+      expect(page).to have_content('Single-bid')
+
+      click_on(multi_bid.title)
+      expect(page).to have_content('Rules for multi-bid auctions')
+
+      visit '/'
+
+      click_on(single_bid.title)
+      expect(page).to have_content('Rules for single-bid auctions')
+    end
+
+    scenario 'Bidding on a single-bid auction' do
+      single_bid = FactoryGirl.create(:auction, :running, :single_bid)
+      visit '/'
+      sign_in_bidder
+      expect(page).to_not have_content("Current bid:")
+      expect(page).to_not have_content('$')
+      expect(page).to_not have_content("#{single_bid.bidders.count} bids")
+      click_on(single_bid.title)
+
+      click_on("BID")
+      expect(page).to have_content("Your bid:")
+      
+      # fill in the form
+      expect(page).to_not have_content("Current bid:")
+      fill_in("bid_amount", with: '3493')
+      click_on("Submit")
+
+      # takes us to confirmation page
+      expect(page).to have_content("Confirm your bid: $3493")
+      click_on("Confirm")
+
+      expect(page).to_not have_selector(:link_or_button, "BID")
+      expect(page).to have_content("Your bid:")
+      expect(page).to have_content("$3,493.00")
+
+      visit auction_path(single_bid)
+      expect(page).to_not have_selector(:link_or_button, "BID")
+      expect(page).to have_content("Your bid:")
+      expect(page).to have_content("$3,493.00")
+    end
+
+    scenario "Bidding multiple times on a multi-bid auction" do
+      single_bid = FactoryGirl.create(:auction, :running, :multi_bid)
+      visit '/'
+      sign_in_bidder
+
+      click_on(single_bid.title)
+
+      click_on("BID")
+      expect(page).to have_content("Current bid:")
+
+      # fill in the form
+      fill_in("bid_amount", with: '800')
+      click_on("Submit")
+
+      # takes us to confirmation page
+      expect(page).to have_content("Confirm your bid: $800")
+      click_on("Confirm")
+
+      # returns us back to the bid page
+      expect(page).to have_content("Current bid:")
+      expect(page).to have_content("$800.00")
+
+      # bidding again (can't do this in single-bid)
+      click_on("BID")
+
+      # fill in the form
+      fill_in("bid_amount", with: '500')
+      click_on("Submit")
+
+      # takes us to confirmation page
+      expect(page).to have_content("Confirm your bid: $500")
+      click_on("Confirm")
+
+      # returns us back to the bid page
+      expect(page).to have_content("Current bid:")
+      expect(page).to have_content("$500.00")
+    end
+
+    scenario "Viewing bid history for a live single-bid auction" do
+      single_bid = FactoryGirl.create(:auction, :running, :single_bid)
+
+      visit "/auctions/#{single_bid.id}/bids"
+
+      single_bid.bids.each do |bid|
+        amount = ApplicationController.helpers.number_to_currency(bid.amount)
+        expect(page).to_not have_content(amount)
+      end
+
+      expect(page).to_not have_content('[Name withheld until the auction ends]')
+      expect(page).to_not have_content('[Withheld]')
+
+      expect(page).to have_content('Bids are sealed until the auction ends.')
+      expect(page).to have_content('See the auction rules to learn more.')
+    end
+
+    scenario "Viewing your own bid for a live single-bid auction" do
+      single_bid = FactoryGirl.create(:auction, :running, :single_bid)
+      visit '/'
+      sign_in_bidder
+
+      click_on(single_bid.title)
+      click_on("BID")
+
+      # fill in the form
+      fill_in("bid_amount", with: '500')
+      click_on("Submit")
+
+      # takes us to confirmation page
+      expect(page).to have_content("Confirm your bid: $500")
+      click_on("Confirm")
+
+      visit "/auctions/#{single_bid.id}/bids"
+
+      amount = ApplicationController.helpers.number_to_currency(500)
+      expect(page).to have_content(amount)
+      expect(page).to_not have_content("#{amount} *")
+
+      other_peoples_bids = single_bid.bids.reject {|bid| bid.bidder_id == @bidder.id}
+
+      other_peoples_bids.each do |bid|
+        amount = ApplicationController.helpers.number_to_currency(bid.amount)
+        expect(page).to_not have_content(amount)
+      end
+    end
+
+    scenario "Viewing the bid history for a closed single-bid auction" do
+      single_bid = FactoryGirl.create(:auction, :closed, :with_bidders, :single_bid)
+      bids = single_bid.bids.sort_by(&:created_at).reverse
+
+      visit '/'
+
+      sign_in_bidder
+      path = auction_bids_path(single_bid.id)
+      visit path
+
+      expect(page).to_not have_content('Bids are sealed until the auction ends.')
+      expect(page).to_not have_content('See the auction rules to learn more.')
+
+      # ensure the table has the correct content, in the correct order
+      bids.each_with_index do |bid, i|
+        row_number = i + 1
+
+        bid = Presenter::Bid.new(bid)
+
+        # check the "name" column
+        within(:xpath, cel_xpath(row_number, 1)) do
+          expect(page).to have_content(bid.bidder_name)
+        end
+
+        within(:xpath, cel_xpath(row_number, 2)) do
+          expect(page).to have_content(bid.bidder.duns_number)
+        end
+
+        # check the "amount" column
+        if i == 0
+          # ensure the first row bid amount includes an asterisk
+          amount = ApplicationController.helpers.number_to_currency(bid.amount)
+          within(:xpath, cel_xpath(row_number, 3)) do
+            expect(page).to have_content("#{amount} *")
+          end
+        else
+          amount = ApplicationController.helpers.number_to_currency(bid.amount)
+          within(:xpath, cel_xpath(row_number, 3)) do
+            expect(page).to have_content(amount)
+            expect(page).not_to have_content("#{amount} *")
+          end
+        end
+
+        # check the "date" column
+        within(:xpath, cel_xpath(row_number, 4)) do
+          expect(page).to have_content(bid.time)
+        end
+      end
+    end
+
     scenario "There are unpublished auctions and visiting auctions#show" do
       @unpublished_auction = FactoryGirl.create(:auction, :unpublished)
       @published_auction = FactoryGirl.create(:auction, :published)

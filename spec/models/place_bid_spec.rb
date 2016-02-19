@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe PlaceBid do
   let(:place_bid) { PlaceBid.new(params, current_user) }
+  let(:place_second_bid) { PlaceBid.new(second_params, current_user) }
   let(:current_user) { FactoryGirl.create(:user) }
+  let(:second_user) { FactoryGirl.create(:user) }
   let(:amount) { 1005 }
   let(:params) do
     {
@@ -12,11 +14,51 @@ RSpec.describe PlaceBid do
       }
     }
   end
+  let(:second_amount) { 1000 }
+  let(:second_params) do
+    {
+      auction_id: auction_id,
+      bid: {
+        amount: second_amount
+      }
+    }
+  end
   let(:auction_id) { auction.id }
   let(:auction) do
     FactoryGirl.create(:auction,
+                       :multi_bid,
                        start_datetime: Time.now - 3.days,
                        end_datetime: Time.now + 7.days)
+  end
+
+  context 'when the auction is single-bid' do
+    let(:auction) do
+      FactoryGirl.create(:auction,
+                         :single_bid,
+                         :with_bidders,
+                         start_datetime: Time.now - 3.days,
+                         end_datetime: Time.now + 7.days)
+    end
+
+    it 'should reject bids when the user has already bid on the given auction' do
+      expect do
+        place_bid.perform
+        place_second_bid.perform
+      end.to raise_error(UnauthorizedError)
+    end
+
+    it 'should allow tie bids' do
+      params = {
+        auction_id: auction_id,
+        bid: {
+          amount: 10
+        }
+      }
+      expect do
+        PlaceBid.new(params, current_user).perform
+        PlaceBid.new(params, second_user).perform
+      end.to_not raise_error
+    end
   end
 
   context 'when auction cannot be found' do

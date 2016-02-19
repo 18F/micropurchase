@@ -61,80 +61,142 @@ RSpec.describe AuctionsController do
         expect(json_auction['end_datetime']).to be_iso8601
       end
 
-      context 'and the auction is running' do
-        let!(:auction)     { FactoryGirl.create(:auction, :running) }
-        let(:json_bids)    { json_auction['bids'] }
+      context 'when the auction is single bid' do
+        context 'and the auction is running' do
+          let!(:auction)     { FactoryGirl.create(:auction, :running, :single_bid) }
+          let(:json_bids)    { json_auction['bids'] }
 
-        it 'veils all bidder information' do
-          json_bids.each do |bid|
-            expect(bid['bidder_id']).to eq(nil)
-            bidder = bid['bidder']
-            expect(bidder['id']).to          eq(nil)
-            expect(bidder['github_id']).to   eq(nil)
-            expect(bidder['created_at']).to  eq(nil)
-            expect(bidder['updated_at']).to  eq(nil)
-            expect(bidder['sam_account']).to eq(nil)
+          it 'veils all bids' do
+            expect(json_bids).to be_empty
+          end
+
+          context 'and the authenticated user is one of the bidders' do
+            let(:api_key)  { FakeGitHub::VALID_API_KEY }
+            let!(:auction) do
+              FactoryGirl.create(:auction, :single_bid, :running, bidder_ids: [user.id])
+            end
+
+            let(:authenticated_users_bid) do
+              json_response['auction']['bids'].find {|b| b['bidder_id'] == user.id}
+            end
+            let(:all_the_other_bids) do
+              json_response['auction']['bids'].select {|b| b['bidder_id'] != user.id}
+            end
+
+            it 'does not veil the bids from the authenticated user' do
+              expect(authenticated_users_bid['bidder_id']).to_not eq(nil)
+
+              bidder = authenticated_users_bid['bidder']
+
+              expect(bidder['id']).to_not          eq(nil)
+              expect(bidder['github_id']).to_not   eq(nil)
+              expect(bidder['created_at']).to_not  eq(nil)
+              expect(bidder['updated_at']).to_not  eq(nil)
+              expect(bidder['sam_account']).to_not eq(nil)
+            end
+
+            it 'veils the bids not created by the authenticated user' do
+              expect(json_bids).to include(authenticated_users_bid)
+              expect(json_bids.length).to eq(1)
+            end
           end
         end
 
-        context 'and the authenticated user is one of the bidders' do
-          let(:api_key)  { FakeGitHub::VALID_API_KEY }
-          let!(:auction) do
-            FactoryGirl.create(:auction, :running, bidder_ids: [user.id])
-          end
+        context 'and the auction is closed' do
+          let!(:auction)  { FactoryGirl.create(:auction, :closed, :single_bid) }
+          let(:json_bids) { json_auction['bids'] }
 
-          let(:authenticated_users_bid) do
-            json_response['auction']['bids'].find {|b| b['bidder_id'] == user.id }
-          end
-          let(:all_the_other_bids) do
-            json_response['auction']['bids'].select {|b| b['bidder_id'] != user.id }
-          end
-
-          it 'does not veil the bids from the authenticated user' do
-            expect(authenticated_users_bid['bidder_id']).to_not eq(nil)
-
-            bidder = authenticated_users_bid['bidder']
-
-            expect(bidder['id']).to_not          eq(nil)
-            expect(bidder['github_id']).to_not   eq(nil)
-            expect(bidder['created_at']).to_not  eq(nil)
-            expect(bidder['updated_at']).to_not  eq(nil)
-            expect(bidder['sam_account']).to_not eq(nil)
-          end
-
-          it 'veils the bids not created by the authenticated user' do
-            all_the_other_bids.each do |bid|
-              expect(bid['bidder_id']).to eq(nil)
-
+          it 'unveils all bids information' do
+            json_bids.each do |bid|
+              expect(bid['bidder_id']).to_not eq(nil)
               bidder = bid['bidder']
-
-              expect(bidder['id']).to          eq(nil)
-              expect(bidder['github_id']).to   eq(nil)
-              expect(bidder['created_at']).to  eq(nil)
-              expect(bidder['updated_at']).to  eq(nil)
-              expect(bidder['email']).to       eq(nil)
-              expect(bidder['sam_account']).to eq(nil)
+              expect(bidder['id']).to_not          eq(nil)
+              expect(bidder['github_id']).to_not   eq(nil)
+              expect(bidder['created_at']).to_not  eq(nil)
+              expect(bidder['updated_at']).to_not  eq(nil)
+              expect(bidder['email']).to_not       eq(nil)
+              expect(bidder['sam_account']).to_not eq(nil)
             end
           end
         end
       end
 
-      context 'and the auction is closed' do
-        let!(:auctions) do
-          [FactoryGirl.create(:auction, :closed)]
-        end
-        let(:json_bids) { json_auction['bids'] }
+      context 'when the auction is mult-bid' do
+        context 'and the auction is running' do
+          let!(:auction)     { FactoryGirl.create(:auction, :running) }
+          let(:json_bids)    { json_auction['bids'] }
 
-        it 'unveils all bidder information' do
-          json_bids.each do |bid|
-            expect(bid['bidder_id']).to_not eq(nil)
-            bidder = bid['bidder']
-            expect(bidder['id']).to_not          eq(nil)
-            expect(bidder['github_id']).to_not   eq(nil)
-            expect(bidder['created_at']).to_not  eq(nil)
-            expect(bidder['updated_at']).to_not  eq(nil)
-            expect(bidder['email']).to_not       eq(nil)
-            expect(bidder['sam_account']).to_not eq(nil)
+          it 'veils all bidder information' do
+            json_bids.each do |bid|
+              expect(bid['bidder_id']).to eq(nil)
+              bidder = bid['bidder']
+              expect(bidder['id']).to          eq(nil)
+              expect(bidder['github_id']).to   eq(nil)
+              expect(bidder['created_at']).to  eq(nil)
+              expect(bidder['updated_at']).to  eq(nil)
+              expect(bidder['sam_account']).to eq(nil)
+            end
+          end
+
+          context 'and the authenticated user is one of the bidders' do
+            let(:api_key)  { FakeGitHub::VALID_API_KEY }
+            let!(:auction) do
+              FactoryGirl.create(:auction, :running, bidder_ids: [user.id])
+            end
+
+            let(:authenticated_users_bid) do
+              json_response['auction']['bids'].find {|b| b['bidder_id'] == user.id}
+            end
+            let(:all_the_other_bids) do
+              json_response['auction']['bids'].select {|b| b['bidder_id'] != user.id}
+            end
+
+            it 'does not veil the bids from the authenticated user' do
+              expect(authenticated_users_bid['bidder_id']).to_not eq(nil)
+
+              bidder = authenticated_users_bid['bidder']
+
+              expect(bidder['id']).to_not          eq(nil)
+              expect(bidder['github_id']).to_not   eq(nil)
+              expect(bidder['created_at']).to_not  eq(nil)
+              expect(bidder['updated_at']).to_not  eq(nil)
+              expect(bidder['sam_account']).to_not eq(nil)
+            end
+
+            it 'veils the bids not created by the authenticated user' do
+              all_the_other_bids.each do |bid|
+                expect(bid['bidder_id']).to eq(nil)
+
+                bidder = bid['bidder']
+
+                expect(bidder['id']).to          eq(nil)
+                expect(bidder['github_id']).to   eq(nil)
+                expect(bidder['created_at']).to  eq(nil)
+                expect(bidder['updated_at']).to  eq(nil)
+                expect(bidder['email']).to       eq(nil)
+                expect(bidder['sam_account']).to eq(nil)
+              end
+            end
+          end
+        end
+
+        context 'and the auction is closed' do
+          let!(:auctions) do
+            [FactoryGirl.create(:auction, :closed)]
+          end
+          let(:json_bids) { json_auction['bids'] }
+
+          it 'unveils all bidder information' do
+            json_bids.each do |bid|
+              expect(bid['bidder_id']).to_not eq(nil)
+              bidder = bid['bidder']
+              expect(bidder['id']).to_not          eq(nil)
+              expect(bidder['github_id']).to_not   eq(nil)
+              expect(bidder['created_at']).to_not  eq(nil)
+              expect(bidder['updated_at']).to_not  eq(nil)
+              expect(bidder['email']).to_not       eq(nil)
+              expect(bidder['sam_account']).to_not eq(nil)
+            end
           end
         end
       end
@@ -180,45 +242,83 @@ RSpec.describe AuctionsController do
         expect(json_auctions.map {|a| a['end_datetime'] }).to all(be_iso8601)
       end
 
-      context 'and the auction is running' do
-        let!(:auctions) do
-          [FactoryGirl.create(:auction, :running)]
-        end
-        let(:json_bids) { json_auctions.first['bids'] }
-
-        it 'veils all bidder information' do
-          json_bids.each do |bid|
-            expect(bid['bidder_id']).to eq(nil)
-            bidder = bid['bidder']
-            expect(bidder['id']).to          eq(nil)
-            expect(bidder['github_id']).to   eq(nil)
-            expect(bidder['created_at']).to  eq(nil)
-            expect(bidder['updated_at']).to  eq(nil)
-            expect(bidder['email']).to       eq(nil)
-            expect(bidder['sam_account']).to eq(nil)
-          end
-        end
-
-        context 'and the auction is closed' do
+      context 'when the auction is multi bid' do
+        context 'and the auction is running' do
           let!(:auctions) do
-            [FactoryGirl.create(:auction, :closed)]
+            [FactoryGirl.create(:auction, :running, :multi_bid)]
           end
           let(:json_bids) { json_auctions.first['bids'] }
 
-          it 'unveils all bidder information' do
+          it 'veils all bidder information' do
             json_bids.each do |bid|
-              expect(bid['bidder_id']).to_not eq(nil)
+              expect(bid['bidder_id']).to eq(nil)
               bidder = bid['bidder']
-              expect(bidder['id']).to_not          eq(nil)
-              expect(bidder['github_id']).to_not   eq(nil)
-              expect(bidder['created_at']).to_not  eq(nil)
-              expect(bidder['updated_at']).to_not  eq(nil)
-              expect(bidder['email']).to_not       eq(nil)
-              expect(bidder['sam_account']).to_not eq(nil)
+              expect(bidder['id']).to          eq(nil)
+              expect(bidder['github_id']).to   eq(nil)
+              expect(bidder['created_at']).to  eq(nil)
+              expect(bidder['updated_at']).to  eq(nil)
+              expect(bidder['email']).to       eq(nil)
+              expect(bidder['sam_account']).to eq(nil)
+            end
+          end
+
+          context 'and the auction is closed' do
+            let!(:auctions) do
+              [FactoryGirl.create(:auction, :closed, :multi_bid)]
+            end
+            let(:json_bids) { json_auctions.first['bids'] }
+
+            it 'unveils all bidder information' do
+              json_bids.each do |bid|
+                expect(bid['bidder_id']).to_not eq(nil)
+                bidder = bid['bidder']
+                expect(bidder['id']).to_not          eq(nil)
+                expect(bidder['github_id']).to_not   eq(nil)
+                expect(bidder['created_at']).to_not  eq(nil)
+                expect(bidder['updated_at']).to_not  eq(nil)
+                expect(bidder['email']).to_not       eq(nil)
+                expect(bidder['sam_account']).to_not eq(nil)
+              end
             end
           end
         end
       end
+
+      context 'when the auction is single bid' do
+        context 'and the auction is running' do
+          let!(:auctions) do
+            [FactoryGirl.create(:auction, :running, :single_bid)]
+          end
+          let(:json_bids) { json_auctions.first['bids'] }
+
+          it 'veils all bids' do
+            expect(json_bids).to be_empty
+          end
+
+          context 'and the auction is closed' do
+            let!(:auctions) do
+              [FactoryGirl.create(:auction, :closed, :single_bid)]
+            end
+            let(:json_bids) { json_auctions.first['bids'] }
+
+            it 'unveils all bids' do
+              json_bids.each do |bid|
+                expect(bid['bidder_id']).to_not eq(nil)
+                bidder = bid['bidder']
+                expect(bidder['id']).to_not          eq(nil)
+                expect(bidder['github_id']).to_not   eq(nil)
+                expect(bidder['created_at']).to_not  eq(nil)
+                expect(bidder['updated_at']).to_not  eq(nil)
+                expect(bidder['email']).to_not       eq(nil)
+                expect(bidder['sam_account']).to_not eq(nil)
+              end
+
+              expect(json_bids.length).to eq(auctions.first.bids.length)
+            end
+          end
+        end
+      end
+
     end
   end
 end

@@ -23,6 +23,12 @@ class AuctionsController < ApplicationController
     end
   end
 
+  def single_bid_rules
+  end
+
+  def multi_bid_rules
+  end
+
   rescue_from 'ActiveRecord::RecordNotFound' do
     respond_to do |format|
       format.html do
