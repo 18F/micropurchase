@@ -18,11 +18,11 @@ Feature: Toggling visibility on the sam status warning
     Given I am a user without a verified sam account
     And there is an open auction
     When I sign in and verify my account information
-    And I collapse the warning about my SAM registrtation
+    And I collapse the warning about my SAM registration
     Then I will not see the warning
     And I will see a link to expand the warning
 
-    When I visit a the open auction
+    When I visit the auction
     Then I will see that the warning is still collapsed
 
     When I click to expand the warning

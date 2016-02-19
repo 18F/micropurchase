@@ -6,7 +6,7 @@ Then(/^I should see a warning that my SAM registration is not complete$/) do
   expect(page).to have_selector(".auction-alert")
 end
 
-When(/^I collapse the warning about my SAM registrtation$/) do
+When(/^I collapse the warning about my SAM registration$/) do
   click_on "collapse"
 end
 

@@ -9,6 +9,11 @@ Given(/^I am a user without a verified sam account$/) do
   sign_in(@user)
 end
 
+Given(/^I am an administrator$/) do
+  @user = FactoryGirl.create(:admin_user)
+  sign_in(@user)
+end
+
 When(/^I visit the home page$/) do
   visit "/"
 end
@@ -25,12 +30,33 @@ When(/^I sign in and verify my account information/) do
 end
 
 Given(/^there is an open auction$/) do
-  @auction = FactoryGirl.create(:auction,
-                                start_datetime: Time.now - 3.days,
-                                end_datetime: Time.now + 3.days,
-                                title: 'an auction')
+  @auction = FactoryGirl.create(:auction, :with_bidders)
 end
 
-When(/^I visit a the open auction$/) do
+When(/^I visit the auction$/) do
   visit "/auctions/#{@auction.id}"
+end
+
+When(/^I click on the auction$/) do
+  click_on(@auction.title)
+end
+
+Then(/^I expect to see the winning bid for the auction$/) do
+  auction = Presenter::Auction.new(@auction)
+  current_bid_amount = ApplicationController.helpers.number_to_currency(
+    auction.current_bid.amount
+  )
+
+  expect(page).to have_text(current_bid_amount)
+end
+
+Then(/^I expect to see the description for the auction$/) do
+  expect(page).to have_text(@auction.description)
+end
+
+Then(/^I expect to see the auction deadline$/) do
+  expect(page).to have_text(
+                    Presenter::DcTime.convert(@auction.end_datetime).
+                    beginning_of_day.strftime(Presenter::DcTime::FORMAT)
+                  )
 end
