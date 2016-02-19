@@ -2,7 +2,7 @@ language: ruby
 before_script:
 - bundle exec rake db:create
 - bundle exec rake db:migrate
-script: bundle exec rake spec
+script: bundle exec rake
 addons:
   postgresql: '9.3'
   code_climate:
