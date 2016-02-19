@@ -6,9 +6,7 @@
 <a href="/">« Back to open issues</a>
 
 <div class="usa-grid-full">
-  <hr class='usa-size-one-whole'>
   <% @auctions.each do |auction| %>
     <%= render partial: '/auctions/list_item', locals: {auction: auction} %>
-    <hr>
   <% end %>
 </div>
