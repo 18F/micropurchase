@@ -52,5 +52,6 @@ module ViewModel
     def current_user_has_no_sam_verification?
       current_user && !current_user.sam_account?
     end
+
   end
 end
