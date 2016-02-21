@@ -39,6 +39,14 @@ module ViewModel
       auction.start_datetime.strftime("%m/%d/%Y at %I:%M %p %Z")
     end
 
+    def show_bid_button_unless_over
+      return if auction.over?
+
+      content_tag :p do 
+        link_to "Bid >>", new_auction_bid_path(auction), {class: "usa-button"}
+      end
+    end
+
     private
 
     def bid_to_plural
@@ -52,5 +60,6 @@ module ViewModel
     def current_user_has_no_sam_verification?
       current_user && !current_user.sam_account?
     end
+
   end
 end
