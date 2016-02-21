@@ -215,11 +215,8 @@ textarea#auction_description {
   }
 }
 
-/* not sure what's up, but the usa-button-green seems to have blue hover ??
- * so a little loving help below:
- * */
-.usa-button.usa-button-green,
-.usa-button-big.usa-button-green {
+.usa-button,
+.usa-button-big {
   background-color: $color-green;
 
   &:hover {

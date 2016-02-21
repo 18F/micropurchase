@@ -5,6 +5,7 @@ module Presenter
     include ActiveModel::SerializerSupport
     include ActionView::Helpers::DateHelper
     include ActionView::Helpers::NumberHelper
+    include ActionView::Helpers::UrlHelper
 
     def current_bid?
       current_bid_record != nil
