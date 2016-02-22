@@ -13,7 +13,7 @@ Feature: Using the Admin Auctions panel
 
     When I click on the auction
     Then I expect to see the winning bid for the auction
-    And I expect to see the description for the auction
+    And I expect to see the auction description
 
   Scenario: Adding a multi-bid auction
     Given I am an administrator
@@ -23,7 +23,7 @@ Feature: Using the Admin Auctions panel
     Then I should be able to fill out a form for the auction
 
     When I click on create
-    Then I expect to see the auction
+    Then I expect to see the auction title
     Then I expect to see the auction deadline
 
   Scenario: Updating an auction
@@ -36,7 +36,7 @@ Feature: Using the Admin Auctions panel
     Then I should be able to fill out a form for the auction
 
     When I click on update
-    Then I expect to see the auction with the new title
+    Then I expect to see the new title for the auction
 
     When I click on the auction
     Then I expect to see the changes

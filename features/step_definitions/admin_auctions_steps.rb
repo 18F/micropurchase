@@ -10,7 +10,7 @@ Then(/^I expect to see the auction$/) do
   expect(page).to have_text(@auction.title)
 end
 
-Then(/^I expect to see the auction with the new title$/) do
+Then(/^I expect to see the new title for the auction$/) do
   expect(page).to have_text(@title)
   @auction = Auction.where(title: @title).first
 end

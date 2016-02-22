@@ -22,7 +22,7 @@ Feature: Toggling visibility on the sam status warning
     Then I will not see the warning
     And I will see a link to expand the warning
 
-    When I visit the auction
+    When I visit the auction page
     Then I will see that the warning is still collapsed
 
     When I click to expand the warning
