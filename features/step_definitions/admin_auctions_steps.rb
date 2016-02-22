@@ -56,20 +56,12 @@ Then(/^I expect to see the changes$/) do
   expect(page).to have_text(@description)
 end
 
-When(/^I click to create a new auction$/) do
-  find_link('Create a new auction').click
-end
-
-When(/^I click on edit$/) do
+When(/^I click to edit the auction$/) do
   click_on("Edit")
   @auction = Auction.where(title: @title).first
 end
 
-When(/^I click on create$/) do
+When(/^I click to create an auction$/) do
   click_on("Create")
   @auction = Auction.where(title: @title).first
-end
-
-When(/^I click on update$/) do
-  click_on('Update')
 end

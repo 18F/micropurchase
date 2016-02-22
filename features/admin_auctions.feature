@@ -11,7 +11,7 @@ Feature: Using the Admin Auctions panel
     Then I will not see a warning I must be an admin
     And I expect to see the auction
 
-    When I click on the auction
+    When I click on the auction title
     Then I expect to see the winning bid for the auction
     And I expect to see the auction description
 
@@ -19,10 +19,10 @@ Feature: Using the Admin Auctions panel
     Given I am an administrator
     When I sign in
     And I visit the auctions admin page
-    And I click to create a new auction
+    And I click on the "Create a new auction" link
     Then I should be able to fill out a form for the auction
 
-    When I click on create
+    When I click to create an auction
     Then I expect to see the auction title
     Then I expect to see the auction deadline
 
@@ -32,11 +32,11 @@ Feature: Using the Admin Auctions panel
     When I sign in
     And I visit the auctions admin page
 
-    When I click on edit
+    When I click to edit the auction
     Then I should be able to fill out a form for the auction
 
-    When I click on update
+    When I click on the Update button
     Then I expect to see the new title for the auction
 
-    When I click on the auction
+    When I click on the auction title
     Then I expect to see the changes

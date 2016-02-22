@@ -1,8 +1,8 @@
-When(/^I click on the "?(.+)"? button$/) do |button|
+When(/^I click on the "?([^"]+)"? button$/) do |button|
   click_on(button)
 end
 
-When(/^I click on "?(.+)"? link$/) do |label|
+When(/^I click on the "?([^"]+)"? link$/) do |label|
   click_on(label)
 end
 
