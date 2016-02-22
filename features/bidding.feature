@@ -17,14 +17,14 @@ Feature: Bidding
     And I click on the "View details »" link
     Then I expect to see a link to the auction issue URL
 
-    When I click on the Bid button
-    Then I expect to see an Authorize With Github button
+    When I click on the "BID »" button
+    Then I expect to see an "Authorize with GitHub »" button
 
-    When I click on the Authorize With Github button
+    When I click on the "Authorize with GitHub »" link
     And I click on the Submit button
     Then I expect to see the auction title
 
-    When I click on the Bid button
+    When I click on the "Bid »" button
     Then I expect to see a current bid amount
 
     When I submit a bid for $800
@@ -35,13 +35,14 @@ Feature: Bidding
 
   Scenario: Logging in before bidding
     Given there is an open auction
-    And I am allowed to bid
+    And I am a user with a verified SAM account
+    And I sign in and verify my account information
     When I click on the "Bid »" button
     Then I expect to not see an Authorize With Github button
     And I expect to see a current bid amount
 
     When I submit a bid for $999
-    Then I expect to see a confirmation for $999.00
+    Then I expect to see a confirmation for $999
     
     When I click on the Confirm button
     Then I expect to see a current bid amount of $999

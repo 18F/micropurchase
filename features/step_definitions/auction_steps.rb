@@ -105,7 +105,7 @@ Then(/^I expect to see a confirmation for \$(.+)$/) do |amount|
 end
 
 Then(/^I expect to see I have the winning bid$/) do
-  expect(page).to have_content("You are currently the winning bidder.")
+  expect(page).to have_content("You currently have the winning bid.")
   expect(page).to_not have_content("You are currently not the winning bidder.")
 end
 
