@@ -33,7 +33,7 @@
       <p class="auction-label-info"><%= @view_model.auction_formatted_end_time %></p>
       <p class="auction-label"><%= @view_model.auction_start_label %></p>
       <p class="auction-label-info"><%= @view_model.auction_formatted_start_time %></p>
-      <%= show_bid_button_unless_auction_over(@view_model.auction) %>
+      <%= @view_model.show_bid_button_unless_over(self) %>
     </div>
       <div class="auction-more-info">
         <p>
