@@ -79,9 +79,9 @@ RSpec.describe AuctionQuery do
   end
 
   describe '#in_reverse_chron_order' do
-    let(:auctions) { 5.times.map { FactoryGirl.create(:auction) } }
+    let(:auctions) { Array.new(5) { FactoryGirl.create(:auction) } }
     let(:sorted_auctions) do
-      auctions.sort_by {|a| a.end_datetime}
+      auctions.sort_by(&:end_datetime)
     end
 
     it 'should return auctions in reverse chronological order by endtime' do
@@ -201,5 +201,4 @@ RSpec.describe AuctionQuery do
       expect(query.public_index).to match_array([published_auction])
     end
   end
-
 end

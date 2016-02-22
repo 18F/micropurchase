@@ -17,7 +17,7 @@
 </div>
 <p><%=h raw @auction.html_summary %></p>
 <p><%=h raw @auction.html_description %></p>
-<hr>
+
 <div class='usa-grid'>
   <% if @auction.current_bid? %>
     <h2>Current Bid: </h2>
@@ -27,7 +27,7 @@
       <div class='usa-width-one-fourth amount'><%= number_to_currency(@auction.current_bid_amount) %></div>
       <div class='usa-width-one-fourth amount'><%= @auction.current_bid_time %></div>
     </div>
-    <hr>
+
     <% @auction.bids.each do |bid| %>
       <div class='usa-width-one-whole'>
         <div class='usa-width-one-fourth bidder-name'><%= bid.bidder_name %></div>

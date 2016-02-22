@@ -5,8 +5,8 @@ RSpec.describe UsersController, type: :controller do
 
   describe '#edit' do
     it 'raises a ActiveRecord::RecordNotFound when user is not found' do
-      expect { get :edit, {id: user.id + 1000}, user_id: user.id }.
-        to raise_error(ActiveRecord::RecordNotFound)
+      expect { get :edit, {id: user.id + 1000}, user_id: user.id }
+        .to raise_error(ActiveRecord::RecordNotFound)
     end
 
     it 'handles it as unauthorized when user is not in session' do

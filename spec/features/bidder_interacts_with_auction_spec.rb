@@ -20,6 +20,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
       visit auction_path(@published_auction)
 
       expect(page).to have_text(@published_auction.description)
+      expect(page).to have_text(@published_auction.title)
 
       expect do
         visit auction_path(@unpublished_auction)

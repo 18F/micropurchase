@@ -2,7 +2,7 @@ class UpdateUser < Struct.new(:params, :current_user)
   attr_reader :status
 
   def save
-    fail UnauthorizedError if !allowed_to_edit?
+    fail UnauthorizedError unless allowed_to_edit?
 
     update_user
   end

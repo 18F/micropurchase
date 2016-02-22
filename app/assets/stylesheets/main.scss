@@ -14,15 +14,15 @@ $color-cool-blue: #205493;
 $color-purple: #4c2c92;
 
 html {
-    font-size: 16px;
+    font-size: 62.5%;
 }
 
 body {
-    font-size: 1.0625rem;
+    font-size: 1.8rem;
 }
 
 p,li,span,button {
-    font-size: 1.0625rem;
+    font-size: 1.8rem;
 }
 
 .usa-font-lead p {
@@ -280,9 +280,6 @@ nav.usa-site-navbar a {
   line-height: 0;
 }
 
-hr {
-  border: 1px solid #5b616b;
-}
 
 footer {
   margin-top: 50px;
@@ -387,11 +384,12 @@ h1, h2, h3, h4, h5, h6, p {
   padding: 40px 40px;
 }
 
-/*
+
 .usa-width-one-whole .issue-list-item {
   border: 1px solid #ccc;
+  margin-bottom: 30px;
 }
-*/
+
 
 .usa-label-big {
   background-color: #00a6d2;

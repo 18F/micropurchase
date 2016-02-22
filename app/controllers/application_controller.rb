@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   # optionally have authenticated access to public routes.
   # for example, /auctions/:id/bids will unveil bidder info about
   # the authenticated user. but the page also works fine sans authentication.
-  before_action :set_current_user_to_api_user!, if: Proc.new { api_request? }
+  before_action :set_current_user_to_api_user!, if: proc { api_request? }
 
   def current_user
     @current_user ||= User.where(id: session[:user_id]).first
@@ -80,19 +80,14 @@ class ApplicationController < ActionController::Base
     should_redirect
   end
 
+  # rubocop:disable Style/AccessorMethodName
   def set_current_user_to_api_user!(raise_errors: false)
     user = User.where(github_id: github_id).first
 
-    if raise_errors
-      if user.nil?
-        fail UnauthorizedError::UserNotFound
-      else
-        @current_user = user
-      end
-    else
-      @current_user = user
-    end
+    fail UnauthorizedError::UserNotFound if user.nil? && raise_errors
+    @current_user = user
   end
+  # rubocop:enable Style/AccessorMethodName
 
   def github_id
     if html_request? && current_user

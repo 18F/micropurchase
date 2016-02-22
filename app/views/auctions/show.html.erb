@@ -9,7 +9,7 @@
 <div class="usa-grid-full">
   <p><a href="<%= root_path %>">« Back to open projects</a></p>
   <div class="usa-width-two-thirds auction-description">
-    <h1>Auction Details</h1>
+    <h1><%= @view_model.auction_record.title %></h1>
     <div class="github-issue">
       <%=h raw @view_model.auction_html_description %>
     </div>

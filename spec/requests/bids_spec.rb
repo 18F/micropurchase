@@ -23,7 +23,6 @@ RSpec.describe AuctionsController do
   end
   let(:status) { response.status }
 
-
   describe 'POST /auctions/:auction_id/bids' do
     before do
       post auction_bids_path(auction), params, headers
@@ -34,7 +33,7 @@ RSpec.describe AuctionsController do
       let(:api_key) { nil }
       let(:auction) { FactoryGirl.create(:auction, :running) }
       let(:current_auction_price) do
-         auction.bids.sort_by {|b| b.amount}.first.amount
+        auction.bids.sort_by(&:amount).first.amount
       end
       let(:bid_amount) { current_auction_price - 10 }
 
@@ -51,7 +50,7 @@ RSpec.describe AuctionsController do
       let(:api_key) { FakeGitHub::INVALID_API_KEY }
       let(:auction) { FactoryGirl.create(:auction, :running) }
       let(:current_auction_price) do
-         auction.bids.sort_by {|b| b.amount}.first.amount
+        auction.bids.sort_by(&:amount).first.amount
       end
       let(:bid_amount) { current_auction_price - 10 }
 
@@ -68,7 +67,7 @@ RSpec.describe AuctionsController do
       let(:api_key) { FakeGitHub::VALID_API_KEY }
       let(:auction) { FactoryGirl.create(:auction, :closed, :with_bidders) }
       let(:current_auction_price) do
-         auction.bids.sort_by {|b| b.amount}.first.amount
+        auction.bids.sort_by(&:amount).first.amount
       end
       let(:bid_amount) { current_auction_price - 10 }
 
@@ -85,7 +84,7 @@ RSpec.describe AuctionsController do
       let(:api_key) { FakeGitHub::VALID_API_KEY }
       let(:auction) { FactoryGirl.create(:auction, :future, :with_bidders) }
       let(:current_auction_price) do
-         auction.bids.sort_by {|b| b.amount}.first.amount
+        auction.bids.sort_by(&:amount).first.amount
       end
       let(:bid_amount) { current_auction_price - 10 }
 
@@ -102,7 +101,7 @@ RSpec.describe AuctionsController do
       let(:api_key) { FakeGitHub::VALID_API_KEY }
       let(:auction) { FactoryGirl.create(:auction, :running) }
       let(:current_auction_price) do
-         auction.bids.sort_by {|b| b.amount}.first.amount
+        auction.bids.sort_by(&:amount).first.amount
       end
 
       context 'and the bid amount is the lowest' do

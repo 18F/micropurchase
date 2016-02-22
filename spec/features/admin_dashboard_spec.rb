@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "AdminDashboards", type: :feature do
   before do
-    @complete_and_successful = 5.times.map do
+    @complete_and_successful = Array.new(5) do
       FactoryGirl.create(:auction, :complete_and_successful)
     end
     @unpublished = FactoryGirl.create(:auction, :unpublished)
@@ -22,5 +22,4 @@ RSpec.feature "AdminDashboards", type: :feature do
 
     expect(page).to have_text(@unpublished.description)
   end
-
 end

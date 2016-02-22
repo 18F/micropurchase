@@ -2,7 +2,6 @@ require 'rails_helper'
 require 'rake'
 
 RSpec.describe 'rake sam:check' do
-
   before do
     allow(SamAccountReckoner).to receive(:new).and_return(reckoner)
     Micropurchase::Application.load_tasks
@@ -11,7 +10,7 @@ RSpec.describe 'rake sam:check' do
   context 'when the sam_account for the user is false' do
     let!(:user) { FactoryGirl.create(:user, :with_duns_in_sam, sam_account: false) }
     let(:reckoner) { SamAccountReckoner.new(user) }
-    
+
     it 'uses the SamAccountReckoner to determine whether the account is valid' do
       expect(SamAccountReckoner.unreckoned).to_not be_empty
 

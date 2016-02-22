@@ -1,10 +1,10 @@
 class AuctionParser < Struct.new(:params)
   def attributes
-    general_attributes.merge({
+    general_attributes.merge(
       start_datetime: start_datetime,
       end_datetime: end_datetime,
       start_price: start_price
-    })
+    )
   end
 
   def general_attributes
@@ -64,7 +64,7 @@ class AuctionParser < Struct.new(:params)
     parsed_time = Chronic.parse(time)
     fail ArgumentError, "Missing or poorly formatted time: '#{time}'" unless parsed_time
 
-    unless time.match(/\d{1,2}:\d{2}/)
+    unless time =~ /\d{1,2}:\d{2}/
       parsed_time = parsed_time.beginning_of_day
     end
     parsed_time.utc
