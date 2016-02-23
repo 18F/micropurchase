@@ -1,11 +1,11 @@
 OmniAuth.config.test_mode = true
 
-def mock_sign_in(user)
+def mock_sign_in(github_id, name)
   OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(
     provider: 'github',
-    uid: user.github_id,
+    uid: github_id,
     info: {
-      name: user.name
+      name: name
     }
   )
 end

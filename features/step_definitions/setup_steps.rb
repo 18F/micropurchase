@@ -1,17 +1,20 @@
 # coding: utf-8
 Given(/^I am a user with a verified SAM account$/) do
   @user = FactoryGirl.create(:user, sam_account: true, github_id: '123451')
-  mock_sign_in(@user)
+  @github_id = @user.github_id
+  mock_sign_in(@user.github_id, @user.name)
 end
 
 Given(/^I am a user without a verified sam account$/) do
   @user = FactoryGirl.create(:user, sam_account: false, github_id: '123451')
-  mock_sign_in(@user)
+  @github_id = @user.github_id
+  mock_sign_in(@user.github_id, @user.name)
 end
 
 Given(/^I am an administrator$/) do
   @user = FactoryGirl.create(:admin_user)
-  mock_sign_in(@user)
+  @github_id = @user.github_id
+  mock_sign_in(@user.github_id, @user.name)
 end
 
 When(/^I visit the home page$/) do
