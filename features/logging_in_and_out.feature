@@ -1,5 +1,5 @@
 Feature: logging in and out
-  As a contractor
+  As a vendor
   I should be able to log into the application
   So that I can bid on auctions
 

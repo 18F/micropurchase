@@ -1,5 +1,5 @@
 Feature: Bid Details
-  As a contractor
+  As a vendor
   I want to be able to view all the bids on auctions
   So I can make a good bid
 

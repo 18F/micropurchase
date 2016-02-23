@@ -1,5 +1,5 @@
 Feature: Bidding
-  As a contractor
+  As a vendor
   I want to be able to bid on auctions
   So I can be paid for work
 

@@ -1,5 +1,5 @@
 Feature: Closed Auctions
-  As a contractor
+  As a vendor
   I want to be able to view closed auctions
   So that I see who won
 

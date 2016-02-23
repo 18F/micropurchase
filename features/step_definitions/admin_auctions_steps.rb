@@ -10,7 +10,7 @@ Then(/^I expect to see the auction$/) do
   expect(page).to have_text(@auction.title)
 end
 
-Then(/^I expect to see the new title for the auction$/) do
+Then(/^I expect my auction changes to have been saved$/) do
   expect(page).to have_text(@title)
   @auction = Auction.where(title: @title).first
 end
@@ -19,7 +19,7 @@ Then(/^I set the auction type to be multi_bid$/) do
   select("multi_bid", from: "auction_type")
 end
 
-Then(/^I should be able to fill out a form for the auction$/) do
+Then(/^I should be able to edit the existing auction form$/) do
   @title = 'This is the form-edited title'
   fill_in("auction_title", with: @title)
 
@@ -50,7 +50,7 @@ Then(/^I should be able to fill out a form for the auction$/) do
   select("published", from: "auction_published")
 end
 
-Then(/^I expect to see the changes$/) do
+Then(/^I expect to see new content on the page$/) do
   expect(page).to have_text(@title)
   expect(page).to have_text(@summary)
   expect(page).to have_text(@description)
