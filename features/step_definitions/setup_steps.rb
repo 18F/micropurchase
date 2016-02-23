@@ -40,3 +40,4 @@ When(/^I sign in and verify my account information/) do
   step "I sign in"
   click_on "Submit"
 end
+

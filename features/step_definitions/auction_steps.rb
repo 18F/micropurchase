@@ -20,6 +20,22 @@ Given(/^there is an? (.+) auction$/) do |label|
              end
 end
 
+Given(/^there are many different auctions$/) do
+  Timecop.freeze do
+    Timecop.scale(1.hour)
+
+    @closed_auctions = 3.times.to_a.map do
+      FactoryGirl.create(:auction, :closed, title: Faker::Commerce.product_name)
+    end
+
+    @current_auctions = 5.times.to_a.map do
+      FactoryGirl.create(:auction, :running, title: Faker::Commerce.product_name)
+    end
+
+    @future_auctions = [FactoryGirl.create(:auction, :future)]
+  end
+end
+
 Given(/^there is also an unpublished auction$/) do
   @unpublished_auction = FactoryGirl.create(:auction, published: false)
 end
@@ -128,4 +144,7 @@ Then(/^I expect to see an? (.+) status$/) do |label|
   within(:css, 'div.auction-info') do
     expect(page).to have_content(label)
   end
+end
+
+Then(/^the auctions should be in reverse chronological order$/) do
 end
