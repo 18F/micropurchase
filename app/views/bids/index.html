@@ -1,8 +1,4 @@
 <% content_for :title do %>18F Micro-purchase - Bids on <%= @auction.title %><% end %>
-<% content_for :description do %>Auction <%= @auction.id %> has <%= @auction.bids.length %> bids.<% end %>
-<% content_for :data_tags do %>
-<%= render partial: '/auctions/data_tags', locals: {auction: @auction} %>
-<% end %>
 
 <h1>Bids for "<%= @auction.title %>"</h1>
 

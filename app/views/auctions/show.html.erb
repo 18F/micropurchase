@@ -1,8 +1,4 @@
 <% content_for :title do %>18F Micro-purchase - <%= @view_model.auction_title %><% end %>
-<% content_for :description do %><%= @view_model.auction_summary %><% end %>
-<% content_for :data_tags do %>
-  <%= render partial: '/auctions/data_tags', locals: {auction: @view_model.auction} %>
-<% end %>
 
 <%= render partial: @view_model.current_user_header_partial, locals: {auction: @view_model.auction} %>
 

@@ -23,6 +23,7 @@ RSpec.feature "Pages have meta tags", type: :feature do
   end
 
   scenario "Open auction meta tags" do
+    skip 'removing meta tags for now'
     current_auction, _bids = create_current_auction
     visit auction_path(current_auction)
 
@@ -35,6 +36,8 @@ RSpec.feature "Pages have meta tags", type: :feature do
   end
 
   scenario "Closed auction meta tags" do
+    skip 'removing meta tags for now'
+
     closed_auction, _bids = create_closed_auction
     visit auction_path(closed_auction)
 
