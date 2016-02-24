@@ -15,6 +15,34 @@ FactoryGirl.define do
     billable_to 'Tock'
     cap_proposal_url { nil }
     published { :published }
+    type { :multi_bid }
+
+    trait :single_bid_with_tie do
+      single_bid
+
+      after(:create) do |auction|
+        Timecop.freeze(auction.start_datetime) do
+          Timecop.scale(3600)
+          3.times do
+            FactoryGirl.create(:bid, auction: auction, amount: 3000)
+          end
+        end
+      end
+    end
+
+    trait :single_bid_with_tie_and_other_bids do
+      single_bid
+
+      after(:create) do |auction|
+        Timecop.freeze(auction.start_datetime) do
+          Timecop.scale(3600)
+          3.times do |i|
+            FactoryGirl.create(:bid, auction: auction, amount: 3000 - i)
+            FactoryGirl.create(:bid, auction: auction, amount: 100)
+          end
+        end
+      end
+    end
 
     trait :with_bidders do
       ignore do
@@ -105,6 +133,14 @@ FactoryGirl.define do
 
     trait :unpublished do
       published { :unpublished }
+    end
+
+    trait :single_bid do
+      type { :single_bid }
+    end
+
+    trait :multi_bid do
+      type { :multi_bid }
     end
 
     trait :complete_and_successful do

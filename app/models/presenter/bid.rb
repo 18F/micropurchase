@@ -1,5 +1,7 @@
 module Presenter
   class Bid < SimpleDelegator
+    include ActionView::Helpers::NumberHelper
+
     def time
       Presenter::DcTime.convert_and_format(created_at)
     end
@@ -34,6 +36,27 @@ module Presenter
 
     def null
       Null::NULL
+    end
+
+    def amount_to_currency
+      number_to_currency(amount)
+    end
+
+    def amount_to_currency_with_asterisk
+      return "#{amount_to_currency} *" if is_winning?
+      return amount_to_currency
+    end
+
+    def is_winning?
+      model.id == presenter_auction.winning_bid_id
+    end
+
+    def winning_status
+      if presenter_auction.single_bid? && presenter_auction.available?
+        return 'n/a'
+      else
+        is_winning?
+      end
     end
 
     def model

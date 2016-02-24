@@ -8,6 +8,12 @@
 
 <a href="<%= auction_path(@auction) %>">« Back to auction</a>
 
+<% if @auction.available? && @auction.single_bid? %>
+  <p>
+    Bids are sealed until the auction ends. See the <a href='/auctions/rules/single-bid'>auction rules</a> to learn more.
+  </p>
+<% end %>
+
 <table class="usa-table-borderless">
   <thead>
     <tr>
@@ -18,7 +24,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @auction.bids.each_with_index do |bid, i| %>
+    <% @auction.veiled_bids(current_user).each_with_index do |bid, i| %>
       <tr>
         <td>
           <%=
@@ -38,7 +44,7 @@
             )
           %>
         </td>
-        <td><%= content_for_row(i, bid) %></td>
+        <td><%= bid.amount_to_currency_with_asterisk %></td>
         <td><%= Presenter::DcTime.convert_and_format(bid.created_at) %></td>
       </tr>
     <% end %>
