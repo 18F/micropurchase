@@ -21,6 +21,13 @@ RSpec.describe AuctionsController do
       }
     }
   end
+  let(:second_params) do
+    {
+      bid: {
+        amount: second_bid_amount
+      }
+    }
+  end
   let(:status) { response.status }
 
   describe 'POST /auctions/:auction_id/bids' do
@@ -101,7 +108,7 @@ RSpec.describe AuctionsController do
       let(:api_key) { FakeGitHub::VALID_API_KEY }
       let(:auction) { FactoryGirl.create(:auction, :running) }
       let(:current_auction_price) do
-        auction.bids.sort_by(&:amount).first.amount
+        auction.bids.sort_by {|b| b.amount}.first.amount
       end
 
       context 'and the bid amount is the lowest' do
@@ -117,17 +124,65 @@ RSpec.describe AuctionsController do
         end
       end
 
-      context 'and the bid amount is not the lowest' do
-        let(:bid_amount) { current_auction_price + 10 }
+      context 'when the auction is multi-bid' do
+        let(:auction) { FactoryGirl.create(:auction, :running, :multi_bid) }
 
-        it 'returns a json error' do
-          expect(json_response['error']).to eq('Bids cannot be greater than the current max bid')
-        end
+        context 'and the bid amount is not the lowest' do
+          let(:bid_amount) { current_auction_price + 10 }
 
-        it 'returns a 403 status code' do
-          expect(status).to eq(403)
+          it 'returns a json error' do
+            expect(json_response['error']).to eq('Bids cannot be greater than the current max bid')
+          end
+
+          it 'returns a 403 status code' do
+            expect(status).to eq(403)
+          end
         end
       end
+
+      context 'when the auction is single-bid' do
+        let(:auction) { FactoryGirl.create(:auction, :running, :single_bid) }
+
+        context 'and the bid amount is not the lowest' do
+          let(:amount) { current_auction_price + 10 }
+          let(:bid_amount) { amount }
+
+          it 'returns a 200 status code' do
+            expect(status).to eq(200)
+          end
+
+          it 'returns the right amount' do
+            expect(json_response['bid']['amount']).to eq(amount)
+          end
+        end
+
+        context 'and the bidder has not yet bid on this auction' do
+          let(:bid_amount) { current_auction_price - 10 }
+
+          it 'creates a new bid' do
+            expect(json_bid['amount']).to eq(bid_amount)
+            expect(json_bid['bidder_id']).to eq(user.id)
+          end
+
+          it 'returns a 200 status code' do
+            expect(status).to eq(200)
+          end
+        end
+
+        context 'and the bidder has already bid on this auction' do
+          let(:bid_amount) { current_auction_price - 10 }
+          let(:second_bid_amount) { bid_amount - 10 }
+
+          it 'returns a 403 status code' do
+            post auction_bids_path(auction), second_params, headers
+
+            expect(status).to eq(403)
+            expect(json_response).to have_key('error')
+            expect(json_response['error']).to eq('You can only bid once in a single-bid auction.')
+          end
+        end
+      end
+
 
       context 'and the user has a false #sam_account' do
         let(:user) { FactoryGirl.create(:user, :with_duns_not_in_sam, sam_account: false) }

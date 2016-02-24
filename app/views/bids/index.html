@@ -1,12 +1,14 @@
 <% content_for :title do %>18F Micro-purchase - Bids on <%= @auction.title %><% end %>
-<% content_for :description do %>Auction <%= @auction.id %> has <%= @auction.bids.length %> bids.<% end %>
-<% content_for :data_tags do %>
-<%= render partial: '/auctions/data_tags', locals: {auction: @auction} %>
-<% end %>
 
 <h1>Bids for "<%= @auction.title %>"</h1>
 
 <a href="<%= auction_path(@auction) %>">« Back to auction</a>
+
+<% if @auction.available? && @auction.single_bid? %>
+  <p>
+    Bids are sealed until the auction ends. See the <a href='/auctions/rules/single-bid'>auction rules</a> to learn more.
+  </p>
+<% end %>
 
 <table class="usa-table-borderless">
   <thead>
@@ -18,7 +20,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @auction.bids.each_with_index do |bid, i| %>
+    <% @auction.veiled_bids(current_user).each_with_index do |bid, i| %>
       <tr>
         <td>
           <%=
@@ -38,7 +40,7 @@
             )
           %>
         </td>
-        <td><%= content_for_row(i, bid) %></td>
+        <td><%= bid.amount_to_currency_with_asterisk %></td>
         <td><%= Presenter::DcTime.convert_and_format(bid.created_at) %></td>
       </tr>
     <% end %>

@@ -17,15 +17,15 @@ RSpec.describe BidsController, controller: true do
         bid = auction.bids.create(bidder_id: current_bidder.id)
         expect(bid).to be_valid
         get :my_bids, {}, user_id: current_bidder.id
-        assigned_auction = assigns(:auctions).first
-        expect(assigned_auction).to be_a(Presenter::Auction)
-        expect(assigned_auction.id).to eq(auction.id)
+        assigned_bid = assigns(:bids).first
+        expect(assigned_bid).to be_a(Presenter::Bid)
+        expect(assigned_bid.id).to eq(bid.id)
       end
 
       it 'should not assign auctions that the current user has not bidded on' do
         auction.bids.create(bidder_id: current_bidder.id + 127)
         get :my_bids, {}, user_id: current_bidder.id
-        expect(assigns(:auctions)).to be_empty
+        expect(assigns(:bids)).to be_empty
       end
     end
   end
