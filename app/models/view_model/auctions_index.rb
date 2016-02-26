@@ -1,6 +1,7 @@
 module ViewModel
   class AuctionsIndex < Struct.new(:current_user, :auctions_query)
     def auctions
+      # change to return map of ViewModel::AuctionListItem(current_user, auction)
       @auctions ||= auctions_query.map {|auction| Presenter::Auction.new(auction) }
     end
 
