@@ -49,6 +49,8 @@ foreman start -p 3000
 
 To set up GitHub authentication for creating user accounts and logging in, set up a [new developer application](https://github.com/settings/applications/new). The "Application name" and "Homepage URL" can be whatever you'd like, but the "Authorization callback URL" should be `http://localhost:3000`.
 
+#### For local development
+
 Once you register the application, you'll receive a Client ID and a Client Secret. Put them into a `.env` file at the root of the application, like this:
 
 ```
@@ -57,6 +59,10 @@ MPT_3500_GITHUB_SECRET="your-client-secret"
 ```
 
 Make sure to restart the server to register those environmental variables.
+
+#### For deployment
+
+See the GitHub API keys section of our deployment instructions below.
 
 ### Testing
 
@@ -84,11 +90,23 @@ Create the database service:
 $ cf create-service rds shared-psql micropurchase-psql
 ```
 
-Set environment variables with `cf set-env`:
+Create a [user-provided service](https://docs.cloudfoundry.org/devguide/services/user-provided.html):
 
 ```
-$ cf set-env micropurchase MPT_3500_GITHUB_KEY [the key]
-$ cf set-env micropurchase MPT_3500_GITHUB_SECRET [the secret]
+$ cf cups micropurchase-github -p "client_id, secret"
+```
+
+The above command will interactively prompt you for your GitHub application keys.
+
+The value stored locally in `MPT_3500_GITHUB_KEY` is the `client_id`.
+
+The value stored locally in `MPT_3500_GITHUB_SECRET` is the `secret.`
+
+Bind your services to the app:
+
+```
+$ cf bind-service micropurchase micropurchase-psql
+$ cf bind-service micropurchase micropurchase-github
 ```
 
 Set up the database:
