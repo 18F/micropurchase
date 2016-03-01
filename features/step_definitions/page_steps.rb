@@ -18,6 +18,14 @@ Then(/^I expect to see an? (.+) label$/) do |label|
   end
 end
 
+Then(/^I expect to see "(.+)"$/) do |text|
+  expect(page).to have_content(text)
+end
+
+Then(/^I expect to not see "(.+)"$/) do |text|
+  expect(page).to_not have_content(text)
+end
+
 Then(/^I expect to see an? "?([^"]+)"? button$/) do |button|
   expect(page).to have_selector(:link_or_button, button)
 end
@@ -55,8 +63,8 @@ Then(/^there should be meta tags for the closed auction$/) do
 
   expect(page).to have_css("title", visible: false, text: "18F Micro-purchase - #{pr_auction.title}")
   expect(page).to have_css("meta[property='og:title'][content='18F Micro-purchase - #{pr_auction.title}']", visible: false)
-  expect(page).to have_css("meta[name='description'][content='#{pr_auction.summary}']", visible: false)
-  expect(page).to have_css("meta[property='og:description'][content='#{pr_auction.summary}']", visible: false)
+  # expect(page).to have_css("meta[name='description'][content='#{pr_auction.summary}']", visible: false)
+  # expect(page).to have_css("meta[property='og:description'][content='#{pr_auction.summary}']", visible: false)
 end
 
 Then(/^there should be meta tags for the open auction$/) do
@@ -64,8 +72,8 @@ Then(/^there should be meta tags for the open auction$/) do
 
   expect(page).to have_css("title", visible: false, text: "18F Micro-purchase - #{pr_auction.title}")
   expect(page).to have_css("meta[property='og:title'][content='18F Micro-purchase - #{pr_auction.title}']", visible: false)
-  expect(page).to have_css("meta[name='description'][content='#{pr_auction.summary}']", visible: false)
-  expect(page).to have_css("meta[property='og:description'][content='#{pr_auction.summary}']", visible: false)
+  # expect(page).to have_css("meta[name='description'][content='#{pr_auction.summary}']", visible: false)
+  # expect(page).to have_css("meta[property='og:description'][content='#{pr_auction.summary}']", visible: false)
 end
 
 # FIXME
@@ -78,4 +86,19 @@ Then(/^there should be meta tags for the index page for (\d+) open and (\d+) fut
   expect(page).to have_css("meta[name='twitter:data1'][value='#{open_count}']", visible: false)
   expect(page).to have_css("meta[name='twitter:label2'][value='Coming Auctions']", visible: false)
   expect(page).to have_css("meta[name='twitter:data2'][value='#{future_count}']", visible: false)
+end
+
+Then(/^I expect to see a link to (single-bid|multi-bid) rules$/) do |rules|
+  case rules
+  when 'single-bid'
+    expect(page).to have_content("Single-bid")
+  when 'multi-bid'
+    expect(page).to have_content("Multi-bid")
+  else
+    fail "Unrecognized auction type: #{rules}"
+  end
+end
+
+Then(/^I expect to see the rules for (single-bid|multi-bid) auctions$/) do |type|
+  expect(page).to have_content("Rules for #{type} auctions")
 end

@@ -1,4 +1,4 @@
-When(/^I go to the auction bids page$/) do
+When(/^I visit the auction bids page$/) do
   visit(auction_bids_path(@auction.id))
 end
 

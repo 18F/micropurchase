@@ -15,6 +15,10 @@ Given(/^there is an? (.+) auction$/) do |label|
                FactoryGirl.create(:auction)
              when 'open'
                FactoryGirl.create(:auction, :with_bidders)
+             when 'single-bid'
+               FactoryGirl.create(:auction, :running, :single_bid)
+             when 'closed single-bid'
+               FactoryGirl.create(:auction, :closed, :with_bidders, :single_bid)
              else
                fail "Unrecognized auction type: #{label}"
              end
@@ -73,6 +77,12 @@ Then(/^I expect to see the number of bid for the auction$/) do
   expect(page).to have_content(number_of_bids)
 end
 
+Then(/^I expect to not see the number of bid for the auction$/) do
+  number_of_bids = "#{@auction.bids.length} bids"
+  expect(page).to_not have_content(number_of_bids)
+end
+
+
 When(/^I click on the link to the bids$/) do
   number_of_bids = "#{@auction.bids.length} bids"
   click_on(number_of_bids)
@@ -128,7 +138,7 @@ end
 Then(/^I expect to see I do not have the winning bid$/) do
   expect(page).not_to have_content("You are currently the winning bidder.")
   expect(page).to have_content("You are currently not the winning bidder.")
-end  
+end
 
 # Fix me (look for specific date in there)
 Then(/^I expect to see when the auction started$/) do
