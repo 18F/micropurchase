@@ -148,6 +148,7 @@ GEM
     hashdiff (0.3.0)
     hashie (3.4.3)
     highline (1.7.8)
+    holidays (3.2.0)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     httpclient (2.7.1)
@@ -359,6 +360,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   hakiri
+  holidays
   jasmine
   json-schema
   octokit (~> 4.0)
@@ -382,4 +384,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.10.6
+   1.11.2
