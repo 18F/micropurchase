@@ -48,7 +48,12 @@ class AuctionParser < Struct.new(:params)
   end
 
   def delivery_deadline
-    parse_time(params[:auction][:delivery_deadline])
+    due_in_days = params[:auction][:due_in_days]
+    if defined? due_in_days and due_in_days.to_i > 0
+      due_in_days.to_i.business_days.after(end_datetime.to_date).end_of_day
+    else
+      parse_time(params[:auction][:delivery_deadline])
+    end
   end
 
   def start_datetime

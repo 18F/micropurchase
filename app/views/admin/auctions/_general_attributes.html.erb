@@ -22,8 +22,13 @@
 <label for='auction_end_datetime'>End date</label>
 <%= f.text_field :end_datetime %>
 
-<label for='auction_delivery_deadline'>Delivery deadline</label>
-<%= f.text_field :delivery_deadline %>
+<% if @auction.new_record? %>
+  <label for='auction_due_in_days'>Due in days</label>
+  <%= text_field_tag :auction_due_in_days %>
+<% else %>
+  <label for='delivery_deadline'>Delivery deadline</label>
+  <%= f.text_field :delivery_deadline %>
+<% end %>
 
 <label for='auction_billable_to'>Billable to</label>
 <%= f.text_field :billable_to %>

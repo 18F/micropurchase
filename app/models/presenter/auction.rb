@@ -205,8 +205,8 @@ module Presenter
       bid = lowest_user_bid(user)
       bid.nil? ? nil : bid.amount
     end
-    
-    
+
+
     def html_description
       return '' if description.blank?
       markdown.render(description)

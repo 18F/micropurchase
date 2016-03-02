@@ -26,6 +26,7 @@ gem 'octokit', '~> 4.0'
 gem 'active_model_serializers'
 
 gem 'business_time'
+gem 'holidays'
 
 group :test do
   gem "codeclimate-test-reporter", require: nil
