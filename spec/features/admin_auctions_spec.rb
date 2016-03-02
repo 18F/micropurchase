@@ -47,7 +47,7 @@ RSpec.feature "AdminAuctions", type: :feature do
     fill_in("auction_issue_url", with: "https://github.com/18F/calc/issues/255")
     fill_in("auction_start_datetime", with: Presenter::DcTime.convert(Time.now + 3.days).strftime("%m/%d/%Y"))
     fill_in("auction_end_datetime", with: Presenter::DcTime.convert(Time.now - 3.days).strftime("%m/%d/%Y"))
-    fill_in("auction_due_in_days", with: 5)
+    fill_in("due_in_days", with: 5)
     fill_in("auction_billable_to", with: "the tock line item for CALC")
     select("published", from: "auction_published")
 
