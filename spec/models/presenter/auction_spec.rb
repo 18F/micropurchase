@@ -200,16 +200,6 @@ RSpec.describe Presenter::Auction do
     end
   end
 
-  describe "#in_reverse_chron_order" do
-    it 'should arrange auctions in order of descending end times' do
-      auction1 = FactoryGirl.create(:auction, end_datetime: Time.now)
-      auction2 = FactoryGirl.create(:auction, end_datetime: 2.days.from_now)
-      auction3 = FactoryGirl.create(:auction, end_datetime: 3.days.ago)
-
-      expect(Auction.in_reverse_chron_order).to eq([auction2, auction1, auction3])
-    end
-  end
-
   describe "#html_summary" do
     let(:summary) { nil }
     let(:auction) { Presenter::Auction.new(FactoryGirl.build(:auction, summary: summary)) }
