@@ -9,7 +9,6 @@ class ApplicationController
 
     def require_authentication
       fail UnauthorizedError::RedirectToLogin if current_user.nil?
-      true
     end
 
     def require_admin

@@ -4,7 +4,6 @@ class ApplicationController
 
     def require_authentication
       set_api_current_user(raise_errors: true)
-      true
     end
 
     def require_admin

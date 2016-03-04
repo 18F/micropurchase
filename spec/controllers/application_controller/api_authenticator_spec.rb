@@ -57,10 +57,6 @@ RSpec.describe ApplicationController::ApiAuthenticator, type: :model do
           authenticator.require_authentication
         end.to_not raise_error
       end
-
-      it 'should return true' do
-        expect(authenticator.require_authentication).to be_truthy
-      end
     end
   end
 
@@ -120,10 +116,6 @@ RSpec.describe ApplicationController::ApiAuthenticator, type: :model do
 
       it 'does not raise an error' do
         expect { authenticator.require_admin }.to_not raise_error
-      end
-
-      it 'returns true' do
-        expect(authenticator.require_admin).to be_truthy
       end
     end
   end

@@ -32,10 +32,6 @@ RSpec.describe ApplicationController::WebAuthenticator, type: :model do
       it 'should not raise an error' do
         expect { authenticator.require_authentication }.to_not raise_error
       end
-
-      it 'should return true' do
-        expect(authenticator.require_authentication).to be_truthy
-      end
     end
   end
   describe 'require_admin' do
@@ -62,10 +58,6 @@ RSpec.describe ApplicationController::WebAuthenticator, type: :model do
 
       it 'does not raise an error' do
         expect { authenticator.require_admin }.not_to raise_error
-      end
-
-      it 'should return true' do
-        expect(authenticator.require_admin).to be_truthy
       end
     end
   end
