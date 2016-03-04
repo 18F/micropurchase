@@ -3,7 +3,7 @@ class ApplicationController
     attr_reader :current_user
 
     def require_authentication
-      set_current_user(raise_errors: true)
+      set_api_current_user(raise_errors: true)
       true
     end
 
@@ -23,7 +23,7 @@ class ApplicationController
     end
 
     # rubocop:disable Style/AccessorMethodName
-    def set_current_user(raise_errors: false)
+    def set_api_current_user(raise_errors: false)
       user = User.where(github_id: github_id).first
 
       fail UnauthorizedError::UserNotFound if user.nil? && raise_errors

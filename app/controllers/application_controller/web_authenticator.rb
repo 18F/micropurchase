@@ -4,10 +4,9 @@ class ApplicationController
       @current_user ||= User.where(id: controller.session[:user_id]).first
     end
 
-    def set_current_user
-      current_user
+    def set_api_current_user
     end
-    
+
     def require_authentication
       fail UnauthorizedError::RedirectToLogin if current_user.nil?
       true
