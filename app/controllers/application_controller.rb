@@ -11,17 +11,9 @@ class ApplicationController < ActionController::Base
   # the authenticated user. but the page also works fine sans authentication.
   before_action :set_current_user, if: proc { api_request? }
 
-  def require_admin
-    require_authentication
-    is_admin = Admins.verify?(github_id)
-    fail UnauthorizedError::MustBeAdmin unless is_admin
-
-    is_admin
-  end
-
-  delegate :require_authentication, :current_user, :github_id, :set_current_user,
+  delegate :require_authentication, :require_admin, :current_user, :github_id, :set_current_user,
            to: :authenticator
-  
+
   rescue_from 'UnauthorizedError::MustBeAdmin' do |error|
     message = error.message || "Unauthorized"
     handle_error(message)
@@ -57,15 +49,13 @@ class ApplicationController < ActionController::Base
     @authenticator
   end
 
-
   def html_request?
-    request.format.symbol == :html
+    request.format.html?
   end
 
   def api_request?
-    [:json].include? request.format.symbol
+    request.format.json?
   end
-
 
   def handle_error(message)
     if html_request?

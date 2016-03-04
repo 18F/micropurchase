@@ -5,9 +5,13 @@ class ApplicationController
     end
 
     def require_authentication
-      if current_user.nil?
-        fail UnauthorizedError::RedirectToLogin
-      end
+      fail UnauthorizedError::RedirectToLogin if current_user.nil?
+      true
+    end
+
+    def require_admin
+      require_authentication
+      Admins.verify_or_fail!(github_id)
     end
 
     def github_id

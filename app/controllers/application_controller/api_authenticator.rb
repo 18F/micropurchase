@@ -4,6 +4,12 @@ class ApplicationController
 
     def require_authentication
       set_current_user(raise_errors: true)
+      true
+    end
+
+    def require_admin
+      require_authentication
+      Admins.verify_or_fail!(github_id)
     end
 
     def api_key
