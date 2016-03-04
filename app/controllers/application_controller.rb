@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   # optionally have authenticated access to public routes.
   # for example, /auctions/:id/bids will unveil bidder info about
   # the authenticated user. but the page also works fine sans authentication.
-  before_action :set_current_user, if: proc { api_request? }
+  before_action :set_current_user
 
   delegate :require_authentication, :require_admin, :current_user, :github_id, :set_current_user,
            to: :authenticator
