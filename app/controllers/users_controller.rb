@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    require_authentication and return
+    require_authentication or return
 
     updater = UpdateUser.new(params, current_user)
     if updater.save
