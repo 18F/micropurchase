@@ -1,4 +1,6 @@
 module ViewModel
+  # consider renaming to AuctionListItem, tie this less to the controller action
+  # would still have an AuctionShow if any logic here used for page elements outside of list items
   class AuctionShow < Struct.new(:current_user, :auction_record)
     include ActionView::Helpers::NumberHelper
 
@@ -9,6 +11,9 @@ module ViewModel
     delegate :title, :summary, :html_description, :status, :id, :bid_count, :current_bid_amount_as_currency,
       :issue_url, :user_bid_amount_as_currency,
         to: :auction, prefix: true
+
+    # disentangle the meaning of some auction state
+    # difference between winning an auction and being leading an auction at the moment
 
     def auction_status_label
       if auction_won?
@@ -22,6 +27,7 @@ module ViewModel
       end
     end
 
+    # define a status_partial on the SingleBidAuction, MultiBidAuction classes
     def auction_status_partial
       if auction.single_bid? && !auction_won?
         'auctions/single_bid_auction_status'

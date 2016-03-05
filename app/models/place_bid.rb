@@ -63,9 +63,37 @@ class PlaceBid < Struct.new(:params, :current_user)
 
   # rubocop:disable Style/IfUnlessModifier, Style/GuardClause
   def validate_bid_data
+    # ValidateBid.new(auction, bid).perform
+    # class ValidateBid
+    # ...
+    #   def perform
+    #     user_can_bid_validation (user.validate_can_bid)
+    #     baseline_validation (is it an integer)
+    #     auction_type.validate
+    #   end 
+    # end
+
+    # what are the names of these things?
     if auction_is_single_bid? && bidder_already_bid_on_this_auction?
       fail UnauthorizedError, 'You can only bid once in a single-bid auction.'
     end
+
+    if auction_is_multi_bid? && amount > current_max_bid
+      fail UnauthorizedError, "Bids cannot be greater than the current max bid"
+    end
+    # look into creating a wrapper for each auction type
+    # e.g.: Presenter::Auction::SingleBid, Presenter::Auction::MultiBid
+    # could PlaceBid delegate to PlaceSingleBid and PlaceMultiBid?
+    # ValidateSingleBid, ValidateMultiBid, delegated from ValidateBid
+    #--------
+
+    # explore an auction_options table
+    # auction_id, type, option_value
+    # think of this as a mini-redis, an arbitrary key-value store.
+    # AuctionOptions.set('key', 'value')
+    # AuctionOptions.get('key')
+
+
 
     if amount.to_i != amount
       fail UnauthorizedError, 'Bids must be in increments of one dollar'
@@ -81,10 +109,6 @@ class PlaceBid < Struct.new(:params, :current_user)
 
     if amount <= 0
       fail UnauthorizedError, 'Bid amount out of range'
-    end
-
-    if auction_is_multi_bid? && amount > current_max_bid
-      fail UnauthorizedError, "Bids cannot be greater than the current max bid"
     end
   end
   # rubocop:enable Style/IfUnlessModifier, Style/GuardClause

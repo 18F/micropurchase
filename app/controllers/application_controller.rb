@@ -11,10 +11,13 @@ class ApplicationController < ActionController::Base
   # the authenticated user. but the page also works fine sans authentication.
   before_action :set_current_user_to_api_user!, if: proc { api_request? }
 
+  # move this stuff out of here!
   def current_user
     @current_user ||= User.where(id: session[:user_id]).first
   end
 
+  # repeating if/else's are an indication of missing polymorphism
+  # a thing that decides once if it's api or html
   def require_authentication
     if html_request?
       redirect_if_not_logged_in!

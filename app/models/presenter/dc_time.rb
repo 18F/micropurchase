@@ -1,4 +1,6 @@
 module Presenter
+  # delegation worked here, when the network of where this functionality
+  # was used wasn't clear.
   class DcTime < Struct.new(:time)
     FORMAT = "%B %d, %Y %r".freeze
     def convert
