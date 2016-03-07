@@ -1,0 +1,167 @@
+.auction-label-expiring {
+    background-color: $color-gold !important;
+    color: black !important;
+}
+
+.auction-label-over {
+    background-color: $color-secondary-dark !important;
+}
+
+.auction-label-future {
+    background-color: $color-primary-alt !important;
+    color: black !important;
+}
+
+.auction-label-open {
+    background-color: $color-green !important;
+}
+
+a[class^="auction-label-"] {
+	margin-right: $base-padding-lite;
+}
+
+
+.auction-description {
+  h1 {
+    margin-top: 0;
+  }
+}
+
+.github-issue {
+  h1 {
+	  line-height: 1.1em;
+	  margin-top: 0.2em;
+	  margin-bottom: 0.5em;
+  }
+
+  h2, h3, h4, h5, h6 {
+	  line-height: 1.1em;
+	  margin-top: 0.2em;
+	  margin-bottom: 0.1em;
+  }
+
+  p, li {
+	  line-height: 1.3em;
+  }
+
+  ul {
+	  margin-bottom: 0.5em;
+  }
+}
+
+.auction-detail-panel {
+  border: 1px solid #ccc;
+
+  .auction-info {
+    margin-top: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    font-size: 2rem;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .auction-more-info {
+
+    background-color: $primary-darkest;
+    margin-top: 30px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+
+    p {
+      padding: 1rem 3rem 0 3rem;
+      margin: 0;
+    }
+
+    a {
+      color: white;
+      text-decoration: none;
+    }
+
+    i {
+      color: white;
+      margin-right: 5px;
+    }
+  }
+}
+
+.auction-label {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.auction-label-info {
+  padding-bottom: 20px;
+}
+
+.bid-button {
+  margin-bottom: 30px;
+}
+
+.issue-list-item {
+	background-color: $branding-light;
+	font-weight: $font-light;
+
+  .issue-label {
+    margin-top: 0.75rem;
+  }
+
+  .issue-title {
+    margin-top: 1rem;
+    font-size: 2rem;
+  }
+
+  .issue-bid-details {
+    background-color: $color-gray;
+    background-color: $primary-darkest;
+    color: $color-white;
+    padding: 2rem 3rem;
+
+    .current-bid-box {
+      position: relative;
+
+      .current-bid-box-children {
+        position: relative;
+        top: 50%;
+
+        .current-bid-header {
+          font-weight: 400;
+        }
+        .current-bid {
+          font-size: 1.3rem;
+          font-weight: 700;
+        }
+
+        .current-bid-link {
+            white-space: nowrap;
+        }
+
+      }
+    }
+
+    .bid-deadline-box {
+      .bid-deadline-box-children {
+        position: relative;
+        top: 50%;
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    a.usa-button {
+        margin-top: 0;
+        padding: 0.5rem 2rem;
+        white-space: nowrap;
+    }
+
+    p {
+      display: inline;
+      margin-right: 40px;
+    }
+  }
+}
+
+.issue-list-item-details {
+	font-weight: $font-bold;
+}

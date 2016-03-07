@@ -1,29 +1,8 @@
-$color-green: #2e8540;
-$color-primary: #0071bc;
-$color-primary-darker: #205493;
-$color-primary-alt: #02bfe7;
-$color-primary-alt-darkest: #046b99;
-$color-primary-alt-lightest: #e1f3f8;
-$color-gray: #f1f1f1;
-$primary-darkest: #112E51;
-$gray-cool-light: #dce4ef;
-$color-gray-dark: #323a45;
-$color-secondary-dark: #cd2026;
-$color-gold: #fdb81e;
-$color-cool-blue: #205493;
-$color-purple: #4c2c92;
-
-html {
-    font-size: 62.5%;
-}
-
-body {
-    font-size: 1.8rem;
-}
-
-p,li,span,button {
-    font-size: 1.8rem;
-}
+@import 'mixins';
+@import 'variables';
+@import 'uswds-grid';
+@import 'elements';
+@import 'vendor/accessible-mega-menu';
 
 .usa-font-lead p {
     font-size: 1.882352941rem;
@@ -44,192 +23,9 @@ textarea#auction_description {
   height: 500px;
 }
 
-.usa-alert-info {
-  background-image: asset-url("info.svg");
-  margin-bottom: 30px;
-}
-
-.usa-alert-success {
-  background-image: asset-url("success.svg");
-}
-
-.usa-alert-error {
-    background-image: asset-url("error.svg");
-}
-
-.usa-alert-warning {
-    background-image: asset-url("warning.svg");
-}
-
-.auction-label-expiring {
-    background-color: $color-gold !important;
-    color: black !important;
-}
-
-.auction-label-over {
-    background-color: $color-secondary-dark !important;
-}
-
-.auction-label-future {
-    background-color: $color-primary-alt !important;
-    color: black !important;
-}
-
-.auction-label-open {
-    background-color: $color-green !important;
-}
-
-
-.auction-description {
-  h1 {
-    margin-top: 0;
-  }
-}
-
-.github-issue {
-  h1 {
-	  line-height: 1.1em;
-	  margin-top: 0.2em;
-	  margin-bottom: 0.5em;
-  }
-
-  h2, h3, h4, h5, h6 {
-	  line-height: 1.1em;
-	  margin-top: 0.2em;
-	  margin-bottom: 0.1em;
-  }
-
-  p, li {
-	  line-height: 1.3em;
-  }
-
-  ul {
-	  margin-bottom: 0.5em;
-  }
-}
-
-.auction-detail-panel {
-  border: 1px solid #ccc;
-
-  .auction-info {
-    margin-top: 2rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    font-size: 2rem;
-
-    p {
-      margin: 0;
-    }
-  }
-
-  .auction-more-info {
-
-    background-color: $primary-darkest;
-    margin-top: 30px;
-    padding-top: 10px;
-    padding-bottom: 30px;
-
-    p {
-      padding: 1rem 3rem 0 3rem;
-      margin: 0;
-    }
-
-    a {
-      color: white;
-      text-decoration: none;
-    }
-
-    i {
-      color: white;
-      margin-right: 5px;
-    }
-  }
-}
-
-.auction-label {
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-.auction-label-info {
-  padding-bottom: 20px;
-}
-
-.bid-button {
-  margin-bottom: 30px;
-}
-
-.issue-list-item {
-  .issue-label {
-    margin-top: 0.75rem;
-  }
-
-  .issue-title {
-    margin-top: 1rem;
-    font-size: 2rem;
-  }
-  .issue-bid-details {
-    background-color: $color-gray;
-    padding: 2rem 3rem;
-
-    .current-bid-box {
-      position: relative;
-
-      .current-bid-box-children {
-        position: relative;
-        top: 50%;
-
-        .current-bid-header {
-          font-weight: 400;
-        }
-        .current-bid {
-          font-size: 1.3rem;
-          font-weight: 700;
-        }
-
-        .current-bid-link {
-            white-space: nowrap;
-        }
-
-      }
-    }
-
-    .bid-deadline-box {
-      .bid-deadline-box-children {
-        position: relative;
-        top: 50%;
-        margin-bottom: 0.5rem;
-      }
-    }
-
-    a.usa-button {
-        margin-top: 0;
-        padding: 0.5rem 2rem;
-        white-space: nowrap;
-    }
-
-    p {
-      display: inline;
-      margin-right: 40px;
-    }
-  }
-}
-
-/* not sure what's up, but the usa-button-green seems to have blue hover ??
- * so a little loving help below:
- * */
-.usa-button.usa-button-green,
-.usa-button-big.usa-button-green {
-  background-color: $color-green;
-
-  &:hover {
-    background-color: darken($color-green, 10);
-  }
-
-  &:active {
-    background-color: darken($color-green, 20);
-  }
-}
+@import 'uswds-overrides';
+@import 'alerts';
+@import 'auction';
 
 .bid-form {
   max-width: none;
@@ -249,11 +45,6 @@ textarea#auction_description {
 }
 
 
-nav.usa-site-navbar {
-  background: $primary-darkest;
-  padding: 10px;
-}
-
 body.admin {
   nav.usa-site-navbar {
     background: $color-primary-alt-darkest;
@@ -268,13 +59,7 @@ body.admin {
   }
 }
 
-nav.usa-site-navbar a {
-  position: relative;
-  top: -15px;
-  margin-left: 14px;
-  font-size: 30px;
-  color: #fff;
-}
+
 
 #logo {
   line-height: 0;
@@ -367,17 +152,8 @@ footer {
   font-size: 20px;
 }
 
-h1, h2, h3, h4, h5, h6, p {
-  font-family: "Source Sans Pro", "Helvetica", "Arial", sans-serif;
-}
+@import 'typography';
 
-.usa-footer-primary-section {
-  background: $gray-cool-light;
-}
-
-.usa-footer-secondary-section {
-  background: $primary-darkest;
-}
 
 .intro {
   background: #222;
@@ -385,53 +161,4 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 
-.usa-width-one-whole .issue-list-item {
-  border: 1px solid #ccc;
-  margin-bottom: 30px;
-}
-
-
-.usa-label-big {
-  background-color: #00a6d2;
-}
-
-a {
-  color: #0071bc;
-}
-
-a:visited {
-  color: #046b99;
-}
-
-.usa-footer-secondary_section {
-    background-color: $primary-darkest;
-}
-
-.usa-footer-secondary_section a {
-    color: white;
-    line-height: 1.8;
-}
-
-.usa-footer-secondary_section h2 {
-    margin-bottom: 0px;
-    color: white;
-}
-
-.usa-button-primary-alt {
-  color: white;
-}
-
-.warning-hide-trigger,
-.warning-show-trigger .warning-trigger {
-  float: right;
-}
-
-.warning-message {
-  display: inline-block;
-  padding-left: 5rem;
-  margin: 0;
-}
-
-.usa-alert {
-  margin-bottom: 2rem;
-}
+@import 'links';

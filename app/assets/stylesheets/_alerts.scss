@@ -1,0 +1,16 @@
+.usa-alert-info {
+  background-image: asset-url("info.svg");
+  margin-bottom: 30px;
+}
+
+.usa-alert-success {
+  background-image: asset-url("success.svg");
+}
+
+.usa-alert-error {
+    background-image: asset-url("error.svg");
+}
+
+.usa-alert-warning {
+    background-image: asset-url("warning.svg");
+}

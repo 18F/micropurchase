@@ -64,14 +64,26 @@
       <div class="usa-grid">
         <div class="usa-width-one-whole">
           <div class="logo" id="logo">
-            <%= image_tag "18f-logo.svg", width: '50', alt: "18f-logo" %>
+            <%= image_tag "18F-Logo-2016-Blue.svg", width: '50', alt: "18f-logo" %>
             <a href="/" accesskey="1" title="Home" aria-label="Home">Micropurchase</a>
 
             <div class="header-account">
               <% if current_user %>
-                <span>Logged in as <%= current_user.name %></span>
-                <a class="usa-button usa-button-outline-inverse" href="<%= logout_path %>">Logout</a>
-                <a class="usa-button usa-button-outline-inverse" href="<%= edit_user_path(current_user) %>">Edit Profile</a>
+                <nav class="nav-login">
+                  <ul class="nav-menu">
+                      <li class="nav-item"><a href="javascript:void(0)">Logged in as <%= current_user.name %></a>
+                          <div class="sub-nav">
+                              <ul class="sub-nav-group">
+                                  <li><a class="usa-button usa-button-outline-inverse" href="<%= logout_path %>">Logout</a></li>
+                                  <li><a class="usa-button usa-button-outline-inverse" href="<%= edit_user_path(current_user) %>">Edit Profile</a></li>
+                              </ul>
+                          </div>
+                      </li>
+                  </ul>
+                </nav>
+                <!-- <span>Logged in as <%= current_user.name %></span> -->
+                <!-- <a class="usa-button usa-button-outline-inverse" href="<%= logout_path %>">Logout</a> -->
+                <!-- <a class="usa-button usa-button-outline-inverse" href="<%= edit_user_path(current_user) %>">Edit Profile</a> -->
               <% else %>
                 <a href="/login" class="usa-button usa-button-outline-inverse">Login</a>
               <% end %>
@@ -125,7 +137,7 @@
     <div class="usa-footer-secondary_section">
       <div class="usa-grid">
         <div class="usa-footer-logo usa-width-one-half">
-          <%= image_tag "18f-logo.svg", class: 'usa-footer-slim-logo-img', alt: 'Logo image' %>
+          <%= image_tag "18F-Logo-2016-Blue.svg", class: 'usa-footer-slim-logo-img', alt: 'Logo image' %>
         </div>
 
         <div class="usa-footer-contact-links usa-width-one-half">
@@ -210,7 +222,7 @@
     <!-- <div class="usa-footer-secondary_section">
       <div class="usa-grid">
         <div class="usa-footer-logo">
-          <%= image_tag "18f-logo.svg", class: 'usa-footer-slim-logo-img', alt: 'Logo image' %>
+          <%= image_tag "18F-Logo-2016-Blue.svg", class: 'usa-footer-slim-logo-img', alt: 'Logo image' %>
         </div>
       </div>
     </div> -->
