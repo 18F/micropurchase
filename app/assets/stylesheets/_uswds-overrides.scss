@@ -1,0 +1,90 @@
+/* not sure what's up, but the usa-button-green seems to have blue hover ??
+ * so a little loving help below:
+ * */
+.usa-button.usa-button-green,
+.usa-button-big.usa-button-green {
+  background-color: $color-green;
+
+  &:hover {
+    background-color: darken($color-green, 10);
+  }
+
+  &:active {
+    background-color: darken($color-green, 20);
+  }
+}
+
+nav.usa-site-navbar {
+  background: $primary-darkest;
+  padding: 10px;
+}
+
+nav.usa-site-navbar a {
+  position: relative;
+  top: -15px;
+  margin-left: 14px;
+  font-size: 30px;
+  color: #fff;
+}
+
+.usa-footer-primary-section {
+  background: $gray-cool-light;
+}
+
+.usa-footer-secondary-section {
+  background: $primary-darkest;
+}
+
+.usa-width-one-whole .issue-list-item {
+  border: 1px solid #ccc;
+  margin-bottom: 30px;
+}
+
+.usa-label-big {
+  background-color: #00a6d2;
+}
+
+.usa-footer-secondary_section {
+    background-color: $primary-darkest;
+}
+
+.usa-footer-secondary_section a {
+  color: $color-white;
+  line-height: 1.8;
+
+  &:visited {
+    color: $color-white;
+  }
+}
+
+.usa-footer-secondary_section h2 {
+    margin-bottom: 0px;
+    color: white;
+}
+
+.usa-button-primary-alt {
+  color: white;
+}
+
+.warning-hide-trigger,
+.warning-show-trigger .warning-trigger {
+  float: right;
+}
+
+.warning-message {
+  display: inline-block;
+  padding-left: 5rem;
+  margin: 0;
+}
+
+.usa-alert {
+  margin-bottom: 2rem;
+}
+
+.usa-disclaimer {
+  font-size: 1.2rem;
+
+  @include media($small-screen) {
+    font-size: 1.5rem;
+  }
+}

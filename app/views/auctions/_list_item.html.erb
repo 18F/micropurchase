@@ -5,27 +5,27 @@
         <span class="usa-label-big <%= auction.label_class %>"><%= auction.label %></span> <a href="<%= auction_path(auction) %>"><%= auction.title %></a>
       </h3>
       <p class='issue-description'>
-        <%=h raw auction.html_summary %><a href="<%= auction_path(auction) %>">View details »</a>
+        <%=h raw auction.html_summary %><a class="issue-list-item-details" href="<%= auction_path(auction) %>">View details »</a>
       </p>
       <p><%= auction.formatted_type.capitalize %></p>
     </div>
   </div>
-<div class="usa-grid issue-bid-details">
-  <div class='usa-width-one-whole issue-bids-info'>
-    <div class="usa-grid-full">
-    <% if auction.available? %>
-    <%= render partial: 'auctions/bids_and_form', locals: {auction: auction} %>
+  <div class="usa-grid issue-bid-details">
+    <div class='usa-width-one-whole issue-bids-info'>
+      <div class="usa-grid-full">
+      <% if auction.available? %>
+        <%= render partial: 'auctions/bids_and_form', locals: {auction: auction} %>
 
-      <div class="usa-width-one-third">
-        <% if auction.user_can_bid?(current_user) %>
-          <a href="<%= new_auction_bid_path(auction) %>" class='usa-button'>Bid »</a>
-        <% else %>
-        <% end %>
-      </div>
-    <% else %>
-      <%= render partial: 'auctions/winning_bid', locals: {auction: auction} %>
-    <% end %>
+        <div class="usa-width-one-third">
+          <% if auction.user_can_bid?(current_user) %>
+            <a href="<%= new_auction_bid_path(auction) %>" class='usa-button'>Bid »</a>
+          <% else %>
+          <% end %>
+        </div>
+      <% else %>
+        <%= render partial: 'auctions/winning_bid', locals: {auction: auction} %>
+      <% end %>
+    </div>
+    </div>
   </div>
-  </div>
-</div>
 </div>

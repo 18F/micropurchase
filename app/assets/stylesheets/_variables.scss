@@ -1,0 +1,36 @@
+$color-green: #2e8540;
+$color-primary: #0071bc;
+$color-primary-darker: #205493;
+$color-primary-alt: #02bfe7;
+$color-primary-alt-darkest: #046b99;
+$color-primary-alt-lightest: #e1f3f8;
+$color-gray: #f1f1f1;
+$gray-cool-light: #dce4ef;
+$color-gray-dark: #323a45;
+$color-secondary-dark: #cd2026;
+$color-gold: #fdb81e;
+$color-cool-blue: #205493;
+$color-purple: #4c2c92;
+$color-white: #ffffff;
+
+// 18f Branding
+$branding-darkest: #1C304A;
+$branding-medium: #046B99;
+$branding-bright: #00CFFF;
+$branding-light: #B3EFFF;
+
+$primary-darkest: $branding-darkest;
+// $color-secondary-dark: $branding-medium;
+
+
+$links-primary: $branding-darkest;
+$links-secondary: $branding-medium;
+
+// Typography
+$font-light: 200;
+$font-normal: 400;
+$font-bold: 600;
+
+
+// Padding
+$base-padding-lite: 0.42em;
