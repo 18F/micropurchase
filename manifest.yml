@@ -8,4 +8,5 @@ applications:
   buildpack: https://github.com/ddollar/heroku-buildpack-multi.git
   services:
     - micropurchase-psql
+    - micropurchase-github
   command: null
