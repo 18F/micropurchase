@@ -1,0 +1,7 @@
+.usa-footer-slim-logo-img {
+	margin-bottom: $base-padding;
+
+	@include media($small-screen) {
+		margin-bottom: 0;
+	}
+}
