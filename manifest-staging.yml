@@ -1,11 +1,12 @@
 ---
 applications:
-- name: micropurchase
-  memory: 512M
+- name: micropurchase-staging
+  memory: 1G
   instances: 1
   domain: 18f.gov
   host: micropurchase-staging
   buildpack: https://github.com/ddollar/heroku-buildpack-multi.git
   services:
     - micropurchase-staging-psql
+    - micropurchase-github
   command: null

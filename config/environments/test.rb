@@ -39,4 +39,6 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  ENV['VCAP_SERVICES'] = File.read("#{Rails.root}/spec/support/vcap_services.json")
 end
