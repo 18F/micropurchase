@@ -1,8 +1,8 @@
-<p>Bidding is closed</p>
+<div class="usa-width-one-half">Bidding is closed</div>
 <% if auction.bids? %>
-  <p>Winning Bid: <%= number_to_currency(auction.current_bid_amount) %></p>
+  <div class="usa-width-one-half">Winning Bid: <%= number_to_currency(auction.current_bid_amount) %></div>
 <% else %>
-  <p>No bids</p>
+  <div class="usa-width-one-half">No bids</div>
 <% end %>
 <% unless auction.over? %>
   <span class="bid-deadline">

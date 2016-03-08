@@ -56,7 +56,11 @@ nav.usa-site-navbar a {
 .header-image,
 .header-image img {
   max-width: none;
-  width: 50px;
+  width: 25px;
+
+  @include media($small-screen) {
+    width: 50px;
+  }
 }
 
 .header-table {

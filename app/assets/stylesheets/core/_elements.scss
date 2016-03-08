@@ -13,3 +13,14 @@ html {
 ul li:before {
   display: none;
 }
+
+p,
+li,
+span {
+	font-weight: $font-light;
+	font-size: $small-font-size;
+  @include media($small-screen) {
+    font-size: $base-font-size;
+
+  }
+}

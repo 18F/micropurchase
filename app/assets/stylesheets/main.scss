@@ -1,20 +1,20 @@
 @import 'vendor/us-web-design-standards/all';
+
 @import 'core/mixins';
 @import 'core/variables';
 @import 'uswds-grid';
 @import 'core/elements';
+@import 'uswds-overrides';
+
 @import 'core/links';
 @import 'core/typography';
 @import 'core/layout';
+
 @import 'vendor/accessible-mega-menu';
 @import 'components/nav-dropdown';
 @import 'components/accordion';
 @import 'blocks/header';
 @import 'blocks/footer';
-
-.usa-font-lead p {
-    font-size: 1.882352941rem;
-}
 
 input[disabled] {
   color: lighten($color-gray-dark, 50%);
@@ -31,7 +31,7 @@ textarea#auction_description {
   height: 500px;
 }
 
-@import 'uswds-overrides';
+
 @import 'alerts';
 @import 'blocks/auction';
 
