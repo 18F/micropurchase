@@ -61,37 +61,37 @@
     </div>
 
     <nav class="usa-site-navbar">
-      <div class="usa-grid">
-        <div class="usa-width-one-whole">
-          <div class="logo" id="logo">
+      <div class="usa-grid header-table">
+        <div class="logo header-row" id="logo">
+          <div class="header-image">
             <%= image_tag "18F-Logo-2016-Blue.svg", width: '50', alt: "18f-logo" %>
-            <a href="/" accesskey="1" title="Home" aria-label="Home">Micropurchase</a>
+          </div>
+          <a class="header-title-text" href="/" accesskey="1" title="Home" aria-label="Home">Micropurchase</a>
 
-            <div class="header-account">
-              <% if current_user %>
-                <nav class="nav-login">
-                  <ul class="nav-menu">
-                      <li class="nav-item">
-                        <a href="javascript:void(0)">
-                          Logged in as <%= current_user.name %>
-                          <icon class="fa fa-caret-down"></icon>
-                        </a>
-                        <div class="sub-nav">
-                            <ul class="sub-nav-group">
-                                <li><a class="usa-button usa-button-outline-inverse" href="<%= logout_path %>">Logout</a></li>
-                                <li><a class="usa-button usa-button-outline-inverse" href="<%= edit_user_path(current_user) %>">Edit Profile</a></li>
-                            </ul>
-                        </div>
-                      </li>
-                  </ul>
-                </nav>
-                <!-- <span>Logged in as <%= current_user.name %></span> -->
-                <!-- <a class="usa-button usa-button-outline-inverse" href="<%= logout_path %>">Logout</a> -->
-                <!-- <a class="usa-button usa-button-outline-inverse" href="<%= edit_user_path(current_user) %>">Edit Profile</a> -->
-              <% else %>
-                <a href="/login" class="button-login usa-button usa-button-outline-inverse">Login</a>
-              <% end %>
-            </div>
+          <div class="header-account">
+            <% if current_user %>
+              <nav class="nav-login">
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                      <a href="javascript:void(0)">
+                        Logged in as <%= current_user.name %>
+                        <icon class="fa fa-caret-down"></icon>
+                      </a>
+                      <div class="sub-nav">
+                          <ul class="sub-nav-group">
+                              <li><a class="usa-button usa-button-outline-inverse" href="<%= logout_path %>">Logout</a></li>
+                              <li><a class="usa-button usa-button-outline-inverse" href="<%= edit_user_path(current_user) %>">Edit Profile</a></li>
+                          </ul>
+                      </div>
+                    </li>
+                </ul>
+              </nav>
+              <!-- <span>Logged in as <%= current_user.name %></span> -->
+              <!-- <a class="usa-button usa-button-outline-inverse" href="<%= logout_path %>">Logout</a> -->
+              <!-- <a class="usa-button usa-button-outline-inverse" href="<%= edit_user_path(current_user) %>">Edit Profile</a> -->
+            <% else %>
+              <a href="/login" class="button-login usa-button usa-button-outline-inverse">Login</a>
+            <% end %>
           </div>
         </div>
       </div>
@@ -99,7 +99,7 @@
 
   </header>
 
-  <div class="usa-grid">
+  <div class="usa-grid content-wrapper">
     <div class="usa-width-one-whole">
       <%= flash_errors %>
 
@@ -107,7 +107,7 @@
     </div>
   </div>
 
-    <footer class="usa-footer usa-footer-medium usa-sans" role="contentinfo">
+    <footer class="usa-footer usa-footer-large usa-sans" role="contentinfo">
     <div class="usa-grid usa-footer-return-to-top">
      <!--  <a href="#">Return to top</a> -->
     </div>
@@ -141,7 +141,7 @@
     <div class="usa-footer-secondary_section">
       <div class="usa-grid">
         <div class="usa-footer-logo usa-width-one-half">
-          <%= image_tag "18F-Logo-2016-Blue.svg", class: 'usa-footer-slim-logo-img', alt: 'Logo image' %>
+          <%= image_tag "18F-Logo-2016-Blue.svg", class: 'usa-footer-slim-logo-img footer-image', alt: 'Logo image' %>
         </div>
 
         <div class="usa-footer-contact-links usa-width-one-half">

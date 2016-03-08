@@ -1,7 +1,58 @@
-.usa-footer-slim-logo-img {
+.usa-footer-primary-section {
+	background: $branding-light;
+}
+
+.footer-image {
 	margin-bottom: $base-padding;
 
-	@include media($small-screen) {
+	@include media($medium-screen) {
 		margin-bottom: 0;
 	}
+}
+
+
+.usa-footer-primary-link {
+	@include media($medium-screen) {
+		padding: $base-padding;
+	}
+}
+
+.usa-footer-large {
+  .usa-footer-primary-section {
+    padding: 0;
+
+    @include media($large-screen) {
+      padding-bottom: 1rem;
+      padding-top: 1rem;
+    }
+  }
+
+  .usa-footer-nav ul {
+    @include media($large-screen) {
+      align-items: center;
+      display: flex;
+    }
+  }
+}
+
+
+ul.usa-footer-primary-content,
+li.usa-footer-primary-content,
+li.usa-footer-primary-content {
+	border-top: 1px solid $primary-darkest;
+
+	@include media($medium-screen) {
+    border-top: 1px solid $primary-darkest;
+  }
+
+  @include media($large-screen) {
+    border: none;
+  }
+
+  &:last-child {
+
+    @include media($large-screen) {
+      border-bottom: none;
+    }
+  }
 }

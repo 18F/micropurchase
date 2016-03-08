@@ -1,8 +1,11 @@
 @import 'vendor/us-web-design-standards/all';
-@import 'mixins';
-@import 'variables';
+@import 'core/mixins';
+@import 'core/variables';
 @import 'uswds-grid';
-@import 'elements';
+@import 'core/elements';
+@import 'core/links';
+@import 'core/typography';
+@import 'core/layout';
 @import 'vendor/accessible-mega-menu';
 @import 'components/nav-dropdown';
 @import 'components/accordion';
@@ -30,7 +33,7 @@ textarea#auction_description {
 
 @import 'uswds-overrides';
 @import 'alerts';
-@import 'auction';
+@import 'blocks/auction';
 
 .bid-form {
   max-width: none;
@@ -137,33 +140,10 @@ footer {
   margin: auto;
 }
 
-.header-account {
-  float: right;
-  position: relative;
-  top: 15px;
-  color: #fff;
-}
-
-.header-account span {
-  position: relative;
-  top: -8px;
-  right: 10px;
-}
-
-.header-account a.usa-button {
-  margin: 0;
-  position: relative;
-  top: -10px;
-  font-size: 20px;
-}
-
-@import 'typography';
-
-
 .intro {
   background: #222;
   padding: 40px 40px;
 }
 
 
-@import 'links';
+
