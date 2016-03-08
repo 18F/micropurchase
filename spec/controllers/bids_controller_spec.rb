@@ -128,7 +128,6 @@ RSpec.describe BidsController, controller: true do
 
     context 'when there are no other bids' do
       before do
-        allow(controller).to receive(:current_user).and_return(current_bidder)
         allow(PlaceBid).to receive(:new).and_return(place_bid)
       end
 
@@ -143,7 +142,7 @@ RSpec.describe BidsController, controller: true do
 
       it "creates creates a bid and redirects to the new bid page" do
         expect(PlaceBid).to receive(:new).with(anything, current_bidder).and_return(place_bid)
-        post :create, request_params
+        post :create, request_params, user_id: current_bidder.id
         expect(flash[:bid]).to eq("success")
         expect(response).to redirect_to("/auctions/#{auction.id}")
       end
@@ -151,7 +150,7 @@ RSpec.describe BidsController, controller: true do
       it "adds a flash error when the bid is bad" do
         expect(PlaceBid).to receive(:new).with(anything, current_bidder)
           .and_raise(UnauthorizedError.new("Bad bid, sucker!"))
-        post :create, request_params
+        post :create, request_params, user_id: current_bidder.id
         expect(flash[:error]).to eq("Bad bid, sucker!")
         expect(response).to redirect_to("/auctions/#{auction.id}/bids/new")
       end

@@ -1,0 +1,35 @@
+{
+  "rds": [
+   {
+    "credentials": {
+     "db_name": "fakedbname",
+     "host": "fakehost",
+     "password": "fakepass",
+     "uri": "fakeuri",
+     "username": "fakeusername"
+    },
+    "label": "rds",
+    "name": "micropurchase-staging-psql",
+    "plan": "shared-psql",
+    "provider": null,
+    "syslog_drain_url": null,
+    "tags": [
+     "database",
+     "RDS",
+     "postgresql"
+    ]
+   }
+  ],
+  "user-provided": [
+   {
+    "credentials": {
+     "client_id": "fakeclientid",
+     "secret": "fakesecret"
+    },
+    "label": "user-provided",
+    "name": "micropurchase-github",
+    "syslog_drain_url": "",
+    "tags": []
+   }
+  ]
+}

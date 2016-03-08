@@ -8,7 +8,4 @@ class Auction < ActiveRecord::Base
 
   # Disable STI
   self.inheritance_column = :__disabled
-
-  scope :in_reverse_chron_order, -> { order('end_datetime DESC') }
-  scope :with_bids, -> { includes(:bids) }
 end

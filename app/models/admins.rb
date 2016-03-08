@@ -15,4 +15,9 @@ class Admins
   def self.verify?(uid)
     new.verify?(uid)
   end
+
+  def self.verify_or_fail!(uid)
+    fail UnauthorizedError::MustBeAdmin unless verify?(uid)
+    true
+  end
 end

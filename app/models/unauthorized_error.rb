@@ -13,4 +13,7 @@ class UnauthorizedError < StandardError
 
   class GitHubAuthenticationError < StandardError
   end
+
+  class RedirectToLogin < StandardError
+  end
 end
