@@ -1,0 +1,16 @@
+.accordion-text {
+  display: none;
+
+  @include media($small-screen) {
+    display: inline-block;
+    font-weight: $font-bold;
+  }
+}
+
+.accordion-icon {
+  display: inline-block;
+
+  @include media($small-screen) {
+    display: none;
+  }
+}

@@ -1,0 +1,57 @@
+.header-account .nav-menu .nav-item > a {
+	border: none;
+	font-size: 1rem;
+	margin: 0;
+	padding: 0;
+}
+
+.header-account .nav-item:after {
+	display: none;
+}
+
+.header-account .fa-caret-down {
+  font-size: 1.5rem;
+  padding-left: $base-padding-lite;
+  vertical-align: bottom;
+}
+
+
+.header-account .nav-menu .sub-nav {
+	top: 1.5rem;
+	padding: 0;
+	margin: 0;
+	right: 0;
+}
+
+.header-account .nav-menu .sub-nav-group {
+	margin: 0;
+}
+
+.header-account .nav-menu .sub-nav a {
+	border-radius: 0;
+	box-shadow: none;
+	border: none;
+	font-size: 1rem;
+	color: $default-color;
+	color: $primary-darkest;
+	top: 0;
+	width: 100%;
+	text-align: left;
+
+	&:hover,
+	&:focus {
+		border-radius: 0;
+		box-shadow: none;
+		border: none;
+		background: $primary-darkest;
+		background: $branding-bright;
+		color: $color-white;
+		color: $primary-darkest;
+	}
+}
+
+
+// .header-account .usa-button.button-login {
+// 	background: $branding-bright;
+// 	color: $primary-darkest;
+// }

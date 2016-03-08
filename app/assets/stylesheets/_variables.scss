@@ -14,12 +14,14 @@ $color-purple: #4c2c92;
 $color-white: #ffffff;
 
 // 18f Branding
+$branding-black: #000000;
 $branding-darkest: #1C304A;
 $branding-medium: #046B99;
 $branding-bright: #00CFFF;
 $branding-light: #B3EFFF;
 
 $primary-darkest: $branding-darkest;
+$default-color: $branding-black;
 // $color-secondary-dark: $branding-medium;
 
 
@@ -33,4 +35,5 @@ $font-bold: 600;
 
 
 // Padding
+$base-padding: 1.25em;
 $base-padding-lite: 0.42em;
