@@ -14,22 +14,10 @@
   }
 }
 
-nav.usa-site-navbar {
-  background: $primary-darkest;
-  padding: 10px;
-}
 
-nav.usa-site-navbar a {
-  position: relative;
-  top: -15px;
-  margin-left: 14px;
-  font-size: 30px;
-  color: #fff;
-}
-
-.usa-footer-primary-section {
-  background: $gray-cool-light;
-}
+// .usa-footer-primary-section {
+//   background: $gray-cool-light;
+// }
 
 .usa-footer-secondary-section {
   background: $primary-darkest;
@@ -47,6 +35,7 @@ nav.usa-site-navbar a {
 .usa-footer-secondary_section {
     background-color: $primary-darkest;
 }
+
 
 .usa-footer-secondary_section a {
   color: $color-white;

@@ -1,3 +1,71 @@
+
+nav.usa-site-navbar {
+  background: $primary-darkest;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
 nav.usa-site-navbar a {
-	font-weight: 200;
+  position: relative;
+  margin-left: 14px;
+  color: #fff;
+}
+
+.header-account {
+  color: $color-white;
+  padding: 0;
+  text-align: right;
+}
+
+.header-account span {
+  position: relative;
+  top: -8px;
+  right: 10px;
+}
+
+.header-account a.usa-button {
+  margin: 0;
+  position: relative;
+  font-size: 20px;
+}
+
+nav.usa-site-navbar a {
+  font-weight: 200;
+  padding-left: $site-margins;
+  padding-right: $site-margins;
+  vertical-align: middle;
+}
+
+.header-image,
+.header-title-text,
+.header-account {
+  color: $color-white;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.header-title-text {
+  font-size: 1.5rem;
+
+  @include media($small-screen) {
+    font-size: 3rem;
+
+  }
+}
+
+.header-image,
+.header-image img {
+  max-width: none;
+  width: 50px;
+}
+
+.header-table {
+  display: table;
+  width: 100%;
+}
+
+
+.header-row {
+  display: table-row;
+  width: 100%;
 }
