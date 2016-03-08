@@ -1,6 +1,15 @@
 /* not sure what's up, but the usa-button-green seems to have blue hover ??
  * so a little loving help below:
  * */
+
+.usa-font-lead p {
+    font-size: $base-font-size;
+
+  @include media($small-screen) {
+    font-size: $lead-font-size;
+  }
+}
+
 .usa-button.usa-button-green,
 .usa-button-big.usa-button-green {
   background-color: $color-green;
@@ -13,11 +22,6 @@
     background-color: darken($color-green, 20);
   }
 }
-
-
-// .usa-footer-primary-section {
-//   background: $gray-cool-light;
-// }
 
 .usa-footer-secondary-section {
   background: $primary-darkest;
@@ -70,7 +74,7 @@
   margin-bottom: 2rem;
 }
 
-.usa-disclaimer {
+.usa-disclaimer-official {
   font-size: 1.2rem;
 
   @include media($small-screen) {
