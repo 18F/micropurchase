@@ -12,5 +12,9 @@
 
   @include media($small-screen) {
     display: none;
+
+    &.fa-close {
+    	display: inline-block;
+    }
   }
 }

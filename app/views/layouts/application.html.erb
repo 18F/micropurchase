@@ -68,6 +68,7 @@
           </div>
           <a class="header-title-text" href="/" accesskey="1" title="Home" aria-label="Home">Micropurchase</a>
 
+          <button id="button-nav-drawer" class="usa-button usa-button-outline-inverse" data-drawer-toggle="menu"><span class="fa fa-bars"></span></button>
           <div class="header-account">
             <% if current_user %>
               <nav class="nav-login">
@@ -97,7 +98,11 @@
       </div>
     </nav>
 
+
+
   </header>
+
+  <%= render partial: "components/nav_drawer", locals: { current_user: @current_user } %>
 
   <div class="content-wrapper <% if current_page?(root_path) %>index<% end %>">
     <div class="usa-width-one-whole">

@@ -19,8 +19,6 @@ footer {
 .usa-footer .usa-footer-primary-link {
 	font-weight: $font-normal;
 	font-size: $h3-font-size;
-	padding-left: $site-margins;
-	padding-right: $site-margins;
 
 	@include media($medium-screen) {
 		padding: $base-padding;
