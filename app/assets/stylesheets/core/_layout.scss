@@ -1,0 +1,7 @@
+.content-wrapper {
+	@extend .usa-grid;
+}
+
+.content-wrapper.index{
+	padding: 0;
+}

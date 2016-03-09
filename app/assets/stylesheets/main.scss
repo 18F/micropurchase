@@ -1,14 +1,15 @@
 @import 'vendor/us-web-design-standards/all';
-
 @import 'core/mixins';
 @import 'core/variables';
+@import 'core/typography';
 @import 'uswds-grid';
 @import 'core/elements';
 @import 'uswds-overrides';
 
 @import 'core/links';
-@import 'core/typography';
+
 @import 'core/layout';
+@import 'core/forms';
 
 @import 'vendor/accessible-mega-menu';
 @import 'components/nav-dropdown';
@@ -16,41 +17,13 @@
 @import 'blocks/header';
 @import 'blocks/footer';
 
-input[disabled] {
-  color: lighten($color-gray-dark, 50%);
-  border-color: lighten($color-gray-dark, 50%);
-}
 
-textarea#auction_summary {
-  width: 500px;
-  height: 150px;
-}
-
-textarea#auction_description {
-  width: 500px;
-  height: 500px;
-}
-
-
-@import 'alerts';
+@import 'blocks/alerts';
 @import 'blocks/auction';
+@import 'blocks/bids';
+@import 'blocks/slabs';
+@import 'blocks/intro';
 
-.bid-form {
-  max-width: none;
-
-  .cancel, .submit {
-      display: inline-block;
-  }
-
-  .cancel {
-    margin-right: 2rem;
-  }
-
-  .button-wrapper {
-    margin: 0 auto;
-    width: 600px;
-  }
-}
 
 
 body.admin {
@@ -68,29 +41,14 @@ body.admin {
 }
 
 
-
 #logo {
   line-height: 0;
 }
 
 
-footer {
-  margin-top: 50px;
-}
 
 .center {
   text-align: center;
-}
-
-.issue-icon {
-  width: 25px;
-  max-width: none;
-}
-
-.bid-button {
-  padding: 5px 8px;
-  white-space: nowrap;
-  background-color: #2e8540;
 }
 
 .table-container {
@@ -98,52 +56,8 @@ footer {
   overflow: scroll;
 }
 
-.table-open-issue-list {
-  min-width: 600px;
-}
-
-.table-open-issue-list h1 {
-  font-size: 20px;
-  margin: 0 0 10px 0;
-}
-
-.table-open-issue-list p {
-  margin: 0;
-}
-
-.table-bids {
-  min-width: 150px;
-}
-
-.make-bid-table {
-  margin-bottom: 20px;
-}
-
-.make-bid-grid {
-  text-align: center;
-  margin-bottom: 80px;
-}
-
-.make-bid-grid p {
-  margin: 0;
-  line-height: 1.129411765rem;
-}
-
-.current-bid-amount {
-  margin-top: 0;
-  font-size: 40px;
-  color: #2e8540;
-}
-
-#your-bid-amount {
-  max-width: 250px;
-  margin: auto;
-}
 
 .intro {
   background: #222;
   padding: 40px 40px;
 }
-
-
-

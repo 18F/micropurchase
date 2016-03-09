@@ -5,18 +5,20 @@
   <meta name="twitter:data2" value="<%= @view_model.upcoming_auction_count %>">
 <% end %>
 
-<div class="usa-width-full">
-  <h1>Welcome!</h1>
+<section class="slab-intro usa-grid usa-width-full">
+  <h1 class="intro-text">Welcome!</h1>
   <div class="usa-font-lead">
     <p>The Micro-purchase Marketplace is the place to bid on open-source issues from the 18F team. <a href="https://18f.gsa.gov/2015/11/06/micro-purchase-lessons/">Learn more about this experiment »</a></p>
     <p>Be sure to <a href="<%= login_path %>">register your company</a> before placing a bid. If you have any questions, please email us at <a href="mailto:micropurchase@gsa.gov">micropurchase@gsa.gov</a>.</p>
   </div>
-</div>
+</section>
 
-<h2>Issues open for bid</h2>
+<section class="usa-grid">
+  <h2>Issues open for bid</h2>
 
-<%= render partial: @view_model.header_partial %>
+  <%= render partial: @view_model.header_partial %>
 
-<div class="usa-grid-full">
-  <%= render partial: @view_model.auctions_list_partial %>
-</div>
+  <div class="usa-grid-full">
+    <%= render partial: @view_model.auctions_list_partial %>
+  </div>
+</section>
