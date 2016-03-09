@@ -13,19 +13,28 @@
   <div class="usa-width-one-third">
     <div class="auction-detail-panel">
       <div class="auction-info">
-      <p class="auction-label">Auction type:</p>
-      <p class="auction-label-info">
-        <%= @view_model.auction_type.capitalize %> (<%= @view_model.auction_rules_link %>).
-      </p>
-      <p class="auction-label">Status:</p>
-      <p class="auction-label-info"><%= @view_model.auction_status %></p>
-      <p class="auction-label"><%= @view_model.auction_status_label %></p>
-      <p class="auction-label-info"><%= render partial: @view_model.auction_status_partial %>
-      </p>
-      <p class="auction-label"><%= @view_model.auction_deadline_label %></p>
-      <p class="auction-label-info"><%= @view_model.auction_formatted_end_time %></p>
-      <p class="auction-label"><%= @view_model.auction_start_label %></p>
-      <p class="auction-label-info"><%= @view_model.auction_formatted_start_time %></p>
+      <div>
+        <p class="auction-label">Auction type:</p>
+        <p class="auction-label-info">
+          <%= @view_model.auction_type.capitalize %> (<%= @view_model.auction_rules_link %>).
+        </p>
+      </div>
+      <div>
+        <p class="auction-label">Status:</p>
+        <p class="auction-label-info"><%= @view_model.auction_status %></p>
+      </div>
+      <div>
+        <p class="auction-label"><%= @view_model.auction_status_label %></p>
+        <p class="auction-label-info"><%= render partial: @view_model.auction_status_partial %></p>
+      </div>
+      <div>
+        <p class="auction-label"><%= @view_model.auction_deadline_label %></p>
+        <p class="auction-label-info"><%= @view_model.auction_formatted_end_time %></p>
+      </div>
+      <div>
+        <p class="auction-label"><%= @view_model.auction_start_label %></p>
+        <p class="auction-label-info"><%= @view_model.auction_formatted_start_time %></p>
+      </div>
       <% if @view_model.auction.user_can_bid?(current_user) %>
       <p>
         <a href="<%= new_auction_bid_path(@view_model.auction) %>" class='usa-button usa-button'>BID »</a>

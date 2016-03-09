@@ -8,3 +8,11 @@ p {
   font-family: "Source Sans Pro", "Helvetica", "Arial", sans-serif;
   font-weight: $font-normal;
 }
+
+label {
+	font-weight: $font-normal;
+}
+
+input {
+	font-weight: $font-light;
+}
