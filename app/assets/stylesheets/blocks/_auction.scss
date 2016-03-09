@@ -1,3 +1,14 @@
+textarea#auction_summary {
+  width: 500px;
+  height: 150px;
+}
+
+textarea#auction_description {
+  width: 500px;
+  height: 500px;
+}
+
+
 .auction-label-expiring {
     background-color: $color-gold !important;
     color: black !important;
@@ -96,13 +107,19 @@ a[class^="auction-label-"] {
   padding-bottom: 20px;
 }
 
-.bid-button {
-  margin-bottom: 30px;
-}
+
+// .usa-width-one-whole .issue-list-item {
+//   border: 1px solid #ccc;
+
+// }
 
 .issue-list-item {
-	background-color: $branding-light;
+  border: 1px solid $color-gray-neutral;
+	background-color: $color-white;
+  border-radius: $border-radius;
 	font-weight: $font-light;
+
+  margin-bottom: $site-margins;
 
   .issue-label {
     margin-top: 0.75rem;
@@ -115,11 +132,17 @@ a[class^="auction-label-"] {
     span {
     	font-weight: $font-bold;
     }
+
+    // a {
+    //   font-weight: $font-normal;
+    // }
   }
 
   .issue-bid-details {
     background-color: $color-gray;
     background-color: $primary-darkest;
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
     color: $color-white;
     padding: 2rem 3rem;
 
@@ -166,6 +189,12 @@ a[class^="auction-label-"] {
   }
 }
 
-.issue-list-item-details {
-	font-weight: $font-bold;
+.issue-list-item-details,
+.issue-bids-info {
+	font-weight: $font-normal;
+}
+
+.issue-icon {
+  width: 25px;
+  max-width: none;
 }

@@ -1,6 +1,6 @@
 .usa-alert-info {
   background-image: asset-url("info.svg");
-  margin-bottom: 30px;
+  margin-bottom: $site-margins;
 }
 
 .usa-alert-success {
@@ -13,4 +13,9 @@
 
 .usa-alert-warning {
     background-image: asset-url("warning.svg");
+}
+
+.usa-alert {
+	border-radius: $border-radius;
+	border: 1px solid $color-gray-neutral;
 }

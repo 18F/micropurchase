@@ -1,3 +1,8 @@
+
+footer {
+  margin-top: 50px;
+}
+
 .usa-footer-primary-section {
 	background: $branding-light;
 }
@@ -11,7 +16,12 @@
 }
 
 
-.usa-footer-primary-link {
+.usa-footer .usa-footer-primary-link {
+	font-weight: $font-normal;
+	font-size: $h3-font-size;
+	padding-left: $site-margins;
+	padding-right: $site-margins;
+
 	@include media($medium-screen) {
 		padding: $base-padding;
 	}
