@@ -43,7 +43,7 @@
 
 .auction-label-expiring {
     background-color: $color-gold !important;
-    color: black !important;
+    color: $default-color !important;
 }
 
 .auction-label-over {
@@ -51,8 +51,8 @@
 }
 
 .auction-label-future {
-    background-color: $color-primary-alt !important;
-    color: black !important;
+  background-color: $branding-bright;
+  color: $default-color !important;
 }
 
 .auction-label-open {

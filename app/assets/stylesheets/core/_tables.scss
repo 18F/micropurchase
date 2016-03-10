@@ -1,20 +1,24 @@
 .usa-table-borderless td {
-	font-weight: $font-light;
-	text-align: left;
-	vertical-align: top;
-	&:first-of-type {
-		font-weight: $font-bold;
-	}
+  font-weight: $font-light;
+  text-align: left;
+  vertical-align: top;
 
+  &:first-of-type {
+    font-weight: $font-normal;
+  }
 }
 
 .usa-table-borderless th {
-	vertical-align: bottom;
-	text-align: left;
+  vertical-align: bottom;
+  text-align: left;
 }
 
 
 .usa-table-borderless {
-	margin: 0;
-	width: 100%;
+  width: 100%;
+}
+
+.table-container {
+  width: 100%;
+  overflow: scroll;
 }

@@ -66,7 +66,8 @@ textarea#auction_description {
     border-bottom-left-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
     color: $color-white;
-    padding: 2rem 3rem;
+    padding: $base-padding 3rem;
+    padding-bottom: 0;
 
     .current-bid-box {
       position: relative;
@@ -117,15 +118,14 @@ textarea#auction_description {
 }
 
 
-.issue-bids-info-item {
-  margin-bottom: $base-padding;
 
-  @include media($small-screen) {
-    margin-bottom: 0;
-  }
+.issue-bids-info-item {
+  display: inline-block;
+  margin-bottom: $base-padding;
+  margin-right: $site-margins;
 
   &:last-of-type {
-    margin-bottom: 0;
+    margin-right: 0;
   }
 }
 

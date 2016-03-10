@@ -1,11 +1,13 @@
 @import 'vendor/us-web-design-standards/all';
+@import 'core/fonts';
 @import 'core/mixins';
 @import 'core/variables';
 @import 'core/typography';
-@import 'uswds-grid';
-@import 'core/elements';
+
+@import 'uswds-grid-overrides';
 @import 'uswds-overrides';
 
+@import 'core/elements';
 @import 'core/links';
 @import 'core/lists';
 @import 'core/layout';
@@ -16,10 +18,9 @@
 @import 'components/nav-dropdown';
 @import 'components/accordion';
 @import 'components/drawer';
+
 @import 'blocks/header';
 @import 'blocks/footer';
-
-
 @import 'blocks/alerts';
 @import 'blocks/auction';
 @import 'blocks/auction-detail';
@@ -29,6 +30,8 @@
 @import 'blocks/nav-drawer';
 
 
+// Misc
+// To do: Move or consolidate
 body.admin {
   nav.usa-site-navbar {
     background: $color-primary-alt-darkest;
@@ -48,15 +51,8 @@ body.admin {
   line-height: 0;
 }
 
-
-
 .center {
   text-align: center;
-}
-
-.table-container {
-  width: 100%;
-  overflow: scroll;
 }
 
 

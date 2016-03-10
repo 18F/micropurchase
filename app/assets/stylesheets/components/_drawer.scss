@@ -1,10 +1,10 @@
-$drawer-width: 200px;
+$drawer-width: 150px;
 
 drawer {
   @include transition(right, 0.3s);
 
   background: $branding-darkest;
-  border: 1px solid $color-gray-neutral;
+  border: 4px solid $branding-bright;
   border-right: none;
   border-top: none;
   color: $color-white;
