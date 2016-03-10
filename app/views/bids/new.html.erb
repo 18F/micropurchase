@@ -51,7 +51,7 @@ Bidding on this auction closed on <%= @auction.end_datetime %>. The winning bid 
 <p>Note that all users who submit bids consent to the publication of their GitHub usernames, DUNS numbers, and bid amounts following the conclusion of the bidding process.</p>
       <div class='button-wrapper'>
         <a href='<%= root_path %>' class='usa-button usa-button-big usa-button-gray cancel'>Cancel</a>
-        <%= f.submit 'Submit', class: 'usa-button-big usa-button submit' %>
+        <%= f.submit 'Submit', class: 'usa-button-big usa-button usa-button-outline submit' %>
       </div>
   <% end %>
 <% else %>

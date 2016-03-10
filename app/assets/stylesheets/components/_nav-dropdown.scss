@@ -1,12 +1,22 @@
 .header-account .nav-menu .nav-item > a {
   border: none;
-  font-size: 1rem;
+  font-size: $small-font-size;
+  font-weight: $font-normal;
   margin: 0;
   padding: 0;
+  padding-top: rem(5px);
 
   @include media($medium-screen) {
     font-size: $h5-font-size;
   }
+}
+
+.header-account .nav-menu .nav-item > a[aria-expanded=true] {
+  border: 0;
+  color: $default-color;
+  font-weight: $font-normal;
+  text-decoration: none;
+  z-index: 9000;
 }
 
 .header-account .nav-item:after {
@@ -23,17 +33,27 @@
   }
 }
 
-
-.header-account .nav-menu .sub-nav {
-  top: auto;
-  padding: 0;
+.header-account .nav-menu .sub-nav[aria-expanded=true] {
+  border: transparent;
+  border-bottom: 4px solid $branding-bright;
+  border-top: 4px solid $branding-bright;
+  display: block;
+  left: 0px;
   margin: 0;
-  right: 0;
-  border: 1px solid $primary-darkest;
+  right: -7px;
+  padding: 0;
+  top: 0;
+  z-index: 8000;
+}
+
+.header-account .nav-menu .sub-nav[aria-expanded=false],
+.header-account .nav-menu .sub-nav {
+  display: none;
 }
 
 .header-account .nav-menu .sub-nav-group {
   margin: 0;
+  margin-top: 30px;
 }
 
 .header-account .nav-menu .sub-nav a {

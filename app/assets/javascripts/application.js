@@ -34,6 +34,21 @@ $(function(){
 
         /* css class for the open state */
         openClass: "open"
-    })
+    });
+
+    var profileButton = $('.header-account .nav-menu .nav-item a');
+
+    var resizeProfileMenu = function resizeProfileMenu(button) {
+        var buttonHeight = button.height();
+        $('.header-account .nav-menu .sub-nav-group').css('margin-top', 3 + buttonHeight);
+    };
+
+    resizeProfileMenu(profileButton);
+
+    $(window).on('resize', function(){
+        $('.header-account .nav-menu .sub-nav-group')
+        resizeProfileMenu(profileButton)
+    });
+
 });
 
