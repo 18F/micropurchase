@@ -3,7 +3,7 @@
 <%= render partial: @view_model.current_user_header_partial, locals: {auction: @view_model.auction} %>
 
 <div class="usa-grid-full">
-  <p><a href="<%= root_path %>"><icon class="fa fa-angle-double-left"></icon> Back to open projects</a></p>
+  <p><a class="link-highlighted" href="<%= root_path %>"><icon class="fa fa-angle-double-left"></icon> Back to open projects</a></p>
   <div class="usa-width-two-thirds auction-description">
     <h1><%= @view_model.auction_record.title %></h1>
     <div class="github-issue">
