@@ -37,7 +37,7 @@
       </div>
       <% if @view_model.auction.user_can_bid?(current_user) %>
       <p>
-        <a href="<%= new_auction_bid_path(@view_model.auction) %>" class='usa-button usa-button'>BID »</a>
+        <a href="<%= new_auction_bid_path(@view_model.auction) %>" class='button-bid usa-button'>BID <icon class="fa fa-angle-double-right"></icon></a>
       </p>
       <% end %>
     </div>

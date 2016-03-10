@@ -54,9 +54,9 @@ RSpec.feature "Pages have meta tags", type: :feature do
 
     create_authed_bidder
 
-    click_on "Login"
+    find('.button-login').click
     click_on("Authorize with GitHub")
-    click_on("Edit Profile")
+    click_on("Edit profile")
 
     expect(page).to have_css("title", visible: false, text: "18F Micro-purchase - Edit user: Doris Doogooder")
   end
