@@ -13,8 +13,10 @@
 @import 'core/layout';
 @import 'core/forms';
 @import 'core/tables';
+@import 'core/buttons';
 
 @import 'vendor/accessible-mega-menu';
+
 @import 'components/nav-dropdown';
 @import 'components/accordion';
 @import 'components/drawer';
@@ -57,10 +59,4 @@ body.admin {
 
 .center {
   text-align: center;
-}
-
-
-.intro {
-  background: #222;
-  padding: 40px 40px;
 }

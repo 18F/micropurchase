@@ -10,19 +10,19 @@ $medium: new-breakpoint(min-width $medium-screen 6);
 $small: new-breakpoint(min-width $small-screen 1);
 
 .usa-grid-full .usa-width-one-fourth {
-	@include media($medium-screen) {
-		@include span-columns(12);
-	}
+  @include media($medium-screen) {
+    @include span-columns(12);
+  }
 }
 
 .usa-footer-primary-section .usa-grid-full {
-	@include media($medium-screen) {
-		padding-left: 0;
-		padding-right: 0;
-	}
+  @include media($medium-screen) {
+    padding-left: 0;
+    padding-right: 0;
+  }
 
-	@include media($large-screen) {
-		padding-left: $site-margins;
-		padding-right: $site-margins;
-	}
+  @include media($large-screen) {
+    padding-left: $site-margins;
+    padding-right: $site-margins;
+  }
 }

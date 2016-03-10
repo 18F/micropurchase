@@ -1,24 +1,24 @@
 .usa-footer-primary-section {
-	background: $branding-light;
+  background: $branding-light;
 }
 
 .footer-image {
-	margin-bottom: $base-padding;
+  margin-bottom: $base-padding;
 
-	@include media($medium-screen) {
-		margin-bottom: 0;
-	}
+  @include media($medium-screen) {
+    margin-bottom: 0;
+  }
 }
 
 
 .usa-footer .usa-footer-primary-link {
   color: $branding-darkest;
-	font-weight: $font-normal;
-	font-size: $h3-font-size;
+  font-weight: $font-normal;
+  font-size: $h3-font-size;
 
-	@include media($medium-screen) {
-		padding: $base-padding;
-	}
+  @include media($medium-screen) {
+    padding: $base-padding;
+  }
 }
 
 .usa-footer-large {
@@ -43,9 +43,9 @@
 ul.usa-footer-primary-content,
 li.usa-footer-primary-content,
 li.usa-footer-primary-content {
-	border-top: 1px solid $primary-darkest;
+  border-top: 1px solid $primary-darkest;
 
-	@include media($medium-screen) {
+  @include media($medium-screen) {
     border-top: 1px solid $primary-darkest;
   }
 

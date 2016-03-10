@@ -1,16 +1,9 @@
 html {
-	@include font-default();
+  @include font-default();
 
   font-size: 10px;
 }
 
-// body {
-//     font-size: 1.8rem;
-// }
-
-// p,li,span,button {
-//     font-size: 1.8rem;
-// }
 
 ul li:before {
   display: none;
@@ -19,8 +12,8 @@ ul li:before {
 p,
 li,
 span {
-	font-weight: $font-light;
-	font-size: $small-font-size;
+  font-weight: $font-light;
+  font-size: $small-font-size;
   @include media($small-screen) {
     font-size: $base-font-size;
 
