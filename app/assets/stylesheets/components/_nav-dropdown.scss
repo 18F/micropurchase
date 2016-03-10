@@ -1,62 +1,65 @@
 .header-account .nav-menu .nav-item > a {
-	border: none;
-	font-size: 1rem;
-	margin: 0;
-	padding: 0;
+  border: none;
+  font-size: 1rem;
+  margin: 0;
+  padding: 0;
+
+  @include media($medium-screen) {
+    font-size: $h5-font-size;
+  }
 }
 
 .header-account .nav-item:after {
-	display: none;
+  display: none;
 }
 
 .header-account .fa-caret-down {
   font-size: 1.5rem;
   padding-left: $base-padding-lite;
   vertical-align: bottom;
+
+  @include media($medium-screen) {
+    vertical-align: middle;
+  }
 }
 
 
 .header-account .nav-menu .sub-nav {
-	top: auto;
-	padding: 0;
-	margin: 0;
-	right: 0;
-	border: 1px solid $primary-darkest;
+  top: auto;
+  padding: 0;
+  margin: 0;
+  right: 0;
+  border: 1px solid $primary-darkest;
 }
 
 .header-account .nav-menu .sub-nav-group {
-	margin: 0;
+  margin: 0;
 }
 
 .header-account .nav-menu .sub-nav a {
-	border-radius: 0;
-	box-shadow: none;
-	border: none;
-	font-size: 1rem;
-	font-weight: $font-bold;
-	color: $default-color;
-	color: $primary-darkest;
-	top: 0;
-	width: 100%;
-	text-align: left;
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
+  font-size: 1rem;
+  font-weight: $font-bold;
+  color: $default-color;
+  color: $primary-darkest;
+  top: 0;
+  width: 100%;
+  text-align: left;
 
-	&:hover,
-	&:focus {
-		border-radius: 0;
-		box-shadow: none;
-		border: none;
-		background: $primary-darkest;
-		background: $branding-bright;
-		color: $color-white;
-		color: $primary-darkest;
-	}
+  &:hover,
+  &:focus {
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    background: $primary-darkest;
+    background: $branding-bright;
+    color: $color-white;
+    color: $primary-darkest;
+  }
 }
 
 .header-account .sub-nav-group li:after {
-	display: none;
+  display: none;
 }
-
-// .header-account .usa-button.button-login {
-// 	background: $branding-bright;
-// 	color: $primary-darkest;
-// }
