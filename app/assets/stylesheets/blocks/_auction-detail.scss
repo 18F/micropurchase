@@ -17,22 +17,24 @@
   .auction-more-info {
 
     background-color: $primary-darkest;
-    margin-top: 30px;
-    padding-top: 10px;
-    padding-bottom: 30px;
+    padding: 2rem;
 
-    p {
-      padding: 1rem 3rem 0 3rem;
-      margin: 0;
+    p,
+    a,
+    i {
+      color: $color-white;
     }
 
-    a {
-      color: white;
-      text-decoration: none;
+    p {
+      padding-bottom: 1rem;
+      margin: 0;
+
+      &:last-of-type {
+        padding-bottom: 0;
+      }
     }
 
     i {
-      color: white;
       margin-right: 5px;
     }
   }
