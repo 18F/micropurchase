@@ -2,7 +2,8 @@
 	@extend .usa-grid;
 }
 
-.content-wrapper.index{
+.content-wrapper#index,
+.content-wrapper#auctions {
 	margin: 0;
 	max-width: none;
 	padding: 0;
