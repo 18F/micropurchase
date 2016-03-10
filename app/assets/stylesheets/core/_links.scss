@@ -5,5 +5,19 @@ a:visited {
 
 a:hover,
 a:focus {
-	color: $links-secondary;
+  color: $links-secondary;
+}
+
+a.link-highlighted {
+  background: $branding-darkest;
+  color: $branding-bright;
+  padding: rem(1px);
+  padding-left: $border-radius;
+  padding-right: $border-radius;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  }
 }
