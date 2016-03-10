@@ -5,7 +5,6 @@ gem 'rails', '4.2.5.2'
 gem 'pg'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
-gem 'us_web_design_standards'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
