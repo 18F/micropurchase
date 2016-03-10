@@ -274,10 +274,20 @@ nav.usa-site-navbar a {
   margin-left: 14px;
   font-size: 30px;
   color: #fff;
+
+  @media all and (max-width: 345px) {
+    display: inline-block;
+    margin-left: 0;
+    font-size: 25px;
+  }
 }
 
 #logo {
   line-height: 0;
+
+  @media all and (max-width: 345px) {
+    line-height: normal;
+  }
 }
 
 
@@ -352,6 +362,12 @@ footer {
   position: relative;
   top: 15px;
   color: #fff;
+
+  @media all and (max-width: 450px) {
+    float: none;
+    margin-top: .4em;
+    margin-bottom: .4em;
+  }
 }
 
 .header-account span {
