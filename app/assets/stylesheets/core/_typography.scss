@@ -5,8 +5,7 @@ h4,
 h5,
 h6,
 p {
-  font-family: "Source Sans Pro", "Helvetica", "Arial", sans-serif;
-  font-weight: $font-normal;
+  @include font-default();
 }
 
 label {

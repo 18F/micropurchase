@@ -1,4 +1,6 @@
 html {
+	@include font-default();
+
   font-size: 10px;
 }
 

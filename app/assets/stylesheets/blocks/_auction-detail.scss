@@ -59,8 +59,10 @@
     background-color: $color-green !important;
 }
 
-a[class^="auction-label-"] {
-  margin-right: $base-padding-lite;
+a[class*="auction-label-"],
+span[class*="auction-label-"] {
+  margin-left: $base-padding-lite;
+
 }
 
 .auction-label,
