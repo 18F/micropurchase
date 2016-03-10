@@ -65,6 +65,7 @@ module Presenter
     end
 
     def ==(other)
+      other = Presenter::Bid.new(other) if other.is_a?(::Bid)
       model == other.model
     end
 
