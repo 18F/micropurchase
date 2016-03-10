@@ -3,7 +3,7 @@
 <%= render partial: @view_model.current_user_header_partial, locals: {auction: @view_model.auction} %>
 
 <div class="usa-grid-full">
-  <p><a href="<%= root_path %>">« Back to open projects</a></p>
+  <p><a href="<%= root_path %>"><icon class="fa fa-angle-double-left"></icon> Back to open projects</a></p>
   <div class="usa-width-two-thirds auction-description">
     <h1><%= @view_model.auction_record.title %></h1>
     <div class="github-issue">
@@ -44,10 +44,11 @@
       <div class="auction-more-info">
         <p>
           <i class="fa fa-github"></i>
-          <a href="<%= @view_model.auction_issue_url %>">View on GitHub »</a>
+          <a href="<%= @view_model.auction_issue_url %>">View on GitHub <icon class="fa fa-angle-double-right"></icon></a>
         </p>
+        <p>Have feedback?</p>
         <p>
-          <a href="mailto:micropurchase@gsa.gov">Have feedback? Email micropurchase@gsa.gov</a>
+          <a href="mailto:micropurchase@gsa.gov">Send us an email!</a>
         </p>
       </div>
     </div>

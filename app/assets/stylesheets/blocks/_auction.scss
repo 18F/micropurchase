@@ -58,9 +58,6 @@ textarea#auction_description {
     	font-weight: $font-bold;
     }
 
-    // a {
-    //   font-weight: $font-normal;
-    // }
   }
 
   .issue-bid-details {
@@ -102,9 +99,9 @@ textarea#auction_description {
     }
 
     a.usa-button {
-        margin-top: 0;
-        padding: 0.5rem 2rem;
-        white-space: nowrap;
+      margin: 0;
+      padding: 0.5rem 2rem;
+      white-space: nowrap;
     }
 
     p {
@@ -117,6 +114,19 @@ textarea#auction_description {
 .issue-list-item-details,
 .issue-bids-info {
 	font-weight: $font-normal;
+}
+
+
+.issue-bids-info-item {
+  margin-bottom: $base-padding;
+
+  @include media($small-screen) {
+    margin-bottom: 0;
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 }
 
 .issue-icon {
