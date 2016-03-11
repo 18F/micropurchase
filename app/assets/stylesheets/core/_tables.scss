@@ -28,11 +28,17 @@
 
 @media only screen and (max-width: $small-screen) {
 
-  table, thead, tbody, th, td, tr {
-    display: block;
+  table#table-bids {
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+      display: block;
+    }
   }
 
-  tr {
+  table#table-bids tr {
     border-bottom: 1px solid $color-gray-neutral;
     border-top: 1px solid $color-gray-neutral;
 
@@ -45,18 +51,18 @@
     }
   }
 
-  table thead {
+  table#table-bids thead {
     display: none;
   }
 
-  table td {
+  table#table-bids td {
     border: none;
     border-bottom: 1px solid $color-gray-neutral;
     padding-left: 50%;
     position: relative;
   }
 
-  table td:before {
+  table#table-bids td:before {
     display: inline-block;
     font-weight: $font-bold;
     left: 15px;
