@@ -337,7 +337,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
     click_on "Submit"
 
     # bad ui brings us back to the home page :(
-    page.find(".issue-list-item-details").click
+    page.find(".button-bid").click
     expect(page).to have_content("Current bid:")
 
     # fill in the form
@@ -379,7 +379,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
       click_on "Submit"
 
       # bad ui brings us back to the home page :(
-      page.find(".issue-list-item-details").click
+      page.find(".button-bid").click
       expect(page).to have_content("Current bid:")
 
       # fill in the form
@@ -401,7 +401,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
       visit "/"
       sign_in_bidder
 
-      page.find(".issue-list-item-details").click
+      page.find(".button-bid").click
       expect(page).not_to have_content("Authorize with GitHub")
       expect(page).to have_content("Current bid:")
 
@@ -423,11 +423,8 @@ RSpec.feature "bidder interacts with auction", type: :feature do
 
       visit "/"
       sign_in_bidder
-      visit "/"
 
-      # page.find(".issue-list-item-details").click
-
-      click_on "View details"
+      page.find(".button-bid").click
       expect(page).not_to have_content("Authorize with GitHub")
       expect(page).to have_content("Current bid:")
       expect(page).to have_content("No bids yet.")
@@ -442,9 +439,8 @@ RSpec.feature "bidder interacts with auction", type: :feature do
 
       visit "/"
       sign_in_bidder
-      visit "/"
 
-      page.find(".issue-list-item-details").click
+      page.find(".button-bid").click
 
       expect(page).not_to have_content("Authorize with GitHub")
       expect(page).to have_content("Current bid:")
@@ -459,7 +455,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
       sign_in_bidder
       visit "/"
 
-      page.find(".issue-list-item-details").click
+      page.find(".button-bid").click
       expect(page).not_to have_content("Authorize with GitHub")
       expect(page).to have_content("Current bid:")
       expect(page).to have_content("No bids yet.")
