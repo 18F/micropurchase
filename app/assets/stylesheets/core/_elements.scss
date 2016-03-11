@@ -12,10 +12,10 @@ ul li:before {
 p,
 li,
 span {
+	font-size: $small-font-size;
   font-weight: $font-light;
-  font-size: $small-font-size;
+
   @include media($small-screen) {
     font-size: $base-font-size;
-
   }
 }

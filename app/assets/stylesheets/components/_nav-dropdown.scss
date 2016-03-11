@@ -38,12 +38,11 @@
   border-bottom: 4px solid $branding-bright;
   border-top: 4px solid $branding-bright;
   display: block;
-  // left: 0px;
-  width: 205px; // default
   margin: 0;
   right: -7px;
   padding: 0;
   top: 0;
+  width: 205px; // default
   z-index: 8000;
 }
 
@@ -61,22 +60,20 @@
   border-radius: 0;
   box-shadow: none;
   border: none;
+  color: $primary-darkest;
   font-size: 1rem;
   font-weight: $font-bold;
-  color: $default-color;
-  color: $primary-darkest;
+  text-align: left;
   top: 0;
   width: 100%;
-  text-align: left;
+
 
   &:hover,
   &:focus {
     border-radius: 0;
     box-shadow: none;
     border: none;
-    background: $primary-darkest;
     background: $branding-bright;
-    color: $color-white;
     color: $primary-darkest;
   }
 }

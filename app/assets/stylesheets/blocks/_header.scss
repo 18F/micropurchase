@@ -1,14 +1,14 @@
 
 nav.usa-site-navbar {
   background: $primary-darkest;
-  padding-top: 10px;
   padding-bottom: 10px;
+  padding-top: 10px;
 }
 
 nav.usa-site-navbar a {
-  position: relative;
-  margin-left: 14px;
   color: #fff;
+  margin-left: 14px;
+  position: relative;
 }
 
 .header-account {
@@ -19,14 +19,14 @@ nav.usa-site-navbar a {
 
 .header-account span {
   position: relative;
-  top: -8px;
   right: 10px;
+  top: -8px;
 }
 
 .header-account a.usa-button {
+  font-size: 20px;
   margin: 0;
   position: relative;
-  font-size: 20px;
 }
 
 nav.usa-site-navbar a {
