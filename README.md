@@ -60,6 +60,21 @@ MPT_3500_GITHUB_SECRET="your-client-secret"
 
 Make sure to restart the server to register those environmental variables.
 
+### Using Docker
+
+A development instance of the Micropurchase application can be spun up quickly
+using [Docker Compose](https://docs.docker.com/compose/).  After setting your
+Github application credentials in your `.env` file as described above, start up
+the database and application server using `docker-compose`.
+
+```
+docker-compose up
+```
+
+Visit http://localhost:3000/
+
+The sample data will be populated in the database automatically.
+
 #### For deployment
 
 See the GitHub API keys section of our deployment instructions below.
@@ -72,6 +87,13 @@ bundle exec rspec
 or
 ```
 rake spec
+```
+
+#### Using Docker
+
+```
+docker-compose up -d
+docker-compose run web bundle exec rake spec
 ```
 
 ## Deployment
