@@ -4,9 +4,11 @@ services:
   postgresql:
     image: postgres
     env_file: .env
+#   env_file: .env.example
   micropurchases:
     build: .
     env_file: .env
+#   env_file: .env.example
     depends_on:
     - postgresql
     ports:
