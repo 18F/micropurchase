@@ -1,0 +1,15 @@
+# This requires docker-compose 1.6.0 and uses docker engine 1.10+ DNS discovery
+version: '2'
+services:
+  postgresql:
+    image: postgres
+    env_file: .env
+#   env_file: .env.example
+  micropurchases:
+    build: .
+    env_file: .env
+#   env_file: .env.example
+    depends_on:
+    - postgresql
+    ports:
+    - "3000:3000"
