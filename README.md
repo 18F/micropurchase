@@ -71,7 +71,7 @@ the database and application server using `docker-compose`.
 docker-compose up
 ```
 
-Visit http://localhost:3000/
+Visit http://localhost:3000/  (If running Docker within a VM using [boot2docker](https://github.com/boot2docker/boot2docker) or [Docker Machine](https://docs.docker.com/machine/overview/), use the IP address of the VM rather than localhost, e.g. `boot2docker ip` or `docker-machine ip default`.)
 
 The sample data will be populated in the database automatically.
 
