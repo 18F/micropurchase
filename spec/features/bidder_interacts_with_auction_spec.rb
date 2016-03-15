@@ -42,11 +42,11 @@ RSpec.feature "bidder interacts with auction", type: :feature do
 
       click_on("BID")
       expect(page).to have_content("Your bid:")
-      
+
       # fill in the form
       expect(page).to_not have_content("Current bid:")
       fill_in("bid_amount", with: '3493')
-      click_on("Submit")
+      find('.usa-button.submit').click
 
       # takes us to confirmation page
       expect(page).to have_content("Confirm your bid: $3493")
@@ -74,7 +74,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
 
       # fill in the form
       fill_in("bid_amount", with: '800')
-      click_on("Submit")
+      find('.usa-button.submit').click
 
       # takes us to confirmation page
       expect(page).to have_content("Confirm your bid: $800")
@@ -89,7 +89,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
 
       # fill in the form
       fill_in("bid_amount", with: '500')
-      click_on("Submit")
+      find('.usa-button.submit').click
 
       # takes us to confirmation page
       expect(page).to have_content("Confirm your bid: $500")
@@ -127,7 +127,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
 
       # fill in the form
       fill_in("bid_amount", with: '500')
-      click_on("Submit")
+      find('.usa-button.submit').click
 
       # takes us to confirmation page
       expect(page).to have_content("Confirm your bid: $500")
@@ -244,7 +244,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
         end
       end
 
-      expect(page).to_not have_content('Bid »')
+      expect(page).to_not have_css('.button-bid')
     end
 
     scenario "There is an expiring auction" do
@@ -257,8 +257,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
           expect(page).to have_content('Expiring')
         end
       end
-
-      expect(page).to have_content('Bid »')
+      expect(page).to have_content('Bid ')
     end
 
     scenario "There is a future auction" do
@@ -272,7 +271,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
         end
       end
 
-      expect(page).to_not have_content('Bid »')
+      expect(page).to_not have_css('.button-bid')
     end
 
     scenario "There are several auctions" do
@@ -322,11 +321,12 @@ RSpec.feature "bidder interacts with auction", type: :feature do
 
     # going to the auction detail page
     click_on(@auction.title)
-    page.find("a[href='#{@auction.issue_url}']")
+    find("a[href='#{@auction.issue_url}']")
 
     # going via another link
     visit "/"
-    click_on("View details »")
+    page.find(".issue-list-item-details").click
+
     page.find("a[href='#{@auction.issue_url}']")
 
     # logging in via bid click
@@ -334,15 +334,15 @@ RSpec.feature "bidder interacts with auction", type: :feature do
     @bidder = create_authed_bidder
     expect(page).to have_content("Authorize with GitHub")
     click_on("Authorize with GitHub")
-    click_on('Submit')
+    click_on "Submit"
 
     # bad ui brings us back to the home page :(
-    click_on("Bid »")
+    page.find(".button-bid").click
     expect(page).to have_content("Current bid:")
 
     # fill in the form
     fill_in("bid_amount", with: '800')
-    click_on("Submit")
+    find('.usa-button.submit').click
 
     # takes us to confirmation page
     expect(page).to have_content("Confirm your bid: $800")
@@ -368,7 +368,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
 
       # going via another link
       visit "/"
-      click_on("View details »")
+      page.find(".issue-list-item-details").click
       page.find("a[href='#{@auction.issue_url}']")
 
       # logging in via bid click
@@ -376,15 +376,15 @@ RSpec.feature "bidder interacts with auction", type: :feature do
       expect(page).to have_content("Authorize with GitHub")
       click_on("Authorize with GitHub")
       # completing user profile
-      click_on('Submit')
+      click_on "Submit"
 
       # bad ui brings us back to the home page :(
-      click_on("Bid »")
+      page.find(".button-bid").click
       expect(page).to have_content("Current bid:")
 
       # fill in the form
       fill_in("bid_amount", with: '800')
-      click_on("Submit")
+      find('.usa-button.submit').click
 
       # takes us to confirmation page
       expect(page).to have_content("Confirm your bid: $800")
@@ -401,12 +401,12 @@ RSpec.feature "bidder interacts with auction", type: :feature do
       visit "/"
       sign_in_bidder
 
-      click_on("Bid »")
+      page.find(".button-bid").click
       expect(page).not_to have_content("Authorize with GitHub")
       expect(page).to have_content("Current bid:")
 
       fill_in("bid_amount", with: '999')
-      click_on("Submit")
+      find('.usa-button.submit').click
 
       # takes us to confirmation page
       expect(page).to have_content("Confirm your bid: $999")
@@ -424,14 +424,14 @@ RSpec.feature "bidder interacts with auction", type: :feature do
       visit "/"
       sign_in_bidder
 
-      click_on("Bid »")
+      page.find(".button-bid").click
       expect(page).not_to have_content("Authorize with GitHub")
       expect(page).to have_content("Current bid:")
       expect(page).to have_content("No bids yet.")
       expect(page).not_to have_content("You are currently the winning bidder.")
 
       fill_in("bid_amount", with: '999')
-      click_on("Submit")
+      find('.usa-button.submit').click
     end
 
     scenario "Is not the current winning bidder with bids from other users" do
@@ -440,7 +440,7 @@ RSpec.feature "bidder interacts with auction", type: :feature do
       visit "/"
       sign_in_bidder
 
-      click_on("Bid »")
+      page.find(".button-bid").click
 
       expect(page).not_to have_content("Authorize with GitHub")
       expect(page).to have_content("Current bid:")
@@ -453,8 +453,9 @@ RSpec.feature "bidder interacts with auction", type: :feature do
 
       visit "/"
       sign_in_bidder
+      visit "/"
 
-      click_on("Bid »")
+      page.find(".button-bid").click
       expect(page).not_to have_content("Authorize with GitHub")
       expect(page).to have_content("Current bid:")
       expect(page).to have_content("No bids yet.")
@@ -469,10 +470,10 @@ RSpec.feature "bidder interacts with auction", type: :feature do
       @bidder.update_attributes(sam_account: false)
       visit '/'
 
-      click_on "Login"
+      find('.button-login').click
       click_on("Authorize with GitHub")
 
-      click_on('Submit')
+      click_on "Submit"
 
       expect(page).to_not have_content("Bid »")
       expect(page).to have_content('Your DUNS is not registered with SAM')

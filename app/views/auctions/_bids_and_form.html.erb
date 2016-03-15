@@ -1,4 +1,4 @@
-<div class="usa-width-one-third current-bid-box">
+<div class="current-bid-box">
   <div class="current-bid-box-children">
   <% if auction.multi_bid? %>
     <% if auction.bids? %>
@@ -25,7 +25,7 @@
 </div>
 </div>
 
-<div class="usa-width-one-third bid-deadline-box">
+<div class="bid-deadline-box">
   <div class="bid-deadline-box-children">
   <span class="bid-deadline">
     Bid Deadline:  <%= distance_of_time_in_words(Time.now, auction.end_datetime) %> left

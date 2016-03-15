@@ -1,5 +1,7 @@
 <div class="usa-alert usa-alert-error auction-alert">
-  <a href='javascript:void(0)' class='warning-hide-trigger'>collapse</a>
+  <a href='javascript:void(0)' class='warning-hide-trigger'>
+    <icon class="accordion-icon fa fa-close"></icon>
+  </a>
   <div class="usa-alert-body"><h3>Your DUNS is not registered with SAM*</h3></div>
   <div class="usa-alert-text">
     <p>You will not be able to bid on any auctions until:</p>
@@ -12,7 +14,11 @@
   </div>
 </div>
 
-<div class='usa-alert usa-alert-warning warning-show-trigger' style='display:none'>
-  <h3 class='warning-message'>DUNS not registered</h3>
-  <a class='warning-trigger' href='javascript:void(0)'>expand</a>
+<div class='usa-alert usa-alert-error warning-show-trigger' style='display:none'>
+
+  <a class='warning-trigger' href='javascript:void(0)'>
+    <icon class="accordion-icon fa fa-expand"></icon>
+    <span class="accordion-text">learn more</span>
+  </a>
+  <div class="usa-alert-body"><h3>DUNS not registered</h3></div>
 </div>
