@@ -6,13 +6,14 @@ RSpec.feature "logging in and out of the app", type: :feature do
 
     create_authed_bidder
 
-    click_on "Login"
+    find('.button-login').click
+
     expect(page).to have_content("Authorize with GitHub")
 
     click_on("Authorize with GitHub")
 
-    expect(page).to have_content("Edit Profile")
-    click_on("Edit Profile")
+    expect(page).to have_content("Edit profile")
+    click_on("Edit profile")
 
     expect(page).to have_content("Complete your account")
     expect(page).to have_content("Name")
@@ -23,7 +24,7 @@ RSpec.feature "logging in and out of the app", type: :feature do
   scenario "New user logs in, created and logs out via header link" do
     visit "/"
 
-    click_on "Login"
+    find('.button-login').click
     expect(page).to have_content("Authorize with GitHub")
 
     click_on("Authorize with GitHub")
@@ -49,7 +50,7 @@ RSpec.feature "logging in and out of the app", type: :feature do
 
     create_authed_bidder
 
-    click_on "Login"
+    find('.button-login').click
     expect(page).to have_content("Authorize with GitHub")
 
     click_on("Authorize with GitHub")
@@ -76,7 +77,7 @@ RSpec.feature "logging in and out of the app", type: :feature do
 
     create_authed_bidder
 
-    click_on "Login"
+    find('.button-login').click
     expect(page).to have_content("Authorize with GitHub")
 
     click_on("Authorize with GitHub")
@@ -100,7 +101,7 @@ RSpec.feature "logging in and out of the app", type: :feature do
 
     create_authed_bidder
 
-    click_on "Login"
+    find('.button-login').click
     expect(page).to have_content("Authorize with GitHub")
 
     click_on("Authorize with GitHub")
