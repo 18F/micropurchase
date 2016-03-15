@@ -22,6 +22,10 @@ module Presenter
       @message
     end
 
+    def github_login
+      @message
+    end
+    
     def duns_number
       @message
     end
