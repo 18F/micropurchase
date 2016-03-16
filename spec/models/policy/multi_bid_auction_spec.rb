@@ -78,8 +78,8 @@ RSpec.describe Policy::MultiBidAuction, type: :model do
     context 'when there are no bids' do
       let(:ar_auction) { FactoryGirl.create(:auction) }
 
-      it 'should be nil' do
-        expect(auction.highlighted_bid).to be_nil
+      it 'should be ' do
+        expect(auction.highlighted_bid).to be_a Presenter::Bid::Null
       end
     end
   end
@@ -111,6 +111,49 @@ RSpec.describe Policy::MultiBidAuction, type: :model do
     end
   end
 
+  describe 'user_bids' do
+    context 'when the user has not made a bid' do
+      let(:ar_auction) { FactoryGirl.create(:auction, :multi_bid, :running, :with_bidders) }
+
+      it 'should return an empty array' do
+        expect(auction.user_bids).to eq([])
+      end
+
+      it 'should return Presenter::Bid::Null for the lowest_user_bid' do
+        expect(auction.lowest_user_bid).to be_a Presenter::Bid::Null
+      end
+
+      it 'should return nil for the lowest_user_bid_amount' do
+        expect(auction.lowest_user_bid_amount).to be_nil
+      end
+    end
+    
+    context 'when the user has made a bid' do
+      let(:user1) { FactoryGirl.create(:user) }
+      let(:user2) { FactoryGirl.create(:user) }
+      let(:ar_auction) { FactoryGirl.create(:auction, :multi_bid, :running, bidder_ids: [user.id, user2.id, user1.id, user2.id, user.id]) }
+      let(:user_bid) { auction.bids.sort_by(&:amount).detect {|b| b.bidder_id == user.id }.amount }
+
+      it 'should return an array with all user bids' do
+        out = auction.user_bids
+        expect(out).to be_an Array
+        expect(out.size).to eq(2)
+        expect(out.first.bidder).to eq(user)
+      end
+
+      it 'should return the lowest bid for lowest_user_bid' do
+        bid = auction.lowest_user_bid
+        expect(bid).to be_a Presenter::Bid
+        expect(bid.bidder).to eq(user)
+        expect(bid.amount).to eq(user_bid)
+      end
+
+      it 'should return the lowest amount for the lowest_user_bid_amount' do
+        expect(auction.lowest_user_bid_amount).to eq(user_bid)
+      end
+    end
+  end
+  
   describe 'max_possible_bid_amount' do
     it 'should be the BID_INCREMENT less than the lowest bid' do
       lowest_bid_amount = ar_auction.bids.sort_by(&:amount).first.amount

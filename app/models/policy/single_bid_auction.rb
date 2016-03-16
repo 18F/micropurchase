@@ -21,16 +21,29 @@ class Policy::SingleBidAuction < Policy::Auction
   end
 
   def winning_bid
-    return nil if available?
+    return Presenter::Bid::Null.new if available?
     return lowest_bids.first if lowest_bids.length == 1
     lowest_bids.sort_by(&:created_at).first
   end
 
-  def winning_bid?(bid)
+  def winning_bidder_name
+    winning_bid.name
+  end
+
+  def winning_bid_amount
+    winning_bid.amount
+  end
+  
+  def bid_is_winner?(bid)
     return false if bid.nil? || available?
     bid == winning_bid
   end
 
+  def user_is_winner?
+    return false if available? || !bids?
+    winning_bid.bidder_id == user.id
+  end
+  
   def displayed_bids
     if available?
       user_bids
@@ -57,5 +70,41 @@ class Policy::SingleBidAuction < Policy::Auction
 
   def format_type
     'single-bid'
+  end
+
+  def display_type
+    'Single Bid'
+  end
+
+  def open_bid_status_label
+    'Your bid:'
+  end
+
+  def status_partial
+    if over?
+      super
+    else
+      'auctions/single_bid_auction_status'
+    end
+  end
+  
+  def rules_href
+    '/auctions/rules/single-bid'
+  end
+  
+  def info_box_partial
+    'single_bid_info_box'
+  end
+
+  def win_header_partial
+    'auctions/single_bid_win_header'
+  end  
+
+  def bid_input_partial
+    'auction_input'
+  end
+
+  def bid_alert_partial
+    'bid_alert_single_bid_auction'
   end
 end

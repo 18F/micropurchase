@@ -148,13 +148,7 @@ RSpec.describe Policy::SingleBidAuction, type: :model do
   describe 'winning_bid' do
     context 'when the auction is still running' do
       it 'should return nil' do
-        expect(auction.winning_bid).to be_nil
-      end
-
-      it 'should return false for winning_bid?(bid)' do
-        bid = pr_auction.bids.sort_by(&:amount).first
-        expect(bid).to_not be_nil
-        expect(auction.winning_bid?(bid)).to be_falsey
+        expect(auction.winning_bid).to be_a Presenter::Bid::Null
       end
     end
 
@@ -164,7 +158,7 @@ RSpec.describe Policy::SingleBidAuction, type: :model do
       it 'should return the lowest bid' do
         bid = pr_auction.bids.sort_by(&:amount).first
         expect(auction.winning_bid).to eq(bid)
-        expect(auction.winning_bid?(bid)).to be_truthy
+        expect(auction.bid_is_winner?(bid)).to be_truthy
       end
 
       context 'when there is a tie for the lowest bid' do
@@ -175,8 +169,52 @@ RSpec.describe Policy::SingleBidAuction, type: :model do
                                             created_at: lowest_bid.created_at + 10.seconds)
 
           expect(auction.winning_bid).to eq(lowest_bid)
-          expect(auction.winning_bid?(lowest_bid)).to be_truthy
-          expect(auction.winning_bid?(user_bid)).to be_falsey
+          expect(auction.bid_is_winner?(lowest_bid)).to be_truthy
+          expect(auction.bid_is_winner?(user_bid)).to be_falsey
+        end
+      end
+    end
+  end
+
+  describe 'is_winner?' do
+    context 'when the auction is running' do
+      let(:ar_auction) { FactoryGirl.create(:auction, :single_bid, :with_bidders, bidder_ids: [user2.id, user.id]) }
+
+      it 'should return false for bid_is_winner?' do
+        bid = Presenter::Bid.new(ar_auction.bids.detect {|b| b.bidder_id = user.id})
+        expect(auction.bid_is_winner?(bid)).to be_falsey
+      end
+
+      it 'should return false for user_is_winner?' do
+        expect(auction.user_is_winner?).to be_falsey
+      end
+    end
+
+    context 'when the auction is over' do
+      context 'the user has the lowest bid' do
+        let(:ar_auction) { FactoryGirl.create(:auction, :single_bid, :closed, :with_bidders, bidder_ids: [user2.id, user.id]) }
+
+        it 'should return true for bid_is_winner?' do
+          bid = Presenter::Bid.new(ar_auction.bids.detect {|b| b.bidder_id == user.id})
+          expect(auction.bid_is_winner?(bid)).to be_truthy
+        end
+
+        it 'should return true for user_is_winner?' do
+          expect(auction.user_is_winner?).to be_truthy
+        end
+
+      end
+
+      context 'the user does not have the lowest bid' do
+        let(:ar_auction) { FactoryGirl.create(:auction, :single_bid, :closed, :with_bidders, bidder_ids: [user.id, user2.id]) }
+
+        it 'should return false for bid_is_winner?' do
+          bid = Presenter::Bid.new(ar_auction.bids.detect {|b| b.bidder_id = user.id})
+          expect(auction.bid_is_winner?(bid)).to be_falsey
+        end
+
+        it 'should return false for user_is_winner?' do
+          expect(auction.user_is_winner?).to be_falsey
         end
       end
     end
@@ -213,7 +251,58 @@ RSpec.describe Policy::SingleBidAuction, type: :model do
     end
   end
 
-  context 'max_possible_bid_amount' do
+  describe 'user_bids' do
+    context 'when the user has not made a bid' do
+      let(:ar_auction) { FactoryGirl.create(:auction, :multi_bid, :running, :with_bidders) }
+
+      it 'should return an empty array' do
+        expect(auction.user_bids).to eq([])
+      end
+
+      it 'should return Presenter::Bid::Null for the lowest_user_bid' do
+        expect(auction.lowest_user_bid).to be_a Presenter::Bid::Null
+      end
+
+      it 'should return nil for the lowest_user_bid_amount' do
+        expect(auction.lowest_user_bid_amount).to be_nil
+      end
+
+      it 'should return false for user_is_bidder?' do
+        expect(auction.user_is_bidder?).to be_falsey
+      end
+    end
+
+    context 'when the user has made a bid' do
+      let(:user2) { FactoryGirl.create(:user) }
+      let(:ar_auction) { FactoryGirl.create(:auction, :single_bid, :running, bidder_ids: [user.id, user2.id]) }
+      let(:user_bid) { ar_auction.bids.detect {|b| b.bidder_id == user.id }.amount }
+
+      it 'should return an array with 1 bid' do
+        out = auction.user_bids
+        expect(out).to be_an Array
+        expect(out.size).to eq(1)
+        expect(out.first.bidder).to eq(user)
+        expect(out.first.amount).to eq(user_bid)
+      end
+
+      it 'should return the bid for lowest_user_bid' do
+        bid = auction.lowest_user_bid
+        expect(bid).to be_a Presenter::Bid
+        expect(bid.bidder).to eq(user)
+        expect(bid.amount).to eq(user_bid)
+      end
+
+      it 'should return the amount for the lowest_user_bid_amount' do
+        expect(auction.lowest_user_bid_amount).to eq(user_bid)
+      end
+
+      it 'should return truthy for user_is_bidder?' do
+        expect(auction.user_is_bidder?).to be_truthy
+      end
+    end
+  end
+
+  describe 'max_possible_bid_amount' do
     it 'should always be the auction start price' do
       expect(auction.max_possible_bid_amount).to eq(pr_auction.start_price)
     end
