@@ -44,13 +44,14 @@ module Presenter
 
     def amount_to_currency_with_asterisk
       return "#{amount_to_currency} *" if is_winning?
-      return amount_to_currency
+      amount_to_currency
     end
 
     def is_winning?
       model.id == presenter_auction.winning_bid_id
     end
 
+    # REMOVEME
     def winning_status
       if presenter_auction.single_bid? && presenter_auction.available?
         return 'n/a'
@@ -61,6 +62,11 @@ module Presenter
 
     def model
       __getobj__
+    end
+
+    def ==(other)
+      other = Presenter::Bid.new(other) if other.is_a?(::Bid)
+      model == other.model
     end
 
     class Null
