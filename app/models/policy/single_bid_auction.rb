@@ -33,7 +33,7 @@ class Policy::SingleBidAuction < Policy::Auction
   def winning_bid_amount
     winning_bid.amount
   end
-  
+
   def bid_is_winner?(bid)
     return false if bid.nil? || available?
     bid == winning_bid
@@ -43,7 +43,7 @@ class Policy::SingleBidAuction < Policy::Auction
     return false if available? || !bids?
     winning_bid.bidder_id == user.id
   end
-  
+
   def displayed_bids
     if available?
       user_bids
@@ -87,24 +87,24 @@ class Policy::SingleBidAuction < Policy::Auction
       'auctions/single_bid_auction_status'
     end
   end
-  
+
   def rules_href
     '/auctions/rules/single-bid'
   end
-  
+
   def info_box_partial
-    'single_bid_info_box'
+    'auctions/single_bid/info_box'
   end
 
   def win_header_partial
-    'auctions/single_bid_win_header'
-  end  
+    'auctions/single_bid/win_header'
+  end
 
   def bid_input_partial
     'auction_input'
   end
 
   def bid_alert_partial
-    'bid_alert_single_bid_auction'
+    'bids/single_bid/bid_alert'
   end
 end

@@ -13,8 +13,11 @@ RSpec.describe Policy::SingleBidAuction, type: :model do
       let(:user) { nil }
 
       it 'should return false' do
-        skip('might be true to show bid button')
         expect(auction.user_can_bid?).to be_falsey
+      end
+
+      it 'should return true for show_bid_button?' do
+        expect(auction.show_bid_button?).to be_truthy
       end
     end
 
@@ -24,6 +27,10 @@ RSpec.describe Policy::SingleBidAuction, type: :model do
       it 'should return false' do
         expect(auction.user_can_bid?).to be_falsey
       end
+
+      it 'should return false for show_bid_button' do
+        expect(auction.show_bid_button?).to be_falsey
+      end
     end
 
     context 'when the auction is closed' do
@@ -32,11 +39,19 @@ RSpec.describe Policy::SingleBidAuction, type: :model do
       it 'should return false' do
         expect(auction.user_can_bid?).to be_falsey
       end
+
+      it 'should return false for show_bid_button' do
+        expect(auction.show_bid_button?).to be_falsey
+      end
     end
 
     context 'when the user has not bid on the auction' do
       it 'should return true' do
         expect(auction.user_can_bid?).to be_truthy
+      end
+
+      it 'should return true for show_bid_button' do
+        expect(auction.show_bid_button?).to be_truthy
       end
     end
 
@@ -45,6 +60,10 @@ RSpec.describe Policy::SingleBidAuction, type: :model do
 
       it 'should return false' do
         expect(auction.user_can_bid?).to be_falsey
+      end
+
+      it 'should return false for show_bid_button' do
+        expect(auction.show_bid_button?).to be_falsey
       end
     end
   end

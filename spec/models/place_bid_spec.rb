@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe PlaceBid do
-  let(:place_bid) { PlaceBid.new(params, current_user) }
-  let(:place_second_bid) { PlaceBid.new(second_params, current_user) }
+  let(:place_bid) { PlaceBid.new(auction, params) }
+  let(:place_second_bid) { PlaceBid.new(auction2, second_params) }
   let(:current_user) { FactoryGirl.create(:user) }
   let(:second_user) { FactoryGirl.create(:user) }
   let(:amount) { 1005 }
@@ -24,21 +24,26 @@ RSpec.describe PlaceBid do
     }
   end
   let(:auction_id) { auction.id }
-  let(:auction) do
+  let(:ar_auction) do
     FactoryGirl.create(:auction,
                        :multi_bid,
                        start_datetime: Time.now - 3.days,
                        end_datetime: Time.now + 7.days)
   end
+  let(:auction) { Policy::Auction.factory(ar_auction, current_user) }
+
+  # this awkward construction is to bypass caching in the AR model, etc.
+  let(:auction2) { Policy::Auction.factory(Auction.find(ar_auction.id), current_user) }
 
   context 'when the auction is single-bid' do
-    let(:auction) do
+    let(:ar_auction) do
       FactoryGirl.create(:auction,
                          :single_bid,
                          :with_bidders,
                          start_datetime: Time.now - 3.days,
                          end_datetime: Time.now + 7.days)
     end
+    let(:second_user_auction) { Policy::Auction.factory(ar_auction, second_user) }
 
     it 'should reject bids when the user has already bid on the given auction' do
       expect do
@@ -55,22 +60,14 @@ RSpec.describe PlaceBid do
         }
       }
       expect do
-        PlaceBid.new(params, current_user).perform
-        PlaceBid.new(params, second_user).perform
+        PlaceBid.new(auction, params).perform
+        PlaceBid.new(second_user_auction, params).perform
       end.to_not raise_error
     end
   end
 
-  context 'when auction cannot be found' do
-    let(:auction) { double('auction', id: 1000) }
-
-    it 'should raise a not found' do
-      expect { place_bid.perform }.to raise_error(ActiveRecord::RecordNotFound)
-    end
-  end
-
   context 'when the auction has expired' do
-    let(:auction) do
+    let(:ar_auction) do
       FactoryGirl.create(:auction,
                          start_datetime: Time.now - 5.days,
                          end_datetime: Time.now - 3.day)
@@ -82,7 +79,7 @@ RSpec.describe PlaceBid do
   end
 
   context 'when the auction has not started yet' do
-    let(:auction) do
+    let(:ar_auction) do
       FactoryGirl.create(:auction,
                          start_datetime: Time.now + 5.days,
                          end_datetime: Time.now + 7.days)
@@ -113,7 +110,7 @@ RSpec.describe PlaceBid do
     let(:amount) { 405 }
 
     it 'should raise an authorization error' do
-      FactoryGirl.create(:bid, auction: auction, amount: amount - 5)
+      FactoryGirl.create(:bid, auction: ar_auction, amount: amount - 5)
       expect { place_bid.perform }.to raise_error(UnauthorizedError)
     end
   end
@@ -130,7 +127,7 @@ RSpec.describe PlaceBid do
     let(:amount) { 400 }
 
     it 'should raise an authorization error' do
-      FactoryGirl.create(:bid, auction: auction, amount: amount)
+      FactoryGirl.create(:bid, auction: ar_auction, amount: amount)
       expect { place_bid.perform }.to raise_error(UnauthorizedError)
     end
   end

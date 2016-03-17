@@ -13,8 +13,11 @@ RSpec.describe Policy::MultiBidAuction, type: :model do
       let(:user) { nil }
 
       it 'should return false' do
-        skip("This is true so the user can bid")
         expect(auction.user_can_bid?).to be_falsey
+      end
+
+      it 'should return true for show_bid_button' do
+        expect(auction.show_bid_button?).to be_truthy
       end
     end
 
@@ -24,6 +27,10 @@ RSpec.describe Policy::MultiBidAuction, type: :model do
       it 'should return false' do
         expect(auction.user_can_bid?).to be_falsey
       end
+
+      it 'should return false for show_bid_button' do
+        expect(auction.show_bid_button?).to be_falsey
+      end
     end
 
     context 'when the auction is closed' do
@@ -32,11 +39,19 @@ RSpec.describe Policy::MultiBidAuction, type: :model do
       it 'should return false' do
         expect(auction.user_can_bid?).to be_falsey
       end
+
+      it 'should return false for show_bid_button' do
+        expect(auction.show_bid_button?).to be_falsey
+      end
     end
 
     context 'when the auction is running' do
       it 'should return true' do
         expect(auction.user_can_bid?).to be_truthy
+      end
+
+      it 'should return true for show_bid_button' do
+        expect(auction.show_bid_button?).to be_truthy
       end
     end
   end
@@ -157,7 +172,7 @@ RSpec.describe Policy::MultiBidAuction, type: :model do
   describe 'max_possible_bid_amount' do
     it 'should be the BID_INCREMENT less than the lowest bid' do
       lowest_bid_amount = ar_auction.bids.sort_by(&:amount).first.amount
-      expect(auction.max_possible_bid_amount).to eq(lowest_bid_amount - PlaceBid::BID_INCREMENT)
+      expect(auction.max_possible_bid_amount).to eq(lowest_bid_amount - Policy::Auction::BID_INCREMENT)
     end
   end
 
