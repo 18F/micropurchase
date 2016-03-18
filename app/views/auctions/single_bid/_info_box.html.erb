@@ -1,0 +1,6 @@
+<% if auction.user_is_bidder? %>
+<span class="current-bid-header">Your bid:</span>
+<span class="current-bid"><%= number_to_currency(auction.highlighted_bid.amount) %></span>
+<% else %>
+<span class="current-bid-header">Bids Hidden</span>
+<% end %>

@@ -7,22 +7,21 @@ class BidsController < ApplicationController
                           .with_bids_and_bidders
                           .published
                           .find(params[:auction_id])
-    @auction = Presenter::Auction.new(auction)
+    @auction = Policy::Auction.factory(auction, current_user)
   end
 
   def my_bids
-    @bids = Bid
-              .where(bidder_id: current_user.id)
-              .includes(:auction)
-              .all
-              .map {|bid| Presenter::Bid.new(bid)}
+    @bids = Bid.where(bidder_id: current_user.id)
+            .includes(:auction)
+            .all
+            .map {|bid| Presenter::Bid.new(bid)}
   end
 
   def new
     # check if user is valid
     if current_user.sam_account?
       auction = AuctionQuery.new.public_find(params[:auction_id])
-      @auction = Presenter::Auction.new(auction)
+      @auction = Policy::Auction.factory(auction, current_user)
       @bid = Bid.new
     else
       session[:return_to] = request.fullpath
@@ -31,13 +30,14 @@ class BidsController < ApplicationController
   end
 
   def confirm
-    @auction = Presenter::Auction.new(Auction.find(params[:auction_id]))
-    @bid = Presenter::Bid.new(PlaceBid.new(params, current_user).dry_run)
+    @auction = Policy::Auction.factory(Auction.find(params[:auction_id]), current_user)
+    @bid = Policy::Bid.new(PlaceBid.new(@auction, params).dry_run, @auction)
   end
 
   def create
     fail UnauthorizedError, "You must have a valid SAM.gov account to place a bid" unless current_user.sam_account?
-    @bid = Presenter::Bid.new(PlaceBid.new(params, current_user).perform)
+    @auction = Policy::Auction.factory(Auction.find(params[:auction_id]), current_user)
+    @bid = Policy::Bid.new(PlaceBid.new(@auction, params).perform, @auction)
 
     respond_to do |format|
       format.html do

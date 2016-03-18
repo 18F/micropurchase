@@ -72,7 +72,9 @@ class AuctionParser < Struct.new(:params)
 
   def start_price
     price = params[:auction][:start_price].to_f
-    price = PlaceBid::BID_LIMIT if price > PlaceBid::BID_LIMIT || price <= 0
+
+    # FIXME: should actually be a method in the PolicyAuction
+    price = Policy::Auction::BID_LIMIT if price > Policy::Auction::BID_LIMIT || price <= 0
 
     price
   end

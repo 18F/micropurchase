@@ -1,0 +1,9 @@
+<div class="usa-width-one-half">
+  <h2 class='center'>Valid bid:</h2>
+  <p class="current-bid-amount center">$<%= number_to_currency(@auction.min_possible_bid_amount) %> - <%= number_to_currency(@auction.max_possible_bid_amount) %></p>
+</div>
+
+<div class="usa-width-one-half">
+  <h2 class='center'><label for="your-bid-amount">Your bid:</label></h2>
+  <%= form.text_field :amount %>
+</div>

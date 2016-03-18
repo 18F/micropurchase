@@ -8,6 +8,14 @@ module Presenter
       Admins.verify?(model.github_id)
     end
 
+    def sam_account?
+      model.sam_account
+    end
+
+    def to_param
+      model.to_param
+    end
+    
     def in_sam?
       if model.sam_account == true
         'Yes'

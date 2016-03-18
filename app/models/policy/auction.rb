@@ -40,7 +40,7 @@ class Policy::Auction
   end
 
   def winning_bidder_name
-    winning_bid.name
+    winning_bid.bidder_name
   end
 
   def winning_bid_amount
@@ -73,6 +73,10 @@ class Policy::Auction
     available? && end_datetime < 12.hours.from_now
   end
 
+  def all_bids
+    bids.map {|b| Policy::Bid.new(b, self) }
+  end
+  
   def user_logged_in?
     !user.nil?
   end
@@ -80,7 +84,7 @@ class Policy::Auction
   def user_id
     user.id
   end
-  
+
   def user_is_bidder?
     return false if user.nil?
     bids.detect {|b| user.id == b.bidder_id } != nil
@@ -93,7 +97,7 @@ class Policy::Auction
 
   def user_bids
     return [] if user.nil?
-    bids.select {|b| user.id == b.bidder_id }.map {|x| Presenter::Bid.new(x) }
+    bids.select {|b| user.id == b.bidder_id }.map {|x| Policy::Bid.new(x, self) }
   end
   
   def user_can_bid?
@@ -176,6 +180,10 @@ class Policy::Auction
     lowest_user_bid.raw_amount
   end
 
+  def ==(obj)
+    obj.user == user && obj.auction == auction
+  end
+  
   protected
 
   def initialize(auction, user)
@@ -210,7 +218,7 @@ class Policy::Auction
   end
   
   def lowest_bids
-    @lowest_bids ||= bids.select {|b| lowest_bid_amount == b.amount }.sort_by(&:created_at)
+    @lowest_bids ||= bids.select {|b| lowest_bid_amount == b.amount }.sort_by(&:created_at).map {|x| Policy::Bid.new(x, self) }
   end
 
   def lowest_bid

@@ -4,12 +4,6 @@
 
 <a href="<%= auction_path(@auction) %>">« Back to auction</a>
 
-<% if @auction.available? && @auction.single_bid? %>
-  <p>
-    Bids are sealed until the auction ends. See the <a href='/auctions/rules/single-bid'>auction rules</a> to learn more.
-  </p>
-<% end %>
-
 <table class="usa-table-borderless">
   <thead>
     <tr>
@@ -20,7 +14,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @auction.veiled_bids(current_user).each_with_index do |bid, i| %>
+    <% @auction.displayed_bids.each_with_index do |bid, i| %>
       <tr>
         <td>
           <%=

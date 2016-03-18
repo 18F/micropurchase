@@ -48,7 +48,7 @@ class Policy::SingleBidAuction < Policy::Auction
     if available?
       user_bids
     else
-      bids
+      all_bids
     end
   end
 
@@ -84,7 +84,7 @@ class Policy::SingleBidAuction < Policy::Auction
     if over?
       super
     else
-      'auctions/single_bid_auction_status'
+      'auctions/single_bid/auction_status'
     end
   end
 

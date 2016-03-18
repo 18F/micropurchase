@@ -7,7 +7,7 @@ class Policy::MultiBidAuction < Policy::Auction
   end
   
   def displayed_bids
-    bids
+    all_bids
   end
 
   def max_possible_bid_amount

@@ -3,7 +3,7 @@ module Admin
     before_filter :require_admin
 
     def index
-      @auctions = Auction.all.map {|auction| Presenter::Auction.new(auction) }
+      @auctions = Auction.all.map {|auction| Policy::Auction.factory(auction, current_user) }
 
       respond_to do |format|
         format.html
@@ -14,7 +14,7 @@ module Admin
     end
 
     def show
-      @auction = Presenter::Auction.new(Auction.find(params[:id]))
+      @auction = Policy::Auction.factory(Auction.find(params[:id]), current_user)
 
       respond_to do |format|
         format.html
@@ -44,7 +44,7 @@ module Admin
 
     def create
       auction = CreateAuction.new(params).perform
-      auction = Presenter::Auction.new(auction)
+      auction = Policy::Auction.factory(auction, current_user)
 
       respond_to do |format|
         format.html { redirect_to "/admin/auctions" }
@@ -75,7 +75,7 @@ module Admin
       auction = Auction.find(params[:id])
       UpdateAuction.new(auction, params).perform
       auction.reload
-      auction = Presenter::Auction.new(auction)
+      auction = Policy::Auction.factory(auction, current_user)
 
       respond_to do |format|
         format.html { redirect_to "/admin/auctions" }

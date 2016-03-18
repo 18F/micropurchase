@@ -42,15 +42,6 @@ module Presenter
       number_to_currency(amount)
     end
 
-    def amount_to_currency_with_asterisk
-      return "#{amount_to_currency} *" if is_winning?
-      amount_to_currency
-    end
-
-    def is_winning?
-      model.id == presenter_auction.winning_bid_id
-    end
-
     # REMOVEME
     def winning_status
       if presenter_auction.single_bid? && presenter_auction.available?
@@ -58,6 +49,10 @@ module Presenter
       else
         is_winning?
       end
+    end
+
+    def raw_amount
+      amount
     end
 
     def model
@@ -68,7 +63,7 @@ module Presenter
       other = Presenter::Bid.new(other) if other.is_a?(::Bid)
       model == other.model
     end
-
+    
     class Null
       NULL = "&nbsp;".html_safe
 
@@ -86,6 +81,10 @@ module Presenter
 
       def amount
         NULL
+      end
+
+      def raw_amount
+        nil
       end
     end
   end

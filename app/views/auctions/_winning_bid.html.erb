@@ -1,7 +1,7 @@
 <p>Bidding is closed</p>
 <% if auction.bids? %>
   <p>Winning Bid:</p>
-  <p><%= number_to_currency(auction.current_bid_amount) %></p>
+  <p><%= number_to_currency(auction.winning_bid.amount) %></p>
 <% else %>
   <p>No bids</p>
 <% end %>

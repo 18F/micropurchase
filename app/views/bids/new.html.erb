@@ -1,9 +1,9 @@
 <% content_for :title do %>18F Micro-purchase - New bid<% end %>
 <% content_for :description do %>
 <% if @auction.available? %>
-Place a bid for "<%= @auction.title %>". The current bid is <%= number_to_currency(@auction.current_bid_amount) %>.
+Place a bid for "<%= @auction.title %>".
 <% else %>
-Bidding on this auction closed on <%= @auction.end_datetime %>. The winning bid was <%= number_to_currency(@auction.current_bid_amount) %>.
+Bidding on this auction closed on <%= @auction.end_datetime %>. The winning bid was <%= number_to_currency(@auction.winning_bid.amount) %>.
 <% end %>
 <% end %>
 <% content_for :data_tags do %>
@@ -17,35 +17,7 @@ Bidding on this auction closed on <%= @auction.end_datetime %>. The winning bid 
 <% if @auction.available? %>
   <%= form_for @bid, url: confirm_auction_bids_path(@auction), html: {class: 'bid-form'} do |f| %>
     <div class="usa-width-one-whole">
-      <% if @auction.multi_bid? %>
-        <div class="usa-width-one-half">
-          <h2 class='center'>Current bid:</h2>
-          <p class="current-bid-amount center"><%= number_to_currency(@auction.current_bid_amount) %></p>
-          <% if @auction.user_is_winning_bidder?(current_user) %>
-            <h3 class="center">You are currently the winning bidder.</h3>
-          <% elsif @auction.bids? %>
-            <h3 class="center">You are currently <b>not</b> the winning bidder.</h3>
-          <% else %>
-            <p class="current-bid-amount center">No bids yet.</p>
-          <% end %>
-        </div>
-
-        <div class="usa-width-one-half">
-          <h2 class='center'><label for="your-bid-amount">Your bid:</label></h2>
-          <%= f.text_field :amount %>
-        </div>
-        <% else %>
-        <div class="usa-width-one-half">
-          <h2 class='center'>Valid bid:</h2>
-          <p class="current-bid-amount center">$1 - <%= number_to_currency(@auction.start_price) %></p>
-        </div>
-
-
-        <div class="usa-width-one-half">
-          <h2 class='center'><label for="your-bid-amount">Your bid:</label></h2>
-          <%= f.text_field :amount %>
-        </div>
-        <% end %>
+      <%= render partial: @auction.bid_input_partial, locals: {form: f}  %>
     </div>
 
 <p>Note that all users who submit bids consent to the publication of their GitHub usernames, DUNS numbers, and bid amounts following the conclusion of the bidding process.</p>

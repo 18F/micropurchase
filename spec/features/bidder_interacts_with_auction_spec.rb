@@ -608,16 +608,16 @@ RSpec.feature "bidder interacts with auction", type: :feature do
 
     scenario "Viewing auction page for a closed auction where authenticated user has not placed bids" do
       create_closed_auction
-      auction = Presenter::Auction.new(@auction)
 
       visit '/'
       sign_in_bidder
 
+      auction = Policy::Auction.new(@auction, @bidder)
       visit auction_path(auction.id)
 
       expect(page).to_not have_css('.usa-alert-error')
       expect(page).to_not have_content("You are not the winner")
-      expect(page).to have_content("Winning bid (#{auction.current_bidder_name}):")
+      expect(page).to have_content("Winning bid (#{auction.highlighted_bid_bidder_name}):")
       expect(page).not_to have_content("Current bid:")
 
       expect(page).to have_content("Auction ended at:")

@@ -7,7 +7,7 @@
       <p class='issue-description'>
         <%=h raw auction.html_summary %><a href="<%= auction_path(auction) %>">View details »</a>
       </p>
-      <p><%= auction.formatted_type.capitalize %></p>
+      <p><%= auction.display_type %></p>
     </div>
   </div>
 <div class="usa-grid issue-bid-details">
@@ -17,7 +17,7 @@
     <%= render partial: 'auctions/bids_and_form', locals: {auction: auction} %>
 
       <div class="usa-width-one-third">
-        <% if auction.user_can_bid?(current_user) %>
+        <% if auction.show_bid_button? %>
           <a href="<%= new_auction_bid_path(auction) %>" class='usa-button'>Bid »</a>
         <% else %>
         <% end %>
