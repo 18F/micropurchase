@@ -3,7 +3,7 @@ When(/^I click on the "?([^"]+)"? button$/) do |button|
   first(:link_or_button, button).click
 end
 
-When(/^I click on the "?([^"]+)"? link$/) do |label|
+When(/^I click on the "([^"]+)" link$/) do |label|
   click_on(label)
 end
 
@@ -27,11 +27,11 @@ Then(/^I expect to not see "(.+)"$/) do |text|
   expect(page).to_not have_content(text)
 end
 
-Then(/^I expect to see an? "?([^"]+)"? button$/) do |button|
+Then(/^I expect to see an? "([^"]+)" button$/) do |button|
   expect(page).to have_selector(:link_or_button, button)
 end
 
-Then(/^I expect to not see an? "?([^"]+)"? button$/) do |button|
+Then(/^I expect to not see an? "([^"]+)" button$/) do |button|
   expect(page).to_not have_selector(:link_or_button, button)
 end
 

@@ -24,7 +24,7 @@ Feature: logging in and out
 
     When I click on the "Authorize with GitHub" button
     Then I expect to see the name from github authentication
-    And I expect to see a Logout button
+    And I expect to see a "Logout" button
 
     When I fill out the profile form
     And I click on the "Submit" button
@@ -43,7 +43,7 @@ Feature: logging in and out
 
     When I click on the "Authorize with GitHub" button
     Then I expect to see my name
-    And I expect to see a Logout button
+    And I expect to see a "Logout" button
     
   Scenario: User logs in when viewing protected or specific information
     Given I am a user with a verified SAM account
@@ -52,12 +52,12 @@ Feature: logging in and out
     
     When I click on the "Authorize with GitHub" button
     Then I expect to see my name
-    And I expect to see a Logout button
+    And I expect to see a "Logout" button
 
   Scenario: User views and edits their information
     Given I am a user with a verified SAM account
     When I visit the home page
-    And I click on the Login button
+    And I click on the "Login" button
     Then I expect to see an "Authorize with GitHub" button
 
     When I click on the "Authorize with GitHub" button

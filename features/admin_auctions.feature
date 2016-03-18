@@ -35,7 +35,7 @@ Feature: Using the Admin Auctions panel
     When I click to edit the auction
     Then I should be able to edit the existing auction form
 
-    When I click on the Update button
+    When I click on the "Update" button
     Then I expect my auction changes to have been saved
 
     When I click on the auction title

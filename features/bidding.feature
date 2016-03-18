@@ -24,7 +24,7 @@ Feature: Bidding
 
     When I click on the "Authorize with GitHub" link
     Then I expect to be on the profile edit page
-    And I click on the Submit button
+    And I click on the "Submit" button
     Then I expect to see the auction title
 
     When I click on the "Bid" button
@@ -33,7 +33,7 @@ Feature: Bidding
     When I submit a bid for $800
     Then I expect to see a confirmation for $800
 
-    When I click on the Confirm button
+    When I click on the "Confirm" button
     Then I expect to see a current bid amount of $800
 
   Scenario: Logging in before bidding
@@ -41,13 +41,13 @@ Feature: Bidding
     And I am a user with a verified SAM account
     And I sign in and verify my account information
     When I click on the "Bid" button
-    Then I expect to not see an Authorize With Github button
+    Then I expect to not see an "Authorize With Github" button
     And I expect to see a current bid amount
 
     When I submit a bid for $999
     Then I expect to see a confirmation for $999
     
-    When I click on the Confirm button
+    When I click on the "Confirm" button
     Then I expect to see a current bid amount of $999
     And I expect to see I have the winning bid
 
@@ -58,16 +58,16 @@ Feature: Bidding
     And I click on the Bid button
 
     Then I expect to be on the new bid page
-    And I expect to not see an Authorize With Github button
+    And I expect to not see an "Authorize With Github" button
     And I expect to see a message about no bids
 
   Scenario: When someone else has outbid me
     Given there is an open auction
     And I am allowed to bid
     When I visit the home page
-    And I click on the Bid button
+    And I click on the "Bid" button
     
-    Then I expect to not see an Authorize With Github button
+    Then I expect to not see an "Authorize With Github" button
     And I expect to be on the new bid page
     And I expect to see a current bid amount
     And I expect to see I do not have the winning bid
