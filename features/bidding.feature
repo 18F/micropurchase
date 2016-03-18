@@ -16,18 +16,18 @@ Feature: Bidding
     And there should be meta tags for the open auction
 
     When I visit the home page
-    And I click on the "View details »" link
+    And I click on the "View details" link
     Then I expect to see a link to the auction issue URL
 
-    When I click on the "BID »" button
-    Then I expect to see an "Authorize with GitHub »" button
+    When I click on the "BID" button
+    Then I expect to see an "Authorize with GitHub" button
 
-    When I click on the "Authorize with GitHub »" link
+    When I click on the "Authorize with GitHub" link
     Then I expect to be on the profile edit page
     And I click on the Submit button
     Then I expect to see the auction title
 
-    When I click on the "Bid »" button
+    When I click on the "Bid" button
     Then I expect to see a current bid amount
 
     When I submit a bid for $800
@@ -40,7 +40,7 @@ Feature: Bidding
     Given there is an open auction
     And I am a user with a verified SAM account
     And I sign in and verify my account information
-    When I click on the "Bid »" button
+    When I click on the "Bid" button
     Then I expect to not see an Authorize With Github button
     And I expect to see a current bid amount
 

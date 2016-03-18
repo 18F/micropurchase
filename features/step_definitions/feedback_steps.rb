@@ -1,5 +1,5 @@
 Then(/^I should see a link to give feedback$/) do
-  expect(page).to have_link('Give Feedback')
+  expect(page).to have_link('Feedback')
 end
 
 Then(/^I should see a link to get in touch$/) do

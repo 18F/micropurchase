@@ -24,7 +24,7 @@ end
 When(/^I sign in$/) do
   step "I visit the home page"
   click_on "registered bidder"
-  click_on "Authorize with GitHub »"
+  click_on "Authorize with GitHub"
 end
 
 Given(/^I am signed in$/) do

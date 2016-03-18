@@ -9,7 +9,7 @@ Feature: Basic Auction Views
     When I visit the home page
     Then I expect to see the auction
     And I expect to not see the unpublished auction
-    And I expect to see a "Bid »" button
+    And I expect to see a "Bid" button
     And there should be meta tags for the index page for 1 open and 0 future auctions
 
   Scenario: Many auctions
@@ -51,34 +51,34 @@ Feature: Basic Auction Views
     Given there is a closed auction
     When I visit the home page
     Then I expect to see a Closed label
-    And I expect to not see a "Bid »" button
+    And I expect to not see a "Bid" button
     And there should be meta tags for the index page for 0 open and 0 future auctions
 
     When I visit the auction page
     Then I expect to see a Closed status
-    And I expect to not see a "Bid »" button
+    And I expect to not see a "Bid" button
     And there should be meta tags for the closed auction
 
   Scenario: There is an expiring auction
     Given there is an expiring auction
     When I visit the home page
     Then I expect to see an Expiring label
-    And I expect to see a "Bid »" button
+    And I expect to see a "Bid" button
     And there should be meta tags for the index page for 1 open and 0 future auctions
 
     When I visit the auction page
     Then I expect to see an Open status
-    And I expect to see a "BID »" button
+    And I expect to see a "BID" button
     And there should be meta tags for the open auction
 
   Scenario: There is a future auction
     Given there is a future auction
     When I visit the home page
     Then I expect to see a Coming Soon label
-    And I expect to not see a "Bid »" button
+    And I expect to not see a "Bid" button
     And there should be meta tags for the index page for 0 open and 1 future auctions
 
     When I visit the auction page
     Then I expect to see a Closed status
-    And I expect to not see a "Bid »" button
+    And I expect to not see a "Bid" button
     And there should be meta tags for the closed auction

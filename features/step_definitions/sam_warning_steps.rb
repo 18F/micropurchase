@@ -12,17 +12,17 @@ Then(/^I should see a warning that my SAM registration is not complete$/) do
 end
 
 When(/^I collapse the warning about my SAM registration$/) do
-  click_on "collapse"
+  find(:css, '.warning-hide-trigger').click
 end
 
 Then(/^I will not see the warning$/) do
   expect(page).not_to have_content("Your DUNS is not registered with SAM*")
-  expect(page).not_to have_content("collapse")
+  expect(page).not_to have_selector('.warning-hide-trigger')
 end
 
 Then(/^I will see a link to expand the warning$/) do
-  expect(page).to have_content("expand")
-  expect(page).not_to have_content("collapse")
+  find(:css, '.warning-show-trigger')
+  expect(page).to_not have_selector('.warning-hide-trigger')
 end
 
 Then(/^I will see that the warning is still collapsed$/) do
@@ -30,5 +30,5 @@ Then(/^I will see that the warning is still collapsed$/) do
 end
 
 When(/^I click to expand the warning$/) do
-  click_on "expand"
+  find(:css, '.warning-show-trigger').click
 end

@@ -1,5 +1,6 @@
 When(/^I click on the "?([^"]+)"? button$/) do |button|
-  click_on(button)
+  # will click the first if there are two with same text!
+  first(:link_or_button, button).click
 end
 
 When(/^I click on the "?([^"]+)"? link$/) do |label|
