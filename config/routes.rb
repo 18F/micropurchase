@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   get '/admin', to: 'admin/dashboards#index'
   get '/admin/action_items', to: 'admin/dashboards#action_items'
   get '/admin/drafts', to: 'admin/dashboards#drafts'
-  get '/admin/auctions/:id/preview', to: 'admin/auctions#preview'
+  get '/admin/auctions/:id/preview', to: 'admin/auctions#preview', as: 'admin_preview_auction'
   namespace :admin do
     resources :auctions
     resources :users

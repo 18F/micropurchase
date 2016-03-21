@@ -28,6 +28,6 @@ class UpdateUser < Struct.new(:params, :current_user)
   end
 
   def user_params
-    params.require(:user).permit(:duns_number, :email)
+    params.require(:user).permit(:name, :duns_number, :email)
   end
 end
