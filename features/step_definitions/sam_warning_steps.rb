@@ -32,3 +32,35 @@ end
 When(/^I click to expand the warning$/) do
   find(:css, '.warning-show-trigger').click
 end
+
+Given(/^a SAM check for my DUNS will (.+)$/) do |action|
+  client = double('samwise_client')
+
+  case action
+  when 'return true'
+    expect(client).to receive('duns_is_in_sam?').at_least(:once).and_return(true)
+  when 'return false'
+    expect(client).to receive('duns_is_in_sam?').at_least(:once).and_return(false)
+  when 'raise an exception'
+    expect(client).to receive('duns_is_in_sam?').at_least(:once).and_raise(RuntimeError)
+  else
+    fail "Unknown action for mocking SAM check: #{action}"
+  end
+
+  expect(Samwise::Client).to receive(:new).at_least(:once).and_return(client)
+end
+
+Then(/^I should become a valid SAM user$/) do
+  @user.reload
+  expect(@user).to be_sam_account
+end
+
+Then(/^I should not become a valid SAM user$/) do
+  @user.reload
+  expect(@user).to_not be_sam_account
+end
+
+Then(/^I enter a new DUNS in my profile$/) do
+  @new_duns = Faker::Company.duns_number
+  fill_in("user_duns_number", with: @new_duns)
+end
