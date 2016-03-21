@@ -66,12 +66,23 @@ Feature: logging in and out
     And there should be meta tags for the edit profile form
 
     When I fill the "Email Address" field with "doris@doogooder.com"
+    When I fill the "Name" field with "Doris Doogooder"
     And I click on the "Submit" button
     Then I expect to be on the home page
     
     When I click on the "Edit profile" link
     Then I expect to see "doris@doogooder.com" in the "Email Address" field
+    And I expect to see "Doris Doogooder" in the "Name" field
 
+    When I click on the "Logout" button
+    And I click on the "Login" button
+    Then I expect to see an "Authorize with GitHub" button
+
+    When I click on the "Authorize with GitHub" button
+    Then I expect to be on the profile edit page
+    And I expect to see "doris@doogooder.com" in the "Email Address" field
+    And I expect to see "Doris Doogooder" in the "Name" field
+    
   Scenario: User tries to enter an invalid email address
     Given I am a user with a verified SAM account
     When I visit the home page
