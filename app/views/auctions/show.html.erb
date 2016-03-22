@@ -35,7 +35,7 @@
         <p class="auction-label"><%= @view_model.auction_start_label %></p>
         <p class="auction-label-info"><%= @view_model.auction_formatted_start_time %></p>
       </div>
-      <% if @view_model.auction.user_can_bid?(current_user) %>
+      <% if @view_model.auction.show_bid_button?(current_user) %>
       <p>
         <a href="<%= new_auction_bid_path(@view_model.auction) %>" class='button-bid usa-button'>BID <icon class="fa fa-angle-double-right"></icon></a>
       </p>
