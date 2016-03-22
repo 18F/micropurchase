@@ -96,30 +96,15 @@ module Presenter
     end
 
     def starts_in
-      distance = distance_of_time_in_words(Time.now, model.start_datetime)
-      if model.start_datetime < Time.now
-        "#{distance} ago"
-      else
-        "in #{distance}"
-      end
+      time_in_human(model.start_datetime)
     end
 
     def ends_in
-      distance = distance_of_time_in_words(Time.now, model.end_datetime)
-      if model.end_datetime < Time.now
-        "#{distance} ago"
-      else
-        "in #{distance}"
-      end
+      time_in_human(model.end_datetime)
     end
 
     def delivery_deadline_expires_in
-      distance = distance_of_time_in_words(Time.now, model.delivery_deadline)
-      if model.delivery_deadline < Time.now
-        "#{distance} ago"
-      else
-        "in #{distance}"
-      end
+      time_in_human(model.delivery_deadline)
     end
 
     # rubocop:disable Style/DoubleNegation
@@ -275,6 +260,15 @@ module Presenter
                                             tables: true,
                                             fenced_code_blocks: true,
                                             lax_spacing: true)
+    end
+
+    def time_in_human(time)
+      distance = distance_of_time_in_words(Time.now, time)
+      if time < Time.now
+        "#{distance} ago"
+      else
+        "in #{distance}"
+      end
     end
 
     def model
