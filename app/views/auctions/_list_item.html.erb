@@ -17,7 +17,7 @@
         <%= render partial: 'auctions/bids_and_form', locals: {auction: auction} %>
 
         <div class="issue-bids-info-item">
-          <% if auction.user_can_bid?(current_user) %>
+          <% if auction.show_bid_button?(current_user) %>
             <a href="<%= new_auction_bid_path(auction) %>" class='usa-button usa-button-outline-inverse button-bid'>Bid <icon class="fa fa-angle-double-right"></icon></a>
           <% end %>
         </div>
