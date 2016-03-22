@@ -18,6 +18,7 @@ Capybara.javascript_driver = :poltergeist
 WebMock.allow_net_connect!
 
 require 'capybara-screenshot/cucumber'
+require 'cucumber/rspec/doubles'
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any

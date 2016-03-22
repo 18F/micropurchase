@@ -19,7 +19,7 @@ class UpdateUser < Struct.new(:params, :current_user)
 
   def update_user
     user.assign_attributes(user_params)
-    SamAccountReckoner.new(user).clear
+    update_sam
     @status = user.save
   end
 
@@ -27,6 +27,15 @@ class UpdateUser < Struct.new(:params, :current_user)
     current_user == user
   end
 
+  def update_sam
+    reckoner = SamAccountReckoner.new(user)
+
+    reckoner.clear
+    reckoner.set! unless user.duns_number.blank?
+  rescue
+    # do nothing
+  end
+  
   def user_params
     params.require(:user).permit(:name, :duns_number, :email)
   end

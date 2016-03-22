@@ -5,6 +5,7 @@ class Authenticator < Struct.new(:auth_hash, :session)
     find_or_create_user
     update_user
     sign_in
+    check_sam
     redirect_hash
   end
 
@@ -22,6 +23,13 @@ class Authenticator < Struct.new(:auth_hash, :session)
     session[:user_id] = user.id
   end
 
+  def check_sam
+    return if user.sam_account?
+    SamAccountReckoner.new(user).set!
+  rescue
+    # do nothing
+  end
+  
   def redirect_hash
     # protects redirects as outlined here:
     # http://brakemanscanner.org/docs/warning_types/redirect/

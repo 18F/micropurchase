@@ -12,6 +12,11 @@ class SamAccountReckoner < Struct.new(:user)
     user.sam_account = user_in_sam?
   end
 
+  def set!
+    set
+    user.save!
+  end
+  
   private
 
   def should_clear?
