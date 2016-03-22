@@ -9,7 +9,7 @@ Feature: Admin Dashboard
     And there is also an unpublished auction
     And I sign in
     When I visit the admin action items page
-    Then I expect to see the name of each dashboard auction
+    Then I should see the name of each dashboard auction
 
   Scenario: Previewing an unpublished auction
     Given I am an administrator

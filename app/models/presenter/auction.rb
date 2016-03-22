@@ -162,11 +162,11 @@ module Presenter
     end
 
     def lowest_bids
-      bids.select {|b| b.amount == lowest_amount }
+      bids.select {|b| b.amount == lowest_amount }.sort_by(&:created_at)
     end
 
     def lowest_amount
-      bids.sort_by(&:amount).first.amount
+      bids.sort_by(&:amount).first.amount rescue nil
     end
 
     def html_description
