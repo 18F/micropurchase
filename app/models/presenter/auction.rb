@@ -191,25 +191,28 @@ module Presenter
       bids.sort_by(&:amount).first.amount
     end
 
+    def auction_user(user)
+      return Presenter::AuctionUser::Null.new if user.nil?
+
+      @auction_users ||= {}
+      @auction_users[user.id] ||= Presenter::AuctionUser.new(bids, user)
+    end
+
     def user_is_bidder?(user)
-      return false if user.nil?
-      bids.detect {|b| user.id == b.bidder_id } != nil
+      auction_user(user).has_bid?
     end
 
     def user_bids(user)
-      return [] if user.nil?
-      bids.select {|b| user.id == b.bidder_id }
+      auction_user(user).bids
     end
 
     def lowest_user_bid(user)
-      user_bids(user).sort_by(&:amount).first
+      auction_user(user).lowest_bid
     end
 
     def lowest_user_bid_amount(user)
-      bid = lowest_user_bid(user)
-      bid.nil? ? nil : bid.amount
+      auction_user(user).lowest_bid_amount
     end
-
 
     def html_description
       return '' if description.blank?
