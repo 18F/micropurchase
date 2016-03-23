@@ -1,5 +1,6 @@
 language: ruby
 cache: bundler
+bundler_args: --without production --binstubs
 before_script:
 - bundle exec rake db:create
 - bundle exec rake db:migrate
