@@ -84,6 +84,8 @@ GEM
     cliver (0.3.2)
     codeclimate-test-reporter (0.4.8)
       simplecov (>= 0.7.1, < 1.0.0)
+    codeclimate_batch (0.4.0)
+      json
     coderay (1.1.0)
     commander (4.3.8)
       highline (~> 1.7.2)
@@ -360,6 +362,7 @@ DEPENDENCIES
   cf-app-utils
   chronic
   codeclimate-test-reporter
+  codeclimate_batch
   cucumber-rails
   database_cleaner
   db-query-matchers

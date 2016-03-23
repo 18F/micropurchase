@@ -29,6 +29,7 @@ gem 'business_time'
 
 group :test do
   gem "codeclimate-test-reporter", require: nil
+  gem 'codeclimate_batch'
   gem 'webmock'
   gem 'json-schema'
   gem 'db-query-matchers'
