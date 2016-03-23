@@ -5,10 +5,11 @@ before_script:
 - bundle exec rake db:migrate
 script: bundle exec rake $TASK
 env:
-  - TASK: rspec
+  - TASK: spec
   - TASK: cucumber
 after_script:
-  - codeclimate-batch --groups 4
+  # must equal number of rubies * number of tasks
+  - codeclimate-batch --groups 2
 addons:
   postgresql: '9.3'
   code_climate:
