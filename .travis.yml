@@ -9,7 +9,7 @@ env:
   - TASK: cucumber
 after_script:
   # must equal number of rubies * number of tasks
-  - codeclimate-batch --groups 2
+  - ./bin/codeclimate-batch --groups 2
 addons:
   postgresql: '9.3'
   code_climate:
