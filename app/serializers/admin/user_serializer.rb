@@ -7,7 +7,8 @@ module Admin
                :sam_account,
                :created_at,
                :updated_at,
-               :id
+               :id,
+               :github_login
 
     def created_at
       object.created_at.iso8601 rescue nil

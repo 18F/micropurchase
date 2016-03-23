@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20160216174015) do
     t.string   "email"
     t.boolean  "sam_account",          default: false, null: false
     t.string   "credit_card_form_url"
+    t.string   "github_login"
   end
 
   add_index "users", ["sam_account"], name: "index_users_on_sam_account", using: :btree

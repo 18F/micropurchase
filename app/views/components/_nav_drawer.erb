@@ -1,0 +1,39 @@
+<drawer class="usa-width-one-fourth drawer" aria-hidden="true">
+  <button class="fa fa-close" data-drawer-toggle="close"></button>
+
+  <ul class="drawer-menu">
+
+
+    <li class="drawer-menu-item">
+      <h3>Profile</h3>
+      <ul class="drawer-submenu">
+
+        <% if current_user %>
+          <li class="drawer-submenu-item"><a class="" href="<%= edit_user_path(current_user) %>">Edit profile</a>
+          <li class="drawer-submenu-item"><a class="" href="<%= logout_path %>">Logout</a></li></li>
+        <% else %>
+          <li class="drawer-submenu-item"><a href="/login" class="">Login</a></li>
+        <% end %>
+      </ul>
+    </li>
+    <hr>
+
+    <li class="drawer-menu-item">
+      <a href="<%= root_path %>">Projects</a>
+    </li>
+    <li class="drawer-menu-item">
+      <a href="https://18f.gsa.gov/2015/10/13/open-source-micropurchasing/">About</a>
+    </li>
+    <li class="drawer-menu-item">
+      <a href="https://docs.google.com/forms/d/15ycigLrTS7Ld4iVPgIMN-U5dMDFy6TnrHGOSkgk7qTI/viewform?c=0&w=1">Feedback</a>
+    </li>
+    <li class="drawer-menu-item">
+      <a href="<%= faq_path %>">Policies</a>
+    </li>
+    <li class="drawer-menu-item">
+      <a href="https://pages.18f.gov/micropurchase-api-docs/">API Docs</a>
+    </li>
+
+  </ul>
+
+</drawer>

@@ -8,8 +8,17 @@ require 'cucumber/rails'
 require 'database_cleaner'
 
 require 'capybara/poltergeist'
+
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, js_errors: false)
+end
+
 Capybara.javascript_driver = :poltergeist
+
 WebMock.allow_net_connect!
+
+require 'capybara-screenshot/cucumber'
+require 'cucumber/rspec/doubles'
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any

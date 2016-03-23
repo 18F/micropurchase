@@ -126,6 +126,10 @@
                     "updated_at": {
                       "type": ["date-time", "null"],
                       "minLength": 1
+                    },
+                    "github_login": {
+                      "type": ["string", "null"],
+                      "minLength": 1
                     }
                   },
                   "required": [
@@ -135,7 +139,8 @@
                     "sam_account",
                     "created_at",
                     "updated_at",
-                    "id"
+                    "id",
+                    "github_login"  
                   ]
                 }
               }

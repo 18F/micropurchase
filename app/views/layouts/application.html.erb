@@ -5,6 +5,10 @@
   <meta charset="utf-8">
   <title><%= yield(:title).presence || "18F - Micro-purchase" %></title>
   <meta property="og:title" content="<%= yield(:title).presence || "18F - Micro-purchase" %>">
+
+  <!-- Link to FontAwesome -->
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <%= stylesheet_link_tag    'application', media: 'all', debug: true %>
   <%= javascript_include_tag "application", debug: true %>
   <%= csrf_meta_tags %>
@@ -40,10 +44,6 @@
 
   <!-- End 18F GA snippet -->
 
-  <!-- Link to FontAwesome -->
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body class='<%= controller_class %>'>
@@ -61,29 +61,51 @@
     </div>
 
     <nav class="usa-site-navbar">
-      <div class="usa-grid">
-        <div class="usa-width-one-whole">
-          <div class="logo" id="logo">
-            <%= image_tag "18f-logo.svg", width: '50', alt: "18f-logo" %>
+      <div class="usa-grid header-table">
+        <div class="logo header-row" id="logo">
+          <div class="header-image">
+            <%= image_tag "18F-Logo-2016-Blue.svg", alt: "18f-logo" %>
+          </div>
+          <div class="header-title-text">
             <a href="/" accesskey="1" title="Home" aria-label="Home">Micropurchase</a>
-
-            <div class="header-account">
-              <% if current_user %>
-                <span>Logged in as <%= current_user.name %></span>
-                <a class="usa-button usa-button-outline-inverse" href="<%= logout_path %>">Logout</a>
-                <a class="usa-button usa-button-outline-inverse" href="<%= edit_user_path(current_user) %>">Edit Profile</a>
-              <% else %>
-                <a href="/login" class="usa-button usa-button-outline-inverse">Login</a>
-              <% end %>
-            </div>
+          </div>
+          <button id="button-nav-drawer" class="usa-button usa-button-outline-inverse" data-drawer-toggle="menu"><span class="fa fa-bars"></span></button>
+          <div class="header-account">
+            <% if current_user %>
+              <nav class="nav-login">
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                      <a href="javascript:void(0)">
+                        Logged in as <%= current_user.name %>
+                        <icon class="fa fa-caret-down"></icon>
+                      </a>
+                      <div class="sub-nav">
+                          <ul class="sub-nav-group">
+                              <li><a class="usa-button usa-button-outline-inverse" href="<%= edit_user_path(current_user) %>">Edit profile</a></li>
+                              <li><a class="usa-button usa-button-outline-inverse" href="<%= logout_path %>">Logout</a></li>
+                          </ul>
+                      </div>
+                    </li>
+                </ul>
+              </nav>
+              <!-- <span>Logged in as <%= current_user.name %></span> -->
+              <!-- <a class="usa-button usa-button-outline-inverse" href="<%= logout_path %>">Logout</a> -->
+              <!-- <a class="usa-button usa-button-outline-inverse" href="<%= edit_user_path(current_user) %>">Edit Profile</a> -->
+            <% else %>
+              <a href="/login" class="button-login usa-button usa-button-outline-inverse">Login</a>
+            <% end %>
           </div>
         </div>
       </div>
     </nav>
 
+
+
   </header>
 
-  <div class="usa-grid">
+  <%= render partial: "components/nav_drawer", locals: { current_user: @current_user } %>
+
+  <div class="content-wrapper" id="<% if current_page?(root_path) %>index<% elsif current_page?(auctions_path) %>auctions<% end %>">
     <div class="usa-width-one-whole">
       <%= flash_errors %>
 
@@ -91,7 +113,7 @@
     </div>
   </div>
 
-    <footer class="usa-footer usa-footer-medium usa-sans" role="contentinfo">
+    <footer class="usa-footer usa-footer-large usa-sans" role="contentinfo">
     <div class="usa-grid usa-footer-return-to-top">
      <!--  <a href="#">Return to top</a> -->
     </div>
@@ -100,19 +122,19 @@
         <nav class="usa-footer-nav">
           <ul class="usa-unstyled-list">
             <li class="usa-width-one-fourth usa-footer-primary-content">
-              <a class="usa-footer-primary-link" href="https://micropurchase.18f.gov/">Projects</a>
+              <a class="usa-footer-primary-link" href="<%= root_path %>">Projects</a>
             </li>
             <li class="usa-width-one-fourth usa-footer-primary-content">
-              <a class="usa-footer-primary-link" href="https://18f.gsa.gov/2015/10/13/open-source-micropurchasing/">About Micropurchasing</a>
+              <a class="usa-footer-primary-link" href="https://18f.gsa.gov/2015/10/13/open-source-micropurchasing/">About</a>
             </li>
             <li class="usa-width-one-fourth usa-footer-primary-content">
-              <a class="usa-footer-primary-link" href="https://docs.google.com/forms/d/15ycigLrTS7Ld4iVPgIMN-U5dMDFy6TnrHGOSkgk7qTI/viewform?c=0&w=1">Give Feedback</a>
+              <a class="usa-footer-primary-link" href="https://docs.google.com/forms/d/15ycigLrTS7Ld4iVPgIMN-U5dMDFy6TnrHGOSkgk7qTI/viewform?c=0&w=1">Feedback</a>
             </li>
             <li class="usa-width-one-fourth usa-footer-primary-content">
-              <a class="usa-footer-primary-link" href="<%= faq_path %>">Policies and Guidelines</a>
+              <a class="usa-footer-primary-link" href="<%= faq_path %>">Policies</a>
             </li>
             <li class="usa-width-one-fourth usa-footer-primary-content">
-              <a class="usa-footer-primary-link" href="https://pages.18f.gov/micropurchase-api-docs/">API Documentation</a>
+              <a class="usa-footer-primary-link" href="https://pages.18f.gov/micropurchase-api-docs/">API Docs</a>
             </li>
             <!-- <li class="usa-width-one-sixth usa-footer-primary-content">
               <a class="usa-footer-primary-link" href="#">Primary link</a>
@@ -125,7 +147,7 @@
     <div class="usa-footer-secondary_section">
       <div class="usa-grid">
         <div class="usa-footer-logo usa-width-one-half">
-          <%= image_tag "18f-logo.svg", class: 'usa-footer-slim-logo-img', alt: 'Logo image' %>
+          <%= image_tag "18F-Logo-2016-Blue.svg", class: 'usa-footer-slim-logo-img footer-image', alt: 'Logo image' %>
         </div>
 
         <div class="usa-footer-contact-links usa-width-one-half">
@@ -139,82 +161,6 @@
         </div>
       </div>
     </div>
-
-    <!-- old footer     -->
-
-    <!-- <footer class="usa-footer usa-footer-medium usa-sans" role="contentinfo">
-
-      <div class="usa-footer-primary-section">
-        <div class="usa-grid-full">
-          <nav class="usa-footer-nav">
-            <ul class="usa-unstyled-list usa-width-one-sixth usa-footer-primary-content">
-              <h4 class="usa-footer-primary-link">Contact Us</h4>
-              <li>
-                <a href="https://docs.google.com/forms/d/15ycigLrTS7Ld4iVPgIMN-U5dMDFy6TnrHGOSkgk7qTI/viewform?c=0&w=1">
-                  Submit Feedback
-                </a>
-              </li>
-              <li>
-                <a href="mailto:micropurchase@gsa.gov">
-                  Email Us
-                </a>
-              </li>
-            </ul>
-
-            <ul class="usa-unstyled-list usa-width-one-sixth usa-footer-primary-content">
-              <h4 class="usa-footer-primary-link">Participate in this Project</h4>
-              <li>
-                <a href="https://18f.gsa.gov">
-                  18F Homepage
-                </a>
-              </li>
-              <li>
-                <a href="https://github.com/18f/micropurchase">
-                  See This Project on GitHub
-                </a>
-              </li>
-            </ul>
-            </nav
-          </div>
-        </div>
-      </div> -->
-
-          <!-- <div class="usa-social-links">
-            <a href="#">
-              <svg width="26" height="39" role="img" aria-label="Facebook">
-                <title>Facebook</title>
-                <image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/designstandards/assets/img/social-icons/svg/facebook25.svg" src="/designstandards/assets/img/social-icons/png/facebook25.png" width="26" height="39"></image>
-              </svg>
-            </a>
-            <a href="#">
-              <svg width="26" height="39" role="img" aria-label="Twitter">
-                <title>Twitter</title>
-                <image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/designstandards/assets/img/social-icons/svg/twitter16.svg" src="/designstandards/assets/img/social-icons/png/twitter16.png" width="26" height="39"></image>
-              </svg>
-            </a>
-            <a href="#">
-              <svg width="26" height="39" role="img" aria-label="YouTube">
-                <title>YouTube</title>
-                <image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/designstandards/assets/img/social-icons/svg/youtube15.svg" src="/designstandards/assets/img/social-icons/png/youtube15.png" width="26" height="39"></image>
-              </svg>
-            </a>
-            <a href="#">
-              <svg width="26" height="39" role="img" aria-label="RSS">
-                <title>RSS</title>
-                <image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/designstandards/assets/img/social-icons/svg/rss25.svg" src="/designstandards/assets/img/social-icons/png/rss25.png" width="26" height="39"></image>
-              </svg>
-            </a>
-          </div> -->
-
-
-    <!-- <div class="usa-footer-secondary_section">
-      <div class="usa-grid">
-        <div class="usa-footer-logo">
-          <%= image_tag "18f-logo.svg", class: 'usa-footer-slim-logo-img', alt: 'Logo image' %>
-        </div>
-      </div>
-    </div> -->
-
 
   </footer>
   <script src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js"

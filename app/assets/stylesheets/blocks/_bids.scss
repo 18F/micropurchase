@@ -1,0 +1,31 @@
+.table-bids {
+  min-width: 150px;
+}
+
+.current-bid-amount {
+  color: #2e8540;
+  font-size: 40px;
+  margin-top: 0;
+}
+
+.bid-form {
+  max-width: none;
+
+  .cancel, .submit {
+    display: inline-block;
+  }
+
+  .cancel {
+    margin-right: 2rem;
+  }
+
+  .button-wrapper {
+    margin: 0 auto;
+    width: 600px;
+  }
+}
+
+#your-bid-amount {
+  margin: auto;
+  max-width: 250px;
+}

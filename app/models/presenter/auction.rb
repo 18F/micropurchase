@@ -8,9 +8,13 @@ module Presenter
 
     def user_can_bid?(user)
       return false unless available?
-      return false if user && !user.sam_account?
+      return false if user.nil? || !user.sam_account?
       return false if single_bid? && user_is_bidder?(user)
       true
+    end
+
+    def show_bid_button?(user)
+      user_can_bid?(user) || user.nil?
     end
 
     def current_bid?
@@ -205,8 +209,8 @@ module Presenter
       bid = lowest_user_bid(user)
       bid.nil? ? nil : bid.amount
     end
-    
-    
+
+
     def html_description
       return '' if description.blank?
       markdown.render(description)

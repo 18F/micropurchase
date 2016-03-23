@@ -159,6 +159,10 @@
                     },
                     "sam_account": {
                       "type": "boolean"
+                    },
+                    "github_login": {
+                      "type": ["string", "null"],
+                      "minLength": 1  
                     }
                   },
                   "required": [
@@ -169,7 +173,8 @@
                     "updated_at",
                     "email",
                     "sam_account",
-                    "id"
+                    "id",
+                    "github_login"  
                   ]
                 }
               }
