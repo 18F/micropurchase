@@ -1,9 +1,16 @@
 language: ruby
 cache: bundler
+bundler_args: --without production --binstubs
 before_script:
 - bundle exec rake db:create
 - bundle exec rake db:migrate
-script: bundle exec rake
+script: bundle exec rake $TASK
+env:
+  - TASK: spec
+  - TASK: cucumber
+after_script:
+  # must equal number of rubies * number of tasks
+  - ./bin/codeclimate-batch --groups 2
 addons:
   postgresql: '9.3'
   code_climate:
