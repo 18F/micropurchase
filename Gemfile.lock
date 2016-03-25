@@ -215,6 +215,7 @@ GEM
       slop (~> 3.4)
     puma (2.16.0)
     rack (1.6.4)
+    rack-cors (0.4.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.5.2)
@@ -380,6 +381,7 @@ DEPENDENCIES
   poltergeist
   pry
   puma
+  rack-cors
   rails (= 4.2.5.2)
   rails-erd
   rails_12factor
