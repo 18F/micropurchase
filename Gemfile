@@ -22,6 +22,7 @@ gem 'redcarpet'
 gem 'puma'
 gem 'samwise', github: '18f/samwise', branch: 'micropurchase-compatibility'
 gem 'octokit', '~> 4.0'
+gem 'rack-cors', require: 'rack/cors'
 
 gem 'active_model_serializers'
 
