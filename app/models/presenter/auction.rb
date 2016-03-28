@@ -96,30 +96,15 @@ module Presenter
     end
 
     def starts_in
-      distance = distance_of_time_in_words(Time.now, model.start_datetime)
-      if model.start_datetime < Time.now
-        "#{distance} ago"
-      else
-        "in #{distance}"
-      end
+      time_in_human(model.start_datetime)
     end
 
     def ends_in
-      distance = distance_of_time_in_words(Time.now, model.end_datetime)
-      if model.end_datetime < Time.now
-        "#{distance} ago"
-      else
-        "in #{distance}"
-      end
+      time_in_human(model.end_datetime)
     end
 
     def delivery_deadline_expires_in
-      distance = distance_of_time_in_words(Time.now, model.delivery_deadline)
-      if model.delivery_deadline < Time.now
-        "#{distance} ago"
-      else
-        "in #{distance}"
-      end
+      time_in_human(model.delivery_deadline)
     end
 
     # rubocop:disable Style/DoubleNegation
@@ -191,25 +176,28 @@ module Presenter
       bids.sort_by(&:amount).first.amount
     end
 
+    def auction_user(user)
+      return Presenter::AuctionUser::Null.new if user.nil?
+
+      @auction_users ||= {}
+      @auction_users[user.id] ||= Presenter::AuctionUser.new(bids, user)
+    end
+
     def user_is_bidder?(user)
-      return false if user.nil?
-      bids.detect {|b| user.id == b.bidder_id } != nil
+      auction_user(user).has_bid?
     end
 
     def user_bids(user)
-      return [] if user.nil?
-      bids.select {|b| user.id == b.bidder_id }
+      auction_user(user).bids
     end
 
     def lowest_user_bid(user)
-      user_bids(user).sort_by(&:amount).first
+      auction_user(user).lowest_bid
     end
 
     def lowest_user_bid_amount(user)
-      bid = lowest_user_bid(user)
-      bid.nil? ? nil : bid.amount
+      auction_user(user).lowest_bid_amount
     end
-
 
     def html_description
       return '' if description.blank?
@@ -272,6 +260,15 @@ module Presenter
                                             tables: true,
                                             fenced_code_blocks: true,
                                             lax_spacing: true)
+    end
+
+    def time_in_human(time)
+      distance = distance_of_time_in_words(Time.now, time)
+      if time < Time.now
+        "#{distance} ago"
+      else
+        "in #{distance}"
+      end
     end
 
     def model
