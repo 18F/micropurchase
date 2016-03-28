@@ -1,11 +1,17 @@
 require 'action_view'
 
 module Presenter
-  class Auction < SimpleDelegator
+  class Auction
+    attr_accessor :auction
+    
     include ActiveModel::SerializerSupport
     include ActionView::Helpers::DateHelper
     include ActionView::Helpers::NumberHelper
 
+    def initialize(auction)
+      @auction = auction
+    end
+    
     def user_can_bid?(user)
       return false unless available?
       return false if user.nil? || !user.sam_account?
@@ -34,6 +40,15 @@ module Presenter
       end
     end
 
+    delegate :title, :created_at,
+             :start_datetime, :end_datetime, :github_repo, :issue_url,
+             :summary, :description, :delivery_deadline, :billable_to,
+             :start_price, :published, :notes, :delivery_url, :result,
+             :cap_proposal_url, :awardee_paid_status, :to_param,
+             :model_name, :to_key, :to_model, :type, :id,
+             :read_attribute_for_serialization,
+             to: :auction
+
     delegate :amount, :time,
              to: :current_bid, prefix: :current_bid
 
@@ -53,10 +68,10 @@ module Presenter
     end
 
     def bids
-      model.bids.to_a
-           .map {|bid| Presenter::Bid.new(bid) }
-           .sort_by(&:created_at)
-           .reverse
+      auction.bids.to_a
+             .map {|bid| Presenter::Bid.new(bid) }
+             .sort_by(&:created_at)
+             .reverse
     end
 
     def veiled_bids(user)
@@ -79,20 +94,20 @@ module Presenter
     end
 
     def starts_at
-      Presenter::DcTime.convert_and_format(model.start_datetime)
+      Presenter::DcTime.convert_and_format(auction.start_datetime)
     end
 
     def ends_at
-      Presenter::DcTime.convert_and_format(model.end_datetime)
+      Presenter::DcTime.convert_and_format(auction.end_datetime)
     end
 
     def formatted_type
-      return 'multi-bid'  if model.type == 'multi_bid'
-      return 'single-bid' if model.type == 'single_bid'
+      return 'multi-bid'  if auction.type == 'multi_bid'
+      return 'single-bid' if auction.type == 'single_bid'
     end
 
     def type
-      model.type
+      auction.type
     end
 
     def starts_in
@@ -110,22 +125,22 @@ module Presenter
     # rubocop:disable Style/DoubleNegation
     def available?
       !!(
-        (model.start_datetime && !future?) &&
-          (model.end_datetime && !over?)
+        (auction.start_datetime && !future?) &&
+          (auction.end_datetime && !over?)
       )
     end
     # rubocop:enable Style/DoubleNegation
 
     def over?
-      model.end_datetime < Time.now
+      auction.end_datetime < Time.now
     end
 
     def future?
-      model.start_datetime > Time.now
+      auction.start_datetime > Time.now
     end
 
     def expiring?
-      available? && model.end_datetime < 12.hours.from_now
+      available? && auction.end_datetime < 12.hours.from_now
     end
 
     def user_is_winning_bidder?(user)
@@ -151,11 +166,11 @@ module Presenter
     end
 
     def single_bid?
-      model.type == 'single_bid'
+      auction.type == 'single_bid'
     end
 
     def multi_bid?
-      model.type == 'multi_bid'
+      auction.type == 'multi_bid'
     end
 
     def single_bid_winning_bid
@@ -253,6 +268,7 @@ module Presenter
                                             fenced_code_blocks: true,
                                             lax_spacing: true)
     end
+<<<<<<< 34d54e0bbe774a42fdef4360811a1bec52a4ea02
 
     def time_in_human(time)
       distance = distance_of_time_in_words(Time.now, time)
@@ -266,5 +282,7 @@ module Presenter
     def model
       __getobj__
     end
+=======
+>>>>>>> Make the Presenter::Auction explicitly delegate
   end
 end

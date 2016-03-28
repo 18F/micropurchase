@@ -10,10 +10,10 @@ module Presenter
     delegate :bids, :bids?, :bid_count, :available?, :html_summary,
              :html_description, :current_bid?, :current_bidder_name,
              :current_bidder_duns_number, :current_bid_amount,
-             :current_bid_time, :starts_at, :ends_at,
+             :current_bid_time, :starts_at, :ends_at, :delivery_deadline_expires_in,
              to: :pr_auction
 
-    delegate :title, :created_at,
+    delegate :title, :created_at, :paid?,
              :start_datetime, :end_datetime, :github_repo, :issue_url,
              :summary, :description, :delivery_deadline, :billable_to,
              :start_price, :published, :notes, :delivery_url, :result,
