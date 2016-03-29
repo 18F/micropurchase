@@ -266,7 +266,6 @@ module Presenter
                                             fenced_code_blocks: true,
                                             lax_spacing: true)
     end
-<<<<<<< 34d54e0bbe774a42fdef4360811a1bec52a4ea02
 
     def time_in_human(time)
       distance = distance_of_time_in_words(Time.now, time)
@@ -280,7 +279,5 @@ module Presenter
     def model
       __getobj__
     end
-=======
->>>>>>> Make the Presenter::Auction explicitly delegate
   end
 end
