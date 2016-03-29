@@ -40,11 +40,9 @@ module Presenter
       end
     end
 
-    delegate :title, :created_at,
-             :start_datetime, :end_datetime, :github_repo, :issue_url,
-             :summary, :description, :delivery_deadline, :billable_to,
-             :start_price, :published, :notes, :delivery_url, :result,
-             :cap_proposal_url, :awardee_paid_status, :to_param,
+    delegate :title, :created_at, :start_datetime, :end_datetime,
+             :github_repo, :issue_url, :summary, :description,
+             :delivery_deadline, :start_price, :published, :to_param,
              :model_name, :to_key, :to_model, :type, :id,
              :read_attribute_for_serialization,
              to: :auction
