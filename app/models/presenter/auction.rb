@@ -1,11 +1,15 @@
 require 'action_view'
 
 module Presenter
-  class Auction < SimpleDelegator
+  class Auction
     include ActiveModel::SerializerSupport
     include ActionView::Helpers::DateHelper
     include ActionView::Helpers::NumberHelper
 
+    def initialize(auction)
+      @auction = auction
+    end
+    
     def user_can_bid?(user)
       return false unless available?
       return false if user.nil? || !user.sam_account?
@@ -33,6 +37,13 @@ module Presenter
         return current_bid.amount - PlaceBid::BID_INCREMENT
       end
     end
+
+    delegate :title, :created_at, :start_datetime, :end_datetime,
+             :github_repo, :issue_url, :summary, :description,
+             :delivery_deadline, :start_price, :published, :to_param,
+             :model_name, :to_key, :to_model, :type, :id,
+             :read_attribute_for_serialization,
+             to: :model
 
     delegate :amount, :time,
              to: :current_bid, prefix: :current_bid
@@ -264,7 +275,7 @@ module Presenter
     end
 
     def model
-      __getobj__
+      @auction
     end
   end
 end
