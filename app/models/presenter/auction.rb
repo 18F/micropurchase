@@ -209,7 +209,7 @@ module Presenter
       markdown.render(summary)
     end
 
-    delegate :label_class, :label, :tag_data_value_status, :tag_data_label_2, :tag_data_value_2,
+    delegate :status, :label_class, :label, :tag_data_value_status, :tag_data_label_2, :tag_data_value_2,
              to: :status_presenter
 
     def human_start_time
