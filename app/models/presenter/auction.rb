@@ -2,8 +2,6 @@ require 'action_view'
 
 module Presenter
   class Auction
-    attr_accessor :auction
-    
     include ActiveModel::SerializerSupport
     include ActionView::Helpers::DateHelper
     include ActionView::Helpers::NumberHelper
@@ -45,7 +43,7 @@ module Presenter
              :delivery_deadline, :start_price, :published, :to_param,
              :model_name, :to_key, :to_model, :type, :id,
              :read_attribute_for_serialization,
-             to: :auction
+             to: :model
 
     delegate :amount, :time,
              to: :current_bid, prefix: :current_bid
@@ -66,10 +64,10 @@ module Presenter
     end
 
     def bids
-      auction.bids.to_a
-             .map {|bid| Presenter::Bid.new(bid) }
-             .sort_by(&:created_at)
-             .reverse
+      model.bids.to_a
+           .map {|bid| Presenter::Bid.new(bid) }
+           .sort_by(&:created_at)
+           .reverse
     end
 
     def veiled_bids(user)
@@ -92,20 +90,20 @@ module Presenter
     end
 
     def starts_at
-      Presenter::DcTime.convert_and_format(auction.start_datetime)
+      Presenter::DcTime.convert_and_format(model.start_datetime)
     end
 
     def ends_at
-      Presenter::DcTime.convert_and_format(auction.end_datetime)
+      Presenter::DcTime.convert_and_format(model.end_datetime)
     end
 
     def formatted_type
-      return 'multi-bid'  if auction.type == 'multi_bid'
-      return 'single-bid' if auction.type == 'single_bid'
+      return 'multi-bid'  if model.type == 'multi_bid'
+      return 'single-bid' if model.type == 'single_bid'
     end
 
     def type
-      auction.type
+      model.type
     end
 
     def starts_in
@@ -123,22 +121,22 @@ module Presenter
     # rubocop:disable Style/DoubleNegation
     def available?
       !!(
-        (auction.start_datetime && !future?) &&
-          (auction.end_datetime && !over?)
+        (model.start_datetime && !future?) &&
+          (model.end_datetime && !over?)
       )
     end
     # rubocop:enable Style/DoubleNegation
 
     def over?
-      auction.end_datetime < Time.now
+      model.end_datetime < Time.now
     end
 
     def future?
-      auction.start_datetime > Time.now
+      model.start_datetime > Time.now
     end
 
     def expiring?
-      available? && auction.end_datetime < 12.hours.from_now
+      available? && model.end_datetime < 12.hours.from_now
     end
 
     def user_is_winning_bidder?(user)
@@ -164,11 +162,11 @@ module Presenter
     end
 
     def single_bid?
-      auction.type == 'single_bid'
+      model.type == 'single_bid'
     end
 
     def multi_bid?
-      auction.type == 'multi_bid'
+      model.type == 'multi_bid'
     end
 
     def single_bid_winning_bid
@@ -277,7 +275,7 @@ module Presenter
     end
 
     def model
-      __getobj__
+      @auction
     end
   end
 end
