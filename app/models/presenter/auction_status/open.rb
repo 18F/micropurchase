@@ -4,6 +4,10 @@ module Presenter
       include ActionView::Helpers::DateHelper
       include ActionView::Helpers::NumberHelper
 
+      def status
+        'Open'
+      end
+      
       def label_class
         'auction-label-open'
       end

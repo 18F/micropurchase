@@ -3,6 +3,10 @@ module Presenter
     class Over < Struct.new(:auction)
       include ActionView::Helpers::NumberHelper
 
+      def status
+        'Closed'
+      end
+      
       def label_class
         'auction-label-over'
       end
