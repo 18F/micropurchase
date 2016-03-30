@@ -4,7 +4,11 @@
 $small-screen:  481px;
 $medium-screen: 600px;
 $large-screen:  768px;
+$huge-screen:  900px;
+$jumbo-screen:  1240px;
 
+$huge: new-breakpoint(min-width $jumbo-screen 12);
+$huge: new-breakpoint(min-width $huge-screen 12);
 $large: new-breakpoint(min-width $large-screen 12);
 $medium: new-breakpoint(min-width $medium-screen 6);
 $small: new-breakpoint(min-width $small-screen 1);

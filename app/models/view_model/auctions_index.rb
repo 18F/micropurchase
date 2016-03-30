@@ -29,5 +29,15 @@ module ViewModel
         'auctions_list'
       end
     end
+
+    def auctions_list_previous_partial
+      # logic needs to be refactored before push
+      # should make sure there are previous auctions
+      if auctions.empty?
+        'empty_auctions'
+      else
+        'auctions_list_previous'
+      end
+    end
   end
 end
