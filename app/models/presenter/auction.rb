@@ -239,6 +239,14 @@ module Presenter
         'auctions/multi_bid/index_bid_summary'
       end
     end
+
+    def current_bid_info_partial
+      if single_bid?
+        'bids/single_bid/current_bid_info'
+      elsif multi_bid?
+        'bids/multi_bid/current_bid_info'
+      end
+    end
     
     private
 
