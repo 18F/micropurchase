@@ -232,6 +232,14 @@ module Presenter
       end
     end
 
+    def index_bid_summary_partial
+      if single_bid?
+        'auctions/single_bid/index_bid_summary'
+      elsif multi_bid?
+        'auctions/multi_bid/index_bid_summary'
+      end
+    end
+    
     private
 
     def status_presenter_class
