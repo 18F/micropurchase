@@ -1,7 +1,7 @@
 module ViewModel
   class AuctionsIndex < Struct.new(:current_user, :auctions_query)
     def auctions
-      @auctions ||= auctions_query.map {|auction| Presenter::Auction.new(auction) }
+      @auctions ||= auctions_query.map {|auction| ViewModel::Auction.new(current_user, auction) }
     end
 
     def active_auction_count

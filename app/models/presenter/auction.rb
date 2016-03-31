@@ -231,22 +231,6 @@ module Presenter
         "in #{distance_of_time_in_words(Time.now, start_datetime)}"
       end
     end
-
-    def index_bid_summary_partial
-      if single_bid?
-        'auctions/single_bid/index_bid_summary'
-      elsif multi_bid?
-        'auctions/multi_bid/index_bid_summary'
-      end
-    end
-
-    def current_bid_info_partial
-      if single_bid?
-        'bids/single_bid/current_bid_info'
-      elsif multi_bid?
-        'bids/multi_bid/current_bid_info'
-      end
-    end
     
     private
 

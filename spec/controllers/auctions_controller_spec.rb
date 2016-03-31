@@ -6,7 +6,7 @@ RSpec.describe AuctionsController, controller: true do
       auction_record = FactoryGirl.create(:auction)
       get :index
       auction = assigns(:view_model).auctions.first
-      expect(auction).to be_a(Presenter::Auction)
+      expect(auction).to be_a(ViewModel::Auction)
       expect(auction.id).to eq(auction_record.id)
     end
   end
@@ -16,7 +16,7 @@ RSpec.describe AuctionsController, controller: true do
       auction_record = FactoryGirl.create(:auction)
       get :show, id: auction_record.id
       auction = assigns(:view_model).auction
-      expect(auction).to be_a(Presenter::Auction)
+      expect(auction).to be_a(ViewModel::Auction)
       expect(auction.id).to eq(auction_record.id)
     end
 
