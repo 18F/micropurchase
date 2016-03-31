@@ -20,7 +20,7 @@ Feature: Using the Admin Auctions panel
     When I sign in
     And I visit the auctions admin page
     And I click on the "Create a new auction" link
-    Then I should be able to edit the existing auction form
+    Then I should be able to edit the new auction form
 
     When I click to create an auction
     Then I expect to see the auction title
