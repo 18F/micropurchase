@@ -11,6 +11,8 @@ env:
 after_script:
   # must equal number of rubies * number of tasks
   - ./bin/codeclimate-batch --groups 2
+  - npm install -g pa11y-crawl
+  - pa11y-crawl --run "bundle exec puma" --ci http://localhost:3000
 addons:
   postgresql: '9.3'
   code_climate:
