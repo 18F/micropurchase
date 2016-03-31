@@ -49,7 +49,8 @@ class AuctionParser < Struct.new(:params)
 
   def delivery_deadline
     if params.has_key?(:due_in_days)
-      params[:due_in_days].to_i.business_days.after(end_datetime.to_date).end_of_workday
+      real_days = params[:due_in_days].to_i.business_days
+      end_of_workday(real_days.after(end_datetime.to_date))
     else
       parse_time(params[:auction][:delivery_deadline])
     end
@@ -79,5 +80,12 @@ class AuctionParser < Struct.new(:params)
     price = PlaceBid::BID_LIMIT if price > PlaceBid::BID_LIMIT || price <= 0
 
     price
+  end
+
+  private
+
+  def end_of_workday(date)
+    cob = Time.parse(BusinessTime::Config.end_of_workday)
+    Time.mktime(date.year, date.month, date.day, cob.hour, cob.min, cob.sec)
   end
 end
