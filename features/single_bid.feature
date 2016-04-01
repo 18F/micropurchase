@@ -41,9 +41,11 @@ Feature: Single-bid auctions
     And I am allowed to bid
     When I visit the auction page
     And I click on the "BID" button
+    Then I expect to be on the new bid page
 
     When I submit a bid for $500
-    Then I expect to see a confirmation for $500
+    Then I expect to be on the bid confirmation page
+    And I expect to see a confirmation for $500
 
     When I click on the "Confirm" button
     Then I expect to see "Your bid: $500"

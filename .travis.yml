@@ -11,6 +11,8 @@ env:
 after_script:
   # must equal number of rubies * number of tasks
   - ./bin/codeclimate-batch --groups 2
+  - npm install -g pa11y-crawl
+  - pa11y-crawl --run "bundle exec puma" --ci http://localhost:3000
 addons:
   postgresql: '9.3'
   code_climate:
@@ -23,6 +25,7 @@ before_deploy:
 - export GOPATH=${HOME}/Godeps/_workspace
 - go get github.com/concourse/autopilot
 - cf install-plugin -f $GOPATH/bin/autopilot
+- bundle exec rake git:dump_sha
 deploy:
 - provider: script
   script: "./deploy.sh staging"

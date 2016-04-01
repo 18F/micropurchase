@@ -24,9 +24,9 @@ module ViewModel
 
     def auction_status_partial
       if auction.single_bid? && !auction_won?
-        'auctions/single_bid_auction_status'
+        'auctions/single_bid/auction_status'
       else
-        'auctions/auction_status'
+        'auctions/multi_bid/auction_status'
       end
     end
 
@@ -57,8 +57,8 @@ module ViewModel
     end
 
     def win_header_partial
-      return 'auctions/multi_bid_win_header'  if auction.multi_bid?
-      return 'auctions/single_bid_win_header' if auction.single_bid?
+      return 'auctions/multi_bid/win_header'  if auction.multi_bid?
+      return 'auctions/single_bid/win_header' if auction.single_bid?
     end
 
     def auction_link_text

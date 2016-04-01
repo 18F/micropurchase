@@ -12,10 +12,10 @@ class BidsController < ApplicationController
 
   def my_bids
     @bids = Bid
-              .where(bidder_id: current_user.id)
-              .includes(:auction)
-              .all
-              .map {|bid| Presenter::Bid.new(bid)}
+            .where(bidder_id: current_user.id)
+            .includes(:auction)
+            .all
+            .map {|bid| Presenter::Bid.new(bid) }
   end
 
   def new

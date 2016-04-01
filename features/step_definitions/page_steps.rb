@@ -55,6 +55,10 @@ Then(/^I expect to be on the new bid page$/) do
   expect(page.current_path).to eq(new_auction_bid_path(@auction))
 end
 
+Then(/^I expect to be on the bid confirmation page$/) do
+  expect(page.current_path).to eq(confirm_auction_bids_path(@auction))
+end
+
 Then(/^there should be meta tags for the edit profile form$/) do
   expect(page).to have_css("title", visible: false, text: "18F Micro-purchase - Edit user: #{@user.name}")
 end
