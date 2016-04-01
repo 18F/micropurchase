@@ -209,9 +209,6 @@ module Presenter
       markdown.render(summary)
     end
 
-    delegate :status, :label_class, :label, :tag_data_value_status, :tag_data_label_2, :tag_data_value_2,
-             to: :status_presenter
-
     def human_start_time
       if start_datetime < Time.now
         # this method comes from the included date helpers
@@ -222,23 +219,6 @@ module Presenter
     end
     
     private
-
-    def status_presenter_class
-      status_name = if expiring?
-                      'Expiring'
-                    elsif over?
-                      'Over'
-                    elsif future?
-                      'Future'
-                    else
-                      'Open'
-                    end
-      "::Presenter::AuctionStatus::#{status_name}".constantize
-    end
-
-    def status_presenter
-      @status_presenter ||= status_presenter_class.new(self)
-    end
 
     def current_bid_record
       @current_bid_record ||= bids.sort_by {|bid| [bid.amount, bid.created_at, bid.id] }.first

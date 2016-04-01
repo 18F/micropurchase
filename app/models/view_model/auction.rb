@@ -6,12 +6,12 @@ module ViewModel
       @auction ||= Presenter::Auction.new(auction_record)
     end
 
-    delegate :title, :summary, :html_description, :status, :id, :bid_count, :current_bid_amount_as_currency,
+    delegate :title, :summary, :html_description, :bid_count, :current_bid_amount_as_currency,
              :issue_url, :user_bid_amount_as_currency,
              :start_datetime, :end_datetime, :veiled_bids, :created_at, :current_bidder_name,
-             :label_class, :label, :html_summary, :html_description, :formatted_type,
+             :html_summary, :html_description, :formatted_type,
              :available?, :bids?, :bids, :human_start_time, :start_price,
-             :tag_data_value_status, :over?, :tag_data_label_2, :tag_data_value_2,
+             :over?,
              :multi_bid?, :single_bid?, :type,
              :id, :read_attribute_for_serialization, :to_param,
              to: :auction
@@ -77,5 +77,29 @@ module ViewModel
         'bids/multi_bid/current_bid_info'
       end
     end
+
+    delegate :status, :label_class, :label, :tag_data_value_status, :tag_data_label_2, :tag_data_value_2,
+             to: :status_presenter
+
+    private
+
+    def status_presenter_class
+      status_name = if auction.expiring?
+                      'Expiring'
+                    elsif auction.over?
+                      'Over'
+                    elsif auction.future?
+                      'Future'
+                    else
+                      'Open'
+                    end
+      "::Presenter::AuctionStatus::#{status_name}".constantize
+    end
+
+    def status_presenter
+      @status_presenter ||= status_presenter_class.new(self)
+    end
+
+
   end
 end
