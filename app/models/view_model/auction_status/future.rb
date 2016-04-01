@@ -1,6 +1,6 @@
-module Presenter
+module ViewModel
   module AuctionStatus
-    class Over < Struct.new(:auction)
+    class Future < Struct.new(:auction)
       include ActionView::Helpers::NumberHelper
 
       def status
@@ -8,23 +8,23 @@ module Presenter
       end
       
       def label_class
-        'auction-label-over'
+        'auction-label-future'
       end
 
       def label
-        'Closed'
+        'Coming Soon'
       end
 
       def tag_data_value_status
-        label
+        auction.human_start_time
       end
 
       def tag_data_label_2
-        "Winning Bid"
+        "Starting bid"
       end
 
       def tag_data_value_2
-        number_to_currency(auction.current_bid_amount)
+        number_to_currency(auction.start_price)
       end
     end
   end

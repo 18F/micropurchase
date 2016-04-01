@@ -114,7 +114,7 @@ module ViewModel
                     else
                       'Open'
                     end
-      "::Presenter::AuctionStatus::#{status_name}".constantize
+      "::ViewModel::AuctionStatus::#{status_name}".constantize
     end
 
     def status_presenter
