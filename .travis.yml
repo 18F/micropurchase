@@ -1,18 +1,18 @@
 language: ruby
 cache: bundler
-bundler_args: --without production --binstubs
+bundler_args: "--without production --binstubs"
 before_script:
 - bundle exec rake db:create
 - bundle exec rake db:migrate
 script: bundle exec rake $TASK
 env:
-  - TASK: spec
-  - TASK: cucumber
+  global:
+  - CF_USERNAME=18f-acq_deployer
+  - secure: m/pjI186X+ae3RX5v+ygX5yoFPISKZHRw5/Y2QDlPkhpDVkqYz+5hTZcqAs/LO1epIL6tsCpesuN8d9Rho/j2XbZxNvv56Fsox5Hs8tTWZ4a1APZj0iE2yHh7HLkwK2A1RrOkpgLkAlCctS1lB7EwAUrlywW6dcJb64dxdws4XH4aypoY8ajgTDrGzRXKV8zuEv5rf6BWih3Lm+fg8l/n0UbswGLKq9RKAfSqclW/S8BuUrfsX1VbsBqQPbU86Cyr88vUpq/WcfBaufsCZvtgwSCaoeCl+P15C+qERWC998duwzWyHh6WAHgNGNX2C2nz+9FSXMHR+X1+4BYkOPYmcM+B8hmJkzByzBXjeHfKJMYIyG+jloOMuu9gK/vwX4PjEFxtMnzD7COEKwM7t7kgMTglmkpIvHgTKFVw+wRUKHz4PfODiuDD+NQsXxCI3SUdP0lIyMp83UaaZfYA9CnX52UO9P6hMWHWObD+w7fC+La3HKQR9juaOClxi1IL4RZI3BILtAI/0X7yFbdY/HPGKXyqa6ETc6JwQ/lAC8v+unmSu7ISvp+zZyBjGmbUUluoTtHOK9ZiKl9gd+NscMIi01a8lFlKDY1JF53XSD6oTCtYdocvmcDnDBFBn7+t7A7QLObpo3NCbDKrKK2WIU7Z6QqGLTglScCSquvT/4cK+Q=
 after_script:
-  # must equal number of rubies * number of tasks
-  - ./bin/codeclimate-batch --groups 2
-  - npm install -g pa11y-crawl
-  - pa11y-crawl --run "bundle exec puma" --ci http://localhost:3000
+- "./bin/codeclimate-batch --groups 2"
+- npm install -g pa11y-crawl
+- pa11y-crawl --run "bundle exec puma" --ci http://localhost:3000
 addons:
   postgresql: '9.3'
   code_climate:
@@ -36,7 +36,3 @@ deploy:
   skip_cleanup: true
   on:
     branch: master
-env:
-  global:
-    - secure: FLB35CRI2zADUKRUFjWp9ZYhRts8olD7RjjOOk/vfDNgq+6mB3s3YLKL0NtlOVRKKRjVecBbZrWKPXc0yEg3tzmfzKrxFI2DQdWpQdunl7/lbnuEKqTAW2ogX7nLTWpfyUeD2vwiO63PXP1BH2qfgDMjDgTMbW2V2v1hPGH9Fm1bRrO/f4x1eGc1AnN6pQjlSe4VhE71N4axQfupMiuthY74+l9dCY+NauH7NcmkGmiaFnPqCdq0SDKuJaFm9HGl++V9qdRv4EgaEr2m0pQESbn4q0AZUI2ox0+z2WamscvAEMumTKiIOlcE7OlH8bU0x0EmQqnuzk9OouSAPqlr9DXJH54bWZ1QXeOOD52TfNlZTUgw8b0pOAglHLLGZuRlY8neaGqPuiZ/lmFlfLHGrHIeUU5qJXostdTDQC5qaiC2GGsEYFYYcNaShCeYVpd/iJDwQank6fdkIj9itEwNf+PClWHpt1gJnzGLQ6KWyOUUukr/1rBjWv5SPbGuf6pQl2WHYxa2N4c//0yfYLgS7XIFCleAI7CPrCqpsu3lIchkzQcGNsCslSDCZqcpE3LxkCrwLLUipo0os/KfnrndICuCQV4nSaPJSG7+5KIWOPhjE0AunZbFVvdzlHDDEDCJcl295vGxis1+mPG7i7yDN8/cRUiJrugAZ8kpr6cioyQ=
-    - CF_USERNAME=deploy-agile-bpa
