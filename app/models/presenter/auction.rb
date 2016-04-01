@@ -10,17 +10,6 @@ module Presenter
       @auction = auction
     end
     
-    def user_can_bid?(user)
-      return false unless available?
-      return false if user.nil? || !user.sam_account?
-      return false if single_bid? && user_is_bidder?(user)
-      true
-    end
-
-    def show_bid_button?(user)
-      user_can_bid?(user) || user.nil?
-    end
-
     def current_bid?
       current_bid_record != nil
     end

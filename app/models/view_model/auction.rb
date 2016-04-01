@@ -10,11 +10,22 @@ module ViewModel
              :issue_url, :user_bid_amount_as_currency,
              :start_datetime, :end_datetime, :veiled_bids, :created_at, :current_bidder_name,
              :label_class, :label, :html_summary, :html_description, :formatted_type,
-             :available?, :bids?, :bids, :human_start_time, :show_bid_button?, :start_price,
+             :available?, :bids?, :bids, :human_start_time, :start_price,
              :tag_data_value_status, :over?, :tag_data_label_2, :tag_data_value_2,
-             :multi_bid?, :single_bid?, :type, :user_is_bidder?, :user_is_winning_bidder?,
+             :multi_bid?, :single_bid?, :type,
              :id, :read_attribute_for_serialization, :to_param,
              to: :auction
+
+    def user_can_bid?
+      return false unless auction.available?
+      return false if current_user.nil? || !current_user.sam_account?
+      return false if auction.single_bid? && user_is_bidder?
+      true
+    end
+
+    def show_bid_button?
+      user_can_bid? || current_user.nil?
+    end
 
     def formatted_current_bid_amount
       if current_bid_amount.nil?
@@ -38,6 +49,15 @@ module ViewModel
       end
     end
 
+    # can we get rid of Presenter::Auction view?
+    def user_is_bidder?
+      auction.user_is_bidder?(current_user)
+    end
+
+    def user_is_winning_bidder?
+      auction.user_is_winning_bidder?(current_user)
+    end
+
     def auction_type
       auction.formatted_type
     end
@@ -57,6 +77,5 @@ module ViewModel
         'bids/multi_bid/current_bid_info'
       end
     end
-
   end
 end

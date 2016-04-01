@@ -7,7 +7,7 @@ module ViewModel
     end
 
     delegate :title, :summary, :html_description, :status, :id, :bid_count, :current_bid_amount_as_currency,
-      :issue_url, :user_bid_amount_as_currency,
+      :issue_url, :user_bid_amount_as_currency, :show_bid_button?,
         to: :auction, prefix: true
 
     delegate :formatted_current_bid_amount, :current_bid_amount, :current_bid, :auction_type,
