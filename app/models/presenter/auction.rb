@@ -44,10 +44,6 @@ module Presenter
       number_to_currency(current_bid_amount)
     end
 
-    def user_bid_amount_as_currency(user)
-      number_to_currency(lowest_user_bid_amount(user))
-    end
-
     def bids?
       bid_count > 0
     end
@@ -128,11 +124,6 @@ module Presenter
       available? && model.end_datetime < 12.hours.from_now
     end
 
-    def user_is_winning_bidder?(user)
-      return false unless current_bid?
-      user.id == winning_bidder_id
-    end
-
     def winning_bidder
       winning_bid.bidder rescue nil
     end
@@ -174,29 +165,6 @@ module Presenter
 
     def lowest_amount
       bids.sort_by(&:amount).first.amount
-    end
-
-    def auction_user(user)
-      return Presenter::AuctionUser::Null.new if user.nil?
-
-      @auction_users ||= {}
-      @auction_users[user.id] ||= Presenter::AuctionUser.new(bids, user)
-    end
-
-    def user_is_bidder?(user)
-      auction_user(user).has_bid?
-    end
-
-    def user_bids(user)
-      auction_user(user).bids
-    end
-
-    def lowest_user_bid(user)
-      auction_user(user).lowest_bid
-    end
-
-    def lowest_user_bid_amount(user)
-      auction_user(user).lowest_bid_amount
     end
 
     def html_description

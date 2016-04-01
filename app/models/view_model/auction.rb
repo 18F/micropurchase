@@ -7,7 +7,7 @@ module ViewModel
     end
 
     delegate :title, :summary, :html_description, :bid_count, :current_bid_amount_as_currency,
-             :issue_url, :user_bid_amount_as_currency,
+             :issue_url,
              :start_datetime, :end_datetime, :veiled_bids, :created_at, :current_bidder_name,
              :html_summary, :html_description, :formatted_type,
              :available?, :bids?, :bids, :human_start_time, :start_price,
@@ -51,13 +51,30 @@ module ViewModel
 
     # can we get rid of Presenter::Auction view?
     def user_is_bidder?
-      auction.user_is_bidder?(current_user)
+      auction_user.has_bid?
     end
 
     def user_is_winning_bidder?
-      auction.user_is_winning_bidder?(current_user)
+      return false unless auction.current_bid?
+      current_user.id == auction.winning_bidder_id
+    end
+    
+    def user_bids
+      auction_user.bids
     end
 
+    def lowest_user_bid
+      auction_user.lowest_bid
+    end
+
+    def lowest_user_bid_amount
+      auction_user.lowest_bid_amount
+    end
+
+    def user_bid_amount_as_currency
+      number_to_currency(lowest_user_bid_amount)
+    end
+    
     def auction_type
       auction.formatted_type
     end
@@ -100,6 +117,9 @@ module ViewModel
       @status_presenter ||= status_presenter_class.new(self)
     end
 
-
+    def auction_user
+      return Presenter::AuctionUser::Null.new if current_user.nil?
+      @auction_user ||= Presenter::AuctionUser.new(bids, current_user)
+    end
   end
 end
