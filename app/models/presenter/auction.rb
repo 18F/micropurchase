@@ -1,5 +1,7 @@
 require 'action_view'
 
+# This is a wrapper around the basic AR model and should be used for
+# selecting and rendering raw data from the model object.
 module Presenter
   class Auction
     include ActiveModel::SerializerSupport
@@ -9,7 +11,7 @@ module Presenter
     def initialize(auction)
       @auction = auction
     end
-    
+
     def current_bid?
       current_bid_record != nil
     end
@@ -67,7 +69,7 @@ module Presenter
       end
 
       # otherwise, return all the bids
-      return bids
+      bids
     end
 
     def bid_count
@@ -152,7 +154,7 @@ module Presenter
     def single_bid_winning_bid
       return nil if available?
       return lowest_bids.first if lowest_bids.length == 1
-      return lowest_bids.sort_by(&:created_at).first
+      lowest_bids.sort_by(&:created_at).first
     end
 
     def multi_bid_winning_bid
@@ -185,7 +187,7 @@ module Presenter
         "in #{distance_of_time_in_words(Time.now, start_datetime)}"
       end
     end
-    
+
     private
 
     def current_bid_record

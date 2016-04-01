@@ -1,3 +1,6 @@
+# This class encapsulates representations of the Auction used in
+# controller responses (views and API json) as well as access methods
+# tied to the current user.
 module ViewModel
   class Auction < Struct.new(:current_user, :auction_record)
     include ActionView::Helpers::NumberHelper
@@ -6,14 +9,14 @@ module ViewModel
       @auction ||= Presenter::Auction.new(auction_record)
     end
 
-    delegate :title, :summary, :html_description, :bid_count, :current_bid_amount_as_currency,
-             :issue_url,
-             :start_datetime, :end_datetime, :veiled_bids, :created_at, :current_bidder_name,
-             :html_summary, :html_description, :formatted_type,
-             :available?, :bids?, :bids, :human_start_time, :start_price,
-             :over?,
-             :multi_bid?, :single_bid?, :type,
-             :id, :read_attribute_for_serialization, :to_param,
+    delegate :title, :summary, :html_description, :bid_count,
+             :current_bid_amount_as_currency, :issue_url,
+             :start_datetime, :end_datetime, :veiled_bids,
+             :created_at, :current_bidder_name, :html_summary,
+             :html_description, :formatted_type, :available?, :bids?,
+             :bids, :human_start_time, :start_price, :over?,
+             :multi_bid?, :single_bid?, :type, :id,
+             :read_attribute_for_serialization, :to_param,
              to: :auction
 
     def user_can_bid?
@@ -95,7 +98,8 @@ module ViewModel
       end
     end
 
-    delegate :status, :label_class, :label, :tag_data_value_status, :tag_data_label_2, :tag_data_value_2,
+    delegate :status, :label_class, :label, :tag_data_value_status,
+             :tag_data_label_2, :tag_data_value_2,
              to: :status_presenter
 
     private
