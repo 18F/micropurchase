@@ -10,3 +10,6 @@ applications:
     - micropurchase-staging-psql
     - micropurchase-github
   command: null
+  env:
+    RAILS_ENV: staging
+    RACK_ENV: staging
