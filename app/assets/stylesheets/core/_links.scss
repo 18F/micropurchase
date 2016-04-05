@@ -9,8 +9,8 @@ a:focus {
 }
 
 a.link-highlighted {
-  background: $branding-bright;
-  color: $branding-darkest;
+  background-color: $branding-darkest;
+  color: $branding-bright;
   padding: rem(1px);
   padding-left: $border-radius;
   padding-right: $border-radius;
