@@ -1,4 +1,4 @@
-module Presenter
+module ViewModel
   module AuctionStatus
     class Open < Struct.new(:auction)
       include ActionView::Helpers::DateHelper

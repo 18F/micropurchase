@@ -95,5 +95,4 @@ class PlaceBid < Struct.new(:params, :current_user)
 
     (params[:bid] && params_amount).to_f.round(2)
   end
-
 end

@@ -36,6 +36,10 @@ Feature: Bidding
     When I click on the "Confirm" button
     Then I expect to see a current bid amount of $800
 
+    When I visit the home page
+    Then I expect to see a "Bid" button
+    And I expect to see "Current bid: $800.00"
+
   Scenario: Logging in before bidding
     Given there is an open auction
     And I am a user with a verified SAM account

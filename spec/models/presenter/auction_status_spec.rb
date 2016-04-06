@@ -1,7 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe Presenter::Auction do
-  let(:presenter) { Presenter::Auction.new(auction) }
+RSpec.describe ViewModel::Auction do
+  let(:user) { FactoryGirl.create(:user) }
+  let(:presenter) { ViewModel::Auction.new(user, auction) }
 
   context "when the auction is expiring soon" do
     let(:auction) do

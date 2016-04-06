@@ -3,14 +3,18 @@ module ViewModel
     include ActionView::Helpers::NumberHelper
 
     def auction
-      @auction ||= Presenter::Auction.new(auction_record)
+      @auction ||= ViewModel::Auction.new(current_user, auction_record)
     end
 
-    delegate :title, :summary, :html_description, :status, :id, :bid_count, :current_bid_amount_as_currency,
-      :issue_url, :user_bid_amount_as_currency,
-        to: :auction, prefix: true
+    delegate :title, :summary, :html_description, :status, :id,
+             :bid_count, :current_bid_amount_as_currency, :issue_url,
+             :user_bid_amount_as_currency, :show_bid_button?,
+             to: :auction, prefix: true
 
-    def auction_status_label
+    delegate :formatted_current_bid_amount, :current_bid_amount, :current_bid, :auction_type,
+             to: :auction
+
+    def auction_status_header
       if auction_won?
         "Winning bid (#{auction.current_bidder_name}):"
       else
@@ -27,28 +31,6 @@ module ViewModel
         'auctions/single_bid/auction_status'
       else
         'auctions/multi_bid/auction_status'
-      end
-    end
-
-    def formatted_current_bid_amount
-      if current_bid_amount.nil?
-        return 'n/a'
-      else
-        return number_to_currency(current_bid_amount)
-      end
-    end
-
-    def current_bid_amount
-      current_bid.amount rescue nil
-    end
-
-    # This could be in the Presenter::Auction modelm but I don't want to make that change now
-    def current_bid
-      return nil if current_user.nil?
-      if auction.available? && auction.single_bid?
-        auction.bids.detect {|bid| bid.bidder_id == current_user.id }
-      else
-        auction.current_bid
       end
     end
 
@@ -93,10 +75,6 @@ module ViewModel
       elsif auction.type == 'multi_bid'
         return '/auctions/rules/multi-bid'
       end
-    end
-
-    def auction_type
-      auction.formatted_type
     end
 
     private
