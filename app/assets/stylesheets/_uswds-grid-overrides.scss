@@ -30,3 +30,7 @@ $small: new-breakpoint(min-width $small-screen 1);
     padding-right: $site-margins;
   }
 }
+
+.usa-grid-top-padding {
+  padding-top: 1.25em;
+}
