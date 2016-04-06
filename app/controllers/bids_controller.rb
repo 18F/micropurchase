@@ -7,7 +7,7 @@ class BidsController < ApplicationController
                           .with_bids_and_bidders
                           .published
                           .find(params[:auction_id])
-    @auction = Presenter::Auction.new(auction)
+    @auction = ViewModel::Auction.new(current_user, auction)
   end
 
   def my_bids
@@ -22,7 +22,7 @@ class BidsController < ApplicationController
     # check if user is valid
     if current_user.sam_account?
       auction = AuctionQuery.new.public_find(params[:auction_id])
-      @auction = Presenter::Auction.new(auction)
+      @auction = ViewModel::Auction.new(current_user, auction)
       @bid = Bid.new
     else
       session[:return_to] = request.fullpath
@@ -31,7 +31,7 @@ class BidsController < ApplicationController
   end
 
   def confirm
-    @auction = Presenter::Auction.new(Auction.find(params[:auction_id]))
+    @auction = ViewModel::Auction.new(current_user, Auction.find(params[:auction_id]))
     @bid = Presenter::Bid.new(PlaceBid.new(params, current_user).dry_run)
   end
 

@@ -1,6 +1,6 @@
-module Presenter
+module ViewModel
   module AuctionStatus
-    class Expiring < Presenter::AuctionStatus::Open
+    class Expiring < ViewModel::AuctionStatus::Open
       def label_class
         'auction-label-expiring'
       end

@@ -1,8 +1,8 @@
-module Presenter
-  class AuctionUser
+module ViewModel
+  class UserBids
     attr_accessor :bids, :user
 
-    def initialize(all_bids, user)
+    def initialize(user, all_bids)
       @user = user
       @bids = all_bids.select {|b| b.bidder.id == user.id }
     end

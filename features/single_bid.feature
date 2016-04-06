@@ -36,6 +36,10 @@ Feature: Single-bid auctions
     Then I expect to not see a "BID" button
     And I expect to see "Your bid: $3,493.00"
 
+    When I visit the home page
+    Then I expect to not see a "BID" button
+    And I expect to see "Your bid: $3,493.00"
+
   Scenario: viewing your own single bid
     Given there is a single-bid auction
     And I am allowed to bid

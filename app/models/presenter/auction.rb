@@ -1,5 +1,7 @@
 require 'action_view'
 
+# This is a wrapper around the basic AR model and should be used for
+# selecting and rendering raw data from the model object.
 module Presenter
   class Auction
     include ActiveModel::SerializerSupport
@@ -8,17 +10,6 @@ module Presenter
 
     def initialize(auction)
       @auction = auction
-    end
-    
-    def user_can_bid?(user)
-      return false unless available?
-      return false if user.nil? || !user.sam_account?
-      return false if single_bid? && user_is_bidder?(user)
-      true
-    end
-
-    def show_bid_button?(user)
-      user_can_bid?(user) || user.nil?
     end
 
     def current_bid?
@@ -55,10 +46,6 @@ module Presenter
       number_to_currency(current_bid_amount)
     end
 
-    def user_bid_amount_as_currency(user)
-      number_to_currency(lowest_user_bid_amount(user))
-    end
-
     def bids?
       bid_count > 0
     end
@@ -82,7 +69,7 @@ module Presenter
       end
 
       # otherwise, return all the bids
-      return bids
+      bids
     end
 
     def bid_count
@@ -139,11 +126,6 @@ module Presenter
       available? && model.end_datetime < 12.hours.from_now
     end
 
-    def user_is_winning_bidder?(user)
-      return false unless current_bid?
-      user.id == winning_bidder_id
-    end
-
     def winning_bidder
       winning_bid.bidder rescue nil
     end
@@ -172,7 +154,7 @@ module Presenter
     def single_bid_winning_bid
       return nil if available?
       return lowest_bids.first if lowest_bids.length == 1
-      return lowest_bids.sort_by(&:created_at).first
+      lowest_bids.sort_by(&:created_at).first
     end
 
     def multi_bid_winning_bid
@@ -187,29 +169,6 @@ module Presenter
       bids.sort_by(&:amount).first.amount
     end
 
-    def auction_user(user)
-      return Presenter::AuctionUser::Null.new if user.nil?
-
-      @auction_users ||= {}
-      @auction_users[user.id] ||= Presenter::AuctionUser.new(bids, user)
-    end
-
-    def user_is_bidder?(user)
-      auction_user(user).has_bid?
-    end
-
-    def user_bids(user)
-      auction_user(user).bids
-    end
-
-    def lowest_user_bid(user)
-      auction_user(user).lowest_bid
-    end
-
-    def lowest_user_bid_amount(user)
-      auction_user(user).lowest_bid_amount
-    end
-
     def html_description
       return '' if description.blank?
       markdown.render(description)
@@ -220,9 +179,6 @@ module Presenter
       markdown.render(summary)
     end
 
-    delegate :status, :label_class, :label, :tag_data_value_status, :tag_data_label_2, :tag_data_value_2,
-             to: :status_presenter
-
     def human_start_time
       if start_datetime < Time.now
         # this method comes from the included date helpers
@@ -232,40 +188,7 @@ module Presenter
       end
     end
 
-    def index_bid_summary_partial
-      if single_bid?
-        'auctions/single_bid/index_bid_summary'
-      elsif multi_bid?
-        'auctions/multi_bid/index_bid_summary'
-      end
-    end
-
-    def current_bid_info_partial
-      if single_bid?
-        'bids/single_bid/current_bid_info'
-      elsif multi_bid?
-        'bids/multi_bid/current_bid_info'
-      end
-    end
-    
     private
-
-    def status_presenter_class
-      status_name = if expiring?
-                      'Expiring'
-                    elsif over?
-                      'Over'
-                    elsif future?
-                      'Future'
-                    else
-                      'Open'
-                    end
-      "::Presenter::AuctionStatus::#{status_name}".constantize
-    end
-
-    def status_presenter
-      @status_presenter ||= status_presenter_class.new(self)
-    end
 
     def current_bid_record
       @current_bid_record ||= bids.sort_by {|bid| [bid.amount, bid.created_at, bid.id] }.first
