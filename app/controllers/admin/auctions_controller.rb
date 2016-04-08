@@ -56,20 +56,22 @@ module Admin
       respond_error(e)
     end
 
-    def destroy
-      id = params[:id].dup
-      auction = Auction.find(id)
-      DestroyAuction.new(auction).perform
-
-      respond_to do |format|
-        format.html { redirect_to "/admin/auctions" }
-        format.json do
-          render json: {message: "Successfully deleted Auction ##{id}"}
-        end
-      end
-    rescue ArgumentError => e
-      respond_error(e)
-    end
+    # We have already disabled this action in the admin screens, let's remove this
+    # method as a precaution as well
+    # def destroy
+    #   id = params[:id].dup
+    #   auction = Auction.find(id)
+    #   DestroyAuction.new(auction).perform
+    #
+    #   respond_to do |format|
+    #     format.html { redirect_to "/admin/auctions" }
+    #     format.json do
+    #       render json: {message: "Successfully deleted Auction ##{id}"}
+    #     end
+    #   end
+    # rescue ArgumentError => e
+    #   respond_error(e)
+    # end
 
     def update
       auction = Auction.find(params[:id])
