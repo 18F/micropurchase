@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
   root 'auctions#index'
 
-  get '/auctions/winners/archive', to: 'auctions#previous_winners_archive'
-  get '/auctions/winners', to: 'auctions#previous_winners'
-
   get '/auctions/rules/single-bid', to: 'auctions#single_bid_rules'
   get '/auctions/rules/multi-bid', to: 'auctions#multi_bid_rules'
   resources :auctions, only: [:index, :show] do
