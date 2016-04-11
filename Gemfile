@@ -65,7 +65,7 @@ group :development do
   gem 'rubocop'
 end
 
-group :staging, :development do
+group :staging, :development, :test do
   gem 'factory_girl_rails'
 end
 
