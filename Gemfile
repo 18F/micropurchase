@@ -49,7 +49,6 @@ group :development, :test do
   gem 'pry'
 
   gem 'database_cleaner'
-  gem 'factory_girl_rails'
   gem 'faker'
   gem 'timecop'
   gem 'brakeman', require: false
@@ -66,7 +65,11 @@ group :development do
   gem 'rubocop'
 end
 
-group :production do
+group :staging, :development, :test do
+  gem 'factory_girl_rails'
+end
+
+group :production, :staging do
   gem 'cf-app-utils'
   gem 'rails_12factor'
 end
