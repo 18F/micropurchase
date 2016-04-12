@@ -2,7 +2,7 @@
 applications:
 - name: micropurchase
   memory: 1G
-  instances: 1
+  instances: 2
   domain: 18f.gov
   host: micropurchase
   buildpack: https://github.com/ddollar/heroku-buildpack-multi.git
