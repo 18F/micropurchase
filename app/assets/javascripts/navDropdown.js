@@ -1,5 +1,5 @@
 (function (window) {
-
+  // import microp utility object
   var microp = window.microp;
 
   $(function(){
