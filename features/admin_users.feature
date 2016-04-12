@@ -8,7 +8,7 @@ Feature: Admin Users
     And I sign in
     When I visit the admin users page
     Then I will not see a warning I must be an admin
-    And I expect to see my user info
+    And I should see my user info
 
   Scenario: counting the numbers of users and admins
     Given I am an administrator
