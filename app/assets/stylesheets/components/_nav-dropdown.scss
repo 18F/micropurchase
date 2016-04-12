@@ -35,7 +35,6 @@
 
 .header-account .nav-menu .sub-nav[aria-expanded=true] {
   border: transparent;
-  border-bottom: 4px solid $branding-bright;
   border-top: 4px solid $branding-bright;
   display: block;
   margin: 0;
@@ -60,10 +59,11 @@
   border-radius: 0;
   box-shadow: none;
   border: none;
-  color: $primary-darkest;
-  font-size: 1rem;
-  font-weight: $font-bold;
-  text-align: left;
+  color: $branding-black;
+  font-size: $small-font-size;
+  font-weight: $font-normal;
+  padding-right: 7px;
+  text-align: right;
   top: 0;
   width: 100%;
 
@@ -73,8 +73,8 @@
     border-radius: 0;
     box-shadow: none;
     border: none;
-    background: $branding-bright;
-    color: $primary-darkest;
+    color: $branding-darkest;
+    text-decoration: underline;
   }
 }
 
