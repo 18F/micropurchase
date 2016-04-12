@@ -1,20 +1,15 @@
 require 'action_view'
 
+# This is a wrapper around the basic AR model and should be used for
+# selecting and rendering raw data from the model object.
 module Presenter
-  class Auction < SimpleDelegator
+  class Auction
     include ActiveModel::SerializerSupport
     include ActionView::Helpers::DateHelper
     include ActionView::Helpers::NumberHelper
 
-    def user_can_bid?(user)
-      return false unless available?
-      return false if user.nil? || !user.sam_account?
-      return false if single_bid? && user_is_bidder?(user)
-      true
-    end
-
-    def show_bid_button?(user)
-      user_can_bid?(user) || user.nil?
+    def initialize(auction)
+      @auction = auction
     end
 
     def current_bid?
@@ -34,6 +29,13 @@ module Presenter
       end
     end
 
+    delegate :title, :created_at, :start_datetime, :end_datetime,
+             :github_repo, :issue_url, :summary, :description,
+             :delivery_deadline, :start_price, :published, :to_param,
+             :model_name, :to_key, :to_model, :type, :id,
+             :read_attribute_for_serialization,
+             to: :model
+
     delegate :amount, :time,
              to: :current_bid, prefix: :current_bid
 
@@ -42,10 +44,6 @@ module Presenter
 
     def current_bid_amount_as_currency
       number_to_currency(current_bid_amount)
-    end
-
-    def user_bid_amount_as_currency(user)
-      number_to_currency(lowest_user_bid_amount(user))
     end
 
     def bids?
@@ -71,7 +69,7 @@ module Presenter
       end
 
       # otherwise, return all the bids
-      return bids
+      bids
     end
 
     def bid_count
@@ -96,30 +94,15 @@ module Presenter
     end
 
     def starts_in
-      distance = distance_of_time_in_words(Time.now, model.start_datetime)
-      if model.start_datetime < Time.now
-        "#{distance} ago"
-      else
-        "in #{distance}"
-      end
+      time_in_human(model.start_datetime)
     end
 
     def ends_in
-      distance = distance_of_time_in_words(Time.now, model.end_datetime)
-      if model.end_datetime < Time.now
-        "#{distance} ago"
-      else
-        "in #{distance}"
-      end
+      time_in_human(model.end_datetime)
     end
 
     def delivery_deadline_expires_in
-      distance = distance_of_time_in_words(Time.now, model.delivery_deadline)
-      if model.delivery_deadline < Time.now
-        "#{distance} ago"
-      else
-        "in #{distance}"
-      end
+      time_in_human(model.delivery_deadline)
     end
 
     # rubocop:disable Style/DoubleNegation
@@ -141,11 +124,6 @@ module Presenter
 
     def expiring?
       available? && model.end_datetime < 12.hours.from_now
-    end
-
-    def user_is_winning_bidder?(user)
-      return false unless current_bid?
-      user.id == winning_bidder_id
     end
 
     def winning_bidder
@@ -176,7 +154,7 @@ module Presenter
     def single_bid_winning_bid
       return nil if available?
       return lowest_bids.first if lowest_bids.length == 1
-      return lowest_bids.sort_by(&:created_at).first
+      lowest_bids.sort_by(&:created_at).first
     end
 
     def multi_bid_winning_bid
@@ -191,26 +169,6 @@ module Presenter
       bids.sort_by(&:amount).first.amount
     end
 
-    def user_is_bidder?(user)
-      return false if user.nil?
-      bids.detect {|b| user.id == b.bidder_id } != nil
-    end
-
-    def user_bids(user)
-      return [] if user.nil?
-      bids.select {|b| user.id == b.bidder_id }
-    end
-
-    def lowest_user_bid(user)
-      user_bids(user).sort_by(&:amount).first
-    end
-
-    def lowest_user_bid_amount(user)
-      bid = lowest_user_bid(user)
-      bid.nil? ? nil : bid.amount
-    end
-
-
     def html_description
       return '' if description.blank?
       markdown.render(description)
@@ -220,17 +178,6 @@ module Presenter
       return '' if summary.blank?
       markdown.render(summary)
     end
-
-    def status
-      if available?
-        'Open'
-      else
-        'Closed'
-      end
-    end
-
-    delegate :label_class, :label, :tag_data_value_status, :tag_data_label_2, :tag_data_value_2,
-             to: :status_presenter
 
     def human_start_time
       if start_datetime < Time.now
@@ -242,23 +189,6 @@ module Presenter
     end
 
     private
-
-    def status_presenter_class
-      status_name = if expiring?
-                      'Expiring'
-                    elsif over?
-                      'Over'
-                    elsif future?
-                      'Future'
-                    else
-                      'Open'
-                    end
-      "::Presenter::AuctionStatus::#{status_name}".constantize
-    end
-
-    def status_presenter
-      @status_presenter ||= status_presenter_class.new(self)
-    end
 
     def current_bid_record
       @current_bid_record ||= bids.sort_by {|bid| [bid.amount, bid.created_at, bid.id] }.first
@@ -274,8 +204,17 @@ module Presenter
                                             lax_spacing: true)
     end
 
+    def time_in_human(time)
+      distance = distance_of_time_in_words(Time.now, time)
+      if time < Time.now
+        "#{distance} ago"
+      else
+        "in #{distance}"
+      end
+    end
+
     def model
-      __getobj__
+      @auction
     end
   end
 end

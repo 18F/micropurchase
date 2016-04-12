@@ -1,15 +1,19 @@
-module Presenter
+module ViewModel
   module AuctionStatus
-    class Expiring < Struct.new(:auction)
+    class Open < Struct.new(:auction)
       include ActionView::Helpers::DateHelper
       include ActionView::Helpers::NumberHelper
 
+      def status
+        'Open'
+      end
+      
       def label_class
-        'auction-label-expiring'
+        'auction-label-open'
       end
 
       def label
-        'Expiring'
+        'Open'
       end
 
       def tag_data_value_status
@@ -21,7 +25,11 @@ module Presenter
       end
 
       def tag_data_value_2
-        "#{auction.current_bid_amount_as_currency} - #{auction.bid_count} bids"
+        if auction.single_bid?
+          "Sealed"
+        else
+          "#{number_to_currency(auction.current_bid_amount)} - #{auction.bids.length} bids"
+        end
       end
     end
   end

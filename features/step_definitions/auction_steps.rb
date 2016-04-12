@@ -108,13 +108,14 @@ Then(/^I expect to see a message about no auctions$/) do
                                "Please check back soon to view micropurchase opportunities.")
 end
 
-Then (/^I expect to see a message about no bids$/) do
+Then(/^I expect to see a message about no bids$/) do
   expect(page).to have_content("No bids yet.")
 end
 
 When(/^I submit a bid for \$(.+)$/) do |amount|
-  fill_in("bid_amount", with: amount)
-  click_on("Submit")
+  field = find_field('Your bid:')
+  fill_in("Your bid:", with: amount)
+  step('I click on the "Submit" button')
 end
 
 Then(/^I expect to see a current bid amount( of \$([\d\.]+))?$/) do |_, amount|

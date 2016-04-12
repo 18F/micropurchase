@@ -27,10 +27,11 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'active_model_serializers'
 
 gem 'business_time'
+gem 'holidays'
 
 group :test do
   gem "codeclimate-test-reporter", require: nil
-  gem 'codeclimate_batch'
+  gem 'codeclimate_batch', require: nil
   gem 'webmock'
   gem 'json-schema'
   gem 'db-query-matchers'
@@ -48,7 +49,6 @@ group :development, :test do
   gem 'pry'
 
   gem 'database_cleaner'
-  gem 'factory_girl_rails'
   gem 'faker'
   gem 'timecop'
   gem 'brakeman', require: false
@@ -65,7 +65,11 @@ group :development do
   gem 'rubocop'
 end
 
-group :production do
+group :staging, :development, :test do
+  gem 'factory_girl_rails'
+end
+
+group :production, :staging do
   gem 'cf-app-utils'
   gem 'rails_12factor'
 end

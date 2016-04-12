@@ -1,11 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe Presenter::Auction do
-  let(:presenter) { Presenter::Auction.new(auction) }
+RSpec.describe ViewModel::Auction do
+  let(:user) { FactoryGirl.create(:user) }
+  let(:presenter) { ViewModel::Auction.new(user, auction) }
 
   context "when the auction is expiring soon" do
     let(:auction) do
-      a = Auction.new(start_datetime: Time.now - 3.day, end_datetime: Time.now + 3.hours, start_price: 3500)
+      a = Auction.new(start_datetime: Time.now - 3.day, end_datetime: Time.now + 3.hours, start_price: 3500, type: 1)
       a.bids.build(amount: 3000)
       a
     end
@@ -25,7 +26,7 @@ RSpec.describe Presenter::Auction do
 
   context "when the auction is in progress" do
     let(:auction) do
-      a = Auction.new(start_datetime: Time.now - 3.day, end_datetime: Time.now + 2.days, start_price: 3500)
+      a = Auction.new(start_datetime: Time.now - 3.day, end_datetime: Time.now + 2.days, start_price: 3500, type: 1)
       a.bids.build(amount: 3000)
       a
     end

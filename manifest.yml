@@ -10,3 +10,6 @@ applications:
     - micropurchase-psql
     - micropurchase-github
   command: null
+  env:
+    RAILS_ENV: production
+    RACK_ENV: production

@@ -36,14 +36,20 @@ Feature: Single-bid auctions
     Then I expect to not see a "BID" button
     And I expect to see "Your bid: $3,493.00"
 
+    When I visit the home page
+    Then I expect to not see a "BID" button
+    And I expect to see "Your bid: $3,493.00"
+
   Scenario: viewing your own single bid
     Given there is a single-bid auction
     And I am allowed to bid
     When I visit the auction page
     And I click on the "BID" button
+    Then I expect to be on the new bid page
 
     When I submit a bid for $500
-    Then I expect to see a confirmation for $500
+    Then I expect to be on the bid confirmation page
+    And I expect to see a confirmation for $500
 
     When I click on the "Confirm" button
     Then I expect to see "Your bid: $500"
