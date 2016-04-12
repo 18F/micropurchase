@@ -59,6 +59,11 @@ module Presenter
       end
     end
 
+    def ==(other)
+      return false unless other.is_a?(Presenter::Bid)
+      self.id == other.id
+    end
+    
     def model
       __getobj__
     end
