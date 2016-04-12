@@ -61,7 +61,7 @@ Feature: logging in and out
     Then I should see an "Authorize with GitHub" button
 
     When I click on the "Authorize with GitHub" button
-    Then I should be on the profile edit page
+    Then I should be on my profile page
     And I should see a profile form with my info
     And there should be meta tags for the edit profile form
 
@@ -79,7 +79,7 @@ Feature: logging in and out
     Then I should see an "Authorize with GitHub" button
 
     When I click on the "Authorize with GitHub" button
-    Then I should be on the profile edit page
+    Then I should be on my profile page
     And I should see "doris@doogooder.com" in the "Email Address" field
     And I should see "Doris Doogooder" in the "Name" field
     
@@ -90,9 +90,9 @@ Feature: logging in and out
     Then I should see an "Authorize with GitHub" button
 
     When I click on the "Authorize with GitHub" button
-    Then I should be on the profile edit page
+    Then I should be on my profile page
     And I should see a profile form with my info
-    And there should be meta tags for the edit profile form
+    
 
     When I fill the "Email Address" field with "doris_the_nonvalid_email_address_person"
     And I click on the "Submit" button

@@ -15,7 +15,7 @@ Feature: Bid Details
 
   Scenario: When the auction is open and I'm logged in
     Given there is an open auction
-    And I am allowed to bid
+    And I am an authenticated vendor
     And I have placed a bid
     When I visit the auction bids page
     Then I should see my name and DUNS only on my bids

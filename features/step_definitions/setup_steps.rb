@@ -31,7 +31,7 @@ Given(/^I am signed in$/) do
   step("I sign in")
 end
 
-Given(/^I am allowed to bid$/) do
+Given(/^I am an authenticated vendor$/) do
   step("I am a user with a verified SAM account")
   step("I sign in")
 end

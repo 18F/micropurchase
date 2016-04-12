@@ -13,7 +13,7 @@ Feature: Single-bid auctions
 
   Scenario: bidding on a single-bid auction
     Given there is a single-bid auction
-    And I am allowed to bid
+    And I am an authenticated vendor
     When I visit the home page
     Then I should not see "Current bid:"
 
@@ -42,7 +42,7 @@ Feature: Single-bid auctions
 
   Scenario: viewing your own single bid
     Given there is a single-bid auction
-    And I am allowed to bid
+    And I am an authenticated vendor
     When I visit the auction page
     And I click on the "BID" button
     Then I should be on the new bid page
@@ -61,7 +61,7 @@ Feature: Single-bid auctions
 
   Scenario: viewing the bid history for a closed single-bid auction
     Given there is a closed single-bid auction
-    And I am allowed to bid
+    And I am an authenticated vendor
     When I visit the auction bids page
     Then I should not see "Bids are sealed until the auction ends."
     And I should not see "See the auction rules to learn more."
