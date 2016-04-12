@@ -1,16 +1,10 @@
-<% if defined? for_winners_page %>
-
-<% else %>
-	<div class="issue-bids-info-item">Bidding is closed</div>
-<% end %>
+<div class="issue-bids-info-item">Bidding is closed</div>
 <% if auction.bids? %>
-  <div class="issue-bids-info-item"><% if defined? for_winners_page %><% else %>
-  	<div class="issue-bids-info-item">Winning bid: </div>
-	<% end %><%= number_to_currency(auction.current_bid_amount) %></div>
+  <div class="issue-bids-info-item">Winning Bid: <%= number_to_currency(auction.current_bid_amount) %></div>
 <% else %>
   <div class="issue-bids-info-item">No bids</div>
 <% end %>
-<% unless auction.over? or defined? for_winners_page %>
+<% unless auction.over? %>
   <span class="issue-bids-info-item bid-deadline">
     Bid start time: <%= auction.human_start_time %>
   </span>

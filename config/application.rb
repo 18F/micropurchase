@@ -36,7 +36,6 @@ module Micropurchase
     config.generators do |g|
       g.factory_girl false
     end
-    config.assets.precompile += %w( *-bundle.js )
 
     config.middleware.insert_before 0, "Rack::Cors" do
       allow do

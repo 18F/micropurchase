@@ -1,7 +1,7 @@
 set -e
 
 API="https://api.cloud.gov"
-ORG="agile-bpa"
+ORG="18f-acq"
 SPACE=$1
 
 if [ $# -ne 1 ]; then

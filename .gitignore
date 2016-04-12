@@ -20,3 +20,4 @@
 .env
 
 vendor
+cf-ssh.yml
