@@ -1,3 +1,5 @@
+'use strict';
+
 (function (window) {
   // import microp utility object
   var microp = window.microp;
@@ -8,23 +10,23 @@
     textRotation: 60,
     scale: d3.scale.sqrt(),
     linear: d3.scale.linear()
-  }
+  };
 
 
   var selectMetric = function selectMetric (metricName) {
-    return $('[data-metric][data-name="'+metricName+'"]')
-  }
+    return $('[data-metric][data-name="'+metricName+'"]');
+  };
 
   var setSelectorText = function setSelectorText (name, text, formatter) {
-    if (formatter == "$") {
+    if (formatter === '$') {
       text = microp.format.commaSeparatedDollars(text);
-    } else if (formatter == '#') {
+    } else if (formatter === '#') {
       text = Math.round(text * 10) / 10;
-    } else if (formatter == 'days') {
+    } else if (formatter === 'days') {
       text = Math.round(text * 10) / 10 + ' days';
     }
     window.selectors[name].text(text);
-  }
+  };
 
 
 
@@ -75,15 +77,13 @@
         show: true,
         format: {
           value: function (value, ratio, id, index) {
-            return value == null
-              ? 'no bid'
-              : microp.format.commaSeparatedDollars(value);
+            return value == null ? 'no bid' : microp.format.commaSeparatedDollars(value);
 
           }
         }
       }
     });
-  }
+  };
 
   // var loadChart3 = function loadChart3 (settings) {
 
@@ -184,7 +184,7 @@
             rotate: winners.textRotation,
             multiline: false
           },
-          "extent": dateExtent
+          'extent': dateExtent
         },
         y: {
           tick: {
@@ -220,7 +220,7 @@
         }
       }
     });
-  }
+  };
 
   var loadChart5 = function loadChart5 (settings) {
 
@@ -255,8 +255,9 @@
           return '<table class="c3-tooltip">' +
             '<tbody>' +
               '<tr>' +
-                '<th colspan="1">' + microp.format.date(d[0].x, "/") + '</th>' +
-                '<th class="name" colspan="1"><span style="background-color:#1C304A"></span>' + d[0].id + '</th>' +
+                '<th colspan="1">' + microp.format.date(d[0].x, '/') + '</th>' +
+                '<th class="name" colspan="1"><span style="background-color:#1C304A"></span>' +
+                d[0].id + '</th>' +
               '</tr>' +
               '<tr class="c3-tooltip-name--'+ d[0].id + '">' +
                 '<td class="name">Bids</td>' +
@@ -267,7 +268,7 @@
                 '<td class="value">$' + settings.z[d[0].id] + '</td>' +
               '</tr>' +
             '</tbody>' +
-          '</table>'
+          '</table>';
         }
       },
       legend: {
@@ -292,7 +293,7 @@
   */
   var loadDonut1 = function loadDonut1 (settings) {
     var donutByRepo = c3.generate({
-      bindto: "#donut-by-repo",
+      bindto: '#donut-by-repo',
       data: {
         columns: settings.cols ? settings.cols : [
           ['software', 0],
@@ -301,20 +302,20 @@
         type : 'donut'
       },
       donut: {
-        title: "Projects by repo"
+        title: 'Projects by repo'
       },
       color: {
         pattern: ['#1C304A','#00CFFF','#046B99','#B3EFFF']
       }
     });
-  }
+  };
 
   /* Project by language
     * We need to have tags attached to auctions
   */
   var loadDonut2 = function loadDonut2 (settings) {
     var donutByLangauge = c3.generate({
-      bindto: "#donut-by-language",
+      bindto: '#donut-by-language',
       data: {
         columns: settings.cols ? settings.cols : [
           ['software', 0],
@@ -323,13 +324,13 @@
         type : 'donut'
       },
       donut: {
-        title: "Projects by language"
+        title: 'Projects by language'
       },
       color: {
         pattern: ['#046B99','#B3EFFF','#1C304A','#00CFFF']
       }
     });
-  }
+  };
 
   ///////////////////////////////////////////////////////////
   // Create Charts Data (charts 2-4)
@@ -382,7 +383,7 @@
 
       if (auctionsByWinners[0]) {
         var winnerId = auctionsByWinners[0].values[0].key;
-        uniqueWinners.push(winnerId)
+        uniqueWinners.push(winnerId);
       }
       //
 
@@ -419,7 +420,7 @@
     bidList = _.values(pairedDates);
 
     cols2[2] = dateList;
-    cols2[2][0] = "means_dates";
+    cols2[2][0] = 'means_dates';
 
     _.forEach(bidList, function(bidGrouping, i) {
       if (i === 0) {
@@ -470,7 +471,7 @@
     //
 
     return { cols: cols2 };
-  }
+  };
 
   // var createChartData3 = function createChartData3(data, auctions) {
   //   cols3 = [['auction_date']],
@@ -551,12 +552,12 @@
     })
 
     var byGithub = d3.nest()
-      .key(function(d){return microp.format.date(d.created_at)})
-      .key(function(d){return d.github_repo})
+      .key(function(d){return microp.format.date(d.created_at);})
+      .key(function(d){return d.github_repo;})
       .entries(auctions);
 
     var byAuction = d3.nest()
-      .key(function(d){return microp.format.date(d.created_at)})
+      .key(function(d){return microp.format.date(d.created_at);})
       .entries(auctions);
 
     _.each(byGithub, function (date, key) {
@@ -583,7 +584,7 @@
     });
 
     return settings;
-  }
+  };
 
   var createChartData5 = function createChartData5(auctions) {
     var settings = {};
@@ -599,7 +600,7 @@
       .entries(auctions);
 
     _.each(auctionsByEndtime, function(dateObj, i, list) {
-      var dateString = 'date_'+ i
+      var dateString = 'date_'+ i;
       settings.cols.push([dateString, dateObj.key]);
       _.each(dateObj.values, function(auction, j, list) {
         var winningBid = auction.values[0].bids.length
@@ -612,7 +613,7 @@
     });
 
     return settings;
-  }
+  };
 
   // Donut by repo
   var createDonutSettings1 = function createDonutSettings1(auctions) {
@@ -626,7 +627,7 @@
 
     var repos = d3.nest()
       .key(function(d){ return d.github_repo;})
-      .rollup(function(d){ return d.length })
+      .rollup(function(d){ return d.length; })
       .map(auctions);
 
     settings.cols = _.map(repos, function(value, key) {
@@ -634,7 +635,7 @@
     });
 
     return settings;
-  }
+  };
 
     // Donut by repo
   var createDonutSettings2 = function createDonutSettings2(auctions) {
@@ -664,7 +665,7 @@
     });
 
     return settings;
-  }
+  };
 
   var setChartSettings = function setChartSettings(data) {
     var auctions = _.sortBy(data.auctions, 'id');
@@ -678,7 +679,7 @@
     settings.donut2 = createDonutSettings2(auctions);
 
     return settings;
-  }
+  };
 
 
   var runVisualizations = function runVisualizations (data, settings) {
@@ -698,10 +699,10 @@
     window.selectors = {
       $success: selectMetric('success'),
       $bidding_vendors: selectMetric('bidding_vendors'),
-      $bids: selectMetric("bids"),
-      $vendors: selectMetric("vendors"),
-      $projects: selectMetric("projects"),
-      $winning_bid: selectMetric("winning_bid"),
+      $bids: selectMetric('bids'),
+      $vendors: selectMetric('vendors'),
+      $projects: selectMetric('projects'),
+      $winning_bid: selectMetric('winning_bid'),
       $unique_winners: selectMetric('unique_winners'),
       $auction_length: selectMetric('auction_length'),
       $auctions_total: selectMetric('auctions_total')
