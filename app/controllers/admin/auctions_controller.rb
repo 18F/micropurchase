@@ -3,7 +3,7 @@ module Admin
     before_filter :require_admin
 
     def index
-      @auctions = Auction.all.map {|auction| Presenter::Auction.new(auction) }
+      @auctions = Auction.all.map {|auction| Presenter::AdminAuction.new(auction) }
 
       respond_to do |format|
         format.html
@@ -14,7 +14,7 @@ module Admin
     end
 
     def show
-      @auction = Presenter::Auction.new(Auction.find(params[:id]))
+      @auction = Presenter::AdminAuction.new(Auction.find(params[:id]))
 
       respond_to do |format|
         format.html
@@ -39,12 +39,12 @@ module Admin
         auction = Auction.new
       end
       # @view_model = ViewModel::AdminAuctionForm.new(auction)
-      @auction = Presenter::Auction.new(auction)
+      @auction = Presenter::AdminAuction.new(auction)
     end
 
     def create
       auction = CreateAuction.new(params).perform
-      auction = Presenter::Auction.new(auction)
+      auction = Presenter::AdminAuction.new(auction)
 
       respond_to do |format|
         format.html { redirect_to "/admin/auctions" }
@@ -56,26 +56,28 @@ module Admin
       respond_error(e)
     end
 
-    def destroy
-      id = params[:id].dup
-      auction = Auction.find(id)
-      DestroyAuction.new(auction).perform
-
-      respond_to do |format|
-        format.html { redirect_to "/admin/auctions" }
-        format.json do
-          render json: {message: "Successfully deleted Auction ##{id}"}
-        end
-      end
-    rescue ArgumentError => e
-      respond_error(e)
-    end
+    # We have already disabled this action in the admin screens, let's remove this
+    # method as a precaution as well
+    # def destroy
+    #   id = params[:id].dup
+    #   auction = Auction.find(id)
+    #   DestroyAuction.new(auction).perform
+    #
+    #   respond_to do |format|
+    #     format.html { redirect_to "/admin/auctions" }
+    #     format.json do
+    #       render json: {message: "Successfully deleted Auction ##{id}"}
+    #     end
+    #   end
+    # rescue ArgumentError => e
+    #   respond_error(e)
+    # end
 
     def update
       auction = Auction.find(params[:id])
       UpdateAuction.new(auction, params).perform
       auction.reload
-      auction = Presenter::Auction.new(auction)
+      auction = Presenter::AdminAuction.new(auction)
 
       respond_to do |format|
         format.html { redirect_to "/admin/auctions" }
@@ -89,7 +91,7 @@ module Admin
 
     def edit
       auction = Auction.find(params[:id])
-      @auction = Presenter::Auction.new(auction)
+      @auction = Presenter::AdminAuction.new(auction)
     end
 
     private

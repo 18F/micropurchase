@@ -105,7 +105,7 @@
 
   <%= render partial: "components/nav_drawer", locals: { current_user: @current_user } %>
 
-  <div class="content-wrapper" id="<% if current_page?(root_path) %>index<% elsif current_page?(auctions_path) %>auctions<% end %>">
+  <div class="content-wrapper" id="<% if current_page?(root_path) %>index<% elsif current_page?(auctions_path) %>auctions<% elsif current_page?(auctions_winners_path) %>winners<% end %>">
     <div class="usa-width-one-whole">
       <%= flash_errors %>
 
@@ -121,19 +121,19 @@
       <div class="usa-grid-full">
         <nav class="usa-footer-nav">
           <ul class="usa-unstyled-list">
-            <li class="usa-width-one-fourth usa-footer-primary-content">
+            <li class="usa-footer-primary-content">
               <a class="usa-footer-primary-link" href="<%= root_path %>">Projects</a>
             </li>
-            <li class="usa-width-one-fourth usa-footer-primary-content">
+            <li class="usa-footer-primary-content">
               <a class="usa-footer-primary-link" href="https://18f.gsa.gov/2015/10/13/open-source-micropurchasing/">About</a>
             </li>
-            <li class="usa-width-one-fourth usa-footer-primary-content">
+            <li class="usa-footer-primary-content">
               <a class="usa-footer-primary-link" href="https://docs.google.com/forms/d/15ycigLrTS7Ld4iVPgIMN-U5dMDFy6TnrHGOSkgk7qTI/viewform?c=0&w=1">Feedback</a>
             </li>
-            <li class="usa-width-one-fourth usa-footer-primary-content">
+            <li class="usa-footer-primary-content">
               <a class="usa-footer-primary-link" href="<%= faq_path %>">Policies</a>
             </li>
-            <li class="usa-width-one-fourth usa-footer-primary-content">
+            <li class="usa-footer-primary-content">
               <a class="usa-footer-primary-link" href="https://pages.18f.gov/micropurchase-api-docs/">API Docs</a>
             </li>
             <!-- <li class="usa-width-one-sixth usa-footer-primary-content">

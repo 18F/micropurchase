@@ -1,63 +1,34 @@
+(function (window) {
+  // import microp utility object
+  var microp = window.microp;
 
+  $(function(){
 
-$(function(){
+  	$(".nav-login").accessibleMegaMenu({
+      /* prefix for generated unique id attributes, which are required
+         to indicate aria-owns, aria-controls and aria-labelledby */
+      uuidPrefix: "accessible-megamenu",
 
-  /**
-  * 'throttles' the execution of a funtion.
-  * will only call the function passed to throttle
-  * once every @threshold milliseconds
-  *
-  * @example
-  * window.addEventListener('resize', throttle(someFunction, 150, window));
-  */
-  window.throttle = function throttle(fn, threshhold, scope) {
-    threshhold || (threshhold = 250);
-    var last,
-        deferTimer;
-    return function () {
-      var context = scope || this;
+      /* css class used to define the megamenu styling */
+      menuClass: "nav-menu",
 
-      var now = +new Date,
-          args = arguments;
-      if (last && now < last + threshhold) {
-        // hold on to it
-        clearTimeout(deferTimer);
-        deferTimer = setTimeout(function () {
-          last = now;
-          fn.apply(context, args);
-        }, threshhold);
-      } else {
-        last = now;
-        fn.apply(context, args);
-      }
-    };
-  }
+      /* css class for a top-level navigation item in the megamenu */
+      topNavItemClass: "nav-item",
 
-	$(".nav-login").accessibleMegaMenu({
-        /* prefix for generated unique id attributes, which are required
-           to indicate aria-owns, aria-controls and aria-labelledby */
-        uuidPrefix: "accessible-megamenu",
+      /* css class for a megamenu panel */
+      panelClass: "sub-nav",
 
-        /* css class used to define the megamenu styling */
-        menuClass: "nav-menu",
+      /* css class for a group of items within a megamenu panel */
+      panelGroupClass: "sub-nav-group",
 
-        /* css class for a top-level navigation item in the megamenu */
-        topNavItemClass: "nav-item",
+      /* css class for the hover state */
+      hoverClass: "hover",
 
-        /* css class for a megamenu panel */
-        panelClass: "sub-nav",
+      /* css class for the focus state */
+      focusClass: "focus",
 
-        /* css class for a group of items within a megamenu panel */
-        panelGroupClass: "sub-nav-group",
-
-        /* css class for the hover state */
-        hoverClass: "hover",
-
-        /* css class for the focus state */
-        focusClass: "focus",
-
-        /* css class for the open state */
-        openClass: "open"
+      /* css class for the open state */
+      openClass: "open"
     });
 
     var profileButton = $('.header-account .nav-menu .nav-item a');
@@ -76,7 +47,8 @@ $(function(){
 
     onResize();
 
-    window.addEventListener('resize', window.throttle(onResize, 200, window));
+    window.addEventListener('resize', microp.throttle(onResize, 200, window));
 
-});
+  });
 
+})(this)

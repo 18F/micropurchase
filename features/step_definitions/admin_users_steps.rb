@@ -2,7 +2,7 @@ When(/^I visit the admin users page$/) do
   visit admin_users_path
 end
 
-When(/^I expect to see my user info$/) do
+When(/^I should see my user info$/) do
   user = Presenter::User.new(@user)
 
   expect(page).to have_text(user.duns_number)

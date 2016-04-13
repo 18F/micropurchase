@@ -16,6 +16,8 @@
 
 /coverage
 /public/capybara.html
+/public/commit.txt
 .env
 
 vendor
+cf-ssh.yml

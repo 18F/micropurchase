@@ -5,31 +5,31 @@ Given(/^I only have a Github account$/) do
   mock_sign_in(@github_id, @name)
 end
 
-Then(/^I expect to see the name from github authentication$/) do
+Then(/^I should see the name from github authentication$/) do
   field = find_field('Name')
   expect(field.value).to eq(@name)
 end
 
-Then(/^I expect to see my name$/) do
+Then(/^I should see my name$/) do
   expect(page).to have_content(@user.name)
 end
 
-Then(/^I expect to not see my name$/) do
+Then(/^I should not see my name$/) do
   expect(page).to_not have_content(@user.name)
 end
 
-Then(/^I expect to see my email address$/) do
+Then(/^I should see my email address$/) do
   expect(page).to have_content(@user.email)
 end
 
-Then(/^I expect to see a profile form$/) do
+Then(/^I should see a profile form$/) do
   expect(page).to have_content("Complete your account")
   expect(page).to have_content("Name")
   expect(page).to have_content("DUNS Number")
   expect(page).to have_content("Email Address")
 end
 
-Then(/^I expect to see a profile form with my info$/) do
+Then(/^I should see a profile form with my info$/) do
   expect(page).to have_content("Complete your account")
 
   field = find_field('Name')
@@ -55,23 +55,23 @@ When(/^I fill the "([^"]*)" field with "([^"]*)"$/) do |field, value|
   fill_in(field, with: value)
 end
 
-Then(/^I expect to see "([^"]*)" in the "([^"]*)" field$/) do |value, field|
+Then(/^I should see "([^"]*)" in the "([^"]*)" field$/) do |value, field|
   field = find_field(field)
   expect(field.value).to eq(value)
 end
 
-Then(/^I expect to see my (.+) in the "([^"]*)" field$/) do |attribute, field|
+Then(/^I should see my (.+) in the "([^"]*)" field$/) do |attribute, field|
   field = find_field(field)
   expect(field.value).to eq(@user.send(attribute))
 end
 
-Then(/^I expect to see an alert that "([^"]*)"$/) do |message|
+Then(/^I should see an alert that "([^"]*)"$/) do |message|
   within("div.usa-alert.usa-alert-error") do
     expect(page).to have_content(message)
   end
 end
 
-Then(/^I expect to see my changes$/) do
+Then(/^I should see my changes$/) do
   @user = User.where(github_id: @github_id).first
   expect(@user).to_not be_nil
 

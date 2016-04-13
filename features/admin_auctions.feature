@@ -9,22 +9,22 @@ Feature: Using the Admin Auctions panel
     When I sign in
     And I visit the auctions admin page
     Then I will not see a warning I must be an admin
-    And I expect to see the auction
+    And I should see the auction
 
-    When I click on the auction title
-    Then I expect to see the winning bid for the auction
-    And I expect to see the auction description
+    When I click on the auction's title
+    Then I should see the winning bid for the auction
+    And I should see the auction's description
 
   Scenario: Adding a multi-bid auction
     Given I am an administrator
     When I sign in
     And I visit the auctions admin page
     And I click on the "Create a new auction" link
-    Then I should be able to edit the existing auction form
+    Then I should be able to edit the new auction form
 
     When I click to create an auction
-    Then I expect to see the auction title
-    Then I expect to see the auction deadline
+    Then I should see the auction's title
+    Then I should see the auction's deadline
 
   Scenario: Updating an auction
     Given I am an administrator
@@ -38,5 +38,5 @@ Feature: Using the Admin Auctions panel
     When I click on the "Update" button
     Then I expect my auction changes to have been saved
 
-    When I click on the auction title
-    Then I expect to see new content on the page
+    When I click on the auction's title
+    Then I should see new content on the page

@@ -1,28 +1,7 @@
 <div class="current-bid-box">
   <div class="current-bid-box-children">
-  <% if auction.multi_bid? %>
-    <% if auction.bids? %>
-    <span class="current-bid-header">Current bid:</span>
-    <span class="current-bid"><%= number_to_currency(auction.current_bid_amount) %>  </span><br/>
-    <span class="current-bid-link"><%=
-    link_to(
-      pluralize(auction.bids.length, 'bid'),
-      auction_bids_path(auction.id)
-    )
-    %>
-  </span>
-  <% else %>
-    <p>No bids yet</p>
-  <% end %>
-<% else %>
-  <% if auction.user_is_bidder?(current_user) %>
-    <span class="current-bid-header">Your bid:</span>
-    <span class="current-bid"><%= number_to_currency(auction.lowest_user_bid_amount(current_user)) %></span>
-  <% else %>
-    <span class="current-bid-header">Bids Hidden</span>
-  <% end %>
-<% end %>
-</div>
+    <%= render partial: auction.index_bid_summary_partial, locals: {auction: auction} %>
+  </div>
 </div>
 
 <div class="bid-deadline-box">

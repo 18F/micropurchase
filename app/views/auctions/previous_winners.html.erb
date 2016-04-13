@@ -1,0 +1,149 @@
+<% content_for :data_tags do %>
+  <meta name="twitter:label1" value="Active Auctions">
+  <meta name="twitter:data1" value="<%= @view_model.active_auction_count %>">
+  <meta name="twitter:label2" value="Coming Auctions">
+  <meta name="twitter:data2" value="<%= @view_model.upcoming_auction_count %>">
+<% end %>
+
+<section class="slab-intro usa-width-full">
+  <section class="usa-grid">
+  <h1>Auction winners</h1>
+  <div class="hero-metrics_wrapper usa-grid-full usa-grid">
+    <a href="#chart-bids-by-auction" class="hero-metric">
+      <h1 class="hero-metric_number" data-metric data-name="auctions_total"></h1>
+      <p class="hero-metric_description">total auctions</p>
+    </a>
+    <a href="#chart-winning-bid" class="hero-metric">
+      <!-- <h1 class="hero-metric_number" data-metric data-name="success">XX%</h1>
+      <p class="hero-metric_description">auction success rate</p> -->
+      <h1 class="hero-metric_number" data-metric data-name="unique_winners"></h1>
+      <p class="hero-metric_description">unique auction winners</p>
+    </a>
+    <a href="#chart4" class="hero-metric">
+      <h1 class="hero-metric_number" data-metric data-name="bids"></h1>
+      <p class="hero-metric_description">bids/auction</p>
+    </a>
+    <a href="#agency-savings" class="hero-metric">
+      <h1 class="hero-metric_number" data-metric data-name="bidding_vendors"></h1>
+      <p class="hero-metric_description">vendors who have placed bids</p>
+    </a>
+    <a href="#auction-length" class="hero-metric">
+      <!-- <h1 class="hero-metric_number" data-metric data-name="vendors">XXXX</h1>
+      <p class="hero-metric_description">active vendors</p> -->
+      <h1 class="hero-metric_number" data-metric data-name="auction_length"></h1>
+      <p class="hero-metric_description">average auction length</p>
+    </a>
+    <!-- <a href="#donut-by-repo" class="hero-metric">
+      <h1 class="hero-metric_number" data-metric data-name="projects"></h1>
+      <p class="hero-metric_description">unique open-source projects</p>
+    </a> -->
+    <a href="#chart-winning-bid" class="hero-metric">
+      <h1 class="hero-metric_number" data-metric data-name="winning_bid"></h1>
+      <p class="hero-metric_description">average winning bid</p>
+    </a>
+  </div>
+  </section>
+</section>
+
+<section class="usa-width-full">
+  <section class="usa-grid usa-grid-top-padding">
+    <a class="link-highlighted" href="/auctions/winners/archive/">See all previous winners <icon class="fa fa-angle-double-right"></icon></a>
+
+    <!-- <section id="bids-by-time">
+      <h1>Price by Bid Number</h1>
+      <div id="chart"></div>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+    </section> -->
+
+    <section id="chart-donuts">
+      <div class="usa-grid-full">
+        <h1>Projects</h1>
+        <h2 class="h4">Where can you get involved?</h2>
+        <div class="usa-width-one-half" id="donut-by-repo"></div>
+        <div class="usa-width-one-half" id="donut-by-language"></div>
+
+      </div>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </section>
+  </section>
+</section>
+
+<section class="slab-intro usa-width-full">
+  <section class="usa-grid">
+    <section id="chart-winning-bid">
+      <h1>Winning bid by date of auction</h1>
+      <h2 class="h4">What bid amounts are winning these days?</h2>
+      <div id="chart2"></div>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+    </section>
+  </section>
+</section>
+
+<section class="usa-width-full">
+  <section class="usa-grid">
+    <section id="chart-community">
+      <h1>Community</h1>
+      <h2 class="h4">The Micropurchase platform is growing in every measurable capacity</h2>
+      <p class="winners-chart-directions">Use the subchart below to navigate past community figures</p>
+      <div id="chart4"></div>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </section>
+  </section>
+</section>
+
+<section class="slab-intro usa-width-full">
+  <section class="usa-grid">
+    <section id="chart-bids-by-auction">
+      <h1>Bids by auction</h1>
+      <h2 class="h4">Are number of bids and winning bid related?</h2>
+      <div id="chart5"></div>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </section>
+  </section>
+</section>
+
+<!-- <section id="chart-donuts">
+  <div class="usa-grid-full">
+    <h1>Projects</h1>
+    <div class="usa-width-one-third" id="chart-project-types"></div>
+    <div class="usa-width-one-third" id="chart-software-types"></div>
+    <div class="usa-width-one-third" id="chart-software-dollars"></div>
+
+  </div>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+</section> -->
+
+<section class="usa-width-full">
+  <section class="usa-grid usa-grid-top-padding">
+    <a class="link-highlighted" href="/auctions/winners/archive/">See all previous winners <icon class="fa fa-angle-double-right"></icon></a>
+
+    <section>
+      <h1>FAQ</h1>
+
+      <!-- <h2 class="h3" id="agency-savings">Is Micropurchase saving agencies money?</h2> -->
+      <h2 class="h3" id="agency-savings">Lorem ipsum?</h2>
+      <p>Lorem ipsum by doing this and that</p>
+
+      <!-- <h2 class="h3">How does the GSA avoid split purchases?</h2> -->
+      <h2 class="h3">Ipsum lorem?</h2>
+      <p>Lorem ipsum by doing this and that</p>
+
+      <!-- <h2 class="h3">What kind of projects can I use Micropurchase for?</h2> -->
+      <h2 class="h3">Ipsum lorem?</h2>
+      <p>Lorem ipsum dolor sit amet, consectetor. To learn more, check out <a class="link-highlighted" href="#">all archived opportunities <icon class="fa fa-angle-double-right"></icon></a></p>
+
+      <!-- <h2 class="h3">What if it isn’t successful?</h2> -->
+      <h2 class="h3">Lorem ipsum?</h2>
+      <p>Lorem ipsum dolor sit amet, consecttetor. To learn more, check out <a class="link-highlighted" href="#">these unsuccessful opportunities <icon class="fa fa-angle-double-right"></icon></a></p>
+
+      <!-- <h2 class="h3" id="auction-length">How long does an auction last?</h2> -->
+      <h2 class="h3" id="auction-length">Lorem ipsum?</h2>
+      <p>Lorem ipsum dolor sit amet, consecttetor.</p>
+
+    </section>
+  </section>
+</section>
+
+<%= javascript_include_tag "winners-bundle" %>

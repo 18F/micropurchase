@@ -1,4 +1,8 @@
 <% content_for :title do %>18F Micro-purchase - <%= @view_model.auction_title %><% end %>
+<% content_for :description do %><%= @view_model.auction_summary %><% end %>
+<% content_for :data_tags do %>
+  <%= render partial: '/auctions/data_tags', locals: {auction: @view_model.auction} %>
+<% end %>
 
 <%= render partial: @view_model.current_user_header_partial, locals: {auction: @view_model.auction} %>
 
@@ -24,7 +28,7 @@
         <p class="auction-label-info"><%= @view_model.auction_status %></p>
       </div>
       <div>
-        <p class="auction-label"><%= @view_model.auction_status_label %></p>
+        <p class="auction-label"><%= @view_model.auction_status_header %></p>
         <p class="auction-label-info"><%= render partial: @view_model.auction_status_partial %></p>
       </div>
       <div>
@@ -35,7 +39,7 @@
         <p class="auction-label"><%= @view_model.auction_start_label %></p>
         <p class="auction-label-info"><%= @view_model.auction_formatted_start_time %></p>
       </div>
-      <% if @view_model.auction.show_bid_button?(current_user) %>
+      <% if @view_model.auction.show_bid_button? %>
       <p>
         <a href="<%= new_auction_bid_path(@view_model.auction) %>" class='button-bid usa-button'>BID <icon class="fa fa-angle-double-right"></icon></a>
       </p>

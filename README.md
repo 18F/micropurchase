@@ -1,4 +1,5 @@
 [![Code Climate](https://codeclimate.com/github/18F/micropurchase/badges/gpa.svg)](https://codeclimate.com/github/18F/micropurchase) [![Test Coverage](https://codeclimate.com/github/18F/micropurchase/badges/coverage.svg)](https://codeclimate.com/github/18F/micropurchase/coverage) [![Dependency Status](https://gemnasium.com/18F/micropurchase.svg)](https://gemnasium.com/18F/micropurchase) [![security](https://hakiri.io/github/18F/micropurchase/master.svg)](https://hakiri.io/github/18F/micropurchase/master)
+[![Accessibility](https://continua11y.18f.gov/18F/micropurchase.svg?branch=develop)](https://continua11y.18f.gov/18F/micropurchase)
 
 # Micropurchase
 
@@ -101,12 +102,37 @@ See the GitHub API keys section of our deployment instructions below.
 
 ### Testing
 
+This application uses Rspec for testing models and controllers and Cucumber for functional testing. These can be run separately like if you'd like to only focus on one aspect of testing.
+
 ```
-bundle exec rspec
+bundle exec rake spec
+bundle exec rake cucumber
 ```
-or
+
+The default rake task will run both in order
+
 ```
-rake spec
+bundle exec rake
+```
+
+### Coverage and CodeClimate
+
+Because this application uses two different test suites (RSpec and Cucumber), it has a more complicated setup for measuring coverage and reporting it to CodeClimate. By default, CodeClimate only will use the coverage statistics from RSpec, meaning you will see a drop in coverage for controllers tested more thoroughly by Cucumber. The solution involves a few parts:
+
+1. The `.simplecov` file in the root specifies SimpleCov configuration shared by both RSpec and Cucumber. This switches the coverage gem to use for CI vs. local operation.
+2. The [codeclimate_batch](https://github.com/grosser/codeclimate_batch) CLI merges the coverage reports from each suite before reporting to CodeClimate. This process includes sending all configs to the [cc-amend](https://cc-amend.herokuapp.com/) service. To use the them, you must also make sure your CI calls bundler with `--binstubs` to install gem binaries locally.
+3. The codeclimate_batch gem will only run on a CI server and you must also define an environment variable `CODECLIMATE_REPO_TOKEN` with the value of the repo token provided by CodeClimate for it to work.
+4. The codeclimate_batch gem will also only run on the DEFAULT_BRANCH specified in the `.simplecov` file. If you change your CodeClimate to use a branch other than develop, you must change the value in `.simplecov`
+
+If everything is working correctly, you should see the following text at the bottom of CI builds of your `develop` branch:
+
+``` shell
+$ ./bin/codeclimate-batch --groups 2
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 23656  100    41  100 23615    202   114k --:--:-- --:--:-- --:--:--  118k
+sent 2 reports for 18F-micropurchase-1248
+Code climate: 0.21s to send 2 reports
 ```
 
 #### Using Docker

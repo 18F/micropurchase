@@ -1,5 +1,5 @@
 .usa-footer-primary-section {
-  background: $branding-light;
+  background: $color-gray-lightest;
 }
 
 .footer-image {
@@ -51,6 +51,8 @@ li.usa-footer-primary-content {
 
   @include media($large-screen) {
     border: none;
+    text-align: center;
+    width: 20%;
   }
 
   &:last-child {
