@@ -119,7 +119,7 @@ When(/^I submit a bid for \$(.+)$/) do |amount|
 end
 
 Then(/^I should see a current bid amount( of \$([\d\.]+))?$/) do |_, amount|
-  expect(page).to have_content("Current bid:")
+  expect(page).to have_content(/Current bid: \$[\d,\.]+/)
   expect(page).to have_content(amount) unless amount.nil?
 end
 

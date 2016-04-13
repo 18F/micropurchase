@@ -42,6 +42,10 @@ Feature: Bidding
 
   Scenario: Logging in before bidding
     Given there is an open auction
+
+    When I visit the home page
+    Then I should see a current bid amount
+
     And I am a user with a verified SAM account
     And I sign in and verify my account information
     When I click on the "Bid" button

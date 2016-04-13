@@ -44,7 +44,6 @@ module ViewModel
 
     # This could be in the Presenter::Auction modelm but I don't want to make that change now
     def current_bid
-      return nil if current_user.nil?
       if auction.available? && auction.single_bid?
         auction.bids.detect {|bid| bid.bidder_id == current_user.id }
       else
