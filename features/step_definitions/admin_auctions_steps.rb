@@ -6,7 +6,7 @@ Then(/^I will not see a warning I must be an admin$/) do
   expect(page).to_not have_text('must be an admin')
 end
 
-Then(/^I expect to see the auction$/) do
+Then(/^I should see the auction$/) do
   expect(page).to have_text(@auction.title)
 end
 
@@ -83,7 +83,7 @@ Then(/^I should be able to edit the existing auction form$/) do
   select("published", from: "auction_published")
 end
 
-Then(/^I expect to see new content on the page$/) do
+Then(/^I should see new content on the page$/) do
   expect(page).to have_text(@title)
   expect(page).to have_text(@summary)
   expect(page).to have_text(@description)

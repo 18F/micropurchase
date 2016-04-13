@@ -7,11 +7,11 @@ When(/^I click on the "([^"]+)" link$/) do |label|
   click_on(label)
 end
 
-When(/^I click on the auction title$/) do
+When(/^I click on the auction's title$/) do
   click_on(@auction.title)
 end
 
-Then(/^I expect to see an? (.+) label$/) do |label|
+Then(/^I should see an? (.+) label$/) do |label|
   within(:css, 'div.issue-list-item') do
     within(:css, 'span.usa-label-big') do
       expect(page).to have_content(label)
@@ -19,19 +19,19 @@ Then(/^I expect to see an? (.+) label$/) do |label|
   end
 end
 
-Then(/^I expect to see "(.+)"$/) do |text|
+Then(/^I should see "(.+)"$/) do |text|
   expect(page).to have_content(text)
 end
 
-Then(/^I expect to not see "(.+)"$/) do |text|
+Then(/^I should not see "(.+)"$/) do |text|
   expect(page).to_not have_content(text)
 end
 
-Then(/^I expect to see an? "([^"]+)" button$/) do |button|
+Then(/^I should see an? "([^"]+)" button$/) do |button|
   expect(page).to have_selector(:link_or_button, button)
 end
 
-Then(/^I expect to not see an? "([^"]+)" button$/) do |button|
+Then(/^I should not see an? "([^"]+)" button$/) do |button|
   expect(page).to_not have_selector(:link_or_button, button)
 end
 
@@ -39,19 +39,19 @@ When(/^I visit my bids page$/) do
   visit my_bids_path
 end
 
-Then(/^I expect to be on the home page$/) do
+Then(/^I should be on the home page$/) do
   expect(page.current_path).to eq("/")
 end
 
-Then(/^I expect to be on the auction page$/) do
+Then(/^I should be on the auction page$/) do
   expect(page.current_path).to eq(auction_path(@auction))
 end
 
-Then(/^I expect to be on the profile edit page$/) do
+Then(/^I should be on the profile edit page$/) do
   expect(page.current_path).to eq(edit_user_path(@user))
 end
 
-Then(/^I expect to be on the new bid page$/) do
+Then(/^I should be on the new bid page$/) do
   expect(page.current_path).to eq(new_auction_bid_path(@auction))
 end
 
@@ -93,7 +93,7 @@ Then(/^there should be meta tags for the index page for (\d+) open and (\d+) fut
   expect(page).to have_css("meta[name='twitter:data2'][value='#{future_count}']", visible: false)
 end
 
-Then(/^I expect to see a link to (single-bid|multi-bid) rules$/) do |rules|
+Then(/^I should see a link to (single-bid|multi-bid) rules$/) do |rules|
   case rules
   when 'single-bid'
     expect(page).to have_content("Single-bid")
@@ -104,6 +104,6 @@ Then(/^I expect to see a link to (single-bid|multi-bid) rules$/) do |rules|
   end
 end
 
-Then(/^I expect to see the rules for (single-bid|multi-bid) auctions$/) do |type|
+Then(/^I should see the rules for (single-bid|multi-bid) auctions$/) do |type|
   expect(page).to have_content("Rules for #{type} auctions")
 end
