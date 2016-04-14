@@ -113,10 +113,6 @@ module Presenter
       available? && model.end_datetime < 12.hours.from_now
     end
 
-    def winning_bidder
-      winning_bid.bidder
-    end
-
     def winning_bid
       return Presenter::Bid::Null.new if single_bid? && available?
       lowest_bid

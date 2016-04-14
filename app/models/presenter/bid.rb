@@ -29,7 +29,7 @@ module Presenter
     def bidder_id
       bidder.id || null
     end
-    
+
     def bidder_duns_number
       bidder.duns_number || null
     end
@@ -71,7 +71,7 @@ module Presenter
       return false unless other.is_a?(Presenter::Bid)
       self.id == other.id
     end
-    
+
     def model
       __getobj__
     end
@@ -95,18 +95,14 @@ module Presenter
         false
       end
 
-      def bidder
-        nil
-      end
-      
       def bidder_id
         nil
       end
-      
+
       def id
         nil
       end
-      
+
       def amount
         NULL
       end
