@@ -59,6 +59,9 @@ module Presenter
       to: :auction_status
     )
 
+    delegate :winning_bid, :veiled_bids, :single_bid?, :multi_bid?, :formatted_type,
+             to: :auction_rules
+        
     def bids?
       bid_count > 0
     end
@@ -68,21 +71,6 @@ module Presenter
         .map {|bid| decorated_bid(bid) }
         .sort_by(&:created_at)
         .reverse
-    end
-
-    def veiled_bids(user)
-      # For single bid auctions, we reveal no bids if the auction is running
-      # For multi bid auctions, we let the bids go through, but depend on
-      # Presenter::Bid to veil certain attributes.
-
-      # redact all bids if auction is still running and type is single bid
-      if available? && model.single_bid?
-        return [] if user.nil?
-        return bids.select {|bid| bid.bidder_id == user.id}
-      end
-
-      # otherwise, return all the bids
-      bids
     end
 
     def bid_count
@@ -97,14 +85,14 @@ module Presenter
       Presenter::DcTime.convert_and_format(model.end_datetime)
     end
 
-    def formatted_type
-      return 'multi-bid'  if model.type == 'multi_bid'
-      return 'single-bid' if model.type == 'single_bid'
-    end
+    # def formatted_type
+    #   return 'multi-bid'  if model.type == 'multi_bid'
+    #   return 'single-bid' if model.type == 'single_bid'
+    # end
 
-    def type
-      model.type
-    end
+    # def type
+    #   model.type
+    # end
 
     def starts_in
       time_in_human(model.start_datetime)
@@ -116,10 +104,6 @@ module Presenter
 
     def delivery_deadline_expires_in
       time_in_human(model.delivery_deadline)
-    end
-
-    def winning_bid
-      decorated_bid(model.winning_bid)
     end
 
     def lowest_bid
@@ -151,6 +135,21 @@ module Presenter
 
     private
 
+    def auction_rules_class
+      type = case model.type 
+             when 'single_bid', 'sealed-bid'
+               'SealedBid'
+             else
+               'Basic'
+             end
+  
+      "::Rules::#{type}".constantize
+    end
+
+    def auction_rules
+      @auction_rules ||= auction_rules_class.new(self)
+    end
+    
     def markdown
       # FIXME: Do we want the lax_spacing?
       @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML,
