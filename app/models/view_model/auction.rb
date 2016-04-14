@@ -44,10 +44,6 @@ module ViewModel
       end
     end
 
-    def show_highlighted_bid?
-      highlighted_bid.display?
-    end
-    
     def highlighted_bid_amount_as_currency
       number_to_currency(highlighted_bid_amount)
     end

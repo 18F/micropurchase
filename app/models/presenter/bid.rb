@@ -22,10 +22,6 @@ module Presenter
       end
     end
 
-    def display?
-      true
-    end
-
     def bidder_id
       bidder.id || null
     end
@@ -52,7 +48,7 @@ module Presenter
 
     def amount_to_currency_with_asterisk
       return "#{amount_to_currency} *" if is_winning?
-      return amount_to_currency
+      amount_to_currency
     end
 
     def is_winning?
@@ -69,7 +65,7 @@ module Presenter
 
     def ==(other)
       return false unless other.is_a?(Presenter::Bid)
-      self.id == other.id
+      id == other.id
     end
 
     def model
@@ -89,10 +85,6 @@ module Presenter
 
       def bidder_name
         NULL
-      end
-
-      def display?
-        false
       end
 
       def bidder_id
