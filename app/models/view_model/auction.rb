@@ -52,14 +52,6 @@ module ViewModel
       number_to_currency(highlighted_bid_amount)
     end
 
-    def formatted_highlighted_bid_amount
-      if highlighted_bid_amount.nil?
-        return 'n/a'
-      else
-        return number_to_currency(highlighted_bid_amount)
-      end
-    end
-
     def highlighted_bidder_name
       highlighted_bid.bidder_name
     end

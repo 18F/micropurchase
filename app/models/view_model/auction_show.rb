@@ -11,7 +11,7 @@ module ViewModel
              :user_bid_amount_as_currency, :show_bid_button?,
              to: :auction, prefix: true
 
-    delegate :formatted_highlighted_bid_amount, :highlighted_bid_amount_as_currency,
+    delegate :highlighted_bid_amount_as_currency,
              :highlighted_bid_amount, :highlighted_bid, :auction_type,
              to: :auction
 
