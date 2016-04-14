@@ -42,10 +42,6 @@ module Presenter
     delegate :bidder_name, :bidder_duns_number,
              to: :current_bid, prefix: :current
 
-    def current_bid_amount_as_currency
-      number_to_currency(current_bid_amount)
-    end
-
     def bids?
       bid_count > 0
     end

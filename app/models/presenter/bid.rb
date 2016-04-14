@@ -22,6 +22,10 @@ module Presenter
       end
     end
 
+    def display?
+      true
+    end
+    
     def bidder_duns_number
       bidder.duns_number || null
     end
@@ -83,6 +87,10 @@ module Presenter
         NULL
       end
 
+      def display?
+        false
+      end
+      
       def amount
         NULL
       end
