@@ -19,5 +19,4 @@
 /public/commit.txt
 .env
 
-vendor
 cf-ssh.yml
