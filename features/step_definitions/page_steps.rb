@@ -39,6 +39,10 @@ When(/^I visit my bids page$/) do
   visit my_bids_path
 end
 
+When(/^I visit my profile page$/) do
+  visit edit_user_path(@user)
+end
+
 Then(/^I should be on the home page$/) do
   expect(page.current_path).to eq("/")
 end
@@ -47,7 +51,7 @@ Then(/^I should be on the auction page$/) do
   expect(page.current_path).to eq(auction_path(@auction))
 end
 
-Then(/^I should be on the profile edit page$/) do
+Then(/^I should be on my profile page$/) do
   expect(page.current_path).to eq(edit_user_path(@user))
 end
 

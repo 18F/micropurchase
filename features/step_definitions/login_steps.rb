@@ -55,12 +55,62 @@ When(/^I fill the "([^"]*)" field with "([^"]*)"$/) do |field, value|
   fill_in(field, with: value)
 end
 
+When(/^there is no (.+) associated with my account$/) do |attribute|
+  attribute = attribute.parameterize('_')
+  @user.update_attribute(attribute, nil)
+end
+
+def fake_value_for_attribute(attribute)
+  case attribute
+  when 'credit_card_form_url'
+    Faker::Internet.url
+  when 'name'
+    Faker::Name.name
+  when 'duns_number'
+    Faker::Company.duns_number
+  when 'email'
+    Faker::Internet.email
+  else
+    fail "Unknown attribute '#{attribute}'"
+  end
+end
+
+When(/^there is a (.+) associated with my account$/) do |attr|
+  attribute = attr.parameterize('_')
+  @user.update_attribute(attribute, fake_value_for_attribute(attribute))
+end
+
+When(/^I fill in the (.+) field on my profile page$/) do |attribute|
+  attribute = attribute.parameterize('_')
+  value = fake_value_for_attribute(attribute)
+
+  @new_values ||= {}
+  @new_values[attribute] = value
+  
+  step("I fill in the \"user_#{attribute}\" field with \"#{value}\"")
+end
+
+When(/^I fill in the "(.+)" field with "([^"]*)"$/) do |field, value|
+  fill_in(field, with: value)
+end
+
+Then(/^the new value should be stored as my (.+)$/) do |attribute|
+  attribute = attribute.parameterize('_')
+  field = find_field("user_#{attribute}")
+
+  expect(@new_values).to_not be_nil
+  expect(@new_values[attribute]).to_not be_nil
+  expect(field.value).to eq(@new_values[attribute])
+end
+  
 Then(/^I should see "([^"]*)" in the "([^"]*)" field$/) do |value, field|
   field = find_field(field)
   expect(field.value).to eq(value)
 end
 
 Then(/^I should see my (.+) in the "([^"]*)" field$/) do |attribute, field|
+  @user.reload
+  attribute = attribute.parameterize('_')
   field = find_field(field)
   expect(field.value).to eq(@user.send(attribute))
 end
