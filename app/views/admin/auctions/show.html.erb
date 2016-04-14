@@ -19,13 +19,13 @@
 <p><%=h raw @auction.html_description %></p>
 
 <div class='usa-grid'>
-  <% if @auction.current_bid? %>
+  <% if @auction.bids? %>
     <h2>Current Bid: </h2>
     <div class='usa-width-one-whole'>
-      <div class='usa-width-one-fourth bidder-name'><%= @auction.current_bidder_name %></div>
-      <div class='usa-width-one-fourth bidder-duns-number'><%= @auction.current_bidder_duns_number %></div>
-      <div class='usa-width-one-fourth amount'><%= number_to_currency(@auction.current_bid_amount) %></div>
-      <div class='usa-width-one-fourth amount'><%= @auction.current_bid_time %></div>
+      <div class='usa-width-one-fourth bidder-name'><%= @auction.lowest_bidder_name %></div>
+      <div class='usa-width-one-fourth bidder-duns-number'><%= @auction.lowest_bidder_duns_number %></div>
+      <div class='usa-width-one-fourth amount'><%= number_to_currency(@auction.lowest_bid_amount) %></div>
+      <div class='usa-width-one-fourth amount'><%= @auction.lowest_bid_time %></div>
     </div>
 
     <% @auction.bids.each do |bid| %>

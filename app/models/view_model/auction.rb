@@ -40,7 +40,7 @@ module ViewModel
       if auction.available? && auction.single_bid?
         auction.bids.detect {|bid| bid.bidder_id == current_user.id } || Presenter::Bid::Null.new
       else
-        auction.current_bid
+        auction.lowest_bid
       end
     end
 
@@ -69,7 +69,8 @@ module ViewModel
     end
 
     def user_is_winning_bidder?
-      return false unless auction.current_bid?
+      # fixme: who is calling this?
+      return false unless auction.bids?
       current_user.id == auction.winning_bidder_id
     end
 
