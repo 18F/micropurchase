@@ -20,13 +20,7 @@
 
 <div class='usa-grid'>
   <% if @auction.bids? %>
-    <h2>Current Bid: </h2>
-    <div class='usa-width-one-whole'>
-      <div class='usa-width-one-fourth bidder-name'><%= @auction.lowest_bidder_name %></div>
-      <div class='usa-width-one-fourth bidder-duns-number'><%= @auction.lowest_bidder_duns_number %></div>
-      <div class='usa-width-one-fourth amount'><%= number_to_currency(@auction.lowest_bid_amount) %></div>
-      <div class='usa-width-one-fourth amount'><%= @auction.lowest_bid_time %></div>
-    </div>
+  <h2>Current Bids:</h2>
 
     <% @auction.bids.each do |bid| %>
       <div class='usa-width-one-whole'>
