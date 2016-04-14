@@ -12,20 +12,11 @@ module Presenter
       @auction = auction
     end
 
-    def current_bid?
-      current_bid_record != nil
-    end
-
-    def current_bid
-      return Presenter::Bid::Null.new unless current_bid_record
-      Presenter::Bid.new(current_bid_record)
-    end
-
-    def current_max_bid
-      if current_bid.is_a?(Presenter::Bid::Null)
+    def max_allowed_bid
+      if lowest_bid.is_a?(Presenter::Bid::Null)
         return start_price - PlaceBid::BID_INCREMENT
       else
-        return current_bid.amount - PlaceBid::BID_INCREMENT
+        return lowest_bid.amount - PlaceBid::BID_INCREMENT
       end
     end
 
@@ -37,24 +28,20 @@ module Presenter
              to: :model
 
     delegate :amount, :time,
-             to: :current_bid, prefix: :current_bid
+             to: :lowest_bid, prefix: :lowest_bid
 
     delegate :bidder_name, :bidder_duns_number,
-             to: :current_bid, prefix: :current
-
-    def current_bid_amount_as_currency
-      number_to_currency(current_bid_amount)
-    end
+             to: :lowest_bid, prefix: :lowest
 
     def bids?
       bid_count > 0
     end
 
     def bids
-      model.bids.to_a
-           .map {|bid| Presenter::Bid.new(bid) }
-           .sort_by(&:created_at)
-           .reverse
+      @bids ||= model.bids.to_a
+                     .map {|bid| Presenter::Bid.new(bid) }
+                     .sort_by(&:created_at)
+                     .reverse
     end
 
     def veiled_bids(user)
@@ -126,21 +113,17 @@ module Presenter
       available? && model.end_datetime < 12.hours.from_now
     end
 
-    def winning_bidder
-      winning_bid.bidder rescue nil
-    end
-
     def winning_bid
-      return single_bid_winning_bid if single_bid?
-      return multi_bid_winning_bid  if multi_bid?
+      return Presenter::Bid::Null.new if single_bid? && available?
+      lowest_bid
     end
 
     def winning_bidder_id
-      winning_bid.bidder_id rescue nil
+      winning_bid.bidder_id
     end
 
     def winning_bid_id
-      winning_bid.id rescue nil
+      winning_bid.id
     end
 
     def single_bid?
@@ -151,16 +134,10 @@ module Presenter
       model.type == 'multi_bid'
     end
 
-    def single_bid_winning_bid
-      return nil if available?
-      return lowest_bids.first if lowest_bids.length == 1
-      lowest_bids.sort_by(&:created_at).first
+    def lowest_bid
+      @lowest_bid ||= (lowest_bids.first || Presenter::Bid::Null.new)
     end
-
-    def multi_bid_winning_bid
-      current_bid
-    end
-
+    
     def lowest_bids
       bids.select {|b| b.amount == lowest_amount }.sort_by(&:created_at)
     end
@@ -189,10 +166,6 @@ module Presenter
     end
 
     private
-
-    def current_bid_record
-      @current_bid_record ||= bids.sort_by {|bid| [bid.amount, bid.created_at, bid.id] }.first
-    end
 
     def markdown
       # FIXME: Do we want the lax_spacing?

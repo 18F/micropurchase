@@ -43,8 +43,8 @@ class PlaceBid < Struct.new(:params, :current_user)
     Presenter::Auction.new(auction).available?
   end
 
-  def current_max_bid
-    Presenter::Auction.new(auction).current_max_bid
+  def max_allowed_bid
+    Presenter::Auction.new(auction).max_allowed_bid
   end
 
   def auction_is_single_bid?
@@ -83,7 +83,7 @@ class PlaceBid < Struct.new(:params, :current_user)
       fail UnauthorizedError, 'Bid amount out of range'
     end
 
-    if auction_is_multi_bid? && amount > current_max_bid
+    if auction_is_multi_bid? && amount > max_allowed_bid
       fail UnauthorizedError, "Bids cannot be greater than the current max bid"
     end
   end

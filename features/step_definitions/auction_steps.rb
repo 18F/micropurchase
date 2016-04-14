@@ -54,11 +54,11 @@ end
 
 Then(/^I should see the winning bid for the auction$/) do
   auction = Presenter::Auction.new(@auction)
-  current_bid_amount = ApplicationController.helpers.number_to_currency(
-    auction.current_bid.amount
+  lowest_bid_amount = ApplicationController.helpers.number_to_currency(
+    auction.lowest_amount
   )
 
-  expect(page).to have_text(current_bid_amount)
+  expect(page).to have_text(lowest_bid_amount)
 end
 
 Then(/^I should see the auction's (.+)$/) do |field|

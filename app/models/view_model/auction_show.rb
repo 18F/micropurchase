@@ -7,16 +7,17 @@ module ViewModel
     end
 
     delegate :title, :summary, :html_description, :status, :id,
-             :bid_count, :current_bid_amount_as_currency, :issue_url,
+             :bid_count, :issue_url,
              :user_bid_amount_as_currency, :show_bid_button?,
              to: :auction, prefix: true
 
-    delegate :formatted_current_bid_amount, :current_bid_amount, :current_bid, :auction_type,
+    delegate :highlighted_bid_amount_as_currency,
+             :highlighted_bid_amount, :highlighted_bid, :auction_type,
              to: :auction
 
     def auction_status_header
       if auction_won?
-        "Winning bid (#{auction.current_bidder_name}):"
+        "Winning bid (#{auction.highlighted_bidder_name}):"
       else
         if auction.single_bid?
           "Your bid:"

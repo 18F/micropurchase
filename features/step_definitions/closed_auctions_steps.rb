@@ -21,15 +21,15 @@ When(/^I have not placed a bid$/) do
 end
 
 Then(/^I should see the auction had a winning bid$/) do
-  auction = Presenter::Auction.new(@auction)
-  expect(page).to have_content("Winning bid: #{auction.current_bid_amount_as_currency}")
+  auction = ViewModel::Auction.new(nil, @auction)
+  expect(page).to have_content("Winning bid: #{auction.highlighted_bid_amount_as_currency}")
   expect(page).not_to have_content("Current bid:")
 end
 
 
 Then(/^I should see the auction had a winning bid with name$/) do
-  auction = Presenter::Auction.new(@auction)
-  expect(page).to have_content("Winning bid (#{auction.current_bidder_name}): #{auction.current_bid_amount_as_currency}")
+  auction = ViewModel::Auction.new(nil, @auction)
+  expect(page).to have_content("Winning bid (#{auction.highlighted_bidder_name}): #{auction.highlighted_bid_amount_as_currency}")
   expect(page).not_to have_content("Current bid:")
 end
 

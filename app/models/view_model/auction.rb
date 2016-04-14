@@ -10,9 +10,9 @@ module ViewModel
     end
 
     delegate :title, :summary, :html_description, :bid_count,
-             :current_bid_amount_as_currency, :issue_url,
+             :issue_url,
              :start_datetime, :end_datetime, :veiled_bids,
-             :created_at, :current_bidder_name, :html_summary,
+             :created_at, :html_summary,
              :html_description, :formatted_type, :available?, :bids?,
              :bids, :human_start_time, :start_price, :over?,
              :multi_bid?, :single_bid?, :type, :id,
@@ -30,34 +30,35 @@ module ViewModel
       user_can_bid? || current_user.nil?
     end
 
-    def formatted_current_bid_amount
-      if current_bid_amount.nil?
-        return 'n/a'
-      else
-        return number_to_currency(current_bid_amount)
-      end
-    end
+    delegate :amount,
+             to: :highlighted_bid, prefix: true
 
-    def current_bid_amount
-      current_bid.amount rescue nil
-    end
-
-    # This could be in the Presenter::Auction modelm but I don't want to make that change now
-    def current_bid
+    # This is the single bid we display under the auction as an important
+    # summary of the bidding. Unlike the lowest bid, it differs based
+    # on the type of auction and whether the auction is closed
+    def highlighted_bid
       if auction.available? && auction.single_bid?
-        auction.bids.detect {|bid| bid.bidder_id == current_user.id }
+        auction.bids.detect {|bid| bid.bidder_id == current_user.id } || Presenter::Bid::Null.new
       else
-        auction.current_bid
+        auction.lowest_bid
       end
     end
 
-    # can we get rid of Presenter::Auction view?
+    def highlighted_bid_amount_as_currency
+      number_to_currency(highlighted_bid_amount)
+    end
+
+    def highlighted_bidder_name
+      highlighted_bid.bidder_name
+    end
+    
     def user_is_bidder?
       user_bids_obj.has_bid?
     end
 
     def user_is_winning_bidder?
-      return false unless auction.current_bid?
+      # fixme: who is calling this?
+      return false unless auction.bids?
       current_user.id == auction.winning_bidder_id
     end
 
@@ -89,11 +90,11 @@ module ViewModel
       end
     end
 
-    def current_bid_info_partial
+    def highlighted_bid_info_partial
       if auction.single_bid?
-        'bids/single_bid/current_bid_info'
+        'bids/single_bid/highlighted_bid_info'
       elsif auction.multi_bid?
-        'bids/multi_bid/current_bid_info'
+        'bids/multi_bid/highlighted_bid_info'
       end
     end
 

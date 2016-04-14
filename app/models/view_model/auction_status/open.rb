@@ -28,7 +28,7 @@ module ViewModel
         if auction.single_bid?
           "Sealed"
         else
-          "#{number_to_currency(auction.current_bid_amount)} - #{auction.bids.length} bids"
+          "#{number_to_currency(auction.highlighted_bid_amount)} - #{auction.bids.length} bids"
         end
       end
     end

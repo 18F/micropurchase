@@ -13,11 +13,10 @@ RSpec.describe Presenter::Auction do
       specify { expect(auction.bids?).to be_falsey }
       specify { expect(auction.bid_count).to eq(0) }
       specify { expect(auction.bids).to eq([]) }
-      specify { expect(auction.current_bid?).to be_falsey }
-      specify { expect(auction.current_bid).to be_a(Presenter::Bid::Null) }
+      specify { expect(auction.lowest_bid).to be_a(Presenter::Bid::Null) }
 
-      it 'current_max_bid should return the starting bid for the auction' do
-        expect(auction.current_max_bid).to eq(auction.start_price - PlaceBid::BID_INCREMENT)
+      it 'max_allowed_bid should return the starting bid for the auction' do
+        expect(auction.max_allowed_bid).to eq(auction.start_price - PlaceBid::BID_INCREMENT)
       end
       
       specify { expect(auction.lowest_bids).to eq([]) }
@@ -42,17 +41,15 @@ RSpec.describe Presenter::Auction do
         end
       end
 
-      specify { expect(auction.current_bid?).to be_truthy }
+      it 'lowest_bid should return the bid with the lowest amount' do
+        lowest_bid = auction.lowest_bid
 
-      it 'current_bid should return the bid with the lowest amount' do
-        current_bid = auction.current_bid
-
-        expect(current_bid).to be_a(Presenter::Bid)
-        expect(current_bid.amount).to eq(ar_bids_by_amount.first.amount)
-        expect(current_bid.bidder_id).to eq(ar_bids_by_amount.first.bidder_id)
+        expect(lowest_bid).to be_a(Presenter::Bid)
+        expect(lowest_bid.amount).to eq(ar_bids_by_amount.first.amount)
+        expect(lowest_bid.bidder_id).to eq(ar_bids_by_amount.first.bidder_id)
       end
 
-      specify { expect(auction.current_max_bid).to eq(auction.current_bid.amount - PlaceBid::BID_INCREMENT) }
+      specify { expect(auction.max_allowed_bid).to eq(auction.lowest_bid.amount - PlaceBid::BID_INCREMENT) }
       
       it 'lowest_bids should return an array of the lowest amount' do
         bids = auction.lowest_bids
@@ -86,17 +83,15 @@ RSpec.describe Presenter::Auction do
         end
       end
 
-      specify { expect(auction.current_bid?).to be_truthy }
+      it 'lowest_bid should return the bid with the lowest amount and the earliest creation time' do
+        lowest_bid = auction.lowest_bid
 
-      it 'current_bid should return the bid with the lowest amount and the earliest creation time' do
-        current_bid = auction.current_bid
-
-        expect(current_bid).to be_a(Presenter::Bid)
-        expect(current_bid.amount).to eq(ar_bids_by_amount.first.amount)
-        expect(current_bid.bidder_id).to eq(ar_bids_by_amount.first.bidder_id)
+        expect(lowest_bid).to be_a(Presenter::Bid)
+        expect(lowest_bid.amount).to eq(ar_bids_by_amount.first.amount)
+        expect(lowest_bid.bidder_id).to eq(ar_bids_by_amount.first.bidder_id)
       end
 
-      specify { expect(auction.current_max_bid).to eq(auction.current_bid.amount - PlaceBid::BID_INCREMENT) }
+      specify { expect(auction.max_allowed_bid).to eq(auction.lowest_bid.amount - PlaceBid::BID_INCREMENT) }
 
       it 'lowest_bids should return an array of all bids with the lowest amount sorted by ascending creation time' do
         lowest_bids = auction.lowest_bids
@@ -125,9 +120,8 @@ RSpec.describe Presenter::Auction do
             expect(auction.veiled_bids(user)).to match_array([])
           end
 
-          specify { expect(auction.winning_bid).to be_nil }
+          specify { expect(auction.winning_bid).to be_a(Presenter::Bid::Null) }
           specify { expect(auction.winning_bid_id).to be_nil }
-          specify { expect(auction.winning_bidder).to be_nil }
           specify { expect(auction.winning_bidder_id).to be_nil }
         end
         
@@ -139,8 +133,8 @@ RSpec.describe Presenter::Auction do
             expect(auction.veiled_bids(last_bidder).map(&:id)).to match_array([last_bid].map(&:id))
           end
 
-          specify { expect(auction.winning_bid).to be_nil }
-          specify { expect(auction.winning_bidder).to be_nil }
+          specify { expect(auction.winning_bid).to be_a(Presenter::Bid::Null) }
+          specify { expect(auction.winning_bid_id).to be_nil }
           specify { expect(auction.winning_bidder_id).to be_nil }
         end
 
@@ -149,9 +143,8 @@ RSpec.describe Presenter::Auction do
             expect(auction.veiled_bids(user)).to match_array([])
           end
 
-          specify { expect(auction.winning_bid).to be_nil }
+          specify { expect(auction.winning_bid).to be_a(Presenter::Bid::Null) }
           specify { expect(auction.winning_bid_id).to be_nil }
-          specify { expect(auction.winning_bidder).to be_nil }
           specify { expect(auction.winning_bidder_id).to be_nil }
         end
       end
@@ -170,7 +163,6 @@ RSpec.describe Presenter::Auction do
           expect(auction.winning_bid.amount).to eq(ar_bids_by_amount.first.amount)
         end
 
-        specify { expect(auction.winning_bidder).to eq(auction.winning_bid.bidder) }
         specify { expect(auction.winning_bidder_id).to eq(auction.winning_bid.bidder_id) }
         specify { expect(auction.winning_bid_id).to eq(auction.winning_bid.id) }
       end
@@ -187,7 +179,6 @@ RSpec.describe Presenter::Auction do
 
           specify { expect(auction.winning_bid).to be_a(Presenter::Bid::Null) }
           specify { expect(auction.winning_bid_id).to be_nil }
-          specify { expect(auction.winning_bidder).to be_nil }
           specify { expect(auction.winning_bidder_id).to be_nil }          
         end
       
@@ -207,7 +198,6 @@ RSpec.describe Presenter::Auction do
           end
           
           specify { expect(auction.winning_bid_id).to eq(ar_lowest_bid.id) }
-          specify { expect(auction.winning_bidder).to eq(ar_lowest_bid.bidder) }
           specify { expect(auction.winning_bidder_id).to eq(ar_lowest_bid.bidder_id) }
         end
       end
@@ -226,7 +216,6 @@ RSpec.describe Presenter::Auction do
           end
           
           specify { expect(auction.winning_bid_id).to eq(ar_lowest_bid.id) }
-          specify { expect(auction.winning_bidder).to eq(ar_lowest_bid.bidder) }
           specify { expect(auction.winning_bidder_id).to eq(ar_lowest_bid.bidder_id) }
         end
       end
