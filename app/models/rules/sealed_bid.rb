@@ -1,5 +1,5 @@
 module Rules
-  class SealedBid < Struct.new(:auction)
+  class SealedBid < Rules::Basic
     def winning_bid
       return Presenter::Bid::Null.new if auction.available?
       auction.lowest_bid
@@ -14,6 +14,14 @@ module Rules
       end
     end
 
+    def user_can_bid?(user)
+      super && !auction.bids.any? {|b| b.bidder_id == user.id }
+    end
+
+    def max_allowed_bid
+      auction.start_price - PlaceBid::BID_INCREMENT
+    end
+    
     # so tests will pass for moment; will remove later
     def single_bid?
       true

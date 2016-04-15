@@ -40,31 +40,29 @@ class PlaceBid < Struct.new(:params, :current_user)
   end
 
   def auction_available?
-    Presenter::Auction.new(auction).available?
+    presenter_auction.available?
+  end
+
+  def user_can_bid?
+    presenter_auction.user_can_bid?(current_user)
   end
 
   def max_allowed_bid
-    Presenter::Auction.new(auction).max_allowed_bid
-  end
-
-  def bidder_already_bid_on_this_auction?
-    return false if auction.bids.empty?
-
-    auction.bids.map(&:bidder_id).include?(current_user.id)
+    presenter_auction.max_allowed_bid
   end
 
   # rubocop:disable Style/IfUnlessModifier, Style/GuardClause
   def validate_bid_data
-    if auction.single_bid? && bidder_already_bid_on_this_auction?
-      fail UnauthorizedError, 'You can only bid once in a single-bid auction.'
+    unless auction_available?
+      fail UnauthorizedError, 'Auction not available'
+    end
+
+    unless user_can_bid?
+      fail UnauthorizedError, 'You are not allowed to bid on this auction'
     end
 
     if amount.to_i != amount
       fail UnauthorizedError, 'Bids must be in increments of one dollar'
-    end
-
-    unless auction_available?
-      fail UnauthorizedError, 'Auction not available'
     end
 
     if amount > BID_LIMIT
@@ -75,7 +73,7 @@ class PlaceBid < Struct.new(:params, :current_user)
       fail UnauthorizedError, 'Bid amount out of range'
     end
 
-    if auction.multi_bid? && amount > max_allowed_bid
+    if amount > max_allowed_bid
       fail UnauthorizedError, "Bids cannot be greater than the current max bid"
     end
   end
@@ -86,5 +84,9 @@ class PlaceBid < Struct.new(:params, :current_user)
     params_amount = params_amount.delete(',') if params_amount.is_a?(String)
 
     (params[:bid] && params_amount).to_f.round(2)
+  end
+
+  def presenter_auction
+    @presenter ||= Presenter::Auction.new(auction)
   end
 end

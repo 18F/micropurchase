@@ -9,6 +9,20 @@ module Rules
       auction.bids
     end
 
+    def user_can_bid?(user)
+      return false unless auction.available?
+      return false if user.nil? || !user.sam_account?
+      true
+    end
+
+    def max_allowed_bid
+      if auction.lowest_bid.is_a?(Presenter::Bid::Null)
+        return auction.start_price - PlaceBid::BID_INCREMENT
+      else
+        return auction.lowest_amount - PlaceBid::BID_INCREMENT
+      end
+    end
+    
     # so tests will pass for moment; will remove later
     def single_bid?
       false
