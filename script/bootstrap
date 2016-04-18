@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+set -x
+
+# create config files, if not already present
+if [ ! -f .env ]; then
+  cp .env.example .env
+fi
+
+mkdir -p tmp/pids
+
+bundle
+
+bin/rake db:setup
+
+echo "DONE"
