@@ -2,8 +2,12 @@
 
 ### Setting up and running the app
 
-The application is running Ruby 2.2.3 and Rails 4.2.4. Most of the
-libraries are available as gems.
+The application is running Ruby on Rails.
+
+The current Ruby version is included in the [`.ruby-version`](../.ruby-version)
+file. If you do not have on already, you should install and manage Ruby versions
+using a Ruby version manager.  The [18F laptop
+script](https://github.com/18F/laptop) installs RVM for this reason.
 
 Testing with javascript and capybara on Travis CI requires some
 [Poltergeist](https://github.com/teampoltergeist/poltergeist).
