@@ -14,7 +14,7 @@ Join the Micropurchase Slack channels:
 ### Add yourself as an Admin
 
 [Find your GitHub ID](http://caius.github.io/github_id/) and [add yourself as an
-admin](config/admins.yml).
+admin](../config/admins.yml).
 
 Being an admin means you can:
 * create/edit auctions
@@ -23,7 +23,7 @@ Being an admin means you can:
 auctions are running)
 
 Don't forget to submit a pull request! See
-[CONTRIBUTING.md](CONTRIBUTING.md) for more information on how this team submits
+[CONTRIBUTING.md](../CONTRIBUTING.md) for more information on how this team submits
 / accepts pull requests.
 
 ### Get deploy access
@@ -36,4 +36,4 @@ inspect and configure them.
 Once you're set up with Cloud Foundry, ask for access to the `18f-acq`
 organization in the Micropurchase Slack channel.
 
-Read more about deployments in the [deployment docs](doc/deployment.md).
+Read more about deployments in the [deployment docs](deployment.md).
