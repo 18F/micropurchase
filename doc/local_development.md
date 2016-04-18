@@ -34,7 +34,20 @@ MPT_3500_GITHUB_KEY="your-client-id"
 MPT_3500_GITHUB_SECRET="your-client-secret"
 ```
 
-Make sure to restart the server to register those environmental variables.
+Make sure to restart the server to register those environment variables.
+
+### Set up your account to enable bidding locally
+
+To bid in your local environment, you'll first need to log in so there is a
+`User` record for you in the database. Then you can run the following:
+
+```
+$ rails c
+$ user = User.last
+$ user.update(sam_account: true)
+```
+
+You should now see the "Bid" button on open auctions in your dev environment.
 
 ### Using Docker
 
@@ -93,4 +106,11 @@ The default rake task will run both in order
 
 ```
 bundle exec rake
+```
+
+#### Using Docker
+
+```
+docker-compose up -d
+docker-compose run web bundle exec rake spec
 ```
