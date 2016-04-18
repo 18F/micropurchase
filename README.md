@@ -28,7 +28,7 @@ Updating the ERD requires Graphiz. Installation instructions are [here](http://v
 ## Local Development
 
 See the (local development docs)[doc/local_development.md] for information on
-setting up the codebase and running tests locally.
+setting up the codebase and running tests locally or with Docker.
 
 ### Coverage and CodeClimate
 
@@ -48,13 +48,6 @@ $ ./bin/codeclimate-batch --groups 2
 100 23656  100    41  100 23615    202   114k --:--:-- --:--:-- --:--:--  118k
 sent 2 reports for 18F-micropurchase-1248
 Code climate: 0.21s to send 2 reports
-```
-
-#### Using Docker
-
-```
-docker-compose up -d
-docker-compose run web bundle exec rake spec
 ```
 
 ## Security Scans
