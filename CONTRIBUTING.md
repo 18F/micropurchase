@@ -62,7 +62,7 @@ rejected.
 One drawback to Rails' standard model-view-controller paradigm is that model
 objects tend to get cluttered over time with many different methods for all
 sorts of different reasons. We want to prevent this as much as we can. Read our
-[document on technical debt](TECHNICAL_DEBT.md) to understand how things are
+[document on technical debt](doc/technical_debt.md) to understand how things are
 organized.
 
 ## Public domain
