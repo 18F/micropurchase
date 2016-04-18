@@ -142,65 +142,6 @@ docker-compose up -d
 docker-compose run web bundle exec rake spec
 ```
 
-## Deployment
-
-This application is deployed on the cloud.gov PaaS which runs on Cloud Foundry. The following instructions are 18F-specific, but could easily be adapted for other Cloud Foundry instances or other web hosts.
-
-Create the app (it's ok if the deploy fails):
-
-```
-$ cf push
-```
-
-Create the database service:
-
-```
-$ cf create-service rds shared-psql micropurchase-psql
-```
-
-Create a [user-provided service](https://docs.cloudfoundry.org/devguide/services/user-provided.html):
-
-```
-$ cf cups micropurchase-github -p "client_id, secret"
-```
-
-The above command will interactively prompt you for your GitHub application keys.
-
-The value stored locally in `MPT_3500_GITHUB_KEY` is the `client_id`.
-
-The value stored locally in `MPT_3500_GITHUB_SECRET` is the `secret.`
-
-Bind your services to the app:
-
-```
-$ cf bind-service micropurchase micropurchase-psql
-$ cf bind-service micropurchase micropurchase-github
-```
-
-Set up the database:
-
-```
-$ cf-ssh
-$~ bundle exec rake db:migrate
-$~ bundle exec rake db:seed
-```
-
-Restage the app:
-
-```
-cf restage micropurchase
-```
-
-### Manual Deployment
-
-```
-cf push
-```
-
-### Automated Deployment
-
-Pull requests merged into the `master` branch will be automatically deployed to https://micropurchase.18f.gov.
-
 ## Security Scans
 
 This repository uses two tools to provide a total of three types of automated security checks:
