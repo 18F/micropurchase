@@ -8,7 +8,7 @@ module Rules
     def veiled_bids(user)
       if auction.available?
         return [] if user.nil?
-        auction.bids.select {|bid| bid.bidder_id == user.id}
+        auction.bids.select {|bid| bid.bidder_id == user.id }
       else
         auction.bids
       end
@@ -21,7 +21,7 @@ module Rules
     def max_allowed_bid
       auction.start_price - PlaceBid::BID_INCREMENT
     end
-    
+
     # so tests will pass for moment; will remove later
     def single_bid?
       true
@@ -31,12 +31,12 @@ module Rules
       false
     end
 
+    def partial_prefix
+      'single_bid'
+    end
+
     def formatted_type
       'single-bid'
-    end
-    
-    def rules_type
-      'sealed-bid'
     end
   end
 end

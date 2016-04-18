@@ -25,10 +25,8 @@ module ViewModel
       :human_start_time,
       :id,
       :issue_url,
-      :multi_bid?,
       :over?,
       :read_attribute_for_serialization,
-      :single_bid?,
       :start_datetime,
       :start_price,
       :summary,
@@ -103,19 +101,11 @@ module ViewModel
     end
 
     def index_bid_summary_partial
-      if single_bid?
-        'auctions/single_bid/index_bid_summary'
-      elsif multi_bid?
-        'auctions/multi_bid/index_bid_summary'
-      end
+      auction.partial_path('index_bid_summary')
     end
 
     def highlighted_bid_info_partial
-      if single_bid?
-        'bids/single_bid/highlighted_bid_info'
-      elsif multi_bid?
-        'bids/multi_bid/highlighted_bid_info'
-      end
+      auction.partial_path('highlighted_bid_info', 'bids')
     end
 
     delegate :status, :label_class, :label, :tag_data_value_status,

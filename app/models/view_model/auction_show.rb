@@ -28,6 +28,7 @@ module ViewModel
     end
 
     def auction_status_partial
+      # how do I handle this?
       if auction.single_bid? && !auction_won?
         'auctions/single_bid/auction_status'
       else
@@ -40,8 +41,7 @@ module ViewModel
     end
 
     def win_header_partial
-      return 'auctions/multi_bid/win_header'  if auction.multi_bid?
-      return 'auctions/single_bid/win_header' if auction.single_bid?
+      auction.partial_path('win_header')
     end
 
     def auction_link_text

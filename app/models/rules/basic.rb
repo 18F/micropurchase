@@ -22,7 +22,7 @@ module Rules
         return auction.lowest_amount - PlaceBid::BID_INCREMENT
       end
     end
-    
+
     # so tests will pass for moment; will remove later
     def single_bid?
       false
@@ -32,10 +32,22 @@ module Rules
       true
     end
 
+    def partial_path(name, base_dir='auctions')
+      if partial_prefix.blank?
+        "#{base_dir}/#{name}.html.erb"
+      else
+        "#{base_dir}/#{partial_prefix}/#{name}.html.erb"
+      end
+    end
+
+    def partial_prefix
+      'multi_bid'
+    end
+
     def formatted_type
       'multi-bid'
     end
-    
+
     def rules_type
       'basic'
     end

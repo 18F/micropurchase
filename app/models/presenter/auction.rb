@@ -34,9 +34,9 @@ module Presenter
     )
 
     delegate :winning_bid, :veiled_bids, :single_bid?, :multi_bid?, :formatted_type,
-             :user_can_bid?, :max_allowed_bid,
+             :user_can_bid?, :max_allowed_bid, :partial_path,
              to: :auction_rules
-        
+
     def bids?
       bid_count > 0
     end
@@ -111,20 +111,20 @@ module Presenter
     private
 
     def auction_rules_class
-      type = case model.type 
+      type = case model.type
              when 'single_bid', 'sealed-bid'
                'SealedBid'
              else
                'Basic'
              end
-  
+
       "::Rules::#{type}".constantize
     end
 
     def auction_rules
       @auction_rules ||= auction_rules_class.new(self)
     end
-    
+
     def markdown
       # FIXME: Do we want the lax_spacing?
       @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML,
