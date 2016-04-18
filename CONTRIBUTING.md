@@ -27,9 +27,9 @@ We are following a variant of the standard [git flow](http://nvie.com/posts/a-su
 
 Unlike git flow, there is no requirement to prefix any of your branches with type strings like `feature/` or `hotfix/`, but you **must** submit any pull request against the `develop` branch. Pull requests against `master` will be rejected.
 
-### Presenters and Models
+### Preventing Technical Debt
 
-One drawback to Rails' standard model-view-controller paradigm is that model objects tend to get cluttered over time with many different presenter methods for displaying attributes in specific formats, etc. Rails already has a notion of `helpers`, but those can only be called from within views and live in a global namespace. Instead, we have defined separate Presenter classes for each model located in `app/models/presenter` and this is where most new functionality should be added. Model classes should contain only basic methods that operate with ActiveRecord.
+One drawback to Rails' standard model-view-controller paradigm is that model objects tend to get cluttered over time with many different methods for all sorts of different reasons. We want to prevent this as much as we can. Read our [document on technical debt](TECHNICAL_DEBT.md) to understand how things are organized.
 
 ## Public domain
 

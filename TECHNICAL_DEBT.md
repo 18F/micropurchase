@@ -212,9 +212,14 @@ This isn't really worth it for a little repetition in two methods, but
 it can be very convenient if you find yourself repeating the same
 conditionals in many methods.
 
+Similarly, we have a few places where we branch depending on the
+auction type. This will likely make a good candidate for similar
+refactoring in the future.
+
 # Null Objects
 
-Polymorphism is also useful for reducing the logic of null responses. Too often, we have code like this
+Polymorphism is also useful for reducing the logic of null
+responses. Too often, we have code like this
 
 ``` ruby
 user_bid = auction.user_bid
@@ -260,4 +265,8 @@ Much cleaner. There are a few places where we define `Null`
 equivalents to the `Presenter::Bid` and `Presenter::User` object for
 instance.
 
-# What's Next?
+# Further Reading
+
+* [Practical Object-Oriented Design in Ruby](http://www.sandimetz.com/products)
+* [Objects on Rails](http://objectsonrails.com/)
+* [Nothing is Something](https://www.youtube.com/watch?v=OMPfEXIlTVE)
