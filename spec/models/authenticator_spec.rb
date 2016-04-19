@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Authenticator do
   let(:authenticator) { Authenticator.new(auth_hash, session) }
-
   let(:auth_hash) do
     OmniAuth::AuthHash.new(
       provider: 'github',
@@ -16,12 +15,8 @@ RSpec.describe Authenticator do
   end
   let(:session) { {} }
 
-  before do
-    User.delete_all
-  end
-
   context 'when the uid exists in a user' do
-    let!(:user) { User.create(github_id: '12345') }
+    let!(:user) { FactoryGirl.create(:user, github_id: '12345', name: nil) }
 
     it 'does not create a new user' do
       expect { authenticator.perform }.to_not change { User.count }
