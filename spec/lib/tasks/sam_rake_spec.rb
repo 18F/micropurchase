@@ -7,15 +7,14 @@ RSpec.describe 'rake sam:check' do
       user = FactoryGirl.create(:user, sam_account: false)
       reckoner = SamAccountReckoner.new(user)
       Micropurchase::Application.load_tasks
-      allow(SamAccountReckoner).to receive(:new).and_return(reckoner)
-      expect(SamAccountReckoner.unreckoned).to_not be_empty
       allow(SamAccountReckoner).to receive(:unreckoned).and_return([user])
       allow(SamAccountReckoner).to receive(:new).with(user).and_return(reckoner)
-      allow(reckoner).to receive(:user_in_sam?).and_return(true)
+      client = double('samwise client', duns_is_in_sam?: true)
+      allow(Samwise::Client).to receive(:new).and_return(client)
 
       Rake::Task['sam:check'].invoke
 
-      expect(user).to be_sam_account
+      expect(user.reload).to be_sam_account
       expect(User.where(sam_account: false)).to be_empty
     end
   end

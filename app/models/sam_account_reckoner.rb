@@ -8,8 +8,9 @@ class SamAccountReckoner < Struct.new(:user)
   end
 
   def set
-    return true if user.sam_account?
-    user.sam_account = user_in_sam?
+    if !user.sam_account?
+      user.sam_account = user_in_sam?
+    end
   end
 
   def set!
