@@ -37,5 +37,5 @@ Feature: Credit Card Form URL
     And I visit my profile page
     When I fill in the Credit Card Form URL field on my profile page with "htt:/bad.url\\"
     And I click on the "Submit" button
-    Then I should see "Credit card form url is an invalid URL format"
+    Then I should see "Credit card form url is not a valid URL"
     And my Credit Card Form URL should not be set
