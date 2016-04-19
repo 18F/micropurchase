@@ -6,19 +6,8 @@ RSpec.describe Admin::UsersController do
       github_response_for_user(admin)
     end
   end
-  let!(:non_admin_users) do
-    duns_in_sam = 10.times.to_a.map { FactoryGirl.create(:user, :with_duns_in_sam) }
-    duns_not_in_sam = 10.times.to_a.map { FactoryGirl.create(:user, :with_duns_not_in_sam) }
-    without_duns = 10.times.to_a.map { FactoryGirl.create(:user) }
-
-    arr = []
-    arr.concat duns_in_sam
-    arr.concat duns_not_in_sam
-    arr.concat without_duns
-
-    arr
-  end
-  let(:admin)         { FactoryGirl.create(:admin_user, github_id: 86790) }
+  let!(:non_admin_users) { FactoryGirl.create_list(:user, 2) }
+  let(:admin) { FactoryGirl.create(:admin_user, github_id: 86790) }
   let(:json_response) { JSON.parse(response.body) }
   let(:json_non_admin_users) { json_response['admin_report']['non_admin_users'] }
   let(:headers) do

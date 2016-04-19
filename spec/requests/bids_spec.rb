@@ -6,7 +6,7 @@ RSpec.describe AuctionsController do
       github_response_for_user(user)
     end
   end
-  let(:user) { FactoryGirl.create(:user, :with_duns_in_sam) }
+  let(:user) { FactoryGirl.create(:user) }
   let(:headers) do
     {
       'HTTP_ACCEPT' => 'text/x-json',
@@ -185,7 +185,7 @@ RSpec.describe AuctionsController do
 
 
       context 'and the user has a false #sam_account' do
-        let(:user) { FactoryGirl.create(:user, :with_duns_not_in_sam, sam_account: false) }
+        let(:user) { FactoryGirl.create(:user, sam_account: false) }
         let(:bid_amount) { current_auction_price - 10 }
 
         it 'returns a json error' do
