@@ -19,3 +19,4 @@ exclude_paths:
 - spec/**/*
 - features/**/*
 - "**/vendor/**/*"
+- "lib/tasks/**"
