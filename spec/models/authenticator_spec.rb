@@ -21,7 +21,7 @@ RSpec.describe Authenticator do
   end
 
   context 'when the uid exists in a user' do
-    let!(:user) { User.create(github_id: '12345') }
+    let!(:user) { FactoryGirl.create(:user, github_id: '12345', name: nil) }
 
     it 'does not create a new user' do
       expect { authenticator.perform }.to_not change { User.count }

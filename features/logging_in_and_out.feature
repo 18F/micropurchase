@@ -8,7 +8,7 @@ Feature: logging in and out
     When I visit the home page
     And I click on the Login button
     Then I should see an "Authorize with GitHub" button
-    
+
     When I click on the "Authorize with GitHub" button
     Then I should see an "Edit profile" button
 

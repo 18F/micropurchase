@@ -42,7 +42,7 @@ end
 
 When(/^I fill out the profile form$/) do
   @new_name = Faker::Name.name
-  @new_duns = Faker::Company.duns_number
+  @new_duns = '12345678'
   @new_email = Faker::Internet.email
 
   expect(page).to have_content("Enter your DUNS number")
