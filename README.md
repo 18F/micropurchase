@@ -27,7 +27,7 @@ Updating the ERD requires Graphiz. Installation instructions are [here](http://v
 
 ## Local Development
 
-See the (local development docs)[doc/local_development.md] for information on
+See the [local development docs](doc/local_development.md) for information on
 setting up the codebase and running tests locally or with Docker.
 
 ### Coverage and CodeClimate
@@ -49,6 +49,10 @@ $ ./bin/codeclimate-batch --groups 2
 sent 2 reports for 18F-micropurchase-1248
 Code climate: 0.21s to send 2 reports
 ```
+
+## Deployment on Cloud Foundry
+
+See the [deployment docs](doc/deployment.md) for information on setting up and running the staging and production sites.
 
 ## Security Scans
 
@@ -78,6 +82,12 @@ bundle exec hakiri gemfile:scan
 ### Ignored Brakeman warnings
 
 Sometimes Brakeman will report a false positive. In cases like these, the warnings will be ignored. Ignored warnings are declared in `config/brakeman.ignore`. This file contains a machine-readable list of all ignored warnings. Any ignored warning will contain a note explaining (or linking to an explanation of) why the warning is ignored.
+
+## 18F Processes
+
+For information about working as part of the Micropurchase team, see the [onboarding docs](doc/onboarding.md).
+
+To see how the team handles technical debt, see the [technical debt docs](doc/technical_debt.md).
 
 ## Public domain
 

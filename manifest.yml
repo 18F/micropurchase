@@ -13,3 +13,5 @@ applications:
   env:
     RAILS_ENV: production
     RACK_ENV: production
+    MPT_3500_GITHUB_KEY: $(echo $VCAP_SERVICES | sed 's/-//g' | jq '.userprovided[0].credentials.client_id' )
+    MPT_3500_GITHUB_SECRET: $(echo $VCAP_SERVICES | sed 's/-//g' | jq '.userprovided[0].credentials.secret' )
