@@ -16,7 +16,7 @@ class SamAccountReckoner < Struct.new(:user)
     set
     user.save!
   end
-  
+
   private
 
   def should_clear?
