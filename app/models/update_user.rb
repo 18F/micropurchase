@@ -31,7 +31,7 @@ class UpdateUser < Struct.new(:params, :current_user)
     reckoner = SamAccountReckoner.new(user)
 
     reckoner.clear
-    reckoner.set! unless user.duns_number.blank?
+    reckoner.delay.set! unless user.duns_number.blank?
   rescue
     # do nothing
   end
