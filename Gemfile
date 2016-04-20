@@ -19,6 +19,9 @@ gem 'active_model_serializers'
 gem 'business_time'
 gem 'holidays'
 gem 'factory_girl_rails'
+gem 'delayed_job_active_record'
+gem 'daemons'
+gem 'foreman'
 
 group :test do
   gem "codeclimate-test-reporter", require: nil

@@ -116,5 +116,17 @@ RSpec.describe UpdateUser do
       user.reload
       expect(user.sam_account).to eq(false)
     end
+
+    it 'calls the SamAccountReckoner through a delayed job' do
+      reckoner = double('reckoner', clear: true)
+      allow(SamAccountReckoner).to receive(:new).with(user).and_return(reckoner)
+      delayed_job = double(set!: true)
+      allow(reckoner).to receive(:delay).and_return(delayed_job)
+      
+      updater.save
+
+      expect(reckoner).to have_received(:delay)
+      expect(delayed_job).to have_received(:set!)
+    end
   end
 end

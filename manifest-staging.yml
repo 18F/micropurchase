@@ -10,4 +10,4 @@ applications:
     - micropurchase-staging-psql
     - micropurchase-github
     - data-dot-gov
-  command: null
+  command: script/start

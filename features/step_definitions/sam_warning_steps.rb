@@ -51,11 +51,13 @@ Given(/^a SAM check for my DUNS will (.+)$/) do |action|
 end
 
 Then(/^I should become a valid SAM user$/) do
+  Delayed::Worker.new.work_off
   @user.reload
   expect(@user).to be_sam_account
 end
 
 Then(/^I should not become a valid SAM user$/) do
+  Delayed::Worker.new.work_off
   @user.reload
   expect(@user).to_not be_sam_account
 end

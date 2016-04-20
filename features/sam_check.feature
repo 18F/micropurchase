@@ -17,6 +17,7 @@ Feature: Automatically checking a user's SAM status
     When I enter a new DUNS in my profile
     And I click on the "Submit" button
     Then I should become a valid SAM user
+    When I refresh the page
     And I should not see a warning about my SAM registration
     When I visit my profile page
     Then I should see a success message that "Your DUNS number has been verified in Sam.gov"
@@ -43,8 +44,6 @@ Feature: Automatically checking a user's SAM status
     And I click on the "Submit" button
     Then I should not become a valid SAM user
     And I should see a warning that my SAM registration is not complete
-    When I visit my profile page
-    Then I should see an alert that my DUNS number was not found in Sam.gov
 
   Scenario: Negative SAM check on DUNS change
     Given I am a user without a verified SAM account
