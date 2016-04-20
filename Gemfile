@@ -19,6 +19,7 @@ gem 'business_time'
 gem 'holidays'
 gem 'delayed_job_active_record'
 gem 'daemons'
+gem 'foreman'
 
 group :test do
   gem "codeclimate-test-reporter", require: nil
