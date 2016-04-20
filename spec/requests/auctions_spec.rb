@@ -84,15 +84,15 @@ RSpec.describe AuctionsController do
             end
 
             it 'does not veil the bids from the authenticated user' do
-              expect(authenticated_users_bid['bidder_id']).to_not eq(nil)
+              expect(authenticated_users_bid['bidder_id']).to_not be_nil
 
               bidder = authenticated_users_bid['bidder']
 
-              expect(bidder['id']).to_not          eq(nil)
-              expect(bidder['github_id']).to_not   eq(nil)
-              expect(bidder['created_at']).to_not  eq(nil)
-              expect(bidder['updated_at']).to_not  eq(nil)
-              expect(bidder['sam_account']).to_not eq(nil)
+              expect(bidder['id']).to_not          be_nil
+              expect(bidder['github_id']).to_not   be_nil
+              expect(bidder['created_at']).to_not  be_nil
+              expect(bidder['updated_at']).to_not  be_nil
+              expect(bidder['sam_account']).to_not be_nil
             end
 
             it 'veils the bids not created by the authenticated user' do
@@ -108,14 +108,14 @@ RSpec.describe AuctionsController do
 
           it 'unveils all bids information' do
             json_bids.each do |bid|
-              expect(bid['bidder_id']).to_not eq(nil)
+              expect(bid['bidder_id']).to_not be_nil
               bidder = bid['bidder']
-              expect(bidder['id']).to_not          eq(nil)
-              expect(bidder['github_id']).to_not   eq(nil)
-              expect(bidder['created_at']).to_not  eq(nil)
-              expect(bidder['updated_at']).to_not  eq(nil)
-              expect(bidder['email']).to_not       eq(nil)
-              expect(bidder['sam_account']).to_not eq(nil)
+              expect(bidder['id']).to_not          be_nil
+              expect(bidder['github_id']).to_not   be_nil
+              expect(bidder['created_at']).to_not  be_nil
+              expect(bidder['updated_at']).to_not  be_nil
+              expect(bidder['email']).to_not       be_nil
+              expect(bidder['sam_account']).to_not be_nil
             end
           end
         end
@@ -128,13 +128,13 @@ RSpec.describe AuctionsController do
 
           it 'veils all bidder information' do
             json_bids.each do |bid|
-              expect(bid['bidder_id']).to eq(nil)
+              expect(bid['bidder_id']).to be_nil
               bidder = bid['bidder']
-              expect(bidder['id']).to          eq(nil)
-              expect(bidder['github_id']).to   eq(nil)
-              expect(bidder['created_at']).to  eq(nil)
-              expect(bidder['updated_at']).to  eq(nil)
-              expect(bidder['sam_account']).to eq(nil)
+              expect(bidder['id']).to          be_nil
+              expect(bidder['github_id']).to   be_nil
+              expect(bidder['created_at']).to  be_nil
+              expect(bidder['updated_at']).to  be_nil
+              expect(bidder['sam_account']).to be_nil
             end
           end
 
@@ -152,29 +152,29 @@ RSpec.describe AuctionsController do
             end
 
             it 'does not veil the bids from the authenticated user' do
-              expect(authenticated_users_bid['bidder_id']).to_not eq(nil)
+              expect(authenticated_users_bid['bidder_id']).to_not be_nil
 
               bidder = authenticated_users_bid['bidder']
 
-              expect(bidder['id']).to_not          eq(nil)
-              expect(bidder['github_id']).to_not   eq(nil)
-              expect(bidder['created_at']).to_not  eq(nil)
-              expect(bidder['updated_at']).to_not  eq(nil)
-              expect(bidder['sam_account']).to_not eq(nil)
+              expect(bidder['id']).to_not          be_nil
+              expect(bidder['github_id']).to_not   be_nil
+              expect(bidder['created_at']).to_not  be_nil
+              expect(bidder['updated_at']).to_not  be_nil
+              expect(bidder['sam_account']).to_not be_nil
             end
 
             it 'veils the bids not created by the authenticated user' do
               all_the_other_bids.each do |bid|
-                expect(bid['bidder_id']).to eq(nil)
+                expect(bid['bidder_id']).to be_nil
 
                 bidder = bid['bidder']
 
-                expect(bidder['id']).to          eq(nil)
-                expect(bidder['github_id']).to   eq(nil)
-                expect(bidder['created_at']).to  eq(nil)
-                expect(bidder['updated_at']).to  eq(nil)
-                expect(bidder['email']).to       eq(nil)
-                expect(bidder['sam_account']).to eq(nil)
+                expect(bidder['id']).to          be_nil
+                expect(bidder['github_id']).to   be_nil
+                expect(bidder['created_at']).to  be_nil
+                expect(bidder['updated_at']).to  be_nil
+                expect(bidder['email']).to       be_nil
+                expect(bidder['sam_account']).to be_nil
               end
             end
           end
@@ -188,14 +188,14 @@ RSpec.describe AuctionsController do
 
           it 'unveils all bidder information' do
             json_bids.each do |bid|
-              expect(bid['bidder_id']).to_not eq(nil)
+              expect(bid['bidder_id']).to_not be_nil
               bidder = bid['bidder']
-              expect(bidder['id']).to_not          eq(nil)
-              expect(bidder['github_id']).to_not   eq(nil)
-              expect(bidder['created_at']).to_not  eq(nil)
-              expect(bidder['updated_at']).to_not  eq(nil)
-              expect(bidder['email']).to_not       eq(nil)
-              expect(bidder['sam_account']).to_not eq(nil)
+              expect(bidder['id']).to_not          be_nil
+              expect(bidder['github_id']).to_not   be_nil
+              expect(bidder['created_at']).to_not  be_nil
+              expect(bidder['updated_at']).to_not  be_nil
+              expect(bidder['email']).to_not       be_nil
+              expect(bidder['sam_account']).to_not be_nil
             end
           end
         end
@@ -251,14 +251,14 @@ RSpec.describe AuctionsController do
 
           it 'veils all bidder information' do
             json_bids.each do |bid|
-              expect(bid['bidder_id']).to eq(nil)
+              expect(bid['bidder_id']).to be_nil
               bidder = bid['bidder']
-              expect(bidder['id']).to          eq(nil)
-              expect(bidder['github_id']).to   eq(nil)
-              expect(bidder['created_at']).to  eq(nil)
-              expect(bidder['updated_at']).to  eq(nil)
-              expect(bidder['email']).to       eq(nil)
-              expect(bidder['sam_account']).to eq(nil)
+              expect(bidder['id']).to          be_nil
+              expect(bidder['github_id']).to   be_nil
+              expect(bidder['created_at']).to  be_nil
+              expect(bidder['updated_at']).to  be_nil
+              expect(bidder['email']).to       be_nil
+              expect(bidder['sam_account']).to be_nil
             end
           end
 
@@ -270,14 +270,14 @@ RSpec.describe AuctionsController do
 
             it 'unveils all bidder information' do
               json_bids.each do |bid|
-                expect(bid['bidder_id']).to_not eq(nil)
+                expect(bid['bidder_id']).to_not be_nil
                 bidder = bid['bidder']
-                expect(bidder['id']).to_not          eq(nil)
-                expect(bidder['github_id']).to_not   eq(nil)
-                expect(bidder['created_at']).to_not  eq(nil)
-                expect(bidder['updated_at']).to_not  eq(nil)
-                expect(bidder['email']).to_not       eq(nil)
-                expect(bidder['sam_account']).to_not eq(nil)
+                expect(bidder['id']).to_not          be_nil
+                expect(bidder['github_id']).to_not   be_nil
+                expect(bidder['created_at']).to_not  be_nil
+                expect(bidder['updated_at']).to_not  be_nil
+                expect(bidder['email']).to_not       be_nil
+                expect(bidder['sam_account']).to_not be_nil
               end
             end
           end
@@ -303,14 +303,14 @@ RSpec.describe AuctionsController do
 
             it 'unveils all bids' do
               json_bids.each do |bid|
-                expect(bid['bidder_id']).to_not eq(nil)
+                expect(bid['bidder_id']).to_not be_nil
                 bidder = bid['bidder']
-                expect(bidder['id']).to_not          eq(nil)
-                expect(bidder['github_id']).to_not   eq(nil)
-                expect(bidder['created_at']).to_not  eq(nil)
-                expect(bidder['updated_at']).to_not  eq(nil)
-                expect(bidder['email']).to_not       eq(nil)
-                expect(bidder['sam_account']).to_not eq(nil)
+                expect(bidder['id']).to_not          be_nil
+                expect(bidder['github_id']).to_not   be_nil
+                expect(bidder['created_at']).to_not  be_nil
+                expect(bidder['updated_at']).to_not  be_nil
+                expect(bidder['email']).to_not       be_nil
+                expect(bidder['sam_account']).to_not be_nil
               end
 
               expect(json_bids.length).to eq(auctions.first.bids.length)
