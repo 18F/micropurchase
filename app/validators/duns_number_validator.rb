@@ -10,14 +10,20 @@ class DunsNumberValidator < ActiveModel::EachValidator
   private
 
   def invalid_duns_number?(value)
-    !contains_only_integers?(formatted_duns(value))
+    !contains_thirteen_integers?(formatted_duns(value))
   end
 
   def formatted_duns(value)
-    Samwise::Util.format_duns(duns: value)
+    begin
+      Samwise::Util.format_duns(duns: value)
+    rescue Samwise::Error::InvalidFormat
+      nil
+    end
   end
 
-  def contains_only_integers?(duns_number)
-    duns_number.match(/\A\d{8,13}\z/)
+  def contains_thirteen_integers?(duns_number)
+    if duns_number.present?
+      duns_number.match(/\A\d{13}\z/)
+    end
   end
 end

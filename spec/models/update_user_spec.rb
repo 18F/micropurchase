@@ -51,7 +51,7 @@ RSpec.describe UpdateUser do
         params = ActionController::Parameters.new(
           id: user_id,
           user: {
-            duns_number: "INVALID"
+            duns_number: "BAD"
           }
         )
 
