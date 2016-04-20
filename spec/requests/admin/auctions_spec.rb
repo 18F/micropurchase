@@ -4,7 +4,7 @@ describe Admin::AuctionsController do
   describe 'GET /admin/auctions' do
     context 'when the API key is invalid' do
       it 'returns a 404 HTTP response' do
-        admin = FactoryGirl.create(:admin_user, github_id: 86790)
+        admin = FactoryGirl.create(:admin_user)
         stub_github('/user') { github_response_for_user(admin) }
         api_key = FakeGitHub::INVALID_API_KEY
         headers = {
@@ -20,7 +20,7 @@ describe Admin::AuctionsController do
 
     context 'when the API key is missing' do
       it 'returns a 404 HTTP response' do
-        admin = FactoryGirl.create(:admin_user, github_id: 86790)
+        admin = FactoryGirl.create(:admin_user)
         stub_github('/user') { github_response_for_user(admin) }
         api_key = nil
         headers = {
@@ -37,7 +37,7 @@ describe Admin::AuctionsController do
     context 'when the API key is valid' do
 
       it 'returns a 200 HTTP response' do
-        admin = FactoryGirl.create(:admin_user, github_id: 86790)
+        admin = FactoryGirl.create(:admin_user)
         stub_github('/user') { github_response_for_user(admin) }
         api_key = FakeGitHub::VALID_API_KEY
         headers = {
@@ -52,7 +52,7 @@ describe Admin::AuctionsController do
 
       it 'returns valid auctions' do
         FactoryGirl.create(:auction, :with_bidders)
-        admin = FactoryGirl.create(:admin_user, github_id: 86790)
+        admin = FactoryGirl.create(:admin_user)
         stub_github('/user') { github_response_for_user(admin) }
         api_key = FakeGitHub::VALID_API_KEY
         headers = {
@@ -67,7 +67,7 @@ describe Admin::AuctionsController do
 
       it 'returns iso8601 dates' do
         FactoryGirl.create_list(:auction, 2, :with_bidders)
-        admin = FactoryGirl.create(:admin_user, github_id: 86790)
+        admin = FactoryGirl.create(:admin_user)
         stub_github('/user') { github_response_for_user(admin) }
         api_key = FakeGitHub::VALID_API_KEY
         headers = {
