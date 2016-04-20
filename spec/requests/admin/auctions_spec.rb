@@ -9,7 +9,7 @@ RSpec.describe Admin::AuctionsController do
   let!(:auctions) do
     10.times.to_a.map { FactoryGirl.create(:auction, :with_bidders) }
   end
-  let(:admin)         { FactoryGirl.create(:admin_user, github_id: 86790) }
+  let(:admin)         { FactoryGirl.create(:admin_user) }
   let(:json_response) { JSON.parse(response.body) }
   let(:json_auctions) { json_response['auctions'] }
   let(:headers) do
