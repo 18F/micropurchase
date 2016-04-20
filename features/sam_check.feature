@@ -17,7 +17,9 @@ Feature: Automatically checking a user's SAM status
     When I enter a new DUNS in my profile
     And I click on the "Submit" button
     Then I should become a valid SAM user
-    And I should not see a warning about my SAM registration
+    # TODO:
+    # And I referesh the page
+    Then I should not see a warning about my SAM registration
 
   Scenario: Exception during SAM check on login
     Given I am a user without a verified SAM account
@@ -25,7 +27,7 @@ Feature: Automatically checking a user's SAM status
     When I sign in and verify my account information
     Then I should not become a valid SAM user
     And I should see a warning that my SAM registration is not complete
-      
+
   Scenario: Negative SAM check on login
     Given I am a user without a verified SAM account
     And a SAM check for my DUNS will return false
@@ -41,7 +43,7 @@ Feature: Automatically checking a user's SAM status
     And I click on the "Submit" button
     Then I should not become a valid SAM user
     And I should see a warning that my SAM registration is not complete
-      
+
   Scenario: Negative SAM check on DUNS change
     Given I am a user without a verified SAM account
     And I am signed in
@@ -50,4 +52,3 @@ Feature: Automatically checking a user's SAM status
     And I click on the "Submit" button
     Then I should not become a valid SAM user
     And I should see a warning that my SAM registration is not complete
-
