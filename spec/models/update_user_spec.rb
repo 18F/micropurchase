@@ -59,8 +59,24 @@ RSpec.describe UpdateUser do
         updater.save
 
         expect(updater.errors).to eq(
-          'DUNS number must be integers only and between 8 and 13 digits long'
+          'DUNS number format is invalid'
         )
+      end
+    end
+
+    context 'user updates DUNS to nil' do
+      it 'does not raise validation error' do
+        params = ActionController::Parameters.new(
+          id: user_id,
+          user: {
+            duns_number: nil
+          }
+        )
+
+        updater = UpdateUser.new(params, current_user)
+        updater.save
+
+        expect(updater.errors).to eq('')
       end
     end
 

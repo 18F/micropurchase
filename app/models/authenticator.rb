@@ -16,7 +16,9 @@ class Authenticator < Struct.new(:auth_hash, :session)
   end
 
   def update_user
-    user.update_attribute(:name, name) if user.name.blank?
+    if user.name.blank?
+      user.update(name: name)
+    end
   end
 
   def sign_in

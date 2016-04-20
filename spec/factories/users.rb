@@ -1,9 +1,8 @@
 FactoryGirl.define do
   sequence(:github_id) { |n| n }
-  sequence(:duns_number) { |n| "1234567#{n}" }
 
   factory :user do
-    duns_number
+    duns_number { Faker::Company.duns_number }
     name { Faker::Name.name }
     email { Faker::Internet.email }
     github_id 123_456

@@ -9,4 +9,4 @@ en:
         user:
           attributes:
             duns_number:
-              invalid: 'must be integers only and between 8 and 13 digits long'
+              invalid: 'format is invalid'

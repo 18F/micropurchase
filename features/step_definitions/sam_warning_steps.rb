@@ -61,6 +61,6 @@ Then(/^I should not become a valid SAM user$/) do
 end
 
 Then(/^I enter a new DUNS in my profile$/) do
-  @new_duns = '12345678'
+  @new_duns = Faker::Company.duns_number
   fill_in("user_duns_number", with: @new_duns)
 end
