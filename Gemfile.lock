@@ -109,9 +109,15 @@ GEM
       nokogiri (~> 1.5)
       railties (>= 3, < 5)
     cucumber-wire (0.0.1)
+    daemons (1.2.3)
     database_cleaner (1.5.1)
     db-query-matchers (0.4.1)
     debug_inspector (0.0.2)
+    delayed_job (4.1.1)
+      activesupport (>= 3.0, < 5.0)
+    delayed_job_active_record (4.1.0)
+      activerecord (>= 3.0, < 5)
+      delayed_job (>= 3.0, < 5)
     diff-lcs (1.2.5)
     docile (1.1.5)
     domain_name (0.5.20160128)
@@ -134,6 +140,8 @@ GEM
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
     fastercsv (1.5.5)
+    foreman (0.78.0)
+      thor (~> 0.19.1)
     gherkin (3.2.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
@@ -366,12 +374,15 @@ DEPENDENCIES
   codeclimate-test-reporter
   codeclimate_batch
   cucumber-rails
+  daemons
   database_cleaner
   db-query-matchers
+  delayed_job_active_record
   dotenv-rails
   email_validator
   factory_girl_rails
   faker
+  foreman
   hakiri
   holidays
   jasmine
