@@ -18,6 +18,8 @@ Feature: Automatically checking a user's SAM status
     And I click on the "Submit" button
     Then I should become a valid SAM user
     And I should not see a warning about my SAM registration
+    When I visit my profile page
+    Then I should see a success message that "Your DUNS number has been verified in Sam.gov"
 
   Scenario: Exception during SAM check on login
     Given I am a user without a verified SAM account
@@ -25,7 +27,7 @@ Feature: Automatically checking a user's SAM status
     When I sign in and verify my account information
     Then I should not become a valid SAM user
     And I should see a warning that my SAM registration is not complete
-      
+
   Scenario: Negative SAM check on login
     Given I am a user without a verified SAM account
     And a SAM check for my DUNS will return false
@@ -41,7 +43,9 @@ Feature: Automatically checking a user's SAM status
     And I click on the "Submit" button
     Then I should not become a valid SAM user
     And I should see a warning that my SAM registration is not complete
-      
+    When I visit my profile page
+    Then I should see an alert that "Unable to find your account on SAM, please confirm your DUNS number"
+
   Scenario: Negative SAM check on DUNS change
     Given I am a user without a verified SAM account
     And I am signed in
@@ -51,3 +55,8 @@ Feature: Automatically checking a user's SAM status
     Then I should not become a valid SAM user
     And I should see a warning that my SAM registration is not complete
 
+  Scenario: No DUNS number present
+    Given I am a user without a DUNS number
+    And I am signed in
+    When I visit my profile page
+    Then I should see a warning that "You must supply a valid DUNS number"

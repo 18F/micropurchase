@@ -45,7 +45,6 @@ When(/^I fill out the profile form$/) do
   @new_duns = Faker::Company.duns_number
   @new_email = Faker::Internet.email
 
-  expect(page).to have_content("Enter your DUNS number")
   fill_in("user_name", with: @new_name)
   fill_in("user_duns_number", with: @new_duns)
   fill_in("user_email", with: @new_email)
@@ -117,6 +116,17 @@ end
 
 Then(/^I should see an alert that "([^"]*)"$/) do |message|
   within("div.usa-alert.usa-alert-error") do
+    expect(page).to have_content(message)
+  end
+end
+
+Then(/^I should see a warning that "([^"]*)"$/) do |message|
+  within("div.usa-alert.usa-alert-warning") do
+    expect(page).to have_content(message)
+  end
+end
+Then(/^I should see a success message that "([^"]*)"$/) do |message|
+  within("div.usa-alert.usa-alert-success") do
     expect(page).to have_content(message)
   end
 end
