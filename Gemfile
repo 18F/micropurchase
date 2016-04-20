@@ -17,6 +17,8 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'active_model_serializers'
 gem 'business_time'
 gem 'holidays'
+gem 'delayed_job_active_record'
+gem 'daemons'
 
 group :test do
   gem "codeclimate-test-reporter", require: nil
