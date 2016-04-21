@@ -5,17 +5,15 @@ RSpec.describe UpdateUser do
   let(:updater) { UpdateUser.new(params, user) }
 
   let(:user_id) { user.id }
-  let(:user_name) { Faker::Name.name }
-  let(:user_email) { Faker::Internet.email }
   let(:user_duns) { user.duns_number }
   let(:user_credit_card_url) { 'https://random-example.com/pay' }
-  
+
   let(:params) do
     ActionController::Parameters.new(
       id: user_id,
       user: {
-        name: user_name,
-        email: user_email,
+        name: Faker::Name.name,
+        email: Faker::Internet.email,
         duns_number: user_duns,
         credit_card_form_url: user_credit_card_url
       })
@@ -80,11 +78,10 @@ RSpec.describe UpdateUser do
     end
   end
 
-  
   context 'when user is found and can be edited by current user' do
     let(:user_duns) { Faker::Company.duns_number }
     before { allow_any_instance_of(SamAccountReckoner).to receive(:set!) }
-      
+
     it 'update the user when current user is the user' do
       updater.save
       user.reload
