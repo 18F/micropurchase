@@ -1,4 +1,4 @@
 require 'rails_helper'
 
-RSpec.describe User do
+describe User do
 end

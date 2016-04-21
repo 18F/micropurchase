@@ -41,7 +41,7 @@ Feature: Automatically checking a user's SAM status
     And I click on the "Submit" button
     Then I should not become a valid SAM user
     And I should see a warning that my SAM registration is not complete
-      
+
   Scenario: Negative SAM check on DUNS change
     Given I am a user without a verified SAM account
     And I am signed in
