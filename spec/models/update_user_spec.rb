@@ -48,6 +48,7 @@ RSpec.describe UpdateUser do
 
     context 'user updates DUNS to invalid DUNS number' do
       it 'raises validation error' do
+        old_duns_number = user.duns_number
         params = ActionController::Parameters.new(
           id: user_id,
           user: {
@@ -61,6 +62,7 @@ RSpec.describe UpdateUser do
         expect(updater.errors).to eq(
           'DUNS number format is invalid'
         )
+        expect(user.duns_number).to eq old_duns_number
       end
     end
 
