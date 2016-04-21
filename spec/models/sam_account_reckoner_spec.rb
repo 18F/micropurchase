@@ -64,7 +64,8 @@ describe SamAccountReckoner do
 
     context 'when the duns number has changed' do
       it 'clears the sam account validation' do
-        user = FactoryGirl.create(:user, sam_account: true, duns_number: 'old')
+        old = '123456789'
+        user = FactoryGirl.create(:user, sam_account: true, duns_number: old)
         user.duns_number = 'new'
 
         SamAccountReckoner.new(user).clear
