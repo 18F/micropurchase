@@ -59,10 +59,15 @@ When(/^there is no (.+) associated with my account$/) do |attribute|
   @user.update_attribute(attribute, nil)
 end
 
+Then(/^my (.+) should not be set$/) do |attribute|
+  attribute = attribute.parameterize('_')
+  expect(@user.send(attribute)).to be_blank
+end
+
 def fake_value_for_attribute(attribute)
   case attribute
   when 'credit_card_form_url'
-    Faker::Internet.url
+    Faker::Internet.url.gsub('http:', 'https:')
   when 'name'
     Faker::Name.name
   when 'duns_number'
@@ -82,7 +87,11 @@ end
 When(/^I fill in the (.+) field on my profile page$/) do |attribute|
   attribute = attribute.parameterize('_')
   value = fake_value_for_attribute(attribute)
+  step("I fill in the #{attribute} field on my profile page with \"#{value}\"")
+end
 
+When(/^I fill in the (.+) field on my profile page with "([^"]+)"$/) do |attribute, value|
+  attribute = attribute.parameterize('_')
   @new_values ||= {}
   @new_values[attribute] = value
   
