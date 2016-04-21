@@ -29,6 +29,6 @@ class SamAccountReckoner < Struct.new(:user)
   end
 
   def client
-    @client ||= Samwise::Client.new
+    @client ||= Samwise::Client.new(api_key: DataDotGovCredentials.api_key)
   end
 end

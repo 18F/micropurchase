@@ -9,6 +9,7 @@ applications:
   services:
     - micropurchase-psql
     - micropurchase-github
+    - data-dot-gov
   command: null
   env:
     RAILS_ENV: production

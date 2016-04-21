@@ -9,7 +9,5 @@ applications:
   services:
     - micropurchase-staging-psql
     - micropurchase-github
+    - data-dot-gov
   command: null
-  env:
-    RAILS_ENV: staging
-    RACK_ENV: staging
