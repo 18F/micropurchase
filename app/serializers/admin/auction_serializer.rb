@@ -21,7 +21,7 @@ module Admin
                :billable_to
 
     def delivery_deadline
-      object.delivery_deadline.iso8601
+      object.delivery_deadline.try(:iso8601)
     end
 
     def created_at

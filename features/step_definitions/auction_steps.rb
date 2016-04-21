@@ -55,7 +55,7 @@ end
 Then(/^I should see the winning bid for the auction$/) do
   auction = Presenter::Auction.new(@auction)
   lowest_bid_amount = ApplicationController.helpers.number_to_currency(
-    auction.lowest_amount
+    auction.lowest_bid.amount
   )
 
   expect(page).to have_text(lowest_bid_amount)

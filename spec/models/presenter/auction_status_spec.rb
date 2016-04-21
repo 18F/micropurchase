@@ -6,7 +6,7 @@ RSpec.describe ViewModel::Auction do
 
   context "when the auction is expiring soon" do
     let(:auction) do
-      a = Auction.new(start_datetime: Time.now - 3.day, end_datetime: Time.now + 3.hours, start_price: 3500, type: 1)
+      a = Auction.new(start_datetime: Time.current - 3.days, end_datetime: Time.current + 3.hours, start_price: 3500, type: 1)
       a.bids.build(amount: 3000)
       a
     end

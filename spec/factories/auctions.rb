@@ -2,7 +2,6 @@ FactoryGirl.define do
   factory :auction do
     start_datetime { Time.now - 3.days }
     end_datetime { Time.now + 3.days }
-    delivery_deadline { 5.business_days.after(end_datetime) }
     delivery_url { nil }
     awardee_paid_status { :not_paid }
     result { :not_applicable }
@@ -66,6 +65,11 @@ FactoryGirl.define do
           auction.bids << FactoryGirl.create(:bid, bidder_id: bidder_id, auction: auction, amount: amount)
         end
       end
+    end
+
+    trait :available do
+      start_datetime { Time.now - 2.days }
+      end_datetime { Time.now + 2.days }
     end
 
     trait :closed do
