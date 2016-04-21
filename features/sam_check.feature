@@ -17,8 +17,7 @@ Feature: Automatically checking a user's SAM status
     When I enter a new DUNS in my profile
     And I click on the "Submit" button
     Then I should become a valid SAM user
-    # TODO:
-    # And I referesh the page
+    And I referesh the page
     Then I should not see a warning about my SAM registration
 
   Scenario: Exception during SAM check on login
