@@ -33,6 +33,14 @@ module Presenter
     delegate :bidder_name, :bidder_duns_number,
              to: :lowest_bid, prefix: :lowest
 
+    delegate(
+      :future?,
+      :expiring?,
+      :over?,
+      :available?,
+      to: :auction_status
+    )
+
     def bids?
       bid_count > 0
     end
@@ -104,22 +112,6 @@ module Presenter
       model.winning_bid.bidder_id
     end
 
-    def available?
-      AuctionStatus.new(model).available?
-    end
-
-    def expiring?
-      AuctionStatus.new(model).expiring?
-    end
-
-    def future?
-      AuctionStatus.new(model).future?
-    end
-
-    def over?
-      AuctionStatus.new(model).over?
-    end
-
     def html_description
       return '' if description.blank?
       markdown.render(description)
@@ -158,6 +150,10 @@ module Presenter
       else
         "in #{distance}"
       end
+    end
+
+    def auction_status
+      AuctionStatus.new(model)
     end
 
     def decorated_bid(bid)
