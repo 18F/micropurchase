@@ -7,6 +7,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'us_web_design_standards'
 gem 'omniauth'
 gem 'omniauth-github'
+gem 'clockwork'
 gem 'chronic'
 gem 'email_validator'
 gem 'validate_url'
@@ -49,9 +50,11 @@ group :development, :test do
 end
 
 group :development do
-  gem 'web-console', '~> 2.0'
+  gem 'letter_opener'
+  gem 'letter_opener_web'
   gem 'rails-erd'
   gem 'rubocop'
+  gem 'web-console', '~> 2.0'
 end
 
 group :production, :staging do
