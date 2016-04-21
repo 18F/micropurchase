@@ -1,5 +1,5 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :github,
-          GithubCredentials.client_id,
-          GithubCredentials.secret
+          ENV['MPT_3500_GITHUB_KEY'],
+          ENV['MPT_3500_GITHUB_SECRET']
 end

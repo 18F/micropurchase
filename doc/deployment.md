@@ -45,7 +45,9 @@ The above command will interactively prompt you for your GitHub application keys
 
 The value stored locally in `MPT_3500_GITHUB_KEY` is the `client_id`.
 
-The value stored locally in `MPT_3500_GITHUB_SECRET` is the `secret.`
+The value stored locally in `MPT_3500_GITHUB_SECRET` is the `secret`.
+
+When using a user-provided service, Cloud Foundry stores the credentials as part of an environmental variable called `VCAP_SERVICES`. To avoid CF-specific code, the credentials can be parsed out of the JSON during deployment; see the [application manifest](../manifest.yml) to see how this happens.
 
 Bind your services to the app:
 
