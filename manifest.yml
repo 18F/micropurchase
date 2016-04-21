@@ -15,3 +15,4 @@ applications:
     RACK_ENV: production
     MPT_3500_GITHUB_KEY: $(echo $VCAP_SERVICES | sed 's/-//g' | jq '.userprovided[] | select(.name=="micropurchase-github") | .credentials.client_id' )
     MPT_3500_GITHUB_SECRET: $(echo $VCAP_SERVICES | sed 's/-//g' | jq '.userprovided[] | select(.name=="micropurchase-github") | .credentials.secret' )
+    DATA_DOT_GOV_API_KEY: $(echo $VCAP_SERVICES | sed 's/-//g' | jq '.userprovided[] | select(.name=="data-dot-gov") | .credentials.api_key' )
