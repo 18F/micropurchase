@@ -13,5 +13,5 @@ applications:
   env:
     RAILS_ENV: staging
     RACK_ENV: staging
-    MPT_3500_GITHUB_KEY: $(echo $VCAP_SERVICES | sed 's/-//g' | jq '.userprovided[0].credentials.client_id' )
-    MPT_3500_GITHUB_SECRET: $(echo $VCAP_SERVICES | sed 's/-//g' | jq '.userprovided[0].credentials.secret' )
+    MPT_3500_GITHUB_KEY: $(echo $VCAP_SERVICES | sed 's/-//g' | jq '.userprovided[] | select(.name=="micropurchase-github") | .credentials.client_id' )
+    MPT_3500_GITHUB_SECRET: $(echo $VCAP_SERVICES | sed 's/-//g' | jq '.userprovided[] | select(.name=="micropurchase-github") | .credentials.secret' )
