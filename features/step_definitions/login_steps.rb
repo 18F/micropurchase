@@ -45,7 +45,6 @@ When(/^I fill out the profile form$/) do
   @new_duns = Faker::Company.duns_number
   @new_email = Faker::Internet.email
 
-  expect(page).to have_content("Enter your DUNS number")
   fill_in("user_name", with: @new_name)
   fill_in("user_duns_number", with: @new_duns)
   fill_in("user_email", with: @new_email)
@@ -113,12 +112,6 @@ Then(/^I should see my (.+) in the "([^"]*)" field$/) do |attribute, field|
   attribute = attribute.parameterize('_')
   field = find_field(field)
   expect(field.value).to eq(@user.send(attribute))
-end
-
-Then(/^I should see an alert that "([^"]*)"$/) do |message|
-  within("div.usa-alert.usa-alert-error") do
-    expect(page).to have_content(message)
-  end
 end
 
 Then(/^I should see my changes$/) do

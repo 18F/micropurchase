@@ -11,6 +11,12 @@ Given(/^I am a user without a verified SAM account$/) do
   mock_sign_in(@user.github_id, @user.name)
 end
 
+Given(/^I am a user without a DUNS number$/) do
+  @user = FactoryGirl.create(:user, sam_account: false, github_id: '123451', duns_number: nil)
+  @github_id = @user.github_id
+  mock_sign_in(@user.github_id, @user.name)
+end
+
 Given(/^I am an administrator$/) do
   @user = FactoryGirl.create(:admin_user)
   @github_id = @user.github_id
@@ -40,4 +46,3 @@ When(/^I sign in and verify my account information/) do
   step "I sign in"
   click_on "Submit"
 end
-
