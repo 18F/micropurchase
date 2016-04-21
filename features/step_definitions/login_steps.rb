@@ -114,23 +114,6 @@ Then(/^I should see my (.+) in the "([^"]*)" field$/) do |attribute, field|
   expect(field.value).to eq(@user.send(attribute))
 end
 
-Then(/^I should see an alert that "([^"]*)"$/) do |message|
-  within("div.usa-alert.usa-alert-error") do
-    expect(page).to have_content(message)
-  end
-end
-
-Then(/^I should see a warning that "([^"]*)"$/) do |message|
-  within("div.usa-alert.usa-alert-warning") do
-    expect(page).to have_content(message)
-  end
-end
-Then(/^I should see a success message that "([^"]*)"$/) do |message|
-  within("div.usa-alert.usa-alert-success") do
-    expect(page).to have_content(message)
-  end
-end
-
 Then(/^I should see my changes$/) do
   @user = User.where(github_id: @github_id).first
   expect(@user).to_not be_nil
