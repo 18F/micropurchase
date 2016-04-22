@@ -23,6 +23,7 @@ Feature: Bidding
     Then I should see an "Authorize with GitHub" button
 
     When I click on the "Authorize with GitHub" link
+    And I visit my profile page
     Then I should be on my profile page
     And I click on the "Submit" button
     Then I should see the auction's title

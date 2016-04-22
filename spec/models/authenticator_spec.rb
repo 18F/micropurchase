@@ -1,87 +1,66 @@
 require 'rails_helper'
 
-RSpec.describe Authenticator do
-  let(:authenticator) { Authenticator.new(auth_hash, session) }
-  let(:auth_hash) do
-    OmniAuth::AuthHash.new(
-      provider: 'github',
-      uid: '12345',
-      info: {
-        name: 'Kane',
-        email: 'email@gemal.com',
-        image: 'github-image.png'
-      }
-    )
-  end
-  let(:session) { {} }
-
+describe Authenticator do
   context 'when the uid exists in a user' do
-    let!(:user) { FactoryGirl.create(:user, github_id: '12345', name: nil) }
-
     it 'does not create a new user' do
-      expect { authenticator.perform }.to_not change { User.count }
+      FactoryGirl.create(:user, github_id: github_id_from_oauth)
+      authenticator = Authenticator.new(auth_hash, {})
+      expect { authenticator.perform }.not_to change { User.count }
     end
 
     it 'updates the user with additional data' do
+      user = FactoryGirl.create(:user)
+      allow(User).to receive(:find_or_create_by).with(github_id: github_id_from_oauth).and_return(user)
+      authenticator = Authenticator.new(auth_hash, {})
+      allow(user).to receive(:from_oauth_hash).with(auth_hash)
+
       authenticator.perform
-      user.reload
-      expect(user.name).to eq('Kane')
+
+      expect(user).to have_received(:from_oauth_hash).with(auth_hash)
     end
 
     it 'signs in the user into the session' do
-      authenticator.perform
-      expect(session[:user_id]).to eq(user.id)
-    end
+      user = FactoryGirl.create(:user, github_id: github_id_from_oauth)
+      session = {}
+      authenticator = Authenticator.new(auth_hash, session)
 
-    it 'returns the redirect path' do
-      expect(authenticator.perform)
-        .to eq(controller: :users,
-               action: :edit,
-               id: user.id,
-               only_path: true)
+      authenticator.perform
+
+      expect(session[:user_id]).to eq(user.id)
     end
   end
 
   context 'when the uid does not exist' do
-    let(:user) { User.where(github_id: '12345').first }
-
     it 'creates a new user' do
+      authenticator = Authenticator.new(auth_hash, {})
+
       expect { authenticator.perform }.to change { User.count }
-      expect(user.name).to eq('Kane')
     end
 
     it 'signs in the user into the session' do
-      authenticator.perform
-      expect(session[:user_id]).to eq(user.id)
-    end
+      user = FactoryGirl.create(:user, github_id: github_id_from_oauth)
+      session = {}
+      authenticator = Authenticator.new(auth_hash, session)
 
-    it 'returns the redirect path' do
-      expect(authenticator.perform)
-        .to eq(controller: :users,
-               action: :edit,
-               id: user.id,
-               only_path: true)
+      authenticator.perform
+
+      expect(session[:user_id]).to eq(user.id)
     end
   end
 
-  context 'when the user is an admin' do
-    let(:admin_uid) { Admins.github_ids.first }
+  def auth_hash
+    OmniAuth::AuthHash.new(
+      provider: 'github',
+      uid: github_id_from_oauth,
+      info: {
+        name: 'Kane',
+        email: 'email@example.com',
+        image: 'github-image.png'
+      }
+    )
+  end
 
-    let(:auth_hash) do
-      OmniAuth::AuthHash.new(
-        provider: 'github',
-        uid: admin_uid,
-        info: {
-          name: 'Kane',
-          email: 'email@gemal.com',
-          image: 'github-image.png'})
-    end
-
-    it 'has the redirect url as home' do
-      expect(authenticator.perform)
-        .to eq(controller: :auctions,
-               action: :index,
-               only_path: true)
-    end
+  def github_id_from_oauth
+    '12345'
   end
 end

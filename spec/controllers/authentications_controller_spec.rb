@@ -8,17 +8,22 @@ RSpec.describe AuthenticationsController do
       expect(session[:user_id]).to_not eq(nil)
     end
 
-    it 'should redirect to edit the user when not an admin' do
+    it 'should redirect to root path if no return to set' do
       request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
+      request.env['HTTP_REFERER'] = nil
+
       get :create, provider: 'github'
-      expect(response).to redirect_to("http://test.host/users/#{User.last.id}/edit")
+
+      expect(response).to redirect_to("http://test.host/")
     end
 
-    it 'should redirect to home when an admin' do
-      mock_github(uid: Admins.github_ids.first)
+    it 'should redirect to return to path if present' do
       request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
+      request.env['HTTP_REFERER'] = "http://test.host/auctions"
+
       get :create, provider: 'github'
-      expect(response).to redirect_to("http://test.host/")
+
+      expect(response).to redirect_to("http://test.host/auctions")
     end
 
     it 'should create a new user' do

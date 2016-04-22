@@ -14,7 +14,8 @@ Feature: Automatically checking a user's SAM status
     Given I am a user without a verified SAM account
     And I am signed in
     And a SAM check for my DUNS will return true
-    When I enter a new DUNS in my profile
+    When I visit my profile page
+    And I enter a new DUNS in my profile
     And I click on the "Submit" button
     Then I should become a valid SAM user
     And I should not see a warning about my SAM registration
@@ -39,7 +40,8 @@ Feature: Automatically checking a user's SAM status
     Given I am a user without a verified SAM account
     And I am signed in
     And a SAM check for my DUNS will raise an exception
-    When I enter a new DUNS in my profile
+    When I visit my profile page
+    And I enter a new DUNS in my profile
     And I click on the "Submit" button
     Then I should not become a valid SAM user
     And I should see a warning that my SAM registration is not complete
@@ -50,7 +52,8 @@ Feature: Automatically checking a user's SAM status
     Given I am a user without a verified SAM account
     And I am signed in
     And a SAM check for my DUNS will return false
-    When I enter a new DUNS in my profile
+    When I visit my profile page
+    And I enter a new DUNS in my profile
     And I click on the "Submit" button
     Then I should not become a valid SAM user
     And I should see a warning that my SAM registration is not complete
