@@ -24,7 +24,7 @@ class UsersController < ApplicationController
       redirect_to root_path
     else
       @user = updater.user
-      flash[:error] = updater.errors
+      flash.now[:error] = updater.errors
       render :edit
     end
   end
