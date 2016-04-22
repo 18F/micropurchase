@@ -5,17 +5,18 @@ end
 
 def github_request_headers
   {
-    'Accept'          => 'application/vnd.github.v3+json',
-    'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-    'Content-Type'    => 'application/json',
-    'User-Agent'      => 'Octokit Ruby Gem 4.2.0'
+    'Accept'=>'application/vnd.github.v3+json',
+    'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+    'Authorization'=>'token validKeyAbcdfgh123',
+    'Content-Type'=>'application/json',
+    'User-Agent'=>'Octokit Ruby Gem 4.3.0'
   }
 end
 
 def handle_request(request, response_body: nil)
-  response_headers = {'Content-Type' => 'application/json'}
+  response_headers = { 'Content-Type' => 'application/json' }
   bad_credentials  = "{\"message\":\"Bad Credentials\"}"
-  token            = request.headers['Authorization'].split[1] rescue nil
+  token = request.headers['Authorization'].split[1] rescue nil
 
   if token != FakeGitHub::VALID_API_KEY
     response_body = bad_credentials
