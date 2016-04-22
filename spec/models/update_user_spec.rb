@@ -1,11 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe UpdateUser do
-  let(:user) { FactoryGirl.create(:user) }
   let(:updater) { UpdateUser.new(params, user) }
-
+  let(:user) { FactoryGirl.create(:user) }
   let(:user_id) { user.id }
-  let(:user_duns) { user.duns_number }
+  let(:valid_duns_number) { '012345678' }
   let(:user_credit_card_url) { 'https://random-example.com/pay' }
 
   let(:params) do
@@ -13,15 +12,16 @@ RSpec.describe UpdateUser do
       id: user_id,
       user: {
         name: Faker::Name.name,
+        duns_number: valid_duns_number,
         email: Faker::Internet.email,
-        duns_number: user_duns,
         credit_card_form_url: user_credit_card_url
-      })
+      }
+    )
   end
 
   context 'when current user is not the same as the user being edited' do
-    let(:user2) { FactoryGirl.create(:user) }
-    let(:user_id) { user2.id }
+    let(:other_user) { FactoryGirl.create(:user) }
+    let(:user_id) { other_user.id }
 
     it 'raises UnauthorizedError' do
       expect { updater.save }.to raise_error(UnauthorizedError)
@@ -37,6 +37,7 @@ RSpec.describe UpdateUser do
   end
 
   context 'when the params are insufficient' do
+    let(:user_id) { user.id }
     let(:params) do
       ActionController::Parameters.new(id: user_id)
     end
@@ -68,13 +69,46 @@ RSpec.describe UpdateUser do
   end
 
   context 'when user is found and can be edited by current user' do
-    let(:user_duns) { Faker::Company.duns_number }
-    before { allow_any_instance_of(SamAccountReckoner).to receive(:set!) }
+    context 'user updates DUNS to invalid DUNS number' do
+      it 'raises validation error' do
+        user = FactoryGirl.create(:user)
+        old_duns_number = user.duns_number
+        params = ActionController::Parameters.new(
+          id: user.id,
+          user: {
+            duns_number: "BAD"
+          }
+        )
+
+        updater = UpdateUser.new(params, user)
+        updater.save
+
+        expect(updater.errors).to eq('DUNS number format is invalid')
+        expect(user.duns_number).to eq old_duns_number
+      end
+    end
+
+    context 'user updates DUNS to nil' do
+      it 'does not raise validation error' do
+        user = FactoryGirl.create(:user)
+        params = ActionController::Parameters.new(
+          id: user.id,
+          user: {
+            duns_number: nil
+          }
+        )
+
+        updater = UpdateUser.new(params, user)
+        updater.save
+
+        expect(updater.errors).to eq('')
+      end
+    end
 
     it 'update the user when current user is the user' do
       updater.save
       user.reload
-      expect(user.duns_number).to eq(user_duns)
+      expect(user.duns_number).to eq(valid_duns_number)
     end
 
     it 'clears the sam id, when it has changed' do
