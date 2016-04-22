@@ -9,6 +9,9 @@ class Auction < ActiveRecord::Base
   # Disable STI
   self.inheritance_column = :__disabled
 
+  validates :end_datetime, presence: true
+  validates :start_datetime, presence: true
+
   def winning_bid
     if single_bid? && AuctionStatus.new(self).available?
       nil
