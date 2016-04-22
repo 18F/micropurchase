@@ -9,20 +9,41 @@ module ViewModel
       @auction ||= Presenter::Auction.new(auction_record)
     end
 
-    delegate :title, :summary, :html_description, :bid_count,
-             :issue_url,
-             :start_datetime, :end_datetime, :veiled_bids,
-             :created_at, :html_summary,
-             :html_description, :formatted_type, :available?, :bids?,
-             :bids, :human_start_time, :start_price, :over?,
-             :multi_bid?, :single_bid?, :type, :id,
-             :read_attribute_for_serialization, :to_param,
-             to: :auction
+    delegate(
+      :available?,
+      :bid_count,
+      :bids,
+      :bids?,
+      :created_at,
+      :end_datetime,
+      :expiring?,
+      :formatted_type,
+      :future?,
+      :html_description,
+      :html_description,
+      :html_summary,
+      :human_start_time,
+      :id,
+      :issue_url,
+      :multi_bid?,
+      :over?,
+      :read_attribute_for_serialization,
+      :single_bid?,
+      :start_datetime,
+      :start_price,
+      :summary,
+      :title,
+      :to_param,
+      :type,
+      :updated_at,
+      :veiled_bids,
+      to: :auction
+    )
 
     def user_can_bid?
-      return false unless auction.available?
+      return false unless available?
       return false if current_user.nil? || !current_user.sam_account?
-      return false if auction.single_bid? && user_is_bidder?
+      return false if single_bid? && user_is_bidder?
       true
     end
 
@@ -36,7 +57,7 @@ module ViewModel
     # summary of the bidding. Unlike the lowest bid, it differs based
     # on the type of auction and whether the auction is closed
     def highlighted_bid
-      if auction.available? && auction.single_bid?
+      if available? && single_bid?
         auction.bids.detect {|bid| bid.bidder_id == current_user.id } || Presenter::Bid::Null.new
       else
         auction.lowest_bid
@@ -82,17 +103,17 @@ module ViewModel
     end
 
     def index_bid_summary_partial
-      if auction.single_bid?
+      if single_bid?
         'auctions/single_bid/index_bid_summary'
-      elsif auction.multi_bid?
+      elsif multi_bid?
         'auctions/multi_bid/index_bid_summary'
       end
     end
 
     def highlighted_bid_info_partial
-      if auction.single_bid?
+      if single_bid?
         'bids/single_bid/highlighted_bid_info'
-      elsif auction.multi_bid?
+      elsif multi_bid?
         'bids/multi_bid/highlighted_bid_info'
       end
     end
@@ -104,11 +125,11 @@ module ViewModel
     private
 
     def status_presenter_class
-      status_name = if auction.expiring?
+      status_name = if expiring?
                       'Expiring'
-                    elsif auction.over?
+                    elsif over?
                       'Over'
-                    elsif auction.future?
+                    elsif future?
                       'Future'
                     else
                       'Open'

@@ -20,12 +20,30 @@ module Presenter
       end
     end
 
-    delegate :title, :created_at, :start_datetime, :end_datetime,
-             :github_repo, :issue_url, :summary, :description,
-             :delivery_deadline, :start_price, :published, :to_param,
-             :model_name, :to_key, :to_model, :type, :id, :single_bid?, :multi_bid?,
-             :read_attribute_for_serialization, :lowest_bid,
-             to: :model
+    delegate(
+      :created_at,
+      :delivery_deadline,
+      :description,
+      :end_datetime,
+      :github_repo,
+      :id,
+      :issue_url,
+      :model_name,
+      :multi_bid?,
+      :published,
+      :read_attribute_for_serialization,
+      :single_bid?,
+      :start_datetime,
+      :start_price,
+      :summary,
+      :title,
+      :to_key,
+      :to_model,
+      :to_param,
+      :type,
+      :updated_at,
+      to: :model
+    )
 
     delegate :amount, :time,
              to: :lowest_bid, prefix: :lowest_bid
