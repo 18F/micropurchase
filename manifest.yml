@@ -10,7 +10,4 @@ applications:
     - micropurchase-psql
     - micropurchase-github
     - data-dot-gov
-  command: null
-  env:
-    RAILS_ENV: production
-    RACK_ENV: production
+  command: script/start

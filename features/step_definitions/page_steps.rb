@@ -1,3 +1,7 @@
+When(/^I refresh the page$/) do
+  visit page.current_path
+end
+
 When(/^I click on the "?([^"]+)"? button$/) do |button|
   # will click the first if there are two with same text!
   first(:link_or_button, button).click
