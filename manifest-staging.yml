@@ -12,3 +12,6 @@ applications:
     - micropurchase-smtp
     - data-dot-gov
   command: script/start
+  env:
+    RAILS_ENV: staging
+    RACK_ENV: staging
