@@ -47,14 +47,6 @@ class PlaceBid < Struct.new(:params, :current_user)
     Presenter::Auction.new(auction).max_allowed_bid
   end
 
-  def auction_is_single_bid?
-    auction.type == 'single_bid'
-  end
-
-  def auction_is_multi_bid?
-    auction.type == 'multi_bid'
-  end
-
   def bidder_already_bid_on_this_auction?
     return false if auction.bids.empty?
 
@@ -63,7 +55,7 @@ class PlaceBid < Struct.new(:params, :current_user)
 
   # rubocop:disable Style/IfUnlessModifier, Style/GuardClause
   def validate_bid_data
-    if auction_is_single_bid? && bidder_already_bid_on_this_auction?
+    if auction.single_bid? && bidder_already_bid_on_this_auction?
       fail UnauthorizedError, 'You can only bid once in a single-bid auction.'
     end
 
@@ -83,7 +75,7 @@ class PlaceBid < Struct.new(:params, :current_user)
       fail UnauthorizedError, 'Bid amount out of range'
     end
 
-    if auction_is_multi_bid? && amount > max_allowed_bid
+    if auction.multi_bid? && amount > max_allowed_bid
       fail UnauthorizedError, "Bids cannot be greater than the current max bid"
     end
   end

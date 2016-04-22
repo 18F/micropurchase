@@ -30,8 +30,7 @@ module ViewModel
       user_can_bid? || current_user.nil?
     end
 
-    delegate :amount,
-             to: :highlighted_bid, prefix: true
+    delegate :amount, to: :highlighted_bid, prefix: true
 
     # This is the single bid we display under the auction as an important
     # summary of the bidding. Unlike the lowest bid, it differs based
@@ -51,7 +50,7 @@ module ViewModel
     def highlighted_bidder_name
       highlighted_bid.bidder_name
     end
-    
+
     def user_is_bidder?
       user_bids_obj.has_bid?
     end

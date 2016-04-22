@@ -52,11 +52,11 @@ module Presenter
     end
 
     def is_winning?
-      model.id == presenter_auction.winning_bid_id
+      model.id == presenter_auction.winning_bid.id
     end
 
     def winning_status
-      if presenter_auction.single_bid? && presenter_auction.available?
+      if auction.single_bid? && presenter_auction.available?
         return 'n/a'
       else
         is_winning?
@@ -74,6 +74,10 @@ module Presenter
 
     class Null
       NULL = "&nbsp;".html_safe
+
+      def created_at
+        nil
+      end
 
       def time
         NULL
