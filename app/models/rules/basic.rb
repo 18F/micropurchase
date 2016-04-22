@@ -23,15 +23,10 @@ module Rules
       end
     end
 
-    # so tests will pass for moment; will remove later
-    def single_bid?
-      false
+    def highlighted_bid(user)
+      auction.lowest_bid
     end
-
-    def multi_bid?
-      true
-    end
-
+    
     def show_bids?
       true
     end

@@ -25,6 +25,7 @@ module Presenter
     delegate :bidder_name, :bidder_duns_number,
              to: :lowest_bid, prefix: :lowest
 
+
     delegate(
       :future?,
       :expiring?,
@@ -33,9 +34,9 @@ module Presenter
       to: :auction_status
     )
 
-    delegate :winning_bid, :veiled_bids, :single_bid?, :multi_bid?, :formatted_type,
+    delegate :winning_bid, :veiled_bids, :formatted_type,
              :user_can_bid?, :max_allowed_bid, :partial_path, :highlighted_bid_label,
-             :auction_rules_href, :show_bids?,
+             :auction_rules_href, :show_bids?, :highlighted_bid,
              to: :auction_rules
 
     def bids?
@@ -60,15 +61,6 @@ module Presenter
     def ends_at
       Presenter::DcTime.convert_and_format(model.end_datetime)
     end
-
-    # def formatted_type
-    #   return 'multi-bStruct.new(:auction)id'  if model.type == 'multi_bid'
-    #   return 'single-bid' if model.type == 'single_bid'
-    # end
-
-    # def type
-    #   model.type
-    # end
 
     def starts_in
       time_in_human(model.start_datetime)

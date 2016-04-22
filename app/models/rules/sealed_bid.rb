@@ -22,15 +22,6 @@ module Rules
       auction.start_price - PlaceBid::BID_INCREMENT
     end
 
-    # so tests will pass for moment; will remove later
-    def single_bid?
-      true
-    end
-
-    def multi_bid?
-      false
-    end
-
     def show_bids?
       !auction.available?
     end
@@ -41,6 +32,14 @@ module Rules
 
     def formatted_type
       'single-bid'
+    end
+
+    def highlighted_bid(user)
+      if auction.available?
+        auction.bids.detect {|bid| bid.bidder_id == user.id } || Presenter::Bid::Null.new
+      else
+        auction.lowest_bid
+      end
     end
 
     def highlighted_bid_label

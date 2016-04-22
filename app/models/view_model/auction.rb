@@ -42,28 +42,18 @@ module ViewModel
     )
 
     def user_can_bid?
-      return false unless available?
-      return false if current_user.nil? || !current_user.sam_accepted?
-      return false if single_bid? && user_is_bidder?
-      true
+      auction.user_can_bid?(current_user)
     end
 
+    def highlighted_bid
+      auction.highlighted_bid(current_user)
+    end
+    
     def show_bid_button?
       user_can_bid? || current_user.nil?
     end
 
     delegate :amount, to: :highlighted_bid, prefix: true
-
-    # This is the single bid we display under the auction as an important
-    # summary of the bidding. Unlike the lowest bid, it differs based
-    # on the type of auction and whether the auction is closed
-    def highlighted_bid
-      if available? && single_bid?
-        auction.bids.detect {|bid| bid.bidder_id == current_user.id } || Presenter::Bid::Null.new
-      else
-        auction.lowest_bid
-      end
-    end
 
     def highlighted_bid_amount_as_currency
       number_to_currency(highlighted_bid_amount)
