@@ -10,6 +10,7 @@ module ViewModel
     end
 
     delegate(
+      :auction_rules_href,
       :available?,
       :bid_count,
       :bids,
@@ -26,7 +27,9 @@ module ViewModel
       :id,
       :issue_url,
       :over?,
+      :partial_path,
       :read_attribute_for_serialization,
+      :show_bids?,
       :start_datetime,
       :start_price,
       :summary,

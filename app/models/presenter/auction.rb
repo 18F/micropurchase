@@ -34,7 +34,8 @@ module Presenter
     )
 
     delegate :winning_bid, :veiled_bids, :single_bid?, :multi_bid?, :formatted_type,
-             :user_can_bid?, :max_allowed_bid, :partial_path,
+             :user_can_bid?, :max_allowed_bid, :partial_path, :highlighted_bid_label,
+             :auction_rules_href, :show_bids?,
              to: :auction_rules
 
     def bids?

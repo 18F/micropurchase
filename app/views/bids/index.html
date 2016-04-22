@@ -8,7 +8,7 @@
 
 <a class="link-highlighted" href="<%= auction_path(@auction) %>"><icon class="fa fa-angle-double-left"></icon> Back to auction</a>
 
-<% if @auction.available? && @auction.single_bid? %>
+<% if !@auction.show_bids? %>
   <p>
     Bids are sealed until the auction ends. See the <a href='/auctions/rules/single-bid'>auction rules</a> to learn more.
   </p>

@@ -25,7 +25,8 @@ module ViewModel
       end
 
       def tag_data_value_2
-        if auction.single_bid?
+        # Do we still need this? 
+        if !auction.show_bids?
           "Sealed"
         else
           "#{number_to_currency(auction.highlighted_bid_amount)} - #{auction.bids.length} bids"

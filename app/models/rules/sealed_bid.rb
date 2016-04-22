@@ -31,12 +31,24 @@ module Rules
       false
     end
 
+    def show_bids?
+      !auction.available?
+    end
+    
     def partial_prefix
       'single_bid'
     end
 
     def formatted_type
       'single-bid'
+    end
+
+    def highlighted_bid_label
+      'Your bid:'
+    end
+
+    def auction_rules_href
+      '/auction/rules/single-bid'
     end
   end
 end

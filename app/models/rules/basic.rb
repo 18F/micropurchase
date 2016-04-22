@@ -32,6 +32,10 @@ module Rules
       true
     end
 
+    def show_bids?
+      true
+    end
+    
     def partial_path(name, base_dir='auctions')
       if partial_prefix.blank?
         "#{base_dir}/#{name}.html.erb"
@@ -50,6 +54,14 @@ module Rules
 
     def rules_type
       'basic'
+    end
+
+    def highlighted_bid_label
+      'Current bid:'
+    end
+
+    def auction_rules_href
+      '/auctions/rules/multi-bid'
     end
   end
 end
