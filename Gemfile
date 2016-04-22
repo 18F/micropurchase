@@ -18,6 +18,7 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'active_model_serializers'
 gem 'business_time'
 gem 'holidays'
+gem 'factory_girl_rails'
 
 group :test do
   gem "codeclimate-test-reporter", require: nil
@@ -48,10 +49,6 @@ group :development do
   gem 'web-console', '~> 2.0'
   gem 'rails-erd'
   gem 'rubocop'
-end
-
-group :staging, :development, :test do
-  gem 'factory_girl_rails'
 end
 
 group :production, :staging do

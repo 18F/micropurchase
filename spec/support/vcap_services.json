@@ -30,6 +30,15 @@
     "name": "micropurchase-github",
     "syslog_drain_url": "",
     "tags": []
-   }
+  },
+  {
+   "credentials": {
+    "api_key": "fakeapikey"
+   },
+   "label": "user-provided",
+   "name": "data-dot-gov",
+   "syslog_drain_url": "",
+   "tags": []
+  }
   ]
 }
