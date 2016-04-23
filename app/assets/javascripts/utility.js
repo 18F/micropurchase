@@ -1,3 +1,5 @@
+'use strict';
+
 (function (window) {
 	var microp = {};
 
@@ -16,7 +18,7 @@
     return function () {
       var context = scope || this;
 
-      var now = +new Date,
+      var now = +new Date(),
           args = arguments;
       if (last && now < last + threshhold) {
         // hold on to it
@@ -30,12 +32,10 @@
         fn.apply(context, args);
       }
     };
-  }
+  };
 
   microp.format = function(format) {
-    return (typeof format === 'function')
-      ? format
-      : d3.format(format);
+    return (typeof format === 'function') ? format : d3.format(format);
   };
 
   microp.format.transform = function(format, transform) {
@@ -55,12 +55,12 @@
   };
 
   microp.format.removeGitPrefix = function(str) {
-    return str.split("https://github.com/").join("");
+    return str.split('https://github.com/').join('');
   };
 
   microp.format.transformDollars = function(str) {
     if (str.charAt(0) === '-') {
-      str = '-' + str.substr(1)
+      str = '-' + str.substr(1);
     }
     return '$' + str;
   };
@@ -76,9 +76,9 @@
   microp.format.date = function (date, seperator) {
     var dateObj,
       date;
-    if (typeof(date) == 'string') {
+    if (typeof(date) === 'string') {
       dateObj = new Date(date);
-    } else if (typeof(date) == 'object') {
+    } else if (typeof(date) === 'object') {
       dateObj = date;
     }
 
