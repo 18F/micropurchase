@@ -100,7 +100,7 @@ module Presenter
       end
 
       def amount
-        NULL
+        nil #NULL
       end
     end
   end

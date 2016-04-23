@@ -20,7 +20,7 @@ RSpec.describe Presenter::Auction do
       end
       
       specify { expect(auction.lowest_bids).to eq([]) }
-      specify { expect(auction.lowest_amount).to be_nil }
+      specify { expect(auction.lowest_bid_amount).to be_nil }
     end
     
     context 'when there are multiple bids' do
@@ -61,7 +61,7 @@ RSpec.describe Presenter::Auction do
       end
 
       it 'lowest_amount should return the lowest bid' do
-        expect(auction.lowest_amount).to eq(ar_bids_by_amount.first.amount)
+        expect(auction.lowest_bid_amount).to eq(ar_bids_by_amount.first.amount)
       end
     end
 
@@ -105,7 +105,37 @@ RSpec.describe Presenter::Auction do
       end
     end
   end
-  
+
+  # describe "#winning_bid" do
+  #   context "auction is single bid and open" do
+  #     let(:ar_auction) { FactoryGirl.create(:auction, :single_bid, :running) }
+
+  #     it "returns nil" do
+  #       expect(auction.winning_bid).to be_nil
+  #     end
+  #   end
+
+  #   context "auction is single bid and closed" do
+  #     it "returns lowest bid" do
+  #       auction = FactoryGirl.create(:auction, :single_bid, :closed)
+  #       low_bid = FactoryGirl.create(:bid, auction: auction, amount: 1)
+  #       _high = FactoryGirl.create(:bid, auction: auction, amount: 10000)
+
+  #       expect(auction.winning_bid).to eq low_bid
+  #     end
+  #   end
+
+  #   context "auction is multi bid and open" do
+  #     it "returns lowest bid" do
+  #       auction = FactoryGirl.create(:auction, :available, :multi_bid)
+  #       low_bid = FactoryGirl.create(:bid, auction: auction, amount: 1)
+  #       _high = FactoryGirl.create(:bid, auction: auction, amount: 10000)
+        
+  #       expect(auction.winning_bid).to eq low_bid
+  #     end
+  #   end
+  # end
+
   describe 'type-specific bid methods' do
     context 'for a single-bid auction' do
       context 'when the auction is still running' do

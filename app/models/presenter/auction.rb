@@ -16,7 +16,7 @@ module Presenter
              :github_repo, :issue_url, :summary, :description,
              :delivery_deadline, :start_price, :published, :to_param,
              :model_name, :to_key, :to_model, :type, :id,
-             :read_attribute_for_serialization, :lowest_bid,
+             :read_attribute_for_serialization,
              to: :model
 
     delegate :amount, :time,
@@ -24,7 +24,6 @@ module Presenter
 
     delegate :bidder_name, :bidder_duns_number,
              to: :lowest_bid, prefix: :lowest
-
 
     delegate(
       :future?,
@@ -45,9 +44,17 @@ module Presenter
 
     def bids
       @bids ||= model.bids.to_a
-        .map {|bid| decorated_bid(bid) }
-        .sort_by(&:created_at)
-        .reverse
+                     .map {|bid| decorated_bid(bid) }
+                     .sort_by(&:created_at)
+                     .reverse
+    end
+
+    def lowest_bids
+      model.lowest_bids.map {|b| decorated_bid(b) }
+    end
+
+    def lowest_bid
+      decorated_bid(model.lowest_bid)
     end
 
     def bid_count
@@ -74,12 +81,8 @@ module Presenter
       time_in_human(model.delivery_deadline)
     end
 
-    def lowest_bid
-      decorated_bid(model.lowest_bid)
-    end
-
     def winning_bidder_id
-      model.winning_bid.bidder_id
+      winning_bid.bidder_id
     end
 
     def html_description

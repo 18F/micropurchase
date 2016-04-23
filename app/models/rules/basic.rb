@@ -19,7 +19,7 @@ module Rules
       if auction.lowest_bid.is_a?(Presenter::Bid::Null)
         return auction.start_price - PlaceBid::BID_INCREMENT
       else
-        return auction.lowest_amount - PlaceBid::BID_INCREMENT
+        return auction.lowest_bid_amount - PlaceBid::BID_INCREMENT
       end
     end
 

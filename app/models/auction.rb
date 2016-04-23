@@ -12,16 +12,12 @@ class Auction < ActiveRecord::Base
   validates :end_datetime, presence: true
   validates :start_datetime, presence: true
 
-  def winning_bid
-    if single_bid? && AuctionStatus.new(self).available?
-      nil
-    else
-      lowest_bid
-    end
+  def lowest_bids
+    bids.select {|b| b.amount == lowest_amount }.sort_by(&:created_at)
   end
 
   def lowest_bid
-    bids.select {|b| b.amount == lowest_amount }.sort_by(&:created_at).first
+    lowest_bids.first
   end
 
   private
