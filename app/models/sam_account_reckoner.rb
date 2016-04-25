@@ -28,9 +28,9 @@ class SamAccountReckoner < Struct.new(:user)
 
   def sam_status
     if client.duns_is_in_sam?(duns: user.duns_number)
-      1
+      :sam_accepted
     else
-      2
+      :sam_rejected
     end
   end
 
