@@ -6,16 +6,30 @@ module ViewModel
       @auction ||= ViewModel::Auction.new(current_user, auction_record)
     end
 
-    delegate :title, :summary, :html_description, :status, :id,
-             :bid_count, :issue_url,
-             :user_bid_amount_as_currency, :show_bid_button?,
-             to: :auction, prefix: true
-
-    delegate :highlighted_bid_amount_as_currency,
-             :highlighted_bid_amount, :highlighted_bid, :auction_type,
-             :auction_rules_href,
-             to: :auction
-
+    delegate(
+      :bid_count,
+      :html_description,
+      :id,
+      :issue_url,
+      :show_bid_button?,
+      :status_text,
+      :summary,
+      :title,
+      :user_bid_amount_as_currency,
+      to: :auction,
+      prefix: true
+    )
+    
+    delegate(
+      :auction_rules_href,
+      :auction_status,
+      :auction_type,
+      :highlighted_bid,
+      :highlighted_bid_amount,
+      :highlighted_bid_amount_as_currency,
+      to: :auction
+    )
+    
     def auction_status_header
       if auction_won?
         "Winning bid (#{auction.highlighted_bidder_name}):"

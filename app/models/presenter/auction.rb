@@ -12,19 +12,43 @@ module Presenter
       @auction = auction
     end
 
-    delegate :title, :created_at, :start_datetime, :end_datetime,
-             :github_repo, :issue_url, :summary, :description,
-             :delivery_deadline, :start_price, :published, :to_param,
-             :model_name, :to_key, :to_model, :type, :id,
-             :read_attribute_for_serialization,
-             to: :model
+    delegate(
+      :created_at,
+      :delivery_deadline,
+      :description,
+      :end_datetime,
+      :github_repo,
+      :id,
+      :issue_url,
+      :model_name,
+      :published,
+      :read_attribute_for_serialization,
+      :start_datetime,
+      :start_price,
+      :summary,
+      :title,
+      :to_key,
+      :to_model,
+      :to_param,
+      :type,
+      :updated_at,
+      to: :model
+    )
 
-    delegate :amount, :time,
-             to: :lowest_bid, prefix: :lowest_bid
-
-    delegate :bidder_name, :bidder_duns_number,
-             to: :lowest_bid, prefix: :lowest
-
+    delegate(
+      :amount,
+      :time,
+      to: :lowest_bid,
+      prefix: :lowest_bid
+    )
+    
+    delegate(
+      :bidder_duns_number,
+      :bidder_name, 
+      to: :lowest_bid,
+      prefix: :lowest
+    )
+    
     delegate(
       :future?,
       :expiring?,
@@ -33,11 +57,20 @@ module Presenter
       to: :auction_status
     )
 
-    delegate :winning_bid, :veiled_bids, :formatted_type,
-             :user_can_bid?, :max_allowed_bid, :partial_path, :highlighted_bid_label,
-             :auction_rules_href, :show_bids?, :highlighted_bid,
-             to: :auction_rules
-
+    delegate(
+      :auction_rules_href,
+      :formatted_type,
+      :highlighted_bid,
+      :highlighted_bid_label,
+      :max_allowed_bid,
+      :partial_path,
+      :show_bids?,
+      :user_can_bid?,
+      :veiled_bids,
+      :winning_bid,
+      to: :auction_rules
+    )
+    
     def bids?
       bid_count > 0
     end

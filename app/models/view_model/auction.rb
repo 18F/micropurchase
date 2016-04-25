@@ -20,6 +20,7 @@ module ViewModel
       :expiring?,
       :formatted_type,
       :future?,
+      :highlighted_bid_label,
       :html_description,
       :html_description,
       :html_summary,
@@ -101,10 +102,16 @@ module ViewModel
       auction.partial_path('highlighted_bid_info', 'bids')
     end
 
-    delegate :status, :label_class, :label, :tag_data_value_status,
-             :tag_data_label_2, :tag_data_value_2,
-             to: :status_presenter
-
+    delegate(
+      :label,
+      :label_class,
+      :status_text,
+      :tag_data_label_2,
+      :tag_data_value_status,
+      :tag_data_value_2,
+      to: :status_presenter
+    )
+    
     private
 
     def status_presenter_class

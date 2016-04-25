@@ -3,7 +3,7 @@ module ViewModel
     class Over < Struct.new(:auction)
       include ActionView::Helpers::NumberHelper
 
-      def status
+      def status_text
         'Closed'
       end
       

@@ -4,7 +4,7 @@ module ViewModel
       include ActionView::Helpers::DateHelper
       include ActionView::Helpers::NumberHelper
 
-      def status
+      def status_text
         'Open'
       end
       
