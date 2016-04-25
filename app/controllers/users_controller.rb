@@ -5,9 +5,12 @@ class UsersController < ApplicationController
 
     if current_user.duns_number.blank?
       flash.now[:warning] = "You must supply a valid DUNS number"
-    elsif current_user.sam_account?
+    elsif current_user.sam_pending?
+      flash.now[:warning] = "Your profile is pending while your DUNS number is
+      being validated. This typically takes less than one hour"
+    elsif current_user.sam_accepted?
       flash.now[:success] = "Your DUNS number has been verified in Sam.gov"
-    elsif !current_user.sam_account?
+    elsif current_user.sam_rejected?
       flash.now[:error] = "Your DUNS number was not found in Sam.gov. Please enter
       a valid DUNS number to complete your profile. Check
       https://www.sam.gov/sam/helpPage/SAM_Reg_Status_Help_Page.html to make

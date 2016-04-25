@@ -128,7 +128,7 @@ Then(/^I should see my changes$/) do
   expect(@user).to_not be_nil
 
   expect(@user.duns_number).to eq(@new_duns)
-  expect(@user).to_not be_sam_account
+  expect(@user).to be_sam_pending
   expect(@user.email).to eq(@new_email)
   expect(@user.name).to eq(@new_name)
 

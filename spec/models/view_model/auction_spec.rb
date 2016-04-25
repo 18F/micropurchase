@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ViewModel::Auction, type: :model do
   let(:ar_auction) { FactoryGirl.create(:auction) }
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryGirl.create(:user, sam_status: :sam_accepted) }
   let(:auction) { ViewModel::Auction.new(user, ar_auction) }
 
   describe 'bid status checks' do
@@ -19,8 +19,8 @@ RSpec.describe ViewModel::Auction, type: :model do
         end
       end
 
-      context 'when the user does not have a SAM account' do
-        let(:user) { FactoryGirl.create(:user, sam_account: false) }
+      context 'when the user does not have a verified SAM account' do
+        let(:user) { FactoryGirl.create(:user, sam_status: :sam_pending) }
 
         it 'should return false for show_bid_button?' do
           expect(auction.show_bid_button?).to be_falsey
@@ -82,7 +82,7 @@ RSpec.describe ViewModel::Auction, type: :model do
       end
 
       context 'when the user does not have a SAM account' do
-        let(:user) { FactoryGirl.create(:user, sam_account: false) }
+        let(:user) { FactoryGirl.create(:user, sam_status: :sam_pending) }
 
         it 'should return false for show_bid_button?' do
           expect(auction.show_bid_button?).to be_falsey

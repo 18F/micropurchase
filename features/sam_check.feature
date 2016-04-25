@@ -23,11 +23,19 @@ Feature: Automatically checking a user's SAM status
     When I visit my profile page
     Then I should see a success message that "Your DUNS number has been verified in Sam.gov"
 
+  Scenario: Pending SAM check on DUNS edit
+    Given I am a user without a verified SAM account
+    And I am signed in
+    When I enter a new DUNS in my profile
+    And I click on the "Submit" button
+    When I visit my profile page
+    Then I should see a warning that "Your profile is pending while your DUNS number is being validated. This typically takes less than one hour"
+
   Scenario: Exception during SAM check on login
     Given I am a user without a verified SAM account
     And a SAM check for my DUNS will raise an exception
     When I sign in and verify my account information
-    Then I should not become a valid SAM user
+    Then I should remain a pending SAM user
     And I should see a warning that my SAM registration is not complete
 
   Scenario: Negative SAM check on login
@@ -44,7 +52,7 @@ Feature: Automatically checking a user's SAM status
     When I visit my profile page
     And I enter a new DUNS in my profile
     And I click on the "Submit" button
-    Then I should not become a valid SAM user
+    Then I should remain a pending SAM user
     And I should see a warning that my SAM registration is not complete
 
   Scenario: Negative SAM check on DUNS change

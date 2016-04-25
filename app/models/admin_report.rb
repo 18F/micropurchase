@@ -27,6 +27,8 @@ class AdminReport
   end
 
   def non_admin_users_in_sam
-    non_admin_users.select(&:sam_account?)
+    non_admin_users.select do |user|
+      user.sam_accepted?
+    end
   end
 end

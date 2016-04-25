@@ -114,7 +114,7 @@ RSpec.describe UpdateUser do
     it 'clears the sam id, when it has changed' do
       updater.save
       user.reload
-      expect(user.sam_account).to eq(false)
+      expect(user).to be_sam_pending
     end
 
     it 'calls the SamAccountReckoner through a delayed job' do
@@ -122,7 +122,7 @@ RSpec.describe UpdateUser do
       allow(SamAccountReckoner).to receive(:new).with(user).and_return(reckoner)
       delayed_job = double(set!: true)
       allow(reckoner).to receive(:delay).and_return(delayed_job)
-      
+
       updater.save
 
       expect(reckoner).to have_received(:delay)

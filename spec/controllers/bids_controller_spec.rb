@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe BidsController, controller: true do
-  let(:current_bidder) { FactoryGirl.create(:user) }
+  let(:current_bidder) { FactoryGirl.create(:user, sam_status: :sam_accepted) }
   let(:auction) { FactoryGirl.create(:auction) }
 
   describe '/my-bids' do
@@ -33,7 +33,7 @@ RSpec.describe BidsController, controller: true do
   describe '#new' do
     context 'when logged in' do
       it 'should render the bid information' do
-        get :new, {auction_id: auction.id}, user_id: current_bidder.id
+        get :new, { auction_id: auction.id }, user_id: current_bidder.id
         expect(response).to render_template(:new)
       end
 
@@ -41,7 +41,7 @@ RSpec.describe BidsController, controller: true do
         let(:auction) { FactoryGirl.create(:auction, :published) }
 
         it 'renders the template' do
-          get :new, {auction_id: auction.id}, user_id: current_bidder.id
+          get :new, { auction_id: auction.id }, user_id: current_bidder.id
           expect(response).to render_template(:new)
         end
       end

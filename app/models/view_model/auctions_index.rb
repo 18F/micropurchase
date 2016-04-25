@@ -13,7 +13,7 @@ module ViewModel
     end
 
     def header_partial
-      if current_user && current_user.sam_account?
+      if current_user && current_user.sam_accepted?
         '/components/sam_verified_header'
       elsif current_user
         '/components/no_sam_verification_header'

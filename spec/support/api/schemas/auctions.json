@@ -116,8 +116,8 @@
                       "type": ["string", "null"],
                       "minLength": 1
                     },
-                    "sam_account": {
-                      "type": ["boolean", "null"]
+                    "sam_status": {
+                      "type": ["string", "null"]
                     },
                     "created_at": {
                       "type": ["date-time", "null"],
@@ -136,7 +136,7 @@
                     "github_id",
                     "duns_number",
                     "name",
-                    "sam_account",
+                    "sam_status",
                     "created_at",
                     "updated_at",
                     "id",

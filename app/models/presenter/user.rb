@@ -9,11 +9,7 @@ module Presenter
     end
 
     def in_sam?
-      if model.sam_account == true
-        'Yes'
-      else
-        'No'
-      end
+      model.sam_status
     end
 
     def model
