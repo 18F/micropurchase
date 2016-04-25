@@ -1,4 +1,4 @@
-class Authenticator < Struct.new(:auth_hash, :session)
+class LoginUser < Struct.new(:auth_hash, :session)
   def perform
     user.from_oauth_hash(auth_hash)
     sign_in

@@ -1,6 +1,6 @@
 class AuthenticationsController < ApplicationController
   def create
-    Authenticator.new(request.env['omniauth.auth'], session).perform
+    LoginUser.new(request.env['omniauth.auth'], session).perform
     redirect_back_or_root_path
   end
 
