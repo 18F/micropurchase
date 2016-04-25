@@ -8,24 +8,6 @@ RSpec.describe AuthenticationsController do
       expect(session[:user_id]).to_not eq(nil)
     end
 
-    it 'should redirect to root path if no return to set' do
-      request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
-      request.env['HTTP_REFERER'] = nil
-
-      get :create, provider: 'github'
-
-      expect(response).to redirect_to("http://test.host/")
-    end
-
-    it 'should redirect to return to path if present' do
-      request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
-      request.env['HTTP_REFERER'] = "http://test.host/auctions"
-
-      get :create, provider: 'github'
-
-      expect(response).to redirect_to("http://test.host/auctions")
-    end
-
     it 'should create a new user' do
       request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
       expect { get :create, provider: 'github' }.to change { User.count }.by(1)

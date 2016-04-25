@@ -20,7 +20,8 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from 'UnauthorizedError::RedirectToLogin' do |error|
-    redirect_to '/login'
+    store_location
+    redirect_to login_path
   end
 
   rescue_from UnauthorizedError do |error|
@@ -63,6 +64,12 @@ class ApplicationController < ActionController::Base
       redirect_to '/'
     elsif api_request?
       render json: {error: message}, status: 404
+    end
+  end
+
+  def store_location
+    if request.get?
+      session[:return_to] = request.original_fullpath
     end
   end
 end

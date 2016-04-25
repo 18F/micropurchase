@@ -10,7 +10,9 @@ Feature: logging in and out
     Then I should see an "Authorize with GitHub" button
 
     When I click on the "Authorize with GitHub" button
-    And I visit my profile page
+    Then I should be on the home page
+
+    When I visit my profile page
     And I click on the "Edit profile" button
     Then I should see a profile form with my info
     And there should be meta tags for the edit profile form
