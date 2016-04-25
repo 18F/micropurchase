@@ -1,11 +1,11 @@
 require "rails_helper"
 
-RSpec.describe ApplicationController::ApiAuthenticator, type: :model do
+describe ApiAuthenticator, type: :model do
   let(:api_key)   { '12345' }
   let(:headers) { {'HTTP_API_KEY' => api_key} }
   let(:request) { double('request', headers: headers) }
   let(:controller) { double('controller', request: request) }
-  let(:authenticator) { ApplicationController::ApiAuthenticator.new(controller) }
+  let(:authenticator) { ApiAuthenticator.new(controller) }
 
   describe "require_authentication" do
     context 'when the API key is absent' do

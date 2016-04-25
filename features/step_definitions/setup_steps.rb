@@ -44,5 +44,6 @@ end
 
 When(/^I sign in and verify my account information/) do
   step "I sign in"
+  step "I visit my profile page"
   click_on "Submit"
 end

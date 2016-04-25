@@ -8,14 +8,14 @@
       "file": "app/controllers/authentications_controller.rb",
       "line": 4,
       "link": "http://brakemanscanner.org/docs/warning_types/redirect/",
-      "code": "redirect_to(Authenticator.new(request.env[\"omniauth.auth\"], session).perform)",
+      "code": "redirect_to(LoginUser.new(request.env[\"omniauth.auth\"], session).perform)",
       "render_path": null,
       "location": {
         "type": "method",
         "class": "AuthenticationsController",
         "method": "create"
       },
-      "user_input": "Authenticator.new(request.env[\"omniauth.auth\"], session).perform",
+      "user_input": "LoginUser.new(request.env[\"omniauth.auth\"], session).perform",
       "confidence": "High",
       "note": "Fixed here: https://github.com/18F/micropurchase/commit/799d74393c394e016fba5eab9df1eb638a7d2b06"
     }

@@ -1,9 +1,9 @@
 require "rails_helper"
 
-RSpec.describe ApplicationController::WebAuthenticator, type: :model do
+describe WebAuthenticator, type: :model do
   let(:session) { {user_id: user.id} }
   let(:controller) { double('controller', session: session) }
-  let(:authenticator) { ApplicationController::WebAuthenticator.new(controller) }
+  let(:authenticator) { WebAuthenticator.new(controller) }
 
   describe 'require_authentication' do
     context 'when no current user' do

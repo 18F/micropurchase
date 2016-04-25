@@ -44,6 +44,7 @@ When(/^I visit my bids page$/) do
 end
 
 When(/^I visit my profile page$/) do
+  @user = User.find_by(github_id: @github_id)
   visit edit_user_path(@user)
 end
 

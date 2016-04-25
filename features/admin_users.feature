@@ -13,7 +13,7 @@ Feature: Admin Users
   Scenario: counting the numbers of users and admins
     Given I am an administrator
     And there are users in the system
-    And I sign in
     When I visit the admin users page
+    And I sign in
     Then I expect the page to show me the number of regular users
     And I expect the page to show me the number of admin users
