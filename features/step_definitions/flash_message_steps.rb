@@ -21,6 +21,7 @@ Then(/^I should see an alert that my DUNS number was not found in Sam\.gov$/) do
 end
 
 Then(/^I should see a warning that "([^"]*)"$/) do |message|
+  # expect(page).to have_content(message)
   within("div.usa-alert.usa-alert-warning") do
     expect(page).to have_content(message)
   end
