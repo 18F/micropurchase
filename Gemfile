@@ -24,6 +24,7 @@ gem 'simple_form'
 gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'foreman'
+gem 'c2', github: '18f/c2-api-client-ruby'
 
 group :test do
   gem "codeclimate-test-reporter", require: nil

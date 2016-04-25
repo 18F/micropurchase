@@ -17,6 +17,8 @@ Given(/^there is an? (.+) auction$/) do |label|
                FactoryGirl.create(:auction, :running, :single_bid)
              when 'closed single-bid'
                FactoryGirl.create(:auction, :closed, :with_bidders, :single_bid)
+             when 'needs evaluation'
+               FactoryGirl.create(:auction, :with_bidders, :evaluation_needed)
              else
                fail "Unrecognized auction type: #{label}"
              end
