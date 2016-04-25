@@ -8,6 +8,8 @@ Feature: Automatically checking a user's SAM status
     And a SAM check for my DUNS will return true
     When I sign in and verify my account information
     Then I should become a valid SAM user
+
+    When I visit the home page
     And I should not see a warning about my SAM registration
 
   Scenario: Successful SAM check on DUNS edit
@@ -26,8 +28,10 @@ Feature: Automatically checking a user's SAM status
   Scenario: Pending SAM check on DUNS edit
     Given I am a user without a verified SAM account
     And I am signed in
-    When I enter a new DUNS in my profile
+    When I visit my profile page
+    And I enter a new DUNS in my profile
     And I click on the "Submit" button
+
     When I visit my profile page
     Then I should see a warning that "Your profile is pending while your DUNS number is being validated. This typically takes less than one hour"
 
