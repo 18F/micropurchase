@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe UpdateUser do
   let(:updater) { UpdateUser.new(params, user) }
-  let(:user) { FactoryGirl.create(:user, sam_account: true) }
+  let(:user) { FactoryGirl.create(:user, sam_status: :sam_accepted) }
   let(:user_id) { user.id }
   let(:user_duns_number) { user.duns_number }
   let(:user_credit_card_url) { 'https://random-example.com/pay' }

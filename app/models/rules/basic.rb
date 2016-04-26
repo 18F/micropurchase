@@ -11,7 +11,7 @@ module Rules
 
     def user_can_bid?(user)
       return false unless auction.available?
-      return false if user.nil? || !user.sam_account?
+      return false if user.nil? || !user.sam_accepted?
       true
     end
 
