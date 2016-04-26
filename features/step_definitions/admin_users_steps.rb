@@ -13,8 +13,8 @@ When(/^I should see my user info$/) do
 end
 
 Given(/^there are users in the system$/) do
-  @number_of_users = 11
-  @number_of_users.times { FactoryGirl.create(:user) }
+  @number_of_users = 1
+  FactoryGirl.create(:user)
 end
 
 Then(/^I expect the page to show me the number of regular users$/) do

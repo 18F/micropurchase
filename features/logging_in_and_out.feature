@@ -68,13 +68,13 @@ Feature: logging in and out
     And I should see a profile form with my info
     And there should be meta tags for the edit profile form
 
-    When I fill the "Email Address" field with "doris@doogooder.com"
+    When I fill the "Email Address" field with "doris@example.com"
     When I fill the "Name" field with "Doris Doogooder"
     And I click on the "Submit" button
     Then I should be on the home page
 
     When I click on the "Edit profile" link
-    Then I should see "doris@doogooder.com" in the "Email Address" field
+    Then I should see "doris@example.com" in the "Email Address" field
     And I should see "Doris Doogooder" in the "Name" field
 
     When I click on the "Logout" button
@@ -83,7 +83,7 @@ Feature: logging in and out
 
     When I click on the "Authorize with GitHub" button
     And I visit my profile page
-    And I should see "doris@doogooder.com" in the "Email Address" field
+    And I should see "doris@example.com" in the "Email Address" field
     And I should see "Doris Doogooder" in the "Name" field
 
   Scenario: User tries to enter an invalid email address

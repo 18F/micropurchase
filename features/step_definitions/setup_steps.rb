@@ -1,4 +1,3 @@
-# coding: utf-8
 Given(/^I am a user with a verified SAM account$/) do
   @user = FactoryGirl.create(:user, sam_status: :sam_accepted, github_id: '123451')
   @github_id = @user.github_id
