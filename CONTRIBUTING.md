@@ -19,7 +19,7 @@ Policy GitHub repository]( https://github.com/18f/open-source-policy), or just
 
 ## Instructions for 18F team members
 
-Check out on the [onboarding doc](doc/onboarding.md) for instructions on how to
+Check out on the [onboarding docs](docs/onboarding.md) for instructions on how to
 get going.
 
 ## Instructions for Contributors
@@ -62,7 +62,7 @@ rejected.
 One drawback to Rails' standard model-view-controller paradigm is that model
 objects tend to get cluttered over time with many different methods for all
 sorts of different reasons. We want to prevent this as much as we can. Read our
-[document on technical debt](doc/technical_debt.md) to understand how things are
+[document on technical debt](docs/technical_debt.md) to understand how things are
 organized.
 
 ## Public domain

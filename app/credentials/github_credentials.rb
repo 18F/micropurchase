@@ -1,3 +1,5 @@
+require "concerns/user_provided_service"
+
 class GithubCredentials
   extend UserProvidedService
 

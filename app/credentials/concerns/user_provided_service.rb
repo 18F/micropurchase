@@ -4,19 +4,18 @@ module UserProvidedService
   end
 
   def use_env_var?(force_vcap)
-    !force_vcap && (Rails.env.development? or Rails.env.test?)
+    !force_vcap && (Rails.env.development? || Rails.env.test?)
   end
 
-
-  def vcap_services
-    JSON.parse(ENV['VCAP_SERVICES'])
+  def user_provided_service(name)
+    user_provided_services.find {|service| service['name'] == name }
   end
 
   def user_provided_services
     vcap_services['user-provided']
   end
 
-  def user_provided_service(name)
-    user_provided_services.find {|service| service['name'] == name }
+  def vcap_services
+    JSON.parse(ENV['VCAP_SERVICES'])
   end
 end
