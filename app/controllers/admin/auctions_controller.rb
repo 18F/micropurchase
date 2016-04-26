@@ -32,46 +32,22 @@ module Admin
     end
 
     def new
-      if params[:auction]
-        parser = AuctionParser.new(params)
-        auction = Auction.new(parser.general_attributes)
-      else
-        auction = Auction.new
-      end
-      # @view_model = ViewModel::AdminAuctionForm.new(auction)
+      auction = Auction.new
+
       @auction = Presenter::AdminAuction.new(auction)
     end
 
     def create
-      auction = CreateAuction.new(params).perform
+      auction = CreateAuction.new(auction_params).perform
       auction = Presenter::AdminAuction.new(auction)
 
       respond_to do |format|
-        format.html { redirect_to "/admin/auctions" }
+        format.html { redirect_to admin_auctions_path }
         format.json do
           render json: auction, serializer: Admin::AuctionSerializer
         end
       end
-    rescue ArgumentError => e
-      respond_error(e)
     end
-
-    # We have already disabled this action in the admin screens, let's remove this
-    # method as a precaution as well
-    # def destroy
-    #   id = params[:id].dup
-    #   auction = Auction.find(id)
-    #   DestroyAuction.new(auction).perform
-    #
-    #   respond_to do |format|
-    #     format.html { redirect_to "/admin/auctions" }
-    #     format.json do
-    #       render json: {message: "Successfully deleted Auction ##{id}"}
-    #     end
-    #   end
-    # rescue ArgumentError => e
-    #   respond_error(e)
-    # end
 
     def update
       auction = Auction.find(params[:id])
@@ -95,6 +71,29 @@ exit        end
     end
 
     private
+
+    def auction_params
+      params.require(:auction).permit(
+        :awardee_paid_status,
+        :billable_to,
+        :cap_proposal_url,
+        :delivery_deadline,
+        :delivery_url,
+        :description,
+        :due_in_days,
+        :end_datetime,
+        :github_repo,
+        :issue_url,
+        :notes,
+        :published,
+        :result,
+        :start_datetime,
+        :start_price,
+        :summary,
+        :title,
+        :type,
+      )
+    end
 
     def respond_error(exception)
       message = exception.message
