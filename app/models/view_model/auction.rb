@@ -5,10 +5,6 @@ module ViewModel
   class Auction < Struct.new(:current_user, :auction_record)
     include ActionView::Helpers::NumberHelper
 
-    def auction
-      @auction ||= Presenter::Auction.new(auction_record)
-    end
-
     delegate(
       :auction_rules_href,
       :available?,
@@ -42,6 +38,22 @@ module ViewModel
       to: :auction
     )
 
+    delegate(
+      :amount,
+      to: :highlighted_bid,
+      prefix: true
+    )
+
+    delegate(
+      :label,
+      :label_class,
+      :status_text,
+      :tag_data_label_2,
+      :tag_data_value_status,
+      :tag_data_value_2,
+      to: :status_presenter
+    )
+
     def user_can_bid?
       auction.user_can_bid?(current_user)
     end
@@ -49,12 +61,10 @@ module ViewModel
     def highlighted_bid
       auction.highlighted_bid(current_user)
     end
-    
+
     def show_bid_button?
       user_can_bid? || current_user.nil?
     end
-
-    delegate :amount, to: :highlighted_bid, prefix: true
 
     def highlighted_bid_amount_as_currency
       number_to_currency(highlighted_bid_amount)
@@ -102,17 +112,11 @@ module ViewModel
       auction.partial_path('highlighted_bid_info', 'bids')
     end
 
-    delegate(
-      :label,
-      :label_class,
-      :status_text,
-      :tag_data_label_2,
-      :tag_data_value_status,
-      :tag_data_value_2,
-      to: :status_presenter
-    )
-    
     private
+
+    def auction
+      @auction ||= Presenter::Auction.new(auction_record)
+    end
 
     def status_presenter_class
       status_name = if expiring?

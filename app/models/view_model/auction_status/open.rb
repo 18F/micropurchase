@@ -25,7 +25,7 @@ module ViewModel
       end
 
       def tag_data_value_2
-        # Do we still need this? 
+        # Keeping this, but we should look at our metadata again
         if !auction.show_bids?
           "Sealed"
         else
