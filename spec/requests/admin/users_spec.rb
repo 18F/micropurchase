@@ -6,7 +6,7 @@ RSpec.describe Admin::UsersController do
       github_response_for_user(admin)
     end
   end
-  let!(:non_admin_users) { FactoryGirl.create_list(:user, 2) }
+  let!(:non_admin_users) { FactoryGirl.create_list(:user, 2, sam_status: :sam_accepted) }
   let(:admin) { FactoryGirl.create(:admin_user, github_id: 86790) }
   let(:json_response) { JSON.parse(response.body) }
   let(:json_non_admin_users) { json_response['admin_report']['non_admin_users'] }

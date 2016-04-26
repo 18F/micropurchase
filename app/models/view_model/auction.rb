@@ -42,7 +42,7 @@ module ViewModel
 
     def user_can_bid?
       return false unless available?
-      return false if current_user.nil? || !current_user.sam_account?
+      return false if current_user.nil? || !current_user.sam_accepted?
       return false if single_bid? && user_is_bidder?
       true
     end

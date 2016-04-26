@@ -6,7 +6,7 @@ RSpec.describe AuctionsController do
       github_response_for_user(user)
     end
   end
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryGirl.create(:user, sam_status: :sam_accepted) }
   let(:headers) do
     {
       'HTTP_ACCEPT' => 'text/x-json',
@@ -184,8 +184,21 @@ RSpec.describe AuctionsController do
       end
 
 
-      context 'and the user has a false #sam_account' do
-        let(:user) { FactoryGirl.create(:user, sam_account: false) }
+      context 'and the user has a rejected #sam_status' do
+        let(:user) { FactoryGirl.create(:user, sam_status: :sam_rejected) }
+        let(:bid_amount) { current_auction_price - 10 }
+
+        it 'returns a json error' do
+          expect(json_response['error']).to eq('You must have a valid SAM.gov account to place a bid')
+        end
+
+        it 'returns a 403 status code' do
+          expect(status).to eq(403)
+        end
+      end
+
+      context 'and the user has a pending #sam_status' do
+        let(:user) { FactoryGirl.create(:user, sam_status: :sam_pending) }
         let(:bid_amount) { current_auction_price - 10 }
 
         it 'returns a json error' do

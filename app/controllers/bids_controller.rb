@@ -20,7 +20,7 @@ class BidsController < ApplicationController
 
   def new
     # check if user is valid
-    if current_user.sam_account?
+    if current_user.sam_accepted?
       auction = AuctionQuery.new.public_find(params[:auction_id])
       @auction = ViewModel::Auction.new(current_user, auction)
       @bid = Bid.new
@@ -36,7 +36,9 @@ class BidsController < ApplicationController
   end
 
   def create
-    fail UnauthorizedError, "You must have a valid SAM.gov account to place a bid" unless current_user.sam_account?
+    unless current_user.sam_accepted?
+      fail UnauthorizedError, "You must have a valid SAM.gov account to place a bid"
+    end
     @bid = Presenter::Bid.new(PlaceBid.new(params, current_user).perform)
 
     respond_to do |format|

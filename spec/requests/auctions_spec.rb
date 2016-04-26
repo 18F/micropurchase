@@ -94,7 +94,7 @@ RSpec.describe AuctionsController do
               expect(bidder['github_id']).to_not   be_nil
               expect(bidder['created_at']).to_not  be_nil
               expect(bidder['updated_at']).to_not  be_nil
-              expect(bidder['sam_account']).to_not be_nil
+              expect(bidder['sam_status']).to_not be_nil
             end
 
             it 'veils the bids not created by the authenticated user' do
@@ -118,7 +118,7 @@ RSpec.describe AuctionsController do
               expect(bidder['github_id']).to_not   be_nil
               expect(bidder['created_at']).to_not  be_nil
               expect(bidder['updated_at']).to_not  be_nil
-              expect(bidder['sam_account']).to_not be_nil
+              expect(bidder['sam_status']).to_not be_nil
             end
           end
         end
@@ -139,7 +139,7 @@ RSpec.describe AuctionsController do
               expect(bidder['github_id']).to   be_nil
               expect(bidder['created_at']).to  be_nil
               expect(bidder['updated_at']).to  be_nil
-              expect(bidder['sam_account']).to be_nil
+              expect(bidder['sam_status']).to be_nil
             end
           end
 
@@ -167,7 +167,7 @@ RSpec.describe AuctionsController do
               expect(bidder['github_id']).to_not   be_nil
               expect(bidder['created_at']).to_not  be_nil
               expect(bidder['updated_at']).to_not  be_nil
-              expect(bidder['sam_account']).to_not be_nil
+              expect(bidder['sam_status']).to_not be_nil
             end
 
             it 'veils the bids not created by the authenticated user' do
@@ -182,7 +182,7 @@ RSpec.describe AuctionsController do
                 expect(bidder['github_id']).to   be_nil
                 expect(bidder['created_at']).to  be_nil
                 expect(bidder['updated_at']).to  be_nil
-                expect(bidder['sam_account']).to be_nil
+                expect(bidder['sam_status']).to be_nil
               end
             end
           end
@@ -204,7 +204,7 @@ RSpec.describe AuctionsController do
               expect(bidder['github_id']).to_not   be_nil
               expect(bidder['created_at']).to_not  be_nil
               expect(bidder['updated_at']).to_not  be_nil
-              expect(bidder['sam_account']).to_not be_nil
+              expect(bidder['sam_status']).to_not be_nil
             end
           end
         end
@@ -268,7 +268,7 @@ RSpec.describe AuctionsController do
               expect(bidder['github_id']).to   be_nil
               expect(bidder['created_at']).to  be_nil
               expect(bidder['updated_at']).to  be_nil
-              expect(bidder['sam_account']).to be_nil
+              expect(bidder['sam_status']).to be_nil
             end
           end
 
@@ -288,7 +288,7 @@ RSpec.describe AuctionsController do
                 expect(bidder['github_id']).to_not   be_nil
                 expect(bidder['created_at']).to_not  be_nil
                 expect(bidder['updated_at']).to_not  be_nil
-                expect(bidder['sam_account']).to_not be_nil
+                expect(bidder['sam_status']).to_not be_nil
               end
             end
           end

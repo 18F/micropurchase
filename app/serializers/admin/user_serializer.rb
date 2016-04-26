@@ -4,7 +4,7 @@ module Admin
                :duns_number,
                :name,
                :email,
-               :sam_account,
+               :sam_status,
                :created_at,
                :updated_at,
                :id,

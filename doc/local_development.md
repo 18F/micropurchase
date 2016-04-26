@@ -48,7 +48,7 @@ To bid in your local environment, you'll first need to log in so there is a
 ```
 $ rails c
 $ user = User.last
-$ user.update(sam_account: true)
+$ user.update(sam_status: :sam_accepted)
 ```
 
 You should now see the "Bid" button on open auctions in your dev environment.

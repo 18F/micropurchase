@@ -25,7 +25,7 @@ module Presenter
     def github_login
       @message
     end
-    
+
     def duns_number
       @message
     end
@@ -38,7 +38,7 @@ module Presenter
       @message
     end
 
-    def sam_account
+    def sam_status
       @message
     end
   end

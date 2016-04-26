@@ -2,7 +2,7 @@ class UserSerializer < ActiveModel::Serializer
   attributes :github_id,
              :duns_number,
              :name,
-             :sam_account,
+             :sam_status,
              :created_at,
              :updated_at,
              :id,
