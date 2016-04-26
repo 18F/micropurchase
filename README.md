@@ -17,17 +17,21 @@ Currently, there is no RDoc-style documentation for the methods and classes in t
 
 ### Database Schema
 
-We are keeping a version-controlled Entity Relationship Diagram (ERD) located in`docs/erd.pdf`. Any new change to the database schema must include an update to this diagram. You can automatically update the diagram by running (follow the local development instructions below if you don't have the app setup locally):
+We are keeping a version-controlled Entity Relationship Diagram (ERD) located
+in`docs/erd.pdf`. Any new change to the database schema must include an update
+to this diagram. You can automatically update the diagram by running (follow the
+local development instructions below if you don't have the app setup locally):
 
 ```
 bundle exec erd
 ```
 
-Updating the ERD requires Graphiz. Installation instructions are [here](http://voormedia.github.io/rails-erd/install.html).
+Updating the ERD requires Graphiz. Installation instructions are
+[here](http://voormedia.github.io/rails-erd/install.html).
 
 ## Local Development
 
-See the (local development docs)[doc/local_development.md] for information on
+See the (local development docs)[docs/local_development.md] for information on
 setting up the codebase and running tests locally or with Docker.
 
 ### Coverage and CodeClimate
