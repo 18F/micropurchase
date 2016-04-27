@@ -70,7 +70,7 @@ module Presenter
       :winning_bid,
       to: :auction_rules
     )
-    
+
     def bids?
       bid_count > 0
     end
@@ -139,19 +139,8 @@ module Presenter
 
     private
 
-    def auction_rules_class
-      type = case model.type
-             when 'single_bid', 'sealed-bid'
-               'SealedBid'
-             else
-               'Basic'
-             end
-
-      "::Rules::#{type}".constantize
-    end
-
     def auction_rules
-      @auction_rules ||= auction_rules_class.new(self)
+      @auction_rules ||= RulesFactory.new(self).create
     end
 
     def markdown

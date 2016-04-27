@@ -22,6 +22,8 @@ Feature: Closed Auctions
     Then I should see I am not the winner
     And I should see when the auction ended
     And there should be meta tags for the closed auction
+    And email notifications are sent to losing bidders
+    And I should receive an email notifying me that I did not win
 
   Scenario: I have not bid on the auction
     Given there is a closed auction

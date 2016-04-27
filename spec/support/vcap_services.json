@@ -1,44 +1,61 @@
 {
   "rds": [
-   {
-    "credentials": {
-     "db_name": "fakedbname",
-     "host": "fakehost",
-     "password": "fakepass",
-     "uri": "fakeuri",
-     "username": "fakeusername"
-    },
-    "label": "rds",
-    "name": "micropurchase-staging-psql",
-    "plan": "shared-psql",
-    "provider": null,
-    "syslog_drain_url": null,
-    "tags": [
-     "database",
-     "RDS",
-     "postgresql"
-    ]
-   }
+    {
+      "credentials": {
+        "db_name": "fakedbname",
+        "host": "fakehost",
+        "password": "fakepass",
+        "uri": "fakeuri",
+        "username": "fakeusername"
+      },
+      "label": "rds",
+      "name": "micropurchase-staging-psql",
+      "plan": "shared-psql",
+      "provider": null,
+      "syslog_drain_url": null,
+      "tags": [
+        "database",
+        "RDS",
+        "postgresql"
+      ]
+    }
   ],
   "user-provided": [
-   {
-    "credentials": {
-     "client_id": "fakeclientid",
-     "secret": "fakesecret"
+    {
+      "credentials": {
+        "client_id": "fakeclientid",
+        "secret": "fakesecret"
+      },
+      "label": "user-provided",
+      "name": "micropurchase-github",
+      "syslog_drain_url": "",
+      "tags": [
+
+      ]
     },
-    "label": "user-provided",
-    "name": "micropurchase-github",
-    "syslog_drain_url": "",
-    "tags": []
-  },
-  {
-   "credentials": {
-    "api_key": "fakeapikey"
-   },
-   "label": "user-provided",
-   "name": "data-dot-gov",
-   "syslog_drain_url": "",
-   "tags": []
-  }
+    {
+      "credentials": {
+        "api_key": "fakeapikey"
+      },
+      "label": "user-provided",
+      "name": "data-dot-gov",
+      "syslog_drain_url": "",
+      "tags": [
+
+      ]
+    },
+    {
+      "credentials": {
+        "smtp_password": "fakesmtppassword",
+        "smtp_username": "fakesmtpusername",
+        "default_url_host": "fakeurlhost.com"
+      },
+      "label": "user-provided",
+      "name": "micropurchase-smtp",
+      "syslog_drain_url": "",
+      "tags": [
+
+      ]
+    }
   ]
 }

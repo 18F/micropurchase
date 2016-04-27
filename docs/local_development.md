@@ -40,6 +40,21 @@ MPT_3500_GITHUB_SECRET="your-client-secret"
 
 Make sure to restart the server to register those environment variables.
 
+### Understanding / viewing transactional emails
+
+We are using [Mandrill](https://mandrillapp.com/) to send transactional emails.
+To set up email sending in a production environment, you will need to set the
+`SMTP_PASSWORD` and `SMTP_USERNAME` environment variables.
+
+In the development environment, we are using
+[Letter Opener](https://github.com/ryanb/letter_opener). Letter Opener lets you
+preview email in the default browser instead of sending it.  This means you do
+not need to set up email delivery in your development environment, and you no
+longer need to worry about accidentally sending a test email to someone else's
+address.
+
+To view sent emails locally, visit http://localhost:3000/letter_opener
+
 ### Set up your account to enable bidding locally
 
 To bid in your local environment, you'll first need to log in so there is a

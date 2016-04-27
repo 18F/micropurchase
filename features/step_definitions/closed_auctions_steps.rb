@@ -13,7 +13,7 @@ When(/^I have placed a bid that is not the lowest$/) do
   # sort the bids so that newest is first
   bids = @auction.bids.sort_by(&:created_at).reverse
   b = bids[1]
-  b.update_attribute(:bidder_id, @user.id)
+  b.update(bidder: @user)
 end
 
 When(/^I have not placed a bid$/) do
