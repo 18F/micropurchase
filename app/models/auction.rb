@@ -12,12 +12,12 @@ class Auction < ActiveRecord::Base
   validates :end_datetime, presence: true
   validates :start_datetime, presence: true
 
-  def lowest_bids
-    bids.select {|b| b.amount == lowest_amount }.sort_by(&:created_at)
-  end
-
   def lowest_bid
     lowest_bids.first
+  end
+
+  def lowest_bids
+    bids.select {|b| b.amount == lowest_amount }.sort_by(&:created_at)
   end
 
   private

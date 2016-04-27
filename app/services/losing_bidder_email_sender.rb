@@ -20,10 +20,18 @@ class LosingBidderEmailSender
   end
 
   def losing_bids
-    if auction.winning_bid
-      auction.bids.where.not(id: auction.winning_bid.id)
+    if winning_bid
+      auction.bids.where.not(id: winning_bid.id)
     else
       Bid.none
     end
+  end
+
+  def winning_bid
+    auction_rules.winning_bid
+  end
+
+  def auction_rules
+    RulesFactory.new(auction).create
   end
 end
