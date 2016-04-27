@@ -69,8 +69,8 @@ ActiveRecord::Schema.define(version: 20160425170026) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.string   "email"
-    t.string   "github_login"
     t.string   "credit_card_form_url"
+    t.string   "github_login"
     t.integer  "sam_status",           default: 0, null: false
   end
 
