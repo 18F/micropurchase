@@ -5,7 +5,7 @@ RSpec.describe Presenter::Auction do
   let(:ar_bids_by_amount) { ar_auction.bids.order('amount ASC, created_at ASC') }
   let(:auction) { Presenter::Auction.new(ar_auction) }
   let(:user) { FactoryGirl.create(:user) }
-  
+
   describe 'internal bid methods' do
     context 'when there are no bids' do
       let(:ar_auction) { FactoryGirl.create(:auction) }
@@ -18,14 +18,14 @@ RSpec.describe Presenter::Auction do
       it 'max_allowed_bid should return the starting bid for the auction' do
         expect(auction.max_allowed_bid).to eq(auction.start_price - PlaceBid::BID_INCREMENT)
       end
-      
+
       specify { expect(auction.lowest_bids).to eq([]) }
       specify { expect(auction.lowest_bid_amount).to be_nil }
     end
-    
+
     context 'when there are multiple bids' do
       let(:ar_auction) { FactoryGirl.create(:auction, :with_bidders) }
-      
+
       specify { expect(auction.bids?).to be_truthy }
       specify { expect(auction.bid_count).to eq(ar_auction.bids.count) }
 
@@ -50,7 +50,7 @@ RSpec.describe Presenter::Auction do
       end
 
       specify { expect(auction.max_allowed_bid).to eq(auction.lowest_bid.amount - PlaceBid::BID_INCREMENT) }
-      
+
       it 'lowest_bids should return an array of the lowest amount' do
         bids = auction.lowest_bids
 
@@ -96,7 +96,7 @@ RSpec.describe Presenter::Auction do
       it 'lowest_bids should return an array of all bids with the lowest amount sorted by ascending creation time' do
         lowest_bids = auction.lowest_bids
         ar_lowest_bids = ar_bids_by_amount.select {|b| b.amount == ar_bids_by_amount.first.amount }
-        
+
         expect(lowest_bids).to be_an(Array)
         expect(lowest_bids.first).to be_a(Presenter::Bid)
         expect(lowest_bids.count).to eq(ar_lowest_bids.count)
@@ -105,36 +105,6 @@ RSpec.describe Presenter::Auction do
       end
     end
   end
-
-  # describe "#winning_bid" do
-  #   context "auction is single bid and open" do
-  #     let(:ar_auction) { FactoryGirl.create(:auction, :single_bid, :running) }
-
-  #     it "returns nil" do
-  #       expect(auction.winning_bid).to be_nil
-  #     end
-  #   end
-
-  #   context "auction is single bid and closed" do
-  #     it "returns lowest bid" do
-  #       auction = FactoryGirl.create(:auction, :single_bid, :closed)
-  #       low_bid = FactoryGirl.create(:bid, auction: auction, amount: 1)
-  #       _high = FactoryGirl.create(:bid, auction: auction, amount: 10000)
-
-  #       expect(auction.winning_bid).to eq low_bid
-  #     end
-  #   end
-
-  #   context "auction is multi bid and open" do
-  #     it "returns lowest bid" do
-  #       auction = FactoryGirl.create(:auction, :available, :multi_bid)
-  #       low_bid = FactoryGirl.create(:bid, auction: auction, amount: 1)
-  #       _high = FactoryGirl.create(:bid, auction: auction, amount: 10000)
-        
-  #       expect(auction.winning_bid).to eq low_bid
-  #     end
-  #   end
-  # end
 
   describe 'type-specific bid methods' do
     context 'for a single-bid auction' do
