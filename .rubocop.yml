@@ -150,7 +150,7 @@ Style/SpaceInsideBlockBraces:
   # Valid values are: space, no_space
   EnforcedStyleForEmptyBraces: no_space
   # Space between { and |. Overrides EnforcedStyle if there is a conflict.
-  SpaceBeforeBlockParameters: false
+  SpaceBeforeBlockParameters: true
 
 Style/SpaceInsideHashLiteralBraces:
   EnforcedStyle: space
