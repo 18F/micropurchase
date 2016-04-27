@@ -3,7 +3,6 @@ When(/^I refresh the page$/) do
 end
 
 When(/^I click on the "?([^"]+)"? button$/) do |button|
-  # will click the first if there are two with same text!
   first(:link_or_button, button).click
 end
 
@@ -43,6 +42,10 @@ When(/^I visit my bids page$/) do
   visit my_bids_path
 end
 
+When(/^I visit the auction bids page$/) do
+  visit(auction_bids_path(@auction.id))
+end
+
 When(/^I visit my profile page$/) do
   @user = User.find_by(github_id: @github_id)
   visit edit_user_path(@user)
@@ -77,8 +80,6 @@ Then(/^there should be meta tags for the closed auction$/) do
 
   expect(page).to have_css("title", visible: false, text: "18F Micro-purchase - #{pr_auction.title}")
   expect(page).to have_css("meta[property='og:title'][content='18F Micro-purchase - #{pr_auction.title}']", visible: false)
-  # expect(page).to have_css("meta[name='description'][content='#{pr_auction.summary}']", visible: false)
-  # expect(page).to have_css("meta[property='og:description'][content='#{pr_auction.summary}']", visible: false)
 end
 
 Then(/^there should be meta tags for the open auction$/) do
@@ -86,8 +87,6 @@ Then(/^there should be meta tags for the open auction$/) do
 
   expect(page).to have_css("title", visible: false, text: "18F Micro-purchase - #{pr_auction.title}")
   expect(page).to have_css("meta[property='og:title'][content='18F Micro-purchase - #{pr_auction.title}']", visible: false)
-  # expect(page).to have_css("meta[name='description'][content='#{pr_auction.summary}']", visible: false)
-  # expect(page).to have_css("meta[property='og:description'][content='#{pr_auction.summary}']", visible: false)
 end
 
 # FIXME

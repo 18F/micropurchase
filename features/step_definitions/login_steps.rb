@@ -43,7 +43,7 @@ end
 When(/^I fill out the profile form$/) do
   @new_name = Faker::Name.name
   @new_duns = Faker::Company.duns_number
-  @new_email = Faker::Internet.email
+  @new_email = "random#{rand(10000)}@example.com"
 
   fill_in("user_name", with: @new_name)
   fill_in("user_duns_number", with: @new_duns)
@@ -73,7 +73,7 @@ def fake_value_for_attribute(attribute)
   when 'duns_number'
     Faker::Company.duns_number
   when 'email'
-    Faker::Internet.email
+    "random#{rand(10000)}@example.com"
   else
     fail "Unknown attribute '#{attribute}'"
   end
@@ -94,7 +94,7 @@ When(/^I fill in the (.+) field on my profile page with "([^"]+)"$/) do |attribu
   attribute = attribute.parameterize('_')
   @new_values ||= {}
   @new_values[attribute] = value
-  
+
   step("I fill in the \"user_#{attribute}\" field with \"#{value}\"")
 end
 
@@ -110,7 +110,7 @@ Then(/^the new value should be stored as my (.+)$/) do |attribute|
   expect(@new_values[attribute]).to_not be_nil
   expect(field.value).to eq(@new_values[attribute])
 end
-  
+
 Then(/^I should see "([^"]*)" in the "([^"]*)" field$/) do |value, field|
   field = find_field(field)
   expect(field.value).to eq(value)

@@ -15,13 +15,12 @@ Feature: Basic Auction Views
   Scenario: Many auctions
     Given there are many different auctions
     When I visit the home page
-    Then the auctions should be in reverse chronological order
-    Then there should be meta tags for the index page for 5 open and 1 future auctions
+    Then there should be meta tags for the index page for 1 open and 1 future auctions
 
   Scenario: Visiting a auction detail page
     Given there is an open auction
     And there is also an unpublished auction
-    
+
     When I visit the auction page
     Then I should see the auction's title
     And I should see the auction's description
@@ -30,8 +29,6 @@ Feature: Basic Auction Views
     And I should see when the auction ends
     And I should see a current bid amount
     And there should be meta tags for the open auction
-    #When I visit the unpublished auction
-    #Then I should see a routing error
 
   Scenario: There are no auctions
     When I visit the home page
@@ -43,7 +40,7 @@ Feature: Basic Auction Views
     When I visit the home page
     Then I should see the number of bid for the auction
     And I should see the auction's summary
-    
+
     When I click on the link to the bids
     Then I should see the bid history
 

@@ -13,7 +13,7 @@ RSpec.describe UpdateUser do
       user: {
         name: Faker::Name.name,
         duns_number: user_duns_number,
-        email: Faker::Internet.email,
+        email: "random#{rand(10000)}@example.com",
         credit_card_form_url: user_credit_card_url
       }
     )
