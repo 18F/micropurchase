@@ -30,34 +30,4 @@ describe Auction do
       end
     end
   end
-
-  describe "#winning_bid" do
-    context "auction is single bid and open" do
-      it "returns nil" do
-        auction = FactoryGirl.create(:auction, :single_bid, :running)
-
-        expect(auction.winning_bid).to be_nil
-      end
-    end
-
-    context "auction is single bid and closed" do
-      it "returns lowest bid" do
-        auction = FactoryGirl.create(:auction, :single_bid, :closed)
-        low_bid = FactoryGirl.create(:bid, auction: auction, amount: 1)
-        _high = FactoryGirl.create(:bid, auction: auction, amount: 10000)
-
-        expect(auction.winning_bid).to eq low_bid
-      end
-    end
-
-    context "auction is multi bid and open" do
-      it "returns lowest bid" do
-        auction = FactoryGirl.create(:auction, :available, :multi_bid)
-        low_bid = FactoryGirl.create(:bid, auction: auction, amount: 1)
-        _high = FactoryGirl.create(:bid, auction: auction, amount: 10000)
-
-        expect(auction.winning_bid).to eq low_bid
-      end
-    end
-  end
 end

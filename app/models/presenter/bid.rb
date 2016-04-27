@@ -56,7 +56,7 @@ module Presenter
     end
 
     def winning_status
-      if auction.single_bid? && presenter_auction.available?
+      if !presenter_auction.show_bids?
         return 'n/a'
       else
         is_winning?
@@ -100,7 +100,7 @@ module Presenter
       end
 
       def amount
-        NULL
+        nil #NULL
       end
     end
   end

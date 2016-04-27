@@ -5,11 +5,8 @@ module ViewModel
   class Auction < Struct.new(:current_user, :auction_record)
     include ActionView::Helpers::NumberHelper
 
-    def auction
-      @auction ||= Presenter::Auction.new(auction_record)
-    end
-
     delegate(
+      :auction_rules_href,
       :available?,
       :bid_count,
       :bids,
@@ -19,16 +16,17 @@ module ViewModel
       :expiring?,
       :formatted_type,
       :future?,
+      :highlighted_bid_label,
       :html_description,
       :html_description,
       :html_summary,
       :human_start_time,
       :id,
       :issue_url,
-      :multi_bid?,
       :over?,
+      :partial_path,
       :read_attribute_for_serialization,
-      :single_bid?,
+      :show_bids?,
       :start_datetime,
       :start_price,
       :summary,
@@ -40,28 +38,32 @@ module ViewModel
       to: :auction
     )
 
+    delegate(
+      :amount,
+      to: :highlighted_bid,
+      prefix: true
+    )
+
+    delegate(
+      :label,
+      :label_class,
+      :status_text,
+      :tag_data_label_2,
+      :tag_data_value_status,
+      :tag_data_value_2,
+      to: :status_presenter
+    )
+
     def user_can_bid?
-      return false unless available?
-      return false if current_user.nil? || !current_user.sam_accepted?
-      return false if single_bid? && user_is_bidder?
-      true
+      auction.user_can_bid?(current_user)
+    end
+
+    def highlighted_bid
+      auction.highlighted_bid(current_user)
     end
 
     def show_bid_button?
       user_can_bid? || current_user.nil?
-    end
-
-    delegate :amount, to: :highlighted_bid, prefix: true
-
-    # This is the single bid we display under the auction as an important
-    # summary of the bidding. Unlike the lowest bid, it differs based
-    # on the type of auction and whether the auction is closed
-    def highlighted_bid
-      if available? && single_bid?
-        auction.bids.detect {|bid| bid.bidder_id == current_user.id } || Presenter::Bid::Null.new
-      else
-        auction.lowest_bid
-      end
     end
 
     def highlighted_bid_amount_as_currency
@@ -103,26 +105,18 @@ module ViewModel
     end
 
     def index_bid_summary_partial
-      if single_bid?
-        'auctions/single_bid/index_bid_summary'
-      elsif multi_bid?
-        'auctions/multi_bid/index_bid_summary'
-      end
+      auction.partial_path('index_bid_summary')
     end
 
     def highlighted_bid_info_partial
-      if single_bid?
-        'bids/single_bid/highlighted_bid_info'
-      elsif multi_bid?
-        'bids/multi_bid/highlighted_bid_info'
-      end
+      auction.partial_path('highlighted_bid_info', 'bids')
     end
 
-    delegate :status, :label_class, :label, :tag_data_value_status,
-             :tag_data_label_2, :tag_data_value_2,
-             to: :status_presenter
-
     private
+
+    def auction
+      @auction ||= Presenter::Auction.new(auction_record)
+    end
 
     def status_presenter_class
       status_name = if expiring?

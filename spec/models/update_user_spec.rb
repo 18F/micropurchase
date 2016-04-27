@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe UpdateUser do
   let(:updater) { UpdateUser.new(params, user) }
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryGirl.create(:user, sam_status: :sam_accepted) }
   let(:user_id) { user.id }
-  let(:valid_duns_number) { '012345678' }
+  let(:user_duns_number) { user.duns_number }
   let(:user_credit_card_url) { 'https://random-example.com/pay' }
 
   let(:params) do
@@ -12,7 +12,7 @@ RSpec.describe UpdateUser do
       id: user_id,
       user: {
         name: Faker::Name.name,
-        duns_number: valid_duns_number,
+        duns_number: user_duns_number,
         email: Faker::Internet.email,
         credit_card_form_url: user_credit_card_url
       }
@@ -70,63 +70,45 @@ RSpec.describe UpdateUser do
 
   context 'when user is found and can be edited by current user' do
     context 'user updates DUNS to invalid DUNS number' do
+      let(:user_duns_number) { 'BAD' }
+
       it 'raises validation error' do
-        user = FactoryGirl.create(:user)
         old_duns_number = user.duns_number
-        params = ActionController::Parameters.new(
-          id: user.id,
-          user: {
-            duns_number: "BAD"
-          }
-        )
-
-        updater = UpdateUser.new(params, user)
         updater.save
-
         expect(updater.errors).to eq('DUNS number format is invalid')
         expect(user.duns_number).to eq old_duns_number
       end
     end
 
     context 'user updates DUNS to nil' do
+      let (:user_duns_number) { nil }
+
       it 'does not raise validation error' do
-        user = FactoryGirl.create(:user)
-        params = ActionController::Parameters.new(
-          id: user.id,
-          user: {
-            duns_number: nil
-          }
-        )
-
-        updater = UpdateUser.new(params, user)
         updater.save
-
         expect(updater.errors).to eq('')
       end
     end
 
-    it 'update the user when current user is the user' do
-      updater.save
-      user.reload
-      expect(user.duns_number).to eq(valid_duns_number)
-    end
+    context 'user updates DUNS to a valid number' do
+      let(:user_duns_number) { Faker::Company.duns_number }
 
-    it 'clears the sam id, when it has changed' do
-      updater.save
-      user.reload
-      expect(user).to be_sam_pending
-    end
+      it 'clears the sam id, when it has changed' do
+        updater.save
+        user.reload
+        expect(user).to be_sam_pending
+      end
 
-    it 'calls the SamAccountReckoner through a delayed job' do
-      reckoner = double('reckoner', clear: true)
-      allow(SamAccountReckoner).to receive(:new).with(user).and_return(reckoner)
-      delayed_job = double(set!: true)
-      allow(reckoner).to receive(:delay).and_return(delayed_job)
+      it 'calls the SamAccountReckoner through a delayed job' do
+        reckoner = double('reckoner', clear: true)
+        allow(SamAccountReckoner).to receive(:new).with(user).and_return(reckoner)
+        delayed_job = double(set!: true)
+        allow(reckoner).to receive(:delay).and_return(delayed_job)
 
-      updater.save
+        updater.save
 
-      expect(reckoner).to have_received(:delay)
-      expect(delayed_job).to have_received(:set!)
+        expect(reckoner).to have_received(:delay)
+        expect(delayed_job).to have_received(:set!)
+      end
     end
   end
 end

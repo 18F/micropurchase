@@ -178,7 +178,7 @@ RSpec.describe AuctionsController do
 
             expect(status).to eq(403)
             expect(json_response).to have_key('error')
-            expect(json_response['error']).to eq('You can only bid once in a single-bid auction.')
+            expect(json_response['error']).to eq('You are not allowed to bid on this auction')
           end
         end
       end

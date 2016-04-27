@@ -6,33 +6,41 @@ module ViewModel
       @auction ||= ViewModel::Auction.new(current_user, auction_record)
     end
 
-    delegate :title, :summary, :html_description, :status, :id,
-             :bid_count, :issue_url,
-             :user_bid_amount_as_currency, :show_bid_button?,
-             to: :auction, prefix: true
-
-    delegate :highlighted_bid_amount_as_currency,
-             :highlighted_bid_amount, :highlighted_bid, :auction_type,
-             to: :auction
-
+    delegate(
+      :bid_count,
+      :html_description,
+      :id,
+      :issue_url,
+      :show_bid_button?,
+      :status_text,
+      :summary,
+      :title,
+      :user_bid_amount_as_currency,
+      to: :auction,
+      prefix: true
+    )
+    
+    delegate(
+      :auction_rules_href,
+      :auction_status,
+      :auction_type,
+      :highlighted_bid,
+      :highlighted_bid_amount,
+      :highlighted_bid_amount_as_currency,
+      to: :auction
+    )
+    
     def auction_status_header
       if auction_won?
         "Winning bid (#{auction.highlighted_bidder_name}):"
       else
-        if auction.single_bid?
-          "Your bid:"
-        else
-          "Current bid:"
-        end
+        auction.highlighted_bid_label
       end
     end
 
     def auction_status_partial
-      if auction.single_bid? && !auction_won?
-        'auctions/single_bid/auction_status'
-      else
-        'auctions/multi_bid/auction_status'
-      end
+      # This is a bit ugly since the partial has an if-else in it now
+      auction.partial_path('auction_status')
     end
 
     def current_user_header_partial
@@ -40,8 +48,7 @@ module ViewModel
     end
 
     def win_header_partial
-      return 'auctions/multi_bid/win_header'  if auction.multi_bid?
-      return 'auctions/single_bid/win_header' if auction.single_bid?
+      auction.partial_path('win_header')
     end
 
     def auction_link_text
@@ -70,22 +77,14 @@ module ViewModel
       "<a href='#{auction_rules_href}'>Rules for #{auction.formatted_type} auctions</a>".html_safe
     end
 
-    def auction_rules_href
-      if auction.type == 'single_bid'
-        return '/auctions/rules/single-bid'
-      elsif auction.type == 'multi_bid'
-        return '/auctions/rules/multi-bid'
-      end
+    def auction_won?
+      auction.over? && auction.bids?
     end
 
     private
 
     def bid_to_plural
       auction.bids? ? "bids" : "bid"
-    end
-
-    def auction_won?
-      auction.over? && auction.bids?
     end
 
     def current_user_has_no_sam_verification?

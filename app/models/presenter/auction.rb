@@ -12,14 +12,6 @@ module Presenter
       @auction = auction
     end
 
-    def max_allowed_bid
-      if lowest_bid.is_a?(Presenter::Bid::Null)
-        return start_price - PlaceBid::BID_INCREMENT
-      else
-        return lowest_bid.amount - PlaceBid::BID_INCREMENT
-      end
-    end
-
     delegate(
       :created_at,
       :delivery_deadline,
@@ -29,10 +21,8 @@ module Presenter
       :id,
       :issue_url,
       :model_name,
-      :multi_bid?,
       :published,
       :read_attribute_for_serialization,
-      :single_bid?,
       :start_datetime,
       :start_price,
       :summary,
@@ -45,12 +35,20 @@ module Presenter
       to: :model
     )
 
-    delegate :amount, :time,
-             to: :lowest_bid, prefix: :lowest_bid
-
-    delegate :bidder_name, :bidder_duns_number,
-             to: :lowest_bid, prefix: :lowest
-
+    delegate(
+      :amount,
+      :time,
+      to: :lowest_bid,
+      prefix: :lowest_bid
+    )
+    
+    delegate(
+      :bidder_duns_number,
+      :bidder_name, 
+      to: :lowest_bid,
+      prefix: :lowest
+    )
+    
     delegate(
       :future?,
       :expiring?,
@@ -59,30 +57,37 @@ module Presenter
       to: :auction_status
     )
 
+    delegate(
+      :auction_rules_href,
+      :formatted_type,
+      :highlighted_bid,
+      :highlighted_bid_label,
+      :max_allowed_bid,
+      :partial_path,
+      :show_bids?,
+      :user_can_bid?,
+      :veiled_bids,
+      :winning_bid,
+      to: :auction_rules
+    )
+    
     def bids?
       bid_count > 0
     end
 
     def bids
       @bids ||= model.bids.to_a
-        .map {|bid| decorated_bid(bid) }
-        .sort_by(&:created_at)
-        .reverse
+                     .map {|bid| decorated_bid(bid) }
+                     .sort_by(&:created_at)
+                     .reverse
     end
 
-    def veiled_bids(user)
-      # For single bid auctions, we reveal no bids if the auction is running
-      # For multi bid auctions, we let the bids go through, but depend on
-      # Presenter::Bid to veil certain attributes.
+    def lowest_bids
+      model.lowest_bids.map {|b| decorated_bid(b) }
+    end
 
-      # redact all bids if auction is still running and type is single bid
-      if available? && model.single_bid?
-        return [] if user.nil?
-        return bids.select {|bid| bid.bidder_id == user.id}
-      end
-
-      # otherwise, return all the bids
-      bids
+    def lowest_bid
+      decorated_bid(model.lowest_bid)
     end
 
     def bid_count
@@ -97,15 +102,6 @@ module Presenter
       Presenter::DcTime.convert_and_format(model.end_datetime)
     end
 
-    def formatted_type
-      return 'multi-bid'  if model.type == 'multi_bid'
-      return 'single-bid' if model.type == 'single_bid'
-    end
-
-    def type
-      model.type
-    end
-
     def starts_in
       time_in_human(model.start_datetime)
     end
@@ -118,16 +114,8 @@ module Presenter
       time_in_human(model.delivery_deadline)
     end
 
-    def winning_bid
-      decorated_bid(model.winning_bid)
-    end
-
-    def lowest_bid
-      decorated_bid(model.lowest_bid)
-    end
-
     def winning_bidder_id
-      model.winning_bid.bidder_id
+      winning_bid.bidder_id
     end
 
     def html_description
@@ -150,6 +138,21 @@ module Presenter
     end
 
     private
+
+    def auction_rules_class
+      type = case model.type
+             when 'single_bid', 'sealed-bid'
+               'SealedBid'
+             else
+               'Basic'
+             end
+
+      "::Rules::#{type}".constantize
+    end
+
+    def auction_rules
+      @auction_rules ||= auction_rules_class.new(self)
+    end
 
     def markdown
       # FIXME: Do we want the lax_spacing?
