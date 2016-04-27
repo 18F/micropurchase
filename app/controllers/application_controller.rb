@@ -69,7 +69,7 @@ class ApplicationController < ActionController::Base
       flash[:error] = message
       redirect_to '/'
     elsif api_request?
-      render json: {error: message}, status: 404
+      render json: { error: message }, status: 404
     end
   end
 

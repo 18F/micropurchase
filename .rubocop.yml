@@ -124,7 +124,7 @@ Style/TrailingWhitespace:
 Style/GuardClause:
   Description: Check for conditionals that can be replaced with guard clauses
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#no-nested-conditionals
-  Enabled: true
+  Enabled: false
   MinBodyLength: 1
 
 Style/StringLiterals:
@@ -153,8 +153,8 @@ Style/SpaceInsideBlockBraces:
   SpaceBeforeBlockParameters: false
 
 Style/SpaceInsideHashLiteralBraces:
-  EnforcedStyle: no_space
-  EnforcedStyleForEmptyBraces: no_space
+  EnforcedStyle: space
+  EnforcedStyleForEmptyBraces: space
   SupportedStyles:
     - space
     - no_space

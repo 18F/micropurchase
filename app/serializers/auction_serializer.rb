@@ -14,7 +14,7 @@ class AuctionSerializer < ActiveModel::Serializer
 
   def bids
     bids = object.veiled_bids(scope)
-    bids.map {|bid| BidSerializer.new(bid, {scope: scope, root: false})}
+    bids.map { |bid| BidSerializer.new(bid, {scope: scope, root: false}) }
   end
 
   def created_at

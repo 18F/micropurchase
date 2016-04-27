@@ -15,7 +15,7 @@ class BidsController < ApplicationController
             .where(bidder_id: current_user.id)
             .includes(:auction)
             .all
-            .map {|bid| Presenter::Bid.new(bid) }
+            .map { |bid| Presenter::Bid.new(bid) }
   end
 
   def new
@@ -71,7 +71,7 @@ class BidsController < ApplicationController
         redirect_to redirect_path
       end
       format.json do
-        render json: {error: error.message}, status: 403
+        render json: { error: error.message }, status: 403
       end
     end
   end
