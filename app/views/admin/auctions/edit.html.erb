@@ -1,9 +1,6 @@
 <h1>Editing auction</h1>
-<%= form_for [:admin, @auction], method: 'put' do |f| %>
-
+<%= simple_form_for [:admin, @auction] do |f| %>
   <%= render partial: 'general_attributes', locals: {f: f} %>
-
   <%= render partial: 'edit_attributes', locals: {f: f} %>
-
-  <%= f.submit value: 'Update', :class => 'usa-button usa-button-outline' %>
+  <%= f.submit class: 'usa-button usa-button-outline' %>
 <% end %>

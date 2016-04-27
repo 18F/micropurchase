@@ -1,11 +1,4 @@
-<label for='auction_delivery_url'>Delivery URL</label>
-<%= f.text_field :delivery_url %>
-
-<label for='auction_result'>Result</label>
-<%= f.select :result, Auction.results.keys.to_a %>
-
-<label for='auction_cap_proposal_url'>CAP Proposal URL</label>
-<%= f.text_field :cap_proposal_url %>
-
-<label for='auction_awardee_paid_status'>Paid?</label>
-<%= f.select :awardee_paid_status, Auction.awardee_paid_statuses.keys.to_a %>
+<%= f.input :delivery_url %>
+<%= f.input :result, collection: Auction.results.keys.to_a %>
+<%= f.input :cap_proposal_url %>
+<%= f.input :awardee_paid_status, collection: Auction.awardee_paid_statuses.keys.to_a %>

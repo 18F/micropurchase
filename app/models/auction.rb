@@ -1,4 +1,6 @@
 class Auction < ActiveRecord::Base
+  attr_accessor :due_in_days
+
   has_many :bids
   has_many :bidders, through: :bids
   enum result: { not_applicable: 0, accepted: 1, rejected: 2 }

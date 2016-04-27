@@ -7,9 +7,7 @@ class CreateAuction < Struct.new(:params)
 
   private
 
-  def parser
-    AuctionParser.new(params)
+  def attributes
+    AuctionParser.new(params).attributes
   end
-
-  delegate :attributes, to: :parser
 end
