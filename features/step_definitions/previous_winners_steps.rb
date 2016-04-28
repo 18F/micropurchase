@@ -18,7 +18,6 @@ Then(/^I click on the previous winners link$/) do
   first(:link, 'See all previous winners').click
 end
 
-
 Then(/^I should see six numbers on the page$/) do
   expect(page).to have_selector(".hero-metrics_wrapper")
 
@@ -29,14 +28,13 @@ Then(/^I should see six numbers on the page$/) do
   auction_length = page.find(:css, "[data-name='auction_length']")
   winning_bid = page.find(:css, "[data-name='winning_bid']")
 
-  expect(auctions_total).to have_content()
-  expect(unique_winners).to have_content()
-  expect(bids).to have_content()
-  expect(bidding_vendors).to have_content()
-  expect(auction_length).to have_content()
-  expect(winning_bid).to have_content()
+  expect(auctions_total).to have_content
+  expect(unique_winners).to have_content
+  expect(bids).to have_content
+  expect(bidding_vendors).to have_content
+  expect(auction_length).to have_content
+  expect(winning_bid).to have_content
 end
-
 
 Then(/^I should see a section with two donut charts$/) do
   expect(page).to have_selector("#chart-donuts")
@@ -47,8 +45,8 @@ Then(/^I should see a section with two donut charts$/) do
   expect(page).to have_selector("#donut-by-repo")
   expect(page).to have_selector("#donut-by-language")
 
-  expect(by_repo).to have_content()
-  expect(by_language).to have_content()
+  expect(by_repo).to have_content
+  expect(by_language).to have_content
 end
 
 Then(/^I should see a Winning bid section$/) do
@@ -58,7 +56,7 @@ Then(/^I should see a Winning bid section$/) do
 
   expect(page).to have_selector("#chart2")
 
-  expect(chart2).to have_content()
+  expect(chart2).to have_content
 end
 
 Then(/^I should see a Community section$/) do
@@ -68,7 +66,7 @@ Then(/^I should see a Community section$/) do
 
   expect(page).to have_selector("#chart4")
 
-  expect(chart4).to have_content()
+  expect(chart4).to have_content
 end
 
 Then(/^I should see a Bids by auction section$/) do
@@ -78,9 +76,8 @@ Then(/^I should see a Bids by auction section$/) do
 
   expect(page).to have_selector("#chart5")
 
-  expect(chart5).to have_content()
+  expect(chart5).to have_content
 end
-
 
 Then(/^I should see a dropdown menu$/) do
   expect(page).to have_selector("form.winners-filter")
@@ -99,9 +96,5 @@ Then(/^I should see a list of all the previous auctions$/) do
 
   previous_auction_item = first(:css, ".winners-list-item")
 
-  expect(previous_auction_item).to have_content()
+  expect(previous_auction_item).to have_content
 end
-
-
-
-

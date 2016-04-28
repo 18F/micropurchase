@@ -85,86 +85,6 @@
     });
   };
 
-  // var loadChart3 = function loadChart3 (settings) {
-
-  //   var today = new Date();
-
-  //   var oneMonthAgo = new Date(today - (1000 * 60 * 60 * 24 * 31)); // 30 days ago
-  //   var dateExtent = [oneMonthAgo,today];
-
-  //   charts.chart3 = c3.generate({
-  //     bindto: '#chart3',
-  //     data: {
-  //         x: "auction_date",
-  //         groups: settings.groups ? settings.groups : [
-  //             ['1', '2']
-  //         ],
-  //         type: 'bar',
-  //         columns: settings.cols ? settings.cols : [
-  //           ["auction_date", "2015-03-07"],
-  //           ["1",0],
-  //           ["2",0]
-  //         ],
-  //         names: settings.names ? settings.names : {
-  //             "auction_date": "D\u00e1tum",
-  //             "1": "1",
-  //             "2": "2"
-  //         },
-  //         axes: settings.axes ? settings.axes : {
-  //             "auction_date": "x",
-  //             "1": "y",
-  //             "2": "y"
-  //         }
-  //     },
-  //     size: {
-  //       height: 400
-  //     },
-  //     tooltip: {
-  //       format: {
-  //         value: function (value, ratio, id, index) {
-  //           if (value) {
-  //             return value + ' bids'
-  //           }
-  //         }
-  //       }
-  //     },
-  //     bar: {
-  //       width: {
-  //         ratio: 0.35 // this makes bar width 50% of length between ticks
-  //       }
-  //     },
-  //     zoom: {
-  //       enabled: true
-  //     },
-  //     point: {
-  //       r: 5
-  //     },
-  //     subchart: {
-  //       show: true,
-  //       size: {
-  //         height: 20
-  //       }
-  //     },
-  //     axis: {
-  //       "x": {
-  //           "type": "timeseries",
-  //           "extent": dateExtent,
-  //           "tick": {
-  //             multiline: false,
-  //             fit: true
-  //           }
-  //       },
-  //       y: {
-  //         label: {
-  //           text: 'Bids',
-  //           position: 'outer-middle',
-  //         }
-  //       }
-  //     }
-  //   });
-
-  // };
-
   charts.load.chart4 = function loadChart4 (settings) {
 
     var today = new Date();
@@ -390,7 +310,6 @@
         uniqueWinners.push(winnerId)
       }
 
-
       var bid_amts = _.pluck(auction.bids, 'amount');
 
       // for bids/auction
@@ -469,69 +388,6 @@
     //
     return { cols: settings.cols };
   };
-
-  // var createChartData3 = function createChartData3(data, auctions) {
-  //   cols3 = [['auction_date']],
-  //   groups3 = [],
-  //   axes3 = {
-  //     "auction_date": "x"
-  //   },
-  //   names3 = {
-  //     "auction_date": "Dates"
-  //   }
-
-  //   var auctionIds = _.map(auctions, function(auction){
-  //     return auction.id;
-  //   });
-
-  //   var bidsByDate = _.map(data.auctions, function(auction) {
-  //     return auction.bids;
-  //   })
-
-  //   bidsByDate = _.flatten(bidsByDate);
-
-
-  //   bidsByDate = _.sortBy(bidsByDate, 'created_at');
-
-  //   _.each(bidsByDate, function(bid){
-  //     bid.created_at = microp.format.date(bid.created_at);
-  //   })
-
-  //   bidsByDate = _.groupBy(bidsByDate, 'created_at');
-  //   var dates3 = _.keys(bidsByDate);
-  //   cols3[0] = cols3[0].concat(dates3);
-
-  //   var mappedBids = _.map(bidsByDate, function(bid, key){
-  //     return d3.nest()
-  //       .key(function(d) { return d.auction_id; })
-  //       .rollup(function(d){ return d.length})
-  //       .map(bid);
-  //   });
-
-  //   var makeCols = function(auctionIds, mappedBids) {
-  //     var parentArr = [];
-  //     _.each(auctionIds, function(id) {
-  //       var childArr = [];
-  //       childArr.push(""+id);
-  //       _.each(mappedBids, function(bid){
-  //         var val = bid[id] ? bid[id] : 0;
-  //         childArr.push(val);
-  //       })
-  //       parentArr.push(childArr);
-  //     })
-  //     return parentArr;
-  //   }
-
-  //   var columns = makeCols(auctionIds,mappedBids);
-  //   cols3 = cols3.concat(columns);
-
-  //   _.each(auctions, function(auction){
-  //     axes3[auction.id] = 'y';
-  //     names3[auction.id] = ""+auction.id;
-  //     groups3.push(""+auction.id);
-  //   });
-  //   return { cols: cols3, groups: [groups3], axes: axes3, names: names3 };
-  // }
 
   charts.create.chart4 = function createChartData4(auctions) {
     var settings = {};
@@ -666,11 +522,9 @@
 
   charts.settings = function setChartSettings(data) {
     var auctions = _.sortBy(data.auctions, 'id');
-    // charts.settings.auctions = auctions; // can remove
     var settings = {};
 
     settings.chart2 = charts.create.chart2(auctions);
-    // settings.chart3 = charts.create.chart3(data, auctions);
     settings.chart4 = charts.create.chart4(auctions);
     settings.chart5 = charts.create.chart5(auctions);
     settings.donut1 = charts.create.donut1(auctions);
@@ -684,7 +538,6 @@
     settings = settings ? settings : setChartSettings(data);
 
     charts.load.chart2(settings.chart2);
-    // charts.load.chart3(settings.chart3)
     charts.load.chart4(settings.chart4);
     charts.load.chart5(settings.chart5);
     charts.load.donut1(settings.donut1);

@@ -42,7 +42,7 @@ RSpec.describe AuctionsController, controller: true do
 
   describe '#previous_winners' do
     it 'renders the previous winners dashboard page' do
-      auction_record = FactoryGirl.create(:auction)
+      auction_record = create(:auction)
       get :previous_winners
       auction = assigns(:view_model).auctions.first
       expect(auction).to be_a(ViewModel::Auction)
@@ -52,7 +52,7 @@ RSpec.describe AuctionsController, controller: true do
 
   describe '#previous_winners_archive' do
     it 'renders the previous winners archive page' do
-      auction_record = FactoryGirl.create(:auction)
+      auction_record = create(:auction)
       get :previous_winners_archive
       auction = assigns(:view_model).auctions.first
       expect(auction).to be_a(ViewModel::Auction)
@@ -60,4 +60,3 @@ RSpec.describe AuctionsController, controller: true do
     end
   end
 end
-
