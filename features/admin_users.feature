@@ -27,4 +27,3 @@ Feature: Admin Users
     And I check the 'Contracting officer' checkbox
     And I submit the changes to the user
     Then I expect there to be a contracting officer in the list of users
-

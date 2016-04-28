@@ -1,6 +1,10 @@
 SimpleForm.setup do |config|
-  config.wrappers :default, class: :input,
-    hint_class: :field_with_hint, error_class: :field_with_errors do |b|
+  config.wrappers(
+    :default,
+    class: :input,
+    hint_class: :field_with_hint,
+    error_class: :field_with_errors
+  ) do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength
