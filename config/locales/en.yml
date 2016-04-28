@@ -10,3 +10,14 @@ en:
           attributes:
             duns_number:
               invalid: 'format is invalid'
+  mailers:
+    auction_mailer:
+      losing_bidder_notification:
+        para_1: "This email is to inform you that your bid for %{auction_title}
+          was not the winning bid. For more information please see the auction details
+          here %{auction_url}"
+        para_2: "Thank you for your participation and we look forward to working
+          with you in the future."
+        sign_off: "Sincerely,"
+        from: "The 18f Micropurchase team"
+        subject: "18f Micropurchase Auction Status"

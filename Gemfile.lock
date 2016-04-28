@@ -80,6 +80,9 @@ GEM
     choice (0.2.0)
     chronic (0.10.2)
     cliver (0.3.2)
+    clockwork (2.0.0)
+      activesupport
+      tzinfo
     codeclimate-test-reporter (0.5.0)
       simplecov (>= 0.7.1, < 1.0.0)
     codeclimate_batch (0.4.0)
@@ -173,6 +176,12 @@ GEM
     jwt (1.5.1)
     launchy (2.4.3)
       addressable (~> 2.3)
+    letter_opener (1.4.1)
+      launchy (~> 2.2)
+    letter_opener_web (1.3.0)
+      actionmailer (>= 3.2)
+      letter_opener (~> 1.0)
+      railties (>= 3.2)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -370,6 +379,7 @@ DEPENDENCIES
   capybara-screenshot
   cf-app-utils
   chronic
+  clockwork
   codeclimate-test-reporter
   codeclimate_batch
   cucumber-rails
@@ -386,6 +396,8 @@ DEPENDENCIES
   holidays
   jasmine
   json-schema
+  letter_opener
+  letter_opener_web
   octokit (~> 4.0)
   omniauth
   omniauth-github

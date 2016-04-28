@@ -33,4 +33,8 @@ Rails.application.routes.draw do
   get '/login', to: 'logins#index'
   get '/logout', to: 'authentications#destroy'
   get '/faq', to: 'logins#faq'
+
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine => "letter_opener"
+  end
 end
