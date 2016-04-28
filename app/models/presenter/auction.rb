@@ -32,6 +32,7 @@ module Presenter
       :to_param,
       :type,
       :updated_at,
+      :lowest_bid,
       to: :model
     )
 

@@ -37,13 +37,25 @@ describe 'GET /auctions/:id' do
       expect(response.status).to eq 200
     end
 
-    it 'returns a valid auction' do
+    it 'returns a valid auction response' do
       login
       auction = create(:auction, :with_bidders)
 
       get auction_path(auction), nil, headers
 
       expect(response).to match_response_schema('auction')
+    end
+
+    context 'winning bid not present' do
+      it 'returns a valid auction response' do
+        login
+        auction = create(:auction, :available, :single_bid)
+        _bid = create(:bid, auction: auction)
+
+        get auction_path(auction), nil, headers
+
+        expect(response).to match_response_schema('auction')
+      end
     end
 
     it 'returns iso8601 dates' do

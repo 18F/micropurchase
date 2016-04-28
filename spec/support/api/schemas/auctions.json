@@ -140,7 +140,7 @@
                     "created_at",
                     "updated_at",
                     "id",
-                    "github_login"  
+                    "github_login"
                   ]
                 }
               }

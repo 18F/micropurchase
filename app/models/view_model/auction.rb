@@ -34,6 +34,7 @@ module ViewModel
       :to_param,
       :type,
       :updated_at,
+      :lowest_bid,
       :veiled_bids,
       to: :auction
     )
