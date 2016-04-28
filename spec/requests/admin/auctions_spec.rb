@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe Admin::AuctionsController do
+  include RequestHelpers
+
   describe 'GET /admin/auctions' do
     context 'when the API key is invalid' do
       it 'returns a 404 HTTP response' do
