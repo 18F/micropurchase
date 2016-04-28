@@ -48,7 +48,8 @@
       "credentials": {
         "smtp_password": "fakesmtppassword",
         "smtp_username": "fakesmtpusername",
-        "default_url_host": "fakeurlhost.com"
+        "default_url_host": "fakeurlhost.com",
+        "default_from": "info@localhost:3000"
       },
       "label": "user-provided",
       "name": "micropurchase-smtp",
