@@ -1,0 +1,8 @@
+<h1>Editing user</h1>
+
+<%= simple_form_for [:admin, @user] do |form| %>
+  <%= form.input :email, disabled: true %>
+  <%= form.input :name, disabled: true %>
+  <%= form.input :contracting_officer, as: :boolean %>
+  <%= form.submit %>
+<% end %>
