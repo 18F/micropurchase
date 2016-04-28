@@ -21,7 +21,6 @@ describe AuctionStatus do
         end
       end
 
-
       context "start datetime in future, end datetime in future" do
         it "is false" do
           auction = FactoryGirl.build(:auction, start_datetime: tomorrow, end_datetime: tomorrow)

@@ -7,7 +7,7 @@ module ViewModel
       def status_text
         'Open'
       end
-      
+
       def label_class
         'auction-label-open'
       end

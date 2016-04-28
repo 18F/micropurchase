@@ -10,12 +10,12 @@ describe LosingBidderEmailSender do
           losing_bid = create(:bid, amount: 100, auction: auction)
           second_losing_bid = create(:bid, amount: 101, auction: auction)
           mailer_double = double(deliver_later: true)
-          allow(AuctionMailer).to receive(:losing_bidder_notification).
-            with(losing_bid).
-            and_return(mailer_double)
-          allow(AuctionMailer).to receive(:losing_bidder_notification).
-            with(second_losing_bid).
-            and_return(mailer_double)
+          allow(AuctionMailer).to receive(:losing_bidder_notification)
+            .with(losing_bid)
+            .and_return(mailer_double)
+          allow(AuctionMailer).to receive(:losing_bidder_notification)
+            .with(second_losing_bid)
+            .and_return(mailer_double)
 
           LosingBidderEmailSender.new(auction).perform
 
@@ -33,9 +33,9 @@ describe LosingBidderEmailSender do
           user_without_email = create(:user, email: nil)
           _losing_bid_no_email = create(:bid, bidder: user_without_email, amount: 100, auction: auction)
           mailer_double = double(deliver_later: true)
-          allow(AuctionMailer).to receive(:losing_bidder_notification).
-            with(losing_bid_with_email).
-            and_return(mailer_double)
+          allow(AuctionMailer).to receive(:losing_bidder_notification)
+            .with(losing_bid_with_email)
+            .and_return(mailer_double)
 
           LosingBidderEmailSender.new(auction).perform
 

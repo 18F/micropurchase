@@ -92,7 +92,7 @@ end
 
 When(/^I fill in the (.+) field on my profile page with "([^"]+)"$/) do |attribute, value|
   attribute = attribute.parameterize('_')
-  @new_values ||= {}
+  @new_values ||= { }
   @new_values[attribute] = value
 
   step("I fill in the \"user_#{attribute}\" field with \"#{value}\"")

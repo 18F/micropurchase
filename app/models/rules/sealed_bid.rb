@@ -8,14 +8,14 @@ module Rules
     def veiled_bids(user)
       if auction.available?
         return [] if user.nil?
-        auction.bids.select {|bid| bid.bidder_id == user.id }
+        auction.bids.select { |bid| bid.bidder_id == user.id }
       else
         auction.bids
       end
     end
 
     def user_can_bid?(user)
-      super && !auction.bids.any? {|b| b.bidder_id == user.id }
+      super && !auction.bids.any? { |b| b.bidder_id == user.id }
     end
 
     def max_allowed_bid
@@ -25,7 +25,7 @@ module Rules
     def show_bids?
       !auction.available?
     end
-    
+
     def partial_prefix
       'single_bid'
     end
@@ -36,7 +36,7 @@ module Rules
 
     def highlighted_bid(user)
       if auction.available?
-        auction.bids.detect {|bid| bid.bidder_id == user.id } || Presenter::Bid::Null.new
+        auction.bids.detect { |bid| bid.bidder_id == user.id } || Presenter::Bid::Null.new
       else
         auction.lowest_bid
       end

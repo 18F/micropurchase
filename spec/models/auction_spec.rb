@@ -8,7 +8,7 @@ describe Auction do
         low_bid = FactoryGirl.create(:bid, auction: auction, amount: 1)
         _high = FactoryGirl.create(:bid, auction: auction, amount: 10000)
 
-        expect(auction.lowest_bid).to eq (low_bid)
+        expect(auction.lowest_bid).to eq(low_bid)
       end
     end
 
@@ -26,7 +26,7 @@ describe Auction do
         _second_bid = FactoryGirl.create(:bid, auction: auction, created_at: Time.current, amount: 1)
         first_bid = FactoryGirl.create(:bid, auction: auction, created_at: 1.hour.ago, amount: 1)
 
-        expect(auction.lowest_bid).to eq (first_bid)
+        expect(auction.lowest_bid).to eq(first_bid)
       end
     end
   end

@@ -19,7 +19,7 @@ module ViewModel
       to: :auction,
       prefix: true
     )
-    
+
     delegate(
       :auction_rules_href,
       :auction_status,
@@ -29,7 +29,7 @@ module ViewModel
       :highlighted_bid_amount_as_currency,
       to: :auction
     )
-    
+
     def auction_status_header
       if auction_won?
         "Winning bid (#{auction.highlighted_bidder_name}):"

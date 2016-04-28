@@ -51,7 +51,7 @@ class PlaceBid < Struct.new(:params, :current_user)
     presenter_auction.max_allowed_bid
   end
 
-  # rubocop:disable Style/IfUnlessModifier, Style/GuardClause
+  # rubocop:disable Style/IfUnlessModifier
   def validate_bid_data
     unless auction_available?
       fail UnauthorizedError, 'Auction not available'
@@ -77,7 +77,7 @@ class PlaceBid < Struct.new(:params, :current_user)
       fail UnauthorizedError, "Bids cannot be greater than the current max bid"
     end
   end
-  # rubocop:enable Style/IfUnlessModifier, Style/GuardClause
+  # rubocop:enable Style/IfUnlessModifier
 
   def amount
     params_amount = params[:bid][:amount]

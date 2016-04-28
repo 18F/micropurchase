@@ -54,10 +54,10 @@ RSpec.describe Presenter::Auction do
       it 'lowest_bids should return an array of the lowest amount' do
         bids = auction.lowest_bids
 
-        expect(auction.lowest_bids).to be_an(Array)
-        expect(auction.lowest_bids.count).to eq(1)
-        expect(auction.lowest_bids.first.bidder_id).to eq(ar_bids_by_amount.first.bidder_id)
-        expect(auction.lowest_bids.first.amount).to eq(ar_bids_by_amount.first.amount)
+        expect(bids).to be_an(Array)
+        expect(bids.count).to eq(1)
+        expect(bids.first.bidder_id).to eq(ar_bids_by_amount.first.bidder_id)
+        expect(bids.first.amount).to eq(ar_bids_by_amount.first.amount)
       end
 
       it 'lowest_amount should return the lowest bid' do
@@ -95,7 +95,7 @@ RSpec.describe Presenter::Auction do
 
       it 'lowest_bids should return an array of all bids with the lowest amount sorted by ascending creation time' do
         lowest_bids = auction.lowest_bids
-        ar_lowest_bids = ar_bids_by_amount.select {|b| b.amount == ar_bids_by_amount.first.amount }
+        ar_lowest_bids = ar_bids_by_amount.select { |b| b.amount == ar_bids_by_amount.first.amount }
 
         expect(lowest_bids).to be_an(Array)
         expect(lowest_bids.first).to be_a(Presenter::Bid)

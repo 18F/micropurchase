@@ -26,10 +26,10 @@ Then(/^I should see the auction had a winning bid$/) do
   expect(page).not_to have_content("Current bid:")
 end
 
-
 Then(/^I should see the auction had a winning bid with name$/) do
   auction = ViewModel::Auction.new(nil, @auction)
-  expect(page).to have_content("Winning bid (#{auction.highlighted_bidder_name}): #{auction.highlighted_bid_amount_as_currency}")
+  expect(page)
+    .to have_content("Winning bid (#{auction.highlighted_bidder_name}): #{auction.highlighted_bid_amount_as_currency}")
   expect(page).not_to have_content("Current bid:")
 end
 

@@ -5,4 +5,3 @@ Then(/^I should not see bids from other users$/) do
     expect(page).to_not have_content(amount)
   end
 end
-
