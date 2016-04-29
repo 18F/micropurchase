@@ -17,3 +17,13 @@ Feature: Admin Users
     And I sign in
     Then I expect the page to show me the number of regular users
     And I expect the page to show me the number of admin users
+
+  Scenario: makes user a contracting officer
+    Given I am an administrator
+    And there are users in the system
+    And I visit the admin users page
+    When I sign in
+    And I click the edit user link next to the first non-admin user
+    And I check the 'Contracting officer' checkbox
+    And I submit the changes to the user
+    Then I expect there to be a contracting officer in the list of users
