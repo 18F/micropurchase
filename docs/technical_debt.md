@@ -55,22 +55,22 @@ it as an example of how we are applying this approach:
    as defining AR relationships. You could also put named scopes here,
    but hold off on that since it's another way to accumulate things
    you don't need.
-2. [Presenter::Auction](app/models/presenter/auction.rb) we usually wrap the AR auction in this class
+2. [AuctionPresenter](app/presenters/auction_presenter.rb) we usually wrap the AR auction in this class
    and this is where we put a lot of the basic display code or
    conditionals like `available?` that normally might be stuck inside
    the AR model class.
-3. [Presenter::AdminAuction](app/models/presenter/admin_auction.rb): Since there are some fields in the
+3. [AdminAuctionPresenter](app/presenters/admin_auction_presenter.rb): Since there are some fields in the
    `Auction` DB table that should only be used by administrators, we
    also have a class that is only used in the admin controllers that
    delegates to the regular presenter and also can access privileged
-   fields. The regular `Presenter::Auction` does not delegate access
+   fields. The regular `AuctionPresenter` does not delegate access
    to those fields, so we get basic access control for the two
    different roles.
-4. [ViewModel::Auction](app/models/view_model/auction.rb): Many of the methods in `Presenter::Auction` were only used for
-   displaying the auction inside HTML views(for instance,
-   `show_bid_button?` or `lowest_user_bid`). These were moved to this
-   method which is a wrapper around a `Presenter::Auction` object and
-   the `current_user` so we don't need to pass the user in to many of
+4. [AuctionViewModel](app/view_models/auction_view_model.rb): Many of the
+   methods in `AuctionPresenter` were only used for displaying the auction
+   inside HTML views(for instance, `show_bid_button?` or `lowest_user_bid`). These
+   were moved to this method which is a wrapper around a `AuctionPresenter`
+   object and the `current_user` so we don't need to pass the user in to many of
    these methods.
 5. [AuctionQuery](app/models/auction_query.rb): instead of using a
    bunch of named scopes, that might be called within controllers,
@@ -112,20 +112,18 @@ object for an action and calls its Perform method. So, here is how the
 auctions_controller records a new bid:
 
 ```ruby
-@bid = Presenter::Bid.new(PlaceBid.new(params, current_user).perform)
+@bid = BidPresenter.new(PlaceBid.new(params, current_user).perform)
 ```
 
-In this case, the controller is
-instantiating a new `PlaceBid` object, then calling `perform` on it
-and then wrapping the ActiveRecord `Bid` object returned in a
-`Presenter::Bid` object. This might seem weird at first -- OOP urges
-us to think of our classes as nouns instead of verbs -- but it offers
-certain advantages over controllers calling models directly. It lets
-us place auditing or other controls in a single place without having
-to edit controllers or API methods to be consistent. It also would be
-simple to switch to an asynchronous job-based approach for any actions
-should we need to. And we can test the action with unit tests instead
-of controller tests.
+In this case, the controller is instantiating a new `PlaceBid` object, then
+calling `perform` on it and then wrapping the ActiveRecord `Bid` object returned
+in a `BidPresenter` object. This might seem weird at first -- OOP urges us to
+think of our classes as nouns instead of verbs -- but it offers certain
+advantages over controllers calling models directly. It lets us place auditing
+or other controls in a single place without having to edit controllers or API
+methods to be consistent. It also would be simple to switch to an asynchronous
+job-based approach for any actions should we need to. And we can test the action
+with unit tests instead of controller tests.
 
 # View Models
 
@@ -144,10 +142,10 @@ We solve both of these issues by defining a specific new decorator
 class that's used for wrapping the objects and helpers needed by a
 specific controller view. So, for the `auctions_controller#show`
 method, we have defined a
-[ViewModel::AuctionShow](app/models/view_model/auction_show.rb) class
+[AuctionShowViewModel](app/view_models/auction_show_view_model.rb) class
 that wraps the current user and the auction we are showing. This lets
 us scope our view's helpers to be specific to this view model (or to
-delegate to the shared `ViewModel::Auction` object). Furthermore,
+delegate to the shared `AuctionShowViewModel` object). Furthermore,
 instead of doing inline conditionals in our views, we can instead
 define new partials for each distinct switch of the page's logic and
 replace that convoluted branching code in the partial with a helper
@@ -177,8 +175,8 @@ The risk of such an approach is that you might forget a branching
 conditional in one of these methods and it creates a lot of tedious
 complexity even if you don't. To fix this, there are a few places
 where we delegate to an associated object and use polymorphism. So, we
-can define classes like `ViewModel::Status::Open` and
-`ViewModel::Status::Closed` each with its own methods like `label` or
+can define classes like `AuctionStatus::OpenViewModel` and
+`AuctionStatus::ClosedViewModel` each with its own methods like `label` or
 `status` that the auction presenter can delegate to by calling an
 instance of the appropriate class.
 
@@ -200,7 +198,7 @@ def status_presenter_class
                 else
                   'Open'
                 end
-  "::ViewModel::AuctionStatus::#{status_name}".constantize
+  "::AuctionStatus::#{status_name}ViewModel".constantize
 end
 
 def status_presenter
@@ -238,7 +236,7 @@ possibility for some nils triggering fatal errors. What if instead of
 returning nil, we could define an Null class like this
 
 ``` ruby
-class Presenter::Bid
+class BidPresenter
   def display_amount
     bid.amount
   end
@@ -252,7 +250,7 @@ end
 ```
 
 Then, the `user_bid` method would return either an instance of
-`Presenter::Bid` or `Presenter::Bid::Null`, both of which define a
+`BidPresenter` or `BidPresenter::Null`, both of which define a
 `display_amount` method. This then lets us redefine our original code
 to just be
 
@@ -262,7 +260,7 @@ user_bid.display_amount
 ```
 
 Much cleaner. There are a few places where we define `Null`
-equivalents to the `Presenter::Bid` and `Presenter::User` object for
+equivalents to the `BidPresenter` and `UserPresenter` object for
 instance.
 
 # Further Reading

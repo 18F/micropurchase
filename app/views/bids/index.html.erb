@@ -45,7 +45,7 @@
           %>
         </td>
         <td><%= bid.amount_to_currency_with_asterisk %></td>
-        <td><%= Presenter::DcTime.convert_and_format(bid.created_at) %></td>
+        <td><%= DcTimePresenter.convert_and_format(bid.created_at) %></td>
       </tr>
     <% end %>
   </tbody>
