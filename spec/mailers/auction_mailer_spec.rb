@@ -12,7 +12,7 @@ describe AuctionMailer do
         I18n.t('mailers.auction_mailer.losing_bidder_notification.subject')
       )
       expect(email.subject).to eq I18n.t('mailers.auction_mailer.losing_bidder_notification.subject')
-      expect(email.from).to eq [SMTPCredentials.default_from]
+      expect(email.from).to eq SMTPCredentials.default_from
       expect(email.body.encoded).to include(
         I18n.t(
           'mailers.auction_mailer.losing_bidder_notification.para_1',

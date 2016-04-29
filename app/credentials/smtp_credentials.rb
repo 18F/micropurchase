@@ -27,11 +27,7 @@ class SMTPCredentials
     end
   end
 
-  def self.default_from(force_vcap: false)
-    if use_env_var?(force_vcap)
-      ENV['DEFAULT_EMAIL_FROM']
-    else
-      credentials('micropurchase-smtp')['default_from']
-    end
+  def self.default_from
+    credentials('micropurchase-smtp')['default_from']
   end
 end

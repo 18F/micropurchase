@@ -6,21 +6,17 @@ describe SMTPCredentials do
       env_var_smtp_password = 'fake smtp password'
       env_var_smtp_username = 'fake smtp username'
       env_var_default_url_host = 'fake url host'
-      env_var_defalt_from = 'fake default from'
-      ENV['SMTP_PASSWORD'] =  env_var_smtp_password
-      ENV['SMTP_USERNAME'] = env_var_smtp_username
-      ENV['DEFAULT_URL_HOST'] = env_var_default_url_host
-      ENV['DEFAULT_EMAIL_FROM'] = env_var_defalt_from
+      allow(ENV).to receive(:[]).with('SMTP_PASSWORD').and_return(env_var_smtp_password)
+      allow(ENV).to receive(:[]).with('SMTP_USERNAME').and_return(env_var_smtp_username)
+      allow(ENV).to receive(:[]).with('DEFAULT_URL_HOST').and_return(env_var_default_url_host)
 
-      password = SMTPCredentials.smtp_password(force_vcap: false)
-      username = SMTPCredentials.smtp_username(force_vcap: false)
-      url_host = SMTPCredentials.default_url_host(force_vcap: false)
-      from = SMTPCredentials.default_from(force_vcap: false)
+      password = SMTPCredentials.smtp_password
+      username = SMTPCredentials.smtp_username
+      url_host = SMTPCredentials.default_url_host
 
       expect(password).to eq env_var_smtp_password
       expect(username).to eq env_var_smtp_username
       expect(url_host).to eq env_var_default_url_host
-      expect(from).to eq env_var_defalt_from
     end
   end
 
@@ -34,7 +30,7 @@ describe SMTPCredentials do
       password = SMTPCredentials.smtp_password(force_vcap: true)
       username = SMTPCredentials.smtp_username(force_vcap: true)
       url_host = SMTPCredentials.default_url_host(force_vcap: true)
-      from = SMTPCredentials.default_from(force_vcap: true)
+      from = SMTPCredentials.default_from
 
       expect(password).to eq smtp_password_from_fixture
       expect(username).to eq smtp_username_from_fixture
