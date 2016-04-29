@@ -1,6 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe AuctionsController do
+describe AuctionsController do
+  include RequestHelpers
+
   before do
     stub_github('/user') do
       github_response_for_user(user)

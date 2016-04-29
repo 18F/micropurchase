@@ -26,11 +26,11 @@ module Rules
     def highlighted_bid(user)
       auction.lowest_bid
     end
-    
+
     def show_bids?
       true
     end
-    
+
     def partial_path(name, base_dir='auctions')
       if partial_prefix.blank?
         "#{base_dir}/#{name}.html.erb"
