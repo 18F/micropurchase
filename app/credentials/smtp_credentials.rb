@@ -1,5 +1,4 @@
 class SMTPCredentials
-
   def self.smtp_password
     ENV["micropurchase_smtp_smtp_password"]
   end
