@@ -55,14 +55,18 @@
   };
 
   microp.format.removeGitPrefix = function(str) {
-    return str.split('https://github.com/').join('');
+    return str.includes('https')
+      ? str.split("https://github.com/").join("")
+      : str;
   };
 
   microp.format.transformDollars = function(str) {
+    str = String(str);
     if (str.charAt(0) === '-') {
-      str = '-' + str.substr(1);
+      return '-$' + str.substr(1, str.length);
+    } else {
+      return '$' + str;
     }
-    return '$' + str;
   };
 
   microp.format.commaSeparatedDollars = microp.format.transform(

@@ -12,6 +12,7 @@
 #
 src_files:
   - assets/application.js
+  - assets/winners-bundle.js
 
 # stylesheets
 #
@@ -38,6 +39,7 @@ stylesheets:
 #   - helpers/**/*.js
 #
 helpers:
+  - 'helpers/*.js'
   - 'helpers/**/*.js'
 
 # spec_files
