@@ -16,7 +16,7 @@ module Rules
     end
 
     def max_allowed_bid
-      if auction.lowest_bid.is_a?(Presenter::Bid::Null)
+      if auction.lowest_bid.is_a?(BidPresenter::Null)
         return auction.start_price - PlaceBid::BID_INCREMENT
       else
         return auction.lowest_bid_amount - PlaceBid::BID_INCREMENT

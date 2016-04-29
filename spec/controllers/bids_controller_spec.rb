@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe BidsController, controller: true do
-  let(:current_bidder) { FactoryGirl.create(:user, sam_status: :sam_accepted) }
-  let(:auction) { FactoryGirl.create(:auction) }
+  let(:current_bidder) { create(:user, sam_status: :sam_accepted) }
+  let(:auction) { create(:auction) }
 
   describe '/my-bids' do
     context 'when logged out' do
@@ -18,7 +18,7 @@ RSpec.describe BidsController, controller: true do
         expect(bid).to be_valid
         get :my_bids, { }, user_id: current_bidder.id
         assigned_bid = assigns(:bids).first
-        expect(assigned_bid).to be_a(Presenter::Bid)
+        expect(assigned_bid).to be_a(BidPresenter)
         expect(assigned_bid.id).to eq(bid.id)
       end
 
@@ -38,7 +38,7 @@ RSpec.describe BidsController, controller: true do
       end
 
       context 'when the auction is published' do
-        let(:auction) { FactoryGirl.create(:auction, :published) }
+        let(:auction) { create(:auction, :published) }
 
         it 'renders the template' do
           get :new, { auction_id: auction.id }, user_id: current_bidder.id
@@ -47,7 +47,7 @@ RSpec.describe BidsController, controller: true do
       end
 
       context 'when the auction is unpublished' do
-        let(:auction) { FactoryGirl.create(:auction, :unpublished) }
+        let(:auction) { create(:auction, :unpublished) }
 
         it 'should raise a routing error' do
           expect do
@@ -64,7 +64,7 @@ RSpec.describe BidsController, controller: true do
       end
 
       context 'when the auction is published' do
-        let(:auction) { FactoryGirl.create(:auction, :published) }
+        let(:auction) { create(:auction, :published) }
 
         it 'renders the template' do
           get :new, auction_id: auction.id
@@ -73,7 +73,7 @@ RSpec.describe BidsController, controller: true do
       end
 
       context 'when the auction is unpublished' do
-        let(:auction) { FactoryGirl.create(:auction, :unpublished) }
+        let(:auction) { create(:auction, :unpublished) }
 
         it 'should raise a routing error' do
           get :new, auction_id: auction.id
@@ -99,7 +99,7 @@ RSpec.describe BidsController, controller: true do
     end
 
     context 'when the auction is published' do
-      let(:auction) { FactoryGirl.create(:auction, :published) }
+      let(:auction) { create(:auction, :published) }
 
       it 'renders the template' do
         get :index, auction_id: auction.id
@@ -108,7 +108,7 @@ RSpec.describe BidsController, controller: true do
     end
 
     context 'when the auction is unpublished' do
-      let(:auction) { FactoryGirl.create(:auction, :unpublished) }
+      let(:auction) { create(:auction, :unpublished) }
 
       it 'should raise a routing error' do
         expect do

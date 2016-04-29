@@ -20,7 +20,7 @@ module Admin
     private
 
     def to_presenter(auctions)
-      auctions.map { |a| Presenter::AdminAuction.new(a) }
+      auctions.map { |a| AdminAuctionPresenter.new(a) }
     end
   end
 end

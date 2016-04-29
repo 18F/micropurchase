@@ -1,8 +1,11 @@
 module Rules
   class SealedBid < Rules::Basic
     def winning_bid
-      return Presenter::Bid::Null.new if auction.available?
-      auction.lowest_bid
+      if auction.available?
+        BidPresenter::Null.new
+      else
+        auction.lowest_bid
+      end
     end
 
     def veiled_bids(user)
@@ -36,7 +39,7 @@ module Rules
 
     def highlighted_bid(user)
       if auction.available?
-        auction.bids.detect { |bid| bid.bidder_id == user.id } || Presenter::Bid::Null.new
+        auction.bids.detect {|bid| bid.bidder_id == user.id } || BidPresenter::Null.new
       else
         auction.lowest_bid
       end

@@ -1,19 +1,19 @@
 require 'rails_helper'
 
-RSpec.describe Presenter::Auction do
-  let(:ar_auction) { FactoryGirl.create(:auction) }
+describe AuctionPresenter do
+  let(:ar_auction) { create(:auction) }
   let(:ar_bids_by_amount) { ar_auction.bids.order('amount ASC, created_at ASC') }
-  let(:auction) { Presenter::Auction.new(ar_auction) }
-  let(:user) { FactoryGirl.create(:user) }
+  let(:auction) { AuctionPresenter.new(ar_auction) }
+  let(:user) { create(:user) }
 
   describe 'internal bid methods' do
     context 'when there are no bids' do
-      let(:ar_auction) { FactoryGirl.create(:auction) }
+      let(:ar_auction) { create(:auction) }
 
       specify { expect(auction.bids?).to be_falsey }
       specify { expect(auction.bid_count).to eq(0) }
       specify { expect(auction.bids).to eq([]) }
-      specify { expect(auction.lowest_bid).to be_a(Presenter::Bid::Null) }
+      specify { expect(auction.lowest_bid).to be_a(BidPresenter::Null) }
 
       it 'max_allowed_bid should return the starting bid for the auction' do
         expect(auction.max_allowed_bid).to eq(auction.start_price - PlaceBid::BID_INCREMENT)
@@ -24,18 +24,18 @@ RSpec.describe Presenter::Auction do
     end
 
     context 'when there are multiple bids' do
-      let(:ar_auction) { FactoryGirl.create(:auction, :with_bidders) }
+      let(:ar_auction) { create(:auction, :with_bidders) }
 
       specify { expect(auction.bids?).to be_truthy }
       specify { expect(auction.bid_count).to eq(ar_auction.bids.count) }
 
-      it 'bids should return Presenter::Bid objects sorted by descending creation time' do
+      it 'bids should return BidPresenter objects sorted by descending creation time' do
         bids = auction.bids
         last_create = 100.years.from_now
 
         expect(bids).to be_an(Array)
         bids.each do |bid|
-          expect(bid).to be_a(Presenter::Bid)
+          expect(bid).to be_a(BidPresenter)
           expect(bid.created_at).to be <= last_create
           last_create = bid.created_at
         end
@@ -44,7 +44,7 @@ RSpec.describe Presenter::Auction do
       it 'lowest_bid should return the bid with the lowest amount' do
         lowest_bid = auction.lowest_bid
 
-        expect(lowest_bid).to be_a(Presenter::Bid)
+        expect(lowest_bid).to be_a(BidPresenter)
         expect(lowest_bid.amount).to eq(ar_bids_by_amount.first.amount)
         expect(lowest_bid.bidder_id).to eq(ar_bids_by_amount.first.bidder_id)
       end
@@ -66,18 +66,18 @@ RSpec.describe Presenter::Auction do
     end
 
     context 'when there are multiple low bids of the same amount' do
-      let(:ar_auction) { FactoryGirl.create(:auction, :single_bid_with_tie) }
+      let(:ar_auction) { create(:auction, :single_bid_with_tie) }
 
       specify { expect(auction.bids?).to be_truthy }
       specify { expect(auction.bid_count).to eq(ar_auction.bids.count) }
 
-      it 'bids should return Presenter::Bid objects sorted by descending creation time' do
+      it 'bids should return BidPresenter objects sorted by descending creation time' do
         bids = auction.bids
         last_create = 100.years.from_now
 
         expect(bids).to be_an(Array)
         bids.each do |bid|
-          expect(bid).to be_a(Presenter::Bid)
+          expect(bid).to be_a(BidPresenter)
           expect(bid.created_at).to be <= last_create
           last_create = bid.created_at
         end
@@ -86,7 +86,7 @@ RSpec.describe Presenter::Auction do
       it 'lowest_bid should return the bid with the lowest amount and the earliest creation time' do
         lowest_bid = auction.lowest_bid
 
-        expect(lowest_bid).to be_a(Presenter::Bid)
+        expect(lowest_bid).to be_a(BidPresenter)
         expect(lowest_bid.amount).to eq(ar_bids_by_amount.first.amount)
         expect(lowest_bid.bidder_id).to eq(ar_bids_by_amount.first.bidder_id)
       end
@@ -98,7 +98,7 @@ RSpec.describe Presenter::Auction do
         ar_lowest_bids = ar_bids_by_amount.select { |b| b.amount == ar_bids_by_amount.first.amount }
 
         expect(lowest_bids).to be_an(Array)
-        expect(lowest_bids.first).to be_a(Presenter::Bid)
+        expect(lowest_bids.first).to be_a(BidPresenter)
         expect(lowest_bids.count).to eq(ar_lowest_bids.count)
         expect(lowest_bids.map(&:id)).to eq(ar_lowest_bids.map(&:id))
         expect(lowest_bids.map(&:bidder_id)).to eq(ar_lowest_bids.map(&:bidder_id))
@@ -109,7 +109,7 @@ RSpec.describe Presenter::Auction do
   describe 'type-specific bid methods' do
     context 'for a single-bid auction' do
       context 'when the auction is still running' do
-        let(:ar_auction) { FactoryGirl.create(:auction, :single_bid_with_tie, :running) }
+        let(:ar_auction) { create(:auction, :single_bid_with_tie, :running) }
 
         context 'when the user has not placed a bid' do
           it 'veiled_bids should return an empty array' do
@@ -133,7 +133,7 @@ RSpec.describe Presenter::Auction do
         end
 
         context 'when the auction is closed' do
-          let(:ar_auction) { FactoryGirl.create(:auction, :single_bid_with_tie, :closed) }
+          let(:ar_auction) { create(:auction, :single_bid_with_tie, :closed) }
 
           it 'veiled_bids should return all bids associated with the auction' do
             expect(auction.veiled_bids(user).map(&:id)).to match_array(auction.bids.map(&:id))
@@ -143,14 +143,14 @@ RSpec.describe Presenter::Auction do
         context 'for a regular auction' do
           context 'when the auction is still running' do
             context 'when the auction has no bids' do
-              let(:ar_auction) { FactoryGirl.create(:auction) }
+              let(:ar_auction) { create(:auction) }
 
               it 'veiled_bids should return an empty array' do
                 expect(auction.veiled_bids(user)).to eq([])
               end
             end
             context 'when the auction has bids' do
-              let(:ar_auction) { FactoryGirl.create(:auction, :multi_bid, :with_bidders, :running) }
+              let(:ar_auction) { create(:auction, :multi_bid, :with_bidders, :running) }
               let(:ar_lowest_bid) { ar_bids_by_amount.first }
               let(:user) { auction.bids.first.bidder }
 
@@ -164,7 +164,7 @@ RSpec.describe Presenter::Auction do
 
       describe "#html_summary" do
         let(:summary) { nil }
-        let(:auction) { Presenter::Auction.new(FactoryGirl.build(:auction, summary: summary)) }
+        let(:auction) { AuctionPresenter.new(build(:auction, summary: summary)) }
 
         it 'should return an empty string if the summary is blank' do
           expect(auction.html_summary).to be_blank
@@ -213,7 +213,7 @@ RSpec.describe Presenter::Auction do
 
       describe '#html_description' do
         let(:description) { nil }
-        let(:auction) { Presenter::Auction.new(FactoryGirl.build(:auction, description: description)) }
+        let(:auction) { AuctionPresenter.new(build(:auction, description: description)) }
 
         it 'should return an empty string if the description is blank' do
           expect(auction.html_description).to be_blank

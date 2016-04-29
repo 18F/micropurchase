@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe Presenter::DcTime do
-  let(:converter) { Presenter::DcTime.new(time) }
+describe DcTimePresenter do
+  let(:converter) { DcTimePresenter.new(time) }
   let(:time) { Chronic.parse("4/1/2001 6:15am").utc }
 
   describe '#convert' do

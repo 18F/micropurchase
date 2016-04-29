@@ -3,7 +3,7 @@ module Admin
     before_filter :require_admin
 
     def index
-      all_users = User.all.map {|user| Presenter::User.new(user) }
+      all_users = User.all.map {|user| UserPresenter.new(user) }
       @admins, @users = all_users.partition(&:admin?)
       @admin_report = AdminReport.new(users: all_users)
 
@@ -16,7 +16,7 @@ module Admin
     end
 
     def show
-      @user = Presenter::User.new(User.find(params[:id]))
+      @user = UserPresenter.new(User.find(params[:id]))
     end
 
     def edit

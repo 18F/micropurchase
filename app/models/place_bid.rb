@@ -87,6 +87,6 @@ class PlaceBid < Struct.new(:params, :current_user)
   end
 
   def presenter_auction
-    @presenter ||= Presenter::Auction.new(auction)
+    @presenter ||= AuctionPresenter.new(auction)
   end
 end

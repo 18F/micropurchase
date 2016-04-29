@@ -76,14 +76,14 @@ Then(/^there should be meta tags for the edit profile form$/) do
 end
 
 Then(/^there should be meta tags for the closed auction$/) do
-  pr_auction = Presenter::Auction.new(@auction)
+  pr_auction = AuctionPresenter.new(@auction)
 
   expect(page).to have_css("title", visible: false, text: "18F Micro-purchase - #{pr_auction.title}")
   expect(page).to have_css("meta[property='og:title'][content='18F Micro-purchase - #{pr_auction.title}']", visible: false)
 end
 
 Then(/^there should be meta tags for the open auction$/) do
-  pr_auction = Presenter::Auction.new(@auction)
+  pr_auction = AuctionPresenter.new(@auction)
 
   expect(page).to have_css("title", visible: false, text: "18F Micro-purchase - #{pr_auction.title}")
   expect(page).to have_css("meta[property='og:title'][content='18F Micro-purchase - #{pr_auction.title}']", visible: false)
