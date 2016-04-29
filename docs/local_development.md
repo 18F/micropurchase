@@ -34,8 +34,8 @@ Secret. Put the values in the `.env` file at the root of the application.
 ```
 # .env
 
-MPT_3500_GITHUB_KEY="your-client-id"
-MPT_3500_GITHUB_SECRET="your-client-secret"
+micropurchase_github_client_id="your-client-id"
+micropurchase_github_secret="your-client-secret"
 ```
 
 Make sure to restart the server to register those environment variables.
@@ -44,7 +44,8 @@ Make sure to restart the server to register those environment variables.
 
 We are using [Mandrill](https://mandrillapp.com/) to send transactional emails.
 To set up email sending in a production environment, you will need to set the
-`SMTP_PASSWORD` and `SMTP_USERNAME` environment variables.
+`micropurchase_smtp_smtp_password` and `micropurchase_smtp_smtp_username`
+environment variables.
 
 In the development environment, we are using
 [Letter Opener](https://github.com/ryanb/letter_opener). Letter Opener lets you
