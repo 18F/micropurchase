@@ -1,6 +1,6 @@
 Feature: Previous Winners View and Previous Winners Archive Page
   As an unauthenticated user
-  I want to be able to previous winners on the site
+  I want to be able to see previous auction winners
   So that I can learn about micropurchase
 
   Scenario: Visiting the previous winners page
@@ -17,7 +17,7 @@ Feature: Previous Winners View and Previous Winners Archive Page
     When I visit the previous winners page
     Then I should see a link to the previous winners archive page
     When I click on the previous winners link
-    Then I should visit the previous winners archive page
+    Then I should be at previous winners archive page
 
   Scenario: Visiting the previous winners archive page
     Given there is a closed auction
