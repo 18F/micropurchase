@@ -5,7 +5,7 @@ RSpec.describe Rules::Basic, type: :model do
   let(:auction) { Presenter::Auction.new(ar_auction) }
 
   subject { Rules::Basic.new(auction) }
-  
+
   describe 'winning_bid' do
     it "should be the auction's lowest_bid" do
       expect(subject.winning_bid).to eq(auction.lowest_bid)
@@ -19,7 +19,7 @@ RSpec.describe Rules::Basic, type: :model do
       let(:ar_auction) { FactoryGirl.create(:auction) }
       specify { expect(subject.user_can_bid?(user)).to be_truthy }
     end
-    
+
     context 'when the auction is over' do
       specify { expect(subject.user_can_bid?(user)).to be_falsey }
     end

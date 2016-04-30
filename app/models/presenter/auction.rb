@@ -42,14 +42,14 @@ module Presenter
       to: :lowest_bid,
       prefix: :lowest_bid
     )
-    
+
     delegate(
       :bidder_duns_number,
-      :bidder_name, 
+      :bidder_name,
       to: :lowest_bid,
       prefix: :lowest
     )
-    
+
     delegate(
       :future?,
       :expiring?,
@@ -78,13 +78,13 @@ module Presenter
 
     def bids
       @bids ||= model.bids.to_a
-                     .map {|bid| decorated_bid(bid) }
+                     .map { |bid| decorated_bid(bid) }
                      .sort_by(&:created_at)
                      .reverse
     end
 
     def lowest_bids
-      model.lowest_bids.map {|b| decorated_bid(b) }
+      model.lowest_bids.map { |b| decorated_bid(b) }
     end
 
     def lowest_bid

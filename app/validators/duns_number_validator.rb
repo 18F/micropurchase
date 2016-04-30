@@ -3,7 +3,7 @@ require 'samwise'
 class DunsNumberValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     if value.present? && invalid_duns_number?(value)
-      record.errors[attribute] << (I18n.t('activerecord.errors.models.user.attributes.duns_number.invalid'))
+      record.errors[attribute] << I18n.t('activerecord.errors.models.user.attributes.duns_number.invalid')
     end
   end
 
@@ -14,11 +14,9 @@ class DunsNumberValidator < ActiveModel::EachValidator
   end
 
   def formatted_duns(value)
-    begin
-      Samwise::Util.format_duns(duns: value)
-    rescue Samwise::Error::InvalidFormat
-      nil
-    end
+    Samwise::Util.format_duns(duns: value)
+  rescue Samwise::Error::InvalidFormat
+    nil
   end
 
   def contains_thirteen_integers?(duns_number)

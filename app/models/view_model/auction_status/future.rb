@@ -6,7 +6,7 @@ module ViewModel
       def status_text
         'Closed'
       end
-      
+
       def label_class
         'auction-label-future'
       end

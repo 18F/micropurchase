@@ -52,9 +52,10 @@ end
 Then(/^I should see the auction's (.+)$/) do |field|
   if field == 'deadline'
     expect(page).to have_text(
-                      Presenter::DcTime.convert(@auction.end_datetime).
-                      beginning_of_day.strftime(Presenter::DcTime::FORMAT)
-                    )
+      Presenter::DcTime
+      .convert(@auction.end_datetime)
+      .beginning_of_day
+      .strftime(Presenter::DcTime::FORMAT))
   else
     expect(page).to have_text(@auction.send(field))
   end

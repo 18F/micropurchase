@@ -17,7 +17,7 @@ class Auction < ActiveRecord::Base
   end
 
   def lowest_bids
-    bids.select {|b| b.amount == lowest_amount }.sort_by(&:created_at)
+    bids.select { |b| b.amount == lowest_amount }.sort_by(&:created_at)
   end
 
   private

@@ -1,15 +1,15 @@
 module ViewModel
   class AuctionsIndex < Struct.new(:current_user, :auctions_query)
     def auctions
-      @auctions ||= auctions_query.map {|auction| ViewModel::Auction.new(current_user, auction) }
+      @auctions ||= auctions_query.map { |auction| ViewModel::Auction.new(current_user, auction) }
     end
 
     def active_auction_count
-      auctions.count {|i| i.start_datetime < Time.now && Time.now < i.end_datetime }
+      auctions.count { |i| i.start_datetime < Time.now && Time.now < i.end_datetime }
     end
 
     def upcoming_auction_count
-      auctions.count {|i| Time.now < i.start_datetime }
+      auctions.count { |i| Time.now < i.start_datetime }
     end
 
     def header_partial

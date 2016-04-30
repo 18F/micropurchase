@@ -27,4 +27,3 @@ Then(/^I should see a success message that "([^"]*)"$/) do |message|
     expect(page).to have_content(message)
   end
 end
-

@@ -51,7 +51,6 @@ Then(/^I should be able to edit the new auction form$/) do
   select("published", from: "auction_published")
 end
 
-
 Then(/^I should be able to edit the existing auction form$/) do
   @title = 'This is the form-edited title'
   fill_in("auction_title", with: @title)

@@ -185,7 +185,7 @@ RSpec.describe ViewModel::Auction, type: :model do
         let(:user2) { FactoryGirl.create(:user) }
         let(:ar_auction) { FactoryGirl.create(:auction, :single_bid, :running, bidder_ids: [user1.id, user2.id]) }
         let(:auction) { ViewModel::Auction.new(user1, ar_auction) }
-        let(:user1_bid) { auction.bids.detect {|b| b.bidder_id == user1.id }.amount }
+        let(:user1_bid) { auction.bids.detect { |b| b.bidder_id == user1.id }.amount }
 
         it 'should return an array with 1 bid' do
           out = auction.user_bids
@@ -211,7 +211,7 @@ RSpec.describe ViewModel::Auction, type: :model do
         let(:user2) { FactoryGirl.create(:user) }
         let(:ar_auction) { FactoryGirl.create(:auction, :multi_bid, :running, bidder_ids: [user1.id, user2.id, user1.id, user2.id, user1.id]) }
         let(:auction) { ViewModel::Auction.new(user1, ar_auction) }
-        let(:user1_bid) { auction.bids.sort_by(&:amount).detect {|b| b.bidder_id == user1.id }.amount }
+        let(:user1_bid) { auction.bids.sort_by(&:amount).detect { |b| b.bidder_id == user1.id }.amount }
 
         it 'should return an array with all user bids' do
           out = auction.user_bids

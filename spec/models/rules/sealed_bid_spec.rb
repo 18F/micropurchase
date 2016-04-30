@@ -4,7 +4,7 @@ RSpec.describe Rules::SealedBid, type: :model do
   let(:ar_auction) { FactoryGirl.create(:auction, :single_bid, :with_bidders) }
   let(:auction) { Presenter::Auction.new(ar_auction) }
   subject { Rules::SealedBid.new(auction) }
-  
+
   describe 'winning_bid' do
     context 'if the auction if open' do
       it 'returns a Presenter::Bid::Null object' do
@@ -42,7 +42,7 @@ RSpec.describe Rules::SealedBid, type: :model do
     context 'if the auction is over' do
       let(:ar_auction) { FactoryGirl.create(:auction, :single_bid, :with_bidders, :closed) }
       let(:user) { FactoryGirl.create(:user) }
-      
+
       it 'should return all bids' do
         expect(subject.veiled_bids(user)).to eq(auction.bids)
       end
@@ -53,7 +53,7 @@ RSpec.describe Rules::SealedBid, type: :model do
     context 'when the auction is over' do
       let(:ar_auction) { FactoryGirl.create(:auction, :single_bid, :with_bidders, :closed) }
       let(:user) { FactoryGirl.create(:user) }
-      
+
       it 'should return the lowest bid' do
         expect(subject.highlighted_bid(user)).to eq(auction.lowest_bid)
       end
@@ -61,7 +61,7 @@ RSpec.describe Rules::SealedBid, type: :model do
 
     context 'when the auction is running' do
       let(:ar_auction) { FactoryGirl.create(:auction, :single_bid, :with_bidders) }
-      
+
       context 'when the user has placed a bid' do
         let(:user) { auction.bids.first.bidder }
 
@@ -69,28 +69,27 @@ RSpec.describe Rules::SealedBid, type: :model do
           expect(subject.highlighted_bid(user)).to eq(auction.bids.first)
         end
       end
-      
+
       context 'when the user has not placed a bid' do
         let(:user) { FactoryGirl.create(:user) }
-        
+
         it 'should return a Presenter::Bid::Null object' do
           expect(subject.highlighted_bid(user)).to be_a(Presenter::Bid::Null)
         end
       end
     end
   end
-  
 
   describe 'user_can_bid?' do
     let(:ar_auction) { FactoryGirl.create(:auction, :single_bid, :with_bidders) }
-    
+
     context 'when the user has placed a bid' do
       let(:user) { auction.bids.first.bidder }
       it 'should return false' do
         expect(subject.user_can_bid?(user)).to be_falsey
       end
     end
-    
+
     context 'when the user has not placed a bid' do
       let(:user) { FactoryGirl.create(:user, sam_status: :sam_accepted) }
 

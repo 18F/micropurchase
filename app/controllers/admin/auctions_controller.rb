@@ -66,7 +66,7 @@ module Admin
         format.html { redirect_to "/admin/auctions" }
         format.json do
           render json: auction, serializer: Admin::AuctionSerializer
-exit        end
+        end
       end
     rescue ArgumentError => e
       respond_error(e)

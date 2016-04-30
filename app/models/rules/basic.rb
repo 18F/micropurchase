@@ -31,7 +31,7 @@ module Rules
       true
     end
 
-    def partial_path(name, base_dir='auctions')
+    def partial_path(name, base_dir = 'auctions')
       if partial_prefix.blank?
         "#{base_dir}/#{name}.html.erb"
       else

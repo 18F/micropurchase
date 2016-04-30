@@ -110,7 +110,7 @@ describe AuctionsController do
       let(:api_key) { FakeGitHub::VALID_API_KEY }
       let(:auction) { FactoryGirl.create(:auction, :running) }
       let(:current_auction_price) do
-        auction.bids.sort_by {|b| b.amount}.first.amount
+        auction.bids.sort_by(&:amount).first.amount
       end
 
       context 'and the bid amount is the lowest' do
@@ -184,7 +184,6 @@ describe AuctionsController do
           end
         end
       end
-
 
       context 'and the user has a rejected #sam_status' do
         let(:user) { FactoryGirl.create(:user, sam_status: :sam_rejected) }
