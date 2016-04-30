@@ -29,6 +29,9 @@ gem 'c2', github: '18f/c2-api-client-ruby'
 group :test do
   gem "codeclimate-test-reporter", require: nil
   gem 'codeclimate_batch', require: nil
+  gem 'dotenv'
+  gem 'webmock'
+  gem 'json-schema'
   gem 'db-query-matchers'
   gem 'json-schema'
   gem 'shoulda-matchers'
