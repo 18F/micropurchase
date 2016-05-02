@@ -59,33 +59,33 @@ describe('PreviousWinners', function () {
 
 	describe('top metrics', function() {
 		it('has the correct number of vendors who have placed bids', function() {
-			winners.charts.create.chart2(auctions)
+			winners.charts.create.metrics(auctions)
 			expect(auctions.length).toEqual(4);
 			expect(winners.metrics.$auctions_total).toEqual(4)
 		})
 
 		it('has the correct number of unique winners', function() {
-			winners.charts.create.chart2(auctions)
+			winners.charts.create.metrics(auctions)
 			expect(winners.metrics.$unique_winners).toEqual(3)
 		})
 
 		it('has the correct average winning bid', function() {
-			winners.charts.create.chart2(auctions)
+			winners.charts.create.metrics(auctions)
 			expect(winners.metrics.$winning_bid).toEqual('$2,113')
 		})
 
 		it('has the correct number of vendors', function() {
-			winners.charts.create.chart2(auctions)
+			winners.charts.create.metrics(auctions)
 			expect(winners.metrics.$bidding_vendors).toEqual(8)
 		})
 
 		it('has the correct number of bids/auction', function() {
-			winners.charts.create.chart2(auctions)
+			winners.charts.create.metrics(auctions)
 			expect(winners.metrics.$bids).toEqual(3.3)
 		})
 
 		it('has the correct length for a typical auction', function() {
-			winners.charts.create.chart2(auctions)
+			winners.charts.create.metrics(auctions)
 			expect(winners.metrics.$auction_length).toEqual('7.3 days')
 		})
 	})

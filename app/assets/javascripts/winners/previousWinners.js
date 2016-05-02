@@ -67,6 +67,11 @@
           label: {
             text: 'Bid amount',
             position: 'outer-middle'
+          },
+          tick: {
+            format: function(d) {
+              return microp.format.commaSeparatedDollars(d);
+            }
           }
         }
       },
@@ -256,8 +261,231 @@
   // Create Charts Data (charts 2-4)
   ///////////////////////////////////////////////////////////
 
-  // returns object { cols: [ [ ] ]}
+  var getWinningBids = function getWinningBids(auctions) {
+    return _.pluck(auctions, 'winning_bid');
+  }
+
+  var getWinningBidAmounts = function getWinningBidAmounts(auctions) {
+    var winningBids = getWinningBids(auctions);
+    return _.pluck(winningBids, 'amount')
+  }
+
+  var meanWinningBids = function meanWinningBids(auctions) {
+    var winningBids = getWinningBidAmounts(auctions);
+    return d3.mean(winningBids);
+  }
+
+  var getAllBidders = function getAllBidders(auctions) {
+    return _.pluck(auction.bids, 'bidder_id');
+  }
+
+  var getNumberUniqueWinners = function getNumberUniqueWinners(auctions, unique) {
+    var winningBids = getWinningBids(auctions);
+    winningBids = _.filter(_.pluck(winningBids, 'bidder_id'), function(num) {
+      if (_.isNumber(num)) {
+        return num;
+      }
+    });
+    if (unique) {
+      winningBids = _.uniq(winningBids);
+    }
+    return winningBids.length;
+  }
+
+  var getBidsPerAuction = function(auctions) {
+    var bidsPerAuction = _.map(auctions, function(auction, key){
+      return auction.bids.length
+    })
+    return d3.mean(bidsPerAuction);
+  }
+
+  var getBiddingVendors = function(auctions) {
+    var biddingVendors = _.map(auctions, function(auction, key){
+      return _.pluck(auction.bids, 'bidder_id')
+    });
+    return _.uniq(_.flatten(biddingVendors)).length;
+  }
+
+  var getUniqueRepos = function getUniqueRepos(auctions) {
+
+
+    var repos = _.pluck(auctions, 'github_repo')
+
+    repos = _.map(repos, function(value,key) {
+      return microp.format.stardardizeUrl(value);
+    })
+
+    return repos = _.uniq(repos).length;
+  }
+
+  var getAuctionLength = function getAuctionLength(auctions) {
+    var auctionL =  _.map(auctions, function(auction){
+      var timeDiff = new Date(auction.end_datetime) - new Date(auction.start_datetime);
+      var dayUTF = 1000 * 60 * 60 * 24;
+      return (timeDiff / dayUTF);
+    });
+
+    return d3.mean(auctionL)
+  }
+
+
+
+  charts.create.metrics = function createMetrics(auctions) {
+
+    var uniqueWinners = getNumberUniqueWinners(auctions, true)
+
+    var avgWinningBids = meanWinningBids(auctions);
+
+    var repos = getUniqueRepos(auctions)
+
+    var bidsPerAuction = getBidsPerAuction(auctions)
+
+    var biddingVendors = getBiddingVendors(auctions)
+
+    var auctionLength = getAuctionLength(auctions)
+
+    console.log('ALL AUCTIONS           :', auctions)
+    console.log('unique winning bidders :', uniqueWinners)
+    console.log('average winning bid    :', avgWinningBids)
+    console.log('number of repos        :', repos)
+    console.log('bids per auction       :', bidsPerAuction)
+    console.log('# of bidding vendors   :', biddingVendors)
+    console.log('average auction length :', auctionLength)
+
+
+    winners.setSelectorText('$auctions_total', auctions.length);
+    winners.setSelectorText('$unique_winners', uniqueWinners);
+    winners.setSelectorText('$bids', bidsPerAuction, '#');
+    winners.setSelectorText('$bidding_vendors', biddingVendors, '#');
+    winners.setSelectorText('$auction_length', auctionLength, 'days');
+    winners.setSelectorText('$winning_bid', avgWinningBids, '$');
+  };
+
+
+  charts.create.metrics2 = function createMetrics2(auctions) {
+    var bidsPerAuction = [],
+      winningBids = [],
+      uniqueBidders = [],
+      repos = [],
+      uniqueWinners = [],
+      auctionLength = [];
+
+     _.each(auctions, function(auction){
+      var auction_bids = _.sortBy(auction.bids, 'created_at');
+
+      // for unique vendors
+      var bidders = _.pluck(auction.bids, 'bidder_id');
+      //
+
+      var timeDiff = new Date(auction.end_datetime) - new Date(auction.start_datetime);
+      var dayUTF = 1000 * 60 * 60 * 24;
+
+      auctionLength.push(timeDiff / dayUTF);
+
+      // for unique winners
+      var auctionsByWinners = d3.nest()
+        .key(function(d){ return d.amount; })
+        .key(function(d){ return d.bidder_id; })
+        .entries(auction_bids);
+      if (auctionsByWinners[0]) {
+        var winnerId = auctionsByWinners[0].values[0].key;
+        uniqueWinners.push(winnerId)
+      }
+
+      var bid_amts = _.pluck(auction.bids, 'amount');
+
+      bidsPerAuction.push(bid_amts.length);
+
+      uniqueBidders.push(bidders);
+
+      repos.push(auction.github_repo);
+    });
+
+    var pairedDates = _.zip(settings.cols[0],settings.cols[1]);
+    pairedDates = _.groupBy(pairedDates, function(num){
+      return num[0];
+    });
+    var bidList = _.values(pairedDates);
+
+    _.forEach(bidList, function(bidGrouping, i) {
+      if (i === 0) {
+        return;
+      }
+      var winningBidGroup = _.map(bidGrouping, function(num) {
+        return num[1];
+      });
+      winningBids.push(winningBidGroup);
+    });
+
+    winners.setSelectorText('$winning_bid', d3.mean(_.flatten(winningBids)), '$');
+    winners.setSelectorText('$bids', d3.mean(bidsPerAuction), '#');
+
+    uniqueBidders = _.uniq(_.flatten(uniqueBidders)).length;
+    winners.setSelectorText('$bidding_vendors', uniqueBidders);
+
+    repos = _.uniq(repos).length;
+    winners.setSelectorText('$projects', repos);
+
+    uniqueWinners = _.uniq(uniqueWinners).length;
+
+    winners.setSelectorText('$unique_winners', uniqueWinners);
+
+    auctionLength = d3.mean(auctionLength);
+
+    winners.setSelectorText('$auction_length', auctionLength, 'days');
+
+    winners.setSelectorText('$auctions_total', auctions.length, '#');
+
+  }
+
   charts.create.chart2 = function createChartData2(auctions) {
+    var settings = {};
+
+    settings.cols = [['bids_dates'], ['bids'], ['means_dates'],['means']];
+
+     _.each(auctions, function(auction){
+      var auction_bids = _.sortBy(auction.bids, 'created_at');
+
+      if (auction.bids.length > 0) {
+        settings.cols[0].push(microp.format.date(auction.end_datetime));
+      }
+
+      var auctionsByWinners = d3.nest()
+        .key(function(d){ return d.amount; })
+        .key(function(d){ return d.bidder_id; })
+        .entries(auction_bids);
+        if (auctionsByWinners.length > 0) {
+          settings.cols[1].push(+auctionsByWinners[0].key);
+        }
+    });
+
+    var pairedDates = _.zip(settings.cols[0],settings.cols[1]);
+    pairedDates = _.groupBy(pairedDates, function(num){
+      return num[0];
+    });
+
+    var dateList = _.keys(pairedDates);
+    var bidList = _.values(pairedDates);
+
+    settings.cols[2] = dateList;
+    settings.cols[2][0] = 'means_dates';
+
+    _.forEach(bidList, function(bidGrouping, i) {
+      if (i === 0) {
+        return;
+      }
+      var winningBidGroup = _.map(bidGrouping, function(num) {
+        return num[1];
+      });
+
+      settings.cols[3].push(d3.mean(winningBidGroup));
+    });
+    return { cols: settings.cols };
+  };
+
+
+  // returns object { cols: [ [ ] ]}
+  charts.create.chart2_old = function createChartData2_old(auctions) {
     var settings = {};
 
     settings.cols = [['bids_dates'], ['bids'], ['means_dates'],['means']];
@@ -388,6 +616,7 @@
     //
     return { cols: settings.cols };
   };
+
 
   charts.create.chart4 = function createChartData4(auctions) {
     var settings = {};
@@ -523,8 +752,9 @@
   charts.settings = function setChartSettings(data) {
     var auctions = _.sortBy(data.auctions, 'id');
     var settings = {};
-
+    settings.metrics = charts.create.metrics(auctions)
     settings.chart2 = charts.create.chart2(auctions);
+    // settings.chart2 = charts.create.chart21(auctions)
     settings.chart4 = charts.create.chart4(auctions);
     settings.chart5 = charts.create.chart5(auctions);
     settings.donut1 = charts.create.donut1(auctions);
