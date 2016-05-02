@@ -1,6 +1,6 @@
 class AuctionsIndexViewModel < Struct.new(:current_user, :auctions_query)
   def auctions
-    @auctions ||= auctions_query.map {|auction| AuctionViewModel.new(current_user, auction) }
+    @auctions ||= auctions_query.map { |auction| AuctionViewModel.new(current_user, auction) }
   end
 
   def active_auction_count
