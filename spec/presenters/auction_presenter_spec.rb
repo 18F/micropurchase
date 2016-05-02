@@ -13,7 +13,7 @@ describe AuctionPresenter do
       specify { expect(auction.bids?).to be_falsey }
       specify { expect(auction.bid_count).to eq(0) }
       specify { expect(auction.bids).to eq([]) }
-      specify { expect(auction.lowest_bid).to be_a(BidPresenter::Null) }
+      specify { expect(auction.lowest_bid).to be_a(NullBidPresenter) }
 
       it 'max_allowed_bid should return the starting bid for the auction' do
         expect(auction.max_allowed_bid).to eq(auction.start_price - PlaceBid::BID_INCREMENT)

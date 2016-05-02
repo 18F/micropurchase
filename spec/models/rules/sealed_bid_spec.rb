@@ -7,8 +7,8 @@ describe Rules::SealedBid do
 
   describe 'winning_bid' do
     context 'if the auction if open' do
-      it 'returns a BidPresenter::Null object' do
-        expect(subject.winning_bid).to be_a(BidPresenter::Null)
+      it 'returns a NullBidPresenter object' do
+        expect(subject.winning_bid).to be_a(NullBidPresenter)
       end
     end
 
@@ -73,8 +73,8 @@ describe Rules::SealedBid do
       context 'when the user has not placed a bid' do
         let(:user) { create(:user) }
 
-        it 'should return a BidPresenter::Null object' do
-          expect(subject.highlighted_bid(user)).to be_a(BidPresenter::Null)
+        it 'should return a NullBidPresenter object' do
+          expect(subject.highlighted_bid(user)).to be_a(NullBidPresenter)
         end
       end
     end

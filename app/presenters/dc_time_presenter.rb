@@ -6,7 +6,7 @@ class DcTimePresenter < Struct.new(:time)
   end
 
   def convert_and_format(format = FORMAT)
-    return BidPresenter::Null::NULL unless time
+    return NullBidPresenter::NULL unless time
     convert.strftime(format)
   end
 

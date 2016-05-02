@@ -165,7 +165,7 @@ class AuctionPresenter
     if bid.present?
       BidPresenter.new(bid)
     else
-      BidPresenter::Null.new
+      NullBidPresenter.new
     end
   end
 
