@@ -1,7 +1,5 @@
 Given(/^there are complete and successful auctions$/) do
-  @complete_and_successful = Array.new(5) do
-    FactoryGirl.create(:auction, :complete_and_successful)
-  end
+  @complete_and_successful = FactoryGirl.create_list(:auction, 2, :complete_and_successful)
 end
 
 When(/^I visit the admin action items page$/) do
@@ -9,7 +7,7 @@ When(/^I visit the admin action items page$/) do
 end
 
 When(/^I visit the preview page for the unpublished auction$/) do
-  visit admin_preview_auction_path(@unpublished_auction) 
+  visit admin_preview_auction_path(@unpublished_auction)
 end
 
 Then(/^I should see a preview of the auction$/) do

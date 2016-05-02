@@ -23,7 +23,8 @@ Feature: Bidding
     Then I should see an "Authorize with GitHub" button
 
     When I click on the "Authorize with GitHub" link
-    Then I should be on the profile edit page
+    And I visit my profile page
+    Then I should be on my profile page
     And I click on the "Submit" button
     Then I should see the auction's title
 
@@ -42,6 +43,10 @@ Feature: Bidding
 
   Scenario: Logging in before bidding
     Given there is an open auction
+
+    When I visit the home page
+    Then I should see a current bid amount
+
     And I am a user with a verified SAM account
     And I sign in and verify my account information
     When I click on the "Bid" button
@@ -57,7 +62,7 @@ Feature: Bidding
 
   Scenario: Viewing an auction when I have not bid
     Given there is an open bidless auction
-    And I am allowed to bid
+    And I am an authenticated vendor
     When I visit the home page
     And I click on the Bid button
 
@@ -67,7 +72,7 @@ Feature: Bidding
 
   Scenario: When someone else has outbid me
     Given there is an open auction
-    And I am allowed to bid
+    And I am an authenticated vendor
     When I visit the home page
     And I click on the "Bid" button
     

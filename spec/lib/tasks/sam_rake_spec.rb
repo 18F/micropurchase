@@ -2,37 +2,32 @@ require 'rails_helper'
 require 'rake'
 
 RSpec.describe 'rake sam:check' do
-  before do
-    allow(SamAccountReckoner).to receive(:new).and_return(reckoner)
-    Micropurchase::Application.load_tasks
-  end
-
-  context 'when the sam_account for the user is false' do
-    let!(:user) { FactoryGirl.create(:user, :with_duns_in_sam, sam_account: false) }
-    let(:reckoner) { SamAccountReckoner.new(user) }
-
+  context 'when the sam_status for the user is pending' do
     it 'uses the SamAccountReckoner to determine whether the account is valid' do
-      expect(SamAccountReckoner.unreckoned).to_not be_empty
+      user = FactoryGirl.create(:user, sam_status: :sam_pending)
+      Micropurchase::Application.load_tasks
+      client = double('samwise client')
+      expect(client).to receive(:duns_is_in_sam?).and_return(true)
+      expect(Samwise::Client).to receive(:new).and_return(client)
 
-      # need to return same user record because mocking
-      expect(SamAccountReckoner).to receive(:unreckoned).and_return([user])
-      expect(SamAccountReckoner).to receive(:new).with(user).and_return(reckoner)
-      expect(reckoner).to receive(:user_in_sam?).and_return(true)
+      Rake::Task['sam:check'].execute
 
-      Rake::Task['sam:check'].invoke
-
-      expect(user).to be_sam_account
-      expect(User.where(sam_account: false)).to be_empty
+      user = User.first
+      expect(user).to be_sam_accepted
+      expect(User.where(sam_status: :sam_pending)).to be_empty
     end
   end
 
-  context 'when the sam_account is true for the user' do
-    let!(:user) { FactoryGirl.create(:user, :with_duns_in_sam, sam_account: true) }
-    let(:reckoner) { SamAccountReckoner.new(user) }
-
+  context 'when the sam_status is accepted for the user' do
     it 'does not use the reckoner and keeps the account as it is' do
+      user = FactoryGirl.create(:user, sam_status: :sam_accepted)
+      reckoner = SamAccountReckoner.new(user)
+      Micropurchase::Application.load_tasks
+      allow(SamAccountReckoner).to receive(:new).and_return(reckoner)
+
       expect(reckoner).to_not receive(:set)
-      Rake::Task['sam:check'].invoke
+
+      Rake::Task['sam:check'].execute
     end
   end
 end

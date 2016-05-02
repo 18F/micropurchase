@@ -1,0 +1,9 @@
+<h2 class="center">Current bid:</h2>
+<p class="current-bid-amount center"><%= number_to_currency(@auction.highlighted_bid_amount) %></p>
+<% if @auction.user_is_winning_bidder? %>
+  <h3 class="center">You are currently the winning bidder.</h3>
+<% elsif @auction.bids? %>
+  <h3 class="center">You are currently <b>not</b> the winning bidder.</h3>
+<% else %>
+  <p class="current-bid-amount center">No bids yet.</p>
+<% end %>

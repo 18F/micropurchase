@@ -26,11 +26,15 @@ Rails.application.routes.draw do
   get '/admin/auctions/:id/preview', to: 'admin/auctions#preview', as: 'admin_preview_auction'
   namespace :admin do
     resources :auctions
-    resources :users
+    resources :users, only: [:index, :edit, :update, :show]
   end
 
   get '/auth/:provider/callback', to: 'authentications#create'
   get '/login', to: 'logins#index'
   get '/logout', to: 'authentications#destroy'
   get '/faq', to: 'logins#faq'
+
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine => "letter_opener"
+  end
 end

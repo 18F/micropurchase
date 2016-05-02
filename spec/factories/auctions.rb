@@ -2,7 +2,6 @@ FactoryGirl.define do
   factory :auction do
     start_datetime { Time.now - 3.days }
     end_datetime { Time.now + 3.days }
-    delivery_deadline { 5.business_days.after(end_datetime) }
     delivery_url { nil }
     awardee_paid_status { :not_paid }
     result { :not_applicable }
@@ -23,36 +22,22 @@ FactoryGirl.define do
       after(:create) do |auction|
         Timecop.freeze(auction.start_datetime) do
           Timecop.scale(3600)
-          3.times do
+          2.times do
             FactoryGirl.create(:bid, auction: auction, amount: 3000)
           end
         end
       end
     end
 
-    trait :single_bid_with_tie_and_other_bids do
-      single_bid
-
-      after(:create) do |auction|
-        Timecop.freeze(auction.start_datetime) do
-          Timecop.scale(3600)
-          3.times do |i|
-            FactoryGirl.create(:bid, auction: auction, amount: 3000 - i)
-            FactoryGirl.create(:bid, auction: auction, amount: 100)
-          end
-        end
-      end
-    end
-
     trait :with_bidders do
-      ignore do
+      transient do
         bidder_ids []
       end
 
       after(:build) do |instance|
         Timecop.freeze(instance.start_datetime) do
           Timecop.scale(3600)
-          (1..4).each do |i|
+          (1..2).each do |i|
             amount = 3499 - (20 * i) - rand(10)
             instance.bids << FactoryGirl.create(:bid, auction: instance, amount: amount)
           end
@@ -66,6 +51,11 @@ FactoryGirl.define do
           auction.bids << FactoryGirl.create(:bid, bidder_id: bidder_id, auction: auction, amount: amount)
         end
       end
+    end
+
+    trait :available do
+      start_datetime { Time.now - 2.days }
+      end_datetime { Time.now + 2.days }
     end
 
     trait :closed do

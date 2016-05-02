@@ -1,14 +1,16 @@
 module Admin
   class UserSerializer < ActiveModel::Serializer
-    attributes :github_id,
-               :duns_number,
-               :name,
-               :email,
-               :sam_account,
-               :created_at,
-               :updated_at,
-               :id,
-               :github_login
+    attributes(
+      :created_at,
+      :duns_number,
+      :email,
+      :github_id,
+      :github_login,
+      :id,
+      :name,
+      :sam_status,
+      :updated_at
+    )
 
     def created_at
       object.created_at.iso8601 rescue nil

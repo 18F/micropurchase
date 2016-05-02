@@ -48,7 +48,7 @@ class AuctionParser < Struct.new(:params)
   end
 
   def delivery_deadline
-    if params.has_key?(:due_in_days)
+    if params.key?(:due_in_days)
       real_days = params[:due_in_days].to_i.business_days
       end_of_workday(real_days.after(end_datetime.to_date))
     else

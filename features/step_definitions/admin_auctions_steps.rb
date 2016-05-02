@@ -45,12 +45,11 @@ Then(/^I should be able to edit the new auction form$/) do
   @deadline_day = Presenter::DcTime.convert(@time_in_days.business_days.from_now).strftime("%m/%d/%Y")
   fill_in("due_in_days", with: @time_in_days)
 
-  @billable = "the tock line item for CALC"         
+  @billable = "the tock line item for CALC"
   fill_in("auction_billable_to", with: @billable)
 
   select("published", from: "auction_published")
 end
-
 
 Then(/^I should be able to edit the existing auction form$/) do
   @title = 'This is the form-edited title'
@@ -77,7 +76,7 @@ Then(/^I should be able to edit the existing auction form$/) do
   @deadline_day = Presenter::DcTime.convert(Time.now + 5.days).strftime("%m/%d/%Y")
   fill_in("auction_delivery_deadline", with: @deadline_day)
 
-  @billable = "the tock line item for CALC"         
+  @billable = "the tock line item for CALC"
   fill_in("auction_billable_to", with: @billable)
 
   select("published", from: "auction_published")

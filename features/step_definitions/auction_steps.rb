@@ -1,5 +1,3 @@
-# coding: utf-8
-
 # FIXME: Assign to variable based on type and use name as selector (rather than overwriting @auction)
 Given(/^there is an? (.+) auction$/) do |label|
   @auction = case label
@@ -25,19 +23,9 @@ Given(/^there is an? (.+) auction$/) do |label|
 end
 
 Given(/^there are many different auctions$/) do
-  Timecop.freeze do
-    Timecop.scale(1.hour)
-
-    @closed_auctions = 3.times.to_a.map do
-      FactoryGirl.create(:auction, :closed, title: Faker::Commerce.product_name)
-    end
-
-    @current_auctions = 5.times.to_a.map do
-      FactoryGirl.create(:auction, :running, title: Faker::Commerce.product_name)
-    end
-
-    @future_auctions = [FactoryGirl.create(:auction, :future)]
-  end
+  FactoryGirl.create(:auction, :closed, title: Faker::Commerce.product_name)
+  FactoryGirl.create(:auction, :running, title: Faker::Commerce.product_name)
+  FactoryGirl.create(:auction, :future)
 end
 
 Given(/^there is also an unpublished auction$/) do
@@ -54,19 +42,20 @@ end
 
 Then(/^I should see the winning bid for the auction$/) do
   auction = Presenter::Auction.new(@auction)
-  current_bid_amount = ApplicationController.helpers.number_to_currency(
-    auction.current_bid.amount
+  lowest_bid_amount = ApplicationController.helpers.number_to_currency(
+    auction.lowest_bid.amount
   )
 
-  expect(page).to have_text(current_bid_amount)
+  expect(page).to have_text(lowest_bid_amount)
 end
 
 Then(/^I should see the auction's (.+)$/) do |field|
   if field == 'deadline'
     expect(page).to have_text(
-                      Presenter::DcTime.convert(@auction.end_datetime).
-                      beginning_of_day.strftime(Presenter::DcTime::FORMAT)
-                    )
+      Presenter::DcTime
+      .convert(@auction.end_datetime)
+      .beginning_of_day
+      .strftime(Presenter::DcTime::FORMAT))
   else
     expect(page).to have_text(@auction.send(field))
   end
@@ -82,7 +71,6 @@ Then(/^I should not see the number of bid for the auction$/) do
   expect(page).to_not have_content(number_of_bids)
 end
 
-
 When(/^I click on the link to the bids$/) do
   number_of_bids = "#{@auction.bids.length} bids"
   click_on(number_of_bids)
@@ -91,8 +79,6 @@ end
 Then(/^I should see the bid history$/) do
   h1_text = "Bids for \"#{@auction.title}\""
   expect(page).to have_content(h1_text)
-
-  # FIXME: more
 end
 
 Then(/^I should not see the unpublished auction$/) do
@@ -104,8 +90,10 @@ Then(/^I should see a routing error$/) do
 end
 
 Then(/^I should see a message about no auctions$/) do
-  expect(page).to have_content("There are no current open auctions on the site. " \
-                               "Please check back soon to view micropurchase opportunities.")
+  expect(page).to have_content(
+    "There are no current open auctions on the site. " \
+    "Please check back soon to view micropurchase opportunities."
+  )
 end
 
 Then(/^I should see a message about no bids$/) do
@@ -113,13 +101,12 @@ Then(/^I should see a message about no bids$/) do
 end
 
 When(/^I submit a bid for \$(.+)$/) do |amount|
-  field = find_field('Your bid:')
   fill_in("Your bid:", with: amount)
   step('I click on the "Submit" button')
 end
 
 Then(/^I should see a current bid amount( of \$([\d\.]+))?$/) do |_, amount|
-  expect(page).to have_content("Current bid:")
+  expect(page).to have_content(/Current bid: \$[\d,\.]+/)
   expect(page).to have_content(amount) unless amount.nil?
 end
 
@@ -155,7 +142,4 @@ Then(/^I should see an? (.+) status$/) do |label|
   within(:css, 'div.auction-info') do
     expect(page).to have_content(label)
   end
-end
-
-Then(/^the auctions should be in reverse chronological order$/) do
 end

@@ -4,10 +4,10 @@ module ViewModel
       include ActionView::Helpers::DateHelper
       include ActionView::Helpers::NumberHelper
 
-      def status
+      def status_text
         'Open'
       end
-      
+
       def label_class
         'auction-label-open'
       end
@@ -25,10 +25,11 @@ module ViewModel
       end
 
       def tag_data_value_2
-        if auction.single_bid?
+        # Keeping this, but we should look at our metadata again
+        if !auction.show_bids?
           "Sealed"
         else
-          "#{number_to_currency(auction.current_bid_amount)} - #{auction.bids.length} bids"
+          "#{number_to_currency(auction.highlighted_bid_amount)} - #{auction.bids.length} bids"
         end
       end
     end

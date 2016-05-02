@@ -102,6 +102,10 @@ Style/DotPosition:
   - leading
   - trailing
 
+Style/IfUnlessModifier:
+  MaxLineLength: 80
+  Enabled: false
+
 Style/NumericLiterals:
   Enabled: false
 
@@ -124,7 +128,7 @@ Style/TrailingWhitespace:
 Style/GuardClause:
   Description: Check for conditionals that can be replaced with guard clauses
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#no-nested-conditionals
-  Enabled: true
+  Enabled: false
   MinBodyLength: 1
 
 Style/StringLiterals:
@@ -150,11 +154,11 @@ Style/SpaceInsideBlockBraces:
   # Valid values are: space, no_space
   EnforcedStyleForEmptyBraces: no_space
   # Space between { and |. Overrides EnforcedStyle if there is a conflict.
-  SpaceBeforeBlockParameters: false
+  SpaceBeforeBlockParameters: true
 
 Style/SpaceInsideHashLiteralBraces:
-  EnforcedStyle: no_space
-  EnforcedStyleForEmptyBraces: no_space
+  EnforcedStyle: space
+  EnforcedStyleForEmptyBraces: space
   SupportedStyles:
     - space
     - no_space

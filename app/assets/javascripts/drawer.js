@@ -1,3 +1,5 @@
+'use strict';
+
 (function (window) {
   /**
    * Utilities for setting or removing tabindex on all focusable elements
@@ -74,7 +76,7 @@
 
     /** Close drawer on escape keypress */
     handleKeyup: function(e) {
-      if (e.keyCode == KEYCODE_ESC) {
+      if (e.keyCode === KEYCODE_ESC) {
         if (this.isOpen) {
           this.hide();
         }

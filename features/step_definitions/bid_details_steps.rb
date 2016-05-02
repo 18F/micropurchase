@@ -1,7 +1,3 @@
-When(/^I visit the auction bids page$/) do
-  visit(auction_bids_path(@auction.id))
-end
-
 Then(/^I should be able to see the full details for each bid$/) do
   # sort the bids so that newest is first
   bids = @auction.bids.sort_by(&:created_at).reverse
@@ -27,7 +23,7 @@ Then(/^I should be able to see the full details for each bid$/) do
     within(:xpath, cel_xpath(row_number, 3)) do
       expect(page).to have_content(amount)
     end
-    
+
     # check the "date" column
     within(:xpath, cel_xpath(row_number, 4)) do
       expect(page).to have_content(bid.time)
@@ -45,24 +41,24 @@ Then(/^I should not see the bidder name or duns for any bid$/) do
     unredacted_bidder_name = bid.bidder.name
     unredacted_bidder_duns = bid.bidder.duns_number
     bid = Presenter::Bid.new(bid)
-    
+
     # check the "name" column
     within(:xpath, cel_xpath(row_number, 1)) do
       expect(page).not_to have_content(unredacted_bidder_name)
       expect(page).to have_content("[Name withheld until the auction ends]")
     end
-    
+
     within(:xpath, cel_xpath(row_number, 2)) do
       expect(page).not_to have_content(unredacted_bidder_duns)
       expect(page).to have_content("[Withheld]")
     end
-    
+
     # check the "amount" column
     amount = ApplicationController.helpers.number_to_currency(bid.amount)
     within(:xpath, cel_xpath(row_number, 3)) do
       expect(page).to have_content(amount)
     end
-    
+
     # check the "date" column
     within(:xpath, cel_xpath(row_number, 4)) do
       expect(page).to have_content(bid.time)
@@ -86,22 +82,22 @@ Then(/^I should see my name and DUNS only on my bids$/) do
     end
 
     bid = Presenter::Bid.new(bid)
-    
+
     # check the "name" column
     within(:xpath, cel_xpath(row_number, 1)) do
       expect(page).to have_content(bidder_name)
     end
-    
+
     within(:xpath, cel_xpath(row_number, 2)) do
       expect(page).to have_content(bidder_duns)
     end
-    
+
     # check the "amount" column
     amount = ApplicationController.helpers.number_to_currency(bid.amount)
     within(:xpath, cel_xpath(row_number, 3)) do
       expect(page).to have_content(amount)
     end
-    
+
     # check the "date" column
     within(:xpath, cel_xpath(row_number, 4)) do
       expect(page).to have_content(bid.time)

@@ -1,12 +1,14 @@
 class BidSerializer < ActiveModel::Serializer
   has_one :bidder, class_name: 'User', serializer: UserSerializer
 
-  attributes :bidder_id,
-             :auction_id,
-             :amount,
-             :created_at,
-             :updated_at,
-             :id
+  attributes(
+    :amount,
+    :auction_id,
+    :bidder_id,
+    :created_at,
+    :id,
+    :updated_at
+  )
 
   def bidder_id
     object.veiled_bidder_attribute(:id, scope)

@@ -3,12 +3,12 @@ module Admin
     before_filter :require_admin
 
     def index
-      @auctions = Auction.all.map {|auction| Presenter::AdminAuction.new(auction) }
+      @auctions = Auction.all.map { |auction| Presenter::AdminAuction.new(auction) }
 
       respond_to do |format|
         format.html
         format.json do
-          render json: @auctions, each_serializer: AuctionSerializer
+          render json: @auctions, each_serializer: Admin::AuctionSerializer
         end
       end
     end
@@ -19,7 +19,7 @@ module Admin
       respond_to do |format|
         format.html
         format.json do
-          render json: @auction, serializer: AuctionSerializer
+          render json: @auction, serializer: Admin::AuctionSerializer
         end
       end
     end
@@ -49,29 +49,12 @@ module Admin
       respond_to do |format|
         format.html { redirect_to "/admin/auctions" }
         format.json do
-          render json: auction, serializer: AuctionSerializer
+          render json: auction, serializer: Admin::AuctionSerializer
         end
       end
     rescue ArgumentError => e
       respond_error(e)
     end
-
-    # We have already disabled this action in the admin screens, let's remove this
-    # method as a precaution as well
-    # def destroy
-    #   id = params[:id].dup
-    #   auction = Auction.find(id)
-    #   DestroyAuction.new(auction).perform
-    #
-    #   respond_to do |format|
-    #     format.html { redirect_to "/admin/auctions" }
-    #     format.json do
-    #       render json: {message: "Successfully deleted Auction ##{id}"}
-    #     end
-    #   end
-    # rescue ArgumentError => e
-    #   respond_error(e)
-    # end
 
     def update
       auction = Auction.find(params[:id])
@@ -82,7 +65,7 @@ module Admin
       respond_to do |format|
         format.html { redirect_to "/admin/auctions" }
         format.json do
-          render json: auction, serializer: AuctionSerializer
+          render json: auction, serializer: Admin::AuctionSerializer
         end
       end
     rescue ArgumentError => e
@@ -104,8 +87,8 @@ module Admin
           flash[:error] = message
           redirect_to "/admin/auctions"
         end
-        format.html do
-          render json: {error: message}
+        format.json do
+          render json: { error: message }
         end
       end
     end

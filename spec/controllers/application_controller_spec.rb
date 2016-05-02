@@ -10,7 +10,7 @@ RSpec.describe ApplicationController, controller: true do
       let(:format) { double('format', "html?" => true, "json?" => false) }
 
       it 'should return an instance of WebAuthenticator' do
-        expect(controller.send(:authenticator)).to be_a(ApplicationController::WebAuthenticator)
+        expect(controller.send(:authenticator)).to be_a(WebAuthenticator)
       end
     end
 
@@ -18,7 +18,7 @@ RSpec.describe ApplicationController, controller: true do
       let(:format) { double('format', "html?" => false, "json?" => true) }
 
       it 'should return an instance of ApiAuthenticator' do
-        expect(controller.send(:authenticator)).to be_a(ApplicationController::WebAuthenticator)
+        expect(controller.send(:authenticator)).to be_a(WebAuthenticator)
       end
     end
   end

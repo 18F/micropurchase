@@ -1,20 +1,23 @@
 class AuctionSerializer < ActiveModel::Serializer
-  attributes :issue_url,
-             :github_repo,
-             :start_price,
-             :start_datetime,
-             :end_datetime,
-             :title,
-             :description,
-             :id,
-             :bids,
-             :created_at,
-             :updated_at,
-             :summary
+  attributes(
+    :bids,
+    :created_at,
+    :description,
+    :end_datetime,
+    :github_repo,
+    :id,
+    :issue_url,
+    :start_datetime,
+    :start_price,
+    :summary,
+    :title,
+    :updated_at,
+    :winning_bid
+  )
 
   def bids
     bids = object.veiled_bids(scope)
-    bids.map {|bid| BidSerializer.new(bid, {scope: scope, root: false})}
+    bids.map { |bid| BidSerializer.new(bid, { scope: scope, root: false }) }
   end
 
   def created_at
@@ -22,7 +25,7 @@ class AuctionSerializer < ActiveModel::Serializer
   end
 
   def updated_at
-    object.created_at.iso8601
+    object.updated_at.iso8601
   end
 
   def end_datetime
@@ -31,5 +34,15 @@ class AuctionSerializer < ActiveModel::Serializer
 
   def start_datetime
     object.start_datetime.iso8601
+  end
+
+  def winning_bid
+    WinningBidSerializer.new(find_winning_bid)
+  end
+
+  private
+
+  def find_winning_bid
+    RulesFactory.new(object).create.winning_bid
   end
 end

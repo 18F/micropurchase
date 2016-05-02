@@ -43,9 +43,10 @@
               "created_at",
               "updated_at",
               "email",
-              "sam_account",
+              "sam_status",
               "credit_card_form_url",
-              "github_login"
+              "github_login",
+              "contracting_officer"
             ],
             "properties": {
               "id": {
@@ -54,6 +55,9 @@
               "github_id": {
                 "type": "string",
                 "minLength": 1
+              },
+              "contracting_officer": {
+                "type": "boolean"
               },
               "duns_number": {
                 "type": "string",
@@ -75,8 +79,8 @@
                 "type": "string",
                 "minLength": 1
               },
-              "sam_account": {
-                "type": "boolean"
+              "sam_status": {
+                "type": "string"
               },
               "credit_card_form_url": {
                 "type": ["string", "null"]
@@ -101,9 +105,10 @@
               "created_at",
               "updated_at",
               "email",
-              "sam_account",
+              "sam_status",
               "credit_card_form_url",
-              "github_login"
+              "github_login",
+              "contracting_officer"
             ],
             "properties": {
               "id": {
@@ -112,6 +117,9 @@
               "github_id": {
                 "type": "string",
                 "minLength": 1
+              },
+              "contracting_officer": {
+                "type": "boolean"
               },
               "duns_number": {
                 "type": "string",
@@ -132,8 +140,8 @@
               "email": {
                 "type": "string"
               },
-              "sam_account": {
-                "type": "boolean"
+              "sam_status": {
+                "type": "string"
               },
               "credit_card_form_url": {
                 "type": ["string", "null"]

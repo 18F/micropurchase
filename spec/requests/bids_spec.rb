@@ -1,12 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe AuctionsController do
+describe AuctionsController do
+  include RequestHelpers
+
   before do
     stub_github('/user') do
       github_response_for_user(user)
     end
   end
-  let(:user) { FactoryGirl.create(:user, :with_duns_in_sam) }
+  let(:user) { FactoryGirl.create(:user, sam_status: :sam_accepted) }
   let(:headers) do
     {
       'HTTP_ACCEPT' => 'text/x-json',
@@ -108,7 +110,7 @@ RSpec.describe AuctionsController do
       let(:api_key) { FakeGitHub::VALID_API_KEY }
       let(:auction) { FactoryGirl.create(:auction, :running) }
       let(:current_auction_price) do
-        auction.bids.sort_by {|b| b.amount}.first.amount
+        auction.bids.sort_by(&:amount).first.amount
       end
 
       context 'and the bid amount is the lowest' do
@@ -178,14 +180,26 @@ RSpec.describe AuctionsController do
 
             expect(status).to eq(403)
             expect(json_response).to have_key('error')
-            expect(json_response['error']).to eq('You can only bid once in a single-bid auction.')
+            expect(json_response['error']).to eq('You are not allowed to bid on this auction')
           end
         end
       end
 
+      context 'and the user has a rejected #sam_status' do
+        let(:user) { FactoryGirl.create(:user, sam_status: :sam_rejected) }
+        let(:bid_amount) { current_auction_price - 10 }
 
-      context 'and the user has a false #sam_account' do
-        let(:user) { FactoryGirl.create(:user, :with_duns_not_in_sam, sam_account: false) }
+        it 'returns a json error' do
+          expect(json_response['error']).to eq('You must have a valid SAM.gov account to place a bid')
+        end
+
+        it 'returns a 403 status code' do
+          expect(status).to eq(403)
+        end
+      end
+
+      context 'and the user has a pending #sam_status' do
+        let(:user) { FactoryGirl.create(:user, sam_status: :sam_pending) }
         let(:bid_amount) { current_auction_price - 10 }
 
         it 'returns a json error' do

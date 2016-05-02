@@ -1,21 +1,27 @@
 require 'rails_helper'
 
 RSpec.describe UpdateUser do
-  let(:updater) { UpdateUser.new(params, current_user) }
-  let(:current_user) { User.create(duns_number: '12341', sam_account: true) }
+  let(:updater) { UpdateUser.new(params, user) }
+  let(:user) { FactoryGirl.create(:user, sam_status: :sam_accepted) }
+  let(:user_id) { user.id }
+  let(:user_duns_number) { user.duns_number }
+  let(:user_credit_card_url) { 'https://random-example.com/pay' }
 
   let(:params) do
     ActionController::Parameters.new(
       id: user_id,
       user: {
-        duns_number: 'new-new'
+        name: Faker::Name.name,
+        duns_number: user_duns_number,
+        email: "random#{rand(10000)}@example.com",
+        credit_card_form_url: user_credit_card_url
       }
     )
   end
 
   context 'when current user is not the same as the user being edited' do
-    let(:user) { User.create }
-    let(:user_id) { user.id }
+    let(:other_user) { FactoryGirl.create(:user) }
+    let(:user_id) { other_user.id }
 
     it 'raises UnauthorizedError' do
       expect { updater.save }.to raise_error(UnauthorizedError)
@@ -23,7 +29,7 @@ RSpec.describe UpdateUser do
   end
 
   context 'when the user being edited does not exist' do
-    let(:user_id) { current_user.id + 1000 }
+    let(:user_id) { user.id + 1000 }
 
     it 'raises a ActiveRecord::RecordNotFound when user is not found' do
       expect { updater.save }.to raise_error(ActiveRecord::RecordNotFound)
@@ -31,7 +37,7 @@ RSpec.describe UpdateUser do
   end
 
   context 'when the params are insufficient' do
-    let(:user_id) { current_user.id }
+    let(:user_id) { user.id }
     let(:params) do
       ActionController::Parameters.new(id: user_id)
     end
@@ -41,20 +47,68 @@ RSpec.describe UpdateUser do
     end
   end
 
-  context 'when user is found and can be edited by current user' do
-    let(:user_id) { user.id }
-    let(:user) { current_user }
+  context 'when the credit_card_url is not valid' do
+    let(:user_credit_card_url) { 'fiff13t913jt10h' }
 
-    it 'update the user when current user is the user' do
-      updater.save
-      user.reload
-      expect(user.duns_number).to eq('new-new')
+    it 'raises an error on the save' do
+      expect(updater.save).to be_falsey
+      expect(updater.errors).to eq('Credit card form url is not a valid URL')
+    end
+  end
+
+  context 'when the credit_card_url raises an exception' do
+    context 'when the credit_card_url is not valid' do
+      let(:user_credit_card_url) { 'hfdsgih9ghg' }
+      before { allow_any_instance_of(URI::Parser).to receive(:parse).and_raise(URI::InvalidURIError) }
+
+      it 'raises an error on the save' do
+        expect(updater.save).to be_falsey
+        expect(updater.errors).to eq('Credit card form url is not a valid URL')
+      end
+    end
+  end
+
+  context 'when user is found and can be edited by current user' do
+    context 'user updates DUNS to invalid DUNS number' do
+      let(:user_duns_number) { 'BAD' }
+
+      it 'raises validation error' do
+        old_duns_number = user.duns_number
+        updater.save
+        expect(updater.errors).to eq('DUNS number format is invalid')
+        expect(user.duns_number).to eq old_duns_number
+      end
     end
 
-    it 'clears the sam id, when it has changed' do
-      updater.save
-      user.reload
-      expect(user.sam_account).to eq(false)
+    context 'user updates DUNS to nil' do
+      let(:user_duns_number) { nil }
+
+      it 'does not raise validation error' do
+        updater.save
+        expect(updater.errors).to eq('')
+      end
+    end
+
+    context 'user updates DUNS to a valid number' do
+      let(:user_duns_number) { Faker::Company.duns_number }
+
+      it 'clears the sam id, when it has changed' do
+        updater.save
+        user.reload
+        expect(user).to be_sam_pending
+      end
+
+      it 'calls the SamAccountReckoner through a delayed job' do
+        reckoner = double('reckoner', clear: true)
+        allow(SamAccountReckoner).to receive(:new).with(user).and_return(reckoner)
+        delayed_job = double(set!: true)
+        allow(reckoner).to receive(:delay).and_return(delayed_job)
+
+        updater.save
+
+        expect(reckoner).to have_received(:delay)
+        expect(delayed_job).to have_received(:set!)
+      end
     end
   end
 end

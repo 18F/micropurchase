@@ -12,64 +12,83 @@ module Presenter
       @auction = auction
     end
 
-    def current_bid?
-      current_bid_record != nil
-    end
+    delegate(
+      :created_at,
+      :delivery_deadline,
+      :description,
+      :end_datetime,
+      :github_repo,
+      :id,
+      :issue_url,
+      :model_name,
+      :published,
+      :read_attribute_for_serialization,
+      :start_datetime,
+      :start_price,
+      :summary,
+      :title,
+      :to_key,
+      :to_model,
+      :to_param,
+      :type,
+      :updated_at,
+      :lowest_bid,
+      to: :model
+    )
 
-    def current_bid
-      return Presenter::Bid::Null.new unless current_bid_record
-      Presenter::Bid.new(current_bid_record)
-    end
+    delegate(
+      :amount,
+      :time,
+      to: :lowest_bid,
+      prefix: :lowest_bid
+    )
 
-    def current_max_bid
-      if current_bid.is_a?(Presenter::Bid::Null)
-        return start_price - PlaceBid::BID_INCREMENT
-      else
-        return current_bid.amount - PlaceBid::BID_INCREMENT
-      end
-    end
+    delegate(
+      :bidder_duns_number,
+      :bidder_name,
+      to: :lowest_bid,
+      prefix: :lowest
+    )
 
-    delegate :title, :created_at, :start_datetime, :end_datetime,
-             :github_repo, :issue_url, :summary, :description,
-             :delivery_deadline, :start_price, :published, :to_param,
-             :model_name, :to_key, :to_model, :type, :id,
-             :read_attribute_for_serialization,
-             to: :model
+    delegate(
+      :future?,
+      :expiring?,
+      :over?,
+      :available?,
+      to: :auction_status
+    )
 
-    delegate :amount, :time,
-             to: :current_bid, prefix: :current_bid
-
-    delegate :bidder_name, :bidder_duns_number,
-             to: :current_bid, prefix: :current
-
-    def current_bid_amount_as_currency
-      number_to_currency(current_bid_amount)
-    end
+    delegate(
+      :auction_rules_href,
+      :formatted_type,
+      :highlighted_bid,
+      :highlighted_bid_label,
+      :max_allowed_bid,
+      :partial_path,
+      :show_bids?,
+      :user_can_bid?,
+      :veiled_bids,
+      :winning_bid,
+      to: :auction_rules
+    )
 
     def bids?
       bid_count > 0
     end
 
     def bids
-      model.bids.to_a
-           .map {|bid| Presenter::Bid.new(bid) }
-           .sort_by(&:created_at)
-           .reverse
+      @bids ||= model.bids.to_a
+                     .map { |bid| decorated_bid(bid) }
+                     .sort_by(&:created_at)
+                     .reverse
     end
 
-    def veiled_bids(user)
-      # For single bid auctions, we reveal no bids if the auction is running
-      # For multi bid auctions, we let the bids go through, but depend on
-      # Presenter::Bid to veil certain attributes.
+    def lowest_bids
+      model.lowest_bids.map { |b| decorated_bid(b) }
+    end
 
-      # redact all bids if auction is still running and type is single bid
-      if available? && single_bid?
-        return [] if user.nil?
-        return bids.select {|bid| bid.bidder_id == user.id}
-      end
-
-      # otherwise, return all the bids
-      bids
+    def lowest_bid
+      decorated_bid(model.lowest_bid)
     end
 
     def bid_count
@@ -84,15 +103,6 @@ module Presenter
       Presenter::DcTime.convert_and_format(model.end_datetime)
     end
 
-    def formatted_type
-      return 'multi-bid'  if model.type == 'multi_bid'
-      return 'single-bid' if model.type == 'single_bid'
-    end
-
-    def type
-      model.type
-    end
-
     def starts_in
       time_in_human(model.start_datetime)
     end
@@ -105,68 +115,8 @@ module Presenter
       time_in_human(model.delivery_deadline)
     end
 
-    # rubocop:disable Style/DoubleNegation
-    def available?
-      !!(
-        (model.start_datetime && !future?) &&
-          (model.end_datetime && !over?)
-      )
-    end
-    # rubocop:enable Style/DoubleNegation
-
-    def over?
-      model.end_datetime < Time.now
-    end
-
-    def future?
-      model.start_datetime > Time.now
-    end
-
-    def expiring?
-      available? && model.end_datetime < 12.hours.from_now
-    end
-
-    def winning_bidder
-      winning_bid.bidder rescue nil
-    end
-
-    def winning_bid
-      return single_bid_winning_bid if single_bid?
-      return multi_bid_winning_bid  if multi_bid?
-    end
-
     def winning_bidder_id
-      winning_bid.bidder_id rescue nil
-    end
-
-    def winning_bid_id
-      winning_bid.id rescue nil
-    end
-
-    def single_bid?
-      model.type == 'single_bid'
-    end
-
-    def multi_bid?
-      model.type == 'multi_bid'
-    end
-
-    def single_bid_winning_bid
-      return nil if available?
-      return lowest_bids.first if lowest_bids.length == 1
-      lowest_bids.sort_by(&:created_at).first
-    end
-
-    def multi_bid_winning_bid
-      current_bid
-    end
-
-    def lowest_bids
-      bids.select {|b| b.amount == lowest_amount }.sort_by(&:created_at)
-    end
-
-    def lowest_amount
-      bids.sort_by(&:amount).first.amount rescue nil
+      winning_bid.bidder_id
     end
 
     def html_description
@@ -190,8 +140,8 @@ module Presenter
 
     private
 
-    def current_bid_record
-      @current_bid_record ||= bids.sort_by {|bid| [bid.amount, bid.created_at, bid.id] }.first
+    def auction_rules
+      @auction_rules ||= RulesFactory.new(self).create
     end
 
     def markdown
@@ -210,6 +160,18 @@ module Presenter
         "#{distance} ago"
       else
         "in #{distance}"
+      end
+    end
+
+    def auction_status
+      AuctionStatus.new(model)
+    end
+
+    def decorated_bid(bid)
+      if bid.present?
+        Presenter::Bid.new(bid)
+      else
+        Presenter::Bid::Null.new
       end
     end
 

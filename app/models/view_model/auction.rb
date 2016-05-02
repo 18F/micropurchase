@@ -5,60 +5,83 @@ module ViewModel
   class Auction < Struct.new(:current_user, :auction_record)
     include ActionView::Helpers::NumberHelper
 
-    def auction
-      @auction ||= Presenter::Auction.new(auction_record)
-    end
+    delegate(
+      :auction_rules_href,
+      :available?,
+      :bid_count,
+      :bids,
+      :bids?,
+      :created_at,
+      :end_datetime,
+      :expiring?,
+      :formatted_type,
+      :future?,
+      :highlighted_bid_label,
+      :html_description,
+      :html_description,
+      :html_summary,
+      :human_start_time,
+      :id,
+      :issue_url,
+      :over?,
+      :partial_path,
+      :read_attribute_for_serialization,
+      :show_bids?,
+      :start_datetime,
+      :start_price,
+      :summary,
+      :title,
+      :to_param,
+      :type,
+      :updated_at,
+      :lowest_bid,
+      :veiled_bids,
+      to: :auction
+    )
 
-    delegate :title, :summary, :html_description, :bid_count,
-             :current_bid_amount_as_currency, :issue_url,
-             :start_datetime, :end_datetime, :veiled_bids,
-             :created_at, :current_bidder_name, :html_summary,
-             :html_description, :formatted_type, :available?, :bids?,
-             :bids, :human_start_time, :start_price, :over?,
-             :multi_bid?, :single_bid?, :type, :id,
-             :read_attribute_for_serialization, :to_param,
-             to: :auction
+    delegate(
+      :amount,
+      to: :highlighted_bid,
+      prefix: true
+    )
+
+    delegate(
+      :label,
+      :label_class,
+      :status_text,
+      :tag_data_label_2,
+      :tag_data_value_status,
+      :tag_data_value_2,
+      to: :status_presenter
+    )
 
     def user_can_bid?
-      return false unless auction.available?
-      return false if current_user.nil? || !current_user.sam_account?
-      return false if auction.single_bid? && user_is_bidder?
-      true
+      auction.user_can_bid?(current_user)
+    end
+
+    def highlighted_bid
+      auction.highlighted_bid(current_user)
     end
 
     def show_bid_button?
       user_can_bid? || current_user.nil?
     end
 
-    def formatted_current_bid_amount
-      if current_bid_amount.nil?
-        return 'n/a'
-      else
-        return number_to_currency(current_bid_amount)
-      end
+    def highlighted_bid_amount_as_currency
+      number_to_currency(highlighted_bid_amount)
     end
 
-    def current_bid_amount
-      current_bid.amount rescue nil
+    def highlighted_bidder_name
+      highlighted_bid.bidder_name
     end
 
-    # This could be in the Presenter::Auction modelm but I don't want to make that change now
-    def current_bid
-      return nil if current_user.nil?
-      if auction.available? && auction.single_bid?
-        auction.bids.detect {|bid| bid.bidder_id == current_user.id }
-      else
-        auction.current_bid
-      end
-    end
-
-    # can we get rid of Presenter::Auction view?
     def user_is_bidder?
       user_bids_obj.has_bid?
     end
 
     def user_is_winning_bidder?
-      return false unless auction.current_bid?
+      # FIXME: who is calling this?
+      return false unless auction.bids?
       current_user.id == auction.winning_bidder_id
     end
 
@@ -83,33 +106,25 @@ module ViewModel
     end
 
     def index_bid_summary_partial
-      if auction.single_bid?
-        'auctions/single_bid/index_bid_summary'
-      elsif auction.multi_bid?
-        'auctions/multi_bid/index_bid_summary'
-      end
+      auction.partial_path('index_bid_summary')
     end
 
-    def current_bid_info_partial
-      if auction.single_bid?
-        'bids/single_bid/current_bid_info'
-      elsif auction.multi_bid?
-        'bids/multi_bid/current_bid_info'
-      end
+    def highlighted_bid_info_partial
+      auction.partial_path('highlighted_bid_info', 'bids')
     end
-
-    delegate :status, :label_class, :label, :tag_data_value_status,
-             :tag_data_label_2, :tag_data_value_2,
-             to: :status_presenter
 
     private
 
+    def auction
+      @auction ||= Presenter::Auction.new(auction_record)
+    end
+
     def status_presenter_class
-      status_name = if auction.expiring?
+      status_name = if expiring?
                       'Expiring'
-                    elsif auction.over?
+                    elsif over?
                       'Over'
-                    elsif auction.future?
+                    elsif future?
                       'Future'
                     else
                       'Open'

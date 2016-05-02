@@ -15,12 +15,12 @@ class BidsController < ApplicationController
             .where(bidder_id: current_user.id)
             .includes(:auction)
             .all
-            .map {|bid| Presenter::Bid.new(bid) }
+            .map { |bid| Presenter::Bid.new(bid) }
   end
 
   def new
     # check if user is valid
-    if current_user.sam_account?
+    if current_user.sam_accepted?
       auction = AuctionQuery.new.public_find(params[:auction_id])
       @auction = ViewModel::Auction.new(current_user, auction)
       @bid = Bid.new
@@ -36,7 +36,9 @@ class BidsController < ApplicationController
   end
 
   def create
-    fail UnauthorizedError, "You must have a valid SAM.gov account to place a bid" unless current_user.sam_account?
+    unless current_user.sam_accepted?
+      fail UnauthorizedError, "You must have a valid SAM.gov account to place a bid"
+    end
     @bid = Presenter::Bid.new(PlaceBid.new(params, current_user).perform)
 
     respond_to do |format|
@@ -69,7 +71,7 @@ class BidsController < ApplicationController
         redirect_to redirect_path
       end
       format.json do
-        render json: {error: error.message}, status: 403
+        render json: { error: error.message }, status: 403
       end
     end
   end

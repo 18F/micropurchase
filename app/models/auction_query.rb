@@ -80,7 +80,7 @@ class AuctionQuery
   def my_bids(user_id)
     @relation
       .joins(:bids)
-      .where(bids: {bidder_id: user_id})
+      .where(bids: { bidder_id: user_id })
       .uniq
   end
 

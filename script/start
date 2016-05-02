@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+set -x
+
+# default the port, for development
+# http://stackoverflow.com/a/6859838/358804
+PORT=${PORT-3000}
+
+bin/rake cf:on_first_instance db:migrate
+foreman start -p $PORT

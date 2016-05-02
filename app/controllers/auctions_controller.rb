@@ -40,7 +40,7 @@ class AuctionsController < ApplicationController
 
     @view_model = ViewModel::AuctionsIndex.new(current_user, collection)
 
-    @auctions_json = @view_model.auctions.each {|a| AuctionSerializer.new(a, root: false)}.as_json
+    @auctions_json = @view_model.auctions.each { |a| AuctionSerializer.new(a, root: false) }.as_json
     respond_to do |format|
       format.html
     end
@@ -50,7 +50,7 @@ class AuctionsController < ApplicationController
     collection = AuctionQuery.new.public_index
     @view_model = ViewModel::AuctionsIndex.new(current_user, collection)
 
-    @auctions_json = @view_model.auctions.each {|a| AuctionSerializer.new(a, root: false)}.as_json
+    @auctions_json = @view_model.auctions.each { |a| AuctionSerializer.new(a, root: false) }.as_json
 
     respond_to do |format|
       format.html

@@ -1,26 +1,17 @@
 FactoryGirl.define do
-  sequence :github_id do |n|
-    n
-  end
+  sequence(:github_id) { |n| n }
+  sequence(:email) { |n| "email#{n}@example.com" }
 
   factory :user do
-    name { Faker::Name.name }
-    email { Faker::Internet.email }
     duns_number { Faker::Company.duns_number }
+    name { Faker::Name.name }
+    email
     github_id 123_456
-    sam_account true
+    sam_status :sam_pending
     credit_card_form_url 'https://some-website.com/pay'
 
     factory :admin_user do
       github_id { Admins.github_ids.first }
-    end
-
-    trait :with_duns_not_in_sam do
-      duns_number { Faker::Company.duns_number }
-    end
-
-    trait :with_duns_in_sam do
-      duns_number { '130477032' }
     end
   end
 end

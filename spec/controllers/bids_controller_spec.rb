@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe BidsController, controller: true do
-  let(:current_bidder) { FactoryGirl.create(:user) }
+  let(:current_bidder) { FactoryGirl.create(:user, sam_status: :sam_accepted) }
   let(:auction) { FactoryGirl.create(:auction) }
 
   describe '/my-bids' do
@@ -16,7 +16,7 @@ RSpec.describe BidsController, controller: true do
       it 'should assign auctions that current user have bidded on, presented' do
         bid = auction.bids.create(bidder_id: current_bidder.id)
         expect(bid).to be_valid
-        get :my_bids, {}, user_id: current_bidder.id
+        get :my_bids, { }, user_id: current_bidder.id
         assigned_bid = assigns(:bids).first
         expect(assigned_bid).to be_a(Presenter::Bid)
         expect(assigned_bid.id).to eq(bid.id)
@@ -24,7 +24,7 @@ RSpec.describe BidsController, controller: true do
 
       it 'should not assign auctions that the current user has not bidded on' do
         auction.bids.create(bidder_id: current_bidder.id + 127)
-        get :my_bids, {}, user_id: current_bidder.id
+        get :my_bids, { }, user_id: current_bidder.id
         expect(assigns(:bids)).to be_empty
       end
     end
@@ -33,7 +33,7 @@ RSpec.describe BidsController, controller: true do
   describe '#new' do
     context 'when logged in' do
       it 'should render the bid information' do
-        get :new, {auction_id: auction.id}, user_id: current_bidder.id
+        get :new, { auction_id: auction.id }, user_id: current_bidder.id
         expect(response).to render_template(:new)
       end
 
@@ -41,7 +41,7 @@ RSpec.describe BidsController, controller: true do
         let(:auction) { FactoryGirl.create(:auction, :published) }
 
         it 'renders the template' do
-          get :new, {auction_id: auction.id}, user_id: current_bidder.id
+          get :new, { auction_id: auction.id }, user_id: current_bidder.id
           expect(response).to render_template(:new)
         end
       end
@@ -51,7 +51,7 @@ RSpec.describe BidsController, controller: true do
 
         it 'should raise a routing error' do
           expect do
-            get :new, {auction_id: auction.id}, user_id: current_bidder.id
+            get :new, { auction_id: auction.id }, user_id: current_bidder.id
           end.to raise_error ActionController::RoutingError
         end
       end
@@ -86,7 +86,7 @@ RSpec.describe BidsController, controller: true do
   describe '#index' do
     context 'when logged in' do
       it 'renders the template' do
-        get :index, {auction_id: auction.id}, user_id: current_bidder.id
+        get :index, { auction_id: auction.id }, user_id: current_bidder.id
         expect(response).to render_template(:index)
       end
     end
@@ -121,7 +121,7 @@ RSpec.describe BidsController, controller: true do
   describe '#create' do
     context 'when not logged in' do
       it 'redirects to authenticate' do
-        post :create, auction_id: auction.id, bid: {amount: 1000.00}
+        post :create, auction_id: auction.id, bid: { amount: 1000.00 }
         expect(response).to redirect_to("/login")
       end
     end
@@ -136,7 +136,7 @@ RSpec.describe BidsController, controller: true do
       let(:request_params) do
         {
           auction_id: auction.id,
-          bid: {amount: 3000.50}
+          bid: { amount: 3000.50 }
         }
       end
 
