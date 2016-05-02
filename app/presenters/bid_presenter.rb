@@ -46,19 +46,15 @@ class BidPresenter < SimpleDelegator
   end
 
   def amount_to_currency_with_asterisk
-    return "#{amount_to_currency} *" if is_winning?
+    return "#{amount_to_currency} *" if winning?
     amount_to_currency
-  end
-
-  def is_winning?
-    model.id == presenter_auction.winning_bid.id
   end
 
   def winning_status
     if !presenter_auction.show_bids?
       return 'n/a'
     else
-      is_winning?
+      winning?
     end
   end
 
@@ -99,7 +95,13 @@ class BidPresenter < SimpleDelegator
     end
 
     def amount
-      nil #NULL
+      nil
     end
   end
+
+  private
+  def winning?
+    model.id == presenter_auction.winning_bid.id
+  end
+
 end

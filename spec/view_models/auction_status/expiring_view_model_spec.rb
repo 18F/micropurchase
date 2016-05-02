@@ -5,7 +5,7 @@ describe AuctionStatus::ExpiringViewModel do
     let(:presenter) { AuctionViewModel.new(create(:user), auction) }
     let(:auction) do
       a = Auction.new(start_datetime: Time.current - 3.days, end_datetime: Time.current + 3.hours, start_price: 3500, type: 1)
-      a.bids.build(amount: 3000)
+      create(:bid, amount: 3000, auction: a)
       a
     end
 
@@ -21,5 +21,4 @@ describe AuctionStatus::ExpiringViewModel do
       expect(presenter.tag_data_value_2).to eq("$3,000.00 - 1 bids")
     end
   end
-
 end
