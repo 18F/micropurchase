@@ -4,11 +4,11 @@ class AuctionsIndexViewModel < Struct.new(:current_user, :auctions_query)
   end
 
   def active_auction_count
-    auctions.count {|i| i.start_datetime < Time.now && Time.now < i.end_datetime }
+    auctions.count { |i| i.start_datetime < Time.now && Time.now < i.end_datetime }
   end
 
   def upcoming_auction_count
-    auctions.count {|i| Time.now < i.start_datetime }
+    auctions.count { |i| Time.now < i.start_datetime }
   end
 
   def header_partial
@@ -30,8 +30,6 @@ class AuctionsIndexViewModel < Struct.new(:current_user, :auctions_query)
   end
 
   def auctions_list_previous_partial
-    # logic needs to be refactored before push
-    # should make sure there are previous auctions
     if auctions.empty?
       'empty_auctions'
     else

@@ -3,7 +3,7 @@ class UserBidsViewModel
 
   def initialize(user, all_bids)
     @user = user
-    @bids = all_bids.select {|b| b.bidder.id == user.id }
+    @bids = all_bids.select { |b| b.bidder.id == user.id }
   end
 
   def has_bid?
