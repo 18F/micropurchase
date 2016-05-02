@@ -71,7 +71,8 @@ ActiveRecord::Schema.define(version: 20160428200813) do
     t.string   "email"
     t.string   "credit_card_form_url"
     t.string   "github_login"
-    t.integer  "sam_status",           default: 0, null: false
+    t.integer  "sam_status",           default: 0,     null: false
+    t.boolean  "contracting_officer",  default: false, null: false
   end
 
   add_index "users", ["contracting_officer"], name: "index_users_on_contracting_officer", where: "(contracting_officer = true)", using: :btree
