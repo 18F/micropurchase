@@ -1,4 +1,4 @@
-class Admi::AuctionsController < ApplicationController
+class Admin::AuctionsController < ApplicationController
   before_filter :require_admin
 
   def index
