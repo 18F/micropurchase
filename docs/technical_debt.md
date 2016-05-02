@@ -250,7 +250,7 @@ end
 ```
 
 Then, the `user_bid` method would return either an instance of
-`BidPresenter` or `BidPresenter::Null`, both of which define a
+`BidPresenter` or `NullBidPresenter`, both of which define a
 `display_amount` method. This then lets us redefine our original code
 to just be
 

@@ -1,7 +1,7 @@
 class Rules::SealedBid < Rules::Basic
   def winning_bid
     if auction.available?
-      BidPresenter::Null.new
+      NullBidPresenter.new
     else
       auction.lowest_bid
     end
@@ -38,7 +38,7 @@ class Rules::SealedBid < Rules::Basic
 
   def highlighted_bid(user)
     if auction.available?
-      auction.bids.detect { |bid| bid.bidder_id == user.id } || BidPresenter::Null.new
+      auction.bids.detect { |bid| bid.bidder_id == user.id } || NullBidPresenter.new
     else
       auction.lowest_bid
     end
