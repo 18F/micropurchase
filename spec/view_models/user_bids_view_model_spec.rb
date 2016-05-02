@@ -10,10 +10,6 @@ describe UserBidsViewModel do
   context 'when the user has placed a bid' do
     let(:user_bids) { UserBidsViewModel.new(user, bids) }
 
-    it 'should return true for has_bids?' do
-      expect(user_bids.has_bid?).to be_truthy
-    end
-
     it 'should return only the user bids for bids' do
       expect(user_bids.bids).to be_an(Array)
       expect(user_bids.bids.length).to eq(2)
@@ -39,10 +35,6 @@ describe UserBidsViewModel do
     let(:other_user) { create(:user) }
     let(:user_bids) { UserBidsViewModel.new(other_user, bids) }
 
-    it 'should return false for has_bid?' do
-      expect(user_bids.has_bid?).to be_falsey
-    end
-
     it 'should return an empty array for bids' do
       expect(user_bids.bids).to eq([])
     end
@@ -58,10 +50,6 @@ describe UserBidsViewModel do
 
   context 'when the user is nil' do
     let(:user_bids) { UserBidsViewModel::Null.new }
-
-    it 'should return false for has_bid?' do
-      expect(user_bids.has_bid?).to be_falsey
-    end
 
     it 'should return an empty array for bids' do
       expect(user_bids.bids).to eq([])

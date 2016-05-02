@@ -72,7 +72,7 @@ class AuctionViewModel < Struct.new(:current_user, :auction_record)
   end
 
   def user_is_bidder?
-    user_bids_obj.has_bid?
+    user_bids_obj.bid?
   end
 
   def user_is_winning_bidder?

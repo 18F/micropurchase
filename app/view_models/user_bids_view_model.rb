@@ -6,7 +6,7 @@ class UserBidsViewModel
     @bids = all_bids.select { |b| b.bidder.id == user.id }
   end
 
-  def has_bid?
+  def bid?
     bids.any?
   end
 
@@ -19,7 +19,7 @@ class UserBidsViewModel
   end
 
   class Null
-    def has_bid?
+    def bid?
       false
     end
 
