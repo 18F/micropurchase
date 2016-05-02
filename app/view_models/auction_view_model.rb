@@ -76,7 +76,7 @@ class AuctionViewModel < Struct.new(:current_user, :auction_record)
   end
 
   def user_is_winning_bidder?
-    # fixme: who is calling this?
+    # FIXME: who is calling this?
     return false unless auction.bids?
     current_user.id == auction.winning_bidder_id
   end
