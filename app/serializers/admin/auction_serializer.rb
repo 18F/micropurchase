@@ -1,7 +1,8 @@
 class Admin::AuctionSerializer < ActiveModel::Serializer
   has_many :bids, serializer: Admin::BidSerializer
 
-  attributes :issue_url,
+  attributes(
+    :issue_url,
     :github_repo,
     :start_price,
     :start_datetime,
@@ -18,6 +19,7 @@ class Admin::AuctionSerializer < ActiveModel::Serializer
     :notes,
     :summary,
     :billable_to
+  )
 
   def delivery_deadline
     object.delivery_deadline.try(:iso8601)

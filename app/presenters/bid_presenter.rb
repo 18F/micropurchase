@@ -100,8 +100,8 @@ class BidPresenter < SimpleDelegator
   end
 
   private
+
   def winning?
     model.id == presenter_auction.winning_bid.id
   end
-
 end
