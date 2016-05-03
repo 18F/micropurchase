@@ -10,6 +10,17 @@ en:
           attributes:
             duns_number:
               invalid: 'format is invalid'
+        auction:
+          attributes:
+            start_price:
+              invalid:
+               "You do not have permission to publish auctions with a start
+               price over $%{start_price}"
+  controllers:
+    admin:
+      auctions:
+        create:
+          success: "Auction created successfully"
   mailers:
     auction_mailer:
       losing_bidder_notification:

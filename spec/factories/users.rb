@@ -12,6 +12,10 @@ FactoryGirl.define do
 
     factory :admin_user do
       github_id { Admins.github_ids.first }
+
+      factory :contracting_officer do
+        contracting_officer true
+      end
     end
   end
 end

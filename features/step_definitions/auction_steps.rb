@@ -61,6 +61,10 @@ Then(/^I should see the auction's (.+)$/) do |field|
   end
 end
 
+Then(/^I should see the start price for the auction is \$(\d+)$/) do |price|
+  expect(page).to have_field('auction_start_price', with: price)
+end
+
 Then(/^I should see the number of bid for the auction$/) do
   number_of_bids = "#{@auction.bids.length} bids"
   expect(page).to have_content(number_of_bids)

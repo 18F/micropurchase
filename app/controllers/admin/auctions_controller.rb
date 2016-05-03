@@ -26,7 +26,6 @@ class Admin::AuctionsController < ApplicationController
   def preview
     auction = Auction.find(params[:id])
     @view_model = AuctionShowViewModel.new(current_user, auction)
-
     render 'auctions/show'
   end
 
@@ -37,37 +36,43 @@ class Admin::AuctionsController < ApplicationController
     else
       auction = Auction.new
     end
+
     @auction = AdminAuctionPresenter.new(auction)
   end
 
   def create
-    auction = CreateAuction.new(params).perform
-    auction = AdminAuctionPresenter.new(auction)
+    @auction = CreateAuction.new(params, current_user).auction
+    auction = AdminAuctionPresenter.new(@auction)
 
-    respond_to do |format|
-      format.html { redirect_to "/admin/auctions" }
-      format.json do
-        render json: auction, serializer: Admin::AuctionSerializer
+    if @auction.save
+      respond_to do |format|
+        format.html do
+          flash[:success] = I18n.t('controllers.admin.auctions.create.success')
+          redirect_to admin_auctions_path
+        end
+        format.json do
+          render json: auction, serializer: Admin::AuctionSerializer
+        end
       end
+    else
+      render_errors(@auction.errors.full_messages.to_sentence, :new)
     end
-  rescue ArgumentError => e
-    respond_error(e)
   end
 
   def update
     auction = Auction.find(params[:id])
-    UpdateAuction.new(auction, params).perform
+    UpdateAuction.new(auction, params, current_user).perform
     auction.reload
     auction = AdminAuctionPresenter.new(auction)
 
     respond_to do |format|
-      format.html { redirect_to "/admin/auctions" }
+      format.html { redirect_to admin_auctions_path }
       format.json do
         render json: auction, serializer: Admin::AuctionSerializer
       end
     end
   rescue ArgumentError => e
-    respond_error(e)
+    respond_error(e, :edit)
   end
 
   def edit
@@ -77,16 +82,20 @@ class Admin::AuctionsController < ApplicationController
 
   private
 
-  def respond_error(exception)
+  def respond_error(exception, path)
     message = exception.message
+    render_errors(message, path)
+  end
 
+  def render_errors(error_message, path)
     respond_to do |format|
       format.html do
-        flash[:error] = message
-        redirect_to "/admin/auctions"
+        flash[:error] = error_message
+        render path
       end
+
       format.json do
-        render json: { error: message }
+        render json: { error: error_message }
       end
     end
   end

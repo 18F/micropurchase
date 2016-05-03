@@ -4,7 +4,12 @@ describe AuctionStatus::ExpiringViewModel do
   context "when the auction is expiring soon" do
     let(:presenter) { AuctionViewModel.new(create(:user), auction) }
     let(:auction) do
-      a = Auction.new(start_datetime: Time.current - 3.days, end_datetime: Time.current + 3.hours, start_price: 3500, type: 1)
+      a = create(
+        :auction,
+        start_datetime: Time.now - 3.days,
+        end_datetime: Time.now + 3.hours,
+        start_price: 3500
+      )
       create(:bid, amount: 3000, auction: a)
       a
     end

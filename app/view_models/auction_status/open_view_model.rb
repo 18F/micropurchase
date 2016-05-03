@@ -26,7 +26,7 @@ class AuctionStatus::OpenViewModel < Struct.new(:auction)
     if !auction.show_bids?
       "Sealed"
     else
-      "#{number_to_currency(auction.highlighted_bid_amount)} - #{auction.bids.length} bids"
+      "#{auction.highlighted_bid_amount_as_currency} - #{auction.bids.length} bids"
     end
   end
 end
