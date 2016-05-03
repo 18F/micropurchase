@@ -35,14 +35,14 @@ Then(/^I should be able to edit the new auction form$/) do
   @issue_url = 'https://github.com/18F/calc/issues/255'
   fill_in('auction_issue_url', with: @issue_url)
 
-  @start_day = Presenter::DcTime.convert(3.days.from_now).strftime("%m/%d/%Y")
+  @start_day = DcTimePresenter.convert(3.days.from_now).strftime("%m/%d/%Y")
   fill_in("auction_start_datetime", with: @start_day)
 
-  @end_day = Presenter::DcTime.convert(3.days.from_now).strftime("%m/%d/%Y")
+  @end_day = DcTimePresenter.convert(3.days.from_now).strftime("%m/%d/%Y")
   fill_in("auction_end_datetime", with: @end_day)
 
   @time_in_days = 3
-  @deadline_day = Presenter::DcTime.convert(@time_in_days.business_days.from_now).strftime("%m/%d/%Y")
+  @deadline_day = DcTimePresenter.convert(@time_in_days.business_days.from_now).strftime("%m/%d/%Y")
   fill_in("due_in_days", with: @time_in_days)
 
   @billable = "the tock line item for CALC"
@@ -67,13 +67,13 @@ Then(/^I should be able to edit the existing auction form$/) do
   @issue_url = 'https://github.com/18F/calc/issues/255'
   fill_in('auction_issue_url', with: @issue_url)
 
-  @start_day = Presenter::DcTime.convert(Time.now + 3.days).strftime("%m/%d/%Y")
+  @start_day = DcTimePresenter.convert(Time.now + 3.days).strftime("%m/%d/%Y")
   fill_in("auction_start_datetime", with: @start_day)
 
-  @end_day = Presenter::DcTime.convert(Time.now - 3.days).strftime("%m/%d/%Y")
+  @end_day = DcTimePresenter.convert(Time.now - 3.days).strftime("%m/%d/%Y")
   fill_in("auction_end_datetime", with: @end_day)
 
-  @deadline_day = Presenter::DcTime.convert(Time.now + 5.days).strftime("%m/%d/%Y")
+  @deadline_day = DcTimePresenter.convert(Time.now + 5.days).strftime("%m/%d/%Y")
   fill_in("auction_delivery_deadline", with: @deadline_day)
 
   @billable = "the tock line item for CALC"

@@ -7,7 +7,7 @@ Then(/^I should be able to see the full details for each bid$/) do
     row_number = i + 1
     unredacted_bidder_name = bid.bidder.name
     unredacted_bidder_duns = bid.bidder.duns_number
-    bid = Presenter::Bid.new(bid)
+    bid = BidPresenter.new(bid)
 
     # check the "name" column
     within(:xpath, cel_xpath(row_number, 1)) do
@@ -40,7 +40,7 @@ Then(/^I should not see the bidder name or duns for any bid$/) do
     row_number = i + 1
     unredacted_bidder_name = bid.bidder.name
     unredacted_bidder_duns = bid.bidder.duns_number
-    bid = Presenter::Bid.new(bid)
+    bid = BidPresenter.new(bid)
 
     # check the "name" column
     within(:xpath, cel_xpath(row_number, 1)) do
@@ -81,7 +81,7 @@ Then(/^I should see my name and DUNS only on my bids$/) do
       bidder_duns = '[Withheld]'
     end
 
-    bid = Presenter::Bid.new(bid)
+    bid = BidPresenter.new(bid)
 
     # check the "name" column
     within(:xpath, cel_xpath(row_number, 1)) do

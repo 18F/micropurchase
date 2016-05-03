@@ -1,18 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe ViewModel::UserBids, type: :model do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:user2) { FactoryGirl.create(:user) }
-  let(:user3) { FactoryGirl.create(:user) }
-  let(:ar_auction) { FactoryGirl.create(:auction, :with_bidders, bidder_ids: [user.id, user2.id, user3.id, user2.id, user3.id, user.id]) }
+describe UserBidsViewModel do
+  let(:user) { create(:user) }
+  let(:user2) { create(:user) }
+  let(:user3) { create(:user) }
+  let(:ar_auction) { create(:auction, :with_bidders, bidder_ids: [user.id, user2.id, user3.id, user2.id, user3.id, user.id]) }
   let(:bids) { ar_auction.bids.sort_by(&:amount).reverse }
 
   context 'when the user has placed a bid' do
-    let(:user_bids) { ViewModel::UserBids.new(user, bids) }
-
-    it 'should return true for has_bids?' do
-      expect(user_bids.has_bid?).to be_truthy
-    end
+    let(:user_bids) { UserBidsViewModel.new(user, bids) }
 
     it 'should return only the user bids for bids' do
       expect(user_bids.bids).to be_an(Array)
@@ -36,12 +32,8 @@ RSpec.describe ViewModel::UserBids, type: :model do
   end
 
   context 'when the user has not placed a bid' do
-    let(:other_user) { FactoryGirl.create(:user) }
-    let(:user_bids) { ViewModel::UserBids.new(other_user, bids) }
-
-    it 'should return false for has_bid?' do
-      expect(user_bids.has_bid?).to be_falsey
-    end
+    let(:other_user) { create(:user) }
+    let(:user_bids) { UserBidsViewModel.new(other_user, bids) }
 
     it 'should return an empty array for bids' do
       expect(user_bids.bids).to eq([])
@@ -57,11 +49,7 @@ RSpec.describe ViewModel::UserBids, type: :model do
   end
 
   context 'when the user is nil' do
-    let(:user_bids) { ViewModel::UserBids::Null.new }
-
-    it 'should return false for has_bid?' do
-      expect(user_bids.has_bid?).to be_falsey
-    end
+    let(:user_bids) { UserBidsViewModel::Null.new }
 
     it 'should return an empty array for bids' do
       expect(user_bids.bids).to eq([])
