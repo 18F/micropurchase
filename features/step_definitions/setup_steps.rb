@@ -1,11 +1,21 @@
 Given(/^I am a user with a verified SAM account$/) do
-  @user = FactoryGirl.create(:user, sam_status: :sam_accepted, github_id: '123451')
+  @user = FactoryGirl.create(
+    :user,
+    sam_status: :sam_accepted,
+    github_id: '123451',
+    duns_number: FakeSamApi::VALID_DUNS
+  )
   @github_id = @user.github_id
   mock_sign_in(@user.github_id, @user.name)
 end
 
 Given(/^I am a user without a verified SAM account$/) do
-  @user = FactoryGirl.create(:user, sam_status: :sam_pending, github_id: '123451')
+  @user = FactoryGirl.create(
+    :user,
+    sam_status: :sam_pending,
+    github_id: '123451',
+    duns_number: FakeSamApi::INVALID_DUNS
+  )
   @github_id = @user.github_id
   mock_sign_in(@user.github_id, @user.name)
 end
