@@ -5,8 +5,8 @@ describe GithubCredentials do
     it "returns correct value" do
       env_var_client_id = "super secret key"
       env_var_secret = "super secret secret"
-      ENV['micropurchase_github_client_id'] = env_var_client_id
-      ENV['micropurchase_github_secret'] = env_var_secret
+      ENV['MICROPURCHASE_GITHUB_CLIENT_ID'] = env_var_client_id
+      ENV['MICROPURCHASE_GITHUB_SECRET'] = env_var_secret
 
       client_id = GithubCredentials.client_id
       secret = GithubCredentials.secret

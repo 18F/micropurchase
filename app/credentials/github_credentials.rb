@@ -1,9 +1,9 @@
 class GithubCredentials
   def self.client_id
-    ENV["micropurchase_github_client_id"]
+    ENV["MICROPURCHASE_GITHUB_CLIENT_ID"]
   end
 
   def self.secret
-    ENV["micropurchase_github_secret"]
+    ENV["MICROPURCHASE_GITHUB_SECRET"]
   end
 end

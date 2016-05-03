@@ -44,11 +44,11 @@ Steps to set new environment variables:
   class GithubCredentials
 
     def self.client_id
-      ENV['micropurchase_github_client_id']
+      ENV['MICROPURCHASE_GITHUB_CLIENT_ID']
     end
 
     def self.secret
-      ENV['micropurchase_github_secret']
+      ENV['MICROPURCHASE_GITHUB_SECRET']
     end
   end
   ```
@@ -71,8 +71,8 @@ Steps to set new environment variables:
   ```
   # .env
 
-  micropurchase_github_client_id=super_secret_key
-  micropurchase_github_secret=super_secret_secret
+  MICROPURCHASE_GITHUB_CLIENT_ID=super_secret_key
+  MICROPURCHASE_GITHUB_SECRET=super_secret_secret
   ```
 
 1. Create a [user-provided service](https://docs.cloudfoundry.org/devguide/services/user-provided.html):
