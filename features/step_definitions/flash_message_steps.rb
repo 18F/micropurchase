@@ -4,6 +4,10 @@ Then(/^I should see an alert that "([^"]*)"$/) do |message|
   end
 end
 
+Then(/^I should see an alert that$/) do |message|
+  step("I should see an alert that \"#{message}\"")
+end
+
 Then(/^I should see an alert that my DUNS number was not found in Sam\.gov$/) do
   within("div.usa-alert.usa-alert-error") do
     expect(page).to have_content(

@@ -31,6 +31,7 @@ group :test do
   gem 'webmock'
   gem 'json-schema'
   gem 'db-query-matchers'
+  gem 'shoulda-matchers'
 end
 
 group :development, :test do

@@ -20,11 +20,23 @@ Feature: Using the Admin Auctions panel
     When I sign in
     And I visit the auctions admin page
     And I click on the "Create a new auction" link
-    Then I should be able to edit the new auction form
-
-    When I click to create an auction
+    And I edit the new auction form
+    And I click to create an auction
     Then I should see the auction's title
-    Then I should see the auction's deadline
+    And I should see the auction's deadline
+
+  Scenario: Creating an invalid auction
+    Given I am an administrator
+    And I sign in
+    And I visit the auctions admin page
+    When I click on the "Create a new auction" link
+    And I edit the new auction form
+    And I set the auction start price to $24000
+    And I click to create an auction
+    Then I should see an alert that
+      """
+      You do not have permission to publish auctions with a start price over $3500
+      """
 
   Scenario: Updating an auction
     Given I am an administrator
