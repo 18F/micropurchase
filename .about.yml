@@ -39,24 +39,32 @@ testable: true
 #   id: Internal team identifier/user name
 #   role: Team member's role; leads should be designated as 'lead'
 team:
-- github: allalala
-  id: Alla Goldman Seiffert
+- github: mtorres253
+  id: Michael Torres
   role: Product Manager
-  
+
 - github: vzvenyach
   id: V. David Zvenyach
   role: Product Owner
-  
+
+- github: adelevieb
+  id: Alan DeLevie
+  role: Lead Developer
+
 - github: harrisj
   id: Jacob Harris
   role: Developer
 
-- github: adelevie
-  id: Alan DeLevie
-  role: Lead Developer
+- github: jessieay
+  id: Jessie Young
+  role: Developer
 
-- github: ddotrollins
-  id: Duane Rollins
+- github: gemfarmer
+  id: Brian Hedberg
+  role: Lead Frontend Designer
+
+- github: andrewmaier
+  id: Andrew Maier
   role: User Experience Lead
 
 # Partners for whom the project is developed
@@ -126,7 +134,7 @@ https://18f.gsa.gov/2015/10/13/open-source-micropurchasing/
 #   text: Anchor text for the link
 links:
 - url: https://micropurchase.18f.gov
-  text: Micropurchase Platfrom 
+  text: Micropurchase Platform
 
 # Email addresses of points-of-contact
 contact:
