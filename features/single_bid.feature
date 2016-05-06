@@ -63,7 +63,7 @@ Feature: Single-bid auctions
     Given there is a closed single-bid auction
     And I am an authenticated vendor
     When I visit the auction page
-    Then I should see a current bid amount
+    Then I should see a winning bid amount
 
     When I visit the auction bids page
     Then I should not see "Bids are sealed until the auction ends."

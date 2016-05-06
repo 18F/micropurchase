@@ -116,6 +116,11 @@ Then(/^I should see a current bid amount( of \$([\d\.]+))?$/) do |_, amount|
   expect(page).to have_content(amount) unless amount.nil?
 end
 
+Then(/^I should see a winning bid amount( of \$([\d\.]+))?$/) do |_, amount|
+  expect(page).to have_content(/Winning bid \([^\)]+\): \$[\d,\.]+/)
+  expect(page).to have_content(amount) unless amount.nil?
+end
+
 Then(/^I should see a link to the auction issue URL$/) do
   page.find("a[href='#{@auction.issue_url}']")
 end
