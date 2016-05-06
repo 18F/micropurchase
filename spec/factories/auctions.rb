@@ -60,6 +60,7 @@ FactoryGirl.define do
     end
 
     trait :closed do
+      start_datetime { Time.now - 4.days }
       end_datetime { Time.now - 2.days }
     end
 
@@ -87,6 +88,7 @@ FactoryGirl.define do
 
     trait :future do
       start_datetime { Time.now + 1.day }
+      end_datetime { Time.now + 2.days }
     end
 
     trait :delivery_deadline_expired do

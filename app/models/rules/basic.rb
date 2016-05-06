@@ -4,24 +4,22 @@ class Rules::Basic < Struct.new(:auction)
   end
 
   def veiled_bids(user)
-    auction.bids
+    auction.bids.order(created_at: :desc)
   end
 
   def user_can_bid?(user)
-    return false unless auction.available?
-    return false if user.nil? || !user.sam_accepted?
-    true
+    auction.available? && user.present? && user.sam_accepted?
   end
 
   def max_allowed_bid
-    if auction.lowest_bid.is_a?(NullBidPresenter)
-      return auction.start_price - PlaceBid::BID_INCREMENT
+    if auction.lowest_bid.present?
+      auction.lowest_bid_amount - PlaceBid::BID_INCREMENT
     else
-      return auction.lowest_bid_amount - PlaceBid::BID_INCREMENT
+      auction.start_price - PlaceBid::BID_INCREMENT
     end
   end
 
-  def highlighted_bid(user)
+  def highlighted_bid(user = nil)
     auction.lowest_bid
   end
 

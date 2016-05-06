@@ -7,17 +7,16 @@ class Rules::SealedBid < Rules::Basic
     end
   end
 
-  def veiled_bids(user)
-    if auction.available?
-      return [] if user.nil?
-      auction.bids.select { |bid| bid.bidder_id == user.id }
+  def veiled_bids(user = nil)
+    if auction.available? && user.present?
+      auction.bids.where(bidder: user)
     else
-      auction.bids
+      auction.bids.order(created_at: :desc)
     end
   end
 
   def user_can_bid?(user)
-    super && !auction.bids.any? { |b| b.bidder_id == user.id }
+    super && auction.bids.where(bidder: user).empty?
   end
 
   def max_allowed_bid
@@ -36,9 +35,9 @@ class Rules::SealedBid < Rules::Basic
     'single-bid'
   end
 
-  def highlighted_bid(user)
+  def highlighted_bid(user = nil)
     if auction.available?
-      auction.bids.detect { |bid| bid.bidder_id == user.id } || NullBidPresenter.new
+      auction.bids.detect { |bid| bid.bidder == user } || NullBidPresenter.new
     else
       auction.lowest_bid
     end

@@ -21,7 +21,7 @@ class AuctionStatus::FutureViewModel < Struct.new(:auction)
     "Starting bid"
   end
 
-  def tag_data_value_2
+  def tag_data_value_2(_user = nil)
     number_to_currency(auction.start_price)
   end
 end

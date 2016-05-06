@@ -1,56 +1,47 @@
 class AuctionsController < ApplicationController
   def index
-    collection = AuctionQuery.new.public_index
-    @view_model = AuctionsIndexViewModel.new(current_user, collection)
+    @auctions = AuctionQuery.new.public_index
+    @view_model = AuctionsIndexViewModel.new(user: current_user, auctions: @auctions)
 
     respond_to do |format|
       format.html
       format.json do
-        render json: @view_model.auctions, each_serializer: AuctionSerializer
+        render json: @auctions, each_serializer: AuctionSerializer
       end
     end
   end
 
   def show
-    auction = AuctionQuery.new.public_find(params[:id])
-    @view_model = AuctionShowViewModel.new(current_user, auction)
+    @auction = AuctionQuery.new.public_find(params[:id])
+    @view_model = AuctionShowViewModel.new(user: current_user, auction: @auction)
 
     respond_to do |format|
       format.html
       format.json do
-        render json: @view_model.auction, serializer: AuctionSerializer
+        render json: @auction, serializer: AuctionSerializer
       end
     end
   end
 
-  def single_bid_rules
-  end
-
-  def multi_bid_rules
-  end
-
   def previous_winners_archive
-    collection = AuctionQuery.new.public_index
+    @auctions = AuctionQuery.new.public_index
 
     if params[:result] == 'true'
-      collection = collection.all.where.not(result: 'rejected')
+      @auctions = @auctions.all.where.not(result: 'rejected')
     elsif params[:result] == 'false'
-      collection = collection.all.where(result: 'rejected')
+      @auctions = @auctions.all.where(result: 'rejected')
     end
 
-    @view_model = AuctionsIndexViewModel.new(current_user, collection)
+    @view_model = AuctionsIndexViewModel.new(user: current_user, auctions: @auctions)
 
-    @auctions_json = @view_model.auctions.each { |a| AuctionSerializer.new(a, root: false) }.as_json
     respond_to do |format|
       format.html
     end
   end
 
   def previous_winners
-    collection = AuctionQuery.new.public_index
-    @view_model = AuctionsIndexViewModel.new(current_user, collection)
-
-    @auctions_json = @view_model.auctions.each { |a| AuctionSerializer.new(a, root: false) }.as_json
+    @auctions = AuctionQuery.new.public_index
+    @view_model = AuctionsIndexViewModel.new(user: current_user, auctions: @auctions)
 
     respond_to do |format|
       format.html

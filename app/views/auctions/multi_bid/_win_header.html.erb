@@ -1,12 +1,12 @@
 <% if auction.over? %>
-  <% if auction.bids? %>
+  <% if auction.bids.any? %>
     <% if current_user %>
-      <% if auction.user_is_winning_bidder? %>
+      <% if auction.user_is_winning_bidder?(current_user) %>
           <div class="usa-alert usa-alert-success auction-alert">
             <div class="usa-alert-body"><h3>You are the winner</h3></div>
             <p class="usa-alert-text">Congratulations! We will contact you with further instructions.</p>
           </div>
-      <% elsif auction.user_is_bidder? %>
+      <% elsif auction.user_is_bidder?(current_user) %>
         <div class="usa-alert usa-alert-error auction-alert">
           <div class="usa-alert-body"><h3>You are not the winner</h3></div>
           <p class="usa-alert-text">Someone else placed a lower bid than you.</p>
@@ -27,7 +27,7 @@
     </div>
   </div>
   <% end %>
-<% elsif auction.available? && auction.bids? && current_user && auction.user_is_bidder? %>
+<% elsif auction.available? && auction.bids.any? && current_user && auction.user_is_bidder?(current_user) %>
   <% if flash["bid"] %>
     <div class="usa-alert usa-alert-success">
       <div class="usa-alert-body">

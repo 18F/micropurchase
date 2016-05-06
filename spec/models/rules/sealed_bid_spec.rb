@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 describe Rules::SealedBid do
-  let(:ar_auction) { create(:auction, :single_bid, :with_bidders) }
-  let(:auction) { AuctionPresenter.new(ar_auction) }
+  let(:auction) { create(:auction, :single_bid, :with_bidders) }
   subject { Rules::SealedBid.new(auction) }
 
   describe 'winning_bid' do
@@ -13,9 +12,10 @@ describe Rules::SealedBid do
     end
 
     context 'if the auction is over' do
-      let(:ar_auction) { create(:auction, :single_bid, :with_bidders, :closed) }
       it "returns the auction's lowest bid" do
-        expect(subject.winning_bid).to eq(auction.lowest_bid)
+        auction = create(:auction, :single_bid, :with_bidders, :closed)
+        rules = Rules::SealedBid.new(auction)
+        expect(rules.winning_bid).to eq(auction.lowest_bid)
       end
     end
   end
@@ -40,22 +40,21 @@ describe Rules::SealedBid do
     end
 
     context 'if the auction is over' do
-      let(:ar_auction) { create(:auction, :single_bid, :with_bidders, :closed) }
-      let(:user) { create(:user) }
-
       it 'should return all bids' do
-        expect(subject.veiled_bids(user)).to eq(auction.bids)
+        auction = create(:auction, :single_bid, :with_bidders, :closed)
+        user = create(:user)
+        rules = Rules::SealedBid.new(auction)
+        expect(rules.veiled_bids(user)).to match_array(auction.bids)
       end
     end
   end
 
   describe 'highlighted_bid' do
     context 'when the auction is over' do
-      let(:ar_auction) { create(:auction, :single_bid, :with_bidders, :closed) }
-      let(:user) { create(:user) }
-
       it 'should return the lowest bid' do
-        expect(subject.highlighted_bid(user)).to eq(auction.lowest_bid)
+        auction = create(:auction, :single_bid, :with_bidders, :closed)
+        rules = Rules::SealedBid.new(auction)
+        expect(rules.highlighted_bid).to eq(auction.lowest_bid)
       end
     end
 

@@ -7,7 +7,6 @@ Then(/^I should be able to see the full details for each bid$/) do
     row_number = i + 1
     unredacted_bidder_name = bid.bidder.name
     unredacted_bidder_duns = bid.bidder.duns_number
-    bid = BidPresenter.new(bid)
 
     # check the "name" column
     within(:xpath, cel_xpath(row_number, 1)) do
@@ -40,7 +39,6 @@ Then(/^I should not see the bidder name or duns for any bid$/) do
     row_number = i + 1
     unredacted_bidder_name = bid.bidder.name
     unredacted_bidder_duns = bid.bidder.duns_number
-    bid = BidPresenter.new(bid)
 
     # check the "name" column
     within(:xpath, cel_xpath(row_number, 1)) do
@@ -68,7 +66,7 @@ end
 
 Then(/^I should see my name and DUNS only on my bids$/) do
   # sort the bids so that newest is first
-  bids = @auction.bids.sort_by(&:created_at).reverse
+  bids = @auction.bids.order(created_at: :desc)
 
   # ensure the table has the correct content, in the correct order
   bids.each_with_index do |bid, i|
@@ -80,8 +78,6 @@ Then(/^I should see my name and DUNS only on my bids$/) do
       bidder_name = '[Name withheld until the auction ends]'
       bidder_duns = '[Withheld]'
     end
-
-    bid = BidPresenter.new(bid)
 
     # check the "name" column
     within(:xpath, cel_xpath(row_number, 1)) do

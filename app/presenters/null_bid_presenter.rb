@@ -9,14 +9,6 @@ class NullBidPresenter
     NULL
   end
 
-  def bidder_duns_number
-    NULL
-  end
-
-  def bidder_name
-    NULL
-  end
-
   def bidder_id
     nil
   end

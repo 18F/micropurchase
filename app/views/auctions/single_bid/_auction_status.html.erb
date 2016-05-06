@@ -2,6 +2,6 @@
   <%= render partial: "auctions/multi_bid/auction_status" %>
 <% else %>
   <span class="bid-amount">
-    <%= @view_model.auction_user_bid_amount_as_currency %>
+    <%= @auction.user_bid_amount_as_currency(current_user) %>
   </span>
 <% end %>
