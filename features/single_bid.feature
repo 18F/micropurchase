@@ -59,9 +59,12 @@ Feature: Single-bid auctions
     And I should not see "$500 *"
     And I should not see bids from other users
 
-  Scenario: viewing the bid history for a closed single-bid auction
+  Scenario: viewing a closed single-bid auction
     Given there is a closed single-bid auction
     And I am an authenticated vendor
+    When I visit the auction page
+    Then I should see a current bid amount
+
     When I visit the auction bids page
     Then I should not see "Bids are sealed until the auction ends."
     And I should not see "See the auction rules to learn more."
