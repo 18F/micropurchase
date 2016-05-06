@@ -22,6 +22,12 @@ Given(/^I am an administrator$/) do
   mock_sign_in(@user.github_id, @user.name)
 end
 
+Given(/^I am a contracting officer$/) do
+  @user = FactoryGirl.create(:contracting_officer)
+  @github_id = @user.github_id
+  mock_sign_in(@user.github_id, @user.name)
+end
+
 When(/^I visit the home page$/) do
   visit "/"
 end

@@ -1,5 +1,5 @@
 When(/^I visit the auctions admin page$/) do
-  visit "/admin/auctions"
+  visit admin_auctions_path
 end
 
 Then(/^I will not see a warning I must be an admin$/) do
@@ -15,11 +15,15 @@ Then(/^I expect my auction changes to have been saved$/) do
   @auction = Auction.where(title: @title).first
 end
 
+When(/^I set the auction start price to \$(.+)$/) do |amount|
+  fill_in("auction_start_price", with: amount)
+end
+
 Then(/^I set the auction type to be multi_bid$/) do
   select("multi_bid", from: "auction_type")
 end
 
-Then(/^I should be able to edit the new auction form$/) do
+When(/^I edit the new auction form$/) do
   @title = 'This is the form-edited title'
   fill_in("auction_title", with: @title)
 
@@ -82,12 +86,6 @@ Then(/^I should be able to edit the existing auction form$/) do
   select("published", from: "auction_published")
 end
 
-Then(/^I should see new content on the page$/) do
-  expect(page).to have_text(@title)
-  expect(page).to have_text(@summary)
-  expect(page).to have_text(@description)
-end
-
 When(/^I click to edit the auction$/) do
   click_on("Edit")
   @auction = Auction.where(title: @title).first
@@ -96,4 +94,14 @@ end
 When(/^I click to create an auction$/) do
   click_on("Create")
   @auction = Auction.where(title: @title).first
+end
+
+Then(/^I should see new content on the page$/) do
+  expect(page).to have_text(@title)
+  expect(page).to have_text(@summary)
+  expect(page).to have_text(@description)
+end
+
+Then(/^I should see that my auction was created successfully$/) do
+  expect(page).to have_content(I18n.t('controllers.admin.auctions.create.success'))
 end

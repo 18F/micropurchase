@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160428200813) do
+ActiveRecord::Schema.define(version: 20160503143402) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,7 +36,10 @@ ActiveRecord::Schema.define(version: 20160428200813) do
     t.integer  "awardee_paid_status", default: 0
     t.string   "delivery_url"
     t.string   "cap_proposal_url"
+    t.integer  "user_id"
   end
+
+  add_index "auctions", ["user_id"], name: "index_auctions_on_user_id", using: :btree
 
   create_table "bids", force: :cascade do |t|
     t.integer  "bidder_id"

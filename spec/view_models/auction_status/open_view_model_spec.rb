@@ -4,7 +4,12 @@ describe AuctionStatus::OpenViewModel do
   context "when the auction is open" do
     let(:presenter) { AuctionViewModel.new(create(:user), auction) }
     let(:auction) do
-      a = Auction.new(start_datetime: Time.now - 3.day, end_datetime: Time.now + 2.days, start_price: 3500, type: 1)
+      a = create(
+        :auction,
+        start_datetime: Time.now - 3.days,
+        end_datetime: Time.now + 2.days,
+        start_price: 3500
+      )
       create(:bid, auction: a, amount: 3000)
       a
     end

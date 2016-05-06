@@ -4,8 +4,13 @@ describe AuctionStatus::FutureViewModel do
   context "when the auction is in the future" do
     let(:presenter) { AuctionViewModel.new(create(:user), auction) }
     let(:auction) do
-      a = Auction.new(start_datetime: Time.now + 3.day, end_datetime: Time.now + 5.hours, start_price: 3500)
-      a.bids.build(amount: 3000)
+      a = create(
+        :auction,
+        start_datetime: Time.now + 3.day,
+        end_datetime: Time.now + 3.hours,
+        start_price: 3500
+      )
+      create(:bid, auction: a, amount: 3000)
       a
     end
 

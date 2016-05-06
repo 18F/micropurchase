@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :auction do
+    association :user, factory: :admin_user
     start_datetime { Time.now - 3.days }
     end_datetime { Time.now + 3.days }
     delivery_url { nil }

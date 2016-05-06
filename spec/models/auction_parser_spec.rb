@@ -6,62 +6,6 @@ RSpec.describe AuctionParser do
   let(:attributes) { parser.attributes }
 
   describe '#perform' do
-    context 'when the price is too high' do
-      let(:params) do
-        {
-          auction: {
-            title: 'title',
-            description: 'description',
-            github_repo: 'github url',
-            start_datetime: 'Nov 3, 2015',
-            end_datetime: '11/10/2015',
-            start_price: 3500.01
-          }
-        }
-      end
-
-      it 'drops the price down to the bid upper limit' do
-        expect(attributes[:start_price]).to eq(3500.00)
-      end
-    end
-
-    context 'when the price is too low' do
-      let(:params) do
-        {
-          auction: {
-            title: 'title',
-            description: 'description',
-            github_repo: 'github url',
-            start_datetime: 'Nov 3, 2015',
-            end_datetime: '11/10/2015',
-            start_price: 0
-          }
-        }
-      end
-
-      it 'bumps the price to the bid upper limit' do
-        expect(attributes[:start_price]).to eq(3500.00)
-      end
-    end
-
-    context 'when the price is not present' do
-      let(:params) do
-        {
-          auction: {
-            title: 'title',
-            description: 'description',
-            github_repo: 'github url',
-            start_datetime: 'Nov 3, 2015',
-            end_datetime: '11/10/2015'
-          }
-        }
-      end
-
-      it 'makes the price the bid upper limit' do
-        expect(attributes[:start_price]).to eq(3500.00)
-      end
-    end
-
     context 'when an exact time is passed for start/end time' do
       let(:params) do
         {
