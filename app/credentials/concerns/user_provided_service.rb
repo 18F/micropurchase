@@ -8,7 +8,7 @@ module UserProvidedService
   end
 
   def user_provided_service(name)
-    user_provided_services.find {|service| service['name'] == name }
+    user_provided_services.find { |service| service['name'] == name }
   end
 
   def user_provided_services

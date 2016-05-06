@@ -2,14 +2,14 @@ require "rails_helper"
 
 describe ApiAuthenticator, type: :model do
   let(:api_key)   { '12345' }
-  let(:headers) { {'HTTP_API_KEY' => api_key} }
+  let(:headers) { { 'HTTP_API_KEY' => api_key } }
   let(:request) { double('request', headers: headers) }
   let(:controller) { double('controller', request: request) }
   let(:authenticator) { ApiAuthenticator.new(controller) }
 
   describe "require_authentication" do
     context 'when the API key is absent' do
-      let(:headers) { {} }
+      let(:headers) { { } }
 
       before do
         allow_any_instance_of(Octokit::Client).to receive(:user).and_raise(Octokit::Unauthorized)
@@ -64,7 +64,7 @@ describe ApiAuthenticator, type: :model do
     let(:github_id) { '67890' }
 
     context 'when the API key is absent' do
-      let(:headers) { {} }
+      let(:headers) { { } }
 
       before do
         allow_any_instance_of(Octokit::Client).to receive(:user).and_raise(Octokit::Unauthorized)

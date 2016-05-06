@@ -41,7 +41,7 @@ When(/^I visit the unpublished auction$/) do
 end
 
 Then(/^I should see the winning bid for the auction$/) do
-  auction = Presenter::Auction.new(@auction)
+  auction = AuctionPresenter.new(@auction)
   lowest_bid_amount = ApplicationController.helpers.number_to_currency(
     auction.lowest_bid.amount
   )
@@ -52,12 +52,17 @@ end
 Then(/^I should see the auction's (.+)$/) do |field|
   if field == 'deadline'
     expect(page).to have_text(
-                      Presenter::DcTime.convert(@auction.end_datetime).
-                      beginning_of_day.strftime(Presenter::DcTime::FORMAT)
-                    )
+     DcTimePresenter
+      .convert(@auction.end_datetime)
+      .beginning_of_day
+      .strftime(DcTimePresenter::FORMAT))
   else
     expect(page).to have_text(@auction.send(field))
   end
+end
+
+Then(/^I should see the start price for the auction is \$(\d+)$/) do |price|
+  expect(page).to have_field('auction_start_price', with: price)
 end
 
 Then(/^I should see the number of bid for the auction$/) do

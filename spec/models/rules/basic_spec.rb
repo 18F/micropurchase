@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe Rules::Basic, type: :model do
-  let(:ar_auction) { FactoryGirl.create(:auction, :closed, :with_bidders) }
-  let(:auction) { Presenter::Auction.new(ar_auction) }
+describe Rules::Basic do
+  let(:ar_auction) { create(:auction, :closed, :with_bidders) }
+  let(:auction) { AuctionPresenter.new(ar_auction) }
 
   subject { Rules::Basic.new(auction) }
-  
+
   describe 'winning_bid' do
     it "should be the auction's lowest_bid" do
       expect(subject.winning_bid).to eq(auction.lowest_bid)
@@ -13,13 +13,13 @@ RSpec.describe Rules::Basic, type: :model do
   end
 
   describe 'user_can_bid?' do
-    let(:user) { FactoryGirl.create(:user, sam_status: :sam_accepted) }
+    let(:user) { create(:user, sam_status: :sam_accepted) }
 
     context 'when the auction is open and the user can bid' do
-      let(:ar_auction) { FactoryGirl.create(:auction) }
+      let(:ar_auction) { create(:auction) }
       specify { expect(subject.user_can_bid?(user)).to be_truthy }
     end
-    
+
     context 'when the auction is over' do
       specify { expect(subject.user_can_bid?(user)).to be_falsey }
     end
@@ -29,14 +29,14 @@ RSpec.describe Rules::Basic, type: :model do
     end
 
     context 'when the user is not sam_accepted?' do
-      let(:user) { FactoryGirl.create(:user, sam_status: :sam_pending) }
+      let(:user) { create(:user, sam_status: :sam_pending) }
       specify { expect(subject.user_can_bid?(user)).to be_falsey }
     end
   end
 
   describe 'max_allowed_bid' do
     context 'when there are no bids' do
-      let(:ar_auction) { FactoryGirl.create(:auction) }
+      let(:ar_auction) { create(:auction) }
 
       it 'should be BID_INCRMENT below the start price' do
         expect(subject.max_allowed_bid).to eq(auction.start_price - PlaceBid::BID_INCREMENT)
@@ -44,7 +44,7 @@ RSpec.describe Rules::Basic, type: :model do
     end
 
     context 'when there is a bid' do
-      let(:ar_auction) { FactoryGirl.create(:auction, :with_bidders) }
+      let(:ar_auction) { create(:auction, :with_bidders) }
       it 'should be BID_INCREMENT below the lowest bid' do
         expect(subject.max_allowed_bid).to eq(auction.lowest_bid_amount - PlaceBid::BID_INCREMENT)
       end
@@ -52,7 +52,7 @@ RSpec.describe Rules::Basic, type: :model do
   end
 
   describe 'highlighted_bid' do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { create(:user) }
     it 'should return the lowest bid' do
       expect(subject.highlighted_bid(user)).to eq(auction.lowest_bid)
     end

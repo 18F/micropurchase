@@ -8,7 +8,7 @@ When(/^I visit the admin users page$/) do
 end
 
 When(/^I should see my user info$/) do
-  user = Presenter::User.new(@user)
+  user = UserPresenter.new(@user)
 
   expect(page).to have_text(user.duns_number)
   expect(page).to have_text(user.email)
@@ -44,4 +44,3 @@ end
 Then(/^I expect the page to show me the number of admin users$/) do
   expect(page).to have_text("Admins (1)")
 end
-

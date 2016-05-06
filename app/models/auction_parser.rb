@@ -1,9 +1,9 @@
-class AuctionParser < Struct.new(:params)
+class AuctionParser < Struct.new(:params, :user)
   def attributes
     general_attributes.merge(
       start_datetime: start_datetime,
       end_datetime: end_datetime,
-      start_price: start_price
+      user: user
     )
   end
 
@@ -22,9 +22,12 @@ class AuctionParser < Struct.new(:params)
       published: published,
       notes: notes,
       billable_to: billable_to,
-      result: result
+      result: result,
+      start_price: start_price
     }
   end
+
+  private
 
   [
     :type,
@@ -40,7 +43,8 @@ class AuctionParser < Struct.new(:params)
     :cap_proposal_url,
     :notes,
     :billable_to,
-    :result
+    :result,
+    :start_price
   ].each do |key|
     define_method key do
       params[:auction][key]
@@ -48,7 +52,7 @@ class AuctionParser < Struct.new(:params)
   end
 
   def delivery_deadline
-    if params.has_key?(:due_in_days)
+    if params.key?(:due_in_days)
       real_days = params[:due_in_days].to_i.business_days
       end_of_workday(real_days.after(end_datetime.to_date))
     else
@@ -74,15 +78,6 @@ class AuctionParser < Struct.new(:params)
     end
     parsed_time.utc
   end
-
-  def start_price
-    price = params[:auction][:start_price].to_f
-    price = PlaceBid::BID_LIMIT if price > PlaceBid::BID_LIMIT || price <= 0
-
-    price
-  end
-
-  private
 
   def end_of_workday(date)
     cob = Time.parse(BusinessTime::Config.end_of_workday)

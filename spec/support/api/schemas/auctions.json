@@ -64,17 +64,6 @@
             "type": "string",
             "minLength": 1
           },
-          "winning_bid": {
-            "type": "object",
-            "properties": {
-              "amount": {
-                "type": ["number", "null"]
-              },
-              "bidder_id": {
-                "type": ["number", "null"]
-              }
-            }
-          },
           "bids": {
             "type": "array",
             "uniqueItems": true,

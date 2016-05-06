@@ -92,7 +92,7 @@ end
 
 When(/^I fill in the (.+) field on my profile page with "([^"]+)"$/) do |attribute, value|
   attribute = attribute.parameterize('_')
-  @new_values ||= {}
+  @new_values ||= { }
   @new_values[attribute] = value
 
   step("I fill in the \"user_#{attribute}\" field with \"#{value}\"")
@@ -128,7 +128,6 @@ Then(/^I should see my changes$/) do
   expect(@user).to_not be_nil
 
   expect(@user.duns_number).to eq(@new_duns)
-  expect(@user).to be_sam_pending
   expect(@user.email).to eq(@new_email)
   expect(@user.name).to eq(@new_name)
 

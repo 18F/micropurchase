@@ -37,7 +37,6 @@ describe Admin::AuctionsController do
     end
 
     context 'when the API key is valid' do
-
       it 'returns a 200 HTTP response' do
         admin = FactoryGirl.create(:admin_user)
         stub_github('/user') { github_response_for_user(admin) }
@@ -80,10 +79,10 @@ describe Admin::AuctionsController do
         get admin_auctions_path, nil, headers
 
         json_auctions = JSON.parse(response.body)['auctions']
-        expect(json_auctions.map {|a| a['created_at'] }).to all(be_iso8601)
-        expect(json_auctions.map {|a| a['updated_at'] }).to all(be_iso8601)
-        expect(json_auctions.map {|a| a['start_datetime'] }).to all(be_iso8601)
-        expect(json_auctions.map {|a| a['end_datetime'] }).to all(be_iso8601)
+        expect(json_auctions.map { |a| a['created_at'] }).to all(be_iso8601)
+        expect(json_auctions.map { |a| a['updated_at'] }).to all(be_iso8601)
+        expect(json_auctions.map { |a| a['start_datetime'] }).to all(be_iso8601)
+        expect(json_auctions.map { |a| a['end_datetime'] }).to all(be_iso8601)
       end
     end
   end

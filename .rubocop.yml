@@ -55,10 +55,6 @@ Metrics/ModuleLength:
   CountComments: false
   Max: 100
 
-Style/MultilineBlockLayout:
-  Description: 'Ensures newlines after multiline block do statements.'
-  Enabled: false
-
 Rails/HasAndBelongsToMany:
   Description: Prefer has_many :through to has_and_belongs_to_many.
   Enabled: true
@@ -79,6 +75,13 @@ Rails/TimeZone:
   SupportedStyles:
     - strict
     - flexible
+
+Style/MultilineBlockLayout:
+  Description: 'Ensures newlines after multiline block do statements.'
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
 
 Style/AndOr:
   Description: Use &&/|| instead of and/or.
@@ -101,6 +104,10 @@ Style/DotPosition:
   SupportedStyles:
   - leading
   - trailing
+
+Style/IfUnlessModifier:
+  MaxLineLength: 80
+  Enabled: false
 
 Style/NumericLiterals:
   Enabled: false

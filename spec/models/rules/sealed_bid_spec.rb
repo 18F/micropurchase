@@ -1,19 +1,19 @@
 require 'rails_helper'
 
-RSpec.describe Rules::SealedBid, type: :model do
-  let(:ar_auction) { FactoryGirl.create(:auction, :single_bid, :with_bidders) }
-  let(:auction) { Presenter::Auction.new(ar_auction) }
+describe Rules::SealedBid do
+  let(:ar_auction) { create(:auction, :single_bid, :with_bidders) }
+  let(:auction) { AuctionPresenter.new(ar_auction) }
   subject { Rules::SealedBid.new(auction) }
-  
+
   describe 'winning_bid' do
     context 'if the auction if open' do
-      it 'returns a Presenter::Bid::Null object' do
-        expect(subject.winning_bid).to be_a(Presenter::Bid::Null)
+      it 'returns a NullBidPresenter object' do
+        expect(subject.winning_bid).to be_a(NullBidPresenter)
       end
     end
 
     context 'if the auction is over' do
-      let(:ar_auction) { FactoryGirl.create(:auction, :single_bid, :with_bidders, :closed) }
+      let(:ar_auction) { create(:auction, :single_bid, :with_bidders, :closed) }
       it "returns the auction's lowest bid" do
         expect(subject.winning_bid).to eq(auction.lowest_bid)
       end
@@ -31,7 +31,7 @@ RSpec.describe Rules::SealedBid, type: :model do
       end
 
       context 'if the user did not bid' do
-        let(:user) { FactoryGirl.create(:user) }
+        let(:user) { create(:user) }
 
         it 'should return an empty array' do
           expect(subject.veiled_bids(user)).to eq([])
@@ -40,9 +40,9 @@ RSpec.describe Rules::SealedBid, type: :model do
     end
 
     context 'if the auction is over' do
-      let(:ar_auction) { FactoryGirl.create(:auction, :single_bid, :with_bidders, :closed) }
-      let(:user) { FactoryGirl.create(:user) }
-      
+      let(:ar_auction) { create(:auction, :single_bid, :with_bidders, :closed) }
+      let(:user) { create(:user) }
+
       it 'should return all bids' do
         expect(subject.veiled_bids(user)).to eq(auction.bids)
       end
@@ -51,17 +51,17 @@ RSpec.describe Rules::SealedBid, type: :model do
 
   describe 'highlighted_bid' do
     context 'when the auction is over' do
-      let(:ar_auction) { FactoryGirl.create(:auction, :single_bid, :with_bidders, :closed) }
-      let(:user) { FactoryGirl.create(:user) }
-      
+      let(:ar_auction) { create(:auction, :single_bid, :with_bidders, :closed) }
+      let(:user) { create(:user) }
+
       it 'should return the lowest bid' do
         expect(subject.highlighted_bid(user)).to eq(auction.lowest_bid)
       end
     end
 
     context 'when the auction is running' do
-      let(:ar_auction) { FactoryGirl.create(:auction, :single_bid, :with_bidders) }
-      
+      let(:ar_auction) { create(:auction, :single_bid, :with_bidders) }
+
       context 'when the user has placed a bid' do
         let(:user) { auction.bids.first.bidder }
 
@@ -69,30 +69,29 @@ RSpec.describe Rules::SealedBid, type: :model do
           expect(subject.highlighted_bid(user)).to eq(auction.bids.first)
         end
       end
-      
+
       context 'when the user has not placed a bid' do
-        let(:user) { FactoryGirl.create(:user) }
-        
-        it 'should return a Presenter::Bid::Null object' do
-          expect(subject.highlighted_bid(user)).to be_a(Presenter::Bid::Null)
+        let(:user) { create(:user) }
+
+        it 'should return a NullBidPresenter object' do
+          expect(subject.highlighted_bid(user)).to be_a(NullBidPresenter)
         end
       end
     end
   end
-  
 
   describe 'user_can_bid?' do
-    let(:ar_auction) { FactoryGirl.create(:auction, :single_bid, :with_bidders) }
-    
+    let(:ar_auction) { create(:auction, :single_bid, :with_bidders) }
+
     context 'when the user has placed a bid' do
       let(:user) { auction.bids.first.bidder }
       it 'should return false' do
         expect(subject.user_can_bid?(user)).to be_falsey
       end
     end
-    
+
     context 'when the user has not placed a bid' do
-      let(:user) { FactoryGirl.create(:user, sam_status: :sam_accepted) }
+      let(:user) { create(:user, sam_status: :sam_accepted) }
 
       it 'should return true' do
         expect(subject.user_can_bid?(user)).to be_truthy

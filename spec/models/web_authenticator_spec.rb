@@ -1,13 +1,13 @@
 require "rails_helper"
 
 describe WebAuthenticator, type: :model do
-  let(:session) { {user_id: user.id} }
+  let(:session) { { user_id: user.id } }
   let(:controller) { double('controller', session: session) }
   let(:authenticator) { WebAuthenticator.new(controller) }
 
   describe 'require_authentication' do
     context 'when no current user' do
-      let(:session) { {} }
+      let(:session) { { } }
 
       it 'raises a RedirectToLogin error' do
         expect do
@@ -17,7 +17,7 @@ describe WebAuthenticator, type: :model do
     end
 
     context 'when user_id is not found in the database' do
-      let(:session) { {user_id: 99_999_999} }
+      let(:session) { { user_id: 99_999_999 } }
 
       it 'raises a RedirectToLogin error' do
         expect do
@@ -36,7 +36,7 @@ describe WebAuthenticator, type: :model do
   end
   describe 'require_admin' do
     context 'when no current user' do
-      let(:session) { {} }
+      let(:session) { { } }
 
       it 'redirects to authenticate' do
         expect do
