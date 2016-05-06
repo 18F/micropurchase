@@ -49,7 +49,7 @@ team:
 
 - github: adelevieb
   id: Alan DeLevie
-  role: Lead Developer
+  role: Developer
 
 - github: harrisj
   id: Jacob Harris
@@ -61,7 +61,7 @@ team:
 
 - github: gemfarmer
   id: Brian Hedberg
-  role: Lead Frontend Designer
+  role: Front End Designer
 
 - github: andrewmaier
   id: Andrew Maier
