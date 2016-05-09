@@ -11,7 +11,8 @@ class AuctionSerializer < ActiveModel::Serializer
     :start_price,
     :summary,
     :title,
-    :updated_at
+    :updated_at,
+    :winning_bid
   )
 
   def bids
@@ -33,5 +34,23 @@ class AuctionSerializer < ActiveModel::Serializer
 
   def start_datetime
     object.start_datetime.iso8601
+  end
+
+  def winning_bid
+    WinningBidSerializer.new(find_winning_bid)
+  end
+
+  private
+
+  def find_winning_bid
+    if auction_status.available?
+      NullBid.new
+    else
+      RulesFactory.new(object).create.winning_bid
+    end
+  end
+
+  def auction_status
+    @_auction_status ||= AuctionStatus.new(object)
   end
 end

@@ -1,4 +1,4 @@
-class Rules::SealedBid < Rules::Basic
+class Rules::SealedBid < Rules::BaseRules
   def winning_bid
     if auction.available?
       NullBidPresenter.new
@@ -9,15 +9,14 @@ class Rules::SealedBid < Rules::Basic
 
   def veiled_bids(user)
     if auction.available?
-      return [] if user.nil?
-      auction.bids.select { |bid| bid.bidder_id == user.id }
+      auction.bids.select { |bid| bid.bidder == user }
     else
       auction.bids
     end
   end
 
   def user_can_bid?(user)
-    super && !auction.bids.any? { |b| b.bidder_id == user.id }
+    super && !auction.bids.any? { |b| b.bidder == user }
   end
 
   def max_allowed_bid
