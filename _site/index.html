@@ -53,6 +53,21 @@
         <div class="wrapper">
           <header class="h-feed-header">
             <h1 class="p-title">Auctions</h1>
+            <form>
+              <h1>Filter</h1>
+              <div class="field field-checkbox">
+                <label>
+                  <input type="checkbox" checked="" />
+                  <span class="label-text">Show closed auctions</span>
+                </label>
+              </div>
+              <div class="field field-checkbox">
+                <label>
+                  <input type="checkbox" checked="" />
+                  <span class="label-text">Show sealed auctions</span>
+                </label>
+              </div>
+            </form>
             <nav>
               <h2>Sort by</h2>
               <ul>
@@ -61,20 +76,22 @@
                 <li><a href="#">Project</a></li>
                 <li><a href="#">Time remaining</a></li>
                 <li><a href="#">Current bid</a></li>
-                <li><a href="#">Status</a></li>
               </ul>
             </nav>
           </header>
-          <article class="h-entry issue">
+          <article class="h-entry auction">
             <h1 class="p-name">
               <a href="/auctions/">Open Opportunities: Create Agency Admin User Role </a> 
             </h1>
-            <span class="usa-label-big auction-label-open">Open</span>
             <p class="issue-description p-summary">The Open Opportunities is a node.js-based platform to foster collaboration on government projects. This issue seeks to create a new user role for &ldquo;Agency Admins&rdquo; that will (in the future) give those users admin privileges to see data for users from their agency.</p>
             <footer>
               <dl>
                 <dt>Submitted by</dt>
-                <dd class="p-author"><img src="" /></dd>
+                <dd class="p-author"><img src="#" />Patrick Bateman</dd>
+                <dt class="auction-current-bid">Current bid</dt>
+                <dd class="auction-current-bid">$2,750.00</dd>
+                <dt class="auction-status">Status</dt>
+                <dd class="auction-status auction-status-open">Open</dd>              
               </dl>
             </footer>
           </article>
@@ -82,12 +99,15 @@
             <h1 class="p-name">
               <a href="/auctions/">Tock superusers should be able to enter 0-60 hour weeks</a> 
             </h1>
-            <span class="auction-label-open">Open</span>
             <p class="p-summary">Tock is a simple time tracking app that 18F employees use to report their time on a weekly basis. Currently, no user may enter more than 40 hours per week. This issue seeks to allow certain specified users of Tock to enter anywhere between 0 and 60 hours.</p>
             <footer>
               <dl>
                 <dt>Submitted by</dt>
                 <dd class="p-author"><img src="" /></dd>
+                <dt class="auction-current-bid">Current bid</dt>
+                <dd class="auction-current-bid">Sealed</dd>
+                <dt class="auction-status">Status</dt>
+                <dd class="auction-status auction-status-open">Open</dd>              
               </dl>
             </footer>
           </article>
@@ -95,12 +115,13 @@
             <h1 class="p-name">
               <a href="/auctions/">Another fake entry</a> 
             </h1>
-            <span class="auction-label-closed">Closed</span>
             <p class="p-summary">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p>
             <footer>
               <dl>
                 <dt>Submitted by</dt>
-                <dd class="p-author"><img src="" /></dd>
+                <dd class="p-author"><img src="#" /> Michael Torres</dd>
+                <dt class="auction-status">Status</dt>
+                <dd class="auction-status auction-status-closed">Closed</dd>              
               </dl>
             </footer>
           </article>
@@ -108,12 +129,13 @@
             <h1>
               <a href="/auctions/">Another fake entry</a> 
             </h1>
-            <span class="auction-label-closed">Closed</span>
             <p class="p-summary">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p>
             <footer>
               <dl>
                 <dt>Submitted by</dt>
-                <dd class="p-author"><img src="" /></dd>
+                <dd class="p-author"><img src="#" /> Michael Torres</dd>
+                <dt class="auction-status">Status</dt>
+                <dd class="auction-status auction-status-closed">Closed</dd>              
               </dl>
             </footer>
           </article>
@@ -121,12 +143,13 @@
             <h1>
               <a href="/auctions/">Another fake entry</a> 
             </h1>
-            <span class="auction-label-closed">Closed</span>
             <p class="p-summary">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p>
             <footer>
               <dl>
                 <dt>Submitted by</dt>
-                <dd class="p-author"><img src="" /></dd>
+                <dd class="p-author"><img src="#" /> Michael Torres</dd>
+                <dt class="auction-status">Status</dt>
+                <dd class="auction-status auction-status-closed">Closed</dd>              
               </dl>
             </footer>
           </article>
@@ -134,12 +157,13 @@
             <h1>
               <a href="/auctions/">Another fake entry</a> 
             </h1>
-            <span class="auction-label-closed">Closed</span>
             <p class="p-summary">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p>
             <footer>
               <dl>
                 <dt>Submitted by</dt>
-                <dd class="p-author"><img src="" /></dd>
+                <dd class="p-author"><img src="#" /> Michael Torres</dd>
+                <dt class="auction-status">Status</dt>
+                <dd class="auction-status auction-status-closed">Closed</dd>              
               </dl>
             </footer>
           </article>

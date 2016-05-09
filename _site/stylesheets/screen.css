@@ -19,8 +19,8 @@ body{
 	font-family: Source Sans Pro, Verdana, sans-serif;
 	font-size: 18px;
 	font-weight: 400;
-	color: #404040;
-	background: #f8f8f8;
+	background: #2d3f5b;
+	color: #fff;
 }
 
 a{ color: #006fbe; text-decoration: underline; }
@@ -149,8 +149,6 @@ img { max-width: 100%; }
 
 .site-header{ 
 	padding: 8px 0 10px;
-	background: #394f72;
-	color: #fff;
 }
 
 .site-header .logo,
@@ -938,11 +936,6 @@ a[id]{
 
 /* @group layout-home */
 
-.layout-home{
-	background: #394f72;
-	color: #fff;
-}
-
 .layout-home main > header{
 	background: #fbf9eb;
 	color: #333;
@@ -970,17 +963,35 @@ a[id]{
 
 .h-feed-header nav{
 	float: right;
-	margin-top: -36px;
-	font-size: 16px;
+	font-size: 12px;
+	padding-left: 54px;
+	position: relative;
+}
+
+.h-feed-header form{
+	font-size: 12px;
+	margin-top: 12px;
+}
+
+.h-feed-header form h1{
+	position: absolute;
+	left: -9999em;
+	top: -9999em;
+}
+
+.h-feed-header form .field{
+	float: left;
+	margin-right: 1em;
+	margin-left: -2px;
 }
 
 .h-feed-header nav h2{
 	font-size: 9px;
 	text-transform: uppercase;
 	font-family: Lucida Grande;
-	position: relative;
-	left: 1px;
-	margin-bottom: 4px;
+	position: absolute;
+	left: 0;
+	bottom: 1px;
 }
 
 .h-feed-header nav a{ color: #666; }
@@ -1021,6 +1032,39 @@ a[id]{
 	color: #444;
 }
 
+.layout-home main article footer dt{
+	font-size: 11px;
+	font-family: Lucida Grande;
+	margin-bottom: 8px;
+}
+
+.layout-home main article footer dd img{
+	width: 24px;
+	height: 24px;
+	background: #888;
+	border-radius: 100%;
+	border: none;
+	vertical-align: middle;
+	margin-top: -1px;
+	margin-right: 4px;
+	margin-left: -1px;
+}
+
+.layout-home main article footer dt.auction-current-bid,
+.layout-home main article footer dd.auction-current-bid{
+	position: absolute;
+	left: 50%;	
+	bottom: 0;
+	padding-bottom: 20px;
+	border-left: 1px solid #eee;
+	padding-left: 8px;
+}
+
+.layout-home main article footer dt.auction-current-bid{
+	padding-bottom: 38px;
+	padding-top: 12px;
+}
+
 .layout-home main article h1{
 	margin-right: 64px;
 	font-size: 24px;
@@ -1028,19 +1072,25 @@ a[id]{
 	margin-bottom: 0.6em;
 }
 
-.layout-home main article span{
+.layout-home main article dt.auction-status{
 	position: absolute;
-	right: 16px;
-	top: 16px;
-	font-size: 12px;
+	top: -9999em;
+	left: -9999em;
+}
+
+.layout-home main article .auction-status{
+	position: absolute;
+	right: 12px;
+	top: 12px;
+	font-size: 14px;
 	background: #008269;
 	color: #fff;
 	padding: 8px;
 	border-radius: 3px;
 }
 
-.layout-home main article span.auction-label-closed{
-	background: #8f3e0e;
+.layout-home main article .auction-status-closed{
+	background: #992d00;
 	
 }
 
