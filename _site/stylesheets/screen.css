@@ -264,6 +264,7 @@ img { max-width: 100%; }
 	border-radius: 3px;
 	text-align: left;
 	cursor: pointer;
+	text-decoration: none;
 }
 
 .site-header .nav-sign-out:hover{
