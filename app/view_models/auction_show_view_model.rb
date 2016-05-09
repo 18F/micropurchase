@@ -7,6 +7,8 @@ class AuctionShowViewModel < Struct.new(:current_user, :auction_record)
 
   delegate(
     :bid_count,
+    :formatted_start_time,
+    :formatted_end_time,
     :html_description,
     :id,
     :issue_url,
@@ -58,18 +60,8 @@ class AuctionShowViewModel < Struct.new(:current_user, :auction_record)
     auction.over? ? "Auction ended at:" : "Bid deadline:"
   end
 
-  def auction_formatted_end_time
-    return "" unless auction.end_datetime
-    auction.ends_at
-  end
-
   def auction_start_label
     auction.over? ? "Auction started at:" : "Bid start time:"
-  end
-
-  def auction_formatted_start_time
-    return "" unless auction.start_datetime
-    auction.starts_at
   end
 
   def auction_rules_link

@@ -93,20 +93,20 @@ class AuctionPresenter
     bids.size
   end
 
-  def starts_at
+  def formatted_start_time
     DcTimePresenter.convert_and_format(model.start_datetime)
   end
 
-  def ends_at
+  def formatted_end_time
     DcTimePresenter.convert_and_format(model.end_datetime)
   end
 
-  def starts_in
+  def relative_start_time
     time_in_human(model.start_datetime)
   end
 
-  def ends_in
-    time_in_human(model.end_datetime)
+  def relative_time_left
+    "#{distance_of_time_in_words(Time.now, model.end_datetime)} left"
   end
 
   def delivery_deadline_expires_in
@@ -125,15 +125,6 @@ class AuctionPresenter
   def html_summary
     return '' if summary.blank?
     markdown.render(summary)
-  end
-
-  def human_start_time
-    if start_datetime < Time.now
-      # this method comes from the included date helpers
-      "#{distance_of_time_in_words(Time.now, start_datetime)} ago"
-    else
-      "in #{distance_of_time_in_words(Time.now, start_datetime)}"
-    end
   end
 
   def url

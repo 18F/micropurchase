@@ -12,6 +12,6 @@
 <% end %>
 <% unless auction.over? or defined? for_winners_page %>
   <span class="issue-bids-info-item bid-deadline">
-    Bid start time: <%= auction.human_start_time %>
+    Bid start time: <%= auction.relative_start_time %>
   </span>
 <% end %>
