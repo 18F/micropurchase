@@ -60,7 +60,7 @@ class AuctionShowViewModel < Struct.new(:current_user, :auction_record)
 
   def auction_formatted_end_time
     return "" unless auction.end_datetime
-    auction.end_datetime.strftime("%m/%d/%Y at %I:%M %p %Z")
+    auction.ends_at
   end
 
   def auction_start_label
@@ -69,7 +69,7 @@ class AuctionShowViewModel < Struct.new(:current_user, :auction_record)
 
   def auction_formatted_start_time
     return "" unless auction.start_datetime
-    auction.start_datetime.strftime("%m/%d/%Y at %I:%M %p %Z")
+    auction.starts_at
   end
 
   def auction_rules_link

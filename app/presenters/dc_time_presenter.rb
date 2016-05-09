@@ -7,7 +7,7 @@ class DcTimePresenter < Struct.new(:time)
 
   def convert_and_format(format = FORMAT)
     return NullBidPresenter::NULL unless time
-    convert.strftime(format)
+    convert.strftime(format) + " #{timezone_label}"
   end
 
   def self.convert(time)
@@ -16,5 +16,9 @@ class DcTimePresenter < Struct.new(:time)
 
   def self.convert_and_format(time, format = FORMAT)
     new(time).convert_and_format(format)
+  end
+
+  def timezone_label
+    convert.zone
   end
 end
