@@ -48,11 +48,6 @@ Then(/^I should not see a winner alert box$/) do
   expect(page).to_not have_content("You are not the winner")
 end
 
-Then(/^I should see when the auction ended$/) do
-  expect(page).to have_content("Auction ended at:")
-  expect(page).not_to have_content("Bid deadline:")
-end
-
 Then(/^I should see the auction ended with no bids$/) do
   expect(page).to have_content("This auction ended with no bids.")
   expect(page).to have_content("Current bid:")

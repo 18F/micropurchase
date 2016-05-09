@@ -32,7 +32,7 @@ describe DcTimePresenter do
 
     context 'when it is a time' do
       it 'should convert to a reasonable string' do
-        expect(converter.convert_and_format).to eq("April 01, 2001 06:15:00 AM")
+        expect(converter.convert_and_format).to eq("April 01, 2001 06:15:00 AM EDT")
       end
     end
   end
