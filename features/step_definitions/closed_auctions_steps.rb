@@ -1,8 +1,8 @@
 When(/^I have placed the lowest bid$/) do
   # sort the bids so that newest is first
-  bids = @auction.bids.sort_by(&:created_at).reverse
+  bids = @auction.bids.order(created_at: :desc)
   b = bids.first
-  b.update_attribute(:bidder_id, @user.id)
+  b.update(bidder: @user)
 end
 
 When(/^I have placed a bid$/) do
@@ -21,15 +21,13 @@ When(/^I have not placed a bid$/) do
 end
 
 Then(/^I should see the auction had a winning bid$/) do
-  auction = AuctionViewModel.new(nil, @auction)
-  expect(page).to have_content("Winning bid: #{auction.highlighted_bid_amount_as_currency}")
+  expect(page).to have_content("Winning bid: #{@auction.highlighted_bid_amount_as_currency(@user)}")
   expect(page).not_to have_content("Current bid:")
 end
 
 Then(/^I should see the auction had a winning bid with name$/) do
-  auction = AuctionViewModel.new(nil, @auction)
   expect(page)
-    .to have_content("Winning bid (#{auction.highlighted_bidder_name}): #{auction.highlighted_bid_amount_as_currency}")
+    .to have_content("Winning bid (#{@auction.highlighted_bidder_name(@user)}): #{@auction.highlighted_bid_amount_as_currency(@user)}")
   expect(page).not_to have_content("Current bid:")
 end
 

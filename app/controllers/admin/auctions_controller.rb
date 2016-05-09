@@ -2,7 +2,7 @@ class Admin::AuctionsController < ApplicationController
   before_filter :require_admin
 
   def index
-    @auctions = Auction.all.map { |auction| AdminAuctionPresenter.new(auction) }
+    @auctions = Auction.all
 
     respond_to do |format|
       format.html
@@ -13,7 +13,7 @@ class Admin::AuctionsController < ApplicationController
   end
 
   def show
-    @auction = AdminAuctionPresenter.new(Auction.find(params[:id]))
+    @auction = Auction.find(params[:id])
 
     respond_to do |format|
       format.html
@@ -24,25 +24,22 @@ class Admin::AuctionsController < ApplicationController
   end
 
   def preview
-    auction = Auction.find(params[:id])
-    @view_model = AuctionShowViewModel.new(current_user, auction)
+    @auction = Auction.find(params[:id])
+    @view_model = AuctionShowViewModel.new(user: current_user, auction: @auction)
     render 'auctions/show'
   end
 
   def new
     if params[:auction]
       parser = AuctionParser.new(params)
-      auction = Auction.new(parser.general_attributes)
+      @auction = Auction.new(parser.general_attributes)
     else
-      auction = Auction.new
+      @auction = Auction.new
     end
-
-    @auction = AdminAuctionPresenter.new(auction)
   end
 
   def create
     @auction = CreateAuction.new(params, current_user).auction
-    auction = AdminAuctionPresenter.new(@auction)
 
     if @auction.save
       respond_to do |format|
@@ -63,7 +60,6 @@ class Admin::AuctionsController < ApplicationController
     auction = Auction.find(params[:id])
     UpdateAuction.new(auction, params, current_user).perform
     auction.reload
-    auction = AdminAuctionPresenter.new(auction)
 
     respond_to do |format|
       format.html { redirect_to admin_auctions_path }
@@ -76,8 +72,7 @@ class Admin::AuctionsController < ApplicationController
   end
 
   def edit
-    auction = Auction.find(params[:id])
-    @auction = AdminAuctionPresenter.new(auction)
+    @auction = Auction.find(params[:id])
   end
 
   private

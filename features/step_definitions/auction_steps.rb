@@ -12,7 +12,7 @@ Given(/^there is an? (.+) auction$/) do |label|
              when 'open bidless'
                FactoryGirl.create(:auction)
              when 'open'
-               FactoryGirl.create(:auction, :with_bidders)
+               FactoryGirl.create(:auction, :available, :with_bidders)
              when 'single-bid'
                FactoryGirl.create(:auction, :running, :single_bid)
              when 'closed single-bid'
@@ -41,9 +41,8 @@ When(/^I visit the unpublished auction$/) do
 end
 
 Then(/^I should see the winning bid for the auction$/) do
-  auction = AuctionPresenter.new(@auction)
   lowest_bid_amount = ApplicationController.helpers.number_to_currency(
-    auction.lowest_bid.amount
+    @auction.lowest_bid.amount
   )
 
   expect(page).to have_text(lowest_bid_amount)

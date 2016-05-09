@@ -22,11 +22,11 @@ class AuctionStatus::OpenViewModel < Struct.new(:auction)
     "Bidding"
   end
 
-  def tag_data_value_2
+  def tag_data_value_2(user = nil)
     if !auction.show_bids?
       "Sealed"
     else
-      "#{auction.highlighted_bid_amount_as_currency} - #{auction.bids.length} bids"
+      "#{auction.highlighted_bid_amount_as_currency(user)} - #{auction.bids.length} bids"
     end
   end
 end

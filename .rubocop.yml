@@ -1,4 +1,5 @@
 AllCops:
+  TargetRubyVersion: 2.3
   Include:
     - 'Gemfile'
     - 'Rakefile'
@@ -23,7 +24,7 @@ Metrics/ClassLength:
   Description: Avoid classes longer than 100 lines of code.
   Enabled: true
   CountComments: false
-  Max: 100
+  Max: 200
 
 
 Metrics/AbcSize:
@@ -75,6 +76,12 @@ Rails/TimeZone:
   SupportedStyles:
     - strict
     - flexible
+
+Style/FrozenStringLiteralComment:
+  Description: >-
+                 Add the frozen_string_literal comment to the top of files
+                 to help transition from Ruby 2.3.0 to Ruby 3.0.
+  Enabled: false
 
 Style/MultilineBlockLayout:
   Description: 'Ensures newlines after multiline block do statements.'

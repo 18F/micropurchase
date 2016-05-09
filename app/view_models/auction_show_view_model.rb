@@ -1,8 +1,11 @@
-class AuctionShowViewModel < Struct.new(:current_user, :auction_record)
+class AuctionShowViewModel
   include ActionView::Helpers::NumberHelper
 
-  def auction
-    @auction ||= AuctionViewModel.new(current_user, auction_record)
+  attr_reader :auction
+
+  def initialize(user: nil, auction:)
+    @user = user
+    @auction = auction
   end
 
   delegate(
@@ -24,21 +27,19 @@ class AuctionShowViewModel < Struct.new(:current_user, :auction_record)
     :auction_status,
     :auction_type,
     :highlighted_bid,
-    :highlighted_bid_amount,
     :highlighted_bid_amount_as_currency,
     to: :auction
   )
 
   def auction_status_header
     if auction_won?
-      "Winning bid (#{auction.highlighted_bidder_name}):"
+      "Winning bid (#{auction.highlighted_bidder_name(user)}):"
     else
       auction.highlighted_bid_label
     end
   end
 
   def auction_status_partial
-    # This is a bit ugly since the partial has an if-else in it now
     auction.partial_path('auction_status')
   end
 
@@ -51,15 +52,18 @@ class AuctionShowViewModel < Struct.new(:current_user, :auction_record)
   end
 
   def auction_link_text
-    "#{auction.bid_count} #{bid_to_plural}"
+    "#{auction.bids.count} #{bid_to_plural}"
   end
 
   def auction_deadline_label
-    auction.over? ? "Auction ended at:" : "Bid deadline:"
+    if auction.over?
+      "Auction ended at:"
+    else
+      "Bid deadline:"
+    end
   end
 
   def auction_formatted_end_time
-    return "" unless auction.end_datetime
     auction.end_datetime.strftime("%m/%d/%Y at %I:%M %p %Z")
   end
 
@@ -68,7 +72,6 @@ class AuctionShowViewModel < Struct.new(:current_user, :auction_record)
   end
 
   def auction_formatted_start_time
-    return "" unless auction.start_datetime
     auction.start_datetime.strftime("%m/%d/%Y at %I:%M %p %Z")
   end
 
@@ -77,16 +80,18 @@ class AuctionShowViewModel < Struct.new(:current_user, :auction_record)
   end
 
   def auction_won?
-    auction.over? && auction.bids?
+    auction.over? && auction.bids.any?
   end
 
   private
 
+  attr_reader :user
+
   def bid_to_plural
-    auction.bids? ? "bids" : "bid"
+    auction.bids.any? ? "bids" : "bid"
   end
 
   def current_user_has_no_sam_verification?
-    current_user && !current_user.sam_accepted?
+    user && !user.sam_accepted?
   end
 end

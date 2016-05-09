@@ -9,7 +9,7 @@
 <div class="usa-grid-full">
   <p><a class="link-highlighted" href="<%= root_path %>"><icon class="fa fa-angle-double-left"></icon> Back to open projects</a></p>
   <div class="usa-width-two-thirds auction-description">
-    <h1><%= @view_model.auction_record.title %></h1>
+    <h1><%= @view_model.auction.title %></h1>
     <div class="github-issue">
       <%=h raw @view_model.auction_html_description %>
     </div>
@@ -20,7 +20,7 @@
       <div>
         <p class="auction-label">Auction type:</p>
         <p class="auction-label-info">
-          <%= @view_model.auction_type.capitalize %> (<%= @view_model.auction_rules_link %>).
+          <%= @auction.formatted_type.capitalize %> (<%= @view_model.auction_rules_link %>).
         </p>
       </div>
       <div>
@@ -39,7 +39,7 @@
         <p class="auction-label"><%= @view_model.auction_start_label %></p>
         <p class="auction-label-info"><%= @view_model.auction_formatted_start_time %></p>
       </div>
-      <% if @view_model.auction.show_bid_button? %>
+      <% if @view_model.auction.show_bid_button?(current_user) %>
       <p>
         <a href="<%= new_auction_bid_path(@view_model.auction) %>" class='button-bid usa-button'>BID <icon class="fa fa-angle-double-right"></icon></a>
       </p>

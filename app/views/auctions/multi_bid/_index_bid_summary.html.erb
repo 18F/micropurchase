@@ -1,4 +1,4 @@
- <% if auction.bids? %>
+<% if auction.bids.any? %>
     <span class="current-bid-header">Current bid:</span>
     <span class="current-bid"><%= auction.highlighted_bid_amount_as_currency %>  </span><br/>
     <span class="current-bid-link"><%=

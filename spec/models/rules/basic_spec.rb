@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 describe Rules::Basic do
-  let(:ar_auction) { create(:auction, :closed, :with_bidders) }
-  let(:auction) { AuctionPresenter.new(ar_auction) }
+  let(:auction) { create(:auction, :closed, :with_bidders) }
 
   subject { Rules::Basic.new(auction) }
 
@@ -13,15 +12,22 @@ describe Rules::Basic do
   end
 
   describe 'user_can_bid?' do
-    let(:user) { create(:user, sam_status: :sam_accepted) }
-
     context 'when the auction is open and the user can bid' do
-      let(:ar_auction) { create(:auction) }
-      specify { expect(subject.user_can_bid?(user)).to be_truthy }
+      it 'is true' do
+        user = create(:user, sam_status: :sam_accepted)
+        auction = create(:auction, :available)
+        rules = Rules::Basic.new(auction)
+        expect(rules.user_can_bid?(user)).to be_truthy
+      end
     end
 
     context 'when the auction is over' do
-      specify { expect(subject.user_can_bid?(user)).to be_falsey }
+      it 'is false' do
+      user = create(:user, sam_status: :sam_accepted)
+      auction = create(:auction, :closed)
+      rules = Rules::Basic.new(auction)
+      expect(rules.user_can_bid?(user)).to be_falsey
+      end
     end
 
     context 'when the user is nil' do
@@ -36,10 +42,10 @@ describe Rules::Basic do
 
   describe 'max_allowed_bid' do
     context 'when there are no bids' do
-      let(:ar_auction) { create(:auction) }
-
-      it 'should be BID_INCRMENT below the start price' do
-        expect(subject.max_allowed_bid).to eq(auction.start_price - PlaceBid::BID_INCREMENT)
+      it 'should be BID_INCREMENT below the start price' do
+        auction = create(:auction)
+        rules = Rules::Basic.new(auction)
+        expect(rules.max_allowed_bid).to eq(auction.start_price - PlaceBid::BID_INCREMENT)
       end
     end
 

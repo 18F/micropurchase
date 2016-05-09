@@ -40,15 +40,15 @@ class PlaceBid < Struct.new(:params, :current_user)
   end
 
   def auction_available?
-    presenter_auction.available?
+    auction.available?
   end
 
   def user_can_bid?
-    presenter_auction.user_can_bid?(current_user)
+    auction.user_can_bid?(current_user)
   end
 
   def max_allowed_bid
-    presenter_auction.max_allowed_bid
+    auction.max_allowed_bid
   end
 
   # rubocop:disable Style/IfUnlessModifier
@@ -84,9 +84,5 @@ class PlaceBid < Struct.new(:params, :current_user)
     params_amount = params_amount.delete(',') if params_amount.is_a?(String)
 
     (params[:bid] && params_amount).to_f.round(2)
-  end
-
-  def presenter_auction
-    @presenter ||= AuctionPresenter.new(auction)
   end
 end

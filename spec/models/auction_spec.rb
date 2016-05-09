@@ -29,12 +29,95 @@ describe Auction do
     end
   end
 
+  describe "#html_summary" do
+    context "summary is nil" do
+      it 'should return an empty string if the summary is blank' do
+        auction = build(:auction, summary: nil)
+        expect(auction.html_summary).to be_blank
+      end
+    end
+
+    context "summary contains markdown" do
+      it 'renders markdown as HTML with autolinks' do
+        summary = 'This is **bold** text with link http://18f.gov anytime'
+
+        auction = build(:auction, summary: summary)
+
+        expect(auction.html_summary).to match('<strong>bold</strong>')
+        expect(auction.html_summary).to match('<a href="http://18f.gov">http://18f.gov</a>')
+      end
+    end
+  end
+
+  describe '#show_bid_button?' do
+    context 'no user' do
+      it 'is true' do
+        auction = build(:auction)
+
+        expect(auction.show_bid_button?(nil)).to eq true
+      end
+    end
+
+    context 'user does not have verified SAM account' do
+      it 'is false' do
+        user = create(:user, sam_status: :sam_pending)
+        auction = build(:auction)
+
+        expect(auction.show_bid_button?(user)).to eq false
+      end
+    end
+  end
+
+  describe '#user_is_bidder?' do
+    context 'user placed bid on auction' do
+      it 'is true' do
+        auction = build(:auction)
+        user = create(:user)
+        create(:bid, auction: auction, bidder: user)
+
+        expect(auction.user_is_bidder?(user)).to eq true
+      end
+    end
+
+    context 'user has not placed a bid' do
+      it 'is false' do
+        auction = build(:auction)
+        user = create(:user)
+
+        expect(auction.user_is_bidder?(user)).to eq false
+      end
+    end
+  end
+
+  describe '#user_is_winning_bidder?' do
+    context 'when the user is currently the winner' do
+      it 'should return true' do
+        auction = build(:auction)
+        user = create(:user)
+        create(:bid, auction: auction, bidder: user)
+
+        expect(auction.user_is_winning_bidder?(user)).to eq true
+      end
+    end
+
+    context 'when the user is not the current winner' do
+      it 'should return false' do
+        auction = create(:auction)
+        user = create(:user)
+        create(:bid, amount: 100, auction: auction, bidder: user)
+        create(:bid, amount: 50, auction: auction)
+
+        expect(auction.user_is_winning_bidder?(user)).to eq false
+      end
+    end
+  end
+
   describe "#lowest_bid" do
     context "multiple bids" do
       it "returns bid with lowest amount" do
-        auction = FactoryGirl.create(:auction)
-        low_bid = FactoryGirl.create(:bid, auction: auction, amount: 1)
-        _high = FactoryGirl.create(:bid, auction: auction, amount: 10000)
+        auction = create(:auction)
+        low_bid = create(:bid, auction: auction, amount: 1)
+        _high = create(:bid, auction: auction, amount: 10000)
 
         expect(auction.lowest_bid).to eq(low_bid)
       end
@@ -42,7 +125,7 @@ describe Auction do
 
     context "no bids" do
       it "returns nil" do
-        auction = FactoryGirl.create(:auction)
+        auction = create(:auction)
 
         expect(auction.lowest_bid).to be_nil
       end
@@ -50,9 +133,9 @@ describe Auction do
 
     context "multiple bids with same amount" do
       it "returns first created bid" do
-        auction = FactoryGirl.create(:auction)
-        _second_bid = FactoryGirl.create(:bid, auction: auction, created_at: Time.current, amount: 1)
-        first_bid = FactoryGirl.create(:bid, auction: auction, created_at: 1.hour.ago, amount: 1)
+        auction = create(:auction)
+        _second_bid = create(:bid, auction: auction, created_at: Time.current, amount: 1)
+        first_bid = create(:bid, auction: auction, created_at: 1.hour.ago, amount: 1)
 
         expect(auction.lowest_bid).to eq(first_bid)
       end
