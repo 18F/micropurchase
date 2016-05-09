@@ -1,6 +1,0 @@
-attributes:
-  - content
-  - foreign_key
-  - inheritance
-disconnected: true
-filename: docs/erd

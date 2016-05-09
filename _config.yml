@@ -1,0 +1,30 @@
+# Site settings
+title: Micropurchase
+description:
+email:
+permalink: pretty
+author:
+  name: Andrew Maier
+  email: andrew.maier@gsa.gov
+
+github:
+  organization: 18F
+  repository: micropurchase
+  default_branch: 18f-pages-internal
+
+exclude:
+- CONTRIBUTING.md
+- Gemfile
+- Gemfile.lock
+- LICENSE.md
+- README.md
+- go
+- vendor
+
+defaults:
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
