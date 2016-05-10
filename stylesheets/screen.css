@@ -925,7 +925,7 @@ a[id]{
 /* @end */
 
 /* @group layout-sign-in */
-
+.layout-sign-in .site-header nav{ display: none; }
 .layout-sign-in main { padding-top: 2em; }
 .layout-sign-in main section {
 	margin-bottom: 2em;
