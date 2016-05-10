@@ -7,8 +7,9 @@ class AuctionShowViewModel < Struct.new(:current_user, :auction_record)
 
   delegate(
     :bid_count,
-    :formatted_start_time,
+    :formatted_delivery_deadline,
     :formatted_end_time,
+    :formatted_start_time,
     :html_description,
     :id,
     :issue_url,
@@ -70,6 +71,10 @@ class AuctionShowViewModel < Struct.new(:current_user, :auction_record)
 
   def auction_won?
     auction.over? && auction.bids?
+  end
+
+  def auction_has_delivery_deadline?
+    !auction.delivery_deadline.blank?
   end
 
   private

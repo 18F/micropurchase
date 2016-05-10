@@ -10,6 +10,7 @@ Feature: Closed Auctions
     When I visit the auction page
     Then I should see the auction had a winning bid with name
     And I should see I am the winner
+    And I should see when the auction started
     And I should see when the auction ended
     And there should be meta tags for the closed auction
 
@@ -20,6 +21,7 @@ Feature: Closed Auctions
     When I visit the auction page
     Then I should see the auction had a winning bid with name
     Then I should see I am not the winner
+    And I should see when the auction started
     And I should see when the auction ended
     And there should be meta tags for the closed auction
     And email notifications are sent to losing bidders
@@ -32,6 +34,7 @@ Feature: Closed Auctions
     When I visit the auction page
     Then I should see the auction had a winning bid with name
     And I should not see a winner alert box
+    And I should see when the auction started
     And I should see when the auction ended
     And there should be meta tags for the closed auction
 
@@ -41,6 +44,8 @@ Feature: Closed Auctions
     When I visit the auction page
     Then I should see when the auction ended
     And I should see the auction ended with no bids
+    And I should see when the auction started
+    And I should see when the auction ended
     And there should be meta tags for the closed auction
 
   Scenario: I am not logged in

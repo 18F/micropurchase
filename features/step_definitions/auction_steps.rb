@@ -152,7 +152,6 @@ Then(/^I should see I do not have the winning bid$/) do
   expect(page).to have_content("You are currently not the winning bidder.")
 end
 
-# Fix me (look for specific date in there)
 Then(/^I should see when the auction started$/) do
   expect(page).to have_text(
                     DcTimePresenter.convert_and_format(@auction.start_datetime))
@@ -166,6 +165,10 @@ end
 Then(/^I should see when the auction ended$/) do
   expect(page).to_not have_content("Bid deadline:")
   expect(page).to have_text("Auction ended at: #{DcTimePresenter.convert_and_format(@auction.end_datetime)}")
+end
+
+Then(/^I should see the delivery deadline$/) do
+  expect(page).to have_content("Delivery deadline: #{DcTimePresenter.convert_and_format(@auction.delivery_deadline)}")
 end
 
 Then(/^I should see an? (.+) status$/) do |label|
