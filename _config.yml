@@ -1,5 +1,5 @@
 # Site settings
-title: Micropurchase
+title: Micropurchase prototype
 description:
 email:
 permalink: pretty
@@ -10,7 +10,7 @@ author:
 github:
   organization: 18F
   repository: micropurchase
-  default_branch: 18f-pages-internal
+  default_branch: 18f-pages
 
 
 collections:
