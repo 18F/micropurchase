@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe AuctionPresenter do
+  include ActionView::Helpers::DateHelper
+  
   let(:ar_auction) { create(:auction) }
   let(:ar_bids_by_amount) { ar_auction.bids.order('amount ASC, created_at ASC') }
   let(:auction) { AuctionPresenter.new(ar_auction) }
@@ -168,103 +170,141 @@ describe AuctionPresenter do
           end
         end
       end
+    end
+  end
 
-      describe "#html_summary" do
-        let(:summary) { nil }
-        let(:auction) { AuctionPresenter.new(build(:auction, summary: summary)) }
+  describe "#formatted_start_time" do
+    it 'should equal the DcTimePresenter representation' do
+      expect(auction.formatted_start_time).to eq(DcTimePresenter.convert_and_format(auction.start_datetime))
+    end
+  end
 
-        it 'should return an empty string if the summary is blank' do
-          expect(auction.html_summary).to be_blank
-        end
+  describe "#formatted_end_time" do
+    it 'should equal the DcTimePresenter representation' do
+      expect(auction.formatted_end_time).to eq(DcTimePresenter.convert_and_format(auction.end_datetime))
+    end
+  end
 
-        context 'bold text' do
-          let(:summary) { 'This is **bold** text' }
+  describe "#relative_start_time" do
+    context 'when the start time is in the future' do
+      let(:ar_auction) { create(:auction, start_datetime: 1.day.from_now) }
 
-          it 'should render correctly' do
-            expect(auction.html_summary).to match("<strong>bold</strong>")
-          end
-        end
-
-        context 'italicized text' do
-          let(:summary) { 'This is _italic_ text' }
-
-          it 'should render correctly' do
-            expect(auction.html_summary).to match('<em>italic</em>')
-          end
-        end
-
-        context 'autolinks' do
-          let(:summary) { 'Please visit http://18f.gov anytime' }
-
-          it 'should render correctly' do
-            expect(auction.html_summary).to match('<a href="http://18f.gov">http://18f.gov</a>')
-          end
-        end
-
-        context 'ignoring underscores in words' do
-          let(:summary) { 'This_is_a_test' }
-
-          it 'should not render as italicized' do
-            expect(auction.html_summary).to_not match('<em>')
-          end
-        end
-
-        context 'table rendering' do
-          let(:summary) { "First Header|Second Header\n------------- | -------------\nContent Cell  | Content Cell\n" }
-
-          it 'should render a table element' do
-            expect(auction.html_summary).to match('<table>')
-          end
-        end
+      it 'should be "in the_distance_of_time"' do
+        expect(auction.relative_start_time).to eq("in #{distance_of_time_in_words(Time.now, ar_auction.start_datetime)}")
       end
+    end
 
-      describe '#html_description' do
-        let(:description) { nil }
-        let(:auction) { AuctionPresenter.new(build(:auction, description: description)) }
+    context 'when the start time is in the past' do
+      let(:ar_auction) { create(:auction, start_datetime: 1.day.ago) }
 
-        it 'should return an empty string if the description is blank' do
-          expect(auction.html_description).to be_blank
-        end
+      it 'should be "in the_distance_of_time"' do
+        expect(auction.relative_start_time).to eq("#{distance_of_time_in_words(Time.now, ar_auction.start_datetime)} ago")
+      end
+    end
+  end
 
-        context 'bold text' do
-          let(:description) { 'This is **bold** text' }
+  describe '#relative_time_left' do
+    let(:ar_auction) { create(:auction, start_datetime: 1.day.from_now) }
 
-          it 'should render correctly' do
-            expect(auction.html_description).to match("<strong>bold</strong>")
-          end
-        end
+    it 'should be "the_distance_of_time left"' do
+      expect(auction.relative_time_left).to eq("#{distance_of_time_in_words(Time.now, ar_auction.end_datetime)} left")
+    end
+  end
 
-        context 'italicized text' do
-          let(:description) { 'This is _italic_ text' }
+  describe "#html_summary" do
+    let(:summary) { nil }
+    let(:auction) { AuctionPresenter.new(build(:auction, summary: summary)) }
 
-          it 'should render correctly' do
-            expect(auction.html_description).to match('<em>italic</em>')
-          end
-        end
+    it 'should return an empty string if the summary is blank' do
+      expect(auction.html_summary).to be_blank
+    end
 
-        context 'autolinks' do
-          let(:description) { 'Please visit http://18f.gov anytime' }
+    context 'bold text' do
+      let(:summary) { 'This is **bold** text' }
 
-          it 'should render correctly' do
-            expect(auction.html_description).to match('<a href="http://18f.gov">http://18f.gov</a>')
-          end
-        end
+      it 'should render correctly' do
+        expect(auction.html_summary).to match("<strong>bold</strong>")
+      end
+    end
 
-        context 'ignoring underscores in words' do
-          let(:description) { 'This_is_a_test' }
+    context 'italicized text' do
+      let(:summary) { 'This is _italic_ text' }
 
-          it 'should not render as italicized' do
-            expect(auction.html_description).to_not match('<em>')
-          end
-        end
+      it 'should render correctly' do
+        expect(auction.html_summary).to match('<em>italic</em>')
+      end
+    end
 
-        context 'table rendering' do
-          let(:description) { "First Header|Second Header\n------------- | -------------\nContent Cell  | Content Cell\n" }
+    context 'autolinks' do
+      let(:summary) { 'Please visit http://18f.gov anytime' }
 
-          it 'should render a table element' do
-            expect(auction.html_description).to match('<table>')
-          end
-        end
+      it 'should render correctly' do
+        expect(auction.html_summary).to match('<a href="http://18f.gov">http://18f.gov</a>')
+      end
+    end
+
+    context 'ignoring underscores in words' do
+      let(:summary) { 'This_is_a_test' }
+
+      it 'should not render as italicized' do
+        expect(auction.html_summary).to_not match('<em>')
+      end
+    end
+
+    context 'table rendering' do
+      let(:summary) { "First Header|Second Header\n------------- | -------------\nContent Cell  | Content Cell\n" }
+
+      it 'should render a table element' do
+        expect(auction.html_summary).to match('<table>')
+      end
+    end
+  end
+
+  describe '#html_description' do
+    let(:description) { nil }
+    let(:auction) { AuctionPresenter.new(build(:auction, description: description)) }
+
+    it 'should return an empty string if the description is blank' do
+      expect(auction.html_description).to be_blank
+    end
+
+    context 'bold text' do
+      let(:description) { 'This is **bold** text' }
+
+      it 'should render correctly' do
+        expect(auction.html_description).to match("<strong>bold</strong>")
+      end
+    end
+
+    context 'italicized text' do
+      let(:description) { 'This is _italic_ text' }
+
+      it 'should render correctly' do
+        expect(auction.html_description).to match('<em>italic</em>')
+      end
+    end
+
+    context 'autolinks' do
+      let(:description) { 'Please visit http://18f.gov anytime' }
+
+      it 'should render correctly' do
+        expect(auction.html_description).to match('<a href="http://18f.gov">http://18f.gov</a>')
+      end
+    end
+
+    context 'ignoring underscores in words' do
+      let(:description) { 'This_is_a_test' }
+
+      it 'should not render as italicized' do
+        expect(auction.html_description).to_not match('<em>')
+      end
+    end
+
+    context 'table rendering' do
+      let(:description) { "First Header|Second Header\n------------- | -------------\nContent Cell  | Content Cell\n" }
+
+      it 'should render a table element' do
+        expect(auction.html_description).to match('<table>')
       end
     end
   end
