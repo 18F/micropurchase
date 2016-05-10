@@ -1,48 +1,12 @@
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+---
+excerpt: none
+permalink: /
+---
 
-  <title>18F Micropurchase - Index</title>
-  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
-  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
-
-  <meta name="description" content="none">
-
-  <link href='https://fonts.googleapis.com/css?family=Merriweather:400,700,400italic,700italic,300italic,300|Source+Sans+Pro:200,300,300italic,400,400italic,600,600italic,900' rel='stylesheet' type='text/css'>
-
-  <script src="/javascripts/jquery-2.1.4.min.js"></script>
-  <script src="/javascripts/application.js"></script>
-
-  <link rel="stylesheet" type="text/css" href="/stylesheets/reset.css">
-  <link rel="stylesheet" type="text/css" href="/stylesheets/screen.css">
-
-  <link rel="canonical" href="/">
-  <link rel="alternate" type="application/rss+xml" title="Micropurchase" href="/feed.xml" />
-
-
-</head>
-
+{% include head.html %}
 <body class="no-js layout-home">
   <a class="a-skip-to-main" href="#main">Skip to main content</a>
-  <header class="site-header">
-  <div class="wrapper">
-    <h1 class="logo">
-      <a href="/">
-        <img src="/images/logo/18F-Logo-Bright-L.png">
-        Micropurchase
-      </a>
-    </h1>
-    <nav class="nav">
-      <a class="nav-sign-out" href="/sign-in/">
-        <h1>Signed in as</h1>
-        <img src="/images/andrew_maier.jpg" alt="Andrew Maier">
-        <span>Andrew Maier</span>
-        <span class="action">Sign out</span>
-      </a>
-    </nav>
-  </div>
-</header>
+  {% include site-header.html %}
   <main role="main" id="main">
     <header role="banner">
       The place to bid on 18F&rsquo;s open-source development opportunities. 
@@ -169,28 +133,5 @@
       </div>
     </div>
   </main>
-  <footer class="site-footer">
-  <div class="wrapper">
-    <h1 class="logo">
-      <a href="/">
-        <img src="/images/logo/18F-Logo-Bright-L.png">
-        Micropurchase
-      </a>
-    </h1>
-    <nav class="nav-site-nav">
-      <ul>
-        <li><a href="#">Projects</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Feedback</a></li>
-        <li><a href="#">Policies</a></li>
-        <li><a href="#">API Docs</a></li>  
-      </ul>
-    </nav>
-    <nav class="nav-contact">
-      <h2>Contact</h2>
-      <a href="#">micropurchase@gsa.gov</a>
-      <a href="#">View our code on GitHub</a>      
-    </nav>
-  </div>
-</footer>
+  {% include site-footer.html %}
 </body>

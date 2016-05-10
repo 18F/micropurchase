@@ -12,6 +12,13 @@ github:
   repository: micropurchase
   default_branch: 18f-pages-internal
 
+
+collections:
+  pages:
+    output: true
+    permalink: /:path/
+
+
 exclude:
 - CONTRIBUTING.md
 - Gemfile
