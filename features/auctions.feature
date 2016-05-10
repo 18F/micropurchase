@@ -53,7 +53,9 @@ Feature: Basic Auction Views
 
     When I visit the auction page
     Then I should see a Closed status
+    And I should see when the auction started
     And I should see when the auction ended
+    And I should see the delivery deadline
     And I should not see a "Bid" button
     And there should be meta tags for the closed auction
 
@@ -69,6 +71,7 @@ Feature: Basic Auction Views
     And I should see a "BID" button
     And I should see when the auction started
     And I should see when the auction ends
+    And I should see the delivery deadline
     And there should be meta tags for the open auction
 
   Scenario: There is a future auction

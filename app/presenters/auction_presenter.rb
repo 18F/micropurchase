@@ -101,6 +101,10 @@ class AuctionPresenter
     DcTimePresenter.convert_and_format(model.end_datetime)
   end
 
+  def formatted_delivery_deadline
+    DcTimePresenter.convert_and_format(model.delivery_deadline)
+  end
+
   def relative_start_time
     time_in_human(model.start_datetime)
   end
