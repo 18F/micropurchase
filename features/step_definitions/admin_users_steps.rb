@@ -44,3 +44,24 @@ end
 Then(/^I expect the page to show me the number of admin users$/) do
   expect(page).to have_text("Admins (1)")
 end
+
+Then(/^I should see a column labeled "([^"]+)"$/) do |text|
+  find('th', text: text)
+end
+
+Given(/^there are various types of users in the system$/) do
+  @users = []
+
+  30.times do
+    has_duns = rand(4)
+    in_sam = has_duns && rand(4)
+    small_biz = in_sam && rand(4)
+
+    opts = { }
+    opts[:duns_number] = nil unless has_duns
+    opts[:sam_status] = :sam_accepted if in_sam
+    opts[:small_business] = true if small_biz
+
+    @users << FactoryGirl.create(:user, opts)
+  end
+end
