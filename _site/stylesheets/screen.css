@@ -79,9 +79,13 @@ a.button span.slack::before{
 	clear: both;
 }
 
-main{
+main,
+nav.breadcrumbs{
 	background: white;
 	color: #333;
+}
+
+main{
 	padding-bottom: 2em;
 }
 
@@ -322,6 +326,18 @@ img { max-width: 100%; }
 
 /* @end */
 
+/* @group nav.breadcrumbs */
+
+nav.breadcrumbs{
+	padding-top: 1em;
+}
+
+nav.breadcrumbs a{
+	color: #666;
+}
+
+/* @end */
+
 /* @group .site-footer */
 
 .site-footer{
@@ -396,6 +412,109 @@ img { max-width: 100%; }
 
 
 /* @end */
+
+/* @group auction */
+
+
+
+article.auction{
+	border: 1px solid #ddd;
+	padding: 14px 16px 0;
+	margin-bottom: 20px;
+	border-radius: 4px;
+	border-right-color: #d8d8d8;
+	border-bottom-color: #d5d5d5;
+	box-shadow: 1px 1px 0 #f8f8f8;
+	background: #fff;
+	color: #555;
+	position: relative;
+	max-width: 480px;
+}
+
+article.auction footer.auction-footer{
+	padding: 12px 16px 14px;
+	margin: 14px -16px 0;
+	background: #f8f8f8;
+	border-radius: 0 0 3px 3px;
+	font-size: 16px;
+	color: #444;
+}
+
+article.auction footer.auction-footer dt{
+	font-size: 11px;
+	font-family: Lucida Grande;
+	margin-bottom: 8px;
+}
+
+article.auction footer.auction-footer dd img{
+	width: 24px;
+	height: 24px;
+	background: #888;
+	border-radius: 100%;
+	border: none;
+	vertical-align: middle;
+	margin-top: -1px;
+	margin-right: 4px;
+	margin-left: -1px;
+}
+
+article.auction footer.auction-footer dt.auction-current-bid,
+article.auction footer.auction-footer dd.auction-current-bid{
+	position: absolute;
+	left: 50%;	
+	bottom: 0;
+	padding-bottom: 20px;
+	border-left: 1px solid #eee;
+	padding-left: 8px;
+}
+
+article.auction footer.auction-footer dt.auction-current-bid{
+	padding-bottom: 38px;
+	padding-top: 12px;
+}
+
+article.auction footer.auction-footer .auction-status{
+	position: absolute;
+	right: 16px;
+	top: 16px;
+}
+
+article.auction h1{
+	margin-right: 64px;
+	font-size: 24px !important;
+	letter-spacing: 0 !important;
+	font-weight: normal !important;
+	line-height: 1.2;
+	margin-bottom: 0.6em;
+}
+
+article.auction dt.auction-status{
+	position: absolute;
+	top: -9999em;
+	left: -9999em;
+}
+
+dd.auction-status{
+	font-size: 14px;
+	background: #008269;
+	color: #fff;
+	padding: 8px;
+	border-radius: 3px;
+	display: inline-block;
+}
+
+dd.auction-status-closed{
+	background: #992d00;	
+}
+
+.layout-home main article .auction-status{
+	position: absolute;
+	right: 12px;
+	top: 12px;
+}
+
+/* @end */
+
 
 /* @group .page */
 
@@ -748,6 +867,75 @@ a[id]{
 
 /* @group layouts */
 
+/* @group layout-auctions-show */
+
+.layout-auctions-show main{
+	padding-top: 2em;
+}
+
+.layout-auctions-show main .auction-header h1{
+	font-size: 32px;
+	line-height: 1.1;
+}
+
+.layout-auctions-show main .auction-footer {
+	padding: 20px;
+	background: #eee;	
+}
+
+.layout-auctions-show main .auction-header dl dt,
+.layout-auctions-show main .auction-footer dl dt{
+	font-size: 11px;
+	font-family: roboto condensed;
+	text-transform: uppercase;
+	margin-bottom: 6px;	
+	color: #555;
+}
+
+.layout-auctions-show main .auction-header dl dd,
+.layout-auctions-show main .auction-footer dl dd{
+	margin-bottom: 20px;
+}
+
+.layout-auctions-show main .auction-footer dl dd:last-child{
+	margin-bottom: 0;
+}
+
+.layout-auctions-show main .auction-footer span{
+	display: block;
+	margin-top: 0.4em;
+	font-size: 12px;
+	
+}
+
+@media screen and (min-width: 1066.66px){
+	.layout-auctions-show main .wrapper{
+		padding-right: 384px;
+	}	
+	
+	.layout-auctions-show main .wrapper .page,
+	.layout-auctions-show main .wrapper .auction-footer{
+		float: left;
+		width: 100%;
+	}
+
+	.layout-auctions-show main .wrapper .auction-footer{
+		width: 352px;
+		float: right;
+		margin-right: -384px;
+	}
+
+	.layout-auctions-show main .wrapper .page h1,
+	.layout-auctions-show main .wrapper .page h2,
+	.layout-auctions-show main .wrapper .page h3,
+	.layout-auctions-show main .wrapper .page p,
+	.layout-auctions-show main .wrapper .page li{
+		margin-left: 0;
+	}	
+
+}
+/* @end */
+
 /* @group layout-home */
 
 .layout-home main > header{
@@ -823,89 +1011,9 @@ a[id]{
 	margin-bottom: 32px;
 }
 
-.layout-home main article{
-	border: 1px solid #ddd;
+.h-feed .auction{
 	float: left;
-	padding: 14px 16px 0;
-	margin-bottom: 20px;
-	border-radius: 4px;
-	border-right-color: #d8d8d8;
-	border-bottom-color: #d5d5d5;
-	box-shadow: 1px 1px 0 #f8f8f8;
-	background: #fff;
-	color: #555;
-	position: relative;
-}
-
-.layout-home main article footer{
-	padding: 12px 16px 14px;
-	margin: 14px -16px 0;
-	background: #f8f8f8;
-	border-radius: 0 0 3px 3px;
-	font-size: 16px;
-	color: #444;
-}
-
-.layout-home main article footer dt{
-	font-size: 11px;
-	font-family: Lucida Grande;
-	margin-bottom: 8px;
-}
-
-.layout-home main article footer dd img{
-	width: 24px;
-	height: 24px;
-	background: #888;
-	border-radius: 100%;
-	border: none;
-	vertical-align: middle;
-	margin-top: -1px;
-	margin-right: 4px;
-	margin-left: -1px;
-}
-
-.layout-home main article footer dt.auction-current-bid,
-.layout-home main article footer dd.auction-current-bid{
-	position: absolute;
-	left: 50%;	
-	bottom: 0;
-	padding-bottom: 20px;
-	border-left: 1px solid #eee;
-	padding-left: 8px;
-}
-
-.layout-home main article footer dt.auction-current-bid{
-	padding-bottom: 38px;
-	padding-top: 12px;
-}
-
-.layout-home main article h1{
-	margin-right: 64px;
-	font-size: 24px;
-	line-height: 1.2;
-	margin-bottom: 0.6em;
-}
-
-.layout-home main article dt.auction-status{
-	position: absolute;
-	top: -9999em;
-	left: -9999em;
-}
-
-.layout-home main article .auction-status{
-	position: absolute;
-	right: 12px;
-	top: 12px;
-	font-size: 14px;
-	background: #008269;
-	color: #fff;
-	padding: 8px;
-	border-radius: 3px;
-}
-
-.layout-home main article .auction-status-closed{
-	background: #992d00;
-	
+	width: 460px;
 }
 
 @media screen and (min-width: 1066.66px){
@@ -925,7 +1033,7 @@ a[id]{
 /* @end */
 
 /* @group layout-sign-in */
-
+.layout-sign-in .site-header nav{ display: none; }
 .layout-sign-in main { padding-top: 2em; }
 .layout-sign-in main section {
 	margin-bottom: 2em;

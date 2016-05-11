@@ -45,20 +45,34 @@
 </header>
   <main role="main" id="main">
     <div class="wrapper">
-      <section>
-        <h1>Sign in</h1>
-        <a href="/">Authorize with GitHub</a>
-      </section>
-      <section>
-        <h1>Sign up</h1>
-        <p>Before participating in this marketplace, you&rsquo;ll need to:</p>
-        <ol>
-          <li>Register your company with <a href="https://SAM.gov">SAM.gov</a></li>
-          <li>Obtain a <a href="#">DUNS number</a>.</li>
-          <li>Have a <a href="#">GitHub</a> account.</li>
-        </ol>
-      <p>Once you&rsquo;re ready, you can sign in using your GitHub account. Only public account information will be requested. If you encounter any issues, let us know at <a href="">micropurchase@gsa.gov</a>. </p>     
-      </section>
+      <h1>New bid</h1>
+      <p>You&rsquo;re placing a bid on</p>
+      <article class="h-entry auction">
+        <h1 class="p-name auction-name">
+          <a href="/auctions/show">Open Opportunities: Create Agency Admin User Role </a> 
+        </h1>
+        <p class="p-summary auction-summary">The Open Opportunities is a node.js-based platform to foster collaboration on government projects. This issue seeks to create a new user role for &ldquo;Agency Admins&rdquo; that will (in the future) give those users admin privileges to see data for users from their agency.</p>
+        <footer class="auction-footer">
+          <dl>
+            <dt>Submitted by</dt>
+            <dd class="p-author"><img src="#">Patrick Bateman</dd>
+            <dt class="auction-current-bid">Current bid</dt>
+            <dd class="auction-current-bid">$2,750.00</dd>
+            <dt class="auction-status">Status</dt>
+            <dd class="auction-status auction-status-open">Open</dd>
+          </dl>
+        </footer>
+      </article>
+      The maximum (current) bid is $3414.00. Please enter a lower amount. 
+      <form>
+        <div class="field"> 
+          <label>
+            <span class="label-text">Your bid</span>
+            <input type="number"></input>
+          </label>
+        </div>
+        <button>Submit</button>
+      </form>
     </div>
   </main>
   <footer class="site-footer">
@@ -71,11 +85,10 @@
     </h1>
     <nav class="nav-site-nav">
       <ul>
-        <li><a href="#">Projects</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Feedback</a></li>
-        <li><a href="#">Policies</a></li>
-        <li><a href="#">API Docs</a></li>  
+        <li><a href="/about">About</a></li>
+        <li><a href="/feedback">Feedback</a></li>
+        <li><a href="/policies">Policies</a></li>
+        <li><a href="/api">API Docs</a></li>  
       </ul>
     </nav>
     <nav class="nav-contact">
