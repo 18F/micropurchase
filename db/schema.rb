@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160503143402) do
+ActiveRecord::Schema.define(version: 20160510180328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,10 +72,11 @@ ActiveRecord::Schema.define(version: 20160503143402) do
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
     t.string   "email"
+    t.string   "github_login"
     t.string   "credit_card_form_url"
     t.integer  "sam_status",           default: 0,     null: false
     t.boolean  "contracting_officer",  default: false, null: false
-    t.string   "github_login"
+    t.boolean  "small_business",       default: false, null: false
   end
 
   add_index "users", ["contracting_officer"], name: "index_users_on_contracting_officer", where: "(contracting_officer = true)", using: :btree
