@@ -10,8 +10,11 @@ class AuctionPresenter
   end
 
   delegate(
+    :billable_to,
+    :cap_proposal_url,
     :created_at,
     :delivery_deadline,
+    :delivery_url,
     :description,
     :end_datetime,
     :github_repo,
@@ -30,6 +33,7 @@ class AuctionPresenter
     :type,
     :updated_at,
     :lowest_bid,
+    :reload,
     to: :model
   )
 
@@ -130,6 +134,15 @@ class AuctionPresenter
     else
       "in #{distance_of_time_in_words(Time.now, start_datetime)}"
     end
+  end
+
+  def url
+    root_url = if Rails.env.development? || Rails.env.test?
+                 ENV['ROOT_URL']
+               else
+                 VCAPApplication.application_uris.first
+               end
+    "#{root_url}/auctions/#{id}"
   end
 
   private

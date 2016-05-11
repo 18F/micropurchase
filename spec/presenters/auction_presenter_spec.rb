@@ -6,6 +6,13 @@ describe AuctionPresenter do
   let(:auction) { AuctionPresenter.new(ar_auction) }
   let(:user) { create(:user) }
 
+  describe '#url' do
+    it 'returns a valid url that includes the id of the auction' do
+      expect(auction.url).to be_url
+      expect(auction.url).to include(auction.id.to_s)
+    end
+  end
+
   describe 'internal bid methods' do
     context 'when there are no bids' do
       let(:ar_auction) { create(:auction) }

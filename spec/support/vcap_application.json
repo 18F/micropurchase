@@ -1,0 +1,23 @@
+{
+ "VCAP_APPLICATION": {
+  "application_id": "fake_application_id",
+  "application_name": "fake_application_name",
+  "application_uris": [
+   "fake_uri.18f.gov"
+  ],
+  "application_version": "fake_application_version",
+  "limits": {
+   "disk": 1024,
+   "fds": 16384,
+   "mem": 1024
+  },
+  "name": "fake_name",
+  "space_id": "fake_space_id",
+  "space_name": "staging",
+  "uris": [
+   "fake_uri.18f.gov"
+  ],
+  "users": null,
+  "version": "fake_version"
+ }
+}

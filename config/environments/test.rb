@@ -12,4 +12,5 @@ Rails.application.configure do
   config.active_support.test_order = :random
   config.active_support.deprecation = :stderr
   ENV['VCAP_SERVICES'] = File.read("#{Rails.root}/spec/support/vcap_services.json")
+  ENV['VCAP_APPLICATION'] = File.read("#{Rails.root}/spec/support/vcap_application.json")
 end

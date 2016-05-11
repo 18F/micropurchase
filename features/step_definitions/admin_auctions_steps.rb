@@ -2,6 +2,31 @@ When(/^I visit the auctions admin page$/) do
   visit admin_auctions_path
 end
 
+When(/^I visit the admin edit page for that auction$/) do
+  visit "/admin/auctions/#{@auction.id}/edit"
+end
+
+When(/^I select the result as accepted$/) do
+  auction_presenter = AuctionPresenter.new(@auction)
+  fake_cap_proposal_attributes  = ConstructCapAttributes.new(auction_presenter).perform
+  c2_proposal_double = double(id: 8888)
+  c2_response_double = double(body: c2_proposal_double)
+  c2_client_double = double
+  allow(c2_client_double).to receive(:post)
+    .with('proposals', fake_cap_proposal_attributes)
+    .and_return(c2_response_double)
+  allow(C2::Client).to receive(:new).and_return(c2_client_double)
+
+  select("accepted", from: "auction_result")
+end
+
+Then(/^I should see that the auction has a CAP Proposal URL$/) do
+  Delayed::Worker.new.work_off
+  @auction.reload
+  expect(@auction.cap_proposal_url).not_to be_nil
+  expect(page).to have_content(@auction.cap_proposal_url)
+end
+
 Then(/^I will not see a warning I must be an admin$/) do
   expect(page).to_not have_text('must be an admin')
 end
@@ -88,6 +113,7 @@ end
 
 When(/^I click to edit the auction$/) do
   click_on("Edit")
+
   @auction = Auction.where(title: @title).first
 end
 
