@@ -31,7 +31,7 @@ Updating the ERD requires Graphiz. Installation instructions are
 
 ## Local Development
 
-See the (local development docs)[docs/local_development.md] for information on
+See the [local development docs](docs/local_development.md) for information on
 setting up the codebase and running tests locally or with Docker.
 
 ### Coverage and CodeClimate
