@@ -19,11 +19,13 @@ excerpt: None
           <a href="/auctions/">Open Opportunities: Create Agency Admin User Role </a> 
         </h1>
         <dl>
-          <dt class="auction-author">Submitted by</dt>
-          <dd class="auction-author p-author"><img src="#">Patrick Bateman</dd>
+          <dt class="auction-time-remaining">Time remaining</dt>
+          <dd class="auction-time-remaining">12 days</dd>
+          <dt class="auction-status">Status</dt>
+          <dd class="auction-status auction-status-open">Open</dd>
           <dt class="auction-current-bid">Current bid</dt>
           <dd class="auction-current-bid">
-            $2,750.00
+            $3,500.00
             <form action="{{site.baseurl}}/bids/new">
               <button>Place bid</button>
             </form>

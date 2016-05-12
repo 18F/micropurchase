@@ -42,23 +42,28 @@ permalink: /
             </ul>
           </nav>
         </header>
+        {% include _auction.html %}
+        {% include _auction.html %}
+        {% include _auction.html %}
+        {% include _auction.html %}
+
         <article class="h-entry auction">
           <header class="auction-header">
             <h1 class="p-name auction-name">
-              <a href="{{site.baseurl}}/auctions/show">Open Opportunities: Create Agency Admin User Role </a> 
+              <a href="{{site.baseurl}}/auctions/show">Tock superusers should be able to enter 0-60 hour weeks</a> 
             </h1>
             <dl>
               <dt class="auction-time-remaining">Time remaining</dt>
-              <dd class="auction-time-remaining">15 days</dd>
+              <dd class="auction-time-remaining">12 days</dd>
               <dt class="auction-status">Status</dt>
               <dd class="auction-status auction-status-open">Open</dd>
               <dt class="auction-current-bid">Current bid</dt>
               <dd class="auction-current-bid">
-                $2,750.00
+                $3,500.00
               </dd>
             </dl>
           </header>
-          <p class="p-summary auction-summary">The Open Opportunities is a node.js-based platform to foster collaboration on government projects. This issue seeks to create a new user role for &ldquo;Agency Admins&rdquo; that will (in the future) give those users admin privileges to see data for users from their agency.</p>
+          <p class="p-summary">Tock is a simple time tracking app that 18F employees use to report their time on a weekly basis. Currently, no user may enter more than 40 hours per week. This issue seeks to allow certain specified users of Tock to enter anywhere between 0 and 60 hours.</p>
           <footer class="auction-footer">
             <dl>
               <dt class="auction-author">Submitted by</dt>
@@ -66,84 +71,13 @@ permalink: /
               <dt class="auction-language">Language</dt>
               <dd class="auction-language">Ruby</dd>
               <dt class="auction-project">Project</dt>
-              <dd class="auction-project">Open Opportunities</dd>
+              <dd class="auction-project">Tock</dd>
               <dt class="auction-agency">Agency</dt>
               <dd class="auction-agency">General Services Administration</dd>
             </dl>
           </footer>
         </article>
-        <article class="h-entry auction ">
-          <h1 class="p-name">
-            <a href="{{site.baseurl}}/auctions/show">Tock superusers should be able to enter 0-60 hour weeks</a> 
-          </h1>
-          <p class="p-summary">Tock is a simple time tracking app that 18F employees use to report their time on a weekly basis. Currently, no user may enter more than 40 hours per week. This issue seeks to allow certain specified users of Tock to enter anywhere between 0 and 60 hours.</p>
-          <footer class="auction-footer">
-            <dl>
-              <dt>Submitted by</dt>
-              <dd class="p-author"><img src=""></dd>
-              <dt class="auction-current-bid">Current bid</dt>
-              <dd class="auction-current-bid">Sealed</dd>
-              <dt class="auction-status">Status</dt>
-              <dd class="auction-status auction-status-open">Open</dd>              
-            </dl>
-          </footer>
-        </article>
-        <article class="h-entry auction">
-          <h1 class="p-name">
-            <a href="{{site.baseurl}}/auctions/show">Another fake entry</a> 
-          </h1>
-          <p class="p-summary">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p>
-          <footer class="auction-footer">
-            <dl>
-              <dt>Submitted by</dt>
-              <dd class="p-author"><img src="#"> Michael Torres</dd>
-              <dt class="auction-status">Status</dt>
-              <dd class="auction-status auction-status-closed">Closed</dd>              
-            </dl>
-          </footer>
-        </article>
-        <article class="h-entry auction">
-          <h1>
-            <a href="{{site.baseurl}}/auctions/show">Another fake entry</a> 
-          </h1>
-          <p class="p-summary">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p>
-          <footer class="auction-footer">
-            <dl>
-              <dt>Submitted by</dt>
-              <dd class="p-author"><img src="#"> Michael Torres</dd>
-              <dt class="auction-status">Status</dt>
-              <dd class="auction-status auction-status-closed">Closed</dd>              
-            </dl>
-          </footer>
-        </article>
-        <article class="h-entry auction">
-          <h1>
-            <a href="{{site.baseurl}}/auctions/show">Another fake entry</a> 
-          </h1>
-          <p class="p-summary">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p>
-          <footer class="auction-footer">
-            <dl>
-              <dt>Submitted by</dt>
-              <dd class="p-author"><img src="#"> Michael Torres</dd>
-              <dt class="auction-status">Status</dt>
-              <dd class="auction-status auction-status-closed">Closed</dd>              
-            </dl>
-          </footer>
-        </article>
-        <article class="h-entry auction">
-          <h1>
-            <a href="{{site.baseurl}}/auctions/show">Another fake entry</a> 
-          </h1>
-          <p class="p-summary">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p>
-          <footer class="auction-footer">
-            <dl>
-              <dt>Submitted by</dt>
-              <dd class="p-author"><img src="#"> Michael Torres</dd>
-              <dt class="auction-status">Status</dt>
-              <dd class="auction-status auction-status-closed">Closed</dd>              
-            </dl>
-          </footer>
-        </article>
+
       </div>
     </div>
   </main>

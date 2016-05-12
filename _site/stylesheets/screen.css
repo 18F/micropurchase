@@ -417,27 +417,27 @@ nav.breadcrumbs a{
 
 /* @group auction */
 
-.auction{
-	border: 1px solid #ddd;
-	padding: 14px 16px 0;
-	margin-bottom: 20px;
-	border-radius: 4px;
-	border-right-color: #d8d8d8;
-	border-bottom-color: #d5d5d5;
-	box-shadow: 1px 1px 0 #f8f8f8;
-	background: #fff;
-	color: #555;
-	position: relative;
-	max-width: 480px;
+
+.auction a{
+	color: inherit;
+	text-decoration: none;
 }
 
-.auction h1{
+.auction a h1{
 	margin-right: 64px;
 	font-size: 24px;
 	letter-spacing: 0;
 	font-weight: normal;
 	line-height: 1.2;
 	margin-bottom: 0.5em;
+	text-decoration: underline;
+	color: #006fbe;
+}
+
+.auction a:hover h1{
+	color: #00aedf; 
+	text-decoration: none;
+	
 }
 
 .auction .auction-header{
@@ -466,13 +466,13 @@ nav.breadcrumbs a{
 
 
 .auction .auction-footer{
-	padding: 12px 16px 64px;
+	padding: 12px 16px 72px;
 	margin: 14px -16px 0;
-	background: #f8f8f8;
+	background: #fafafa;
 	border-radius: 0 0 3px 3px;
 	font-size: 16px;
 	line-height: 16px;
-	color: #444;
+	color: #777;
 	position: relative;
 }
 
@@ -483,11 +483,30 @@ nav.breadcrumbs a{
 	margin-bottom: 8px;
 }
 
+.auction .auction-footer dd{
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	color: #333;
+}
+
 .auction .auction-footer .auction-agency,
 .auction .auction-footer .auction-language{
 	position: absolute;
 	left: 50%;
 	top: 12px;
+}
+
+.auction .auction-footer::after{
+	content: "";
+	position: absolute;
+	left: 16px;
+	right: 16px;
+	height: 0;
+	border-top: 1px solid #eee;
+	top: 50%;
+	margin-top: -1px;
+	
 }
 
 .auction .auction-footer dd.auction-agency{
@@ -496,13 +515,13 @@ nav.breadcrumbs a{
 
 .auction .auction-footer dt.auction-project,
 .auction .auction-footer dt.auction-language{
-	top: 64px;
+	top: 72px;
 	position: absolute;
 }
 
 .auction .auction-footer dd.auction-project,
 .auction .auction-footer dd.auction-language{
-	top: 88px;
+	top: 96px;
 	position: absolute;
 }
 
@@ -553,14 +572,19 @@ dd.auction-status{
 	display: inline-block;
 }
 
-.auction-status-closed{
-	background: #992d00;	
+dd.auction-status-closed{
+	background: #992d00;
+	color: white !important;	
 }
 
 .layout-home main article .auction-status{
 	position: absolute;
 	right: 12px;
 	top: 12px;
+}
+
+.layout-home main article .auction-status::after{
+	content: "";
 }
 
 /* @end */
@@ -1001,6 +1025,7 @@ a[id]{
 .h-feed-header{
 	margin-bottom: 2em;
 }
+
 .h-feed-header::after{
 	content: "";
 	display: table;
@@ -1066,7 +1091,22 @@ a[id]{
 	width: 460px;
 }
 
+.layout-home main .auction{
+	border: 1px solid #ddd;
+	padding: 14px 16px 0;
+	margin-bottom: 20px;
+	border-radius: 4px;
+	border-right-color: #d8d8d8;
+	border-bottom-color: #d5d5d5;
+	box-shadow: 1px 1px 0 #f8f8f8;
+	background: #fff;
+	color: #555;
+	position: relative;
+	max-width: 480px;
+}
+
 @media screen and (min-width: 1066.66px){
+
 	.layout-home main article{
 		max-width: 470px;
 		margin-right: 20px;
