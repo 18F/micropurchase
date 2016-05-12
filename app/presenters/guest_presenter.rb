@@ -1,5 +1,5 @@
 class GuestPresenter
-  def sam_status_message_for(flash)
+  def sam_status_message_for(_flash)
     nil
   end
 
