@@ -99,7 +99,7 @@ RSpec.describe UpdateUser do
       end
 
       it 'calls the SamAccountReckoner through a delayed job' do
-        reckoner = double('reckoner', clear: true)
+        reckoner = double('reckoner', set_default_sam_status: true)
         allow(SamAccountReckoner).to receive(:new).with(user).and_return(reckoner)
         delayed_job = double(set!: true)
         allow(reckoner).to receive(:delay).and_return(delayed_job)

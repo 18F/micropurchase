@@ -44,7 +44,9 @@ end
 
 When(/^I sign in$/) do
   step "I visit the home page"
-  click_on "registered bidder"
+  within(".header-account") do
+    click_on "Login"
+  end
   click_on "Authorize with GitHub"
 end
 
