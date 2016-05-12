@@ -6,6 +6,8 @@ class RulesFactory
   def create
     eligibility = if auction.small_business?
                     Eligibility::SmallBusiness.new
+                  elsif auction.eight_a_stars?
+                    Eligibility::EightAStars.new
                   else
                     Eligibility::InSam.new
                   end
