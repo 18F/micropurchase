@@ -6,8 +6,6 @@ class RulesFactory
   def create
     eligibility = if auction.small_business?
                     Eligibility::SmallBusiness.new
-                  elsif auction.eight_a_stars?
-                    Eligibility::EightAStars.new
                   else
                     Eligibility::InSam.new
                   end
@@ -16,6 +14,8 @@ class RulesFactory
       Rules::SealedBid.new(auction, eligibility)
     elsif type == 'multi_bid'
       Rules::Basic.new(auction, eligibility)
+    elsif type == 'sole_source'
+      Rules::SoleSource.new(auction, Eligibility::EightAStars.new)
     end
   end
 
