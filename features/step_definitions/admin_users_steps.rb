@@ -49,19 +49,27 @@ Then(/^I should see a column labeled "([^"]+)"$/) do |text|
   find('th', text: text)
 end
 
-Given(/^there are various types of users in the system$/) do
-  @users = []
+Given(/^there is a user in SAM.gov who is not a small business$/) do
+  @user = FactoryGirl.create(:user, sam_status: :sam_accepted, small_business: false)
+end
 
-  30.times do
-    has_duns = rand(4)
-    in_sam = has_duns && rand(4)
-    small_biz = in_sam && rand(4)
+Given(/^there is a user in SAM.gov who is a small business$/) do
+  @user = FactoryGirl.create(:user, sam_status: :sam_accepted, small_business: true)
+end
 
-    opts = { }
-    opts[:duns_number] = nil unless has_duns
-    opts[:sam_status] = :sam_accepted if in_sam
-    opts[:small_business] = true if small_biz
+Given(/^there is a user who is not in SAM.gov$/) do
+  @user = FactoryGirl.create(:user, sam_status: :sam_pending)
+end
 
-    @users << FactoryGirl.create(:user, opts)
+Then(/^I should see "([^"]+)" for the user in the "([^"]+)" column$/) do |value, column|
+  user_admin_columns = ['Name', 'Email', 'DUNS Number', 'SAM.gov status',
+                        'Small Business?', 'Github ID']
+
+  index = user_admin_columns.index(column)
+  fail 'Unrecognized column: #{column}' if index.nil?
+  css = "table#table-users tbody tr td:nth-child(#{index+1})"
+
+  within(css) do
+    expect(page).to have_content(value)
   end
 end

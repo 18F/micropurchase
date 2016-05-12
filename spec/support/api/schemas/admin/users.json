@@ -45,8 +45,9 @@
               "email",
               "sam_status",
               "credit_card_form_url",
-              "github_login",
-              "contracting_officer"
+              "github_login",  
+              "contracting_officer",
+              "small_business"
             ],
             "properties": {
               "id": {
@@ -57,6 +58,9 @@
                 "minLength": 1
               },
               "contracting_officer": {
+                "type": "boolean"
+              },
+              "small_business": {
                 "type": "boolean"
               },
               "duns_number": {
@@ -108,7 +112,8 @@
               "sam_status",
               "credit_card_form_url",
               "github_login",
-              "contracting_officer"
+              "contracting_officer",
+              "small_business"  
             ],
             "properties": {
               "id": {
@@ -119,6 +124,9 @@
                 "minLength": 1
               },
               "contracting_officer": {
+                "type": "boolean"
+              },
+              "small_business": {
                 "type": "boolean"
               },
               "duns_number": {
