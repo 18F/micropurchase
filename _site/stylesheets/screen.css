@@ -1,3 +1,5 @@
+/* @override http://localhost:4000/stylesheets/screen.css */
+
 /* @override http://127.0.0.1:4000/stylesheets/screen.css */
 
 /* @group bootstrap */
@@ -415,9 +417,7 @@ nav.breadcrumbs a{
 
 /* @group auction */
 
-
-
-article.auction{
+.auction{
 	border: 1px solid #ddd;
 	padding: 14px 16px 0;
 	margin-bottom: 20px;
@@ -431,22 +431,82 @@ article.auction{
 	max-width: 480px;
 }
 
-article.auction footer.auction-footer{
-	padding: 12px 16px 14px;
+.auction h1{
+	margin-right: 64px;
+	font-size: 24px;
+	letter-spacing: 0;
+	font-weight: normal;
+	line-height: 1.2;
+	margin-bottom: 0.5em;
+}
+
+.auction .auction-header{
+	margin-bottom: 1em;
+	font-size: 16px;
+}
+.auction .auction-header dl,
+.auction .auction-header dl dt,
+.auction .auction-header dl dd{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.auction .auction-header dl dt::after{
+	content: ":";
+}
+
+.auction .auction-header dl dd::after{
+	content: "\2219";
+	margin-left: 0.2em;
+}
+
+.auction .auction-header dl dd:last-child::after{
+	display: none;
+}
+
+
+.auction .auction-footer{
+	padding: 12px 16px 64px;
 	margin: 14px -16px 0;
 	background: #f8f8f8;
 	border-radius: 0 0 3px 3px;
 	font-size: 16px;
+	line-height: 16px;
 	color: #444;
+	position: relative;
 }
 
-article.auction footer.auction-footer dt{
+.auction .auction-footer dt{
 	font-size: 11px;
+	line-height: 14px;
 	font-family: Lucida Grande;
 	margin-bottom: 8px;
 }
 
-article.auction footer.auction-footer dd img{
+.auction .auction-footer .auction-agency,
+.auction .auction-footer .auction-language{
+	position: absolute;
+	left: 50%;
+	top: 12px;
+}
+
+.auction .auction-footer dd.auction-agency{
+	top: 34px;
+}
+
+.auction .auction-footer dt.auction-project,
+.auction .auction-footer dt.auction-language{
+	top: 64px;
+	position: absolute;
+}
+
+.auction .auction-footer dd.auction-project,
+.auction .auction-footer dd.auction-language{
+	top: 88px;
+	position: absolute;
+}
+
+.auction .auction-footer dd img{
 	width: 24px;
 	height: 24px;
 	background: #888;
@@ -458,8 +518,7 @@ article.auction footer.auction-footer dd img{
 	margin-left: -1px;
 }
 
-article.auction footer.auction-footer dt.auction-current-bid,
-article.auction footer.auction-footer dd.auction-current-bid{
+.auction .auction-footer .auction-current-bid{
 	position: absolute;
 	left: 50%;	
 	bottom: 0;
@@ -468,27 +527,18 @@ article.auction footer.auction-footer dd.auction-current-bid{
 	padding-left: 8px;
 }
 
-article.auction footer.auction-footer dt.auction-current-bid{
+.auction .auction-footer .auction-current-bid{
 	padding-bottom: 38px;
 	padding-top: 12px;
 }
 
-article.auction footer.auction-footer .auction-status{
+.auction .auction-footer .auction-status{
 	position: absolute;
 	right: 16px;
 	top: 16px;
 }
 
-article.auction h1{
-	margin-right: 64px;
-	font-size: 24px !important;
-	letter-spacing: 0 !important;
-	font-weight: normal !important;
-	line-height: 1.2;
-	margin-bottom: 0.6em;
-}
-
-article.auction dt.auction-status{
+.auction dt.auction-status{
 	position: absolute;
 	top: -9999em;
 	left: -9999em;
@@ -503,7 +553,7 @@ dd.auction-status{
 	display: inline-block;
 }
 
-dd.auction-status-closed{
+.auction-status-closed{
 	background: #992d00;	
 }
 
