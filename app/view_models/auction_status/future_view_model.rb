@@ -14,7 +14,7 @@ class AuctionStatus::FutureViewModel < Struct.new(:auction)
   end
 
   def tag_data_value_status
-    auction.human_start_time
+    auction.relative_start_time
   end
 
   def tag_data_label_2

@@ -32,7 +32,15 @@ describe DcTimePresenter do
 
     context 'when it is a time' do
       it 'should convert to a reasonable string' do
-        expect(converter.convert_and_format).to eq("April 01, 2001 06:15:00 AM")
+        expect(converter.convert_and_format).to eq("April 01, 2001 06:15:00 AM EDT")
+      end
+
+      context 'when we are in daylight saving time' do
+        let(:time) { Chronic.parse('12/1/2010 6:15am').utc }
+        
+        it 'should handle daylight saving time correctly' do
+          expect(converter.convert_and_format).to eq("December 01, 2010 06:15:00 AM EST")
+        end
       end
     end
   end

@@ -4,7 +4,7 @@
     <%=h raw auction.html_description %>
   </p>
   <% if auction.available? %>
-  <h3>Ends in <%= distance_of_time_in_words(Time.now, auction.end_datetime) %></h3>
+  <h3>Ends in <%= auction.relative_time_left %></h3>
   <% end %>
 </div>
 <hr>

@@ -3,6 +3,7 @@ FactoryGirl.define do
     association :user, factory: :admin_user
     start_datetime { Time.now - 3.days }
     end_datetime { Time.now + 3.days }
+    delivery_deadline { Time.now + 10.days }
     delivery_url { nil }
     awardee_paid_status { :not_paid }
     result { :not_applicable }

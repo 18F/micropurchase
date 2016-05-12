@@ -54,13 +54,26 @@ end
 Then(/^I should see the auction's (.+)$/) do |field|
   if field == 'deadline'
     expect(page).to have_text(
-     DcTimePresenter
-      .convert(@auction.end_datetime)
-      .beginning_of_day
-      .strftime(DcTimePresenter::FORMAT))
+      DcTimePresenter
+        .convert(@auction.end_datetime)
+        .beginning_of_day
+        .strftime(DcTimePresenter::FORMAT))
   else
     expect(page).to have_text(@auction.send(field))
   end
+end
+
+Then(/^I should see when bidding starts and ends in ET$/) do
+  expect(page).to have_text(
+    DcTimePresenter.convert_and_format(@auction.start_datetime))
+
+  expect(page).to have_text(
+    DcTimePresenter.convert_and_format(@auction.end_datetime))
+end
+
+Then(/^I should see the delivery deadline in ET$/) do
+  expect(page).to have_text(
+    DcTimePresenter.convert_and_format(@auction.delivery_deadline))
 end
 
 Then(/^I should see the start price for the auction is \$(\d+)$/) do |price|
@@ -139,14 +152,23 @@ Then(/^I should see I do not have the winning bid$/) do
   expect(page).to have_content("You are currently not the winning bidder.")
 end
 
-# Fix me (look for specific date in there)
 Then(/^I should see when the auction started$/) do
-  expect(page).to_not have_content("Auction ended at:")
+  expect(page).to have_text(
+    DcTimePresenter.convert_and_format(@auction.start_datetime))
 end
 
 Then(/^I should see when the auction ends$/) do
   expect(page).to_not have_content("Auction ended at:")
-  expect(page).to have_content("Bid deadline:")
+  expect(page).to have_content("Bid deadline: #{DcTimePresenter.convert_and_format(@auction.end_datetime)}")
+end
+
+Then(/^I should see when the auction ended$/) do
+  expect(page).to_not have_content("Bid deadline:")
+  expect(page).to have_text("Auction ended at: #{DcTimePresenter.convert_and_format(@auction.end_datetime)}")
+end
+
+Then(/^I should see the delivery deadline$/) do
+  expect(page).to have_content("Delivery deadline: #{DcTimePresenter.convert_and_format(@auction.delivery_deadline)}")
 end
 
 Then(/^I should see an? (.+) status$/) do |label|
