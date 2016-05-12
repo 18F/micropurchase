@@ -110,7 +110,7 @@ class AuctionPresenter
   end
 
   def relative_time_left
-    "#{distance_of_time_in_words(Time.now, model.end_datetime)} left"
+    "#{distance_of_time_in_words(Time.current, model.end_datetime)} left"
   end
 
   def delivery_deadline_expires_in
@@ -157,8 +157,8 @@ class AuctionPresenter
   end
 
   def time_in_human(time)
-    distance = distance_of_time_in_words(Time.now, time)
-    if time < Time.now
+    distance = distance_of_time_in_words(Time.current, time)
+    if time < Time.current
       "#{distance} ago"
     else
       "in #{distance}"
