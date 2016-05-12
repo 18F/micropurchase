@@ -2,6 +2,7 @@ class AuctionsController < ApplicationController
   def index
     collection = AuctionQuery.new.public_index
     @view_model = AuctionsIndexViewModel.new(current_user, collection)
+    sam_status_message_for(flash)
 
     respond_to do |format|
       format.html
@@ -63,5 +64,12 @@ class AuctionsController < ApplicationController
         fail ActionController::RoutingError, 'Not Found'
       end
     end
+  end
+
+  private
+
+  def sam_status_message_for(flash)
+    user = current_user || Guest.new
+    user.decorate.sam_status_message_for(flash)
   end
 end
