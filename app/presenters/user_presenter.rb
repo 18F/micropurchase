@@ -23,6 +23,14 @@ class UserPresenter < SimpleDelegator
     "components/user_nav_drawer"
   end
 
+  def small_business_label
+    if model.sam_accepted?
+      small_business? ? 'Yes' : 'No'
+    else
+      'N/A'
+    end
+  end
+
   def model
     __getobj__
   end
