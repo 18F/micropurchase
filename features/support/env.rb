@@ -4,6 +4,8 @@ require 'database_cleaner'
 require 'cucumber/rspec/doubles'
 require 'capybara/poltergeist'
 require 'webmock/cucumber'
+require 'capybara-screenshot/cucumber'
+
 Dir[Rails.root.join("spec/support/*.rb")].each { |file| require file }
 
 Capybara.register_driver :poltergeist do |app|
@@ -11,6 +13,9 @@ Capybara.register_driver :poltergeist do |app|
 end
 
 Capybara.javascript_driver = :poltergeist
+
+# Screenshots were being saved to the root directory
+Capybara.save_path = Rails.root.join('tmp')
 
 Delayed::Worker.delay_jobs = false
 
