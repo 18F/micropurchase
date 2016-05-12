@@ -26,7 +26,7 @@ class BidsController < ApplicationController
       @bid = Bid.new
     else
       session[:return_to] = request.fullpath
-      redirect_to edit_user_path(current_user)
+      redirect_to users_edit_path
     end
   end
 

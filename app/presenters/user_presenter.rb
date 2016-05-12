@@ -12,7 +12,11 @@ class UserPresenter < SimpleDelegator
   end
 
   def sam_status_message_for(flash)
-    Object.const_get("#{model.sam_status.camelize}Presenter").new.flash_message(flash)
+    sam_status_presenter.flash_message(flash)
+  end
+
+  def sam_status_message_for_auctions_index(flash)
+    sam_status_presenter.auctions_index_flash_message(flash)
   end
 
   def nav_drawer_partial
@@ -21,5 +25,11 @@ class UserPresenter < SimpleDelegator
 
   def model
     __getobj__
+  end
+
+  private
+
+  def sam_status_presenter
+    Object.const_get("#{model.sam_status.camelize}Presenter").new
   end
 end
