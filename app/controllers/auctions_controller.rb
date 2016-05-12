@@ -70,6 +70,6 @@ class AuctionsController < ApplicationController
 
   def sam_status_message_for(flash)
     user = current_user || Guest.new
-    user.decorate.sam_status_message_for(flash)
+    user.decorate.sam_status_message_for_auctions_index(flash)
   end
 end

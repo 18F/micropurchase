@@ -6,7 +6,7 @@
       <h3>Profile</h3>
       <ul class="drawer-submenu">
         <% if current_user %>
-          <li class="drawer-submenu-item"><a class="" href="<%= edit_user_path(current_user) %>">Edit profile</a>
+          <li class="drawer-submenu-item"><a class="" href="<%= users_edit_path %>">Edit profile</a>
           <li class="drawer-submenu-item"><a class="" href="<%= logout_path %>">Logout</a></li></li>
         <% else %>
           <li class="drawer-submenu-item"><a href="/login" class="">Login</a></li>

@@ -59,4 +59,4 @@ Feature: Automatically checking a user's SAM status
     When I visit my profile page
     Then I should see a warning that "You must supply a valid DUNS number"
     When I visit the home page
-    Then I should see a warning that "You must supply a valid DUNS number"
+    Then I should see a warning that "In order to bid, you must supply a valid DUNS number. Please update your profile"

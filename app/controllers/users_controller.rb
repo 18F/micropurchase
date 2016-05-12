@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
   def edit
-    @user = User.find(params[:id])
-    fail UnauthorizedError if current_user.nil? || current_user != @user
+    fail UnauthorizedError if current_user.nil?
 
-    current_user.decorate.sam_status_message_for(flash)
+    @user = current_user
+    @user.decorate.sam_status_message_for(flash)
   end
 
   def update
