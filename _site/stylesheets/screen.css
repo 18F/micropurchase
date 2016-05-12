@@ -135,7 +135,573 @@ img { max-width: 100%; }
 
 /* @end */
 
+/* @group forms */
 
+/* @group summary.error-message */
+
+summary.error-message{
+	background: #990017;
+	color: white;
+	padding: 8px;
+	border-radius: 3px;
+	font-size: 14px;
+	line-height: 18px;
+	margin-bottom: 24px;
+	margin-top: -8px;
+}
+
+summary.error-message details{ margin-top: 8px; }
+summary.error-message details p:first-of-type{ margin-top: 8px; }
+summary.error-message details ol{
+	list-style-type: decimal;
+	margin: 0 0 0 1.4em;
+	padding-top: 0;
+}
+
+summary.error-message details ol li{
+	margin-bottom: 6px;
+}
+
+/* @end */
+
+legend {
+  padding: 0;
+  display: table;
+}
+
+fieldset {
+  border: 0;
+  padding: 0.01em 0 0 0;
+  margin: 0;
+  min-width: 0;
+}
+
+body:not(:-moz-handler-blocked) fieldset {
+  display: table-cell;
+}
+
+input[type=tel],
+input[type=text],
+input[type=date],
+input[type=email],
+input[type=number],
+input[type=password],
+input[type=search],
+select,
+textarea{
+	-webkit-appearance: none;
+	padding: 4px 8px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	line-height: 36px;
+	min-height: 36px;
+	min-width: 4em;
+	width: 100%;
+	margin: 0;
+	outline: none;
+	font: inherit;
+}
+
+input[type=radio],
+input[type=checkbox]{ 
+	outline: none; 
+	border: none;
+}
+
+.field-select select{
+	min-width: 0; 
+	background: none;
+	padding-right: 24px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: block;
+}
+
+.field-select span.label-select{ 
+	position: relative; 
+	width: 15%;
+	display: block;
+}
+
+.field-select{ position: relative; }
+
+.field-select::after{
+	content: "";
+	border: 6px solid black;
+	position: absolute;
+	right: 20px;
+	bottom: 50%;
+	margin-bottom: 2px;
+	border-color: #aaa transparent transparent transparent;
+	z-index: -1;
+}
+
+.field-select:hover select{ border-color: #aaa; }
+.field-select:hover::after{ border-top-color: #888; }
+
+textarea{
+	display: block;
+	width: 100%;
+	max-width: 40em;
+	min-height: 6em;
+	line-height: 1.25;
+	color: #333;
+}
+
+button,
+.button {
+	background: none;
+	border: 1px solid;
+	color: #008c52;
+	font: inherit;
+	padding: 10px 12px;
+	margin: 0;
+	line-height: 16px;	
+	cursor: pointer;
+	text-decoration: none;
+	border-radius: 3px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+button:hover,
+.button:hover {
+	background: #00834d;
+	border-color: #00834d;
+	color: white;
+	box-shadow: 0 1px 0 #f3f3f3;
+}
+
+button:active,
+.button:active {
+	color: #7aa79d;
+	background: #006e52;
+	border-color: #006e52;
+	box-shadow: inset 0 1px 0 rgba(0,0,0,0.1);
+}
+
+form a.a-return + h1{
+	margin-top: 1em !important;	
+}
+
+
+fieldset > p{
+	font-size: 14px;
+	line-height: 1.4;
+	color: #444;
+	margin-top: 0;
+	margin-bottom: 1em;
+}
+
+.description-text,
+.p-description-text{
+	margin-top: 8px;
+	font-size: 12px;
+	line-height: 1.3;
+	max-width: 28em;
+	display: block;
+	color: #333;
+}
+
+.description-text a{ color: inherit; }
+.description-text a:hover{ text-decoration: none; }
+
+div.field,
+fieldset{ margin-bottom: 24px; }
+fieldset.fieldset-radio{ margin-bottom: 18px; }
+
+fieldset.fieldset-parties-requesting-agency,
+fieldset.fieldset-parties-servicing-agency,
+.section-agency-official fieldset.fieldset-requesting-agency,
+.section-agency-official fieldset.fieldset-servicing-agency,
+fieldset.fieldset-program-official,
+fieldset.fieldset-additional-point-of-contact,
+fieldset.fieldset-corporate-official,
+fieldset.fieldset-funding-official,
+fieldset.fieldset-component-tas,
+fieldset.fieldset-reimbursable-line-costs,
+fieldset.fieldset-assisted-acquisition-line-costs,
+fieldset.fieldset-point-of-contact{
+	border: 1px solid #cfcfcf;
+	padding: 16px;
+	padding-bottom: 19px;
+	position: relative;
+	margin-top: 36px;
+	margin-bottom: 32px;
+	border-radius: 4px;
+}
+
+fieldset.fieldset-program-official div.field:last-of-type,
+fieldset.fieldset-additional-point-of-contact div.field:last-of-type,
+fieldset.fieldset-corporate-official div.field:last-of-type{
+	margin-bottom: 4px;
+}
+
+fieldset.fieldset-corporate-official{ margin-bottom: 24px; }
+
+fieldset.fieldset-parties-requesting-agency > legend,
+fieldset.fieldset-parties-servicing-agency > legend,
+.section-agency-official fieldset.fieldset-requesting-agency > legend,
+.section-agency-official fieldset.fieldset-servicing-agency > legend,
+fieldset.fieldset-program-official > legend,
+fieldset.fieldset-corporate-official > legend,
+fieldset.fieldset-additional-point-of-contact > legend,
+fieldset.fieldset-funding-official > legend,
+fieldset.fieldset-component-tas > legend,
+fieldset.fieldset-reimbursable-line-costs > legend,
+fieldset.fieldset-assisted-acquisition-line-costs > legend,
+fieldset.fieldset-point-of-contact > legend,
+fieldset > header > h1{
+	position: absolute;
+	background: white;
+	margin: 0 0 -3px;
+	bottom: 100%;
+	left: 8px;
+	padding: 0 1px;
+	font-size: 14px;
+	line-height: 16px;
+	font-weight: 600;
+	color: #777;
+}
+
+fieldset div.field:last-of-type+fieldset{
+	margin-top: 24px;
+	margin-bottom: 4px;
+}
+
+.fieldset.fieldset-labor-related-costs,
+.fieldset.fieldset-direct-material-costs,
+.fieldset.fieldset-discretionary-technical-assistance,
+.fieldset.fieldset-equivalent-work,
+.fieldset.fieldset-equivalent-work .fieldset,
+.fieldset.fieldset-radio{
+	padding: 0;
+	border: none;
+}
+
+.field-servicing-agency-tracking-number span.label-text,
+.field-requesting-agencys-scope span.label-text,
+.field-roles-and-responsibilities span.label-text,
+.field-assisted-acquisition-small-business-credit-clause span.label-text,
+.field-requesting-agencys-clauses span.label-text,
+.field-servicing-agencys-clauses span.label-text,
+.field-additional-agency-attachments span.label-text,
+.field-disputes span.label-text,
+.field-additional-agency-attachments span.label-text,
+.fieldset-assisted-acquisition-agreement > legend,
+.fieldset-gtc-action > legend,
+.fieldset-recurring-agreement > legend,
+.fieldset-agreement-type > legend,
+.fieldset-advanced-payments > legend,
+.fieldset-performance-period > legend,
+.fieldset-accrual-per-work-completed-period > legend{ 
+	position: absolute !important;
+	left: -9999em;
+}
+
+fieldset > legend,
+.field span.label-text{
+	display: block;	
+	max-width: 40em;
+	margin: 0 0 8px;
+	padding: 0;
+	position: static;
+	font: inherit;
+	line-height: 20px;
+}
+
+.field.field-radio{ 
+	display: inline-block; 
+	vertical-align: middle;
+	margin-bottom: 6px;
+}
+
+.field.field-radio label{
+	display: inline-block;
+	padding: 8px 12px 8px 12px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	min-height: 32px;
+	line-height: 1;
+	vertical-align: middle;
+}
+
+.field.field-radio input,
+.field.field-checkbox input{ margin-right: 0.4em; }
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus,
+.field.field-checkbox.is-focused label,
+.field.field-radio.is-focused label{
+	border-color: #1188ff;
+	box-shadow: 0 0 0 1px rgba(17,136,255,0.15);
+	outline: none;
+}
+
+
+
+main div.field-select.is-focused::after{
+	border-top-color: #1188ff;
+
+}
+
+div.field.field-checkbox span.label-text,
+div.field.field-radio span.label-text,
+div.field.field-radio input{ 
+	display: inline; 
+	vertical-align: middle;
+}
+
+div.field.field-checkbox{
+	position: relative;
+	padding-left: 24px;
+	margin-bottom: 8px;
+}
+
+div.field.field-checkbox input{ 
+	font-size: 1em;	
+	line-height: 1;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+div.field.field-checkbox+div.field.field-checkbox{ margin-top: 4px; }
+
+div.field.field-checkbox+.is-branch{
+	margin-top: -4px !important;
+	margin-left: 3px;
+	margin-bottom: 16px;
+}
+
+div.field.is-error input,
+div.field.is-error textarea{
+	background: #fff7f4;
+	background: repeating-linear-gradient(
+    45deg,
+    #fff4f2,
+    #fff4f2 10px,
+    #fff7f4 10px,
+    #fff7f4 20px
+  );
+	border-color: #ce6246;
+}
+
+div.field.is-error span.error-message,
+fieldset.fieldset-radio.is-error span.error-message{
+	color: #990017;	
+	display: block;
+}
+
+div.field.is-error span.error-message,
+fieldset.fieldset-radio.is-error span.error-message{
+	color: #af1830;	
+	font-size: 14px;
+	padding-top: 6px;
+	display: block;
+	font-style: italic;	
+}
+
+@media screen and (min-width: 533.33px) {
+
+	fieldset.fieldset-date-range::after{
+		content: "";
+		display: table;
+		clear: both;		
+	}	
+		
+	fieldset.fieldset-date-range div.field{
+		padding-bottom: 1.4em;
+		position: relative;
+		width: 50%;
+		float: left;
+		margin-bottom: 0;
+	}
+	
+	fieldset.fieldset-date-range span.label-text{
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		margin: 0;
+		font-size: 12px;
+	}
+
+}
+
+
+fieldset.fieldset-mailing-address div.field{
+	padding-bottom: 1.4em;
+	position: relative;
+}
+
+fieldset.fieldset-mailing-address div.field span.label-text{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	margin: 0;
+	font-size: 12px;
+}
+
+fieldset.fieldset-mailing-address div.field-city-state-zip::after{
+	content: "";
+	display: table;
+	clear: both;
+}
+
+fieldset.fieldset-mailing-address div.field-city-state-zip{
+	margin-right: -0.7em;
+	margin-bottom: 0;
+}
+
+fieldset.fieldset-mailing-address div.field.field-city,
+fieldset.fieldset-mailing-address div.field.field-state,
+fieldset.fieldset-mailing-address div.field.field-zip{
+	float: left;
+	width: 25%;
+	padding-right: 0.67em; 
+	margin-bottom: 0;
+}
+
+fieldset.fieldset-mailing-address div.field.field-city{ 
+	width: 50%; 
+}
+
+fieldset.fieldset-mailing-address div.field.field-city input,
+fieldset.fieldset-mailing-address div.field.field-state input,
+fieldset.fieldset-mailing-address div.field.field-zip input{
+	min-width: 0;
+}
+
+/* @group widths */
+
+@media screen and (min-width: 533.33px){
+	.field-telephone-number input,
+	.field-email-address input,
+	.field-additional-classification input{
+	  width: 50%;
+	  min-width: 10em;
+	}
+	
+	.field-project-number input,
+	.field-phone-number input,
+	.field-telephone-number input,
+	.field-fax-number input,
+	.field-date input,
+	.field-direct-cost input,
+	.field-overhead-fees input,
+	.field-total-estimated-amount input,
+	.field-expiry-date input,
+	.field-cancellation-date input,
+	.field-alc input,
+	.field-component-tas input,
+	.field-betc input,
+	.field-object-class-code input,
+	.field-sp input,
+	.field-ata input,
+	.field-aid input,
+	.field-bpoa input,
+	.field-a input,
+	.field-main input,
+	.field-sub input,
+	.field-bpn input,
+	.field-bpn-4 input,
+	.field-servicing-agency-tracking-number input,
+	.field-total-net-order-amount input{
+		width: 10em;
+	}
+
+}
+
+/* @end */
+
+.section-form .branch{
+	padding: 0 0 0 12px;
+	position: relative;
+}
+
+.section-form .fieldset-radio+.branch,
+.section-form .fieldset-radio+.branch+.branch{
+	margin-top: 12px;
+}
+
+.branch > h1.branch-logic,
+.branch > header > h1.branch-logic{
+	text-transform: uppercase;
+	font: 13px Courier, mono !important;
+	font-weight: 600 !important;
+	padding: 4px;
+	background: #eee;
+	display: inline-block;
+	color: #ed2766 !important;
+	border-radius: 2px;
+	border: 1px solid #ccc;
+	margin-top: 16px;
+	margin-bottom: 8px !important;
+}
+
+body.branches .branch h1.branch-logic,
+body.branches .branch > header > h1.branch-logic{ display: none; }
+
+.section-form .branch::after{
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: -1px;
+	width: 3px;
+	border-radius: 2px;
+	content: "";
+	background: #ccc;
+}
+
+main div.wrap > form { max-width: 576px; }
+
+@media screen and (min-width: 640px) {
+	main div.wrap > form {
+		padding-right: 16px;
+		border-right: 1px solid #eee;
+	}	
+	
+}
+
+
+main form footer{ 
+	margin-top: 32px; 
+	padding-bottom: 64px;
+	position: relative;
+}
+
+main form footer a{
+	position: absolute;
+	right: 0;
+	top: 12px;
+}
+
+main form footer a:hover{ color: #333; }
+main form footer p{
+	clear: both;
+	font-family: Georgia;
+	font-style: italic;
+	color: #888;
+	background: #f3f3f3;
+	padding: 12px;
+	max-width: none;
+	margin-top: 24px;
+	font-size: 14px;
+}
+main form footer p button{
+	display: inline;
+	float: none;
+	padding: 4px 8px;
+	color: #555;
+	background: white;
+	border: 2px solid #ccc;
+	font-family: Helvetica;
+	font-style: normal;
+	margin-left: 0.2em;
+ }
+
+/* @end */
 
 /* @group .site-header */
 
@@ -332,6 +898,7 @@ img { max-width: 100%; }
 
 nav.breadcrumbs{
 	padding-top: 1em;
+	padding-bottom: 1em;
 }
 
 nav.breadcrumbs a{
@@ -476,6 +1043,7 @@ nav.breadcrumbs a{
 	position: relative;
 }
 
+
 .auction .auction-footer dt{
 	font-size: 11px;
 	line-height: 14px;
@@ -487,6 +1055,7 @@ nav.breadcrumbs a{
 	display: block;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	white-space: nowrap;
 	color: #333;
 }
 
@@ -565,11 +1134,25 @@ nav.breadcrumbs a{
 
 dd.auction-status{
 	font-size: 14px;
-	background: #008269;
+	background: #00cfff;
 	color: #fff;
 	padding: 8px;
+	padding-bottom: 24px;
 	border-radius: 3px;
 	display: inline-block;
+	position: relative;
+}
+
+dd.auction-status::after{
+	content: "ddd.";
+	display: block !important;
+	position: absolute;
+	border: 50px solid transparent;
+	border-bottom-color: #fff;
+	bottom: -32px;
+	left: -28px;
+	width: 0;
+	height: 0;
 }
 
 dd.auction-status-closed{
@@ -943,30 +1526,96 @@ a[id]{
 
 /* @group layout-auctions-show */
 
-.layout-auctions-show main{
-	padding-top: 2em;
+
+
+.layout-auctions-show main .wrapper{
+	padding: 1em;
+	border: 1px solid #ccc;
+	border-radius: 6px;
 }
 
 .layout-auctions-show main .auction-header h1{
 	font-size: 32px;
 	line-height: 1.1;
+	margin-bottom: 0.4em;
+}
+
+
+.layout-auctions-show main .auction-header dd.auction-time-remaining{
+	margin-right: 1.4em;
+}
+.layout-auctions-show main .auction-header dd.auction-time-remaining span{
+	position: absolute;
+	left: 20px;
+	color: #aaa;
+}
+
+.layout-auctions-show main .auction-header dd,
+.layout-auctions-show main .auction-header dt{
+	vertical-align: middle;
+	
+}
+.layout-auctions-show main .auction-header dd::after{ display: none; }
+
+.layout-auctions-show .auction .auction-header dd.auction-status{
+	position: absolute;
+	right: 0;
+	top: 0;	
+}
+
+.layout-auctions-show .auction .auction-header .auction-current-bid{
+	position: relative;
+}
+
+
+.layout-auctions-show .auction .auction-header form button{
+	white-space: nowrap;
+	
 }
 
 .layout-auctions-show main .auction-footer {
-	padding: 20px;
-	background: #eee;	
+	background: none;	
 }
 
-.layout-auctions-show main .auction-header dl dt,
-.layout-auctions-show main .auction-footer dl dt{
-	font-size: 11px;
-	font-family: roboto condensed;
-	text-transform: uppercase;
-	margin-bottom: 6px;	
+.layout-auctions-show main .auction-footer::after {
+	display: none;
+}
+
+.layout-auctions-show main .auction-footer section{
+	border: 1px solid #00bbe6;
+	box-shadow: 0 0 0 1px #fafafa;
+	border-radius: 4px;
+	margin-bottom: 1em;
+	padding: 20px;
+}
+
+.layout-auctions-show main .auction-footer p{
+	margin-bottom: 0.8em;
+	line-height: 1.4;
+}
+
+
+.layout-auctions-show .auction .auction-footer form label{
+	font-weight: 600;
 	color: #555;
 }
 
-.layout-auctions-show main .auction-header dl dd,
+.layout-auctions-show .auction .auction-footer form button{
+	display: block;
+	width: 100%;
+}
+.layout-auctions-show main .auction-footer dl{
+	background: #f3f3f3;
+	padding: 20px;
+}
+
+
+.layout-auctions-show main .auction-footer dl dt,
+.layout-auctions-show main .auction-footer dl dd{
+	position: static !important;
+	
+	
+}
 .layout-auctions-show main .auction-footer dl dd{
 	margin-bottom: 20px;
 }
@@ -975,28 +1624,28 @@ a[id]{
 	margin-bottom: 0;
 }
 
-.layout-auctions-show main .auction-footer span{
+.layout-auctions-show main .auction-header span{
 	display: block;
 	margin-top: 0.4em;
 	font-size: 12px;
-	
 }
 
-@media screen and (min-width: 1066.66px){
-	.layout-auctions-show main .wrapper{
-		padding-right: 384px;
-	}	
+@media screen and (min-width: 1066.66px){	
 	
 	.layout-auctions-show main .wrapper .page,
 	.layout-auctions-show main .wrapper .auction-footer{
 		float: left;
 		width: 100%;
 	}
+	
+	.layout-auctions-show main .wrapper .page{
+		width: 576px;
+	}
 
 	.layout-auctions-show main .wrapper .auction-footer{
-		width: 352px;
+		width: 312px;
 		float: right;
-		margin-right: -384px;
+		margin: 0;
 	}
 
 	.layout-auctions-show main .wrapper .page h1,

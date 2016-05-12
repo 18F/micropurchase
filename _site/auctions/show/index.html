@@ -52,19 +52,19 @@
     <div class="wrapper">
       <header class="auction-header">
         <h1 class="p-name">
-          <a href="/auctions/">Open Opportunities: Create Agency Admin User Role </a> 
+          Open Opportunities: Create Agency Admin User Role
         </h1>
         <dl>
           <dt class="auction-time-remaining">Time remaining</dt>
-          <dd class="auction-time-remaining">12 days</dd>
+          <dd class="auction-time-remaining">
+            12 days
+            <span class="auction-time-left-alternate">Ends: 05/25/2016 at 5:00pm EST</span>
+          </dd>
           <dt class="auction-status">Status</dt>
           <dd class="auction-status auction-status-open">Open</dd>
           <dt class="auction-current-bid">Current bid</dt>
           <dd class="auction-current-bid">
             $3,500.00
-            <form action="/bids/new">
-              <button>Place bid</button>
-            </form>
           </dd>
         </dl>
       </header>
@@ -78,20 +78,27 @@
         <p>Then test(s) written as part of this micro-purchase will fail.</p>        
       </div>
       <footer class="auction-footer">
+        <section class="auction-place-bid">
+          <p>The maximum (current) bid is $3414.00. Please enter a lower amount.</p>
+          <form>
+            <div class="field"> 
+              <label>
+                <span class="label-text">Your bid</span>
+                <input type="number" />
+              </label>
+            </div>
+            <button>Place bid</button>
+          </form>
+        </section>
         <dl>
-          <dt class="auction-time-left">Time left</dt>
-          <dd class="auction-time-left">
-            15 days
-            <span class="auction-time-left-alternate">
-              Ends: 05/25/2016 at 5:00pm EST
-            </span>
-          </dd>
-          <dt class="auction-github-issue">GitHub issue</dt>
-          <dd class="auction-github-issue"><a href="https://github.com/18F/openopps-platform/issues/1236">openopps-platform#1236</a></dd>
+          <dt class="auction-author">Submitted by</dt>
+          <dd class="auction-author p-author"><img src="#" />Patrick Bateman</dd>
           <dt class="auction-language">Language</dt>
           <dd class="auction-language">Ruby</dd>
-          <dt class="auction-status">Status</dt>
-          <dd class="auction-status auction-status-open">Open</dd>
+          <dt class="auction-project">Project</dt>
+          <dd class="auction-project">Open Opportunities</dd>
+          <dt class="auction-agency">Agency</dt>
+          <dd class="auction-agency">General Services Administration</dd>
         </dl>
       </footer>
     </div>
