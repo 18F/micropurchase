@@ -23,7 +23,7 @@ Feature: Admin Users
     And there are users in the system
     And I visit the admin users page
     When I sign in
-    And I click the edit user link next to the first non-admin user
+    And I click the edit user link next to the first admin user
     And I check the 'Contracting officer' checkbox
     And I submit the changes to the user
-    Then I expect there to be a contracting officer in the list of users
+    Then I expect there to be a contracting officer in the list of admin users
