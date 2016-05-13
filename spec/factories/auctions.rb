@@ -55,6 +55,17 @@ FactoryGirl.define do
       end
     end
 
+    trait :between_micropurchase_and_sat_threshold do
+      association :user, factory: :contracting_officer
+      start_price do
+        rand(StartPriceThresholds::MICROPURCHASE+1..StartPriceThresholds::SAT)
+      end
+    end
+
+    trait :below_micropurchase_threshold do
+      start_price { rand(1..StartPriceThresholds::MICROPURCHASE) }
+    end
+
     trait :available do
       start_datetime { Time.now - 2.days }
       end_datetime { Time.now + 2.days }

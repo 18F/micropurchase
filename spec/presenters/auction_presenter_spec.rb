@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe AuctionPresenter do
   include ActionView::Helpers::DateHelper
-  
+
   let(:ar_auction) { create(:auction) }
   let(:ar_bids_by_amount) { ar_auction.bids.order('amount ASC, created_at ASC') }
   let(:auction) { AuctionPresenter.new(ar_auction) }
@@ -12,6 +12,30 @@ describe AuctionPresenter do
     it 'returns a valid url that includes the id of the auction' do
       expect(auction.url).to be_url
       expect(auction.url).to include(auction.id.to_s)
+    end
+  end
+
+  describe '#small_business?' do
+    context 'when the start price is below the micro-purchase threshold' do
+      let(:ar_auction) { create(:auction, :below_micropurchase_threshold) }
+
+      it 'returns false' do
+        expect(auction.small_business?).to be false
+      end
+    end
+
+    context %(
+      when the start price is above the micropurchase threshold
+      but below the simplified acquisitions threshold
+                                                                ) do
+
+      let(:ar_auction) do
+        create(:auction, :between_micropurchase_and_sat_threshold)
+      end
+
+      it 'returns true' do
+        expect(auction.small_business?).to be true
+      end
     end
   end
 

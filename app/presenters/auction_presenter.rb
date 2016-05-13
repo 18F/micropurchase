@@ -65,6 +65,11 @@ class AuctionPresenter
     to: :auction_rules
   )
 
+  delegate(
+    :small_business?,
+    to: :start_price_thresholds
+  )
+
   def bids?
     bid_count > 0
   end
@@ -132,6 +137,14 @@ class AuctionPresenter
     "#{root_url}/auctions/#{id}"
   end
 
+  def eligibility
+    if small_business?
+      'Small-business only'
+    else
+      'SAM.gov only'
+    end
+  end
+
   private
 
   def auction_rules
@@ -155,6 +168,14 @@ class AuctionPresenter
     else
       "in #{distance}"
     end
+  end
+
+  def auction_status
+    AuctionStatus.new(model)
+  end
+
+  def start_price_thresholds
+    @start_price_thresholds ||= StartPriceThresholds.new(start_price)
   end
 
   def decorated_bid(bid)

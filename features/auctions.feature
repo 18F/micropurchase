@@ -3,6 +3,16 @@ Feature: Basic Auction Views
   I want to be able to view auctions on the site
   So that I can learn about micropurchase
 
+  Scenario: A vendor sees small business only auctions on the auction feed
+    Given there is an auction with a starting price between the micropurchase threshold and simplified acquisition threshold
+    When I visit the home page
+    Then I should see that the auction indicates it is for small business only
+
+  Scenario: A vendor sees a non-small business only auctions on the auction feed
+    Given there is a below the micropurchase threshold auction
+    When I visit the home page
+    Then I should not see that the auction indicates it is for small business only
+
   Scenario: Visiting the home page
     Given there is an open auction
     And there is also an unpublished auction
