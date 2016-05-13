@@ -413,6 +413,7 @@ DEPENDENCIES
   database_cleaner
   db-query-matchers
   delayed_job_active_record
+  dotenv
   dotenv-rails
   email_validator
   factory_girl_rails
