@@ -2,7 +2,6 @@ class LoginUser < Struct.new(:auth_hash, :session)
   def perform
     user.from_oauth_hash(auth_hash)
     sign_in
-    check_sam
   end
 
   private
@@ -13,12 +12,5 @@ class LoginUser < Struct.new(:auth_hash, :session)
 
   def sign_in
     session[:user_id] = user.id
-  end
-
-  def check_sam
-    return if user.sam_account?
-    SamAccountReckoner.new(user).set!
-  rescue
-    # do nothing
   end
 end
