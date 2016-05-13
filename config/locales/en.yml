@@ -3,6 +3,8 @@ en:
     attributes:
       user:
         duns_number: "DUNS number"
+      auction:
+        start_price: ""
 
     errors:
       models:
