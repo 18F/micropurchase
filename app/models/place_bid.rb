@@ -1,5 +1,4 @@
 class PlaceBid < Struct.new(:params, :current_user)
-  BID_LIMIT = 3500
   BID_INCREMENT = 1
 
   attr_reader :bid
@@ -53,10 +52,6 @@ class PlaceBid < Struct.new(:params, :current_user)
 
   # rubocop:disable Style/IfUnlessModifier
   def validate_bid_data
-    unless auction_available?
-      fail UnauthorizedError, 'Auction not available'
-    end
-
     unless user_can_bid?
       fail UnauthorizedError, 'You are not allowed to bid on this auction'
     end
@@ -65,7 +60,7 @@ class PlaceBid < Struct.new(:params, :current_user)
       fail UnauthorizedError, 'Bids must be in increments of one dollar'
     end
 
-    if amount > BID_LIMIT
+    if amount > auction.start_price
       fail UnauthorizedError, 'Bid too high'
     end
 

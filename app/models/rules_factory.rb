@@ -4,10 +4,18 @@ class RulesFactory
   end
 
   def create
+    eligibility = if auction.small_business?
+                    Eligibility::SmallBusiness.new
+                  else
+                    Eligibility::InSam.new
+                  end
+
     if type == 'single_bid'
-      Rules::SealedBid.new(auction)
+      Rules::SealedBid.new(auction, eligibility)
     elsif type == 'multi_bid'
-      Rules::Basic.new(auction)
+      Rules::Basic.new(auction, eligibility)
+    elsif type == 'sole_source'
+      Rules::SoleSource.new(auction, Eligibility::EightAStars.new)
     end
   end
 

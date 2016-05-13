@@ -146,6 +146,15 @@ class AuctionPresenter
     @auction_rules ||= RulesFactory.new(self).create
   end
 
+  def small_business?
+    start_price > Auction::MICROPURCHASE_THRESHOLD
+  end
+
+  def eight_a_stars
+    # this could be a db column
+    true
+  end
+
   def markdown
     # FIXME: Do we want the lax_spacing?
     @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML,
