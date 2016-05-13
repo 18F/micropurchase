@@ -18,7 +18,8 @@ Rails.application.routes.draw do
 
   get '/my-bids', to: 'bids#my_bids'
 
-  resources :users, only: [:edit, :update]
+  resources :users, only: [:update]
+  get 'users/edit' => 'users#edit'
 
   get '/admin', to: 'admin/dashboards#index'
   get '/admin/action_items', to: 'admin/dashboards#action_items'

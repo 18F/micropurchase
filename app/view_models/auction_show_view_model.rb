@@ -46,7 +46,7 @@ class AuctionShowViewModel < Struct.new(:current_user, :auction_record)
   end
 
   def current_user_header_partial
-    current_user_has_no_sam_verification? ? "/components/no_sam_verification_header" : win_header_partial
+    win_header_partial
   end
 
   def win_header_partial
@@ -81,9 +81,5 @@ class AuctionShowViewModel < Struct.new(:current_user, :auction_record)
 
   def bid_to_plural
     auction.bids? ? "bids" : "bid"
-  end
-
-  def current_user_has_no_sam_verification?
-    current_user && !current_user.sam_accepted?
   end
 end

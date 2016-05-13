@@ -72,27 +72,9 @@
           <button id="button-nav-drawer" class="usa-button usa-button-outline-inverse" data-drawer-toggle="menu"><span class="fa fa-bars"></span></button>
           <div class="header-account">
             <% if current_user %>
-              <nav class="nav-login">
-                <ul class="nav-menu">
-                    <li class="nav-item">
-                      <a href="javascript:void(0)">
-                        Logged in as <%= current_user.name %>
-                        <icon class="fa fa-caret-down"></icon>
-                      </a>
-                      <div class="sub-nav">
-                          <ul class="sub-nav-group">
-                              <li><a class="usa-button usa-button-outline-inverse" href="<%= edit_user_path(current_user) %>">Edit profile</a></li>
-                              <li><a class="usa-button usa-button-outline-inverse" href="<%= logout_path %>">Logout</a></li>
-                          </ul>
-                      </div>
-                    </li>
-                </ul>
-              </nav>
-              <!-- <span>Logged in as <%= current_user.name %></span> -->
-              <!-- <a class="usa-button usa-button-outline-inverse" href="<%= logout_path %>">Logout</a> -->
-              <!-- <a class="usa-button usa-button-outline-inverse" href="<%= edit_user_path(current_user) %>">Edit Profile</a> -->
+              <%= render partial: current_user.decorate.nav_drawer_partial, locals: { current_user: current_user } %>
             <% else %>
-              <a href="/login" class="button-login usa-button usa-button-outline-inverse">Login</a>
+              <%= render partial: Guest.new.decorate.nav_drawer_partial, locals: { current_user: current_user } %>
             <% end %>
           </div>
         </div>
@@ -108,7 +90,6 @@
   <div class="content-wrapper" id="<% if current_page?(root_path) %>index<% elsif current_page?(auctions_path) %>auctions<% elsif current_page?(auctions_winners_path) %>winners<% end %>">
     <div class="usa-width-one-whole">
       <%= render "flashes" %>
-
       <%= yield %>
     </div>
   </div>
