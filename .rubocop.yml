@@ -1,4 +1,5 @@
 AllCops:
+  TargetRubyVersion: 2.3
   Include:
     - 'Gemfile'
     - 'Rakefile'
@@ -24,7 +25,6 @@ Metrics/ClassLength:
   Enabled: true
   CountComments: false
   Max: 100
-
 
 Metrics/AbcSize:
   # The ABC size is a calculated magnitude, so this number can be a Fixnum or
@@ -75,6 +75,13 @@ Rails/TimeZone:
   SupportedStyles:
     - strict
     - flexible
+
+
+Style/FrozenStringLiteralComment:
+  Description: >-
+                 Add the frozen_string_literal comment to the top of files
+                 to help transition from Ruby 2.3.0 to Ruby 3.0.
+  Enabled: false
 
 Style/MultilineBlockLayout:
   Description: 'Ensures newlines after multiline block do statements.'
