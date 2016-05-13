@@ -5,7 +5,8 @@ describe AuctionMailer do
     it 'sends the email to the bidder' do
       bidder = create(:user, email: "test@example.com")
       bid = create(:bid, bidder: bidder)
-      email = AuctionMailer.losing_bidder_notification(bid)
+      email = AuctionMailer
+        .losing_bidder_notification(bidder: bidder, auction: bid.auction)
 
       expect(email.to).to eq [bidder.email]
       expect(email.subject).to eq(

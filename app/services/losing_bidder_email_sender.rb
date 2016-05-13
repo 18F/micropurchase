@@ -4,8 +4,10 @@ class LosingBidderEmailSender
   end
 
   def perform
-    losing_bids_with_emails.each do |bid|
-      AuctionMailer.losing_bidder_notification(bid).deliver_later
+    losing_bidders_with_emails.each do |bidder|
+      AuctionMailer
+        .losing_bidder_notification(bidder: bidder, auction: auction)
+        .deliver_later
     end
   end
 
@@ -13,17 +15,17 @@ class LosingBidderEmailSender
 
   attr_reader :auction
 
-  def losing_bids_with_emails
-    losing_bids.includes(:bidder).select do |bid|
-      bid.bidder.email.present?
+  def losing_bidders_with_emails
+    losing_bidders.select do |bidder|
+      bidder.email.present?
     end
   end
 
-  def losing_bids
+  def losing_bidders
     if winning_bid
-      auction.bids.where.not(id: winning_bid.id)
+      auction.bids.map(&:bidder).uniq - [winning_bid.bidder]
     else
-      Bid.none
+      User.none
     end
   end
 
