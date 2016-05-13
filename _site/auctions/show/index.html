@@ -61,12 +61,25 @@
             <span class="auction-time-left-alternate">Ends: 05/25/2016 at 5:00pm EST</span>
           </dd>
           <dt class="auction-status">Status</dt>
-          <dd class="auction-status auction-status-open">Open</dd>
+          <dd class="auction-status auction-status-open"><span>Open</span></dd>
           <dt class="auction-current-bid">Current bid</dt>
           <dd class="auction-current-bid">
             $3,500.00
           </dd>
         </dl>
+        <section class="auction-place-bid">
+          <p>The maximum (current) bid is $3414.00. Please enter a lower amount.</p>
+          <form>
+            <div class="field"> 
+              <label>
+                <span class="label-text">Your bid</span>
+                <input type="number" />
+              </label>
+            </div>
+            <button>Place bid</button>
+          </form>
+        </section>
+
       </header>
       <div class="page">
         <p class="issue-description p-summary">Open Opportunities uses the open source sails.js MVC framework (Node.js / Express). Currently, a task creator should receive the following notification if a task they created receives a comment. However, this functionality has broken, without breaking the build's test suite. This issue sees the creation of a failing test (or tests) that will only pass when the notification functionality is restored, along with the fix to make those tests pass.</p>
@@ -79,7 +92,7 @@
       </div>
       <footer class="auction-footer">
         <section class="auction-place-bid">
-          <p>The maximum (current) bid is $3414.00. Please enter a lower amount.</p>
+        <p>The maximum (current) bid is $3414.00. Please enter a lower amount.</p>
           <form>
             <div class="field"> 
               <label>

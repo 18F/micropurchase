@@ -1134,23 +1134,40 @@ nav.breadcrumbs a{
 
 dd.auction-status{
 	font-size: 14px;
-	background: #00cfff;
 	color: #fff;
 	padding: 8px;
 	padding-bottom: 24px;
 	border-radius: 3px;
 	display: inline-block;
 	position: relative;
+	background-color: #00cfff;
+	background: linear-gradient(#00cfff,#008fe4);
+	border-top: 1px solid #008ee1;
+	border-right: 1px solid #00acd4;
+}
+
+dd.auction-status span{
+	display: block;
+	-webkit-transform: rotate(45deg);
+	font-weight: 600;
+	text-align: center;
+	text-indent: 1.2em;
+	position: relative;
+	top: -0.5em;
+	right: -0.5em;
+	text-transform: uppercase;
+	text-shadow: 1px 1px #00acd4;
 }
 
 dd.auction-status::after{
 	content: "ddd.";
 	display: block !important;
 	position: absolute;
-	border: 50px solid transparent;
+	border: 32px solid transparent;
+	border-left-color: #fff;
 	border-bottom-color: #fff;
-	bottom: -32px;
-	left: -28px;
+	bottom: -2px;
+	left: -2px;
 	width: 0;
 	height: 0;
 }
@@ -1534,6 +1551,10 @@ a[id]{
 	border-radius: 6px;
 }
 
+.layout-auctions-show main .auction-header{
+	position: relative;
+	margin-bottom: 2em;
+}
 .layout-auctions-show main .auction-header h1{
 	font-size: 32px;
 	line-height: 1.1;
@@ -1544,10 +1565,12 @@ a[id]{
 .layout-auctions-show main .auction-header dd.auction-time-remaining{
 	margin-right: 1.4em;
 }
+
 .layout-auctions-show main .auction-header dd.auction-time-remaining span{
 	position: absolute;
-	left: 20px;
-	color: #aaa;
+	left: 0;
+	bottom: 0;
+	margin-bottom: -1.67em;
 }
 
 .layout-auctions-show main .auction-header dd,
@@ -1559,8 +1582,10 @@ a[id]{
 
 .layout-auctions-show .auction .auction-header dd.auction-status{
 	position: absolute;
-	right: 0;
-	top: 0;	
+	right: -19px;
+	top: -19px;	
+	width: 64px;
+	height: 64px;
 }
 
 .layout-auctions-show .auction .auction-header .auction-current-bid{
@@ -1581,29 +1606,31 @@ a[id]{
 	display: none;
 }
 
-.layout-auctions-show main .auction-footer section{
-	border: 1px solid #00bbe6;
+.auction-place-bid{
+	color: #555;
+	border: 1px solid #73aee5;
 	box-shadow: 0 0 0 1px #fafafa;
 	border-radius: 4px;
 	margin-bottom: 1em;
 	padding: 20px;
 }
 
-.layout-auctions-show main .auction-footer p{
+.auction-place-bid p{
 	margin-bottom: 0.8em;
 	line-height: 1.4;
 }
 
 
-.layout-auctions-show .auction .auction-footer form label{
+.auction-place-bid form label{
 	font-weight: 600;
 	color: #555;
 }
 
-.layout-auctions-show .auction .auction-footer form button{
+.auction-place-bid form button{
 	display: block;
 	width: 100%;
 }
+
 .layout-auctions-show main .auction-footer dl{
 	background: #f3f3f3;
 	padding: 20px;
@@ -1631,7 +1658,7 @@ a[id]{
 }
 
 @media screen and (min-width: 1066.66px){	
-	
+	.layout-auctions-show .auction-header .auction-place-bid{ display: none; }
 	.layout-auctions-show main .wrapper .page,
 	.layout-auctions-show main .wrapper .auction-footer{
 		float: left;
@@ -1640,6 +1667,10 @@ a[id]{
 	
 	.layout-auctions-show main .wrapper .page{
 		width: 576px;
+	}
+	
+	.layout-auctions-show main .wrapper .page p{
+		width: 100%;
 	}
 
 	.layout-auctions-show main .wrapper .auction-footer{
