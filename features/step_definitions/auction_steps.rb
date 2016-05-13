@@ -17,6 +17,8 @@ Given(/^there is an? (.+) auction$/) do |label|
                FactoryGirl.create(:auction, :running, :single_bid)
              when 'closed single-bid'
                FactoryGirl.create(:auction, :closed, :with_bidders, :single_bid)
+             when 'needs evaluation'
+               FactoryGirl.create(:auction, :with_bidders, :evaluation_needed)
              else
                fail "Unrecognized auction type: #{label}"
              end
@@ -41,7 +43,7 @@ When(/^I visit the unpublished auction$/) do
 end
 
 Then(/^I should see the winning bid for the auction$/) do
-  auction = Presenter::Auction.new(@auction)
+  auction = AuctionPresenter.new(@auction)
   lowest_bid_amount = ApplicationController.helpers.number_to_currency(
     auction.lowest_bid.amount
   )
@@ -52,13 +54,30 @@ end
 Then(/^I should see the auction's (.+)$/) do |field|
   if field == 'deadline'
     expect(page).to have_text(
-      Presenter::DcTime
-      .convert(@auction.end_datetime)
-      .beginning_of_day
-      .strftime(Presenter::DcTime::FORMAT))
+      DcTimePresenter
+        .convert(@auction.end_datetime)
+        .beginning_of_day
+        .strftime(DcTimePresenter::FORMAT))
   else
     expect(page).to have_text(@auction.send(field))
   end
+end
+
+Then(/^I should see when bidding starts and ends in ET$/) do
+  expect(page).to have_text(
+    DcTimePresenter.convert_and_format(@auction.start_datetime))
+
+  expect(page).to have_text(
+    DcTimePresenter.convert_and_format(@auction.end_datetime))
+end
+
+Then(/^I should see the delivery deadline in ET$/) do
+  expect(page).to have_text(
+    DcTimePresenter.convert_and_format(@auction.delivery_deadline))
+end
+
+Then(/^I should see the start price for the auction is \$(\d+)$/) do |price|
+  expect(page).to have_field('auction_start_price', with: price)
 end
 
 Then(/^I should see the number of bid for the auction$/) do
@@ -110,6 +129,11 @@ Then(/^I should see a current bid amount( of \$([\d\.]+))?$/) do |_, amount|
   expect(page).to have_content(amount) unless amount.nil?
 end
 
+Then(/^I should see a winning bid amount( of \$([\d\.]+))?$/) do |_, amount|
+  expect(page).to have_content(/Winning bid \([^\)]+\): \$[\d,\.]+/)
+  expect(page).to have_content(amount) unless amount.nil?
+end
+
 Then(/^I should see a link to the auction issue URL$/) do
   page.find("a[href='#{@auction.issue_url}']")
 end
@@ -128,14 +152,23 @@ Then(/^I should see I do not have the winning bid$/) do
   expect(page).to have_content("You are currently not the winning bidder.")
 end
 
-# Fix me (look for specific date in there)
 Then(/^I should see when the auction started$/) do
-  expect(page).to_not have_content("Auction ended at:")
+  expect(page).to have_text(
+    DcTimePresenter.convert_and_format(@auction.start_datetime))
 end
 
 Then(/^I should see when the auction ends$/) do
   expect(page).to_not have_content("Auction ended at:")
-  expect(page).to have_content("Bid deadline:")
+  expect(page).to have_content("Bid deadline: #{DcTimePresenter.convert_and_format(@auction.end_datetime)}")
+end
+
+Then(/^I should see when the auction ended$/) do
+  expect(page).to_not have_content("Bid deadline:")
+  expect(page).to have_text("Auction ended at: #{DcTimePresenter.convert_and_format(@auction.end_datetime)}")
+end
+
+Then(/^I should see the delivery deadline$/) do
+  expect(page).to have_content("Delivery deadline: #{DcTimePresenter.convert_and_format(@auction.delivery_deadline)}")
 end
 
 Then(/^I should see an? (.+) status$/) do |label|

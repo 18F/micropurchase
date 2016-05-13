@@ -21,13 +21,13 @@ When(/^I have not placed a bid$/) do
 end
 
 Then(/^I should see the auction had a winning bid$/) do
-  auction = ViewModel::Auction.new(nil, @auction)
+  auction = AuctionViewModel.new(nil, @auction)
   expect(page).to have_content("Winning bid: #{auction.highlighted_bid_amount_as_currency}")
   expect(page).not_to have_content("Current bid:")
 end
 
 Then(/^I should see the auction had a winning bid with name$/) do
-  auction = ViewModel::Auction.new(nil, @auction)
+  auction = AuctionViewModel.new(nil, @auction)
   expect(page)
     .to have_content("Winning bid (#{auction.highlighted_bidder_name}): #{auction.highlighted_bid_amount_as_currency}")
   expect(page).not_to have_content("Current bid:")
@@ -46,11 +46,6 @@ end
 Then(/^I should not see a winner alert box$/) do
   expect(page).to_not have_css('.usa-alert-error')
   expect(page).to_not have_content("You are not the winner")
-end
-
-Then(/^I should see when the auction ended$/) do
-  expect(page).to have_content("Auction ended at:")
-  expect(page).not_to have_content("Bid deadline:")
 end
 
 Then(/^I should see the auction ended with no bids$/) do

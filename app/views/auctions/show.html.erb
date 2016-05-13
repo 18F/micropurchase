@@ -39,6 +39,12 @@
         <p class="auction-label"><%= @view_model.auction_start_label %></p>
         <p class="auction-label-info"><%= @view_model.auction_formatted_start_time %></p>
       </div>
+      <% if @view_model.auction_has_delivery_deadline? %>
+      <div>
+        <p class="auction-label">Delivery deadline:</p>
+        <p class="auction-label-info"><%= @view_model.auction_formatted_delivery_deadline %></p>
+      </div>
+      <% end %>
       <% if @view_model.auction.show_bid_button? %>
       <p>
         <a href="<%= new_auction_bid_path(@view_model.auction) %>" class='button-bid usa-button'>BID <icon class="fa fa-angle-double-right"></icon></a>

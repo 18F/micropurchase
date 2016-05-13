@@ -1,5 +1,30 @@
 When(/^I visit the auctions admin page$/) do
-  visit "/admin/auctions"
+  visit admin_auctions_path
+end
+
+When(/^I visit the admin edit page for that auction$/) do
+  visit "/admin/auctions/#{@auction.id}/edit"
+end
+
+When(/^I select the result as accepted$/) do
+  auction_presenter = AuctionPresenter.new(@auction)
+  fake_cap_proposal_attributes  = ConstructCapAttributes.new(auction_presenter).perform
+  c2_proposal_double = double(id: 8888)
+  c2_response_double = double(body: c2_proposal_double)
+  c2_client_double = double
+  allow(c2_client_double).to receive(:post)
+    .with('proposals', fake_cap_proposal_attributes)
+    .and_return(c2_response_double)
+  allow(C2::Client).to receive(:new).and_return(c2_client_double)
+
+  select("accepted", from: "auction_result")
+end
+
+Then(/^I should see that the auction has a CAP Proposal URL$/) do
+  Delayed::Worker.new.work_off
+  @auction.reload
+  expect(@auction.cap_proposal_url).not_to be_nil
+  expect(page).to have_content(@auction.cap_proposal_url)
 end
 
 Then(/^I will not see a warning I must be an admin$/) do
@@ -15,11 +40,15 @@ Then(/^I expect my auction changes to have been saved$/) do
   @auction = Auction.where(title: @title).first
 end
 
+When(/^I set the auction start price to \$(.+)$/) do |amount|
+  fill_in("auction_start_price", with: amount)
+end
+
 Then(/^I set the auction type to be multi_bid$/) do
   select("multi_bid", from: "auction_type")
 end
 
-Then(/^I should be able to edit the new auction form$/) do
+When(/^I edit the new auction form$/) do
   @title = 'This is the form-edited title'
   fill_in("auction_title", with: @title)
 
@@ -35,14 +64,14 @@ Then(/^I should be able to edit the new auction form$/) do
   @issue_url = 'https://github.com/18F/calc/issues/255'
   fill_in('auction_issue_url', with: @issue_url)
 
-  @start_day = Presenter::DcTime.convert(3.days.from_now).strftime("%m/%d/%Y")
+  @start_day = DcTimePresenter.convert(3.days.from_now).strftime("%m/%d/%Y")
   fill_in("auction_start_datetime", with: @start_day)
 
-  @end_day = Presenter::DcTime.convert(3.days.from_now).strftime("%m/%d/%Y")
+  @end_day = DcTimePresenter.convert(3.days.from_now).strftime("%m/%d/%Y")
   fill_in("auction_end_datetime", with: @end_day)
 
   @time_in_days = 3
-  @deadline_day = Presenter::DcTime.convert(@time_in_days.business_days.from_now).strftime("%m/%d/%Y")
+  @deadline_day = DcTimePresenter.convert(@time_in_days.business_days.from_now).strftime("%m/%d/%Y")
   fill_in("due_in_days", with: @time_in_days)
 
   @billable = "the tock line item for CALC"
@@ -67,13 +96,13 @@ Then(/^I should be able to edit the existing auction form$/) do
   @issue_url = 'https://github.com/18F/calc/issues/255'
   fill_in('auction_issue_url', with: @issue_url)
 
-  @start_day = Presenter::DcTime.convert(Time.now + 3.days).strftime("%m/%d/%Y")
+  @start_day = DcTimePresenter.convert(Time.now + 3.days).strftime("%m/%d/%Y")
   fill_in("auction_start_datetime", with: @start_day)
 
-  @end_day = Presenter::DcTime.convert(Time.now - 3.days).strftime("%m/%d/%Y")
+  @end_day = DcTimePresenter.convert(Time.now - 3.days).strftime("%m/%d/%Y")
   fill_in("auction_end_datetime", with: @end_day)
 
-  @deadline_day = Presenter::DcTime.convert(Time.now + 5.days).strftime("%m/%d/%Y")
+  @deadline_day = DcTimePresenter.convert(Time.now + 5.days).strftime("%m/%d/%Y")
   fill_in("auction_delivery_deadline", with: @deadline_day)
 
   @billable = "the tock line item for CALC"
@@ -82,18 +111,23 @@ Then(/^I should be able to edit the existing auction form$/) do
   select("published", from: "auction_published")
 end
 
-Then(/^I should see new content on the page$/) do
-  expect(page).to have_text(@title)
-  expect(page).to have_text(@summary)
-  expect(page).to have_text(@description)
-end
-
 When(/^I click to edit the auction$/) do
   click_on("Edit")
+
   @auction = Auction.where(title: @title).first
 end
 
 When(/^I click to create an auction$/) do
   click_on("Create")
   @auction = Auction.where(title: @title).first
+end
+
+Then(/^I should see new content on the page$/) do
+  expect(page).to have_text(@title)
+  expect(page).to have_text(@summary)
+  expect(page).to have_text(@description)
+end
+
+Then(/^I should see that my auction was created successfully$/) do
+  expect(page).to have_content(I18n.t('controllers.admin.auctions.create.success'))
 end

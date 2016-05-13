@@ -1,7 +1,8 @@
 class AuctionsController < ApplicationController
   def index
     collection = AuctionQuery.new.public_index
-    @view_model = ViewModel::AuctionsIndex.new(current_user, collection)
+    @view_model = AuctionsIndexViewModel.new(current_user, collection)
+    sam_status_message_for(flash)
 
     respond_to do |format|
       format.html
@@ -13,7 +14,7 @@ class AuctionsController < ApplicationController
 
   def show
     auction = AuctionQuery.new.public_find(params[:id])
-    @view_model = ViewModel::AuctionShow.new(current_user, auction)
+    @view_model = AuctionShowViewModel.new(current_user, auction)
 
     respond_to do |format|
       format.html
@@ -38,7 +39,7 @@ class AuctionsController < ApplicationController
       collection = collection.all.where(result: 'rejected')
     end
 
-    @view_model = ViewModel::AuctionsIndex.new(current_user, collection)
+    @view_model = AuctionsIndexViewModel.new(current_user, collection)
 
     @auctions_json = @view_model.auctions.each { |a| AuctionSerializer.new(a, root: false) }.as_json
     respond_to do |format|
@@ -48,7 +49,7 @@ class AuctionsController < ApplicationController
 
   def previous_winners
     collection = AuctionQuery.new.public_index
-    @view_model = ViewModel::AuctionsIndex.new(current_user, collection)
+    @view_model = AuctionsIndexViewModel.new(current_user, collection)
 
     @auctions_json = @view_model.auctions.each { |a| AuctionSerializer.new(a, root: false) }.as_json
 
@@ -63,5 +64,12 @@ class AuctionsController < ApplicationController
         fail ActionController::RoutingError, 'Not Found'
       end
     end
+  end
+
+  private
+
+  def sam_status_message_for(flash)
+    user = current_user || Guest.new
+    user.decorate.sam_status_message_for_auctions_index(flash)
   end
 end

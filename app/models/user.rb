@@ -5,7 +5,11 @@ class User < ActiveRecord::Base
   validates :duns_number, duns_number: true
   validates :email, allow_blank: true, email: true
 
-  enum sam_status: { sam_pending: 0, sam_accepted: 1, sam_rejected: 2 }
+  enum sam_status: { duns_blank: 0, sam_accepted: 1, sam_rejected: 2, sam_pending: 3 }
+
+  def decorate
+    UserPresenter.new(self)
+  end
 
   def from_oauth_hash(auth_hash)
     set_if_blank('name', auth_hash)

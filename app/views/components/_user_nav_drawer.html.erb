@@ -1,0 +1,16 @@
+<nav class="nav-login">
+  <ul class="nav-menu">
+      <li class="nav-item">
+        <a href="javascript:void(0)">
+          Logged in as <%= current_user.name %>
+          <icon class="fa fa-caret-down"></icon>
+        </a>
+        <div class="sub-nav">
+            <ul class="sub-nav-group">
+                <li><a class="usa-button usa-button-outline-inverse" href="<%= users_edit_path %>">Edit profile</a></li>
+                <li><a class="usa-button usa-button-outline-inverse" href="<%= logout_path %>">Logout</a></li>
+            </ul>
+        </div>
+      </li>
+  </ul>
+</nav>

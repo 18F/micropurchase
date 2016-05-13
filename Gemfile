@@ -13,7 +13,7 @@ gem 'email_validator'
 gem 'validate_url'
 gem 'redcarpet'
 gem 'puma'
-gem 'samwise', github: '18f/samwise', branch: 'micropurchase-compatibility'
+gem 'samwise', github: '18f/samwise', branch: 'master'
 gem 'octokit', '~> 4.0'
 gem 'rack-cors', require: 'rack/cors'
 gem 'active_model_serializers'
@@ -24,13 +24,19 @@ gem 'simple_form'
 gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'foreman'
+gem 'c2', github: '18f/c2-api-client-ruby'
 
 group :test do
   gem "codeclimate-test-reporter", require: nil
   gem 'codeclimate_batch', require: nil
+  gem 'dotenv'
   gem 'webmock'
   gem 'json-schema'
   gem 'db-query-matchers'
+  gem 'json-schema'
+  gem 'shoulda-matchers'
+  gem 'sinatra'
+  gem 'webmock'
 end
 
 group :development, :test do

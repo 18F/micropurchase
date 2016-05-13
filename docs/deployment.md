@@ -24,9 +24,15 @@ $ cf push
 ### Setting environment variables on staging or production
 
 Cloud.gov allows you to set environment variables manually, but they are wiped
-out on each deploy. To get around this issue, we are setting environment
-variables via `Credentials` classes locally and having those classes access
-attributes stored in user-provided services on Cloud.gov.
+out by a zero-downtime deploy. To get around this issue, we are accessing
+environment variables via `Credentials` classes locally.
+
+The classes pick up environment variables set in the shell by the `cf-env-parser`
+buildpack; more information about how it works can be found in
+[that project's repo](https://github.com/18f/cf-env-parser-buildpack).
+
+If you're not using Cloud Foundry to deploy, just set the environment variables
+directly in your system.
 
 Steps to set new environment variables:
 
@@ -36,22 +42,13 @@ Steps to set new environment variables:
   # app/credentials/github_credentials.rb
 
   class GithubCredentials
-    extend UserProvidedService
 
-    def self.client_id(force_vcap: false)
-      if use_env_var?(force_vcap)
-        ENV['MPT_3500_GITHUB_KEY']
-      else
-        credentials('micropurchase-github')['client_id']
-      end
+    def self.client_id
+      ENV['MICROPURCHASE_GITHUB_CLIENT_ID']
     end
 
-    def self.secret(force_vcap: false)
-      if use_env_var?(force_vcap)
-        ENV['MPT_3500_GITHUB_SECRET']
-      else
-        credentials('micropurchase-github')['secret']
-      end
+    def self.secret
+      ENV['MICROPURCHASE_GITHUB_SECRET']
     end
   end
   ```
@@ -74,8 +71,8 @@ Steps to set new environment variables:
   ```
   # .env
 
-  MPT_3500_GITHUB_KEY=super_secret_key
-  MPT_3500_GITHUB_SECRET=super_secret_secret
+  MICROPURCHASE_GITHUB_CLIENT_ID=super_secret_key
+  MICROPURCHASE_GITHUB_SECRET=super_secret_secret
   ```
 
 1. Create a [user-provided service](https://docs.cloudfoundry.org/devguide/services/user-provided.html):
@@ -128,7 +125,7 @@ $ cf create-service rds shared-psql micropurchase-psql
 Set up the database:
 
 ```
-$ cf-ssh
+$ cf-ssh -f manifest.yml
 $~ bundle exec rake db:migrate
 $~ bundle exec rake db:seed
 ```

@@ -29,9 +29,9 @@
         <td><%= bid.presenter_auction.available? %></td>
         <td><%= number_to_currency(bid.amount) %></td>
         <td><%= bid.winning_status %></td>
-        <td><%= Presenter::DcTime.convert(bid.presenter_auction.start_datetime).to_s(:long) %></td>
-        <td><%= Presenter::DcTime.convert(bid.presenter_auction.end_datetime).to_s(:long) %></td>
-        <td><%= Presenter::DcTime.convert(bid.presenter_auction.delivery_deadline).to_s(:long) rescue nil %></td>
+        <td><%= DcTimePresenter.convert(bid.presenter_auction.start_datetime).to_s(:long) %></td>
+        <td><%= DcTimePresenter.convert(bid.presenter_auction.end_datetime).to_s(:long) %></td>
+        <td><%= DcTimePresenter.convert(bid.presenter_auction.delivery_deadline).to_s(:long) rescue nil %></td>
       </tr>
       <% end %>
     </tbody>

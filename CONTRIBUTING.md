@@ -37,11 +37,15 @@ models up to multipage interactions with the site. All new code must be covered
 by tests or it will not be accepted. You can run `rake spec` to make sure all
 tests are passing before you submit your pull request.
 
-In addition, we try to maintain a consistent style by using
+We try to maintain a consistent style by using
 [Rubocop](http://batsov.com/rubocop/), a style checker for Ruby code. We have
 relaxed some of the more stringent rules in a basic Rubocop configuration, so it
 should be easy to ensure your code meets our basic formatting rules. To check
 style, you can run `rake rubocop` to see any style offenses.
+
+For front-end code, we use the [jasmine](http://jasmine.github.io/2.0/introduction.html)
+framework to unit test user interactions and data visualizations. You can run
+`rake jasmine` and see if tests are passing at `http://localhost:8888/`.
 
 ### Our Git Branching Philosophy
 

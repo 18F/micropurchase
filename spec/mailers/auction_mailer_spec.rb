@@ -5,14 +5,15 @@ describe AuctionMailer do
     it 'sends the email to the bidder' do
       bidder = create(:user, email: "test@example.com")
       bid = create(:bid, bidder: bidder)
-      email = AuctionMailer.losing_bidder_notification(bid)
+      email = AuctionMailer
+        .losing_bidder_notification(bidder: bidder, auction: bid.auction)
 
       expect(email.to).to eq [bidder.email]
       expect(email.subject).to eq(
         I18n.t('mailers.auction_mailer.losing_bidder_notification.subject')
       )
       expect(email.subject).to eq I18n.t('mailers.auction_mailer.losing_bidder_notification.subject')
-      expect(email.from).to eq SMTPCredentials.default_from
+      expect(email.from).to eq [SMTPCredentials.default_from]
       expect(email.body.encoded).to include(
         I18n.t(
           'mailers.auction_mailer.losing_bidder_notification.para_1',

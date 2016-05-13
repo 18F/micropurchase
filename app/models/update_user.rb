@@ -5,6 +5,7 @@ class UpdateUser < Struct.new(:params, :current_user)
     fail UnauthorizedError unless allowed_to_edit?
 
     update_user
+    user.save
   end
 
   def errors
@@ -20,7 +21,6 @@ class UpdateUser < Struct.new(:params, :current_user)
   def update_user
     user.assign_attributes(user_params)
     update_sam
-    @status = user.save
   end
 
   def allowed_to_edit?
@@ -29,11 +29,8 @@ class UpdateUser < Struct.new(:params, :current_user)
 
   def update_sam
     reckoner = SamAccountReckoner.new(user)
-
-    reckoner.clear
-    reckoner.delay.set! unless user.duns_number.blank?
-  rescue
-    # do nothing
+    reckoner.set_default_sam_status
+    reckoner.delay.set!
   end
 
   def user_params

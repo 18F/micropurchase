@@ -48,7 +48,7 @@ end
 
 When(/^I visit my profile page$/) do
   @user = User.find_by(github_id: @github_id)
-  visit edit_user_path(@user)
+  visit users_edit_path
 end
 
 Then(/^I should be on the home page$/) do
@@ -60,7 +60,7 @@ Then(/^I should be on the auction page$/) do
 end
 
 Then(/^I should be on my profile page$/) do
-  expect(page.current_path).to eq(edit_user_path(@user))
+  expect(page.current_path).to eq(users_edit_path)
 end
 
 Then(/^I should be on the new bid page$/) do
@@ -76,14 +76,14 @@ Then(/^there should be meta tags for the edit profile form$/) do
 end
 
 Then(/^there should be meta tags for the closed auction$/) do
-  pr_auction = Presenter::Auction.new(@auction)
+  pr_auction = AuctionPresenter.new(@auction)
 
   expect(page).to have_css("title", visible: false, text: "18F Micro-purchase - #{pr_auction.title}")
   expect(page).to have_css("meta[property='og:title'][content='18F Micro-purchase - #{pr_auction.title}']", visible: false)
 end
 
 Then(/^there should be meta tags for the open auction$/) do
-  pr_auction = Presenter::Auction.new(@auction)
+  pr_auction = AuctionPresenter.new(@auction)
 
   expect(page).to have_css("title", visible: false, text: "18F Micro-purchase - #{pr_auction.title}")
   expect(page).to have_css("meta[property='og:title'][content='18F Micro-purchase - #{pr_auction.title}']", visible: false)
