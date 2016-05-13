@@ -2,6 +2,7 @@
 .auction-detail-panel {
   border: 1px solid #ccc;
   border-radius: $border-radius;
+  margin-bottom: $base-padding-large;
 
   .auction-info {
     margin-top: 2rem;
@@ -15,7 +16,6 @@
   }
 
   .auction-more-info {
-
     background-color: $primary-darkest;
     padding: 2rem;
 
@@ -38,6 +38,10 @@
       margin-right: 5px;
     }
   }
+}
+
+.auction-detail-bid {
+  padding-bottom: $base-padding;
 }
 
 

@@ -11,12 +11,14 @@ $color-secondary-dark: #cd2026;
 $color-gold: #fdb81e;
 $color-cool-blue: #205493;
 $color-purple: #4c2c92;
+$color-purple-pale: #b1cffe;
 $color-white: #ffffff;
 $color-gray-neutral: #cccccc;
 
 // 18f Branding
 $branding-black: #000000;
-$branding-darkest: #1C304A;
+// $branding-darkest: #1C304A;
+$branding-darkest: #2d3f5b;
 $branding-medium: #046B99;
 $branding-bright: #00CFFF;
 $branding-light: #B3EFFF;
@@ -36,6 +38,12 @@ $font-bold: 600;
 // Padding
 $base-padding: 1.25em;
 $base-padding-lite: 0.42em;
+$base-padding-large: 2.85em;
 
 // Typography
 $h1-font-size: rem(35px);
+
+
+// Logo
+// $logo-18f-sm: 25px;
+$logo-18f: 44px;

@@ -50,9 +50,9 @@
       </div>
       <% end %>
       <% if @view_model.auction.show_bid_button? %>
-      <p>
-        <a href="<%= new_auction_bid_path(@view_model.auction) %>" class='button-bid usa-button'>BID <icon class="fa fa-angle-double-right"></icon></a>
-      </p>
+        <p class="auction-detail-bid">
+          <a href="<%= new_auction_bid_path(@view_model.auction) %>" class='button-bid usa-button'>BID <icon class="fa fa-angle-double-right"></icon></a>
+        </p>
       <% end %>
     </div>
       <div class="auction-more-info">

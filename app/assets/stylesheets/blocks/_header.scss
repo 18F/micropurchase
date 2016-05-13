@@ -1,4 +1,3 @@
-
 nav.usa-site-navbar {
   background: $primary-darkest;
   padding-bottom: 10px;
@@ -9,6 +8,20 @@ nav.usa-site-navbar a {
   color: #fff;
   margin-left: 14px;
   position: relative;
+
+  &.header-home-link {
+    display: table-cell;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
 }
 
 .header-account {
@@ -45,21 +58,25 @@ nav.usa-site-navbar a {
 }
 
 .header-title-text {
-  font-size: 1.5rem;
+  font-size: 2rem;
+  font-weight: $font-light;
+  letter-spacing: -0.5px;
 
   @include media($small-screen) {
     font-size: 3rem;
+
   }
 }
 
 .header-image,
 .header-image img {
+  margin-right: $base-padding-lite;
   max-width: none;
-  width: 25px;
+  width: $logo-18f;
+}
 
-  @include media($small-screen) {
-    width: 50px;
-  }
+.header-image img {
+  float: left;
 }
 
 .header-table {

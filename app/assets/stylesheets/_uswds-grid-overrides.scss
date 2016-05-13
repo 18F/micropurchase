@@ -7,7 +7,7 @@ $large-screen:  768px;
 $huge-screen:  900px;
 $jumbo-screen:  1240px;
 
-$huge: new-breakpoint(min-width $jumbo-screen 12);
+$jumbo: new-breakpoint(min-width $jumbo-screen 12);
 $huge: new-breakpoint(min-width $huge-screen 12);
 $large: new-breakpoint(min-width $large-screen 12);
 $medium: new-breakpoint(min-width $medium-screen 6);
@@ -33,4 +33,13 @@ $small: new-breakpoint(min-width $small-screen 1);
 
 .usa-grid-top-padding {
   padding-top: 1.25em;
+}
+
+
+.usa-grid {
+  padding: 0 1.5rem;
+
+  @include media($small-screen) {
+    padding: 0 3rem;
+  }
 }

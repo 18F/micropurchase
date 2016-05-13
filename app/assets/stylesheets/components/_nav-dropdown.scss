@@ -26,7 +26,7 @@
 .header-account .fa-caret-down {
   font-size: 1.5rem;
   padding-left: $base-padding-lite;
-  vertical-align: bottom;
+  vertical-align: middle;
 
   @include media($medium-screen) {
     vertical-align: middle;
