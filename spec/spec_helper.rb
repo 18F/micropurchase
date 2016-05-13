@@ -1,4 +1,4 @@
-ENV['RACK_ENV'] = 'test'
+ENV['RACK_ENV'] ||= 'test'
 require 'simplecov'
 require 'webmock/rspec'
 SimpleCov.start

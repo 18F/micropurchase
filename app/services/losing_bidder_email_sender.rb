@@ -30,10 +30,6 @@ class LosingBidderEmailSender
   end
 
   def winning_bid
-    auction_rules.winning_bid
-  end
-
-  def auction_rules
-    RulesFactory.new(auction).create
+    WinningBid.new(auction).find
   end
 end

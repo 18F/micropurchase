@@ -30,11 +30,6 @@ class ApplicationController < ActionController::Base
     redirect_to login_path
   end
 
-  rescue_from UnauthorizedError do |error|
-    message = error.message || "Unauthorized"
-    handle_error(message)
-  end
-
   rescue_from 'UnauthorizedError::UserNotFound' do |error|
     message = error.message || "User not found"
     handle_error(message)
@@ -44,7 +39,7 @@ class ApplicationController < ActionController::Base
 
   def authenticator
     if @authenticator.nil?
-      @authenticator = if html_request?
+      @authenticator = if html_request? || csv_request?
                          WebAuthenticator.new(self)
                        elsif api_request?
                          ApiAuthenticator.new(self)
@@ -58,6 +53,10 @@ class ApplicationController < ActionController::Base
 
   def html_request?
     request.format.html?
+  end
+
+  def csv_request?
+    request.format == :csv
   end
 
   def api_request?

@@ -35,11 +35,16 @@ Given(/^there is also an unpublished auction$/) do
 end
 
 When(/^I visit the auction page$/) do
-  visit "/auctions/#{@auction.id}"
+  visit auction_path(@auction)
 end
 
 When(/^I visit the unpublished auction$/) do
-  visit "/auctions/#{@unpublished_auction.id}"
+  visit auction_path(@unpublished_auction)
+end
+
+When(/^the winning bidder has a valid DUNS number$/) do
+  winning_bid = RulesFactory.new(@auction).create.winning_bid
+  winning_bid.bidder.update(duns_number: FakeSamApi::VALID_DUNS)
 end
 
 Then(/^I should see the winning bid for the auction$/) do

@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :auctions
     resources :users, only: [:index, :edit, :update, :show]
+    resources :auction_reports, only: [:show]
   end
 
   get '/auth/:provider/callback', to: 'authentications#create'
