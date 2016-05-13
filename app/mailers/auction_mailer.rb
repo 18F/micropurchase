@@ -1,7 +1,7 @@
 class AuctionMailer < ActionMailer::Base
-  def losing_bidder_notification(bid)
-    @auction = bid.auction
-    bidder = bid.bidder
+  def losing_bidder_notification(bidder:, auction:)
+    @auction = auction
+    bidder = bidder
     mail(
       to: bidder.email,
       subject: I18n.t('mailers.auction_mailer.losing_bidder_notification.subject'),
