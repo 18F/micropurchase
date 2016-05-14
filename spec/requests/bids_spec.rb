@@ -34,6 +34,7 @@ describe AuctionsController do
 
   describe 'POST /auctions/:auction_id/bids' do
     before do
+      @bid_count = auction.bids.count
       post auction_bids_path(auction), params, headers
     end
     let(:json_bid) { json_response['bid'] }
@@ -53,6 +54,10 @@ describe AuctionsController do
       it 'returns a 404 status code' do
         expect(status).to eq(404)
       end
+
+      it 'should not create a bid' do
+        expect(auction.bids.count).to eq(@bid_count)
+      end
     end
 
     context 'when the API key is invalid' do
@@ -69,6 +74,10 @@ describe AuctionsController do
 
       it 'returns a 404 status code' do
         expect(status).to eq(404)
+      end
+
+      it 'should not create a bid' do
+        expect(auction.bids.count).to eq(@bid_count)
       end
     end
 
@@ -87,6 +96,10 @@ describe AuctionsController do
       it 'returns a 403 status code' do
         expect(status).to eq(403)
       end
+
+      it 'should not create a bid' do
+        expect(auction.bids.count).to eq(@bid_count)
+      end
     end
 
     context 'when the auction has not yet started' do
@@ -103,6 +116,10 @@ describe AuctionsController do
 
       it 'returns a 403 status code' do
         expect(status).to eq(403)
+      end
+
+      it 'should not create a bid' do
+        expect(auction.bids.count).to eq(@bid_count)
       end
     end
 
@@ -123,6 +140,15 @@ describe AuctionsController do
 
         it 'returns a 200 status code' do
           expect(status).to eq(200)
+        end
+
+        it 'should create a bid from the API source' do
+          expect(auction.bids.count).to eq(@bid_count + 1)
+          new_bid = auction.bids.order('created_at DESC').first
+
+          expect(new_bid.amount).to eq(bid_amount)
+          expect(new_bid.bidder).to eq(user)
+          expect(new_bid.via).to eq('api')
         end
       end
 
@@ -156,6 +182,10 @@ describe AuctionsController do
           it 'returns a 403 status code' do
             expect(status).to eq(403)
           end
+
+          it 'should not create a bid' do
+            expect(auction.bids.count).to eq(@bid_count)
+          end
         end
       end
 
@@ -186,6 +216,15 @@ describe AuctionsController do
           it 'returns a 200 status code' do
             expect(status).to eq(200)
           end
+
+          it 'should create a bid from the API source' do
+            expect(auction.bids.count).to eq(@bid_count + 1)
+
+            new_bid = auction.bids.order('created_at DESC').first
+            expect(new_bid.amount).to eq(bid_amount)
+            expect(new_bid.bidder).to eq(user)
+            expect(new_bid.via).to eq('api')
+          end
         end
 
         context 'and the bidder has already bid on this auction' do
@@ -193,11 +232,13 @@ describe AuctionsController do
           let(:second_bid_amount) { bid_amount - 10 }
 
           it 'returns a 403 status code' do
+            bid_count = auction.bids.count
             post auction_bids_path(auction), second_params, headers
 
             expect(status).to eq(403)
             expect(json_response).to have_key('error')
             expect(json_response['error']).to eq('You are not allowed to bid on this auction')
+            expect(auction.bids.count).to eq(bid_count)
           end
         end
       end
@@ -213,6 +254,10 @@ describe AuctionsController do
         it 'returns a 403 status code' do
           expect(status).to eq(403)
         end
+
+        it 'should not create a bid' do
+          expect(auction.bids.count).to eq(@bid_count)
+        end
       end
 
       context 'and the user has a pending #sam_status' do
@@ -225,6 +270,10 @@ describe AuctionsController do
 
         it 'returns a 403 status code' do
           expect(status).to eq(403)
+        end
+
+        it 'should not create a bid' do
+          expect(auction.bids.count).to eq(@bid_count)
         end
       end
 
@@ -258,6 +307,8 @@ describe AuctionsController do
         it 'returns a 403 status code' do
           expect(status).to eq(403)
         end
+
+        it 'should not create a bid'
       end
 
       context 'and the bid amount contains cents' do
@@ -269,6 +320,9 @@ describe AuctionsController do
 
         it 'returns a 403 status code' do
           expect(status).to eq(403)
+        end
+
+        it 'should not create a bid' do
         end
       end
     end

@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
     :require_admin,
     :require_authentication,
     :set_api_current_user,
+    :via,
     to: :authenticator
   )
 

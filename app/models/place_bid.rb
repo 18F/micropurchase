@@ -1,4 +1,4 @@
-class PlaceBid < Struct.new(:params, :current_user)
+class PlaceBid < Struct.new(:params, :current_user, :via)
   BID_LIMIT = 3500
   BID_INCREMENT = 1
 
@@ -18,7 +18,8 @@ class PlaceBid < Struct.new(:params, :current_user)
     @bid ||= Bid.create(
       amount: amount,
       bidder_id: current_user.id,
-      auction_id: auction.id
+      auction_id: auction.id,
+      via: via
     )
   end
 
@@ -26,7 +27,8 @@ class PlaceBid < Struct.new(:params, :current_user)
     @bid ||= Bid.new(
       amount: amount,
       bidder_id: current_user.id,
-      auction_id: auction.id
+      auction_id: auction.id,
+      via: via
     )
 
     @bid.readonly!
