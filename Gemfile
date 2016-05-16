@@ -43,7 +43,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'cucumber-rails', require: false
   gem 'capybara'
-  gem 'capybara-screenshot'
   gem 'poltergeist'
   gem 'byebug'
   gem 'pry'

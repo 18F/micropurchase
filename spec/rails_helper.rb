@@ -6,7 +6,6 @@ require 'rspec/rails'
 require 'dotenv'
 Dotenv.load
 require 'capybara/rspec'
-require 'capybara-screenshot/rspec'
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
