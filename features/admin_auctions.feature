@@ -52,3 +52,31 @@ Feature: Using the Admin Auctions panel
 
     When I click on the auction's title
     Then I should see new content on the page
+
+  Scenario: I get a CSV file containing Sam.gov data for the winning vendor
+    Given I am an administrator
+    And I sign in
+    And there is a closed auction
+    And the winning bidder has a valid DUNS number
+    When I visit the admin auction page for that auction
+    And I click on the link to generate a winning bidder CSV report
+    Then the file should contain the following data from Sam.gov:
+      """
+      13GG Vendor Name,
+      13JJ Vendor Address Line 1,
+      13KK Vendor Address Line 2,
+      13LL Vendor Address Line 3,
+      13MM Vendor Address City,
+      13NN Vendor Address State,
+      13PP Vendor Zip Code,
+      13QQ Vendor Country Code,
+      13RR Vendor Phone Number,
+      13SS Vendor Fax Number,
+      Sudol, Brendan,
+      4301 N Henderson Rd Apt 408,
+      Arlington,
+      VA,
+      222032511,
+      USA,
+      5404218332,
+      """

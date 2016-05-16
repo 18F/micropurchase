@@ -2,8 +2,16 @@ When(/^I visit the auctions admin page$/) do
   visit admin_auctions_path
 end
 
+When(/^I visit the admin auction page for that auction$/) do
+  visit admin_auction_path(@auction)
+end
+
 When(/^I visit the admin edit page for that auction$/) do
-  visit "/admin/auctions/#{@auction.id}/edit"
+  visit edit_admin_auction_path(@auction)
+end
+
+When(/^I click on the link to generate a winning bidder CSV report$/) do
+  click_on(I18n.t('admin.auctions.show.winner_report'))
 end
 
 When(/^I select the result as accepted$/) do
@@ -25,6 +33,13 @@ Then(/^I should see that the auction has a CAP Proposal URL$/) do
   @auction.reload
   expect(@auction.cap_proposal_url).not_to be_nil
   expect(page).to have_content(@auction.cap_proposal_url)
+end
+
+Then(/^the file should contain the following data from Sam\.gov:$/) do |content|
+  expect(page.response_headers["Content-Disposition"]).to include("attachment")
+  content.split(',').each do |info|
+    expect(page.source).to include(info.strip)
+  end
 end
 
 Then(/^I will not see a warning I must be an admin$/) do

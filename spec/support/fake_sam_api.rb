@@ -6,9 +6,17 @@ class FakeSamApi < Sinatra::Base
 
   get '/sam/v4/registrations/:duns' do
     if params[:duns] == VALID_DUNS
-      status 200
+      json_response 200, 'duns_info.json'
     elsif params[:duns] == INVALID_DUNS
-      status 400
+      json_response 404, 'invalid_duns.json'
     end
+  end
+
+  private
+
+  def json_response(response_code, file_name)
+    content_type :json
+    status response_code
+    File.open(File.dirname(__FILE__) + '/fixtures/' + file_name, 'rb').read
   end
 end

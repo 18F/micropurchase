@@ -46,7 +46,7 @@ class AuctionSerializer < ActiveModel::Serializer
     if auction_status.available?
       NullBid.new
     else
-      RulesFactory.new(object).create.winning_bid
+      WinningBid.new(object).find
     end
   end
 

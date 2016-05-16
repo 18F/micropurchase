@@ -1,0 +1,492 @@
+{
+  "sam_data": {
+    "registration": {
+      "govtBusinessPoc": {
+        "lastName": "SUDOL",
+        "address": {
+          "zip": "22203",
+          "countryCode": "USA",
+          "line1": "4301 N HENDERSON RD APT 408",
+          "stateorProvince": "VA",
+          "city": "Arlington"
+        },
+        "email": "BRENDANSUDOL@GMAIL.COM",
+        "usPhone": "5404218332",
+        "firstName": "BRENDAN"
+      },
+      "qualifications": {
+      },
+      "dunsPlus4": "0000",
+      "activationDate": "2015-10-30 11:42:30.0",
+      "fiscalYearEndCloseDate": "12\/31",
+      "businessTypes": [
+        "VW",
+        "2X",
+        "27"
+      ],
+      "registrationDate": "2015-10-28 00:00:00.0",
+      "certificationsURL": {
+        "pdfUrl": "https:\/\/www.sam.gov\/SAMPortal\/filedownload?reportType=1&orgId=kZhDothaHaS8Y%2BBby2ety%2B1PIcKkDuGxkhITFtBfiwpmpGqNLrKsCz9OrI6CaxsI&pitId=Pg1XpWC8vQH7LKi9e8r5BK5D6ORH953kPtjfCGikUDnIY8Fsp71cFeSgzD8W9Uqd&requestId=OBq2t61SZrN75k9"
+      },
+      "hasDelinquentFederalDebt": false,
+      "duns": "080037478",
+      "cage": "7H1Y7",
+      "hasKnownExclusion": false,
+      "publicDisplay": true,
+      "expirationDate": "2016-10-27 10:53:02.0",
+      "status": "ACTIVE",
+      "corporateStructureCode": "2J",
+      "stateOfIncorporation": "VA",
+      "corporateStructureName": "Sole Proprietorship",
+      "legalBusinessName": "Sudol, Brendan",
+      "congressionalDistrict": "VA 08",
+      "bondingInformation": {
+      },
+      "businessStartDate": "2015-10-28",
+      "statusMessage": "Active",
+      "lastUpdateDate": "2015-11-02 17:36:23.0",
+      "samAddress": {
+        "zipPlus4": "2511",
+       "zip": "22203",
+        "countryCode": "USA",
+        "line1": "4301 N Henderson Rd Apt 408",
+        "stateorProvince": "VA",
+        "city": "Arlington"
+      },
+      "submissionDate": "2015-10-28 10:53:02.0",
+      "naics": [
+        {
+          "isPrimary": false,
+          "naicsCode": "518210",
+          "naicsName": "DATA PROCESSING, HOSTING, AND RELATED SERVICES"
+        },
+        {
+          "isPrimary": true,
+          "naicsCode": "541511",
+          "naicsName": "CUSTOM COMPUTER PROGRAMMING SERVICES"
+        }
+      ],
+      "certifications": {
+        "farResponses": [
+          {
+            "id": "FAR 52.209-2"
+          },
+          {
+            "id": "FAR 52.209-5",
+            "answers": [
+              {
+                "answerText": "No",
+                "section": "52.209-5.a.1.i.A"
+              },
+              {
+                "answerText": "No",
+                "section": "52.209-5.a.1.i.B"
+              },
+              {
+                "answerText": "No",
+                "section": "52.209-5.a.1.i.D"
+              },
+              {
+                "answerText": "No",
+                "section": "52.209-5.a.1.i.C"
+              },
+              {
+                "answerText": "No",
+                "section": "52.209-5.a.1.ii"
+              }
+            ]
+          },
+          {
+            "id": "FAR 52.203-2",
+            "answers": {
+              "section": "52.203-2.b.2.i",
+              "SamPointOfContact": {
+                "lastName": "Sudol",
+                "title": "CEO",
+                "firstName": "Brendan"
+              }
+            }
+          },
+          {
+            "id": "FAR 52.215-6",
+            "answers": {
+              "answerText": "No",
+              "section": "52.215-6.a"
+            }
+          },
+          {
+            "id": "FAR 52.214-14",
+            "answers": {
+              "answerText": "No",
+              "section": "52.214-14.a"
+            }
+          },
+          {
+            "id": "FAR 52.223-4",
+            "answers": {
+              "answerText": "Yes",
+              "section": "52.223-4"
+            }
+          },
+          {
+            "id": "FAR 52.223-9",
+            "answers": {
+              "answerText": "Yes",
+              "section": "52.223-9"
+            }
+          },
+          {
+            "id": "FAR 52.219-2",
+            "answers": {
+              "answerText": "No",
+              "section": "52.219-2.a"
+            }
+          },
+          {
+            "id": "FAR 52.204-3",
+            "answers": [
+              {
+                "answerText": "TIN ON FILE",
+                "section": "52.204-3.d"
+              },
+              {
+                "answerText": "No",
+                "section": "52.204-3.f"
+              }
+            ]
+          },
+          {
+            "id": "FAR 52.212-3",
+            "answers": [
+              {
+                "naics": [
+                  {
+                    "isSmallBusiness": "Y",
+                    "isPrimary": false,
+                    "naicsCode": 518210,
+                    "naicsName": "DATA PROCESSING, HOSTING, AND RELATED SERVICES"
+                  },
+                  {
+                    "isSmallBusiness": "Y",
+                    "isPrimary": true,
+                    "naicsCode": 541511,
+                    "naicsName": "CUSTOM COMPUTER PROGRAMMING SERVICES"
+                  }
+                ],
+                "section": "52.212-3.c"
+              },
+              {
+                "answerText": "Yes",
+                "section": "52.212-3.c.1"
+              },
+              {
+                "answerText": "Yes",
+                "section": "52.212-3.c.4"
+              },
+              {
+                "answerText": "No",
+                "section": "52.212-3.c.5"
+              },
+              {
+                "answerText": "No",
+                "section": "52.212-3.c.6.i"
+              },
+              {
+                "answerText": "No",
+                "section": "52.212-3.c.6.ii"
+              },
+              {
+                "answerText": "No",
+                "section": "52.212-3.c.7.i"
+              },
+              {
+                "answerText": "No",
+                "section": "52.212-3.c.7.ii"
+              },
+              {
+                "answerText": "No",
+                "section": "52.212-3.c.10.i.A"
+              },
+              {
+                "answerText": "No",
+                "section": "52.212-3.c.10.i.B"
+              },
+              {
+                "answerText": "No",
+                "section": "52.212-3.c.10.ii"
+              },
+              {
+                "answerText": "No",
+                "section": "52.212-3.c.11.ii"
+              },
+              {
+                "answerText": "No",
+                "section": "52.212-3.d.1.i"
+              },
+              {
+                "answerText": "Yes",
+                "section": "52.212-3.d.1.ii"
+              },
+              {
+                "answerText": "Sudol, Brendan  has not had previous contracts subject to written affirmative action programs requirements from Secretary of Labor regulations.",
+                "section": "52.212-3.d.2.i"
+              },
+              {
+                "answerText": "No",
+                "section": "52.212-3.f"
+              },
+              {
+                "answerText": "No",
+                "section": "52.212-3.h.1"
+              },
+              {
+                "answerText": "No",
+                "section": "52.212-3.h.2"
+              },
+              {
+                "answerText": "No",
+                "section": "52.212-3.h.4"
+              },
+              {
+                "answerText": "No",
+                "section": "52.212-3.h.3"
+              },
+              {
+                "answerText": "No",
+                "section": "52.212-3.h.5"
+              },
+              {
+                "answerText": "No",
+                "section": "52.212-3.i.2.i"
+              },
+              {
+                "section": "52.212-3.j"
+              },
+              {
+                "answerText": "Vendor will provide information with specific offers to the Government",
+                "section": "52.212-3.k.1.2.i"
+              },
+              {
+                "answerText": "No",
+                "section": "52.212-3.k.2.2"
+              },
+              {
+                "answerText": "No",
+                "section": "52.212-3.l.5"
+              },
+              {
+                "answerText": "No",
+                "section": "52.212-3-AltII.iii"
+              },
+              {
+                "answerText": "No",
+                "section": "52.226-2.b.1"
+              },
+              {
+                "answerText": "No",
+                "section": "52.226-2.b.2"
+              }
+            ]
+          },
+          {
+            "id": "FAR 52.219-1",
+            "answers": [
+              {
+                "naics": [
+                  {
+                    "isSmallBusiness": "Y",
+                    "isPrimary": false,
+                    "naicsCode": 518210,
+                    "naicsName": "DATA PROCESSING, HOSTING, AND RELATED SERVICES"
+                  },
+                  {
+                    "isSmallBusiness": "Y",
+                    "isPrimary": true,
+                    "naicsCode": 541511,
+                    "naicsName": "CUSTOM COMPUTER PROGRAMMING SERVICES"
+                  }
+                ],
+                "section": "52.219-1.b"
+              },
+              {
+                "answerText": "Yes",
+                "section": "52.219-1.b.1"
+              },
+              {
+                "answerText": "No",
+                "section": "52.219-1.b.3.1"
+              },
+              {
+                "answerText": "No",
+                "section": "52.219-1.b.4.i"
+              },
+              {
+                "answerText": "No",
+                "section": "52.219-1.b.4.ii"
+              },
+              {
+                "answerText": "No",
+                "section": "52.219-1.b.5.i"
+              },
+              {
+                "answerText": "No",
+                "section": "52.219-1.b.5.ii"
+              },
+              {
+                "answerText": "No",
+                "section": "52.219-1.b.6"
+              },
+              {
+                "answerText": "No",
+                "section": "52.219-1.b.7"
+              },
+              {
+                "answerText": "No",
+                "section": "52.219-1.b.8.i"
+              },
+              {
+                "answerText": "No",
+                "section": "52.219-1.b.8.ii"
+              }
+            ]
+          },
+          {
+            "id": "FAR 52.219-22",
+            "answers": [
+              {
+                "naics": [
+                  {
+                    "isSmallBusiness": "Y",
+                    "isPrimary": false,
+                    "naicsCode": 518210,
+                    "naicsName": "DATA PROCESSING, HOSTING, AND RELATED SERVICES"
+                  },
+                  {
+                    "isSmallBusiness": "Y",
+                    "isPrimary": true,
+                    "naicsCode": 541511,
+                    "naicsName": "CUSTOM COMPUTER PROGRAMMING SERVICES"
+                  }
+                ],
+                "section": "52.219-22.b"
+              },
+              {
+                "answerText": "No",
+                "section": "52.219-22.b.2.1"
+              },
+              {
+                "answerText": "Yes",
+                "section": "52.219-22.b.1.ii"
+              },
+              {
+                "answerText": "No",
+                "section": "52.219-22.AltI.3"
+              }
+            ]
+          },
+          {
+            "id": "FAR 52.227-15",
+            "answers": {
+              "answerText": "No",
+              "section": "52.227-15.b.2"
+            }
+          },
+          {
+            "id": "FAR 52.204-17",
+            "answers": {
+              "answerText": "No",
+              "section": "52.204-17.b"
+            }
+          },
+          {
+            "id": "FAR 52.222-18",
+            "answers": {
+              "answerText": "No",
+              "section": "52.222-18.c.1"
+            }
+          },
+          {
+            "id": "FAR 52.222-22",
+            "answers": [
+              {
+                "answerText": "No",
+                "section": "52.222-22.a"
+              },
+              {
+                "answerText": "Yes",
+                "section": "52.222-22.b"
+              }
+            ]
+          },
+          {
+            "id": "FAR 52.222-25",
+            "answers": {
+              "answerText": "Sudol, Brendan  has not had previous contracts subject to written affirmative action programs requirements from Secretary of Labor regulations.",
+              "section": "52.222-25"
+            }
+          },
+          {
+            "id": "FAR 52.225-2",
+            "answers": {
+              "answerText": "No",
+              "section": "52.225-2.a"
+            }
+          },
+          {
+            "id": "FAR 52.225-4",
+            "answers": {
+              "answerText": "No",
+              "section": "52.225-4.a"
+            }
+          },
+          {
+            "id": "FAR 52.225-6",
+            "answers": {
+              "answerText": "No",
+              "section": "52.225-6.a"
+            }
+          },
+          {
+            "id": "FAR 52.222-48",
+            "answers": {
+              "answerText": "Vendor will provide information with specific offers to the Government",
+              "section": "52.222-48.a.1"
+            }
+          },
+          {
+            "id": "FAR 52.222-52",
+            "answers": {
+              "answerText": "No",
+              "section": "52.222-52.a.1.1"
+            }
+          }
+        ],
+        "pdfUrl": "https:\/\/www.sam.gov\/SAMPortal\/filedownload?reportType=1&orgId=lMyKInN%2Foqf04g%2FvVztShA%2BcWi8XK7WjQWKoJUYu7NacoHgyZxR8pTrAN1CVT0De&pitId=RZkszH9S6s0Abl6mGJwsgYPHqUaBri%2F2WjwW2x5iq%2BL7jRbzE5QICgmRUM%2BpFW5%2FcBFt9%2B0IfIlp%0Avc0c429SbA%3D%3D&requestId=v2Ch11MYW04O1Nz"
+      },
+      "creditCardUsage": true,
+      "countryOfIncorporation": "USA",
+      "electronicBusinessPoc": {
+        "lastName": "SUDOL",
+        "address": {
+          "zip": "22203",
+          "countryCode": "USA",
+          "line1": "4301 N HENDERSON RD APT 408",
+          "stateorProvince": "VA",
+          "city": "Arlington"
+        },
+        "email": "BRENDANSUDOL@GMAIL.COM",
+        "usPhone": "5404218332",
+        "firstName": "BRENDAN"
+      },
+      "mailingAddress": {
+        "zipPlus4": "2511",
+        "zip": "22203",
+        "countryCode": "USA",
+        "line1": "4301 N Henderson Rd Apt 408",
+        "stateorProvince": "VA",
+        "city": "Arlington"
+      },
+      "purposeOfRegistration": "ALL_AWARDS"
+    }
+  }
+}
