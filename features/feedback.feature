@@ -6,5 +6,5 @@ Feature: Feedback options
   Scenario: Visiting the homepage
     When I visit the home page
     Then I should see a link to give feedback
-    And I should see a link to get in touch
+    And I should see an email link to get in touch
     And I should see a link to the github repository
