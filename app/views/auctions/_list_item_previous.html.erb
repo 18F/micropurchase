@@ -1,5 +1,4 @@
-<% if auction.available? %>
-<% else %>
+<% if !AuctionStatus.new(auction).available? %>
   <div class='usa-width-one-whole issue-list-item winners-list-item'>
 
     <div class="usa-grid issue-bid-details">
@@ -11,5 +10,4 @@
       </div>
     </div>
   </div>
-
 <% end %>

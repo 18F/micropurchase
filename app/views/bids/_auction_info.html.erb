@@ -3,8 +3,8 @@
   <p class='issue-description'>
     <%=h raw auction.html_description %>
   </p>
-  <% if auction.available? %>
-  <h3>Ends in <%= auction.relative_time_left %></h3>
+  <% if AuctionStatus.new(auction).available? %>
+    <h3>Ends in <%= auction.relative_time_left %></h3>
   <% end %>
 </div>
 <hr>

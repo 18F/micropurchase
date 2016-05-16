@@ -13,7 +13,7 @@
   <div class="usa-grid issue-bid-details">
     <div class='usa-width-one-whole issue-bids-info'>
       <div class="usa-grid-full">
-      <% if auction.available? %>
+      <% if AuctionStatus.new(auction).available? %>
         <%= render partial: 'auctions/bids_and_form', locals: {auction: auction} %>
 
         <div class="issue-bids-info-item">

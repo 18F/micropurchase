@@ -4,10 +4,14 @@ class Rules::BaseRules < Struct.new(:auction)
   end
 
   def user_can_bid?(user)
-    auction.available? && user.present? && user.sam_accepted?
+    auction_available? && user.present? && user.sam_accepted?
   end
 
   def partial_prefix
     fail NotImplementedError
+  end
+
+  def auction_available?
+    AuctionStatus.new(auction).available?
   end
 end

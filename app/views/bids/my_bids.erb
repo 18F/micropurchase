@@ -26,7 +26,7 @@
           <%= link_to(bid.presenter_auction.title, auction_path(bid.presenter_auction)) %>
         </td>
         <td><%= bid.presenter_auction.formatted_type %></td>
-        <td><%= bid.presenter_auction.available? %></td>
+        <td><%= AuctionStatus.new(bid.auction).available? %></td>
         <td><%= number_to_currency(bid.amount) %></td>
         <td><%= bid.winning_status %></td>
         <td><%= DcTimePresenter.convert(bid.presenter_auction.start_datetime).to_s(:long) %></td>

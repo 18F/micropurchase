@@ -39,10 +39,6 @@ class PlaceBid < Struct.new(:params, :current_user)
     @auction ||= Auction.find(params[:auction_id])
   end
 
-  def auction_available?
-    presenter_auction.available?
-  end
-
   def user_can_bid?
     presenter_auction.user_can_bid?(current_user)
   end
@@ -78,6 +74,10 @@ class PlaceBid < Struct.new(:params, :current_user)
     end
   end
   # rubocop:enable Style/IfUnlessModifier
+
+  def auction_available?
+    AuctionStatus.new(auction).available?
+  end
 
   def amount
     params_amount = params[:bid][:amount]

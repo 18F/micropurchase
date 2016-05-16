@@ -3,19 +3,16 @@ class AuctionViewModel < Struct.new(:current_user, :auction_record)
 
   delegate(
     :auction_rules_href,
-    :available?,
     :bid_count,
     :bids,
     :bids?,
     :created_at,
     :delivery_deadline,
     :end_datetime,
-    :expiring?,
     :formatted_delivery_deadline,
     :formatted_end_time,
     :formatted_start_time,
     :formatted_type,
-    :future?,
     :highlighted_bid_label,
     :html_description,
     :html_description,
@@ -24,7 +21,6 @@ class AuctionViewModel < Struct.new(:current_user, :auction_record)
     :relative_start_time,
     :id,
     :issue_url,
-    :over?,
     :partial_path,
     :read_attribute_for_serialization,
     :show_bids?,
@@ -131,6 +127,26 @@ class AuctionViewModel < Struct.new(:current_user, :auction_record)
                     'Open'
                   end
     "::AuctionStatus::#{status_name}ViewModel".constantize
+  end
+
+  def expiring?
+    auction_status.expiring?
+  end
+
+  def future?
+    auction_status.future?
+  end
+
+  def available?
+    auction_status.available?
+  end
+
+  def over?
+    auction_status.over?
+  end
+
+  def auction_status
+    AuctionStatus.new(auction_record)
   end
 
   def status_presenter

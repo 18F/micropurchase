@@ -1,10 +1,10 @@
 <% content_for :title do %>18F Micro-purchase - New bid<% end %>
 <% content_for :description do %>
-<% if @auction.available? %>
-Place a bid for "<%= @auction.title %>". The current bid is <%= @auction.highlighted_bid_amount_as_currency %>.
-<% else %>
-Bidding on this auction closed on <%= @auction.end_datetime %>. The winning bid was <%= @auction.highlighted_bid_amount_as_currency %>.
-<% end %>
+  <% if AuctionStatus.new(@auction).available? %>
+    Place a bid for "<%= @auction.title %>". The current bid is <%= @auction.highlighted_bid_amount_as_currency %>.
+  <% else %>
+    Bidding on this auction closed on <%= @auction.end_datetime %>. The winning bid was <%= @auction.highlighted_bid_amount_as_currency %>.
+  <% end %>
 <% end %>
 <% content_for :data_tags do %>
 <%= render partial: '/auctions/data_tags', locals: {auction: @auction} %>
@@ -14,7 +14,7 @@ Bidding on this auction closed on <%= @auction.end_datetime %>. The winning bid 
 
 <%= render partial: 'auction_info', locals: { auction: @auction } %>
 
-<% if @auction.available? %>
+<% if AuctionStatus.new(@auction).available? %>
   <%= form_for @bid, url: confirm_auction_bids_path(@auction), html: {class: 'bid-form'} do |f| %>
     <div class="usa-width-one-whole">
       <div class="usa-width-one-half">

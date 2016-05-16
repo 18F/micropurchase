@@ -58,11 +58,19 @@ class AuctionShowViewModel < Struct.new(:current_user, :auction_record)
   end
 
   def auction_deadline_label
-    auction.over? ? "Auction ended at:" : "Bid deadline:"
+    if AuctionStatus.new(auction).over?
+      "Auction ended at:"
+    else
+      "Bid deadline:"
+    end
   end
 
   def auction_start_label
-    auction.over? ? "Auction started at:" : "Bid start time:"
+    if AuctionStatus.new(auction_record).over?
+      "Auction started at:"
+    else
+      "Bid start time:"
+    end
   end
 
   def auction_rules_link
@@ -70,7 +78,7 @@ class AuctionShowViewModel < Struct.new(:current_user, :auction_record)
   end
 
   def auction_won?
-    auction.over? && auction.bids?
+    AuctionStatus.new(auction_record).over? && auction.bids?
   end
 
   def auction_has_delivery_deadline?

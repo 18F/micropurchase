@@ -52,14 +52,6 @@ class AuctionPresenter
   )
 
   delegate(
-    :future?,
-    :expiring?,
-    :over?,
-    :available?,
-    to: :auction_status
-  )
-
-  delegate(
     :auction_rules_href,
     :formatted_type,
     :highlighted_bid,
@@ -163,10 +155,6 @@ class AuctionPresenter
     else
       "in #{distance}"
     end
-  end
-
-  def auction_status
-    AuctionStatus.new(model)
   end
 
   def decorated_bid(bid)

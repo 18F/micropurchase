@@ -30,26 +30,6 @@ describe AuctionStatus do
           expect(status).not_to be_available
         end
       end
-
-      context "auction does not have a start date time" do
-        it "is false" do
-          auction = FactoryGirl.build(:auction, start_datetime: nil, end_datetime: tomorrow)
-
-          status = AuctionStatus.new(auction)
-
-          expect(status).not_to be_available
-        end
-      end
-
-      context "auction does not have an end datetime" do
-        it "is false" do
-          auction = FactoryGirl.build(:auction, start_datetime: tomorrow, end_datetime: nil)
-
-          status = AuctionStatus.new(auction)
-
-          expect(status).not_to be_available
-        end
-      end
     end
 
     describe "#over?" do
