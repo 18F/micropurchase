@@ -6,7 +6,7 @@
 
 <% if auction.bids? %>
   <div class="issue-bids-info-item"><% if defined? for_winners_page %><% else %>
-    <div class="issue-bids-info-item">Winning bid: </div>
+    <span>Winning bid: </span>
   <% end %><%= auction.highlighted_bid_amount_as_currency %></div>
 
 <% else %>

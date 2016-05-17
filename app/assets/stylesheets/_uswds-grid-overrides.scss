@@ -35,11 +35,16 @@ $small: new-breakpoint(min-width $small-screen 1);
   padding-top: 1.25em;
 }
 
-
 .usa-grid {
   padding: 0 1.5rem;
 
   @include media($small-screen) {
     padding: 0 3rem;
+  }
+}
+
+.usa-width-one-half {
+  &:nth-child(2n) {
+    @include omega();
   }
 }

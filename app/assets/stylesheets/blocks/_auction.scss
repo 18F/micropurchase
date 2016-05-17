@@ -1,3 +1,13 @@
+.auction-wrapper {
+  display:flex;
+  -ms-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-justify-content: space-between;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+
 textarea#auction_summary {
   height: 150px;
   width: 500px;
@@ -7,8 +17,6 @@ textarea#auction_description {
   height: 500px;
   width: 500px;
 }
-
-
 
 .auction-description {
   h1 {
@@ -39,14 +47,21 @@ textarea#auction_description {
 }
 
 .issue-list-item {
-  border: 1px solid $color-gray-neutral;
   background-color: $color-white;
+  border: 1px solid $color-gray-neutral;
   border-radius: $border-radius;
+  display: flex !important;
+  flex-direction: column;
+  -ms-flex-direction: column;
+  -webkit-flex-direction: column;
   font-weight: $font-light;
   margin-bottom: $site-margins;
 
   &:last-of-type {
     margin-bottom: $base-padding-large;
+
+  .issue-content-wrapper {
+    flex: 1 0 auto;
   }
 
   .issue-label {
@@ -71,6 +86,7 @@ textarea#auction_description {
     color: $color-white;
     padding: $base-padding 3rem;
     padding-bottom: 0;
+    width: 100%;
 
     .current-bid-box {
       position: relative;
@@ -129,6 +145,10 @@ textarea#auction_description {
 
   &:last-of-type {
     margin-right: 0;
+  }
+
+  span {
+    font-weight: $font-normal;
   }
 }
 
