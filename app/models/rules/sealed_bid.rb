@@ -1,6 +1,6 @@
 class Rules::SealedBid < Rules::BaseRules
   def winning_bid
-    if auction.available?
+    if auction_available?
       NullBidPresenter.new
     else
       auction.lowest_bid
@@ -8,7 +8,7 @@ class Rules::SealedBid < Rules::BaseRules
   end
 
   def veiled_bids(user)
-    if auction.available?
+    if auction_available?
       auction.bids.select { |bid| bid.bidder == user }
     else
       auction.bids
@@ -24,7 +24,7 @@ class Rules::SealedBid < Rules::BaseRules
   end
 
   def show_bids?
-    !auction.available?
+    !auction_available?
   end
 
   def partial_prefix
@@ -36,7 +36,7 @@ class Rules::SealedBid < Rules::BaseRules
   end
 
   def highlighted_bid(user)
-    if auction.available?
+    if auction_available?
       auction.bids.detect { |bid| bid.bidder_id == user.id } || NullBidPresenter.new
     else
       auction.lowest_bid
@@ -49,5 +49,11 @@ class Rules::SealedBid < Rules::BaseRules
 
   def auction_rules_href
     '/auction/rules/single-bid'
+  end
+
+  private
+
+  def auction_available?
+    AuctionStatus.new(auction).available?
   end
 end
