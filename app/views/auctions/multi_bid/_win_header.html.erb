@@ -1,25 +1,6 @@
 <% if AuctionStatus.new(auction).over? %>
   <% if auction.bids? %>
-    <% if current_user %>
-      <% if auction.user_is_winning_bidder? %>
-        <div class="usa-alert usa-alert-success auction-alert">
-          <div class="usa-alert-body"><h3>You are the winner</h3></div>
-          <p class="usa-alert-text">Congratulations! We will contact you with further instructions.</p>
-        </div>
-      <% elsif auction.user_is_bidder? %>
-        <div class="usa-alert usa-alert-error auction-alert">
-          <div class="usa-alert-body"><h3>You are not the winner</h3></div>
-          <p class="usa-alert-text">Someone else placed a lower bid than you.</p>
-        </div>
-      <% end %>
-
-    <% else %>
-      <div class="usa-alert usa-alert-info auction-alert">
-        <div class="usa-alert-body">
-          <h3 class="usa-alert-heading">Auction Now Closed</h3>
-        </div>
-      </div>
-    <% end %>
+    <%= render partial: current_user.decorate.win_header_partial, locals: { auction: auction } %>
   <% else %>
     <div class="usa-alert usa-alert-info auction-alert">
       <div class="usa-alert-body">
@@ -51,5 +32,4 @@
       </div>
     </div>
   <% end %>
-<%# display nothing if in the future %>
 <% end %>

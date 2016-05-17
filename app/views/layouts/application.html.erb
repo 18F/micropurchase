@@ -71,21 +71,13 @@
           </div>
           <button id="button-nav-drawer" class="usa-button usa-button-outline-inverse" data-drawer-toggle="menu"><span class="fa fa-bars"></span></button>
           <div class="header-account">
-            <% if current_user %>
-              <%= render partial: current_user.decorate.nav_drawer_partial, locals: { current_user: current_user } %>
-            <% else %>
-              <%= render partial: Guest.new.decorate.nav_drawer_partial, locals: { current_user: current_user } %>
-            <% end %>
+            <%= render partial: current_user.decorate.nav_drawer_partial,
+              locals: { current_user: current_user } %>
           </div>
         </div>
       </div>
     </nav>
-
-
-
   </header>
-
-  <%= render partial: "components/nav_drawer", locals: { current_user: @current_user } %>
 
   <div class="content-wrapper" id="<% if current_page?(root_path) %>index<% elsif current_page?(auctions_path) %>auctions<% elsif current_page?(auctions_winners_path) %>winners<% end %>">
     <div class="usa-width-one-whole">
@@ -117,9 +109,6 @@
             <li class="usa-footer-primary-content">
               <a class="usa-footer-primary-link" href="https://pages.18f.gov/micropurchase-api-docs/">API Docs</a>
             </li>
-            <!-- <li class="usa-width-one-sixth usa-footer-primary-content">
-              <a class="usa-footer-primary-link" href="#">Primary link</a>
-            </li>  -->
           </ul>
         </nav>
       </div>
@@ -142,10 +131,8 @@
         </div>
       </div>
     </div>
-
   </footer>
   <script src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js"
 id="_fed_an_ua_tag"></script>
 </body>
-<!-- staging deploy test 003 -->
 </html>
