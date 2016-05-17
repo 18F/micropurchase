@@ -24,7 +24,7 @@ class AuctionStatus
   attr_reader :auction
 
   def ends_in_future?
-    auction.end_datetime && auction.end_datetime > Time.current
+    auction.end_datetime > Time.current
   end
 
   def ended_in_past?
@@ -36,6 +36,6 @@ class AuctionStatus
   end
 
   def started_in_past?
-    auction.start_datetime && auction.start_datetime < Time.current
+    auction.start_datetime < Time.current
   end
 end

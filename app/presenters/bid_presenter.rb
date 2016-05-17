@@ -6,7 +6,7 @@ class BidPresenter < SimpleDelegator
   end
 
   def veiled_bidder_attribute(attribute, show_user = nil, message: nil)
-    if presenter_auction.available? && bidder != show_user
+    if auction_available? && bidder != show_user
       message
     else
       bidder.send(attribute) || null
@@ -14,7 +14,7 @@ class BidPresenter < SimpleDelegator
   end
 
   def veiled_bidder(show_user = nil, message: nil)
-    if presenter_auction.available? && bidder != show_user
+    if auction_available? && bidder != show_user
       VeiledBidderPresenter.new(message: message)
     else
       bidder
@@ -71,5 +71,9 @@ class BidPresenter < SimpleDelegator
 
   def winning?
     model.id == presenter_auction.winning_bid.id
+  end
+
+  def auction_available?
+    AuctionStatus.new(model.auction).available?
   end
 end

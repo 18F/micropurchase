@@ -50,10 +50,4 @@ class Rules::SealedBid < Rules::BaseRules
   def auction_rules_href
     '/auction/rules/single-bid'
   end
-
-  private
-
-  def auction_available?
-    AuctionStatus.new(auction).available?
-  end
 end
