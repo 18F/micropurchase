@@ -1,5 +1,5 @@
 .auction-wrapper {
-  display:flex;
+  display: flex;
   -ms-flex-wrap: wrap;
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
@@ -51,9 +51,9 @@ textarea#auction_description {
   border: 1px solid $color-gray-neutral;
   border-radius: $border-radius;
   display: flex !important;
-  flex-direction: column;
   -ms-flex-direction: column;
   -webkit-flex-direction: column;
+  flex-direction: column;
   font-weight: $font-light;
   margin-bottom: $site-margins;
 
