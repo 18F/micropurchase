@@ -61,7 +61,7 @@ class AuctionViewModel < Struct.new(:current_user, :auction_record)
   end
 
   def show_bid_button?
-    user_can_bid? || current_user.nil?
+    user_can_bid? || current_user.is_a?(Guest)
   end
 
   def highlighted_bid_amount_as_currency

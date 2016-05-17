@@ -23,6 +23,14 @@ class UserPresenter < SimpleDelegator
     "components/user_nav_drawer"
   end
 
+  def win_header_partial
+    "auctions/multi_bid/user_win_header"
+  end
+
+  def nav_drawer_submenu_partial
+    "components/user_nav_drawer_submenu"
+  end
+
   def small_business_label
     if model.sam_accepted?
       small_business? ? 'Yes' : 'No'

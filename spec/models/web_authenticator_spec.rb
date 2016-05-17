@@ -35,7 +35,7 @@ describe WebAuthenticator, type: :model do
     end
   end
   describe 'require_admin' do
-    context 'when no current user' do
+    context 'when current user is a guest' do
       let(:session) { { } }
 
       it 'redirects to authenticate' do

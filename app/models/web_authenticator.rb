@@ -1,13 +1,15 @@
 class WebAuthenticator < Struct.new(:controller)
   def current_user
-    @current_user ||= User.where(id: controller.session[:user_id]).first
+    @current_user ||= User.where(id: controller.session[:user_id]).first || Guest.new
   end
 
   def set_api_current_user
   end
 
   def require_authentication
-    fail UnauthorizedError::RedirectToLogin if current_user.nil?
+    if current_user.is_a?(Guest)
+      fail UnauthorizedError::RedirectToLogin
+    end
   end
 
   def require_admin

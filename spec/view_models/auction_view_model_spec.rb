@@ -8,7 +8,7 @@ describe AuctionViewModel do
   describe 'bid status checks' do
     context 'for a single-bid auction' do
       context 'when the user is not logged in' do
-        let(:user) { nil }
+        let(:user) { Guest.new }
 
         it 'should return true for show_bid_button?' do
           expect(auction.show_bid_button?).to be_truthy
@@ -70,10 +70,10 @@ describe AuctionViewModel do
 
     context 'for a multi-bid auction' do
       context 'when the user is not logged in' do
-        let(:user) { nil }
+        let(:user) { Guest.new }
 
         it 'should return true for show_bid_button?' do
-          expect(auction.show_bid_button?).to be_truthy
+          expect(auction.show_bid_button?).to eq true
         end
 
         it 'should return false for user_can_bid?' do
