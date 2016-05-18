@@ -127,12 +127,7 @@ RSpec.describe BidsController, controller: true do
     end
 
     context 'when there are no other bids' do
-      # before do
-      #   allow(PlaceBid).to receive(:new).and_return(place_bid)
-      # end
-
       let(:bid) { auction.bids.first }
-      # let(:place_bid) { double('place bid object', perform: true) }
       let(:request_params) do
         {
           auction_id: auction.id,
@@ -142,11 +137,10 @@ RSpec.describe BidsController, controller: true do
 
       context 'when the bid is good' do
         it "creates a bid and redirects to the new bid page" do
-          #expect(PlaceBid).to receive(:new).with(anything, current_bidder).and_return(place_bid)
           post :create, request_params, user_id: current_bidder.id
           expect(flash[:bid]).to eq("success")
           expect(response).to redirect_to("/auctions/#{auction.id}")
-          
+
           bid = auction.bids.order('created_at DESC').first
           expect(bid.bidder).to eq(current_bidder)
           expect(bid.amount).to eq(1000)
@@ -161,7 +155,6 @@ RSpec.describe BidsController, controller: true do
             bid: { amount: -192 }
           }
         end
-        
 
         it "adds a flash error when the bid is bad" do
           post :create, request_params, user_id: current_bidder.id

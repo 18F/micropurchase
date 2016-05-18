@@ -33,10 +33,6 @@ describe AuctionsController do
   let(:status) { response.status }
 
   describe 'POST /auctions/:auction_id/bids' do
-    before do
-      @bid_count = auction.bids.count
-      post auction_bids_path(auction), params, headers
-    end
     let(:json_bid) { json_response['bid'] }
 
     context 'when the API key is missing' do
@@ -48,15 +44,19 @@ describe AuctionsController do
       let(:bid_amount) { current_auction_price - 10 }
 
       it 'returns a json error' do
+        post auction_bids_path(auction), params, headers
         expect(json_response['error']).to eq('User not found')
       end
 
       it 'returns a 404 status code' do
-        expect(status).to eq(404)
+        post auction_bids_path(auction), params, headers
+        expect(response.status).to eq(404)
       end
 
       it 'should not create a bid' do
-        expect(auction.bids.count).to eq(@bid_count)
+        expect do
+          post auction_bids_path(auction), params, headers
+        end.to_not change { auction.bids.count }
       end
     end
 
@@ -69,15 +69,19 @@ describe AuctionsController do
       let(:bid_amount) { current_auction_price - 10 }
 
       it 'returns a json error' do
+        post auction_bids_path(auction), params, headers
         expect(json_response['error']).to eq('User not found')
       end
 
       it 'returns a 404 status code' do
+        post auction_bids_path(auction), params, headers
         expect(status).to eq(404)
       end
 
       it 'should not create a bid' do
-        expect(auction.bids.count).to eq(@bid_count)
+        expect do
+          post auction_bids_path(auction), params, headers
+        end.to_not change { auction.bids.count }
       end
     end
 
@@ -90,15 +94,19 @@ describe AuctionsController do
       let(:bid_amount) { current_auction_price - 10 }
 
       it 'returns a json error' do
+        post auction_bids_path(auction), params, headers
         expect(json_response['error']).to eq('Auction not available')
       end
 
       it 'returns a 403 status code' do
+        post auction_bids_path(auction), params, headers
         expect(status).to eq(403)
       end
 
       it 'should not create a bid' do
-        expect(auction.bids.count).to eq(@bid_count)
+        expect do
+          post auction_bids_path(auction), params, headers
+        end.to_not change { auction.bids.count }
       end
     end
 
@@ -111,15 +119,19 @@ describe AuctionsController do
       let(:bid_amount) { current_auction_price - 10 }
 
       it 'returns a json error' do
+        post auction_bids_path(auction), params, headers
         expect(json_response['error']).to eq('Auction not available')
       end
 
       it 'returns a 403 status code' do
+        post auction_bids_path(auction), params, headers
         expect(status).to eq(403)
       end
 
       it 'should not create a bid' do
-        expect(auction.bids.count).to eq(@bid_count)
+        expect do
+          post auction_bids_path(auction), params, headers
+        end.to_not change { auction.bids.count }
       end
     end
 
@@ -134,16 +146,21 @@ describe AuctionsController do
         let(:bid_amount) { current_auction_price - 10 }
 
         it 'creates a new bid' do
+          post auction_bids_path(auction), params, headers
           expect(json_bid['amount']).to eq(bid_amount)
           expect(json_bid['bidder_id']).to eq(user.id)
         end
 
         it 'returns a 200 status code' do
+          post auction_bids_path(auction), params, headers
           expect(status).to eq(200)
         end
 
         it 'should create a bid from the API source' do
-          expect(auction.bids.count).to eq(@bid_count + 1)
+          expect do
+            post auction_bids_path(auction), params, headers
+          end.to change { auction.bids.count }.by(1)
+
           new_bid = auction.bids.order('created_at DESC').first
 
           expect(new_bid.amount).to eq(bid_amount)
@@ -176,15 +193,19 @@ describe AuctionsController do
           let(:bid_amount) { current_auction_price + 10 }
 
           it 'returns a json error' do
+            post auction_bids_path(auction), params, headers
             expect(json_response['error']).to eq('Bids cannot be greater than the current max bid')
           end
 
           it 'returns a 403 status code' do
+            post auction_bids_path(auction), params, headers
             expect(status).to eq(403)
           end
 
           it 'should not create a bid' do
-            expect(auction.bids.count).to eq(@bid_count)
+            expect do
+              post auction_bids_path(auction), params, headers
+            end.to_not change { auction.bids.count }
           end
         end
       end
@@ -197,10 +218,12 @@ describe AuctionsController do
           let(:bid_amount) { amount }
 
           it 'returns a 200 status code' do
+            post auction_bids_path(auction), params, headers
             expect(status).to eq(200)
           end
 
           it 'returns the right amount' do
+            post auction_bids_path(auction), params, headers
             expect(json_response['bid']['amount']).to eq(amount)
           end
         end
@@ -209,16 +232,20 @@ describe AuctionsController do
           let(:bid_amount) { current_auction_price - 10 }
 
           it 'creates a new bid' do
+            post auction_bids_path(auction), params, headers
             expect(json_bid['amount']).to eq(bid_amount)
             expect(json_bid['bidder_id']).to eq(user.id)
           end
 
           it 'returns a 200 status code' do
+            post auction_bids_path(auction), params, headers
             expect(status).to eq(200)
           end
 
           it 'should create a bid from the API source' do
-            expect(auction.bids.count).to eq(@bid_count + 1)
+            expect do
+              post auction_bids_path(auction), params, headers
+            end.to change { auction.bids.count }.by(1)
 
             new_bid = auction.bids.order('created_at DESC').first
             expect(new_bid.amount).to eq(bid_amount)
@@ -232,13 +259,15 @@ describe AuctionsController do
           let(:second_bid_amount) { bid_amount - 10 }
 
           it 'returns a 403 status code' do
-            bid_count = auction.bids.count
-            post auction_bids_path(auction), second_params, headers
+            post auction_bids_path(auction), params, headers
+
+            expect do
+              post auction_bids_path(auction), second_params, headers
+            end.to_not change { auction.bids.count }
 
             expect(status).to eq(403)
             expect(json_response).to have_key('error')
             expect(json_response['error']).to eq('You are not allowed to bid on this auction')
-            expect(auction.bids.count).to eq(bid_count)
           end
         end
       end
@@ -248,15 +277,19 @@ describe AuctionsController do
         let(:bid_amount) { current_auction_price - 10 }
 
         it 'returns a json error' do
+          post auction_bids_path(auction), params, headers
           expect(json_response['error']).to eq('You must have a valid SAM.gov account to place a bid')
         end
 
         it 'returns a 403 status code' do
+          post auction_bids_path(auction), params, headers
           expect(status).to eq(403)
         end
 
         it 'should not create a bid' do
-          expect(auction.bids.count).to eq(@bid_count)
+          expect do
+            post auction_bids_path(auction), params, headers
+          end.to_not change { auction.bids.count }
         end
       end
 
@@ -265,15 +298,19 @@ describe AuctionsController do
         let(:bid_amount) { current_auction_price - 10 }
 
         it 'returns a json error' do
+          post auction_bids_path(auction), params, headers
           expect(json_response['error']).to eq('You must have a valid SAM.gov account to place a bid')
         end
 
         it 'returns a 403 status code' do
+          post auction_bids_path(auction), params, headers
           expect(status).to eq(403)
         end
 
         it 'should not create a bid' do
-          expect(auction.bids.count).to eq(@bid_count)
+          expect do
+            post auction_bids_path(auction), params, headers
+          end.to_not change { auction.bids.count }
         end
       end
 
@@ -281,6 +318,7 @@ describe AuctionsController do
         let(:bid_amount) { (current_auction_price - 10).to_f }
 
         it 'ignores the floatiness' do
+          post auction_bids_path(auction), params, headers
           expect(json_bid['amount']).to eq(bid_amount)
         end
       end
@@ -289,10 +327,12 @@ describe AuctionsController do
         let(:bid_amount) { 'clearly not a valid bid' }
 
         it 'returns a json error' do
+          post auction_bids_path(auction), params, headers
           expect(json_response['error']).to eq('Bid amount out of range')
         end
 
         it 'returns a 403 status code' do
+          post auction_bids_path(auction), params, headers
           expect(status).to eq(403)
         end
       end
@@ -301,24 +341,32 @@ describe AuctionsController do
         let(:bid_amount) { -1000 }
 
         it 'returns a json error' do
+          post auction_bids_path(auction), params, headers
           expect(json_response['error']).to eq('Bid amount out of range')
         end
 
         it 'returns a 403 status code' do
+          post auction_bids_path(auction), params, headers
           expect(status).to eq(403)
         end
 
-        it 'should not create a bid'
+        it 'should not create a bid' do
+          expect do
+            post auction_bids_path(auction), params, headers
+          end.to_not change { auction.bids.count }
+        end
       end
 
       context 'and the bid amount contains cents' do
         let(:bid_amount) { 1.99 }
 
         it 'returns a json error' do
+          post auction_bids_path(auction), params, headers
           expect(json_response['error']).to eq('Bids must be in increments of one dollar')
         end
 
         it 'returns a 403 status code' do
+          post auction_bids_path(auction), params, headers
           expect(status).to eq(403)
         end
 
