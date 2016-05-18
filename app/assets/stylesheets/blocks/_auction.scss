@@ -46,11 +46,14 @@ textarea#auction_description {
   }
 }
 
+.auction-wrapper .issue-list-item {
+  display: flex;
+}
+
 .issue-list-item {
   background-color: $color-white;
   border: 1px solid $color-gray-neutral;
   border-radius: $border-radius;
-  display: flex !important;
   -ms-flex-direction: column;
   -webkit-flex-direction: column;
   flex-direction: column;

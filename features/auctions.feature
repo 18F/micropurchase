@@ -22,10 +22,6 @@ Feature: Basic Auction Views
     And I should see a "Bid" button
     And there should be meta tags for the index page for 1 open and 0 future auctions
 
-  Scenario: Default ordering for the micropurchase homepage
-    When I visit the home page
-    Then the auction previews should be in descending order by end date timestamp
-
   Scenario: Many auctions
     Given there are many different auctions
     When I visit the home page
