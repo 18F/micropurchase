@@ -1,8 +1,8 @@
-<div class='usa-width-one-whole issue-list-item'>
-  <div class="usa-grid">
+<div class='usa-width-one-half issue-list-item'>
+  <div class="usa-grid issue-content-wrapper">
     <div class='usa-width-one-whole issue-label'>
       <h3 class='issue-title'>
-        <a href="<%= auction_path(auction) %>"><%= auction.title %></a> <span class="usa-label-big <%= auction.label_class %>"><%= auction.label %></span>
+        <span class="usa-label-big <%= auction.label_class %>"><%= auction.label %></span> <a href="<%= auction_path(auction) %>"><%= auction.title %></a>
       </h3>
       <p class='issue-description'>
         <%=h raw auction.html_summary %><a class="issue-list-item-details" href="<%= auction_path(auction) %>">View details <icon class="fa fa-angle-double-right"></icon></a>

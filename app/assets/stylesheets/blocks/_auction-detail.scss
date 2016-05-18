@@ -64,9 +64,12 @@
 }
 
 a[class*="auction-label-"],
-span[class*="auction-label-"] {
+span[class*="auction-label-"],
+a[class*="auction-label-"]:only-of-type,
+span[class*="auction-label-"]:only-of-type {
+  float: right;
+  margin: 0;
   margin-left: $base-padding-lite;
-
 }
 
 .auction-label,

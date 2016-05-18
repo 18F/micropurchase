@@ -9,6 +9,45 @@ describe AuctionsController do
       expect(auction).to be_a(AuctionViewModel)
       expect(auction.id).to eq(auction_record.id)
     end
+
+    context 'the list of auctions is sorted' do
+      it 'renders them descending by datetime' do
+
+        Timecop.freeze
+
+        date_start = Time.current - 3.days
+        date_latest = Time.current + 3.days
+        date_middle = Time.current + 2.days
+        date_first = Time.current + 1.days
+
+        auction_record_1 = create(
+          :auction,
+          start_datetime: date_start,
+          end_datetime: date_middle)
+
+        auction_record_2 = create(
+          :auction,
+          start_datetime: date_start,
+          end_datetime: date_latest)
+
+        auction_record_3 = create(
+          :auction,
+          start_datetime: date_start,
+          end_datetime: date_first)
+
+        get :index
+        auctions = assigns(:view_model).auctions
+
+        auction_1 = auctions[0]
+        auction_2 = auctions[1]
+        auction_3 = auctions[2]
+
+        expect(auction_1).to be_a(AuctionViewModel)
+        expect(auction_1.end_datetime).to be_within(0.1).of(date_latest)
+        expect(auction_2.end_datetime).to be_within(0.1).of(date_middle)
+        expect(auction_3.end_datetime).to be_within(0.1).of(date_first)
+      end
+    end
   end
 
   describe '#show' do
