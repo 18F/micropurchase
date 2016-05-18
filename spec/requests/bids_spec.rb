@@ -126,6 +126,23 @@ describe AuctionsController do
         end
       end
 
+      context 'when the auction start price is between the micropurchase and SAT threshold' do
+        let(:auction) { create(:auction, :between_micropurchase_and_sat_threshold, :running) }
+        let(:bid_amount) { current_auction_price - 10 }
+
+        context 'and the vendor is not small business' do
+          let(:user) { create(:user, :not_small_business) }
+
+          it 'returns a json error' do
+            expect(json_response['error']).to eq('You are not allowed to bid on this auction')
+          end
+
+          it 'returns a 403 status code' do
+            expect(status).to eq(403)
+          end
+        end
+      end
+
       context 'when the auction is multi-bid' do
         let(:auction) { FactoryGirl.create(:auction, :running, :multi_bid) }
 

@@ -31,6 +31,37 @@ RSpec.describe PlaceBid do
                        end_datetime: Time.now + 7.days)
   end
 
+  context 'when the auction start price is above the micro-purchase threshold' do
+    let(:auction) { create(:auction, :between_micropurchase_and_sat_threshold) }
+
+    context 'and the vendor is not a small business' do
+      let(:current_user) { create(:user, :not_small_business) }
+
+      it 'should reject the bid' do
+        expect { place_bid.perform }.to raise_error(UnauthorizedError)
+      end
+
+      it 'should not create a new bid' do
+        # need to rescue otherwise the raising of UnauthorizedError
+        # causes the test to error before the change can be evaluated
+        expect do
+          begin
+            place_bid.perform
+          rescue
+          end
+        end.not_to change { Bid.count }
+      end
+    end
+
+    context 'and the vendor is a small business' do
+      let(:current_user) { create(:user, :small_business) }
+
+      it 'should allow the bid' do
+        expect { place_bid.perform }.to change { Bid.count }.by(1)
+      end
+    end
+  end
+
   context 'when the auction is single-bid' do
     let(:auction) do
       FactoryGirl.create(:auction,

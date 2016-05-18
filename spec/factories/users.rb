@@ -10,6 +10,16 @@ FactoryGirl.define do
     sam_status :duns_blank
     credit_card_form_url 'https://some-website.com/pay'
 
+    trait :small_business do
+      sam_status { :sam_accepted }
+      small_business { true }
+    end
+
+    trait :not_small_business do
+      sam_status { :sam_accepted }
+      small_business { false }
+    end
+
     factory :admin_user do
       github_id { Admins.github_ids.first }
 
