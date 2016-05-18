@@ -3,10 +3,10 @@ require 'csv'
 class WinningBidderExport
   class Error < StandardError; end
 
-  PURCHASE_CARD_AS_PAYMENT_METHOD = 'Y'
-  NATIONAL_INTEREST_ACTION = 'None'
-  COMMERCIAL_ITEM_TEST_PROGRAM = 'N'
-  SOLICITATION_PROCEDURES = 'SP1'
+  PURCHASE_CARD_AS_PAYMENT_METHOD = 'Y'.freeze
+  NATIONAL_INTEREST_ACTION = 'None'.freeze
+  COMMERCIAL_ITEM_TEST_PROGRAM = 'N'.freeze
+  SOLICITATION_PROCEDURES = 'SP1'.freeze
 
   def initialize(auction)
     @auction = auction
