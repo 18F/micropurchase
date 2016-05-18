@@ -15,10 +15,10 @@ describe AuctionsController do
 
         Timecop.freeze
 
-        date_start = Time.now - 3.days
-        date_latest = Time.now + 3.days
-        date_middle = Time.now + 2.days
-        date_first = Time.now + 1.days
+        date_start = Time.current - 3.days
+        date_latest = Time.current + 3.days
+        date_middle = Time.current + 2.days
+        date_first = Time.current + 1.days
 
         auction_record_1 = create(
           :auction,
