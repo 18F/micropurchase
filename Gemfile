@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.3.1'
+
 gem 'rails', '4.2.6'
 gem 'pg'
 gem 'sass-rails', '~> 5.0'
@@ -30,8 +32,6 @@ group :test do
   gem "codeclimate-test-reporter", require: nil
   gem 'codeclimate_batch', require: nil
   gem 'dotenv'
-  gem 'webmock'
-  gem 'json-schema'
   gem 'db-query-matchers'
   gem 'json-schema'
   gem 'shoulda-matchers'
