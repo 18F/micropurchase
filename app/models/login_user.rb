@@ -7,7 +7,7 @@ class LoginUser < Struct.new(:auth_hash, :session)
   private
 
   def user
-    @_user ||= User.find_or_create_by(github_id: auth_hash[:uid])
+    @_user ||= FindOrRegisterUser.new(github_id: auth_hash[:uid]).perform
   end
 
   def sign_in

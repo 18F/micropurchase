@@ -10,7 +10,7 @@ describe LoginUser do
 
     it 'updates the user with additional data' do
       user = FactoryGirl.create(:user)
-      allow(User).to receive(:find_or_create_by).with(github_id: github_id_from_oauth).and_return(user)
+      allow(User).to receive(:create).with(github_id: github_id_from_oauth).and_return(user)
       authenticator = LoginUser.new(auth_hash, { })
       allow(user).to receive(:from_oauth_hash).with(auth_hash)
 
