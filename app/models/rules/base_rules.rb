@@ -7,6 +7,10 @@ class Rules::BaseRules
     @eligibility = eligibility
   end
 
+  def eligibility_label
+    eligibility.label
+  end
+
   def partial_path(name, base_dir = 'auctions')
     "#{base_dir}/#{partial_prefix}/#{name}.html.erb"
   end

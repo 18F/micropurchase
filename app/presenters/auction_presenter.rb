@@ -137,12 +137,8 @@ class AuctionPresenter
     "#{root_url}/auctions/#{id}"
   end
 
-  def eligibility
-    if small_business?
-      'Small-business only'
-    else
-      'SAM.gov only'
-    end
+  def eligibility_label
+    auction_rules.eligibility.label
   end
 
   private

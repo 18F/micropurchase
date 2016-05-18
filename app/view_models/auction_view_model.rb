@@ -8,7 +8,7 @@ class AuctionViewModel < Struct.new(:current_user, :auction_record)
     :bids?,
     :created_at,
     :delivery_deadline,
-    :eligibility,
+    :eligibility_label,
     :end_datetime,
     :formatted_delivery_deadline,
     :formatted_end_time,

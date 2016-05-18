@@ -8,7 +8,7 @@
         <%=h raw auction.html_summary %><a class="issue-list-item-details" href="<%= auction_path(auction) %>">View details <icon class="fa fa-angle-double-right"></icon></a>
       </p>
       <p><%= auction.formatted_type.capitalize %></p>
-      <p><%= auction.eligibility %></p>
+      <p><%= auction.eligibility_label %></p>
     </div>
   </div>
   <div class="usa-grid issue-bid-details">
