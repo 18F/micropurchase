@@ -91,7 +91,6 @@ Then(/^I should see the auction's (.+)$/) do |field|
     expect(page).to have_text(
       DcTimePresenter
         .convert(@auction.end_datetime)
-        .beginning_of_day
         .strftime(DcTimePresenter::FORMAT))
   else
     expect(page).to have_text(@auction.send(field))

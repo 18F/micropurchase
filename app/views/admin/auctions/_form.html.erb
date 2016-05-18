@@ -1,0 +1,19 @@
+<%= f.input :type, collection: Auction.types.keys.to_a %>
+<%= f.input :title %>
+<%= f.input :github_repo %>
+<%= f.input :issue_url %>
+<%= f.input :summary, as: :text %>
+<%= f.input :description, as: :text %>
+<%= f.input :start_datetime, as: :datetime %>
+<%= f.input :end_datetime, as: :datetime %>
+
+<% if @auction.new_record? %>
+  <%= f.input :due_in_days %>
+<% else %>
+  <%= f.input :delivery_deadline, as: :datetime %>
+<% end %>
+
+<%= f.input :billable_to %>
+<%= f.input :start_price %>
+<%= f.input :published, collection: Auction.publisheds.keys.to_a %>
+<%= f.input :notes, as: :text %>

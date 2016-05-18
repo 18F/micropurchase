@@ -79,15 +79,19 @@ When(/^I edit the new auction form$/) do
   @issue_url = 'https://github.com/18F/calc/issues/255'
   fill_in('auction_issue_url', with: @issue_url)
 
-  @start_day = DcTimePresenter.convert(3.days.from_now).strftime("%m/%d/%Y")
-  fill_in("auction_start_datetime", with: @start_day)
+  @start_day = DcTimePresenter.convert(3.days.from_now)
+  select @start_day.year, from: "auction_start_datetime_1i"
+  select @start_day.strftime("%B"), from: "auction_start_datetime_2i"
+  select @start_day.day, from: "auction_start_datetime_3i"
 
-  @end_day = DcTimePresenter.convert(3.days.from_now).strftime("%m/%d/%Y")
-  fill_in("auction_end_datetime", with: @end_day)
+  @end_day = DcTimePresenter.convert(3.days.from_now)
+  select @end_day.year, from: "auction_end_datetime_1i"
+  select @end_day.strftime("%B"), from: "auction_end_datetime_2i"
+  select @end_day.day, from: "auction_end_datetime_3i"
 
   @time_in_days = 3
-  @deadline_day = DcTimePresenter.convert(@time_in_days.business_days.from_now).strftime("%m/%d/%Y")
-  fill_in("due_in_days", with: @time_in_days)
+  @deadline_day = DcTimePresenter.convert(@time_in_days.business_days.from_now)
+  fill_in("auction_due_in_days", with: @time_in_days)
 
   @billable = "the tock line item for CALC"
   fill_in("auction_billable_to", with: @billable)
@@ -111,14 +115,20 @@ Then(/^I should be able to edit the existing auction form$/) do
   @issue_url = 'https://github.com/18F/calc/issues/255'
   fill_in('auction_issue_url', with: @issue_url)
 
-  @start_day = DcTimePresenter.convert(Time.now + 3.days).strftime("%m/%d/%Y")
-  fill_in("auction_start_datetime", with: @start_day)
+  @start_day = DcTimePresenter.convert(Time.now + 3.days)
+  select @start_day.year, from: "auction_start_datetime_1i"
+  select @start_day.strftime("%B"), from: "auction_start_datetime_2i"
+  select @start_day.day, from: "auction_start_datetime_3i"
 
-  @end_day = DcTimePresenter.convert(Time.now - 3.days).strftime("%m/%d/%Y")
-  fill_in("auction_end_datetime", with: @end_day)
+  @end_day = DcTimePresenter.convert(Time.now - 3.days)
+  select @end_day.year, from: "auction_end_datetime_1i"
+  select @end_day.strftime("%B"), from: "auction_end_datetime_2i"
+  select @end_day.day, from: "auction_end_datetime_3i"
 
-  @deadline_day = DcTimePresenter.convert(Time.now + 5.days).strftime("%m/%d/%Y")
-  fill_in("auction_delivery_deadline", with: @deadline_day)
+  @deadline_day = DcTimePresenter.convert(Time.now + 5.days)
+  select @deadline_day.year, from: "auction_delivery_deadline_1i"
+  select @deadline_day.strftime("%B"), from: "auction_delivery_deadline_2i"
+  select @deadline_day.day, from: "auction_delivery_deadline_3i"
 
   @billable = "the tock line item for CALC"
   fill_in("auction_billable_to", with: @billable)
