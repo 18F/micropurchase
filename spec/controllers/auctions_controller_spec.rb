@@ -43,9 +43,9 @@ describe AuctionsController do
         auction_3 = auctions[2]
 
         expect(auction_1).to be_a(AuctionViewModel)
-        expect(auction_1.end_datetime).to eq(date_latest)
-        expect(auction_2.end_datetime).to eq(date_middle)
-        expect(auction_3.end_datetime).to eq(date_first)
+        expect(auction_1.end_datetime).to be_within(0.1).of(date_latest)
+        expect(auction_2.end_datetime).to be_within(0.1).of(date_middle)
+        expect(auction_3.end_datetime).to be_within(0.1).of(date_first)
       end
     end
   end
