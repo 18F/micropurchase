@@ -60,7 +60,7 @@ nav.usa-site-navbar a {
 .header-title-text {
   font-size: 2rem;
   font-weight: $font-light;
-  letter-spacing: -0.5px;
+  letter-spacing: -.5px;
 
   @include media($small-screen) {
     font-size: 3rem;
