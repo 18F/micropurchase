@@ -45,6 +45,10 @@ textarea#auction_description {
   font-weight: $font-light;
   margin-bottom: $site-margins;
 
+  &:last-of-type {
+    margin-bottom: $base-padding-large;
+  }
+
   .issue-label {
     margin-top: 0.75rem;
   }

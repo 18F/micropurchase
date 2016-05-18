@@ -1,14 +1,13 @@
 .content-wrapper {
   @extend .usa-grid;
 
-  padding-bottom: (2 * $site-margins);
+  flex: 1 0 auto;
 }
 
 .content-wrapper#index,
 .content-wrapper#auctions,
 .content-wrapper#winners {
   padding: 0;
-  padding-bottom: (2 * $site-margins);
   margin: 0;
   max-width: none;
 }

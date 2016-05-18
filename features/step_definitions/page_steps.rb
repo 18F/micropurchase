@@ -7,7 +7,7 @@ When(/^I click on the "?([^"]+)"? button$/) do |button|
 end
 
 When(/^I click on the "([^"]+)" link$/) do |label|
-  click_on(label)
+  first(:link, label).click
 end
 
 When(/^I click on the auction's title$/) do

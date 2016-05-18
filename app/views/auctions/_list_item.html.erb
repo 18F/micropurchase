@@ -14,18 +14,17 @@
   <div class="usa-grid issue-bid-details">
     <div class='usa-width-one-whole issue-bids-info'>
       <div class="usa-grid-full">
-      <% if AuctionStatus.new(auction).available? %>
-        <%= render partial: 'auctions/bids_and_form', locals: {auction: auction} %>
-
-        <div class="issue-bids-info-item">
-          <% if auction.show_bid_button? %>
-            <a href="<%= new_auction_bid_path(auction) %>" class='usa-button usa-button-outline-inverse button-bid'>Bid <icon class="fa fa-angle-double-right"></icon></a>
-          <% end %>
-        </div>
-      <% else %>
-        <%= render partial: 'auctions/winning_bid', locals: {auction: auction} %>
-      <% end %>
-    </div>
+        <% if AuctionStatus.new(auction).available? %>
+          <%= render partial: 'auctions/bids_and_form', locals: {auction: auction} %>
+          <div class="issue-bids-info-item">
+            <% if auction.show_bid_button? %>
+              <a href="<%= new_auction_bid_path(auction) %>" class='usa-button usa-button-outline-inverse button-bid'>Bid <icon class="fa fa-angle-double-right"></icon></a>
+            <% end %>
+          </div>
+        <% else %>
+          <%= render partial: 'auctions/winning_bid', locals: {auction: auction} %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

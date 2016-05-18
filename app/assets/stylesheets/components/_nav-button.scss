@@ -1,0 +1,92 @@
+$avatar-width: 32px;
+$avatar-padding: 4px;
+$login-btn-color-active: #909db2;
+$login-btn-bg-primary: #4c6aa5;
+$login-btn-bg-secondary: #1c366a;
+$login-btn-border: #162b54;
+$login-btn-border-bottom: #0f1e3b;
+$login-gradient: linear-gradient($login-btn-bg-primary, $login-btn-bg-secondary);
+$login-shadow: rgba(73, 207, 239, .2);
+$login-shadow-active: rgba(8, 84, 141, .33);
+
+header.usa-site-header a.nav-sign-out {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  float: right;
+  font-size: 1.4rem;
+  height: $avatar-width + (2 * $avatar-padding); // 40px
+  line-height: 1.4rem;
+  padding: 0;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    background: $login-btn-bg-primary;
+    background: linear-gradient($login-btn-bg-primary, $login-btn-bg-secondary);
+    border-bottom-color: $login-btn-border-bottom;
+    border-color: $login-btn-border;
+    -webkit-box-shadow: inset 1px 1px 0 $login-shadow;
+    cursor: pointer;
+  }
+
+  &:active {
+    background: linear-gradient($login-btn-bg-secondary, $login-btn-bg-primary);
+    border-color: $login-btn-border;
+    -webkit-box-shadow: inset 1px 1px 0 $login-shadow-active;
+    color: $login-btn-color-active;
+    -webkit-touch-callout: none; // iOS Safari
+    -khtml-user-select: none;    // Konqueror
+    -moz-user-select: none;      // Firefox
+    -ms-user-select: none;       // IE/Edge
+    -webkit-user-select: none;   // Chrome/Safari/Opera
+    user-select: none;
+  }
+}
+
+.nav-sign-out button {
+  background: transparent;
+  margin: 0;
+  padding: 0;
+  padding-left: $avatar-width + (2 * $avatar-padding);
+  padding-right: $base-padding-lite;
+  width: 100%;
+}
+
+.nav-sign-out h1 {
+  font-family: Lucida Grande;
+  font-size: .9rem;
+  line-height: inherit;
+  margin-top: 1px;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.nav-sign-out img {
+  border-radius: 100%;
+  height: $avatar-width;
+  left: $avatar-padding;
+  position: absolute;
+  top: $avatar-padding;
+  width: $avatar-width;
+}
+
+.nav-sign-out span {
+  font-weight: $font-bold;
+
+  &.action {
+    font-size: 1.2rem;
+    margin-left: .8em;
+    text-decoration: underline;
+  }
+}
+
+.header-account .nav-sign-out span {
+  position: static;
+  right: inherit;
+  top: inherit;
+}
+
