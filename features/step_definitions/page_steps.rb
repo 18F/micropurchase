@@ -42,10 +42,6 @@ When(/^I visit my bids page$/) do
   visit my_bids_path
 end
 
-When(/^I visit the auction bids page$/) do
-  visit(auction_bids_path(@auction.id))
-end
-
 When(/^I visit my profile page$/) do
   @user = User.find_by(github_id: @github_id)
   visit users_edit_path

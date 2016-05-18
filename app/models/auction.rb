@@ -1,6 +1,4 @@
 class Auction < ActiveRecord::Base
-  MAX_START_PRICE = 3500
-
   belongs_to :user
   has_many :bids
   has_many :bidders, through: :bids
@@ -32,12 +30,12 @@ class Auction < ActiveRecord::Base
   end
 
   def start_price_equal_to_or_less_than_max_if_not_contracting_officer
-    if user && !user.contracting_officer? && start_price > MAX_START_PRICE
+    if user && !user.contracting_officer? && start_price > StartPriceThresholds::MICROPURCHASE
       errors.add(
         :start_price,
         I18n.t(
           'activerecord.errors.models.auction.attributes.start_price.invalid',
-          start_price: MAX_START_PRICE
+          start_price: StartPriceThresholds::MICROPURCHASE
         )
       )
     end

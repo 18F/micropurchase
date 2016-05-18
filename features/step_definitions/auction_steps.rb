@@ -19,9 +19,35 @@ Given(/^there is an? (.+) auction$/) do |label|
                FactoryGirl.create(:auction, :closed, :with_bidders, :single_bid)
              when 'needs evaluation'
                FactoryGirl.create(:auction, :with_bidders, :evaluation_needed)
+             when 'within simplified acquisition threshold'
+               FactoryGirl.create(:auction, :between_micropurchase_and_sat_threshold, :available)
+             when 'below the micropurchase threshold'
+               FactoryGirl.create(:auction, :below_micropurchase_threshold, :available)
              else
                fail "Unrecognized auction type: #{label}"
              end
+end
+
+Given(/^there is an auction with a starting price between the micropurchase threshold and simplified acquisition threshold$/) do
+  @auction = FactoryGirl.create(:auction, :between_micropurchase_and_sat_threshold, :available)
+end
+
+Then(/^I should see that the auction indicates it is for small business only$/) do
+  auction_div = find('a', text: @auction.title)
+    .find(:xpath, "..")
+    .find(:xpath, "..")
+    .find(:xpath, "..")
+
+  expect(auction_div).to have_content('Small-business only')
+end
+
+Then(/^I should not see that the auction indicates it is for small business only$/) do
+  auction_div = find('a', text: @auction.title)
+    .find(:xpath, "..")
+    .find(:xpath, "..")
+    .find(:xpath, "..")
+
+  expect(auction_div).to_not have_content('Small-business only')
 end
 
 Given(/^there are many different auctions$/) do
@@ -45,6 +71,10 @@ end
 When(/^the winning bidder has a valid DUNS number$/) do
   winning_bid = RulesFactory.new(@auction).create.winning_bid
   winning_bid.bidder.update(duns_number: FakeSamApi::VALID_DUNS)
+end
+
+When(/^I visit the auction bids page$/) do
+  visit(auction_bids_path(@auction.id))
 end
 
 Then(/^I should see the winning bid for the auction$/) do
@@ -176,8 +206,26 @@ Then(/^I should see the delivery deadline$/) do
   expect(page).to have_content("Delivery deadline: #{DcTimePresenter.convert_and_format(@auction.delivery_deadline)}")
 end
 
+Then(/^I should see the bid button$/) do
+  within(:css, 'div.auction-info') do
+    expect(page).to have_content('BID')
+  end
+end
+
+Then(/^I should not see the bid button$/) do
+  within(:css, 'div.auction-info') do
+    expect(page).to_not have_content('BID')
+  end
+end
+
 Then(/^I should see an? (.+) status$/) do |label|
   within(:css, 'div.auction-info') do
     expect(page).to have_content(label)
+  end
+end
+
+Then(/^I should not see an? (.+) status$/) do |label|
+  within(:css, 'div.auction-info') do
+    expect(page).to_not have_content(label)
   end
 end
