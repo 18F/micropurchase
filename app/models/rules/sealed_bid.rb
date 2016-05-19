@@ -48,6 +48,6 @@ class Rules::SealedBid < Rules::BaseRules
   end
 
   def auction_rules_href
-    '/auction/rules/single-bid'
+    '/auctions/rules/single-bid'
   end
 end

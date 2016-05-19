@@ -2,11 +2,19 @@
   <div class="usa-grid issue-content-wrapper">
     <div class='usa-width-one-whole issue-label'>
       <h3 class='issue-title'>
-        <span class="usa-label-big <%= auction.label_class %>">
-          <%= auction.label %>
-        </span>
-        <%= link_to auction.title, auction_path(auction.id) %>
+        <div class="issue-ribbon">
+          <span class="<%= auction.label_class %>"><%= auction.label %></span>
+        </div> <%= link_to auction.title, auction_path(auction.id) %>
       </h3>
+      <div class="bid-deadline-box-children">
+        <span class="bid-deadline">
+          Time remaining:  <%= auction.relative_time_left %>
+        </span>
+        <br/>
+        <span class="bid-deadline">
+          Bid start time: <%= auction.relative_start_time %>
+        </span>
+      </div>
       <p class='issue-description'>
       <%= auction.html_summary %>
       <%= link_to(
