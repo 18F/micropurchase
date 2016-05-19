@@ -7,7 +7,8 @@ Feature: Vendor views an open auction
     Given there is an open bidless auction
     And I am an authenticated vendor
     When I visit the home page
-    And I click on the "Bid" button
+    And I click on the auction's title
+    And I click on the "BID" button
 
     Then I should be on the new bid page
     And I should not see an "Authorize With Github" button
@@ -17,7 +18,8 @@ Feature: Vendor views an open auction
     Given there is an open auction
     And I am an authenticated vendor
     When I visit the home page
-    And I click on the "Bid" button
+    And I click on the auction's title
+    And I click on the "BID" button
 
     Then I should not see an "Authorize With Github" button
     And I should be on the new bid page

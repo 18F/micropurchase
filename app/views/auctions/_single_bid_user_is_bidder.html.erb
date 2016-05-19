@@ -1,0 +1,7 @@
+<span class="issue-current-bid">
+  Your bid:
+  <span class="issue-winning-bid">
+    <%= link_to auction.user_bid_amount_as_currency,
+      auction_bids_path(auction.id) %>
+  </span>
+</span>

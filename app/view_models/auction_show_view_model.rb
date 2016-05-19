@@ -118,8 +118,12 @@ class AuctionShowViewModel
     status_presenter.tag_data_value_2
   end
 
-  def relative_time_left
-    HumanTime.new(time: auction.ended_at).relative_time_left
+  def distance_of_time
+    "#{HumanTime.new(time: auction.ended_at).distance_of_time} left"
+  end
+
+  def relative_time
+    HumanTime.new(time: auction.started_at).relative_time
   end
 
   def highlighted_bid_amount_as_currency

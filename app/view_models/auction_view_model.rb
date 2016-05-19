@@ -18,8 +18,6 @@ class AuctionViewModel < Struct.new(:current_user, :auction_record)
     :html_description,
     :html_description,
     :html_summary,
-    :relative_time_left,
-    :relative_start_time,
     :id,
     :issue_url,
     :partial_path,

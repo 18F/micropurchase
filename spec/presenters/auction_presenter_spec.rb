@@ -209,32 +209,6 @@ describe AuctionPresenter do
     end
   end
 
-  describe "#relative_start_time" do
-    context 'when the start time is in the future' do
-      let(:ar_auction) { create(:auction, started_at: 1.day.from_now) }
-
-      it 'should be "in the_distance_of_time"' do
-        expect(auction.relative_start_time).to eq("in #{distance_of_time_in_words(Time.now, ar_auction.started_at)}")
-      end
-    end
-
-    context 'when the start time is in the past' do
-      let(:ar_auction) { create(:auction, started_at: 1.day.ago) }
-
-      it 'should be "in the_distance_of_time"' do
-        expect(auction.relative_start_time).to eq("#{distance_of_time_in_words(Time.now, ar_auction.started_at)} ago")
-      end
-    end
-  end
-
-  describe '#relative_time_left' do
-    let(:ar_auction) { create(:auction, started_at: 1.day.from_now) }
-
-    it 'should be "the_distance_of_time left"' do
-      expect(auction.relative_time_left).to eq("#{distance_of_time_in_words(Time.now, ar_auction.ended_at)} left")
-    end
-  end
-
   describe "#html_summary" do
     let(:summary) { nil }
     let(:auction) { AuctionPresenter.new(build(:auction, summary: summary)) }
