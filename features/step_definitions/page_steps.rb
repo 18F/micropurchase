@@ -14,7 +14,7 @@ When(/^I click on the auction's title$/) do
   click_on(@auction.title)
 end
 
-Then(/^I should see an? (.+) label$/) do |label|
+Then(/^I should see an? "([^"]+)" label$/) do |label|
   within(:css, 'div.issue-list-item') do
     within(:css, 'span.usa-label-big') do
       expect(page).to have_content(label)

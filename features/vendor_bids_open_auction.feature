@@ -1,4 +1,4 @@
-Feature: Bidding
+Feature: Vendor bids on an open auction
   As a vendor
   I want to be able to bid on auctions
   So I can be paid for work
@@ -59,40 +59,3 @@ Feature: Bidding
     When I click on the "Confirm" button
     Then I should see a current bid amount of $999
     And I should see I have the winning bid
-
-  Scenario: Viewing an auction when I have not bid
-    Given there is an open bidless auction
-    And I am an authenticated vendor
-    When I visit the home page
-    And I click on the Bid button
-
-    Then I should be on the new bid page
-    And I should not see an "Authorize With Github" button
-    And I should see a message about no bids
-
-    Scenario: A vendor sees small business only auctions on the auction view page
-      Given there is an auction with a starting price between the micropurchase threshold and simplified acquisition threshold
-      And I am a user with a verified SAM account who is not a small business
-      And I sign in
-      When I visit the auction page
-      Then I should not see the bid button
-      And I should see a Small-business only status
-
-    Scenario: A vendor sees a non small business only auctions on the auction view page
-      Given there is a below the micropurchase threshold auction
-      And I am a user with a verified SAM account who is not a small business
-      And I sign in
-      When I visit the auction page
-      Then I should see the bid button
-      And I should not see a Small-business only status
-
-  Scenario: When someone else has outbid me
-    Given there is an open auction
-    And I am an authenticated vendor
-    When I visit the home page
-    And I click on the "Bid" button
-
-    Then I should not see an "Authorize With Github" button
-    And I should be on the new bid page
-    And I should see a current bid amount
-    And I should see I do not have the winning bid

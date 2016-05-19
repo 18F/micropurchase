@@ -1,4 +1,4 @@
-Feature: Admin Delivery Approval
+Feature: Admin approves delivery of a project
   As an admin
   I want to set an auction result to be approved
   And have the CAP Proposal created automatically

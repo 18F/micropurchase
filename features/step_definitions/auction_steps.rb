@@ -217,7 +217,7 @@ Then(/^I should not see the bid button$/) do
   end
 end
 
-Then(/^I should see an? (.+) status$/) do |label|
+Then(/^I should see an? "(.+)" status$/) do |label|
   within(:css, 'div.auction-info') do
     expect(page).to have_content(label)
   end

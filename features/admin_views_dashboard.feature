@@ -10,10 +10,3 @@ Feature: Admin Dashboard
     And I sign in
     When I visit the admin action items page
     Then I should see the name of each dashboard auction
-
-  Scenario: Previewing an unpublished auction
-    Given I am an administrator
-    And I sign in
-    And there is also an unpublished auction
-    When I visit the preview page for the unpublished auction
-    Then I should see a preview of the auction
