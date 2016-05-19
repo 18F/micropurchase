@@ -7,6 +7,8 @@ before_script:
 - bundle exec rake db:create
 - bundle exec rake db:migrate
 script: bundle exec rake $TASK
+notifications:
+  email: false
 env:
   global:
   - CF_USERNAME=18f-acq_deployer
