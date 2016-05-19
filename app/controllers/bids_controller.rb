@@ -32,14 +32,14 @@ class BidsController < ApplicationController
 
   def confirm
     @auction = AuctionViewModel.new(current_user, Auction.find(params[:auction_id]))
-    @bid = BidPresenter.new(PlaceBid.new(params, current_user).dry_run)
+    @bid = BidPresenter.new(PlaceBid.new(params: params, user: current_user, via: via).dry_run)
   end
 
   def create
     unless current_user.sam_accepted?
       fail UnauthorizedError, "You must have a valid SAM.gov account to place a bid"
     end
-    @bid = BidPresenter.new(PlaceBid.new(params, current_user).perform)
+    @bid = BidPresenter.new(PlaceBid.new(params: params, user: current_user, via: via).perform)
 
     respond_to do |format|
       format.html do

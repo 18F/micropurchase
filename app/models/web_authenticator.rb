@@ -20,4 +20,8 @@ class WebAuthenticator < Struct.new(:controller)
   def github_id
     current_user.github_id
   end
+
+  def via
+    'web'
+  end
 end

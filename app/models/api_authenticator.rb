@@ -29,6 +29,10 @@ class ApiAuthenticator < Struct.new(:controller)
   end
   # rubocop:enable Style/AccessorMethodName
 
+  def via
+    'api'
+  end
+
   private
 
   def github_id_from_api_key(api_key)

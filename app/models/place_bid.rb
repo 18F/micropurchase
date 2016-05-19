@@ -1,8 +1,14 @@
-class PlaceBid < Struct.new(:params, :current_user)
+class PlaceBid
   BID_LIMIT = 3500
   BID_INCREMENT = 1
 
-  attr_reader :bid
+  attr_reader :bid, :params, :user, :via
+
+  def initialize(params:, user:, via:nil)
+    @params = params
+    @user = user
+    @via = via
+  end
 
   def perform
     validate_bid_data
@@ -17,16 +23,18 @@ class PlaceBid < Struct.new(:params, :current_user)
   def create_bid
     @bid ||= Bid.create(
       amount: amount,
-      bidder_id: current_user.id,
-      auction_id: auction.id
+      bidder_id: user.id,
+      auction_id: auction.id,
+      via: via
     )
   end
 
   def unsaveable_bid
     @bid ||= Bid.new(
       amount: amount,
-      bidder_id: current_user.id,
-      auction_id: auction.id
+      bidder_id: user.id,
+      auction_id: auction.id,
+      via: via
     )
 
     @bid.readonly!
@@ -40,14 +48,13 @@ class PlaceBid < Struct.new(:params, :current_user)
   end
 
   def user_can_bid?
-    presenter_auction.user_can_bid?(current_user)
+    presenter_auction.user_can_bid?(user)
   end
 
   def max_allowed_bid
     presenter_auction.max_allowed_bid
   end
 
-  # rubocop:disable Style/IfUnlessModifier
   def validate_bid_data
     unless auction_available?
       fail UnauthorizedError, 'Auction not available'
@@ -73,7 +80,6 @@ class PlaceBid < Struct.new(:params, :current_user)
       fail UnauthorizedError, "Bids cannot be greater than the current max bid"
     end
   end
-  # rubocop:enable Style/IfUnlessModifier
 
   def auction_available?
     AuctionStatus.new(auction).available?
