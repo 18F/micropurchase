@@ -9,7 +9,7 @@ class PlaceBid
     @user = user
     @via = via
   end
-  
+
   def perform
     validate_bid_data
     create_bid
@@ -55,7 +55,6 @@ class PlaceBid
     presenter_auction.max_allowed_bid
   end
 
-  # rubocop:disable Style/IfUnlessModifier
   def validate_bid_data
     unless auction_available?
       fail UnauthorizedError, 'Auction not available'
@@ -81,7 +80,6 @@ class PlaceBid
       fail UnauthorizedError, "Bids cannot be greater than the current max bid"
     end
   end
-  # rubocop:enable Style/IfUnlessModifier
 
   def auction_available?
     AuctionStatus.new(auction).available?

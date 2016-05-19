@@ -177,11 +177,19 @@ describe AuctionsController do
           let(:user) { create(:user, :not_small_business) }
 
           it 'returns a json error' do
+            post auction_bids_path(auction), params, headers
             expect(json_response['error']).to eq('You are not allowed to bid on this auction')
           end
 
           it 'returns a 403 status code' do
+            post auction_bids_path(auction), params, headers
             expect(status).to eq(403)
+          end
+
+          it 'does not create a bid' do
+            expect do
+              post auction_bids_path(auction), params, headers
+            end.to_not change { auction.bids.count }
           end
         end
       end
