@@ -3,7 +3,6 @@ class CreateCapProposalJob < ActiveJob::Base
 
   def perform(auction_id)
     auction = Auction.find(auction_id)
-    auction_presenter = AuctionPresenter.new(auction)
-    CreateCapProposal.new(auction_presenter).perform
+    CreateCapProposal.new(auction).perform
   end
 end

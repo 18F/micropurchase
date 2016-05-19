@@ -4,8 +4,8 @@ RSpec.describe AuctionQuery do
   let(:query) { AuctionQuery.new }
 
   describe '#accepted' do
-    let(:accepted_auction) { FactoryGirl.create(:auction, :accepted) }
-    let!(:rejected_auction) { FactoryGirl.create(:auction, result: :rejected) }
+    let(:accepted_auction) { create(:auction, :accepted) }
+    let!(:rejected_auction) { create(:auction, result: :rejected) }
 
     it 'should return only accepted auctions' do
       expect(query.accepted).to match_array([accepted_auction])
@@ -13,9 +13,9 @@ RSpec.describe AuctionQuery do
   end
 
   describe '#not_evaluated' do
-    let(:unevaluated_auction) { FactoryGirl.create(:auction, :running) }
-    let!(:evaluated_auction) { FactoryGirl.create(:auction, :accepted) }
-    let!(:rejected_auction) { FactoryGirl.create(:auction, result: :rejected) }
+    let(:unevaluated_auction) { create(:auction, :running) }
+    let!(:evaluated_auction) { create(:auction, :accepted) }
+    let!(:rejected_auction) { create(:auction, result: :rejected) }
 
     it 'should only return non-evaluated auctions' do
       expect(query.not_evaluated).to match_array([unevaluated_auction])
@@ -23,9 +23,9 @@ RSpec.describe AuctionQuery do
   end
 
   describe '#delivery_deadline_expired' do
-    let!(:running_auction) { FactoryGirl.create(:auction, :running) }
+    let!(:running_auction) { create(:auction, :running) }
     let(:dd_expired_auction) do
-      FactoryGirl.create(:auction, :delivery_deadline_expired)
+      create(:auction, :delivery_deadline_expired)
     end
 
     it 'should return only delivery deadline expired auctions' do
@@ -34,8 +34,8 @@ RSpec.describe AuctionQuery do
   end
 
   describe '#delivered' do
-    let(:delivered_auction) { FactoryGirl.create(:auction, :delivered) }
-    let!(:running_auction) { FactoryGirl.create(:auction, :running) }
+    let(:delivered_auction) { create(:auction, :delivered) }
+    let!(:running_auction) { create(:auction, :running) }
 
     it 'should return only delivered auctions' do
       expect(query.delivered).to match_array([delivered_auction])
@@ -43,8 +43,8 @@ RSpec.describe AuctionQuery do
   end
 
   describe '#cap_submitted' do
-    let(:cap_submitted) { FactoryGirl.create(:auction, :cap_submitted) }
-    let!(:running_auction) { FactoryGirl.create(:auction, :running) }
+    let(:cap_submitted) { create(:auction, :cap_submitted) }
+    let!(:running_auction) { create(:auction, :running) }
 
     it 'should return only cap_submitted auctions' do
       expect(query.cap_submitted).to match_array([cap_submitted])
@@ -52,8 +52,8 @@ RSpec.describe AuctionQuery do
   end
 
   describe '#cap_not_submitted' do
-    let!(:cap_submitted) { FactoryGirl.create(:auction, :cap_submitted) }
-    let(:running_auction) { FactoryGirl.create(:auction, :running) }
+    let!(:cap_submitted) { create(:auction, :cap_submitted) }
+    let(:running_auction) { create(:auction, :running) }
 
     it 'should return only auctions where CAP has not been submitted' do
       expect(query.cap_not_submitted).to match_array([running_auction])
@@ -61,8 +61,8 @@ RSpec.describe AuctionQuery do
   end
 
   describe '#paid' do
-    let(:paid_auction) { FactoryGirl.create(:auction, :paid) }
-    let!(:running_auction) { FactoryGirl.create(:auction, :running) }
+    let(:paid_auction) { create(:auction, :paid) }
+    let!(:running_auction) { create(:auction, :running) }
 
     it 'should only return paid auctions' do
       expect(query.paid).to match_array([paid_auction])
@@ -70,8 +70,8 @@ RSpec.describe AuctionQuery do
   end
 
   describe '#not_paid' do
-    let!(:paid_auction) { FactoryGirl.create(:auction, :paid) }
-    let(:running_auction) { FactoryGirl.create(:auction, :running) }
+    let!(:paid_auction) { create(:auction, :paid) }
+    let(:running_auction) { create(:auction, :running) }
 
     it 'should only return unpaid auctions' do
       expect(query.not_paid).to match_array([running_auction])
@@ -79,7 +79,7 @@ RSpec.describe AuctionQuery do
   end
 
   describe '#in_reverse_chron_order' do
-    let(:auctions) { Array.new(5) { FactoryGirl.create(:auction) } }
+    let(:auctions) { Array.new(5) { create(:auction) } }
     let(:sorted_auctions) do
       auctions.sort_by(&:end_datetime)
     end
@@ -90,8 +90,8 @@ RSpec.describe AuctionQuery do
   end
 
   describe '#published' do
-    let(:published) { FactoryGirl.create(:auction, :published) }
-    let!(:unpublished) { FactoryGirl.create(:auction, :unpublished) }
+    let(:published) { create(:auction, :published) }
+    let!(:unpublished) { create(:auction, :unpublished) }
 
     it 'should only return published auctions' do
       expect(query.published).to match_array([published])
@@ -99,8 +99,8 @@ RSpec.describe AuctionQuery do
   end
 
   describe '#unpublished' do
-    let!(:published) { FactoryGirl.create(:auction, :published) }
-    let(:unpublished) { FactoryGirl.create(:auction, :unpublished) }
+    let!(:published) { create(:auction, :published) }
+    let(:unpublished) { create(:auction, :unpublished) }
 
     it 'should only return unpublished auctions' do
       expect(query.unpublished).to match_array([unpublished])
@@ -109,14 +109,14 @@ RSpec.describe AuctionQuery do
 
   describe '#complete_and_successful' do
     let(:complete_and_successful) do
-      FactoryGirl.create(:auction, :complete_and_successful)
+      create(:auction, :complete_and_successful)
     end
-    let!(:running_auction) { FactoryGirl.create(:auction, :running) }
-    let!(:rejected_auction) { FactoryGirl.create(:auction, result: :rejected) }
+    let!(:running_auction) { create(:auction, :running) }
+    let!(:rejected_auction) { create(:auction, result: :rejected) }
     let!(:unpaid_auction) do
-      FactoryGirl.create(:auction, awardee_paid_status: :not_paid)
+      create(:auction, awardee_paid_status: :not_paid)
     end
-    let(:anomolous_auction) { FactoryGirl.create(:auction, :rejected, :paid) }
+    let(:anomolous_auction) { create(:auction, :rejected, :paid) }
 
     it 'should only return complete and successful auctions' do
       expect(query.complete_and_successful)
@@ -125,11 +125,11 @@ RSpec.describe AuctionQuery do
   end
 
   describe '#payment_pending' do
-    let(:payment_pending) { FactoryGirl.create(:auction, :payment_pending) }
-    let!(:running_auction) { FactoryGirl.create(:auction, :running) }
-    let!(:paid_auction) { FactoryGirl.create(:auction, :paid) }
+    let(:payment_pending) { create(:auction, :payment_pending) }
+    let!(:running_auction) { create(:auction, :running) }
+    let!(:paid_auction) { create(:auction, :paid) }
     let!(:complete_and_successful) do
-      FactoryGirl.create(:auction, :complete_and_successful)
+      create(:auction, :complete_and_successful)
     end
 
     it 'should only return finished auctions where payment is pending' do
@@ -138,11 +138,11 @@ RSpec.describe AuctionQuery do
   end
 
   describe '#payment_needed' do
-    let(:payment_needed) { FactoryGirl.create(:auction, :payment_needed) }
-    let!(:running_auction) { FactoryGirl.create(:auction, :running) }
-    let!(:payment_pending) { FactoryGirl.create(:auction, :payment_pending) }
+    let(:payment_needed) { create(:auction, :payment_needed) }
+    let!(:running_auction) { create(:auction, :running) }
+    let!(:payment_pending) { create(:auction, :payment_pending) }
     let!(:complete_and_successful) do
-      FactoryGirl.create(:auction, :complete_and_successful)
+      create(:auction, :complete_and_successful)
     end
 
     it 'should only return auctions where payment is needed' do
@@ -151,13 +151,13 @@ RSpec.describe AuctionQuery do
   end
 
   describe '#evaluation_needed' do
-    let(:evaluation_needed) { FactoryGirl.create(:auction, :evaluation_needed) }
+    let(:evaluation_needed) { create(:auction, :evaluation_needed) }
     let!(:complete_and_successful) do
-      FactoryGirl.create(:auction, :complete_and_successful)
+      create(:auction, :complete_and_successful)
     end
-    let!(:running_auction) { FactoryGirl.create(:auction, :running) }
-    let!(:payment_pending) { FactoryGirl.create(:auction, :payment_pending) }
-    let!(:payment_needed) { FactoryGirl.create(:auction, :payment_needed) }
+    let!(:running_auction) { create(:auction, :running) }
+    let!(:payment_pending) { create(:auction, :payment_pending) }
+    let!(:payment_needed) { create(:auction, :payment_needed) }
 
     it 'should only return auctions where an evaluation is needed' do
       expect(query.evaluation_needed).to match_array([evaluation_needed])
@@ -165,14 +165,14 @@ RSpec.describe AuctionQuery do
   end
 
   describe '#delivery_past_due' do
-    let(:delivery_past_due) { FactoryGirl.create(:auction, :delivery_past_due) }
+    let(:delivery_past_due) { create(:auction, :delivery_past_due) }
     let!(:complete_and_successful) do
-      FactoryGirl.create(:auction, :complete_and_successful)
+      create(:auction, :complete_and_successful)
     end
-    let!(:running_auction) { FactoryGirl.create(:auction, :running) }
-    let!(:payment_pending) { FactoryGirl.create(:auction, :payment_pending) }
-    let!(:payment_needed) { FactoryGirl.create(:auction, :payment_needed) }
-    let!(:rejected) { FactoryGirl.create(:auction, :rejected) }
+    let!(:running_auction) { create(:auction, :running) }
+    let!(:payment_pending) { create(:auction, :payment_pending) }
+    let!(:payment_needed) { create(:auction, :payment_needed) }
+    let!(:rejected) { create(:auction, :rejected) }
 
     it 'should only return auctions where delivery is past due' do
       expect(query.delivery_past_due).to match_array([delivery_past_due])
@@ -180,8 +180,8 @@ RSpec.describe AuctionQuery do
   end
 
   describe '#public_find' do
-    let(:unpublished_auction) { FactoryGirl.create(:auction, :unpublished) }
-    let(:published_auction) { FactoryGirl.create(:auction, :published) }
+    let(:unpublished_auction) { create(:auction, :unpublished) }
+    let(:published_auction) { create(:auction, :published) }
 
     it 'should not return an unpublished auction' do
       expect { query.public_find(unpublished_auction.id) }
@@ -194,8 +194,8 @@ RSpec.describe AuctionQuery do
   end
 
   describe '#public_index' do
-    let!(:unpublished_auction) { FactoryGirl.create(:auction, :unpublished) }
-    let(:published_auction) { FactoryGirl.create(:auction, :published) }
+    let!(:unpublished_auction) { create(:auction, :unpublished) }
+    let(:published_auction) { create(:auction, :published) }
 
     it 'should only return published auctions' do
       expect(query.public_index).to match_array([published_auction])

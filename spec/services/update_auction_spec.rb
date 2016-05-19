@@ -34,8 +34,7 @@ describe UpdateAuction do
         updater = UpdateAuction.new(auction, params)
 
         expect { updater.perform }.to_not change { auction.cap_proposal_url }
-        expect(auction.cap_proposal_url).to_not be_a(String)
-        expect(auction.cap_proposal_url).to be_nil
+        expect(auction.cap_proposal_url).to eq ""
       end
     end
   end

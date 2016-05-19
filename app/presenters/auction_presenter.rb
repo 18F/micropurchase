@@ -34,7 +34,7 @@ class AuctionPresenter
     :updated_at,
     :lowest_bid,
     :reload,
-    to: :model
+    to: :auction
   )
 
   delegate(
@@ -75,15 +75,15 @@ class AuctionPresenter
   end
 
   def bids
-    @bids ||= model.bids.order(created_at: :desc).map { |bid| decorated_bid(bid) }
+    @bids ||= auction.bids.order(created_at: :desc).map { |bid| decorated_bid(bid) }
   end
 
   def lowest_bids
-    model.lowest_bids.map { |b| decorated_bid(b) }
+    auction.lowest_bids.map { |b| decorated_bid(b) }
   end
 
   def lowest_bid
-    decorated_bid(model.lowest_bid)
+    decorated_bid(auction.lowest_bid)
   end
 
   def bid_count
@@ -91,27 +91,27 @@ class AuctionPresenter
   end
 
   def formatted_start_time
-    DcTimePresenter.convert_and_format(model.start_datetime)
+    DcTimePresenter.convert_and_format(auction.start_datetime)
   end
 
   def formatted_end_time
-    DcTimePresenter.convert_and_format(model.end_datetime)
+    DcTimePresenter.convert_and_format(auction.end_datetime)
   end
 
   def formatted_delivery_deadline
-    DcTimePresenter.convert_and_format(model.delivery_deadline)
+    DcTimePresenter.convert_and_format(auction.delivery_deadline)
   end
 
   def relative_start_time
-    time_in_human(model.start_datetime)
+    time_in_human(auction.start_datetime)
   end
 
   def relative_time_left
-    "#{distance_of_time_in_words(Time.current, model.end_datetime)} left"
+    "#{distance_of_time_in_words(Time.current, auction.end_datetime)} left"
   end
 
   def delivery_deadline_expires_in
-    time_in_human(model.delivery_deadline)
+    time_in_human(auction.delivery_deadline)
   end
 
   def winning_bidder_id
@@ -143,6 +143,8 @@ class AuctionPresenter
 
   private
 
+  attr_reader :auction
+
   def auction_rules
     @auction_rules ||= RulesFactory.new(self).create
   end
@@ -167,7 +169,7 @@ class AuctionPresenter
   end
 
   def auction_status
-    AuctionStatus.new(model)
+    AuctionStatus.new(auction)
   end
 
   def start_price_thresholds
@@ -180,9 +182,5 @@ class AuctionPresenter
     else
       NullBidPresenter.new
     end
-  end
-
-  def model
-    @auction
   end
 end

@@ -12,25 +12,23 @@ describe AuctionsController do
 
     context 'the list of auctions is sorted' do
       it 'renders them descending by datetime' do
-
         Timecop.freeze
-
         date_start = Time.current - 3.days
         date_latest = Time.current + 3.days
         date_middle = Time.current + 2.days
         date_first = Time.current + 1.days
 
-        auction_record_1 = create(
+        create(
           :auction,
           start_datetime: date_start,
           end_datetime: date_middle)
 
-        auction_record_2 = create(
+        create(
           :auction,
           start_datetime: date_start,
           end_datetime: date_latest)
 
-        auction_record_3 = create(
+        create(
           :auction,
           start_datetime: date_start,
           end_datetime: date_first)
@@ -51,20 +49,11 @@ describe AuctionsController do
   end
 
   describe '#show' do
-    it 'assigns presented auction' do
-      auction_record = create(:auction)
-      get :show, id: auction_record.id
-      auction = assigns(:view_model).auction
-      expect(auction).to be_a(AuctionViewModel)
-      expect(auction.id).to eq(auction_record.id)
-    end
-
     context 'when the auction is published' do
       it 'assigns presented auction' do
         auction_record = create(:auction, :published)
         get :show, id: auction_record.id
         auction = assigns(:view_model)
-        expect(auction).to be_a(AuctionShowViewModel)
         expect(auction.auction.id).to eq(auction_record.id)
       end
     end
@@ -84,7 +73,6 @@ describe AuctionsController do
       auction_record = create(:auction)
       get :previous_winners
       auction = assigns(:view_model).auctions.first
-      expect(auction).to be_a(AuctionViewModel)
       expect(auction.id).to eq(auction_record.id)
     end
   end

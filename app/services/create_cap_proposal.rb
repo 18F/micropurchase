@@ -18,8 +18,10 @@ class CreateCapProposal
 
   private
 
+  attr_reader :auction
+
   def add_cap_proposal_url_to_auction!(cap_proposal_url)
-    Auction.update(@auction.id, cap_proposal_url: cap_proposal_url)
+    auction.update(cap_proposal_url: cap_proposal_url)
   end
 
   def configure_c2_client

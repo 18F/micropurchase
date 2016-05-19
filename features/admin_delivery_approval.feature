@@ -11,5 +11,6 @@ Feature: Admin Delivery Approval
     When I visit the admin edit page for that auction
     And I select the result as accepted
     And I click on the "Update" button
+    Then the proposal should have a CAP Proposal URL
     When I visit the admin edit page for that auction
     Then I should see that the auction has a CAP Proposal URL

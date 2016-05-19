@@ -9,6 +9,6 @@ class AdminAuctionPresenter < AuctionPresenter
     :paid?,
     :result,
     :updated_at,
-    to: :model
+    to: :auction
   )
 end
