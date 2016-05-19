@@ -7,12 +7,10 @@
         "type": "object",
         "properties": {
           "issue_url": {
-            "type": "string",
-            "minLength": 1
+            "type": "string"
           },
           "github_repo": {
-            "type": "string",
-            "minLength": 1
+            "type": "string"
           },
           "start_price": {
             "type": "number"
@@ -45,8 +43,7 @@
             "minLength": 1
           },
           "summary": {
-            "type": "string",
-            "minLength": 1
+            "type": "string"
           },
           "winning_bid": {
             "type": "object",
@@ -66,11 +63,11 @@
             "items": {
               "required": [
                 "bidder_id",
-              "auction_id",
-              "amount",
-              "created_at",
-              "updated_at",
-              "id"
+                "auction_id",
+                "amount",
+                "created_at",
+                "updated_at",
+                "id"
                 ],
               "properties": {
                 "bidder_id": {
@@ -129,13 +126,13 @@
                   },
                   "required": [
                     "github_id",
-                  "duns_number",
-                  "name",
-                  "sam_status",
-                  "created_at",
-                  "updated_at",
-                  "id",
-                  "github_login"
+                    "duns_number",
+                    "name",
+                    "sam_status",
+                    "created_at",
+                    "updated_at",
+                    "id",
+                    "github_login"
                     ]
                 }
               }
@@ -143,18 +140,16 @@
           }
         },
         "required": [
-          "issue_url",
-        "github_repo",
-        "start_price",
-        "start_datetime",
-        "end_datetime",
-        "title",
-        "description",
-        "id",
-        "created_at",
-        "updated_at",
-        "summary",
-        "bids"
+          "start_price",
+          "start_datetime",
+          "end_datetime",
+          "title",
+          "description",
+          "id",
+          "created_at",
+          "updated_at",
+          "summary",
+          "bids"
           ]
         }
       },

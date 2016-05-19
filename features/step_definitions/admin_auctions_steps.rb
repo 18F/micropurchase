@@ -28,11 +28,15 @@ When(/^I select the result as accepted$/) do
   select("accepted", from: "auction_result")
 end
 
-Then(/^I should see that the auction has a CAP Proposal URL$/) do
-  Delayed::Worker.new.work_off
+Then(/^the proposal should have a CAP Proposal URL$/) do
   @auction.reload
-  expect(@auction.cap_proposal_url).not_to be_nil
-  expect(page).to have_content(@auction.cap_proposal_url)
+  expect(@auction.cap_proposal_url).not_to eq ""
+end
+
+Then(/^I should see that the auction has a CAP Proposal URL$/) do
+  expect(find_field(I18n.t('simple_form.labels.auction.cap_proposal_url')).value).to eq(
+    @auction.cap_proposal_url
+  )
 end
 
 Then(/^the file should contain the following data from Sam\.gov:$/) do |content|
