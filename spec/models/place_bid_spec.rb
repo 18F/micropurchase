@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe PlaceBid do
-  let(:place_bid) { PlaceBid.new(params, current_user) }
-  let(:place_second_bid) { PlaceBid.new(second_params, current_user) }
+  let(:place_bid) { PlaceBid.new(params: params, user: current_user) }
+  let(:place_second_bid) { PlaceBid.new(params: second_params, user: current_user) }
   let(:current_user) { FactoryGirl.create(:user, sam_status: :sam_accepted) }
   let(:second_user) { FactoryGirl.create(:user, sam_status: :sam_accepted) }
   let(:amount) { 1005 }
@@ -86,8 +86,8 @@ RSpec.describe PlaceBid do
         }
       }
       expect do
-        PlaceBid.new(params, current_user).perform
-        PlaceBid.new(params, second_user).perform
+        PlaceBid.new(params: params, user: current_user).perform
+        PlaceBid.new(params: params, user: second_user).perform
       end.to_not raise_error
     end
   end

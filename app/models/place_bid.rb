@@ -1,9 +1,15 @@
-class PlaceBid < Struct.new(:params, :current_user, :via)
+class PlaceBid
   BID_LIMIT = 3500
   BID_INCREMENT = 1
 
-  attr_reader :bid
+  attr_reader :bid, :params, :user, :via
 
+  def initialize(params:, user:, via:nil)
+    @params = params
+    @user = user
+    @via = via
+  end
+  
   def perform
     validate_bid_data
     create_bid
@@ -17,7 +23,7 @@ class PlaceBid < Struct.new(:params, :current_user, :via)
   def create_bid
     @bid ||= Bid.create(
       amount: amount,
-      bidder_id: current_user.id,
+      bidder_id: user.id,
       auction_id: auction.id,
       via: via
     )
@@ -26,7 +32,7 @@ class PlaceBid < Struct.new(:params, :current_user, :via)
   def unsaveable_bid
     @bid ||= Bid.new(
       amount: amount,
-      bidder_id: current_user.id,
+      bidder_id: user.id,
       auction_id: auction.id,
       via: via
     )
@@ -42,7 +48,7 @@ class PlaceBid < Struct.new(:params, :current_user, :via)
   end
 
   def user_can_bid?
-    presenter_auction.user_can_bid?(current_user)
+    presenter_auction.user_can_bid?(user)
   end
 
   def max_allowed_bid
