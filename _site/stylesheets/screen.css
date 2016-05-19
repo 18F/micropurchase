@@ -1,7 +1,5 @@
 /* @override http://localhost:4000/stylesheets/screen.css */
 
-/* @override http://127.0.0.1:4000/stylesheets/screen.css */
-
 /* @group bootstrap */
 
 html {
@@ -15,7 +13,7 @@ body{
 	font-family: Source Sans Pro, Verdana, sans-serif;
 	font-size: 18px;
 	font-weight: 400;
-	background: #2d3f5b;
+	background: #2b3e5c;
 	color: #fff;
 }
 
@@ -467,7 +465,6 @@ div.field.field-checkbox input{
 	top: 0;
 }
 
-div.field.field-checkbox+div.field.field-checkbox{ margin-top: 4px; }
 
 div.field.field-checkbox+.is-branch{
 	margin-top: -4px !important;
@@ -717,11 +714,21 @@ main form footer p button{
 	padding: 8px 0 10px;
 }
 
-.site-header .logo,
+.site-header a{
+	color: #53d3fe;	 
+}
+
 .site-header .logo a,
 .site-header .logo a img{ float: left; }
+.site-header .logo{ 
+	margin-bottom: 0.5em; 
+}
 
-.site-header .logo{ margin-bottom: 0.5em; }
+.site-header .logo::after{
+	content: "";
+	display: block;
+	clear: both; 
+}
 
 .site-header .logo a{
 	font-size: 24px;
@@ -805,7 +812,6 @@ main form footer p button{
 	
 }
 
-
 .site-header form button:hover{
 	background-color: #eee;
 	color: #111;
@@ -813,81 +819,40 @@ main form footer p button{
 	cursor: pointer;
 }
 
-.site-header .nav-sign-out{
-	position: absolute;
-	top: 0;
-	right: 0;
-	color: inherit;
-	float: right;
-	height: 40px;
-	padding: 4px 8px 4px 44px;
-	font-size: 14px;
-	line-height: 14px;
-	width: 192px;
-	border: 1px solid transparent;
-	border-radius: 3px;
-	text-align: left;
-	cursor: pointer;
-	text-decoration: none;
+.site-header .nav-header-nav{
+	padding-top: 8px;
+	padding-bottom: 12px;
+	line-height: 1.4em;
+	font-size: 16px;
 }
 
-.site-header .nav-sign-out:hover{
-	background: #4c6aa5;
-	background: linear-gradient(#4c6aa5, #1c366a);
-	border-color: #162b54;
-	border-bottom-color: #0f1e3b;
-	cursor: pointer;
-	-webkit-box-shadow: inset 1px 1px 0 rgba(73,207,239,0.2);
+.site-header .nav-header-nav .user-name{
+	max-width: 10em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	display: inline-block;
+	vertical-align: baseline;
 }
 
-.site-header .nav-sign-out:active{
-	color: #909db2;
-	background: linear-gradient(#1c366a, #4c6aa5);
-	border-color: #162b54;
-	-webkit-box-shadow: inset 1px 1px 0 rgba(8,84,141,0.33);
-	  -webkit-touch-callout: none; /* iOS Safari */
-	  -webkit-user-select: none;   /* Chrome/Safari/Opera */
-	  -khtml-user-select: none;    /* Konqueror */
-	  -moz-user-select: none;      /* Firefox */
-	  -ms-user-select: none;       /* IE/Edge */
-	  user-select: none;           
+.site-header .nav-header-nav > span,
+.site-header .nav-header-nav a{
+	margin-right: 0.8em;
 }
 
+.site-header .nav-header-nav a:last-of-type{ margin-right: 0; }
 
-.site-header .nav-sign-out:active img{
-	opacity: 0.7;
-}
-
-.site-header .nav-sign-out h1{
-	font-size: 9px;
-	text-transform: uppercase;
-	font-family: Lucida Grande;
-	position: relative;
-	left: 1px;
-	margin-top: 1px;
-}
-
-.site-header .nav-sign-out img{
-	width: 32px;
-	height: 32px;
-	border-radius: 100%;
-	position: absolute;
-	left: 4px;
-	top: 3px;	
-}
-
-.site-header .nav-sign-out span.action{
-	margin-left: 0.8em;
-	font-size: 12px;
-	text-decoration: underline;
-}
-
-@media screen and (min-width:568.88px){
-	.site-header .wrapper{ 
-		padding-right: 224px; 
-		padding-left: 128px; 
+@media screen and (min-width: 799.99px){
+	.site-header .logo{
+		float: left;
 	}
-	.site-header .logo{ margin-left: -128px; margin-bottom: 0;}
+	
+	.site-header .nav-header-nav{
+		float: right;
+		text-align: right;
+		padding-top: 14px;
+	}
+	.site-header .logo{ margin-bottom: 0;}
 	.site-header form{ clear: none; }
 
 }
@@ -910,15 +875,20 @@ nav.breadcrumbs a{
 /* @group .site-footer */
 
 .site-footer{
-	padding-top: 1em;
-	padding-bottom: 2em;
+	padding-top: 18px;
+	padding-bottom: 36px;
 }
 
-.site-footer .logo,
 .site-footer .logo a,
 .site-footer .logo a img{ float: left; }
 
-.site-footer .logo{ margin-bottom: 0.5em; }
+.site-footer .logo{ margin-bottom: 16px; }
+
+.site-footer .logo::after{
+	content: "";
+	display: block;
+	clear: both;
+}
 
 .site-footer .logo a{
 	font-size: 24px;
@@ -934,6 +904,7 @@ nav.breadcrumbs a{
 	height: 44px;
 	margin-right: 6px;
 	border: 1px solid #2a4674;
+	margin-left: -1px;
 }
 
 .site-footer h1 a{
@@ -944,41 +915,61 @@ nav.breadcrumbs a{
 	letter-spacing: -1px;
 }
 
-.site-footer a{ 
-	color: inherit;
+.site-footer .nav-site-nav{
+	margin-bottom: 24px;
+	font-size: 16px;
 }
 
-.site-footer nav{
-	position: absolute;
-	right: 0;
-	top: 16px;
+.site-footer a{ 
+	color: inherit;
 }
 
 .site-footer .nav-contact{
 	position: static;
 	clear: both;
-	padding-top: 1em;
-	text-align: right;
-	font-size: 12px;
+	font-size: 14px;
 }
+
 .site-footer .nav-contact a{
-	margin-right: 0.4em;
+	margin-right: 16px;
 	text-decoration: none;
 	color: #b1cffe;
+}
+
+.site-footer .nav-site-nav li:last-of-type,
+.site-footer .nav-contact a:last-of-type{
+	margin-right: 0;
 }
 
 .site-footer .nav-contact h2{
 	display: none;
 }
 
-.site-footer ul{
-	margin-right: -0.8em;
-}
 .site-footer ul li{
 	display: inline;
 	margin-right: 0.8em;
 }
 
+@media screen and (min-width: 799.99px){
+	.site-footer { 
+		padding-top: 24px; 
+		padding-bottom: 48px;
+	}
+	.site-footer .logo{ float: left; }
+	.site-footer .nav-site-nav,
+	.site-footer .nav-contact{ 
+		padding-top: 12px;
+		float: right; 
+		text-align: right;
+		font-size: 18px;
+	}
+	
+	.site-footer .nav-contact{ 
+		font-size: 14px;
+		padding-top: 0;
+	}
+
+}
 
 /* @end */
 
@@ -1033,7 +1024,7 @@ nav.breadcrumbs a{
 
 
 .auction .auction-footer{
-	padding: 12px 16px 72px;
+	padding: 12px 16px;
 	margin: 14px -16px 0;
 	background: #fafafa;
 	border-radius: 0 0 3px 3px;
@@ -1057,6 +1048,7 @@ nav.breadcrumbs a{
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	color: #333;
+	line-height: 1.2em;
 }
 
 .auction .auction-footer .auction-agency,
@@ -1066,7 +1058,7 @@ nav.breadcrumbs a{
 	top: 12px;
 }
 
-.auction .auction-footer::after{
+/*.auction .auction-footer::after{
 	content: "";
 	position: absolute;
 	left: 16px;
@@ -1076,9 +1068,9 @@ nav.breadcrumbs a{
 	top: 50%;
 	margin-top: -1px;
 	
-}
+}*/
 
-.auction .auction-footer dd.auction-agency{
+/*.auction .auction-footer dd.auction-agency{
 	top: 34px;
 }
 
@@ -1092,7 +1084,7 @@ nav.breadcrumbs a{
 .auction .auction-footer dd.auction-language{
 	top: 96px;
 	position: absolute;
-}
+}*/
 
 .auction .auction-footer dd img{
 	width: 24px;
@@ -1144,32 +1136,7 @@ dd.auction-status{
 	background: linear-gradient(#00cfff,#008fe4);
 	border-top: 1px solid #008ee1;
 	border-right: 1px solid #00acd4;
-}
-
-dd.auction-status span{
-	display: block;
-	-webkit-transform: rotate(45deg);
-	font-weight: 600;
-	text-align: center;
-	text-indent: 1.2em;
-	position: relative;
-	top: -0.5em;
-	right: -0.5em;
-	text-transform: uppercase;
-	text-shadow: 1px 1px #00acd4;
-}
-
-dd.auction-status::after{
-	content: "ddd.";
-	display: block !important;
-	position: absolute;
-	border: 32px solid transparent;
-	border-left-color: #fff;
-	border-bottom-color: #fff;
-	bottom: -2px;
-	left: -2px;
-	width: 0;
-	height: 0;
+	text-indent: 2px;
 }
 
 dd.auction-status-closed{
@@ -1180,7 +1147,8 @@ dd.auction-status-closed{
 .layout-home main article .auction-status{
 	position: absolute;
 	right: 12px;
-	top: 12px;
+	top: -4px;
+	text-align: center;
 }
 
 .layout-home main article .auction-status::after{
@@ -1695,11 +1663,15 @@ a[id]{
 .layout-home main > header{
 	background: #fbf9eb;
 	color: #333;
-	padding: 1em 0;
+	padding: 12px 0 16px;
 	text-align: center;
 	margin-bottom: 32px;
 	border-bottom: 1px solid #efdfb3;
 	border-top: 1px solid #faf9f3;
+}
+
+.layout-home main > header p{
+	line-height: 1.4em;
 }
 
 .h-feed-header{
@@ -1726,7 +1698,7 @@ a[id]{
 }
 
 .h-feed-header form{
-	font-size: 12px;
+	font-size: 14px;
 	margin-top: 12px;
 }
 
@@ -1740,6 +1712,7 @@ a[id]{
 	float: left;
 	margin-right: 1em;
 	margin-left: -2px;
+	margin-bottom: 0;
 }
 
 .h-feed-header nav h2{
@@ -1766,11 +1739,6 @@ a[id]{
 	margin-bottom: 32px;
 }
 
-.h-feed .auction{
-	float: left;
-	width: 460px;
-}
-
 .layout-home main .auction{
 	border: 1px solid #ddd;
 	padding: 14px 16px 0;
@@ -1782,16 +1750,18 @@ a[id]{
 	background: #fff;
 	color: #555;
 	position: relative;
-	max-width: 480px;
+	max-width: 100%;
+	display: block;
 }
 
-@media screen and (min-width: 1066.66px){
+@media screen and (min-width: 799.99px){
 
-	.layout-home main article{
-		max-width: 470px;
-		margin-right: 20px;
+	.layout-home main .auction{
+		width: 48.5%;
+		margin-right: 3%;
+		float: left;
 	}
-	.layout-home main article:nth-child(2n+1){
+	.layout-home main .auction:nth-child(2n+1){
 		margin-right: 0;
 	}
 }
