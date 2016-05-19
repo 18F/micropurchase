@@ -1,4 +1,6 @@
 class Auction < ActiveRecord::Base
+  attr_accessor :due_in_days
+
   belongs_to :user
   has_many :bids
   has_many :bidders, through: :bids
@@ -12,8 +14,13 @@ class Auction < ActiveRecord::Base
 
   validates :end_datetime, presence: true
   validates :start_datetime, presence: true
+  validates :start_price, presence: true
+  validates :title, presence: true
   validates :user, presence: true
   validate :start_price_equal_to_or_less_than_max_if_not_contracting_officer
+  validates :summary, presence: true, if: :published?
+  validates :description, presence: true, if: :published?
+  validates :delivery_deadline, presence: true, if: :published?
 
   def lowest_bid
     lowest_bids.first

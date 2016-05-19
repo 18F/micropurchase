@@ -15,9 +15,11 @@ class UpdateAuction < Struct.new(:auction, :params, :user)
 
   private
 
+  def attributes
+    parser.attributes
+  end
+
   def parser
     @_parser ||= AuctionParser.new(params, user)
   end
-
-  delegate :attributes, to: :parser
 end

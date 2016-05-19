@@ -11,31 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160514014929) do
+ActiveRecord::Schema.define(version: 20160517224513) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "auctions", force: :cascade do |t|
-    t.string   "issue_url"
-    t.integer  "start_price",         default: 3500
+    t.string   "issue_url",           default: ""
+    t.integer  "start_price",         default: 3500, null: false
     t.datetime "start_datetime",                     null: false
     t.datetime "end_datetime",                       null: false
-    t.string   "title"
-    t.text     "description"
-    t.string   "github_repo"
+    t.string   "title",                              null: false
+    t.text     "description",         default: "",   null: false
+    t.string   "github_repo",         default: ""
     t.integer  "published",           default: 0
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
-    t.text     "summary"
+    t.text     "summary",             default: "",   null: false
     t.datetime "delivery_deadline"
-    t.text     "notes"
-    t.string   "billable_to"
+    t.text     "notes",               default: ""
+    t.string   "billable_to",         default: ""
     t.integer  "result",              default: 0
     t.integer  "type",                default: 0
     t.integer  "awardee_paid_status", default: 0
     t.string   "delivery_url"
-    t.string   "cap_proposal_url"
+    t.string   "cap_proposal_url",    default: ""
     t.integer  "user_id"
   end
 
@@ -73,8 +73,8 @@ ActiveRecord::Schema.define(version: 20160514014929) do
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
     t.string   "email"
-    t.string   "credit_card_form_url"
     t.string   "github_login"
+    t.string   "credit_card_form_url"
     t.integer  "sam_status",           default: 0,     null: false
     t.boolean  "contracting_officer",  default: false, null: false
     t.boolean  "small_business",       default: false, null: false

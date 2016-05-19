@@ -30,19 +30,11 @@ class Admin::AuctionsController < ApplicationController
   end
 
   def new
-    if params[:auction]
-      parser = AuctionParser.new(params)
-      auction = Auction.new(parser.general_attributes)
-    else
-      auction = Auction.new
-    end
-
-    @auction = AdminAuctionPresenter.new(auction)
+    @auction = Auction.new
   end
 
   def create
     @auction = CreateAuction.new(params, current_user).auction
-    auction = AdminAuctionPresenter.new(@auction)
 
     if @auction.save
       respond_to do |format|
@@ -50,8 +42,12 @@ class Admin::AuctionsController < ApplicationController
           flash[:success] = I18n.t('controllers.admin.auctions.create.success')
           redirect_to admin_auctions_path
         end
+
         format.json do
-          render json: auction, serializer: Admin::AuctionSerializer
+          render(
+            json: AdminAuctionPresenter.new(@auction),
+            serializer: Admin::AuctionSerializer
+          )
         end
       end
     else
@@ -63,12 +59,14 @@ class Admin::AuctionsController < ApplicationController
     auction = Auction.find(params[:id])
     UpdateAuction.new(auction, params, current_user).perform
     auction.reload
-    auction = AdminAuctionPresenter.new(auction)
 
     respond_to do |format|
       format.html { redirect_to admin_auctions_path }
       format.json do
-        render json: auction, serializer: Admin::AuctionSerializer
+        render(
+          json: AdminAuctionPresenter.new(auction),
+          serializer: Admin::AuctionSerializer
+        )
       end
     end
   rescue ArgumentError => e
@@ -76,8 +74,7 @@ class Admin::AuctionsController < ApplicationController
   end
 
   def edit
-    auction = Auction.find(params[:id])
-    @auction = AdminAuctionPresenter.new(auction)
+    @auction = Auction.find(params[:id])
   end
 
   private
