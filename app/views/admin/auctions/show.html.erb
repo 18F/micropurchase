@@ -1,11 +1,11 @@
 <h1><%= @auction.title %></h1>
 
-<%= link_to I18n.t('admin.auctions.show.winner_report'), admin_auction_report_path(@auction, format: :csv) %>
-
 <div class='usa-width-one-whole'>
   <div class='usa-width-one-sixth'>
     <% if AuctionStatus.new(@auction).available? %>
       <%= image_tag 'issue-icon.png', class: 'issue-icon' %>
+    <% elsif AuctionStatus.new(@auction).over? %>
+      <%= link_to I18n.t('admin.auctions.show.winner_report'), admin_auction_report_path(@auction, format: :csv) %>
     <% else %>
       <span class=''>not live</span>
     <% end %>

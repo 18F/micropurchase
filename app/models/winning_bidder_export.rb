@@ -3,6 +3,11 @@ require 'csv'
 class WinningBidderExport
   class Error < StandardError; end
 
+  PURCHASE_CARD_AS_PAYMENT_METHOD = 'Y'.freeze
+  NATIONAL_INTEREST_ACTION = 'None'.freeze
+  COMMERCIAL_ITEM_TEST_PROGRAM = 'N'.freeze
+  SOLICITATION_PROCEDURES = 'SP1'.freeze
+
   def initialize(auction)
     @auction = auction
   end
@@ -29,7 +34,19 @@ class WinningBidderExport
       '13PP Vendor Zip Code',
       '13QQ Vendor Country Code',
       '13RR Vendor Phone Number',
-      '13SS Vendor Fax Number'
+      '13SS Vendor Fax Number',
+      '2B Effective Date',
+      '2C Current Completion Date',
+      '3A Base And All Options Value',
+      '3B Base And Exercised Options Value',
+      '3C Action Obligation',
+      '6M Description of Requirement',
+      '6N Purchase Card as Payment Method',
+      '6R National Interest Action',
+      '9A DUNS Number',
+      '9B Contractor Name from Contract',
+      '10J Commercial Item Test Program',
+      '10M Solicitation Procedures'
     ]
   end
 
@@ -44,7 +61,19 @@ class WinningBidderExport
       address_zip,
       address_country,
       phone,
-      fax
+      fax,
+      end_datetime,
+      delivery_deadline,
+      winning_bid_amount,
+      winning_bid_amount,
+      winning_bid_amount,
+      auction.description,
+      PURCHASE_CARD_AS_PAYMENT_METHOD,
+      NATIONAL_INTEREST_ACTION,
+      winning_bidder.duns_number,
+      legal_business_name,
+      COMMERCIAL_ITEM_TEST_PROGRAM,
+      SOLICITATION_PROCEDURES
     ]
   end
 
@@ -92,6 +121,22 @@ class WinningBidderExport
     sam_data[:govtBusinessPoc][:fax]
   end
 
+  def end_datetime
+    format_date(auction.end_datetime)
+  end
+
+  def delivery_deadline
+    format_date(auction.delivery_deadline)
+  end
+
+  def winning_bid_amount
+    winning_bid.amount
+  end
+
+  def format_date(date)
+    date.strftime('%Y%m%d')
+  end
+
   def sam_address
     sam_data[:samAddress]
   end
@@ -109,7 +154,11 @@ class WinningBidderExport
   end
 
   def winning_bidder
-    WinningBid.new(auction).find.bidder
+    winning_bid.bidder
+  end
+
+  def winning_bid
+    @_winning_bid ||= WinningBid.new(auction).find
   end
 
   def client
