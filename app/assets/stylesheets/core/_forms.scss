@@ -1,9 +1,14 @@
 input[disabled] {
-	border-color: lighten($color-gray-dark, 50%);
+  border-color: lighten($color-gray-dark, 50%);
   color: lighten($color-gray-dark, 50%);
 }
 
 input,
 input[type="text"] {
   border-radius: $border-radius;
+}
+
+.time-input {
+  float: left;
+  width: 33%;
 }

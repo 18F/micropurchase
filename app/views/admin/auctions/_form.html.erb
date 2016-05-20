@@ -4,13 +4,13 @@
 <%= f.input :issue_url %>
 <%= f.input :summary, as: :text %>
 <%= f.input :description, as: :text %>
-<%= f.input :started_at, as: :datetime %>
-<%= f.input :ended_at, as: :datetime %>
+<%= render partial: 'datetime_fields', locals: { field: 'started' } %>
+<%= render partial: 'datetime_fields', locals: { field: 'ended' } %>
 
 <% if @auction.new_record? %>
   <%= f.input :due_in_days %>
 <% else %>
-  <%= f.input :delivery_due_at, as: :datetime %>
+  <%= render partial: 'datetime_fields', locals: { field: 'delivery_due' } %>
 <% end %>
 
 <%= f.input :billable_to %>
