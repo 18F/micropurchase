@@ -112,6 +112,43 @@ class AuctionPresenter
 
   def delivery_due_at_expires_in
     time_in_human(auction.delivery_due_at)
+
+  def relative_time
+    if (Time.current < model.end_datetime)
+      if (Time.current > model.start_datetime)
+        "Time remaining: #{distance_of_time_in_words(Time.current, model.end_datetime)}"
+      else
+        'Auction starts in #{distance_of_time_in_words(Time.current, model.start_datetime)}'
+      end
+    elsif (Time.current > model.end_datetime)
+      return 'brian, this auction is closed'
+    end
+  end
+
+
+  def time_open
+    "Time remaining: #{distance_of_time_in_words(Time.current, model.end_datetime)}"
+  end
+
+  def time_over
+    'brian, this auction is closed'
+  end
+
+  def time_future
+    'Auction starts in #{distance_of_time_in_words(Time.current, model.start_datetime)}'
+  end
+
+
+  # def relative_time
+  #   if model.available? or model.expiring?
+  #     "Time remaining: #{distance_of_time_in_words(Time.current, model.end_datetime)}"
+  #   elsif model.future?
+  #     'Auction starts in #{distance_of_time_in_words(Time.current, model.start_datetime)}'
+  #   elsif model.over?
+  #     ''
+  #   end
+  # end
+
   end
 
   def winning_bidder_id

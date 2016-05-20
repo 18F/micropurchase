@@ -20,6 +20,7 @@ class AuctionViewModel < Struct.new(:current_user, :auction_record)
     :html_summary,
     :relative_time_left,
     :relative_start_time,
+    :relative_time,
     :id,
     :issue_url,
     :partial_path,
@@ -29,6 +30,9 @@ class AuctionViewModel < Struct.new(:current_user, :auction_record)
     :started_at,
     :start_price,
     :summary,
+    :time_future,
+    :time_open,
+    :time_over,
     :title,
     :to_param,
     :type,
@@ -130,6 +134,18 @@ class AuctionViewModel < Struct.new(:current_user, :auction_record)
                   end
     "::AuctionStatus::#{status_name}ViewModel".constantize
   end
+
+  # def relative_time
+  #   if (Time.current < model.end_datetime)
+  #     if (Time.current > model.start_datetime)
+  #       "Time remaining: #{distance_of_time_in_words(Time.current, model.end_datetime)}"
+  #     else
+  #       'Auction starts in #{distance_of_time_in_words(Time.current, model.start_datetime)}'
+  #     end
+  #   elsif (Time.current > model.end_datetime)
+  #     return ''
+  #   end
+  # end
 
   def expiring?
     auction_status.expiring?
