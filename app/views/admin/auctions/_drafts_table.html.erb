@@ -18,10 +18,10 @@
         (<%= link_to('preview', "/admin/auctions/#{auction.id}/preview") %>)
       </td>
       <td><%= auction.billable_to %></td>
-      <td><%= auction.start_datetime %></td>
-      <td><%= auction.end_datetime %></td>
+      <td><%= auction.started_at %></td>
+      <td><%= auction.ended_at %></td>
       <td><%= auction.start_price %></td>
-      <td><%= auction.delivery_deadline %></td>
+      <td><%= auction.delivered_at %></td>
     </tr>
     <% end %>
   </tbody>

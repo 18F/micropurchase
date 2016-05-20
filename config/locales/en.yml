@@ -5,12 +5,6 @@ en:
         duns_number: "DUNS number"
       auction:
         start_price: ""
-        # description: ""
-        # title: ""
-        # summary: ""
-        # start_datetime: ""
-        # end_datetime: ""
-        # delivery_deadline: ""
 
     errors:
       models:
@@ -24,7 +18,7 @@ en:
               invalid:
                "You do not have permission to publish auctions with a start
                price over $%{start_price}"
-            delivery_deadline:
+            delivered_at:
               blank: "(or 'Due in days') can't be blank"
   controllers:
     admin:

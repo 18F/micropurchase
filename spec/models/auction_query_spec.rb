@@ -22,14 +22,14 @@ RSpec.describe AuctionQuery do
     end
   end
 
-  describe '#delivery_deadline_expired' do
+  describe '#delivered_at_expired' do
     let!(:running_auction) { create(:auction, :running) }
     let(:dd_expired_auction) do
-      create(:auction, :delivery_deadline_expired)
+      create(:auction, :delivered_at_expired)
     end
 
     it 'should return only delivery deadline expired auctions' do
-      expect(query.delivery_deadline_expired).to match_array([dd_expired_auction])
+      expect(query.delivered_at_expired).to match_array([dd_expired_auction])
     end
   end
 
@@ -81,7 +81,7 @@ RSpec.describe AuctionQuery do
   describe '#in_reverse_chron_order' do
     let(:auctions) { Array.new(5) { create(:auction) } }
     let(:sorted_auctions) do
-      auctions.sort_by(&:end_datetime)
+      auctions.sort_by(&:ended_at)
     end
 
     it 'should return auctions in reverse chronological order by endtime' do

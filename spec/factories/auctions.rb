@@ -1,21 +1,21 @@
 FactoryGirl.define do
   factory :auction do
     association :user, factory: :admin_user
-    start_datetime { Time.now - 3.days }
-    end_datetime { Time.now + 3.days }
+    started_at { Time.now - 3.days }
+    ended_at { Time.now + 3.days }
     result :not_applicable
     title { Faker::Company.catch_phrase }
     type :multi_bid
     published :published
     summary Faker::Lorem.paragraph
     description Faker::Lorem.paragraphs(3, true).join("\n\n")
-    delivery_deadline { Time.now + 10.days }
+    delivered_at { Time.now + 10.days }
 
     trait :single_bid_with_tie do
       single_bid
 
       after(:create) do |auction|
-        Timecop.freeze(auction.start_datetime) do
+        Timecop.freeze(auction.started_at) do
           Timecop.scale(3600)
           2.times do
             create(:bid, auction: auction, amount: 3000)
@@ -31,7 +31,7 @@ FactoryGirl.define do
       end
 
       after(:build) do |instance|
-        Timecop.freeze(instance.start_datetime) do
+        Timecop.freeze(instance.started_at) do
           Timecop.scale(3600)
           (1..2).each do |i|
             amount = 3499 - (20 * i) - rand(10)
@@ -61,17 +61,17 @@ FactoryGirl.define do
     end
 
     trait :available do
-      start_datetime { Time.now - 2.days }
-      end_datetime { Time.now + 2.days }
+      started_at { Time.now - 2.days }
+      ended_at { Time.now + 2.days }
     end
 
     trait :closed do
-      end_datetime { Time.now - 2.days }
+      ended_at { Time.now - 2.days }
     end
 
     trait :delivered do
-      end_datetime { Time.now - 2.days }
-      delivery_deadline { Time.now - 1.day }
+      ended_at { Time.now - 2.days }
+      delivered_at { Time.now - 1.day }
       delivery_url 'https://github.com/foo/bar'
     end
 
@@ -89,16 +89,16 @@ FactoryGirl.define do
     end
 
     trait :expiring do
-      end_datetime { Time.now + 3.hours }
+      ended_at { Time.now + 3.hours }
     end
 
     trait :future do
-      start_datetime { Time.now + 1.day }
+      started_at { Time.now + 1.day }
     end
 
-    trait :delivery_deadline_expired do
+    trait :delivered_at_expired do
       closed
-      delivery_deadline { end_datetime + 1.day }
+      delivered_at { ended_at + 1.day }
     end
 
     trait :accepted do
@@ -143,7 +143,7 @@ FactoryGirl.define do
 
     trait :complete_and_successful do
       with_bidders
-      delivery_deadline_expired
+      delivered_at_expired
       delivered
       accepted
       cap_submitted
@@ -155,7 +155,7 @@ FactoryGirl.define do
       accepted
       cap_submitted
       not_paid
-      delivery_deadline_expired
+      delivered_at_expired
     end
 
     trait :payment_needed do
@@ -166,12 +166,12 @@ FactoryGirl.define do
     trait :evaluation_needed do
       delivered
       not_evaluated
-      delivery_deadline_expired
+      delivered_at_expired
     end
 
     trait :delivery_past_due do
       not_delivered
-      delivery_deadline_expired
+      delivered_at_expired
     end
   end
 end

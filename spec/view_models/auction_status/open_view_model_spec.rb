@@ -6,8 +6,8 @@ describe AuctionStatus::OpenViewModel do
     let(:auction) do
       a = create(
         :auction,
-        start_datetime: Time.now - 3.days,
-        end_datetime: Time.now + 2.days,
+        started_at: Time.now - 3.days,
+        ended_at: Time.now + 2.days,
         start_price: 3500
       )
       create(:bid, auction: a, amount: 3000)

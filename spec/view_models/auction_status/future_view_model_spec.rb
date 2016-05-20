@@ -6,8 +6,8 @@ describe AuctionStatus::FutureViewModel do
     let(:auction) do
       a = create(
         :auction,
-        start_datetime: Time.now + 3.day,
-        end_datetime: Time.now + 3.hours,
+        started_at: Time.now + 3.day,
+        ended_at: Time.now + 3.hours,
         start_price: 3500
       )
       create(:bid, auction: a, amount: 3000)

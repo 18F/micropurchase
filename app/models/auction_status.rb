@@ -8,15 +8,15 @@ class AuctionStatus
   end
 
   def over?
-    auction.end_datetime.present? && ended_in_past?
+    auction.ended_at.present? && ended_in_past?
   end
 
   def future?
-    auction.start_datetime.nil? || starts_in_future?
+    auction.started_at.nil? || starts_in_future?
   end
 
   def expiring?
-    available? && auction.end_datetime < (Time.current + 12.hours)
+    available? && auction.ended_at < (Time.current + 12.hours)
   end
 
   private
@@ -24,18 +24,18 @@ class AuctionStatus
   attr_reader :auction
 
   def ends_in_future?
-    auction.end_datetime > Time.current
+    auction.ended_at > Time.current
   end
 
   def ended_in_past?
-    auction.end_datetime < Time.current
+    auction.ended_at < Time.current
   end
 
   def starts_in_future?
-    auction.start_datetime > Time.current
+    auction.started_at > Time.current
   end
 
   def started_in_past?
-    auction.start_datetime < Time.current
+    auction.started_at < Time.current
   end
 end

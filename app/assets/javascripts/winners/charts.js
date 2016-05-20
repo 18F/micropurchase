@@ -236,7 +236,7 @@
           var auction_bids = _.sortBy(auction.bids, 'created_at');
 
           if (auction.winning_bid && auction.bids.length > 0) {
-            settings.cols[0].push(microp.format.date(auction.end_datetime));
+            settings.cols[0].push(microp.format.date(auction.ended_at));
             settings.cols[1].push(+auction.winning_bid.amount);
           }
 
@@ -283,12 +283,12 @@
         })
 
         var byGithub = d3.nest()
-          .key(function(d){return microp.format.date(d.end_datetime)})
+          .key(function(d){return microp.format.date(d.ended_at)})
           .key(function(d){return d.github_repo})
           .entries(auctions);
 
         var byAuction = d3.nest()
-          .key(function(d){return microp.format.date(d.end_datetime)})
+          .key(function(d){return microp.format.date(d.ended_at)})
           .entries(auctions);
 
         _.each(byGithub, function (date, key) {
@@ -339,7 +339,7 @@
 
         var auctionsByEndtime = d3.nest()
           .key(function(d){
-            return microp.format.date(d.end_datetime);
+            return microp.format.date(d.ended_at);
           })
           .key(function(d){ return d.id; })
           .entries(auctions);

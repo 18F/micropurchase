@@ -3,11 +3,11 @@ class AuctionSerializer < ActiveModel::Serializer
     :bids,
     :created_at,
     :description,
-    :end_datetime,
+    :ended_at,
     :github_repo,
     :id,
     :issue_url,
-    :start_datetime,
+    :started_at,
     :start_price,
     :summary,
     :title,
@@ -28,12 +28,12 @@ class AuctionSerializer < ActiveModel::Serializer
     object.updated_at.iso8601
   end
 
-  def end_datetime
-    object.end_datetime.iso8601
+  def ended_at
+    object.ended_at.iso8601
   end
 
-  def start_datetime
-    object.start_datetime.iso8601
+  def started_at
+    object.started_at.iso8601
   end
 
   def winning_bid

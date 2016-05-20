@@ -3,7 +3,7 @@
   <% if AuctionStatus.new(@auction).available? %>
     Place a bid for "<%= @auction.title %>". The current bid is <%= @auction.highlighted_bid_amount_as_currency %>.
   <% else %>
-    Bidding on this auction closed on <%= @auction.end_datetime %>. The winning bid was <%= @auction.highlighted_bid_amount_as_currency %>.
+    Bidding on this auction closed on <%= @auction.ended_at %>. The winning bid was <%= @auction.highlighted_bid_amount_as_currency %>.
   <% end %>
 <% end %>
 <% content_for :data_tags do %>

@@ -81,8 +81,8 @@ describe Admin::AuctionsController do
         json_auctions = JSON.parse(response.body)['auctions']
         expect(json_auctions.map { |a| a['created_at'] }).to all(be_iso8601)
         expect(json_auctions.map { |a| a['updated_at'] }).to all(be_iso8601)
-        expect(json_auctions.map { |a| a['start_datetime'] }).to all(be_iso8601)
-        expect(json_auctions.map { |a| a['end_datetime'] }).to all(be_iso8601)
+        expect(json_auctions.map { |a| a['started_at'] }).to all(be_iso8601)
+        expect(json_auctions.map { |a| a['ended_at'] }).to all(be_iso8601)
       end
     end
   end

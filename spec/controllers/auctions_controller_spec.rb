@@ -20,18 +20,18 @@ describe AuctionsController do
 
         create(
           :auction,
-          start_datetime: date_start,
-          end_datetime: date_middle)
+          started_at: date_start,
+          ended_at: date_middle)
 
         create(
           :auction,
-          start_datetime: date_start,
-          end_datetime: date_latest)
+          started_at: date_start,
+          ended_at: date_latest)
 
         create(
           :auction,
-          start_datetime: date_start,
-          end_datetime: date_first)
+          started_at: date_start,
+          ended_at: date_first)
 
         get :index
         auctions = assigns(:view_model).auctions
@@ -41,9 +41,9 @@ describe AuctionsController do
         auction_3 = auctions[2]
 
         expect(auction_1).to be_a(AuctionViewModel)
-        expect(auction_1.end_datetime).to be_within(0.1).of(date_latest)
-        expect(auction_2.end_datetime).to be_within(0.1).of(date_middle)
-        expect(auction_3.end_datetime).to be_within(0.1).of(date_first)
+        expect(auction_1.ended_at).to be_within(0.1).of(date_latest)
+        expect(auction_2.ended_at).to be_within(0.1).of(date_middle)
+        expect(auction_3.ended_at).to be_within(0.1).of(date_first)
       end
     end
   end

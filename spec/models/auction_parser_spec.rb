@@ -29,17 +29,17 @@ RSpec.describe AuctionParser do
         user = create(:user)
         params = {
           auction:  {
-            'start_datetime(1i)' => '2016',
-            'start_datetime(2i)' => '04',
-            'start_datetime(3i)' => '15',
-            'start_datetime(4i)' => '13',
-            'start_datetime(5i)' => '00',
+            'started_at(1i)' => '2016',
+            'started_at(2i)' => '04',
+            'started_at(3i)' => '15',
+            'started_at(4i)' => '13',
+            'started_at(5i)' => '00',
           }
         }
 
         attributes = AuctionParser.new(params, user).attributes
 
-        expect(attributes[:start_datetime]).to be_a(ActiveSupport::TimeWithZone)
+        expect(attributes[:started_at]).to be_a(ActiveSupport::TimeWithZone)
       end
     end
   end

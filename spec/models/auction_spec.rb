@@ -7,8 +7,8 @@ describe Auction do
 
   describe 'Validations' do
     context 'on create' do
-      it { should validate_presence_of(:end_datetime) }
-      it { should validate_presence_of(:start_datetime) }
+      it { should validate_presence_of(:ended_at) }
+      it { should validate_presence_of(:started_at) }
       it { should validate_presence_of(:start_price) }
       it { should validate_presence_of(:title) }
       it { should validate_presence_of(:user) }
@@ -48,7 +48,7 @@ describe Auction do
         auction = create(:auction, published: :unpublished)
 
         auction.published = :published
-        auction.delivery_deadline = nil
+        auction.delivered_at = nil
 
         expect(auction).to be_invalid
       end

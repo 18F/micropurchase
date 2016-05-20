@@ -12,15 +12,15 @@ class Auction < ActiveRecord::Base
   # Disable STI
   self.inheritance_column = :__disabled
 
-  validates :end_datetime, presence: true
-  validates :start_datetime, presence: true
+  validates :ended_at, presence: true
+  validates :started_at, presence: true
   validates :start_price, presence: true
   validates :title, presence: true
   validates :user, presence: true
   validate :start_price_equal_to_or_less_than_max_if_not_contracting_officer
   validates :summary, presence: true, if: :published?
   validates :description, presence: true, if: :published?
-  validates :delivery_deadline, presence: true, if: :published?
+  validates :delivered_at, presence: true, if: :published?
 
   def lowest_bid
     lowest_bids.first

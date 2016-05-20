@@ -10,8 +10,8 @@
       "items": {
         "required": [
           "start_price",
-          "start_datetime",
-          "end_datetime",
+          "started_at",
+          "ended_at",
           "title",
           "description",
           "id",
@@ -29,11 +29,11 @@
           "start_price": {
             "type": "number"
           },
-          "start_datetime": {
+          "started_at": {
             "type": "date-time",
             "minLength": 1
           },
-          "end_datetime": {
+          "ended_at": {
             "type": "date-time",
             "minLength": 1
           },

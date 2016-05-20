@@ -13,17 +13,17 @@ class AuctionPresenter
     :billable_to,
     :cap_proposal_url,
     :created_at,
-    :delivery_deadline,
+    :delivered_at,
     :delivery_url,
     :description,
-    :end_datetime,
+    :ended_at,
     :github_repo,
     :id,
     :issue_url,
     :model_name,
     :published,
     :read_attribute_for_serialization,
-    :start_datetime,
+    :started_at,
     :start_price,
     :summary,
     :title,
@@ -91,27 +91,27 @@ class AuctionPresenter
   end
 
   def formatted_start_time
-    DcTimePresenter.convert_and_format(auction.start_datetime)
+    DcTimePresenter.convert_and_format(auction.started_at)
   end
 
   def formatted_end_time
-    DcTimePresenter.convert_and_format(auction.end_datetime)
+    DcTimePresenter.convert_and_format(auction.ended_at)
   end
 
-  def formatted_delivery_deadline
-    DcTimePresenter.convert_and_format(auction.delivery_deadline)
+  def formatted_delivered_at
+    DcTimePresenter.convert_and_format(auction.delivered_at)
   end
 
   def relative_start_time
-    time_in_human(auction.start_datetime)
+    time_in_human(auction.started_at)
   end
 
   def relative_time_left
-    "#{distance_of_time_in_words(Time.current, auction.end_datetime)} left"
+    "#{distance_of_time_in_words(Time.current, auction.ended_at)} left"
   end
 
-  def delivery_deadline_expires_in
-    time_in_human(auction.delivery_deadline)
+  def delivered_at_expires_in
+    time_in_human(auction.delivered_at)
   end
 
   def winning_bidder_id

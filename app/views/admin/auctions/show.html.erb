@@ -11,10 +11,10 @@
     <% end %>
   </div>
   <div class='usa-width-one-fourth'>
-    <b>Starts:</b> <%= DcTimePresenter.convert(@auction.start_datetime).to_s(:long) %>
+    <b>Starts:</b> <%= DcTimePresenter.convert(@auction.started_at).to_s(:long) %>
   </div>
   <div class='usa-width-one-fourth'>
-    <b>Ends:</b> <%= DcTimePresenter.convert(@auction.end_datetime).to_s(:long) %>
+    <b>Ends:</b> <%= DcTimePresenter.convert(@auction.ended_at).to_s(:long) %>
   </div>
 </div>
 <p><%=h raw @auction.html_summary %></p>

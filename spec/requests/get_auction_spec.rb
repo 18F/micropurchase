@@ -66,8 +66,8 @@ describe 'GET /auctions/:id' do
 
       expect(json_auction['created_at']).to be_iso8601
       expect(json_auction['updated_at']).to be_iso8601
-      expect(json_auction['start_datetime']).to be_iso8601
-      expect(json_auction['end_datetime']).to be_iso8601
+      expect(json_auction['started_at']).to be_iso8601
+      expect(json_auction['ended_at']).to be_iso8601
     end
 
     context 'when the auction is single bid' do
