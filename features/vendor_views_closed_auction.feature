@@ -1,4 +1,4 @@
-Feature: Closed Auctions
+Feature: Vendor views closed auctions
   As a vendor
   I want to be able to view closed auctions
   So that I see who won
@@ -48,10 +48,3 @@ Feature: Closed Auctions
     And I should see when the auction ended
     And there should be meta tags for the closed auction
 
-  Scenario: I am not logged in
-    Given there is a closed auction
-    When I visit the home page
-    Then I should see the auction had a winning bid
-
-    When I visit the auction page
-    Then I should see the auction had a winning bid with name

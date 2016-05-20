@@ -3,6 +3,7 @@ Feature: Feedback options
   I want to be able to give feedback
   So I can learn more about Micropurchase
 
+  # Should add more interactions here
   Scenario: Visiting the homepage
     When I visit the home page
     Then I should see a link to give feedback

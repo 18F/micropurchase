@@ -25,8 +25,3 @@ Feature: Previous Winners View and Previous Winners Archive Page
     Then I should see a dropdown menu
     And the menu should default to All
     And I should see a list of all the previous auctions
-
-
-
-
-

@@ -1,4 +1,4 @@
-Feature: Credit Card Form URL
+Feature: Vendor updates Credit Card Form URL
   As a vendor on the platform
   I want to see the Credit Card Form URL stored for my account
   So that I can make sure payments are going to the right place
