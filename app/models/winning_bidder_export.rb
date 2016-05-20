@@ -63,7 +63,7 @@ class WinningBidderExport
       phone,
       fax,
       ended_at,
-      delivered_at,
+      delivery_due_at,
       winning_bid_amount,
       winning_bid_amount,
       winning_bid_amount,
@@ -125,8 +125,8 @@ class WinningBidderExport
     format_date(auction.ended_at)
   end
 
-  def delivered_at
-    format_date(auction.delivered_at)
+  def delivery_due_at
+    format_date(auction.delivery_due_at)
   end
 
   def winning_bid_amount

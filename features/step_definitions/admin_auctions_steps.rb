@@ -130,9 +130,9 @@ Then(/^I should be able to edit the existing auction form$/) do
   select @end_day.day, from: "auction_ended_at_3i"
 
   @deadline_day = DcTimePresenter.convert(Time.now + 5.days)
-  select @deadline_day.year, from: "auction_delivered_at_1i"
-  select @deadline_day.strftime("%B"), from: "auction_delivered_at_2i"
-  select @deadline_day.day, from: "auction_delivered_at_3i"
+  select @deadline_day.year, from: "auction_delivery_due_at_1i"
+  select @deadline_day.strftime("%B"), from: "auction_delivery_due_at_2i"
+  select @deadline_day.day, from: "auction_delivery_due_at_3i"
 
   @billable = "the tock line item for CALC"
   fill_in("auction_billable_to", with: @billable)

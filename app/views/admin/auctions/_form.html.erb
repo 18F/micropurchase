@@ -10,7 +10,7 @@
 <% if @auction.new_record? %>
   <%= f.input :due_in_days %>
 <% else %>
-  <%= f.input :delivered_at, as: :datetime %>
+  <%= f.input :delivery_due_at, as: :datetime %>
 <% end %>
 
 <%= f.input :billable_to %>

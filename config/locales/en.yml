@@ -18,7 +18,7 @@ en:
               invalid:
                "You do not have permission to publish auctions with a start
                price over $%{start_price}"
-            delivered_at:
+            delivery_due_at:
               blank: "(or 'Due in days') can't be blank"
   controllers:
     admin:

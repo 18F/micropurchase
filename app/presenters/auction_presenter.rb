@@ -13,7 +13,7 @@ class AuctionPresenter
     :billable_to,
     :cap_proposal_url,
     :created_at,
-    :delivered_at,
+    :delivery_due_at,
     :delivery_url,
     :description,
     :ended_at,
@@ -98,8 +98,8 @@ class AuctionPresenter
     DcTimePresenter.convert_and_format(auction.ended_at)
   end
 
-  def formatted_delivered_at
-    DcTimePresenter.convert_and_format(auction.delivered_at)
+  def formatted_delivery_due_at
+    DcTimePresenter.convert_and_format(auction.delivery_due_at)
   end
 
   def relative_start_time
@@ -110,8 +110,8 @@ class AuctionPresenter
     "#{distance_of_time_in_words(Time.current, auction.ended_at)} left"
   end
 
-  def delivered_at_expires_in
-    time_in_human(auction.delivered_at)
+  def delivery_due_at_expires_in
+    time_in_human(auction.delivery_due_at)
   end
 
   def winning_bidder_id

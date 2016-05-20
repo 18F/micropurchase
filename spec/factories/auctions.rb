@@ -9,7 +9,7 @@ FactoryGirl.define do
     published :published
     summary Faker::Lorem.paragraph
     description Faker::Lorem.paragraphs(3, true).join("\n\n")
-    delivered_at { Time.now + 10.days }
+    delivery_due_at { Time.now + 10.days }
 
     trait :single_bid_with_tie do
       single_bid
@@ -71,7 +71,7 @@ FactoryGirl.define do
 
     trait :delivered do
       ended_at { Time.now - 2.days }
-      delivered_at { Time.now - 1.day }
+      delivery_due_at { Time.now - 1.day }
       delivery_url 'https://github.com/foo/bar'
     end
 
@@ -96,9 +96,9 @@ FactoryGirl.define do
       started_at { Time.now + 1.day }
     end
 
-    trait :delivered_at_expired do
+    trait :delivery_due_at_expired do
       closed
-      delivered_at { ended_at + 1.day }
+      delivery_due_at { ended_at + 1.day }
     end
 
     trait :accepted do
@@ -143,7 +143,7 @@ FactoryGirl.define do
 
     trait :complete_and_successful do
       with_bidders
-      delivered_at_expired
+      delivery_due_at_expired
       delivered
       accepted
       cap_submitted
@@ -155,7 +155,7 @@ FactoryGirl.define do
       accepted
       cap_submitted
       not_paid
-      delivered_at_expired
+      delivery_due_at_expired
     end
 
     trait :payment_needed do
@@ -166,12 +166,12 @@ FactoryGirl.define do
     trait :evaluation_needed do
       delivered
       not_evaluated
-      delivered_at_expired
+      delivery_due_at_expired
     end
 
     trait :delivery_past_due do
       not_delivered
-      delivered_at_expired
+      delivery_due_at_expired
     end
   end
 end

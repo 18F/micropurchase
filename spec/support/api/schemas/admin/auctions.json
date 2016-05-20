@@ -14,7 +14,7 @@
           "start_price",
           "started_at",
           "ended_at",
-          "delivered_at",
+          "delivery_due_at",
           "delivery_url",
           "cap_proposal_url",
           "awardee_paid_status",
@@ -45,7 +45,7 @@
             "type": "date-time",
             "minLength": 1
           },
-          "delivered_at": {
+          "delivery_due_at": {
             "type": "date-time",
             "minLength": 1
           },

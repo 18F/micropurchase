@@ -22,14 +22,14 @@ RSpec.describe AuctionQuery do
     end
   end
 
-  describe '#delivered_at_expired' do
+  describe '#delivery_due_at_expired' do
     let!(:running_auction) { create(:auction, :running) }
     let(:dd_expired_auction) do
-      create(:auction, :delivered_at_expired)
+      create(:auction, :delivery_due_at_expired)
     end
 
     it 'should return only delivery deadline expired auctions' do
-      expect(query.delivered_at_expired).to match_array([dd_expired_auction])
+      expect(query.delivery_due_at_expired).to match_array([dd_expired_auction])
     end
   end
 
