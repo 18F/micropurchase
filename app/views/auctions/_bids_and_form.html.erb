@@ -1,21 +1,11 @@
+<div class="bid-deadline-box">
+  <div class="bid-deadline-box-children">
+    <%= auction.relative_time %>
+  </div>
+</div>
+
 <div class="current-bid-box">
   <div class="current-bid-box-children">
     <%= render partial: auction.index_bid_summary_partial, locals: { auction: auction} %>
   </div>
-</div>
-
-<div class="bid-deadline-box">
-  <div class="bid-deadline-box-children">
-    <span class="bid-deadline">
-      Bid Deadline:  <%= auction.relative_time_left %>
-    </span>
-    <br/>
-    <span class="bid-deadline">
-      Bid start time: <%= auction.relative_start_time %>
-    </span>
-  </div>
-</div>
-
-<div class="issue-bids-info-item">
-  <%= render partial: auction.bid_button_partial, locals: { auction: auction } %>
 </div>
