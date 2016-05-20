@@ -105,9 +105,9 @@ Then(/^I should see when bidding starts and ends in ET$/) do
     DcTimePresenter.convert_and_format(@auction.ended_at))
 end
 
-Then(/^I should see the delivered_at timestamp in ET$/) do
+Then(/^I should see the delivery_due_at timestamp in ET$/) do
   expect(page).to have_text(
-    DcTimePresenter.convert_and_format(@auction.delivered_at))
+    DcTimePresenter.convert_and_format(@auction.delivery_due_at))
 end
 
 Then(/^I should see the start price for the auction is \$(\d+)$/) do |price|
@@ -202,7 +202,7 @@ Then(/^I should see when the auction ended$/) do
 end
 
 Then(/^I should see the delivery deadline$/) do
-  expect(page).to have_content("Delivery deadline: #{DcTimePresenter.convert_and_format(@auction.delivered_at)}")
+  expect(page).to have_content("Delivery deadline: #{DcTimePresenter.convert_and_format(@auction.delivery_due_at)}")
 end
 
 Then(/^I should see the bid button$/) do

@@ -4,7 +4,7 @@ class AuctionParser < Struct.new(:params, :user)
       awardee_paid_status: auction_params[:awardee_paid_status],
       billable_to: auction_params[:billable_to],
       cap_proposal_url: auction_params[:cap_proposal_url],
-      delivered_at: delivered_at,
+      delivery_due_at: delivery_due_at,
       delivery_url: auction_params[:delivery_url],
       description: auction_params[:description],
       ended_at: ended_at,
@@ -24,12 +24,12 @@ class AuctionParser < Struct.new(:params, :user)
 
   private
 
-  def delivered_at
+  def delivery_due_at
     if auction_params.key?(:due_in_days) && auction_params[:due_in_days].present?
       real_days = auction_params[:due_in_days].to_i.business_days
       end_of_workday(real_days.after(ended_at))
     elsif auction_params[:deliery_deadline]
-      parse_datetime("delivered_at")
+      parse_datetime("delivery_due_at")
     end
   end
 

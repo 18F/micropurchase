@@ -20,7 +20,7 @@ class Auction < ActiveRecord::Base
   validate :start_price_equal_to_or_less_than_max_if_not_contracting_officer
   validates :summary, presence: true, if: :published?
   validates :description, presence: true, if: :published?
-  validates :delivered_at, presence: true, if: :published?
+  validates :delivery_due_at, presence: true, if: :published?
 
   def lowest_bid
     lowest_bids.first

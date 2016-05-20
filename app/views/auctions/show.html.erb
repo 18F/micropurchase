@@ -43,10 +43,10 @@
         <p class="auction-label"><%= @view_model.auction_start_label %></p>
         <p class="auction-label-info"><%= @view_model.auction_formatted_start_time %></p>
       </div>
-      <% if @view_model.auction_has_delivered_at? %>
+      <% if @view_model.auction_has_delivery_due_at? %>
       <div>
         <p class="auction-label">Delivery deadline:</p>
-        <p class="auction-label-info"><%= @view_model.auction_formatted_delivered_at %></p>
+        <p class="auction-label-info"><%= @view_model.auction_formatted_delivery_due_at %></p>
       </div>
       <% end %>
       <% if @view_model.auction.show_bid_button? %>

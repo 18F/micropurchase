@@ -4,7 +4,7 @@ class AuctionQuery
   end
 
   [
-    :delivered_at_expired,
+    :delivery_due_at_expired,
     :accepted,
     :not_evaluated,
     :delivered,
@@ -26,7 +26,7 @@ class AuctionQuery
 
   def complete_and_successful
     @relation
-      .delivered_at_expired
+      .delivery_due_at_expired
       .delivered
       .accepted
       .cap_submitted
@@ -35,7 +35,7 @@ class AuctionQuery
 
   def payment_pending
     @relation
-      .delivered_at_expired
+      .delivery_due_at_expired
       .delivered
       .accepted
       .cap_submitted
@@ -44,7 +44,7 @@ class AuctionQuery
 
   def payment_needed
     @relation
-      .delivered_at_expired
+      .delivery_due_at_expired
       .delivered
       .accepted
       .cap_not_submitted
@@ -53,14 +53,14 @@ class AuctionQuery
 
   def evaluation_needed
     @relation
-      .delivered_at_expired
+      .delivery_due_at_expired
       .delivered
       .not_evaluated
   end
 
   def delivery_past_due
     @relation
-      .delivered_at_expired
+      .delivery_due_at_expired
       .not_delivered
   end
 
@@ -85,8 +85,8 @@ class AuctionQuery
   end
 
   module Scopes
-    def delivered_at_expired
-      where('delivered_at < ?', Time.zone.now)
+    def delivery_due_at_expired
+      where('delivery_due_at < ?', Time.zone.now)
     end
 
     def accepted

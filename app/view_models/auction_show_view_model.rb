@@ -7,7 +7,7 @@ class AuctionShowViewModel < Struct.new(:current_user, :auction_record)
 
   delegate(
     :bid_count,
-    :formatted_delivered_at,
+    :formatted_delivery_due_at,
     :formatted_end_time,
     :formatted_start_time,
     :html_description,
@@ -81,8 +81,8 @@ class AuctionShowViewModel < Struct.new(:current_user, :auction_record)
     AuctionStatus.new(auction_record).over? && auction.bids?
   end
 
-  def auction_has_delivered_at?
-    !auction.delivered_at.blank?
+  def auction_has_delivery_due_at?
+    !auction.delivery_due_at.blank?
   end
 
   private

@@ -11,7 +11,7 @@ describe WinningBidderExport do
           :closed,
           :with_bidders,
           ended_at: end_date,
-          delivered_at: delivery_date
+          delivery_due_at: delivery_date
         )
         winning_bid = WinningBid.new(auction).find
         winning_bid.bidder.update(duns_number: FakeSamApi::VALID_DUNS)

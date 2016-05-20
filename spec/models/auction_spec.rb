@@ -48,7 +48,7 @@ describe Auction do
         auction = create(:auction, published: :unpublished)
 
         auction.published = :published
-        auction.delivered_at = nil
+        auction.delivery_due_at = nil
 
         expect(auction).to be_invalid
       end

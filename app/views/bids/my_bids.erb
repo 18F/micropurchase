@@ -31,7 +31,7 @@
         <td><%= bid.winning_status %></td>
         <td><%= DcTimePresenter.convert(bid.presenter_auction.started_at).to_s(:long) %></td>
         <td><%= DcTimePresenter.convert(bid.presenter_auction.ended_at).to_s(:long) %></td>
-        <td><%= DcTimePresenter.convert(bid.presenter_auction.delivered_at).to_s(:long) rescue nil %></td>
+        <td><%= DcTimePresenter.convert(bid.presenter_auction.delivery_due_at).to_s(:long) rescue nil %></td>
       </tr>
       <% end %>
     </tbody>
