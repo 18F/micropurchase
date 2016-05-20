@@ -6,8 +6,8 @@ describe AuctionStatus::OverViewModel do
     let(:auction) do
       a = create(
         :auction,
-        start_datetime: Time.now - 5.days,
-        end_datetime: Time.now - 5.hours,
+        started_at: Time.now - 5.days,
+        ended_at: Time.now - 5.hours,
         start_price: 3500
       )
       create(:bid, auction: a, amount: 3000)

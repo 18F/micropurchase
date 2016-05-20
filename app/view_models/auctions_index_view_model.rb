@@ -4,11 +4,11 @@ class AuctionsIndexViewModel < Struct.new(:current_user, :auctions_query)
   end
 
   def active_auction_count
-    auctions.count { |i| i.start_datetime < Time.now && Time.now < i.end_datetime }
+    auctions.count { |i| i.started_at < Time.now && Time.now < i.ended_at }
   end
 
   def upcoming_auction_count
-    auctions.count { |i| Time.now < i.start_datetime }
+    auctions.count { |i| Time.now < i.started_at }
   end
 
   def auctions_list_partial

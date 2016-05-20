@@ -27,8 +27,8 @@ RSpec.describe PlaceBid do
   let(:auction) do
     FactoryGirl.create(:auction,
                        :multi_bid,
-                       start_datetime: Time.now - 3.days,
-                       end_datetime: Time.now + 7.days)
+                       started_at: Time.now - 3.days,
+                       ended_at: Time.now + 7.days)
   end
 
   context 'when the auction start price is above the micro-purchase threshold' do
@@ -67,8 +67,8 @@ RSpec.describe PlaceBid do
       FactoryGirl.create(:auction,
                          :single_bid,
                          :with_bidders,
-                         start_datetime: Time.now - 3.days,
-                         end_datetime: Time.now + 7.days)
+                         started_at: Time.now - 3.days,
+                         ended_at: Time.now + 7.days)
     end
 
     it 'should reject bids when the user has already bid on the given auction' do
@@ -103,8 +103,8 @@ RSpec.describe PlaceBid do
   context 'when the auction has expired' do
     let(:auction) do
       FactoryGirl.create(:auction,
-                         start_datetime: Time.now - 5.days,
-                         end_datetime: Time.now - 3.day)
+                         started_at: Time.now - 5.days,
+                         ended_at: Time.now - 3.day)
     end
 
     it 'should raise an authorization error (because we have that baked in)' do
@@ -115,8 +115,8 @@ RSpec.describe PlaceBid do
   context 'when the auction has not started yet' do
     let(:auction) do
       FactoryGirl.create(:auction,
-                         start_datetime: Time.now + 5.days,
-                         end_datetime: Time.now + 7.days)
+                         started_at: Time.now + 5.days,
+                         ended_at: Time.now + 7.days)
     end
 
     it 'should raise an authorization error (same as above)' do

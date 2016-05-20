@@ -4,13 +4,13 @@
 <%= f.input :issue_url %>
 <%= f.input :summary, as: :text %>
 <%= f.input :description, as: :text %>
-<%= f.input :start_datetime, as: :datetime %>
-<%= f.input :end_datetime, as: :datetime %>
+<%= f.input :started_at, as: :datetime %>
+<%= f.input :ended_at, as: :datetime %>
 
 <% if @auction.new_record? %>
   <%= f.input :due_in_days %>
 <% else %>
-  <%= f.input :delivery_deadline, as: :datetime %>
+  <%= f.input :delivered_at, as: :datetime %>
 <% end %>
 
 <%= f.input :billable_to %>

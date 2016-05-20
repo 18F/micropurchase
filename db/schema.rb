@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160517224513) do
+ActiveRecord::Schema.define(version: 20160520170348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 20160517224513) do
   create_table "auctions", force: :cascade do |t|
     t.string   "issue_url",           default: ""
     t.integer  "start_price",         default: 3500, null: false
-    t.datetime "start_datetime",                     null: false
-    t.datetime "end_datetime",                       null: false
+    t.datetime "started_at",                         null: false
+    t.datetime "ended_at",                           null: false
     t.string   "title",                              null: false
     t.text     "description",         default: "",   null: false
     t.string   "github_repo",         default: ""
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20160517224513) do
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
     t.text     "summary",             default: "",   null: false
-    t.datetime "delivery_deadline"
+    t.datetime "delivered_at"
     t.text     "notes",               default: ""
     t.string   "billable_to",         default: ""
     t.integer  "result",              default: 0

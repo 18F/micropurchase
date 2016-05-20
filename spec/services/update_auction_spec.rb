@@ -4,7 +4,7 @@ describe UpdateAuction do
   describe '#perform' do
     context 'when changing the title' do
       it 'updates the title' do
-        auction = create(:auction, :delivery_deadline_expired)
+        auction = create(:auction, :delivered_at_expired)
         new_title = 'The New Title'
         params = { auction: { title: new_title } }
 
@@ -16,7 +16,7 @@ describe UpdateAuction do
 
     context 'when result is set to accepted' do
       it 'calls the CreateCapProposalJob' do
-        auction = create(:auction, :delivery_deadline_expired)
+        auction = create(:auction, :delivered_at_expired)
         allow(CreateCapProposalJob).to receive(:perform_later).with(auction.id).and_return(nil)
         params= { auction: { result: 'accepted' } }
 
@@ -28,7 +28,7 @@ describe UpdateAuction do
 
     context 'when result is set to rejected' do
       it 'does not set cap_proposal_url' do
-        auction = create(:auction, :delivery_deadline_expired)
+        auction = create(:auction, :delivered_at_expired)
         params = { auction: { result: 'rejected' } }
 
         updater = UpdateAuction.new(auction, params)

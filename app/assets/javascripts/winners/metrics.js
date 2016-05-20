@@ -91,7 +91,7 @@
 
     getAuctionLength: function getAuctionLength() {
       var auctionL =  _.map(this.auctions, function(auction){
-        var timeDiff = new Date(auction.end_datetime) - new Date(auction.start_datetime);
+        var timeDiff = new Date(auction.ended_at) - new Date(auction.started_at);
         var dayUTF = 1000 * 60 * 60 * 24;
         return (timeDiff / dayUTF);
       });

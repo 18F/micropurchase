@@ -6,8 +6,8 @@ describe AuctionStatus::ExpiringViewModel do
     let(:auction) do
       a = create(
         :auction,
-        start_datetime: Time.now - 3.days,
-        end_datetime: Time.now + 3.hours,
+        started_at: Time.now - 3.days,
+        ended_at: Time.now + 3.hours,
         start_price: 3500
       )
       create(:bid, amount: 3000, auction: a)

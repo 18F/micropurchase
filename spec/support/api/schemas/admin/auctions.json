@@ -12,9 +12,9 @@
           "issue_url",
           "github_repo",
           "start_price",
-          "start_datetime",
-          "end_datetime",
-          "delivery_deadline",
+          "started_at",
+          "ended_at",
+          "delivered_at",
           "delivery_url",
           "cap_proposal_url",
           "awardee_paid_status",
@@ -37,15 +37,15 @@
           "start_price": {
             "type": "number"
           },
-          "start_datetime": {
+          "started_at": {
             "type": "date-time",
             "minLength": 1
           },
-          "end_datetime": {
+          "ended_at": {
             "type": "date-time",
             "minLength": 1
           },
-          "delivery_deadline": {
+          "delivered_at": {
             "type": "date-time",
             "minLength": 1
           },

@@ -62,8 +62,8 @@ class WinningBidderExport
       address_country,
       phone,
       fax,
-      end_datetime,
-      delivery_deadline,
+      ended_at,
+      delivered_at,
       winning_bid_amount,
       winning_bid_amount,
       winning_bid_amount,
@@ -121,12 +121,12 @@ class WinningBidderExport
     sam_data[:govtBusinessPoc][:fax]
   end
 
-  def end_datetime
-    format_date(auction.end_datetime)
+  def ended_at
+    format_date(auction.ended_at)
   end
 
-  def delivery_deadline
-    format_date(auction.delivery_deadline)
+  def delivered_at
+    format_date(auction.delivered_at)
   end
 
   def winning_bid_amount

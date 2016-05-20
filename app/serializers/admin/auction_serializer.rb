@@ -5,9 +5,9 @@ class Admin::AuctionSerializer < ActiveModel::Serializer
     :issue_url,
     :github_repo,
     :start_price,
-    :start_datetime,
-    :end_datetime,
-    :delivery_deadline,
+    :started_at,
+    :ended_at,
+    :delivered_at,
     :delivery_url,
     :cap_proposal_url,
     :awardee_paid_status,
@@ -21,8 +21,8 @@ class Admin::AuctionSerializer < ActiveModel::Serializer
     :billable_to
   )
 
-  def delivery_deadline
-    object.delivery_deadline.try(:iso8601)
+  def delivered_at
+    object.delivered_at.try(:iso8601)
   end
 
   def created_at
@@ -33,11 +33,11 @@ class Admin::AuctionSerializer < ActiveModel::Serializer
     object.updated_at.iso8601
   end
 
-  def end_datetime
-    object.end_datetime.iso8601
+  def ended_at
+    object.ended_at.iso8601
   end
 
-  def start_datetime
-    object.start_datetime.iso8601
+  def started_at
+    object.started_at.iso8601
   end
 end

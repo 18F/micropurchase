@@ -4,7 +4,7 @@ describe AuctionStatus do
   describe "#available?" do
     context "start datetime in past, end datetime in future" do
       it "is true" do
-        auction = FactoryGirl.build(:auction, start_datetime: yesterday, end_datetime: tomorrow)
+        auction = FactoryGirl.build(:auction, started_at: yesterday, ended_at: tomorrow)
 
         status = AuctionStatus.new(auction)
 
@@ -13,7 +13,7 @@ describe AuctionStatus do
 
       context "start datetime in past, end datetime in past" do
         it "is false" do
-          auction = FactoryGirl.build(:auction, start_datetime: yesterday, end_datetime: yesterday)
+          auction = FactoryGirl.build(:auction, started_at: yesterday, ended_at: yesterday)
 
           status = AuctionStatus.new(auction)
 
@@ -23,7 +23,7 @@ describe AuctionStatus do
 
       context "start datetime in future, end datetime in future" do
         it "is false" do
-          auction = FactoryGirl.build(:auction, start_datetime: tomorrow, end_datetime: tomorrow)
+          auction = FactoryGirl.build(:auction, started_at: tomorrow, ended_at: tomorrow)
 
           status = AuctionStatus.new(auction)
 
@@ -35,7 +35,7 @@ describe AuctionStatus do
     describe "#over?" do
       context "end datetime is in past" do
         it "is true" do
-          auction = FactoryGirl.build(:auction, end_datetime: yesterday)
+          auction = FactoryGirl.build(:auction, ended_at: yesterday)
 
           status = AuctionStatus.new(auction)
 
@@ -45,7 +45,7 @@ describe AuctionStatus do
 
       context "end datetime is in future" do
         it "is false" do
-          auction = FactoryGirl.build(:auction, end_datetime: tomorrow)
+          auction = FactoryGirl.build(:auction, ended_at: tomorrow)
 
           status = AuctionStatus.new(auction)
 
@@ -55,7 +55,7 @@ describe AuctionStatus do
 
       context "end datetime is nil" do
         it "is false" do
-          auction = FactoryGirl.build(:auction, end_datetime: nil)
+          auction = FactoryGirl.build(:auction, ended_at: nil)
 
           status = AuctionStatus.new(auction)
 
@@ -67,7 +67,7 @@ describe AuctionStatus do
     describe "#future?" do
       context "start datetime is in future" do
         it "is true" do
-          auction = FactoryGirl.build(:auction, start_datetime: tomorrow)
+          auction = FactoryGirl.build(:auction, started_at: tomorrow)
 
           status = AuctionStatus.new(auction)
 
@@ -77,7 +77,7 @@ describe AuctionStatus do
 
       context "start datetime is in past" do
         it "is false" do
-          auction = FactoryGirl.build(:auction, start_datetime: yesterday)
+          auction = FactoryGirl.build(:auction, started_at: yesterday)
 
           status = AuctionStatus.new(auction)
 
@@ -87,7 +87,7 @@ describe AuctionStatus do
 
       context "start datetime is nil" do
         it "is true" do
-          auction = FactoryGirl.build(:auction, start_datetime: nil)
+          auction = FactoryGirl.build(:auction, started_at: nil)
 
           status = AuctionStatus.new(auction)
 
@@ -101,8 +101,8 @@ describe AuctionStatus do
         it "is true" do
           auction = FactoryGirl.build(
             :auction,
-            start_datetime: yesterday,
-            end_datetime: one_hour_from_now
+            started_at: yesterday,
+            ended_at: one_hour_from_now
           )
 
           status = AuctionStatus.new(auction)
@@ -115,8 +115,8 @@ describe AuctionStatus do
         it "is false" do
           auction = FactoryGirl.build(
             :auction,
-            start_datetime: tomorrow,
-            end_datetime: one_hour_from_now
+            started_at: tomorrow,
+            ended_at: one_hour_from_now
           )
 
           status = AuctionStatus.new(auction)
@@ -129,8 +129,8 @@ describe AuctionStatus do
         it "is false" do
           auction = FactoryGirl.build(
             :auction,
-            start_datetime: yesterday,
-            end_datetime: tomorrow
+            started_at: yesterday,
+            ended_at: tomorrow
           )
 
           status = AuctionStatus.new(auction)
