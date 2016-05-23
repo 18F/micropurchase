@@ -42,8 +42,8 @@ class AuctionParser < Struct.new(:params, :user)
   end
 
   def parse_datetime(field)
-    if auction_params["#{field}(1i)"]
-      Time.zone.local(*(1..5).map { |i| auction_params["#{field}(#{i}i)"] })
+    if auction_params[field]
+      DateTimeParser.new(auction_params, field).parse
     end
   end
 
