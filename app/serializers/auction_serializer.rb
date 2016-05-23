@@ -16,8 +16,9 @@ class AuctionSerializer < ActiveModel::Serializer
   )
 
   def bids
-    bids = object.veiled_bids(scope)
-    bids.map { |bid| BidSerializer.new(bid, { scope: scope, root: false }) }
+    veiled_bids.map do |bid|
+      BidSerializer.new(bid, { scope: scope, root: false })
+    end
   end
 
   def created_at
@@ -41,6 +42,14 @@ class AuctionSerializer < ActiveModel::Serializer
   end
 
   private
+
+  def veiled_bids
+    if object.type == 'single_bid' && auction_status.available?
+      object.bids.where(bidder: scope)
+    else
+      object.bids
+    end
+  end
 
   def find_winning_bid
     if auction_status.available?
