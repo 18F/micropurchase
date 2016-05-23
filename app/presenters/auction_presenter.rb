@@ -135,7 +135,7 @@ class AuctionPresenter
   end
 
   def delivery_deadline_expires_in
-    time_in_human(model.delivery_deadline)
+    time_in_human(auction.delivery_due_at)
   end
 
   def winning_bidder_id
