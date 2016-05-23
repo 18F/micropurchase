@@ -110,28 +110,16 @@ class AuctionPresenter
     "#{distance_of_time_in_words(Time.current, auction.ended_at)} left"
   end
 
-  def relative_time
-    if (Time.current < model.end_datetime)
-      if (Time.current > model.start_datetime)
-        "Time remaining: #{distance_of_time_in_words(Time.current, model.end_datetime)}"
-      else
-        'Auction starts in #{distance_of_time_in_words(Time.current, model.start_datetime)}'
-      end
-    elsif (Time.current > model.end_datetime)
-      return 'brian, this auction is closed'
-    end
-  end
-
   def time_open
-    "Time remaining: #{distance_of_time_in_words(Time.current, model.end_datetime)}"
+    "Time remaining: #{distance_of_time_in_words(Time.current, auction.started_at)}"
   end
 
   def time_over
-    "Auction ended #{distance_of_time_in_words(model.start_datetime, Time.current)} ago"
+    "Auction ended #{distance_of_time_in_words(auction.started_at, Time.current)} ago"
   end
 
   def time_future
-    "Auction starts #{distance_of_time_in_words(Time.current, model.start_datetime)} from now"
+    "Auction starts #{distance_of_time_in_words(Time.current, auction.ended_at)} from now"
   end
 
   def delivery_deadline_expires_in
