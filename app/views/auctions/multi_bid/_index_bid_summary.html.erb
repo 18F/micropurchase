@@ -1,0 +1,12 @@
+ <% if auction.bids? %>
+    <span class="current-bid-header">Current bid:</span>
+    <span class="current-bid"><%=
+    link_to(
+      auction.highlighted_bid_amount_as_currency,
+      auction_bids_path(auction.id)
+    )
+    %>
+    </span>
+  <% else %>
+    <p>No bids yet</p>
+    <% end %>

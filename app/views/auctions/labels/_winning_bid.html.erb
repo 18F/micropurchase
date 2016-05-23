@@ -1,0 +1,34 @@
+<% if AuctionStatus.new(auction).available? %>
+  <% if auction.bids? %>
+    <% if auction.user_is_winning_bidder? and auction.user_bid_amount_as_currency %>
+      <span>Your bid:
+        <span class="current-bid"><%=
+        link_to(
+          auction.user_bid_amount_as_currency,
+          auction_bids_path(auction.id)
+        )
+        %>
+        </span>
+      </span>
+    <% end %>
+  <% end %>
+<% elsif AuctionStatus.new(auction).over? %>
+  <% if auction.bids? %>
+    <% if auction.user_is_winning_bidder? %>
+      <span class="current-bid-header">Your won:</span>
+    <% else %>
+      <span>Your bid: <%= auction.user_bid_amount_as_currency %></span>
+      <span class="current-bid-header">Winning bid:</span>
+    <% end %>
+    <span class="current-bid"><%=
+      link_to(
+        auction.highlighted_bid_amount_as_currency,
+        auction_bids_path(auction.id)
+      )
+      %>
+    </span>
+
+  <% else %>
+    <p>No bids</p>
+  <% end %>
+<% end %>
