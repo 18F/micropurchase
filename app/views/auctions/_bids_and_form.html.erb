@@ -1,11 +1,6 @@
-<div class="bid-deadline-box">
-  <div class="bid-deadline-box-children">
-    <%= auction.relative_time %>
-  </div>
-</div>
-
 <div class="current-bid-box">
   <div class="current-bid-box-children">
+    <%= auction.index_bid_summary_partial %>
     <%= render partial: auction.index_bid_summary_partial, locals: {auction: auction} %>
   </div>
 </div>

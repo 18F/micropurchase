@@ -112,6 +112,10 @@ class AuctionViewModel < Struct.new(:current_user, :auction_record)
     auction.partial_path('index_bid_summary')
   end
 
+  def winning_bid_partial
+    auction.partial_path('winning_bid')
+  end
+
   def highlighted_bid_info_partial
     auction.partial_path('highlighted_bid_info', 'bids')
   end
@@ -134,18 +138,6 @@ class AuctionViewModel < Struct.new(:current_user, :auction_record)
                   end
     "::AuctionStatus::#{status_name}ViewModel".constantize
   end
-
-  # def relative_time
-  #   if (Time.current < model.end_datetime)
-  #     if (Time.current > model.start_datetime)
-  #       "Time remaining: #{distance_of_time_in_words(Time.current, model.end_datetime)}"
-  #     else
-  #       'Auction starts in #{distance_of_time_in_words(Time.current, model.start_datetime)}'
-  #     end
-  #   elsif (Time.current > model.end_datetime)
-  #     return ''
-  #   end
-  # end
 
   def expiring?
     auction_status.expiring?

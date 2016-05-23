@@ -7,25 +7,9 @@
         </div> <a href="<%= auction_path(auction) %>"><%= auction.title %></a>
       </h3>
       <div class="bid-deadline-box-children">
-        <span class="bid-deadline">
-          <% if AuctionStatus.new(auction).over? %>
-              <%= auction.time_over %>
-          <% elsif AuctionStatus.new(auction).future? %>
-            <%= auction.time_future %>
-          <% else %>
-            <%= auction.time_open %>
-          <% end %>
-        </span>
-        <% if AuctionStatus.new(auction).available? %>
-          <%= render partial: 'auctions/bids_and_form', locals: {auction: auction} %>
-          <div class="issue-bids-info-item">
-            <% if auction.show_bid_button? %>
-              <a href="<%= new_auction_bid_path(auction) %>" class='usa-button usa-button-outline-inverse button-bid'>Bid <icon class="fa fa-angle-double-right"></icon></a>
-            <% end %>
-          </div>
-        <% else %>
-          <%= render partial: 'auctions/winning_bid', locals: {auction: auction} %>
-        <% end %>
+        <%= render partial: 'auctions/labels/time_remaining', locals: {auction: auction} %>
+
+        <%= render partial: auction.winning_bid_partial, locals: {auction: auction} %>
       </div>
       <p class='issue-description'>
         <%=h raw auction.html_summary %><a class="issue-list-item-details" href="<%= auction_path(auction) %>">View details <icon class="fa fa-angle-double-right"></icon></a>
@@ -37,7 +21,7 @@
   <div class="usa-grid issue-bid-details">
     <div class='usa-width-one-whole issue-bids-info'>
       <div class="usa-grid-full">
-
+      <%= render partial: 'auctions/labels/project', locals: {auction: auction} %>
       </div>
     </div>
   </div>
