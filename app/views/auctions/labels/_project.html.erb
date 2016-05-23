@@ -1,5 +1,6 @@
 <% if defined? auction.auction_record.github_repo %>
-	<div class="issue-project">
-    <a href="<%= auction.auction_record.github_repo %>"><%= auction.auction_record.github_repo %></a>
-	</div>
+	<dl class="issue-project">
+		<dt>Project<dt>
+    <dd><a href="<%= auction.auction_record.github_repo %>"><%= auction.auction_record.github_repo %></a></dd>
+	</dl>
 <% end %>
