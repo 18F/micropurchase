@@ -14,7 +14,7 @@ class AuctionsController < ApplicationController
 
   def show
     auction = AuctionQuery.new.public_find(params[:id])
-    @view_model = AuctionShowViewModel.new(current_user, auction)
+    @auction = AuctionShowViewModel.new(auction: auction, current_user: current_user)
 
     respond_to do |format|
       format.html
