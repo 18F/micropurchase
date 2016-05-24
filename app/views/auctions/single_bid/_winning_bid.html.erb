@@ -1,8 +1,8 @@
 <% if AuctionStatus.new(auction).available? %>
   <% if auction.bids? %>
     <% if auction.user_is_bidder? %>
-      <span>Your bid:
-        <span class="current-bid"><%=
+      <span class="issue-current-bid">Your bid:
+        <span class="issue-winning-bid"><%=
         link_to(
           auction.user_bid_amount_as_currency,
           auction_bids_path(auction.id)
@@ -14,21 +14,24 @@
   <% end %>
 <% elsif AuctionStatus.new(auction).over? %>
   <% if auction.bids? %>
-    <% if auction.user_is_winning_bidder? %>
-      <span class="current-bid-header">You won the auction for </span>
-    <% else %>
-      <span>Your bid: <%= auction.user_bid_amount_as_currency %></span>
-      <span class="current-bid-header">Winning bid:</span>
-    <% end %>
-    <span class="current-bid"><%=
-      link_to(
-        auction.highlighted_bid_amount_as_currency,
-        auction_bids_path(auction.id)
-      )
-      %>
+    <span class="issue-current-bid <% unless auction.user_is_winning_bidder? %>issue-current-bid-long<% end %>">
+      <% if auction.user_is_winning_bidder? %>
+        <span>Your bid won: </span>
+      <% else %>
+        <% if auction.user_bid_amount_as_currency %>
+          <span class="issue-current-bid issue-current-bid-new-line">Your bid: <%= auction.user_bid_amount_as_currency %></span>
+        <% end %>
+        <span class="issue-current-bid">Winning bid:</span>
+      <% end %>
+      <span class="issue-winning-bid"><%=
+        link_to(
+          auction.highlighted_bid_amount_as_currency,
+          auction_bids_path(auction.id)
+        )
+        %>
+      </span>
     </span>
-
   <% else %>
-    <p>No bids</p>
+    <span class="issue-current-bid">No bids</span>
   <% end %>
 <% end %>

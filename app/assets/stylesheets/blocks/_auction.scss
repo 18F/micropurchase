@@ -74,9 +74,18 @@ textarea#auction_description {
   }
 
   .issue-title {
+    margin-bottom: $base-padding-lite;
     margin-top: 1rem;
     font-size: 2.5rem;
 
+    a {
+      text-decoration: underline;
+
+      &:hover,
+      &:focus {
+        text-decoration: none;
+      }
+    }
 
     @include calc(padding-right, "80px + -#{$site-margins} + .25em + #{$base-padding-lite}");
 
@@ -113,14 +122,6 @@ textarea#auction_description {
             white-space: nowrap;
         }
 
-      }
-    }
-
-    .bid-deadline-box {
-      .bid-deadline-box-children {
-        position: relative;
-        top: 50%;
-        margin-bottom: 0.5rem;
       }
     }
 
@@ -167,7 +168,6 @@ textarea#auction_description {
 .issue-details-label {
   font-size: $h6-font-size;
   font-weight: $font-light;
-  // margin-bottom: $base-padding-lite;
 }
 
 .issue-details-title {
@@ -196,8 +196,6 @@ textarea#auction_description {
       margin: 0;
     }
   }
-
-
 }
 
 .issue-details-list {
@@ -205,4 +203,25 @@ textarea#auction_description {
   margin-top: $base-padding;
   margin-bottom: $base-padding;
   width: 100%;
+}
+
+.issue-current-bid:not(.issue-current-bid-long) {
+  &::before {
+    content: "\2219";
+    margin-left: $base-padding-lite;
+    margin-right: $base-padding-lite;
+  }
+}
+
+.issue-current-bid.issue-current-bid-new-line {
+  &::before {
+    content: '\A';
+    white-space: pre;
+  }
+}
+
+.issue-bid-deadline {
+  display: inline-block;
+  margin: 0;
+  margin-bottom: $base-padding-lite;
 }
