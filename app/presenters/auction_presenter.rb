@@ -122,6 +122,10 @@ class AuctionPresenter
     "Auction starts #{distance_of_time_in_words(Time.current, auction.ended_at)} from now"
   end
 
+  def github_repo_stripped
+    auction.github_repo.gsub('https://github.com/', '')
+  end
+
   def delivery_deadline_expires_in
     time_in_human(auction.delivery_due_at)
   end

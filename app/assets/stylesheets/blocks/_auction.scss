@@ -87,12 +87,11 @@ textarea#auction_description {
   }
 
   .issue-bid-details {
-    background-color: $color-gray;
+    background-color: $color-gray-light;
     border-bottom-left-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
-    color: $color-white;
-    padding: $base-padding 3rem;
-    padding-bottom: 0;
+    padding-left: $site-margins;
+    padding-right: $site-margins;
     width: 100%;
 
     .current-bid-box {
@@ -165,3 +164,45 @@ textarea#auction_description {
 }
 
 
+.issue-details-label {
+  font-size: $h6-font-size;
+  font-weight: $font-light;
+  // margin-bottom: $base-padding-lite;
+}
+
+.issue-details-title {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.issue-details-list-item {
+  @include span-columns(6);
+
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-bottom: $base-padding-lite;
+
+  &:nth-child(2n) {
+    @include omega();
+  }
+
+  &:last-child,
+  &:nth-last-child(2):nth-child(odd) {
+    padding-bottom: 0;
+
+    &:after {
+      margin: 0;
+    }
+  }
+
+
+}
+
+.issue-details-list {
+  margin: 0;
+  margin-top: $base-padding;
+  margin-bottom: $base-padding;
+  width: 100%;
+}
