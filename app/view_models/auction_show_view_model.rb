@@ -295,7 +295,7 @@ class AuctionShowViewModel
     if auction.type == 'single_bid' && user_bids.any?
       false
     elsif over?
-     false
+      false
     elsif future?
       false
     elsif current_user.is_a?(Guest)
