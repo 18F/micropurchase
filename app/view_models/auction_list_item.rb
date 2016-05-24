@@ -118,14 +118,14 @@ class AuctionListItem
   private
 
   def current_user_can_bid?
-    if !current_user.sam_accepted?
-      false
-    elsif for_small_business? && !current_user.small_business?
+    if current_user.is_a?(Guest)
+      true
+    elsif !current_user.sam_accepted?
       false
     elsif for_small_business? && current_user.small_business?
       true
-    elsif current_user.is_a?(Guest)
-      true
+    elsif for_small_business? && !current_user.small_business?
+      false
     else # not for small business
       true
     end
