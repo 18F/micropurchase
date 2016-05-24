@@ -2,16 +2,19 @@ class AuctionsIndexViewModel
   attr_reader :auctions, :current_user
 
   def initialize(auctions:, current_user:)
-    @auctions = auctions.to_a
+    @auctions = auctions
     @current_user = current_user
   end
 
   def active_auction_count
-    auctions.count { |i| i.started_at < Time.current && Time.current < i.ended_at }
+    auctions
+      .where('started_at < ?', Time.current)
+      .where('ended_at > ?', Time.current)
+      .count
   end
 
   def upcoming_auction_count
-    auctions.count { |i| Time.current < i.started_at }
+    auctions.where('started_at > ?', Time.current).count
   end
 
   def auction_view_models
