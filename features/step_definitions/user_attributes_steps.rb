@@ -34,3 +34,9 @@ Then(/^I should see "([^"]+)" for the user in the "([^"]+)" column$/) do |value,
     expect(page).to have_content(value)
   end
 end
+
+When(/^there is a (.+) associated with my account$/) do |attr|
+  attribute = attr.parameterize('_')
+  @user.update_attribute(attribute, fake_value_for_user_attribute(attribute))
+end
+

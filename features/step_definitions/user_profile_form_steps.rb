@@ -50,29 +50,9 @@ Then(/^my (.+) should not be set$/) do |attribute|
   expect(@user.send(attribute)).to be_blank
 end
 
-def fake_value_for_attribute(attribute)
-  case attribute
-  when 'credit_card_form_url'
-    Faker::Internet.url.gsub('http:', 'https:')
-  when 'name'
-    Faker::Name.name
-  when 'duns_number'
-    Faker::Company.duns_number
-  when 'email'
-    "random#{rand(10000)}@example.com"
-  else
-    fail "Unknown attribute '#{attribute}'"
-  end
-end
-
-When(/^there is a (.+) associated with my account$/) do |attr|
-  attribute = attr.parameterize('_')
-  @user.update_attribute(attribute, fake_value_for_attribute(attribute))
-end
-
 When(/^I fill in the (.+) field on my profile page$/) do |attribute|
   attribute = attribute.parameterize('_')
-  value = fake_value_for_attribute(attribute)
+  value = fake_value_for_user_attribute(attribute)
   step("I fill in the #{attribute} field on my profile page with \"#{value}\"")
 end
 
