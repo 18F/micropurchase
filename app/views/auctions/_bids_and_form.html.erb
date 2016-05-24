@@ -1,6 +1,6 @@
 <div class="current-bid-box">
   <div class="current-bid-box-children">
-    <%= render partial: auction.index_bid_summary_partial, locals: {auction: auction} %>
+    <%= render partial: auction.index_bid_summary_partial, locals: { auction: auction} %>
   </div>
 </div>
 
@@ -14,4 +14,8 @@
       Bid start time: <%= auction.relative_start_time %>
     </span>
   </div>
+</div>
+
+<div class="issue-bids-info-item">
+  <%= render partial: auction.bid_button_partial, locals: { auction: auction } %>
 </div>

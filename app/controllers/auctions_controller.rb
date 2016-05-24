@@ -1,13 +1,13 @@
 class AuctionsController < ApplicationController
   def index
     collection = AuctionQuery.new.public_index
-    @view_model = AuctionsIndexViewModel.new(current_user, collection)
+    @auctions = AuctionsIndexViewModel.new(auctions: collection, current_user: current_user)
     sam_status_message_for(flash)
 
     respond_to do |format|
       format.html
       format.json do
-        render json: @view_model.auctions, each_serializer: AuctionSerializer
+        render json: collection, each_serializer: AuctionSerializer
       end
     end
   end
@@ -19,7 +19,7 @@ class AuctionsController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        render json: @view_model.auction, serializer: AuctionSerializer
+        render json: auction, serializer: AuctionSerializer
       end
     end
   end
@@ -39,7 +39,7 @@ class AuctionsController < ApplicationController
       collection = collection.all.where(result: 'rejected')
     end
 
-    @view_model = AuctionsIndexViewModel.new(current_user, collection)
+    @view_model = AuctionCollection.new(current_user, collection)
 
     @auctions_json = @view_model.auctions.each { |a| AuctionSerializer.new(a, root: false) }.as_json
     respond_to do |format|
@@ -49,7 +49,7 @@ class AuctionsController < ApplicationController
 
   def previous_winners
     collection = AuctionQuery.new.public_index
-    @view_model = AuctionsIndexViewModel.new(current_user, collection)
+    @view_model = AuctionCollection.new(current_user, collection)
 
     @auctions_json = @view_model.auctions.each { |a| AuctionSerializer.new(a, root: false) }.as_json
 

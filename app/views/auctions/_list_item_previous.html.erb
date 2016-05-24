@@ -5,7 +5,7 @@
       <div class='usa-width-one-whole issue-bids-info'>
         <div class="usa-grid-full">
           <a class="winners-title" href="<%= auction_path(auction) %>"><%= auction.title %> <icon class="fa fa-angle-double-right"></icon></a>
-          <%= render partial: 'auctions/winning_bid', locals: {auction: auction, for_winners_page: true} %>
+          <%= render partial: 'auctions/winning_bids_on_winners_page', locals: {auction: auction, for_winners_page: true} %>
         </div>
       </div>
     </div>

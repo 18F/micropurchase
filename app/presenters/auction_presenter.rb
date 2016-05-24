@@ -150,7 +150,6 @@ class AuctionPresenter
   end
 
   def markdown
-    # FIXME: Do we want the lax_spacing?
     @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML,
                                           no_intra_emphasis: true,
                                           autolink: true,

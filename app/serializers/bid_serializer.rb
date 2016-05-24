@@ -11,11 +11,11 @@ class BidSerializer < ActiveModel::Serializer
   )
 
   def bidder_id
-    object.veiled_bidder_attribute(:id, scope)
+    veiled_bidder_id
   end
 
   def bidder
-    object.veiled_bidder(scope)
+    veiled_bidder
   end
 
   def created_at
@@ -24,5 +24,27 @@ class BidSerializer < ActiveModel::Serializer
 
   def updated_at
     object.created_at.iso8601
+  end
+
+  private
+
+  def veiled_bidder_id
+    if auction_available? && object.bidder != scope
+      nil
+    else
+      bidder.id
+    end
+  end
+
+  def veiled_bidder
+    if auction_available? && object.bidder != scope
+      VeiledBidderPresenter.new
+    else
+      object.bidder
+    end
+  end
+
+  def auction_available?
+    AuctionStatus.new(object.auction).available?
   end
 end
