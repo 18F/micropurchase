@@ -1,3 +1,8 @@
+Then(/^I should see the bid history$/) do
+  h1_text = "Bids for \"#{@auction.title}\""
+  expect(page).to have_content(h1_text)
+end
+
 Then(/^I should be able to see the full details for each bid$/) do
   # sort the bids so that newest is first
   bids = @auction.bids.sort_by(&:created_at).reverse
@@ -102,5 +107,13 @@ Then(/^I should see my name and DUNS only on my bids$/) do
     within(:xpath, cel_xpath(row_number, 4)) do
       expect(page).to have_content(bid.time)
     end
+  end
+end
+
+Then(/^I should not see bids from other users$/) do
+  @auction.bids.each do |bid|
+    next if bid.bidder_id == @user.id
+    amount = ApplicationController.helpers.number_to_currency(bid.amount)
+    expect(page).to_not have_content(amount)
   end
 end
