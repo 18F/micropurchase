@@ -14,6 +14,7 @@ class AuctionViewModel < Struct.new(:current_user, :auction_record)
     :formatted_end_time,
     :formatted_start_time,
     :formatted_type,
+    :github_repo_stripped,
     :highlighted_bid_label,
     :html_description,
     :html_description,
