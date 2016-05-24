@@ -47,20 +47,6 @@ class AuctionListItem
     auction_status.available?
   end
 
-  def current_user_can_bid?
-    if current_user.is_a?(Guest)
-      true
-    elsif !current_user.sam_accepted?
-      false
-    elsif for_small_business? && current_user.small_business?
-      true
-    elsif for_small_business? && !current_user.small_business?
-      false
-    else # not for small business
-      true
-    end
-  end
-
   def bid_button_partial
     if current_user_can_bid?
       'auctions/bid_button'
@@ -130,6 +116,20 @@ class AuctionListItem
   end
 
   private
+
+  def current_user_can_bid?
+    if !current_user.sam_accepted?
+      false
+    elsif for_small_business? && !current_user.small_business?
+      false
+    elsif for_small_business? && current_user.small_business?
+      true
+    elsif current_user.is_a?(Guest)
+      true
+    else # not for small business
+      true
+    end
+  end
 
   def lowest_user_bid_amount
     user_bids.order(amount: :asc).first.amount
