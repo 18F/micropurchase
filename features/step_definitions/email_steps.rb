@@ -3,7 +3,6 @@ Then(/^email notifications are sent to losing bidders$/) do
 end
 
 Then(/^I should receive an email notifying me that I did not win$/) do
-  
   email = ActionMailer::Base.deliveries.first
   expect(email.to.first).to eq @user.email
   expect(email.body.encoded).to include(

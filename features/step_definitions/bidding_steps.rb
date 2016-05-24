@@ -52,3 +52,44 @@ Then(/^I should see the auction ended with no bids$/) do
   expect(page).to have_content("This auction ended with no bids.")
   expect(page).to have_content("Current bid:")
 end
+
+When(/^the winning bidder has a valid DUNS number$/) do
+  winning_bid = RulesFactory.new(@auction).create.winning_bid
+  winning_bid.bidder.update(duns_number: FakeSamApi::VALID_DUNS)
+end
+
+Then(/^I should see the winning bid for the auction$/) do
+  auction = AuctionPresenter.new(@auction)
+  lowest_bid_amount = ApplicationController.helpers.number_to_currency(
+    auction.lowest_bid.amount
+  )
+
+  expect(page).to have_text(lowest_bid_amount)
+end
+
+When(/^I submit a bid for \$(.+)$/) do |amount|
+  fill_in("Your bid:", with: amount)
+  step('I click on the "Submit" button')
+end
+
+Then(/^I should see I have the winning bid$/) do
+  expect(page).to have_content("You currently have the winning bid.")
+  expect(page).to_not have_content("You are currently not the winning bidder.")
+end
+
+Then(/^I should see I do not have the winning bid$/) do
+  expect(page).not_to have_content("You are currently the winning bidder.")
+  expect(page).to have_content("You are currently not the winning bidder.")
+end
+
+Then(/^I should see the bid button$/) do
+  within(:css, 'div.auction-info') do
+    expect(page).to have_content('BID')
+  end
+end
+
+Then(/^I should not see the bid button$/) do
+  within(:css, 'div.auction-info') do
+    expect(page).to_not have_content('BID')
+  end
+end

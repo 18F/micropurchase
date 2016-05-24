@@ -50,29 +50,19 @@ Given(/^I am a contracting officer$/) do
   mock_sign_in(@user.github_id, @user.name)
 end
 
-When(/^I visit the home page$/) do
-  visit "/"
+Given(/^there is a user in SAM.gov who is not a small business$/) do
+  @user = FactoryGirl.create(:user, sam_status: :sam_accepted, small_business: false)
 end
 
-When(/^I sign in$/) do
-  step "I visit the home page"
-  within(".header-account") do
-    click_on "Login"
-  end
-  click_on "Authorize with GitHub"
+Given(/^there is a user in SAM.gov who is a small business$/) do
+  @user = FactoryGirl.create(:user, sam_status: :sam_accepted, small_business: true)
 end
 
-Given(/^I am signed in$/) do
-  step("I sign in")
+Given(/^there is a user who is not in SAM.gov$/) do
+  @user = FactoryGirl.create(:user, sam_status: :sam_pending)
 end
 
-Given(/^I am an authenticated vendor$/) do
-  step("I am a user with a verified SAM account")
-  step("I sign in")
-end
-
-When(/^I sign in and verify my account information/) do
-  step "I sign in"
-  step "I visit my profile page"
-  click_on "Submit"
+Given(/^there are users in the system$/) do
+  @number_of_users = 1
+  FactoryGirl.create(:user)
 end

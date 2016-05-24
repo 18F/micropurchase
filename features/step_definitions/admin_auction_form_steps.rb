@@ -1,14 +1,3 @@
-When(/^I visit the auctions admin page$/) do
-  visit admin_auctions_path
-end
-
-When(/^I visit the admin auction page for that auction$/) do
-  visit admin_auction_path(@auction)
-end
-
-When(/^I visit the admin edit page for that auction$/) do
-  visit edit_admin_auction_path(@auction)
-end
 
 When(/^I click on the link to generate a winning bidder CSV report$/) do
   click_on(I18n.t('admin.auctions.show.winner_report'))
@@ -16,7 +5,7 @@ end
 
 When(/^I select the result as accepted$/) do
   auction_presenter = AuctionPresenter.new(@auction)
-  fake_cap_proposal_attributes  = ConstructCapAttributes.new(auction_presenter).perform
+  fake_cap_proposal_attributes = ConstructCapAttributes.new(auction_presenter).perform
   c2_proposal_double = double(id: 8888)
   c2_response_double = double(body: c2_proposal_double)
   c2_client_double = double
@@ -28,30 +17,10 @@ When(/^I select the result as accepted$/) do
   select("accepted", from: "auction_result")
 end
 
-Then(/^the proposal should have a CAP Proposal URL$/) do
-  @auction.reload
-  expect(@auction.cap_proposal_url).not_to eq ""
-end
-
 Then(/^I should see that the auction has a CAP Proposal URL$/) do
   expect(find_field(I18n.t('simple_form.labels.auction.cap_proposal_url')).value).to eq(
     @auction.cap_proposal_url
   )
-end
-
-Then(/^the file should contain the following data from Sam\.gov:$/) do |content|
-  expect(page.response_headers["Content-Disposition"]).to include("attachment")
-  content.split(',').each do |info|
-    expect(page.source).to include(info.strip)
-  end
-end
-
-Then(/^I will not see a warning I must be an admin$/) do
-  expect(page).to_not have_text('must be an admin')
-end
-
-Then(/^I should see the auction$/) do
-  expect(page).to have_text(@auction.title)
 end
 
 Then(/^I expect my auction changes to have been saved$/) do

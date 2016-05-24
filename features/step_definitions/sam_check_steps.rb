@@ -18,19 +18,13 @@ Then(/^I should not become a valid SAM user$/) do
 end
 
 Then(/^I should remain a pending SAM user$/) do
-
   @user.reload
   expect(@user).to be_sam_pending
 end
 
-Then(/^I enter an? (.+) DUNS in my profile$/) do |duns_type|
-  case duns_type
-  when 'valid'
-    @new_duns = FakeSamApi::VALID_DUNS
-  when 'invalid'
-    @new_duns = FakeSamApi::INVALID_DUNS
-  when 'new'
-    @new_duns = Faker::Company.duns_number
+Then(/^the file should contain the following data from Sam\.gov:$/) do |content|
+  expect(page.response_headers["Content-Disposition"]).to include("attachment")
+  content.split(',').each do |info|
+    expect(page.source).to include(info.strip)
   end
-  fill_in("user_duns_number", with: @new_duns)
 end
