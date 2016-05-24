@@ -1,12 +1,14 @@
 <% if AuctionStatus.new(auction).available? %>
   <% if auction.bids? %>
     <% if auction.user_is_winning_bidder? %>
-      <span class="current-bid-header">Your bid of is winning:</span>
+      <span class="issue-current-bid-header">Your bid of is winning:</span>
     <% else %>
-      <span>Your bid: <%= auction.user_bid_amount_as_currency %></span>
-      <span class="current-bid-header">Current winning bid:</span>
+      <% if auction.user_bid_amount_as_currency %>
+        <span class="issue-current-bid issue-current-bid-new-line">Your bid: <%= auction.user_bid_amount_as_currency %></span>
+      <% end %>
+      <span class="issue-current-bid-header">Current winning bid:</span>
     <% end %>
-    <span class="current-bid"><%=
+    <span class="issue-winning-bid"><%=
     link_to(
       auction.highlighted_bid_amount_as_currency,
       auction_bids_path(auction.id)
@@ -15,17 +17,19 @@
     </span>
 
   <% else %>
-    <p>No bids yet</p>
+    <span class="issue-current-bid">No bids yet</span>
   <% end %>
 <% elsif AuctionStatus.new(auction).over? %>
   <% if auction.bids? %>
     <% if auction.user_is_winning_bidder? %>
-      <span class="current-bid-header">You won the auction for  </span>
+      <span class="issue-current-bid">You won the auction for  </span>
     <% else %>
-      <span>Your bid: <%= auction.user_bid_amount_as_currency %></span>
-      <span class="current-bid-header">Winning bid:</span>
+      <% if auction.user_bid_amount_as_currency %>
+        <span class="issue-current-bid issue-current-bid-new-line">Your bid: <%= auction.user_bid_amount_as_currency %></span>
+      <% end %>
+      <span class="issue-current-bid">Winning bid:</span>
     <% end %>
-    <span class="current-bid"><%=
+    <span class="issue-winning-bid"><%=
     link_to(
       auction.highlighted_bid_amount_as_currency,
       auction_bids_path(auction.id)
@@ -34,6 +38,6 @@
     </span>
 
   <% else %>
-    <p>No bids</p>
+    <span class="issue-current-bid">No bids</span>
   <% end %>
 <% end %>

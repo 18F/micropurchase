@@ -115,11 +115,11 @@ class AuctionPresenter
   end
 
   def time_over
-    "Auction ended #{distance_of_time_in_words(auction.started_at, Time.current)} ago"
+    "Ended #{distance_of_time_in_words(auction.started_at, Time.current)} ago"
   end
 
   def time_future
-    "Auction starts #{distance_of_time_in_words(Time.current, auction.ended_at)} from now"
+    "Starts #{distance_of_time_in_words(Time.current, auction.ended_at)} from now"
   end
 
   def github_repo_stripped
@@ -141,7 +141,7 @@ class AuctionPresenter
 
   def html_summary
     return '' if summary.blank?
-    markdown.render(summary)
+    summary
   end
 
   def url

@@ -1,4 +1,4 @@
-<span class="bid-deadline">
+<div class="issue-bid-deadline">
   <% if AuctionStatus.new(auction).over? %>
       <%= auction.time_over %>
   <% elsif AuctionStatus.new(auction).future? %>
@@ -6,5 +6,5 @@
   <% elsif AuctionStatus.new(auction).available? %>
     <%= auction.time_open %>
   <% end %>
-</span>
+</div>
 
