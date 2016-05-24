@@ -22,11 +22,3 @@ end
 Then(/^I should not see an? "([^"]+)" button$/) do |button|
   expect(page).to_not have_selector(:link_or_button, button)
 end
-
-Then(/^I should see a link to the previous winners archive page$/) do
-  expect(page).to have_link('See all previous winners')
-end
-
-Then(/^I click on the previous winners link$/) do
-  first(:link, 'See all previous winners').click
-end

@@ -55,10 +55,6 @@ When(/^I visit the previous winners page$/) do
   visit "/auctions/winners/"
 end
 
-When(/^I visit the previous winners archive page$/) do
-  visit "/auctions/winners/archive/"
-end
-
 Then(/^I should be on the home page$/) do
   expect(page.current_path).to eq("/")
 end
@@ -78,8 +74,3 @@ end
 Then(/^I should be on the bid confirmation page$/) do
   expect(page.current_path).to eq(confirm_auction_bids_path(@auction))
 end
-
-Then(/^I should be at previous winners archive page$/) do
-  current_path.should == "/auctions/winners/archive/"
-end
-

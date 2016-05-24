@@ -1,4 +1,4 @@
-Feature: Previous Winners View and Previous Winners Archive Page
+Feature: Guest Views Previous Winners Page
   As an unauthenticated user
   I want to be able to see previous auction winners
   So that I can learn about micropurchase
@@ -11,17 +11,3 @@ Feature: Previous Winners View and Previous Winners Archive Page
     And I should see a Winning bid section
     And I should see a Community section
     And I should see a Bids by auction section
-
-  Scenario: Navigating to the previous winners archive page
-    Given there is a closed auction
-    When I visit the previous winners page
-    Then I should see a link to the previous winners archive page
-    When I click on the previous winners link
-    Then I should be at previous winners archive page
-
-  Scenario: Visiting the previous winners archive page
-    Given there is a closed auction
-    When I visit the previous winners archive page
-    Then I should see a dropdown menu
-    And the menu should default to All
-    And I should see a list of all the previous auctions
