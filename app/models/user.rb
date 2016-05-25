@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :bids
+  has_many :bids, foreign_key: 'bidder_id'
 
   validates :credit_card_form_url, url: { allow_blank: true, no_local: true, schemes: %w(http https) }
   validates :duns_number, duns_number: true

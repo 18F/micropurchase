@@ -122,10 +122,6 @@ class AuctionShowViewModel
     HumanTime.new(time: auction.ended_at).relative_time_left
   end
 
-  def relative_start_time
-    HumanTime.new(time: auction.started_at).relative_start_time
-  end
-
   def highlighted_bid_amount_as_currency
     Currency.new(highlighted_bid.amount).to_s
   end
@@ -254,7 +250,7 @@ class AuctionShowViewModel
   end
 
   def status_presenter
-    @status_presenter ||= status_presenter_class.new(self)
+    @status_presenter ||= status_presenter_class.new(auction)
   end
 
   def status_presenter_class
