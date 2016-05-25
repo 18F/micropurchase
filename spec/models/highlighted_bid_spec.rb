@@ -25,7 +25,7 @@ describe HighlightedBid do
       end
     end
 
-    context 'available single bid auction where is not bigger' do
+    context 'available single bid auction where is not bidder' do
       it 'returns null bid' do
         auction = create(:auction, :single_bid, :available)
         user = create(:user)
