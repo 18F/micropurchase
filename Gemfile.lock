@@ -9,14 +9,6 @@ GIT
       hashie
       oauth2
 
-GIT
-  remote: git://github.com/18f/samwise.git
-  revision: fc482b218a21aa05399361d70543b22960a924b5
-  branch: master
-  specs:
-    samwise (0.3.0)
-      httpclient
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -318,6 +310,8 @@ GEM
     ruby_parser (3.8.1)
       sexp_processor (~> 4.1)
     safe_yaml (1.0.4)
+    samwise (0.3.0)
+      httpclient
     sass (3.4.22)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -435,7 +429,7 @@ DEPENDENCIES
   redcarpet
   rspec-rails
   rubocop
-  samwise!
+  samwise (~> 0.3.0)
   sass-rails (~> 5.0)
   shoulda-matchers
   simple_form
