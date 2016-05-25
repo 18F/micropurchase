@@ -144,13 +144,8 @@ class AuctionListItem
   end
 
   def highlighted_bid
-    if available? && auction.type == "single_bid" && user_is_bidder?
-      lowest_user_bid
-    elsif available? && auction.type == "single_bid"
-      NullBidPresenter.new
-    else
-      auction.lowest_bid
-    end
+    @_highlighted_bid ||=
+      HighlightedBid.new(auction: auction, user: current_user).find
   end
 
   def for_small_business?
