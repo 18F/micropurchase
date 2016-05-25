@@ -1,0 +1,6 @@
+<h2 class="center">Current bid:</h2>
+<p class="current-bid-amount center">
+  <%= bid_view_model.highlighted_bid_amount_as_currency %>
+</p>
+
+<%= render partial: bid_view_model.bid_status_partial %>
