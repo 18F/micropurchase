@@ -1,20 +1,20 @@
 <h1>Confirm Your Bid</h1>
 
-<%= render partial: 'auction_info', locals: { auction: @auction } %>
+<%= render partial: 'auction_details', locals: { bid_view_model: @bid_confirm } %>
 
-<% if AuctionStatus.new(@auction).available? %>
-  <%= form_for @bid, url: auction_bids_path(@auction), html: {class: 'bid-form'} do |f| %>
-    <%= f.hidden_field :amount %>
+<%= form_for @bid_confirm.bid,
+  url: auction_bids_path(@bid_confirm.auction_id),
+  html: { class: 'bid-form' } do |f| %>
+  <%= f.hidden_field :amount %>
 
-    <div class="usa-width-one-whole">
-      <h1 class='center'>Confirm your bid: $<%= @bid.amount %></h1>
-    </div>
+  <div class="usa-width-one-whole">
+    <h1 class='center'>Confirm your bid: $<%= @bid_confirm.bid_amount %></h1>
+  </div>
 
-    <div class='button-wrapper'>
-      <a href='<%= root_path %>' class='usa-button usa-button-big usa-button-gray cancel'>Cancel</a>
-      <%= f.submit 'Confirm', class: 'usa-button-big usa-button submit' %>
-    </div>
-  <% end %>
-<% else %>
-  <h2>Bidding is closed</h2>
+  <div class='button-wrapper'>
+    <%= link_to 'Cancel',
+      root_path,
+      class: 'usa-button usa-button-big usa-button-gray cancel' %>
+    <%= f.submit 'Confirm', class: 'usa-button-big usa-button submit' %>
+  </div>
 <% end %>
