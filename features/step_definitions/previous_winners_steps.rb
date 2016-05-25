@@ -32,19 +32,3 @@ Then(/^I should see a Bids by auction section$/) do
 
   expect(page).to have_selector("#chart5")
 end
-
-Then(/^I should see a dropdown menu$/) do
-  expect(page).to have_selector("form.winners-filter")
-end
-
-Then(/^the menu should default to All$/) do
-  expect(page).to have_selector("form.winners-filter")
-
-  dropdown = page.find(:css, "form.winners-filter")
-
-  expect(dropdown).to have_content('All')
-end
-
-Then(/^I should see a list of all the previous auctions$/) do
-  expect(page).to have_selector(".winners-list-item")
-end

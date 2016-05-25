@@ -67,14 +67,4 @@ describe AuctionsController do
       expect(auction.id).to eq(auction_record.id)
     end
   end
-
-  describe '#previous_winners_archive' do
-    it 'renders the previous winners archive page' do
-      auction_record = create(:auction)
-      get :previous_winners_archive
-      auction = assigns(:view_model).auctions.first
-      expect(auction).to be_a(AuctionViewModel)
-      expect(auction.id).to eq(auction_record.id)
-    end
-  end
 end

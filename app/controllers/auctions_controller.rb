@@ -30,23 +30,6 @@ class AuctionsController < ApplicationController
   def multi_bid_rules
   end
 
-  def previous_winners_archive
-    collection = AuctionQuery.new.public_index
-
-    if params[:result] == 'true'
-      collection = collection.all.where.not(result: 'rejected')
-    elsif params[:result] == 'false'
-      collection = collection.all.where(result: 'rejected')
-    end
-
-    @view_model = AuctionCollection.new(current_user, collection)
-
-    @auctions_json = @view_model.auctions.each { |a| AuctionSerializer.new(a, root: false) }.as_json
-    respond_to do |format|
-      format.html
-    end
-  end
-
   def previous_winners
     collection = AuctionQuery.new.public_index
     @view_model = AuctionCollection.new(current_user, collection)
