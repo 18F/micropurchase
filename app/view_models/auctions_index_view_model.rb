@@ -7,14 +7,11 @@ class AuctionsIndexViewModel
   end
 
   def active_auction_count
-    auctions
-      .where('started_at < ?', Time.current)
-      .where('ended_at > ?', Time.current)
-      .count
+    AuctionQuery.new.active_auction_count
   end
 
   def upcoming_auction_count
-    auctions.where('started_at > ?', Time.current).count
+    AuctionQuery.new.upcoming_auction_count
   end
 
   def auction_view_models

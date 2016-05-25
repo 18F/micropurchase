@@ -48,23 +48,12 @@ describe AuctionsController do
         expect(auction.id).to eq(auction_record.id)
       end
     end
-
-    context 'when the auction is not published' do
-      it 'renders an error page' do
-        auction_record = create(:auction, :unpublished)
-        expect do
-          get :show, id: auction_record.id
-        end.to raise_error ActionController::RoutingError
-      end
-    end
   end
 
   describe '#previous_winners' do
     it 'renders the previous winners dashboard page' do
-      auction_record = create(:auction)
       get :previous_winners
-      auction = assigns(:view_model).auctions.first
-      expect(auction.id).to eq(auction_record.id)
+      expect(response.code).to eq '200'
     end
   end
 end

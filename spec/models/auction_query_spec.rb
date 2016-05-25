@@ -194,11 +194,36 @@ RSpec.describe AuctionQuery do
   end
 
   describe '#public_index' do
-    let!(:unpublished_auction) { create(:auction, :unpublished) }
-    let(:published_auction) { create(:auction, :published) }
-
     it 'should only return published auctions' do
+      _unpublished_auction = create(:auction, :unpublished)
+      published_auction = create(:auction, :published)
+
+      query = AuctionQuery.new
+
       expect(query.public_index).to match_array([published_auction])
+    end
+  end
+
+  describe '#active_auction_count' do
+    it 'returns number of available auctions' do
+      _active_auction = create(:auction, :available)
+      _inactive_auction = create(:auction, :closed)
+
+      query = AuctionQuery.new
+
+      expect(query.active_auction_count).to eq 1
+    end
+  end
+
+  describe '#upcoming_auction_count' do
+    it 'returns number of published future auctions' do
+      _published_future = create(:auction, :future, :published)
+      _published_current = create(:auction, :available, :published)
+      _unpublished_future = create(:auction, :future, :unpublished)
+
+      query = AuctionQuery.new
+
+      expect(query.active_auction_count).to eq 1
     end
   end
 end
