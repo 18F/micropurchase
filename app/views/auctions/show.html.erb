@@ -1,17 +1,18 @@
-<% content_for :title do %>18F Micro-purchase - <%= @view_model.auction_title %><% end %>
-<% content_for :description do %><%= @view_model.auction_summary %><% end %>
+<% content_for :title do %>18F Micro-purchase - <%= @auction.title %><% end %>
+<% content_for :description do %><%= @auction.summary %><% end %>
 <% content_for :data_tags do %>
-  <%= render partial: '/auctions/data_tags', locals: {auction: @view_model.auction} %>
+  <%= render partial: '/auctions/data_tags', locals: { auction: @auction } %>
 <% end %>
 
-<%= render partial: @view_model.current_user_header_partial, locals: {auction: @view_model.auction} %>
+<%= render partial: @auction.header_partial(flash),
+  locals: { auction: @auction } %>
 
 <div class="usa-grid-full">
   <p><a class="link-highlighted" href="<%= root_path %>"><icon class="fa fa-angle-double-left"></icon> Back to open projects</a></p>
   <div class="usa-width-two-thirds auction-description">
-    <h1><%= @view_model.auction_record.title %></h1>
+    <h1><%= @auction.title %></h1>
     <div class="github-issue">
-      <%=h raw @view_model.auction_html_description %>
+      <%= @auction.html_description %>
     </div>
   </div>
   <div class="usa-width-one-third">
@@ -20,51 +21,51 @@
       <div>
         <p class="auction-label">Auction type:</p>
         <p class="auction-label-info">
-          <%= @view_model.auction_type.capitalize %> (<%= @view_model.auction_rules_link %>).
+          <%= @auction.capitalized_type %>
+          (<%= link_to @auction.rules_link_text, @auction.rules_path %>).
         </p>
       </div>
       <div>
         <p class="auction-label">Eligible vendors:</p>
-        <p class="auction-label-info"><%= @view_model.auction.eligibility_label %></p>
+        <p class="auction-label-info"><%= @auction.eligibility_label %></p>
       </div>
       <div>
         <p class="auction-label">Status:</p>
-        <p class="auction-label-info"><%= @view_model.auction_status_text %></p>
+        <p class="auction-label-info"><%= @auction.status_text %></p>
       </div>
       <div>
-        <p class="auction-label"><%= @view_model.auction_status_header %></p>
-        <p class="auction-label-info"><%= render partial: @view_model.auction_status_partial %></p>
+        <p class="auction-label"><%= @auction.bid_status_header %></p>
+        <p class="auction-label-info">
+          <%= render partial: @auction.bid_status_partial,
+            locals: { auction: @auction } %>
+        </p>
       </div>
       <div>
-        <p class="auction-label"><%= @view_model.auction_deadline_label %></p>
-        <p class="auction-label-info"><%= @view_model.auction_formatted_end_time %></p>
+        <p class="auction-label"><%= @auction.deadline_label %></p>
+        <p class="auction-label-info"><%= @auction.formatted_end_time %></p>
       </div>
       <div>
-        <p class="auction-label"><%= @view_model.auction_start_label %></p>
-        <p class="auction-label-info"><%= @view_model.auction_formatted_start_time %></p>
+        <p class="auction-label"><%= @auction.start_label %></p>
+        <p class="auction-label-info"><%= @auction.formatted_start_time %></p>
       </div>
-      <% if @view_model.auction_has_delivery_due_at? %>
       <div>
         <p class="auction-label">Delivery deadline:</p>
-        <p class="auction-label-info"><%= @view_model.auction_formatted_delivery_due_at %></p>
+        <p class="auction-label-info"><%= @auction.formatted_delivery_due_at %></p>
       </div>
-      <% end %>
-      <% if @view_model.auction.show_bid_button? %>
-        <p class="auction-detail-bid">
-          <a href="<%= new_auction_bid_path(@view_model.auction) %>" class='button-bid usa-button'>BID <icon class="fa fa-angle-double-right"></icon></a>
-        </p>
-      <% end %>
+
+      <%= render partial: @auction.bid_button_partial, locals: { auction: @auction } %>
     </div>
-      <div class="auction-more-info">
-        <p>
-          <i class="fa fa-github"></i>
-          <a href="<%= @view_model.auction_issue_url %>">View on GitHub <icon class="fa fa-angle-double-right"></icon></a>
-        </p>
-        <p>Have feedback?</p>
-        <p>
-          <a href="mailto:micropurchase@gsa.gov">Send us an email!</a>
-        </p>
-      </div>
+
+    <div class="auction-more-info">
+      <p>
+      <i class="fa fa-github"></i>
+      <a href="<%= @auction.issue_url %>">View on GitHub <icon class="fa fa-angle-double-right"></icon></a>
+      </p>
+      <p>Have feedback?</p>
+      <p>
+      <a href="mailto:micropurchase@gsa.gov">Send us an email!</a>
+      </p>
     </div>
   </div>
+</div>
 </div>
