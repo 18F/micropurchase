@@ -22,6 +22,6 @@ class AuctionStatus::OverViewModel < Struct.new(:auction)
   end
 
   def tag_data_value_2
-    number_to_currency(auction.highlighted_bid_amount)
+    auction.highlighted_bid_amount_as_currency
   end
 end

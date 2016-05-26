@@ -110,22 +110,6 @@ class AuctionPresenter
     "#{distance_of_time_in_words(Time.current, auction.ended_at)} left"
   end
 
-  def time_open
-    "Time remaining: #{distance_of_time_in_words(Time.current, auction.started_at)}"
-  end
-
-  def time_over
-    "Ended #{distance_of_time_in_words(auction.started_at, Time.current)} ago"
-  end
-
-  def time_future
-    "Starts #{distance_of_time_in_words(Time.current, auction.ended_at)} from now"
-  end
-
-  def github_repo_stripped
-    auction.github_repo.gsub('https://github.com/', '')
-  end
-
   def delivery_deadline_expires_in
     time_in_human(auction.delivery_due_at)
   end
@@ -166,7 +150,6 @@ class AuctionPresenter
   end
 
   def markdown
-    # FIXME: Do we want the lax_spacing?
     @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML,
                                           no_intra_emphasis: true,
                                           autolink: true,

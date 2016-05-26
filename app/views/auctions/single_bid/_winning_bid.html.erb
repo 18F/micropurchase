@@ -1,5 +1,5 @@
-<% if AuctionStatus.new(auction).available? %>
-  <% if auction.bids? %>
+<% if auction.available? %>
+  <% if auction.bids.any? %>
     <% if auction.user_is_bidder? %>
       <span class="issue-current-bid">Your bid:
         <span class="issue-winning-bid"><%=
@@ -12,7 +12,7 @@
       </span>
     <% end %>
   <% end %>
-<% elsif AuctionStatus.new(auction).over? %>
+<% elsif auction.over? %>
   <% if auction.bids? %>
     <span class="issue-current-bid <% unless auction.user_is_winning_bidder? %>issue-current-bid-long<% end %>">
       <% if auction.user_is_winning_bidder? %>

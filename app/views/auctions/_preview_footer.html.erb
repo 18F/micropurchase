@@ -1,15 +1,15 @@
 <ul class="issue-details-list">
-  <% if defined? auction.auction_record.github_repo %>
+  <% if defined? auction.project_label %>
     <li class="issue-details-list-item">
       <div class="issue-details-label">Project</div>
-      <div class="issue-details-title"><a href="<%= auction.auction_record.github_repo %>"><i class="fa fa-github"></i> <%= auction.github_repo_stripped %></a></div>
+      <div class="issue-details-title"><a href="<%= auction.project_href %>"><i class="fa fa-github"></i> <%= auction.project_label %></a></div>
     </li>
 
   <% end %>
-  <% if defined? auction.formatted_type.capitalize %>
+  <% if defined? auction.capitalized_formatted_type %>
     <li class="issue-details-list-item">
       <div class="issue-details-label">Type</div>
-      <div class="issue-details-title"><%= auction.formatted_type.capitalize %></div>
+      <div class="issue-details-title"><%= auction.capitalized_formatted_type %></div>
     </li>
 
   <% end %>

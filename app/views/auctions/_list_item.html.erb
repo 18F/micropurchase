@@ -4,7 +4,7 @@
       <h3 class='issue-title'>
         <div class="issue-ribbon">
           <span class="<%= auction.label_class %>"><%= auction.label %></span>
-        </div> <a href="<%= auction_path(auction) %>"><%= auction.title %></a>
+        </div> <%= link_to auction.title, auction_path(auction.id) %>
       </h3>
       <div class="issue-vitals">
         <%= render partial: 'auctions/labels/time_remaining', locals: {auction: auction} %>
@@ -12,7 +12,7 @@
         <%= render partial: auction.winning_bid_partial, locals: {auction: auction} %>
       </div>
       <p class='issue-description'>
-        <%=h raw auction.html_summary %>
+        <%=h auction.html_summary %>
       </p>
     </div>
   </div>

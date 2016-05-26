@@ -15,7 +15,6 @@ Feature: Basic Auction Views
   Scenario: Visiting a auction detail page
     Given there is an open auction
     And there is also an unpublished auction
-
     When I visit the auction page
     Then I should see the auction's title
     And I should see the auction's description
