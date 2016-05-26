@@ -1,4 +1,4 @@
-class Admin::ActionListItem
+class Admin::ActionItemListItem
   attr_reader :auction
 
   def initialize(auction)

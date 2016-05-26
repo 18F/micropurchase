@@ -22,6 +22,6 @@ class Admin::ActionItemsViewModel
   private
 
   def list_items(auctions)
-    auctions.map { |auction| Admin::ActionListItem.new(auction) }
+    auctions.map { |auction| Admin::ActionItemListItem.new(auction) }
   end
 end
