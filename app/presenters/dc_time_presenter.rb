@@ -1,7 +1,7 @@
 class DcTimePresenter < Struct.new(:time)
   FORMAT = "%B %d, %Y %r".freeze
   TIME_ZONE_NAME = 'Eastern Time (US & Canada)'
-  
+
   def convert
     return unless time
     time.in_time_zone(time_zone)
@@ -21,9 +21,9 @@ class DcTimePresenter < Struct.new(:time)
   end
 
   def time_zone
-    self.klass.time_zone
+    self.class.time_zone
   end
-  
+
   def self.time_zone
     ActiveSupport::TimeZone[TIME_ZONE_NAME]
   end

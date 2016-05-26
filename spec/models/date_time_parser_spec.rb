@@ -17,7 +17,7 @@ describe DateTimeParser do
 
       parsed = DateTimeParser.new(params, 'fake_at').parse
 
-      expect(parsed).to be_a(ActiveSupport::TimeWithZone)
+      expect(parsed).to be_an(ActiveSupport::TimeWithZone)
       expect(parsed).to eq(Time.parse("2016-05-26 13:15-04:00"))
     end
   end

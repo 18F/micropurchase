@@ -38,7 +38,7 @@ RSpec.describe AuctionParser do
 
         attributes = AuctionParser.new(params, user).attributes
 
-        expect(attributes[:started_at]).to be_a(DateTime)
+        expect(attributes[:started_at]).to be_an(ActiveSupport::TimeWithZone)
       end
     end
   end
