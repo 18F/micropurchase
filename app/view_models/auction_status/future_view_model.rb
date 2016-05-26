@@ -14,7 +14,7 @@ class AuctionStatus::FutureViewModel < Struct.new(:auction)
   end
 
   def tag_data_value_status
-    auction.relative_start_time
+    HumanTime.new(time: auction.started_at).relative_start_time
   end
 
   def tag_data_label_2
@@ -22,6 +22,6 @@ class AuctionStatus::FutureViewModel < Struct.new(:auction)
   end
 
   def tag_data_value_2
-    number_to_currency(auction.start_price)
+    Currency.new(auction.start_price).to_s
   end
 end

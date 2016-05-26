@@ -18,8 +18,7 @@ RSpec.describe BidsController, controller: true do
         expect(bid).to be_valid
         get :my_bids, { }, user_id: current_bidder.id
         assigned_bid = assigns(:bids).first
-        expect(assigned_bid).to be_a(BidPresenter)
-        expect(assigned_bid.id).to eq(bid.id)
+        expect(assigned_bid.bid).to eq(bid)
       end
 
       it 'should not assign auctions that the current user has not bidded on' do

@@ -22,6 +22,12 @@ class AuctionStatus::OverViewModel < Struct.new(:auction)
   end
 
   def tag_data_value_2
-    auction.highlighted_bid_amount_as_currency
+    Currency.new(lowest_bid.amount).to_s
+  end
+
+  private
+
+  def lowest_bid
+    auction.lowest_bid || NullBid.new
   end
 end

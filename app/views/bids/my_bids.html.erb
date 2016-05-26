@@ -3,7 +3,10 @@
 
 <h1>My Bids</h1>
 
-<a class="link-highlighted" href="/"><icon class="fa fa-angle-double-left"></icon> Back to open issues</a>
+<%= link_to '<icon class="fa fa-angle-double-left"></icon> Back to open issues'.html_safe,
+  root_path,
+  class: "link-highlighted" %>
+
 
 <div class="usa-grid-full">
   <table id="table-admins-auction" class="admin-auctions-table">
@@ -22,16 +25,14 @@
     <tbody>
       <% @bids.each do |bid| %>
       <tr>
-        <td>
-          <%= link_to(bid.presenter_auction.title, auction_path(bid.presenter_auction)) %>
-        </td>
-        <td><%= bid.presenter_auction.formatted_type %></td>
-        <td><%= AuctionStatus.new(bid.auction).available? %></td>
-        <td><%= number_to_currency(bid.amount) %></td>
+        <td><%= link_to(bid.auction_title, auction_path(bid.auction)) %></td>
+        <td><%= bid.formatted_type %></td>
+        <td><%= bid.availability %></td>
+        <td><%= bid.amount %></td>
         <td><%= bid.winning_status %></td>
-        <td><%= DcTimePresenter.convert(bid.presenter_auction.started_at).to_s(:long) %></td>
-        <td><%= DcTimePresenter.convert(bid.presenter_auction.ended_at).to_s(:long) %></td>
-        <td><%= DcTimePresenter.convert(bid.presenter_auction.delivery_due_at).to_s(:long) rescue nil %></td>
+        <td><%= bid.started_at %></td>
+        <td><%= bid.ended_at %></td>
+        <td><%= bid.delivery_due_at %></td>
       </tr>
       <% end %>
     </tbody>

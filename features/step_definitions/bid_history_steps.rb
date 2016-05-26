@@ -112,7 +112,14 @@ end
 
 Then(/^I should not see bids from other users$/) do
   @auction.bids.each do |bid|
-    next if bid.bidder_id == @user.id
+    next if bid.bidder == @user
+    amount = ApplicationController.helpers.number_to_currency(bid.amount)
+    expect(page).to_not have_content(amount)
+  end
+end
+
+Then(/^I should see my bid history$/) do
+  @user.bids.each do |bid|
     amount = ApplicationController.helpers.number_to_currency(bid.amount)
     expect(page).to_not have_content(amount)
   end

@@ -84,6 +84,13 @@ class AuctionQuery
       .in_reverse_chron_order
   end
 
+  def bids_index(id)
+    @relation
+      .with_bids_and_bidders
+      .published
+      .find(id)
+  end
+
   def public_find(id)
     @relation
       .published

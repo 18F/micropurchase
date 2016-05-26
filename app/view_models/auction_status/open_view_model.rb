@@ -1,7 +1,4 @@
 class AuctionStatus::OpenViewModel < Struct.new(:auction)
-  include ActionView::Helpers::DateHelper
-  include ActionView::Helpers::NumberHelper
-
   def status_text
     'Open'
   end
@@ -15,7 +12,7 @@ class AuctionStatus::OpenViewModel < Struct.new(:auction)
   end
 
   def tag_data_value_status
-    auction.relative_time_left
+    HumanTime.new(time: auction.ended_at).relative_time_left
   end
 
   def tag_data_label_2
@@ -23,10 +20,20 @@ class AuctionStatus::OpenViewModel < Struct.new(:auction)
   end
 
   def tag_data_value_2
-    if !auction.show_bids?
+    if auction.type == 'single_bid'
       "Sealed"
     else
-      "#{auction.highlighted_bid_amount_as_currency} - #{auction.bids.length} bids"
+      "#{winning_bid_amount_as_currency} - #{auction.bids.length} bids"
     end
+  end
+
+  private
+
+  def winning_bid_amount_as_currency
+    Currency.new(lowest_bid.amount).to_s
+  end
+
+  def lowest_bid
+    auction.lowest_bid || NullBid.new
   end
 end

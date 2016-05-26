@@ -1,18 +1,20 @@
-<% content_for :title do %>18F Micro-purchase - Bids on <%= @auction.title %><% end %>
-<% content_for :description do %>Auction <%= @auction.id %> has <%= @auction.bids.length %> bids.<% end %>
+<% content_for :title do %>18F Micro-purchase - Bids on <%= @auction_bids.title %><% end %>
+
+<% content_for :description do %>
+  Auction <%= @auction_bids.id %> has <%= @auction_bids.bids_count %> bids.
+<% end %>
+
 <% content_for :data_tags do %>
-  <%= render partial: '/auctions/data_tags', locals: {auction: @auction} %>
+  <%= render partial: 'auctions/data_tags', locals: { auction: @auction_bids } %>
 <% end %>
 
-<h1>Bids for "<%= @auction.title %>"</h1>
+<h1>Bids for "<%= @auction_bids.title %>"</h1>
 
-<a class="link-highlighted" href="<%= auction_path(@auction) %>"><icon class="fa fa-angle-double-left"></icon> Back to auction</a>
+<%= link_to '<icon class="fa fa-angle-double-left"></icon> Back to auction</a>'.html_safe,
+  auction_path(@auction_bids.id),
+  class: 'link-highlighted' %>
 
-<% if !@auction.show_bids? %>
-  <p>
-    Bids are sealed until the auction ends. See the <a href='/auctions/rules/single-bid'>auction rules</a> to learn more.
-  </p>
-<% end %>
+<%= render partial: @auction_bids.sealed_bids_partial %>
 
 <table id="table-bids" class="usa-table-borderless">
   <thead>
@@ -24,28 +26,12 @@
     </tr>
   </thead>
   <tbody>
-    <% @auction.veiled_bids(current_user).each_with_index do |bid, i| %>
+    <% @auction_bids.veiled_bids.each do |bid| %>
       <tr>
-        <td>
-          <%=
-            bid.veiled_bidder_attribute(
-              :name,
-              current_user,
-              message: '[Name withheld until the auction ends]'
-            )
-          %>
-        </td>
-        <td>
-          <%=
-            bid.veiled_bidder_attribute(
-              :duns_number,
-              current_user,
-              message: '[Withheld]'
-            )
-          %>
-        </td>
+        <td><%= bid.veiled_name %></td>
+        <td><%= bid.veiled_duns_number %></td>
         <td><%= bid.amount_to_currency_with_asterisk %></td>
-        <td><%= DcTimePresenter.convert_and_format(bid.created_at) %></td>
+        <td><%= bid.created_at %></td>
       </tr>
     <% end %>
   </tbody>
