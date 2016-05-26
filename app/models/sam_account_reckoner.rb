@@ -51,10 +51,10 @@ class SamAccountReckoner < Struct.new(:user)
   end
 
   def duns_is_in_sam?
-    vendor_summary[:in_sam]
+    vendor_summary[:in_sam] == true
   end
 
   def duns_is_small_business?
-    vendor_summary[:small_business]
+    vendor_summary[:small_business] == true
   end
 end
