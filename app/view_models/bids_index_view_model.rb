@@ -1,4 +1,4 @@
-class AuctionBids
+class BidsIndexViewModel
   attr_reader :auction, :current_user
 
   def initialize(auction:, current_user:)

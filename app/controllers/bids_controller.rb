@@ -4,7 +4,7 @@ class BidsController < ApplicationController
 
   def index
     auction = AuctionQuery.new.bids_index(params[:auction_id])
-    @auction_bids = AuctionBids.new(auction: auction, current_user: current_user)
+    @auction_bids = BidsIndexViewModel.new(auction: auction, current_user: current_user)
   end
 
   def my_bids
