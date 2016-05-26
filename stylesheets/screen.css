@@ -1173,6 +1173,7 @@ dd.auction-status{
 	text-indent: 2px;
 }
 
+
 dd.auction-status-closed{
 	background: #992d00;
 	color: white !important;	
@@ -1584,11 +1585,29 @@ a[id]{
 
 .layout-auctions-show .auction .auction-header dd.auction-status{
 	position: absolute;
-	right: -19px;
-	top: -19px;	
+	right: 0;
+	top: -21px;	
 	width: 64px;
-	height: 64px;
+	height: 44px;
+	text-align: center;
+	border-radius:  0;
 }
+
+.layout-auctions-show .auction .auction-header dd.auction-status::after{
+	position: absolute;
+	content: "";
+	display: block;
+    bottom: -14px;
+    height: 0;
+    left: 0;
+    position: absolute;
+    width: 64px;
+    margin: 0;
+    border-bottom: 14px solid transparent;
+    border-left: 32px solid #008fe4;
+    border-right: 32px solid #008fe4;
+}
+
 
 .layout-auctions-show .auction .auction-header .auction-current-bid{
 	position: relative;
