@@ -1,5 +1,7 @@
 /* @override http://localhost:4000/stylesheets/screen.css */
 
+/* @override http://localhost:4000/stylesheets/screen.css */
+
 /* @group bootstrap */
 
 html {
@@ -308,18 +310,7 @@ div.field,
 fieldset{ margin-bottom: 24px; }
 fieldset.fieldset-radio{ margin-bottom: 18px; }
 
-fieldset.fieldset-parties-requesting-agency,
-fieldset.fieldset-parties-servicing-agency,
-.section-agency-official fieldset.fieldset-requesting-agency,
-.section-agency-official fieldset.fieldset-servicing-agency,
-fieldset.fieldset-program-official,
-fieldset.fieldset-additional-point-of-contact,
-fieldset.fieldset-corporate-official,
-fieldset.fieldset-funding-official,
-fieldset.fieldset-component-tas,
-fieldset.fieldset-reimbursable-line-costs,
-fieldset.fieldset-assisted-acquisition-line-costs,
-fieldset.fieldset-point-of-contact{
+fieldset{
 	border: 1px solid #cfcfcf;
 	padding: 16px;
 	padding-bottom: 19px;
@@ -329,26 +320,7 @@ fieldset.fieldset-point-of-contact{
 	border-radius: 4px;
 }
 
-fieldset.fieldset-program-official div.field:last-of-type,
-fieldset.fieldset-additional-point-of-contact div.field:last-of-type,
-fieldset.fieldset-corporate-official div.field:last-of-type{
-	margin-bottom: 4px;
-}
 
-fieldset.fieldset-corporate-official{ margin-bottom: 24px; }
-
-fieldset.fieldset-parties-requesting-agency > legend,
-fieldset.fieldset-parties-servicing-agency > legend,
-.section-agency-official fieldset.fieldset-requesting-agency > legend,
-.section-agency-official fieldset.fieldset-servicing-agency > legend,
-fieldset.fieldset-program-official > legend,
-fieldset.fieldset-corporate-official > legend,
-fieldset.fieldset-additional-point-of-contact > legend,
-fieldset.fieldset-funding-official > legend,
-fieldset.fieldset-component-tas > legend,
-fieldset.fieldset-reimbursable-line-costs > legend,
-fieldset.fieldset-assisted-acquisition-line-costs > legend,
-fieldset.fieldset-point-of-contact > legend,
 fieldset > header > h1{
 	position: absolute;
 	background: white;
@@ -365,36 +337,6 @@ fieldset > header > h1{
 fieldset div.field:last-of-type+fieldset{
 	margin-top: 24px;
 	margin-bottom: 4px;
-}
-
-.fieldset.fieldset-labor-related-costs,
-.fieldset.fieldset-direct-material-costs,
-.fieldset.fieldset-discretionary-technical-assistance,
-.fieldset.fieldset-equivalent-work,
-.fieldset.fieldset-equivalent-work .fieldset,
-.fieldset.fieldset-radio{
-	padding: 0;
-	border: none;
-}
-
-.field-servicing-agency-tracking-number span.label-text,
-.field-requesting-agencys-scope span.label-text,
-.field-roles-and-responsibilities span.label-text,
-.field-assisted-acquisition-small-business-credit-clause span.label-text,
-.field-requesting-agencys-clauses span.label-text,
-.field-servicing-agencys-clauses span.label-text,
-.field-additional-agency-attachments span.label-text,
-.field-disputes span.label-text,
-.field-additional-agency-attachments span.label-text,
-.fieldset-assisted-acquisition-agreement > legend,
-.fieldset-gtc-action > legend,
-.fieldset-recurring-agreement > legend,
-.fieldset-agreement-type > legend,
-.fieldset-advanced-payments > legend,
-.fieldset-performance-period > legend,
-.fieldset-accrual-per-work-completed-period > legend{ 
-	position: absolute !important;
-	left: -9999em;
 }
 
 fieldset > legend,
@@ -437,8 +379,6 @@ fieldset > legend,
 	outline: none;
 }
 
-
-
 main div.field-select.is-focused::after{
 	border-top-color: #1188ff;
 
@@ -472,8 +412,8 @@ div.field.field-checkbox+.is-branch{
 	margin-bottom: 16px;
 }
 
-div.field.is-error input,
-div.field.is-error textarea{
+div.field.has-error input,
+div.field.has-error textarea{
 	background: #fff7f4;
 	background: repeating-linear-gradient(
     45deg,
@@ -485,8 +425,8 @@ div.field.is-error textarea{
 	border-color: #ce6246;
 }
 
-div.field.is-error span.error-message,
-fieldset.fieldset-radio.is-error span.error-message{
+div.field.has-error span.error-message,
+fieldset.fieldset-radio.has-error span.error-message{
 	color: #990017;	
 	display: block;
 }
@@ -832,7 +772,8 @@ main form footer p button{
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	display: inline-block;
-	vertical-align: baseline;
+	vertical-align: middle
+	;
 }
 
 .site-header .nav-header-nav > span,
@@ -1574,20 +1515,192 @@ a[id]{
 	display: none;
 }
 
+
+@-moz-keyframes uil-ring-anim {
+  0% {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-ms-keyframes uil-ring-anim {
+  0% {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-moz-keyframes uil-ring-anim {
+  0% {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes uil-ring-anim {
+  0% {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    transform-origin: top left;
+
+  }
+  100% {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes uil-ring-anim {
+  0% {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.auction-place-bid .notice{
+	padding: 0;
+	border: none;
+	background: none;
+	color: inherit;
+	text-align: inherit;
+}
+
+.auction-place-bid.auction-place-bid-high-bid{
+	background: #dcfde9;
+	border-color: #5cbb82;
+	border-right-color: #5cbb82;
+	color: #005d1f;
+	text-align: center;
+}
+
+.auction-place-bid.is-loading,
+.auction-place-bid.auction-place-bid-preview,
+.auction-place-bid.auction-place-bid-closed{
+	border-color: #d3d3d3;
+	border-right-color: #c0c0c0;
+	border-bottom-color: #bbb;
+	color: #333;
+	background: #f3f3f3;
+	text-align: center;
+}
+
+.auction-place-bid.has-errors{
+	border-color: #ff632c;
+	border-right-color: #d60c18;
+	border-bottom-color: #d60c18;
+}
+
+.auction-place-bid.has-errors h1{
+	color: #d21d1c;
+	margin-bottom: 0.33em;
+	font-size: 18px;
+}
+.auction-place-bid.is-loading{
+	border-color: #ddd;
+	border-right-color: #c8c8c8;
+	border-bottom-color: #d0d0d0;
+	box-shadow: none;
+}
+
+.auction-place-bid.is-loading::after{
+  content: "";
+  position: absolute;
+  display: block;
+  width: 48px;
+  height: 48px;
+  top: 50%;
+  left: 50%;
+  margin-left: -24px;
+  margin-top: -24px;
+  border-radius: 100%;
+  box-shadow: 01px 0 0 #aaa;
+  -ms-animation: uil-ring-anim 1s linear infinite;
+  -moz-animation: uil-ring-anim 1s linear infinite;
+  -webkit-animation: uil-ring-anim 1s linear infinite;
+  -o-animation: uil-ring-anim 1s linear infinite;
+  animation: uil-ring-anim 1s linear infinite;
+  z-index: 1;
+}
+
+.auction-place-bid.is-loading::before{
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(255,255,255,0.8);
+}
+
 .auction-place-bid{
 	color: #555;
 	border: 1px solid #73aee5;
-	box-shadow: 0 0 0 1px #fafafa;
+	box-shadow: 1px 1px 0 0 #f8f8f8;
 	border-radius: 4px;
 	margin-bottom: 1em;
 	padding: 20px;
+	position: relative;
 }
 
+.auction-place-bid h1,
 .auction-place-bid p{
-	margin-bottom: 0.8em;
-	line-height: 1.4;
+	line-height: 1.3;
 }
 
+
+.auction-place-bid form{
+	padding-top: 18px;
+}
+
+.auction-place-bid form .field{
+	width: 50%;
+}
+
+.auction-place-bid form input{
+	font-weight: normal;
+}
 
 .auction-place-bid form label{
 	font-weight: 600;

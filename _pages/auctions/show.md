@@ -31,6 +31,42 @@ excerpt: None
             $3,500.00
           </dd>
         </dl>
+      </header>
+      <div class="page">
+        <p class="issue-description p-summary">Open Opportunities uses the open source sails.js MVC framework (Node.js / Express). Currently, a task creator should receive the following notification if a task they created receives a comment. However, this functionality has broken, without breaking the build's test suite. This issue sees the creation of a failing test (or tests) that will only pass when the notification functionality is restored, along with the fix to make those tests pass.</p>
+        <h2>Auction rules</h2>
+        <p>Registered users on micropurchase.18f.gov may bid to deliver the requirements in this auction. The lowest bidder at the time the auction closes shall receive the award. The awarded bidder shall have five business days to deliver the requirements. Upon successful completion of the requirements, 18F shall pay the winning bidder. See our <a href="https://micropurchase.18f.gov/faq">rules</a> page</p>
+        <h2>Acceptance criteria</h2>
+        <h3>1. Conditions for the test to fail</h3>
+        <p>When the bug is present, and a user who is not the task creator comments on the task, and no email is generated</p>
+        <p>Then test(s) written as part of this micro-purchase will fail.</p>        
+      </div>
+      <footer class="auction-footer">
+        <section class="auction-place-bid auction-place-bid-closed">
+          <h1>This auction is closed and is no longer accepting bids.</h1>
+        </section>
+        <section class="auction-place-bid auction-place-bid-preview">
+          <h1>This auction has yet to open and is not currently accepting bids.</h1>
+        </section>
+        <section class="auction-place-bid auction-place-bid-high-bid">
+          <h1>You are the high bidder.</h1>
+        </section>
+        <section class="auction-place-bid is-loading">
+          <h1>You are the high bidder.</h1>
+        </section>
+        <section class="auction-place-bid auction-place-bid has-errors">
+          <h1>Your bid was not accepted.</h1>
+          <p>The maximum (current) bid is $3414.00. Please enter a lower amount.</p>
+          <form>
+            <div class="field has-error"> 
+              <label>
+                <span class="label-text">Your bid</span>
+                <input type="number" value="3501"></input>
+              </label>
+            </div>
+            <button>Place bid</button>
+          </form>
+        </section>
         <section class="auction-place-bid">
           <p>The maximum (current) bid is $3414.00. Please enter a lower amount.</p>
           <form>
@@ -43,39 +79,9 @@ excerpt: None
             <button>Place bid</button>
           </form>
         </section>
-
-      </header>
-      <div class="page">
-        <p class="issue-description p-summary">Open Opportunities uses the open source sails.js MVC framework (Node.js / Express). Currently, a task creator should receive the following notification if a task they created receives a comment. However, this functionality has broken, without breaking the build's test suite. This issue sees the creation of a failing test (or tests) that will only pass when the notification functionality is restored, along with the fix to make those tests pass.</p>
-        <h2>Auction rules</h2>
-        <p>Registered users on micropurchase.18f.gov may bid to deliver the requirements in this auction. The lowest bidder at the time the auction closes shall receive the award. The awarded bidder shall have five business days to deliver the requirements. Upon successful completion of the requirements, 18F shall pay the winning bidder. See our <a href="https://micropurchase.18f.gov/faq">rules</a> page</p>
-        <h2>Acceptance criteria</h2>
-        <h3>1. Conditions for the test to fail</h3>
-        <p>When the bug is present, and a user who is not the task creator comments on the task, and no email is generated</p>
-        <p>Then test(s) written as part of this micro-purchase will fail.</p>        
-      </div>
-      <footer class="auction-footer">
-        <section class="auction-place-bid">
-        <p>The maximum (current) bid is $3414.00. Please enter a lower amount.</p>
-          <form>
-            <div class="field"> 
-              <label>
-                <span class="label-text">Your bid</span>
-                <input type="number"></input>
-              </label>
-            </div>
-            <button>Place bid</button>
-          </form>
-        </section>
         <dl>
-          <dt class="auction-author">Submitted by</dt>
-          <dd class="auction-author p-author"><img src="#">Patrick Bateman</dd>
-          <dt class="auction-language">Language</dt>
-          <dd class="auction-language">Ruby</dd>
           <dt class="auction-project">Project</dt>
-          <dd class="auction-project">Open Opportunities</dd>
-          <dt class="auction-agency">Agency</dt>
-          <dd class="auction-agency">General Services Administration</dd>
+          <dd class="auction-project"><a href=""></a>Open Opportunities</dd>
         </dl>
       </footer>
     </div>

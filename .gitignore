@@ -17,5 +17,5 @@
 /coverage
 /public/capybara.html
 .env
-
+/_site
 vendor
