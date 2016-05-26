@@ -223,15 +223,18 @@ input[type=checkbox]{
 	display: block;
 }
 
-.field-select{ position: relative; }
+.field-select{ 
+	position: relative; 
+	z-index: 1;
+}
 
 .field-select::after{
 	content: "";
 	border: 6px solid black;
 	position: absolute;
-	right: 20px;
-	bottom: 50%;
-	margin-bottom: 2px;
+	right: 8px;
+	bottom: 0;
+	margin-bottom: 9px;
 	border-color: #aaa transparent transparent transparent;
 	z-index: -1;
 }
@@ -828,6 +831,10 @@ nav.breadcrumbs-and-tools ol li::after{
 	margin-right: 0.2em;
 }
 
+nav.breadcrumbs-and-tools ol li:last-child::after{
+	display: none;
+}
+
 @media screen and (min-width: 1066.66px){	
     .breadcrumbs-and-tools .wrapper{ padding-right: 320px; }
 
@@ -1377,6 +1384,7 @@ a[id]{
 	.page h4,
 	.page h5,
 	.page figure,
+	.page form,
 	.page p,
 	.page ul,
 	.page ol,
@@ -1466,6 +1474,7 @@ a[id]{
 }
 
 @media screen and (min-width: 711.11px){
+	.page form,
 	.page .table-wrapper{ max-width: 640px; }
 }
 
