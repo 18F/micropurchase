@@ -133,7 +133,7 @@ class NewBidViewModel
   end
 
   def status_presenter
-    @status_presenter ||= status_presenter_class.new(self)
+    @status_presenter ||= status_presenter_class.new(auction)
   end
 
   def status_presenter_class
