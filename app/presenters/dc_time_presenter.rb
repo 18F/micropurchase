@@ -1,6 +1,6 @@
 class DcTimePresenter < Struct.new(:time)
   FORMAT = "%B %d, %Y %r".freeze
-  TIME_ZONE_NAME = 'Eastern Time (US & Canada)'
+  TIME_ZONE_NAME = 'Eastern Time (US & Canada)'.freeze
 
   def convert
     return unless time
