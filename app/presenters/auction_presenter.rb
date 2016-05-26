@@ -110,7 +110,7 @@ class AuctionPresenter
     "#{distance_of_time_in_words(Time.current, auction.ended_at)} left"
   end
 
-  def delivery_deadline_expires_in
+  def delivery_due_at_expires_in
     time_in_human(auction.delivery_due_at)
   end
 
@@ -125,7 +125,7 @@ class AuctionPresenter
 
   def html_summary
     return '' if summary.blank?
-    summary
+    markdown.render(summary)
   end
 
   def url
