@@ -11,13 +11,13 @@ class HumanTime
   def relative_start_time
     distance = distance_of_time_in_words(current_time, time)
     if time < current_time
-      "#{distance} ago"
+      "Ended #{distance} ago"
     else
-      "in #{distance}"
+      "Starts #{distance} from now"
     end
   end
 
   def relative_time_left
-    "#{distance_of_time_in_words(current_time, time)} left"
+    "Time remaining #{distance_of_time_in_words(current_time, time)}"
   end
 end

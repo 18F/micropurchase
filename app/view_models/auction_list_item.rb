@@ -14,9 +14,13 @@ class AuctionListItem
     auction.id
   end
 
+  def bids
+    auction.bids
+  end
+
   def html_summary
     return '' if auction.summary.blank?
-    MarkdownRender.new(auction.summary).to_s
+    auction.summary
   end
 
   def label
@@ -43,6 +47,14 @@ class AuctionListItem
     end
   end
 
+  def project_href
+    auction.github_repo
+  end
+
+  def project_label
+    auction.github_repo.sub('https://github.com/', '')
+  end
+
   def available?
     auction_status.available?
   end
@@ -64,10 +76,10 @@ class AuctionListItem
   end
 
   def winning_bid_partial
-    if auction.bids.any?
-      'auctions/winning_bid_amount'
-    else
-      'auctions/no_winning_bids'
+    if auction.type == 'multi_bid'
+      'auctions/multi_bid/winning_bid'
+    elsif auction.type == 'single_bid'
+      'auctions/multi_bid/winning_bid'
     end
   end
 
@@ -111,8 +123,16 @@ class AuctionListItem
     user_bids.any?
   end
 
+  def user_is_winning_bidder?
+    auction.bids.any? && lowest_user_bid == auction.lowest_bid
+  end
+
   def user_bid_amount_as_currency
     Currency.new(lowest_user_bid_amount).to_s
+  end
+
+  def github_repo_stripped
+    auction.github_repo.gsub('https://github.com/', '')
   end
 
   private
