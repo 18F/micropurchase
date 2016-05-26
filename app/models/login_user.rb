@@ -11,8 +11,8 @@ class LoginUser < Struct.new(:auth_hash, :session)
   end
 
   def update_user_from_oauth_hash!
-    set_if_blank('name')
-    set_if_blank('email')
+    if_blank_set('name')
+    if_blank_set('email')
     user.github_login = auth_hash[:info][:nickname]
     user.save!
   end
@@ -21,7 +21,7 @@ class LoginUser < Struct.new(:auth_hash, :session)
     session[:user_id] = user.id
   end
 
-  def set_if_blank(field)
+  def if_blank_set(field)
     attribute = field.to_sym
 
     if user.send(attribute).blank?
