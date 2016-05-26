@@ -30,7 +30,7 @@ class BidsController < ApplicationController
 
   def confirm
     bid = PlaceBid.new(params: params, user: current_user, via: via).dry_run
-    @bid_confirm = BidsConfirmViewModel.new(auction: Auction.find(params[:auction_id]), bid: bid)
+    @confirm_bid = ConfirmBidViewModel.new(auction: Auction.find(params[:auction_id]), bid: bid)
   end
 
   def create

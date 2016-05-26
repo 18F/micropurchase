@@ -1,4 +1,4 @@
-class BidsConfirmViewModel
+class ConfirmBidViewModel
   attr_reader :auction, :bid
 
   def initialize(auction:, bid:)
@@ -28,7 +28,7 @@ class BidsConfirmViewModel
 
   def html_description
     return '' if auction.description.blank?
-    MarkdownRender.new(auction.description).to_s.html_safe
+    MarkdownRender.new(auction.description).to_s
   end
 
   def relative_time_left
