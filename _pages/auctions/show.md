@@ -7,9 +7,19 @@ excerpt: None
 <body class="no-js layout-auctions-show">
   <a class="a-skip-to-main" href="#main">Skip to main content</a>
   {% include site-header.html %}
-  <nav class="breadcrumbs">
+  <nav class="breadcrumbs-and-tools">
     <div class="wrapper">
-      <a href="/">&larr; All auctions</a>
+      <ol>
+        <li><a href=""><a href="/">Auctions</a></a></li>
+        <li>Open Opportunities: Create Agency Admin User Role</li>
+      </ol>
+      <section class="tools">
+        <h1>Admin tools</h1>
+        <ul>
+          <li><a href="">View bids</a></li>
+          <li><a href="">Edit</a></li>
+        </ul>
+      </section>
     </div>
   </nav>
   <main class="auction h-entry" role="main" id="main">
@@ -48,6 +58,9 @@ excerpt: None
         <section class="auction-place-bid auction-place-bid-preview">
           <h1>This auction has yet to open and is not currently accepting bids.</h1>
         </section>
+        <section class="auction-place-bid auction-place-bid-bid-placed">
+          <h1>You have placed a bid for $3,400.00.</h1>
+        </section>
         <section class="auction-place-bid auction-place-bid-high-bid">
           <h1>You are the high bidder.</h1>
         </section>
@@ -56,7 +69,7 @@ excerpt: None
         </section>
         <section class="auction-place-bid auction-place-bid has-errors">
           <h1>Your bid was not accepted.</h1>
-          <p>The maximum (current) bid is $3414.00. Please enter a lower amount.</p>
+          <p>The maximum (current) bid is $3414.00. Please enter an amount less than or equal to the maximum bid amount.</p>
           <form>
             <div class="field has-error"> 
               <label>
