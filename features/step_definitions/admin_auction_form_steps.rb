@@ -54,9 +54,17 @@ When(/^I edit the new auction form$/) do
 
   @start_day = DcTimePresenter.convert(3.days.from_now)
   fill_in "auction_started_at", with: @start_day.strftime('%Y-%m-%d')
+  select('11', from: 'auction_started_at_1i')
+  select('30', from: 'auction_started_at_2i')
+  select('AM', from: 'auction_started_at_3i')
+  @start_time = DcTimePresenter.time_zone.parse("#{@start_day.strftime('%Y-%m-%d')} 11:30 AM")
 
   @end_day = DcTimePresenter.convert(3.days.from_now)
   fill_in "auction_ended_at", with: @end_day.strftime('%Y-%m-%d')
+  select('4', from: 'auction_ended_at_1i')
+  select('45', from: 'auction_ended_at_2i')
+  select('PM', from: 'auction_ended_at_3i')
+  @end_time = DcTimePresenter.time_zone.parse("#{@start_day.strftime('%Y-%m-%d')} 4:45 PM")
 
   @time_in_days = 3
   @deadline_day = DcTimePresenter.convert(@time_in_days.business_days.from_now)
@@ -86,9 +94,17 @@ Then(/^I should be able to edit the existing auction form$/) do
 
   @start_day = DcTimePresenter.convert(Time.now + 3.days)
   fill_in "auction_started_at", with: @start_day.strftime('%Y-%m-%d')
+  select('12', from: 'auction_started_at_1i')
+  select('30', from: 'auction_started_at_2i')
+  select('PM', from: 'auction_started_at_3i')
+  @start_time = DcTimePresenter.time_zone.parse("#{@start_day.strftime('%Y-%m-%d')} 12:30 PM")
 
-  @end_day = DcTimePresenter.convert(Time.now - 3.days)
+  @end_day = DcTimePresenter.convert(Time.now + 8.days)
   fill_in "auction_ended_at", with: @end_day.strftime('%Y-%m-%d')
+  select('5', from: 'auction_ended_at_1i')
+  select('30', from: 'auction_ended_at_2i')
+  select('PM', from: 'auction_ended_at_3i')
+  @end_time = DcTimePresenter.time_zone.parse("#{@end_day.strftime('%Y-%m-%d')} 5:30 PM") 
 
   @deadline_day = DcTimePresenter.convert(Time.now + 5.days)
   fill_in "auction_delivery_due_at", with: @deadline_day.strftime('%Y-%m-%d')
@@ -118,4 +134,14 @@ end
 
 Then(/^I should see that my auction was created successfully$/) do
   expect(page).to have_content(I18n.t('controllers.admin.auctions.create.success'))
+end
+
+Then(/^I should see the start time I set for the auction$/) do
+  expect(DcTimePresenter.convert_and_format(@auction.started_at)).to eq(DcTimePresenter.convert_and_format(@start_time))
+  expect(page).to have_text(DcTimePresenter.convert_and_format(@start_time))
+end
+
+Then(/^I should see the end time I set for the auction$/) do
+  expect(DcTimePresenter.convert_and_format(@auction.ended_at)).to eq(DcTimePresenter.convert_and_format(@end_time))
+  expect(page).to have_text(DcTimePresenter.convert_and_format(@end_time))
 end

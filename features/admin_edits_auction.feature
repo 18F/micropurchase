@@ -11,7 +11,8 @@ Feature: Admin edits auctions in the admins panel
     And I edit the new auction form
     And I click to create an auction
     Then I should see the auction's title
-    And I should see when bidding starts and ends in ET
+    And I should see the start time I set for the auction
+    And I should see the end time I set for the auction
 
   Scenario: Creating an invalid auction
     Given I am an administrator
@@ -37,7 +38,8 @@ Feature: Admin edits auctions in the admins panel
 
     When I click on the "Update" button
     Then I expect my auction changes to have been saved
-    And I should see when bidding starts and ends in ET
+    And I should see the start time I set for the auction
+    And I should see the end time I set for the auction
 
     When I click on the auction's title
     Then I should see new content on the page
