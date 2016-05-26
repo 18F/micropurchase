@@ -8,7 +8,7 @@ class HumanTime
     @current_time = current_time
   end
 
-  def relative_start_time
+  def relative_time
     distance = distance_of_time_in_words(current_time, time)
     if time < current_time
       "#{distance} ago"

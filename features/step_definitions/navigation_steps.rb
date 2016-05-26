@@ -43,6 +43,10 @@ When(/^I visit the admin action items page$/) do
   visit admin_action_items_path
 end
 
+When(/^I visit the admin drafts page$/) do
+  visit admin_drafts_path
+end
+
 When(/^I visit the preview page for the unpublished auction$/) do
   visit admin_preview_auction_path(@unpublished_auction)
 end

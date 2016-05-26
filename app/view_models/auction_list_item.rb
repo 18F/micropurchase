@@ -96,7 +96,7 @@ class AuctionListItem
   end
 
   def relative_start_time
-    HumanTime.new(time: auction.started_at).relative_start_time
+    HumanTime.new(time: auction.started_at).relative_time
   end
 
   def relative_time_left

@@ -1,5 +1,7 @@
 Given(/^there is an? (.+) auction$/) do |label|
   @auction = case label
+             when 'unpublished'
+               FactoryGirl.create(:auction, :unpublished)
              when 'future'
                FactoryGirl.create(:auction, :future)
              when 'closed'
