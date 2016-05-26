@@ -16,7 +16,7 @@ class AuctionListItem
 
   def html_summary
     return '' if auction.summary.blank?
-    markdown.render(auction.summary).html_safe
+    MarkdownRender.new(auction.summary).to_s
   end
 
   def label
@@ -132,7 +132,11 @@ class AuctionListItem
   end
 
   def lowest_user_bid_amount
-    user_bids.order(amount: :asc).first.amount
+    lowest_user_bid.amount
+  end
+
+  def lowest_user_bid
+    user_bids.order(amount: :asc).first
   end
 
   def user_bids
@@ -140,13 +144,8 @@ class AuctionListItem
   end
 
   def highlighted_bid
-    if available? && auction.type == "single_bid" && user_is_bidder?
-      auction.bids.where(bidder: current_user).first
-    elsif available? && auction.type == "single_bid"
-      NullBidPresenter.new
-    else
-      auction.lowest_bid
-    end
+    @_highlighted_bid ||=
+      HighlightedBid.new(auction: auction, user: current_user).find
   end
 
   def for_small_business?
@@ -180,14 +179,5 @@ class AuctionListItem
 
   def auction_status
     AuctionStatus.new(auction)
-  end
-
-  def markdown
-    @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML,
-                                          no_intra_emphasis: true,
-                                          autolink: true,
-                                          tables: true,
-                                          fenced_code_blocks: true,
-                                          lax_spacing: true)
   end
 end

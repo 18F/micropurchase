@@ -172,7 +172,7 @@ class AuctionShowViewModel
 
   def html_description
     return '' if auction.description.blank?
-    markdown.render(auction.description).html_safe
+    MarkdownRender.new(auction.description).to_s
   end
 
   def deadline_label
@@ -186,11 +186,15 @@ class AuctionShowViewModel
   private
 
   def user_is_winning_bidder?
-    user_bids.order(amount: :asc).first == auction.lowest_bid
+    auction.bids.any? && lowest_user_bid == auction.lowest_bid
   end
 
   def lowest_user_bid_amount
-    user_bids.order(amount: :asc).first.try(:amount)
+    lowest_user_bid.try(:amount)
+  end
+
+  def lowest_user_bid
+    user_bids.order(amount: :asc).first
   end
 
   def formatted_type
@@ -276,15 +280,6 @@ class AuctionShowViewModel
 
   def auction_status
     AuctionStatus.new(auction)
-  end
-
-  def markdown
-    @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML,
-                                          no_intra_emphasis: true,
-                                          autolink: true,
-                                          tables: true,
-                                          fenced_code_blocks: true,
-                                          lax_spacing: true)
   end
 
   def for_small_business?
