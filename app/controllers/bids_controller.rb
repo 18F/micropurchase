@@ -21,7 +21,7 @@ class BidsController < ApplicationController
   def new
     if current_user.sam_accepted?
       auction = AuctionQuery.new.public_find(params[:auction_id])
-      @bid_view_model = BidsNewViewModel.new(auction: auction, current_user: current_user)
+      @bid_view_model = NewBidViewModel.new(auction: auction, current_user: current_user)
     else
       session[:return_to] = request.fullpath
       redirect_to users_edit_path
