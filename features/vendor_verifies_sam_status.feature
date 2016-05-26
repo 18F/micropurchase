@@ -16,7 +16,7 @@ Feature: Automatically checking a user's SAM status
     And I am signed in
     And a SAM check for my DUNS will return true
     When I visit my profile page
-    And I enter a new DUNS in my profile
+    And I enter a valid DUNS in my profile
     And I click on the "Submit" button
     Then I should become a valid SAM user
     When I visit my profile page

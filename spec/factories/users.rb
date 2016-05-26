@@ -27,5 +27,13 @@ FactoryGirl.define do
         contracting_officer true
       end
     end
+
+    trait :small_business do
+      duns_number { FakeSamApi::SMALL_BUSINESS_DUNS }
+    end
+
+    trait :big_business do
+      duns_number { FakeSamApi::BIG_BUSINESS_DUNS }
+    end
   end
 end

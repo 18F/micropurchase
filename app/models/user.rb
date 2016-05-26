@@ -10,21 +10,4 @@ class User < ActiveRecord::Base
   def decorate
     UserPresenter.new(self)
   end
-
-  def from_oauth_hash(auth_hash)
-    set_if_blank('name', auth_hash)
-    set_if_blank('email', auth_hash)
-    self.github_login = auth_hash[:info][:nickname]
-    save!
-  end
-
-  private
-
-  def set_if_blank(field, auth_hash)
-    attribute = field.to_sym
-
-    if send(attribute).blank?
-      send("#{attribute}=", auth_hash[:info][attribute])
-    end
-  end
 end
