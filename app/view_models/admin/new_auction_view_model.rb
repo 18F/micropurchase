@@ -1,4 +1,12 @@
-class Admin::AuctionNewViewModel < SimpleDelegator
+class Admin::NewAuctionViewModel
+  def new_record
+    Auction.new
+  end
+
+  def new_record?
+    true
+  end
+
   def hour_default(_field)
     "7"
   end
