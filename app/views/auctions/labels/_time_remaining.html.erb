@@ -1,7 +1,0 @@
-<div class="issue-bid-deadline">
-  <% if auction.over? or auction.future? %>
-      <%= auction.relative_start_time %>
-  <% elsif auction.available? %>
-    <%= auction.relative_time_left %>
-  <% end %>
-</div>

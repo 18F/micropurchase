@@ -7,8 +7,9 @@
         </div> <%= link_to auction.title, auction_path(auction.id) %>
       </h3>
       <div class="issue-vitals">
-        <%= render partial: 'auctions/labels/time_remaining', locals: {auction: auction} %>
-
+        <div class="issue-bid-deadline">
+          <%= auction.relative_time %>
+        </div>
         <%= render partial: auction.winning_bid_partial, locals: {auction: auction} %>
       </div>
       <p class='issue-description'>

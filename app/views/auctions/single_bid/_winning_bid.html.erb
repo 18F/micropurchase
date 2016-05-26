@@ -13,12 +13,12 @@
     <% end %>
   <% end %>
 <% elsif auction.over? %>
-  <% if auction.bids? %>
+  <% if auction.bids.any? %>
     <span class="issue-current-bid <% unless auction.user_is_winning_bidder? %>issue-current-bid-long<% end %>">
       <% if auction.user_is_winning_bidder? %>
         <span>Your bid won: </span>
       <% else %>
-        <% if auction.user_bid_amount_as_currency %>
+        <% if auction.user_is_bidder? %>
           <span class="issue-current-bid issue-current-bid-new-line">Your bid: <%= auction.user_bid_amount_as_currency %></span>
         <% end %>
         <span class="issue-current-bid">Winning bid:</span>
@@ -31,7 +31,5 @@
         %>
       </span>
     </span>
-  <% else %>
-    <span class="issue-current-bid">No bids</span>
   <% end %>
 <% end %>

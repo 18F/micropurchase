@@ -76,10 +76,12 @@ class AuctionListItem
   end
 
   def winning_bid_partial
-    if auction.type == 'multi_bid'
+    if over? and !auction.bids.any?
+      'auctions/no_bids'
+    elsif auction.type == 'multi_bid'
       'auctions/multi_bid/winning_bid'
     elsif auction.type == 'single_bid'
-      'auctions/multi_bid/winning_bid'
+      'auctions/single_bid/winning_bid'
     end
   end
 
@@ -114,6 +116,15 @@ class AuctionListItem
   def relative_time_left
     HumanTime.new(time: auction.ended_at).relative_time_left
   end
+
+  def relative_time
+    if over? or future?
+      relative_start_time
+    else
+      relative_time_left
+    end
+  end
+
 
   def highlighted_bid_amount_as_currency
     Currency.new(highlighted_bid.amount).to_s

@@ -1,7 +1,7 @@
 <% if auction.available? %>
   <% if auction.bids.any? %>
     <% if auction.user_is_winning_bidder? %>
-      <span class="issue-current-bid-header">Your bid of is winning:</span>
+      <span class="issue-current-bid-header">Your bid is winning:</span>
     <% else %>
       <% if auction.user_is_bidder? %>
         <span class="issue-current-bid issue-current-bid-new-line">Your bid: <%= auction.user_bid_amount_as_currency %></span>
@@ -15,7 +15,6 @@
     )
     %>
     </span>
-
   <% else %>
     <span class="issue-current-bid">No bids yet</span>
   <% end %>
@@ -36,8 +35,5 @@
     )
     %>
     </span>
-
-  <% else %>
-    <span class="issue-current-bid">No bids</span>
   <% end %>
 <% end %>
