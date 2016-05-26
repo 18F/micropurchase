@@ -1,50 +1,95 @@
 require 'rails_helper'
 
 describe LoginUser do
-  context 'when the uid exists in a user' do
-    it 'does not create a new user' do
-      FactoryGirl.create(:user, github_id: github_id_from_oauth)
-      authenticator = LoginUser.new(auth_hash, { })
-      expect { authenticator.perform }.not_to change { User.count }
+  describe "#perform" do
+    context "user does not have github username, name, or email" do
+      it "updates from auth hash" do
+        github_id = '1234'
+        user = create(:user, github_login: nil, name: nil, email: nil, github_id: github_id)
+        auth_hash = {
+          uid: github_id,
+          info: {
+            nickname: "github_username",
+            name: "Person",
+            email: "test@example.com"
+          }
+        }
+
+        login_user = LoginUser.new(auth_hash, {})
+        login_user.perform
+
+        user.reload
+
+        expect(user.github_login).to eq "github_username"
+        expect(user.name).to eq "Person"
+        expect(user.email).to eq "test@example.com"
+      end
     end
 
-    it 'updates the user with additional data' do
-      user = FactoryGirl.create(:user)
-      allow(User).to receive(:create).with(github_id: github_id_from_oauth).and_return(user)
-      authenticator = LoginUser.new(auth_hash, { })
-      allow(user).to receive(:from_oauth_hash).with(auth_hash)
+    context "user already has github username, name, and email" do
+      it "does not update email, name, does update github username" do
+        github_id = '1234'
+        user = create(
+          :user,
+          github_login: "Old_Username",
+          name: "Old name",
+          email: "oldemail@example.com",
+          github_id: github_id
+        )
+        auth_hash = {
+          uid: github_id,
+          info: {
+            nickname: "New_Username",
+            name: "New name",
+            email: "test@example.com"
+          }
+        }
 
-      authenticator.perform
+        login_user = LoginUser.new(auth_hash, {})
+        login_user.perform
 
-      expect(user).to have_received(:from_oauth_hash).with(auth_hash)
+        user.reload
+
+        expect(user.github_login).to eq "New_Username"
+        expect(user.name).to eq "Old name"
+        expect(user.email).to eq "oldemail@example.com"
+      end
     end
 
-    it 'signs in the user into the session' do
-      user = FactoryGirl.create(:user, github_id: github_id_from_oauth)
-      session = { }
-      authenticator = LoginUser.new(auth_hash, session)
+    context 'when the uid exists in a user' do
+      it 'does not create a new user' do
+        FactoryGirl.create(:user, github_id: github_id_from_oauth)
+        authenticator = LoginUser.new(auth_hash, { })
+        expect { authenticator.perform }.not_to change { User.count }
+      end
 
-      authenticator.perform
+      it 'signs in the user into the session' do
+        user = FactoryGirl.create(:user, github_id: github_id_from_oauth)
+        session = { }
+        authenticator = LoginUser.new(auth_hash, session)
 
-      expect(session[:user_id]).to eq(user.id)
+        authenticator.perform
+
+        expect(session[:user_id]).to eq(user.id)
+      end
     end
-  end
 
-  context 'when the uid does not exist' do
-    it 'creates a new user' do
-      authenticator = LoginUser.new(auth_hash, { })
+    context 'when the uid does not exist' do
+      it 'creates a new user' do
+        authenticator = LoginUser.new(auth_hash, { })
 
-      expect { authenticator.perform }.to change { User.count }
-    end
+        expect { authenticator.perform }.to change { User.count }
+      end
 
-    it 'signs in the user into the session' do
-      user = FactoryGirl.create(:user, github_id: github_id_from_oauth)
-      session = { }
-      authenticator = LoginUser.new(auth_hash, session)
+      it 'signs in the user into the session' do
+        user = FactoryGirl.create(:user, github_id: github_id_from_oauth)
+        session = { }
+        authenticator = LoginUser.new(auth_hash, session)
 
-      authenticator.perform
+        authenticator.perform
 
-      expect(session[:user_id]).to eq(user.id)
+        expect(session[:user_id]).to eq(user.id)
+      end
     end
   end
 
