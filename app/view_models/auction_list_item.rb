@@ -16,7 +16,7 @@ class AuctionListItem
 
   def html_summary
     return '' if auction.summary.blank?
-    MarkdownRender.new(auction.summary).to_s.html_safe
+    MarkdownRender.new(auction.summary).to_s
   end
 
   def label

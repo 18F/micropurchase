@@ -14,6 +14,6 @@ class MarkdownRender
   end
 
   def to_s
-    markdown.render(text)
+    markdown.render(text).html_safe
   end
 end

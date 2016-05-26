@@ -172,7 +172,7 @@ class AuctionShowViewModel
 
   def html_description
     return '' if auction.description.blank?
-    MarkdownRender.new(auction.description).to_s.html_safe
+    MarkdownRender.new(auction.description).to_s
   end
 
   def deadline_label
