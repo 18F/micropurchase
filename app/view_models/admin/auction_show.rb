@@ -18,8 +18,8 @@ class Admin::AuctionShow
       'admin/auctions/available'
     elsif over?
       'admin/auctions/csv_report'
-     else
-       'admin/auctions/not_live'
+    else
+      'admin/auctions/not_live'
     end
   end
 
