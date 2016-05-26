@@ -15,7 +15,7 @@ class Admin::NewAuctionViewModel
     "00"
   end
 
-  def meridien_default(_field)
+  def meridiem_default(_field)
     "PM"
   end
 

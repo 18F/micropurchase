@@ -5,7 +5,7 @@ class DateTimeParser
   end
 
   def parse
-    DcTimePresenter.time_zone.parse("#{year}-#{month}-#{day} #{hour}:#{minute} #{meridian}")
+    DcTimePresenter.time_zone.parse("#{year}-#{month}-#{day} #{hour}:#{minute} #{meridiem}")
   end
 
   private
@@ -32,7 +32,7 @@ class DateTimeParser
     time.strftime('%M').to_i
   end
 
-  def meridian
+  def meridiem
     time.strftime('%p')
   end
 
