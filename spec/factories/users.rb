@@ -11,11 +11,13 @@ FactoryGirl.define do
     credit_card_form_url 'https://some-website.com/pay'
 
     trait :small_business do
+      duns_number { FakeSamApi::SMALL_BUSINESS_DUNS }
       sam_status { :sam_accepted }
       small_business { true }
     end
 
     trait :not_small_business do
+      duns_number { FakeSamApi::BIG_BUSINESS_DUNS }
       sam_status { :sam_accepted }
       small_business { false }
     end
@@ -28,12 +30,5 @@ FactoryGirl.define do
       end
     end
 
-    trait :small_business do
-      duns_number { FakeSamApi::SMALL_BUSINESS_DUNS }
-    end
-
-    trait :big_business do
-      duns_number { FakeSamApi::BIG_BUSINESS_DUNS }
-    end
   end
 end

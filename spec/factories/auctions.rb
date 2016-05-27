@@ -24,6 +24,18 @@ FactoryGirl.define do
       end
     end
 
+    trait :winning_vendor_is_small_business do
+      after(:create) do |auction|
+        create(:bid, :from_small_business, auction: auction)
+      end
+    end
+
+    trait :winning_vendor_is_non_small_business do
+      after(:create) do |auction|
+        create(:bid, :from_non_small_business, auction: auction)
+      end
+    end
+
     trait :with_bidders do
       published
       transient do
@@ -52,12 +64,12 @@ FactoryGirl.define do
     trait :between_micropurchase_and_sat_threshold do
       association :user, factory: :contracting_officer
       start_price do
-        rand(StartPriceThresholds::MICROPURCHASE+1..StartPriceThresholds::SAT)
+        rand(AuctionThreshold::MICROPURCHASE+1..AuctionThreshold::SAT)
       end
     end
 
     trait :below_micropurchase_threshold do
-      start_price { rand(1..StartPriceThresholds::MICROPURCHASE) }
+      start_price { rand(1..AuctionThreshold::MICROPURCHASE) }
     end
 
     trait :available do

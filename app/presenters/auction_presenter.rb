@@ -67,7 +67,7 @@ class AuctionPresenter
 
   delegate(
     :small_business?,
-    to: :start_price_thresholds
+    to: :auction_threshold
   )
 
   def bids?
@@ -171,8 +171,8 @@ class AuctionPresenter
     AuctionStatus.new(auction)
   end
 
-  def start_price_thresholds
-    @start_price_thresholds ||= StartPriceThresholds.new(start_price)
+  def auction_threshold
+    @_auction_threshold ||= AuctionThreshold.new(auction)
   end
 
   def decorated_bid(bid)
