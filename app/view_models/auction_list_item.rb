@@ -63,9 +63,9 @@ class AuctionListItem
     if over? && !auction.bids.any?
       'auctions/no_bids'
     elsif auction.type == 'single_bid'
-      auction.winning_single_bid_partial
+      winning_single_bid_partial
     elsif auction.type == 'multi_bid'
-      auction.winning_multi_bid_partial
+      winning_multi_bid_partial
     else # future
       'components/null'
     end
