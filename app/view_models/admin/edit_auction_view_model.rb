@@ -34,5 +34,4 @@ class Admin::EditAuctionViewModel
   def dc_time(field)
     DcTimePresenter.convert(auction.send("#{field}_at"))
   end
-
 end
