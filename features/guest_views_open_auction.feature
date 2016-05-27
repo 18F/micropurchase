@@ -6,8 +6,7 @@ Feature: Guest views open auction
   Scenario: Navigating to bid history
     Given there is an open auction
     When I visit the home page
-    Then I should see the number of bid for the auction
-    And I should see the auction's summary
+    Then I should see the auction's summary
 
     When I click on the link to the bids
     Then I should see the bid history
@@ -16,7 +15,6 @@ Feature: Guest views open auction
     Given there is an expiring auction
     When I visit the home page
     Then I should see an "Expiring" label
-    And I should see a "Bid" button
     And there should be meta tags for the index page for 1 open and 0 future auctions
 
     When I visit the auction page

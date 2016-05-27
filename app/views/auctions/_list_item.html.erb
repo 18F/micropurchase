@@ -2,26 +2,25 @@
   <div class="usa-grid issue-content-wrapper">
     <div class='usa-width-one-whole issue-label'>
       <h3 class='issue-title'>
-        <span class="usa-label-big <%= auction.label_class %>">
-          <%= auction.label %>
-        </span>
-        <%= link_to auction.title, auction_path(auction.id) %>
+        <div class="issue-ribbon">
+          <span class="<%= auction.label_class %>"><%= auction.label %></span>
+        </div> <%= link_to auction.title, auction_path(auction.id) %>
       </h3>
+      <div class="issue-vitals">
+        <div class="issue-bid-deadline">
+          <%= auction.relative_time %>
+        </div>
+        <%= render partial: auction.winning_bid_partial, locals: {auction: auction} %>
+      </div>
       <p class='issue-description'>
-      <%= auction.html_summary %>
-      <%= link_to(
-        'View details <icon class="fa fa-angle-double-right"></icon>'.html_safe,
-        auction_path(auction.id), class: 'issue-list-item-details') %>
+        <%=h auction.html_summary %>
       </p>
-      <p><%= auction.capitalized_formatted_type %></p>
-      <p><%= auction.eligibility_label %></p>
     </div>
   </div>
   <div class="usa-grid issue-bid-details">
     <div class='usa-width-one-whole issue-bids-info'>
       <div class="usa-grid-full">
-        <%= render partial: auction.item_footer_partial,
-          locals: { auction: auction } %>
+      <%= render partial: 'preview_footer', locals: {auction: auction} %>
       </div>
     </div>
   </div>

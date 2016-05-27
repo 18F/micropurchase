@@ -59,6 +59,7 @@ textarea#auction_description {
   flex-direction: column;
   font-weight: $font-light;
   margin-bottom: $site-margins;
+  position: relative;
 
   &:last-of-type {
     margin-bottom: $base-padding-large;
@@ -73,8 +74,20 @@ textarea#auction_description {
   }
 
   .issue-title {
+    margin-bottom: $base-padding-lite;
     margin-top: 1rem;
     font-size: 2.5rem;
+
+    a {
+      text-decoration: underline;
+
+      &:hover,
+      &:focus {
+        text-decoration: none;
+      }
+    }
+
+    @include calc(padding-right, "80px + -#{$site-margins} + .25em + #{$base-padding-lite}");
 
     span {
       font-weight: $font-bold;
@@ -83,13 +96,11 @@ textarea#auction_description {
   }
 
   .issue-bid-details {
-    background-color: $color-gray;
-    background-color: $primary-darkest;
+    background-color: $color-gray-light;
     border-bottom-left-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
-    color: $color-white;
-    padding: $base-padding 3rem;
-    padding-bottom: 0;
+    padding-left: $site-margins;
+    padding-right: $site-margins;
     width: 100%;
 
     .current-bid-box {
@@ -111,14 +122,6 @@ textarea#auction_description {
             white-space: nowrap;
         }
 
-      }
-    }
-
-    .bid-deadline-box {
-      .bid-deadline-box-children {
-        position: relative;
-        top: 50%;
-        margin-bottom: 0.5rem;
       }
     }
 
@@ -159,4 +162,66 @@ textarea#auction_description {
 .issue-icon {
   width: 25px;
   max-width: none;
+}
+
+
+.issue-details-label {
+  font-size: $h6-font-size;
+  font-weight: $font-light;
+}
+
+.issue-details-title {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.issue-details-list-item {
+  @include span-columns(6);
+
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-bottom: $base-padding-lite;
+
+  &:nth-child(2n) {
+    @include omega();
+  }
+
+  &:last-child,
+  &:nth-last-child(2):nth-child(odd) {
+    padding-bottom: 0;
+
+    &:after {
+      margin: 0;
+    }
+  }
+}
+
+.issue-details-list {
+  margin: 0;
+  margin-top: $base-padding;
+  margin-bottom: $base-padding;
+  width: 100%;
+}
+
+.issue-current-bid:not(.issue-current-bid-long) {
+  &::before {
+    content: "\2219";
+    margin-left: $base-padding-lite;
+    margin-right: $base-padding-lite;
+  }
+}
+
+.issue-current-bid.issue-current-bid-new-line {
+  &::before {
+    content: '\A';
+    white-space: pre;
+  }
+}
+
+.issue-bid-deadline {
+  display: inline-block;
+  margin: 0;
+  margin-bottom: $base-padding-lite;
 }

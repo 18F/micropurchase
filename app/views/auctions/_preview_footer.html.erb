@@ -1,0 +1,24 @@
+<ul class="issue-details-list">
+  <% if defined? auction.project_label %>
+    <li class="issue-details-list-item">
+      <div class="issue-details-label">Project</div>
+      <div class="issue-details-title"><a href="<%= auction.project_href %>"><i class="fa fa-github"></i> <%= auction.project_label %></a></div>
+    </li>
+
+  <% end %>
+  <% if defined? auction.capitalized_formatted_type %>
+    <li class="issue-details-list-item">
+      <div class="issue-details-label">Type</div>
+      <div class="issue-details-title"><%= auction.capitalized_formatted_type %></div>
+    </li>
+
+  <% end %>
+  <% if defined? auction.eligibility_label %>
+    <li class="issue-details-list-item">
+      <div class="issue-details-label">Eligibility</div>
+      <div class="issue-details-title"><%= auction.eligibility_label %></div>
+    </li>
+  <% end %>
+</ul>
+
+

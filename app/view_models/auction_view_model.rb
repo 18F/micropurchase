@@ -14,12 +14,14 @@ class AuctionViewModel < Struct.new(:current_user, :auction_record)
     :formatted_end_time,
     :formatted_start_time,
     :formatted_type,
+    :github_repo_stripped,
     :highlighted_bid_label,
     :html_description,
     :html_description,
     :html_summary,
     :relative_time_left,
     :relative_start_time,
+    :relative_time,
     :id,
     :issue_url,
     :partial_path,
@@ -29,6 +31,9 @@ class AuctionViewModel < Struct.new(:current_user, :auction_record)
     :started_at,
     :start_price,
     :summary,
+    :time_future,
+    :time_open,
+    :time_over,
     :title,
     :to_param,
     :type,
@@ -106,6 +111,10 @@ class AuctionViewModel < Struct.new(:current_user, :auction_record)
 
   def index_bid_summary_partial
     auction.partial_path('index_bid_summary')
+  end
+
+  def winning_bid_partial
+    auction.partial_path('winning_bid')
   end
 
   def highlighted_bid_info_partial
