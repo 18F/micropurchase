@@ -102,11 +102,11 @@ class AuctionPresenter
     DcTimePresenter.convert_and_format(auction.delivery_due_at)
   end
 
-  def relative_start_time
+  def relative_time
     time_in_human(auction.started_at)
   end
 
-  def relative_time_left
+  def distance_of_time
     "#{distance_of_time_in_words(Time.current, auction.ended_at)} left"
   end
 

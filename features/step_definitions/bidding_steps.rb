@@ -1,3 +1,7 @@
+When(/^the auction has a lowest bid amount of (.+)$/) do |amount|
+  @auction.lowest_bid.update(amount: amount.to_i)
+end
+
 When(/^I have placed the lowest bid$/) do
   # sort the bids so that newest is first
   bids = @auction.bids.sort_by(&:created_at).reverse

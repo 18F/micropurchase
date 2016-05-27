@@ -9,7 +9,6 @@ Feature: Basic Auction Views
     When I visit the home page
     Then I should see the auction
     And I should not see the unpublished auction
-    And I should see a "Bid" button
     And there should be meta tags for the index page for 1 open and 0 future auctions
 
   Scenario: Visiting a auction detail page

@@ -1,0 +1,5 @@
+<%= render partial: auction.current_winning_bidder_partial,
+  locals: { auction: auction } %>
+
+<%= link_to auction.highlighted_bid_amount_as_currency,
+  auction_bids_path(auction.id) %>

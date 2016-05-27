@@ -20,7 +20,7 @@ class ConfirmBidViewModel
 
   def time_left_partial
     if available?
-      'bids/relative_time_left'
+      'bids/distance_of_time'
     else
       'components/null'
     end
@@ -31,8 +31,8 @@ class ConfirmBidViewModel
     MarkdownRender.new(auction.description).to_s
   end
 
-  def relative_time_left
-    HumanTime.new(time: auction.ended_at).relative_time_left
+  def distance_of_time
+    "#{HumanTime.new(time: auction.ended_at).distance_of_time} left"
   end
 
   private

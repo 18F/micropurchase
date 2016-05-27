@@ -12,7 +12,7 @@ class AuctionStatus::OpenViewModel < Struct.new(:auction)
   end
 
   def tag_data_value_status
-    HumanTime.new(time: auction.ended_at).relative_time_left
+    "#{HumanTime.new(time: auction.ended_at).distance_of_time} left"
   end
 
   def tag_data_label_2

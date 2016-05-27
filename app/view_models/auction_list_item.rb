@@ -6,6 +6,14 @@ class AuctionListItem
     @current_user = current_user
   end
 
+  def label
+    status_presenter.label
+  end
+
+  def label_class
+    status_presenter.label_class
+  end
+
   def title
     auction.title
   end
@@ -17,14 +25,6 @@ class AuctionListItem
   def html_summary
     return '' if auction.summary.blank?
     MarkdownRender.new(auction.summary).to_s
-  end
-
-  def label
-    status_presenter.label
-  end
-
-  def label_class
-    status_presenter.label_class
   end
 
   def capitalized_formatted_type
@@ -43,72 +43,100 @@ class AuctionListItem
     end
   end
 
-  def available?
-    auction_status.available?
+  def github_repo
+    auction.github_repo
   end
 
-  def bid_button_partial
-    if current_user_can_bid?
-      'auctions/bid_button'
+  def project_label_partial
+    if auction.github_repo
+      'auctions/project_label'
     else
       'components/null'
     end
   end
 
-  def item_footer_partial
-    if available?
-      'auctions/bids_and_form'
-    else
-      'auctions/winning_bid'
-    end
+  def project_label
+    auction.github_repo.sub('https://github.com/', '')
   end
 
   def winning_bid_partial
-    if auction.bids.any?
-      'auctions/winning_bid_amount'
-    else
-      'auctions/no_winning_bids'
-    end
-  end
-
-  def start_time_partial
-    if over?
-      'components/null'
-    else
-      'auctions/start_time'
-    end
-  end
-
-  def index_bid_summary_partial
-    if auction.type == 'multi_bid' && auction.bids.any?
-      'auctions/current_bid'
-    elsif auction.type == 'multi_bid'
+    if over? && !auction.bids.any?
       'auctions/no_bids'
-    elsif user_is_bidder?
+    elsif auction.type == 'multi_bid' && over?
+      'auctions/over_winning_bid_details'
+    elsif auction.type == 'single_bid' && over?
+      'auctions/over_with_bids'
+    elsif auction.type == 'multi_bid' && available?
+      auction_available_bids_partial
+    elsif auction.type == 'single_bid' && available?
+      single_bid_bidder_partial
+    else # future
+      'components/null'
+    end
+  end
+
+  def auction_available_bids_partial
+    if auction.bids.any?
+      'auctions/winning_bid_details'
+    else
+      'auctions/no_bids_yet'
+    end
+  end
+
+  def single_bid_bidder_partial
+    if user_is_bidder?
+      'auctions/single_bid_user_is_bidder'
+    else
+      'components/null'
+    end
+  end
+
+  def winning_bidder_partial
+    if user_is_winning_bidder? && auction.type == 'single_bid'
+      'auctions/single_bid_user_is_winning_bidder'
+    elsif user_is_winning_bidder? && auction.type == 'multi_bid'
+      'auctions/multi_bid_user_is_winning_bidder'
+    else
+      'auctions/user_is_not_winning_bidder'
+    end
+  end
+
+  def user_is_bidder_partial
+    if user_is_bidder?
       'auctions/user_is_bidder'
     else
-      'auctions/bids_hidden'
+      'components/null'
     end
   end
 
-  def over?
-    auction_status.over?
+  def over_user_is_winner_class
+    if !user_is_winning_bidder?
+      'issue-current-bid-long'
+    else
+      ''
+    end
   end
 
-  def relative_start_time
-    HumanTime.new(time: auction.started_at).relative_time
+  def current_winning_bidder_partial
+    if user_is_winning_bidder? && auction.type == 'multi_bid'
+      'auctions/user_is_current_winning_bidder'
+    else
+      'auctions/user_is_not_current_winning_bidder'
+    end
   end
 
-  def relative_time_left
-    HumanTime.new(time: auction.ended_at).relative_time_left
+  def relative_time
+    if over?
+      "Ended #{HumanTime.new(time: auction.ended_at).relative_time}"
+    elsif future?
+      "Starts #{HumanTime.new(time: auction.started_at).relative_time} from now"
+    else
+      "Time remaining: #{HumanTime.new(time: auction.ended_at).distance_of_time}"
+    end
   end
 
   def highlighted_bid_amount_as_currency
     Currency.new(highlighted_bid.amount).to_s
-  end
-
-  def user_is_bidder?
-    user_bids.any?
   end
 
   def user_bid_amount_as_currency
@@ -117,18 +145,12 @@ class AuctionListItem
 
   private
 
-  def current_user_can_bid?
-    if current_user.is_a?(Guest)
-      true
-    elsif !current_user.sam_accepted?
-      false
-    elsif for_small_business? && current_user.small_business?
-      true
-    elsif for_small_business? && !current_user.small_business?
-      false
-    else # not for small business
-      true
-    end
+  def user_is_bidder?
+    user_bids.any?
+  end
+
+  def user_is_winning_bidder?
+    auction.bids.any? && lowest_user_bid == auction.lowest_bid
   end
 
   def lowest_user_bid_amount
@@ -167,6 +189,14 @@ class AuctionListItem
                     'Open'
                   end
     "::AuctionStatus::#{status_name}ViewModel".constantize
+  end
+
+  def available?
+    auction_status.available?
+  end
+
+  def over?
+    auction_status.over?
   end
 
   def expiring?

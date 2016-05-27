@@ -15,9 +15,7 @@ Then(/^I should see a column labeled "([^"]+)"$/) do |text|
 end
 
 Then(/^I should see an? "([^"]+)" label$/) do |label|
-  within(:css, 'div.issue-list-item') do
-    within(:css, 'span.usa-label-big') do
-      expect(page).to have_content(label)
-    end
+  within(:css, '.issue-ribbon') do
+    expect(page).to have_content(label)
   end
 end
