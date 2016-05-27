@@ -4,20 +4,37 @@ excerpt: None
 ---
 
 {% include head.html %}
-<body class="no-js layout-auctions-show">
+<body class="no-js layout-auctions-edit">
   <a class="a-skip-to-main" href="#main">Skip to main content</a>
   {% include site-header.html %}
   <nav class="breadcrumbs-and-tools">
     <div class="wrapper">
       <ol>
-        <li><a href=""><a href="/">Auctions</a></a></li>
+        <li><a href="{{site.baseurl}}/">Auctions</a></li>
         <li>Open Opportunities: Create Agency Admin User Role</li>
       </ol>
     </div>
   </nav>
   <main class="auction h-entry" role="main" id="main">
     <div class="wrapper">
-      {% include auction_header.html %}
+      <header class="auction-header">
+        <h1 class="p-name">
+          Open Opportunities: Create Agency Admin User Role
+        </h1>
+        <dl>
+          <dt class="auction-time-remaining">Time remaining</dt>
+          <dd class="auction-time-remaining">
+            12 days
+            <span class="auction-time-left-alternate">Ends: 05/25/2016 at 5:00pm EST</span>
+          </dd>
+          <dt class="auction-status">Status</dt>
+          <dd class="auction-status auction-status-open"><span>Open</span></dd>
+          <dt class="auction-current-bid">Current bid</dt>
+          <dd class="auction-current-bid">
+            $3,500.00
+          </dd>
+        </dl>
+      </header>
       <div class="page">
         <p class="issue-description p-summary">Open Opportunities uses the open source sails.js MVC framework (Node.js / Express). Currently, a task creator should receive the following notification if a task they created receives a comment. However, this functionality has broken, without breaking the build's test suite. This issue sees the creation of a failing test (or tests) that will only pass when the notification functionality is restored, along with the fix to make those tests pass.</p>
         <h2>Auction rules</h2>

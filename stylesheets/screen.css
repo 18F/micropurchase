@@ -807,9 +807,10 @@ main form footer p button{
 
 nav.breadcrumbs-and-tools{
 	padding-top: 12px;
-	padding-bottom: 12px;
+	padding-bottom: 16px;
 	background: white;
-	color: #333;
+	color: #555;
+	font-size: 16px;
 }
 
 .breadcrumbs-and-tools .tools h1{
@@ -1040,10 +1041,13 @@ nav.breadcrumbs-and-tools li{
 }
 
 .auction .auction-header{
-	margin-bottom: 1em;
 	font-size: 16px;
 }
-.auction .auction-header dl,
+
+.auction .auction-header dl{
+	padding: 2px 16px 12px;
+	line-height: 1.4;
+}
 .auction .auction-header dl dt,
 .auction .auction-header dl dd{
 	display: inline-block;
@@ -1061,6 +1065,41 @@ nav.breadcrumbs-and-tools li{
 
 .auction .auction-header dl dd:last-child::after{
 	display: none;
+}
+
+
+.auction .auction-header nav{
+	display: block;
+	clear: both;
+	background: #f3f3f3;
+	background: linear-gradient(#f3f3f3, #eee);
+	border-top: 1px solid #c3c3c3;
+	border-bottom: 1px solid #ccc;
+	padding: 6px 16px 6px 14px;
+	box-shadow: inset 0 1px 0 #e3e3e3;
+}
+
+.layout-auctions-show .auction .auction-header nav .nav-auction-show,
+.layout-auctions-bids .auction .auction-header nav .nav-auction-bids{
+	background: #666;
+	color: white;
+}
+
+.layout-auctions-show .auction .auction-header nav .nav-auction-show:hover,
+.layout-auctions-bids .auction .auction-header nav .nav-auction-bids:hover{
+	background: #444;
+}
+
+.auction .auction-header nav a{
+	display: inline-block;
+	vertical-align: middle;
+	padding: 4px 12px;
+	line-height: 1.4em;
+	border-radius: 999em
+}
+
+.auction .auction-header nav a:hover{
+	background: rgba(0,0,0,0.2);
 }
 
 
@@ -1173,10 +1212,8 @@ dd.auction-status{
 	border-radius: 3px;
 	display: inline-block;
 	position: relative;
-	background-color: #00cfff;
-	background: linear-gradient(#00cfff,#008fe4);
-	border-top: 1px solid #008ee1;
-	border-right: 1px solid #00acd4;
+	background-color: #2D3F5B;
+	border-top: 1px solid #2D3F5B;
 	text-indent: 2px;
 }
 
@@ -1555,10 +1592,8 @@ a[id]{
 
 /* @group layout-auctions-show */
 
-
-
-.layout-auctions-show main .wrapper{
-	padding: 1em;
+.layout-auctions-show main .wrapper,
+.layout-auctions-bids main .wrapper{
 	border: 1px solid #ccc;
 	border-radius: 6px;
 }
@@ -1567,42 +1602,44 @@ a[id]{
 	position: relative;
 	margin-bottom: 2em;
 }
-.layout-auctions-show main .auction-header h1{
-	font-size: 32px;
+
+.layout-auctions-show main .auction-header h1,
+.layout-auctions-bids main .auction-header h1{
+	display: inline-block;
+	font-size: 28px;
 	line-height: 1.1;
-	margin-bottom: 0.4em;
+	margin-bottom: 0.2em;
+	margin-left: 16px;
+	padding-top: 16px;
+	margin-right: 128px;
 }
 
+.layout-auctions-show main .auction-header dl,
+.layout-auctions-bids main .auction-header dl{
+	color: #555;
+}
 
-.layout-auctions-show main .auction-header dd.auction-time-remaining{
+.layout-auctions-show main .auction-header dd.auction-time-remaining,
+.layout-auctions-bids main .auction-header dd.auction-time-remaining{
 	margin-right: 1.4em;
 }
 
-.layout-auctions-show main .auction-header dd.auction-time-remaining span{
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	margin-bottom: -1.67em;
-}
+.layout-auctions-show main .auction-header dd::after,
+.layout-auctions-bids main .auction-header dd::after{ display: none; }
 
-.layout-auctions-show main .auction-header dd,
-.layout-auctions-show main .auction-header dt{
-	vertical-align: middle;
-	
-}
-.layout-auctions-show main .auction-header dd::after{ display: none; }
-
-.layout-auctions-show .auction .auction-header dd.auction-status{
+.layout-auctions-show .auction .auction-header dd.auction-status,
+.layout-auctions-bids .auction .auction-header dd.auction-status{
 	position: absolute;
-	right: 0;
-	top: -21px;	
+	right: 16px;
+	top: -8px;	
 	width: 64px;
 	height: 44px;
 	text-align: center;
-	border-radius:  0;
+	border-radius: 2px 2px 0 0;
 }
 
-.layout-auctions-show .auction .auction-header dd.auction-status::after{
+.layout-auctions-show .auction .auction-header dd.auction-status::after,
+.layout-auctions-bids .auction .auction-header dd.auction-status::after{
 	position: absolute;
 	content: "";
 	display: block;
@@ -1613,8 +1650,8 @@ a[id]{
     width: 64px;
     margin: 0;
     border-bottom: 14px solid transparent;
-    border-left: 32px solid #008fe4;
-    border-right: 32px solid #008fe4;
+    border-left: 32px solid #2D3F5B;
+    border-right: 32px solid #2D3F5B;
 }
 
 
@@ -1851,6 +1888,8 @@ a[id]{
 	
 	.layout-auctions-show main .wrapper .page{
 		width: 576px;
+		padding-left: 16px;
+		padding-top: 0;
 	}
 	
 	.layout-auctions-show main .wrapper .page p{
@@ -1861,6 +1900,7 @@ a[id]{
 		width: 312px;
 		float: right;
 		margin: 0;
+		padding-top: 0;
 	}
 
 	.layout-auctions-show main .wrapper .page h1,
@@ -1872,6 +1912,38 @@ a[id]{
 	}	
 
 }
+/* @end */
+
+/* @group layout-auctions-bids */
+
+.layout-auctions-bids main .wrapper table{
+	width: 100%;
+	color: inherit;
+	text-align: left;
+}
+
+.layout-auctions-bids main .wrapper table th,
+.layout-auctions-bids main .wrapper table td{
+	padding: 8px 0;
+	border-bottom: 1px solid #eee;
+	border-right: 1px solid #eee;
+	padding-left: 16px;
+}
+
+.layout-auctions-bids main .wrapper table .th td,
+.layout-auctions-bids main .wrapper table .col-timestamp{
+	border-right: none;
+}
+
+.layout-auctions-bids main .wrapper table thead th{
+	padding-top: 8px;
+}
+
+.layout-auctions-bids main .wrapper table .th td{
+	font-weight: 600;
+}
+
+
 /* @end */
 
 /* @group layout-home */
@@ -1904,6 +1976,13 @@ a[id]{
 	font-size: 48px;
 	font-weight: 100;
 	letter-spacing: -0.03em;	
+	display: inline-block;
+}
+
+.h-feed-header h1+.button{
+	vertical-align: middle;
+	margin-top: -10px;
+	margin-left: 0.6em;
 }
 
 .h-feed-header nav{
