@@ -10,7 +10,6 @@ common: &default_settings
     capture_source: true
     enabled: true
     ignore_errors: "ActionController::RoutingError"
-  license_key: <%= NewRelicCredentials.license_key %>
   log_level: info
   monitor_mode: true
   transaction_tracer:
@@ -18,11 +17,6 @@ common: &default_settings
     record_sql: obfuscated
     stack_trace_threshold: 0.500
     transaction_threshold: apdex_f
-
-staging:
-  <<: *default_settings
-  app_name: Micropurchase (Staging)
-  monitor_mode: true
 
 production:
   <<: *default_settings
