@@ -76,6 +76,27 @@ When(/^I edit the new auction form$/) do
   select("published", from: "auction_published")
 end
 
+Then(/^I should see the current auction attributes in the form$/) do
+  expect(@auction).to_not be_nil
+  
+  %w(issue_url description github_repo summary issue_url billable_to).each do |field|
+    form_field = find_field("auction_#{field}")
+    expect(form_field.value).to eq(@auction.send(field))
+  end
+
+  started_at = DcTimePresenter.convert(@auction.started_at)
+  expect(find_field('auction_started_at').value).to    eq(started_at.strftime('%Y-%m-%d'))
+  expect(find_field('auction_started_at_1i').value).to eq(started_at.strftime('%l').strip)
+  expect(find_field('auction_started_at_2i').value).to eq(started_at.strftime('%M').strip)
+  expect(find_field('auction_started_at_3i').value).to eq(started_at.strftime('%p'))
+
+  ended_at = DcTimePresenter.convert(@auction.ended_at)
+  expect(find_field('auction_ended_at').value).to    eq(ended_at.strftime('%Y-%m-%d'))
+  expect(find_field('auction_ended_at_1i').value).to eq(ended_at.strftime('%l').strip)
+  expect(find_field('auction_ended_at_2i').value).to eq(ended_at.strftime('%M').strip)
+  expect(find_field('auction_ended_at_3i').value).to eq(ended_at.strftime('%p'))
+end
+
 Then(/^I should be able to edit the existing auction form$/) do
   @title = 'This is the form-edited title'
   fill_in("auction_title", with: @title)
@@ -117,8 +138,6 @@ end
 
 When(/^I click to edit the auction$/) do
   click_on("Edit")
-
-  @auction = Auction.where(title: @title).first
 end
 
 When(/^I click to create an auction$/) do

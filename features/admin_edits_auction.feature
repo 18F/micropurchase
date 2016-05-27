@@ -34,7 +34,8 @@ Feature: Admin edits auctions in the admins panel
     And I visit the auctions admin page
 
     When I click to edit the auction
-    Then I should be able to edit the existing auction form
+    Then I should see the current auction attributes in the form
+    And I should be able to edit the existing auction form
 
     When I click on the "Update" button
     Then I expect my auction changes to have been saved
