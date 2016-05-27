@@ -9,28 +9,17 @@
 
 <% @auctions.each do |auction| %>
   <div class='usa-width-one-whole auction-name'>
-    <a class='usa-width-three-fourths' href="<%= admin_auction_path(auction) %>">
+    <%= link_to admin_auction_path(auction.id), class: 'usa-width-three-fourths' do %>
       <h2><%= auction.title %></h2>
-    </a>
-    <a class='usa-width-one-fourth' href="<%= edit_admin_auction_path(auction) %>">Edit</a>
-    <%=
-      # button_to 'Destroy',
-      #   {
-      #     controller: "auctions",
-      #     action: "destroy",
-      #     id: auction.id
-      #   },
-      #   method: :delete
-    %>
+    <% end %>
+    <%= link_to 'Edit',
+      edit_admin_auction_path(auction.id),
+      class: 'usa-width-one-fourth' %>
   </div>
 
   <div class='usa-width-one-whole auction-details'>
     <div class='usa-width-one-sixth'>
-      <% if AuctionStatus.new(auction).available? %>
-        <%= image_tag 'issue-icon.png', class: 'issue-icon' %>
-      <% else %>
-        <span class=''>not live</span>
-      <% end %>
+      <%= render partial: auction.availability_partial %>
     </div>
     <div class='usa-width-one-fourth'>
       <b>Starts:</b> <%= auction.formatted_start_time %>

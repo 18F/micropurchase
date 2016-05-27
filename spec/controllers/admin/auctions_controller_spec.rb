@@ -10,8 +10,7 @@ describe Admin::AuctionsController do
       auctions = assigns(:auctions)
       expect(auctions).to be_a(Array)
       auction = auctions.first
-      expect(auction).to be_a(AdminAuctionPresenter)
-      expect(auction.id).to eq(auction_record.id)
+      expect(auction.auction).to eq(auction_record)
     end
   end
 
@@ -20,8 +19,7 @@ describe Admin::AuctionsController do
       auction_record = create(:auction)
       get :show, { id: auction_record.id }, user_id: user.id
       auction = assigns(:auction)
-      expect(auction).to be_a(AdminAuctionPresenter)
-      expect(auction.id).to eq(auction_record.id)
+      expect(auction.auction).to eq(auction_record)
     end
   end
 end

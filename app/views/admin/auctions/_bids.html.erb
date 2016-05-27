@@ -1,0 +1,8 @@
+<% auction.bids.each do |bid| %>
+  <div class='usa-width-one-whole'>
+    <div class='usa-width-one-fourth bidder-name'><%= bid.bidder_name %></div>
+    <div class='usa-width-one-fourth bidder-duns-number'><%= bid.bidder_duns_number %></div>
+    <div class='usa-width-one-fourth amount'><%= bid.amount %></div>
+    <div class='usa-width-one-fourth amount'><%= bid.time %></div>
+  </div>
+<% end %>

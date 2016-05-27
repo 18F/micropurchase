@@ -2,23 +2,25 @@ class Admin::AuctionsController < ApplicationController
   before_filter :require_admin
 
   def index
-    @auctions = Auction.all.map { |auction| AdminAuctionPresenter.new(auction) }
+    auctions = Auction.all
+    @auctions = auctions.map { |auction| Admin::AuctionListItem.new(auction) }
 
     respond_to do |format|
       format.html
       format.json do
-        render json: @auctions, each_serializer: Admin::AuctionSerializer
+        render json: auctions, each_serializer: Admin::AuctionSerializer
       end
     end
   end
 
   def show
-    @auction = AdminAuctionPresenter.new(Auction.find(params[:id]))
+    auction = Auction.find(params[:id])
+    @auction = Admin::AuctionShow.new(auction)
 
     respond_to do |format|
       format.html
       format.json do
-        render json: @auction, serializer: Admin::AuctionSerializer
+        render json: auction, serializer: Admin::AuctionSerializer
       end
     end
   end
@@ -30,7 +32,7 @@ class Admin::AuctionsController < ApplicationController
   end
 
   def new
-    @auction = Admin::AuctionNewViewModel.new(Auction.new)
+    @auction = Admin::NewAuctionViewModel.new
   end
 
   def create
@@ -44,7 +46,7 @@ class Admin::AuctionsController < ApplicationController
         end
         format.json do
           render(
-            json: AdminAuctionPresenter.new(@auction),
+            json: @auction,
             serializer: Admin::AuctionSerializer
           )
         end
@@ -54,7 +56,7 @@ class Admin::AuctionsController < ApplicationController
       respond_to do |format|
         format.html do
           flash[:error] = error_messages
-          @auction = Admin::AuctionNewViewModel.new(Auction.new)
+          @auction = Admin::NewAuctionViewModel.new
           render :new
         end
         format.json { render json: { error: error_messages } }
@@ -63,7 +65,7 @@ class Admin::AuctionsController < ApplicationController
   end
 
   def edit
-    @auction = Admin::AuctionEditViewModel.new(Auction.find(params[:id]))
+    @auction = Admin::EditAuctionViewModel.new(Auction.find(params[:id]))
   end
 
   def update
