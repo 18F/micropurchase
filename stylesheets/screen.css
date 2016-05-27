@@ -1045,7 +1045,7 @@ nav.breadcrumbs-and-tools li{
 }
 
 .auction .auction-header dl{
-	padding: 2px 16px 12px;
+	padding: 2px 20px 12px;
 	line-height: 1.4;
 }
 .auction .auction-header dl dt,
@@ -1609,7 +1609,7 @@ a[id]{
 	font-size: 28px;
 	line-height: 1.1;
 	margin-bottom: 0.2em;
-	margin-left: 16px;
+	margin-left: 20px;
 	padding-top: 16px;
 	margin-right: 128px;
 }
@@ -1927,12 +1927,19 @@ a[id]{
 	padding: 8px 0;
 	border-bottom: 1px solid #eee;
 	border-right: 1px solid #eee;
-	padding-left: 16px;
+	padding-left: 20px;
 }
 
 .layout-auctions-bids main .wrapper table .th td,
 .layout-auctions-bids main .wrapper table .col-timestamp{
 	border-right: none;
+}
+
+.layout-auctions-bids main .wrapper table .col-duns,
+.layout-auctions-bids main .wrapper table .col-amount,
+.layout-auctions-bids main .wrapper table .col-timestamp{
+	padding-right: 20px;
+	width: 180px;
 }
 
 .layout-auctions-bids main .wrapper table thead th{
