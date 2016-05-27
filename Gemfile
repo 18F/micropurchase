@@ -66,4 +66,5 @@ end
 group :production, :staging do
   gem 'cf-app-utils'
   gem 'rails_12factor'
+  gem 'newrelic_rpm'
 end

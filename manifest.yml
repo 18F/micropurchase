@@ -10,6 +10,7 @@ applications:
     - micropurchase-psql
     - micropurchase-github
     - micropurchase-smtp
+    - micropurchase-new-relic
     - data-dot-gov
   command: script/start
   env:
