@@ -27,14 +27,14 @@ textarea#auction_description {
 .github-issue {
   h1 {
     line-height: 1.1em;
-    margin-top: 0.2em;
-    margin-bottom: 0.5em;
+    margin-top: .2em;
+    margin-bottom: .5em;
   }
 
   h2, h3, h4, h5, h6 {
     line-height: 1.1em;
-    margin-top: 0.2em;
-    margin-bottom: 0.1em;
+    margin-bottom: .1em;
+    margin-top: .2em;
   }
 
   p, li {
@@ -42,7 +42,7 @@ textarea#auction_description {
   }
 
   ul {
-    margin-bottom: 0.5em;
+    margin-bottom: .5em;
   }
 }
 
@@ -70,29 +70,7 @@ textarea#auction_description {
   }
 
   .issue-label {
-    margin-top: 0.75rem;
-  }
-
-  .issue-title {
-    margin-bottom: $base-padding-lite;
-    margin-top: 1rem;
-    font-size: 2.5rem;
-
-    a {
-      text-decoration: underline;
-
-      &:hover,
-      &:focus {
-        text-decoration: none;
-      }
-    }
-
-    @include calc(padding-right, "80px + -#{$site-margins} + .25em + #{$base-padding-lite}");
-
-    span {
-      font-weight: $font-bold;
-    }
-
+    margin-top: .75rem;
   }
 
   .issue-bid-details {
@@ -127,7 +105,7 @@ textarea#auction_description {
 
     a.usa-button {
       margin: 0;
-      padding: 0.5rem 2rem;
+      padding: .5rem 2rem;
       white-space: nowrap;
     }
 
@@ -138,12 +116,31 @@ textarea#auction_description {
   }
 }
 
+.issue-title {
+  margin-bottom: $base-padding-lite;
+  margin-top: 1rem;
+  font-size: 2.5rem;
+
+  a {
+    text-decoration: underline;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+
+  @include calc(padding-right, "80px + -#{$site-margins} + .25em + #{$base-padding-lite}");
+
+  span {
+    font-weight: $font-bold;
+  }
+}
+
 .issue-list-item-details,
 .issue-bids-info {
   font-weight: $font-normal;
 }
-
-
 
 .issue-bids-info-item {
   display: inline-block;
@@ -180,8 +177,8 @@ textarea#auction_description {
 .issue-details-list-item {
   @include span-columns(6);
 
-  margin-top: 0;
   margin-bottom: 0;
+  margin-top: 0;
   padding-bottom: $base-padding-lite;
 
   &:nth-child(2n) {
@@ -207,7 +204,7 @@ textarea#auction_description {
 
 .issue-current-bid:not(.issue-current-bid-long) {
   &::before {
-    content: "\2219";
+    content: '\2219';
     margin-left: $base-padding-lite;
     margin-right: $base-padding-lite;
   }

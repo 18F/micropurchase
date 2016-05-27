@@ -1,40 +1,42 @@
-$ribbon-expiring-bg: #D7B029;
+$ribbon-expiring-bg: #d7b029;
 $ribbon-expiring-color: $default-color;
-$ribbon-over-bg: #CD2026;
+$ribbon-over-bg: #cd2026;
 $ribbon-over-color: $color-white;
-$ribbon-future-bg: #2D3F5B;
+$ribbon-future-bg: #2d3f5b;
 $ribbon-future-color: $color-white;
-$ribbon-open-bg: #83BF9A;
+$ribbon-open-bg: #83bf9a;
 $ribbon-open-color: $color-white;
 
 $ribbon-bg: $branding-bright;
 $ribbon-hl: $branding-bright;
+$ribbon-shadow: rgba(0, 0, 0, .5);
 $ribbon-w: 80px;
 $ribbon-tail: 10px;
 $ribbon-hang: .25em;
 
 
+
 .issue-ribbon {
-  padding:0 0 $ribbon-tail 0;
+  padding: 0 0 $ribbon-tail;
   position: absolute;
   right: $ribbon-hang;
   top: -$ribbon-hang;
   width: $ribbon-w;
 
   [class*="auction-label-"] {
-    color:#fff;
+    color: $color-white;
     float: right;
     margin: 0;
     padding: $base-padding-lite;
     text-align: center;
-    text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.5);
+    text-shadow: -1px -1px 0 $ribbon-shadow;
     width: $ribbon-w;
   }
 
   [class*="auction-label-"]:after {
-    border-left: $ribbon-w/2 solid $ribbon-bg;
-    border-right: $ribbon-w/2 solid $ribbon-bg;
     border-bottom: $ribbon-tail solid transparent;
+    border-left: $ribbon-w / 2 solid $ribbon-bg;
+    border-right: $ribbon-w / 2 solid $ribbon-bg;
     bottom: 0;
     content: '';
     height: 0;
@@ -48,9 +50,9 @@ $ribbon-hang: .25em;
     color: $ribbon-expiring-color;
   }
 
-  .auction-label-expiring:after {
-    border-left: $ribbon-w/2 solid $ribbon-expiring-bg;
-    border-right: $ribbon-w/2 solid $ribbon-expiring-bg;
+  .auction-label-expiring::after {
+    border-left: $ribbon-w / 2 solid $ribbon-expiring-bg;
+    border-right: $ribbon-w / 2 solid $ribbon-expiring-bg;
   }
 
   .auction-label-over {
@@ -58,9 +60,9 @@ $ribbon-hang: .25em;
     color: $ribbon-over-color;
   }
 
-  .auction-label-over:after {
-    border-left: $ribbon-w/2 solid $ribbon-over-bg;
-    border-right: $ribbon-w/2 solid $ribbon-over-bg;
+  .auction-label-over::after {
+    border-left: $ribbon-w / 2 solid $ribbon-over-bg;
+    border-right: $ribbon-w / 2 solid $ribbon-over-bg;
   }
 
   .auction-label-future {
@@ -68,9 +70,9 @@ $ribbon-hang: .25em;
     color: $ribbon-future-color;
   }
 
-  .auction-label-future:after {
-    border-left: $ribbon-w/2 solid $ribbon-future-bg;
-    border-right: $ribbon-w/2 solid $ribbon-future-bg;
+  .auction-label-future::after {
+    border-left: $ribbon-w / 2 solid $ribbon-future-bg;
+    border-right: $ribbon-w / 2 solid $ribbon-future-bg;
   }
 
   .auction-label-open {
@@ -78,9 +80,9 @@ $ribbon-hang: .25em;
     color: $ribbon-open-color;
   }
 
-  .auction-label-open:after {
-    border-left: $ribbon-w/2 solid $ribbon-open-bg;
-    border-right: $ribbon-w/2 solid $ribbon-open-bg;
+  .auction-label-open::after {
+    border-left: $ribbon-w / 2 solid $ribbon-open-bg;
+    border-right: $ribbon-w / 2 solid $ribbon-open-bg;
   }
 }
 

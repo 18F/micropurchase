@@ -111,7 +111,7 @@ class AuctionListItem
 
   def over_user_is_winner_class
     if !user_is_winning_bidder?
-       'issue-current-bid-long'
+      'issue-current-bid-long'
     else
       ''
     end
