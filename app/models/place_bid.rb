@@ -47,12 +47,8 @@ class PlaceBid
     @auction ||= Auction.find(params[:auction_id])
   end
 
-  def user_can_bid?
-    presenter_auction.user_can_bid?(user)
-  end
-
   def max_allowed_bid
-    presenter_auction.max_allowed_bid
+    rules.max_allowed_bid
   end
 
   def validate_bid_data
@@ -85,14 +81,18 @@ class PlaceBid
     AuctionStatus.new(auction).available?
   end
 
+  def user_can_bid?
+    rules.user_can_bid?(user)
+  end
+
+  def rules
+    @_rules ||= RulesFactory.new(auction).create
+  end
+
   def amount
     params_amount = params[:bid][:amount]
     params_amount = params_amount.delete(',') if params_amount.is_a?(String)
 
     (params[:bid] && params_amount).to_f.round(2)
-  end
-
-  def presenter_auction
-    @presenter ||= AuctionPresenter.new(auction)
   end
 end

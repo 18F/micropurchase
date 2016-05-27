@@ -1,4 +1,5 @@
 class DcTimePresenter < Struct.new(:time)
+  NULL = "&nbsp;".html_safe.freeze
   FORMAT = "%B %d, %Y %r".freeze
   TIME_ZONE_NAME = 'Eastern Time (US & Canada)'.freeze
 
@@ -8,8 +9,11 @@ class DcTimePresenter < Struct.new(:time)
   end
 
   def convert_and_format(format = FORMAT)
-    return NullBidPresenter::NULL unless time
-    convert.strftime(format) + " #{timezone_label}"
+    if time
+      convert.strftime(format) + " #{timezone_label}"
+    else
+      NULL
+    end
   end
 
   def self.convert(time)

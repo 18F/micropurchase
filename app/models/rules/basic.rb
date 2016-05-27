@@ -8,7 +8,7 @@ class Rules::Basic < Rules::BaseRules
   end
 
   def max_allowed_bid
-    if auction.lowest_bid.is_a?(NullBidPresenter) || auction.lowest_bid.nil?
+    if auction.lowest_bid.is_a?(NullBid) || auction.lowest_bid.nil?
       auction.start_price - PlaceBid::BID_INCREMENT
     else
       auction.lowest_bid.amount - PlaceBid::BID_INCREMENT

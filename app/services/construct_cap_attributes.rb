@@ -69,14 +69,6 @@ class ConstructCapAttributes
   end
 
   def url
-    "#{root_url}/auctions/#{auction.id}"
-  end
-
-  def root_url
-    if Rails.env.development? || Rails.env.test?
-      ENV['ROOT_URL']
-    else
-      VCAPApplication.application_uris.first
-    end
+    AuctionUrl.new(auction).find
   end
 end

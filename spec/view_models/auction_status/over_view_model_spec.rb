@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe AuctionStatus::OverViewModel do
   context "when the auction is over" do
-    let(:presenter) { AuctionViewModel.new(create(:user), auction) }
+    let(:presenter) { AuctionStatus::OverViewModel.new(auction) }
     let(:auction) do
       a = create(
         :auction,

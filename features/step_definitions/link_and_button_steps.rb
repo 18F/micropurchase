@@ -1,9 +1,7 @@
 When(/^I click on the link to the bids$/) do
-	auction = AuctionPresenter.new(@auction)
-  lowest_bid_amount = ApplicationController.helpers.number_to_currency(
-    auction.lowest_bid.amount
-  )
-  click_on(lowest_bid_amount)
+  bid = WinningBid.new(@auction).find
+  bid_amount = Currency.new(bid.amount).to_s
+  click_on(bid_amount)
 end
 
 When(/^I click on the "?([^"]+)"? button$/) do |button|
