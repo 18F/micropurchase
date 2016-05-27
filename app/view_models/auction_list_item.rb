@@ -76,6 +76,8 @@ class AuctionListItem
       'auctions/over_with_bids'
     elsif available?
       single_bid_bidder_partial
+    else # future
+      'components/null'
     end
   end
 
@@ -84,6 +86,8 @@ class AuctionListItem
       'auctions/over_winning_bid_details'
     elsif available?
       auction_available_bids_partial
+    else # future
+      'components/null'
     end
   end
 
