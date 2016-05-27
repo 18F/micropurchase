@@ -62,30 +62,14 @@ class AuctionListItem
   def winning_bid_partial
     if over? && !auction.bids.any?
       'auctions/no_bids'
-    elsif auction.type == 'single_bid'
-      winning_single_bid_partial
-    elsif auction.type == 'multi_bid'
-      winning_multi_bid_partial
-    else # future
-      'components/null'
-    end
-  end
-
-  def winning_single_bid_partial
-    if over?
-      'auctions/over_with_bids'
-    elsif available?
-      single_bid_bidder_partial
-    else # future
-      'components/null'
-    end
-  end
-
-  def winning_multi_bid_partial
-    if over?
+    elsif auction.type == 'multi_bid' && over?
       'auctions/over_winning_bid_details'
-    elsif available?
+    elsif auction.type == 'single_bid' && over?
+      'auctions/over_with_bids'
+    elsif auction.type == 'multi_bid' && available?
       auction_available_bids_partial
+    elsif auction.type == 'single_bid' && available?
+      single_bid_bidder_partial
     else # future
       'components/null'
     end
