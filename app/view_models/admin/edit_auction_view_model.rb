@@ -14,18 +14,25 @@ class Admin::EditAuctionViewModel
   end
 
   def hour_default(field)
-    auction.send("#{field}_at").strftime("%l").strip
+    dc_time(field).strftime("%l").strip
   end
 
   def minute_default(field)
-    auction.send("#{field}_at").strftime("%M").strip
+    dc_time(field).strftime("%M").strip
   end
 
-  def meridien_default(field)
-    auction.send("#{field}_at").strftime("%p")
+  def meridiem_default(field)
+    dc_time(field).strftime("%p")
   end
 
   def date_default(field)
-    auction.send("#{field}_at").to_date
+    dc_time(field).to_date
   end
+
+  private
+
+  def dc_time(field)
+    DcTimePresenter.convert(auction.send("#{field}_at"))
+  end
+
 end
