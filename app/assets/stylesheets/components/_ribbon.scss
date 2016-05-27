@@ -5,7 +5,7 @@ $ribbon-over-color: $color-white;
 $ribbon-future-bg: #2d3f5b;
 $ribbon-future-color: $color-white;
 $ribbon-open-bg: #83bf9a;
-$ribbon-open-color: $color-white;
+$ribbon-open-color: $default-color;
 
 $ribbon-bg: $branding-bright;
 $ribbon-hl: $branding-bright;
@@ -29,7 +29,6 @@ $ribbon-hang: .25em;
     margin: 0;
     padding: $base-padding-lite;
     text-align: center;
-    text-shadow: -1px -1px 0 $ribbon-shadow;
     width: $ribbon-w;
   }
 
