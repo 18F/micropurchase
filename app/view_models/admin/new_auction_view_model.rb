@@ -8,7 +8,7 @@ class Admin::NewAuctionViewModel
   end
 
   def hour_default(_field)
-    "7"
+    "1"
   end
 
   def minute_default(_field)
@@ -20,6 +20,6 @@ class Admin::NewAuctionViewModel
   end
 
   def date_default(_field)
-    Date.today
+    DcTimePresenter.convert(Date.today).to_date
   end
 end
