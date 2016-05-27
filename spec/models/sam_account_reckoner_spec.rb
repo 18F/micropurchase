@@ -23,7 +23,7 @@ describe SamAccountReckoner do
       context 'and DUNS has already been accepted' do
         context 'and the user provides a big business DUNS' do
           it 'sets user.small_business to false' do
-            user = FactoryGirl.create(:user, :big_business, sam_status: :sam_accepted)
+            user = FactoryGirl.create(:user, :not_small_business, sam_status: :sam_accepted)
             client = double('samwise client')
             allow(Samwise::Client).to receive(:new).and_return(client)
             vendor_summary = {

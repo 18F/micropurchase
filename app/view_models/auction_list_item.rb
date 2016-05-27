@@ -149,7 +149,7 @@ class AuctionListItem
   end
 
   def for_small_business?
-    StartPriceThresholds.new(auction.start_price).small_business?
+    AuctionThreshold.new(auction).small_business?
   end
 
   def status_presenter

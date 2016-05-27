@@ -279,7 +279,7 @@ class AuctionShowViewModel
   end
 
   def for_small_business?
-    StartPriceThresholds.new(auction.start_price).small_business?
+    AuctionThreshold.new(auction).small_business?
   end
 
   def current_user_can_bid?
