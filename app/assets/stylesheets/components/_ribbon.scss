@@ -33,7 +33,7 @@ $ribbon-hang: .25em;
     width: $ribbon-w;
   }
 
-  [class*="auction-label-"]:after {
+  [class*="auction-label-"]::after {
     border-bottom: $ribbon-tail solid transparent;
     border-left: $ribbon-w / 2 solid $ribbon-bg;
     border-right: $ribbon-w / 2 solid $ribbon-bg;
