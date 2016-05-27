@@ -1,6 +1,6 @@
 class DefaultDateTime
-  HOUR = "13"
-  MINUTE = "00"
+  HOUR = "13".freeze
+  MINUTE = "00".freeze
 
   attr_reader :dc_time
 
@@ -9,7 +9,7 @@ class DefaultDateTime
   end
 
   def convert
-    @_converted ||= dc_time.change({ hour: HOUR, min: MINUTE, sec: 0 })
+    @_converted ||= dc_time.change(hour: HOUR, min: MINUTE, sec: 0)
   end
 
   def hour
