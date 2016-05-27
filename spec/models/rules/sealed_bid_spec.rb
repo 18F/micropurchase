@@ -4,11 +4,11 @@ describe Rules::SealedBid do
 
   describe '#winning_bid' do
     context 'if the auction if open' do
-      it 'returns a NullBidPresenter object' do
+      it 'returns a NullBid object' do
         auction = create(:auction, :single_bid, :with_bidders)
         eligibility = InSamEligibility.new
         rules = Rules::SealedBid.new(auction, eligibility)
-        expect(rules.winning_bid).to be_a(NullBidPresenter)
+        expect(rules.winning_bid).to be_a(NullBid)
       end
     end
 
@@ -79,12 +79,12 @@ describe Rules::SealedBid do
       end
 
       context 'when the user has not placed a bid' do
-        it 'should return a NullBidPresenter object' do
+        it 'should return a NullBid object' do
           auction = create(:auction, :single_bid, :with_bidders)
           user = create(:user)
           eligibility = InSamEligibility.new
           rules = Rules::SealedBid.new(auction, eligibility)
-          expect(rules.highlighted_bid(user)).to be_a(NullBidPresenter)
+          expect(rules.highlighted_bid(user)).to be_a(NullBid)
         end
       end
     end

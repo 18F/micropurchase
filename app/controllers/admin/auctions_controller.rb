@@ -45,10 +45,7 @@ class Admin::AuctionsController < ApplicationController
           redirect_to admin_auctions_path
         end
         format.json do
-          render(
-            json: @auction,
-            serializer: Admin::AuctionSerializer
-          )
+          render json: @auction, serializer: Admin::AuctionSerializer
         end
       end
     else
@@ -74,10 +71,7 @@ class Admin::AuctionsController < ApplicationController
       respond_to do |format|
         format.html { redirect_to admin_auctions_path }
         format.json do
-          render(
-            json: AdminAuctionPresenter.new(auction),
-            serializer: Admin::AuctionSerializer
-          )
+          render json: auction, serializer: Admin::AuctionSerializer
         end
       end
     else

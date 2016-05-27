@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe AuctionStatus::OpenViewModel do
   context "when the auction is open" do
-    let(:presenter) { AuctionViewModel.new(create(:user), auction) }
+    let(:presenter) { AuctionStatus::OpenViewModel.new(auction) }
     let(:auction) do
       a = create(
         :auction,

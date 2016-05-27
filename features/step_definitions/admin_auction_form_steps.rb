@@ -4,8 +4,7 @@ When(/^I click on the link to generate a winning bidder CSV report$/) do
 end
 
 When(/^I select the result as accepted$/) do
-  auction_presenter = AuctionPresenter.new(@auction)
-  fake_cap_proposal_attributes = ConstructCapAttributes.new(auction_presenter).perform
+  fake_cap_proposal_attributes = ConstructCapAttributes.new(@auction).perform
   c2_proposal_double = double(id: 8888)
   c2_response_double = double(body: c2_proposal_double)
   c2_client_double = double

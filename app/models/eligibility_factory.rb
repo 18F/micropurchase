@@ -1,12 +1,12 @@
 class EligibilityFactory
-  attr_reader :auction
+  attr_reader :start_price_threshold
 
   def initialize(auction)
-    @auction = AuctionPresenter.new(auction)
+    @start_price_threshold = AuctionThreshold.new(auction)
   end
 
   def create
-    if auction.small_business?
+    if start_price_threshold.small_business?
       SmallBusinessEligibility.new
     else
       InSamEligibility.new

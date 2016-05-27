@@ -12,7 +12,6 @@ Then(/^I should be able to see the full details for each bid$/) do
     row_number = i + 1
     unredacted_bidder_name = bid.bidder.name
     unredacted_bidder_duns = bid.bidder.duns_number
-    bid = BidPresenter.new(bid)
 
     # check the "name" column
     within(:xpath, cel_xpath(row_number, 1)) do
@@ -31,7 +30,9 @@ Then(/^I should be able to see the full details for each bid$/) do
 
     # check the "date" column
     within(:xpath, cel_xpath(row_number, 4)) do
-      expect(page).to have_content(bid.time)
+      expect(page).to have_content(
+        DcTimePresenter.convert_and_format(bid.created_at)
+      )
     end
   end
 end
@@ -45,7 +46,6 @@ Then(/^I should not see the bidder name or duns for any bid$/) do
     row_number = i + 1
     unredacted_bidder_name = bid.bidder.name
     unredacted_bidder_duns = bid.bidder.duns_number
-    bid = BidPresenter.new(bid)
 
     # check the "name" column
     within(:xpath, cel_xpath(row_number, 1)) do
@@ -59,14 +59,15 @@ Then(/^I should not see the bidder name or duns for any bid$/) do
     end
 
     # check the "amount" column
-    amount = ApplicationController.helpers.number_to_currency(bid.amount)
     within(:xpath, cel_xpath(row_number, 3)) do
-      expect(page).to have_content(amount)
+      expect(page).to have_content(Currency.new(bid.amount).to_s)
     end
 
     # check the "date" column
     within(:xpath, cel_xpath(row_number, 4)) do
-      expect(page).to have_content(bid.time)
+      expect(page).to have_content(
+        DcTimePresenter.convert_and_format(bid.created_at)
+      )
     end
   end
 end
@@ -86,8 +87,6 @@ Then(/^I should see my name and DUNS only on my bids$/) do
       bidder_duns = '[Withheld]'
     end
 
-    bid = BidPresenter.new(bid)
-
     # check the "name" column
     within(:xpath, cel_xpath(row_number, 1)) do
       expect(page).to have_content(bidder_name)
@@ -98,14 +97,17 @@ Then(/^I should see my name and DUNS only on my bids$/) do
     end
 
     # check the "amount" column
-    amount = ApplicationController.helpers.number_to_currency(bid.amount)
+
+    amount = Currency.new(bid.amount).to_s
     within(:xpath, cel_xpath(row_number, 3)) do
       expect(page).to have_content(amount)
     end
 
     # check the "date" column
     within(:xpath, cel_xpath(row_number, 4)) do
-      expect(page).to have_content(bid.time)
+      expect(page).to have_content(
+        DcTimePresenter.convert_and_format(bid.created_at)
+      )
     end
   end
 end
@@ -113,14 +115,12 @@ end
 Then(/^I should not see bids from other users$/) do
   @auction.bids.each do |bid|
     next if bid.bidder == @user
-    amount = ApplicationController.helpers.number_to_currency(bid.amount)
-    expect(page).to_not have_content(amount)
+    expect(page).to_not have_content(Currency.new(bid.amount).to_s)
   end
 end
 
 Then(/^I should see my bid history$/) do
   @user.bids.each do |bid|
-    amount = ApplicationController.helpers.number_to_currency(bid.amount)
-    expect(page).to_not have_content(amount)
+    expect(page).to_not have_content(Currency.new(bid.amount).to_s)
   end
 end

@@ -245,11 +245,11 @@ class AuctionShowViewModel
     if available? && auction.type == "single_bid" && user_is_bidder?
       auction.bids.where(bidder: current_user).first
     elsif available? && auction.type == "single_bid"
-      NullBidPresenter.new
+      NullBid.new
     elsif auction.bids.any?
       auction.lowest_bid
     else
-      NullBidPresenter.new
+      NullBid.new
     end
   end
 
