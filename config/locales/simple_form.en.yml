@@ -17,6 +17,18 @@ en:
         cap_proposal_url: "CAP proposal URL"
         awardee_paid_status: "Paid?"
         start_price: "Start price"
+    hints:
+      auction:
+        title: "A short description of the work"
+        summary: "A brief summary of the auction and rules"
+        description: "Add any context that might help the bidder, as well as language used, acceptance criteria and a definition of done"
+        start_price: 'Specify the bidding start price'
+        github_repo: "The GitHub repo where the winner's pull request is to be filed"
+        issue_url: "The GitHub issue corresponding to this auction"
+        delivery_url: "The URL of the pull request fulfilling the auction requirements"
+        billable_to: "Who will this project be billed to?"
+        result: "Accepting a project will initiate a payment process"
+        cap_proposal_url: "This should be filled in automatically when the project is accepted for payment"
   helpers:
     submit:
       auction:
