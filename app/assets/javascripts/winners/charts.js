@@ -227,16 +227,6 @@
       }
     },
     create: {
-      // Creates a scatterplot with a connecting sparkline
-      // Outputs 4 columns: [['bids_dates'], ['bids'], ['means_dates'],['means']]
-      // bids_dates:  a list of dates that an auction occurred. There may be multiple
-      //              of the same date if multiple auctions occurred on that day.
-      // bids:        a list of corresponding winning bids. The index corresponds to
-      //              the date with the same index in `bids_dates`.
-      // means_dates: a list of dates for the mean winning bid. There should only be
-      //              one of each date.
-      // means:       a list of mean winning bids. Matches a date of the same index
-      //              in `means_dates`.
       chart2: function chart2 (auctions) {
         var settings = {};
 
