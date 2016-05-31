@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-describe AuctionStatus::FutureViewModel do
+describe AuctionStatus::Future do
   context "when the auction is in the future" do
-    let(:presenter) { AuctionStatus::FutureViewModel.new(auction) }
+    let(:presenter) { AuctionStatus::Future.new(auction) }
     let(:auction) do
       a = create(
         :auction,

@@ -1,4 +1,4 @@
-class AuctionStatus:: ExpiringViewModel < AuctionStatus::OpenViewModel
+class AuctionStatus::Expiring < AuctionStatus::Open
   def label_class
     'auction-label-expiring'
   end

@@ -1,6 +1,4 @@
-class AuctionStatus::FutureViewModel < Struct.new(:auction)
-  include ActionView::Helpers::NumberHelper
-
+class AuctionStatus::Future < Struct.new(:auction)
   def status_text
     'Closed'
   end

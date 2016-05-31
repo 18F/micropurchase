@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-describe AuctionStatus::ExpiringViewModel do
+describe AuctionStatus::Expiring do
   context "when the auction is expiring soon" do
-    let(:presenter) { AuctionStatus::ExpiringViewModel.new(auction) }
+    let(:presenter) { AuctionStatus::Expiring.new(auction) }
     let(:auction) do
       a = create(
         :auction,
