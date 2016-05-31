@@ -79,7 +79,7 @@ class Admin::AuctionsController < ApplicationController
       respond_to do |format|
         format.html do
           flash[:error] = error_messages
-          @auction = Admin::AuctionEditViewModel.new(auction)
+          @auction = Admin::EditAuctionViewModel.new(auction)
           render :edit
         end
         format.json { render json: { error: error_messages } }
