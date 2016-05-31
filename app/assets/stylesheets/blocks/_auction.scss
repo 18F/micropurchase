@@ -8,8 +8,10 @@
   justify-content: space-between;
 }
 
-.edit_auction, .new_auction {
-  .url, textarea {
+.edit_auction,
+.new_auction {
+  .url,
+  textarea {
     width: 500px;
   }
 }
