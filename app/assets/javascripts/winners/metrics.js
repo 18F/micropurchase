@@ -67,8 +67,12 @@
 
     getBidsPerAuction: function() {
       var bidsPerAuction = _.map(this.auctions, function(auction, key){
-        return auction.bids.length
-      })
+        if (auction.bids) {
+          return auction.bids.length
+        } else {
+          return 0;
+        }
+      });
       return d3.mean(bidsPerAuction);
     },
 
@@ -83,7 +87,7 @@
     getUniqueRepos: function getUniqueRepos() {
       var repos = _.pluck(this.auctions, 'github_repo')
       repos = _.map(repos, function(value,key) {
-        return microp.format.stardardizeUrl(value);
+        return microp.format.standardizeUrl(value);
       })
       repos = _.uniq(repos).length;
       return repos;
