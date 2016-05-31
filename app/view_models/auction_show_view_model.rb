@@ -230,15 +230,8 @@ class AuctionShowViewModel
   end
 
   def highlighted_bid
-    if available? && auction.type == "single_bid" && user_is_bidder?
-      auction.bids.where(bidder: current_user).first
-    elsif available? && auction.type == "single_bid"
-      NullBid.new
-    elsif auction.bids.any?
-      auction.lowest_bid
-    else
-      NullBid.new
-    end
+    @_highlighted_bid ||=
+      HighlightedBid.new(auction: auction, user: current_user).find
   end
 
   def user_is_bidder?
