@@ -8,8 +8,7 @@
   justify-content: space-between;
 }
 
-.edit_auction,
-.new_auction {
+form[class$="auction"] {
   .url,
   textarea {
     width: 500px;
