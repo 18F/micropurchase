@@ -16,7 +16,7 @@ class Rules::SealedBid < Rules::BaseRules
   end
 
   def user_can_bid?(user)
-    super && !auction.bids.any? { |b| b.bidder == user }
+    super && auction.bids.where(bidder: user).empty?
   end
 
   def max_allowed_bid
