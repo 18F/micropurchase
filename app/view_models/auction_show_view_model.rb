@@ -43,7 +43,7 @@ class AuctionShowViewModel
   end
 
   def eligibility_label
-    if for_small_business?
+    if AuctionThreshold.new(auction).small_business?
       'Small-business only'
     else
       'SAM.gov only'
@@ -87,7 +87,7 @@ class AuctionShowViewModel
   end
 
   def bid_button_partial
-    if current_user_can_bid?
+    if show_bid_button?
       'auctions/show_bid_button'
     else
       'components/null'
@@ -158,7 +158,7 @@ class AuctionShowViewModel
   private
 
   def show_bids?
-    RulesFactory.new(auction).create.show_bids?
+    rules.show_bids?
   end
 
   def user_is_winning_bidder?
@@ -222,23 +222,11 @@ class AuctionShowViewModel
     @_status_presenter ||= StatusPresenterFactory.new(auction).create
   end
 
-  def for_small_business?
-    AuctionThreshold.new(auction).small_business?
-  end
-
-  def current_user_can_bid?
-    if !available? || auction.type == 'single_bid' && user_is_bidder?
-      false
-    elsif current_user.is_a?(Guest)
+  def show_bid_button?
+    if current_user.is_a?(Guest)
       true
-    elsif !current_user.sam_accepted?
-      false
-    elsif for_small_business? && current_user.small_business?
-      true
-    elsif for_small_business? && !current_user.small_business?
-      false
-    else # not for small business
-      true
+    else
+      rules.user_can_bid?(current_user)
     end
   end
 
@@ -252,5 +240,9 @@ class AuctionShowViewModel
 
   def auction_status
     AuctionStatus.new(auction)
+  end
+
+  def rules
+    @_rules ||= RulesFactory.new(auction).create
   end
 end

@@ -11,15 +11,15 @@ class Rules::BaseRules
     eligibility.label
   end
 
-  def user_is_eligible_to_bid?(user)
-    @eligibility.eligible?(user)
-  end
-
   def user_can_bid?(user)
     auction_available? && user.present? && user_is_eligible_to_bid?(user)
   end
 
   def auction_available?
     AuctionStatus.new(auction).available?
+  end
+
+  def user_is_eligible_to_bid?(user)
+    eligibility.eligible?(user)
   end
 end
