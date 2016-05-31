@@ -175,20 +175,7 @@ class AuctionListItem
   end
 
   def status_presenter
-    status_presenter_class.new(auction)
-  end
-
-  def status_presenter_class
-    status_name = if expiring?
-                    'Expiring'
-                  elsif over?
-                    'Over'
-                  elsif future?
-                    'Future'
-                  else
-                    'Open'
-                  end
-    "::AuctionStatus::#{status_name}ViewModel".constantize
+    @_status_presenter ||= StatusPresenterFactory.new(auction).create
   end
 
   def available?
@@ -197,10 +184,6 @@ class AuctionListItem
 
   def over?
     auction_status.over?
-  end
-
-  def expiring?
-    auction_status.expiring?
   end
 
   def future?

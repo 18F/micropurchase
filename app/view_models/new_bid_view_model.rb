@@ -84,10 +84,6 @@ class NewBidViewModel
     status_presenter.tag_data_value_2
   end
 
-  def available?
-    AuctionStatus.new(auction).available?
-  end
-
   def html_description
     return '' if auction.description.blank?
     MarkdownRender.new(auction.description).to_s
@@ -101,6 +97,8 @@ class NewBidViewModel
     auction.bids
   end
 
+  private
+
   def show_bids?
     if auction.type == 'single_bid' && available?
       false
@@ -108,8 +106,6 @@ class NewBidViewModel
       true
     end
   end
-
-  private
 
   def highlighted_bid
     @_highlighted_bid ||=
@@ -133,35 +129,10 @@ class NewBidViewModel
   end
 
   def status_presenter
-    @status_presenter ||= status_presenter_class.new(auction)
+    @_status_presenter ||= StatusPresenterFactory.new(auction).create
   end
 
-  def status_presenter_class
-    status_name = if expiring?
-                    'Expiring'
-                  elsif over?
-                    'Over'
-                  elsif future?
-                    'Future'
-                  else
-                    'Open'
-                  end
-    "::AuctionStatus::#{status_name}ViewModel".constantize
-  end
-
-  def expiring?
-    auction_status.expiring?
-  end
-
-  def future?
-    auction_status.future?
-  end
-
-  def over?
-    auction_status.over?
-  end
-
-  def auction_status
-    AuctionStatus.new(auction)
+  def available?
+    AuctionStatus.new(auction).available?
   end
 end

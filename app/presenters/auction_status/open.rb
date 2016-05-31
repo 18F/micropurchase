@@ -1,4 +1,4 @@
-class AuctionStatus::OpenViewModel < Struct.new(:auction)
+class AuctionStatus::Open < Struct.new(:auction)
   def status_text
     'Open'
   end

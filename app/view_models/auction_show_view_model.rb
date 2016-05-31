@@ -158,18 +158,6 @@ class AuctionShowViewModel
     end
   end
 
-  def over?
-    auction_status.over?
-  end
-
-  def available?
-    auction_status.available?
-  end
-
-  def user_is_bidder?
-    user_bids.any?
-  end
-
   def html_description
     return '' if auction.description.blank?
     MarkdownRender.new(auction.description).to_s
@@ -253,33 +241,12 @@ class AuctionShowViewModel
     end
   end
 
+  def user_is_bidder?
+    user_bids.any?
+  end
+
   def status_presenter
-    @status_presenter ||= status_presenter_class.new(auction)
-  end
-
-  def status_presenter_class
-    status_name = if expiring?
-                    'Expiring'
-                  elsif over?
-                    'Over'
-                  elsif future?
-                    'Future'
-                  else
-                    'Open'
-                  end
-    "::AuctionStatus::#{status_name}ViewModel".constantize
-  end
-
-  def expiring?
-    auction_status.expiring?
-  end
-
-  def future?
-    auction_status.future?
-  end
-
-  def auction_status
-    AuctionStatus.new(auction)
+    @_status_presenter ||= StatusPresenterFactory.new(auction).create
   end
 
   def for_small_business?
@@ -304,5 +271,21 @@ class AuctionShowViewModel
     else # not for small business
       true
     end
+  end
+
+  def over?
+    auction_status.over?
+  end
+
+  def available?
+    auction_status.available?
+  end
+
+  def future?
+    auction_status.future?
+  end
+
+  def auction_status
+    AuctionStatus.new(auction)
   end
 end
