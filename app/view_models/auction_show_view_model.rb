@@ -158,7 +158,7 @@ class AuctionShowViewModel
   private
 
   def show_bids?
-    RulesFactory.new(auction).create.show_bids?
+    rules.show_bids?
   end
 
   def user_is_winning_bidder?
@@ -226,7 +226,7 @@ class AuctionShowViewModel
     if current_user.is_a?(Guest)
       true
     else
-      RulesFactory.new(auction).create.user_can_bid?(current_user)
+      rules.user_can_bid?(current_user)
     end
   end
 
@@ -240,5 +240,9 @@ class AuctionShowViewModel
 
   def auction_status
     AuctionStatus.new(auction)
+  end
+
+  def rules
+    @_rules ||= RulesFactory.new(auction).create
   end
 end
