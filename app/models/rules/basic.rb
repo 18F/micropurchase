@@ -3,7 +3,7 @@ class Rules::Basic < Rules::BaseRules
     auction.lowest_bid
   end
 
-  def veiled_bids(user)
+  def veiled_bids(_user)
     auction.bids
   end
 
@@ -15,27 +15,7 @@ class Rules::Basic < Rules::BaseRules
     end
   end
 
-  def highlighted_bid(user)
-    auction.lowest_bid
-  end
-
   def show_bids?
     true
-  end
-
-  def partial_prefix
-    'multi_bid'
-  end
-
-  def formatted_type
-    'multi-bid'
-  end
-
-  def highlighted_bid_label
-    'Current bid:'
-  end
-
-  def auction_rules_href
-    '/auctions/rules/multi-bid'
   end
 end

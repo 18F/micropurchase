@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-describe AuctionStatus::Open do
-  context "when the auction is open" do
-    let(:presenter) { AuctionStatus::Open.new(auction) }
+describe AuctionStatus::Available do
+  context "when the auction is available" do
+    let(:presenter) { AuctionStatus::Available.new(auction) }
     let(:auction) do
       a = create(
         :auction,

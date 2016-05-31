@@ -19,7 +19,7 @@ class StatusPresenterFactory
     elsif auction_status.future?
       'Future'
     else
-      'Open'
+      'Available'
     end
   end
 

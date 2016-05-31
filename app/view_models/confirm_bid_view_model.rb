@@ -19,11 +19,7 @@ class ConfirmBidViewModel
   end
 
   def time_left_partial
-    if available?
-      'bids/distance_of_time'
-    else
-      'components/null'
-    end
+    StatusPresenterFactory.new(auction).create.time_left_partial
   end
 
   def html_description
@@ -33,11 +29,5 @@ class ConfirmBidViewModel
 
   def distance_of_time
     "#{HumanTime.new(time: auction.ended_at).distance_of_time} left"
-  end
-
-  private
-
-  def available?
-    AuctionStatus.new(auction).available?
   end
 end

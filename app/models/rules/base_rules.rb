@@ -11,20 +11,12 @@ class Rules::BaseRules
     eligibility.label
   end
 
-  def partial_path(name, base_dir = 'auctions')
-    "#{base_dir}/#{partial_prefix}/#{name}.html.erb"
-  end
-
   def user_is_eligible_to_bid?(user)
     @eligibility.eligible?(user)
   end
 
   def user_can_bid?(user)
     auction_available? && user.present? && user_is_eligible_to_bid?(user)
-  end
-
-  def partial_prefix
-    fail NotImplementedError
   end
 
   def auction_available?

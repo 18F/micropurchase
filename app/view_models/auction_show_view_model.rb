@@ -27,7 +27,7 @@ class AuctionShowViewModel
   end
 
   def rules_link_text
-    "Rules for #{formatted_type} auctions"
+    "Rules for #{auction.type.dasherize} auctions"
   end
 
   def rules_path
@@ -71,11 +71,7 @@ class AuctionShowViewModel
   end
 
   def start_label
-    if over?
-      "Auction started at:"
-    else
-      "Bid start time:"
-    end
+    status_presenter.start_label
   end
 
   def formatted_start_time
@@ -134,14 +130,6 @@ class AuctionShowViewModel
     Currency.new(auction.lowest_bid.amount).to_s
   end
 
-  def show_bids?
-    if auction.type == 'single_bid' && available?
-      false
-    else
-      true
-    end
-  end
-
   def bids
     auction.bids
   end
@@ -164,14 +152,14 @@ class AuctionShowViewModel
   end
 
   def deadline_label
-    if over?
-      "Auction ended at:"
-    else
-      "Bid deadline:"
-    end
+    status_presenter.deadline_label
   end
 
   private
+
+  def show_bids?
+    RulesFactory.new(auction).create.show_bids?
+  end
 
   def user_is_winning_bidder?
     auction.bids.any? && lowest_user_bid == auction.lowest_bid
@@ -183,14 +171,6 @@ class AuctionShowViewModel
 
   def lowest_user_bid
     user_bids.order(amount: :asc).first
-  end
-
-  def formatted_type
-    if auction.type == "single_bid"
-      'single-bid'
-    else
-      'multi-bid'
-    end
   end
 
   def multi_bid_winning_bid_header(flash)
@@ -254,11 +234,7 @@ class AuctionShowViewModel
   end
 
   def current_user_can_bid?
-    if auction.type == 'single_bid' && user_bids.any?
-      false
-    elsif over?
-      false
-    elsif future?
+    if !available? || auction.type == 'single_bid' && user_is_bidder?
       false
     elsif current_user.is_a?(Guest)
       true
@@ -279,10 +255,6 @@ class AuctionShowViewModel
 
   def available?
     auction_status.available?
-  end
-
-  def future?
-    auction_status.future?
   end
 
   def auction_status
