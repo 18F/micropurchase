@@ -7,19 +7,25 @@ class Admin::NewAuctionViewModel
     true
   end
 
+  def date_default(_field)
+    default_date_time.convert.to_date
+  end
+
   def hour_default(_field)
-    "7"
+    default_date_time.hour
   end
 
   def minute_default(_field)
-    "00"
+    default_date_time.minute
   end
 
   def meridiem_default(_field)
-    "PM"
+    default_date_time.meridiem
   end
 
-  def date_default(_field)
-    Date.today
+  private
+
+  def default_date_time
+    DefaultDateTime.new
   end
 end
