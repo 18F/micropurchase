@@ -35,10 +35,12 @@ describe UpdateAuction do
       context 'and the auction is between micropurchase and SAT threshold' do
         context 'and the winning vendor is a small business' do
           it 'calls the CreateCapProposalJob' do
-            auction = create(:auction,
-                             :between_micropurchase_and_sat_threshold,
-                             :winning_vendor_is_small_business,
-                             :delivery_due_at_expired)
+            auction = create(
+              :auction,
+              :between_micropurchase_and_sat_threshold,
+              :winning_vendor_is_small_business,
+              :delivery_due_at_expired
+            )
             allow(CreateCapProposalJob).to receive(:perform_later)
               .with(auction.id)
               .and_return(nil)
@@ -52,11 +54,12 @@ describe UpdateAuction do
 
         context 'and the winning vendor is not a small business' do
           it 'does not call the CreateCapProposalJob' do
-            auction = create(:auction,
-                             :between_micropurchase_and_sat_threshold,
-                             :winning_vendor_is_non_small_business,
-                             :delivery_due_at_expired)
-            
+            auction = create(
+              :auction,
+              :between_micropurchase_and_sat_threshold,
+              :winning_vendor_is_non_small_business,
+              :delivery_due_at_expired
+            )
             allow(CreateCapProposalJob).to receive(:perform_later)
               .with(auction.id)
               .and_return(nil)
@@ -88,46 +91,9 @@ describe UpdateAuction do
           .with(auction.id)
           .and_return(nil)
 
-        updater = UpdateAuction.new(auction, params)
+        UpdateAuction.new(auction, params)
 
         expect(CreateCapProposalJob).to_not have_received(:perform_later).with(auction.id)
-      end
-    end
-  end
-
-  describe '#should_create_cap_proposal?' do
-    context 'when there already is a cap_proposal_url' do
-      it 'should return false' do
-        auction = create(:auction, :payment_pending)
-        params = { auction: { title: 'A new auction title' } }
-
-        updater = UpdateAuction.new(auction, params)
-
-        expect(updater.should_create_cap_proposal?).to be(false)
-      end
-    end
-
-    context 'when there is not already a cap_proposal_url' do
-      context 'and params contains result=accepted' do
-        it 'should return true' do
-          auction = create(:auction, :payment_needed)
-          params = { auction: { result: 'accepted' } }
-
-          updater = UpdateAuction.new(auction, params)
-
-          expect(updater.should_create_cap_proposal?).to be(true)
-        end
-      end
-
-      context 'and auction.result is set to rejected' do
-        it 'should return false' do
-          auction = create(:auction, :payment_needed)
-          params = { auction: { result: 'rejected' } }
-
-          updater = UpdateAuction.new(auction, params)
-
-          expect(updater.should_create_cap_proposal?).to be(false)
-        end
       end
     end
   end

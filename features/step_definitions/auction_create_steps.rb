@@ -63,3 +63,12 @@ end
 Given(/^there are complete and successful auctions$/) do
   @complete_and_successful = FactoryGirl.create_list(:auction, 2, :complete_and_successful)
 end
+
+Given(/^there is an auction where the winning vendor is not eligible to be paid$/) do
+  @auction = FactoryGirl.create(
+    :auction,
+    :between_micropurchase_and_sat_threshold,
+    :winning_vendor_is_non_small_business,
+    :evaluation_needed
+  )
+end
