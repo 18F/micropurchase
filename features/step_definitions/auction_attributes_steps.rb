@@ -78,6 +78,11 @@ Then(/^the proposal should have a CAP Proposal URL$/) do
   expect(@auction.cap_proposal_url).not_to eq ""
 end
 
+Then(/^the proposal should not have a CAP Proposal URL$/) do
+  @auction.reload
+  expect(@auction.cap_proposal_url).to eq ""
+end
+
 Then(/^I should see a preview of the auction$/) do
   expect(page).to have_text(@unpublished_auction.description)
 end

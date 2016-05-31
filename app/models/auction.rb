@@ -17,7 +17,7 @@ class Auction < ActiveRecord::Base
   validates :start_price, presence: true
   validates :title, presence: true
   validates :user, presence: true
-  validate :start_price_equal_to_or_less_than_max_if_not_contracting_officer
+  validate :user_is_contracting_officer_if_above_micropurchase, if: :new_record?
   validates :summary, presence: true, if: :published?
   validates :description, presence: true, if: :published?
   validates :delivery_due_at, presence: true, if: :published?
@@ -36,7 +36,7 @@ class Auction < ActiveRecord::Base
     bids.sort_by(&:amount).first.try(:amount)
   end
 
-  def start_price_equal_to_or_less_than_max_if_not_contracting_officer
+  def user_is_contracting_officer_if_above_micropurchase
     if user && !user.contracting_officer? && start_price > AuctionThreshold::MICROPURCHASE
       errors.add(
         :start_price,

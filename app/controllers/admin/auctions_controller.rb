@@ -67,9 +67,16 @@ class Admin::AuctionsController < ApplicationController
 
   def update
     auction = Auction.find(params[:id])
-    if UpdateAuction.new(auction, params, current_user).perform
+    update_auction = UpdateAuction.new(auction, params, current_user)
+
+    if update_auction.perform
       respond_to do |format|
-        format.html { redirect_to admin_auctions_path }
+        format.html do
+          if update_auction.error_messages
+            flash[:error] = update_auction.error_messages
+          end
+          redirect_to admin_auctions_path
+        end
         format.json do
           render json: auction, serializer: Admin::AuctionSerializer
         end
