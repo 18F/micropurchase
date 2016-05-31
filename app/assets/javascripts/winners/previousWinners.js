@@ -6,9 +6,7 @@
   window.winners = {
     onReady: function(){
       // Retrieve data
-      var MP = 'https://micropurchase.18f.gov/auctions.json'
-      var relative = '/auctions.json'
-      $.getJSON(MP).success(function(data){
+      $.getJSON('/auctions.json').success(function(data){
         var auctions = _.sortBy(data.auctions, 'id');
 
         window.winners.metrics = new Metrics(auctions);
