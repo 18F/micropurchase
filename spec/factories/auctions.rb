@@ -1,15 +1,15 @@
 FactoryGirl.define do
   factory :auction do
     association :user, factory: :admin_user
-    started_at { quartile_minute(Time.now - 3.days) }
-    ended_at { quartile_minute(Time.now + 3.days) }
+    started_at { TimeHelpers::quartile_minute(Time.now - 3.days) }
+    ended_at { TimeHelpers::quartile_minute(Time.now + 3.days) }
     result :not_applicable
     title { Faker::Company.catch_phrase }
     type :multi_bid
     published :published
     summary Faker::Lorem.paragraph
     description Faker::Lorem.paragraphs(3, true).join("\n\n")
-    delivery_due_at { quartile_minute(Time.now + 10.days) }
+    delivery_due_at { TimeHelpers::quartile_minute(Time.now + 10.days) }
 
     trait :single_bid_with_tie do
       single_bid
@@ -73,17 +73,17 @@ FactoryGirl.define do
     end
 
     trait :available do
-      started_at { quartile_minute(Time.now - 2.days) }
-      ended_at { quartile_minute(Time.now + 2.days) }
+      started_at { TimeHelpers::quartile_minute(Time.now - 2.days) }
+      ended_at { TimeHelpers::quartile_minute(Time.now + 2.days) }
     end
 
     trait :closed do
-      ended_at { quartile_minute(Time.now - 2.days) }
+      ended_at { TimeHelpers::quartile_minute(Time.now - 2.days) }
     end
 
     trait :delivered do
-      ended_at { quartile_minute(Time.now - 2.days) }
-      delivery_due_at { quartile_minute(Time.now - 1.day) }
+      ended_at { TimeHelpers::quartile_minute(Time.now - 2.days) }
+      delivery_due_at { TimeHelpers::quartile_minute(Time.now - 1.day) }
       delivery_url 'https://github.com/foo/bar'
     end
 
@@ -101,16 +101,16 @@ FactoryGirl.define do
     end
 
     trait :expiring do
-      ended_at { quartile_minute(Time.now + 3.hours) }
+      ended_at { TimeHelpers::quartile_minute(Time.now + 3.hours) }
     end
 
     trait :future do
-      started_at { quartile_minute(Time.now + 1.day) }
+      started_at { TimeHelpers::quartile_minute(Time.now + 1.day) }
     end
 
     trait :delivery_due_at_expired do
       closed
-      delivery_due_at { quartile_minute(ended_at + 1.day) }
+      delivery_due_at { TimeHelpers::quartile_minute(ended_at + 1.day) }
     end
 
     trait :accepted do
