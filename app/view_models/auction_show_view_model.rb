@@ -87,7 +87,7 @@ class AuctionShowViewModel
   end
 
   def bid_button_partial
-    if current_user_can_bid?
+    if show_bid_button?
       'auctions/show_bid_button'
     else
       'components/null'
@@ -222,7 +222,7 @@ class AuctionShowViewModel
     @_status_presenter ||= StatusPresenterFactory.new(auction).create
   end
 
-  def current_user_can_bid?
+  def show_bid_button?
     if current_user.is_a?(Guest)
       true
     else
