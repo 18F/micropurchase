@@ -1,7 +1,7 @@
 <%= f.input :type, collection: Auction.types.keys.to_a %>
 <%= f.input :title %>
-<%= f.input :github_repo %>
-<%= f.input :issue_url %>
+<%= f.input :github_repo, as: :url %>
+<%= f.input :issue_url, as: :url %>
 <%= f.input :summary, as: :text %>
 <%= f.input :description, as: :text %>
 <%= render partial: 'datetime_fields', locals: { field: 'started' } %>
