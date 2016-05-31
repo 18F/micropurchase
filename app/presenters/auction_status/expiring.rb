@@ -1,4 +1,4 @@
-class AuctionStatus::Expiring < AuctionStatus::Open
+class AuctionStatus::Expiring < AuctionStatus::Available
   def label_class
     'auction-label-expiring'
   end

@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe Rules::Basic do
-
   describe '#winning_bid' do
     it "should be the auction's lowest_bid" do
       auction = create(:auction, :closed, :with_bidders)
@@ -70,14 +69,6 @@ describe Rules::Basic do
         expect(rules.max_allowed_bid).to eq(auction.lowest_bid.amount - PlaceBid::BID_INCREMENT)
       end
     end
-  end
-
-  it 'should return the lowest bid' do
-    user = create(:user)
-    auction = create(:auction, :with_bidders)
-    eligibility = InSamEligibility.new
-    rules = Rules::Basic.new(auction, eligibility)
-    expect(rules.highlighted_bid(user)).to eq(auction.lowest_bid)
   end
 
   describe '#show_bids?' do

@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe Rules::SealedBid do
-
   describe '#winning_bid' do
     context 'if the auction if open' do
       it 'returns a NullBid object' do
@@ -52,40 +51,6 @@ describe Rules::SealedBid do
         eligibility = InSamEligibility.new
         rules = Rules::SealedBid.new(auction, eligibility)
         expect(rules.veiled_bids(user)).to eq(auction.bids)
-      end
-    end
-  end
-
-  describe '#highlighted_bid' do
-    context 'when the auction is over' do
-      it 'should return the lowest bid' do
-        auction = create(:auction, :single_bid, :with_bidders, :closed)
-        user = create(:user)
-        eligibility = InSamEligibility.new
-        rules = Rules::SealedBid.new(auction, eligibility)
-        expect(rules.highlighted_bid(user)).to eq(auction.lowest_bid)
-      end
-    end
-
-    context 'when the auction is running' do
-      context 'when the user has placed a bid' do
-        it "should return the user's bid" do
-          auction = create(:auction, :single_bid, :with_bidders)
-          user = auction.bids.first.bidder
-          eligibility = InSamEligibility.new
-          rules = Rules::SealedBid.new(auction, eligibility)
-          expect(rules.highlighted_bid(user)).to eq(auction.bids.first)
-        end
-      end
-
-      context 'when the user has not placed a bid' do
-        it 'should return a NullBid object' do
-          auction = create(:auction, :single_bid, :with_bidders)
-          user = create(:user)
-          eligibility = InSamEligibility.new
-          rules = Rules::SealedBid.new(auction, eligibility)
-          expect(rules.highlighted_bid(user)).to be_a(NullBid)
-        end
       end
     end
   end

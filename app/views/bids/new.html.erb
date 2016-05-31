@@ -12,5 +12,5 @@
 
 <%= render partial: 'auction_details', locals: { bid_view_model: @bid_view_model } %>
 
-<%= render partial: @bid_view_model.form_partial,
+<%= render partial: @bid_view_model.bid_form_partial,
   locals: { bid: @bid, bid_view_model: @bid_view_model } %>

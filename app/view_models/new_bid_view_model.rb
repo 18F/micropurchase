@@ -7,27 +7,15 @@ class NewBidViewModel
   end
 
   def description_partial
-    if available?
-      'bids/available_bid_description'
-    else
-      'bids/over_bid_description'
-    end
+    status_presenter.bid_description_partial
   end
 
   def time_left_partial
-    if available?
-      'bids/distance_of_time'
-    else
-      'components/null'
-    end
+    status_presenter.time_left_partial
   end
 
-  def form_partial
-    if available?
-      'bids/form'
-    else
-      'bids/closed'
-    end
+  def bid_form_partial
+    status_presenter.bid_form_partial
   end
 
   def highlighted_bid_info_partial
@@ -99,14 +87,6 @@ class NewBidViewModel
 
   private
 
-  def show_bids?
-    if auction.type == 'single_bid' && available?
-      false
-    else
-      true
-    end
-  end
-
   def highlighted_bid
     @_highlighted_bid ||=
       HighlightedBid.new(auction: auction, user: current_user).find
@@ -117,22 +97,10 @@ class NewBidViewModel
   end
 
   def lowest_user_bid
-    user_bids.order(amount: :asc).first
-  end
-
-  def user_is_bidder?
-    user_bids.any?
-  end
-
-  def user_bids
-    auction.bids.where(bidder: current_user)
+    auction.bids.where(bidder: current_user).order(amount: :asc).first
   end
 
   def status_presenter
     @_status_presenter ||= StatusPresenterFactory.new(auction).create
-  end
-
-  def available?
-    AuctionStatus.new(auction).available?
   end
 end

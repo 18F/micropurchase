@@ -28,11 +28,7 @@ class AuctionListItem
   end
 
   def capitalized_formatted_type
-    if auction.type == "single_bid"
-      'single-bid'
-    else
-      'multi-bid'
-    end.capitalize
+    auction.type.dasherize.capitalize
   end
 
   def eligibility_label
@@ -126,13 +122,7 @@ class AuctionListItem
   end
 
   def relative_time
-    if over?
-      "Ended #{HumanTime.new(time: auction.ended_at).relative_time}"
-    elsif future?
-      "Starts #{HumanTime.new(time: auction.started_at).relative_time} from now"
-    else
-      "Time remaining: #{HumanTime.new(time: auction.ended_at).distance_of_time}"
-    end
+    status_presenter.relative_time
   end
 
   def highlighted_bid_amount_as_currency
@@ -140,7 +130,7 @@ class AuctionListItem
   end
 
   def user_bid_amount_as_currency
-    Currency.new(lowest_user_bid_amount).to_s
+    Currency.new(lowest_user_bid.amount).to_s
   end
 
   private
@@ -151,10 +141,6 @@ class AuctionListItem
 
   def user_is_winning_bidder?
     auction.bids.any? && lowest_user_bid == auction.lowest_bid
-  end
-
-  def lowest_user_bid_amount
-    lowest_user_bid.amount
   end
 
   def lowest_user_bid
@@ -184,10 +170,6 @@ class AuctionListItem
 
   def over?
     auction_status.over?
-  end
-
-  def future?
-    auction_status.future?
   end
 
   def auction_status

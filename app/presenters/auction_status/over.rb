@@ -1,4 +1,28 @@
 class AuctionStatus::Over < Struct.new(:auction)
+  def start_label
+    "Auction started at:"
+  end
+
+  def deadline_label
+    "Auction ended at:"
+  end
+
+  def relative_time
+    "Ended #{HumanTime.new(time: auction.ended_at).relative_time}"
+  end
+
+  def time_left_partial
+    'components/null'
+  end
+
+  def bid_description_partial
+    'bids/over_bid_description'
+  end
+
+  def bid_form_partial
+    'bids/closed'
+  end
+
   def status_text
     'Closed'
   end

@@ -14,11 +14,7 @@ class MyBidListItem
   end
 
   def formatted_type
-    if auction.type == "single_bid"
-      'single-bid'
-    else
-      'multi-bid'
-    end
+    auction.type.dasherize
   end
 
   def availability
