@@ -67,8 +67,12 @@
 
     getBidsPerAuction: function() {
       var bidsPerAuction = _.map(this.auctions, function(auction, key){
-        return auction.bids.length
-      })
+        if (auction.bids) {
+          return auction.bids.length
+        } else {
+          return 0;
+        }
+      });
       return d3.mean(bidsPerAuction);
     },
 

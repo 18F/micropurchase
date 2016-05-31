@@ -46,11 +46,13 @@
   };
 
   microp.format.stardardizeUrl = function(str) {
-    var lastChar = str.length - 1;
-    if (str.charAt(lastChar) === '/') {
-      str = str.substring(0, lastChar);
+    if (typeof(str) === 'string'){
+      var lastChar = str.length - 1;
+      if (str.charAt(lastChar) === '/') {
+        str = str.substring(0, lastChar);
+      }
+      str = str.toLowerCase();
     }
-    str = str.toLowerCase();
     return str;
   };
 
@@ -78,6 +80,10 @@
   // Outputs a date object formatted like so: %Y-%m-%d
   // Or like so %m/%d if a separator is included
   microp.format.date = function (date, seperator) {
+    if (typeof(date) === 'undefined' || typeof(date) === undefined) {
+      return date;
+    }
+
     var dateObj,
       date;
     if (typeof(date) === 'string') {

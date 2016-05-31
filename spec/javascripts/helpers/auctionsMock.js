@@ -65,8 +65,8 @@ var auctionsMock = {
          "description":"clever description 2",
          "id":22,
          "winning_bid": {
-            "amount": null,
-            "bidder_id": null
+            "amount": 3200,
+            "bidder_id": 30
          },
          "bids":[
             {

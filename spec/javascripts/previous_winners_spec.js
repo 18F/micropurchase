@@ -83,7 +83,7 @@ describe('PreviousWinners', function () {
 
     it("with the correct average winning bid", function(){
       expect(metrics.avgWinningBids).not.toBe(undefined)
-      expect(metrics.avgWinningBids).toEqual(1750)
+      expect(metrics.avgWinningBids).toEqual(2112.5)
     })
 
     it("with the correct number of bids per auction", function(){
@@ -145,7 +145,8 @@ describe('PreviousWinners', function () {
           ["ruby",2],
           ["python",2],
           ["yml",1],
-          []
+          [],
+          ["go",1]
         ]
       }
     })
@@ -170,16 +171,17 @@ describe('PreviousWinners', function () {
             "bids_dates",
             "2016-3-4",
             "2016-3-14",
+            "2016-3-14",
             "2016-3-17"
           ],
-          ["bids",3000,250,2000],
+          ["bids",3000,250,3200,2000],
           [
             "means_dates",
             "2016-3-4",
             "2016-3-14",
             "2016-3-17"
           ],
-          ["means",3000,250,2000]
+          ["means",3000,1725,2000]
         ]
       }
     })
@@ -228,17 +230,20 @@ describe('PreviousWinners', function () {
           ["18",5],
           ["date_1","2016-3-14"],
           ["21",5],
+          ["22",1],
           ["date_2","2016-3-17"],
           ["23",2]
         ],
         "z":{
-          "18":3000,
-          "21":250,
-          "23":2000
+          "18": 3000,
+          "21": 250,
+          "22": 3200,
+          "23": 2000
         },
         "xs":{
           "18":"date_0",
           "21":"date_1",
+          "22":"date_1",
           "23":"date_2"
         }
       }
