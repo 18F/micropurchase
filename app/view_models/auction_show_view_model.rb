@@ -138,11 +138,11 @@ class AuctionShowViewModel
     auction.start_price
   end
 
-  def header_partial(flash)
-    if auction.type == 'single_bid'
-      'components/null'
+  def bid_flash_partial
+    if auction.type == 'multi_bid' && (over? || available_and_user_is_bidder?)
+      'auctions/bid_status_header'
     else
-      multi_bid_winning_bid_header(flash)
+      'components/null'
     end
   end
 
@@ -155,14 +155,14 @@ class AuctionShowViewModel
     status_presenter.deadline_label
   end
 
-  private
-
-  def show_bids?
-    rules.show_bids?
+  def bid_status_class(flash)
+    BidStatusFlashFactory.new(auction: auction, flash: flash, user: current_user).create
   end
 
-  def user_is_winning_bidder?
-    auction.bids.any? && lowest_user_bid == auction.lowest_bid
+  private
+
+  def available_and_user_is_bidder?
+    available? && user_bids.any?
   end
 
   def lowest_user_bid_amount
@@ -173,38 +173,6 @@ class AuctionShowViewModel
     user_bids.order(amount: :asc).first
   end
 
-  def multi_bid_winning_bid_header(flash)
-    if over?
-      auction_over_header
-    elsif available? && user_is_bidder?
-      auction_available_header(flash)
-    else
-      'components/null'
-    end
-  end
-
-  def auction_over_header
-    if auction.bids.any? && current_user.is_a?(Guest)
-      'auctions/multi_bid/guest_win_header'
-    elsif auction.bids.any? && user_is_winning_bidder?
-      'auctions/over_user_is_winner_header'
-    elsif auction.bids.any? && user_is_bidder?
-      'auctions/over_user_is_bidder_header'
-    else
-      'auctions/no_bids_header'
-    end
-  end
-
-  def auction_available_header(flash)
-    if flash['bid']
-      'auctions/bid_submitted_header'
-    elsif user_is_winning_bidder?
-      'auctions/user_is_winning_bidder_header'
-    else
-      'auctions/user_is_bidder_header'
-    end
-  end
-
   def user_bids
     auction.bids.where(bidder: current_user)
   end
@@ -212,10 +180,6 @@ class AuctionShowViewModel
   def highlighted_bid
     @_highlighted_bid ||=
       HighlightedBid.new(auction: auction, user: current_user).find
-  end
-
-  def user_is_bidder?
-    user_bids.any?
   end
 
   def status_presenter

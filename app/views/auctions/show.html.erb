@@ -4,8 +4,8 @@
   <%= render partial: '/auctions/data_tags', locals: { auction: @auction } %>
 <% end %>
 
-<%= render partial: @auction.header_partial(flash),
-  locals: { auction: @auction } %>
+<%= render partial: @auction.bid_flash_partial,
+  locals: { auction: @auction, status: @auction.bid_status_class(flash)  } %>
 
 <div class="usa-grid-full">
   <p><a class="link-highlighted" href="<%= root_path %>"><icon class="fa fa-angle-double-left"></icon> Back to open projects</a></p>
