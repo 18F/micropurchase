@@ -6,7 +6,7 @@ Feature: Admin approves delivery of a project
 
   Scenario: Marking an auction result as accepted
     Given I am an administrator
-    And there is a needs evaluation auction
+    And there is an auction that needs evaluation
     And I sign in
     When I visit the admin edit page for that auction
     And I select the result as accepted

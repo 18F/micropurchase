@@ -1,10 +1,9 @@
-Given(/^a SAM check for my DUNS will (.+)$/) do |action|
-  case action
-  when 'return true'
-    @user.update(duns_number: FakeSamApi::VALID_DUNS)
-  when 'return false'
-    @user.update(duns_number: FakeSamApi::INVALID_DUNS)
-  end
+Given(/^a SAM check for my DUNS will return true$/) do
+  @user.update(duns_number: FakeSamApi::VALID_DUNS)
+end
+
+Given(/^a SAM check for my DUNS will return false$/) do
+  @user.update(duns_number: FakeSamApi::INVALID_DUNS)
 end
 
 Then(/^I should become a valid SAM user$/) do
