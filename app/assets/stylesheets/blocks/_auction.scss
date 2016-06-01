@@ -8,14 +8,19 @@
   justify-content: space-between;
 }
 
+.auction-form {
+  .url,
+  textarea {
+    width: 500px;
+  }
+}
+
 textarea#auction_summary {
   height: 150px;
-  width: 500px;
 }
 
 textarea#auction_description {
   height: 500px;
-  width: 500px;
 }
 
 .auction-description {
