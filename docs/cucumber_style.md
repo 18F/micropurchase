@@ -16,7 +16,7 @@ Gherkin’s flexibility is a bit of a headache, in that there are many possible 
 * _There is a closed single-bid auction with no bids_
 * _I should see “Yes” for “Small Business?” in the “users” table_
 
-That said, there are sometimes challenges that make it hard to follow this style, and it requires some level of consistency in how we frame auctions. And it is something we will probably need to refine as we go along
+That said, there are sometimes challenges that make it hard to follow this style, and it requires some level of consistency in how we frame auctions. And it is something we will probably need to refine as we go along.
 
 ## Generalize Steps When Convenient
 
