@@ -1,32 +1,13 @@
 Given(/^there is an? (.+) auction$/) do |label|
-  @auction = case label
-             when 'unpublished'
-               FactoryGirl.create(:auction, :unpublished)
-             when 'future'
-               FactoryGirl.create(:auction, :future)
-             when 'closed'
-               FactoryGirl.create(:auction, :closed, :with_bidders)
-             when 'closed bidless'
-               FactoryGirl.create(:auction, :closed)
-             when 'expiring'
-               FactoryGirl.create(:auction, :expiring, :with_bidders)
-             when 'open bidless'
-               FactoryGirl.create(:auction)
-             when 'open'
-               FactoryGirl.create(:auction, :with_bidders)
-             when 'single-bid'
-               FactoryGirl.create(:auction, :running, :single_bid)
-             when 'closed single-bid'
-               FactoryGirl.create(:auction, :closed, :with_bidders, :single_bid)
-             when 'needs evaluation'
-               FactoryGirl.create(:auction, :with_bidders, :evaluation_needed)
-             when 'within simplified acquisition threshold'
-               FactoryGirl.create(:auction, :between_micropurchase_and_sat_threshold, :available)
-             when 'below the micropurchase threshold'
-               FactoryGirl.create(:auction, :below_micropurchase_threshold, :available)
-             else
-               fail "Unrecognized auction type: #{label}"
-             end
+  @auction = AuctionFactoryFactory.new(label).create
+end
+
+Given(/^there is an auction that (.+)$/) do |label|
+  @auction = AuctionFactoryFactory.new(label).create
+end
+
+Given(/^there is an auction where (.+)$/) do |label|
+  @auction = AuctionFactoryFactory.new(label).create
 end
 
 Given(/^there is an auction with a starting price between the micropurchase threshold and simplified acquisition threshold$/) do

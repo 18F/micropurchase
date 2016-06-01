@@ -1,4 +1,11 @@
-class UpdateAuction < Struct.new(:auction, :params, :user)
+class UpdateAuction
+
+  def initialize(auction, params, user = nil)
+    @auction = auction
+    @params = params
+    @user = user
+  end
+
   def perform
     auction.assign_attributes(attributes)
 
@@ -14,7 +21,22 @@ class UpdateAuction < Struct.new(:auction, :params, :user)
       winning_bidder_is_eligible_to_be_paid?
   end
 
+  def error_messages
+    if display_vendor_eligiblity_error?
+      'The vendor cannot be paid'
+    else
+      nil
+    end
+  end
+
   private
+
+  attr_reader :auction, :params, :user
+
+  def display_vendor_eligiblity_error?
+    auction_accepted_and_cap_proposal_is_blank? &&
+      !winning_bidder_is_eligible_to_be_paid?
+  end
 
   def auction_accepted_and_cap_proposal_is_blank?
     attributes[:result] == 'accepted' && auction.cap_proposal_url.blank?
