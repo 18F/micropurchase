@@ -155,7 +155,7 @@ RSpec.describe BidsController, controller: true do
           expect(flash[:bid]).to eq("success")
           expect(response).to redirect_to("/auctions/#{auction.id}")
 
-          bid = auction.bids.order('created_at DESC').first
+          bid = auction.bids.last
           expect(bid.bidder).to eq(current_bidder)
           expect(bid.amount).to eq(1000)
           expect(bid.via).to eq('web')

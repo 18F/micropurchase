@@ -29,6 +29,5 @@ FactoryGirl.define do
         contracting_officer true
       end
     end
-
   end
 end

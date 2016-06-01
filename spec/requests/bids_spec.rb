@@ -95,7 +95,9 @@ describe AuctionsController do
 
       it 'returns a json error' do
         post auction_bids_path(auction), params, headers
-        expect(json_response['error']).to eq('Auction not available')
+        expect(json_response['error']).to eq(
+          'You are not allowed to bid on this auction'
+        )
       end
 
       it 'returns a 403 status code' do
@@ -120,7 +122,9 @@ describe AuctionsController do
 
       it 'returns a json error' do
         post auction_bids_path(auction), params, headers
-        expect(json_response['error']).to eq('Auction not available')
+        expect(json_response['error']).to eq(
+          'You are not allowed to bid on this auction'
+        )
       end
 
       it 'returns a 403 status code' do
@@ -286,7 +290,9 @@ describe AuctionsController do
 
         it 'returns a json error' do
           post auction_bids_path(auction), params, headers
-          expect(json_response['error']).to eq('You must have a valid SAM.gov account to place a bid')
+          expect(json_response['error']).to eq(
+            'You are not allowed to bid on this auction'
+          )
         end
 
         it 'returns a 403 status code' do
@@ -307,7 +313,9 @@ describe AuctionsController do
 
         it 'returns a json error' do
           post auction_bids_path(auction), params, headers
-          expect(json_response['error']).to eq('You must have a valid SAM.gov account to place a bid')
+          expect(json_response['error']).to eq(
+            'You are not allowed to bid on this auction'
+          )
         end
 
         it 'returns a 403 status code' do
@@ -362,23 +370,6 @@ describe AuctionsController do
           expect do
             post auction_bids_path(auction), params, headers
           end.to_not change { auction.bids.count }
-        end
-      end
-
-      context 'and the bid amount contains cents' do
-        let(:bid_amount) { 1.99 }
-
-        it 'returns a json error' do
-          post auction_bids_path(auction), params, headers
-          expect(json_response['error']).to eq('Bids must be in increments of one dollar')
-        end
-
-        it 'returns a 403 status code' do
-          post auction_bids_path(auction), params, headers
-          expect(status).to eq(403)
-        end
-
-        it 'should not create a bid' do
         end
       end
     end
