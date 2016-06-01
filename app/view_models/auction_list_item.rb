@@ -23,7 +23,6 @@ class AuctionListItem
   end
 
   def html_summary
-    return '' if auction.summary.blank?
     MarkdownRender.new(auction.summary).to_s
   end
 

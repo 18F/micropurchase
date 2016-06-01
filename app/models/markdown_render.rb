@@ -1,7 +1,7 @@
 class MarkdownRender
   attr_reader :markdown, :text
 
-  def initialize(text)
+  def initialize(text = '')
     @text = text
     @markdown = Redcarpet::Markdown.new(
       Redcarpet::Render::HTML,

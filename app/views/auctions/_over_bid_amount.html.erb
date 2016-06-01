@@ -1,4 +1,10 @@
-<span class="bid-amount"><%= auction.winning_bid_amount_as_currency %></span>
-<span>
-  <%= link_to( auction.link_text, auction_bids_path(auction.id)) %>
-</span>
+<p class="auction-label">
+  <%= "Winning bid (#{auction.lowest_bidder_name}):" %>
+</p>
+
+<p class="auction-label-info">
+  <span class="bid-amount"><%= auction.winning_bid_amount_as_currency %></span>
+  <span>
+    <%= link_to( auction.link_text, auction_bids_path(auction.id)) %>
+  </span>
+</p>

@@ -31,11 +31,7 @@ class AuctionShowViewModel
   end
 
   def rules_path
-    if auction.type == 'single_bid'
-      '/auction/rules/single-bid'
-    else
-      '/auctions/rules/multi-bid'
-    end
+    "/auctions/rules/#{auction.type.dasherize}"
   end
 
   def status_text
@@ -47,16 +43,6 @@ class AuctionShowViewModel
       'Small-business only'
     else
       'SAM.gov only'
-    end
-  end
-
-  def bid_status_header
-    if over? && auction.bids.any?
-      "Winning bid (#{auction.lowest_bid.bidder.name}):"
-    elsif auction.type == 'single_bid'
-      'Your bid:'
-    else
-      'Current bid:'
     end
   end
 
@@ -118,20 +104,12 @@ class AuctionShowViewModel
     "#{HumanTime.new(time: auction.ended_at).distance_of_time} left"
   end
 
-  def relative_time
-    HumanTime.new(time: auction.started_at).relative_time
-  end
-
   def highlighted_bid_amount_as_currency
     Currency.new(highlighted_bid.amount).to_s
   end
 
   def winning_bid_amount_as_currency
     Currency.new(auction.lowest_bid.amount).to_s
-  end
-
-  def bids
-    auction.bids
   end
 
   def start_price
@@ -147,7 +125,6 @@ class AuctionShowViewModel
   end
 
   def html_description
-    return '' if auction.description.blank?
     MarkdownRender.new(auction.description).to_s
   end
 
@@ -157,6 +134,10 @@ class AuctionShowViewModel
 
   def bid_status_class(flash)
     BidStatusFlashFactory.new(auction: auction, flash: flash, user: current_user).create
+  end
+
+  def lowest_bidder_name
+    auction.lowest_bid.bidder.name
   end
 
   private

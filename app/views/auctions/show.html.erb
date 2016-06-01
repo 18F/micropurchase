@@ -34,11 +34,8 @@
         <p class="auction-label-info"><%= @auction.status_text %></p>
       </div>
       <div>
-        <p class="auction-label"><%= @auction.bid_status_header %></p>
-        <p class="auction-label-info">
-          <%= render partial: @auction.bid_status_partial,
-            locals: { auction: @auction } %>
-        </p>
+        <%= render partial: @auction.bid_status_partial,
+          locals: { auction: @auction } %>
       </div>
       <div>
         <p class="auction-label"><%= @auction.deadline_label %></p>
