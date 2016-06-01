@@ -36,7 +36,7 @@ directly in your system.
 
 Steps to set new environment variables:
 
-1. Create a credentials class for accessing the value (env var locally, service in prod env). Example:
+1. Create a credentials class for accessing the value. Example:
 
   ```ruby
   # app/credentials/github_credentials.rb
@@ -66,7 +66,9 @@ Steps to set new environment variables:
   end
   ```
 
-1. Add the environment variable to your local `.env` file for local usage:
+1. If the environment variable is needed to run the application locally, add the
+  environment variable to your local `.env` file for local usage. Also add it
+  to the `.env.example` file as documentation for other developers.
 
   ```
   # .env
@@ -75,15 +77,28 @@ Steps to set new environment variables:
   MICROPURCHASE_GITHUB_SECRET=super_secret_secret
   ```
 
+  ```
+  # .env.example
+
+  MICROPURCHASE_GITHUB_CLIENT_ID=super_secret_key
+  MICROPURCHASE_GITHUB_SECRET=super_secret_secret
+  ```
+
 1. Create a [user-provided service](https://docs.cloudfoundry.org/devguide/services/user-provided.html):
 
-  ```ruby
+  ```bash
   $ cf cups micropurchase-github -p "client_id, secret"
   ```
 
   The above command will interactively prompt you for your GitHub application
-  keys. Important: do not put quotes around input values. Cloud Foundry will do
-  this for you, so if you add a value with quotes it will have double quotes.
+  keys. **Important**: do not put quotes around input values. Cloud Foundry will
+  do this for you, so if you add a value with quotes it will have double quotes.
+
+  The naming convention strings together and dasherizes the user-provided
+  service name and the parameter names to produce environment variables. In the
+  example above, we are setting values for `MICROPURCHASE_GITHUB_CLIENT_ID` and
+  `MICROPURCHASE_GITHUB_SECRET` env vars ('micropurchase-github' + 'client_id'
+  and 'micropurchase-github' + 'secret')
 
 1. Add the service to the manifests:
 
@@ -104,9 +119,19 @@ Steps to set new environment variables:
 1. If you want to bind your service to the app before deploying, you can do so
    manually.
 
-```
-$ cf bind-service micropurchase-staging micropurchase-github
-```
+  ```bash
+  $ cf bind-service micropurchase-staging micropurchase-github
+  ```
+
+1. If you want to update the service parameter values, you can update the
+   user-provided service:
+
+  ```bash
+  $ cf uups micropurchase-github -p 'client_id'
+  ```
+
+  The above command will interactively prompt you for your new GitHub application
+  keys.
 
 ### To deploy a new instance of the app
 
