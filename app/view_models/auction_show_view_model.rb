@@ -31,11 +31,7 @@ class AuctionShowViewModel
   end
 
   def rules_path
-    if auction.type == 'single_bid'
-      '/auction/rules/single-bid'
-    else
-      '/auctions/rules/multi-bid'
-    end
+    "/auctions/rules/#{auction.type.dasherize}"
   end
 
   def status_text
@@ -47,16 +43,6 @@ class AuctionShowViewModel
       'Small-business only'
     else
       'SAM.gov only'
-    end
-  end
-
-  def bid_status_header
-    if over? && auction.bids.any?
-      "Winning bid (#{auction.lowest_bid.bidder.name}):"
-    elsif auction.type == 'single_bid'
-      'Your bid:'
-    else
-      'Current bid:'
     end
   end
 
@@ -118,10 +104,6 @@ class AuctionShowViewModel
     "#{HumanTime.new(time: auction.ended_at).distance_of_time} left"
   end
 
-  def relative_time
-    HumanTime.new(time: auction.started_at).relative_time
-  end
-
   def highlighted_bid_amount_as_currency
     Currency.new(highlighted_bid.amount).to_s
   end
@@ -130,24 +112,19 @@ class AuctionShowViewModel
     Currency.new(auction.lowest_bid.amount).to_s
   end
 
-  def bids
-    auction.bids
-  end
-
   def start_price
     auction.start_price
   end
 
-  def header_partial(flash)
-    if auction.type == 'single_bid'
-      'components/null'
+  def bid_flash_partial
+    if auction.type == 'multi_bid' && (over? || available_and_user_is_bidder?)
+      'auctions/bid_status_header'
     else
-      multi_bid_winning_bid_header(flash)
+      'components/null'
     end
   end
 
   def html_description
-    return '' if auction.description.blank?
     MarkdownRender.new(auction.description).to_s
   end
 
@@ -155,14 +132,18 @@ class AuctionShowViewModel
     status_presenter.deadline_label
   end
 
-  private
-
-  def show_bids?
-    rules.show_bids?
+  def bid_status_class(flash)
+    BidStatusFlashFactory.new(auction: auction, flash: flash, user: current_user).create
   end
 
-  def user_is_winning_bidder?
-    auction.bids.any? && lowest_user_bid == auction.lowest_bid
+  def lowest_bidder_name
+    auction.lowest_bid.bidder.name
+  end
+
+  private
+
+  def available_and_user_is_bidder?
+    available? && user_bids.any?
   end
 
   def lowest_user_bid_amount
@@ -173,38 +154,6 @@ class AuctionShowViewModel
     user_bids.order(amount: :asc).first
   end
 
-  def multi_bid_winning_bid_header(flash)
-    if over?
-      auction_over_header
-    elsif available? && user_is_bidder?
-      auction_available_header(flash)
-    else
-      'components/null'
-    end
-  end
-
-  def auction_over_header
-    if auction.bids.any? && current_user.is_a?(Guest)
-      'auctions/multi_bid/guest_win_header'
-    elsif auction.bids.any? && user_is_winning_bidder?
-      'auctions/over_user_is_winner_header'
-    elsif auction.bids.any? && user_is_bidder?
-      'auctions/over_user_is_bidder_header'
-    else
-      'auctions/no_bids_header'
-    end
-  end
-
-  def auction_available_header(flash)
-    if flash['bid']
-      'auctions/bid_submitted_header'
-    elsif user_is_winning_bidder?
-      'auctions/user_is_winning_bidder_header'
-    else
-      'auctions/user_is_bidder_header'
-    end
-  end
-
   def user_bids
     auction.bids.where(bidder: current_user)
   end
@@ -212,10 +161,6 @@ class AuctionShowViewModel
   def highlighted_bid
     @_highlighted_bid ||=
       HighlightedBid.new(auction: auction, user: current_user).find
-  end
-
-  def user_is_bidder?
-    user_bids.any?
   end
 
   def status_presenter

@@ -23,7 +23,6 @@ class ConfirmBidViewModel
   end
 
   def html_description
-    return '' if auction.description.blank?
     MarkdownRender.new(auction.description).to_s
   end
 

@@ -85,7 +85,7 @@ describe Admin::EditAuctionViewModel do
         view_model = Admin::EditAuctionViewModel.new(auction)
 
         expect(view_model.date_default('delivery_due')).to eq(
-          DcTimePresenter.convert(Date.today).to_date
+          DcTimePresenter.convert(DefaultDateTime.new.convert).to_date
         )
       end
     end
