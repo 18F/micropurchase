@@ -25,6 +25,9 @@ class BidsController < ApplicationController
   def confirm
     bid = PlaceBid.new(params: params, user: current_user, via: via).dry_run
     @confirm_bid = ConfirmBidViewModel.new(auction: Auction.find(params[:auction_id]), bid: bid)
+  rescue UnauthorizedError => error
+    flash[:error] = error.message
+    redirect_to new_auction_bid_path(params[:auction_id])
   end
 
   def create
