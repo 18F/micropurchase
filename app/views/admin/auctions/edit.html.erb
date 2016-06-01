@@ -1,6 +1,8 @@
 <h1>Editing auction</h1>
-<%= simple_form_for [:admin, @auction.record] do |f| %>
-  <%= render partial: 'form', locals: { f: f } %>
-  <%= render partial: 'edit_form', locals: { f: f } %>
-  <%= f.submit class: 'usa-button usa-button-outline' %>
-<% end %>
+<div class="auction-form">
+  <%= simple_form_for [:admin, @auction.record] do |f| %>
+    <%= render partial: 'form', locals: { f: f } %>
+    <%= render partial: 'edit_form', locals: { f: f } %>
+    <%= f.submit class: 'usa-button usa-button-outline' %>
+  <% end %>
+</div>
