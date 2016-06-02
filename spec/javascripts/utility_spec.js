@@ -22,7 +22,7 @@ describe('Utility', function () {
       expect(stardardizeUrl(d)).toBe(d);
     });
 
-    it("it only removes the last forward slash", function(){
+    it("only removes the last forward slash", function(){
       expect(stardardizeUrl(c)).toBe(a);
       expect(stardardizeUrl(a)).not.toBe(c);
       expect(stardardizeUrl(c)).not.toBe(b);
@@ -137,6 +137,7 @@ describe('Utility', function () {
   describe('microp.format.removeGitPrefix', function(){
     var calc = 'https://github.com/18f/calc'
     var accordion = 'https://github.com/18f/accordion'
+    var undefinedProject = undefined
 
     beforeEach(function(){
       removeGitPrefix = microp.format.removeGitPrefix;
@@ -159,6 +160,9 @@ describe('Utility', function () {
       expect(removeGitPrefix('http://github.com/18f')).not.toBe('18f');
     });
 
+    it("handles undefined", function(){
+      expect(removeGitPrefix(undefinedProject)).toBe(undefined);
+    });
   });
 
 

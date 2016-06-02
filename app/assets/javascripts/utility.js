@@ -57,9 +57,12 @@
   };
 
   microp.format.removeGitPrefix = function(str) {
-    return str.includes('https')
-      ? str.split("https://github.com/").join("")
-      : str;
+    if (typeof(str) === 'string'){
+      return str.includes('https')
+          ? str.split("https://github.com/").join("")
+          : str;
+    }
+    return str
   };
 
   microp.format.transformDollars = function(str) {
