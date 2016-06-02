@@ -127,11 +127,13 @@ Steps to set new environment variables:
    user-provided service:
 
   ```bash
-  $ cf uups micropurchase-github -p 'client_id'
+  $ cf uups micropurchase-github -p 'client_id, secret'
   ```
 
-  The above command will interactively prompt you for your new GitHub application
-  keys.
+  The above command will interactively prompt you for your GitHub application
+  keys. **Important**: when updating keys and/or values for a user-provided service,
+  you must update *all* keys for that service. On update, Cloud Foundry removes
+  all previous keys and values from the user-provided service being updated.
 
 ### To deploy a new instance of the app
 
