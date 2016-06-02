@@ -4,9 +4,12 @@ class CreateAuction
   def initialize(params, user)
     @params = params
     @user = user
-    @auction = Auction.new(attributes)
   end
 
+  def perform
+    @auction ||= Auction.new(attributes)
+  end
+  
   private
 
   attr_reader :params, :user

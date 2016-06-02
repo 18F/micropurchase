@@ -36,7 +36,7 @@ class Admin::AuctionsController < ApplicationController
   end
 
   def create
-    @auction = CreateAuction.new(params, current_user).auction
+    @auction = CreateAuction.new(params, current_user).perform
 
     if @auction.save
       respond_to do |format|
