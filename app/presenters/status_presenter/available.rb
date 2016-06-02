@@ -1,4 +1,4 @@
-class AuctionStatus::Available < Struct.new(:auction)
+class StatusPresenter::Available < Struct.new(:auction)
   def start_label
     "Bid start time:"
   end
