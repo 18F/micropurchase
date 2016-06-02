@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-describe BidValidator do
+describe PlaceBidValidator do
   describe '#validate' do
     it 'validates that the bidder is sam accepted' do
       user = create(:user, sam_status: :sam_rejected)
       bid = Bid.new(bidder: user, amount: valid_amount, auction: auction)
 
-      BidValidator.new.validate(bid)
+      PlaceBidValidator.new.validate(bid)
 
       expect(bid.errors.full_messages).to include(
         'You are not allowed to bid on this auction'
@@ -17,7 +17,7 @@ describe BidValidator do
       auction = build(:auction, :future)
       bid = Bid.new(bidder: user, amount: valid_amount, auction: auction)
 
-      BidValidator.new.validate(bid)
+      PlaceBidValidator.new.validate(bid)
 
       expect(bid.errors.full_messages).to include(
         'You are not allowed to bid on this auction'
@@ -29,7 +29,7 @@ describe BidValidator do
       bid = create(:bid, auction: auction, amount: 150)
       bid = Bid.new(bidder: user, amount: 155, auction: auction)
 
-      BidValidator.new.validate(bid)
+      PlaceBidValidator.new.validate(bid)
 
       expect(bid.errors.full_messages).to include(
         'Bids cannot be greater than the current max bid'
@@ -39,7 +39,7 @@ describe BidValidator do
     it 'validates that the bid amount is greater than or equal to zero' do
       bid = Bid.new(bidder: user, amount: -2, auction: auction)
 
-      BidValidator.new.validate(bid)
+      PlaceBidValidator.new.validate(bid)
 
       expect(bid.errors.full_messages).to include(
         'Bid amount out of range'

@@ -5,7 +5,7 @@ class PlaceBid
 
   attr_reader :params, :bidder, :via
 
-  validates_with BidValidator
+  validates_with PlaceBidValidator
 
   def initialize(params:, bidder:, via: nil)
     @params = params

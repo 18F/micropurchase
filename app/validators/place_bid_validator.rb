@@ -1,4 +1,4 @@
-class BidValidator < ActiveModel::Validator
+class PlaceBidValidator < ActiveModel::Validator
   def validate(bid)
     unless user_can_bid?(bid)
       add_error(bid, 'You are not allowed to bid on this auction')
