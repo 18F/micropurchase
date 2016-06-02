@@ -1,19 +1,16 @@
 class PlaceBid
+  include ActiveModel::Validations
+
   BID_INCREMENT = 1
 
-  def initialize(params:, user:, via:nil)
+  attr_reader :params, :bidder, :via
+
+  validates_with BidValidator
+
+  def initialize(params:, bidder:, via: nil)
     @params = params
-    @user = user
+    @bidder = bidder
     @via = via
-  end
-
-  def valid?
-    validate_bid_data
-    bid.errors.empty?
-  end
-
-  def errors
-    bid.errors.full_messages.to_sentence
   end
 
   def perform
@@ -28,19 +25,11 @@ class PlaceBid
   end
 
   def bid
-    @_bid ||= Bid.new(amount: amount, auction: auction, bidder: user, via: via)
+    @_bid ||= Bid.new(amount: amount, auction: auction, bidder: bidder, via: via)
   end
 
   def auction
     @auction ||= Auction.find(params[:auction_id])
-  end
-
-  private
-
-  attr_reader :params, :user, :via
-
-  def validate_bid_data
-    @_validate_bid_data ||= BidValidator.new.validate(bid)
   end
 
   def amount

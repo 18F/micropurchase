@@ -23,20 +23,20 @@ class BidsController < ApplicationController
   end
 
   def confirm
-    bid = PlaceBid.new(params: params, user: current_user, via: via)
+    bid = PlaceBid.new(params: params, bidder: current_user, via: via)
     auction = Auction.find(params[:auction_id])
 
     if bid.valid?
       readonly_bid = bid.dry_run
       @confirm_bid = ConfirmBidViewModel.new(auction: auction, bid: readonly_bid)
     else
-      flash[:error] = bid.errors
+      flash[:error] = bid.errors.full_messages.to_sentence
       redirect_to new_auction_bid_path(auction)
     end
   end
 
   def create
-    @bid = PlaceBid.new(params: params, user: current_user, via: via)
+    @bid = PlaceBid.new(params: params, bidder: current_user, via: via)
 
     if @bid.perform
       respond_to do |format|
@@ -49,10 +49,12 @@ class BidsController < ApplicationController
     else
       respond_to do |format|
         format.html do
-          flash[:error] = @bid.errors
+          flash[:error] = @bid.errors.full_messages.to_sentence
           redirect_to new_auction_bid_path(params[:auction_id])
         end
-        format.json { render json: { error: @bid.errors }, status: 403 }
+        format.json do
+          render json: { error: @bid.errors.full_messages.to_sentence }, status: 403
+        end
       end
     end
   end

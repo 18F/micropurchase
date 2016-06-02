@@ -8,7 +8,7 @@ describe PlaceBid do
       create(:bid, amount: 1000, auction: auction)
       params = { auction_id: auction.id, bid: { amount: '2,000' } }
 
-      place_bid = PlaceBid.new(params: params, user: user)
+      place_bid = PlaceBid.new(params: params, bidder: user)
 
       expect(place_bid).not_to be_valid
     end
@@ -18,7 +18,7 @@ describe PlaceBid do
       auction = create(:auction, :single_bid, :available)
       params = { auction_id: auction.id, bid: { amount: 10 } }
 
-      place_bid = PlaceBid.new(params: params, user: user)
+      place_bid = PlaceBid.new(params: params, bidder: user)
 
       expect(place_bid).to be_valid
     end
@@ -28,7 +28,7 @@ describe PlaceBid do
       auction = create(:auction, :single_bid, :available)
       params = { auction_id: auction.id, bid: { amount: 100000 } }
 
-      place_bid = PlaceBid.new(params: params, user: user)
+      place_bid = PlaceBid.new(params: params, bidder: user)
 
       expect(place_bid).not_to be_valid
     end
@@ -41,7 +41,7 @@ describe PlaceBid do
         auction = create(:auction, :single_bid, :available)
         params = { auction_id: auction.id, bid: { amount: 10 } }
 
-        place_bid = PlaceBid.new(params: params, user: user)
+        place_bid = PlaceBid.new(params: params, bidder: user)
         bid = place_bid.bid
 
         expect { place_bid.perform }.to change { Bid.count }.by(1)
@@ -56,7 +56,7 @@ describe PlaceBid do
         auction = create(:auction, :single_bid, :available)
         params = { auction_id: auction.id, bid: { amount: -10 } }
 
-        place_bid = PlaceBid.new(params: params, user: user)
+        place_bid = PlaceBid.new(params: params, bidder: user)
 
         expect { place_bid.perform }.to change { Bid.count }.by(0)
       end
