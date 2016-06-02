@@ -17,10 +17,9 @@ addons:
   postgresql: '9.3'
   code_climate:
     repo_token: 2ad0d3196c872832cf5d6b34c83bf21dbf0a30e2191ba036be003b01e417a6a1
+after_script:
+  - "./bin/codeclimate-batch --groups 2"
 before_deploy:
-- "./bin/codeclimate-batch --groups 2"
-- npm install -g pa11y-crawl
-- pa11y-crawl --run "bundle exec puma" --ci http://localhost:3000
 - export PATH=$HOME:$PATH
 - travis_retry curl -L -o $HOME/cf.tgz "https://cli.run.pivotal.io/stable?release=linux64-binary&version=6.15.0"
 - tar xzvf $HOME/cf.tgz -C $HOME
