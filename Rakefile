@@ -10,4 +10,4 @@ end
 
 Rails.application.load_tasks
 
-task default: 'jasmine'
+task default: 'jasmine:ci'

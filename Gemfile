@@ -53,7 +53,6 @@ group :development, :test do
   gem 'hakiri', require: false
   gem 'dotenv-rails'
   gem 'jasmine'
-  gem 'jasmine-rails'
 end
 
 group :development do
