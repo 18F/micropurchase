@@ -18,11 +18,16 @@ en:
               invalid:
                "You do not have permission to publish auctions with a start
                price over $%{start_price}"
+            delivery_due_at:
+              blank: "(or 'Due in days') can't be blank"
   controllers:
     admin:
       auctions:
         create:
           success: "Auction created successfully"
+      auction_reports:
+        show:
+          error: "Registration not found for winning bidder DUNS number"
   mailers:
     auction_mailer:
       losing_bidder_notification:
@@ -34,3 +39,8 @@ en:
         sign_off: "Sincerely,"
         from: "The 18f Micropurchase team"
         subject: "18f Micropurchase Auction Status"
+
+  admin:
+    auctions:
+      show:
+        winner_report: "Generate a CSV Report"

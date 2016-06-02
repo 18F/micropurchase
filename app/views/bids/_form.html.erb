@@ -1,0 +1,30 @@
+<%= form_for bid_view_model.new_bid,
+  url: confirm_auction_bids_path(bid_view_model.id),
+  html: { class: 'bid-form' } do |f| %>
+  <div class="usa-width-one-whole">
+    <div class="usa-width-one-half">
+      <%= render partial: bid_view_model.highlighted_bid_info_partial,
+        locals: { bid_view_model: bid_view_model } %>
+    </div>
+
+    <div class="usa-width-one-half">
+      <h2 class="center"><label for="bid_amount">Your bid:</label></h2>
+      <%= f.text_field :amount %>
+    </div>
+  </div>
+
+  <p>
+    Note that all users who submit bids consent to the publication of their GitHub
+    usernames, DUNS numbers, and bid amounts following the conclusion of the
+    bidding process.
+  </p>
+
+  <div class='button-wrapper'>
+    <%= link_to 'Cancel',
+      root_path,
+      class: 'usa-button usa-button-big usa-button-gray cancel' %>
+
+    <%= f.submit 'Submit',
+      class: 'usa-button-big usa-button usa-button-outline submit' %>
+  </div>
+<% end %>

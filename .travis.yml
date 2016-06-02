@@ -1,22 +1,24 @@
 language: ruby
+rvm:
+- ruby-2.3.1
 cache: bundler
 bundler_args: "--without production --binstubs"
 before_script:
 - bundle exec rake db:create
 - bundle exec rake db:migrate
 script: bundle exec rake $TASK
+notifications:
+  email: false
 env:
   global:
   - CF_USERNAME=18f-acq_deployer
   - secure: m/pjI186X+ae3RX5v+ygX5yoFPISKZHRw5/Y2QDlPkhpDVkqYz+5hTZcqAs/LO1epIL6tsCpesuN8d9Rho/j2XbZxNvv56Fsox5Hs8tTWZ4a1APZj0iE2yHh7HLkwK2A1RrOkpgLkAlCctS1lB7EwAUrlywW6dcJb64dxdws4XH4aypoY8ajgTDrGzRXKV8zuEv5rf6BWih3Lm+fg8l/n0UbswGLKq9RKAfSqclW/S8BuUrfsX1VbsBqQPbU86Cyr88vUpq/WcfBaufsCZvtgwSCaoeCl+P15C+qERWC998duwzWyHh6WAHgNGNX2C2nz+9FSXMHR+X1+4BYkOPYmcM+B8hmJkzByzBXjeHfKJMYIyG+jloOMuu9gK/vwX4PjEFxtMnzD7COEKwM7t7kgMTglmkpIvHgTKFVw+wRUKHz4PfODiuDD+NQsXxCI3SUdP0lIyMp83UaaZfYA9CnX52UO9P6hMWHWObD+w7fC+La3HKQR9juaOClxi1IL4RZI3BILtAI/0X7yFbdY/HPGKXyqa6ETc6JwQ/lAC8v+unmSu7ISvp+zZyBjGmbUUluoTtHOK9ZiKl9gd+NscMIi01a8lFlKDY1JF53XSD6oTCtYdocvmcDnDBFBn7+t7A7QLObpo3NCbDKrKK2WIU7Z6QqGLTglScCSquvT/4cK+Q=
-after_script:
-- "./bin/codeclimate-batch --groups 2"
-- npm install -g pa11y-crawl
-- pa11y-crawl --run "bundle exec puma" --ci http://localhost:3000
 addons:
   postgresql: '9.3'
   code_climate:
     repo_token: 2ad0d3196c872832cf5d6b34c83bf21dbf0a30e2191ba036be003b01e417a6a1
+after_script:
+  - "./bin/codeclimate-batch --groups 2"
 before_deploy:
 - export PATH=$HOME:$PATH
 - travis_retry curl -L -o $HOME/cf.tgz "https://cli.run.pivotal.io/stable?release=linux64-binary&version=6.15.0"

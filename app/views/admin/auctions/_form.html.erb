@@ -1,0 +1,19 @@
+<%= f.input :type, collection: Auction.types.keys.to_a %>
+<%= f.input :title %>
+<%= f.input :github_repo, as: :url %>
+<%= f.input :issue_url, as: :url %>
+<%= f.input :summary, as: :text %>
+<%= f.input :description, as: :text %>
+<%= render partial: 'datetime_fields', locals: { field: 'started' } %>
+<%= render partial: 'datetime_fields', locals: { field: 'ended' } %>
+
+<% if @auction.new_record? %>
+  <%= f.input :due_in_days %>
+<% else %>
+  <%= render partial: 'datetime_fields', locals: { field: 'delivery_due' } %>
+<% end %>
+
+<%= f.input :billable_to %>
+<%= f.input :start_price %>
+<%= f.input :published, collection: Auction.publisheds.keys.to_a %>
+<%= f.input :notes, as: :text %>

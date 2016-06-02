@@ -1,5 +1,5 @@
 class Auction < ActiveRecord::Base
-  MAX_START_PRICE = 3500
+  attr_accessor :due_in_days
 
   belongs_to :user
   has_many :bids
@@ -12,10 +12,15 @@ class Auction < ActiveRecord::Base
   # Disable STI
   self.inheritance_column = :__disabled
 
-  validates :end_datetime, presence: true
-  validates :start_datetime, presence: true
+  validates :ended_at, presence: true
+  validates :started_at, presence: true
+  validates :start_price, presence: true
+  validates :title, presence: true
   validates :user, presence: true
   validate :start_price_equal_to_or_less_than_max_if_not_contracting_officer
+  validates :summary, presence: true, if: :published?
+  validates :description, presence: true, if: :published?
+  validates :delivery_due_at, presence: true, if: :published?
 
   def lowest_bid
     lowest_bids.first
@@ -32,12 +37,12 @@ class Auction < ActiveRecord::Base
   end
 
   def start_price_equal_to_or_less_than_max_if_not_contracting_officer
-    if user && !user.contracting_officer? && start_price > MAX_START_PRICE
+    if user && !user.contracting_officer? && start_price > AuctionThreshold::MICROPURCHASE
       errors.add(
         :start_price,
         I18n.t(
           'activerecord.errors.models.auction.attributes.start_price.invalid',
-          start_price: MAX_START_PRICE
+          start_price: AuctionThreshold::MICROPURCHASE
         )
       )
     end

@@ -2,47 +2,41 @@ class Admin::AuctionsController < ApplicationController
   before_filter :require_admin
 
   def index
-    @auctions = Auction.all.map { |auction| AdminAuctionPresenter.new(auction) }
+    auctions = Auction.all
+    @auctions = auctions.map { |auction| Admin::AuctionListItem.new(auction) }
 
     respond_to do |format|
       format.html
       format.json do
-        render json: @auctions, each_serializer: Admin::AuctionSerializer
+        render json: auctions, each_serializer: Admin::AuctionSerializer
       end
     end
   end
 
   def show
-    @auction = AdminAuctionPresenter.new(Auction.find(params[:id]))
+    auction = Auction.find(params[:id])
+    @auction = Admin::AuctionShow.new(auction)
 
     respond_to do |format|
       format.html
       format.json do
-        render json: @auction, serializer: Admin::AuctionSerializer
+        render json: auction, serializer: Admin::AuctionSerializer
       end
     end
   end
 
   def preview
     auction = Auction.find(params[:id])
-    @view_model = AuctionShowViewModel.new(current_user, auction)
+    @auction = AuctionShowViewModel.new(auction: auction, current_user: current_user)
     render 'auctions/show'
   end
 
   def new
-    if params[:auction]
-      parser = AuctionParser.new(params)
-      auction = Auction.new(parser.general_attributes)
-    else
-      auction = Auction.new
-    end
-
-    @auction = AdminAuctionPresenter.new(auction)
+    @auction = Admin::NewAuctionViewModel.new
   end
 
   def create
     @auction = CreateAuction.new(params, current_user).auction
-    auction = AdminAuctionPresenter.new(@auction)
 
     if @auction.save
       respond_to do |format|
@@ -51,51 +45,44 @@ class Admin::AuctionsController < ApplicationController
           redirect_to admin_auctions_path
         end
         format.json do
-          render json: auction, serializer: Admin::AuctionSerializer
+          render json: @auction, serializer: Admin::AuctionSerializer
         end
       end
     else
-      render_errors(@auction.errors.full_messages.to_sentence, :new)
+      error_messages = @auction.errors.full_messages.to_sentence
+      respond_to do |format|
+        format.html do
+          flash[:error] = error_messages
+          @auction = Admin::NewAuctionViewModel.new
+          render :new
+        end
+        format.json { render json: { error: error_messages } }
+      end
     end
+  end
+
+  def edit
+    @auction = Admin::EditAuctionViewModel.new(Auction.find(params[:id]))
   end
 
   def update
     auction = Auction.find(params[:id])
-    UpdateAuction.new(auction, params, current_user).perform
-    auction.reload
-    auction = AdminAuctionPresenter.new(auction)
-
-    respond_to do |format|
-      format.html { redirect_to admin_auctions_path }
-      format.json do
-        render json: auction, serializer: Admin::AuctionSerializer
+    if UpdateAuction.new(auction, params, current_user).perform
+      respond_to do |format|
+        format.html { redirect_to admin_auctions_path }
+        format.json do
+          render json: auction, serializer: Admin::AuctionSerializer
+        end
       end
-    end
-  rescue ArgumentError => e
-    respond_error(e, :edit)
-  end
-
-  def edit
-    auction = Auction.find(params[:id])
-    @auction = AdminAuctionPresenter.new(auction)
-  end
-
-  private
-
-  def respond_error(exception, path)
-    message = exception.message
-    render_errors(message, path)
-  end
-
-  def render_errors(error_message, path)
-    respond_to do |format|
-      format.html do
-        flash[:error] = error_message
-        render path
-      end
-
-      format.json do
-        render json: { error: error_message }
+    else
+      error_messages = auction.errors.full_messages.to_sentence
+      respond_to do |format|
+        format.html do
+          flash[:error] = error_messages
+          @auction = Admin::EditAuctionViewModel.new(auction)
+          render :edit
+        end
+        format.json { render json: { error: error_messages } }
       end
     end
   end

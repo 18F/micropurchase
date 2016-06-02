@@ -9,11 +9,9 @@
       "minItems": 1,
       "items": {
         "required": [
-          "issue_url",
-          "github_repo",
           "start_price",
-          "start_datetime",
-          "end_datetime",
+          "started_at",
+          "ended_at",
           "title",
           "description",
           "id",
@@ -23,21 +21,19 @@
         ],
         "properties": {
           "issue_url": {
-            "type": "string",
-            "minLength": 1
+            "type": "string"
           },
           "github_repo": {
-            "type": "string",
-            "minLength": 1
+            "type": "string"
           },
           "start_price": {
             "type": "number"
           },
-          "start_datetime": {
+          "started_at": {
             "type": "date-time",
             "minLength": 1
           },
-          "end_datetime": {
+          "ended_at": {
             "type": "date-time",
             "minLength": 1
           },

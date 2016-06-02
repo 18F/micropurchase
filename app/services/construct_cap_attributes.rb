@@ -5,8 +5,8 @@ class ConstructCapAttributes
   RECURRING = false
   URGENCY = 20
 
-  def initialize(auction_presenter)
-    @auction = auction_presenter
+  def initialize(auction)
+    @auction = auction
   end
 
   def perform
@@ -29,26 +29,28 @@ class ConstructCapAttributes
 
   private
 
-  def product_name_and_description
-    %(Micropurchase for '#{@auction.title}'.
+  attr_reader :auction
 
-      Link: #{@auction.url}
+  def product_name_and_description
+    %(Micropurchase for '#{auction.title}'.
+
+      Link: #{url}
 
       Summary:
 
-      #{@auction.summary})
+      #{auction.summary})
   end
 
   def link_to_product
-    @auction.delivery_url
+    auction.delivery_url
   end
 
   def justification
-    "Billable to the '#{@auction.billable_to}' Tock line item."
+    "Billable to the '#{auction.billable_to}' Tock line item."
   end
 
   def cost_per_unit
-    @auction.winning_bid.amount
+    winning_bid.amount
   end
 
   def date_requested
@@ -56,9 +58,17 @@ class ConstructCapAttributes
   end
 
   def additional_info
-    %(Vendor name: #{@auction.winning_bid.bidder.name}
-      Vendor email: #{@auction.winning_bid.bidder.email}
-      Vendor DUNS: #{@auction.winning_bid.bidder.duns_number}
-      Use the following credit card form: #{@auction.winning_bid.bidder.credit_card_form_url}.)
+    %(Vendor name: #{winning_bid.bidder.name}
+      Vendor email: #{winning_bid.bidder.email}
+      Vendor DUNS: #{winning_bid.bidder.duns_number}
+      Use the following credit card form: #{winning_bid.bidder.credit_card_form_url}.)
+  end
+
+  def winning_bid
+    WinningBid.new(auction).find
+  end
+
+  def url
+    AuctionUrl.new(auction).find
   end
 end

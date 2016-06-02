@@ -5,26 +5,61 @@ describe Auction do
     it { should belong_to(:user) }
   end
 
-  describe "Validations" do
-    it { should validate_presence_of(:user) }
+  describe 'Validations' do
+    context 'on create' do
+      it { should validate_presence_of(:ended_at) }
+      it { should validate_presence_of(:started_at) }
+      it { should validate_presence_of(:start_price) }
+      it { should validate_presence_of(:title) }
+      it { should validate_presence_of(:user) }
 
-    describe "starting price validations" do
-      context "creator is admin" do
-        it "does not allow auction to have start price above 3500" do
-          user = create(:admin_user)
-          auction = build(:auction, user: user, start_price: 5000)
+      describe "starting price validations" do
+        context "creator is admin" do
+          it "does not allow auction to have start price above 3500" do
+            user = create(:admin_user)
+            auction = build(:auction, user: user, start_price: 5000)
 
-          expect(auction).not_to be_valid
+            expect(auction).not_to be_valid
+          end
+        end
+
+        context "creator is contracting officer" do
+          it "allows auctions to have a start price over 3500" do
+            user = create(:contracting_officer)
+            auction = build(:auction, user: user, start_price: 5000)
+
+            expect(auction).to be_valid
+          end
         end
       end
+    end
 
-      context "creator is contracting officer" do
-        it "allows auctions to have a start price over 3500" do
-          user = create(:contracting_officer)
-          auction = build(:auction, user: user, start_price: 5000)
+    context 'when set to published' do
+      it 'validates presence of summary' do
+        auction = create(:auction, published: :unpublished)
 
-          expect(auction).to be_valid
-        end
+        auction.published = :published
+        auction.summary = nil
+
+        expect(auction).to be_invalid
+      end
+
+      it 'validates presence of delivery deadline' do
+        auction = create(:auction, published: :unpublished)
+
+        auction.published = :published
+        auction.delivery_due_at = nil
+
+        expect(auction).to be_invalid
+      end
+
+      it 'validates presence of description' do
+        auction = create(:auction, published: :unpublished)
+
+        auction.published = :published
+        auction.description = nil
+
+        expect(auction).to be_invalid
       end
     end
   end

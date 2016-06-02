@@ -10,6 +10,18 @@ FactoryGirl.define do
     sam_status :duns_blank
     credit_card_form_url 'https://some-website.com/pay'
 
+    trait :small_business do
+      duns_number { FakeSamApi::SMALL_BUSINESS_DUNS }
+      sam_status { :sam_accepted }
+      small_business { true }
+    end
+
+    trait :not_small_business do
+      duns_number { FakeSamApi::BIG_BUSINESS_DUNS }
+      sam_status { :sam_accepted }
+      small_business { false }
+    end
+
     factory :admin_user do
       github_id { Admins.github_ids.first }
 
@@ -17,5 +29,6 @@ FactoryGirl.define do
         contracting_officer true
       end
     end
+
   end
 end

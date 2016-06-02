@@ -1,22 +1,22 @@
 class Rules::SealedBid < Rules::BaseRules
   def winning_bid
-    if auction.available?
-      NullBidPresenter.new
+    if auction_available?
+      NullBid.new
     else
       auction.lowest_bid
     end
   end
 
   def veiled_bids(user)
-    if auction.available?
-      auction.bids.select { |bid| bid.bidder == user }
+    if auction_available?
+      auction.bids.where(bidder: user)
     else
       auction.bids
     end
   end
 
   def user_can_bid?(user)
-    super && !auction.bids.any? { |b| b.bidder == user }
+    super && auction.bids.where(bidder: user).empty?
   end
 
   def max_allowed_bid
@@ -24,30 +24,6 @@ class Rules::SealedBid < Rules::BaseRules
   end
 
   def show_bids?
-    !auction.available?
-  end
-
-  def partial_prefix
-    'single_bid'
-  end
-
-  def formatted_type
-    'single-bid'
-  end
-
-  def highlighted_bid(user)
-    if auction.available?
-      auction.bids.detect { |bid| bid.bidder_id == user.id } || NullBidPresenter.new
-    else
-      auction.lowest_bid
-    end
-  end
-
-  def highlighted_bid_label
-    'Your bid:'
-  end
-
-  def auction_rules_href
-    '/auction/rules/single-bid'
+    !auction_available?
   end
 end

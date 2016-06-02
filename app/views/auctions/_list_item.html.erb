@@ -1,30 +1,45 @@
-<div class='usa-width-one-whole issue-list-item'>
-  <div class="usa-grid">
+<div class='usa-width-one-half issue-list-item'>
+  <div class="usa-grid issue-content-wrapper">
     <div class='usa-width-one-whole issue-label'>
       <h3 class='issue-title'>
-        <a href="<%= auction_path(auction) %>"><%= auction.title %></a> <span class="usa-label-big <%= auction.label_class %>"><%= auction.label %></span>
+        <div class="issue-ribbon">
+          <span class="<%= auction.label_class %>"><%= auction.label %></span>
+        </div>
+        <%= link_to auction.title, auction_path(auction.id) %>
       </h3>
+      <div class="issue-vitals">
+        <div class="issue-bid-deadline">
+          <%= auction.relative_time %>
+        </div>
+        <%= render partial: auction.winning_bid_partial,
+          locals: { auction: auction } %>
+      </div>
       <p class='issue-description'>
-        <%=h raw auction.html_summary %><a class="issue-list-item-details" href="<%= auction_path(auction) %>">View details <icon class="fa fa-angle-double-right"></icon></a>
+        <%= auction.html_summary %>
       </p>
-      <p><%= auction.formatted_type.capitalize %></p>
     </div>
   </div>
   <div class="usa-grid issue-bid-details">
     <div class='usa-width-one-whole issue-bids-info'>
       <div class="usa-grid-full">
-      <% if auction.available? %>
-        <%= render partial: 'auctions/bids_and_form', locals: {auction: auction} %>
+        <ul class="issue-details-list">
+          <%= render partial: auction.project_label_partial,
+            locals: { auction: auction } %>
+          <li class="issue-details-list-item">
+            <div class="issue-details-label">Type</div>
+            <div class="issue-details-title">
+              <%= auction.capitalized_formatted_type %>
+            </div>
+          </li>
 
-        <div class="issue-bids-info-item">
-          <% if auction.show_bid_button? %>
-            <a href="<%= new_auction_bid_path(auction) %>" class='usa-button usa-button-outline-inverse button-bid'>Bid <icon class="fa fa-angle-double-right"></icon></a>
-          <% end %>
-        </div>
-      <% else %>
-        <%= render partial: 'auctions/winning_bid', locals: {auction: auction} %>
-      <% end %>
-    </div>
+          <li class="issue-details-list-item">
+            <div class="issue-details-label">Eligibility</div>
+            <div class="issue-details-title">
+              <%= auction.eligibility_label %>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

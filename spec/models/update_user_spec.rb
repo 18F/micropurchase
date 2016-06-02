@@ -19,6 +19,49 @@ RSpec.describe UpdateUser do
     )
   end
 
+  context 'when SAM.gov says the vendor is a small business' do
+    it 'sets small_business to true' do
+      user = create(:user)
+      params = ActionController::Parameters.new(
+        id: user.id,
+        user: {
+          name: Faker::Name.name,
+          duns_number: FakeSamApi::SMALL_BUSINESS_DUNS,
+          email: "random#{rand(10000)}@example.com",
+          credit_card_form_url: user.credit_card_form_url
+        }
+      )
+      UpdateUser.new(params, user).save
+
+      Delayed::Worker.new.work_off
+      user.reload
+
+      expect(user.small_business).to eq(true)
+    end
+  end
+
+  context 'when SAM.gov (via Samwise) says the vendor is not a small business' do
+    it 'does not set small_business to true' do
+
+      user = create(:user)
+      params = ActionController::Parameters.new(
+        id: user.id,
+        user: {
+          name: Faker::Name.name,
+          duns_number: FakeSamApi::BIG_BUSINESS_DUNS,
+          email: "random#{rand(10000)}@example.com",
+          credit_card_form_url: user.credit_card_form_url
+        }
+      )
+      UpdateUser.new(params, user).save
+
+      Delayed::Worker.new.work_off
+      user.reload
+
+      expect(user.small_business).to eq(false)
+    end
+  end
+
   context 'when current user is not the same as the user being edited' do
     let(:other_user) { FactoryGirl.create(:user) }
     let(:user_id) { other_user.id }

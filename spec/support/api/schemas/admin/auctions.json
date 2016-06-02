@@ -12,9 +12,9 @@
           "issue_url",
           "github_repo",
           "start_price",
-          "start_datetime",
-          "end_datetime",
-          "delivery_deadline",
+          "started_at",
+          "ended_at",
+          "delivery_due_at",
           "delivery_url",
           "cap_proposal_url",
           "awardee_paid_status",
@@ -29,43 +29,38 @@
         ],
         "properties": {
           "issue_url": {
-            "type": "string",
-            "minLength": 1
+            "type": "string"
           },
           "github_repo": {
-            "type": "string",
-            "minLength": 1
+            "type": "string"
           },
           "start_price": {
             "type": "number"
           },
-          "start_datetime": {
+          "started_at": {
             "type": "date-time",
             "minLength": 1
           },
-          "end_datetime": {
+          "ended_at": {
             "type": "date-time",
             "minLength": 1
           },
-          "delivery_deadline": {
+          "delivery_due_at": {
             "type": "date-time",
             "minLength": 1
           },
           "delivery_url": {
-            "type": ["string", "null"],
-            "minLength": 1
+            "type": ["string", "null"]
           },
           "cap_proposal_url": {
-            "type": ["string", "null"],
-            "minLength": 1
+            "type": ["string"]
           },
           "awardee_paid_status": {
-            "type": ["string", "null"],
+            "type": ["string"],
             "minLength": 1
           },
           "notes": {
-            "type": ["string", "null"],
-            "minLength": 1
+            "type": ["string"]
           },
           "title": {
             "type": "string",
@@ -174,7 +169,7 @@
                     "email",
                     "sam_status",
                     "id",
-                    "github_login"  
+                    "github_login"
                   ]
                 }
               }

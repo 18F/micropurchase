@@ -1,5 +1,8 @@
 # How We Are Trying To Limit Technical Debt
 
+**UNDER CONSTRUCTION: We are in the process of renovating our models so the class layout described here is out of date, although some of the general principles still apply.**
+
+
 Rails is a great framework for getting started quickly. You just need
 to generate a few models and off you go! The problem is that this
 invariably leads to unused and undermaintained code accumulating in
@@ -43,7 +46,7 @@ functionality. Here is a
 if you wanted a bit more background, but this is how we apply it to
 this project.
 
-If you don't now what a Decorator is, it's an object that wraps
+If you don't know what a Decorator is, it's an object that wraps
 another object inside of it and can delegate some methods to the
 internal object directly and define new methods of its own.
 

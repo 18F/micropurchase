@@ -21,6 +21,8 @@
 @import 'components/nav-dropdown';
 @import 'components/accordion';
 @import 'components/drawer';
+@import 'components/nav-button';
+@import 'components/ribbon';
 
 @import 'blocks/header';
 @import 'blocks/footer';
@@ -50,6 +52,11 @@ body.admin {
   }
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
 #logo {
   line-height: 0;

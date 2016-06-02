@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.3.1'
+
 gem 'rails', '4.2.6'
 gem 'pg'
 gem 'sass-rails', '~> 5.0'
@@ -13,13 +15,12 @@ gem 'email_validator'
 gem 'validate_url'
 gem 'redcarpet'
 gem 'puma'
-gem 'samwise', github: '18f/samwise', branch: 'master'
+gem 'samwise', '~> 0.3.0'
 gem 'octokit', '~> 4.0'
 gem 'rack-cors', require: 'rack/cors'
 gem 'active_model_serializers'
 gem 'business_time'
 gem 'holidays'
-gem 'factory_girl_rails'
 gem 'simple_form'
 gem 'delayed_job_active_record'
 gem 'daemons'
@@ -30,8 +31,6 @@ group :test do
   gem "codeclimate-test-reporter", require: nil
   gem 'codeclimate_batch', require: nil
   gem 'dotenv'
-  gem 'webmock'
-  gem 'json-schema'
   gem 'db-query-matchers'
   gem 'json-schema'
   gem 'shoulda-matchers'
@@ -43,11 +42,11 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'cucumber-rails', require: false
   gem 'capybara'
-  gem 'capybara-screenshot'
   gem 'poltergeist'
   gem 'byebug'
   gem 'pry'
   gem 'database_cleaner'
+  gem 'factory_girl_rails'
   gem 'faker'
   gem 'timecop'
   gem 'brakeman', require: false
@@ -67,4 +66,5 @@ end
 group :production, :staging do
   gem 'cf-app-utils'
   gem 'rails_12factor'
+  gem 'newrelic_rpm'
 end

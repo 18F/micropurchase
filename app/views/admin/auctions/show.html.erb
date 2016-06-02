@@ -2,34 +2,18 @@
 
 <div class='usa-width-one-whole'>
   <div class='usa-width-one-sixth'>
-    <% if @auction.available? %>
-      <%= image_tag 'issue-icon.png', class: 'issue-icon' %>
-    <% else %>
-      <span class=''>not live</span>
-    <% end %>
+    <%= render partial: @auction.status_partial, locals: { auction: @auction } %>
   </div>
   <div class='usa-width-one-fourth'>
-    <b>Starts:</b> <%= DcTimePresenter.convert(@auction.start_datetime).to_s(:long) %>
+    <b>Starts:</b> <%= @auction.started_at %>
   </div>
   <div class='usa-width-one-fourth'>
-    <b>Ends:</b> <%= DcTimePresenter.convert(@auction.end_datetime).to_s(:long) %>
+    <b>Ends:</b> <%= @auction.ended_at %>
   </div>
 </div>
-<p><%=h raw @auction.html_summary %></p>
-<p><%=h raw @auction.html_description %></p>
+<p><%= @auction.html_summary %></p>
+<p><%= @auction.html_description %></p>
 
 <div class='usa-grid'>
-  <% if @auction.bids? %>
-  <h2>Current Bids:</h2>
-
-    <% @auction.bids.each do |bid| %>
-      <div class='usa-width-one-whole'>
-        <div class='usa-width-one-fourth bidder-name'><%= bid.bidder_name %></div>
-        <div class='usa-width-one-fourth bidder-duns-number'><%= bid.bidder_duns_number %></div>
-        <div class='usa-width-one-fourth amount'><%= number_to_currency(bid.amount) %></div>
-        <div class='usa-width-one-fourth amount'><%= bid.time %></div>
-      </div>
-    <% end %>
-  <% else %>
-  <% end %>
+  <%= render partial: @auction.bids_partial, locals: { auction: @auction } %>
 </div>

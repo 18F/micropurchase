@@ -4,7 +4,7 @@ class AuctionQuery
   end
 
   [
-    :delivery_deadline_expired,
+    :delivery_due_at_expired,
     :accepted,
     :not_evaluated,
     :delivered,
@@ -24,9 +24,22 @@ class AuctionQuery
     end
   end
 
+  def active_auction_count
+    public_index
+      .started_at_in_past
+      .ended_at_in_future
+      .count
+  end
+
+  def upcoming_auction_count
+    public_index
+      .started_at_in_future
+      .count
+  end
+
   def complete_and_successful
     @relation
-      .delivery_deadline_expired
+      .delivery_due_at_expired
       .delivered
       .accepted
       .cap_submitted
@@ -35,7 +48,7 @@ class AuctionQuery
 
   def payment_pending
     @relation
-      .delivery_deadline_expired
+      .delivery_due_at_expired
       .delivered
       .accepted
       .cap_submitted
@@ -44,7 +57,7 @@ class AuctionQuery
 
   def payment_needed
     @relation
-      .delivery_deadline_expired
+      .delivery_due_at_expired
       .delivered
       .accepted
       .cap_not_submitted
@@ -53,14 +66,14 @@ class AuctionQuery
 
   def evaluation_needed
     @relation
-      .delivery_deadline_expired
+      .delivery_due_at_expired
       .delivered
       .not_evaluated
   end
 
   def delivery_past_due
     @relation
-      .delivery_deadline_expired
+      .delivery_due_at_expired
       .not_delivered
   end
 
@@ -69,6 +82,13 @@ class AuctionQuery
       .published
       .with_bids
       .in_reverse_chron_order
+  end
+
+  def bids_index(id)
+    @relation
+      .with_bids_and_bidders
+      .published
+      .find(id)
   end
 
   def public_find(id)
@@ -85,8 +105,20 @@ class AuctionQuery
   end
 
   module Scopes
-    def delivery_deadline_expired
-      where('delivery_deadline < ?', Time.zone.now)
+    def delivery_due_at_expired
+      where('delivery_due_at < ?', Time.current)
+    end
+
+    def started_at_in_past
+      where('started_at < ?', Time.current)
+    end
+
+    def started_at_in_future
+      where('started_at > ?', Time.current)
+    end
+
+    def ended_at_in_future
+      where('ended_at > ?', Time.current)
     end
 
     def accepted
@@ -114,19 +146,15 @@ class AuctionQuery
     end
 
     def paid
-      where(
-        awardee_paid_status: paid_enum
-      )
+      where(awardee_paid_status: paid_enum)
     end
 
     def not_paid
-      where(
-        awardee_paid_status: not_paid_enum
-      )
+      where(awardee_paid_status: not_paid_enum)
     end
 
     def in_reverse_chron_order
-      order('end_datetime DESC')
+      order('ended_at DESC')
     end
 
     def with_bids

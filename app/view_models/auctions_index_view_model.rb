@@ -1,14 +1,23 @@
-class AuctionsIndexViewModel < Struct.new(:current_user, :auctions_query)
-  def auctions
-    @auctions ||= auctions_query.map { |auction| AuctionViewModel.new(current_user, auction) }
+class AuctionsIndexViewModel
+  attr_reader :auctions, :current_user
+
+  def initialize(auctions:, current_user:)
+    @auctions = auctions
+    @current_user = current_user
   end
 
   def active_auction_count
-    auctions.count { |i| i.start_datetime < Time.now && Time.now < i.end_datetime }
+    AuctionQuery.new.active_auction_count
   end
 
   def upcoming_auction_count
-    auctions.count { |i| Time.now < i.start_datetime }
+    AuctionQuery.new.upcoming_auction_count
+  end
+
+  def auction_view_models
+    auctions.map do |auction|
+      AuctionListItem.new(auction: auction, current_user: current_user)
+    end
   end
 
   def auctions_list_partial
@@ -16,14 +25,6 @@ class AuctionsIndexViewModel < Struct.new(:current_user, :auctions_query)
       'empty_auctions'
     else
       'auctions_list'
-    end
-  end
-
-  def auctions_list_previous_partial
-    if auctions.empty?
-      'empty_auctions'
-    else
-      'auctions_list_previous'
     end
   end
 end

@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   root 'auctions#index'
 
-  get '/auctions/winners/archive', to: 'auctions#previous_winners_archive'
   get '/auctions/winners', to: 'auctions#previous_winners'
 
   get '/auctions/rules/single-bid', to: 'auctions#single_bid_rules'
@@ -28,6 +27,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :auctions
     resources :users, only: [:index, :edit, :update, :show]
+    resources :auction_reports, only: [:show]
   end
 
   get '/auth/:provider/callback', to: 'authentications#create'

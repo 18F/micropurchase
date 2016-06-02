@@ -2,6 +2,7 @@
 .auction-detail-panel {
   border: 1px solid #ccc;
   border-radius: $border-radius;
+  margin-bottom: $base-padding-large;
 
   .auction-info {
     margin-top: 2rem;
@@ -15,15 +16,8 @@
   }
 
   .auction-more-info {
-
-    background-color: $primary-darkest;
+    background-color: $color-gray-light;
     padding: 2rem;
-
-    p,
-    a,
-    i {
-      color: $color-white;
-    }
 
     p {
       padding-bottom: 1rem;
@@ -40,42 +34,6 @@
   }
 }
 
-
-.auction-label-expiring {
-    background-color: $color-gold !important;
-    color: $default-color !important;
-}
-
-.auction-label-over {
-    background-color: $color-secondary-dark !important;
-}
-
-.auction-label-future {
-  background-color: $branding-bright;
-  color: $default-color !important;
-}
-
-.auction-label-open {
-    background-color: $color-green !important;
-}
-
-a[class*="auction-label-"],
-span[class*="auction-label-"] {
-  margin-left: $base-padding-lite;
-
-}
-
-.auction-label,
-.auction-label-info {
-  display: inline-block;
-}
-
-.auction-label {
-  font-size: $h3-font-size;
-  font-weight: $font-normal;
-}
-
-.auction-label-info {
-  font-size: $h4-font-size;
-  padding-bottom: $site-margins;
+.auction-detail-bid {
+  padding-bottom: $base-padding;
 }
