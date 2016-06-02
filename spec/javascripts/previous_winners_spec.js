@@ -20,9 +20,9 @@ describe('PreviousWinners', function () {
     charts = winners.charts
   })
 
-  describe('receive mock data', function () {
+  describe('mock data', function () {
 
-    it('establish the object is correct', function() {
+    it('is the correct data', function() {
       expect(mock.auctions).not.toBe(undefined)
       expect(mock.auctions).toEqual(jasmine.any(Object))
       expect(mock.auctions.length).toEqual(4)
@@ -30,7 +30,7 @@ describe('PreviousWinners', function () {
     })
   })
 
-  describe('there is a winnersPage object', function() {
+  describe('winners page object', function() {
 
     it("called winners, and it exists", function(){
       expect(winners).not.toBe(undefined)
@@ -38,20 +38,20 @@ describe('PreviousWinners', function () {
     })
   })
 
-  describe('there is a Charts object', function() {
+  describe('Charts object', function() {
 
-    it("it exists", function(){
+    it("exists", function(){
       expect(charts).not.toBe(undefined)
       expect(charts).toEqual(jasmine.any(Object))
     })
 
-    it("it has an attribute, textRotation", function(){
+    it("has an attribute, textRotation", function(){
       expect(charts.textRotation).not.toBe(undefined)
       expect(charts.textRotation).toEqual(jasmine.any(Number))
     })
 
 
-    it("it has several methods", function(){
+    it("has several methods", function(){
       expect(charts.create).toEqual(jasmine.any(Object))
       expect(charts.load).toEqual(jasmine.any(Object))
       expect(charts.generate).toEqual(jasmine.any(Function))
@@ -62,57 +62,57 @@ describe('PreviousWinners', function () {
     })
   })
 
-  describe('there is a Metrics object', function() {
+  describe('Metrics object', function() {
 
-    it("and it exists", function(){
+    it("exists", function(){
       expect(metrics).not.toBe(undefined)
       expect(metrics).toEqual(jasmine.any(Object))
     })
 
-    it("with the correct number of auctions", function(){
+    it("has the correct number of auctions", function(){
       expect(metrics.auctions).not.toBe(undefined)
       expect(metrics.auctions).toEqual(jasmine.any(Array))
       expect(metrics.auctions.length).toBe(4)
     })
 
 
-    it("with the correct auction duration", function(){
+    it("has the correct auction duration", function(){
       expect(metrics.auctionLength).not.toBe(undefined)
       expect(metrics.auctionLength).toEqual(7.25)
     })
 
-    it("with the correct average winning bid", function(){
+    it("has the correct average winning bid", function(){
       expect(metrics.avgWinningBids).not.toBe(undefined)
       expect(metrics.avgWinningBids).toEqual(2112.5)
     })
 
-    it("with the correct number of bids per auction", function(){
+    it("has the correct number of bids per auction", function(){
       expect(metrics.bidsPerAuction).not.toBe(undefined)
       expect(metrics.bidsPerAuction).toEqual(3.25)
     })
 
-    it("with the correct number of repos", function(){
+    it("has the correct number of repos", function(){
       expect(metrics.repos).not.toBe(undefined)
       expect(metrics.repos).toEqual(4)
     })
 
-    it("with the correct number of unique winners", function(){
+    it("has the correct number of unique winners", function(){
       expect(metrics.uniqueWinners).not.toBe(undefined)
       expect(metrics.uniqueWinners).toEqual(3)
     })
 
-    it("with the correct number of bidding vendors", function(){
+    it("has the correct number of bidding vendors", function(){
       expect(metrics.biddingVendors).not.toBe(undefined)
       expect(metrics.biddingVendors).toEqual(8)
     })
 
-    it("with javascript selectors", function(){
+    it("has javascript selectors", function(){
       expect(metrics.selectors).not.toBe(undefined)
       expect(metrics.selectors).toEqual(jasmine.any(Object))
     })
   })
 
-  describe('donut 1 data', function () {
+  describe('donut 1 (Projects) data', function () {
     beforeEach(function(){
       settings = charts.settings.donut1
       matcher = {
@@ -136,7 +136,7 @@ describe('PreviousWinners', function () {
     })
   })
 
-  describe('donut 2 data', function () {
+  describe('donut 2 (Languages) data', function () {
     beforeEach(function(){
       settings = charts.settings.donut2
       matcher = {
@@ -157,12 +157,12 @@ describe('PreviousWinners', function () {
       expect(settings.cols).toEqual(jasmine.any(Array))
     })
 
-    it('the array has the correct objects', function(){
+    it('has an array with the correct objects', function(){
       expect(settings).toEqual(matcher)
     })
   })
 
-  describe('chart 2 data', function () {
+  describe('chart 2 (Average winning bid) data', function () {
     beforeEach(function(){
       settings = charts.settings.chart2
       matcher = {
@@ -190,12 +190,12 @@ describe('PreviousWinners', function () {
       expect(settings).toEqual(matcher)
     })
 
-    it('correct number of columns', function(){
+    it('has the correct number of columns', function(){
       expect(settings.cols.length).toEqual(4)
     })
   })
 
-  describe('chart 4 data', function () {
+  describe('chart 4 (Histogram timeseries) data', function () {
     beforeEach(function(){
       settings = charts.settings.chart4
       matcher = {
@@ -212,16 +212,16 @@ describe('PreviousWinners', function () {
       expect(settings).toEqual(matcher)
     })
 
-    it('correct number of columns', function(){
+    it('has the correct number of columns', function(){
       expect(settings.cols.length).toEqual(4)
     })
 
-    it('correct x attribute', function(){
+    it('has the correct x attribute', function(){
       expect(settings.x).toEqual(matcher.x)
     })
   })
 
-  describe('chart 5 data', function () {
+  describe('chart 5 (Bubble chart) data', function () {
     beforeEach(function(){
       settings = charts.settings.chart5
       matcher = {
@@ -253,11 +253,11 @@ describe('PreviousWinners', function () {
       expect(settings).toEqual(matcher)
     })
 
-    it('winning bids are correct', function(){
+    it('has the correct winning bids', function(){
       expect(settings.z).toEqual(matcher.z)
     })
 
-    it('dates are correct', function(){
+    it('has the correct dates', function(){
       expect(settings.xs).toEqual(matcher.xs)
     })
   })
