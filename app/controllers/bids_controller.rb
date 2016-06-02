@@ -44,9 +44,7 @@ class BidsController < ApplicationController
           flash[:bid] = "success"
           redirect_to auction_path(@bid.auction)
         end
-        format.json do
-          render json: @bid.bid, serializer: BidSerializer
-        end
+        format.json { render json: @bid.bid, serializer: BidSerializer }
       end
     else
       respond_to do |format|
@@ -54,9 +52,7 @@ class BidsController < ApplicationController
           flash[:error] = @bid.errors
           redirect_to new_auction_bid_path(params[:auction_id])
         end
-        format.json do
-          render json: { error: @bid.errors }, status: 403
-        end
+        format.json { render json: { error: @bid.errors }, status: 403 }
       end
     end
   end
