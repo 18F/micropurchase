@@ -117,6 +117,21 @@ RSpec.describe BidsController, controller: true do
     end
   end
 
+  describe '#confirm' do
+    context 'bid is bad' do
+      it "adds a flash error when the bid is bad" do
+        current_bidder = create(:user, sam_status: :sam_accepted)
+        auction = create(:auction)
+        request_params = { auction_id: auction.id, bid: { amount: -192 } }
+
+        post :confirm, request_params, user_id: current_bidder.id
+
+        expect(flash[:error]).to eq("Bid amount out of range")
+        expect(response).to redirect_to(new_auction_bid_path(auction))
+      end
+    end
+  end
+
   describe '#create' do
     context 'when not logged in' do
       it 'redirects to authenticate' do
