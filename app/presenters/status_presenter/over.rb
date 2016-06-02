@@ -1,14 +1,14 @@
-class AuctionStatus::Future < Struct.new(:auction)
+class StatusPresenter::Over < Struct.new(:auction)
   def start_label
-    "Bid start time:"
+    "Auction started at:"
   end
 
   def deadline_label
-    "Bid deadline:"
+    "Auction ended at:"
   end
 
   def relative_time
-    "#{HumanTime.new(time: auction.started_at).relative_time} from now"
+    "Ended #{HumanTime.new(time: auction.ended_at).relative_time}"
   end
 
   def time_left_partial
@@ -28,22 +28,28 @@ class AuctionStatus::Future < Struct.new(:auction)
   end
 
   def label_class
-    'auction-label-future'
+    'auction-label-over'
   end
 
   def label
-    'Coming Soon'
+    'Closed'
   end
 
   def tag_data_value_status
-    HumanTime.new(time: auction.started_at).relative_time
+    label
   end
 
   def tag_data_label_2
-    "Starting bid"
+    "Winning Bid"
   end
 
   def tag_data_value_2
-    Currency.new(auction.start_price).to_s
+    Currency.new(lowest_bid.amount).to_s
+  end
+
+  private
+
+  def lowest_bid
+    auction.lowest_bid || NullBid.new
   end
 end

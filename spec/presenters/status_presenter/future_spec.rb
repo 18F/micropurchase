@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-describe AuctionStatus::Future do
+describe StatusPresenter::Future do
   context "when the auction is in the future" do
-    let(:presenter) { AuctionStatus::Future.new(auction) }
+    let(:presenter) { StatusPresenter::Future.new(auction) }
     let(:auction) do
       a = create(
         :auction,

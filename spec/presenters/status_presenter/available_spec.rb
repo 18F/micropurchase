@@ -1,21 +1,21 @@
 require 'rails_helper'
 
-describe AuctionStatus::Expiring do
-  context "when the auction is expiring soon" do
-    let(:presenter) { AuctionStatus::Expiring.new(auction) }
+describe StatusPresenter::Available do
+  context "when the auction is available" do
+    let(:presenter) { StatusPresenter::Available.new(auction) }
     let(:auction) do
       a = create(
         :auction,
         started_at: Time.now - 3.days,
-        ended_at: Time.now + 3.hours,
+        ended_at: Time.now + 2.days,
         start_price: 3500
       )
-      create(:bid, amount: 3000, auction: a)
+      create(:bid, auction: a, amount: 3000)
       a
     end
 
     it "has a twitter status data value with human readable time expression" do
-      expect(presenter.tag_data_value_status).to eq("about 3 hours left")
+      expect(presenter.tag_data_value_status).to eq("2 days left")
     end
 
     it "has a twitter second label that indicates bidding is open" do
