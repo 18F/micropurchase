@@ -9,7 +9,7 @@ class CreateAuction
   def perform
     @auction ||= Auction.new(attributes)
   end
-  
+
   private
 
   attr_reader :params, :user
