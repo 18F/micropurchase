@@ -11,15 +11,18 @@ describe('Utility', function () {
     var a = 'https://google.com/';
     var b = 'https://google.com';
     var c = 'https://google.com//';
+    var d = undefined;
+
 
     it("removes a forward slash at the end", function(){
       expect(stardardizeUrl(a)).toBe(b);
       expect(stardardizeUrl(a)).not.toBe(a);
       expect(stardardizeUrl(a)).not.toBe(c);
       expect(stardardizeUrl(b)).toBe(b);
+      expect(stardardizeUrl(d)).toBe(d);
     });
 
-    it("it only removes the last forward slash", function(){
+    it("only removes the last forward slash", function(){
       expect(stardardizeUrl(c)).toBe(a);
       expect(stardardizeUrl(a)).not.toBe(c);
       expect(stardardizeUrl(c)).not.toBe(b);
@@ -34,6 +37,7 @@ describe('Utility', function () {
 
     var april20 = 'Wed Apr 20 2016 17:42:46 GMT-0500 (CDT)'
     var april20Date = new Date('Wed Apr 20 2016 17:42:46 GMT-0500 (CDT)')
+    var dateUndefined = undefined;
 
     it("defaults to a dash delimiter", function(){
       expect(format.date('10/14/1988')).toBe('1988-10-14');
@@ -48,6 +52,10 @@ describe('Utility', function () {
 
     it("formats a date string", function(){
       expect(format.date(april20)).toBe('2016-4-20');
+    });
+
+    it("handles undefined", function(){
+      expect(format.date(dateUndefined)).toBe(undefined);
     });
 
     it("has a / seperator option", function(){
@@ -129,6 +137,7 @@ describe('Utility', function () {
   describe('microp.format.removeGitPrefix', function(){
     var calc = 'https://github.com/18f/calc'
     var accordion = 'https://github.com/18f/accordion'
+    var undefinedProject = undefined
 
     beforeEach(function(){
       removeGitPrefix = microp.format.removeGitPrefix;
@@ -151,6 +160,9 @@ describe('Utility', function () {
       expect(removeGitPrefix('http://github.com/18f')).not.toBe('18f');
     });
 
+    it("handles undefined", function(){
+      expect(removeGitPrefix(undefinedProject)).toBe(undefined);
+    });
   });
 
 

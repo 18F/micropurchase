@@ -46,18 +46,23 @@
   };
 
   microp.format.stardardizeUrl = function(str) {
-    var lastChar = str.length - 1;
-    if (str.charAt(lastChar) === '/') {
-      str = str.substring(0, lastChar);
+    if (typeof(str) === 'string'){
+      var lastChar = str.length - 1;
+      if (str.charAt(lastChar) === '/') {
+        str = str.substring(0, lastChar);
+      }
+      str = str.toLowerCase();
     }
-    str = str.toLowerCase();
     return str;
   };
 
   microp.format.removeGitPrefix = function(str) {
-    return str.includes('https')
-      ? str.split("https://github.com/").join("")
-      : str;
+    if (typeof(str) === 'string'){
+      return str.includes('https')
+          ? str.split("https://github.com/").join("")
+          : str;
+    }
+    return str
   };
 
   microp.format.transformDollars = function(str) {
@@ -78,6 +83,10 @@
   // Outputs a date object formatted like so: %Y-%m-%d
   // Or like so %m/%d if a separator is included
   microp.format.date = function (date, seperator) {
+    if (typeof(date) === 'undefined' || typeof(date) === undefined) {
+      return date;
+    }
+
     var dateObj,
       date;
     if (typeof(date) === 'string') {
