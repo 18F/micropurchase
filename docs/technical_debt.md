@@ -1,7 +1,5 @@
 # How We Are Trying To Limit Technical Debt
 
-**UNDER CONSTRUCTION: We are in the process of renovating our models so the class layout described here is out of date, although some of the general principles still apply.**
-
 Rails is a great framework for getting started quickly. You just need
 to generate a few models and off you go! The problem is that this
 invariably leads to unused and undermaintained code accumulating in
