@@ -53,9 +53,10 @@
   <%= render partial: 'components/nav_header', locals: { current_user: current_user } %>
 
 
+  <%= render "flashes" %>
+
   <div class="content-wrapper" id="<% if current_page?(root_path) %>index<% elsif current_page?(auctions_path) %>auctions<% elsif current_page?(auctions_winners_path) %>winners<% end %>">
     <div class="usa-width-one-whole">
-      <%= render "flashes" %>
       <%= yield %>
     </div>
   </div>
