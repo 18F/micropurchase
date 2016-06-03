@@ -2,12 +2,8 @@
  * so a little loving help below:
  * */
 
-.usa-font-lead p {
-    font-size: $base-font-size;
-
-  @include media($small-screen) {
-    font-size: $lead-font-size;
-  }
+.usa-alert {
+  margin: 0;
 }
 
 .usa-button.usa-button-green,

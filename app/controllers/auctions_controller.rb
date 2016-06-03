@@ -7,7 +7,7 @@ class AuctionsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        sam_status_message_for(flash)
+        @auctions.sam_status_message_for(flash)
       end
       format.json do
         render json: published_auctions, each_serializer: AuctionSerializer
@@ -35,9 +35,5 @@ class AuctionsController < ApplicationController
 
   def published_auctions
     @_published_auctions ||= AuctionQuery.new.public_index
-  end
-
-  def sam_status_message_for(flash)
-    current_user.decorate.sam_status_message_for_auctions_index(flash)
   end
 end

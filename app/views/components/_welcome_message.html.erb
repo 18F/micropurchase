@@ -1,0 +1,22 @@
+<section class="slab-intro usa-width-full">
+  <div class="usa-grid">
+    <h1 class="intro-text">Welcome!</h1>
+    <div class="usa-font-lead">
+      <p>
+        The Micro-purchase Marketplace is the place to bid on open-source issues
+        from the 18F team.
+        <%= link_to 'Learn more about this experiment <icon class="fa fa-angle-double-right">'.html_safe,
+        "https://18f.gsa.gov/2015/11/06/micro-purchase-lessons/" ,
+        target: '_blank' %>
+      </p>
+
+      <p>
+        Be sure to
+        <%= link_to 'register your company', login_path %>
+        before placing a bid. If you have any questions, please email us at
+        <%= mail_to 'micropurchase@gsa.gov' %>.
+      </p>
+    </div>
+  </div>
+</section>
+

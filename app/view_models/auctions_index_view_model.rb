@@ -20,6 +20,14 @@ class AuctionsIndexViewModel
     end
   end
 
+  def sam_status_message_for(flash)
+    current_user.decorate.sam_status_message_for_auctions_index(flash)
+  end
+
+  def welcome_message_partial
+    current_user.decorate.welcome_message_partial
+  end
+
   def auctions_list_partial
     if auctions.empty?
       'empty_auctions'
