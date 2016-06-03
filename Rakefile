@@ -9,3 +9,5 @@ if Rails.env.development?
 end
 
 Rails.application.load_tasks
+
+task default: 'jasmine:ci'

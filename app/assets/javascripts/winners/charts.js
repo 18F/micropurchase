@@ -278,7 +278,7 @@
         settings.x = 'date_community';
 
         _.each(auctions, function(auction){
-          auction.github_repo = microp.format.stardardizeUrl(auction.github_repo);
+          auction.github_repo = microp.format.standardizeUrl(auction.github_repo);
           auction.github_repo = microp.format.removeGitPrefix(auction.github_repo);
         })
 
@@ -363,7 +363,7 @@
         settings.cols = [];
 
         _.each(auctions, function(auction){
-          auction.github_repo = microp.format.stardardizeUrl(auction.github_repo);
+          auction.github_repo = microp.format.standardizeUrl(auction.github_repo);
           auction.github_repo = microp.format.removeGitPrefix(auction.github_repo);
         })
 
