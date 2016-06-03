@@ -9,7 +9,7 @@ describe PlaceBidValidator do
       PlaceBidValidator.new.validate(bid)
 
       expect(bid.errors.full_messages).to include(
-        'You are not allowed to bid on this auction'
+        I18n.t('activerecord.errors.models.bid.permissions')
       )
     end
 
@@ -20,7 +20,7 @@ describe PlaceBidValidator do
       PlaceBidValidator.new.validate(bid)
 
       expect(bid.errors.full_messages).to include(
-        'You are not allowed to bid on this auction'
+        I18n.t('activerecord.errors.models.bid.permissions')
       )
     end
 
@@ -32,7 +32,7 @@ describe PlaceBidValidator do
       PlaceBidValidator.new.validate(bid)
 
       expect(bid.errors.full_messages).to include(
-        'Bids cannot be greater than the current max bid'
+        I18n.t('activerecord.errors.models.bid.amount.greater_than_max')
       )
     end
 
@@ -42,7 +42,7 @@ describe PlaceBidValidator do
       PlaceBidValidator.new.validate(bid)
 
       expect(bid.errors.full_messages).to include(
-        'Bid amount out of range'
+        I18n.t('activerecord.errors.models.bid.amount.below_zero')
       )
     end
   end

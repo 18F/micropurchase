@@ -1,22 +1,22 @@
 class PlaceBidValidator < ActiveModel::Validator
   def validate(bid)
     unless user_can_bid?(bid)
-      add_error(bid, 'You are not allowed to bid on this auction')
+      add_error(bid, 'permissions')
     end
 
     if bid.amount <= 0
-      add_error(bid, 'Bid amount out of range')
+      add_error(bid, 'amount.below_zero')
     end
 
     if bid.amount > max_allowed_bid(bid)
-      add_error(bid, 'Bids cannot be greater than the current max bid')
+      add_error(bid, 'amount.greater_than_max')
     end
   end
 
   private
 
   def add_error(bid, message)
-    bid.errors.add :base, message
+    bid.errors.add :base, I18n.t("activerecord.errors.models.bid.#{message}")
   end
 
   def user_can_bid?(bid)

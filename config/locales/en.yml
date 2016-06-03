@@ -8,6 +8,11 @@ en:
 
     errors:
       models:
+        bid:
+          permissions: 'You are not allowed to bid on this auction'
+          amount:
+            greater_than_max: 'Bids cannot be greater than the current max bid'
+            below_zero: 'Bid amount out of range'
         user:
           attributes:
             duns_number:
