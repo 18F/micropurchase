@@ -1,5 +1,3 @@
-//= require helpers/auctionMocks
-
 describe('PreviousWinners', function () {
   var winners,
     mock,
