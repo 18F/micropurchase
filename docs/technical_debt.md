@@ -368,6 +368,46 @@ Similarly, we have a few places where we branch depending on the
 auction type. This will likely make a good candidate for similar
 refactoring in the future.
 
+## Composition is Better than Inheritance
+
+The way we handle different rules for different types of auctions is a
+good example of how we favor composition/delegation over large
+inherited types. Currently we have two different types of auctions --
+a basic descending-value auction where all bid amounts are visible
+during the process and a sealed-bid auction where each user can only
+bid once and the winner is revealed when the auction is lower. We
+might add more, but these auctions have slightly different behavior
+from each other in a few different ways:
+
+1. Can the user bid on this auction?
+2. Should I show the user the amounts of other bids?
+3. Is this bid from the user valid?
+4. What summary information should I show for the auction on the home page?
+5. What summary information should I show for the auction on the auction's page?
+6. Should the user be able to see a list of bids when the auction is open? When it's closed?
+
+and so on. We might consider implementing this by defining a
+`ReverseAuction` class and also a `SingleBidAuction` class with the
+variations encoded within. And this works okay, but what if we decide
+to add some more auction types? For instance, a
+`ReverseAuctionWithBuyNowButton` or a
+`SingleBidOnlyForSmallBusinessVendorsAuction` or a
+`ReverseAuctionForSmallBusinessVendorsWithBuyNowButton` or such?
+Ruby's single-inheritance starts to get unwieldy fast and what we
+really want is some sort of idea of mixins. So what if we do that.
+
+Right now, there are several distinct places where we need to know
+what the Rules for an auction specify: when we are rendering a page,
+when we are validating a bid, when we show a winner. Currently both
+auctions are over when time is up, but if we added a Buy Now button,
+auction availability would also vary according to the rules. We could
+implement these variations as a sequence of `if-then-else` statements,
+but it's better to extract to polymorphism like above. And so, we have
+a series of `Rules` objects and auctions specify in a field which
+rules they use, but all are of the same `Auction` type. When we need
+to also specify Eligibility separately, we can do that with a
+different field without creating an OOP explosion.
+
 ## Null Objects
 
 Polymorphism is also useful for reducing the logic of null
