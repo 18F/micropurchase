@@ -91,7 +91,7 @@ end
 The classes involved in this exercise give a good illustration of how
 the various classes relate:
 
-1. [AuctionQuery](app/models/auction_query.rb): this is the class
+1. [AuctionQuery](../app/models/auction_query.rb): this is the class
    where all queries against the Auction model are defined instead of
    using a bunch of named scopes in the AR model. The
    `AuctionQuery#public_index` method returns a list of Auction
@@ -101,7 +101,7 @@ the various classes relate:
    forcibly execute the scopes where they are called in the controller
    (Rails will defer scopes until use, meaning you see an obscure
    error in your view when the query results are first used there).
-2. [Auction](app/models/auction.rb): this is the ActiveRecord class
+2. [Auction](../app/models/auction.rb): this is the ActiveRecord class
    you'd expec. We use this for only basic DB access methods as well
    as defining AR relationships. You could also put named scopes here,
    but hold off on that since it's another way to accumulate things
@@ -110,21 +110,21 @@ the various classes relate:
    to add new methods in there first.
 3. The `current_user` in this case is actually an delegated method in
    the
-   [ApplicationController](app/controllers/application_controller.rb)
+   [ApplicationController](../app/controllers/application_controller.rb)
    that calls the method in an internal instance of either the
-   [WebAuthenticator](app/models/web_authenticator.rb) or
-   [ApiAuthenticator](app/models/api_authenticator.rb) that was used
+   [WebAuthenticator](../app/models/web_authenticator.rb) or
+   [ApiAuthenticator](../app/models/api_authenticator.rb) that was used
    to authenticate the user depending on which mechanism they accessed
    the application through.
 4. Both objects are used to construct an
-   [AuctionsIndexViewModel](app/view_models/auction_index_view_model.rb)
+   [AuctionsIndexViewModel](../app/view_models/auction_index_view_model.rb)
    object in the controller. This is then passed to the ERB view that
    renders the page. View Models are convenient places for helper
    methods to render objects correctly as well as conditional branches
    that would otherwise be hidden inside of ERB templates.
 5. To render each auction in the list on the page, the ViewModel maps
    each auction object in the `public_auctions` array to an
-   [AuctionListItem](app/view_models/auction_list_item.rb)
+   [AuctionListItem](../app/view_models/auction_list_item.rb)
    object. This object contains useful methods for rendering
    attributes of an auction like `user_bid_amount_as_currency` as well
    as methods for picking the appropriate partials to display
@@ -132,7 +132,7 @@ the various classes relate:
 7. The `AuctionListItem` class also delegates to methods from an internal
    object. So, a call to `AuctionListItem#available?` within a view
    will actually call an internal variable instance of the
-   [AuctionStatus](app/models/auction_status.rb) with that
+   [AuctionStatus](../app/models/auction_status.rb) with that
    method. This approach lets us collect related functions like _all
    the methods for querying the availability of an auction_ in a single
    focused place unlike having them be scattered among many methods in
@@ -144,21 +144,21 @@ the various classes relate:
    depending on what the current status of the auction is. Instead of
    using a series of `if-elsif-elsif-end` statements, this is
    accomplished through polymorphism. The
-   [StatusPresenterFactory](app/models/status_presenter_factory) class
+   [StatusPresenterFactory](../app/models/status_presenter_factory) class
    selects an appropriate presenter for the auction status and returns
    an object that supplies the appropriate values for labels or titles
    as needed.
 7. We have also designed some basic presenters for transforming raw
    values from AR models to standardized formats we want to display to
    users. So, the `AuctionListItem` class calls such presenters as
-   [Currency](app/presenters/currency.rb) for monetary amounts and
-   [HumanTime](app/presenters/human_time.rb). Another big presenter is
-   [DcTimePresenter](app/presenters/dc_time_presenter.rb) that is used
+   [Currency](../app/presenters/currency.rb) for monetary amounts and
+   [HumanTime](../app/presenters/human_time.rb). Another big presenter is
+   [DcTimePresenter](../app/presenters/dc_time_presenter.rb) that is used
 8. And if there is a concept whose meaning might change depending on
    the auction or user that is used in several places, it makes sense
    to define an appropriate class for encapsulating that logic in a
    single place and instantiating as needed. So, the
-   [WinningBid](app/models/winning_bid.rb) object is a class that
+   [WinningBid](../app/models/winning_bid.rb) object is a class that
    represents the concept of a winning bid, whose implementation might
    vary depending on the auction (and whether the auction is closed or
    not)
@@ -196,7 +196,7 @@ end
 
 This hits a few other types of classes:
 
-1. [PlaceBid](app/services/place_bid) is a Service object that
+1. [PlaceBid](../app/services/place_bid) is a Service object that
    represents a specific action that changes the state of the system
    with all the information needed to execute it. In this case, we
    instantiate it with the parameters from the controller, the current
@@ -208,14 +208,14 @@ This hits a few other types of classes:
    for instance, a sealed-bid auction only allows the user to bid
    once, while a regular auction requires that the new bid must be
    lower than all other bids -- `PlaceBid` calls a
-   [RulesFactory](app/models/rules_factory.rb) to load the appropriate
+   [RulesFactory](../app/models/rules_factory.rb) to load the appropriate
    rules for the auction. A rules class like
-   [Rules::Basic](app/models/rules/basic.rb)
-   [Rules::SealedBid](app/models/rules/sealed_bid.rb) encapsulates
+   [Rules::Basic](../app/models/rules/basic.rb)
+   [Rules::SealedBid](../app/models/rules/sealed_bid.rb) encapsulates
    rules about what the maximum allowed bid is, whether to show all
    bids.
-3. Serializers like [BidSerializer](app/serializers/bid_serializer.rb)
-   or [AuctionSerializer](app/serializer/auction_serializer.rb)
+3. Serializers like [BidSerializer](../app/serializers/bid_serializer.rb)
+   or [AuctionSerializer](../app/serializer/auction_serializer.rb)
    describe how to represent objects as data in API responses. Because
    we want to return more information to administrators, there are
    also equivalent serializers for the admin controllers that return
@@ -232,15 +232,15 @@ controller looks like this:
 
 ```
 
-1. [CreateAuction](app/services/create_auction) is another Service
+1. [CreateAuction](../app/services/create_auction) is another Service
    object that represents the action of creating an auction and sticks
    to the familiar pattern with a `perform` method.
 2. Within this class, the
-   [AuctionParser](app/models/auction_parser.rb) handles the process
+   [AuctionParser](../app/models/auction_parser.rb) handles the process
    of validating input from the forms and converting it to the
    appropriate types in some cases. We defer most of our auction
    validation until the auction is published, but other parsing
-   classes like the [DateTimeParser](app/models/date_time_parser.rb)
+   classes like the [DateTimeParser](../app/models/date_time_parser.rb)
    handle specific data conversion tasks.
 
 # What Goes Where
@@ -296,7 +296,7 @@ We solve both of these issues by defining a specific new decorator
 class that's used for wrapping the objects and helpers needed by a
 specific controller view. So, for the `auctions_controller#show`
 method, we have defined a
-[AuctionShowViewModel](app/view_models/auction_show_view_model.rb) class
+[AuctionShowViewModel](../app/view_models/auction_show_view_model.rb) class
 that wraps the current user and the auction we are showing. This lets
 us scope our view's helpers to be specific to this view model (or to
 delegate to the shared `AuctionShowViewModel` object). Furthermore,
@@ -418,7 +418,7 @@ equivalents to the `BidPresenter` and `UserPresenter` object for
 instance.
 
 One other example of this technique is the
-[Guest](app/models/guest.rb) class. So much of the application is
+[Guest](../app/models/guest.rb) class. So much of the application is
 oriented towards users being logged in, but we should handle cases
 when there is no user logged in. Instead of checking if
 `current_user.nil?` everywhere, the `WebAuthenticator` instead returns a `Guest` object if no user is logged in.
@@ -429,7 +429,7 @@ def current_user
 end
 ```
 
-This is turn is wrapped by the [GuestPresenter](app/presenters/guest_presenter.rb), which allows the app to specify special partials for guests instead of regular users
+This is turn is wrapped by the [GuestPresenter](../app/presenters/guest_presenter.rb), which allows the app to specify special partials for guests instead of regular users
 
 ``` ruby
   def nav_drawer_partial
