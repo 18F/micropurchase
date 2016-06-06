@@ -2,7 +2,7 @@ class ApiAuthenticator < Struct.new(:controller)
   attr_reader :current_user
 
   def require_authentication
-    set_api_current_user(raise_errors: true)
+    api_current_user(raise_errors: true)
   end
 
   def require_admin
@@ -20,14 +20,15 @@ class ApiAuthenticator < Struct.new(:controller)
     return nil
   end
 
-  # rubocop:disable Style/AccessorMethodName
-  def set_api_current_user(raise_errors: false)
+  def api_current_user(raise_errors: false)
     user = User.where(github_id: github_id).first
 
-    fail UnauthorizedError::UserNotFound if user.nil? && raise_errors
+    if user.nil? && raise_errors
+      fail UnauthorizedError::UserNotFound
+    end
+
     @current_user = user
   end
-  # rubocop:enable Style/AccessorMethodName
 
   def via
     'api'

@@ -1,23 +1,21 @@
 require 'rails_helper'
 
-RSpec.describe ApplicationController, controller: true do
+describe ApplicationController do
   describe "authenticator" do
-    before do
-      allow(controller).to receive(:format).and_return(format)
-    end
-
-    context 'when the controller receives a web request' do
-      let(:format) { double('format', "html?" => true, "json?" => false) }
-
-      it 'should return an instance of WebAuthenticator' do
-        expect(controller.send(:authenticator)).to be_a(WebAuthenticator)
+    context 'API request' do
+      it 'should return an instance of ApiAuthenticator' do
+        format = double('format', "json?" => true)
+        request = double('request', format: format)
+        allow(controller).to receive(:request).and_return(request)
+        expect(controller.send(:authenticator)).to be_a(ApiAuthenticator)
       end
     end
 
-    context 'when the controller receives an API request' do
-      let(:format) { double('format', "html?" => false, "json?" => true) }
-
-      it 'should return an instance of ApiAuthenticator' do
+    context 'non-API request' do
+      it 'should return an instance of WebAuthenticator' do
+        format = double('format', "json?" => false)
+        request = double('request', format: format)
+        allow(controller).to receive(:request).and_return(request)
         expect(controller.send(:authenticator)).to be_a(WebAuthenticator)
       end
     end
