@@ -18,4 +18,8 @@ class GuestPresenter
   def nav_drawer_submenu_partial
     "components/guest_nav_drawer_submenu"
   end
+
+  def welcome_message_partial
+    'components/welcome_message'
+  end
 end
