@@ -37,3 +37,13 @@ Once you're set up with Cloud Foundry, ask for access to the `18f-acq`
 organization in the Micropurchase Slack channel.
 
 Read more about deployments in the [deployment docs](deployment.md).
+
+### Get set up on New Relic
+
+The existing team members all have access to New Relic monitoring for staging
+and production. Ask to be added to the Micropurchase New Relic organization.
+
+Once added, developers should also add themselves to the "Micropurchase devs"
+group on New Relic: https://rpm.newrelic.com/accounts/1345535/notification_channels
+
+New Relic is set up to send alerts to everyone in this group by default.
