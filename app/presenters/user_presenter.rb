@@ -8,7 +8,7 @@ class UserPresenter < SimpleDelegator
   end
 
   def in_sam?
-    model.sam_status
+    model.sam_accepted?
   end
 
   def sam_status_message_for(flash)
@@ -34,9 +34,13 @@ class UserPresenter < SimpleDelegator
   def welcome_message_partial
     'components/null'
   end
+  
+  def sam_status_label
+    in_sam? ? 'Yes' : 'No'
+  end
 
   def small_business_label
-    if model.sam_accepted?
+    if in_sam?
       small_business? ? 'Yes' : 'No'
     else
       'N/A'

@@ -6,6 +6,7 @@ FactoryGirl.define do
     duns_number { Faker::Company.duns_number }
     name { Faker::Name.name }
     email
+    github_login 'ghlogin'
     github_id 123_456
     sam_status :duns_blank
     credit_card_form_url 'https://some-website.com/pay'
