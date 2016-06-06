@@ -204,17 +204,27 @@ This hits a few other types of classes:
    API. Its `perform` method in turn instantiates the auction from the
    ID, verifies that the user can indeed place a bid and the amount is
    valid, and returns the `Bid` object created.
-2. Because different auctions have different rules on eligible bids --
+2. [PlaceBidValidator](../app/validators/place_bid_validator.rb) is
+   what does the actual validation of a potential bid. This follows
+   the established convention for Rails applications in which custom
+   validation should appear in its own validation classes. Although we
+   have gone beyond the basic organizational approach in some cases
+   (and ignored them in a few cases like ViewModels, which are much
+   more powerful and scoped compared to helper methods), we try to
+   stick to Rails' conventions as much as possible. This would also
+   allow us to use the validation if we had another mechanism for
+   creating bids that was separate from PlaceBid.
+3. Because different auctions have different rules on eligible bids --
    for instance, a sealed-bid auction only allows the user to bid
    once, while a regular auction requires that the new bid must be
-   lower than all other bids -- `PlaceBid` calls a
+   lower than all other bids -- `PlaceBidValidator` calls a
    [RulesFactory](../app/models/rules_factory.rb) to load the appropriate
    rules for the auction. A rules class like
    [Rules::Basic](../app/models/rules/basic.rb)
    [Rules::SealedBid](../app/models/rules/sealed_bid.rb) encapsulates
    rules about what the maximum allowed bid is, whether to show all
    bids.
-3. Serializers like [BidSerializer](../app/serializers/bid_serializer.rb)
+4. Serializers like [BidSerializer](../app/serializers/bid_serializer.rb)
    or [AuctionSerializer](../app/serializer/auction_serializer.rb)
    describe how to represent objects as data in API responses. Because
    we want to return more information to administrators, there are
@@ -242,6 +252,9 @@ controller looks like this:
    validation until the auction is published, but other parsing
    classes like the [DateTimeParser](../app/models/date_time_parser.rb)
    handle specific data conversion tasks.
+
+The `AuctionParser` and its related classes are the final major
+subtype of classes in our code and with that our tour is complete.
 
 # What Goes Where
 
@@ -461,7 +474,8 @@ One other example of this technique is the
 [Guest](../app/models/guest.rb) class. So much of the application is
 oriented towards users being logged in, but we should handle cases
 when there is no user logged in. Instead of checking if
-`current_user.nil?` everywhere, the `WebAuthenticator` instead returns a `Guest` object if no user is logged in.
+`current_user.nil?` everywhere, the `WebAuthenticator` instead returns
+a `Guest` object if no user is logged in.
 
 ``` ruby
 def current_user
@@ -469,7 +483,10 @@ def current_user
 end
 ```
 
-This is turn is wrapped by the [GuestPresenter](../app/presenters/guest_presenter.rb), which allows the app to specify special partials for guests instead of regular users
+This is turn is wrapped by the
+[GuestPresenter](../app/presenters/guest_presenter.rb), which allows
+the app to specify special partials for guests instead of regular
+users
 
 ``` ruby
   def nav_drawer_partial
@@ -484,6 +501,25 @@ This is turn is wrapped by the [GuestPresenter](../app/presenters/guest_presente
     "components/guest_nav_drawer_submenu"
   end
 ```
+
+## You Have To Make Things Worse Before You Make Things Better
+
+This structure was not created in advance and filled in
+later. Instead, this is the Nth iteration and reorganization of
+existing code. It's perfectly okay if things get messy and code is
+duplicated or classes collapsed first before you start
+refactoring. Don't be afraid to commit ugly and transitional steps on
+the way to a cleaner organization, as long as you stick to three basic
+rules:
+
+1. Don't try to commit too many changes in a single pull request
+2. Make sure the tests pass and cover all your new code
+3. Relax about CodeClimate/Rubocop and other scores until you're done with the messy work
+
+And remember that sometimes you might have to abandon a particular
+effort because it doesn't work or is too unwieldy. That's okay. You
+learned something in the process that will make the next attempt
+better.
 
 # Further Reading
 
