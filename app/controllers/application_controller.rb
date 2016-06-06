@@ -1,22 +1,14 @@
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   helper_method :current_user
-
-  # for actions that don't require_authentication or require_admin,
-  # we still need to set_current_user_to_api_user so that users can
-  # optionally have authenticated access to public routes.
-  # for example, /auctions/:id/bids will unveil bidder info about
-  # the authenticated user. but the page also works fine sans authentication.
-  before_action :set_api_current_user
+  before_action :api_current_user
 
   delegate(
     :current_user,
     :github_id,
     :require_admin,
     :require_authentication,
-    :set_api_current_user,
+    :api_current_user,
     :via,
     to: :authenticator
   )
@@ -39,25 +31,15 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticator
-    if @authenticator.nil?
-      @authenticator = if html_request? || csv_request?
-                         WebAuthenticator.new(self)
-                       elsif api_request?
-                         ApiAuthenticator.new(self)
-                       else
-                         fail UnauthorizedError, "Unable to authenticate"
-                       end
+    @_authenticator ||= set_authenticator
+  end
+
+  def set_authenticator
+    if api_request?
+      ApiAuthenticator.new(self)
+    else
+      WebAuthenticator.new(self)
     end
-
-    @authenticator
-  end
-
-  def html_request?
-    request.format.html?
-  end
-
-  def csv_request?
-    request.format == :csv
   end
 
   def api_request?
@@ -65,11 +47,11 @@ class ApplicationController < ActionController::Base
   end
 
   def handle_error(message)
-    if html_request?
-      flash[:error] = message
-      redirect_to '/'
-    elsif api_request?
+    if api_request?
       render json: { error: message }, status: 404
+    else
+      flash[:error] = message
+      redirect_to root_path
     end
   end
 
