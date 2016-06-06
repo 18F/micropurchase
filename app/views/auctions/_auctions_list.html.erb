@@ -1,3 +1,3 @@
-<% @auctions.auction_view_models.each do |auction| %>
+<% auction_collection.auction_view_models.each do |auction| %>
   <%= render partial: 'list_item', locals: { auction: auction } %>
 <% end %>

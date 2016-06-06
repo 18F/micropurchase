@@ -1,16 +1,17 @@
 <% content_for :data_tags do %>
   <meta name="twitter:label1" value="Active Auctions">
-  <meta name="twitter:data1" value="<%= @auctions.active_auction_count %>">
+  <meta name="twitter:data1" value="<%= @auction_collection.active_auction_count %>">
   <meta name="twitter:label2" value="Coming Auctions">
-  <meta name="twitter:data2" value="<%= @auctions.upcoming_auction_count %>">
+  <meta name="twitter:data2" value="<%= @auction_collection.upcoming_auction_count %>">
 <% end %>
 
-<%= render partial: @auctions.welcome_message_partial %>
+<%= render partial: @auction_collection.welcome_message_partial %>
 
 <section class="usa-grid">
   <h2>Auctions</h2>
 
   <div class="usa-grid-full auction-wrapper">
-    <%= render partial: @auctions.auctions_list_partial %>
+    <%= render partial: @auction_collection.auctions_list_partial,
+      locals: { auction_collection: @auction_collection } %>
   </div>
 </section>

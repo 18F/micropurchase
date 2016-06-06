@@ -26,7 +26,7 @@ describe AuctionsController do
           ended_at: date_first)
 
         get :index
-        auctions = assigns(:auctions).auctions
+        auctions = assigns(:auction_collection).auctions
 
         auction_1 = auctions[0]
         auction_2 = auctions[1]

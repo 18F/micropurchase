@@ -1,13 +1,13 @@
 class AuctionsController < ApplicationController
   def index
-    @auctions = AuctionsIndexViewModel.new(
+    @auction_collection = AuctionsIndexViewModel.new(
       auctions: published_auctions,
       current_user: current_user
     )
 
     respond_to do |format|
       format.html do
-        @auctions.sam_status_message_for(flash)
+        @auction_collection.sam_status_message_for(flash)
       end
       format.json do
         render json: published_auctions, each_serializer: AuctionSerializer
