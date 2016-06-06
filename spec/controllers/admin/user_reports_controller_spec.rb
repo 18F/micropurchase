@@ -13,5 +13,16 @@ RSpec.describe Admin::UserReportsController do
         expect(response.header['Content-Type']).to include('text/csv')
       end
     end
+
+    context 'when called by a non-admin user' do
+      it 'should return a 500 server error' do
+        user = create(:user)
+        10.times { create(:user) }
+
+        get :index, { format: 'csv' }, user_id: user.id
+
+        expect(response.code).to eq('500')
+      end
+    end
   end
 end
