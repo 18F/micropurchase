@@ -10,6 +10,7 @@ FactoryGirl.define do
     summary Faker::Lorem.paragraph
     description Faker::Lorem.paragraphs(3, true).join("\n\n")
     delivery_due_at { TimeHelpers::quartile_minute(Time.now + 10.days) }
+    purchase_card :default
 
     trait :single_bid_with_tie do
       single_bid
