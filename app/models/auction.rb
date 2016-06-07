@@ -8,19 +8,21 @@ class Auction < ActiveRecord::Base
   enum type: { single_bid: 0, multi_bid: 1 }
   enum awardee_paid_status: { not_paid: 0, paid: 1 }
   enum published: { unpublished: 0, published: 1 }
+  enum purchase_card: { default: 0, other: 1 }
 
   # Disable STI
   self.inheritance_column = :__disabled
 
+  validate :start_price_equal_to_or_less_than_max_if_not_contracting_officer
+  validates :delivery_due_at, presence: true, if: :published?
+  validates :description, presence: true, if: :published?
   validates :ended_at, presence: true
-  validates :started_at, presence: true
+  validates :purchase_card, presence: true
   validates :start_price, presence: true
+  validates :started_at, presence: true
+  validates :summary, presence: true, if: :published?
   validates :title, presence: true
   validates :user, presence: true
-  validate :start_price_equal_to_or_less_than_max_if_not_contracting_officer
-  validates :summary, presence: true, if: :published?
-  validates :description, presence: true, if: :published?
-  validates :delivery_due_at, presence: true, if: :published?
 
   def lowest_bid
     lowest_bids.first

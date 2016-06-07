@@ -12,6 +12,7 @@ describe Auction do
       it { should validate_presence_of(:start_price) }
       it { should validate_presence_of(:title) }
       it { should validate_presence_of(:user) }
+      it { should validate_presence_of(:purchase_card) }
 
       describe "starting price validations" do
         context "creator is admin" do
