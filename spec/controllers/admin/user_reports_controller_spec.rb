@@ -5,7 +5,6 @@ RSpec.describe Admin::UserReportsController do
     context 'when called by an admin user' do
       it 'should return a CSV' do
         user = create(:admin_user)
-        10.times { create(:user) }
 
         get :index, { format: 'csv' }, user_id: user.id
 
@@ -17,8 +16,6 @@ RSpec.describe Admin::UserReportsController do
     context 'when called by a non-admin user' do
       it 'should return a 302 redirection with an error' do
         user = create(:user)
-        10.times { create(:user) }
-
         get :index, { format: 'csv' }, user_id: user.id
 
         expect(response.code).to eq('302')
