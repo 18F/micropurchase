@@ -11,8 +11,8 @@ class UserExport
     CSV.generate do |csv|
       csv << header_values
 
-      users.each do |_user|
-        user = UserPresenter.new(_user)
+      users.each do |u|
+        user = UserPresenter.new(u)
         next if user.admin?
         csv << data_values(user)
       end

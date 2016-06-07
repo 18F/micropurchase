@@ -34,7 +34,7 @@ class UserPresenter < SimpleDelegator
   def welcome_message_partial
     'components/null'
   end
-  
+
   def sam_status_label
     in_sam? ? 'Yes' : 'No'
   end
