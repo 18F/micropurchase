@@ -1,92 +1,35 @@
 class PlaceBid
-  BID_LIMIT = 3500
+  include ActiveModel::Validations
+
   BID_INCREMENT = 1
 
-  attr_reader :bid, :params, :user, :via
+  attr_reader :params, :bidder, :via
 
-  def initialize(params:, user:, via:nil)
+  validates_with PlaceBidValidator
+
+  def initialize(params:, bidder:, via: nil)
     @params = params
-    @user = user
+    @bidder = bidder
     @via = via
   end
 
   def perform
-    validate_bid_data
-    create_bid
+    if valid?
+      bid.save
+    end
   end
 
   def dry_run
-    validate_bid_data
-    unsaveable_bid
+    bid.readonly!
+    bid
   end
 
-  def create_bid
-    @bid ||= Bid.create(
-      amount: amount,
-      bidder_id: user.id,
-      auction_id: auction.id,
-      via: via
-    )
+  def bid
+    @_bid ||= Bid.new(amount: amount, auction: auction, bidder: bidder, via: via)
   end
-
-  def unsaveable_bid
-    @bid ||= Bid.new(
-      amount: amount,
-      bidder_id: user.id,
-      auction_id: auction.id,
-      via: via
-    )
-
-    @bid.readonly!
-    @bid
-  end
-
-  private
 
   def auction
     @auction ||= Auction.find(params[:auction_id])
-  end
-
-  def max_allowed_bid
-    rules.max_allowed_bid
-  end
-
-  def validate_bid_data
-    unless auction_available?
-      fail UnauthorizedError, 'Auction not available'
-    end
-
-    unless user_can_bid?
-      fail UnauthorizedError, 'You are not allowed to bid on this auction'
-    end
-
-    if amount.to_i != amount
-      fail UnauthorizedError, 'Bids must be in increments of one dollar'
-    end
-
-    if amount > BID_LIMIT
-      fail UnauthorizedError, 'Bid too high'
-    end
-
-    if amount <= 0
-      fail UnauthorizedError, 'Bid amount out of range'
-    end
-
-    if amount > max_allowed_bid
-      fail UnauthorizedError, "Bids cannot be greater than the current max bid"
-    end
-  end
-
-  def auction_available?
-    AuctionStatus.new(auction).available?
-  end
-
-  def user_can_bid?
-    rules.user_can_bid?(user)
-  end
-
-  def rules
-    @_rules ||= RulesFactory.new(auction).create
   end
 
   def amount

@@ -31,6 +31,10 @@ class UserPresenter < SimpleDelegator
     "components/user_nav_drawer_submenu"
   end
 
+  def welcome_message_partial
+    'components/null'
+  end
+
   def small_business_label
     if model.sam_accepted?
       small_business? ? 'Yes' : 'No'

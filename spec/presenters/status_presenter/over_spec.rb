@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-describe AuctionStatus::Over do
+describe StatusPresenter::Over do
   context "when the auction is over" do
-    let(:presenter) { AuctionStatus::Over.new(auction) }
+    let(:presenter) { StatusPresenter::Over.new(auction) }
     let(:auction) do
       a = create(
         :auction,

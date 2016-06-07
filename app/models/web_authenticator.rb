@@ -3,7 +3,7 @@ class WebAuthenticator < Struct.new(:controller)
     @current_user ||= User.where(id: controller.session[:user_id]).first || Guest.new
   end
 
-  def set_api_current_user
+  def api_current_user
   end
 
   def require_authentication
