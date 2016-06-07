@@ -12,12 +12,12 @@ RSpec.describe UserExport do
 
         expect(parsed[1][0]).to include(user.name)
         expect(parsed[1][1]).to include(user.email)
-        expect(parsed[1][2]).to include(user.github_login)
+        expect(parsed[1][2]).to include(user.github_id)
         expect(parsed[1][3]).to include('No')
-        expect(parsed[1][4]).to include('N/A')        
+        expect(parsed[1][4]).to include('N/A')
       end
     end
-    
+
     context 'for a small-business user in SAM' do
       it 'should return the correct CSV' do
         user = FactoryGirl.create(:user, :small_business)
@@ -28,7 +28,7 @@ RSpec.describe UserExport do
 
         expect(parsed[1][0]).to include(user.name)
         expect(parsed[1][1]).to include(user.email)
-        expect(parsed[1][2]).to include(user.github_login)
+        expect(parsed[1][2]).to include(user.github_id)
         expect(parsed[1][3]).to include('Yes')
         expect(parsed[1][4]).to include('Yes')
       end
@@ -44,9 +44,21 @@ RSpec.describe UserExport do
 
         expect(parsed[1][0]).to include(user.name)
         expect(parsed[1][1]).to include(user.email)
-        expect(parsed[1][2]).to include(user.github_login)
+        expect(parsed[1][2]).to include(user.github_id)
         expect(parsed[1][3]).to include('Yes')
         expect(parsed[1][4]).to include('No')
+      end
+    end
+
+    context 'for an administrator user' do
+      it 'should return no infomration' do
+        user = FactoryGirl.create(:admin_user)
+
+        export = UserExport.new.export_csv
+
+        parsed = CSV.parse(export)
+
+        expect(parsed[1]).to be_nil
       end
     end
   end
