@@ -15,13 +15,13 @@ RSpec.describe Admin::UserReportsController do
     end
 
     context 'when called by a non-admin user' do
-      it 'should return a 500 server error' do
+      it 'should return a 302 redirection with an error' do
         user = create(:user)
         10.times { create(:user) }
 
         get :index, { format: 'csv' }, user_id: user.id
 
-        expect(response.code).to eq('500')
+        expect(response.code).to eq('302')
       end
     end
   end
