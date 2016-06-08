@@ -31,6 +31,8 @@
   Users (<%= @users.length %>); w/ DUNS (<%= @admin_report.non_admin_users_with_duns.length %>); In SAM (<%= @admin_report.non_admin_users_in_sam.length %>)
 </h2>
 
+<%= link_to "Download CSV", admin_user_reports_path(format: :csv) %>
+y
 <table id="table-users" class="usa-table-borderless">
   <thead>
     <tr>
