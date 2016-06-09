@@ -1,3 +1,5 @@
+require_relative '../../lib/conditional_asset_compressor'
+
 Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address: 'smtp.mandrillapp.com',
@@ -14,7 +16,7 @@ Rails.application.configure do
   config.active_support.deprecation = :notify
   config.assets.compile = false
   config.assets.digest = true
-  config.assets.js_compressor = :uglifier
+  config.assets.js_compressor = ConditionalAssetCompressor.new
   config.cache_classes = true
   config.consider_all_requests_local = false
   config.eager_load = true

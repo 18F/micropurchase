@@ -14,5 +14,5 @@ applications:
     - data-dot-gov
   command: script/start
   env:
-    RAILS_ENV: staging
-    RACK_ENV: staging
+    RAILS_ENV: production
+    RACK_ENV: production
