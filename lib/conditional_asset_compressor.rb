@@ -1,5 +1,5 @@
 class ConditionalAssetCompressor < Uglifier
-  def initialize(options = {})
+  def initialize(options = { })
     options.merge(comments: :all)
     super(options)
   end
