@@ -9,6 +9,15 @@ GIT
       hashie
       oauth2
 
+GIT
+  remote: git://github.com/harrisj/us_web_design_standards_gem.git
+  revision: a789c0a7b55d13f378fb3a0da675bcc687079ea3
+  branch: rails-assets-fixes
+  specs:
+    us_web_design_standards (0.0.2)
+      railties
+      sass (~> 3.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -369,9 +378,6 @@ GEM
       unf_ext
     unf_ext (0.0.7.2)
     unicode-display_width (1.0.3)
-    us_web_design_standards (0.0.2)
-      railties
-      sass (~> 3.4)
     validate_url (1.0.2)
       activemodel (>= 3.0.0)
       addressable
@@ -446,7 +452,7 @@ DEPENDENCIES
   sinatra
   timecop
   uglifier
-  us_web_design_standards
+  us_web_design_standards!
   validate_url
   web-console (~> 2.0)
   webmock
