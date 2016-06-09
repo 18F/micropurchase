@@ -1,7 +1,7 @@
 require "rails_helper"
 
 # This file can be removed when the routing directive that sends JSON
-# requests to the public controllers is alos removed
+# requests to the public controllers is also removed
 RSpec.describe "Redirection to API" do
   include RequestHelpers
 

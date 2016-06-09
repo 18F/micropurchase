@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  # Admin needs to go above redirect
   get '/admin', to: 'admin/dashboards#index'
   get '/admin/action_items', to: 'admin/dashboards#action_items'
   get '/admin/drafts', to: 'admin/dashboards#drafts'

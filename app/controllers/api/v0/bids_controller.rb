@@ -16,12 +16,4 @@ class Api::V0::BidsController < ApplicationController
       render json: { error: @bid.errors.full_messages.to_sentence }, status: 403
     end
   end
-
-  rescue_from 'ActiveRecord::RecordNotFound' do
-    respond_to do |format|
-      format.html do
-        fail ActionController::RoutingError, 'Not Found'
-      end
-    end
-  end
 end
