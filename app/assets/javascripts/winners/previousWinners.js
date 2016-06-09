@@ -1,16 +1,11 @@
 'use strict';
 
 (function (window) {
-
-
   window.winners = {
     onReady: function(){
-      // Retrieve data
       $.getJSON('/auctions.json').success(function(data){
         var auctions = _.sortBy(data.auctions, 'id');
-
         window.winners.metrics = new Metrics(auctions);
-
         window.winners.charts = new Charts(auctions);
 
       })
@@ -22,5 +17,4 @@
   }
 
   $(document).ready(window.winners.onReady);
-
 })(this);

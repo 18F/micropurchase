@@ -5,7 +5,7 @@ ruby '2.3.1'
 gem 'rails', '4.2.6'
 gem 'pg'
 gem 'sass-rails', '~> 5.0'
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 gem 'us_web_design_standards'
 gem 'omniauth'
 gem 'omniauth-github'
@@ -26,6 +26,8 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'foreman'
 gem 'c2', github: '18f/c2-api-client-ruby'
+gem 'jquery-rails-cdn'
+gem 'jquery-rails'
 
 group :test do
   gem "codeclimate-test-reporter", require: nil

@@ -261,5 +261,4 @@ describe('PreviousWinners', function () {
       expect(settings.xs).toEqual(matcher.xs)
     })
   })
-
 })
