@@ -11,7 +11,7 @@ staging).
 You can see the available enviroment variables by running the following:
 
 ```bash
- cf target -p 18f-acq -s staging
+ cf target -o 18f-acq -s staging
  cf env micropurchase-staging
 ```
 
