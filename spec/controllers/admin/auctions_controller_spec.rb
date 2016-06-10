@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe Admin::AuctionsController do
-
   describe '#index' do
     it 'assigns presented auctions' do
       user = create(:admin_user)
@@ -47,9 +46,7 @@ describe Admin::AuctionsController do
         put :update, params, user_id: user.id
         auction = assigns(:auction)
 
-        expect(auction).to be_a(Admin::EditAuctionViewModel)
         expect(auction.record.id).to eq(auction_record.id)
-
         expect(controller).to render_template :edit
       end
     end

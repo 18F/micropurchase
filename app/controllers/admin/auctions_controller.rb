@@ -39,7 +39,9 @@ class Admin::AuctionsController < ApplicationController
 
   def update
     auction = Auction.find(params[:id])
-    if UpdateAuction.new(auction, params, current_user).perform
+    update_auction = UpdateAuction.new(auction, params)
+
+    if update_auction.perform
       redirect_to admin_auctions_path
     else
       error_messages = auction.errors.full_messages.to_sentence
