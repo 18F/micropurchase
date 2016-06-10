@@ -14,13 +14,15 @@ describe UpdateAuction do
       end
     end
 
-    context 'when result is set to accepted' do
-      context 'and the auction is below the micropurchase threshold' do
+    context 'result is set to accepted' do
+      context 'auction is below the micropurchase threshold' do
         it 'calls the CreateCapProposalJob' do
-          auction = create(:auction,
-                           :below_micropurchase_threshold,
-                           :winning_vendor_is_small_business,
-                           :delivery_due_at_expired)
+          auction = create(
+            :auction,
+            :below_micropurchase_threshold,
+            :winning_vendor_is_small_business,
+            :delivery_due_at_expired
+          )
           allow(CreateCapProposalJob).to receive(:perform_later)
             .with(auction.id)
             .and_return(nil)
@@ -32,8 +34,8 @@ describe UpdateAuction do
         end
       end
 
-      context 'and the auction is between micropurchase and SAT threshold' do
-        context 'and the winning vendor is a small business' do
+      context 'auction is between micropurchase and SAT threshold' do
+        context 'winning vendor is a small business' do
           it 'calls the CreateCapProposalJob' do
             auction = create(
               :auction,
@@ -52,7 +54,7 @@ describe UpdateAuction do
           end
         end
 
-        context 'and the winning vendor is not a small business' do
+        context 'winning vendor is not a small business' do
           it 'does not call the CreateCapProposalJob' do
             auction = create(
               :auction,
@@ -94,6 +96,25 @@ describe UpdateAuction do
         UpdateAuction.new(auction, params)
 
         expect(CreateCapProposalJob).to_not have_received(:perform_later).with(auction.id)
+      end
+    end
+
+    context 'auction is for another purchase card' do
+      it 'does not call CreateCapProposalJob' do
+        auction = create(
+          :auction,
+          :below_micropurchase_threshold,
+          :winning_vendor_is_small_business,
+          :delivery_due_at_expired,
+          purchase_card: :other
+        )
+        allow(CreateCapProposalJob).to receive(:perform_later)
+          .with(auction.id)
+        params = { auction: { result: 'accepted' } }
+
+        UpdateAuction.new(auction, params).perform
+
+        expect(CreateCapProposalJob).not_to have_received(:perform_later)
       end
     end
   end
