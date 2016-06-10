@@ -1,4 +1,4 @@
-class Api::V0::AuctionsController < ApplicationController
+class Api::V0::AuctionsController < ApiController
   def index
     render json: AuctionQuery.new.public_index, each_serializer: AuctionSerializer
   end

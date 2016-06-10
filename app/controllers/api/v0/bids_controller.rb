@@ -1,4 +1,4 @@
-class Api::V0::BidsController < ApplicationController
+class Api::V0::BidsController < ApiController
   before_filter :require_authentication, except: [:index]
   skip_before_action :verify_authenticity_token
 

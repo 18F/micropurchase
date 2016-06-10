@@ -5,13 +5,6 @@ class Admin::UsersController < ApplicationController
     all_users = User.all.map {|user| UserPresenter.new(user) }
     @admins, @users = all_users.partition(&:admin?)
     @admin_report = AdminReport.new(users: all_users)
-
-    respond_to do |format|
-      format.html
-      format.json do
-        render json: @admin_report, serializer: Admin::AdminReportSerializer
-      end
-    end
   end
 
   def show

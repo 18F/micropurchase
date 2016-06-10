@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Admin::AuctionsController do
+describe Api::V0::Admin::AuctionsController do
   include RequestHelpers
 
   describe 'GET /admin/auctions' do
@@ -14,7 +14,7 @@ describe Admin::AuctionsController do
           'HTTP_API_KEY' => api_key
         }
 
-        get admin_auctions_path, nil, headers
+        get api_v0_admin_auctions_path, nil, headers
 
         expect(response.status).to eq 404
       end
@@ -30,7 +30,7 @@ describe Admin::AuctionsController do
           'HTTP_API_KEY' => api_key
         }
 
-        get admin_auctions_path, nil, headers
+        get api_v0_admin_auctions_path, nil, headers
 
         expect(response.status).to eq 404
       end
@@ -46,7 +46,7 @@ describe Admin::AuctionsController do
           'HTTP_API_KEY' => api_key
         }
 
-        get admin_auctions_path, nil, headers
+        get api_v0_admin_auctions_path, nil, headers
 
         expect(response.status).to eq 200
       end
@@ -61,7 +61,7 @@ describe Admin::AuctionsController do
           'HTTP_API_KEY' => api_key
         }
 
-        get admin_auctions_path, nil, headers
+        get api_v0_admin_auctions_path, nil, headers
 
         expect(response).to match_response_schema('admin/auctions')
       end
@@ -76,7 +76,7 @@ describe Admin::AuctionsController do
           'HTTP_API_KEY' => api_key
         }
 
-        get admin_auctions_path, nil, headers
+        get api_v0_admin_auctions_path, nil, headers
 
         json_auctions = JSON.parse(response.body)['auctions']
         expect(json_auctions.map { |a| a['created_at'] }).to all(be_iso8601)
