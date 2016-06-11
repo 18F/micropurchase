@@ -52,7 +52,6 @@ describe Api::V0::Admin::UsersController do
       end
 
       it 'returns iso8601 dates' do
-        skip 'until the bug can be solved'
         expect(json_non_admin_users.map { |a| a['created_at'] }).to all(be_iso8601)
         expect(json_non_admin_users.map { |a| a['updated_at'] }).to all(be_iso8601)
       end
