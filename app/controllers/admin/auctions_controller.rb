@@ -6,12 +6,12 @@ class Admin::AuctionsController < ApplicationController
   end
 
   def show
-    @auction = Admin::AuctionShow.new(Auction.find(params[:id]))
+    @auction = Admin::AuctionShowViewModel.new(Auction.find(params[:id]))
   end
 
   def preview
     auction = Auction.find(params[:id])
-    @auction = AuctionShowViewModel.new(auction: auction, current_user: current_user)
+    @auction = ::AuctionShowViewModel.new(auction: auction, current_user: current_user)
     render 'auctions/show'
   end
 
