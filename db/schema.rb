@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160613181643) do
+ActiveRecord::Schema.define(version: 20160613235100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,8 @@ ActiveRecord::Schema.define(version: 20160613181643) do
     t.boolean  "billable",   null: false
     t.integer  "tock_id",    null: false
   end
+
+  add_index "client_accounts", ["tock_id"], name: "index_client_accounts_on_tock_id", unique: true, using: :btree
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false

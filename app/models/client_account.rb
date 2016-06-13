@@ -3,7 +3,7 @@ class ClientAccount < ActiveRecord::Base
   validates :tock_id, presence: true
 
   def to_s
-    "#{name} - #{billable_to_s}"
+    "#{name} (#{billable_to_s})"
   end
 
   private

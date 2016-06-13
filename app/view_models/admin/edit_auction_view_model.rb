@@ -9,8 +9,8 @@ class Admin::EditAuctionViewModel
     auction
   end
 
-  def new_record?
-    false
+  def delivery_due_partial
+    'admin/auctions/delivery_due_at'
   end
 
   def date_default(field)
@@ -27,6 +27,10 @@ class Admin::EditAuctionViewModel
 
   def meridiem_default(field)
     dc_time(field).strftime('%p').strip
+  end
+
+  def billable_to_options
+    ([auction.billable_to] + ClientAccount.all.map(&:to_s)).uniq
   end
 
   private
