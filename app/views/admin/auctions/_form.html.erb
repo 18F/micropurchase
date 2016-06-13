@@ -13,7 +13,7 @@
   <%= render partial: 'datetime_fields', locals: { field: 'delivery_due' } %>
 <% end %>
 
-<%= f.input :billable_to %>
+<%= f.input :billable_to, collection: ClientAccount.all.map(&:to_s) %>
 <%= f.input :start_price %>
 <%= f.input :published, collection: Auction.publisheds.keys.to_a %>
 <%= f.input :purchase_card, collection: Auction.purchase_cards.keys.to_a %>

@@ -1,18 +1,30 @@
 <h1><%= @auction.title %></h1>
 
-<div class='usa-width-one-whole'>
-  <div class='usa-width-one-sixth'>
-    <%= render partial: @auction.status_partial, locals: { auction: @auction } %>
-  </div>
-  <div class='usa-width-one-fourth'>
-    <b>Starts:</b> <%= @auction.started_at %>
-  </div>
-  <div class='usa-width-one-fourth'>
-    <b>Ends:</b> <%= @auction.ended_at %>
-  </div>
+<div>
+  <%= render partial: @auction.status_partial, locals: { auction: @auction } %>
 </div>
-<p><%= @auction.html_summary %></p>
-<p><%= @auction.html_description %></p>
+
+<div>
+  <b>Starts:</b> <%= @auction.started_at %>
+</div>
+
+<div>
+  <b>Ends:</b> <%= @auction.ended_at %>
+</div>
+
+<div>
+  <b>Billable to:</b> <%= @auction.billable_to %>
+</div>
+
+<div>
+  <h3>Summary:</h3>
+  <%= @auction.html_summary %>
+</div>
+
+<div>
+  <h3>Description:</h3>
+  <%= @auction.html_description %>
+</div>
 
 <div class='usa-grid'>
   <%= render partial: @auction.bids_partial, locals: { auction: @auction } %>

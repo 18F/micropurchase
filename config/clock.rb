@@ -9,4 +9,9 @@ module Clockwork
       LosingBidderEmailSender.new(auction).delay.perform
     end
   end
+
+  every(1.day, "tock_projects.import", at: "02:00", tz: "UTC") do
+    puts "Importing Tock projects"
+    TockImporter.new.delay.perform
+  end
 end

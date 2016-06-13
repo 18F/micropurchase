@@ -1,5 +1,5 @@
 Feature: Contracting Officers
-  As an admin and contracting officer 
+  As an admin and contracting officer
   I should be able to create auctions over $3500
 
   Scenario: contracting office creates auction over $3500
