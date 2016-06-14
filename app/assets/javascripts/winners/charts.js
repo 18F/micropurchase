@@ -1,7 +1,6 @@
 'use strict';
 
 (function (window) {
-
   var microp = window.microp;
 
   var Charts = function (auctions) {
@@ -427,5 +426,4 @@
   }
 
   window.Charts = Charts;
-
 }(this));

@@ -6,27 +6,26 @@
 </h1>
 
 <div class='usa-grid-full'>
+  <% @auctions.each do |auction| %>
+    <div class='usa-width-one-whole auction-name'>
+      <%= link_to admin_auction_path(auction.id) do %>
+        <h2><%= auction.title %></h2>
+      <% end %>
+      <%= link_to 'Edit',
+        edit_admin_auction_path(auction.id),
+        class: 'usa-width-one-fourth' %>
+    </div>
 
-<% @auctions.each do |auction| %>
-  <div class='usa-width-one-whole auction-name'>
-    <%= link_to admin_auction_path(auction.id), class: 'usa-width-three-fourths' do %>
-      <h2><%= auction.title %></h2>
-    <% end %>
-    <%= link_to 'Edit',
-      edit_admin_auction_path(auction.id),
-      class: 'usa-width-one-fourth' %>
-  </div>
-
-  <div class='usa-width-one-whole auction-details'>
-    <div class='usa-width-one-sixth'>
-      <%= render partial: auction.availability_partial %>
+    <div class='usa-width-one-whole'>
+      <div>
+        <%= render partial: auction.availability_partial %>
+      </div>
+      <div>
+        <b>Starts:</b> <%= auction.formatted_start_time %>
+      </div>
+      <div>
+        <b>Ends:</b> <%= auction.formatted_end_time %>
+      </div>
     </div>
-    <div class='usa-width-one-fourth'>
-      <b>Starts:</b> <%= auction.formatted_start_time %>
-    </div>
-    <div class='usa-width-one-fourth'>
-      <b>Ends:</b> <%= auction.formatted_end_time %>
-    </div>
-  </div>
-<% end %>
+  <% end %>
 </div>

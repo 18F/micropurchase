@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Admin::UsersController do
+describe Api::V0::Admin::UsersController do
   include RequestHelpers
 
   before do
@@ -21,7 +21,7 @@ describe Admin::UsersController do
 
   describe 'GET /admin/users' do
     before do
-      get admin_users_path, nil, headers
+      get api_v0_admin_users_path, nil, headers
     end
 
     context 'when the API key is invalid' do
@@ -52,7 +52,6 @@ describe Admin::UsersController do
       end
 
       it 'returns iso8601 dates' do
-        skip 'until the bug can be solved'
         expect(json_non_admin_users.map { |a| a['created_at'] }).to all(be_iso8601)
         expect(json_non_admin_users.map { |a| a['updated_at'] }).to all(be_iso8601)
       end

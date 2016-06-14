@@ -31,6 +31,7 @@ RSpec.configure do |config|
   config.before do
     mock_github
     WebMock.stub_request(:any, /api.data.gov/).to_rack(FakeSamApi)
+    WebMock.stub_request(:any, /tock-app.18f.gov/).to_rack(FakeTockApi)
   end
 end
 

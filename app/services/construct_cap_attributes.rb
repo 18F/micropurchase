@@ -46,7 +46,7 @@ class ConstructCapAttributes
   end
 
   def justification
-    "Billable to the '#{auction.billable_to}' Tock line item."
+    "Tock line item: #{auction.billable_to}"
   end
 
   def cost_per_unit

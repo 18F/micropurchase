@@ -28,31 +28,15 @@ class ApplicationController < ActionController::Base
     handle_error(message)
   end
 
-  private
+  protected
 
   def authenticator
-    @_authenticator ||= set_authenticator
-  end
-
-  def set_authenticator
-    if api_request?
-      ApiAuthenticator.new(self)
-    else
-      WebAuthenticator.new(self)
-    end
-  end
-
-  def api_request?
-    request.format.json?
+    @_authenticator ||= WebAuthenticator.new(self)
   end
 
   def handle_error(message)
-    if api_request?
-      render json: { error: message }, status: 404
-    else
-      flash[:error] = message
-      redirect_to root_path
-    end
+    flash[:error] = message
+    redirect_to root_path
   end
 
   def store_location

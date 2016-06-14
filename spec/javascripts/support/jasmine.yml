@@ -11,6 +11,7 @@
 #   - dist/**/*.js
 #
 src_files:
+  - assets/jquery.js
   - assets/application.js
   - assets/winners-bundle.js
 

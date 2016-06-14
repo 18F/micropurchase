@@ -1,20 +1,40 @@
-class UpdateAuction < Struct.new(:auction, :params, :user)
+class UpdateAuction
+  def initialize(auction, params)
+    @auction = auction
+    @params = params
+  end
+
   def perform
     auction.assign_attributes(attributes)
 
+    if vendor_ineligible?
+      auction.errors.add(:base, 'The vendor cannot be paid')
+      false
+    else
+      create_purchase_request
+      auction.save
+    end
+  end
+
+  private
+
+  attr_reader :auction, :params
+
+  def create_purchase_request
     if should_create_cap_proposal?
       CreateCapProposalJob.perform_later(auction.id)
     end
-
-    auction.save
   end
 
   def should_create_cap_proposal?
     auction_accepted_and_cap_proposal_is_blank? &&
-      winning_bidder_is_eligible_to_be_paid?
+      auction.purchase_card == "default"
   end
 
-  private
+  def vendor_ineligible?
+    auction_accepted_and_cap_proposal_is_blank? &&
+      !winning_bidder_is_eligible_to_be_paid?
+  end
 
   def auction_accepted_and_cap_proposal_is_blank?
     attributes[:result] == 'accepted' && auction.cap_proposal_url.blank?
@@ -49,10 +69,6 @@ class UpdateAuction < Struct.new(:auction, :params, :user)
   end
 
   def attributes
-    parser.attributes
-  end
-
-  def parser
-    @_parser ||= AuctionParser.new(params, user)
+    @_attributes ||= AuctionParser.new(params, auction.user).attributes
   end
 end

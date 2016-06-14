@@ -8,7 +8,7 @@ describe 'GET /auctions' do
       login
       api_key = FakeGitHub::INVALID_API_KEY
 
-      get auctions_path, nil, headers(api_key)
+      get api_v0_auctions_path(format: :json), nil, headers(api_key)
 
       expect(response.status).to eq 200
     end
@@ -19,7 +19,7 @@ describe 'GET /auctions' do
       login
       api_key = nil
 
-      get auctions_path, nil, headers(api_key)
+      get api_v0_auctions_path(format: :json), nil, headers(api_key)
 
       expect(response.status).to eq 200
     end
@@ -30,7 +30,7 @@ describe 'GET /auctions' do
       login
       api_key = FakeGitHub::VALID_API_KEY
 
-      get auctions_path, nil, headers(api_key)
+      get api_v0_auctions_path(format: :json), nil, headers(api_key)
 
       expect(response.status).to eq 200
     end
@@ -39,7 +39,7 @@ describe 'GET /auctions' do
       login
       create(:auction, :with_bidders)
 
-      get auctions_path, nil, headers
+      get api_v0_auctions_path(format: :json), nil, headers
 
       expect(response).to match_response_schema('auctions')
     end
@@ -48,7 +48,7 @@ describe 'GET /auctions' do
       login
       create(:auction)
 
-      get auctions_path, nil, headers
+      get api_v0_auctions_path(format: :json), nil, headers
 
       expect(json_auctions.map {|a| a['created_at'] }).to all(be_iso8601)
       expect(json_auctions.map {|a| a['updated_at'] }).to all(be_iso8601)
@@ -62,7 +62,7 @@ describe 'GET /auctions' do
           login
           create(:auction, :running, :multi_bid, :with_bidders)
 
-          get auctions_path, nil, headers
+          get api_v0_auctions_path(format: :json), nil, headers
 
           json_bids.each do |bid|
             expect(bid['bidder_id']).to be_nil
@@ -82,7 +82,7 @@ describe 'GET /auctions' do
             login
             create(:auction, :closed, :multi_bid, :with_bidders)
 
-            get auctions_path, nil, headers
+            get api_v0_auctions_path(format: :json), nil, headers
 
             json_bids.each do |bid|
               expect(bid['bidder_id']).to_not be_nil
@@ -106,7 +106,7 @@ describe 'GET /auctions' do
             login
             create(:auction, :running, :single_bid, :with_bidders)
 
-            get auctions_path, nil, headers
+            get api_v0_auctions_path(format: :json), nil, headers
 
             expect(json_bids).to be_empty
         end
@@ -116,7 +116,7 @@ describe 'GET /auctions' do
             login
             auction = create(:auction, :closed, :single_bid, :with_bidders)
 
-            get auctions_path, nil, headers
+            get api_v0_auctions_path(format: :json), nil, headers
 
             json_bids.each do |bid|
               expect(bid['bidder_id']).to_not be_nil

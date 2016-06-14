@@ -1,9 +1,10 @@
 Feature: Contracting Officers
-  As an admin and contracting officer 
+  As an admin and contracting officer
   I should be able to create auctions over $3500
 
   Scenario: contracting office creates auction over $3500
     Given I am a contracting officer
+    And there is a client account to bill to
     And I sign in
     When I visit the auctions admin page
     And I click on the "Create a new auction" link

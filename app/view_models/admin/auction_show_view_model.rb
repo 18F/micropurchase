@@ -1,4 +1,4 @@
-class Admin::AuctionShow
+class Admin::AuctionShowViewModel
   attr_reader :auction
 
   def initialize(auction)
@@ -11,6 +11,10 @@ class Admin::AuctionShow
 
   def title
     auction.title
+  end
+
+  def billable_to
+    auction.billable_to
   end
 
   def status_partial

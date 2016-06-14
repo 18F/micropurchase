@@ -6,14 +6,8 @@
 <%= f.input :description, as: :text %>
 <%= render partial: 'datetime_fields', locals: { field: 'started' } %>
 <%= render partial: 'datetime_fields', locals: { field: 'ended' } %>
-
-<% if @auction.new_record? %>
-  <%= f.input :due_in_days %>
-<% else %>
-  <%= render partial: 'datetime_fields', locals: { field: 'delivery_due' } %>
-<% end %>
-
-<%= f.input :billable_to %>
+<%= render partial: auction.delivery_due_partial, locals: { f: f } %>
+<%= f.input :billable_to, collection: auction.billable_to_options %>
 <%= f.input :start_price %>
 <%= f.input :published, collection: Auction.publisheds.keys.to_a %>
 <%= f.input :purchase_card, collection: Auction.purchase_cards.keys.to_a %>

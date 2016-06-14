@@ -69,15 +69,13 @@ When(/^I edit the new auction form$/) do
   @deadline_day = DcTimePresenter.convert(@time_in_days.business_days.from_now)
   fill_in("auction_due_in_days", with: @time_in_days)
 
-  @billable = "the tock line item for CALC"
-  fill_in("auction_billable_to", with: @billable)
-
+  select(@billable.to_s, from: "auction_billable_to")
   select("published", from: "auction_published")
 end
 
 Then(/^I should see the current auction attributes in the form$/) do
   expect(@auction).to_not be_nil
-  
+
   %w(issue_url description github_repo summary issue_url billable_to).each do |field|
     form_field = find_field("auction_#{field}")
     expect(form_field.value).to eq(@auction.send(field))
@@ -129,9 +127,7 @@ Then(/^I should be able to edit the existing auction form$/) do
   @deadline_day = DcTimePresenter.convert(Time.now + 5.days)
   fill_in "auction_delivery_due_at", with: @deadline_day.strftime('%Y-%m-%d')
 
-  @billable = "the tock line item for CALC"
-  fill_in("auction_billable_to", with: @billable)
-
+  select(@billable.to_s, from: "auction_billable_to")
   select("published", from: "auction_published")
 end
 
@@ -148,6 +144,7 @@ Then(/^I should see new content on the page$/) do
   expect(page).to have_text(@title)
   expect(page).to have_text(@summary)
   expect(page).to have_text(@description)
+  expect(page).to have_text(@billable.to_s)
 end
 
 Then(/^I should see that my auction was created successfully$/) do

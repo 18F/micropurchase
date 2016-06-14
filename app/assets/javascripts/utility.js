@@ -81,7 +81,7 @@
   // Input: string of a date or Date Object
   // Outputs a date object formatted like so: %Y-%m-%d
   // Or like so %m/%d if a separator is included
-  microp.format.date = function (date, seperator) {
+  microp.format.date = function (date, separator) {
     if (typeof(date) === 'undefined' || typeof(date) === undefined) {
       return date;
     }
@@ -98,7 +98,7 @@
       month = dateObj.getMonth() + 1,
       year = dateObj.getFullYear();
 
-    if (seperator === '/') {
+    if (separator === '/') {
       date = [month,day].join('/');
     } else {
       date = [year,month,day].join('-');

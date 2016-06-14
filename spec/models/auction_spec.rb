@@ -7,6 +7,7 @@ describe Auction do
 
   describe 'Validations' do
     context 'on create' do
+      it { should validate_presence_of(:billable_to) }
       it { should validate_presence_of(:ended_at) }
       it { should validate_presence_of(:started_at) }
       it { should validate_presence_of(:start_price) }

@@ -131,7 +131,7 @@ GEM
       activemodel
     erubis (2.7.0)
     excon (0.49.0)
-    execjs (2.6.0)
+    execjs (2.7.0)
     factory_girl (4.7.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.7.0)
@@ -160,7 +160,7 @@ GEM
     haml (4.0.7)
       tilt
     hashdiff (0.3.0)
-    hashie (3.4.3)
+    hashie (3.4.4)
     highline (1.7.8)
     holidays (3.3.0)
     http-cookie (1.0.2)
@@ -173,6 +173,12 @@ GEM
       rack (>= 1.2.1)
       rake
     jasmine-core (2.4.1)
+    jquery-rails (4.1.1)
+      rails-dom-testing (>= 1, < 3)
+      railties (>= 4.2.0)
+      thor (>= 0.14, < 2.0)
+    jquery-rails-cdn (1.1.2)
+      jquery-rails
     json (1.8.3)
     json-schema (2.6.1)
       addressable (~> 2.3.8)
@@ -191,16 +197,17 @@ GEM
       mime-types (>= 1.16, < 4)
     method_source (0.8.2)
     mime-types (2.99.1)
-    mini_portile2 (2.0.0)
+    mini_portile2 (2.1.0)
     minitest (5.8.4)
-    multi_json (1.11.2)
+    multi_json (1.12.1)
     multi_test (0.1.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     netrc (0.11.0)
     newrelic_rpm (3.15.2.317)
-    nokogiri (1.6.7.2)
-      mini_portile2 (~> 2.0.0.rc2)
+    nokogiri (1.6.8)
+      mini_portile2 (~> 2.1.0)
+      pkg-config (~> 1.1.7)
     oauth2 (1.1.0)
       faraday (>= 0.8, < 0.10)
       jwt (~> 1.0, < 1.5.2)
@@ -222,6 +229,7 @@ GEM
       ast (~> 2.2)
     pg (0.18.4)
     phantomjs (2.1.1.0)
+    pkg-config (1.1.7)
     poltergeist (1.9.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
@@ -311,7 +319,7 @@ GEM
     ruby_parser (3.8.1)
       sexp_processor (~> 4.1)
     safe_yaml (1.0.4)
-    samwise (0.3.0)
+    samwise (0.4.0)
       httpclient
     sass (3.4.22)
     sass-rails (5.0.4)
@@ -413,6 +421,8 @@ DEPENDENCIES
   hakiri
   holidays
   jasmine
+  jquery-rails
+  jquery-rails-cdn
   json-schema
   letter_opener
   letter_opener_web
@@ -431,13 +441,13 @@ DEPENDENCIES
   redcarpet
   rspec-rails
   rubocop
-  samwise (~> 0.3.0)
+  samwise (~> 0.4.0)
   sass-rails (~> 5.0)
   shoulda-matchers
   simple_form
   sinatra
   timecop
-  uglifier (>= 1.3.0)
+  uglifier
   us_web_design_standards
   validate_url
   web-console (~> 2.0)

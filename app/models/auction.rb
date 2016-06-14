@@ -13,7 +13,7 @@ class Auction < ActiveRecord::Base
   # Disable STI
   self.inheritance_column = :__disabled
 
-  validate :start_price_equal_to_or_less_than_max_if_not_contracting_officer
+  validate :user_is_contracting_officer_if_above_micropurchase
   validates :delivery_due_at, presence: true, if: :published?
   validates :description, presence: true, if: :published?
   validates :ended_at, presence: true
@@ -23,6 +23,7 @@ class Auction < ActiveRecord::Base
   validates :summary, presence: true, if: :published?
   validates :title, presence: true
   validates :user, presence: true
+  validates :billable_to, presence: true
 
   def lowest_bid
     lowest_bids.first
@@ -38,7 +39,7 @@ class Auction < ActiveRecord::Base
     bids.sort_by(&:amount).first.try(:amount)
   end
 
-  def start_price_equal_to_or_less_than_max_if_not_contracting_officer
+  def user_is_contracting_officer_if_above_micropurchase
     if user && !user.contracting_officer? && start_price > AuctionThreshold::MICROPURCHASE
       errors.add(
         :start_price,
