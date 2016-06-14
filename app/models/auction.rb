@@ -23,6 +23,7 @@ class Auction < ActiveRecord::Base
   validates :summary, presence: true, if: :published?
   validates :title, presence: true
   validates :user, presence: true
+  validates :billable_to, presence: true
 
   def lowest_bid
     lowest_bids.first

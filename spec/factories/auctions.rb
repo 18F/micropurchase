@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :auction do
     association :user, factory: :admin_user
+    billable_to "Project (billable)"
     started_at { TimeHelpers::quartile_minute(Time.now - 3.days) }
     ended_at { TimeHelpers::quartile_minute(Time.now + 3.days) }
     result :not_applicable

@@ -3,8 +3,8 @@ class Admin::NewAuctionViewModel
     Auction.new
   end
 
-  def new_record?
-    true
+  def delivery_due_partial
+    'admin/auctions/due_in_days'
   end
 
   def date_default(_field)
@@ -21,6 +21,10 @@ class Admin::NewAuctionViewModel
 
   def meridiem_default(_field)
     default_date_time.meridiem
+  end
+
+  def billable_to_options
+    ClientAccount.all.map(&:to_s)
   end
 
   private
