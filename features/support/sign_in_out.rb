@@ -5,7 +5,9 @@ def mock_sign_in(github_id, name)
     provider: 'github',
     uid: github_id,
     info: {
-      name: name
+      name: name,
+      nickname: 'github_username',
+      email: 'email@example.com'
     }
   )
 end

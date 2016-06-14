@@ -2,7 +2,7 @@ require 'samwise'
 
 class DunsNumberValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
-    if value.present? && invalid_duns_number?(value)
+    if !value.nil? && invalid_duns_number?(value)
       record.errors[attribute] << I18n.t('activerecord.errors.models.user.attributes.duns_number.invalid')
     end
   end
