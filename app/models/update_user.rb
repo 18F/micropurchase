@@ -34,13 +34,9 @@ class UpdateUser < Struct.new(:params, :current_user)
   end
 
   def parsed_user_params
-    user_params.inject({}) do |hash, (key, value)|
-      if value == ""
-        value = nil
-      end
-
-      hash[key] = value
-      hash
+    user_params.each_with_object({}) do |(key, value), hash|
+      converted_value = nil_not_empty_string(value)
+      hash[key] = converted_value
     end
   end
 
@@ -48,5 +44,13 @@ class UpdateUser < Struct.new(:params, :current_user)
     params
       .require(:user)
       .permit(:name, :duns_number, :email, :credit_card_form_url)
+  end
+
+  def nil_not_empty_string(value)
+    if value == ""
+      nil
+    else
+      value
+    end
   end
 end
