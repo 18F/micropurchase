@@ -34,7 +34,7 @@ class UpdateUser < Struct.new(:params, :current_user)
   end
 
   def parsed_user_params
-    user_params.each_with_object({}) do |(key, value), hash|
+    user_params.each_with_object({ }) do |(key, value), hash|
       converted_value = nil_not_empty_string(value)
       hash[key] = converted_value
     end
