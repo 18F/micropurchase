@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def edit
-    fail UnauthorizedError if current_user.nil?
+    require_authentication
 
     @user = current_user
     @user.decorate.sam_status_message_for(flash)
