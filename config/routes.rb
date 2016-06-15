@@ -24,11 +24,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: 'json' } do
     namespace :v0 do
       resources :auctions, only: [:index, :show] do
-        resources :bids, only: [:new, :create, :index] do
-          collection do
-            post :confirm
-          end
-        end
+        resources :bids, only: [:create]
       end
 
       namespace :admin do
