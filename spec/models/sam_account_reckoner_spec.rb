@@ -81,7 +81,7 @@ describe SamAccountReckoner do
     end
   end
 
-  describe '#set_default_status' do
+  describe '#set_default_sam_status' do
     context 'when the user is not persisted' do
       it 'does not change the sam status' do
         user = FactoryGirl.build(:user, sam_status: :sam_accepted)
