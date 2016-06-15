@@ -30,6 +30,6 @@ class Admin::ActionItemListItem
   end
 
   def paid?
-    auction.paid?
+    auction.paid_at.present?
   end
 end

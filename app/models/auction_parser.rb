@@ -19,7 +19,6 @@ class AuctionParser
 
   def auction_params
     strong_params.require(:auction).permit(
-      :awardee_paid_status,
       :billable_to,
       :cap_proposal_url,
       :delivery_url,

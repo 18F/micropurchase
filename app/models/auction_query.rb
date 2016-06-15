@@ -146,11 +146,11 @@ class AuctionQuery
     end
 
     def paid
-      where(awardee_paid_status: paid_enum)
+      where.not(paid_at: nil)
     end
 
     def not_paid
-      where(awardee_paid_status: not_paid_enum)
+      where(paid_at: nil)
     end
 
     def in_reverse_chron_order
@@ -174,14 +174,6 @@ class AuctionQuery
     end
 
     private
-
-    def paid_enum
-      Auction.awardee_paid_statuses['paid']
-    end
-
-    def not_paid_enum
-      Auction.awardee_paid_statuses['not_paid']
-    end
 
     def accepted_enum
       Auction.results['accepted']

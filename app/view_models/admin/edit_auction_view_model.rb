@@ -14,15 +14,27 @@ class Admin::EditAuctionViewModel
   end
 
   def date_default(field)
-    dc_time(field).to_date
+    if field == 'paid'
+      nil
+    else
+      dc_time(field).to_date
+    end
   end
 
   def hour_default(field)
-    dc_time(field).strftime('%l').strip
+    if field == 'paid'
+      nil
+    else
+      dc_time(field).strftime('%l').strip
+    end
   end
 
   def minute_default(field)
-    dc_time(field).strftime('%M').strip
+    if field == 'paid'
+      nil
+    else
+      dc_time(field).strftime('%M').strip
+    end
   end
 
   def meridiem_default(field)
