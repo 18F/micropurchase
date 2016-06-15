@@ -25,10 +25,10 @@ class CreateCapProposal
   end
 
   def configure_c2_client
-    @host = ENV.fetch('C2_HOST', 'https://c2-dev.18f.gov')
+    @host = C2Credentials.host
     @c2_client = C2::Client.new(
-      oauth_key: ENV.fetch('MICROPURCHASE_C2_OAUTH_KEY'),
-      oauth_secret: ENV.fetch('MICROPURCHASE_C2_OAUTH_SECRET'),
+      oauth_key: C2Credentials.oauth_key,
+      oauth_secret: C2Credentials.oauth_secret,
       host: @host,
       debug: ENV.fetch('C2_DEBUG', false)
     )

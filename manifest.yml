@@ -7,12 +7,14 @@ applications:
   host: micropurchase
   buildpack: https://github.com/ddollar/heroku-buildpack-multi.git
   services:
-    - micropurchase-psql
+    - data-dot-gov
+    - micropurchase-c2
     - micropurchase-github
+    - micropurchase-psql
     - micropurchase-smtp
     - new-relic
-    - data-dot-gov
   command: script/start
   env:
     RAILS_ENV: production
     RACK_ENV: production
+    C2_HOST: 'https://cap.18f.gov'
