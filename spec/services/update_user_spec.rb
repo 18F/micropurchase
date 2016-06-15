@@ -123,8 +123,8 @@ RSpec.describe UpdateUser do
       end
     end
 
-    context 'user updates DUNS to nil' do
-      let(:user_duns_number) { nil }
+    context 'user updates DUNS to nothing' do
+      let(:user_duns_number) { '' }
 
       it 'does not raise validation error' do
         updater.save

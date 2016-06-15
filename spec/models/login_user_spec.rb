@@ -5,7 +5,7 @@ describe LoginUser do
     context "user does not have github username, name, or email" do
       it "updates from auth hash" do
         github_id = '1234'
-        user = build(:user, github_login: nil, name: nil, email: nil, github_id: github_id)
+        user = build(:user, github_login: nil, name: "", email: "", github_id: github_id)
         user.save(validate: false)
         auth_hash = {
           uid: github_id,

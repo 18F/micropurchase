@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160613235100) do
+ActiveRecord::Schema.define(version: 20160615161811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,13 +79,13 @@ ActiveRecord::Schema.define(version: 20160613235100) do
 
   create_table "users", force: :cascade do |t|
     t.string   "github_id"
-    t.string   "duns_number"
-    t.string   "name"
+    t.string   "duns_number",          default: "",    null: false
+    t.string   "name",                 default: "",    null: false
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
     t.string   "email"
     t.string   "github_login"
-    t.string   "credit_card_form_url"
+    t.string   "credit_card_form_url", default: "",    null: false
     t.integer  "sam_status",           default: 0,     null: false
     t.boolean  "contracting_officer",  default: false, null: false
     t.boolean  "small_business",       default: false, null: false
