@@ -4,7 +4,11 @@ class UserPresenter < SimpleDelegator
   end
 
   def admin?
-    Admins.verify?(model.github_id)
+    authenticated? && Admins.verify?(model.github_id)
+  end
+
+  def authenticated?
+    !model.is_a?(Guest)
   end
 
   def in_sam?

@@ -176,6 +176,14 @@ class AuctionShowViewModel
     auction.lowest_bid.bidder.name
   end
 
+  def admin_edit_auction_partial
+    if UserPresenter.new(current_user).admin?
+      'auctions/edit_auction_link'
+    else
+      'components/null'
+    end
+  end
+
   private
 
   def available_and_user_is_bidder?

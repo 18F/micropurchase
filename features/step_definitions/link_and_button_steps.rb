@@ -20,7 +20,11 @@ Then(/^I should see an? "([^"]+)" link$/) do |link|
   expect(page).to have_selector(:link, link)
 end
 
-Then(/^I should see an? "([^"]*)" button$/) do |button|
+Then(/^I should not see an? "([^"]+)" link$/) do |link|
+  expect(page).to_not have_selector(:link, link)
+end
+
+Then(/^I should see an? "([^"]+)" button$/) do |button|
   expect(page).to have_selector(:link_or_button, button)
 end
 

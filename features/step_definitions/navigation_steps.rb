@@ -31,7 +31,7 @@ When(/^I visit the admin auction page for that auction$/) do
   visit admin_auction_path(@auction)
 end
 
-When(/^I visit the admin edit page for that auction$/) do
+When(/^I visit the admin form for that auction$/) do
   visit edit_admin_auction_path(@auction)
 end
 
@@ -73,4 +73,13 @@ end
 
 Then(/^I should be on the bid confirmation page$/) do
   expect(page.current_path).to eq(confirm_auction_bids_path(@auction))
+end
+
+When(/^I should be on the admin auctions page$/) do
+  expect(page.current_path).to eq(admin_auctions_path)
+end
+
+
+Then(/^I should be on the admin form for that auction$/) do
+  expect(page.current_path).to eq(edit_admin_auction_path(@auction))
 end
