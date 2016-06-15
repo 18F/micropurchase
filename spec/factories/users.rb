@@ -7,6 +7,7 @@ FactoryGirl.define do
     name { Faker::Name.name }
     email
     github_id 123_456
+    github_login 'github_username'
     sam_status :duns_blank
     credit_card_form_url 'https://some-website.com/pay'
 

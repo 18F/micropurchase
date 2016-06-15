@@ -123,8 +123,8 @@ RSpec.describe UpdateUser do
       end
     end
 
-    context 'user updates DUNS to nil' do
-      let(:user_duns_number) { nil }
+    context 'user updates DUNS to nothing' do
+      let(:user_duns_number) { '' }
 
       it 'does not raise validation error' do
         updater.save
@@ -151,6 +151,22 @@ RSpec.describe UpdateUser do
 
         expect(reckoner).to have_received(:delay)
         expect(delayed_job).to have_received(:set!)
+      end
+    end
+
+    context 'small business vendor changes DUNS to empty' do
+      it 'set small_business to false and sam_status to :duns_blank' do
+        user = create(:user, sam_status: :sam_accepted, small_business: true)
+        params = ActionController::Parameters.new(
+          id: user.id, user: { duns_number: '', }
+        )
+        UpdateUser.new(params, user).save
+
+        Delayed::Worker.new.work_off
+        user.reload
+
+        expect(user.small_business).to eq(false)
+        expect(user.sam_status).to eq('duns_blank')
       end
     end
   end

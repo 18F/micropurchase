@@ -52,7 +52,7 @@ RSpec.describe UserExport do
 
     context 'for an administrator user' do
       it 'should return no infomration' do
-        user = FactoryGirl.create(:admin_user)
+        FactoryGirl.create(:admin_user)
 
         export = UserExport.new.export_csv
 

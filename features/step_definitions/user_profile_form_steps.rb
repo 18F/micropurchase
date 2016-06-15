@@ -42,7 +42,7 @@ end
 
 When(/^there is no (.+) associated with my account$/) do |attribute|
   attribute = attribute.parameterize('_')
-  @user.update_attribute(attribute, nil)
+  @user.update(attribute.to_sym => '')
 end
 
 Then(/^my (.+) should not be set$/) do |attribute|

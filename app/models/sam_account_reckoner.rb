@@ -1,9 +1,9 @@
 class SamAccountReckoner < Struct.new(:user)
   def set_default_sam_status
-    if should_clear_status?
-      user.sam_status = :sam_pending
-    elsif user.duns_number.blank?
+    if user.duns_number.blank?
       user.sam_status = :duns_blank
+    elsif should_clear_status?
+      user.sam_status = :sam_pending
     end
   end
 
@@ -21,6 +21,8 @@ class SamAccountReckoner < Struct.new(:user)
   def update_small_business
     if user.sam_accepted?
       user.small_business = duns_is_small_business?
+    elsif user.duns_blank?
+      user.small_business = false
     end
   end
 
