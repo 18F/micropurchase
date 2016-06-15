@@ -51,7 +51,7 @@ RSpec.describe BidsController, controller: true do
         it 'should raise a routing error' do
           expect do
             get :new, { auction_id: auction.id }, user_id: current_bidder.id
-          end.to raise_error ActionController::RoutingError
+          end.to raise_error ActiveRecord::RecordNotFound
         end
       end
     end
@@ -112,7 +112,7 @@ RSpec.describe BidsController, controller: true do
       it 'should raise a routing error' do
         expect do
           get :index, auction_id: auction.id
-        end.to raise_error ActionController::RoutingError
+        end.to raise_error ActiveRecord::RecordNotFound
       end
     end
   end
