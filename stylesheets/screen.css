@@ -872,10 +872,10 @@ main form footer p button{
 
 .breadcrumbs ol li::after{
 	content: "\25B6";
-	margin-left: 0.4em;
+	margin-left: 8px;
 	margin-right: 0.2em;
 	color: #777;
-	font-size: 16px;
+	font-size: 12px;
 }
 
 nav.breadcrumbs ol li:last-child::after{
