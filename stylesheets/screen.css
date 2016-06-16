@@ -251,6 +251,7 @@ input[type=checkbox]{
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: block;
+	line-height: 1.2;
 }
 
 .field-select span.label-select{ 
@@ -347,6 +348,13 @@ fieldset > p{
 
 div.field,
 fieldset{ margin-bottom: 24px; }
+
+.field .help-text{
+font-size: 14px;
+display: block;
+margin-top: 8px;
+}
+
 fieldset.fieldset-radio{ margin-bottom: 18px; }
 
 fieldset{
@@ -2103,11 +2111,32 @@ a[id]{
 	
 	.layout-sign-in main section:last-child h1{
 		font-size: 32px;
-		letter-spacing: -1;
+		font-weight: 400;
+		letter-spacing: -1px;
+		color: #444;
 	}
 }
 
 
 /* @end */
+
+/* @end */
+
+/* @group layout-profile */
+
+.field-duns input{
+	display: block;
+	margin-bottom: 8px;
+	max-width: 10em;
+}
+
+.field-duns .help-text{
+	margin-top: 8px;
+	display: block;
+	font-size: 14px;
+	padding-left: 20px;
+	background: url(images/png/checkmark.png) left center no-repeat;
+	background-size: 16px;	
+}
 
 /* @end */
