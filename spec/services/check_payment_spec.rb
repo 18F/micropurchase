@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe CapPaymentChecker do
+describe CheckPayment do
   describe '#perform' do
     context 'auction is closed, unpaid, for 18F pcard' do
       context 'not purchased in C2' do
@@ -17,7 +17,7 @@ describe CapPaymentChecker do
           allow(C2::Client).to receive(:new).and_return(c2_client_double)
           allow(c2_client_double).to receive(:get).with(c2_path).and_return(response_json)
 
-          CapPaymentChecker.new.perform
+          CheckPayment.new.perform
 
           expect(auction.reload.paid_at).to be_nil
         end
@@ -37,7 +37,7 @@ describe CapPaymentChecker do
           allow(C2::Client).to receive(:new).and_return(c2_client_double)
           allow(c2_client_double).to receive(:get).with(c2_path).and_return(response_json)
 
-          CapPaymentChecker.new.perform
+          CheckPayment.new.perform
 
           expect(auction.reload.paid_at).not_to be_nil
         end
@@ -51,7 +51,7 @@ describe CapPaymentChecker do
         allow(C2::Client).to receive(:new).and_return(c2_client_double)
         allow(c2_client_double).to receive(:get)
 
-        CapPaymentChecker.new.perform
+        CheckPayment.new.perform
 
         expect(c2_client_double).not_to have_received(:get)
       end
@@ -65,7 +65,7 @@ describe CapPaymentChecker do
         allow(C2::Client).to receive(:new).and_return(c2_client_double)
         allow(c2_client_double).to receive(:get)
 
-        CapPaymentChecker.new.perform
+        CheckPayment.new.perform
 
         expect(c2_client_double).not_to have_received(:get)
       end

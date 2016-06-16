@@ -17,6 +17,6 @@ module Clockwork
 
   every(1.day, "tock_projects.import", at: "04:00", tz: "UTC") do
     puts "Checking for paid auctions"
-    CapPaymentChecker.new.delay.perform
+    CheckPayment.new.delay.perform
   end
 end

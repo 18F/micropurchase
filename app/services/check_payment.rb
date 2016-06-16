@@ -1,4 +1,4 @@
-class CapPaymentChecker
+class CheckPayment
   def perform
     AuctionQuery.new.payment_pending.each do |auction|
       paid_at = find_purchase_timestamp(proposal_json(auction))
