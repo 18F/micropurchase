@@ -1,6 +1,10 @@
 class CheckPayment
+  def initialize(auctions = AuctionQuery.new.payment_pending)
+    @auctions = auctions
+  end
+
   def perform
-    AuctionQuery.new.payment_pending.each do |auction|
+    auctions.each do |auction|
       paid_at = find_purchase_timestamp(proposal_json(auction))
 
       if paid_at
@@ -10,6 +14,8 @@ class CheckPayment
   end
 
   private
+
+  attr_reader :auctions
 
   def find_purchase_timestamp(proposal_json)
     parsed_json = JSON.parse(proposal_json)
