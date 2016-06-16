@@ -79,10 +79,10 @@ describe Api::V0::Admin::AuctionsController do
         get api_v0_admin_auctions_path, nil, headers
 
         json_auctions = JSON.parse(response.body)['auctions']
-        # expect(json_auctions.map { |a| a['created_at'] }).to all(be_iso8601)
-        # expect(json_auctions.map { |a| a['updated_at'] }).to all(be_iso8601)
+        expect(json_auctions.map { |a| a['created_at'] }).to all(be_iso8601)
+        expect(json_auctions.map { |a| a['updated_at'] }).to all(be_iso8601)
         expect(json_auctions.map { |a| a['started_at'] }).to all(be_iso8601)
-        # expect(json_auctions.map { |a| a['ended_at'] }).to all(be_iso8601)
+        expect(json_auctions.map { |a| a['ended_at'] }).to all(be_iso8601)
       end
     end
   end
