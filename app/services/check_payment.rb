@@ -8,7 +8,7 @@ class CheckPayment
       paid_at = find_purchase_timestamp(proposal_json(auction))
 
       if paid_at
-        auction.update(paid_at: DateTime.new.iso8601(paid_at))
+        auction.update(paid_at: DateTime.parse(paid_at))
       end
     end
   end
@@ -18,12 +18,12 @@ class CheckPayment
   attr_reader :auctions
 
   def find_purchase_timestamp(proposal_json)
-    parsed_json = JSON.parse(proposal_json)
-    purchase_step = parsed_json['steps'].detect do |step|
-      step["type"] == "Steps::Purchase"
+    parsed_json = proposal_json.body
+    purchase_step = parsed_json[:steps].detect do |step|
+      step[:type] == "Steps::Purchase"
     end
 
-    purchase_step['completed_at']
+    purchase_step[:completed_at]
   end
 
   def proposal_json(auction)

@@ -46,7 +46,7 @@ describe CreateCapProposal do
         end
           .to change { auction.cap_proposal_url }
             .from('')
-            .to("https://c2-dev.18f.gov/proposals/#{fake_cap_proposal_id}")
+            .to("https://cap.18f.gov/proposals/#{fake_cap_proposal_id}")
       end
     end
 

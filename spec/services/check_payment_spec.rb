@@ -6,16 +6,12 @@ describe CheckPayment do
       context 'not purchased in C2' do
         it 'checks for payment updates' do
           c2_path = 'proposals/1234'
-          response_json = fixture_json('c2_proposal_not_purchased')
           auction = create(
             :auction,
             :payment_pending,
             purchase_card: :default,
             cap_proposal_url: "https://c2-dev.18f.gov/#{c2_path}"
           )
-          c2_client_double = double
-          allow(C2::Client).to receive(:new).and_return(c2_client_double)
-          allow(c2_client_double).to receive(:get).with(c2_path).and_return(response_json)
 
           CheckPayment.new.perform
 
@@ -25,17 +21,13 @@ describe CheckPayment do
 
       context 'purchased in C2' do
         it 'checks for payment updates' do
-          c2_path = 'proposals/1234'
-          response_json = fixture_json('c2_proposal_purchased')
+          c2_path = "proposals/#{FakeC2Api::PURCHASED_PROPOSAL_ID}"
           auction = create(
             :auction,
             :payment_pending,
             purchase_card: :default,
             cap_proposal_url: "https://c2-dev.18f.gov/#{c2_path}"
           )
-          c2_client_double = double
-          allow(C2::Client).to receive(:new).and_return(c2_client_double)
-          allow(c2_client_double).to receive(:get).with(c2_path).and_return(response_json)
 
           CheckPayment.new.perform
 
@@ -70,9 +62,5 @@ describe CheckPayment do
         expect(c2_client_double).not_to have_received(:get)
       end
     end
-  end
-
-  def fixture_json(name)
-    File.open("#{::Rails.root}/spec/support/fixtures/#{name}.json").read
   end
 end
