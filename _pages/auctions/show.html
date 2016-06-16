@@ -77,12 +77,42 @@ excerpt: None
             <button>Place bid</button>
           </form>
         </section>
-        <dl>
-          <dt class="auction-project">Project</dt>
-          <dd class="auction-project"><a href=""></a>Open Opportunities</dd>
-        </dl>
+        <ul>
+          <li class="auction-ended">
+            <h2>Ended</h2>
+            <span>June 03, 2016 04:00:00 PM EDT</span>
+          </li>
+          <li class="auction-started">
+            <h2>Started</h2>
+            <span>May 16, 2016 12:00:00 AM EDT</span>
+          </li>
+          <li class="auction-delivery-deadline">
+            <h2>Started</h2>
+            <span>May 27, 2016 12:00:00 AM EDT</span>
+          </li>
+          <li class="auction-project">
+            <h2>Project</h2>
+            <span>Open Opportunities</span>
+          </li>
+          <li class="auction-type">
+            <h2>Type</h2>
+            <span>Multi-bid</span>
+          </li>
+          <li class="auction-eligibility">
+            <h2>Eligibility</h2>
+            <span>SAM.gov only</span>
+          </li>
+        </ul>
       </footer>
     </div>
   </main>
+  <aside class="modal">
+    <h1>Are you sure?</h1>
+    <p>You&rsquo;re about to place a bid for <span class="bid-amount">$3,413.00</span>.</p>
+    <footer>
+      <button>Confirm</button>
+      <a href="#">Cancel</a>
+    </footer>
+  </aside>
   {% include site-footer.html %}
 </body>
