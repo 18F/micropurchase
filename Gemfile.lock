@@ -50,6 +50,13 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.3.8)
+    apivore (1.6.0)
+      actionpack (~> 4)
+      hashie (~> 3.3)
+      json-schema (~> 2.5)
+      rspec (~> 3)
+      rspec-expectations (~> 3.1)
+      rspec-mocks (~> 3.1)
     arel (6.0.3)
     ast (2.2.0)
     binding_of_caller (0.7.2)
@@ -288,6 +295,10 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
+    rspec (3.4.0)
+      rspec-core (~> 3.4.0)
+      rspec-expectations (~> 3.4.0)
+      rspec-mocks (~> 3.4.0)
     rspec-core (3.4.4)
       rspec-support (~> 3.4.0)
     rspec-expectations (3.4.0)
@@ -397,6 +408,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
+  apivore
   brakeman
   business_time
   byebug

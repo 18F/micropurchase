@@ -55,6 +55,7 @@ group :development, :test do
   gem 'hakiri', require: false
   gem 'dotenv-rails'
   gem 'jasmine'
+  gem 'apivore'
 end
 
 group :development do

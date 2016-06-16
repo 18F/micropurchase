@@ -28,6 +28,11 @@ class ApplicationController < ActionController::Base
     handle_error(message)
   end
 
+  rescue_from 'ActiveRecord::RecordNotFound' do |error|
+    message = error.message
+    handle_error(message)
+  end
+
   protected
 
   def authenticator

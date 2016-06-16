@@ -1,0 +1,358 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Micropurchase API Documentation",
+        "description": "Endpoints for the micropurchase API",
+        "version": "0.0.1"
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "basePath": "/api/v0",
+    "paths": {
+        "/auctions": {
+            "get": {
+                "summary": "List auctions",
+                "description": "Returns a list of all auctions (upcoming, running, and ended). Each auction contains bids and each bid contains one bidder.",
+                "responses": {
+                    "200": {
+                        "description": "Returns a list of auctions",
+                        "schema": {
+                            "$ref": "#/definitions/Auctions"
+                        }
+                    },
+                    "404": {
+                        "description": "Returned for all errors, even if the record is found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/auctions/{id}": {
+            "get": {
+                "summary": "Show an auction",
+                "description": "The details of a specific auction",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the auction to retrieve",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns a single auction",
+                        "schema": {
+                            "type": "object",
+                            "required": ["auction"],
+                            "properties": {
+                                "auction": {
+                                    "$ref": "#/definitions/Auction"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Returned for all errors, even if the record is found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/auctions/{id}/bids": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "summary": "Submit a new bid to an auction",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the auction",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "bid"
+                            ],
+                            "properties": {
+                                "bid": {
+                                    "type": "object",
+                                    "required": [
+                                        "amount"
+                                    ],
+                                    "properties": {
+                                        "amount": {
+                                            "type": "integer",
+                                            "minimum": 1
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns the bid that was created",
+                        "schema": {
+                            "type": "object",
+                            "required": ["bid"],
+                            "properties": {
+                                "bid": {
+                                    "$ref": "#/definitions/Bid"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "If the API key doesn't load",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "403": {
+                        "description": "If the bid is rejected",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Auctions": {
+            "type": "object",
+            "required": ["auctions"],
+            "properties": {
+                "auctions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Auction"
+                    }
+                }
+            }
+        },
+        "Auction": {
+            "type": "object",
+            "required": [
+                "id",
+                "title",
+                "summary",
+                "description",
+                "issue_url",
+                "github_repo",
+                "start_price",
+                "started_at",
+                "ended_at",
+                "created_at",
+                "updated_at",
+                "bids"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "summary": {
+                    "type": "string",
+                    "description": "A markdown-formatted summary of the auction"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "A markdown-formatted description of the auction. This is usually a continuation from the first paragraph of the summary."
+                },
+                "issue_url": {
+                    "type": "string",
+                    "format": "url"
+                },
+                "github_repo": {
+                    "type": "string",
+                    "format": "url"
+                },
+                "start_price": {
+                    "type": "integer",
+                    "maximum": 15000,
+                    "minimum": 1
+                },
+                "started_at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "ended_at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "created_at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "winning_bid": {
+                    "type": "object",
+                    "properties": {
+                        "amount": {
+                            "type": [
+                                "integer",
+                                "null"
+                            ]
+                        },
+                        "bidder_id": {
+                            "type": [
+                                "integer",
+                                "null"
+                            ]
+                        }
+                    }
+                },
+                "bids": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Bid"
+                    }
+                }
+            }
+        },
+        "Bid": {
+            "type": "object",
+            "required": [
+                "bidder_id",
+                "auction_id",
+                "amount",
+                "created_at",
+                "updated_at",
+                "id",
+                "bidder"
+            ],
+            "properties": {
+                "bidder_id": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "auction_id": {
+                    "type": "integer"
+                },
+                "amount": {
+                    "type": "integer"
+                },
+                "created_at": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "updated_at": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "bidder": {
+                    "$ref": "#/definitions/Bidder"
+                }
+            }
+        },
+        "Bidder": {
+            "type": "object",
+            "required": [
+                "id",
+                "duns_number",
+                "name",
+                "github_id",
+                "github_login",
+                "sam_status",
+                "created_at",
+                "updated_at"
+            ],
+            "properties": {
+                "id": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "github_id": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "minLength": 1
+                },
+                "duns_number": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "minLength": 1
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "minLength": 1
+                },
+                "github_login": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "sam_status": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "created_at": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "format": "date-time"
+                }
+            }
+        },
+        "Error": {
+            "required": [
+                "error"
+            ],
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
