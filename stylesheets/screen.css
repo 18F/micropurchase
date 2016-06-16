@@ -118,13 +118,13 @@ a.button span.slack::before{
 }
 
 main,
-nav.breadcrumbs{
+.breadcrumbs{
 	background: white;
 	color: #333;
 }
 
 main{
-	padding-bottom: 2em;
+	padding: 1em 0 2em;
 }
 
 img { max-width: 100%; }
@@ -839,72 +839,73 @@ main form footer p button{
 
 /* @end */
 
-/* @group nav.breadcrumbs-and-tools */
+/* @group nav.breadcrumbs*/
 
-nav.breadcrumbs-and-tools{
+.breadcrumbs{
 	padding-top: 12px;
-	padding-bottom: 16px;
-	background: white;
-	color: #555;
-	font-size: 16px;
+	padding-bottom: 12px;
+	background: #f3f3f3;
+	border-bottom: 1px solid #eee;
 }
 
-.breadcrumbs-and-tools .tools h1{
+.breadcrumbs.tools h1{
 	position: absolute;
 	left: -9999em;
 	top: -9999em;
 }
 
-nav.breadcrumbs-and-tools ol li{
+.breadcrumbs ol li{
 	max-width: 8em;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	display: inline-block;
 }
 
-nav.breadcrumbs-and-tools ol li::after{
-	content: ">";
+.breadcrumbs ol li::after{
+	content: "\25B6";
 	margin-left: 0.4em;
 	margin-right: 0.2em;
+	color: #777;
 }
 
-nav.breadcrumbs-and-tools ol li:last-child::after{
+nav.breadcrumbs ol li:last-child::after{
 	display: none;
 }
 
 @media screen and (min-width: 1066.66px){	
-    .breadcrumbs-and-tools .wrapper{ padding-right: 320px; }
+    .breadcrumbs.wrapper{ padding-right: 320px; }
 
-    .breadcrumbs-and-tools .tools{ 
+    .breadcrumbs.tools{ 
     	width: 256px; 
     	float: right;
     	margin-right: -320px;
     	text-align: right;
     }
     
-    .breadcrumbs-and-tools .tools li:last-child a{
+    .breadcrumbs.tools li:last-child a{
 	margin-right: 0; 
 	}
 
 }
 
-nav.breadcrumbs-and-tools ol{
+nav.breadcrumbsol{
 	float: left;
 	width: 75%;
 }
 
 
-nav.breadcrumbs-and-tools li{
+nav.breadcrumbsli{
 	display: inline-block;
 	vertical-align: middle;
 	margin-bottom: 0;
 }
 
-.breadcrumbs-and-tools a{
+.breadcrumbsa{
 	color: #666;
 }
 
-.breadcrumbs-and-tools .tools a{
+.breadcrumbs.tools a{
   border: 1px solid #d3d3d3;
   border-bottom-color: #ccc;
   border-radius: 2px;
@@ -925,14 +926,14 @@ nav.breadcrumbs-and-tools li{
 
 }
 
-.breadcrumbs-and-tools .tools a:hover{
+.breadcrumbs.tools a:hover{
   background: linear-gradient(#fff, #e3e3e3);
   border-color: #c3c3c3;
   border-bottom-color: #b8b8b8;
   text-decoration: none;
 }
 
-.breadcrumbs-and-tools .tools a:active{
+.breadcrumbs.tools a:active{
   color: #888;
   background: linear-gradient(#e3e3e3, #eee);
   border-color: #bbb;
@@ -1938,6 +1939,8 @@ a[id]{
 /* @end */
 
 /* @group layout-home */
+
+.layout-home main { padding-top: 0; }
 
 .layout-home main > header{
 	background: #fbf9eb;
