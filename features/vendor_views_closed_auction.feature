@@ -38,11 +38,6 @@ Feature: Vendor views closed auctions
     And I should see when the auction ended
     And there should be meta tags for the closed auction
 
-  Scenario: Winning vendor was paid
-    Given there is a paid auction
-    When I visit the auction page
-    Then I should see when the winning vendor was paid in ET
-
   Scenario: Nobody has bid on the auction
     Given there is a closed bidless auction
     And I am an authenticated vendor
