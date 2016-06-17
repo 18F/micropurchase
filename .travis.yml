@@ -1,11 +1,18 @@
 language: ruby
 rvm:
-- ruby-2.3.1
+  - ruby-2.3.1
 cache: bundler
 bundler_args: "--without production --binstubs"
+before_install:
+  - "export PATH=$PWD/travis_phantomjs/phantomjs-2.1.1-linux-x86_64/bin:$PATH"
+  - "if [ $(phantomjs --version) != '2.1.1' ]; then rm -rf $PWD/travis_phantomjs; mkdir -p $PWD/travis_phantomjs; fi"
+  - "if [ $(phantomjs --version) != '2.1.1' ]; then wget https://assets.membergetmember.co/software/phantomjs-2.1.1-linux-x86_64.tar.bz2 -O $PWD/travis_phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2; fi"
+  - "if [ $(phantomjs --version) != '2.1.1' ]; then tar -xvf $PWD/travis_phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2 -C $PWD/travis_phantomjs; fi"
+
 before_script:
-- bundle exec rake db:create
-- bundle exec rake db:migrate
+  - bundle exec rake db:create
+  - bundle exec rake db:migrate
+
 script: bundle exec rake $TASK
 notifications:
   email: false
@@ -22,22 +29,22 @@ after_script:
   - npm install -g pa11y-crawl
   - pa11y-crawl --run "bundle exec puma" --ci http://localhost:3000
 before_deploy:
-- export PATH=$HOME:$PATH
-- travis_retry curl -L -o $HOME/cf.tgz "https://cli.run.pivotal.io/stable?release=linux64-binary&version=6.15.0"
-- tar xzvf $HOME/cf.tgz -C $HOME
-- mkdir -p ${HOME}/Godeps/_workspace
-- export GOPATH=${HOME}/Godeps/_workspace
-- go get github.com/concourse/autopilot
-- cf install-plugin -f $GOPATH/bin/autopilot
-- bundle exec rake git:dump_sha
+  - export PATH=$HOME:$PATH
+  - travis_retry curl -L -o $HOME/cf.tgz "https://cli.run.pivotal.io/stable?release=linux64-binary&version=6.15.0"
+  - tar xzvf $HOME/cf.tgz -C $HOME
+  - mkdir -p ${HOME}/Godeps/_workspace
+  - export GOPATH=${HOME}/Godeps/_workspace
+  - go get github.com/concourse/autopilot
+  - cf install-plugin -f $GOPATH/bin/autopilot
+  - bundle exec rake git:dump_sha
 deploy:
-- provider: script
-  script: "./deploy.sh staging"
-  skip_cleanup: true
-  on:
-    branch: develop
-- provider: script
-  script: "./deploy.sh production"
-  skip_cleanup: true
-  on:
-    branch: master
+  - provider: script
+    script: "./deploy.sh staging"
+    skip_cleanup: true
+    on:
+      branch: develop
+  - provider: script
+    script: "./deploy.sh production"
+    skip_cleanup: true
+    on:
+      branch: master

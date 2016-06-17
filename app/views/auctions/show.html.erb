@@ -11,10 +11,11 @@
   <p><a class="link-highlighted" href="<%= root_path %>"><icon class="fa fa-angle-double-left"></icon> Back to open projects</a></p>
   <div class="usa-width-two-thirds auction-description">
     <h1><%= @auction.title %></h1>
-    <div class="github-issue">
-      <%= @auction.html_description %>
-    </div>
+
+    <%= render partial: 'auctions/auction', locals: { auction: @auction } %>
+    <%= render partial: 'auctions/bids', locals: { auction_bids: @auction } %>
   </div>
+
   <div class="usa-width-one-third">
     <div class="auction-detail-panel">
       <div class="auction-info">

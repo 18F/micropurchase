@@ -8,7 +8,7 @@ Feature: Guest views open auction
     When I visit the home page
     Then I should see the auction's summary
 
-    When I click on the link to the bids
+    When I click on the auction's title
     Then I should see the bid history
 
   Scenario: There is an expiring auction
