@@ -72,11 +72,23 @@ class AuctionShowViewModel
     DcTimePresenter.convert_and_format(auction.delivery_due_at)
   end
 
+  def formatted_paid_at
+    DcTimePresenter.convert_and_format(auction.paid_at)
+  end
+
   def bid_button_partial
     if show_bid_button?
       'auctions/show_bid_button'
     else
       'components/null'
+    end
+  end
+
+  def paid_at_partial
+    if auction.paid_at.nil?
+      'components/null'
+    else
+      'auctions/paid_at'
     end
   end
 

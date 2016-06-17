@@ -95,7 +95,7 @@ FactoryGirl.define do
 
     trait :paid do
       delivered
-      awardee_paid_status :paid
+      paid_at { Time.current }
     end
 
     trait :running do
@@ -123,16 +123,12 @@ FactoryGirl.define do
       result :rejected
     end
 
-    trait :paid do
-      awardee_paid_status :paid
-    end
-
     trait :not_paid do
-      awardee_paid_status :not_paid
+      paid_at nil
     end
 
     trait :cap_submitted do
-      cap_proposal_url 'https://cap.18f.gov/proposals/2486'
+      cap_proposal_url 'https://c2-dev.18f.gov/proposals/2486'
     end
 
     trait :not_evaluated do

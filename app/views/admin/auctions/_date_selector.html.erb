@@ -2,5 +2,5 @@
   <%= auction_fields.input "#{field}_at".to_sym,
     as: :date,
     html5: true,
-    input_html: { value: @auction.date_default(field) } %>
+    input_html: { value: auction.date_default(field) } %>
 <% end %>

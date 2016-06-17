@@ -114,7 +114,7 @@ RSpec.describe AuctionQuery do
     let!(:running_auction) { create(:auction, :running) }
     let!(:rejected_auction) { create(:auction, result: :rejected) }
     let!(:unpaid_auction) do
-      create(:auction, awardee_paid_status: :not_paid)
+      create(:auction, :not_paid)
     end
     let(:anomolous_auction) { create(:auction, :rejected, :paid) }
 

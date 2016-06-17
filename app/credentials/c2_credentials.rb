@@ -1,6 +1,6 @@
 class C2Credentials
   def self.host
-    ENV.fetch('C2_HOST', 'https://c2-dev.18f.gov')
+    ENV['C2_HOST']
   end
 
   def self.oauth_key

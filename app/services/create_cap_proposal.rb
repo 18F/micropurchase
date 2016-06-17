@@ -24,23 +24,20 @@ class CreateCapProposal
     auction.update(cap_proposal_url: cap_proposal_url)
   end
 
-  def configure_c2_client
-    @host = C2Credentials.host
-    @c2_client = C2::Client.new(
-      oauth_key: C2Credentials.oauth_key,
-      oauth_secret: C2Credentials.oauth_secret,
-      host: @host,
-      debug: ENV.fetch('C2_DEBUG', false)
-    )
-
-    @c2_client
-  end
-
   def c2_client
     @c2_client ||= configure_c2_client
   end
 
+  def configure_c2_client
+    C2::Client.new(
+      oauth_key: C2Credentials.oauth_key,
+      oauth_secret: C2Credentials.oauth_secret,
+      host: C2Credentials.host,
+      debug: ENV.fetch('C2_DEBUG', false)
+    )
+  end
+
   def construct_proposal_url(id)
-    "#{@host}/proposals/#{id}"
+    "#{C2Credentials.host}/proposals/#{id}"
   end
 end

@@ -50,6 +50,7 @@
         <p class="auction-label-info"><%= @auction.formatted_delivery_due_at %></p>
       </div>
 
+      <%= render partial: @auction.paid_at_partial, locals: { auction: @auction } %>
       <%= render partial: @auction.bid_button_partial, locals: { auction: @auction } %>
     </div>
 

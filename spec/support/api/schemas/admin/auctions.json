@@ -9,23 +9,23 @@
       "minItems": 1,
       "items": {
         "required": [
-          "issue_url",
-          "github_repo",
-          "start_price",
-          "started_at",
-          "ended_at",
+          "billable_to",
+          "cap_proposal_url",
+          "created_at",
           "delivery_due_at",
           "delivery_url",
-          "cap_proposal_url",
-          "awardee_paid_status",
-          "notes",
-          "title",
           "description",
-          "created_at",
-          "updated_at",
+          "ended_at",
+          "github_repo",
+          "id",
+          "issue_url",
+          "notes",
+          "paid_at",
+          "start_price",
+          "started_at",
           "summary",
-          "billable_to",
-          "id"
+          "title",
+          "updated_at"
         ],
         "properties": {
           "issue_url": {
@@ -55,9 +55,8 @@
           "cap_proposal_url": {
             "type": ["string"]
           },
-          "awardee_paid_status": {
-            "type": ["string"],
-            "minLength": 1
+          "paid_at": {
+            "type": ["date-time", "null"]
           },
           "notes": {
             "type": ["string"]

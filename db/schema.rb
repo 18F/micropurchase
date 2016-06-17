@@ -11,33 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160615161811) do
+ActiveRecord::Schema.define(version: 20160615205001) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "auctions", force: :cascade do |t|
-    t.string   "issue_url",           default: ""
-    t.integer  "start_price",         default: 3500, null: false
-    t.datetime "started_at",                         null: false
-    t.datetime "ended_at",                           null: false
-    t.string   "title",                              null: false
-    t.text     "description",         default: "",   null: false
-    t.string   "github_repo",         default: ""
-    t.integer  "published",           default: 0
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-    t.text     "summary",             default: "",   null: false
+    t.string   "issue_url",        default: ""
+    t.integer  "start_price",      default: 3500, null: false
+    t.datetime "started_at",                      null: false
+    t.datetime "ended_at",                        null: false
+    t.string   "title",                           null: false
+    t.text     "description",      default: "",   null: false
+    t.string   "github_repo",      default: ""
+    t.integer  "published",        default: 0
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.text     "summary",          default: "",   null: false
     t.datetime "delivery_due_at"
-    t.text     "notes",               default: ""
-    t.string   "billable_to",         default: ""
-    t.integer  "result",              default: 0
-    t.integer  "type",                default: 0
-    t.integer  "awardee_paid_status", default: 0
+    t.text     "notes",            default: ""
+    t.string   "billable_to",      default: ""
+    t.integer  "result",           default: 0
+    t.integer  "type",             default: 0
     t.string   "delivery_url"
-    t.string   "cap_proposal_url",    default: ""
+    t.string   "cap_proposal_url", default: ""
     t.integer  "user_id"
-    t.integer  "purchase_card",       default: 0,    null: false
+    t.integer  "purchase_card",    default: 0,    null: false
+    t.datetime "paid_at"
   end
 
   add_index "auctions", ["user_id"], name: "index_auctions_on_user_id", using: :btree

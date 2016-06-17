@@ -2,7 +2,7 @@
 <div class="auction-form">
   <%= simple_form_for [:admin, @auction.record] do |f| %>
     <%= render partial: 'form', locals: { f: f, auction: @auction } %>
-    <%= render partial: 'edit_form', locals: { f: f } %>
+    <%= render partial: 'edit_form', locals: { f: f, auction: @auction } %>
     <%= f.submit class: 'usa-button usa-button-outline' %>
   <% end %>
 </div>

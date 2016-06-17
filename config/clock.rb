@@ -14,4 +14,9 @@ module Clockwork
     puts "Importing Tock projects"
     TockImporter.new.delay.perform
   end
+
+  every(1.day, "tock_projects.import", at: "04:00", tz: "UTC") do
+    puts "Checking for paid auctions"
+    CheckPayment.new.delay.perform
+  end
 end
