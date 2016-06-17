@@ -1,4 +1,4 @@
-FROM ruby:2.3.0
+FROM ruby:2.3.1
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
 RUN mkdir /app
 WORKDIR /app
@@ -12,4 +12,3 @@ CMD wait-for-it db:5432 && bundle exec rake db:create:all || true && \
   bundle exec rake db:migrate db:test:prepare && \
   bundle exec rake db:seed && \
   foreman start -p 3000
-
