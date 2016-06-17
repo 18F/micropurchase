@@ -1,10 +1,5 @@
 class BidsController < ApplicationController
-  before_filter :require_authentication, except: [:index]
-
-  def index
-    auction = AuctionQuery.new.bids_index(params[:auction_id])
-    @auction_bids = BidsIndexViewModel.new(auction: auction, current_user: current_user)
-  end
+  before_filter :require_authentication
 
   def my_bids
     bids = Bid.where(bidder: current_user).includes(:auction)

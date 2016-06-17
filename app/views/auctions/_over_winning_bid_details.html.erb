@@ -1,6 +1,5 @@
 <%= render partial: auction.winning_bidder_partial,
   locals: { auction: auction } %>
 <span class="issue-winning-bid">
-  <%= link_to auction.highlighted_bid_amount_as_currency,
-    auction_bids_path(auction.id) %>
+  <%= auction.highlighted_bid_amount_as_currency %>
 </span>

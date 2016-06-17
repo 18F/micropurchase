@@ -15,6 +15,10 @@
   }
 }
 
+.hide {
+  display: none;
+}
+
 textarea#auction_summary {
   height: 150px;
 }
@@ -79,7 +83,7 @@ textarea#auction_description {
   }
 
   .issue-bid-details {
-    background-color: $color-gray-light;
+    background-color: $color-gray-lightest;
     border-bottom-left-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
     padding-left: $site-margins;

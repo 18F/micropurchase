@@ -1,0 +1,31 @@
+<div class="auction-body hide">
+  <div class="layout-auctions-bids">
+    <%= render partial: 'auctions/header', locals: { auction: auction_bids } %>
+  </div>
+
+  <%= render partial: auction_bids.sealed_bids_partial %>
+
+  <table class="usa-table-borderless">
+    <thead>
+      <tr>
+        <th scope="col">Bidder</th>
+        <th scope="col">DUNS</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Date (EST)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% auction_bids.veiled_bids.each do |bid| %>
+        <tr>
+          <td><%= bid.veiled_name %></td>
+          <td><%= bid.veiled_duns_number %></td>
+          <td><%= bid.amount_to_currency_with_asterisk %></td>
+          <td><%= bid.created_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <p>
+    &#42; - winning bid
+  </p>
+</div>

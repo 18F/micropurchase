@@ -26,6 +26,30 @@ class AuctionShowViewModel
     auction.issue_url
   end
 
+  def sealed_bids_partial
+    if available? && auction.type == 'single_bid'
+      'bids/sealed'
+    else
+      'components/null'
+    end
+  end
+
+  def veiled_bids
+    if available? && auction.type == 'single_bid'
+      auction.bids.where(bidder: current_user).map do |bid|
+        BidListItem.new(bid: bid, user: current_user)
+      end
+    else
+      auction.bids.order(created_at: :desc).map do |bid|
+        BidListItem.new(bid: bid, user: current_user)
+      end
+    end
+  end
+
+  def bids_count
+    auction.bids.count
+  end
+
   def rules_link_text
     "Rules for #{auction.type.dasherize} auctions"
   end
@@ -92,7 +116,7 @@ class AuctionShowViewModel
     end
   end
 
-  def link_text
+  def bid_text
     Pluralize.new(number: auction.bids.count, word: 'bid').to_s
   end
 
