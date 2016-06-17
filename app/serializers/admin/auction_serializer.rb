@@ -2,35 +2,31 @@ class Admin::AuctionSerializer < ActiveModel::Serializer
   has_many :bids, serializer: Admin::BidSerializer
 
   attributes(
-    :issue_url,
-    :github_repo,
-    :start_price,
-    :started_at,
-    :ended_at,
+    :billable_to,
+    :cap_proposal_url,
+    :created_at,
     :delivery_due_at,
     :delivery_url,
-    :cap_proposal_url,
-    :awardee_paid_status,
-    :title,
     :description,
+    :ended_at,
+    :github_repo,
     :id,
-    :created_at,
-    :updated_at,
+    :issue_url,
     :notes,
+    :paid_at,
+    :start_price,
+    :started_at,
     :summary,
-    :billable_to
+    :title,
+    :updated_at
   )
-
-  def delivery_due_at
-    object.delivery_due_at.try(:iso8601)
-  end
 
   def created_at
     object.created_at.iso8601
   end
 
-  def updated_at
-    object.updated_at.iso8601
+  def delivery_due_at
+    object.delivery_due_at.try(:iso8601)
   end
 
   def ended_at
@@ -39,5 +35,13 @@ class Admin::AuctionSerializer < ActiveModel::Serializer
 
   def started_at
     object.started_at.iso8601
+  end
+
+  def paid_at
+    object.paid_at.try(:iso8601)
+  end
+
+  def updated_at
+    object.updated_at.iso8601
   end
 end

@@ -26,6 +26,30 @@ class AuctionShowViewModel
     auction.issue_url
   end
 
+  def sealed_bids_partial
+    if available? && auction.type == 'single_bid'
+      'bids/sealed'
+    else
+      'components/null'
+    end
+  end
+
+  def veiled_bids
+    if available? && auction.type == 'single_bid'
+      auction.bids.where(bidder: current_user).map do |bid|
+        BidListItem.new(bid: bid, user: current_user)
+      end
+    else
+      auction.bids.order(created_at: :desc).map do |bid|
+        BidListItem.new(bid: bid, user: current_user)
+      end
+    end
+  end
+
+  def bids_count
+    auction.bids.count
+  end
+
   def rules_link_text
     "Rules for #{auction.type.dasherize} auctions"
   end
@@ -72,6 +96,10 @@ class AuctionShowViewModel
     DcTimePresenter.convert_and_format(auction.delivery_due_at)
   end
 
+  def formatted_paid_at
+    DcTimePresenter.convert_and_format(auction.paid_at)
+  end
+
   def bid_button_partial
     if show_bid_button?
       'auctions/show_bid_button'
@@ -80,7 +108,15 @@ class AuctionShowViewModel
     end
   end
 
-  def link_text
+  def paid_at_partial
+    if auction.paid_at.nil?
+      'components/null'
+    else
+      'auctions/paid_at'
+    end
+  end
+
+  def bid_text
     Pluralize.new(number: auction.bids.count, word: 'bid').to_s
   end
 

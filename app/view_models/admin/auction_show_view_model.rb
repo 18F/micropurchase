@@ -47,6 +47,10 @@ class Admin::AuctionShowViewModel
     formatted_time(auction.ended_at)
   end
 
+  def paid_at
+    formatted_time(auction.paid_at)
+  end
+
   def html_summary
     return '' if auction.summary.blank?
     MarkdownRender.new(auction.summary).to_s
@@ -72,6 +76,6 @@ class Admin::AuctionShowViewModel
   end
 
   def formatted_time(time)
-    DcTimePresenter.convert(time).to_s(:long)
+    DcTimePresenter.convert_and_format(time)
   end
 end

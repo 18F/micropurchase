@@ -3,4 +3,5 @@
 //= require utility.js
 //= require components.js
 //= require drawer.js
+//= require auctionToggle.js
 //= require navDropdown.js

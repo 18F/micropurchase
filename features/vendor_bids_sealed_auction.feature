@@ -54,7 +54,8 @@ Feature: Vendor bids on a sealed-bid auction
     When I click on the "Confirm" button
     Then I should see "Your bid: $500"
 
-    When I visit the auction bids page
+    When I visit the auction page
+    And I click on the "Bids" link
     Then I should see "$500"
     And I should not see "$500 *"
     And I should not see bids from other users

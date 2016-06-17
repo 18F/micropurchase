@@ -1,6 +1,5 @@
 Then(/^I should see the bid history$/) do
-  h1_text = "Bids for \"#{@auction.title}\""
-  expect(page).to have_content(h1_text)
+  expect(page).to have_selector(:css, '.layout-auctions-bids')
 end
 
 Then(/^I should be able to see the full details for each bid$/) do

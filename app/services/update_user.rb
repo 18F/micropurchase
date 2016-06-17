@@ -34,6 +34,8 @@ class UpdateUser < Struct.new(:params, :current_user)
   end
 
   def user_params
-    params.require(:user).permit(:name, :duns_number, :email, :credit_card_form_url)
+    params
+      .require(:user)
+      .permit(:name, :duns_number, :email, :credit_card_form_url)
   end
 end

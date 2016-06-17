@@ -23,10 +23,6 @@ When(/^I visit the unpublished auction$/) do
   visit auction_path(@unpublished_auction)
 end
 
-When(/^I visit the auction bids page$/) do
-  visit(auction_bids_path(@auction.id))
-end
-
 When(/^I visit the auctions admin page$/) do
   visit admin_auctions_path
 end

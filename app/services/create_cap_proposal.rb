@@ -24,23 +24,20 @@ class CreateCapProposal
     auction.update(cap_proposal_url: cap_proposal_url)
   end
 
-  def configure_c2_client
-    @host = ENV.fetch('C2_HOST', 'https://c2-dev.18f.gov')
-    @c2_client = C2::Client.new(
-      oauth_key: ENV.fetch('MICROPURCHASE_C2_OAUTH_KEY'),
-      oauth_secret: ENV.fetch('MICROPURCHASE_C2_OAUTH_SECRET'),
-      host: @host,
-      debug: ENV.fetch('C2_DEBUG', false)
-    )
-
-    @c2_client
-  end
-
   def c2_client
     @c2_client ||= configure_c2_client
   end
 
+  def configure_c2_client
+    C2::Client.new(
+      oauth_key: C2Credentials.oauth_key,
+      oauth_secret: C2Credentials.oauth_secret,
+      host: C2Credentials.host,
+      debug: ENV.fetch('C2_DEBUG', false)
+    )
+  end
+
   def construct_proposal_url(id)
-    "#{@host}/proposals/#{id}"
+    "#{C2Credentials.host}/proposals/#{id}"
   end
 end

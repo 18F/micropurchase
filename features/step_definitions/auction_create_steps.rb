@@ -72,3 +72,7 @@ Given(/^there is an auction where the winning vendor is not eligible to be paid$
     :evaluation_needed
   )
 end
+
+Given(/^there is a paid auction$/) do
+  @auction = FactoryGirl.create(:auction, :closed, :paid)
+end

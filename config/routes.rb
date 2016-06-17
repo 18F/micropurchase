@@ -24,11 +24,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: 'json' } do
     namespace :v0 do
       resources :auctions, only: [:index, :show] do
-        resources :bids, only: [:new, :create, :index] do
-          collection do
-            post :confirm
-          end
-        end
+        resources :bids, only: [:create]
       end
 
       namespace :admin do
@@ -49,14 +45,13 @@ Rails.application.routes.draw do
   match '*path.:format', to: redirect("/api/v0/%{path}"), via: [:get, :post], constraints: { format: :json }
 
   resources :auctions, only: [:index, :show] do
-    resources :bids, only: [:new, :create, :index] do
+    resources :bids, only: [:new, :create] do
       collection do
         post :confirm
       end
     end
   end
 
-  resources :bids, only: [:index]
   get '/my-bids', to: 'bids#my_bids'
 
   resources :users, only: [:update]

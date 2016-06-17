@@ -15,6 +15,10 @@
   }
 }
 
+.hide {
+  display: none;
+}
+
 textarea#auction_summary {
   height: 150px;
 }
@@ -23,13 +27,19 @@ textarea#auction_description {
   height: 500px;
 }
 
-.auction-description {
+.auction-title {
   h1 {
     margin-top: 0;
   }
 }
 
-.github-issue {
+.auction-body {
+  table {
+    margin: 0;
+  }
+}
+
+.auction-description {
   h1 {
     line-height: 1.1em;
     margin-bottom: .5em;
@@ -79,7 +89,7 @@ textarea#auction_description {
   }
 
   .issue-bid-details {
-    background-color: $color-gray-light;
+    background-color: $color-gray-lightest;
     border-bottom-left-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
     padding-left: $site-margins;
@@ -165,7 +175,6 @@ textarea#auction_description {
   width: 25px;
   max-width: none;
 }
-
 
 .issue-details-label {
   font-size: $h6-font-size;

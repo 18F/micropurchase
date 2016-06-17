@@ -6,10 +6,6 @@ class LoginUser < Struct.new(:auth_hash, :session)
 
   private
 
-  def user
-    @_user ||= User.find_or_create_by(github_id: auth_hash[:uid])
-  end
-
   def update_user_from_oauth_hash!
     if_blank_set('name')
     if_blank_set('email')
@@ -19,6 +15,10 @@ class LoginUser < Struct.new(:auth_hash, :session)
 
   def sign_in
     session[:user_id] = user.id
+  end
+
+  def user
+    @_user ||= User.find_or_initialize_by(github_id: auth_hash[:uid])
   end
 
   def if_blank_set(field)

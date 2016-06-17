@@ -5,6 +5,6 @@
 <p class="auction-label-info">
   <span class="bid-amount"><%= auction.winning_bid_amount_as_currency %></span>
   <span>
-    <%= link_to( auction.link_text, auction_bids_path(auction.id)) %>
+    <%= auction.bid_text %>
   </span>
 </p>

@@ -33,7 +33,7 @@ Given(/^I am a user without a verified SAM account$/) do
 end
 
 Given(/^I am a user without a DUNS number$/) do
-  @user = FactoryGirl.create(:user, github_id: '123451', duns_number: nil)
+  @user = FactoryGirl.create(:user, github_id: '123451', duns_number: '')
   @github_id = @user.github_id
   mock_sign_in(@user.github_id, @user.name)
 end

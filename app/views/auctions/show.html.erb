@@ -7,14 +7,21 @@
 <%= render partial: @auction.bid_flash_partial,
   locals: { auction: @auction, status: @auction.bid_status_class(flash)  } %>
 
-<div class="usa-grid-full">
-  <p><a class="link-highlighted" href="<%= root_path %>"><icon class="fa fa-angle-double-left"></icon> Back to open projects</a></p>
-  <div class="usa-width-two-thirds auction-description">
-    <h1><%= @auction.title %></h1>
-    <div class="github-issue">
-      <%= @auction.html_description %>
+<div class="usa-grid">
+  <p>
+  <%= link_to "<icon class='fa fa-angle-double-left'></icon>Back to open projects".html_safe,
+    root_path,
+    class: 'link-highlighted' %>
+  </p>
+  <div class="usa-width-two-thirds">
+    <div class="auction-title">
+      <h1><%= @auction.title %></h1>
     </div>
+
+    <%= render partial: 'auctions/auction', locals: { auction: @auction } %>
+    <%= render partial: 'auctions/bids', locals: { auction_bids: @auction } %>
   </div>
+
   <div class="usa-width-one-third">
     <div class="auction-detail-panel">
       <div class="auction-info">
@@ -50,6 +57,7 @@
         <p class="auction-label-info"><%= @auction.formatted_delivery_due_at %></p>
       </div>
 
+      <%= render partial: @auction.paid_at_partial, locals: { auction: @auction } %>
       <%= render partial: @auction.bid_button_partial, locals: { auction: @auction } %>
     </div>
 

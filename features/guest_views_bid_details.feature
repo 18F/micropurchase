@@ -5,10 +5,12 @@ Feature: Guest views bid details
 
   Scenario: When the auction is over
     Given there is a closed auction
-    When I visit the auction bids page
+    When I visit the auction page
+    And I click on the "Bids" link
     Then I should be able to see the full details for each bid
 
   Scenario: When the auction is current
     Given there is an open auction
-    When I visit the auction bids page
+    When I visit the auction page
+    And I click on the "Bids" link
     Then I should not see the bidder name or duns for any bid

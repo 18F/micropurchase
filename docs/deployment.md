@@ -162,3 +162,18 @@ Restage the app:
 ```
 cf restage micropurchase
 ```
+
+### Creating / updating C2 API keys
+
+To create keys to use for C2's API (used for creating purchase requests for
+auctions that will be paid for with the 18F purchase card), follow these steps:
+
+* Visit https://c2-dev.18f.gov/oauth/applications/
+* Create a new application
+* Save the Application ID as `MICROPURCHASE_C2_OAUTH_KEY`
+* Save the Secret as `MICROPURCHASE_C2_OAUTH_SECRET`
+* If you are using a C2 instance other than c2-dev (eg: staging or prod),
+  create the application at that base url and save it as `C2_HOST`. For example,
+  if you are creating keys for prod, create the keys at
+  `https://cap.18f.gov/oauth/applications` and set `C2_HOST` to
+  `'https://cap.18f.gov'`

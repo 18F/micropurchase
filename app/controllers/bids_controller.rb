@@ -1,10 +1,5 @@
 class BidsController < ApplicationController
-  before_filter :require_authentication, except: [:index]
-
-  def index
-    auction = AuctionQuery.new.bids_index(params[:auction_id])
-    @auction_bids = BidsIndexViewModel.new(auction: auction, current_user: current_user)
-  end
+  before_filter :require_authentication
 
   def my_bids
     bids = Bid.where(bidder: current_user).includes(:auction)
@@ -23,7 +18,7 @@ class BidsController < ApplicationController
 
   def confirm
     bid = PlaceBid.new(params: params, bidder: current_user, via: via)
-    auction = Auction.find(params[:auction_id])
+    auction = AuctionQuery.new.public_find(params[:auction_id])
 
     if bid.valid?
       readonly_bid = bid.dry_run
@@ -38,31 +33,11 @@ class BidsController < ApplicationController
     @bid = PlaceBid.new(params: params, bidder: current_user, via: via)
 
     if @bid.perform
-      respond_to do |format|
-        format.html do
-          flash[:bid] = "success"
-          redirect_to auction_path(@bid.auction)
-        end
-        format.json { render json: @bid.bid, serializer: BidSerializer }
-      end
+      flash[:bid] = "success"
+      redirect_to auction_path(@bid.auction)
     else
-      respond_to do |format|
-        format.html do
-          flash[:error] = @bid.errors.full_messages.to_sentence
-          redirect_to new_auction_bid_path(params[:auction_id])
-        end
-        format.json do
-          render json: { error: @bid.errors.full_messages.to_sentence }, status: 403
-        end
-      end
-    end
-  end
-
-  rescue_from 'ActiveRecord::RecordNotFound' do
-    respond_to do |format|
-      format.html do
-        fail ActionController::RoutingError, 'Not Found'
-      end
+      flash[:error] = @bid.errors.full_messages.to_sentence
+      redirect_to new_auction_bid_path(params[:auction_id])
     end
   end
 end

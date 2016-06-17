@@ -22,7 +22,10 @@ Then(/^I should see the delivery_due_at timestamp in ET$/) do
   expect(page).to have_text(DcTimePresenter.convert_and_format(@auction.delivery_due_at))
 end
 
-# FIX ME
+Then(/^I should see when the winning vendor was paid in ET$/) do
+  expect(page).to have_text(DcTimePresenter.convert_and_format(@auction.paid_at))
+end
+
 Then(/^I should see when the auction started$/) do
   expect(page).to have_text(DcTimePresenter.convert_and_format(@auction.started_at))
 end

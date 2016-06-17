@@ -2,7 +2,7 @@ Feature: Guest views closed auction
   As a guest
   I want to see details about past auctions
   So I can learn more about Micropurchase
-  
+
   Scenario: There is a closed auction
     Given there is a closed auction
     When I visit the home page
@@ -19,3 +19,8 @@ Feature: Guest views closed auction
     And I should see the delivery deadline
     And I should not see a "Bid" button
     And there should be meta tags for the closed auction
+
+  Scenario: Winning vendor was paid
+    Given there is a paid auction
+    When I visit the auction page
+    Then I should see when the winning vendor was paid in ET

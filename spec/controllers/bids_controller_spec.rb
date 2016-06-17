@@ -51,7 +51,7 @@ RSpec.describe BidsController, controller: true do
         it 'should raise a routing error' do
           expect do
             get :new, { auction_id: auction.id }, user_id: current_bidder.id
-          end.to raise_error ActionController::RoutingError
+          end.to raise_error ActiveRecord::RecordNotFound
         end
       end
     end
@@ -78,41 +78,6 @@ RSpec.describe BidsController, controller: true do
           get :new, auction_id: auction.id
           expect(response).to redirect_to("/login")
         end
-      end
-    end
-  end
-
-  describe '#index' do
-    context 'when logged in' do
-      it 'renders the template' do
-        get :index, { auction_id: auction.id }, user_id: current_bidder.id
-        expect(response).to render_template(:index)
-      end
-    end
-
-    context 'when logged out' do
-      it 'renders the template' do
-        get :index, auction_id: auction.id
-        expect(response).to render_template(:index)
-      end
-    end
-
-    context 'when the auction is published' do
-      let(:auction) { create(:auction, :published) }
-
-      it 'renders the template' do
-        get :index, auction_id: auction.id
-        expect(response).to render_template(:index)
-      end
-    end
-
-    context 'when the auction is unpublished' do
-      let(:auction) { create(:auction, :unpublished) }
-
-      it 'should raise a routing error' do
-        expect do
-          get :index, auction_id: auction.id
-        end.to raise_error ActionController::RoutingError
       end
     end
   end

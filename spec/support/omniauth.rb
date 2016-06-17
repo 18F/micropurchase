@@ -7,7 +7,9 @@ def github_auth_hash(opts = { })
     provider: 'github',
     uid: current_user_uid,
     info: {
-      name: 'Doris Doogooder'
+      name: 'Doris Doogooder',
+      email: 'test@example.com',
+      nickname: 'github_username'
     }
   }.merge(opts))
 end

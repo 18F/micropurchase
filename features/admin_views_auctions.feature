@@ -21,3 +21,11 @@ Feature: Admin views auctions in the admin panel
     And there is also an unpublished auction
     When I visit the preview page for the unpublished auction
     Then I should see a preview of the auction
+
+  Scenario: Viewing a paid auction
+    Given I am an administrator
+    And there is a paid auction
+    When I sign in
+    And I visit the auctions admin page
+    And I click on the auction's title
+    Then I should see when the winning vendor was paid in ET
