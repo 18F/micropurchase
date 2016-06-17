@@ -12,10 +12,6 @@ class AuctionUrl
   private
 
   def root_url
-    if Rails.env.development? || Rails.env.test?
-      ENV['ROOT_URL']
-    else
-      VCAPApplication.application_uris.first
-    end
+    ENV['ROOT_URL']
   end
 end
