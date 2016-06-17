@@ -10,6 +10,13 @@ module Clockwork
     end
   end
 
+  every(1.day, "winning_bidder_emails.send", at: "17:00", tz: "UTC") do
+    puts "Sending winning bidder emails"
+    AuctionsClosedWithinLastTwentyFourHoursFinder.new.perform do |auction|
+      WinningBidderEmailSender.new(auction).delay.perform
+    end
+  end
+
   every(1.day, "tock_projects.import", at: "02:00", tz: "UTC") do
     puts "Importing Tock projects"
     TockImporter.new.delay.perform

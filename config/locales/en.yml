@@ -42,8 +42,17 @@ en:
         para_2: "Thank you for your participation and we look forward to working
           with you in the future."
         sign_off: "Sincerely,"
-        from: "The 18f Micropurchase team"
-        subject: "18f Micropurchase Auction Status"
+        from: "The 18F Micro-purchase team"
+        subject: "18F Micro-purchase Auction Status"
+      winning_bidder_notification:
+        para_1: "Congratulations! You have the winning bid for %{auction_title} (%{auction_url}).
+          This means that you have the opportunity to get paid %{bid_amount}
+          if you deliver the requested work by %{auction_delivery_deadline} Eastern Time.
+          If you have any questions about the issue, please add a comment to %{auction_issue_url}."
+        para_2: "Thanks for participating and we look forward to seeing what you can do!"
+        sign_off: "Sincerely,"
+        from: "The 18F Micro-purchase team"
+        subject: "18F Micro-purchase Auction Status: You have the winning bid!"
 
   admin:
     auctions:
