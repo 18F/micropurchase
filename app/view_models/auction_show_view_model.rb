@@ -176,6 +176,10 @@ class AuctionShowViewModel
     auction.lowest_bid.bidder.name
   end
 
+  def admin_edit_auction_partial
+    current_user.decorate.admin_edit_auction_partial
+  end
+
   private
 
   def available_and_user_is_bidder?

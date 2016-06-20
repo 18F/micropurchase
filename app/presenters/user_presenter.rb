@@ -35,6 +35,14 @@ class UserPresenter < SimpleDelegator
     'components/null'
   end
 
+  def admin_edit_auction_partial
+    if admin?
+      'auctions/edit_auction_link'
+    else
+      'components/null'
+    end
+  end
+
   def sam_status_label
     in_sam? ? 'Yes' : 'No'
   end
