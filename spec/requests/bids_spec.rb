@@ -48,11 +48,6 @@ describe 'API bid requests' do
         expect(json_response['error']).to eq('User not found')
       end
 
-      it 'returns a 404 status code' do
-        post api_v0_auction_bids_path(auction), params, headers
-        expect(response.status).to eq(404)
-      end
-
       it 'should not create a bid' do
         expect do
           post api_v0_auction_bids_path(auction), params, headers
@@ -71,11 +66,6 @@ describe 'API bid requests' do
       it 'returns a json error' do
         post api_v0_auction_bids_path(auction), params, headers
         expect(json_response['error']).to eq('User not found')
-      end
-
-      it 'returns a 404 status code' do
-        post api_v0_auction_bids_path(auction), params, headers
-        expect(status).to eq(404)
       end
 
       it 'should not create a bid' do
@@ -100,11 +90,6 @@ describe 'API bid requests' do
         )
       end
 
-      it 'returns a 403 status code' do
-        post api_v0_auction_bids_path(auction), params, headers
-        expect(status).to eq(403)
-      end
-
       it 'should not create a bid' do
         expect do
           post api_v0_auction_bids_path(auction), params, headers
@@ -125,11 +110,6 @@ describe 'API bid requests' do
         expect(json_response['error']).to eq(
           'You are not allowed to bid on this auction'
         )
-      end
-
-      it 'returns a 403 status code' do
-        post api_v0_auction_bids_path(auction), params, headers
-        expect(status).to eq(403)
       end
 
       it 'should not create a bid' do

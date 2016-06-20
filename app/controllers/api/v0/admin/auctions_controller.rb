@@ -8,5 +8,7 @@ class Api::V0::Admin::AuctionsController < ApiController
   def show
     auction = Auction.find(params[:id])
     render json: auction, serializer: ::Admin::AuctionSerializer
+  rescue ActiveRecord::RecordNotFound
+    handle_error('Auction not found')
   end
 end

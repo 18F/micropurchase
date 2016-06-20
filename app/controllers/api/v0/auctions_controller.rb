@@ -5,5 +5,7 @@ class Api::V0::AuctionsController < ApiController
 
   def show
     render json: AuctionQuery.new.public_find(params[:id]), serializer: AuctionSerializer
+  rescue ActiveRecord::RecordNotFound => ex
+    handle_error(ex.message)
   end
 end

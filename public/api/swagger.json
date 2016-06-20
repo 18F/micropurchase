@@ -21,13 +21,16 @@
                     "200": {
                         "description": "Returns a list of auctions",
                         "schema": {
-                            "$ref": "#/definitions/Auctions"
-                        }
-                    },
-                    "404": {
-                        "description": "Returned for all errors, even if the record is found",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
+                            "type": "object",
+                            "required": ["auctions"],
+                            "properties": {
+                                "auctions": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Auction"
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -52,7 +55,9 @@
                         "description": "Returns a single auction",
                         "schema": {
                             "type": "object",
-                            "required": ["auction"],
+                            "required": [
+                                "auction"
+                            ],
                             "properties": {
                                 "auction": {
                                     "$ref": "#/definitions/Auction"
@@ -61,7 +66,7 @@
                         }
                     },
                     "404": {
-                        "description": "Returned for all errors, even if the record is found",
+                        "description": "The auction is not found",
                         "schema": {
                             "$ref": "#/definitions/Error"
                         }
@@ -114,7 +119,9 @@
                         "description": "Returns the bid that was created",
                         "schema": {
                             "type": "object",
-                            "required": ["bid"],
+                            "required": [
+                                "bid"
+                            ],
                             "properties": {
                                 "bid": {
                                     "$ref": "#/definitions/Bid"
@@ -122,14 +129,113 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "If the API key doesn't load",
+                    "403": {
+                        "description": "When the user is not authenticated",
                         "schema": {
                             "$ref": "#/definitions/Error"
                         }
                     },
+                    "404": {
+                        "description": "When the auction is not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/auctions": {
+            "get": {
+                "summary": "List auctions (admin view)",
+                "description": "The administrator view of all auctions. This includes some additional information which is not shown to end users and requires administrator access",
+                "responses": {
+                    "200": {
+                        "description": "Returns a list of auctions",
+                        "schema": {
+                            "type": "object",
+                            "required": ["auctions"],
+                            "properties": {
+                                "auctions": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/AdminAuction"
+                                    }
+                                }
+                            }
+                        }
+                    },
                     "403": {
-                        "description": "If the bid is rejected",
+                        "description": "Returned if the user is not found or not an admin",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/auctions/{id}": {
+            "get": {
+                "summary": "Administrator view of an auction",
+                "description": "The details of a specific auction",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the auction to retrieve",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns a single auction",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "auction"
+                            ],
+                            "properties": {
+                                "auction": {
+                                    "$ref": "#/definitions/AdminAuction"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Returned if the user is not found or not an admin",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "404": {
+                        "description": "If the auction is not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/users": {
+            "get": {
+                "summary": "Get a list of all users",
+                "description": "The administrator view of all users. This requires administrator access",
+                "responses": {
+                    "200": {
+                        "description": "Returns metadata plus two lists of admin and regular users",
+                        "schema": {
+                            "type": "object",
+                            "required": ["admin_report"],
+                            "properties": {
+                                "admin_report": {
+                                    "$ref": "#/definitions/AdminUserInfo"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Returned if the user is not found or not an admin",
                         "schema": {
                             "$ref": "#/definitions/Error"
                         }
@@ -139,18 +245,6 @@
         }
     },
     "definitions": {
-        "Auctions": {
-            "type": "object",
-            "required": ["auctions"],
-            "properties": {
-                "auctions": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Auction"
-                    }
-                }
-            }
-        },
         "Auction": {
             "type": "object",
             "required": [
@@ -344,12 +438,214 @@
                 }
             }
         },
+        "AdminAuction": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Auction"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "billable_to": {
+                            "title": "Billable To",
+                            "description": "The Tock code it should be billable to",
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "cap_proposal_url": {
+                            "title": "CAP Proposal URL",
+                            "description": "The URL for the project in C2",
+                            "format": "url",
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "notes": {
+                            "title": "Notes",
+                            "description": "Private notes for the auction",
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "delivery_due_at": {
+                            "title": "Delivery Due At",
+                            "description": "The time that delivery is due by.",
+                            "format": "date-time",
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "delivery_url": {
+                            "title": "Payment delivery URL",
+                            "description": "A URL where the vendor can accept a P-card purchase",
+                            "format": "url",
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "paid_at": {
+                            "title": "Paid At",
+                            "description": "The time the vendor was paid for the work. The presence of this field can also be used as a boolean that the vendor has been paid.",
+                            "format": "date-time",
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "AdminUserInfo": {
+            "description": "Metadata about users",
+            "type": "object",
+            "required": ["quick_stats", "non_admin_users", "admin_users"],
+            "properties": {
+                "quick_stats": {
+                    "type": "object",
+                    "properties": {
+                        "total_users": {
+                            "type": "integer",
+                            "minimum": 0
+                        },
+                        "users_with_duns": {
+                            "type": "integer",
+                            "minimum": 0
+                        },
+                        "users_in_sam": {
+                            "type": "integer",
+                            "minimum": 0
+                        },
+                        "notes": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "total_users",
+                        "users_with_duns",
+                        "users_in_sam",
+                        "notes"
+                    ]
+                },
+                "non_admin_users": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "$ref": "#/definitions/User"
+                    }
+                },
+                "admin_users": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "$ref": "#/definitions/User"
+                    }
+                }
+            }
+        },
+        "User": {
+            "type": "object",
+            "required": [
+                "id",
+                "github_id",
+                "duns_number",
+                "name",
+                "created_at",
+                "updated_at",
+                "email",
+                "sam_status",
+                "credit_card_form_url",
+                "github_login",
+                "contracting_officer",
+                "small_business"  
+            ],
+            "properties": {
+                "id": {
+                    "title": "User ID",
+                    "description": "The unique record ID for the user",
+                    "type": "integer"
+                },
+                "github_id": {
+                    "title": "Github ID",
+                    "description": "The ID for the user on the GitHub",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "contracting_officer": {
+                    "title": "Contracting Officer?",
+                    "description": "Returns true if the user is a contracting officer. Only admins can be contracting officer.",
+                    "type": "boolean"
+                },
+                "small_business": {
+                    "title": "Small Business?",
+                    "description": "Returns true if the user is a small business. This field is only relevant for regular users.",
+                    "type": "boolean"
+                },
+                "duns_number": {
+                    "title": "DUNS Number",
+                    "description": "The DUNS number for the user",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "The user's name",
+                    "type": "string"
+                },
+                "created_at": {
+                    "title": "Created At",
+                    "description": "When the user's account was created",
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "updated_at": {
+                    "title": "Updated At",
+                    "description": "When the user's profile information was last changed.",
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "email": {
+                    "title": "Email Address",
+                    "description": "The user's email address",
+                    "type": "string",
+                    "format": "email"
+                },
+                "sam_status": {
+                    "title": "SAM Status",
+                    "description": "The status of the user in SAM.gov. This will be pending until the user is found and validated. Only accepted users can bid.",
+                    "type": "string"
+                },
+                "credit_card_form_url": {
+                    "title": "Credit Card Form URL",
+                    "description": "A URL where the vendor can accept a credit card payment after successfully delivering an auction.",
+                    "format": "url",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "github_login": {
+                    "title": "GitHub Login",
+                    "description": "The username on GitHub for the user.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            }
+        },
         "Error": {
             "required": [
                 "error"
             ],
             "properties": {
-                "message": {
+                "error": {
                     "type": "string"
                 }
             }
