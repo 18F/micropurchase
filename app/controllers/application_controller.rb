@@ -44,4 +44,15 @@ class ApplicationController < ActionController::Base
       session[:return_to] = request.original_fullpath
     end
   end
+
+  def store_referer
+    if request.get?
+      session[:return_to] = request.referer
+    end
+  end
+
+  def return_to_stored(default: root_path)
+    redirect_to(session[:return_to] || default)
+    session[:return_to] = nil
+  end
 end

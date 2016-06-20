@@ -34,8 +34,8 @@ class Admin::AuctionsController < ApplicationController
   end
 
   def edit
+    store_referer
     @auction = Admin::EditAuctionViewModel.new(Auction.find(params[:id]))
-    session[:return_to] = request.referer
   end
 
   def update
@@ -43,8 +43,7 @@ class Admin::AuctionsController < ApplicationController
     update_auction = UpdateAuction.new(auction, params)
 
     if update_auction.perform
-      redirect_to(session[:return_to] || admin_auctions_path)
-      session[:return_to] = nil
+      return_to_stored(default: admin_auctions_path)
     else
       error_messages = auction.errors.full_messages.to_sentence
       flash[:error] = error_messages

@@ -4,11 +4,7 @@ class UserPresenter < SimpleDelegator
   end
 
   def admin?
-    authenticated? && Admins.verify?(model.github_id)
-  end
-
-  def authenticated?
-    !model.is_a?(Guest)
+    Admins.verify?(model.github_id)
   end
 
   def in_sam?
@@ -26,7 +22,7 @@ class UserPresenter < SimpleDelegator
   def nav_drawer_partial
     "components/user_nav_drawer"
   end
-
+ 
   def win_header_partial
     "auctions/multi_bid/user_win_header"
   end
@@ -39,6 +35,14 @@ class UserPresenter < SimpleDelegator
     'components/null'
   end
 
+  def admin_edit_auction_partial
+    if admin?
+      'auctions/edit_auction_link'
+    else
+      'components/null'
+    end
+  end
+  
   def sam_status_label
     in_sam? ? 'Yes' : 'No'
   end

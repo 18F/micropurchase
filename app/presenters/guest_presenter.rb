@@ -22,4 +22,8 @@ class GuestPresenter
   def welcome_message_partial
     'components/welcome_message'
   end
+
+  def admin_edit_auction_partial
+    'components/null'
+  end
 end
