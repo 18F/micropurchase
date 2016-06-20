@@ -22,7 +22,7 @@ class UserPresenter < SimpleDelegator
   def nav_drawer_partial
     "components/user_nav_drawer"
   end
- 
+
   def win_header_partial
     "auctions/multi_bid/user_win_header"
   end
@@ -42,7 +42,7 @@ class UserPresenter < SimpleDelegator
       'components/null'
     end
   end
-  
+
   def sam_status_label
     in_sam? ? 'Yes' : 'No'
   end
