@@ -25,14 +25,6 @@ describe Api::V0::Admin::UsersController do
     end
     let(:api_key) { FakeGitHub::VALID_API_KEY }
 
-    it 'returns a 200 HTTP response' do
-      expect(response.status).to eq 200
-    end
-
-    it 'returns a valid admin report of users' do
-      expect(response).to match_response_schema('admin/users')
-    end
-
     it 'returns iso8601 dates' do
       expect(json_non_admin_users.map { |a| a['created_at'] }).to all(be_iso8601)
       expect(json_non_admin_users.map { |a| a['updated_at'] }).to all(be_iso8601)
