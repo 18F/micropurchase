@@ -1,4 +1,4 @@
 @mixin font-default() {
-  font-family: "Source Sans Pro", "Times New Roman","Helvetica", "Arial", sans-serif;
+  font-family: $font-sans;
   font-weight: $font-normal;
 }

@@ -1,0 +1,6 @@
+.usa-checklist-checked {
+  &::before {
+    background-image: image-url('uswds/correct9.png');
+    background-image: image-url('uswds/correct9.svg');
+  }
+}
