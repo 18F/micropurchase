@@ -12,6 +12,13 @@
         "application/json"
     ],
     "basePath": "/api/v0",
+    "securityDefinitions": {
+        "key": {
+            "name": "HTTP_API_KEY",
+            "type": "apiKey",
+            "in": "header"
+        }
+    },
     "paths": {
         "/auctions": {
             "get": {
@@ -22,7 +29,9 @@
                         "description": "Returns a list of auctions",
                         "schema": {
                             "type": "object",
-                            "required": ["auctions"],
+                            "required": [
+                                "auctions"
+                            ],
                             "properties": {
                                 "auctions": {
                                     "type": "array",
@@ -78,6 +87,11 @@
             "post": {
                 "consumes": [
                     "application/json"
+                ],
+                "security": [
+                    {
+                        "key": []
+                    }
                 ],
                 "summary": "Submit a new bid to an auction",
                 "parameters": [
@@ -146,6 +160,11 @@
         },
         "/admin/auctions": {
             "get": {
+                "security": [
+                    {
+                        "key": []
+                    }
+                ],
                 "summary": "List auctions (admin view)",
                 "description": "The administrator view of all auctions. This includes some additional information which is not shown to end users and requires administrator access",
                 "responses": {
@@ -153,7 +172,9 @@
                         "description": "Returns a list of auctions",
                         "schema": {
                             "type": "object",
-                            "required": ["auctions"],
+                            "required": [
+                                "auctions"
+                            ],
                             "properties": {
                                 "auctions": {
                                     "type": "array",
@@ -175,6 +196,11 @@
         },
         "/admin/auctions/{id}": {
             "get": {
+                "security": [
+                    {
+                        "key": []
+                    }
+                ],
                 "summary": "Administrator view of an auction",
                 "description": "The details of a specific auction",
                 "parameters": [
@@ -219,6 +245,11 @@
         },
         "/admin/users": {
             "get": {
+                "security": [
+                    {
+                        "key": []
+                    }
+                ],
                 "summary": "Get a list of all users",
                 "description": "The administrator view of all users. This requires administrator access",
                 "responses": {
@@ -226,7 +257,9 @@
                         "description": "Returns metadata plus two lists of admin and regular users",
                         "schema": {
                             "type": "object",
-                            "required": ["admin_report"],
+                            "required": [
+                                "admin_report"
+                            ],
                             "properties": {
                                 "admin_report": {
                                     "$ref": "#/definitions/AdminUserInfo"
@@ -505,7 +538,11 @@
         "AdminUserInfo": {
             "description": "Metadata about users",
             "type": "object",
-            "required": ["quick_stats", "non_admin_users", "admin_users"],
+            "required": [
+                "quick_stats",
+                "non_admin_users",
+                "admin_users"
+            ],
             "properties": {
                 "quick_stats": {
                     "type": "object",
@@ -563,7 +600,7 @@
                 "credit_card_form_url",
                 "github_login",
                 "contracting_officer",
-                "small_business"  
+                "small_business"
             ],
             "properties": {
                 "id": {
