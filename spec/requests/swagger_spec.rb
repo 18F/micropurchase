@@ -128,7 +128,7 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
       end
     end
 
-    let(:user) { FactoryGirl.create(:user, sam_status: :sam_accepted) }
+    let(:user) { create(:user, sam_status: :sam_accepted) }
     let(:headers) do
       {
         'HTTP_ACCEPT' => 'text/x-json',
@@ -153,7 +153,7 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
 
     context 'when the API key is missing' do
       let(:api_key) { nil }
-      let(:auction) { FactoryGirl.create(:auction, :running) }
+      let(:auction) { create(:auction, :running) }
       let(:current_auction_price) do
         auction.bids.sort_by(&:amount).first.amount
       end
@@ -172,7 +172,7 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
 
     context 'when the API key is invalid' do
       let(:api_key) { FakeGitHub::INVALID_API_KEY }
-      let(:auction) { FactoryGirl.create(:auction, :running) }
+      let(:auction) { create(:auction, :running) }
       let(:current_auction_price) do
         auction.bids.sort_by(&:amount).first.amount
       end
@@ -206,7 +206,7 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
 
     context 'when the auction has ended' do
       let(:api_key) { FakeGitHub::VALID_API_KEY }
-      let(:auction) { FactoryGirl.create(:auction, :closed, :with_bidders) }
+      let(:auction) { create(:auction, :closed, :with_bidders) }
       let(:current_auction_price) do
         auction.bids.sort_by(&:amount).first.amount
       end
@@ -225,7 +225,7 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
 
     context 'when the auction has not yet started' do
       let(:api_key) { FakeGitHub::VALID_API_KEY }
-      let(:auction) { FactoryGirl.create(:auction, :future, :with_bidders) }
+      let(:auction) { create(:auction, :future, :with_bidders) }
       let(:current_auction_price) do
         auction.bids.sort_by(&:amount).first.amount
       end
@@ -244,7 +244,7 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
 
     context 'when the user places a successful bid' do
       let(:api_key) { FakeGitHub::VALID_API_KEY }
-      let(:auction) { FactoryGirl.create(:auction, :running) }
+      let(:auction) { create(:auction, :running) }
       let(:current_auction_price) do
         auction.bids.sort_by(&:amount).first.amount
       end
@@ -300,7 +300,7 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
     end
 
     context 'when the user is an admin' do
-      let(:user) { FactoryGirl.create(:admin_user) }
+      let(:user) { create(:admin_user) }
 
       it 'returns a 200 HTTP response' do
         login(user)
@@ -354,7 +354,7 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
 
     context 'when the API key is valid' do
       it 'returns a 200 HTTP response' do
-        user = FactoryGirl.create(:admin_user)
+        user = create(:admin_user)
         login(user)
         auction = create(:auction, :with_bidders)
         api_key = FakeGitHub::VALID_API_KEY
@@ -368,7 +368,7 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
 
     context 'when the auction is not found' do
       it 'returns a 404 HTTP response' do
-        user = FactoryGirl.create(:admin_user)
+        user = create(:admin_user)
         login(user)
         api_key = FakeGitHub::VALID_API_KEY
 
@@ -418,7 +418,7 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
     end
 
     context 'when the user is an admin' do
-      let(:user) { FactoryGirl.create(:admin_user) }
+      let(:user) { create(:admin_user) }
 
       it 'returns a 200 HTTP response' do
         login(user)
@@ -432,7 +432,7 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
 
       it 'returns information about all users' do
         # create a non-admin user too
-        FactoryGirl.create(:user)
+        create(:user)
 
         login(user)
         create(:auction, :with_bidders)

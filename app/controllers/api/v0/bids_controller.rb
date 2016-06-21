@@ -10,7 +10,5 @@ class Api::V0::BidsController < ApiController
     else
       render json: { error: @bid.errors.full_messages.to_sentence }, status: 403
     end
-  rescue ActiveRecord::RecordNotFound
-    handle_error('Auction not found', :not_found)
   end
 end
