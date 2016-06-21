@@ -44,25 +44,28 @@
 .auction-title {
   h1 {
     display: inline-block;
-    margin-top: 0;
-    margin-bottom: 0;
     float: left;
+    margin-bottom: 0;
+    margin-top: 0;
   }
 
   .usa-button-outline {
     margin-left: $site-margins;
   }
 
-  .auction-subtitle {
-    &:nth-last-child(1) {
-      margin-left: $site-margins;
-    }
-
-    margin: 2rem 0;
-    float: left;
-    font-size: $base-font-size;
+  .auction-subtitles {
+    clear: both;
   }
 
+  .auction-subtitle {
+    float: left;
+    font-size: $base-font-size;
+    margin: 2rem 0;
+
+    &:nth-child(1) {
+      margin-right: $site-margins;
+    }
+  }
 }
 
 .auction-body {
