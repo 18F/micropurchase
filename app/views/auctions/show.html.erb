@@ -4,7 +4,6 @@
   <%= render partial: '/auctions/data_tags', locals: { auction: @auction } %>
 <% end %>
 
-
 <div class="auction-show usa-grid issue-list-item">
   <div class="issue-content-wrapper">
     <div class='usa-width-one-whole issue-label'>
@@ -19,11 +18,13 @@
   <div class="auction-title issue-title">
     <h1><%= @auction.title %></h1>
     <%= render partial: @auction.admin_edit_auction_partial %>
-    <div class="auction-subtitle">
-      <%= @auction.relative_time %>
-    </div>
-    <div class="auction-subtitle">
-      <%= @auction.bid_status %>
+    <div class="auction-subtitles">
+      <div class="auction-subtitle">
+        <%= @auction.relative_time %>
+      </div>
+      <div class="auction-subtitle">
+        <%= @auction.bid_status %>
+      </div>
     </div>
   </div>
 

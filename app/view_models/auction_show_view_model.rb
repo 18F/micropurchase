@@ -50,10 +50,6 @@ class AuctionShowViewModel
     end
   end
 
-  def bids_count
-    auction.bids.count
-  end
-
   def rules_path
     "/auctions/rules/#{auction.type.dasherize}"
   end
@@ -118,14 +114,6 @@ class AuctionShowViewModel
     end
   end
 
-  def bid_text
-    Pluralize.new(number: auction.bids.count, word: 'bid').to_s
-  end
-
-  def user_bid_amount_as_currency
-    Currency.new(lowest_user_bid_amount).to_s
-  end
-
   def tag_data_value_status
     status_presenter.tag_data_value_status
   end
@@ -187,6 +175,10 @@ class AuctionShowViewModel
   end
 
   private
+
+  def user_bid_amount_as_currency
+    Currency.new(lowest_user_bid_amount).to_s
+  end
 
   def lowest_bidder_name
     auction.lowest_bid.bidder.name
