@@ -1,6 +1,5 @@
 .auction-show {
-  border: 1px solid $color-gray-neutral;
-  margin: $site-margins;
+  margin-top: $site-margins;
 
   .usa-alert {
     background-image: none;
@@ -46,11 +45,24 @@
   h1 {
     display: inline-block;
     margin-top: 0;
+    margin-bottom: 0;
+    float: left;
   }
-}
 
-.usa-button-outline {
-  margin: $site-margins;
+  .usa-button-outline {
+    margin-left: $site-margins;
+  }
+
+  .auction-subtitle {
+    &:nth-last-child(1) {
+      margin-left: $site-margins;
+    }
+
+    margin: 2rem 0;
+    float: left;
+    font-size: $base-font-size;
+  }
+
 }
 
 .auction-body {

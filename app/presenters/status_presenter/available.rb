@@ -1,10 +1,10 @@
 class StatusPresenter::Available < Struct.new(:auction)
   def start_label
-    "Bid start time:"
+    "Bid start time"
   end
 
   def deadline_label
-    "Bid deadline:"
+    "Bid deadline"
   end
 
   def relative_time

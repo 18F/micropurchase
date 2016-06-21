@@ -6,10 +6,10 @@ Feature: Vendor bids on a sealed-bid auction
   Scenario: viewing the rules page
     Given there is a single-bid auction
     When I visit the home page
-    Then I should see a link to single-bid rules
+    Then I should see that the auction is Single-bid
 
     When I click on the auction's title
-    Then I should see the rules for single-bid auctions
+    Then I should see the rules for Single-bid auctions
 
   Scenario: bidding on a single-bid auction
     Given there is a single-bid auction
@@ -19,8 +19,8 @@ Feature: Vendor bids on a sealed-bid auction
 
     When I click on the auction's title
     Then I should be on the auction page
-    And I should see "Your bid:"
-    And I should not see "Current bid:"
+    And I should not see "Your bid:"
+    And I should see "Current bid:"
 
     When I click on the "BID" button
     Then I should see "Your bid:"

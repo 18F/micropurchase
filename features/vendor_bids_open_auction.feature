@@ -34,7 +34,7 @@ Feature: Vendor bids on an open auction
     Then I should see a confirmation for $800
 
     When I click on the "Confirm" button
-    Then I should see a current bid amount of $800
+    Then I should see "Your bid: $800"
 
     When I visit the home page
     Then I should see "Your bid is winning: $800.00"
@@ -55,5 +55,5 @@ Feature: Vendor bids on an open auction
     Then I should see a confirmation for $999
 
     When I click on the "Confirm" button
-    Then I should see a current bid amount of $999
+    Then I should see "Your bid: $999"
     And I should see I have the winning bid

@@ -6,7 +6,7 @@
 
 
 <div class="auction-show usa-grid issue-list-item">
-  <div class="usa-grid issue-content-wrapper">
+  <div class="issue-content-wrapper">
     <div class='usa-width-one-whole issue-label'>
       <h3 class='issue-title'>
         <div class="issue-ribbon">
@@ -19,6 +19,12 @@
   <div class="auction-title issue-title">
     <h1><%= @auction.title %></h1>
     <%= render partial: @auction.admin_edit_auction_partial %>
+    <div class="auction-subtitle">
+      <%= @auction.relative_time %>
+    </div>
+    <div class="auction-subtitle">
+      <%= @auction.bid_status %>
+    </div>
   </div>
 
   <div class=usa-grid-full>
@@ -37,35 +43,27 @@
     <div class="auction-detail-panel">
       <div class="auction-info">
         <div>
-          <p class="auction-label">Auction type:</p>
-          <p class="auction-label-info">
-          <%= @auction.capitalized_type %>
-          (<%= link_to @auction.rules_link_text, @auction.rules_path %>).
-          </p>
-        </div>
-        <div>
-          <p class="auction-label">Eligible vendors:</p>
-          <p class="auction-label-info"><%= @auction.eligibility_label %></p>
-        </div>
-        <div>
-          <p class="auction-label">Status:</p>
-          <p class="auction-label-info"><%= @auction.status_text %></p>
-        </div>
-        <div>
-          <%= render partial: @auction.bid_status_partial,
-            locals: { auction: @auction } %>
-        </div>
-        <div>
-          <p class="auction-label"><%= @auction.deadline_label %></p>
-          <p class="auction-label-info"><%= @auction.formatted_end_time %></p>
-        </div>
-        <div>
-          <p class="auction-label"><%= @auction.start_label %></p>
+          <h6><%= @auction.start_label %></h6>
           <p class="auction-label-info"><%= @auction.formatted_start_time %></p>
         </div>
         <div>
-          <p class="auction-label">Delivery deadline:</p>
+          <h6><%= @auction.deadline_label %></h6>
+          <p class="auction-label-info"><%= @auction.formatted_end_time %></p>
+        </div>
+        <div>
+          <h6>Delivery deadline</h6>
           <p class="auction-label-info"><%= @auction.formatted_delivery_due_at %></p>
+        </div>
+        <div>
+          <h6>Auction type:</h6>
+          <p class="auction-label-info">
+          <%= @auction.capitalized_type %>
+          (<%= link_to 'rules', @auction.rules_path %>)
+          </p>
+        </div>
+        <div>
+          <h6>Eligible vendors</h6>
+          <p class="auction-label-info"><%= @auction.eligibility_label %></p>
         </div>
 
         <%= render partial: @auction.paid_at_partial, locals: { auction: @auction } %>

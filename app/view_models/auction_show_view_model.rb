@@ -19,11 +19,15 @@ class AuctionShowViewModel
   end
 
   def capitalized_type
-    auction.type.capitalize
+    auction.type.dasherize.capitalize
   end
 
   def issue_url
     auction.issue_url
+  end
+
+  def relative_time
+    status_presenter.relative_time
   end
 
   def sealed_bids_partial
@@ -50,10 +54,6 @@ class AuctionShowViewModel
     auction.bids.count
   end
 
-  def rules_link_text
-    "Rules for #{auction.type.dasherize} auctions"
-  end
-
   def rules_path
     "/auctions/rules/#{auction.type.dasherize}"
   end
@@ -70,13 +70,15 @@ class AuctionShowViewModel
     end
   end
 
-  def bid_status_partial
+  def bid_status
     if over? && auction.bids.any?
-      'auctions/over_bid_amount'
-    elsif auction.type == 'single_bid'
-      'auctions/user_bid_amount'
+      "Winning bid (#{lowest_bidder_name}): #{winning_bid_amount_as_currency}"
+    elsif user_bids.any?
+      "Your bid: #{user_bid_amount_as_currency}"
+    elsif auction.bids.any?
+      "Current bid: #{highlighted_bid_amount_as_currency}"
     else
-      'auctions/highlighted_bid_amount'
+      ""
     end
   end
 
@@ -180,15 +182,15 @@ class AuctionShowViewModel
     BidStatusFlashFactory.new(auction: auction, flash: flash, user: current_user).create
   end
 
-  def lowest_bidder_name
-    auction.lowest_bid.bidder.name
-  end
-
   def admin_edit_auction_partial
     current_user.decorate.admin_edit_auction_partial
   end
 
   private
+
+  def lowest_bidder_name
+    auction.lowest_bid.bidder.name
+  end
 
   def available_and_user_is_bidder?
     available? && user_bids.any?

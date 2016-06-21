@@ -43,7 +43,7 @@ Then(/^I should not see an? "([^"]+)" link$/) do |link|
 end
 
 Then(/^I should see an? "([^"]+)" button$/) do |button|
-  expect(page).to have_selector(:link_or_button, button)
+  expect(page).to have_selector(:link_or_button, button, exact: true)
 end
 
 Then(/^I should not see an? "([^"]*)" button$/) do |button|
