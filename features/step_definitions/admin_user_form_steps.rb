@@ -5,7 +5,7 @@ When(/^I click the edit user link next to the first non-admin user$/) do
 end
 
 When(/^I click the edit user link next to the first admin user$/) do
-  within(:xpath, '/html/body/div/div/table[1]') do
+  within(:xpath, '//*[@id="table-admins"]/tbody/tr[1]/td[7]') do
     click_on "Edit"
   end
 end

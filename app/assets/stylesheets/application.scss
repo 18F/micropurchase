@@ -15,10 +15,13 @@
 
 @import 'components/accordion';
 @import 'components/alerts';
-@import 'components/auction';
+@import 'components/auction-form';
+@import 'components/auction-show';
+@import 'components/auctions-index';
 @import 'components/auction-detail';
 @import 'components/auction-header';
 @import 'components/bids';
+@import 'components/disclaimer';
 @import 'components/drawer';
 @import 'components/footer';
 @import 'components/forms';
@@ -33,4 +36,3 @@
 
 @import 'junk_drawer';
 @import 'uswds-grid-overrides';
-@import 'uswds-overrides';

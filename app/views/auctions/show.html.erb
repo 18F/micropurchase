@@ -4,74 +4,82 @@
   <%= render partial: '/auctions/data_tags', locals: { auction: @auction } %>
 <% end %>
 
-<%= render partial: @auction.bid_flash_partial,
-  locals: { auction: @auction, status: @auction.bid_status_class(flash)  } %>
 
-<div class="usa-grid">
-  <p>
-  <%= link_to "<icon class='fa fa-angle-double-left'></icon>Back to open projects".html_safe,
-    root_path,
-    class: 'link-highlighted' %>
-  </p>
-  <div class="usa-width-two-thirds">
-    <div class="auction-title">
-      <h1><%= @auction.title %></h1>
+<div class="auction-show usa-grid issue-list-item">
+  <div class="usa-grid issue-content-wrapper">
+    <div class='usa-width-one-whole issue-label'>
+      <h3 class='issue-title'>
+        <div class="issue-ribbon">
+          <span class="<%= @auction.label_class %>"><%= @auction.label %></span>
+        </div>
+      </h3>
     </div>
+  </div>
 
+  <div class="auction-title issue-title">
+    <h1><%= @auction.title %></h1>
+    <%= render partial: @auction.admin_edit_auction_partial %>
+  </div>
+
+  <div class=usa-grid-full>
+    <%= render partial: 'auctions/header', locals: { auction: @auction } %>
+  </div>
+
+  <div class="usa-width-two-thirds">
     <%= render partial: 'auctions/auction', locals: { auction: @auction } %>
     <%= render partial: 'auctions/bids', locals: { auction_bids: @auction } %>
   </div>
 
   <div class="usa-width-one-third">
+    <%= render partial: @auction.bid_flash_partial,
+      locals: { auction: @auction, status: @auction.bid_status_class(flash)  } %>
+
     <div class="auction-detail-panel">
       <div class="auction-info">
-      <%= render @auction.admin_edit_auction_partial %>
-      <div>
-        <p class="auction-label">Auction type:</p>
-        <p class="auction-label-info">
+        <div>
+          <p class="auction-label">Auction type:</p>
+          <p class="auction-label-info">
           <%= @auction.capitalized_type %>
           (<%= link_to @auction.rules_link_text, @auction.rules_path %>).
+          </p>
+        </div>
+        <div>
+          <p class="auction-label">Eligible vendors:</p>
+          <p class="auction-label-info"><%= @auction.eligibility_label %></p>
+        </div>
+        <div>
+          <p class="auction-label">Status:</p>
+          <p class="auction-label-info"><%= @auction.status_text %></p>
+        </div>
+        <div>
+          <%= render partial: @auction.bid_status_partial,
+            locals: { auction: @auction } %>
+        </div>
+        <div>
+          <p class="auction-label"><%= @auction.deadline_label %></p>
+          <p class="auction-label-info"><%= @auction.formatted_end_time %></p>
+        </div>
+        <div>
+          <p class="auction-label"><%= @auction.start_label %></p>
+          <p class="auction-label-info"><%= @auction.formatted_start_time %></p>
+        </div>
+        <div>
+          <p class="auction-label">Delivery deadline:</p>
+          <p class="auction-label-info"><%= @auction.formatted_delivery_due_at %></p>
+        </div>
+
+        <%= render partial: @auction.paid_at_partial, locals: { auction: @auction } %>
+        <%= render partial: @auction.bid_button_partial, locals: { auction: @auction } %>
+
+        <p>
+        <i class="fa fa-github"></i>
+        <a href="<%= @auction.issue_url %>">View on GitHub <icon class="fa fa-angle-double-right"></icon></a>
+        </p>
+        <p>Have feedback?</p>
+        <p>
+        <a href="mailto:micropurchase@gsa.gov">Send us an email!</a>
         </p>
       </div>
-      <div>
-        <p class="auction-label">Eligible vendors:</p>
-        <p class="auction-label-info"><%= @auction.eligibility_label %></p>
-      </div>
-      <div>
-        <p class="auction-label">Status:</p>
-        <p class="auction-label-info"><%= @auction.status_text %></p>
-      </div>
-      <div>
-        <%= render partial: @auction.bid_status_partial,
-          locals: { auction: @auction } %>
-      </div>
-      <div>
-        <p class="auction-label"><%= @auction.deadline_label %></p>
-        <p class="auction-label-info"><%= @auction.formatted_end_time %></p>
-      </div>
-      <div>
-        <p class="auction-label"><%= @auction.start_label %></p>
-        <p class="auction-label-info"><%= @auction.formatted_start_time %></p>
-      </div>
-      <div>
-        <p class="auction-label">Delivery deadline:</p>
-        <p class="auction-label-info"><%= @auction.formatted_delivery_due_at %></p>
-      </div>
-
-      <%= render partial: @auction.paid_at_partial, locals: { auction: @auction } %>
-      <%= render partial: @auction.bid_button_partial, locals: { auction: @auction } %>
-    </div>
-
-    <div class="auction-more-info">
-      <p>
-      <i class="fa fa-github"></i>
-      <a href="<%= @auction.issue_url %>">View on GitHub <icon class="fa fa-angle-double-right"></icon></a>
-      </p>
-      <p>Have feedback?</p>
-      <p>
-      <a href="mailto:micropurchase@gsa.gov">Send us an email!</a>
-      </p>
     </div>
   </div>
-</div>
 </div>
