@@ -45,7 +45,7 @@
 .auction-title {
   h1 {
     display: inline-block;
-    margin-top: 1em;
+    margin-top: 0;
   }
 }
 
@@ -142,7 +142,7 @@
   }
 
   span {
-    font-weight: $font-bold;
+    font-weight: $font-normal;
   }
 }
 

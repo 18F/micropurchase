@@ -5,8 +5,18 @@
 <% end %>
 
 
-<div class="auction-show usa-grid">
-  <div class="auction-title">
+<div class="auction-show usa-grid issue-list-item">
+  <div class="usa-grid issue-content-wrapper">
+    <div class='usa-width-one-whole issue-label'>
+      <h3 class='issue-title'>
+        <div class="issue-ribbon">
+          <span class="<%= @auction.label_class %>"><%= @auction.label %></span>
+        </div>
+      </h3>
+    </div>
+  </div>
+
+  <div class="auction-title issue-title">
     <h1><%= @auction.title %></h1>
     <%= render partial: @auction.admin_edit_auction_partial %>
   </div>

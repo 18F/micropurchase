@@ -136,6 +136,14 @@ class AuctionShowViewModel
     status_presenter.tag_data_value_2
   end
 
+  def label
+    status_presenter.label
+  end
+
+  def label_class
+    status_presenter.label_class
+  end
+
   def distance_of_time
     "#{HumanTime.new(time: auction.ended_at).distance_of_time} left"
   end
