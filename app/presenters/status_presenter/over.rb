@@ -1,10 +1,10 @@
 class StatusPresenter::Over < Struct.new(:auction)
   def start_label
-    "Auction started at:"
+    "Auction started at"
   end
 
   def deadline_label
-    "Auction ended at:"
+    "Auction ended at"
   end
 
   def relative_time

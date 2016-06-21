@@ -57,7 +57,7 @@ end
 
 Then(/^I should see the auction ended with no bids$/) do
   expect(page).to have_content("This auction ended with no bids.")
-  expect(page).to have_content("Current bid:")
+  expect(page).not_to have_content("Current bid:")
 end
 
 When(/^the winning bidder has a valid DUNS number$/) do

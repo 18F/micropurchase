@@ -1,14 +1,14 @@
 class StatusPresenter::Future < Struct.new(:auction)
   def start_label
-    "Bid start time:"
+    "Bid start time"
   end
 
   def deadline_label
-    "Bid deadline:"
+    "Bid deadline"
   end
 
   def relative_time
-    "#{HumanTime.new(time: auction.started_at).relative_time} from now"
+    "Starts #{HumanTime.new(time: auction.started_at).relative_time} from now"
   end
 
   def time_left_partial
