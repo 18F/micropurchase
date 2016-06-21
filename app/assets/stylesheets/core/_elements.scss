@@ -1,9 +1,7 @@
 html {
   @include font-default();
-
   font-size: 10px;
 }
-
 
 ul li:before {
   display: none;
@@ -12,7 +10,7 @@ ul li:before {
 p,
 li,
 span {
-	font-size: $small-font-size;
+  font-size: $small-font-size;
   font-weight: $font-light;
 
   @include media($small-screen) {

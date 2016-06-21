@@ -1,0 +1,12 @@
+.usa-accordion,
+.usa-accordion-bordered {
+  button[aria-expanded=false] {
+    background-image: image-url('uswds/plus.png');
+    background-image: image-url('uswds/plus.svg');
+  }
+
+  button {
+    background-image: image-url('uswds/minus.png');
+    background-image: image-url('uswds/minus.svg');
+  }
+}

@@ -9,6 +9,7 @@
 }
 
 .usa-table-borderless th {
+  background-color: $color-white;
   vertical-align: bottom;
   text-align: left;
 }
@@ -79,34 +80,4 @@
     td:nth-of-type(3):before { content: "Amount"; }
     td:nth-of-type(4):before { content: "Date (EST)"; }
   }
-
-  // TODO: fine tune responsive tables on admin-side
-  // table#table-drafts,
-  // table#table-auctions-action {
-  //   td:nth-of-type(1):before { content: "Title"; }
-  //   td:nth-of-type(2):before { content: "Delivery Deadline"; }
-  //   td:nth-of-type(3):before { content: "Delivery URL"; }
-  //   td:nth-of-type(4):before { content: "Result"; }
-  //   td:nth-of-type(5):before { content: "CAP URL"; }
-  //   td:nth-of-type(6):before { content: "Paid?"; }
-  // }
-
-  // table#table-admins {
-  //   td:nth-of-type(1):before { content: "Name"; }
-  //   td:nth-of-type(2):before { content: "Email"; }
-  //   td:nth-of-type(3):before { content: "DUNS Number"; }
-  //   td:nth-of-type(4):before { content: "In SAM.gov?"; }
-  //   td:nth-of-type(5):before { content: "GitHub ID"; }
-  // }
-
-  // table#table-admins-auction {
-  //   td:nth-of-type(1):before { content: "Auction"; }
-  //   td:nth-of-type(2):before { content: "Auction type"; }
-  //   td:nth-of-type(3):before { content: "Auction running?"; }
-  //   td:nth-of-type(4):before { content: "Amount"; }
-  //   td:nth-of-type(5):before { content: "Winning bid?"; }
-  //   td:nth-of-type(6):before { content: "Auction start time"; }
-  //   td:nth-of-type(7):before { content: "Auction end time"; }
-  //   td:nth-of-type(8):before { content: "Auction delivery deadline"; }
-  // }
 }

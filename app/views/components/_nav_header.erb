@@ -4,7 +4,7 @@
 
   <nav class="usa-site-navbar">
     <div class="usa-grid header-table">
-      <div class="logo header-row" id="logo">
+      <div class="logo header-row" class="logo">
         <a class="header-home-link" href="/" accesskey="1" title="Home" aria-label="Home">
           <div class="header-image">
             <%= image_tag "18F-Logo-2016-Blue.svg", alt: "18f-logo" %>
@@ -13,7 +13,7 @@
             Micropurchase
           </h1>
         </a>
-        <button id="button-nav-drawer" class="usa-button usa-button-outline-inverse" data-drawer-toggle="menu"><span class="fa fa-bars"></span></button>
+        <button class="button-nav-drawer" class="usa-button usa-button-outline-inverse" data-drawer-toggle="menu"><span class="fa fa-bars"></span></button>
         <div class="header-account">
           <% if current_user %>
             <%= render partial: current_user.decorate.nav_drawer_partial, locals: { current_user: current_user } %>
