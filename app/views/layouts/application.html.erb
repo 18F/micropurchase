@@ -51,19 +51,14 @@
 <body class='<%= controller_class %>'>
 
   <%= render partial: 'components/mobile_nav_drawer', locals: { current_user: current_user } %>
-
   <%= render partial: 'components/nav_header', locals: { current_user: current_user } %>
-
-
   <%= render "flashes" %>
 
-  <div class="content-wrapper" id="<% if current_page?(root_path) %>index<% elsif current_page?(auctions_path) %>auctions<% elsif current_page?(auctions_winners_path) %>winners<% end %>">
-    <div class="usa-width-one-whole">
-      <%= yield %>
-    </div>
+  <div class="content-wrapper">
+    <%= yield %>
   </div>
 
-  <%= render partial: "components/site_footer" %>
+  <%= render "components/site_footer" %>
 
   <script src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js" id="_fed_an_ua_tag"></script>
 </body>

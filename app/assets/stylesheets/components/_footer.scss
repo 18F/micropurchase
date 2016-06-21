@@ -1,34 +1,46 @@
+.usa-footer-medium {
+  background: $primary-darkest;
+  -webkit-box-flex: 0;
+  -ms-flex: none;
+  -webkit-flex: none;
+  flex: none;
 
-// Start .usa-footer
-.usa-footer-logo {
-  display: table-row;
+  .usa-grid {
+    padding-bottom: $site-margins;
+  }
 }
 
 .usa-footer-primary-section {
   background-color: transparent;
   float: right;
-  padding: 0;
-  width: 100%;
 
   @include media($medium-screen) {
     width: inherit;
   }
 }
 
-.usa-footer-primary-section ul {
-  margin-bottom: $base-padding;
-
-  @include media($medium-screen) {
-    margin-bottom: 0;
-  }
+.usa-footer-secondary_section {
+  background-color: transparent;
 }
 
-.usa-footer {
-  background: $primary-darkest;
-  -webkit-box-flex: 0;
-  -ms-flex: none;
-  -webkit-flex: none;
-  flex: none;
+.usa-footer-logo img {
+  width: $logo-18f;
+}
+
+.usa-footer-slim-logo-heading {
+  color: $color-white;
+  direction: inline-block;
+  font-size: 2rem;
+  font-weight: $font-light;
+  letter-spacing: -.5px;
+  margin-top: .5rem;
+  padding-top: 0;
+  padding-left: .5rem;
+  vertical-align: middle;
+
+  @include media($medium-screen) {
+    font-size: 3rem;
+  }
 }
 
 .usa-footer .usa-footer-primary-link-item {
@@ -56,7 +68,6 @@
     text-decoration: none;
   }
 }
-
 
 .usa-footer address {
   text-align: left;
@@ -86,68 +97,3 @@
     text-decoration: underline;
   }
 }
-
-// End .usa-footer
-
-// Start .footer
-
-.footer-image,
-.footer-title-text {
-  display: table-cell;
-}
-
-.footer-image {
-  float: left;
-  margin-right: $base-padding-lite;
-  max-width: none;
-  width: $logo-18f;
-}
-
-.footer-title-text {
-  direction: inline-block;
-  font-size: 2rem;
-  font-weight: $font-light;
-  letter-spacing: -.5px;
-  vertical-align: middle;
-
-  @include media($medium-screen) {
-    font-size: 3rem;
-  }
-}
-
-.footer-wrapper {
-  margin-bottom: 2 * $base-padding;
-  margin-top: $base-padding;
-}
-
-.footer-wrapper a {
-  color: $color-white;
-  line-height: 1.8;
-}
-
-.footer-wrapper h2 {
-  color: $color-white;
-  margin-bottom: 0;
-}
-
-.footer-home-link {
-  display: table;
-  float: left;
-  margin-bottom: $base-padding;
-  margin-left: 0;
-  margin-right: 0;
-  padding-left: 0;
-  padding-right: 0;
-  text-decoration: none;
-
-  @include media($medium-screen) {
-    margin-bottom: 0;
-  }
-
-  &:hover,
-  &:focus {
-    text-decoration: none;
-  }
-}
-
-// End .footer
