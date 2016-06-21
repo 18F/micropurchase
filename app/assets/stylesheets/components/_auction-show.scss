@@ -45,7 +45,12 @@
 .auction-title {
   h1 {
     margin-top: 1em;
+    display: inline-block;
   }
+}
+
+.usa-button-outline {
+  margin: $site-margins;
 }
 
 .auction-body {

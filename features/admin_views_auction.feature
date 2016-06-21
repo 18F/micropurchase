@@ -8,9 +8,9 @@ Feature: Admin views public auction pages
     And I sign in
     And there is an open auction
     And I visit the auction page
-    Then I should see an "Edit Auction" link
+    Then I should see the "Edit" link for the auction
 
-    When I click on the "Edit Auction" link
+    When I click on the "Edit" link for the auction
     Then I should be on the admin form for that auction
 
     When I click on the "Update" button
@@ -21,4 +21,4 @@ Feature: Admin views public auction pages
     And I sign in
     And there is an open auction
     When I visit the auction page
-    Then I should not see an "Edit Auction" link
+    Then I should not see an "Edit" link for the auction

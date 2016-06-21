@@ -8,6 +8,7 @@
 <div class="auction-show usa-grid">
   <div class="auction-title">
     <h1><%= @auction.title %></h1>
+    <%= render partial: @auction.admin_edit_auction_partial %>
   </div>
 
   <div class=usa-grid-full>
@@ -20,7 +21,6 @@
   </div>
 
   <div class="usa-width-one-third">
-    <%= render @auction.admin_edit_auction_partial %>
     <%= render partial: @auction.bid_flash_partial,
       locals: { auction: @auction, status: @auction.bid_status_class(flash)  } %>
 
