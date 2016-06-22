@@ -226,4 +226,28 @@ RSpec.describe AuctionQuery do
       expect(query.active_auction_count).to eq 1
     end
   end
+
+  describe '#closed_yesterday' do
+    it 'returns auctions with an end datetime that occured yesterday' do
+      Timecop.freeze(Time.parse("03:00:00 UTC")) do
+        _old_auction = create(:auction, ended_at: 2.days.ago)
+        newly_closed_auction = create(:auction, ended_at: 5.hours.ago)
+        _future_auction = create(:auction, ended_at: 2.days.from_now)
+
+        expect(AuctionQuery.new.closed_yesterday).to eq [newly_closed_auction]
+      end
+    end
+  end
+
+  describe '#closed_within_last_24_hours' do
+    it 'returns auctions with an end datetime that occured today' do
+      Timecop.freeze(Time.parse("19:00:00 UTC")) do
+        _old_auction = create(:auction, ended_at: 2.days.ago)
+        newly_closed_auction = create(:auction, ended_at: 2.hours.ago)
+        _future_auction = create(:auction, ended_at: 2.days.from_now)
+
+        expect(AuctionQuery.new.closed_within_last_24_hours).to eq [newly_closed_auction]
+      end
+    end
+  end
 end

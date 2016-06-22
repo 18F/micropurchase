@@ -17,7 +17,9 @@ class AuctionQuery
     :with_bids,
     :with_bids_and_bidders,
     :published,
-    :unpublished
+    :unpublished,
+    :closed_yesterday,
+    :closed_within_last_24_hours
   ].each do |key|
     define_method key do
       @relation.send(key)
@@ -171,6 +173,23 @@ class AuctionQuery
 
     def unpublished
       where(published: [nil, '', unpublished_enum])
+    end
+
+    def closed_yesterday
+      today = Time.current.to_date
+      yesterday = today - 1.day
+      beginning_of_yesterday = yesterday.beginning_of_day
+      end_of_yesterday = yesterday.end_of_day
+
+      Auction.where(ended_at: beginning_of_yesterday..end_of_yesterday)
+    end
+
+    def closed_within_last_24_hours
+      today = Time.current.to_date
+      last_24_hours = today - 24.hours
+      next_24_hours = today + 24.hours
+
+      where(ended_at: last_24_hours..next_24_hours)
     end
 
     private
