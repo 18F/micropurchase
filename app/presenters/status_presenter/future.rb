@@ -15,10 +15,6 @@ class StatusPresenter::Future < Struct.new(:auction)
     'components/null'
   end
 
-  def bid_description_partial
-    'bids/over_bid_description'
-  end
-
   def status_text
     'Closed'
   end

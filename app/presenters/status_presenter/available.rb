@@ -15,10 +15,6 @@ class StatusPresenter::Available < Struct.new(:auction)
     'bids/time_left'
   end
 
-  def bid_description_partial
-    'bids/available_bid_description'
-  end
-
   def status_text
     'Open'
   end

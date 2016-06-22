@@ -12,7 +12,10 @@ class Rules::BaseRules
   end
 
   def user_can_bid?(user)
-    auction_available? && user.present? && user_is_eligible_to_bid?(user)
+    auction_available? &&
+      user.present? &&
+      user != winning_bidder &&
+      user_is_eligible_to_bid?(user)
   end
 
   def auction_available?
@@ -21,5 +24,11 @@ class Rules::BaseRules
 
   def user_is_eligible_to_bid?(user)
     eligibility.eligible?(user)
+  end
+
+  private
+
+  def winning_bidder
+    winning_bid.bidder
   end
 end

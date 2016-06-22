@@ -11,13 +11,24 @@ describe Rules::Basic do
   end
 
   describe '#user_can_bid?' do
-    context 'when the auction is open and the user can bid' do
+    context 'when the auction is open and the user is eligible to bid' do
       it 'is true' do
         auction = create(:auction)
         user = create(:user, sam_status: :sam_accepted)
         eligibility = InSamEligibility.new
         rules = Rules::Basic.new(auction, eligibility)
         expect(rules.user_can_bid?(user)).to be_truthy
+      end
+    end
+
+    context 'when the auction is open and the user is the winner' do
+      it 'is false' do
+        auction = create(:auction)
+        user = create(:user, sam_status: :sam_accepted)
+        create(:bid, auction: auction, bidder: user)
+        eligibility = InSamEligibility.new
+        rules = Rules::Basic.new(auction, eligibility)
+        expect(rules.user_can_bid?(user)).to eq(false)
       end
     end
 

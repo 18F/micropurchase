@@ -22,7 +22,7 @@ Feature: Vendor bids on a sealed-bid auction
     And I should not see "Your bid:"
     And I should see "Current bid:"
     And I should see the bid form
-    And I should see the auction starting price in the bidding form
+    And I should see the maximum bid amount in the bidding form
 
     When I submit a bid for $3493
     Then I should see a confirmation for $3493
