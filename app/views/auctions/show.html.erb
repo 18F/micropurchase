@@ -4,6 +4,13 @@
   <%= render partial: '/auctions/data_tags', locals: { auction: @auction } %>
 <% end %>
 
+<div>
+  <%= link_to(
+    "<icon class='fa fa-angle-double-left'></icon> Back to all auctions".html_safe,
+    root_path,
+    class: 'breadcrumb-link') %>
+</div>
+
 <div class="auction-show usa-grid issue-list-item">
   <div class="issue-content-wrapper">
     <div class='usa-width-one-whole issue-label'>

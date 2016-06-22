@@ -18,15 +18,17 @@ class ConfirmBidViewModel
     auction.title
   end
 
-  def time_left_partial
-    StatusPresenterFactory.new(auction).create.time_left_partial
+  def time_left
+    "Ends in #{distance_of_time}"
   end
 
   def html_description
     MarkdownRender.new(auction.description).to_s
   end
 
+  private
+
   def distance_of_time
-    "#{HumanTime.new(time: auction.ended_at).distance_of_time} left"
+    HumanTime.new(time: auction.ended_at).distance_of_time
   end
 end

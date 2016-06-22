@@ -4,7 +4,7 @@
     <%= auction.bid_form_prompt %>
 
     <%= simple_form_for Bid.new,
-      url: confirm_auction_bids_path(auction.id) do |f| %>
+      url: auction_bid_confirmations_path(auction.id) do |f| %>
       <%= f.input :amount %>
       <%= f.submit class: 'usa-button usa-button-outline' %>
     <% end %>

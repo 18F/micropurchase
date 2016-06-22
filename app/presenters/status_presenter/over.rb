@@ -11,10 +11,6 @@ class StatusPresenter::Over < Struct.new(:auction)
     "Ended #{HumanTime.new(time: auction.ended_at).relative_time}"
   end
 
-  def time_left_partial
-    'components/null'
-  end
-
   def status_text
     'Closed'
   end
