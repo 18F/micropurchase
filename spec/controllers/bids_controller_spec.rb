@@ -1,38 +1,23 @@
 require 'rails_helper'
 
-RSpec.describe BidsController, controller: true do
+describe BidsController do
   let(:current_bidder) { create(:user, sam_status: :sam_accepted) }
   let(:auction) { create(:auction) }
 
-  describe '/my-bids' do
+  describe '#index' do
     context 'when logged in' do
       it 'should assign auctions that current user have bidded on, presented' do
         bid = auction.bids.create(bidder_id: current_bidder.id)
         expect(bid).to be_valid
-        get :my_bids, { }, user_id: current_bidder.id
+        get :index, { }, user_id: current_bidder.id
         assigned_bid = assigns(:bids).first
         expect(assigned_bid.bid).to eq(bid)
       end
 
       it 'should not assign auctions that the current user has not bidded on' do
         auction.bids.create(bidder_id: current_bidder.id + 127)
-        get :my_bids, { }, user_id: current_bidder.id
+        get :index, { }, user_id: current_bidder.id
         expect(assigns(:bids)).to be_empty
-      end
-    end
-  end
-
-  describe '#confirm' do
-    context 'bid is bad' do
-      it "adds a flash error when the bid is bad" do
-        current_bidder = create(:user, sam_status: :sam_accepted)
-        auction = create(:auction)
-        request_params = { auction_id: auction.id, bid: { amount: -192 } }
-
-        post :confirm, request_params, user_id: current_bidder.id
-
-        expect(flash[:error]).to eq("Bid amount out of range")
-        expect(response).to redirect_to(auction_path(auction))
       end
     end
   end

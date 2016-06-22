@@ -11,10 +11,6 @@ class StatusPresenter::Available < Struct.new(:auction)
     "Time remaining: #{HumanTime.new(time: auction.ended_at).distance_of_time}"
   end
 
-  def time_left_partial
-    'bids/time_left'
-  end
-
   def status_text
     'Open'
   end

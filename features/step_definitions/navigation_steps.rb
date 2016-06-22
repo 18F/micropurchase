@@ -7,7 +7,7 @@ When(/^I visit the home page$/) do
 end
 
 When(/^I visit my bids page$/) do
-  visit my_bids_path
+  visit bids_path
 end
 
 When(/^I visit my profile page$/) do
@@ -68,7 +68,7 @@ Then(/^I should be on my profile page$/) do
 end
 
 Then(/^I should be on the bid confirmation page$/) do
-  expect(page.current_path).to eq(confirm_auction_bids_path(@auction))
+  expect(page.current_path).to eq(auction_bid_confirmations_path(@auction))
 end
 
 When(/^I should be on the admin auctions page$/) do

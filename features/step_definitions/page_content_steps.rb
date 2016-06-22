@@ -27,7 +27,8 @@ Then(/^I should see a link to the auction issue URL$/) do
 end
 
 Then(/^I should see a confirmation for \$(.+)$/) do |amount|
-  expect(page).to have_content("Confirm your bid: $#{amount}")
+  expect(page).to have_content("Confirm Your Bid")
+  expect(page).to have_content("Your bid: $#{amount}")
 end
 
 Then(/^I should see a link to give feedback$/) do

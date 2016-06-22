@@ -8,7 +8,7 @@ a:focus {
   color: $links-secondary;
 }
 
-a.link-highlighted {
+.link-highlighted {
   background-color: $branding-darkest;
   color: $color-white;
   padding: rem(1px);
@@ -20,4 +20,9 @@ a.link-highlighted {
   &:focus {
     text-decoration: underline;
   }
+}
+
+.breadcrumb-link {
+  display: block;
+  margin-top: $base-padding;
 }
