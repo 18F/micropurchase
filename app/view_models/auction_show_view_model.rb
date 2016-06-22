@@ -70,12 +70,16 @@ class AuctionShowViewModel
     end
   end
 
-  def bid_form_prompt
-    if auction.bids.any? && auction.type == "multi_bid"
-      "The current lowest bid is #{highlighted_bid_amount_as_currency}"
+  def bid_form_partial
+    if show_bid_form?
+      'auctions/bid_form'
     else
-      "Start price: #{start_price}"
+      'components/null'
     end
+  end
+
+  def bid_form_prompt
+    Currency.new(rules.max_allowed_bid).to_s
   end
 
   def bid_status
@@ -108,14 +112,6 @@ class AuctionShowViewModel
 
   def formatted_paid_at
     DcTimePresenter.convert_and_format(auction.paid_at)
-  end
-
-  def bid_button_partial
-    if show_bid_button?
-      'auctions/show_bid_button'
-    else
-      'components/null'
-    end
   end
 
   def paid_at_partial
@@ -152,10 +148,6 @@ class AuctionShowViewModel
 
   def highlighted_bid_amount_as_currency
     Currency.new(highlighted_bid.amount).to_s
-  end
-
-  def start_price
-    Currency.new(auction.start_price).to_s
   end
 
   def bid_flash_partial
@@ -217,7 +209,7 @@ class AuctionShowViewModel
     @_status_presenter ||= StatusPresenterFactory.new(auction).create
   end
 
-  def show_bid_button?
+  def show_bid_form?
     if current_user.is_a?(Guest)
       true
     else

@@ -41,7 +41,7 @@
     <%= render partial: @auction.bid_flash_partial,
       locals: { auction: @auction, status: @auction.bid_status_class(flash)  } %>
 
-    <%= render partial: @auction.bid_button_partial, locals: { auction: @auction } %>
+    <%= render partial: @auction.bid_form_partial, locals: { auction: @auction } %>
 
     <div class="auction-detail-panel">
       <div class="auction-info">

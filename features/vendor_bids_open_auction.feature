@@ -18,4 +18,5 @@ Feature: Vendor bids on an open auction
 
     When I click on the "Confirm" button
     Then I should see "Your bid: $999"
+    And I should not see the bid form
     And I should see I have the winning bid

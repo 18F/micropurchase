@@ -1,6 +1,6 @@
 class Rules::Basic < Rules::BaseRules
   def winning_bid
-    auction.lowest_bid
+    auction.lowest_bid || NullBid.new
   end
 
   def veiled_bids(_user)

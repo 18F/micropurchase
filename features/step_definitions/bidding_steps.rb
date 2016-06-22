@@ -76,18 +76,10 @@ When(/^I submit a bid for \$(.+)$/) do |amount|
   step('I click on the "Place bid" button')
 end
 
-Then(/^I should see the auction starting price in the bidding form$/) do
+Then(/^I should see the maximum bid amount in the bidding form$/) do
   within(".auction-bid") do
     expect(page).to have_content(
-      "Start price: #{Currency.new(@auction.start_price).to_s}"
-    )
-  end
-end
-
-Then(/^I should see the current lowest bid amount in the bidding form$/) do
-  within(".auction-bid") do
-    expect(page).to have_content(
-      "The current lowest bid is #{Currency.new(@auction.lowest_bid.amount).to_s}"
+      "Maximum bid: #{Currency.new(RulesFactory.new(@auction).create.max_allowed_bid).to_s}"
     )
   end
 end
