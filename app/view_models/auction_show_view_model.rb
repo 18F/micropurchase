@@ -50,6 +50,10 @@ class AuctionShowViewModel
     end
   end
 
+  def bids_count
+    auction.bids.count
+  end
+
   def rules_path
     "/auctions/rules/#{auction.type.dasherize}"
   end
@@ -66,9 +70,17 @@ class AuctionShowViewModel
     end
   end
 
+  def bid_form_prompt
+    if auction.bids.any? && auction.type == "multi_bid"
+      "The current lowest bid is #{highlighted_bid_amount_as_currency}"
+    else
+      "Start price: #{start_price}"
+    end
+  end
+
   def bid_status
     if over? && auction.bids.any?
-      "Winning bid (#{lowest_bidder_name}): #{winning_bid_amount_as_currency}"
+      "Winning bid (#{lowest_bidder_name}): #{highlighted_bid_amount_as_currency}"
     elsif user_bids.any?
       "Your bid: #{user_bid_amount_as_currency}"
     elsif auction.bids.any?
@@ -142,12 +154,8 @@ class AuctionShowViewModel
     Currency.new(highlighted_bid.amount).to_s
   end
 
-  def winning_bid_amount_as_currency
-    Currency.new(auction.lowest_bid.amount).to_s
-  end
-
   def start_price
-    auction.start_price
+    Currency.new(auction.start_price).to_s
   end
 
   def bid_flash_partial

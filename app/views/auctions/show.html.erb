@@ -41,6 +41,8 @@
     <%= render partial: @auction.bid_flash_partial,
       locals: { auction: @auction, status: @auction.bid_status_class(flash)  } %>
 
+    <%= render partial: @auction.bid_button_partial, locals: { auction: @auction } %>
+
     <div class="auction-detail-panel">
       <div class="auction-info">
         <div>
@@ -68,7 +70,6 @@
         </div>
 
         <%= render partial: @auction.paid_at_partial, locals: { auction: @auction } %>
-        <%= render partial: @auction.bid_button_partial, locals: { auction: @auction } %>
 
         <p>
         <i class="fa fa-github"></i>

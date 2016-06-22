@@ -21,31 +21,26 @@ Feature: Vendor bids on a sealed-bid auction
     Then I should be on the auction page
     And I should not see "Your bid:"
     And I should see "Current bid:"
-
-    When I click on the "BID" button
-    Then I should see "Your bid:"
+    And I should see the bid form
+    And I should see the auction starting price in the bidding form
 
     When I submit a bid for $3493
     Then I should see a confirmation for $3493
 
     When I click on the "Confirm" button
-    Then I should not see a "BID" button
-    And I should see "Your bid: $3,493.00"
+    Then I should see "Your bid: $3,493.00"
 
     When I visit the auction page
-    Then I should not see a "BID" button
+    Then I should not see the bid form
     And I should see "Your bid: $3,493.00"
 
     When I visit the home page
-    Then I should not see a "BID" button
     And I should see "Your bid: $3,493.00"
 
   Scenario: viewing your own single bid
     Given there is a single-bid auction
     And I am an authenticated vendor
     When I visit the auction page
-    And I click on the "BID" button
-    Then I should be on the new bid page
 
     When I submit a bid for $500
     Then I should be on the bid confirmation page

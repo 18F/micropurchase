@@ -19,10 +19,6 @@ class StatusPresenter::Over < Struct.new(:auction)
     'bids/over_bid_description'
   end
 
-  def bid_form_partial
-    'bids/closed'
-  end
-
   def status_text
     'Closed'
   end
