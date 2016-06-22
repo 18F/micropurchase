@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
-  subject { Apivore::SwaggerChecker.instance_for('/api/swagger.json') }
+  subject { Apivore::SwaggerChecker.instance_for('/api/v0/swagger.json') }
   include RequestHelpers
 
   context 'GET /auctions' do

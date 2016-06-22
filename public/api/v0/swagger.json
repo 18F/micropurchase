@@ -440,10 +440,14 @@
           "format": "date-time"
         },
         "created_at": {
+          "title": "Creation Time",
+          "description": "When the auction record was created in the database",
           "type": "string",
           "format": "date-time"
         },
         "updated_at": {
+          "title": "Modification Time",
+          "description": "When the auction record was last updated",
           "type": "string",
           "format": "date-time"
         },
@@ -457,12 +461,16 @@
           ],
           "properties": {
             "amount": {
+              "title": "Amount",
+              "description": "The amount of the bid",
               "type": [
                 "integer",
                 "null"
               ]
             },
             "bidder_id": {
+              "title": "Bidder ID",
+              "description": "The bidder ID for the bid. This can be referenced against all bids in the bids table if you need more details about the bidder. This is provided as a convenient way for your program to check if the winning bid is yours.",
               "type": [
                 "integer",
                 "null"
@@ -505,10 +513,12 @@
         },
         "auction_id": {
           "title": "Auction ID",
+          "description": "The ID of the related auction",
           "type": "integer"
         },
         "amount": {
           "title": "Amount",
+          "description": "The amount of the bid in dollars.",
           "type": "integer",
           "minimum": 1
         },
@@ -519,6 +529,8 @@
           "minLength": 1
         },
         "updated_at": {
+          "title": "Bid Update Time",
+          "description": "When the bid record was last updated. This should always be the same as the creation time.",
           "type": "string",
           "minLength": 1
         },
@@ -599,7 +611,7 @@
         },
         "updated_at": {
           "title": "Account Modification Time",
-          "description": "When the bidder last edited their account information. This information may be redacted with a null value while an auction is still running.",
+          "description": "When the bidder's account information was last updated, either as a result of the user editing it or automated SAM validation. This information may be redacted with a null value while an auction is still running.",
           "type": [
             "string",
             "null"
@@ -693,18 +705,22 @@
           "type": "object",
           "properties": {
             "total_users": {
+              "title": "Total Users",
               "type": "integer",
               "minimum": 0
             },
             "users_with_duns": {
+              "title": "Users with DUNS Numbers",
               "type": "integer",
               "minimum": 0
             },
             "users_in_sam": {
+              "title": "Users in SAM.gov",
               "type": "integer",
               "minimum": 0
             },
             "notes": {
+              "title": "Notes",
               "type": "string"
             }
           },
@@ -763,7 +779,7 @@
         },
         "contracting_officer": {
           "title": "Contracting Officer?",
-          "description": "Returns true if the user is a contracting officer. Only admins can be contracting officer.",
+          "description": "Returns true if the user is a contracting officer. Only admins can be contracting officers.",
           "type": "boolean"
         },
         "small_business": {
@@ -789,7 +805,7 @@
         },
         "updated_at": {
           "title": "Updated At",
-          "description": "When the user's profile information was last changed.",
+          "description": "When the user record was modified. This may be either a result of the user editing information or automated process like checking for SAM.gov membership.",
           "format": "date-time",
           "type": "string"
         },
@@ -802,7 +818,8 @@
         "sam_status": {
           "title": "SAM Status",
           "description": "The status of the user in SAM.gov. This will be pending until the user is found and validated. Only accepted users can bid.",
-          "type": "string"
+          "type": "string",
+          "enum": ["duns_blank", "sam_accepted", "sam_rejected", "sam_pending"]
         },
         "credit_card_form_url": {
           "title": "Credit Card Form URL",
