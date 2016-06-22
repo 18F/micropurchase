@@ -19,10 +19,6 @@ class StatusPresenter::Available < Struct.new(:auction)
     'bids/available_bid_description'
   end
 
-  def bid_form_partial
-    'bids/form'
-  end
-
   def status_text
     'Open'
   end

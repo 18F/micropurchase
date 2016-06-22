@@ -3,6 +3,11 @@
   margin-bottom: $base-padding-large;
   margin-top: 1em;
 
+  .auction-bid {
+    border: 1px solid $color-primary;
+    padding: $base-padding;
+  }
+
   .auction-info {
     background-color: $color-gray-lightest;
     font-size: 2rem;

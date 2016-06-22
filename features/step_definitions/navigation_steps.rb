@@ -67,10 +67,6 @@ Then(/^I should be on my profile page$/) do
   expect(page.current_path).to eq(users_edit_path)
 end
 
-Then(/^I should be on the new bid page$/) do
-  expect(page.current_path).to eq(new_auction_bid_path(@auction))
-end
-
 Then(/^I should be on the bid confirmation page$/) do
   expect(page.current_path).to eq(confirm_auction_bids_path(@auction))
 end

@@ -17,6 +17,8 @@ en:
         cap_proposal_url: "CAP proposal URL"
         paid_at: "Paid at"
         start_price: "Start price"
+      bid:
+        amount: "Your bid"
     placeholders:
       auction:
         title: "A short description of the work"
@@ -34,3 +36,6 @@ en:
       auction:
         create: "Create"
         update: "Update"
+    submit:
+      bid:
+        create: "Place bid"

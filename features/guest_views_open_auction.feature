@@ -19,7 +19,6 @@ Feature: Guest views open auction
 
     When I visit the auction page
     Then I should see an "Expiring" status
-    And I should see a "BID" button
     And I should see when the auction started
     And I should see when the auction ends
     And I should see the delivery deadline

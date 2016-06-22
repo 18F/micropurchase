@@ -45,7 +45,7 @@ Rails.application.routes.draw do
   match '*path.:format', to: redirect("/api/v0/%{path}"), via: [:get, :post], constraints: { format: :json }
 
   resources :auctions, only: [:index, :show] do
-    resources :bids, only: [:new, :create] do
+    resources :bids, only: [:create] do
       collection do
         post :confirm
       end

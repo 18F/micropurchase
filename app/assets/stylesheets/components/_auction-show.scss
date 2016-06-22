@@ -51,6 +51,7 @@
 
   .usa-button-outline {
     margin-left: $site-margins;
+    text-decoration: none;
   }
 
   .auction-subtitles {
@@ -125,12 +126,6 @@
           white-space: nowrap;
         }
       }
-    }
-
-    .usa-button {
-      margin: 0;
-      padding: .5rem 2rem;
-      white-space: nowrap;
     }
 
     p {

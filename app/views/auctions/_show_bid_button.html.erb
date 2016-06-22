@@ -1,5 +1,11 @@
-<p class="auction-detail-bid">
-  <%= link_to 'BID <icon class="fa fa-angle-double-right"></icon>'.html_safe,
-    new_auction_bid_path(auction.id),
-    class: 'button-bid usa-button' %>
-</p>
+<div class="auction-detail-panel">
+  <div class="auction-bid">
+    <%= auction.bid_form_prompt %>
+
+    <%= simple_form_for Bid.new,
+      url: confirm_auction_bids_path(auction.id) do |f| %>
+      <%= f.input :amount %>
+      <%= f.submit class: 'usa-button usa-button-outline' %>
+    <% end %>
+  </div>
+</div>
