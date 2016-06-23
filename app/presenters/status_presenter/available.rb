@@ -32,7 +32,7 @@ class StatusPresenter::Available < Struct.new(:auction)
   end
 
   def tag_data_value_2
-    if auction.type == 'single_bid'
+    if auction.type == 'sealed_bid'
       "Sealed"
     else
       "#{winning_bid_amount_as_currency} - #{auction.bids.length} bids"

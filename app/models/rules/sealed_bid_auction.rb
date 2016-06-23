@@ -1,4 +1,4 @@
-class Rules::SealedBid < Rules::BaseRules
+class Rules::SealedBidAuction < Rules::BaseRules
   def winning_bid
     if auction_available?
       NullBid.new

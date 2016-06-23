@@ -31,7 +31,7 @@ class AuctionShowViewModel
   end
 
   def sealed_bids_partial
-    if available? && auction.type == 'single_bid'
+    if available? && auction.type == 'sealed_bid'
       'bids/sealed'
     else
       'components/null'
@@ -39,7 +39,7 @@ class AuctionShowViewModel
   end
 
   def veiled_bids
-    if available? && auction.type == 'single_bid'
+    if available? && auction.type == 'sealed_bid'
       auction.bids.where(bidder: current_user).map do |bid|
         BidListItem.new(bid: bid, user: current_user)
       end
@@ -151,7 +151,7 @@ class AuctionShowViewModel
   end
 
   def bid_flash_partial
-    if auction.type == 'multi_bid' && (over? || available_and_user_is_bidder?)
+    if auction.type == 'reverse' && (over? || available_and_user_is_bidder?)
       'auctions/bid_status_header'
     else
       'components/null'

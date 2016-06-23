@@ -30,7 +30,7 @@ class MyBidListItem
   end
 
   def winning_status
-    if available? && auction.type == 'single_bid'
+    if available? && auction.type == 'sealed_bid'
       'n/a'
     elsif bid == winning_bid
       'true'

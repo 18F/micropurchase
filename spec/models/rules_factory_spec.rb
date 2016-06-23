@@ -2,23 +2,23 @@ require 'rails_helper'
 
 describe RulesFactory do
   describe '#create' do
-    context 'single bid' do
-      it 'returns SealedBid rules' do
-        auction = build(:auction, type: :single_bid)
+    context 'sealed bid' do
+      it 'returns SealedBidAuction rules' do
+        auction = build(:auction, type: :sealed_bid)
 
         rules = RulesFactory.new(auction).create
 
-        expect(rules).to be_an_instance_of(Rules::SealedBid)
+        expect(rules).to be_an_instance_of(Rules::SealedBidAuction)
       end
     end
 
-    context 'multi_bid' do
+    context 'reverse' do
       it 'returns Basic rules' do
-        auction = build(:auction, type: :multi_bid)
+        auction = build(:auction, type: :reverse)
 
         rules = RulesFactory.new(auction).create
 
-        expect(rules).to be_an_instance_of(Rules::Basic)
+        expect(rules).to be_an_instance_of(Rules::ReverseAuction)
       end
     end
   end

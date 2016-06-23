@@ -44,7 +44,7 @@ class AuctionSerializer < ActiveModel::Serializer
   private
 
   def veiled_bids
-    if object.type == 'single_bid' && auction_status.available?
+    if object.type == 'sealed_bid' && auction_status.available?
       object.bids.where(bidder: scope)
     else
       object.bids

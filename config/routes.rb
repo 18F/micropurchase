@@ -12,8 +12,8 @@ Rails.application.routes.draw do
   root 'auctions#index'
   get '/auctions/winners', to: 'auctions#previous_winners'
 
-  get '/auctions/rules/single-bid', to: 'auctions#single_bid_rules'
-  get '/auctions/rules/multi-bid', to: 'auctions#multi_bid_rules'
+  get '/auctions/rules/sealed-bid', to: 'auctions#sealed_bid_rules'
+  get '/auctions/rules/reverse', to: 'auctions#reverse_rules'
 
   # Map current API requests to new controller for now
   namespace :api, defaults: { format: 'json' } do

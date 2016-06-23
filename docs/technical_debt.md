@@ -494,7 +494,7 @@ users
   end
 
   def win_header_partial
-    "auctions/multi_bid/guest_win_header"
+    "auctions/reverse/guest_win_header"
   end
 
   def nav_drawer_submenu_partial

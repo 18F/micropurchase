@@ -15,10 +15,6 @@ class GuestPresenter
     "components/guest_nav_drawer"
   end
 
-  def win_header_partial
-    "auctions/multi_bid/guest_win_header"
-  end
-
   def nav_drawer_submenu_partial
     "components/guest_nav_drawer_submenu"
   end

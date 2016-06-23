@@ -6,15 +6,15 @@ FactoryGirl.define do
     ended_at { TimeHelpers::quartile_minute(Time.now + 3.days) }
     result :not_applicable
     title { Faker::Company.catch_phrase }
-    type :multi_bid
+    type :reverse
     published :published
     summary Faker::Lorem.paragraph
     description Faker::Lorem.paragraphs(3, true).join("\n\n")
     delivery_due_at { TimeHelpers::quartile_minute(Time.now + 10.days) }
     purchase_card :default
 
-    trait :single_bid_with_tie do
-      single_bid
+    trait :sealed_bid_with_tie do
+      sealed_bid
 
       after(:create) do |auction|
         Timecop.freeze(auction.started_at) do
@@ -143,12 +143,12 @@ FactoryGirl.define do
       published :unpublished
     end
 
-    trait :single_bid do
-      type :single_bid
+    trait :sealed_bid do
+      type :sealed_bid
     end
 
-    trait :multi_bid do
-      type :multi_bid
+    trait :reverse do
+      type :reverse
     end
 
     trait :complete_and_successful do
