@@ -1,0 +1,13 @@
+html,
+body {
+  height: 100%;
+}
+
+.container {
+  min-height: 100%;
+  position: relative;
+}
+
+.content-wrapper {
+  padding-bottom: $footer-height;
+}

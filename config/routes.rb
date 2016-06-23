@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-  get '/admin', to: 'admin/dashboards#index'
-  get '/admin/action_items', to: 'admin/dashboards#action_items'
-  get '/admin/drafts', to: 'admin/dashboards#drafts'
-  get '/admin/auctions/:id/preview', to: 'admin/auctions#preview', as: 'admin_preview_auction'
-
   get '/auth/:provider/callback', to: 'authentications#create'
   get '/login', to: 'logins#index'
   get '/logout', to: 'authentications#destroy'
@@ -34,11 +29,16 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/admin/auctions/:id/preview', to: 'admin/auctions#preview', as: 'admin_preview_auction'
+  get '/admin', to: 'admin/auctions#index'
+
   namespace :admin do
     resources :auctions
     resources :users, only: [:index, :edit, :update, :show]
     resources :auction_reports, only: [:show]
     resources :user_reports, only: [:index]
+    resources :action_items, only: [:index]
+    resources :drafts, only: [:index]
   end
 
   # Temporarily send JSON requests to web to API

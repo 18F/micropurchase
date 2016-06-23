@@ -1,0 +1,26 @@
+<%= render partial: 'admin/nav', locals: { view_model: @action_items } %>
+
+<div class="usa-width-three-fourths">
+  <div class="admin-body">
+    <h2>Delivery past due</h2>
+    <%= render partial: 'items',
+      locals: { auctions: @action_items.delivery_past_due } %>
+
+    <h2>Evaluation needed</h2>
+    <%= render partial: 'items',
+      locals: { auctions: @action_items.delivery_past_due } %>
+      locals: { auctions: @action_items.evaluation_needed } %>
+
+    <h2>Payment needed</h2>
+    <%= render partial: 'items',
+      locals: { auctions: @action_items.payment_needed } %>
+
+    <h2>Payment pending</h2>
+    <%= render partial: 'items',
+      locals: { auctions: @action_items.payment_pending } %>
+
+    <h2>Complete &amp; successful</h2>
+    <%= render partial: 'items',
+      locals: { auctions: @action_items.complete_and_successful } %>
+  </div>
+</div>

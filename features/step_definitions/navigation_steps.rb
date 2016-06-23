@@ -6,7 +6,7 @@ When(/^I visit the home page$/) do
   visit "/"
 end
 
-When(/^I visit my bids page$/) do
+Then(/^I visit my bids page$/) do
   visit bids_path
 end
 
@@ -75,7 +75,10 @@ When(/^I should be on the admin auctions page$/) do
   expect(page.current_path).to eq(admin_auctions_path)
 end
 
-
 Then(/^I should be on the admin form for that auction$/) do
   expect(page.current_path).to eq(edit_admin_auction_path(@auction))
+end
+
+Then(/^I should be on my bids page$/) do
+  expect(page.current_path).to eq(bids_path)
 end

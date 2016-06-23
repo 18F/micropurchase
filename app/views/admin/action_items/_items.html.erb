@@ -1,4 +1,4 @@
-<table id="table-auctions-action" class="admin-auctions-table">
+<table class="usa-table-borderless">
   <thead>
     <tr>
       <th scope="col">Title</th>
@@ -7,20 +7,19 @@
       <th scope="col">Result</th>
       <th scope="col">CAP URL</th>
       <th scope="col">Paid?</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
     <% auctions.each do |auction| %>
     <tr>
-      <td>
-        <%= link_to(auction.title, admin_auction_path(auction)) %>
-        (<%= link_to('edit', edit_admin_auction_path(auction)) %>)
-      </td>
+      <td><%= link_to(auction.title, admin_auction_path(auction.id)) %></td>
       <td><%= auction.delivery_due_at_expires_in %></td>
       <td><%= auction.delivery_url %></td>
       <td><%= auction.result %></td>
       <td><%= auction.cap_proposal_url %></td>
       <td><%= auction.paid? %></td>
+      <td><%= link_to('edit', edit_admin_auction_path(auction)) %></td>
     </tr>
     <% end %>
   </tbody>

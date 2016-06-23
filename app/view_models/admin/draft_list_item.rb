@@ -1,8 +1,12 @@
-class Admin::DraftListItem
+class Admin::DraftListItem < Admin::BaseViewModel
   attr_reader :auction
 
   def initialize(auction)
     @auction = auction
+  end
+
+  def drafts_nav_class
+    'usa-current'
   end
 
   def title

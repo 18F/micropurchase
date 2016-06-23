@@ -2,9 +2,7 @@ class Admin::UsersController < ApplicationController
   before_filter :require_admin
 
   def index
-    all_users = User.all.map {|user| UserPresenter.new(user) }
-    @admins, @users = all_users.partition(&:admin?)
-    @admin_report = AdminReport.new(users: all_users)
+    @view_model = Admin::UsersIndexViewModel.new
   end
 
   def show

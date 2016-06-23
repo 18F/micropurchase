@@ -2,7 +2,7 @@ class Admin::AuctionsController < ApplicationController
   before_filter :require_admin
 
   def index
-    @auctions = Auction.all.map { |auction| Admin::AuctionListItem.new(auction) }
+    @auction_collection = Admin::AuctionsIndexViewModel.new
   end
 
   def show

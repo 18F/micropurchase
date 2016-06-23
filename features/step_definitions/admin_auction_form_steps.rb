@@ -136,7 +136,7 @@ When(/^I click to edit the auction$/) do
 end
 
 When(/^I click to create an auction$/) do
-  click_on("Create")
+  click_on("Create Auction")
   @auction = Auction.where(title: @title).first
 end
 
