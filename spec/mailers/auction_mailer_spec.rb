@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe AuctionMailer do
   describe '#winning_bidder_notification' do
-    it 'sends tge email to the winning bidder' do
+    it 'sends the email to the winning bidder' do
       auction = create(:auction, :with_bidders, :closed)
       winning_bid = WinningBid.new(auction).find
       winning_bidder = winning_bid.bidder
@@ -17,6 +17,7 @@ describe AuctionMailer do
 
       expect(email.subject).to eq I18n.t('mailers.auction_mailer.winning_bidder_notification.subject')
       expect(email.from).to eq [SMTPCredentials.default_from]
+
       expect(email.body.encoded).to include(
         I18n.t(
           'mailers.auction_mailer.winning_bidder_notification.para_1',
@@ -24,7 +25,8 @@ describe AuctionMailer do
           auction_url: auction_url(auction),
           bid_amount: Currency.new(WinningBid.new(auction).find.amount).to_s,
           auction_delivery_deadline: DcTimePresenter.convert_and_format(auction.delivery_due_at),
-          auction_issue_url: auction.issue_url
+          auction_issue_url: auction.issue_url,
+          policy_page_url: ENV['ROOT_URL'] + faq_path
         )
       )
 
