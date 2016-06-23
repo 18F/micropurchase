@@ -20,7 +20,7 @@ class UserPresenter < SimpleDelegator
   end
 
   def mobile_nav_partial
-    "components/user_mobile_nav"
+    "components/user_nav_drawer_submenu"
   end
 
   def nav_drawer_partial
