@@ -10,6 +10,7 @@ Feature: Admin Dashboard
     And I sign in
     When I visit the admin action items page
     Then I should see the name of each dashboard auction
+    And I should see edit links for each dashboard auction
 
   Scenario: Viewing the drafts dashboard
     Given I am an administrator
