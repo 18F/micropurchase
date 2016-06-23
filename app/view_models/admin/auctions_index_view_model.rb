@@ -1,6 +1,8 @@
 class Admin::AuctionsIndexViewModel < Admin::BaseViewModel
   def auctions
-    Auction.all.map { |auction| Admin::AuctionListItem.new(auction) }
+    Auction.all.order(started_at: :desc).map do |auction|
+      Admin::AuctionListItem.new(auction)
+    end
   end
 
   def auctions_nav_class

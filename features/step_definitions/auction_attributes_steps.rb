@@ -96,6 +96,12 @@ Then(/^I should see the name of each dashboard auction$/) do
   end
 end
 
+Then(/^I should see edit links for each dashboard auction$/) do
+  @complete_and_successful.each do |auction|
+    expect(page).to have_link('edit', href: edit_admin_auction_path(auction.id))
+  end
+end
+
 Then(/^I should not see the unpublished auction$/) do
   expect(page).to_not have_content(@unpublished_auction.title)
 end

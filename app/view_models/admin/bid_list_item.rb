@@ -1,4 +1,4 @@
-class Admin::BidListItem
+class Admin::BidListItem < Admin::BaseViewModel
   attr_reader :bid
 
   def initialize(bid)

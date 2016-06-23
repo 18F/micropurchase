@@ -1,4 +1,4 @@
-class Admin::AuctionListItem
+class Admin::AuctionListItem < Admin::BaseViewModel
   attr_reader :auction
 
   def initialize(auction)
@@ -7,10 +7,6 @@ class Admin::AuctionListItem
 
   def id
     auction.id
-  end
-
-  def drafts_nav_class
-    'usa-current'
   end
 
   def title

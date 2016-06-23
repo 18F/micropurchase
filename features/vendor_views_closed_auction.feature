@@ -13,6 +13,8 @@ Feature: Vendor views closed auctions
     And I should see when the auction started
     And I should see when the auction ended
     And there should be meta tags for the closed auction
+    And an email notification is sent to the winning bidder
+    And I should receive an email notifying me that I won
 
   Scenario: I am not the winner
     Given there is a closed auction
@@ -47,4 +49,3 @@ Feature: Vendor views closed auctions
     And I should see when the auction started
     And I should see when the auction ended
     And there should be meta tags for the closed auction
-

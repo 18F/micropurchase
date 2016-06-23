@@ -1,6 +1,4 @@
-class Admin::AuctionReportsController < ApplicationController
-  before_filter :require_admin
-
+class Admin::AuctionReportsController < Admin::BaseController
   def show
     @auction = Auction.find(params[:id])
 

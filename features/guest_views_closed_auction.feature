@@ -8,7 +8,6 @@ Feature: Guest views closed auction
     When I visit the home page
     Then I should see a "Closed" label
     And I should see the auction had a winning bid
-    And I should not see a "Bid" button
     And there should be meta tags for the index page for 0 open and 0 future auctions
 
     When I visit the auction page
@@ -17,7 +16,7 @@ Feature: Guest views closed auction
     And I should see when the auction started
     And I should see when the auction ended
     And I should see the delivery deadline
-    And I should not see a "Bid" button
+    And I should not see the bid form
     And there should be meta tags for the closed auction
 
   Scenario: Winning vendor was paid

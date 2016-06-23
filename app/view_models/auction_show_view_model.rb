@@ -210,7 +210,7 @@ class AuctionShowViewModel
   end
 
   def show_bid_form?
-    if current_user.is_a?(Guest)
+    if available? && current_user.is_a?(Guest)
       true
     else
       rules.user_can_bid?(current_user)

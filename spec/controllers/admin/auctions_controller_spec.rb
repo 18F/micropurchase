@@ -6,7 +6,7 @@ describe Admin::AuctionsController do
       user = create(:admin_user)
       auction_record = create(:auction)
       get :show, { id: auction_record.id }, user_id: user.id
-      auction = assigns(:auction)
+      auction = assigns(:view_model)
       expect(auction.auction).to eq(auction_record)
     end
   end
@@ -32,7 +32,7 @@ describe Admin::AuctionsController do
         }
 
         put :update, params, user_id: user.id
-        auction = assigns(:auction)
+        auction = assigns(:view_model)
 
         expect(auction.record.id).to eq(auction_record.id)
         expect(controller).to render_template :edit

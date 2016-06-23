@@ -8,7 +8,7 @@ Rails.application.configure do
   config.action_dispatch.show_exceptions = false
   config.action_controller.allow_forgery_protection = false
   config.action_mailer.delivery_method = :test
-  config.action_mailer.default_url_options = { host: "localhost" }
+  config.action_mailer.default_url_options = { host: "www.example.com" }
   config.active_support.test_order = :random
   config.active_support.deprecation = :stderr
   ENV['VCAP_SERVICES'] = File.read("#{Rails.root}/spec/support/vcap_services.json")

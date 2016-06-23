@@ -19,7 +19,7 @@
       <td><%= auction.result %></td>
       <td><%= auction.cap_proposal_url %></td>
       <td><%= auction.paid? %></td>
-      <td><%= link_to('edit', edit_admin_auction_path(auction)) %></td>
+      <td><%= link_to('edit', edit_admin_auction_path(auction.id)) %></td>
     </tr>
     <% end %>
   </tbody>

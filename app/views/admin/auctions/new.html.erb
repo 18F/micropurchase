@@ -1,12 +1,6 @@
-<%= render partial: 'admin/nav', locals: { view_model: @auction } %>
-
-<div class="usa-width-three-fourths">
-  <div class="admin-body">
-    <div class="auction-form">
-      <%= simple_form_for [:admin, @auction.new_record] do |f| %>
-        <%= render partial: 'form', locals: { f: f, auction: @auction } %>
-        <%= f.submit class: 'usa-button usa-button-outline' %>
-      <% end %>
-    </div>
-  </div>
+<div class="auction-form">
+  <%= simple_form_for [:admin, @view_model.new_record] do |f| %>
+    <%= render partial: 'form', locals: { f: f, auction: @view_model } %>
+    <%= f.submit class: 'usa-button usa-button-outline' %>
+  <% end %>
 </div>
