@@ -1,34 +1,18 @@
 Rails.application.routes.draw do
-  get '/auth/:provider/callback', to: 'authentications#create'
-  get '/login', to: 'logins#index'
-  get '/logout', to: 'authentications#destroy'
-  get '/faq', to: 'logins#faq'
-
   if Rails.env.development?
     mount LetterOpenerWeb::Engine => "letter_opener"
   end
 
   # Web requests
   root 'auctions#index'
+
+  get '/auth/:provider/callback', to: 'authentications#create'
+  get '/login', to: 'logins#index'
+  get '/logout', to: 'authentications#destroy'
+  get '/faq', to: 'logins#faq'
   get '/auctions/winners', to: 'auctions#previous_winners'
-
-  get '/auctions/rules/sealed-bid', to: 'auctions#sealed_bid_rules'
-  get '/auctions/rules/reverse', to: 'auctions#reverse_rules'
-
-  # Map current API requests to new controller for now
-  namespace :api, defaults: { format: 'json' } do
-    namespace :v0 do
-      resources :auctions, only: [:index, :show] do
-        resources :bids, only: [:create]
-      end
-
-      namespace :admin do
-        resources :auctions, only: [:index, :show]
-        resources :users, only: [:index]
-      end
-    end
-  end
-
+  get '/auctions/rules/sealed-bid', to: 'auctions#sealed_bid_auction_rules'
+  get '/auctions/rules/reverse', to: 'auctions#reverse_auction_rules'
   get '/admin/auctions/:id/preview', to: 'admin/auctions#preview', as: 'admin_preview_auction'
   get '/admin', to: 'admin/auctions#index'
 
@@ -50,7 +34,20 @@ Rails.application.routes.draw do
   end
 
   resources :bids, only: [:index]
-
   resources :users, only: [:update]
-  get 'users/edit' => 'users#edit'
+  get 'edit_user', to: 'users#edit'
+
+  # Map current API requests to new controller for now
+  namespace :api, defaults: { format: 'json' } do
+    namespace :v0 do
+      resources :auctions, only: [:index, :show] do
+        resources :bids, only: [:create]
+      end
+
+      namespace :admin do
+        resources :auctions, only: [:index, :show]
+        resources :users, only: [:index]
+      end
+    end
+  end
 end
