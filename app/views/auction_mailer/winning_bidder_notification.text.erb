@@ -1,15 +1,16 @@
 <%= I18n.t(
-          'mailers.auction_mailer.winning_bidder_notification.para_1',
-          auction_title: @auction.title,
-          auction_url: auction_url(@auction),
-          bid_amount: Currency.new(WinningBid.new(@auction).find.amount).to_s,
-          auction_delivery_deadline: DcTimePresenter.convert_and_format(@auction.delivery_due_at),
-          auction_issue_url: @auction.issue_url,
-          policy_page_url: faq_url
-  )
-%>
+  'mailers.auction_mailer.winning_bidder_notification.para_1',
+  auction_title: @auction.title,
+  auction_url: auction_url(@auction),
+  bid_amount: Currency.new(WinningBid.new(@auction).find.amount).to_s,
+  auction_delivery_deadline: DcTimePresenter.convert_and_format(@auction.delivery_due_at),
+  auction_issue_url: @auction.issue_url
+) %>
 
-<%= I18n.t('mailers.auction_mailer.winning_bidder_notification.para_2') %>
+<%= I18n.t(
+  'mailers.auction_mailer.winning_bidder_notification.para_2',
+  policy_page_url: faq_url
+) %>
 
 <%= I18n.t('mailers.auction_mailer.winning_bidder_notification.sign_off') %>
 
