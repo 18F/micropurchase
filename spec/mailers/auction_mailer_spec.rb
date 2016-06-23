@@ -25,13 +25,15 @@ describe AuctionMailer do
           auction_url: auction_url(auction),
           bid_amount: Currency.new(WinningBid.new(auction).find.amount).to_s,
           auction_delivery_deadline: DcTimePresenter.convert_and_format(auction.delivery_due_at),
-          auction_issue_url: auction.issue_url,
-          policy_page_url: faq_url
+          auction_issue_url: auction.issue_url
         )
       )
 
       expect(email.body.encoded).to include(
-        I18n.t('mailers.auction_mailer.winning_bidder_notification.para_2')
+        I18n.t(
+          'mailers.auction_mailer.winning_bidder_notification.para_2',
+          policy_page_url: faq_url
+        )
       )
       expect(email.body.encoded).to include(
         I18n.t('mailers.auction_mailer.winning_bidder_notification.sign_off')
