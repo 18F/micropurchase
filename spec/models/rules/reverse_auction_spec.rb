@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-describe Rules::Basic do
+describe Rules::ReverseAuction do
   describe '#winning_bid' do
     it "should be the auction's lowest_bid" do
       auction = create(:auction, :closed, :with_bidders)
       eligibility = InSamEligibility.new
-      rules = Rules::Basic.new(auction, eligibility)
+      rules = Rules::ReverseAuction.new(auction, eligibility)
       expect(rules.winning_bid).to eq(auction.lowest_bid)
     end
   end
@@ -16,7 +16,7 @@ describe Rules::Basic do
         auction = create(:auction)
         user = create(:user, sam_status: :sam_accepted)
         eligibility = InSamEligibility.new
-        rules = Rules::Basic.new(auction, eligibility)
+        rules = Rules::ReverseAuction.new(auction, eligibility)
         expect(rules.user_can_bid?(user)).to be_truthy
       end
     end
@@ -27,7 +27,7 @@ describe Rules::Basic do
         user = create(:user, sam_status: :sam_accepted)
         create(:bid, auction: auction, bidder: user)
         eligibility = InSamEligibility.new
-        rules = Rules::Basic.new(auction, eligibility)
+        rules = Rules::ReverseAuction.new(auction, eligibility)
         expect(rules.user_can_bid?(user)).to eq(false)
       end
     end
@@ -37,7 +37,7 @@ describe Rules::Basic do
         auction = create(:auction, :closed)
         user = create(:user, sam_status: :sam_accepted)
         eligibility = InSamEligibility.new
-        rules = Rules::Basic.new(auction, eligibility)
+        rules = Rules::ReverseAuction.new(auction, eligibility)
         expect(rules.user_can_bid?(user)).to be_falsey
       end
     end
@@ -46,7 +46,7 @@ describe Rules::Basic do
       it 'is false' do
         auction = create(:auction)
         eligibility = InSamEligibility.new
-        rules = Rules::Basic.new(auction, eligibility)
+        rules = Rules::ReverseAuction.new(auction, eligibility)
         expect(rules.user_can_bid?(nil)).to be_falsey
       end
     end
@@ -56,7 +56,7 @@ describe Rules::Basic do
         user = create(:user, sam_status: :sam_pending)
         auction = create(:auction)
         eligibility = InSamEligibility.new
-        rules = Rules::Basic.new(auction, eligibility)
+        rules = Rules::ReverseAuction.new(auction, eligibility)
         expect(rules.user_can_bid?(user)).to be_falsey
       end
     end
@@ -67,7 +67,7 @@ describe Rules::Basic do
       it 'should be BID_INCRMENT below the start price' do
         auction = create(:auction)
         eligibility = InSamEligibility.new
-        rules = Rules::Basic.new(auction, eligibility)
+        rules = Rules::ReverseAuction.new(auction, eligibility)
         expect(rules.max_allowed_bid).to eq(auction.start_price - PlaceBid::BID_INCREMENT)
       end
     end
@@ -76,7 +76,7 @@ describe Rules::Basic do
       it 'should be BID_INCREMENT below the lowest bid' do
         auction = create(:auction, :with_bidders)
         eligibility = InSamEligibility.new
-        rules = Rules::Basic.new(auction, eligibility)
+        rules = Rules::ReverseAuction.new(auction, eligibility)
         expect(rules.max_allowed_bid).to eq(auction.lowest_bid.amount - PlaceBid::BID_INCREMENT)
       end
     end
@@ -86,7 +86,7 @@ describe Rules::Basic do
     it 'should always be true' do
       auction = create(:auction, :with_bidders)
       eligibility = InSamEligibility.new
-      rules = Rules::Basic.new(auction, eligibility)
+      rules = Rules::ReverseAuction.new(auction, eligibility)
       expect(rules.show_bids?).to be_truthy
     end
   end

@@ -27,11 +27,11 @@ Given(/^there is an open auction$/) do
 end
 
 Given(/^there is a single-bid auction$/) do
-  @auction = FactoryGirl.create(:auction, :running, :single_bid)
+  @auction = FactoryGirl.create(:auction, :running, :sealed_bid)
 end
 
 Given(/^there is a closed single-bid auction$/) do
-  @auction = FactoryGirl.create(:auction, :closed, :with_bidders, :single_bid)
+  @auction = FactoryGirl.create(:auction, :closed, :with_bidders, :sealed_bid)
 end
 
 Given(/^there is an auction that needs evaluation$/) do

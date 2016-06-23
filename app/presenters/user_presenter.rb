@@ -31,10 +31,6 @@ class UserPresenter < SimpleDelegator
     "components/null"
   end
 
-  def win_header_partial
-    "auctions/multi_bid/user_win_header"
-  end
-
   def nav_drawer_submenu_partial
     "components/user_nav_drawer_submenu"
   end

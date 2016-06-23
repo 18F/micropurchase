@@ -9,9 +9,9 @@ class HighlightedBid
   def find
     if !auction.bids.any?
       NullBid.new
-    elsif available_single_bid? && user_is_bidder?
+    elsif available_sealed_bid? && user_is_bidder?
       lowest_user_bid
-    elsif available_single_bid?
+    elsif available_sealed_bid?
       NullBid.new
     else
       auction.lowest_bid
@@ -20,8 +20,8 @@ class HighlightedBid
 
   private
 
-  def available_single_bid?
-    available? && auction.type == "single_bid"
+  def available_sealed_bid?
+    available? && auction.type == "sealed_bid"
   end
 
   def available?

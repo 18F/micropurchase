@@ -16,11 +16,11 @@ describe 'GET /auctions' do
     expect(json_auctions.map {|a| a['ended_at'] }).to all(be_iso8601)
   end
 
-  context 'when the auction is multi bid' do
+  context 'when the auction is reverse' do
     context 'and the auction is running' do
       it 'veils all bidder information' do
         login
-        create(:auction, :running, :multi_bid, :with_bidders)
+        create(:auction, :running, :reverse, :with_bidders)
 
         get api_v0_auctions_path(format: :json), nil, headers
 
@@ -40,7 +40,7 @@ describe 'GET /auctions' do
       context 'and the auction is closed' do
         it 'unveils all bidder information' do
           login
-          create(:auction, :closed, :multi_bid, :with_bidders)
+          create(:auction, :closed, :reverse, :with_bidders)
 
           get api_v0_auctions_path(format: :json), nil, headers
 
@@ -60,21 +60,19 @@ describe 'GET /auctions' do
     end
   end
 
-  context 'when the auction is single bid' do
+  context 'when the auction is sealed-bid' do
     context 'and the auction is running' do
       it 'veils all bids' do
         login
-        create(:auction, :running, :single_bid, :with_bidders)
-
-          get '/api/v0/auctions', nil, headers
-
-          expect(json_bids).to be_empty
+        create(:auction, :running, :sealed_bid, :with_bidders)
+        get '/api/v0/auctions', nil, headers
+        expect(json_bids).to be_empty
       end
 
       context 'and the auction is closed' do
         it 'unveils all bids' do
           login
-          auction = create(:auction, :closed, :single_bid, :with_bidders)
+          auction = create(:auction, :closed, :sealed_bid, :with_bidders)
 
           get api_v0_auctions_path(format: :json), nil, headers
 

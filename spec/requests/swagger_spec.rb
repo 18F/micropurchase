@@ -95,7 +95,7 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
       context 'winning bid not present' do
         it 'returns a valid auction response' do
           login
-          auction = create(:auction, :available, :single_bid)
+          auction = create(:auction, :available, :sealed_bid)
           _bid = create(:bid, auction: auction)
           api_key = FakeGitHub::VALID_API_KEY
 

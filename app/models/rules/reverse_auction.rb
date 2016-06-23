@@ -1,4 +1,4 @@
-class Rules::Basic < Rules::BaseRules
+class Rules::ReverseAuction < Rules::BaseRules
   def winning_bid
     auction.lowest_bid || NullBid.new
   end

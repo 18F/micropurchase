@@ -19,7 +19,7 @@ describe 'GET /auction/{id}' do
     context 'and the auction is running' do
       it 'veils all bids' do
         login
-        auction = create(:auction, :running, :single_bid, :with_bidders)
+        auction = create(:auction, :running, :sealed_bid, :with_bidders)
 
         get api_v0_auction_path(auction), nil, headers
 
@@ -30,7 +30,7 @@ describe 'GET /auction/{id}' do
         it 'does not veil the bids from the authenticated user' do
           user = create(:user)
           login(user)
-          auction = create(:auction, :running, :single_bid, :with_bidders)
+          auction = create(:auction, :running, :sealed_bid, :with_bidders)
           create(:bid, auction: auction, bidder: user)
 
           get api_v0_auction_path(auction), nil, headers
@@ -49,7 +49,7 @@ describe 'GET /auction/{id}' do
         it 'veils the bids not created by the authenticated user' do
           user = create(:user)
           login(user)
-          auction = create(:auction, :running, :single_bid, :with_bidders)
+          auction = create(:auction, :running, :sealed_bid, :with_bidders)
           create(:bid, auction: auction, bidder: user)
 
           get api_v0_auction_path(auction), nil, headers
@@ -63,7 +63,7 @@ describe 'GET /auction/{id}' do
     context 'and the auction is closed' do
       it 'unveils all bids information' do
         login
-        auction = create(:auction, :closed, :single_bid, :with_bidders)
+        auction = create(:auction, :closed, :sealed_bid, :with_bidders)
 
         get api_v0_auction_path(auction), nil, headers
 
