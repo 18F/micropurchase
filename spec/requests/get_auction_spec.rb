@@ -15,7 +15,7 @@ describe 'GET /auction/{id}' do
     expect(json_auction['ended_at']).to be_iso8601
   end
 
-  context 'when the auction is single bid' do
+  context 'when the auction is sealed-bid' do
     context 'and the auction is running' do
       it 'veils all bids' do
         login
