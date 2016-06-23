@@ -5,7 +5,7 @@ require_relative "environment"
 module Clockwork
   every(1.day, "losing_bidder_emails.send", at: "17:05", tz: 'Eastern Time (US & Canada)') do
     puts "Sending losing bidder emails"
-    AuctionQuery.new.closed_yesterday do |auction|
+    AuctionQuery.new.closed_within_last_24_hours do |auction|
       LosingBidderEmailSender.new(auction).delay.perform
     end
   end
