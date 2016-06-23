@@ -1,7 +1,5 @@
-class Admin::DraftsController < ApplicationController
-  before_filter :require_admin
-
+class Admin::DraftsController < Admin::BaseController
   def index
-    @auction_collection = Admin::DraftAuctionsViewModel.new
+    @view_model = Admin::DraftAuctionsViewModel.new
   end
 end

@@ -1,4 +1,4 @@
-class Admin::AuctionShowViewModel
+class Admin::AuctionShowViewModel < Admin::BaseViewModel
   attr_reader :auction
 
   def initialize(auction)

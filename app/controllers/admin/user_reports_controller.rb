@@ -1,6 +1,4 @@
-class Admin::UserReportsController < ApplicationController
-  before_filter :require_admin
-
+class Admin::UserReportsController < Admin::BaseController
   def index
     @users = User.all
 

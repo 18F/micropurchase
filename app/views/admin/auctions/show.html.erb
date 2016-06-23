@@ -1,35 +1,35 @@
-<h1><%= @auction.title %></h1>
+<h1><%= @view_model.title %></h1>
 
 <div>
-  <%= render partial: @auction.status_partial, locals: { auction: @auction } %>
+  <%= render partial: @view_model.status_partial, locals: { auction: @view_model } %>
 </div>
 
 <div>
-  <b>Starts:</b> <%= @auction.started_at %>
+  <b>Starts:</b> <%= @view_model.started_at %>
 </div>
 
 <div>
-  <b>Ends:</b> <%= @auction.ended_at %>
+  <b>Ends:</b> <%= @view_model.ended_at %>
 </div>
 
 <div>
-  <b>Billable to:</b> <%= @auction.billable_to %>
+  <b>Billable to:</b> <%= @view_model.billable_to %>
 </div>
 
 <div>
-  <b>Paid at:</b> <%= @auction.paid_at %>
+  <b>Paid at:</b> <%= @view_model.paid_at %>
 </div>
 
 <div>
   <h3>Summary:</h3>
-  <%= @auction.html_summary %>
+  <%= @view_model.html_summary %>
 </div>
 
 <div>
   <h3>Description:</h3>
-  <%= @auction.html_description %>
+  <%= @view_model.html_description %>
 </div>
 
 <div class='usa-grid'>
-  <%= render partial: @auction.bids_partial, locals: { auction: @auction } %>
+  <%= render partial: @view_model.bids_partial, locals: { auction: @view_model } %>
 </div>

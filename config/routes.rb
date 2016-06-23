@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :auctions
-    resources :users, only: [:index, :edit, :update, :show]
+    resources :users, only: [:index, :edit, :update]
     resources :auction_reports, only: [:show]
     resources :user_reports, only: [:index]
     resources :action_items, only: [:index]

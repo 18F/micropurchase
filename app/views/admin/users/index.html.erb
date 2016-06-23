@@ -1,68 +1,62 @@
-<%= render partial: 'admin/nav', locals: { view_model: @view_model } %>
-
-<div class="usa-width-three-fourths">
-<div class="admin-body">
-  <h2>Admins (<%= @view_model.admin_count %>)</h2>
-  <table class="usa-table-borderless">
-    <thead>
+<h2>Admins (<%= @view_model.admin_count %>)</h2>
+<table class="usa-table-borderless">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">DUNS Number</th>
+      <th scope="col">Sam.gov status</th>
+      <th scope="col">Contracting Officer?</th>
+      <th scope="col">GitHub ID</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @view_model.admins.each do |user| %>
       <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">DUNS Number</th>
-        <th scope="col">Sam.gov status</th>
-        <th scope="col">Contracting Officer?</th>
-        <th scope="col">GitHub ID</th>
-        <th scope="col"></th>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.duns_number %></td>
+        <td><%= user.sam_status %></td>
+        <td><%= user.contracting_officer? %></td>
+        <td><%= link_to(user.github_id, user.github_json_url) %></td>
+        <td><%= link_to('Edit', edit_admin_user_path(user)) %></td>
       </tr>
-    </thead>
-    <tbody>
-      <% @view_model.admins.each do |user| %>
-        <tr>
-          <td><%= user.name %></td>
-          <td><%= user.email %></td>
-          <td><%= user.duns_number %></td>
-          <td><%= user.sam_status %></td>
-          <td><%= user.contracting_officer? %></td>
-          <td><%= link_to(user.github_id, user.github_json_url) %></td>
-          <td><%= link_to('Edit', edit_admin_user_path(user)) %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+    <% end %>
+  </tbody>
+</table>
 
-  <h2>
-    Users (<%= @view_model.user_count %>);
-    w/ DUNS (<%= @view_model.non_admin_users_with_duns_count %>);
-    In SAM (<%= @view_model.non_admin_users_in_sam_count %>)
-  </h2>
+<h2>
+  Users (<%= @view_model.user_count %>);
+  w/ DUNS (<%= @view_model.non_admin_users_with_duns_count %>);
+  In SAM (<%= @view_model.non_admin_users_in_sam_count %>)
+</h2>
 
-  <%= link_to "Download CSV", admin_user_reports_path(format: :csv) %>
-  y
-  <table class="usa-table-borderless">
-    <thead>
+<%= link_to "Download CSV", admin_user_reports_path(format: :csv) %>
+y
+<table class="usa-table-borderless">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">DUNS Number</th>
+      <th scope="col">SAM.gov status</th>
+      <th scope="col">Small Business?</th>
+      <th scope="col">GitHub ID</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @view_model.users.each do |user| %>
       <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">DUNS Number</th>
-        <th scope="col">SAM.gov status</th>
-        <th scope="col">Small Business?</th>
-        <th scope="col">GitHub ID</th>
-        <th scope="col"></th>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.duns_number %></td>
+        <td><%= user.in_sam? %></td>
+        <td><%= user.small_business_label %></td>
+        <td><%= link_to(user.github_id, user.github_json_url) %></td>
+        <td><%= link_to('Edit', edit_admin_user_path(user)) %></td>
       </tr>
-    </thead>
-    <tbody>
-      <% @view_model.users.each do |user| %>
-        <tr>
-          <td><%= user.name %></td>
-          <td><%= user.email %></td>
-          <td><%= user.duns_number %></td>
-          <td><%= user.in_sam? %></td>
-          <td><%= user.small_business_label %></td>
-          <td><%= link_to(user.github_id, user.github_json_url) %></td>
-          <td><%= link_to('Edit', edit_admin_user_path(user)) %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
-</div>
+    <% end %>
+  </tbody>
+</table>

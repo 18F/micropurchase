@@ -7,7 +7,9 @@
           <div class="header-image">
             <%= image_tag '18F-Logo-2016-Blue.svg', alt: '18f-logo' %>
           </div>
-          <h1 class="header-title-text">Micropurchase</h1>
+          <h1 class="header-title-text">
+            <%= title ||= "Micro-purchase" %>
+          </h1>
         </a>
         <button class="button-nav-drawer" class="usa-button usa-button-outline-inverse" data-drawer-toggle="menu">
           <span class="fa fa-bars"></span>
