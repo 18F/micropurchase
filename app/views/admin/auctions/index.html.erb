@@ -1,31 +1,28 @@
-<h1>
-  <div class='usa-width-three-fourths'>Auctions</div>
-  <div class='usa-width-one-forth right'>
-    <a class='usa-button' href="<%= new_admin_auction_path %>">Create a new auction</a>
+<%= render partial: 'admin/nav', locals: { view_model: @auction_collection } %>
+
+<div class="usa-width-three-fourths">
+  <div class="admin-body">
+    <table class="usa-table-borderless">
+      <thead>
+        <tr>
+          <th scope="col">Auction title</th>
+          <th scope="col">Status</th>
+          <th scope="col">Starts</th>
+          <th scope="col">Ends</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @auction_collection.auctions.each do |auction| %>
+          <tr>
+            <td><%= link_to auction.title, admin_auction_path(auction.id) %></td>
+            <td><%= auction.availability %></td>
+            <td><%= auction.formatted_start_time %></td>
+            <td><%= auction.formatted_end_time %></td>
+            <td><%= link_to 'Edit', edit_admin_auction_path(auction.id) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
-</h1>
-
-<div class='usa-grid-full'>
-  <% @auctions.each do |auction| %>
-    <div class='usa-width-one-whole auction-name'>
-      <%= link_to admin_auction_path(auction.id) do %>
-        <h2><%= auction.title %></h2>
-      <% end %>
-      <%= link_to 'Edit',
-        edit_admin_auction_path(auction.id),
-        class: 'usa-width-one-fourth' %>
-    </div>
-
-    <div class='usa-width-one-whole'>
-      <div>
-        <%= render partial: auction.availability_partial %>
-      </div>
-      <div>
-        <b>Starts:</b> <%= auction.formatted_start_time %>
-      </div>
-      <div>
-        <b>Ends:</b> <%= auction.formatted_end_time %>
-      </div>
-    </div>
-  <% end %>
 </div>

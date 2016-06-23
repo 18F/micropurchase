@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
   enum sam_status: { duns_blank: 0, sam_accepted: 1, sam_rejected: 2, sam_pending: 3 }
 
   def decorate
-    UserPresenter.new(self)
+    if Admins.verify?(github_id)
+      AdminUserPresenter.new(self)
+    else
+      UserPresenter.new(self)
+    end
   end
 end

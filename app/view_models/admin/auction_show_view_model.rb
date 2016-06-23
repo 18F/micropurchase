@@ -18,12 +18,10 @@ class Admin::AuctionShowViewModel
   end
 
   def status_partial
-    if available?
-      'admin/auctions/available'
-    elsif over?
+    if over?
       'admin/auctions/csv_report'
     else
-      'admin/auctions/not_live'
+      'components/null'
     end
   end
 

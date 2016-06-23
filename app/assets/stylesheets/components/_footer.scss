@@ -1,9 +1,16 @@
 .usa-footer-medium {
+  @media only screen and (max-width: $small-screen) {
+    display: none;
+  }
+
   background: $primary-darkest;
+  bottom: 0;
   -webkit-box-flex: 0;
   -ms-flex: none;
   -webkit-flex: none;
   flex: none;
+  position: absolute;
+  width: 100%;
 
   .usa-grid {
     padding-bottom: $site-margins;

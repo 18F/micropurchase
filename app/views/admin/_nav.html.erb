@@ -1,0 +1,19 @@
+<aside class="usa-width-one-fourth">
+  <ul class="usa-sidenav-list">
+    <li><%= link_to 'Auctions',
+      admin_path,
+      class: view_model.auctions_nav_class %></li>
+    <li><%= link_to 'Users',
+      admin_users_path,
+      class: view_model.users_nav_class %></li>
+    <li><%= link_to 'Draft Auctions',
+      admin_drafts_path,
+      class: view_model.drafts_nav_class %></li>
+    <li><%= link_to 'Action Items',
+      admin_action_items_path,
+      class: view_model.action_items_nav_class %></li>
+    <li><%= link_to 'Create New Auction',
+      new_admin_auction_path,
+      class: view_model.new_auction_nav_class %></li>
+  </ul>
+</aside>

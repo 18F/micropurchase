@@ -1,6 +1,10 @@
-class Admin::NewAuctionViewModel
+class Admin::NewAuctionViewModel < Admin::BaseViewModel
   def new_record
     Auction.new
+  end
+
+  def new_auction_nav_class
+    'usa-current'
   end
 
   def delivery_due_partial

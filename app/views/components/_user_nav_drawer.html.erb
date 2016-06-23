@@ -7,19 +7,27 @@
       </a>
       <div class="sub-nav">
         <ul class="sub-nav-group">
-          <li><a class="usa-button usa-button-outline-inverse" href="<%= users_edit_path %>">Edit profile</a></li>
-          <li><a class="usa-button usa-button-outline-inverse" href="<%= logout_path %>">Logout</a></li>
+          <li>
+          <%= link_to(
+            'Edit profile',
+            users_edit_path,
+            class: "usa-button usa-button-outline-inverse") %>
+          </li>
+          <li>
+          <%= link_to(
+            'My bids',
+            bids_path,
+            class: "usa-button usa-button-outline-inverse") %>
+          </li>
+          <%= render partial: current_user.decorate.nav_drawer_admin_link %>
+          <li>
+          <%= link_to(
+            'Logout',
+            logout_path,
+            class: "usa-button usa-button-outline-inverse") %>
+          </li>
         </ul>
       </div>
     </li>
   </ul>
 </nav>
-
-<!-- <a class="nav-sign-out" href="/micropurchase/sign-in/">
-  <button>
-  <h1>Signed in as</h1>
-  <img src="https://avatars2.githubusercontent.com/u/<%= current_user.github_id %>" alt="Andrew Maier">
-  <span><%= current_user.name %></span>
-  <span href="<%= logout_path %>" class="action">Sign out</span>
-  </button>
-</a> -->
