@@ -6,7 +6,6 @@ gem 'rails', '4.2.6'
 gem 'pg'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier'
-gem 'us_web_design_standards'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'clockwork'
@@ -55,6 +54,7 @@ group :development, :test do
   gem 'hakiri', require: false
   gem 'dotenv-rails'
   gem 'jasmine'
+  gem 'apivore'
 end
 
 group :development do

@@ -19,12 +19,16 @@ class UserPresenter < SimpleDelegator
     sam_status_presenter.auctions_index_flash_message(flash)
   end
 
+  def mobile_nav_partial
+    "components/user_mobile_nav"
+  end
+
   def nav_drawer_partial
     "components/user_nav_drawer"
   end
 
-  def win_header_partial
-    "auctions/multi_bid/user_win_header"
+  def nav_drawer_admin_link
+    "components/null"
   end
 
   def nav_drawer_submenu_partial
@@ -33,6 +37,14 @@ class UserPresenter < SimpleDelegator
 
   def welcome_message_partial
     'components/null'
+  end
+
+  def admin_edit_auction_partial
+    if admin?
+      'auctions/edit_auction_link'
+    else
+      'components/null'
+    end
   end
 
   def sam_status_label

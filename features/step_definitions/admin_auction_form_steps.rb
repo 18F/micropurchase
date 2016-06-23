@@ -31,8 +31,8 @@ When(/^I set the auction start price to \$(.+)$/) do |amount|
   fill_in("auction_start_price", with: amount)
 end
 
-Then(/^I set the auction type to be multi_bid$/) do
-  select("multi_bid", from: "auction_type")
+Then(/^I set the auction type to be reverse$/) do
+  select("reverse", from: "auction_type")
 end
 
 When(/^I edit the new auction form$/) do
@@ -136,7 +136,7 @@ When(/^I click to edit the auction$/) do
 end
 
 When(/^I click to create an auction$/) do
-  click_on("Create")
+  click_on("Create Auction")
   @auction = Auction.where(title: @title).first
 end
 

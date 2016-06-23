@@ -1,0 +1,18 @@
+.current-bid-amount {
+  color: $color-green;
+  font-size: 40px;
+  margin-top: 0;
+}
+
+.bid-form {
+  max-width: none;
+
+  .cancel,
+  .submit {
+    display: inline-block;
+  }
+
+  .cancel {
+    margin-right: 2rem;
+  }
+}

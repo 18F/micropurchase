@@ -2,7 +2,7 @@ class Admin::AuctionsController < ApplicationController
   before_filter :require_admin
 
   def index
-    @auctions = Auction.all.map { |auction| Admin::AuctionListItem.new(auction) }
+    @auction_collection = Admin::AuctionsIndexViewModel.new
   end
 
   def show
@@ -34,6 +34,7 @@ class Admin::AuctionsController < ApplicationController
   end
 
   def edit
+    store_referer
     @auction = Admin::EditAuctionViewModel.new(Auction.find(params[:id]))
   end
 
@@ -42,7 +43,7 @@ class Admin::AuctionsController < ApplicationController
     update_auction = UpdateAuction.new(auction, params)
 
     if update_auction.perform
-      redirect_to admin_auctions_path
+      return_to_stored(default: admin_auctions_path)
     else
       error_messages = auction.errors.full_messages.to_sentence
       flash[:error] = error_messages

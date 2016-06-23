@@ -9,15 +9,19 @@ class Admin::AuctionListItem
     auction.id
   end
 
+  def drafts_nav_class
+    'usa-current'
+  end
+
   def title
     auction.title
   end
 
-  def availability_partial
+  def availability
     if available?
-      'admin/auctions/available'
+      "Available"
     else
-      'admin/auctions/not_live'
+      "Not live"
     end
   end
 

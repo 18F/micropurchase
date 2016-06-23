@@ -1,4 +1,8 @@
-class Admin::ActionItemsViewModel
+class Admin::ActionItemsViewModel < Admin::BaseViewModel
+  def action_items_nav_class
+    'usa-current'
+  end
+
   def delivery_past_due
     list_items(AuctionQuery.new.delivery_past_due)
   end

@@ -1,98 +1,23 @@
 require 'rails_helper'
 
-RSpec.describe BidsController, controller: true do
+describe BidsController do
   let(:current_bidder) { create(:user, sam_status: :sam_accepted) }
   let(:auction) { create(:auction) }
 
-  describe '/my-bids' do
-    context 'when logged out' do
-      it 'should redirect to /login' do
-        get :new, auction_id: auction.id
-        expect(response).to redirect_to("/login")
-      end
-    end
-
+  describe '#index' do
     context 'when logged in' do
       it 'should assign auctions that current user have bidded on, presented' do
         bid = auction.bids.create(bidder_id: current_bidder.id)
         expect(bid).to be_valid
-        get :my_bids, { }, user_id: current_bidder.id
+        get :index, { }, user_id: current_bidder.id
         assigned_bid = assigns(:bids).first
         expect(assigned_bid.bid).to eq(bid)
       end
 
       it 'should not assign auctions that the current user has not bidded on' do
         auction.bids.create(bidder_id: current_bidder.id + 127)
-        get :my_bids, { }, user_id: current_bidder.id
+        get :index, { }, user_id: current_bidder.id
         expect(assigns(:bids)).to be_empty
-      end
-    end
-  end
-
-  describe '#new' do
-    context 'when logged in' do
-      it 'should render the bid information' do
-        get :new, { auction_id: auction.id }, user_id: current_bidder.id
-        expect(response).to render_template(:new)
-      end
-
-      context 'when the auction is published' do
-        let(:auction) { create(:auction, :published) }
-
-        it 'renders the template' do
-          get :new, { auction_id: auction.id }, user_id: current_bidder.id
-          expect(response).to render_template(:new)
-        end
-      end
-
-      context 'when the auction is unpublished' do
-        let(:auction) { create(:auction, :unpublished) }
-
-        it 'should raise a routing error' do
-          expect do
-            get :new, { auction_id: auction.id }, user_id: current_bidder.id
-          end.to raise_error ActiveRecord::RecordNotFound
-        end
-      end
-    end
-
-    context 'when logged out' do
-      it 'should redirect to /login' do
-        get :new, auction_id: auction.id
-        expect(response).to redirect_to("/login")
-      end
-
-      context 'when the auction is published' do
-        let(:auction) { create(:auction, :published) }
-
-        it 'renders the template' do
-          get :new, auction_id: auction.id
-          expect(response).to redirect_to("/login")
-        end
-      end
-
-      context 'when the auction is unpublished' do
-        let(:auction) { create(:auction, :unpublished) }
-
-        it 'should raise a routing error' do
-          get :new, auction_id: auction.id
-          expect(response).to redirect_to("/login")
-        end
-      end
-    end
-  end
-
-  describe '#confirm' do
-    context 'bid is bad' do
-      it "adds a flash error when the bid is bad" do
-        current_bidder = create(:user, sam_status: :sam_accepted)
-        auction = create(:auction)
-        request_params = { auction_id: auction.id, bid: { amount: -192 } }
-
-        post :confirm, request_params, user_id: current_bidder.id
-
-        expect(flash[:error]).to eq("Bid amount out of range")
-        expect(response).to redirect_to(new_auction_bid_path(auction))
       end
     end
   end
@@ -138,7 +63,7 @@ RSpec.describe BidsController, controller: true do
         it "adds a flash error when the bid is bad" do
           post :create, request_params, user_id: current_bidder.id
           expect(flash[:error]).to eq("Bid amount out of range")
-          expect(response).to redirect_to("/auctions/#{auction.id}/bids/new")
+          expect(response).to redirect_to(auction_path(auction))
         end
       end
     end

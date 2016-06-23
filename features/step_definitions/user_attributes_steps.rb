@@ -28,10 +28,12 @@ Then(/^I should see "([^"]+)" for the user in the "([^"]+)" column$/) do |value,
 
   index = user_admin_columns.index(column)
   fail 'Unrecognized column: #{column}' if index.nil?
-  css = "table#table-users tbody tr td:nth-child(#{index+1})"
+  css = "tr td:nth-child(#{index+1})"
 
-  within(css) do
-    expect(page).to have_content(value)
+  within(:xpath, '/html/body/div/div/div/div/div/table[2]') do
+    within(css) do
+      expect(page).to have_content(value)
+    end
   end
 end
 

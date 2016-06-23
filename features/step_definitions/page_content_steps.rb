@@ -12,10 +12,6 @@ Then(/^I should see a message about no auctions$/) do
     "Please check back soon to view micropurchase opportunities.")
 end
 
-Then(/^I should see a message about no bids$/) do
-  expect(page).to have_content("No bids yet.")
-end
-
 Then(/^I should see a current bid amount( of \$([\d\.]+))?$/) do |_, amount|
   expect(page).to have_content(/Current bid: \$[\d,\.]+/)
   expect(page).to have_content(amount) unless amount.nil?
@@ -31,7 +27,8 @@ Then(/^I should see a link to the auction issue URL$/) do
 end
 
 Then(/^I should see a confirmation for \$(.+)$/) do |amount|
-  expect(page).to have_content("Confirm your bid: $#{amount}")
+  expect(page).to have_content("Confirm Your Bid")
+  expect(page).to have_content("Your bid: $#{amount}")
 end
 
 Then(/^I should see a link to give feedback$/) do

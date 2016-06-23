@@ -31,17 +31,17 @@ Then(/^I should see when the auction started$/) do
 end
 
 Then(/^I should see when the auction ends$/) do
-  expect(page).to_not have_content("Auction ended at:")
-  expect(page).to have_content("Bid deadline: #{DcTimePresenter.convert_and_format(@auction.ended_at)}")
+  expect(page).to_not have_content("Auction ended at")
+  expect(page).to have_content("Bid deadline #{DcTimePresenter.convert_and_format(@auction.ended_at)}")
 end
 
 Then(/^I should see when the auction ended$/) do
-  expect(page).to_not have_content("Bid deadline:")
-  expect(page).to have_text("Auction ended at: #{DcTimePresenter.convert_and_format(@auction.ended_at)}")
+  expect(page).to_not have_content("Bid deadline")
+  expect(page).to have_text("Auction ended at #{DcTimePresenter.convert_and_format(@auction.ended_at)}")
 end
 
 Then(/^I should see the delivery deadline$/) do
-  expect(page).to have_content("Delivery deadline: #{DcTimePresenter.convert_and_format(@auction.delivery_due_at)}")
+  expect(page).to have_content("Delivery deadline #{DcTimePresenter.convert_and_format(@auction.delivery_due_at)}")
 end
 
 Then(/^I should see the start price for the auction is \$(\d+)$/) do |price|

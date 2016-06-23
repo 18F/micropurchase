@@ -1,0 +1,7 @@
+.usa-disclaimer-official {
+  font-size: 1.2rem;
+
+  @include media($small-screen) {
+    font-size: 1.5rem;
+  }
+}

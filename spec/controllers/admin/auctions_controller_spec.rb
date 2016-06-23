@@ -1,18 +1,6 @@
 require 'rails_helper'
 
 describe Admin::AuctionsController do
-  describe '#index' do
-    it 'assigns presented auctions' do
-      user = create(:admin_user)
-      auction_record = create(:auction)
-      get :index, { }, user_id: user.id
-      auctions = assigns(:auctions)
-      expect(auctions).to be_a(Array)
-      auction = auctions.first
-      expect(auction.auction).to eq(auction_record)
-    end
-  end
-
   describe '#show' do
     it 'assigns presented auction' do
       user = create(:admin_user)

@@ -13,9 +13,9 @@ describe HighlightedBid do
       end
     end
 
-    context 'available single bid auction where user is bidder' do
+    context 'available sealed-bid auction where user is bidder' do
       it 'returns user lowest bid' do
-        auction = create(:auction, :single_bid, :available)
+        auction = create(:auction, :sealed_bid, :available)
         user = create(:user)
         user_bid = create(:bid, auction: auction, bidder: user)
 
@@ -25,9 +25,9 @@ describe HighlightedBid do
       end
     end
 
-    context 'available single bid auction where is not bidder' do
+    context 'available sealed-bid auction where is not bidder' do
       it 'returns null bid' do
-        auction = create(:auction, :single_bid, :available)
+        auction = create(:auction, :sealed_bid, :available)
         user = create(:user)
         other_user = create(:user)
         _other_user_bid = create(:bid, auction: auction, bidder: other_user)
@@ -40,7 +40,7 @@ describe HighlightedBid do
 
     context 'multi bid auction' do
       it 'returns the lowest bid' do
-        auction = create(:auction, :multi_bid, :available)
+        auction = create(:auction, :reverse, :available)
         user = create(:user)
         other_user = create(:user)
         _high_bid = create(:bid, amount: 100, auction: auction, bidder: user)
@@ -54,7 +54,7 @@ describe HighlightedBid do
 
     context 'closed auction' do
       it 'returns the lowest bid' do
-        auction = create(:auction, :single_bid, :closed)
+        auction = create(:auction, :sealed_bid, :closed)
         user = create(:user)
         other_user = create(:user)
         _high_bid = create(:bid, amount: 100, auction: auction, bidder: user)

@@ -57,7 +57,7 @@ end
 
 Then(/^I should see the auction ended with no bids$/) do
   expect(page).to have_content("This auction ended with no bids.")
-  expect(page).to have_content("Current bid:")
+  expect(page).not_to have_content("Current bid:")
 end
 
 When(/^the winning bidder has a valid DUNS number$/) do
@@ -72,28 +72,34 @@ Then(/^I should see the winning bid for the auction$/) do
 end
 
 When(/^I submit a bid for \$(.+)$/) do |amount|
-  fill_in("Your bid:", with: amount)
-  step('I click on the "Submit" button')
+  fill_in("Your bid", with: amount)
+  step('I click on the "Place bid" button')
+end
+
+Then(/^I should see the maximum bid amount in the bidding form$/) do
+  within(".auction-bid") do
+    expect(page).to have_content(
+      "Maximum bid: #{Currency.new(RulesFactory.new(@auction).create.max_allowed_bid).to_s}"
+    )
+  end
 end
 
 Then(/^I should see I have the winning bid$/) do
   expect(page).to have_content("You currently have the winning bid.")
-  expect(page).to_not have_content("You are currently not the winning bidder.")
 end
 
 Then(/^I should see I do not have the winning bid$/) do
-  expect(page).not_to have_content("You are currently the winning bidder.")
-  expect(page).to have_content("You are currently not the winning bidder.")
+  expect(page).not_to have_content("You currently have the winning bid.")
 end
 
-Then(/^I should see the bid button$/) do
-  within(:css, 'div.auction-info') do
-    expect(page).to have_content('BID')
+Then(/^I should see the bid form$/) do
+  within('.auction-show') do
+    expect(page).to have_selector(:css, '.auction-bid form')
   end
 end
 
-Then(/^I should not see the bid button$/) do
-  within(:css, 'div.auction-info') do
-    expect(page).to_not have_content('BID')
+Then(/^I should not see the bid form$/) do
+  within('.auction-show') do
+    expect(page).not_to have_selector(:css, '.auction-bid form')
   end
 end

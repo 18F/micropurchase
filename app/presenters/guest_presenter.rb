@@ -7,12 +7,12 @@ class GuestPresenter
     nil
   end
 
-  def nav_drawer_partial
-    "components/guest_nav_drawer"
+  def mobile_nav_partial
+    "components/guest_mobile_nav"
   end
 
-  def win_header_partial
-    "auctions/multi_bid/guest_win_header"
+  def nav_drawer_partial
+    "components/guest_nav_drawer"
   end
 
   def nav_drawer_submenu_partial
@@ -21,5 +21,9 @@ class GuestPresenter
 
   def welcome_message_partial
     'components/welcome_message'
+  end
+
+  def admin_edit_auction_partial
+    'components/null'
   end
 end

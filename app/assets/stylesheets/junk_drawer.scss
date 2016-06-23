@@ -1,0 +1,11 @@
+.logo {
+  line-height: 0;
+
+  @media all and (max-width: 345px) {
+    line-height: normal;
+  }
+}
+
+.center {
+  text-align: center;
+}

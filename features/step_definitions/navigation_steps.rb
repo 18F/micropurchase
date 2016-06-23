@@ -6,8 +6,8 @@ When(/^I visit the home page$/) do
   visit "/"
 end
 
-When(/^I visit my bids page$/) do
-  visit my_bids_path
+Then(/^I visit my bids page$/) do
+  visit bids_path
 end
 
 When(/^I visit my profile page$/) do
@@ -31,7 +31,7 @@ When(/^I visit the admin auction page for that auction$/) do
   visit admin_auction_path(@auction)
 end
 
-When(/^I visit the admin edit page for that auction$/) do
+When(/^I visit the admin form for that auction$/) do
   visit edit_admin_auction_path(@auction)
 end
 
@@ -67,10 +67,18 @@ Then(/^I should be on my profile page$/) do
   expect(page.current_path).to eq(users_edit_path)
 end
 
-Then(/^I should be on the new bid page$/) do
-  expect(page.current_path).to eq(new_auction_bid_path(@auction))
+Then(/^I should be on the bid confirmation page$/) do
+  expect(page.current_path).to eq(auction_bid_confirmations_path(@auction))
 end
 
-Then(/^I should be on the bid confirmation page$/) do
-  expect(page.current_path).to eq(confirm_auction_bids_path(@auction))
+When(/^I should be on the admin auctions page$/) do
+  expect(page.current_path).to eq(admin_auctions_path)
+end
+
+Then(/^I should be on the admin form for that auction$/) do
+  expect(page.current_path).to eq(edit_admin_auction_path(@auction))
+end
+
+Then(/^I should be on my bids page$/) do
+  expect(page.current_path).to eq(bids_path)
 end

@@ -7,7 +7,7 @@ Feature: Admin creates auctions in the admins panel
     And there is a client account to bill to
     When I sign in
     And I visit the auctions admin page
-    And I click on the "Create a new auction" link
+    When I click on the "Create New Auction" link
     And I edit the new auction form
     And I click to create an auction
     Then I should see the auction's title
@@ -19,7 +19,7 @@ Feature: Admin creates auctions in the admins panel
     And there is a client account to bill to
     And I sign in
     And I visit the auctions admin page
-    When I click on the "Create a new auction" link
+    When I click on the "Create New Auction" link
     And I edit the new auction form
     And I set the auction start price to $24000
     And I click to create an auction

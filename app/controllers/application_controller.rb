@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from 'UnauthorizedError::MustBeAdmin' do |error|
     message = error.message || "Unauthorized"
-    handle_error(message)
+    handle_error(message, 403)
   end
 
   rescue_from 'UnauthorizedError::RedirectToLogin' do |error|
@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from 'UnauthorizedError::UserNotFound' do |error|
     message = error.message || "User not found"
-    handle_error(message)
+    handle_error(message, 403)
   end
 
   protected
@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
     @_authenticator ||= WebAuthenticator.new(self)
   end
 
-  def handle_error(message)
+  def handle_error(message, _code)
     flash[:error] = message
     redirect_to root_path
   end
@@ -43,5 +43,16 @@ class ApplicationController < ActionController::Base
     if request.get?
       session[:return_to] = request.original_fullpath
     end
+  end
+
+  def store_referer
+    if request.get?
+      session[:return_to] = request.referer
+    end
+  end
+
+  def return_to_stored(default: root_path)
+    redirect_to(session[:return_to] || default)
+    session[:return_to] = nil
   end
 end

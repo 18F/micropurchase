@@ -1,0 +1,13 @@
+.auction-wrapper {
+  display: flex;
+  -ms-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-justify-content: space-between;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+
+.auction-wrapper .issue-list-item {
+  display: flex;
+}

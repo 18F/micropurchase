@@ -19,15 +19,19 @@ class AuctionShowViewModel
   end
 
   def capitalized_type
-    auction.type.capitalize
+    auction.type.dasherize.capitalize
   end
 
   def issue_url
     auction.issue_url
   end
 
+  def relative_time
+    status_presenter.relative_time
+  end
+
   def sealed_bids_partial
-    if available? && auction.type == 'single_bid'
+    if available? && auction.type == 'sealed_bid'
       'bids/sealed'
     else
       'components/null'
@@ -35,7 +39,7 @@ class AuctionShowViewModel
   end
 
   def veiled_bids
-    if available? && auction.type == 'single_bid'
+    if available? && auction.type == 'sealed_bid'
       auction.bids.where(bidder: current_user).map do |bid|
         BidListItem.new(bid: bid, user: current_user)
       end
@@ -48,10 +52,6 @@ class AuctionShowViewModel
 
   def bids_count
     auction.bids.count
-  end
-
-  def rules_link_text
-    "Rules for #{auction.type.dasherize} auctions"
   end
 
   def rules_path
@@ -70,13 +70,27 @@ class AuctionShowViewModel
     end
   end
 
-  def bid_status_partial
-    if over? && auction.bids.any?
-      'auctions/over_bid_amount'
-    elsif auction.type == 'single_bid'
-      'auctions/user_bid_amount'
+  def bid_form_partial
+    if show_bid_form?
+      'auctions/bid_form'
     else
-      'auctions/highlighted_bid_amount'
+      'components/null'
+    end
+  end
+
+  def bid_form_prompt
+    Currency.new(rules.max_allowed_bid).to_s
+  end
+
+  def bid_status
+    if over? && auction.bids.any?
+      "Winning bid (#{lowest_bidder_name}): #{highlighted_bid_amount_as_currency}"
+    elsif user_bids.any?
+      "Your bid: #{user_bid_amount_as_currency}"
+    elsif auction.bids.any?
+      "Current bid: #{highlighted_bid_amount_as_currency}"
+    else
+      ""
     end
   end
 
@@ -100,28 +114,12 @@ class AuctionShowViewModel
     DcTimePresenter.convert_and_format(auction.paid_at)
   end
 
-  def bid_button_partial
-    if show_bid_button?
-      'auctions/show_bid_button'
-    else
-      'components/null'
-    end
-  end
-
   def paid_at_partial
     if auction.paid_at.nil?
       'components/null'
     else
       'auctions/paid_at'
     end
-  end
-
-  def bid_text
-    Pluralize.new(number: auction.bids.count, word: 'bid').to_s
-  end
-
-  def user_bid_amount_as_currency
-    Currency.new(lowest_user_bid_amount).to_s
   end
 
   def tag_data_value_status
@@ -136,6 +134,14 @@ class AuctionShowViewModel
     status_presenter.tag_data_value_2
   end
 
+  def label
+    status_presenter.label
+  end
+
+  def label_class
+    status_presenter.label_class
+  end
+
   def distance_of_time
     "#{HumanTime.new(time: auction.ended_at).distance_of_time} left"
   end
@@ -144,16 +150,8 @@ class AuctionShowViewModel
     Currency.new(highlighted_bid.amount).to_s
   end
 
-  def winning_bid_amount_as_currency
-    Currency.new(auction.lowest_bid.amount).to_s
-  end
-
-  def start_price
-    auction.start_price
-  end
-
   def bid_flash_partial
-    if auction.type == 'multi_bid' && (over? || available_and_user_is_bidder?)
+    if auction.type == 'reverse' && (over? || available_and_user_is_bidder?)
       'auctions/bid_status_header'
     else
       'components/null'
@@ -172,11 +170,19 @@ class AuctionShowViewModel
     BidStatusFlashFactory.new(auction: auction, flash: flash, user: current_user).create
   end
 
-  def lowest_bidder_name
-    auction.lowest_bid.bidder.name
+  def admin_edit_auction_partial
+    current_user.decorate.admin_edit_auction_partial
   end
 
   private
+
+  def user_bid_amount_as_currency
+    Currency.new(lowest_user_bid_amount).to_s
+  end
+
+  def lowest_bidder_name
+    auction.lowest_bid.bidder.name
+  end
 
   def available_and_user_is_bidder?
     available? && user_bids.any?
@@ -203,7 +209,7 @@ class AuctionShowViewModel
     @_status_presenter ||= StatusPresenterFactory.new(auction).create
   end
 
-  def show_bid_button?
+  def show_bid_form?
     if current_user.is_a?(Guest)
       true
     else

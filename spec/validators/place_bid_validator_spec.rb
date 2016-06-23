@@ -25,7 +25,7 @@ describe PlaceBidValidator do
     end
 
     it 'validates that the bid amount is less than the max allowed bid' do
-      auction = build(:auction, :multi_bid)
+      auction = build(:auction)
       bid = create(:bid, auction: auction, amount: 150)
       bid = Bid.new(bidder: user, amount: 155, auction: auction)
 

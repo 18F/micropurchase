@@ -1,0 +1,855 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Micropurchase API Documentation",
+    "description": "Endpoints for the micropurchase API",
+    "version": "0.0.1"
+  },
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application\/json"
+  ],
+  "basePath": "\/api\/v0",
+  "securityDefinitions": {
+    "api_key": {
+      "name": "HTTP_API_KEY",
+      "description": "Currently all authentication occurs via the GitHub API. Rather than having the micro-purchase platform generate and store API keys, GitHub Personal API Tokens act as the API key. If you have created an account on the micro-purchase platform, you are signed up to use the API. All you need to do is generate a [GitHub Personal API Token](https:\/\/github.com\/blog\/1509-personal-api-tokens) (with no scopes) and put it in the request headers.\n\n Note that many routes do not require any authentication at all. These docs will note the authentication options for each route.",
+      "type": "apiKey",
+      "in": "header"
+    }
+  },
+  "paths": {
+    "/auctions": {
+      "get": {
+        "summary": "List auctions",
+        "description": "Returns a list of all auctions (upcoming, running, and ended). Each auction contains bids and each bid contains one bidder. If an auction is still running, `bid['bidder_id']` and all keys in `bidder` will be `null`. This request does not require authentication, but if you are authenticated, your bids will not be redacted. This is consistent with the behavior of the web UI.",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of auctions",
+            "schema": {
+              "type": "object",
+              "required": [
+                "auctions"
+              ],
+              "properties": {
+                "auctions": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": {
+                    "$ref": "#\/definitions\/Auction"
+                  }
+                }
+              }
+            },
+            "examples": {
+              "application/json": {
+                "auctions": [
+                  {
+                    "issue_url": "https:\/\/github.com\/18F\/mpt3500\/issues\/10",
+                    "github_repo": "https:\/\/github.com\/18F\/mpt3500",
+                    "start_price": 3500,
+                    "start_datetime": "2016-01-26T18:00:00+00:00",
+                    "end_datetime": "2016-02-27T17:00:00+00:00",
+                    "title": "Review a blog post",
+                    "description": "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?\r\n\r\n## A Markdown Quote\r\n\r\n> Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?\r\n\r\n```\r\ndef foo(bar)\r\n 10.times do\r\n   puts bar\r\n  end\r\nend\r\n```",
+                    "id": 1,
+                    "created_at": "2015-12-21T16:40:01+00:00",
+                    "updated_at": "2015-12-21T16:40:01+00:00",
+                    "summary": "## Summary\r\n\r\nWe need some prose to be proof-read.",
+                    "bids": [
+                      {
+                        "bidder_id": null,
+                        "auction_id": 1,
+                        "amount": 222,
+                        "created_at": "2016-01-06T16:59:59+00:00",
+                        "updated_at": "2016-01-06T16:59:59+00:00",
+                        "id": 68,
+                        "bidder": {
+                          "github_id": null,
+                          "duns_number": null,
+                          "name": null,
+                          "email": null,
+                          "sam_account": null,
+                          "created_at": null,
+                          "updated_at": null,
+                          "id": null
+                        }
+                      },
+                      {
+                        "bidder_id": null,
+                        "auction_id": 1,
+                        "amount": 240,
+                        "created_at": "2016-01-06T16:59:55+00:00",
+                        "updated_at": "2016-01-06T16:59:55+00:00",
+                        "id": 67,
+                        "bidder": {
+                          "github_id": null,
+                          "duns_number": null,
+                          "name": null,
+                          "email": null,
+                          "sam_account": null,
+                          "created_at": null,
+                          "updated_at": null,
+                          "id": null
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auctions/{id}": {
+      "get": {
+        "summary": "Show a specific auction",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "This returns the details of a specific auction, in the same format as the auctions index",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the auction to retrieve",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a single auction",
+            "schema": {
+              "type": "object",
+              "required": [
+                "auction"
+              ],
+              "properties": {
+                "auction": {
+                  "$ref": "#\/definitions\/Auction"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The auction is not found",
+            "schema": {
+              "$ref": "#\/definitions\/Error"
+            }
+          }
+        }
+      }
+    },
+    "/auctions/{id}/bids": {
+      "post": {
+        "consumes": [
+          "application\/json"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "summary": "Submit a Bid",
+        "description": "Submit a new bid to an auction via a JSON payload. Only integer bids are allowed and the bid may be rejected if it doesn't meet the validation rules for the auction. You must be authenticated and able to place a bid to use this method.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the auction you are bidding against",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "body",
+            "description": "Bid payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "bid"
+              ],
+              "properties": {
+                "bid": {
+                  "type": "object",
+                  "required": [
+                    "amount"
+                  ],
+                  "properties": {
+                    "amount": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the bid object that was created",
+            "schema": {
+              "type": "object",
+              "required": [
+                "bid"
+              ],
+              "properties": {
+                "bid": {
+                  "$ref": "#\/definitions\/Bid"
+                }
+              }
+            },
+            "examples": {
+              "application/json": {
+                "bid": {
+                  "bidder_id": 1,
+                  "auction_id": 3,
+                  "amount": 1000,
+                  "created_at": "2016-01-27T01:12:07+00:00",
+                  "updated_at": "2016-01-27T01:12:07+00:00",
+                  "id": 7,
+                  "bidder": {
+                    "github_id": "86790",
+                    "duns_number": "123456789",
+                    "name": "Alan deLevie",
+                    "email": "",
+                    "sam_account": true,
+                    "created_at": "2015-12-23T14:51:34+00:00",
+                    "updated_at": "2016-01-26T01:56:24+00:00",
+                    "id": 1
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "When the user is not authenticated",
+            "schema": {
+              "$ref": "#\/definitions\/Error"
+            }
+          },
+          "404": {
+            "description": "When the auction is not found",
+            "schema": {
+              "$ref": "#\/definitions\/Error"
+            }
+          }
+        }
+      }
+    },
+    "/admin/auctions": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "summary": "Administrator view of all auctions",
+        "description": "The administrator view of all auctions. This includes privileged information which is not shown to end users and requires administrator authentication.",
+        "responses": {
+          "200": {
+            "description": "Returns a list of auctions",
+            "schema": {
+              "type": "object",
+              "required": [
+                "auctions"
+              ],
+              "properties": {
+                "auctions": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#\/definitions\/AdminAuction"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Returned if the user is not found or is not an admin",
+            "schema": {
+              "$ref": "#\/definitions\/Error"
+            }
+          }
+        }
+      }
+    },
+    "/admin/auctions/{id}": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "summary": "Administrator view of an auction. This includes privileged information which is not shown to end users and requires administrator authentication.",
+        "description": "The details of a specific auction. ",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the auction to retrieve",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a single auction",
+            "schema": {
+              "type": "object",
+              "required": [
+                "auction"
+              ],
+              "properties": {
+                "auction": {
+                  "$ref": "#\/definitions\/AdminAuction"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Returned if the user is not found or not an admin",
+            "schema": {
+              "$ref": "#\/definitions\/Error"
+            }
+          },
+          "404": {
+            "description": "If the auction is not found",
+            "schema": {
+              "$ref": "#\/definitions\/Error"
+            }
+          }
+        }
+      }
+    },
+    "/admin/users": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "summary": "Administrator view of all users",
+        "description": "The administrator view of all users. This includes privileged information which is not shown to end users and requires administrator authentication.",
+        "responses": {
+          "200": {
+            "description": "Returns metadata plus two lists of admin and regular users",
+            "schema": {
+              "type": "object",
+              "required": [
+                "admin_report"
+              ],
+              "properties": {
+                "admin_report": {
+                  "$ref": "#\/definitions\/AdminUserInfo"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Returned if the user is not found or not an admin",
+            "schema": {
+              "$ref": "#\/definitions\/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Auction": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "summary",
+        "description",
+        "issue_url",
+        "github_repo",
+        "start_price",
+        "started_at",
+        "ended_at",
+        "created_at",
+        "updated_at",
+        "bids"
+      ],
+      "properties": {
+        "id": {
+          "title": "Auction ID",
+          "description": "A unique identifier for the auction",
+          "type": "integer"
+        },
+        "title": {
+          "title": "Auction Title",
+          "description": "The short title for the auction",
+          "type": "string"
+        },
+        "summary": {
+          "type": "string",
+          "title": "Summary",
+          "description": "A markdown-formatted summary of the auction"
+        },
+        "description": {
+          "type": "string",
+          "title": "Description",
+          "description": "A markdown-formatted description of the auction. This is usually a continuation from the first paragraph of the summary."
+        },
+        "issue_url": {
+          "title": "GitHub Issue URL",
+          "description": "A URL linking to the GitHub issue that describes the auction. This provides a convenient place for further discussion of the solution.",
+          "type": "string",
+          "format": "url"
+        },
+        "github_repo": {
+          "title": "GitHub Repository",
+          "description": "A URL for the GitHub repository where the pull request that implements the micropurchase auction should be opened against.",
+          "type": "string",
+          "format": "url"
+        },
+        "start_price": {
+          "type": "integer",
+          "title": "Start Price",
+          "description": "The starting price of the auction. This is the exclusive ceiling of all bids. For sealed-bid auctions, the highest allowed bid is the starting price minus $1. For open reverse auctions, bidding starts at this amount, but any new bid must be lower than the previous lowest bid.",
+          "maximum": 15000,
+          "minimum": 1
+        },
+        "started_at": {
+          "title": "Start Time",
+          "description": "The date-time the auction was or is open for bidding. This may be in the future if the auction has not yet started.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "ended_at": {
+          "title": "End Time",
+          "description": "The date-time the auction is closed and the winning bid is determined.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "created_at": {
+          "title": "Creation Time",
+          "description": "When the auction record was created in the database",
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "title": "Modification Time",
+          "description": "When the auction record was last updated",
+          "type": "string",
+          "format": "date-time"
+        },
+        "winning_bid": {
+          "title": "Winning Bid",
+          "description": "The current winning bid for the auction. For open reverse auctions, these fields will provide information about the current lowest bid during the auction. For sealed-bid auctions, these values will be nil until the auction is over and the final winning bid has been determined. If there is no bid, these fields will be nil.",
+          "type": "object",
+          "required": [
+            "amount",
+            "bidder_id"
+          ],
+          "properties": {
+            "amount": {
+              "title": "Amount",
+              "description": "The amount of the bid",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "bidder_id": {
+              "title": "Bidder ID",
+              "description": "The bidder ID for the bid. This can be referenced against all bids in the bids table if you need more details about the bidder. This is provided as a convenient way for your program to check if the winning bid is yours.",
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
+          }
+        },
+        "bids": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/Bid"
+          }
+        }
+      }
+    },
+    "Bid": {
+      "type": "object",
+      "required": [
+        "bidder_id",
+        "auction_id",
+        "amount",
+        "created_at",
+        "updated_at",
+        "id",
+        "bidder"
+      ],
+      "properties": {
+        "id": {
+          "title": "Bid ID",
+          "description": "A unique identifier for the bid",
+          "type": "integer"
+        },
+        "bidder_id": {
+          "title": "Bidder ID",
+          "description": "A unique ID for the bidder who made this bid. This value may be redacted with the value of nil if the auction is still open",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "auction_id": {
+          "title": "Auction ID",
+          "description": "The ID of the related auction",
+          "type": "integer"
+        },
+        "amount": {
+          "title": "Amount",
+          "description": "The amount of the bid in dollars.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "created_at": {
+          "title": "Bid Creation Time",
+          "description": "The datetime of when the bid was submitted",
+          "type": "string",
+          "minLength": 1
+        },
+        "updated_at": {
+          "title": "Bid Update Time",
+          "description": "When the bid record was last updated. This should always be the same as the creation time.",
+          "type": "string",
+          "minLength": 1
+        },
+        "bidder": {
+          "$ref": "#\/definitions\/Bidder"
+        }
+      }
+    },
+    "Bidder": {
+      "type": "object",
+      "required": [
+        "id",
+        "duns_number",
+        "name",
+        "github_id",
+        "github_login",
+        "sam_status",
+        "created_at",
+        "updated_at"
+      ],
+      "properties": {
+        "id": {
+          "title": "Bidder ID",
+          "description": "A unique ID for the bidder in the Micropurchase system. This information may be redacted with a null value while an auction is still running.",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "github_id": {
+          "title": "GitHub ID",
+          "description": "The bidder's ID on GitHub. This information may be redacted with a null value while an auction is still running.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "duns_number": {
+          "title": "DUNS Number",
+          "description": "The bidder's DUNS number. This information may be redacted with a null value while an auction is still running.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name": {
+          "title": "Name",
+          "description": "The bidder's name. This information may be redacted with a null value while an auction is still running.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "github_login": {
+          "title": "GitHub Username",
+          "description": "The bidder's username on GitHub. This information may be redacted with a null value while an auction is still running.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sam_status": {
+          "title": "SAM.gov Status",
+          "description": "The bidder's status in SAM.gov. This information may be redacted with a null value while an auction is still running.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "created_at": {
+          "title": "Account Creation Time",
+          "description": "When the bidder signed up for the Micropurchase system. This information may be redacted with a null value while an auction is still running.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "updated_at": {
+          "title": "Account Modification Time",
+          "description": "When the bidder's account information was last updated, either as a result of the user editing it or automated SAM validation. This information may be redacted with a null value while an auction is still running.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      }
+    },
+    "AdminAuction": {
+      "allOf": [
+        {
+          "$ref": "#\/definitions\/Auction"
+        },
+        {
+          "type": "object",
+          "required": [
+            "billable_to",
+            "cap_proposal_url",
+            "notes",
+            "delivery_due_at",
+            "delivery_url",
+            "paid_at"
+          ],
+          "properties": {
+            "billable_to": {
+              "title": "Billable To",
+              "description": "The Tock code it should be billable to",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "cap_proposal_url": {
+              "title": "CAP Proposal URL",
+              "description": "The URL for the project in C2",
+              "format": "url",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "notes": {
+              "title": "Notes",
+              "description": "Private notes for the auction",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "delivery_due_at": {
+              "title": "Delivery Due At",
+              "description": "The time that delivery is due by.",
+              "format": "date-time",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "delivery_url": {
+              "title": "Payment delivery URL",
+              "description": "A URL where the vendor can accept a P-card purchase",
+              "format": "url",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "paid_at": {
+              "title": "Paid At",
+              "description": "The time the vendor was paid for the work. The presence of this field can also be used as a boolean that the vendor has been paid.",
+              "format": "date-time",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "AdminUserInfo": {
+      "description": "Metadata about users",
+      "type": "object",
+      "required": [
+        "quick_stats",
+        "non_admin_users",
+        "admin_users"
+      ],
+      "properties": {
+        "quick_stats": {
+          "type": "object",
+          "properties": {
+            "total_users": {
+              "title": "Total Users",
+              "type": "integer",
+              "minimum": 0
+            },
+            "users_with_duns": {
+              "title": "Users with DUNS Numbers",
+              "type": "integer",
+              "minimum": 0
+            },
+            "users_in_sam": {
+              "title": "Users in SAM.gov",
+              "type": "integer",
+              "minimum": 0
+            },
+            "notes": {
+              "title": "Notes",
+              "type": "string"
+            }
+          },
+          "required": [
+            "total_users",
+            "users_with_duns",
+            "users_in_sam",
+            "notes"
+          ]
+        },
+        "non_admin_users": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#\/definitions\/User"
+          }
+        },
+        "admin_users": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#\/definitions\/User"
+          }
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "required": [
+        "id",
+        "github_id",
+        "duns_number",
+        "name",
+        "created_at",
+        "updated_at",
+        "email",
+        "sam_status",
+        "credit_card_form_url",
+        "github_login",
+        "contracting_officer",
+        "small_business"
+      ],
+      "properties": {
+        "id": {
+          "title": "User ID",
+          "description": "The unique record ID for the user",
+          "type": "integer"
+        },
+        "github_id": {
+          "title": "Github ID",
+          "description": "The ID for the user on the GitHub",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "contracting_officer": {
+          "title": "Contracting Officer?",
+          "description": "Returns true if the user is a contracting officer. Only admins can be contracting officers.",
+          "type": "boolean"
+        },
+        "small_business": {
+          "title": "Small Business?",
+          "description": "Returns true if the user is a small business. This field is only relevant for regular users.",
+          "type": "boolean"
+        },
+        "duns_number": {
+          "title": "DUNS Number",
+          "description": "The DUNS number for the user",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "description": "The user's name",
+          "type": "string"
+        },
+        "created_at": {
+          "title": "Created At",
+          "description": "When the user's account was created",
+          "format": "date-time",
+          "type": "string"
+        },
+        "updated_at": {
+          "title": "Updated At",
+          "description": "When the user record was modified. This may be either a result of the user editing information or automated process like checking for SAM.gov membership.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "email": {
+          "title": "Email Address",
+          "description": "The user's email address",
+          "type": "string",
+          "format": "email"
+        },
+        "sam_status": {
+          "title": "SAM Status",
+          "description": "The status of the user in SAM.gov. This will be pending until the user is found and validated. Only accepted users can bid.",
+          "type": "string",
+          "enum": ["duns_blank", "sam_accepted", "sam_rejected", "sam_pending"]
+        },
+        "credit_card_form_url": {
+          "title": "Credit Card Form URL",
+          "description": "A URL where the vendor can accept a credit card payment after successfully delivering an auction.",
+          "format": "url",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "github_login": {
+          "title": "GitHub Login",
+          "description": "The username on GitHub for the user.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "Error": {
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "title": "Error Message",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

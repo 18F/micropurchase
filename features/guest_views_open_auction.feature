@@ -18,8 +18,7 @@ Feature: Guest views open auction
     And there should be meta tags for the index page for 1 open and 0 future auctions
 
     When I visit the auction page
-    Then I should see an "Open" status
-    And I should see a "BID" button
+    Then I should see an "Expiring" status
     And I should see when the auction started
     And I should see when the auction ends
     And I should see the delivery deadline

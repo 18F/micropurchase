@@ -4,7 +4,7 @@ describe PlaceBid do
   describe '#valid?' do
     it 'converts numbers with commas to integers' do
       user = create(:user, sam_status: :sam_accepted)
-      auction = create(:auction, :multi_bid, :available)
+      auction = create(:auction, :reverse, :available)
       create(:bid, amount: 1000, auction: auction)
       params = { auction_id: auction.id, bid: { amount: '2,000' } }
 
@@ -15,7 +15,7 @@ describe PlaceBid do
 
     it 'is true when bid is valid' do
       user = create(:user, sam_status: :sam_accepted)
-      auction = create(:auction, :single_bid, :available)
+      auction = create(:auction, :sealed_bid, :available)
       params = { auction_id: auction.id, bid: { amount: 10 } }
 
       place_bid = PlaceBid.new(params: params, bidder: user)
@@ -25,7 +25,7 @@ describe PlaceBid do
 
     it 'is false when bid is invalid' do
       user = create(:user, sam_status: :sam_accepted)
-      auction = create(:auction, :single_bid, :available)
+      auction = create(:auction, :sealed_bid, :available)
       params = { auction_id: auction.id, bid: { amount: 100000 } }
 
       place_bid = PlaceBid.new(params: params, bidder: user)
@@ -38,7 +38,7 @@ describe PlaceBid do
     context 'valid bid' do
       it 'creates a bid' do
         user = create(:user, sam_status: :sam_accepted)
-        auction = create(:auction, :single_bid, :available)
+        auction = create(:auction, :sealed_bid, :available)
         params = { auction_id: auction.id, bid: { amount: 10 } }
 
         place_bid = PlaceBid.new(params: params, bidder: user)
@@ -53,7 +53,7 @@ describe PlaceBid do
     context 'invalid bid' do
       it 'does not create a bid' do
         user = create(:user)
-        auction = create(:auction, :single_bid, :available)
+        auction = create(:auction, :sealed_bid, :available)
         params = { auction_id: auction.id, bid: { amount: -10 } }
 
         place_bid = PlaceBid.new(params: params, bidder: user)

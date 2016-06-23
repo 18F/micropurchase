@@ -1,0 +1,26 @@
+<table class="usa-table-borderless">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Delivery Deadline</th>
+      <th scope="col">Delivery URL</th>
+      <th scope="col">Result</th>
+      <th scope="col">CAP URL</th>
+      <th scope="col">Paid?</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% auctions.each do |auction| %>
+    <tr>
+      <td><%= link_to(auction.title, admin_auction_path(auction.id)) %></td>
+      <td><%= auction.delivery_due_at_expires_in %></td>
+      <td><%= auction.delivery_url %></td>
+      <td><%= auction.result %></td>
+      <td><%= auction.cap_proposal_url %></td>
+      <td><%= auction.paid? %></td>
+      <td><%= link_to('edit', edit_admin_auction_path(auction)) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

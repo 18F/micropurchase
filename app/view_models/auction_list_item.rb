@@ -57,14 +57,14 @@ class AuctionListItem
   def winning_bid_partial
     if over? && !auction.bids.any?
       'auctions/no_bids'
-    elsif auction.type == 'multi_bid' && over?
+    elsif auction.type == 'reverse' && over?
       'auctions/over_winning_bid_details'
-    elsif auction.type == 'single_bid' && over?
+    elsif auction.type == 'sealed_bid' && over?
       'auctions/over_with_bids'
-    elsif auction.type == 'multi_bid' && available?
+    elsif auction.type == 'reverse' && available?
       auction_available_bids_partial
-    elsif auction.type == 'single_bid' && available?
-      single_bid_bidder_partial
+    elsif auction.type == 'sealed_bid' && available?
+      sealed_bid_bidder_partial
     else # future
       'components/null'
     end
@@ -78,19 +78,19 @@ class AuctionListItem
     end
   end
 
-  def single_bid_bidder_partial
+  def sealed_bid_bidder_partial
     if user_is_bidder?
-      'auctions/single_bid_user_is_bidder'
+      'auctions/sealed_bid_auction_user_is_bidder'
     else
       'components/null'
     end
   end
 
   def winning_bidder_partial
-    if user_is_winning_bidder? && auction.type == 'single_bid'
-      'auctions/single_bid_user_is_winning_bidder'
-    elsif user_is_winning_bidder? && auction.type == 'multi_bid'
-      'auctions/multi_bid_user_is_winning_bidder'
+    if user_is_winning_bidder? && auction.type == 'sealed_bid'
+      'auctions/sealed_bid_auction_user_is_winning_bidder'
+    elsif user_is_winning_bidder? && auction.type == 'reverse'
+      'auctions/reverse_auction_user_is_winning_bidder'
     else
       'auctions/user_is_not_winning_bidder'
     end
@@ -113,7 +113,7 @@ class AuctionListItem
   end
 
   def current_winning_bidder_partial
-    if user_is_winning_bidder? && auction.type == 'multi_bid'
+    if user_is_winning_bidder? && auction.type == 'reverse'
       'auctions/user_is_current_winning_bidder'
     else
       'auctions/user_is_not_current_winning_bidder'

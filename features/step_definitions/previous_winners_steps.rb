@@ -1,5 +1,5 @@
 Then(/^I should see six numbers on the page$/) do
-  expect(page).to have_selector(".hero-metrics_wrapper")
+  expect(page).to have_selector(".hero-metrics-wrapper")
   expect(page).to have_selector(:css, "[data-name='auctions_total']")
   expect(page).to have_selector(:css, "[data-name='unique_winners']")
   expect(page).to have_selector(:css, "[data-name='bids']")

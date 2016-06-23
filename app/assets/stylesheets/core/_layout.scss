@@ -1,18 +1,13 @@
+html,
+body {
+  height: 100%;
+}
+
+.container {
+  min-height: 100%;
+  position: relative;
+}
+
 .content-wrapper {
-  @extend .usa-grid;
-  flex: 1 0 auto;
-}
-
-.content-wrapper#index,
-.content-wrapper#auctions,
-.content-wrapper#winners {
-  padding: 0;
-  margin: 0;
-  max-width: none;
-}
-
-.content-wrapper#index {
-  h2 {
-    margin-top: .5em;
-  }
+  padding-bottom: $footer-height;
 }

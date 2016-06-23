@@ -1,5 +1,7 @@
 Then(/^I should see the bid history$/) do
-  expect(page).to have_selector(:css, '.layout-auctions-bids')
+  within('.usa-table-borderless') do
+    expect(page).to have_content('Bidder')
+  end
 end
 
 Then(/^I should be able to see the full details for each bid$/) do
@@ -120,6 +122,6 @@ end
 
 Then(/^I should see my bid history$/) do
   @user.bids.each do |bid|
-    expect(page).to_not have_content(Currency.new(bid.amount).to_s)
+    expect(page).to have_content(Currency.new(bid.amount).to_s)
   end
 end

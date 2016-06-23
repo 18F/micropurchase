@@ -3,9 +3,9 @@ $color-purple-pale: #b1cffe;
 $color-gray-neutral: #cccccc;
 
 // 18f Branding
-$branding-black: #000000;
+$branding-black: $color-black;
 $branding-darkest: #2d3f5b;
-$branding-medium: #046B99;
+$branding-medium: $color-primary-alt-darkest;
 $branding-bright: #00CFFF;
 $branding-light: #B3EFFF;
 $primary-darkest: $branding-darkest;
@@ -15,7 +15,6 @@ $links-secondary: $branding-medium;
 
 // Typography
 $font-light: 300;
-$font-normal: 400;
 $font-bold: 600;
 
 // Padding
@@ -23,11 +22,10 @@ $base-padding: 1.25em;
 $base-padding-lite: 0.42em;
 $base-padding-large: 2.85em;
 
-// Typography
-$h1-font-size: rem(35px);
-
 // Logo
 $logo-18f: 44px;
 
 // Magic numbers
 $round-border-radius: 999em;
+$negative-grid-margins: -3rem;
+$footer-height: 120px;

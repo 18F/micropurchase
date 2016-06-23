@@ -1,0 +1,12 @@
+<div class="auction-detail-panel">
+  <div class="auction-bid">
+    Maximum bid:
+    <%= auction.bid_form_prompt %>
+
+    <%= simple_form_for Bid.new,
+      url: auction_bid_confirmations_path(auction.id) do |f| %>
+      <%= f.input :amount %>
+      <%= f.submit class: 'usa-button usa-button-outline' %>
+    <% end %>
+  </div>
+</div>
