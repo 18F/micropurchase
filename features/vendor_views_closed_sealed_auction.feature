@@ -3,8 +3,8 @@ Feature: Vendor views a closed sealed-bid auction
   I want to be able to view a closed sealed-bid auction
   So I can see who won
 
-  Scenario: viewing a closed single-bid auction
-    Given there is a closed single-bid auction
+  Scenario: viewing a closed sealed-bid auction
+    Given there is a closed sealed-bid auction
     And I am an authenticated vendor
     When I visit the auction page
     Then I should see a winning bid amount

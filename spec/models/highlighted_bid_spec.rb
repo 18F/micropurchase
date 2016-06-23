@@ -13,7 +13,7 @@ describe HighlightedBid do
       end
     end
 
-    context 'available single bid auction where user is bidder' do
+    context 'available sealed-bid auction where user is bidder' do
       it 'returns user lowest bid' do
         auction = create(:auction, :sealed_bid, :available)
         user = create(:user)
@@ -25,7 +25,7 @@ describe HighlightedBid do
       end
     end
 
-    context 'available single bid auction where is not bidder' do
+    context 'available sealed-bid auction where is not bidder' do
       it 'returns null bid' do
         auction = create(:auction, :sealed_bid, :available)
         user = create(:user)

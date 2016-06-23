@@ -178,7 +178,7 @@ describe 'API bid requests' do
         end
       end
 
-      context 'when the auction is multi-bid' do
+      context 'when the auction is reverse' do
         let(:auction) { FactoryGirl.create(:auction, :running, :reverse) }
 
         context 'and the bid amount is not the lowest' do
@@ -202,7 +202,7 @@ describe 'API bid requests' do
         end
       end
 
-      context 'when the auction is single-bid' do
+      context 'when the auction is sealed-bid' do
         let(:auction) { FactoryGirl.create(:auction, :running, :sealed_bid) }
 
         context 'and the bid amount is not the lowest' do

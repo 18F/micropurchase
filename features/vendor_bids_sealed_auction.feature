@@ -4,15 +4,15 @@ Feature: Vendor bids on a sealed-bid auction
   So I can build software if I win
 
   Scenario: viewing the rules page
-    Given there is a single-bid auction
+    Given there is a sealed-bid auction
     When I visit the home page
     Then I should see that the auction is Sealed-bid
 
     When I click on the auction's title
     Then I should see the rules for Sealed-bid auctions
 
-  Scenario: bidding on a single-bid auction
-    Given there is a single-bid auction
+  Scenario: bidding on a sealed-bid auction
+    Given there is a sealed-bid auction
     And I am an authenticated vendor
     When I visit the home page
     Then I should not see "Current bid:"
@@ -37,8 +37,8 @@ Feature: Vendor bids on a sealed-bid auction
     When I visit the home page
     And I should see "Your bid: $3,493.00"
 
-  Scenario: viewing your own single bid
-    Given there is a single-bid auction
+  Scenario: viewing your own bid
+    Given there is a sealed-bid auction
     And I am an authenticated vendor
     When I visit the auction page
 

@@ -220,8 +220,8 @@ This hits a few other types of classes:
    lower than all other bids -- `PlaceBidValidator` calls a
    [RulesFactory](../app/models/rules_factory.rb) to load the appropriate
    rules for the auction. A rules class like
-   [Rules::Basic](../app/models/rules/basic.rb)
-   [Rules::SealedBid](../app/models/rules/sealed_bid.rb) encapsulates
+   [Rules::ReverseAuction](../app/models/rules/reverse_auction.rb)
+   [Rules::SealedBidAuction](../app/models/rules/sealed_bid_auction.rb) encapsulates
    rules about what the maximum allowed bid is, whether to show all
    bids.
 4. Serializers like [BidSerializer](../app/serializers/bid_serializer.rb)
@@ -400,11 +400,11 @@ from each other in a few different ways:
 6. Should the user be able to see a list of bids when the auction is open? When it's closed?
 
 and so on. We might consider implementing this by defining a
-`ReverseAuction` class and also a `SingleBidAuction` class with the
+`ReverseAuction` class and also a `SealedBidAuction` class with the
 variations encoded within. And this works okay, but what if we decide
 to add some more auction types? For instance, a
 `ReverseAuctionWithBuyNowButton` or a
-`SingleBidOnlyForSmallBusinessVendorsAuction` or a
+`SealedBidOnlyForSmallBusinessVendorsAuction` or a
 `ReverseAuctionForSmallBusinessVendorsWithBuyNowButton` or such?
 Ruby's single-inheritance starts to get unwieldy fast and what we
 really want is some sort of idea of mixins. So what if we do that.
