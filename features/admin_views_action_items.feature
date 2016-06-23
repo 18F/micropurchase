@@ -1,7 +1,7 @@
-Feature: Admin Dashboard
+Feature: Admin view action items
   As an admin
-  I want to see a dashboard of the auctions
-  So I can tell easily how things are going
+  I want to see the action items dashboard
+  So I can tell what actions I might need to take
 
   Scenario: Viewing the action items dashboard
     Given I am an administrator
