@@ -1,6 +1,6 @@
 Feature: Automatically checking a user's SAM status
   As a user looking to bid on an auction
-  I want the Micropurchase site to automatically check my SAM status
+  I want the Micro-purchase site to automatically check my SAM status
   So that I do not need to wait for manual reconciliation to bid
 
   Scenario: Successful SAM check on login

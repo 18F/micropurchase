@@ -1,7 +1,7 @@
 [![Code Climate](https://codeclimate.com/github/18F/micropurchase/badges/gpa.svg)](https://codeclimate.com/github/18F/micropurchase) [![Test Coverage](https://codeclimate.com/github/18F/micropurchase/badges/coverage.svg)](https://codeclimate.com/github/18F/micropurchase/coverage) [![Dependency Status](https://gemnasium.com/18F/micropurchase.svg)](https://gemnasium.com/18F/micropurchase) [![security](https://hakiri.io/github/18F/micropurchase/master.svg)](https://hakiri.io/github/18F/micropurchase/master)
 [![Accessibility](https://continua11y.18f.gov/18F/micropurchase.svg?branch=develop)](https://continua11y.18f.gov/18F/micropurchase)
 
-# Micropurchase
+# Micro-purchase
 
 This is a web application used to manage the bidding process for 18F's
 [micro-purchase threshold

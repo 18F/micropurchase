@@ -1,5 +1,5 @@
 Feature: Admin downloads user data
-  As an admin of the Micropurchase system
+  As an admin of the Micro-purchase system
   I should be able to download information about all users
   So I can do analysis or send emails to them
 

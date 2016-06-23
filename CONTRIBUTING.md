@@ -20,7 +20,7 @@ Policy GitHub repository]( https://github.com/18f/open-source-policy), or just
 ## Participating in user research
 
 We always welcome feedback from our users. For general feedback, please use the
-[feedback form](https://docs.google.com/a/gsa.gov/forms/d/15ycigLrTS7Ld4iVPgIMN-U5dMDFy6TnrHGOSkgk7qTI/viewform?c=0&w=1) that appears in the footer of the Micropurchase site.
+[feedback form](https://docs.google.com/a/gsa.gov/forms/d/15ycigLrTS7Ld4iVPgIMN-U5dMDFy6TnrHGOSkgk7qTI/viewform?c=0&w=1) that appears in the footer of the Micro-purchase site.
 
 From May 23rd, 2016 through June 6th, 2016 we're also open to conducting 1-1 video chats with 
 
