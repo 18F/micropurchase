@@ -1,12 +1,12 @@
-class Admin::AuctionsController < ApplicationController
-  before_filter :require_admin
+class Admin::AuctionsController < Admin::BaseController
+  layout 'admin', except: [:preview]
 
   def index
-    @auction_collection = Admin::AuctionsIndexViewModel.new
+    @view_model = Admin::AuctionsIndexViewModel.new
   end
 
   def show
-    @auction = Admin::AuctionShowViewModel.new(Auction.find(params[:id]))
+    @view_model = Admin::AuctionShowViewModel.new(Auction.find(params[:id]))
   end
 
   def preview
@@ -16,26 +16,26 @@ class Admin::AuctionsController < ApplicationController
   end
 
   def new
-    @auction = Admin::NewAuctionViewModel.new
+    @view_model = Admin::NewAuctionViewModel.new
   end
 
   def create
-    @auction = CreateAuction.new(params, current_user).perform
+    auction = CreateAuction.new(params, current_user).perform
 
-    if @auction.save
+    if auction.save
       flash[:success] = I18n.t('controllers.admin.auctions.create.success')
       redirect_to admin_auctions_path
     else
-      error_messages = @auction.errors.full_messages.to_sentence
+      error_messages = auction.errors.full_messages.to_sentence
       flash[:error] = error_messages
-      @auction = Admin::NewAuctionViewModel.new
+      @view_model = Admin::NewAuctionViewModel.new
       render :new
     end
   end
 
   def edit
     store_referer
-    @auction = Admin::EditAuctionViewModel.new(Auction.find(params[:id]))
+    @view_model = Admin::EditAuctionViewModel.new(Auction.find(params[:id]))
   end
 
   def update
@@ -47,7 +47,7 @@ class Admin::AuctionsController < ApplicationController
     else
       error_messages = auction.errors.full_messages.to_sentence
       flash[:error] = error_messages
-      @auction = Admin::EditAuctionViewModel.new(auction)
+      @view_model = Admin::EditAuctionViewModel.new(auction)
       render :edit
     end
   end

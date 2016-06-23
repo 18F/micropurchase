@@ -1,7 +1,5 @@
-class Admin::ActionItemsController < ApplicationController
-  before_filter :require_admin
-
+class Admin::ActionItemsController < Admin::BaseController
   def index
-    @action_items = Admin::ActionItemsViewModel.new
+    @view_model = Admin::ActionItemsViewModel.new
   end
 end
