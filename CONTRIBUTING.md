@@ -17,6 +17,18 @@ If you have any questions or want to read more, check out the [18F Open Source
 Policy GitHub repository]( https://github.com/18f/open-source-policy), or just
 [shoot us an email](mailto:18f@gsa.gov).
 
+## Participating in user research
+
+We always welcome feedback from our users. For general feedback, please use the
+[feedback form](https://docs.google.com/a/gsa.gov/forms/d/15ycigLrTS7Ld4iVPgIMN-U5dMDFy6TnrHGOSkgk7qTI/viewform?c=0&w=1) that appears in the footer of the Micropurchase site.
+
+From May 23rd, 2016 through June 6th, 2016 we're also open to conducting 1-1 video chats with 
+
+1. Vendors who have bid on an auction
+2. Agency partners who have worked (or would like to work) with us to create an auction
+
+Please reach out to [Andrew Maier](andrew.maier@gsa.gov) to setup an interview.
+
 ## Instructions for 18F team members
 
 Check out on the [onboarding docs](docs/onboarding.md) for instructions on how to
