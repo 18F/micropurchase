@@ -12,7 +12,7 @@ class AuctionParser
       ended_at: ended_at,
       started_at: started_at,
       user: user
-    )
+    ).delete_if { |_key, value| value.nil? }
   end
 
   private
