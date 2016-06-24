@@ -19,7 +19,7 @@ class ConfirmBidViewModel
   end
 
   def time_left
-    "Ends in #{distance_of_time}"
+    "Ends in #{distance_of_time_to_now}"
   end
 
   def html_description
@@ -28,7 +28,7 @@ class ConfirmBidViewModel
 
   private
 
-  def distance_of_time
-    HumanTime.new(time: auction.ended_at).distance_of_time
+  def distance_of_time_to_now
+    HumanTime.new(time: auction.ended_at).distance_of_time_to_now
   end
 end

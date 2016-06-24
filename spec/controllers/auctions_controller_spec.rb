@@ -49,11 +49,4 @@ describe AuctionsController do
       end
     end
   end
-
-  describe '#previous_winners' do
-    it 'renders the previous winners dashboard page' do
-      get :previous_winners
-      expect(response.code).to eq '200'
-    end
-  end
 end

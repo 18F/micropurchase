@@ -11,6 +11,5 @@
 
 //= require c3.min
 //= require underscore-min
-//= require winners/metrics
 //= require winners/previousWinners
 //= require winners/charts

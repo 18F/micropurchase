@@ -6,7 +6,7 @@ Feature: Guest Views Previous Winners Page
   Scenario: Visiting the previous winners page
     Given there is a closed auction
     When I visit the previous winners page
-    Then I should see six numbers on the page
+    Then I should see seven numbers on the page
     And I should see a section with two donut charts
     And I should see a Winning bid section
     And I should see a Community section

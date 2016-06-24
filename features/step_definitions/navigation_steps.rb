@@ -52,7 +52,7 @@ When(/^I visit the admin users page$/) do
 end
 
 When(/^I visit the previous winners page$/) do
-  visit "/auctions/winners/"
+  visit winners_path
 end
 
 Then(/^I should be on the home page$/) do
