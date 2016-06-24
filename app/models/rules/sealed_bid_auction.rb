@@ -7,6 +7,14 @@ class Rules::SealedBidAuction < Rules::BaseRules
     end
   end
 
+  def highlighted_bid(user)
+    if auction_available?
+      lowest_user_bid(user)
+    else
+      winning_bid
+    end
+  end
+
   def veiled_bids(user)
     if auction_available?
       auction.bids.where(bidder: user)
@@ -15,8 +23,12 @@ class Rules::SealedBidAuction < Rules::BaseRules
     end
   end
 
+  def user_is_bidder?(user)
+    user_bids(user).any?
+  end
+
   def user_can_bid?(user)
-    super && auction.bids.where(bidder: user).empty?
+    super && !user_is_bidder?(user)
   end
 
   def max_allowed_bid
@@ -25,5 +37,15 @@ class Rules::SealedBidAuction < Rules::BaseRules
 
   def show_bids?
     !auction_available?
+  end
+
+  private
+
+  def lowest_user_bid(user)
+    user_bids(user).first || NullBid.new
+  end
+
+  def user_bids(user)
+    auction.bids.where(bidder: user).order(amount: :asc)
   end
 end

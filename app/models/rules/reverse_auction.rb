@@ -3,6 +3,10 @@ class Rules::ReverseAuction < Rules::BaseRules
     auction.lowest_bid || NullBid.new
   end
 
+  def highlighted_bid(_user)
+    winning_bid
+  end
+
   def veiled_bids(_user)
     auction.bids
   end
