@@ -1,7 +1,7 @@
 Feature: Guest views closed auction
   As a guest
   I want to see details about past auctions
-  So I can learn more about Micropurchase
+  So I can learn more about Micro-purchase
 
   Scenario: There is a closed auction
     Given there is a closed auction
