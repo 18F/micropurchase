@@ -1,7 +1,8 @@
 class UpdateAuction
-  def initialize(auction, params)
+  def initialize(auction:, params:, current_user:)
     @auction = auction
     @params = params
+    @current_user = current_user
   end
 
   def perform
@@ -18,7 +19,7 @@ class UpdateAuction
 
   private
 
-  attr_reader :auction, :params
+  attr_reader :auction, :params, :current_user
 
   def create_purchase_request
     if should_create_cap_proposal?
@@ -69,6 +70,10 @@ class UpdateAuction
   end
 
   def attributes
-    @_attributes ||= AuctionParser.new(params, auction.user).attributes
+    @_attributes ||= AuctionParser.new(params, user).attributes
+  end
+
+  def user
+    auction.user || current_user
   end
 end

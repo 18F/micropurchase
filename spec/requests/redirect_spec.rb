@@ -8,11 +8,10 @@ RSpec.describe "Redirection to API" do
   describe 'a get request' do
     it 'should return a redirect to the correct location' do
       login
-      auction = create(:auction, :with_bidders)
-      get "/auctions/#{auction.id}.json", nil, headers
+      get "/auctions.json", nil, headers
 
       expect(response.status).to eq 301
-      expect(response.headers["Location"]).to include("/api/v0/auctions/#{auction.id}")
+      expect(response.headers["Location"]).to include("/api/v0/auctions")
     end
   end
 end

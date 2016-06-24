@@ -8,7 +8,7 @@ describe UpdateAuction do
         new_title = 'The New Title'
         params = { auction: { title: new_title } }
 
-        updater = UpdateAuction.new(auction, params)
+        updater = UpdateAuction.new(auction: auction, params: params, current_user: auction.user)
 
         expect { updater.perform }.to change { auction.title }.to(new_title)
       end
@@ -28,7 +28,7 @@ describe UpdateAuction do
             .and_return(nil)
           params = { auction: { result: 'accepted' } }
 
-          UpdateAuction.new(auction, params).perform
+          UpdateAuction.new(auction: auction, params: params, current_user: auction.user).perform
 
           expect(CreateCapProposalJob).to have_received(:perform_later).with(auction.id)
         end
@@ -48,7 +48,7 @@ describe UpdateAuction do
               .and_return(nil)
             params = { auction: { result: 'accepted' } }
 
-            UpdateAuction.new(auction, params).perform
+            UpdateAuction.new(auction: auction, params: params, current_user: auction.user).perform
 
             expect(CreateCapProposalJob).to have_received(:perform_later).with(auction.id)
           end
@@ -67,7 +67,7 @@ describe UpdateAuction do
               .and_return(nil)
             params = { auction: { result: 'accepted' } }
 
-            UpdateAuction.new(auction, params).perform
+            UpdateAuction.new(auction: auction, params: params, current_user: auction.user).perform
 
             expect(CreateCapProposalJob).to_not have_received(:perform_later).with(auction.id)
           end
@@ -80,7 +80,7 @@ describe UpdateAuction do
         auction = create(:auction, :delivery_due_at_expired)
         params = { auction: { result: 'rejected' } }
 
-        updater = UpdateAuction.new(auction, params)
+        updater = UpdateAuction.new(auction: auction, params: params, current_user: auction.user)
 
         expect { updater.perform }.to_not change { auction.cap_proposal_url }
         expect(auction.cap_proposal_url).to eq ""
@@ -93,7 +93,7 @@ describe UpdateAuction do
           .with(auction.id)
           .and_return(nil)
 
-        UpdateAuction.new(auction, params)
+        UpdateAuction.new(auction: auction, params: params, current_user: auction.user)
 
         expect(CreateCapProposalJob).to_not have_received(:perform_later).with(auction.id)
       end
@@ -112,7 +112,7 @@ describe UpdateAuction do
           .with(auction.id)
         params = { auction: { result: 'accepted' } }
 
-        UpdateAuction.new(auction, params).perform
+        UpdateAuction.new(auction: auction, params: params,current_user: auction.user).perform
 
         expect(CreateCapProposalJob).not_to have_received(:perform_later)
       end
