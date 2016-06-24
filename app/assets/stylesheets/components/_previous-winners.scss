@@ -14,20 +14,6 @@
     border-radius: $border-radius;
     color: $color-white;
     text-decoration: none;
-
-    &:nth-child(2),
-    &:nth-child(6) {
-      background-color: $branding-darkest;
-    }
-
-    &:nth-child(3) {
-      background-color: $branding-light;
-      color: $branding-darkest;
-    }
-
-    &:nth-child(4) {
-      background-color: $branding-medium;
-    }
   }
 
   @media screen and (max-width: $medium-screen) {
@@ -39,7 +25,7 @@
   }
 
   @media screen and (min-width: $medium-screen)  {
-    @include span-columns(4);
+    @include span-columns(3);
 
     &:nth-child(3n) {
       @include omega();

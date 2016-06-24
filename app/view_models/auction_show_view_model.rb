@@ -142,8 +142,8 @@ class AuctionShowViewModel
     status_presenter.label_class
   end
 
-  def distance_of_time
-    "#{HumanTime.new(time: auction.ended_at).distance_of_time} left"
+  def distance_of_time_to_now
+    "#{HumanTime.new(time: auction.ended_at).distance_of_time_to_now} left"
   end
 
   def highlighted_bid_amount_as_currency

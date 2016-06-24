@@ -3,31 +3,13 @@ Rails.application.routes.draw do
     mount LetterOpenerWeb::Engine => "letter_opener"
   end
 
+  # Web requests
   root 'auctions#index'
 
-  # Map current API requests to new controller for now
-  namespace :api, defaults: { format: 'json' } do
-    namespace :v0 do
-      resources :auctions, only: [:index, :show] do
-        resources :bids, only: [:create]
-      end
-
-      namespace :admin do
-        resources :auctions, only: [:index, :show]
-        resources :users, only: [:index]
-      end
-    end
-  end
-
-  # Temporarily send JSON requests to web to API
-  match '*path.:format', to: redirect("/api/v0/%{path}"), via: [:get, :post], constraints: { format: :json }
-
-  # Web requests
   get '/auth/:provider/callback', to: 'authentications#create'
   get '/login', to: 'logins#index'
   get '/logout', to: 'authentications#destroy'
   get '/faq', to: 'logins#faq'
-  get '/auctions/winners', to: 'auctions#previous_winners'
   get '/auctions/rules/sealed-bid', to: 'auctions#sealed_bid_auction_rules'
   get '/auctions/rules/reverse', to: 'auctions#reverse_auction_rules'
   get '/admin/auctions/:id/preview', to: 'admin/auctions#preview', as: 'admin_preview_auction'
@@ -42,7 +24,12 @@ Rails.application.routes.draw do
     resources :drafts, only: [:index]
   end
 
-  resources :auctions, only: [:index, :show] do
+  # Temporarily send JSON requests to web to API
+  match '*path.:format', to: redirect("/api/v0/%{path}"), via: [:get, :post], constraints: { format: :json }
+
+  resources :auctions, only: [:index]
+
+  resources :auctions, only: [:show] do
     resources :bid_confirmations, only: [:create]
     resources :bids, only: [:create]
   end
@@ -50,4 +37,20 @@ Rails.application.routes.draw do
   resources :bids, only: [:index]
   resources :users, only: [:update]
   get 'edit_user', to: 'users#edit'
+
+  resources :winners, only: [:index]
+
+  # Map current API requests to new controller for now
+  namespace :api, defaults: { format: 'json' } do
+    namespace :v0 do
+      resources :auctions, only: [:index, :show] do
+        resources :bids, only: [:create]
+      end
+
+      namespace :admin do
+        resources :auctions, only: [:index, :show]
+        resources :users, only: [:index]
+      end
+    end
+  end
 end

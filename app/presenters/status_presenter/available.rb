@@ -8,7 +8,7 @@ class StatusPresenter::Available < Struct.new(:auction)
   end
 
   def relative_time
-    "Time remaining: #{HumanTime.new(time: auction.ended_at).distance_of_time}"
+    "Time remaining: #{HumanTime.new(time: auction.ended_at).distance_of_time_to_now}"
   end
 
   def status_text
@@ -24,7 +24,7 @@ class StatusPresenter::Available < Struct.new(:auction)
   end
 
   def tag_data_value_status
-    "#{HumanTime.new(time: auction.ended_at).distance_of_time} left"
+    "#{HumanTime.new(time: auction.ended_at).distance_of_time_to_now} left"
   end
 
   def tag_data_label_2
