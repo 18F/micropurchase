@@ -16,10 +16,9 @@ When(/^I select the result as accepted$/) do
   select("accepted", from: "auction_result")
 end
 
-Then(/^I should see that the auction has a CAP Proposal URL$/) do
-  expect(find_field(I18n.t('simple_form.labels.auction.cap_proposal_url')).value).to eq(
-    @auction.cap_proposal_url
-  )
+Then(/^I should see that the auction does not have a CAP Proposal URL$/) do
+  field = find_field(I18n.t('simple_form.labels.auction.cap_proposal_url'))
+  expect(field.value).to eq('')
 end
 
 Then(/^I expect my auction changes to have been saved$/) do

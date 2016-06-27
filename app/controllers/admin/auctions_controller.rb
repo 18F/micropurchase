@@ -43,7 +43,7 @@ class Admin::AuctionsController < Admin::BaseController
     update_auction = UpdateAuction.new(auction: auction, params: params, current_user: current_user)
 
     if update_auction.perform
-      return_to_stored(default: admin_auctions_path)
+      return_to_stored(default: admin_auction_path(auction))
     else
       error_messages = auction.errors.full_messages.to_sentence
       flash[:error] = error_messages
