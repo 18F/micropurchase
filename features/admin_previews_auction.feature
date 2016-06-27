@@ -1,5 +1,5 @@
 Feature: Admin previews auctions
-  As an admin of the Micropurchase system
+  As an admin of the Micro-purchase system
   I want to be able to preview unpublished auctions
   So that I will be able to more efficiently work with the system
 

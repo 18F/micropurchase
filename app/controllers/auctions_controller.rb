@@ -12,8 +12,4 @@ class AuctionsController < ApplicationController
     auction = AuctionQuery.new.public_find(params[:id])
     @auction = AuctionShowViewModel.new(auction: auction, current_user: current_user)
   end
-
-  def previous_winners
-    @auctions = PreviousWinnersViewModel.new
-  end
 end

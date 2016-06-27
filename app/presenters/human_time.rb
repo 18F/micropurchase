@@ -9,7 +9,7 @@ class HumanTime
   end
 
   def relative_time
-    distance = distance_of_time
+    distance = distance_of_time_to_now
     if time < current_time
       "#{distance} ago"
     else
@@ -17,7 +17,11 @@ class HumanTime
     end
   end
 
+  def distance_of_time_to_now
+    time_ago_in_words(time)
+  end
+
   def distance_of_time
-    distance_of_time_in_words(current_time, time)
+    distance_of_time_in_words(time)
   end
 end

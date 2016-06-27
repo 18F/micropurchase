@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   get '/login', to: 'logins#index'
   get '/logout', to: 'authentications#destroy'
   get '/faq', to: 'logins#faq'
-  get '/auctions/winners', to: 'auctions#previous_winners'
   get '/auctions/rules/sealed-bid', to: 'auctions#sealed_bid_auction_rules'
   get '/auctions/rules/reverse', to: 'auctions#reverse_auction_rules'
   get '/admin/auctions/:id/preview', to: 'admin/auctions#preview', as: 'admin_preview_auction'
@@ -28,7 +27,9 @@ Rails.application.routes.draw do
   # Temporarily send JSON requests to web to API
   match '*path.:format', to: redirect("/api/v0/%{path}"), via: [:get, :post], constraints: { format: :json }
 
-  resources :auctions, only: [:index, :show] do
+  resources :auctions, only: [:index]
+
+  resources :auctions, only: [:show] do
     resources :bid_confirmations, only: [:create]
     resources :bids, only: [:create]
   end
@@ -36,6 +37,8 @@ Rails.application.routes.draw do
   resources :bids, only: [:index]
   resources :users, only: [:update]
   get 'edit_user', to: 'users#edit'
+
+  resources :winners, only: [:index]
 
   # Map current API requests to new controller for now
   namespace :api, defaults: { format: 'json' } do

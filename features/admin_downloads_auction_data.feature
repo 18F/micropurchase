@@ -1,5 +1,5 @@
 Feature: Admin downloads auction data
-  As an admin of the Micropurchase system
+  As an admin of the Micro-purchase system
   I should be able to download data about auctions
   So I can do analysis on them
 

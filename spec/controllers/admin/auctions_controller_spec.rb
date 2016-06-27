@@ -38,5 +38,26 @@ describe Admin::AuctionsController do
         expect(controller).to render_template :edit
       end
     end
+
+    context 'auction does not belong to a user' do
+      it 'assigns current user as user' do
+        user = create(:admin_user)
+        auction = create(:auction)
+        auction.user = nil
+        auction.save(validate: false)
+
+        params = {
+          id: auction.id,
+          auction: {
+            title: 'new title'
+          }
+        }
+
+        put :update, params, user_id: user.id
+
+        expect(controller).not_to render_template :edit
+        expect(auction.reload.user).to eq user
+      end
+    end
   end
 end

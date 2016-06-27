@@ -1,45 +1,62 @@
 <% content_for :data_tags do %>
   <meta name="twitter:label1" value="Active Auctions">
-  <meta name="twitter:data1" value="<%= @auctions.active_count %>">
+  <meta name="twitter:data1" value="<%= @view_model.active_count %>">
   <meta name="twitter:label2" value="Coming Auctions">
-  <meta name="twitter:data2" value="<%= @auctions.upcoming_count %>">
+  <meta name="twitter:data2" value="<%= @view_model.upcoming_count %>">
 <% end %>
 
 <section class="slab-intro usa-width-full">
   <section class="usa-grid">
   <h1>Auction winners</h1>
   <div class="hero-metrics-wrapper usa-grid-full usa-grid">
-    <a href="#chart-bids-by-auction" class="hero-metric">
-      <h1 class="hero-metric-number" data-metric data-name="auctions_total"></h1>
-      <p class="hero-metric-description">total auctions</p>
-    </a>
-    <a href="#chart-winning-bid" class="hero-metric">
-      <h1 class="hero-metric-number" data-metric data-name="unique_winners"></h1>
-      <p class="hero-metric-description">unique auction winners</p>
-    </a>
-    <a href="#chart4" class="hero-metric">
-      <h1 class="hero-metric-number" data-metric data-name="bids"></h1>
-      <p class="hero-metric-description">bids/auction</p>
-    </a>
-    <a href="#agency-savings" class="hero-metric">
-      <h1 class="hero-metric-number" data-metric data-name="bidding_vendors"></h1>
-      <p class="hero-metric-description">vendors who have placed bids</p>
-    </a>
-    <a href="#auction-length" class="hero-metric">
-      <h1 class="hero-metric-number" data-metric data-name="auction_length"></h1>
-      <p class="hero-metric-description">average auction length</p>
-    </a>
-    <a href="#chart-winning-bid" class="hero-metric">
-      <h1 class="hero-metric-number" data-metric data-name="winning_bid"></h1>
-      <p class="hero-metric-description">average winning bid</p>
-    </a>
+    <%= render partial: 'hero_metric',
+      locals: {
+      href: '#chart-bids-by-auction',
+      statistic: @view_model.total_auctions,
+      label: 'total auctions'
+    } %>
+    <%= render partial: 'hero_metric',
+      locals: {
+      href: '#chart-winning-bid',
+      statistic: @view_model.unique_auction_winners,
+      label: 'unique auction winners'
+    } %>
+    <%= render partial: 'hero_metric',
+      locals: {
+      href: '#chart4',
+      statistic: @view_model.average_bids_per_auction,
+      label: 'bids/auction'
+    } %>
+    <%= render partial: 'hero_metric',
+      locals: {
+      href: '#agency-savings',
+      statistic: @view_model.vendors_with_bids_count,
+      label: 'vendors who have placed bids'
+    } %>
+    <%= render partial: 'hero_metric',
+      locals: {
+      href: '#auction-length',
+      statistic: @view_model.average_auction_length,
+      label: 'average auction length'
+    } %>
+    <%= render partial: 'hero_metric',
+      locals: {
+      href: '#chart-winning-bid',
+      statistic: @view_model.average_winning_bid,
+      label: 'average winning bid'
+    } %>
+    <%= render partial: 'hero_metric',
+      locals: {
+      href: '#',
+      statistic: @view_model.small_business_count,
+      label: 'small businesses'
+    } %>
   </div>
   </section>
 </section>
 
 <section class="usa-width-full">
   <section class="usa-grid usa-grid-top-padding">
-
     <section id="chart-donuts">
       <div class="usa-grid-full">
         <h1>Projects</h1>
@@ -70,7 +87,7 @@
   <section class="usa-grid">
     <section id="chart-community">
       <h1>Community</h1>
-      <h2 class="h4">The Micropurchase platform is growing.</h2>
+      <h2 class="h4">The Micro-purchase platform is growing.</h2>
       <p class="winners-chart-directions">Use the subchart below to navigate past community figures</p>
       <div id="chart4"></div>
       <p>The micro-purchase platform has tapped into an interested community of both government product owners and open source contributors. As the 18F team ramps up capacity to host more auctions for more projects, we’re also seeing an increase in bidders. This is all positive evidence that there is an untapped marketplace for small, open source contributions to government projects. Drag and adjust the black box on the bottom bar to see a more detailed view of each date.</p>

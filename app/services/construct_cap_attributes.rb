@@ -32,7 +32,7 @@ class ConstructCapAttributes
   attr_reader :auction
 
   def product_name_and_description
-    %(Micropurchase for '#{auction.title}'.
+    %(Micro-purchase for '#{auction.title}'.
 
       Link: #{url}
 

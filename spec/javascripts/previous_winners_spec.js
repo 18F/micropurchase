@@ -13,15 +13,11 @@ describe('PreviousWinners', function () {
     auctions = _.sortBy(mock.auctions, 'id')
 
     winners = {}
-    winners.metrics = new Metrics(auctions)
     winners.charts = new Charts(auctions)
-
-    metrics = winners.metrics
     charts = winners.charts
   })
 
   describe('mock data', function () {
-
     it('is the correct data', function() {
       expect(mock.auctions).not.toBe(undefined)
       expect(mock.auctions).toEqual(jasmine.any(Object))
@@ -31,7 +27,6 @@ describe('PreviousWinners', function () {
   })
 
   describe('winners page object', function() {
-
     it("called winners, and it exists", function(){
       expect(winners).not.toBe(undefined)
       expect(winners).toEqual(jasmine.any(Object))
@@ -39,7 +34,6 @@ describe('PreviousWinners', function () {
   })
 
   describe('Charts object', function() {
-
     it("exists", function(){
       expect(charts).not.toBe(undefined)
       expect(charts).toEqual(jasmine.any(Object))
@@ -59,56 +53,6 @@ describe('PreviousWinners', function () {
       expect(charts.scale).toEqual(jasmine.any(Function))
       expect(charts.settings).toEqual(jasmine.any(Function))
       expect(charts.foo).not.toEqual(jasmine.any(Object))
-    })
-  })
-
-  describe('Metrics object', function() {
-
-    it("exists", function(){
-      expect(metrics).not.toBe(undefined)
-      expect(metrics).toEqual(jasmine.any(Object))
-    })
-
-    it("has the correct number of auctions", function(){
-      expect(metrics.auctions).not.toBe(undefined)
-      expect(metrics.auctions).toEqual(jasmine.any(Array))
-      expect(metrics.auctions.length).toBe(4)
-    })
-
-
-    it("has the correct auction duration", function(){
-      expect(metrics.auctionLength).not.toBe(undefined)
-      expect(metrics.auctionLength).toEqual(7.25)
-    })
-
-    it("has the correct average winning bid", function(){
-      expect(metrics.avgWinningBids).not.toBe(undefined)
-      expect(metrics.avgWinningBids).toEqual(2112.5)
-    })
-
-    it("has the correct number of bids per auction", function(){
-      expect(metrics.bidsPerAuction).not.toBe(undefined)
-      expect(metrics.bidsPerAuction).toEqual(3.25)
-    })
-
-    it("has the correct number of repos", function(){
-      expect(metrics.repos).not.toBe(undefined)
-      expect(metrics.repos).toEqual(4)
-    })
-
-    it("has the correct number of unique winners", function(){
-      expect(metrics.uniqueWinners).not.toBe(undefined)
-      expect(metrics.uniqueWinners).toEqual(3)
-    })
-
-    it("has the correct number of bidding vendors", function(){
-      expect(metrics.biddingVendors).not.toBe(undefined)
-      expect(metrics.biddingVendors).toEqual(8)
-    })
-
-    it("has javascript selectors", function(){
-      expect(metrics.selectors).not.toBe(undefined)
-      expect(metrics.selectors).toEqual(jasmine.any(Object))
     })
   })
 

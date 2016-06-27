@@ -1,7 +1,7 @@
 Feature: Feedback options
   As a user
   I want to be able to give feedback
-  So I can learn more about Micropurchase
+  So I can learn more about Micro-purchase
 
   # Should add more interactions here
   Scenario: Visiting the homepage

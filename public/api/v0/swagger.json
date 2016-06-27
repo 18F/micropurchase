@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Micropurchase API Documentation",
+    "title": "Micro-purchase API Documentation",
     "description": "Endpoints for the micropurchase API",
     "version": "0.0.1"
   },
@@ -554,7 +554,7 @@
       "properties": {
         "id": {
           "title": "Bidder ID",
-          "description": "A unique ID for the bidder in the Micropurchase system. This information may be redacted with a null value while an auction is still running.",
+          "description": "A unique ID for the bidder in the Micro-purchase system. This information may be redacted with a null value while an auction is still running.",
           "type": [
             "integer",
             "null"
@@ -602,7 +602,7 @@
         },
         "created_at": {
           "title": "Account Creation Time",
-          "description": "When the bidder signed up for the Micropurchase system. This information may be redacted with a null value while an auction is still running.",
+          "description": "When the bidder signed up for the Micro-purchase system. This information may be redacted with a null value while an auction is still running.",
           "type": [
             "string",
             "null"

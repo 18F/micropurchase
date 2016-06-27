@@ -1,5 +1,5 @@
 Feature: Admin views auctions in the admin panel
-  As an admin of the Micropurchase system
+  As an admin of the Micro-purchase system
   I want to be able to modify existing auctions in an admin
   So that I will be able to more efficiently work with the system
 

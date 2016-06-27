@@ -40,7 +40,7 @@ class Admin::AuctionsController < Admin::BaseController
 
   def update
     auction = Auction.find(params[:id])
-    update_auction = UpdateAuction.new(auction, params)
+    update_auction = UpdateAuction.new(auction: auction, params: params, current_user: current_user)
 
     if update_auction.perform
       return_to_stored(default: admin_auctions_path)
