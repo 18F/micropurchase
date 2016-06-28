@@ -4,10 +4,22 @@ class SaveAuction
   end
 
   def perform
-    auction.save
+    saved = auction.save
+
+    if should_schedule_auction_ended_job?(saved)
+      AuctionEnded.new(auction)
+        .delay(run_at: auction.ended_at)
+        .perform
+    end
+
+    saved
   end
 
   private
 
   attr_reader :auction
+
+  def should_schedule_auction_ended_job?(saved)
+    saved && !auction.ended_at.nil?
+  end
 end
