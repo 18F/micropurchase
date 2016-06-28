@@ -8,38 +8,40 @@ class WinnersViewModel
   end
 
   def total_auctions
-    auction_count
+    published_auction_count
   end
 
   def unique_auction_winners
-    completed_auctions.map do |auction|
+    successful_auctions.map do |auction|
       WinningBid.new(auction).find.bidder
     end.uniq.count
   end
 
   def average_bids_per_auction
-    if auction_count > 0
-      completed_auctions.map(&:bids).flatten.count / auction_count
+    if successful_auction_count > 0
+      successful_auctions.map(&:bids).flatten.count / successful_auction_count
     else
       'n/a'
     end
   end
 
   def vendors_with_bids_count
-    User.includes(:bids).where(bids: { bidder_id: nil }).count
+    User.includes(:bids).where.not(bids: { bidder_id: nil }).count
   end
 
   def average_auction_length
-    if auction_count > 0
-      HumanTime.new(time: (total_auction_time_length / auction_count)).distance_of_time
+    if published_auction_count > 0
+      HumanTime.new(
+        time: (total_auction_time_length / published_auction_count)
+      ).distance_of_time
     else
       'n/a'
     end
   end
 
   def average_winning_bid
-    if auction_count > 0
-      Currency.new(total_winning_bid_amount / auction_count).to_s
+    if completed_auction_count > 0
+      Currency.new(total_winning_bid_amount / completed_auction_count).to_s
     else
       'n/a'
     end
@@ -52,7 +54,7 @@ class WinnersViewModel
   private
 
   def total_auction_time_length
-    completed_auctions.map do |auction|
+    published_auctions.map do |auction|
       auction.ended_at - auction.started_at
     end.reduce(:+)
   end
@@ -63,11 +65,33 @@ class WinnersViewModel
     end.reduce(:+)
   end
 
-  def auction_count
-    @_auction_count ||= completed_auctions.count
+  def successful_auction_count
+    @_successful_auction_count ||= successful_auctions.count
+  end
+
+  def published_auction_count
+    @_published_auction_count ||= published_auctions.count
+  end
+
+  def completed_auction_count
+    @_completed_auction_count ||= completed_auctions.count
   end
 
   def completed_auctions
-    @_completed_auctions ||= AuctionQuery.new.complete_and_successful
+    @_completed_auctions ||=
+      AuctionQuery
+      .new
+      .published
+      .delivery_due_at_expired
+      .with_bids_and_bidders
+      .where.not(bids: { id: nil })
+  end
+
+  def published_auctions
+    @_published_auctions ||= AuctionQuery.new.published
+  end
+
+  def successful_auctions
+    @_successful_auctions ||= AuctionQuery.new.complete_and_successful
   end
 end
