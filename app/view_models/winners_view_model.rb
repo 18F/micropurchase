@@ -59,6 +59,10 @@ class WinnersViewModel
     UserQuery.new.in_sam.count
   end
 
+  def accepted_auctions_count
+    accepted_auctions.count
+  end
+
   private
 
   def total_delivery_time_length
@@ -103,10 +107,6 @@ class WinnersViewModel
 
   def accepted_auctions
     @_accepted_auctions ||= AuctionQuery.new.published.accepted
-  end
-
-  def accepted_auctions_count
-    accepted_auctions.length
   end
 
   def published_auctions
