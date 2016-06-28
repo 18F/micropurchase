@@ -11,6 +11,14 @@ class WinnersViewModel
     published_auction_count
   end
 
+  def unique_bidders_per_auction
+    if completed_auction_count > 0
+      completed_auctions.map(&:bidders).flatten.uniq.count / completed_auction_count
+    else
+      'n/a'
+    end
+  end
+
   def unique_auction_winners
     completed_auctions.map do |auction|
       WinningBid.new(auction).find.bidder
