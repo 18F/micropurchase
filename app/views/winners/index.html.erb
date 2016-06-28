@@ -59,6 +59,12 @@
     } %>
     <%= render partial: 'hero_metric',
       locals: {
+      href: '#',
+      statistic: @view_model.average_starting_price,
+      label: 'average starting price'
+    } %>
+    <%= render partial: 'hero_metric',
+      locals: {
       href: '#chart-winning-bid',
       statistic: @view_model.average_winning_bid,
       label: 'average winning bid'

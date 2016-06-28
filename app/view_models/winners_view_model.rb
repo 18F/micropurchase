@@ -44,11 +44,11 @@ class WinnersViewModel
   end
 
   def average_winning_bid
-    if completed_auction_count > 0
-      Currency.new(total_winning_bid_amount / completed_auction_count).to_s
-    else
-      'n/a'
-    end
+    calculate_average_price(total_winning_bid_amount, completed_auction_count)
+  end
+
+  def average_starting_price
+    calculate_average_price(total_starting_price, completed_auction_count)
   end
 
   def small_business_count
@@ -85,6 +85,10 @@ class WinnersViewModel
       .map(&:amount)
       .reject(&:nil?)
       .reduce(:+)
+  end
+
+  def total_starting_price
+    completed_auctions.map(&:start_price).reduce(:+)
   end
 
   def published_auction_count
@@ -124,6 +128,14 @@ class WinnersViewModel
   def calculate_average_time(value, auction_count)
     if auction_count > 0
       HumanTime.new(time: (value / auction_count)).distance_of_time
+    else
+      'n/a'
+    end
+  end
+
+  def calculate_average_price(amount, auction_count)
+    if auction_count > 0
+      Currency.new(amount / auction_count).to_s
     else
       'n/a'
     end
