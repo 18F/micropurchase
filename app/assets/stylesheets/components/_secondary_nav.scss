@@ -1,0 +1,47 @@
+$width-nav-sidebar: 250px;
+$height-nav-secondary: 5rem;
+
+.site-nav-secondary {
+  @include media($medium-screen + $width-nav-sidebar) {
+    background-color: $color-white;
+    border-bottom: 1px solid $color-gray-light;
+    clear: both;
+    display: block;
+    height: $height-nav-secondary;
+    padding-left: 3rem;
+  }
+
+  &.is-scrolled {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+
+  ul {
+    @include unstyled-list;
+
+    li {
+      display: inline;
+      padding-right: 3rem;
+    }
+  }
+
+  a {
+    @include padding (1.6rem null);
+    color: $color-gray;
+    font-size: $h5-font-size;
+    letter-spacing: .3px;
+    line-height: $height-nav-secondary;
+    text-decoration: none;
+
+    &:hover {
+      color: $color-primary;
+      text-decoration: underline;
+    }
+
+    &.usa-current {
+      color: $color-primary;
+      font-weight: $font-bold;
+    }
+  }
+}
