@@ -151,6 +151,11 @@ FactoryGirl.define do
       type :reverse
     end
 
+    trait :completed do
+      published
+      delivery_due_at_expired
+    end
+
     trait :complete_and_successful do
       with_bidders
       delivery_due_at_expired

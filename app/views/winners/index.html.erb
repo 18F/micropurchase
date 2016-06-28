@@ -29,6 +29,12 @@
     } %>
     <%= render partial: 'hero_metric',
       locals: {
+      href: '#',
+      statistic: @view_model.unique_bidders_per_auction,
+      label: 'unique bidders per auction'
+    } %>
+    <%= render partial: 'hero_metric',
+      locals: {
       href: '#agency-savings',
       statistic: @view_model.vendors_with_bids_count,
       label: 'vendors who have placed bids'
