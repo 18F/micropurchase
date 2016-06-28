@@ -49,6 +49,14 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
     formatted_time(auction.paid_at)
   end
 
+  def accepted_at
+    formatted_time(auction.accepted_at)
+  end
+
+  def cap_proposal_url
+    auction.cap_proposal_url
+  end
+
   def html_summary
     return '' if auction.summary.blank?
     MarkdownRender.new(auction.summary).to_s
