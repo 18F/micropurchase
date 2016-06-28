@@ -41,6 +41,12 @@
     } %>
     <%= render partial: 'hero_metric',
       locals: {
+      href: '#',
+      statistic: @view_model.average_delivery_time,
+      label: 'average delivery time'
+    } %>
+    <%= render partial: 'hero_metric',
+      locals: {
       href: '#chart-winning-bid',
       statistic: @view_model.average_winning_bid,
       label: 'average winning bid'
@@ -49,7 +55,7 @@
       locals: {
       href: '#',
       statistic: @view_model.small_business_count,
-      label: 'small businesses'
+      label: 'small businesses registered'
     } %>
   </div>
   </section>
