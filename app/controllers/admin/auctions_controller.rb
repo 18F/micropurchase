@@ -45,11 +45,14 @@ class Admin::AuctionsController < Admin::BaseController
     auction = Auction.find(params[:id])
     update_auction = UpdateAuction.new(auction: auction, params: params, current_user: current_user)
 
+    # display errors even on success, to notify admin of important information
+    # such as an email being sent to the vendor asking for a credit card form url
+    error_messages = auction.errors.full_messages.to_sentence
+    flash[:error] = error_messages
+
     if update_auction.perform
       return_to_stored(default: admin_auction_path(auction))
     else
-      error_messages = auction.errors.full_messages.to_sentence
-      flash[:error] = error_messages
       @view_model = Admin::EditAuctionViewModel.new(auction)
       render :edit
     end
