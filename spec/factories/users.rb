@@ -11,6 +11,10 @@ FactoryGirl.define do
     sam_status :duns_blank
     credit_card_form_url 'https://some-website.com/pay'
 
+    trait :sam_accepted do
+      sam_status :sam_accepted
+    end
+
     trait :small_business do
       duns_number { FakeSamApi::SMALL_BUSINESS_DUNS }
       sam_status { :sam_accepted }
@@ -21,6 +25,12 @@ FactoryGirl.define do
       duns_number { FakeSamApi::BIG_BUSINESS_DUNS }
       sam_status { :sam_accepted }
       small_business { false }
+    end
+
+    trait :with_bid do
+      after(:create) do |user|
+        create(:bid, bidder: user)
+      end
     end
 
     factory :admin_user do

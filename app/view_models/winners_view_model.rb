@@ -26,7 +26,7 @@ class WinnersViewModel
   end
 
   def vendors_with_bids_count
-    User.includes(:bids).where.not(bids: { bidder_id: nil }).count
+    UserQuery.new.with_bids.count
   end
 
   def average_auction_length
@@ -58,7 +58,11 @@ class WinnersViewModel
   end
 
   def small_business_count
-    User.where(small_business: true).count
+    UserQuery.new.small_business.count
+  end
+
+  def in_sam_count
+    UserQuery.new.in_sam.count
   end
 
   private
