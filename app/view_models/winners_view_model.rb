@@ -12,14 +12,14 @@ class WinnersViewModel
   end
 
   def unique_auction_winners
-    successful_auctions.map do |auction|
+    completed_auctions.map do |auction|
       WinningBid.new(auction).find.bidder
     end.uniq.count
   end
 
   def average_bids_per_auction
-    if successful_auction_count > 0
-      successful_auctions.map(&:bids).flatten.count / successful_auction_count
+    if completed_auction_count > 0
+      completed_auctions.map(&:bids).flatten.count / completed_auction_count
     else
       'n/a'
     end
@@ -33,6 +33,16 @@ class WinnersViewModel
     if published_auction_count > 0
       HumanTime.new(
         time: (total_auction_time_length / published_auction_count)
+      ).distance_of_time
+    else
+      'n/a'
+    end
+  end
+
+  def average_delivery_time
+    if accepted_auctions_count > 0
+      HumanTime.new(
+        time: (total_auction_time_length / accepted_auctions_count)
       ).distance_of_time
     else
       'n/a'
@@ -53,6 +63,12 @@ class WinnersViewModel
 
   private
 
+  def total_delivery_time_length
+    accepted_auctions.map do |auction|
+      auction.delivery_due_at - auction.ended_at
+    end.reduce(:+)
+  end
+
   def total_auction_time_length
     published_auctions.map do |auction|
       auction.ended_at - auction.started_at
@@ -60,13 +76,11 @@ class WinnersViewModel
   end
 
   def total_winning_bid_amount
-    completed_auctions.map do |auction|
-      auction.lowest_bid.amount
-    end.reduce(:+)
-  end
-
-  def successful_auction_count
-    @_successful_auction_count ||= successful_auctions.count
+    completed_auctions
+      .map(&:lowest_bid)
+      .map(&:amount)
+      .reject(&:nil?)
+      .reduce(:+)
   end
 
   def published_auction_count
@@ -87,11 +101,19 @@ class WinnersViewModel
       .where.not(bids: { id: nil })
   end
 
-  def published_auctions
-    @_published_auctions ||= AuctionQuery.new.published
+  def accepted_auctions
+    @_accepted_auctions ||=
+      AuctionQuery
+      .new
+      .published
+      .accepted
   end
 
-  def successful_auctions
-    @_successful_auctions ||= AuctionQuery.new.complete_and_successful
+  def accepted_auctions_count
+    accepted_auctions.length
+  end
+
+  def published_auctions
+    @_published_auctions ||= AuctionQuery.new.published
   end
 end
