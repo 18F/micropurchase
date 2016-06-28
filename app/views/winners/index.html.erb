@@ -63,6 +63,12 @@
       statistic: @view_model.small_business_count,
       label: 'small businesses registered'
     } %>
+    <%= render partial: 'hero_metric',
+      locals: {
+      href: '#',
+      statistic: @view_model.in_sam_count,
+      label: 'Sam.gov qualified vendors'
+    } %>
   </div>
   </section>
 </section>
