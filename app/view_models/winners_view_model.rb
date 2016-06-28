@@ -42,7 +42,7 @@ class WinnersViewModel
   def average_delivery_time
     if accepted_auctions_count > 0
       HumanTime.new(
-        time: (total_auction_time_length / accepted_auctions_count)
+        time: (total_delivery_time_length / accepted_auctions_count)
       ).distance_of_time
     else
       'n/a'
