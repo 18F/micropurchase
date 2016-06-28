@@ -12,11 +12,10 @@ class WinnersViewModel
   end
 
   def unique_bidders_per_auction
-    if completed_auction_count > 0
-      completed_auctions.map(&:bidders).flatten.uniq.count / completed_auction_count
-    else
-      'n/a'
-    end
+    calculate_average(
+      completed_auctions.map(&:bidders).flatten.uniq.count,
+      completed_auction_count
+    )
   end
 
   def unique_auction_winners
@@ -26,11 +25,10 @@ class WinnersViewModel
   end
 
   def average_bids_per_auction
-    if completed_auction_count > 0
-      completed_auctions.map(&:bids).flatten.count / completed_auction_count
-    else
-      'n/a'
-    end
+    calculate_average(
+      completed_auctions.map(&:bids).flatten.count,
+      completed_auction_count
+    )
   end
 
   def vendors_with_bids_count
@@ -38,23 +36,11 @@ class WinnersViewModel
   end
 
   def average_auction_length
-    if published_auction_count > 0
-      HumanTime.new(
-        time: (total_auction_time_length / published_auction_count)
-      ).distance_of_time
-    else
-      'n/a'
-    end
+    calculate_average_time(total_auction_time_length, published_auction_count)
   end
 
   def average_delivery_time
-    if accepted_auctions_count > 0
-      HumanTime.new(
-        time: (total_delivery_time_length / accepted_auctions_count)
-      ).distance_of_time
-    else
-      'n/a'
-    end
+    calculate_average_time(total_delivery_time_length, accepted_auctions_count)
   end
 
   def average_winning_bid
@@ -72,14 +58,16 @@ class WinnersViewModel
   private
 
   def total_delivery_time_length
-    accepted_auctions.map do |auction|
-      auction.delivery_due_at - auction.ended_at
-    end.reduce(:+)
+    total_time_length(published_auctions, 'delivery_due_at', 'ended_at')
   end
 
   def total_auction_time_length
-    published_auctions.map do |auction|
-      auction.ended_at - auction.started_at
+    total_time_length(published_auctions, 'ended_at', 'started_at')
+  end
+
+  def total_time_length(auctions, first_time, second_time)
+    auctions.map do |auction|
+      auction.send(first_time) - auction.send(second_time)
     end.reduce(:+)
   end
 
@@ -110,11 +98,7 @@ class WinnersViewModel
   end
 
   def accepted_auctions
-    @_accepted_auctions ||=
-      AuctionQuery
-      .new
-      .published
-      .accepted
+    @_accepted_auctions ||= AuctionQuery.new.published.accepted
   end
 
   def accepted_auctions_count
@@ -123,5 +107,21 @@ class WinnersViewModel
 
   def published_auctions
     @_published_auctions ||= AuctionQuery.new.published
+  end
+
+  def calculate_average(value, auction_count)
+    if auction_count > 0
+      value / auction_count
+    else
+      'n/a'
+    end
+  end
+
+  def calculate_average_time(value, auction_count)
+    if auction_count > 0
+      HumanTime.new(time: (value / auction_count)).distance_of_time
+    else
+      'n/a'
+    end
   end
 end
