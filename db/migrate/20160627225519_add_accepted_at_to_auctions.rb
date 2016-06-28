@@ -4,7 +4,8 @@ class AddAcceptedAtToAuctions < ActiveRecord::Migration
 
     execute <<-SQL
       UPDATE auctions
-      SET accepted_at = delivery_due_at;
+      SET accepted_at = delivery_due_at
+      WHERE result = 1;
     SQL
   end
 
