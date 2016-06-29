@@ -1,29 +1,42 @@
-class Admin::BidListItem < Admin::BaseViewModel
-  attr_reader :bid
+class Admin::BidListItem
+  attr_reader :bid, :user
 
-  def initialize(bid)
+  def initialize(bid:, user:)
     @bid = bid
+    @user = user
   end
 
-  def bidder_name
-    bidder.name
+  def veiled_name
+    bid.bidder.name
   end
 
-  def bidder_duns_number
-    bidder.duns_number
+  def veiled_duns_number
+    bid.bidder.duns_number
   end
 
-  def amount
-    Currency.new(bid.amount).to_s
+  def amount_to_currency_with_asterisk
+    if bid == bid.auction.lowest_bid
+      "#{amount_to_currency} *"
+    else
+      amount_to_currency
+    end
   end
 
-  def time
+  def created_at
     DcTimePresenter.convert_and_format(bid.created_at)
   end
 
   private
 
-  def bidder
-    @_bidder ||= bid.bidder
+  def amount_to_currency
+    Currency.new(bid.amount).to_s
+  end
+
+  def auction_available?
+    AuctionStatus.new(bid.auction).available?
+  end
+
+  def bidder_not_user?
+    bid.bidder != user
   end
 end

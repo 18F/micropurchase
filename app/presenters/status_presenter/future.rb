@@ -11,10 +11,6 @@ class StatusPresenter::Future < Struct.new(:auction)
     "Starts #{HumanTime.new(time: auction.started_at).relative_time} from now"
   end
 
-  def status_text
-    'Closed'
-  end
-
   def label_class
     'auction-label-future'
   end

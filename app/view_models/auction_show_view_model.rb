@@ -14,60 +14,37 @@ class AuctionShowViewModel
     auction.title
   end
 
+  def admin_edit_auction_partial
+    current_user.decorate.admin_edit_auction_partial
+  end
+
   def summary
     auction.summary
   end
 
-  def capitalized_type
-    auction.type.dasherize.capitalize
+  def html_description
+    MarkdownRender.new(auction.description).to_s
+  end
+
+  def auction_data
+    {
+      start_label => formatted_date(auction.started_at),
+      deadline_label => formatted_date(auction.ended_at),
+      'Delivery deadline' => formatted_date(auction.delivery_due_at),
+      'Eligible vendors' => eligibility_label
+    }
   end
 
   def issue_url
     auction.issue_url
   end
 
-  def relative_time
-    status_presenter.relative_time
-  end
-
-  def sealed_bids_partial
-    if available? && auction.type == 'sealed_bid'
-      'bids/sealed'
-    else
-      'components/null'
-    end
-  end
-
-  def veiled_bids
-    if available? && auction.type == 'sealed_bid'
-      auction.bids.where(bidder: current_user).map do |bid|
-        BidListItem.new(bid: bid, user: current_user)
-      end
-    else
-      auction.bids.order(created_at: :desc).map do |bid|
-        BidListItem.new(bid: bid, user: current_user)
-      end
-    end
-  end
-
-  def bids_count
-    auction.bids.count
-  end
-
   def rules_path
     "/auctions/rules/#{auction.type.dasherize}"
   end
 
-  def status_text
-    status_presenter.status_text
-  end
-
-  def eligibility_label
-    if AuctionThreshold.new(auction).small_business?
-      'Small-business only'
-    else
-      'SAM.gov only'
-    end
+  def capitalized_type
+    auction.type.dasherize.capitalize
   end
 
   def bid_form_partial
@@ -82,6 +59,18 @@ class AuctionShowViewModel
     Currency.new(rules.max_allowed_bid).to_s
   end
 
+  def bid_status_class(flash)
+    BidStatusFlashFactory.new(auction: auction, flash: flash, user: current_user).create
+  end
+
+  def bid_flash_partial
+    if auction.type == 'reverse' && (over? || available_and_user_is_bidder?)
+      'auctions/bid_status_header'
+    else
+      'components/null'
+    end
+  end
+
   def bid_status
     if over? && auction.bids.any?
       "Winning bid (#{lowest_bidder_name}): #{highlighted_bid_amount_as_currency}"
@@ -94,32 +83,16 @@ class AuctionShowViewModel
     end
   end
 
-  def start_label
-    status_presenter.start_label
-  end
-
-  def formatted_start_time
-    DcTimePresenter.convert_and_format(auction.started_at)
-  end
-
-  def formatted_end_time
-    DcTimePresenter.convert_and_format(auction.ended_at)
-  end
-
-  def formatted_delivery_due_at
-    DcTimePresenter.convert_and_format(auction.delivery_due_at)
-  end
-
-  def formatted_paid_at
-    DcTimePresenter.convert_and_format(auction.paid_at)
-  end
-
   def paid_at_partial
     if auction.paid_at.nil?
       'components/null'
     else
       'auctions/paid_at'
     end
+  end
+
+  def formatted_paid_at
+    formatted_date(auction.paid_at)
   end
 
   def tag_data_value_status
@@ -150,28 +123,28 @@ class AuctionShowViewModel
     Currency.new(highlighted_bid.amount).to_s
   end
 
-  def bid_flash_partial
-    if auction.type == 'reverse' && (over? || available_and_user_is_bidder?)
-      'auctions/bid_status_header'
+  def relative_time
+    status_presenter.relative_time
+  end
+
+  def sealed_bids_partial
+    if available? && auction.type == 'sealed_bid'
+      'bids/sealed'
     else
       'components/null'
     end
   end
 
-  def html_description
-    MarkdownRender.new(auction.description).to_s
-  end
-
-  def deadline_label
-    status_presenter.deadline_label
-  end
-
-  def bid_status_class(flash)
-    BidStatusFlashFactory.new(auction: auction, flash: flash, user: current_user).create
-  end
-
-  def admin_edit_auction_partial
-    current_user.decorate.admin_edit_auction_partial
+  def veiled_bids
+    if available? && auction.type == 'sealed_bid'
+      auction.bids.where(bidder: current_user).map do |bid|
+        BidListItem.new(bid: bid, user: current_user)
+      end
+    else
+      auction.bids.order(created_at: :desc).map do |bid|
+        BidListItem.new(bid: bid, user: current_user)
+      end
+    end
   end
 
   private
@@ -231,5 +204,25 @@ class AuctionShowViewModel
 
   def rules
     @_rules ||= RulesFactory.new(auction).create
+  end
+
+  def start_label
+    status_presenter.start_label
+  end
+
+  def deadline_label
+    status_presenter.deadline_label
+  end
+
+  def eligibility_label
+    if AuctionThreshold.new(auction).small_business?
+      'Small-business only'
+    else
+      'SAM.gov only'
+    end
+  end
+
+  def formatted_date(date)
+    DcTimePresenter.convert_and_format(date)
   end
 end
