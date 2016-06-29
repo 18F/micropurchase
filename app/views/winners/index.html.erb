@@ -17,6 +17,12 @@
     } %>
     <%= render partial: 'hero_metric',
       locals: {
+      href: '#',
+      statistic: @view_model.accepted_auctions_count,
+      label: 'successful deliveries'
+    } %>
+    <%= render partial: 'hero_metric',
+      locals: {
       href: '#chart-winning-bid',
       statistic: @view_model.unique_auction_winners,
       label: 'unique auction winners'
@@ -50,6 +56,12 @@
       href: '#',
       statistic: @view_model.average_delivery_time,
       label: 'average delivery time'
+    } %>
+    <%= render partial: 'hero_metric',
+      locals: {
+      href: '#',
+      statistic: @view_model.average_starting_price,
+      label: 'average starting price'
     } %>
     <%= render partial: 'hero_metric',
       locals: {
