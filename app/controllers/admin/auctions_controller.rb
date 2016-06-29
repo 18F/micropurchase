@@ -1,17 +1,20 @@
 class Admin::AuctionsController < Admin::BaseController
-  layout 'admin', except: [:preview]
+  layout 'admin', except: [:preview, :show]
 
   def index
     @view_model = Admin::AuctionsIndexViewModel.new
   end
 
   def show
-    @view_model = Admin::AuctionShowViewModel.new(Auction.find(params[:id]))
+    @view_model = Admin::AuctionShowViewModel.new(
+      auction: Auction.find(params[:id]),
+      current_user: current_user
+    )
   end
 
   def preview
     auction = Auction.find(params[:id])
-    @auction = ::AuctionShowViewModel.new(auction: auction, current_user: current_user)
+    @view_model = ::AuctionShowViewModel.new(auction: auction, current_user: current_user)
     render 'auctions/show'
   end
 
@@ -43,7 +46,7 @@ class Admin::AuctionsController < Admin::BaseController
     update_auction = UpdateAuction.new(auction: auction, params: params, current_user: current_user)
 
     if update_auction.perform
-      return_to_stored(default: admin_auctions_path)
+      return_to_stored(default: admin_auction_path(auction))
     else
       error_messages = auction.errors.full_messages.to_sentence
       flash[:error] = error_messages

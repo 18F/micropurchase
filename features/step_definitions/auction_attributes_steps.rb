@@ -48,6 +48,17 @@ Then(/^I should see the start price for the auction is \$(\d+)$/) do |price|
   expect(page).to have_field('auction_start_price', with: price)
 end
 
+Then(/^I should see that the auction has a CAP Proposal URL$/) do
+  expect(page).to have_content("CAP proposal URL #{@auction.reload.cap_proposal_url}")
+end
+
+Then(/^I should see that the auction was accepted$/) do
+  expect(@auction.accepted_at).not_to eq nil
+  expect(page).to have_content(
+    DcTimePresenter.convert_and_format(@auction.accepted_at)
+  )
+end
+
 Then(/^I should see the number of bid for the auction$/) do
   number_of_bids = "#{@auction.bids.length} bids"
   expect(page).to have_content(number_of_bids)
@@ -74,16 +85,6 @@ Then(/^I should not see that the auction indicates it is for small business only
                 .find(:xpath, "..")
 
   expect(auction_div).to_not have_content('Small-business only')
-end
-
-Then(/^the proposal should have a CAP Proposal URL$/) do
-  @auction.reload
-  expect(@auction.cap_proposal_url).not_to eq ""
-end
-
-Then(/^the proposal should not have a CAP Proposal URL$/) do
-  @auction.reload
-  expect(@auction.cap_proposal_url).to eq ""
 end
 
 Then(/^I should see a preview of the auction$/) do

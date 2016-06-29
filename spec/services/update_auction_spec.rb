@@ -32,6 +32,19 @@ describe UpdateAuction do
 
           expect(CreateCapProposalJob).to have_received(:perform_later).with(auction.id)
         end
+
+        it 'sets accepted_at' do
+          time = Time.parse('10:00:00 UTC')
+
+          Timecop.freeze(time) do
+            auction = create(:auction, accepted_at: nil)
+            params = { auction: { result: 'accepted' } }
+
+            UpdateAuction.new(auction: auction, params: params, current_user: auction.user).perform
+
+            expect(auction.accepted_at).to eq time
+          end
+        end
       end
 
       context 'auction is between micropurchase and SAT threshold' do

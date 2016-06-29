@@ -3,9 +3,10 @@
 }
 
 .hero-metric {
-  padding: $base-padding;
   text-align: center;
-  text-decoration: none;
+  float: left;
+  @include omega(4n);
+  @include span-columns(3);
 
   &:hover,
   &:focus,
@@ -15,117 +16,6 @@
     color: $color-white;
     text-decoration: none;
   }
-
-  @media screen and (max-width: $medium-screen) {
-    @include span-columns(6);
-
-    &:nth-child(2n) {
-      @include omega();
-    }
-  }
-
-  @media screen and (min-width: $medium-screen)  {
-    @include span-columns(3);
-
-    &:nth-child(3n) {
-      @include omega();
-    }
-  }
-}
-
-.hero-metric-number {
-  margin-top: 0;
-}
-
-.hero-metric-description {
-  margin-bottom: 0;
-}
-
-
-// Winners Archive
-
-.winners-archive-page {
-  padding-bottom: $site-margins;
-  padding-top: $site-margins;
-}
-
-.winners-title,
-.winners-title:visited {
-  @extend h3;
-}
-
-.winners-title {
-  display: inline-block;
-  margin: 0;
-  max-width: 80%;
-}
-
-.winners-header {
-  border-bottom: 2px solid $color-gray-neutral;
-  margin-bottom: $base-padding;
-  padding-bottom: $base-padding-lite;
-}
-
-.winners-header-name {
-  @extend h3;
-  font-weight: $font-normal;
-  text-align: left;
-}
-
-.winners-header-bid {
-  font-weight: $font-normal;
-  text-align: left;
-}
-
-@include media($medium-screen) {
-  .winners-header-name {
-    font-size: $base-font-size;
-    line-height: $base-line-height;
-    margin: 0;
-  }
-
-  .winners-header-bid {
-    text-align: right;
-  }
-}
-
-.winners-list-item {
-  margin-bottom: 1rem;
-}
-
-.winners-list-item .issue-bid-details {
-  background-color: $color-white;
-  color: $branding-darkest;
-  padding-bottom: $base-padding;
-
-  &:hover,
-  &:active,
-  &:focus {
-    background-color: $branding-light;
-  }
-}
-
-.winners-list-item .issue-bids-info-item {
-  float: right;
-  margin-right: 0;
-  margin-top: 1.2rem;
-}
-
-.winners-list-item .usa-grid-full {
-  line-height: 0;
-}
-
-.winners-heading {
-  float: left;
-}
-
-.winners-filter {
-  float: right;
-  margin-bottom: $base-padding;
-}
-
-.winners-filter select {
-  padding-right: 40px;
 }
 
 // Charts

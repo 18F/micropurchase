@@ -17,6 +17,12 @@
     } %>
     <%= render partial: 'hero_metric',
       locals: {
+      href: '#',
+      statistic: @view_model.accepted_auctions_count,
+      label: 'successful deliveries'
+    } %>
+    <%= render partial: 'hero_metric',
+      locals: {
       href: '#chart-winning-bid',
       statistic: @view_model.unique_auction_winners,
       label: 'unique auction winners'
@@ -26,6 +32,12 @@
       href: '#chart4',
       statistic: @view_model.average_bids_per_auction,
       label: 'bids/auction'
+    } %>
+    <%= render partial: 'hero_metric',
+      locals: {
+      href: '#',
+      statistic: @view_model.unique_bidders_per_auction,
+      label: 'unique bidders per auction'
     } %>
     <%= render partial: 'hero_metric',
       locals: {
@@ -47,6 +59,12 @@
     } %>
     <%= render partial: 'hero_metric',
       locals: {
+      href: '#',
+      statistic: @view_model.average_starting_price,
+      label: 'average starting price'
+    } %>
+    <%= render partial: 'hero_metric',
+      locals: {
       href: '#chart-winning-bid',
       statistic: @view_model.average_winning_bid,
       label: 'average winning bid'
@@ -56,6 +74,12 @@
       href: '#',
       statistic: @view_model.small_business_count,
       label: 'small businesses registered'
+    } %>
+    <%= render partial: 'hero_metric',
+      locals: {
+      href: '#',
+      statistic: @view_model.in_sam_count,
+      label: 'Sam.gov qualified vendors'
     } %>
   </div>
   </section>

@@ -1,7 +1,7 @@
-<% content_for :title do %>18F Micro-purchase - <%= @auction.title %><% end %>
-<% content_for :description do %><%= @auction.summary %><% end %>
+<% content_for :title do %>18F Micro-purchase - <%= @view_model.title %><% end %>
+<% content_for :description do %><%= @view_model.summary %><% end %>
 <% content_for :data_tags do %>
-  <%= render partial: '/auctions/data_tags', locals: { auction: @auction } %>
+  <%= render partial: '/auctions/data_tags', locals: { auction: @view_model } %>
 <% end %>
 
 <div>
@@ -16,76 +16,64 @@
     <div class='usa-width-one-whole issue-label'>
       <h3 class='issue-title'>
         <div class="issue-ribbon">
-          <span class="<%= @auction.label_class %>"><%= @auction.label %></span>
+          <span class="<%= @view_model.label_class %>"><%= @view_model.label %></span>
         </div>
       </h3>
     </div>
   </div>
 
   <div class="auction-title issue-title">
-    <h1><%= @auction.title %></h1>
-    <%= render partial: @auction.admin_edit_auction_partial %>
+    <h1><%= @view_model.title %></h1>
+    <%= render partial: @view_model.admin_edit_auction_partial,
+      locals: { view_model: @view_model } %>
     <div class="auction-subtitles">
       <div class="auction-subtitle">
-        <%= @auction.relative_time %>
+        <%= @view_model.relative_time %>
       </div>
       <div class="auction-subtitle">
-        <%= @auction.bid_status %>
+        <%= @view_model.bid_status %>
       </div>
     </div>
   </div>
 
   <div class=usa-grid-full>
-    <%= render partial: 'auctions/header', locals: { auction: @auction } %>
+    <%= render partial: 'auctions/header', locals: { auction: @view_model } %>
   </div>
 
   <div class="usa-width-two-thirds">
-    <%= render partial: 'auctions/auction', locals: { auction: @auction } %>
-    <%= render partial: 'auctions/bids', locals: { auction_bids: @auction } %>
+    <%= render partial: 'auctions/auction', locals: { auction: @view_model } %>
+    <%= render partial: 'auctions/bids', locals: { auction_bids: @view_model } %>
   </div>
 
   <div class="usa-width-one-third">
-    <%= render partial: @auction.bid_flash_partial,
-      locals: { auction: @auction, status: @auction.bid_status_class(flash)  } %>
+    <%= render partial: @view_model.bid_flash_partial,
+      locals: { auction: @view_model, status: @view_model.bid_status_class(flash)  } %>
 
-    <%= render partial: @auction.bid_form_partial, locals: { auction: @auction } %>
+    <%= render partial: @view_model.bid_form_partial, locals: { auction: @view_model } %>
 
     <div class="auction-detail-panel">
       <div class="auction-info">
-        <div>
-          <h6><%= @auction.start_label %></h6>
-          <p class="auction-label-info"><%= @auction.formatted_start_time %></p>
-        </div>
-        <div>
-          <h6><%= @auction.deadline_label %></h6>
-          <p class="auction-label-info"><%= @auction.formatted_end_time %></p>
-        </div>
-        <div>
-          <h6>Delivery deadline</h6>
-          <p class="auction-label-info"><%= @auction.formatted_delivery_due_at %></p>
-        </div>
-        <div>
-          <h6>Auction type:</h6>
-          <p class="auction-label-info">
-          <%= @auction.capitalized_type %>
-          (<%= link_to 'rules', @auction.rules_path %>)
-          </p>
-        </div>
-        <div>
-          <h6>Eligible vendors</h6>
-          <p class="auction-label-info"><%= @auction.eligibility_label %></p>
-        </div>
+        <% @view_model.auction_data.each do |label, data| %>
+          <%= render partial: 'auctions/data',
+            locals: { label: label, data: data } %>
+        <% end %>
 
-        <%= render partial: @auction.paid_at_partial, locals: { auction: @auction } %>
+        <h6>Auction type:</h6>
+        <p class="auction-label-info">
+        <%= @view_model.capitalized_type %>
+        (<%= link_to 'rules', @view_model.rules_path %>)
+        </p>
+
+        <%= render partial: @view_model.paid_at_partial, locals: { auction: @view_model } %>
 
         <p>
         <i class="fa fa-github"></i>
-        <a href="<%= @auction.issue_url %>">View on GitHub <icon class="fa fa-angle-double-right"></icon></a>
+        <%= link_to 'View on GitHub <icon class="fa fa-angle-double-right"></icon>'.html_safe,
+          @view_model.issue_url,
+          target: '_blank' %>
         </p>
         <p>Have feedback?</p>
-        <p>
-        <a href="mailto:micropurchase@gsa.gov">Send us an email!</a>
-        </p>
+        <p><a href="mailto:micropurchase@gsa.gov">Send us an email!</a></p>
       </div>
     </div>
   </div>

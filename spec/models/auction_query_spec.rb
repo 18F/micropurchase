@@ -1,6 +1,5 @@
 require 'rails_helper'
-
-RSpec.describe AuctionQuery do
+describe AuctionQuery do
   let(:query) { AuctionQuery.new }
 
   describe '#accepted' do

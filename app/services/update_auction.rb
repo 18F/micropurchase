@@ -12,7 +12,7 @@ class UpdateAuction
       auction.errors.add(:base, 'The vendor cannot be paid')
       false
     else
-      create_purchase_request
+      perform_approved_auction_tasks
       auction.save
     end
   end
@@ -21,7 +21,11 @@ class UpdateAuction
 
   attr_reader :auction, :params, :current_user
 
-  def create_purchase_request
+  def perform_approved_auction_tasks
+    if auction_accepted? && auction.accepted_at.nil?
+      auction.accepted_at = Time.current
+    end
+
     if should_create_cap_proposal?
       CreateCapProposalJob.perform_later(auction.id)
     end
@@ -38,7 +42,11 @@ class UpdateAuction
   end
 
   def auction_accepted_and_cap_proposal_is_blank?
-    attributes[:result] == 'accepted' && auction.cap_proposal_url.blank?
+    auction_accepted? && auction.cap_proposal_url.blank?
+  end
+
+  def auction_accepted?
+    attributes[:result] == 'accepted'
   end
 
   def winning_bidder_is_eligible_to_be_paid?

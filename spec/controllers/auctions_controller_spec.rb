@@ -44,7 +44,7 @@ describe AuctionsController do
       it 'assigns presented auction' do
         auction_record = create(:auction, :published)
         get :show, id: auction_record.id
-        auction = assigns(:auction)
+        auction = assigns(:view_model)
         expect(auction.id).to eq(auction_record.id)
       end
     end
