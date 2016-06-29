@@ -1,6 +1,6 @@
-class AuctionEnded
-  def initialize(auction)
-    @auction = auction
+class AuctionEndedJob
+  def initialize(auction_id)
+    @auction = Auction.find(auction_id)
   end
 
   def perform

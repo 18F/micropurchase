@@ -15,12 +15,9 @@ class SaveAuction
   attr_reader :auction
 
   def schedule_auction_ended_job(saved)
-    if should_schedule_auction_ended_job?(saved)
-      AuctionEnded.new(auction).delay(run_at: auction.ended_at).perform
+    if saved
+      job = AuctionEndedJob.new(auction.id)
+      Delayed::Job.enqueue(job, run_at: auction.ended_at)
     end
-  end
-
-  def should_schedule_auction_ended_job?(saved)
-    saved && !auction.ended_at.nil?
   end
 end

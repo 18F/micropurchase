@@ -12,7 +12,7 @@ end
 
 Given(/^I have won an auction$/) do
   @auction = FactoryGirl.build(:auction, :closed, :with_bidders)
-  bids = @auction.bids.sort_by(&:created_at).reverse
+  bids = @auction.bids.sort_by(&:amount)
   b = bids.first
   b.update_attribute(:bidder_id, @user.id)
   SaveAuction.new(@auction).perform
@@ -20,7 +20,7 @@ end
 
 Given(/^I have lost an auction$/) do
   @auction = FactoryGirl.build(:auction, :closed, :with_bidders)
-  bids = @auction.bids.sort_by(&:created_at).reverse
+  bids = @auction.bids.sort_by(&:amount)
   b = bids.last
   b.update_attribute(:bidder_id, @user.id)
   SaveAuction.new(@auction).perform

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe AuctionEnded do
+describe AuctionEndedJob do
   describe '#perform' do
     context 'an auction ends' do
       it 'sends the winning bidder email' do
@@ -14,7 +14,7 @@ describe AuctionEnded do
 
         expect(winning_bidder_email_sender_double).to receive(:perform)
 
-        AuctionEnded.new(auction).perform
+        AuctionEndedJob.new(auction.id).perform
       end
 
       it 'sends the losing bidders email' do
@@ -30,7 +30,7 @@ describe AuctionEnded do
 
         expect(losing_bidder_email_sender_double).to receive(:perform)
 
-        AuctionEnded.new(auction).perform
+        AuctionEndedJob.new(auction.id).perform
       end
     end
   end

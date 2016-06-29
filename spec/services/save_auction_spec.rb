@@ -34,36 +34,11 @@ describe SaveAuction do
       end
     end
 
-    context 'setting auction.ended_at' do
-      it 'queues and schedules AuctionEnded#perform' do
-        auction = build(:auction, ended_at: 2.days.from_now)
+    it 'queues and schedules AuctionEndedJob' do
+      auction = build(:auction, ended_at: 2.days.from_now)
 
-        auction_ended_double = instance_double("AuctionEnded")
-        allow(AuctionEnded).to receive(:new)
-          .with(auction)
-          .and_return(auction_ended_double)
-
-        delayed_double = double
-        allow(delayed_double).to receive(:perform)
-
-        allow(auction_ended_double).to receive(:delay)
-          .with(run_at: auction.ended_at)
-          .and_return(delayed_double)
-
-        expect(auction_ended_double).to receive(:delay)
-          .with(run_at: auction.ended_at)
-
-        SaveAuction.new(auction).perform
-      end
-    end
-
-    context 'not setting auction.ended_at' do
-      it 'does not queue and schedule AuctionEnded#perform' do
-        auction = build(:auction, ended_at: nil)
-
-        expect { SaveAuction.new(auction).perform }
-          .not_to change { Delayed::Job.count }
-      end
+      expect { SaveAuction.new(auction).perform }
+        .to change { Delayed::Job.count }.by(1)
     end
   end
 end
