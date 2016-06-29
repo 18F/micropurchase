@@ -4,29 +4,25 @@ Feature: Vendor views closed auctions
   So that I see who won
 
   Scenario: I am the winner
-    Given there is a closed auction
-    And I am an authenticated vendor
-    And I have placed the lowest bid
+    Given I am an authenticated vendor
+    And I have won an auction
     When I visit the auction page
     Then I should see the auction had a winning bid with name
     And I should see I am the winner
     And I should see when the auction started
     And I should see when the auction ended
     And there should be meta tags for the closed auction
-    And an email notification is sent to the winning bidder
     And I should receive an email notifying me that I won
 
   Scenario: I am not the winner
-    Given there is a closed auction
-    And I am an authenticated vendor
-    And I have placed a bid that is not the lowest
+    Given I am an authenticated vendor
+    And I have lost an auction
     When I visit the auction page
     Then I should see the auction had a winning bid with name
     Then I should see I am not the winner
     And I should see when the auction started
     And I should see when the auction ended
     And there should be meta tags for the closed auction
-    And email notifications are sent to losing bidders
     And I should receive an email notifying me that I did not win
 
   Scenario: I have not bid on the auction
