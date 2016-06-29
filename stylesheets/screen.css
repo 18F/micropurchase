@@ -1614,12 +1614,14 @@ a[id]{
 /* @group layout-auctions-show */
 
 .layout-auctions-show main .wrapper,
-.layout-auctions-bids main .wrapper{
+.layout-auctions-bids main .wrapper,
+.layout-auctions-edit main .wrapper{
 	border: 1px solid #ccc;
 	border-radius: 6px;
 }
 
-.layout-auctions-show main .auction-header{
+.layout-auctions-show main .auction-header,
+.layout-auctions-edit main .auction-header{
 	position: relative;
 	margin-bottom: 2em;
 }
@@ -1674,74 +1676,6 @@ a[id]{
 
 .layout-auctions-show main .auction-footer::after {
 	display: none;
-}
-
-
-@-moz-keyframes uil-ring-anim {
-  0% {
-    -ms-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -ms-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-@-ms-keyframes uil-ring-anim {
-  0% {
-    -ms-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -ms-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
- 
-@-webkit-keyframes uil-ring-anim {
-  0% {
-    -ms-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-
-  }
-  100% {
-    -ms-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-@-o-keyframes uil-ring-anim {
-  0% {
-    -ms-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -ms-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
 }
 
 .auction-place-bid .notice{
@@ -1870,13 +1804,17 @@ a[id]{
 
 @media screen and (min-width: 1066.66px){	
 	.layout-auctions-show .auction-header .auction-place-bid{ display: none; }
+	
 	.layout-auctions-show main .wrapper .page,
-	.layout-auctions-show main .wrapper .auction-footer{
+	.layout-auctions-show main .wrapper .auction-footer,
+	.layout-auctions-edit .auction .page,
+	.layout-auctions-edit .auction .auction-footer{
 		float: left;
 		width: 100%;
 	}
 	
-	.layout-auctions-show main .wrapper .page{
+	.layout-auctions-show main .wrapper .page,
+	.layout-auctions-edit .auction .page{
 		width: 630px;
 		padding-left: 20px;
 		padding-top: 0;
@@ -1886,7 +1824,8 @@ a[id]{
 		width: 100%;
 	}
 
-	.layout-auctions-show main .wrapper .auction-footer{
+	.layout-auctions-show main .wrapper .auction-footer,
+	.layout-auctions-edit .auction .auction-footer{
 		width: 312px;
 		float: right;
 		margin: 0;
@@ -1944,6 +1883,102 @@ a[id]{
 	font-weight: 600;
 }
 
+
+/* @end */
+
+/* @group layout-auctions-edit */
+
+.layout-auctions-edit .auction .auction-header{
+	padding: 10px;
+}
+.layout-auctions-edit .auction .auction-header .field-title input{
+	font-size: 28px;
+	font-family: inherit;	
+}
+
+.layout-auctions-edit .auction .auction-header .field-time-remaining,
+.layout-auctions-edit .auction .auction-header .field-time-remaining .label-text,
+.layout-auctions-edit .auction .auction-header .field-time-remaining input,
+.layout-auctions-edit .auction .auction-header .field-time-starting-bid{
+	display: inline-block;
+	width: auto;
+}
+
+.layout-auctions-edit .field-date,
+.layout-auctions-edit .fieldset-time{
+	float: left;
+}
+
+.layout-auctions-edit .field-date{
+	width: 5.1em;
+	overflow: hidden;
+	margin-right: 0.4em;
+}
+
+.layout-auctions-edit .field-date input{
+	width: 100%;
+}
+
+.layout-auctions-edit .fieldset-time{
+	width: 12em;
+	padding: 0;
+}
+
+.layout-auctions-edit .fieldset-date-time,
+.layout-auctions-edit .fieldset-time{
+	padding: 0;
+	border: none;
+	margin: ;
+}
+
+.layout-auctions-edit .fieldset-date-time .fieldset-time{
+	margin: 0;
+	margin-top: -1px;
+}
+
+.layout-auctions-edit .fieldset-date-time .fieldset-time .field {
+	padding-bottom: 28px;
+	position: relative;
+}
+
+.layout-auctions-edit .fieldset-date-time .fieldset-time .field select{
+	background: white;
+}
+
+.layout-auctions-edit .fieldset-date-time .fieldset-time .field::after{
+	bottom: 28px;
+	z-index: 1;
+	border-width: 5px;
+}
+
+.layout-auctions-edit .fieldset-date-time .fieldset-time .field-time-hours select{
+	border-radius: 3px 0 0 3px;
+}
+
+.layout-auctions-edit .fieldset-date-time .fieldset-time .field-time-minutes select{
+	border-radius: 0;
+	border-left: none;
+	border-right: none;
+}
+
+.layout-auctions-edit .fieldset-date-time .fieldset-time .field-time-meridian select{
+	border-radius: 0 3px 3px 0;
+}
+
+
+.layout-auctions-edit .fieldset-date-time .fieldset-time .field .label-text{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	font-size: 12px;
+	
+}
+.layout-auctions-edit .fieldset-date-time .fieldset-time .field-time-hours,
+.layout-auctions-edit .fieldset-date-time .fieldset-time .field-time-minutes,
+.layout-auctions-edit .fieldset-date-time .fieldset-time .field-time-meridian{
+	width: 30%;
+	float: left;
+}
 
 /* @end */
 

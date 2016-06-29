@@ -7,88 +7,202 @@ excerpt: None
 <body class="no-js layout-auctions-edit">
   <a class="a-skip-to-main" href="#main">Skip to main content</a>
   {% include site-header.html %}
-  <nav class="breadcrumbs">
-    <div class="wrapper">
-      <ol>
-        <li><a href="{{site.baseurl}}/">Auctions</a></li>
-        <li>Open Opportunities: Create Agency Admin User Role</li>
-      </ol>
-    </div>
-  </nav>
+  <div class="notice">
+    You are currently editing this auction.
+    <button class="button">Save edits</button>
+    or
+    <a href="{{site.baseurl}}/auctions/show">cancel</a> and return.
+  </div>
   <main class="auction h-entry" role="main" id="main">
     <div class="wrapper">
       <header class="auction-header">
-        <h1 class="p-name">
-          Open Opportunities: Create Agency Admin User Role
-        </h1>
-        <dl>
-          <dt class="auction-time-remaining">Time remaining</dt>
-          <dd class="auction-time-remaining">
-            12 days
-            <span class="auction-time-left-alternate">Ends: 05/25/2016 at 5:00pm EST</span>
-          </dd>
-          <dt class="auction-status">Status</dt>
-          <dd class="auction-status auction-status-open"><span>Open</span></dd>
-          <dt class="auction-current-bid">Current bid</dt>
-          <dd class="auction-current-bid">
-            $3,500.00
-          </dd>
-        </dl>
+        <div class="field field-title">
+          <label>
+            <input type="text" name="" value="Open Opportunities: Create Agency Admin User Role">
+          </label>
+        </div>
+        <div class="field field-time-remaining">
+          <label>
+            <span class="label-text">Time remaining</span>
+            <input type="text" name="">
+          </label>
+        </div>
+        <div class="field field-starting-bid">
+          <label>
+            <span class="label-text">Starting bid</span>
+            <input type="text" name="">
+          </label>
+        </div>
+        <div class="field field-select field-status">
+          <label>
+            <span class="label-text">Status</span>
+            <select>
+              <option>Open</option>
+              <option>Closed</option>
+            </select>
+          </label>
+        </div>      
       </header>
       <div class="page">
-        <p class="issue-description p-summary">Open Opportunities uses the open source sails.js MVC framework (Node.js / Express). Currently, a task creator should receive the following notification if a task they created receives a comment. However, this functionality has broken, without breaking the build's test suite. This issue sees the creation of a failing test (or tests) that will only pass when the notification functionality is restored, along with the fix to make those tests pass.</p>
-        <h2>Auction rules</h2>
-        <p>Registered users on micropurchase.18f.gov may bid to deliver the requirements in this auction. The lowest bidder at the time the auction closes shall receive the award. The awarded bidder shall have five business days to deliver the requirements. Upon successful completion of the requirements, 18F shall pay the winning bidder. See our <a href="https://micropurchase.18f.gov/faq">rules</a> page</p>
-        <h2>Acceptance criteria</h2>
-        <h3>1. Conditions for the test to fail</h3>
-        <p>When the bug is present, and a user who is not the task creator comments on the task, and no email is generated</p>
-        <p>Then test(s) written as part of this micro-purchase will fail.</p>        
+        <div class="field">
+          <label>
+            <span class="label-text">Project background</span>
+            <textarea rows="5">Open Opportunities uses the open source sails.js MVC framework (Node.js / Express). Currently, a task creator should receive the following notification if a task they created receives a comment. However, this functionality has broken, without breaking the build's test suite. This issue sees the creation of a failing test (or tests) that will only pass when the notification functionality is restored, along with the fix to make those tests pass.</textarea>
+          </label>
+        </div>
+        <div class="field">
+          <label>
+            <span class="label-text">Acceptance criteria</span>
+            <textarea rows="15">
+          ### Conditions for the test to fail
+          When the bug is present, and a user who is not the task creator comments on the task, and no email is generated
+          Then test(s) written as part of this micro-purchase will fail.
+
+            </textarea>
+          </label>
+        </div>    
       </div>
       <footer class="auction-footer">
-        <section class="auction-place-bid auction-place-bid-closed">
-          <h1>This auction is closed and is no longer accepting bids.</h1>
-        </section>
-        <section class="auction-place-bid auction-place-bid-preview">
-          <h1>This auction has yet to open and is not currently accepting bids.</h1>
-        </section>
-        <section class="auction-place-bid auction-place-bid-bid-placed">
-          <h1>You have placed a bid for $3,400.00.</h1>
-        </section>
-        <section class="auction-place-bid auction-place-bid-high-bid">
-          <h1>You are the high bidder.</h1>
-        </section>
-        <section class="auction-place-bid is-loading">
-          <h1>You are the high bidder.</h1>
-        </section>
-        <section class="auction-place-bid auction-place-bid has-errors">
-          <h1>Your bid was not accepted.</h1>
-          <p>The maximum (current) bid is $3414.00.</p>
-          <form>
-            <div class="field has-error"> 
+        <fieldset class="fieldset fieldset-date-time fieldset-start-date-time">
+          <legend>Start date &amp; time</legend>
+          <div class="field field-date">
+            <label>
+              <span class="label-text">Date</span>
+              <input type="date" name="">
+            </label>
+          </div>
+          <fieldset class="fieldset fieldset-time">
+            <legend>Time</legend>
+            <div class="field field-select field-time-hours">
               <label>
-                <span class="label-text">Your bid</span>
-                <input type="number" value="3501"></input>
+                <span class="label-text">Hours</span>
+                <select>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>9</option>
+                  <option>10</option>
+                  <option>11</option>
+                  <option>12</option>
+                </select>
               </label>
             </div>
-            <button>Place bid</button>
-          </form>
-        </section>
-        <section class="auction-place-bid">
-          <p>The maximum (current) bid is $3414.00.</p>
-          <form>
-            <div class="field"> 
+            <div class="field field-select field-time-minutes">
               <label>
-                <span class="label-text">Your bid</span>
-                <input type="number"></input>
+                <span class="label-text">Minutes</span>
+                <select>
+                  <option>00</option>
+                  <option>15</option>
+                  <option>30</option>
+                  <option>45</option>
+                </select>
               </label>
             </div>
-            <button>Place bid</button>
-          </form>
+            <div class="field field-select field-time-meridian">
+              <label>
+                <span class="label-text">Meridian</span>
+                <select>
+                  <option>AM</option>
+                  <option>PM</option>
+                </select>
+              </label>
+            </div>
+          </fieldset>
+        </fieldset>
+        <fieldset class="fieldset fieldset-date-time fieldset-end-date-time">
+          <legend>End date &amp; time</legend>
+          <div class="field field-date">
+            <label>
+              <span class="label-text">Date</span>
+              <input type="date" name="">
+            </label>
+          </div>
+          <fieldset class="fieldset fieldset-time">
+            <legend>Time</legend>
+            <div class="field field-select field-time-hours">
+              <label>
+                <span class="label-text">Hours</span>
+                <select>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>9</option>
+                  <option>10</option>
+                  <option>11</option>
+                  <option>12</option>
+                </select>
+              </label>
+            </div>
+            <div class="field field-select field-time-minutes">
+              <label>
+                <span class="label-text">Minutes</span>
+                <select>
+                  <option>00</option>
+                  <option>15</option>
+                  <option>30</option>
+                  <option>45</option>
+                </select>
+              </label>
+            </div>
+            <div class="field field-select field-time-meridian">
+              <label>
+                <span class="label-text">Meridian</span>
+                <select>
+                  <option>AM</option>
+                  <option>PM</option>
+                </select>
+              </label>
+            </div>
+          </fieldset>
+        </fieldset>
+        <div class="field field-select">
+          <label>
+            <span class="label-text">Delivery deadline</span>
+            <select>
+              <option>1 days</option>
+              <option>2 days</option>
+              <option>3 days</option>
+              <option>5 days</option>
+              <option>7 days</option>
+            </select>
+          </label>
+        </div>
+        <div class="field">
+          <label>
+            <span class="label-text">Github Repo</span>
+            <input type="text" name="">
+          </label>
+        </div>
+        <section class="auction-bill-to">
+          <div class="field field-select">
+            <label>
+              <span class="label-text">Customer</span>
+              <select>
+                <option>Customer 1</option>
+                <option>Customer 2</option>
+              </select>
+            </label>
+          </div>    
+          <div class="field field-select">
+            <label>
+              <span class="label-text">Purchase card</span>
+              <select>
+                <option>Customer 1</option>
+                <option>Customer 2</option>
+              </select>
+            </label>
+          </div>    
         </section>
-        <dl>
-          <dt class="auction-project">Project</dt>
-          <dd class="auction-project"><a href=""></a>Open Opportunities</dd>
-        </dl>
       </footer>
     </div>
   </main>
