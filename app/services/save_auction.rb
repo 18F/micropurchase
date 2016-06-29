@@ -9,7 +9,7 @@ class SaveAuction
     if should_schedule_auction_ended_job?(saved)
       AuctionEnded
         .new(auction)
-        .delay(run_at: auction.ended_at)
+        .delay(run_at: auction.ended_at + 5.minutes)
         .perform
     end
 
