@@ -6,7 +6,6 @@ Feature: Vendor views closed auctions
   Scenario: I am the winner
     Given I am an authenticated vendor
     And I have won an auction
-    And the auction ends
     When I visit the auction page
     Then I should see the auction had a winning bid with name
     And I should see I am the winner
@@ -18,7 +17,6 @@ Feature: Vendor views closed auctions
   Scenario: I am not the winner
     Given I am an authenticated vendor
     And I have lost an auction
-    And the auction ends
     When I visit the auction page
     Then I should see the auction had a winning bid with name
     Then I should see I am not the winner
