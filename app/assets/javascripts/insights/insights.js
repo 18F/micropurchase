@@ -14,4 +14,4 @@
   }
 
   $(document).ready(window.winners.onReady);
-})(this);
+}(this));

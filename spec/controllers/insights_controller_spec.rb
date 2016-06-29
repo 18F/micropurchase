@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe WinnersController do
+describe InsightsController do
   describe '#index' do
     it 'renders the winners dashboard page' do
       get :index

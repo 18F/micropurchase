@@ -38,7 +38,7 @@ Rails.application.routes.draw do
   resources :users, only: [:update]
   get 'edit_user', to: 'users#edit'
 
-  resources :winners, only: [:index]
+  resources :insights, only: [:index]
 
   # Map current API requests to new controller for now
   namespace :api, defaults: { format: 'json' } do

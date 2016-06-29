@@ -1,4 +1,4 @@
-describe('PreviousWinners', function () {
+describe('Insights', function () {
   var winners,
     mock,
     auctions,
