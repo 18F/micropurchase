@@ -1905,25 +1905,6 @@ a[id]{
 	width: auto;
 }
 
-.layout-auctions-edit .field-date,
-.layout-auctions-edit .fieldset-time{
-	float: left;
-}
-
-.layout-auctions-edit .field-date{
-	width: 5.1em;
-	overflow: hidden;
-	margin-right: 0.4em;
-}
-
-.layout-auctions-edit .field-date input{
-	width: 100%;
-}
-
-.layout-auctions-edit .fieldset-time{
-	width: 12em;
-	padding: 0;
-}
 
 .layout-auctions-edit .fieldset-date-time,
 .layout-auctions-edit .fieldset-time{
@@ -1982,12 +1963,13 @@ a[id]{
 }
 
 .layout-auctions-edit .auction .auction-footer dl,
+.layout-auctions-edit .auction .auction-footer dl dd,
 .layout-auctions-edit .auction .auction-footer p {
 	line-height: 1.4em;	
 	margin-bottom: 0.7em;
 }
 
-.layout-auctions-edit .auction .auction-footer p {}
+.layout-auctions-edit .auction .auction-footer p a { color: #006fbe; text-decoration: underline;}
 
 /* @end */
 
