@@ -49,7 +49,7 @@ Then(/^I should see the start price for the auction is \$(\d+)$/) do |price|
 end
 
 Then(/^I should see that the auction has a CAP Proposal URL$/) do
-  expect(page).to have_content("CAP proposal URL: #{@auction.reload.cap_proposal_url}")
+  expect(page).to have_content("CAP proposal URL #{@auction.reload.cap_proposal_url}")
 end
 
 Then(/^I should see that the auction was accepted$/) do

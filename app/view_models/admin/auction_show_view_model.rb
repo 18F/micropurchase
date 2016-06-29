@@ -1,8 +1,37 @@
 class Admin::AuctionShowViewModel < Admin::BaseViewModel
-  attr_reader :auction
+  attr_reader :auction, :current_user
 
-  def initialize(auction)
+  def initialize(auction:, current_user:)
     @auction = auction
+    @current_user = current_user
+  end
+
+  def csv_report
+    if over?
+      'admin/auctions/csv_report'
+    else
+      'components/null'
+    end
+  end
+
+  def admin_data
+    {
+      'Published status' => auction.published,
+      'Start date and time' => formatted_date(auction.started_at),
+      'End date and time' => formatted_date(auction.ended_at),
+      'Delivery deadline date and time' => formatted_date(auction.delivery_due_at),
+      'Auction type' => capitalized_type,
+      'Eligible vendors' => eligibility_label,
+      'Starting price' => Currency.new(auction.start_price).to_s,
+      'GitHub repo URL' => auction.github_repo,
+      'GitHub issue URL' => auction.issue_url,
+      'Accepted at' => formatted_date(auction.accepted_at),
+      'Delivery URL' => auction.delivery_url,
+      'Billable to' => auction.billable_to,
+      'Purchase card' => auction.purchase_card,
+      'Paid at' => formatted_date(auction.paid_at),
+      'CAP proposal URL' => auction.cap_proposal_url
+    }
   end
 
   def id
@@ -13,64 +42,64 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
     auction.title
   end
 
-  def billable_to
-    auction.billable_to
+  def summary
+    auction.summary
   end
 
-  def status_partial
-    if over?
-      'admin/auctions/csv_report'
-    else
-      'components/null'
+  def capitalized_type
+    auction.type.dasherize.capitalize
+  end
+
+  def relative_time
+    status_presenter.relative_time
+  end
+
+  def sealed_bids_partial
+    'components/null'
+  end
+
+  def veiled_bids
+    auction.bids.map do |bid|
+      Admin::BidListItem.new(bid: bid, user: current_user)
     end
   end
 
-  def bids_partial
-    if auction.bids.any?
-      'admin/auctions/bids'
+  def eligibility_label
+    if AuctionThreshold.new(auction).small_business?
+      'Small-business only'
     else
-      'components/null'
+      'SAM.gov only'
     end
   end
 
-  def bids
-    auction.bids.map { |bid| Admin::BidListItem.new(bid) }
+  def label
+    status_presenter.label
   end
 
-  def started_at
-    formatted_time(auction.started_at)
+  def label_class
+    status_presenter.label_class
   end
 
-  def ended_at
-    formatted_time(auction.ended_at)
-  end
-
-  def paid_at
-    formatted_time(auction.paid_at)
-  end
-
-  def accepted_at
-    formatted_time(auction.accepted_at)
-  end
-
-  def cap_proposal_url
-    auction.cap_proposal_url
-  end
-
-  def html_summary
-    return '' if auction.summary.blank?
-    MarkdownRender.new(auction.summary).to_s
+  def distance_of_time_to_now
+    "#{HumanTime.new(time: auction.ended_at).distance_of_time_to_now} left"
   end
 
   def html_description
-    return '' if auction.description.blank?
     MarkdownRender.new(auction.description).to_s
+  end
+
+  def html_summary
+    MarkdownRender.new(auction.summary).to_s
+  end
+
+  def admin_edit_auction_partial
+    'auctions/edit_auction_link'
   end
 
   private
 
-  def available?
-    auction_status.available?
+  def status_presenter
+    @_status_presenter ||= StatusPresenterFactory.new(auction).create
   end
 
   def over?
@@ -81,7 +110,11 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
     AuctionStatus.new(auction)
   end
 
-  def formatted_time(time)
-    DcTimePresenter.convert_and_format(time)
+  def rules
+    @_rules ||= RulesFactory.new(auction).create
+  end
+
+  def formatted_date(date)
+    DcTimePresenter.convert_and_format(date)
   end
 end
