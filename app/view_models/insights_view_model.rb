@@ -72,7 +72,7 @@ class InsightsViewModel
   end
 
   def total_delivery_time_length
-    total_time_length(published_auctions, 'delivery_due_at', 'ended_at')
+    total_time_length(accepted_auctions, 'accepted_at', 'ended_at')
   end
 
   def total_auction_time_length
