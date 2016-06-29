@@ -32,7 +32,12 @@
     line-height: 1.3em;
   }
 
+  li {
+    display: block;
+  }
+
   ul {
+    display: block;
     margin-bottom: .5em;
   }
 }

@@ -1,5 +1,5 @@
 class Admin::AuctionsController < Admin::BaseController
-  layout 'admin', except: [:preview, :show]
+  layout 'admin', except: [:preview]
 
   def index
     @view_model = Admin::AuctionsIndexViewModel.new
