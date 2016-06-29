@@ -7,9 +7,7 @@ Then(/^an email notification is sent to the winning bidder$/) do
 end
 
 Then(/^I should receive an email notifying me that I did not win$/) do
-  emails = ActionMailer::Base.deliveries
-  email = emails.find {|email| email.to.include? @user.email}
-
+  email = ActionMailer::Base.deliveries.first
   expect(email.to.first).to eq @user.email
   expect(email.body.encoded).to include(
     I18n.t(
@@ -21,7 +19,6 @@ end
 
 Then(/^I should receive an email notifying me that I won$/) do
   email = ActionMailer::Base.deliveries.first
-
   expect(email.to.first).to eq @user.email
   expect(email.body.encoded).to include(
     I18n.t('mailers.auction_mailer.winning_bidder_notification.para_2', policy_page_url: faq_url)
