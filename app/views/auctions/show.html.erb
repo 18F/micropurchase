@@ -4,7 +4,7 @@
   <%= render partial: '/auctions/data_tags', locals: { auction: @view_model } %>
 <% end %>
 
-<div>
+<div class="usa-grid">
   <%= link_to(
     "<icon class='fa fa-angle-double-left'></icon> Back to all auctions".html_safe,
     root_path,
@@ -36,9 +36,7 @@
     </div>
   </div>
 
-  <div class=usa-grid-full>
-    <%= render partial: 'auctions/header', locals: { auction: @view_model } %>
-  </div>
+  <%= render partial: 'auctions/header', locals: { auction: @view_model } %>
 
   <div class="usa-width-two-thirds">
     <%= render partial: 'auctions/auction', locals: { auction: @view_model } %>

@@ -10,4 +10,12 @@
 
 .auction-wrapper .issue-list-item {
   display: flex;
+
+  &:nth-child(2n) {
+    @include omega();
+  }
+}
+
+.auction-wrapper .issue-label {
+  padding: $site-margins;
 }

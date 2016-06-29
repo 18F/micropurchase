@@ -8,20 +8,6 @@ a:focus {
   color: $links-secondary;
 }
 
-.link-highlighted {
-  background-color: $branding-darkest;
-  color: $color-white;
-  padding: rem(1px);
-  padding-left: $border-radius;
-  padding-right: $border-radius;
-  text-decoration: none;
-
-  &:hover,
-  &:focus {
-    text-decoration: underline;
-  }
-}
-
 .breadcrumb-link {
   display: block;
   margin-top: $base-padding;

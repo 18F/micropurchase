@@ -1,6 +1,6 @@
 <% if flash.any? %>
     <% flash.to_hash.slice("alert", "error", "notice", "success", "warning").each do |key, value| -%>
-      <div class="flashes">
+      <div class="flashes usa-grid">
         <div class="usa-alert usa-alert-<%= key %>">
           <div class="usa-alert-body">
             <p class="usa-alert-text"><%= raw value %></p>

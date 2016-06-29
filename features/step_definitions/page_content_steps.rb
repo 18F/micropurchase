@@ -50,7 +50,7 @@ Then(/^I will not see a warning I must be an admin$/) do
 end
 
 Then(/^I should see the auctions in reverse start date order$/) do
-  first_start_date = page.find(:xpath, '/html/body/div/div/div/div/div/table/tbody/tr[1]/td[3]').text
-  second_start_date = page.find(:xpath, '/html/body/div/div/div/div/div/table/tbody/tr[2]/td[3]').text
+  first_start_date = page.find(:xpath, '/html/body/div/div/div/div/table/tbody/tr[1]/td[3]').text
+  second_start_date = page.find(:xpath, '/html/body/div/div/div/div/table/tbody/tr[2]/td[3]').text
   expect(DateTime.parse(first_start_date)).to be > DateTime.parse(second_start_date)
 end
