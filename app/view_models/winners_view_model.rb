@@ -13,7 +13,7 @@ class WinnersViewModel
 
   def unique_bidders_per_auction
     calculate_average(
-      completed_auctions.map(&:bidders).flatten.uniq.count,
+      unique_bidders_count_per_auction,
       completed_auction_count
     )
   end
@@ -73,6 +73,12 @@ class WinnersViewModel
     total_time_length(published_auctions, 'ended_at', 'started_at')
   end
 
+  def unique_bidders_count_per_auction
+    completed_auctions.map(&:bidders).map do |bidders|
+      bidders.uniq.size
+    end.reduce(:+)
+  end
+
   def total_time_length(auctions, first_time, second_time)
     auctions.map do |auction|
       auction.send(first_time) - auction.send(second_time)
@@ -92,11 +98,11 @@ class WinnersViewModel
   end
 
   def published_auction_count
-    @_published_auction_count ||= published_auctions.count
+    @_published_auction_count ||= published_auctions.count.to_f
   end
 
   def completed_auction_count
-    @_completed_auction_count ||= completed_auctions.count
+    @_completed_auction_count ||= completed_auctions.count.to_f
   end
 
   def completed_auctions
@@ -119,7 +125,7 @@ class WinnersViewModel
 
   def calculate_average(value, auction_count)
     if auction_count > 0
-      value / auction_count
+      (value / auction_count).round
     else
       'n/a'
     end

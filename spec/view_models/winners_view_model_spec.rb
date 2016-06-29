@@ -3,9 +3,11 @@ require 'rails_helper'
 describe WinnersViewModel do
   describe '#unique_bidders_per_auction' do
     it "returns average number of unique vendors who have submitted bids" do
+      _auction_with_two_unique_bidders =
+        create(:auction, :completed, bids: [create(:bid), create(:bid)])
+      _auction_with_one_unique_bidder =
+        create(:auction, :completed, bids: [create(:bid)])
       user = create(:user)
-      auction_with_one_unique_bidder = create(:auction, :completed)
-      create(:bid, auction: auction_with_one_unique_bidder)
       auction_with_three_unique_bidders = create(:auction, :completed)
       create(:bid, auction: auction_with_three_unique_bidders, bidder: user)
       create(:bid, auction: auction_with_three_unique_bidders, bidder: user)
