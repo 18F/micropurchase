@@ -2,6 +2,7 @@ Feature: Admin creates auctions in the admins panel
   As an admin
   I should be able to create auctions
 
+  @background_jobs_off
   Scenario: Adding an auction
     Given I am an administrator
     And there is a client account to bill to
