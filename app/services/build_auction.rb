@@ -1,4 +1,4 @@
-class CreateAuction
+class BuildAuction
   attr_reader :auction
 
   def initialize(params, user)

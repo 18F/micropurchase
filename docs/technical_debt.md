@@ -238,11 +238,11 @@ administrator creates a new auction, the relevant code in the
 controller looks like this:
 
 ``` ruby
-@auction = CreateAuction.new(params, current_user).perform
+@auction = BuildAuction.new(params, current_user).perform
 
 ```
 
-1. [CreateAuction](../app/services/create_auction) is another Service
+1. [BuildAuction](../app/services/build_auction.rb) is another Service
    object that represents the action of creating an auction and sticks
    to the familiar pattern with a `perform` method.
 2. Within this class, the
