@@ -51,8 +51,8 @@ When(/^I visit the admin users page$/) do
   visit admin_users_path
 end
 
-When(/^I visit the previous winners page$/) do
-  visit winners_path
+When(/^I visit the insights page$/) do
+  visit insights_path
 end
 
 Then(/^I should be on the home page$/) do
