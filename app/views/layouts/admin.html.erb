@@ -21,12 +21,9 @@
     <div class="content-wrapper">
       <div class="usa-grid">
         <%= render partial: 'admin/secondary_nav', locals: { view_model: @view_model } %>
-        <div class="usa-width-one-whole">
-          <div class="admin-body">
-            <%= render "flashes" %>
-            <%= yield %>
-          </div>
-        </div>
+      <div>
+        <%= render "flashes" %>
+        <%= yield %>
       </div>
     </div>
   </div>

@@ -1,4 +1,3 @@
-<%= render partial: 'admin/secondary_nav', locals: { view_model: @view_model } %>
 <div class="auction-show usa-grid issue-list-item">
   <div class="issue-content-wrapper">
     <div class='usa-width-one-whole issue-label'>
@@ -23,9 +22,7 @@
     </div>
   </div>
 
-  <div class=usa-grid-full>
-    <%= render partial: 'auctions/header', locals: { auction: @view_model } %>
-  </div>
+  <%= render partial: 'auctions/header', locals: { auction: @view_model } %>
 
   <div class="usa-width-two-thirds">
     <%= render partial: 'admin/auctions/auction', locals: { auction: @view_model } %>

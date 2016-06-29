@@ -11,29 +11,8 @@
 }
 
 .auction-description {
-  h1 {
-    line-height: 1.1em;
-    margin-bottom: .5em;
-    margin-top: .2em;
-  }
-
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    line-height: 1.1em;
-    margin-bottom: .1em;
-    margin-top: .2em;
-  }
-
-  p,
-  li {
-    line-height: 1.3em;
-  }
-
   ul {
-    margin-bottom: .5em;
+    @include unstyled-list;
   }
 }
 

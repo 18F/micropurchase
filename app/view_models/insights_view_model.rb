@@ -1,4 +1,4 @@
-class WinnersViewModel
+class InsightsViewModel
   def active_count
     AuctionQuery.new.active_auction_count
   end
@@ -13,7 +13,7 @@ class WinnersViewModel
 
   def unique_bidders_per_auction
     calculate_average(
-      completed_auctions.map(&:bidders).flatten.uniq.count,
+      unique_bidders_count_per_auction,
       completed_auction_count
     )
   end
@@ -36,19 +36,19 @@ class WinnersViewModel
   end
 
   def average_auction_length
-    calculate_average_time(total_auction_time_length, published_auction_count)
+    calculate_average(total_auction_time_length, published_auction_count, 'time')
   end
 
   def average_delivery_time
-    calculate_average_time(total_delivery_time_length, accepted_auctions_count)
+    calculate_average(total_delivery_time_length, accepted_auctions_count, 'time')
   end
 
   def average_winning_bid
-    calculate_average_price(total_winning_bid_amount, completed_auction_count)
+    calculate_average(total_winning_bid_amount, completed_auction_count, 'price')
   end
 
   def average_starting_price
-    calculate_average_price(total_starting_price, completed_auction_count)
+    calculate_average(total_starting_price, completed_auction_count, 'price')
   end
 
   def small_business_count
@@ -65,8 +65,14 @@ class WinnersViewModel
 
   private
 
+  def unique_bidders_count_per_auction
+    completed_auctions.map(&:bidders).map do |bidders|
+      bidders.uniq.size
+    end.reduce(:+)
+  end
+
   def total_delivery_time_length
-    total_time_length(published_auctions, 'delivery_due_at', 'ended_at')
+    total_time_length(accepted_auctions, 'accepted_at', 'ended_at')
   end
 
   def total_auction_time_length
@@ -117,27 +123,21 @@ class WinnersViewModel
     @_published_auctions ||= AuctionQuery.new.published
   end
 
-  def calculate_average(value, auction_count)
+  def calculate_average(value, auction_count, type = nil)
     if auction_count > 0
-      value / auction_count
+      calculate(value, auction_count, type)
     else
       'n/a'
     end
   end
 
-  def calculate_average_time(value, auction_count)
-    if auction_count > 0
+  def calculate(value, auction_count, type = nil)
+    if type == 'time'
       HumanTime.new(time: (value / auction_count)).distance_of_time
+    elsif type == 'price'
+      Currency.new(value / auction_count).to_s
     else
-      'n/a'
-    end
-  end
-
-  def calculate_average_price(amount, auction_count)
-    if auction_count > 0
-      Currency.new(amount / auction_count).to_s
-    else
-      'n/a'
+      (value / auction_count.to_f).round
     end
   end
 end
