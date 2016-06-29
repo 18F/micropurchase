@@ -1889,7 +1889,8 @@ a[id]{
 /* @group layout-auctions-edit */
 
 .layout-auctions-edit .auction .auction-header{
-	padding: 10px;
+	padding: 20px 20px 0;
+	border-bottom: 1px solid #eee;
 }
 .layout-auctions-edit .auction .auction-header .field-title input{
 	font-size: 28px;
@@ -1979,6 +1980,14 @@ a[id]{
 	width: 30%;
 	float: left;
 }
+
+.layout-auctions-edit .auction .auction-footer dl,
+.layout-auctions-edit .auction .auction-footer p {
+	line-height: 1.4em;	
+	margin-bottom: 0.7em;
+}
+
+.layout-auctions-edit .auction .auction-footer p {}
 
 /* @end */
 

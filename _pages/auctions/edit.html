@@ -21,12 +21,6 @@ excerpt: None
             <input type="text" name="" value="Open Opportunities: Create Agency Admin User Role">
           </label>
         </div>
-        <div class="field field-time-remaining">
-          <label>
-            <span class="label-text">Time remaining</span>
-            <input type="text" name="">
-          </label>
-        </div>
         <div class="field field-starting-bid">
           <label>
             <span class="label-text">Starting bid</span>
@@ -64,15 +58,14 @@ excerpt: None
       </div>
       <footer class="auction-footer">
         <fieldset class="fieldset fieldset-date-time fieldset-start-date-time">
-          <legend>Start date &amp; time</legend>
           <div class="field field-date">
             <label>
-              <span class="label-text">Date</span>
+              <span class="label-text">Start date</span>
               <input type="date" name="">
             </label>
           </div>
           <fieldset class="fieldset fieldset-time">
-            <legend>Time</legend>
+            <legend>Start time</legend>
             <div class="field field-select field-time-hours">
               <label>
                 <span class="label-text">Hours</span>
@@ -112,18 +105,32 @@ excerpt: None
                 </select>
               </label>
             </div>
+            <span class="time-zone">EST</span>
           </fieldset>
         </fieldset>
+        <pre><code>&lt;!-- Shows if javascript is enabled. --&gt;</code></pre>
+        <dl>
+          <dt>End date/time: </dt>
+          <dd>7/11/2016 at 5:30pm</dd>
+          <dt>Delivery deadline:</dt>
+          <dd>7/18/2016 at 5:30pm</dd>
+        </dl>
+        <pre><code>&lt;!-- /end if javascript is enabled. --&gt;</code></pre>
+
+        <p class="help-text">
+          By default, auctions are listed for one week and vendors have five business days to deliver.
+          <a href="#">Customize this</a>
+        </p>
+
         <fieldset class="fieldset fieldset-date-time fieldset-end-date-time">
-          <legend>End date &amp; time</legend>
           <div class="field field-date">
             <label>
-              <span class="label-text">Date</span>
+              <span class="label-text">End date</span>
               <input type="date" name="">
             </label>
           </div>
           <fieldset class="fieldset fieldset-time">
-            <legend>Time</legend>
+            <legend>End time</legend>
             <div class="field field-select field-time-hours">
               <label>
                 <span class="label-text">Hours</span>
@@ -163,8 +170,61 @@ excerpt: None
                 </select>
               </label>
             </div>
+            <span class="time-zone">EST</span>
           </fieldset>
         </fieldset>
+        <fieldset class="fieldset fieldset-date-time fieldset-delivery-date-time">
+          <div class="field field-date">
+            <label>
+              <span class="label-text">Delivery date</span>
+              <input type="date" name="">
+            </label>
+          </div>
+          <fieldset class="fieldset fieldset-time">
+            <legend>Delivery time</legend>
+            <div class="field field-select field-time-hours">
+              <label>
+                <span class="label-text">Hours</span>
+                <select>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>9</option>
+                  <option>10</option>
+                  <option>11</option>
+                  <option>12</option>
+                </select>
+              </label>
+            </div>
+            <div class="field field-select field-time-minutes">
+              <label>
+                <span class="label-text">Minutes</span>
+                <select>
+                  <option>00</option>
+                  <option>15</option>
+                  <option>30</option>
+                  <option>45</option>
+                </select>
+              </label>
+            </div>
+            <div class="field field-select field-time-meridian">
+              <label>
+                <span class="label-text">Meridian</span>
+                <select>
+                  <option>AM</option>
+                  <option>PM</option>
+                </select>
+              </label>
+            </div>
+            <span class="time-zone">EST</span>
+          </fieldset>
+        </fieldset>
+
         <div class="field field-select">
           <label>
             <span class="label-text">Delivery deadline</span>
