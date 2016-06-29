@@ -4,9 +4,8 @@ Feature: Vendor views closed auctions
   So that I see who won
 
   Scenario: I am the winner
-    Given there is a closed auction
-    And I am an authenticated vendor
-    And I have placed the lowest bid
+    Given I am an authenticated vendor
+    And I have won an auction
     When I visit the auction page
     Then I should see the auction had a winning bid with name
     And I should see I am the winner
@@ -17,9 +16,8 @@ Feature: Vendor views closed auctions
     And I should receive an email notifying me that I won
 
   Scenario: I am not the winner
-    Given there is a closed auction
-    And I am an authenticated vendor
-    And I have placed a bid that is not the lowest
+    Given I am an authenticated vendor
+    And I have lost an auction
     When I visit the auction page
     Then I should see the auction had a winning bid with name
     Then I should see I am not the winner
