@@ -18,6 +18,12 @@ Given(/^I have won an auction$/) do
   SaveAuction.new(@auction).perform
 end
 
+Given(/^the auction ends$/) do
+  Timecop.travel @auction.ended_at
+  Delayed::Worker.new.work_off
+end
+
+
 Given(/^I have lost an auction$/) do
   @auction = FactoryGirl.build(:auction, :closed, :with_bidders)
   bids = @auction.bids.sort_by(&:amount)
