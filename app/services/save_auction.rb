@@ -7,7 +7,8 @@ class SaveAuction
     saved = auction.save
 
     if should_schedule_auction_ended_job?(saved)
-      AuctionEnded.new(auction)
+      AuctionEnded
+        .new(auction)
         .delay(run_at: auction.ended_at)
         .perform
     end
