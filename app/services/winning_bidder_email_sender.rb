@@ -16,7 +16,7 @@ class WinningBidderEmailSender
   attr_reader :auction
 
   def auction_has_winner?
-    !WinningBid.new(auction).find.nil?
+    WinningBid.new(auction).find.present?
   end
 
   def winning_bidder

@@ -6,7 +6,7 @@ describe AuctionEndedJob do
       it 'sends the winning bidder email' do
         auction = create(:auction)
 
-        winning_bidder_email_sender_double = instance_double("WinningBidderEmailSender")
+        winning_bidder_email_sender_double = instance_double('WinningBidderEmailSender')
         allow(winning_bidder_email_sender_double).to receive(:perform)
         allow(WinningBidderEmailSender).to receive(:new)
           .with(any_args)
@@ -20,9 +20,7 @@ describe AuctionEndedJob do
       it 'sends the losing bidders email' do
         auction = create(:auction)
 
-        auction = create(:auction, :closed, :with_bidders)
-
-        losing_bidder_email_sender_double = instance_double("LosingBidderEmailSender")
+        losing_bidder_email_sender_double = instance_double('LosingBidderEmailSender')
         allow(losing_bidder_email_sender_double).to receive(:perform)
         allow(LosingBidderEmailSender).to receive(:new)
           .with(any_args)
