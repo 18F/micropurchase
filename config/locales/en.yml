@@ -33,6 +33,9 @@ en:
       auction_reports:
         show:
           error: "Registration not found for winning bidder DUNS number"
+      customers:
+        create:
+          success: "Customer created successfully"
   mailers:
     auction_mailer:
       losing_bidder_notification:

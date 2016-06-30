@@ -55,6 +55,14 @@ When(/^I visit the insights page$/) do
   visit insights_path
 end
 
+When(/^I visit the admin customers page$/) do
+  visit admin_customers_path
+end
+
+When(/^I visit the previous winners page$/) do
+  visit winners_path
+end
+
 Then(/^I should be on the home page$/) do
   expect(page.current_path).to eq("/")
 end
@@ -77,6 +85,14 @@ end
 
 Then(/^I should be on the admin form for that auction$/) do
   expect(page.current_path).to eq(edit_admin_auction_path(@auction))
+end
+
+Then(/^I should be on the new admin customer form/) do
+  expect(page.current_path).to eq(new_admin_customer_path)
+end
+
+Then(/^I should be on the admin customers page/) do
+  expect(page.current_path).to eq(admin_customers_path)
 end
 
 Then(/^I should be on my bids page$/) do
