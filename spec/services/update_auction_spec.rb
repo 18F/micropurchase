@@ -2,6 +2,35 @@ require 'rails_helper'
 
 describe UpdateAuction do
   describe '#perform' do
+    context 'when changing ended_at' do
+      it 'updates the AuctionEndedJob to run_at the new ended_at' do
+        auction = build(:auction, :delivery_due_at_expired)
+        old_ended_at = auction.ended_at
+
+        expect { SaveAuction.new(auction).perform }
+          .to change { Delayed::Job.count }.by(1)
+
+        job = Delayed::Job.first
+
+        new_ended_at = {
+          'ended_at' => '2016-10-26',
+          'ended_at(1i)' => '01',
+          'ended_at(2i)' => '15',
+          'ended_at(3i)' => 'PM'
+        }
+        parsed_new_ended_at = DateTimeParser.new(new_ended_at, 'ended_at').parse
+        params = { auction: new_ended_at}
+
+        expect(job.run_at).to eq(auction.ended_at)
+        UpdateAuction.new(auction: auction,
+                          params: params,
+                          current_user: auction.user).perform
+
+        job.reload
+        expect(job.run_at).to eq(parsed_new_ended_at)
+      end
+    end
+
     context 'when changing the title' do
       it 'updates the title' do
         auction = create(:auction, :delivery_due_at_expired)

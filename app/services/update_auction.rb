@@ -6,7 +6,9 @@ class UpdateAuction
   end
 
   def perform
-    auction.assign_attributes(attributes)
+    assign_attributes
+
+    update_auction_ended_job
 
     if vendor_ineligible?
       auction.errors.add(:base, 'The vendor cannot be paid')
@@ -20,6 +22,31 @@ class UpdateAuction
   private
 
   attr_reader :auction, :params, :current_user
+
+  def assign_attributes
+    auction.assign_attributes(attributes)
+  end
+
+  def update_auction_ended_job
+    if updating_ended_at?
+      job = auction_ended_job
+
+      if job
+        job.update(run_at: auction.ended_at)
+      end
+    end
+  end
+
+  def auction_ended_job
+    Delayed::Job
+      .where(queue: 'auction_ended')
+      .where(auction_id: auction.id)
+      .first
+  end
+
+  def updating_ended_at?
+    attributes.key?(:ended_at)
+  end
 
   def perform_approved_auction_tasks
     if auction_accepted? && auction.accepted_at.nil?

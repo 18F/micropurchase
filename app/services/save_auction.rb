@@ -17,7 +17,10 @@ class SaveAuction
   def schedule_auction_ended_job(saved)
     if saved
       job = AuctionEndedJob.new(auction.id)
-      Delayed::Job.enqueue(job, run_at: auction.ended_at)
+      Delayed::Job.enqueue(job,
+                           run_at: auction.ended_at,
+                           queue: 'auction_ended',
+                           auction_id: auction.id)
     end
   end
 end
