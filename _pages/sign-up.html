@@ -2,48 +2,57 @@
 excerpt: none
 ---
 {% include head.html %}
-<body class="no-js layout-sign-up">
+<body class="no-js layout-sign-up layout-sign-up-step-1">
   <a class="a-skip-to-main" href="#main">Skip to main content</a>
   {% include site-header.html %}
   <main class="page" role="main" id="main">
     <div class="wrapper">
-      <h1>Sign up for Micro-purchase</h1>
       <form class="form-profile">
-        <div class="field field-name">
-          <label>
-            <span class="label-text">Name</span>
-            <input type="text">
-          </label>
-        </div>
-        <div class="field field-duns">
-          <label>
-            <span class="label-text">DUNS number</span>
-            <input type="text">
-            <span class="help-text" title="Verified via SAM.gov">Verified</span>
-          </label>
-        </div>
-        <div class="field field-email">
-          <label>
-            <span class="label-text">Email address</span>
-            <input type="email">
-          </label>
-        </div>
-        <div class="field field-payment-url">
-          <label>
-            <span class="label-text">Payment url</span>
-            <input type="text" id="payment-url">
-            <span class="help-text">The URL where you can accept payments via credit card.</span>
-          </label>
-        </div>
-        <footer>
-          <button type="submit">Submit</button>
-        </footer>
-      </form>
-      <aside class="administrative-notes page">
+      <h1>Welcome to 18F Micro-purchase!</h1>
+      <p>Hi, GitHub.name, it looks like you&rsquo;re new around here! To get started, please complete your profile by following the steps listed below.</p>
+      <h2>Confirm your contact information</h2>
+      <p>We&rsquo;ve pulled the following information from your GitHub profile, but be sure to doublecheck it as this is what we&rsquo;ll use to contact you.</p>
+      <div class="field field-name">
+        <label>
+          <span class="label-text">Name</span>
+          <input type="text">
+        </label>
+      </div>
+      <div class="field field-email">
+        <label>
+          <span class="label-text">Email address</span>
+          <input type="email">
+        </label>
+      </div>
+      <h2>Get yourself setup to place a bid</h2>
+      <p>Before you can bid on an auction, you&rsquo;ll need to <a href="https://www.sam.gov/portal/SAM/?navigationalstate=JBPNS_rO0ABXdcACJqYXZheC5mYWNlcy5wb3J0bGV0YnJpZGdlLlNUQVRFX0lEAAAAAQApdmlldzo1MGZkMTNlNy1hODg1LTQ4NDUtODNhMi1kMGFiZGI2ZWRlMjUAB19fRU9GX18*&portal:componentId=da4318dc-6b96-4dc1-be67-739ce150f67f&interactionstate=JBPNS_rO0ABXc_ABBfanNmQnJpZGdlVmlld0lkAAAAAQAeL2pzZi9hY2NvdW50RGVmYXVsdENvbnRlbnQuanNwAAdfX0VPRl9f&portal:type=action##11">register your business with SAM.gov</a>, <a href="https://iupdate.dnb.com/iUpdate/companylookup.htm">request (or locate) a <abbr title="Data Universal Numbering System">DUNS</abbr> number</a>, and then <a href="https://www.sam.gov/portal/SAM/?navigationalstate=JBPNS_rO0ABXdcACJqYXZheC5mYWNlcy5wb3J0bGV0YnJpZGdlLlNUQVRFX0lEAAAAAQApdmlldzpmZWQzNTQ1ZC0xNTc5LTRkYzYtOTE4ZS01MjJmYjAzMTQxNTUAB19fRU9GX18*&portal:componentId=da4318dc-6b96-4dc1-be67-739ce150f67f&interactionstate=JBPNS_rO0ABXc0ABBfanNmQnJpZGdlVmlld0lkAAAAAQATL2pzZi9mdW5jdGlvbmFsLmpzcAAHX19FT0ZfXw**&portal:type=action##11">update your SAM.gov profile to include your DUNS number</a>.</p>
+      <div class="field field-duns">
+        <label>
+          <span class="label-text">DUNS number</span>
+          <input type="text">
+          <span class="help-text" title="Verified via SAM.gov">Verified</span>
+        </label>
+      </div>
+      <h2>Get yourself setup to accept payment</h2>
+      <p>Before you can get paid you&rsquo;ll need to setup a payment URL. There are a number of different ways to do this. For example, you might use Stripe or Square Cash. See <a href="">our guide for more information</a>.</p>
+      <div class="field field-payment-url">
+        <label>
+          <span class="label-text">Payment url</span>
+          <input type="text" id="payment-url">
+        </label>
+      </div>
+      <h2>Agree to the following terms</h2>
+      <div class="terms">
         <p>None of the content in this GitHub repository is considered proprietary or procurement-sensitive information. Furthermore, all users who submit bids consent to the publication of their GitHub usernames, DUNS numbers, and bid amounts following the conclusion of the bidding process. Bidders&rsquo; email addresses will not be disclosed and will only be used for micro-purchase-related communication on an as-needed basis.</p>
         <p>In order to bid, all users must be listed as &ldquo;Active&rdquo; in SAM.gov on the day the auction opens. The process for SAM.gov activation may take several days, and we encourage interested vendors to sign up at least one week prior to bidding. To check your status with SAM.gov, you may use the SAM Status Tracker. If you need help with SAM.gov, call the toll-free SAM.gov Help Desk: 1-866-606-8220.</p>
-        <p>This platform is the primary method of bidding on micro-purchase opportunities. Vendor organizations may have multiple user accounts registered on this micro-purchase platform and on GitHub, as well as associated with each vendor and the vendor&rsquo;s DUNS number. Furthermore, vendors may register as either individuals or businesses on SAM.gov. Please file a GitHub issue in this repo if you have any questions.</p>
-      </aside>
+        <p>This platform is the primary method of bidding on micro-purchase opportunities. Vendor organizations may have multiple user accounts registered on this micro-purchase platform and on GitHub, as well as associated with each vendor and the vendor&rsquo;s DUNS number. Furthermore, vendors may register as either individuals or businesses on SAM.gov. Please file a GitHub issue in this repo if you have any questions.</p>        
+      </div>
+      <footer>
+        </aside>
+        <button type="submit">Create my account</button>
+        <a href="#">Do this later</a>
+      </footer>
+      </form>
     </div>
   </main>
   {% include site-footer.html %}

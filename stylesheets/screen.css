@@ -347,7 +347,12 @@ fieldset > p{
 .description-text a:hover{ text-decoration: none; }
 
 div.field,
-fieldset{ margin-bottom: 24px; }
+fieldset{ 
+	margin-bottom: 24px; 
+	max-width: 640px;
+	margin-left: auto;
+	margin-right: auto;
+}
 
 .field .help-text{
 font-size: 14px;
@@ -649,41 +654,6 @@ main div.wrap > form { max-width: 576px; }
 }
 
 
-main form footer{ 
-	margin-top: 32px; 
-	padding-bottom: 64px;
-	position: relative;
-}
-
-main form footer a{
-	position: absolute;
-	right: 0;
-	top: 12px;
-}
-
-main form footer a:hover{ color: #333; }
-main form footer p{
-	clear: both;
-	font-family: Georgia;
-	font-style: italic;
-	color: #888;
-	background: #f3f3f3;
-	padding: 12px;
-	max-width: none;
-	margin-top: 24px;
-	font-size: 14px;
-}
-main form footer p button{
-	display: inline;
-	float: none;
-	padding: 4px 8px;
-	color: #555;
-	background: white;
-	border: 2px solid #ccc;
-	font-family: Helvetica;
-	font-style: normal;
-	margin-left: 0.2em;
- }
 
 /* @end */
 
@@ -1283,7 +1253,6 @@ dd.auction-status.auction-status-open::after{
 	line-height: 1.4em;
 	margin: 0 auto 0.7em;
 	max-width: 640px;
-	width: 90%;
 }
 
 
@@ -1337,11 +1306,7 @@ a[id]{
 	clear: none;
 }
 
-.page aside{
-	font-size: 16px;
-	color: #918c84;
-	margin-top: 6px;
-}
+
 
 .page h1,
 .page .page-title{
@@ -1448,7 +1413,6 @@ a[id]{
 	.page ol,
 	.page dl,
 	.page li{
-		width: 90%;
 		margin-left: auto;
 		margin-right: auto;
 	}
@@ -1610,6 +1574,54 @@ a[id]{
 /* @end */
 
 /* @group layouts */
+
+/* @group layout-sign-up */
+
+.layout-sign-up main .wrapper{
+	width: 540px;
+
+}
+
+.layout-sign-up{
+	counter-reset: step;
+}
+
+.layout-sign-up h2{
+	counter-increment: step;	
+}
+.layout-sign-up h2::before{
+	content: counter(step) ". ";
+}
+
+.layout-sign-up .field-name,
+.layout-sign-up .field-email{
+	width: 50%;
+	margin-left: 0;
+}
+
+.layout-sign-up .terms{
+	max-height: 10em;
+	overflow: auto;
+	border: 1px solid #ccc;
+	padding: 10px;
+	margin-bottom: 2em;
+}
+.layout-sign-up .terms h1{
+	font-size: inherit;
+	letter-spacing: normal;
+	font-style: italic;
+	margin-bottom: 1.2em;
+}
+.layout-sign-up .terms p{
+	font-size: inherit;
+	font: inherit;
+	font-size: 14px;
+	line-height: 1.4em;
+	margin-bottom: 0.7em;
+	
+}
+
+/* @end */
 
 /* @group layout-auctions-show */
 
