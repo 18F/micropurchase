@@ -1,0 +1,26 @@
+<h2>Customer Agencies</h2>
+
+<table class="usa-table-borderless">
+  <thead>
+    <tr>
+      <th scope="col">Agency Name</th>
+      <th scope="col">Contact Name</th>
+      <th scope="col">Email</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @view_model.customers.each do |customer| %>
+      <tr>
+        <td><%= customer.agency_name %></td>
+        <td><%= customer.contact_name %></td>
+        <td><%= customer.email %></td>
+        <td><%= link_to('Edit', edit_admin_customer_path(customer)) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Create a New Customer',
+    new_admin_customer_path,
+    class: 'usa-button usa-button-outline' %>

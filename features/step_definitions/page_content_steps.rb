@@ -54,3 +54,13 @@ Then(/^I should see the auctions in reverse start date order$/) do
   second_start_date = page.find(:xpath, '/html/body/div/div/div/div/table/tbody/tr[2]/td[3]').text
   expect(DateTime.parse(first_start_date)).to be > DateTime.parse(second_start_date)
 end
+
+Then(/^I should see a page title "([^"]+)"$/) do |title|
+  expect(page).to have_title title
+end
+
+Then(/^I should see a header "([^"]+)"$/) do |header|
+  within(:css, 'h2') do
+    expect(page).to have_content(header)
+  end
+end
