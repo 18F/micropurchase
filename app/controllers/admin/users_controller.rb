@@ -3,6 +3,11 @@ class Admin::UsersController < Admin::BaseController
     @view_model = Admin::UsersIndexViewModel.new
   end
 
+  def show
+    user = User.find(params[:id])
+    @view_model = Admin::UserShowViewModel.new(user)
+  end
+
   def edit
     user = User.find(params[:id])
     @view_model = Admin::EditUserViewModel.new(user)

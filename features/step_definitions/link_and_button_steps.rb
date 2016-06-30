@@ -22,6 +22,11 @@ When(/^I click on the auction's title$/) do
   click_on(@auction.title)
 end
 
+When(/^I click on the name of the first user$/) do
+  @user = User.last
+  click_on(@user.name)
+end
+
 Then(/^I should see an? "([^"]+)" link$/) do |link|
   expect(page).to have_selector(:link, link)
 end
