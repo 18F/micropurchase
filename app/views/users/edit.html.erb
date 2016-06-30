@@ -1,20 +1,22 @@
 <% content_for :title do %>18F Micro-purchase - Edit user: <%= @user.name %><% end %>
 <% content_for :description do %>Edit your Micro-purchase user account.<% end %>
 
-<h1>Complete your account</h1>
+<div class="usa-grid">
+  <h1>Complete your account</h1>
 
-<%= form_for @user, method: :put do |f| %>
-  <%= f.label :name, 'Name' %>
-  <%= f.text_field :name %>
+  <%= form_for @user, method: :put do |f| %>
+    <%= f.label :name, 'Name' %>
+    <%= f.text_field :name %>
 
-  <%= f.label :duns_number, 'DUNS Number' %>
-  <%= f.text_field :duns_number %>
+    <%= f.label :duns_number, 'DUNS Number' %>
+    <%= f.text_field :duns_number %>
 
-  <%= f.label :email, 'Email Address' %>
-  <%= f.text_field :email %>
+    <%= f.label :email, 'Email Address' %>
+    <%= f.text_field :email %>
 
-  <%= f.label :credit_card_form_url, 'Credit Card Form URL' %>
-  <%= f.text_field :credit_card_form_url %>
+    <%= f.label :credit_card_form_url, 'Credit Card Form URL' %>
+    <%= f.text_field :credit_card_form_url %>
 
-  <%= f.submit 'Submit', :class => 'usa-button usa-button-outline' %>
-<% end %>
+    <%= f.submit 'Submit', :class => 'usa-button usa-button-outline' %>
+  <% end %>
+</div>
