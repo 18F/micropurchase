@@ -26,11 +26,24 @@ excerpt: none
       </div>
       <h2>Get yourself setup to place a bid</h2>
       <p>Before you can bid on an auction, you&rsquo;ll need to <a href="https://www.sam.gov/portal/SAM/?navigationalstate=JBPNS_rO0ABXdcACJqYXZheC5mYWNlcy5wb3J0bGV0YnJpZGdlLlNUQVRFX0lEAAAAAQApdmlldzo1MGZkMTNlNy1hODg1LTQ4NDUtODNhMi1kMGFiZGI2ZWRlMjUAB19fRU9GX18*&portal:componentId=da4318dc-6b96-4dc1-be67-739ce150f67f&interactionstate=JBPNS_rO0ABXc_ABBfanNmQnJpZGdlVmlld0lkAAAAAQAeL2pzZi9hY2NvdW50RGVmYXVsdENvbnRlbnQuanNwAAdfX0VPRl9f&portal:type=action##11">register your business with SAM.gov</a>, <a href="https://iupdate.dnb.com/iUpdate/companylookup.htm">request (or locate) a <abbr title="Data Universal Numbering System">DUNS</abbr> number</a>, and then <a href="https://www.sam.gov/portal/SAM/?navigationalstate=JBPNS_rO0ABXdcACJqYXZheC5mYWNlcy5wb3J0bGV0YnJpZGdlLlNUQVRFX0lEAAAAAQApdmlldzpmZWQzNTQ1ZC0xNTc5LTRkYzYtOTE4ZS01MjJmYjAzMTQxNTUAB19fRU9GX18*&portal:componentId=da4318dc-6b96-4dc1-be67-739ce150f67f&interactionstate=JBPNS_rO0ABXc0ABBfanNmQnJpZGdlVmlld0lkAAAAAQATL2pzZi9mdW5jdGlvbmFsLmpzcAAHX19FT0ZfXw**&portal:type=action##11">update your SAM.gov profile to include your DUNS number</a>.</p>
-      <div class="field field-duns">
+      <div class="field field-duns is-verifying">
         <label>
           <span class="label-text">DUNS number</span>
           <input type="text">
-          <span class="help-text" title="Verified via SAM.gov">Verified</span>
+          <span class="verification-status" title="Verifying via SAM.gov">
+            <span class="verification-status-icon"></span>
+            <span class="verification-status-text">Verifying</span>
+          </span>
+        </label>
+      </div>
+      <div class="field field-duns is-verified">
+        <label>
+          <span class="label-text">DUNS number</span>
+          <input type="text">
+          <span class="verification-status" title="Verifyied via SAM.gov">
+            <span class="verification-status-icon"></span>
+            <span class="verification-status-text">Verified</span>
+          </span>
         </label>
       </div>
       <h2>Get yourself setup to accept payment</h2>
@@ -47,9 +60,15 @@ excerpt: none
         <p>In order to bid, all users must be listed as &ldquo;Active&rdquo; in SAM.gov on the day the auction opens. The process for SAM.gov activation may take several days, and we encourage interested vendors to sign up at least one week prior to bidding. To check your status with SAM.gov, you may use the SAM Status Tracker. If you need help with SAM.gov, call the toll-free SAM.gov Help Desk: 1-866-606-8220.</p>
         <p>This platform is the primary method of bidding on micro-purchase opportunities. Vendor organizations may have multiple user accounts registered on this micro-purchase platform and on GitHub, as well as associated with each vendor and the vendor&rsquo;s DUNS number. Furthermore, vendors may register as either individuals or businesses on SAM.gov. Please file a GitHub issue in this repo if you have any questions.</p>        
       </div>
+      <div class="field field-checkbox">
+        <label>
+          <input type="checkbox" name="">
+          <span class="label-text">I agree to these terms</span>
+        </label>
+      </div>
       <footer>
         </aside>
-        <button type="submit">Create my account</button>
+        <button type="submit">Update my account</button>
         <a href="#">Do this later</a>
       </footer>
       </form>

@@ -1575,26 +1575,85 @@ a[id]{
 
 /* @group layouts */
 
+/* @group layout-profile */
+
+.field-duns input{
+	display: block;
+	margin-bottom: 8px;
+	max-width: 10em;
+}
+
+.field-duns.is-verified .verification-status-text,
+.field-duns.is-verifying .verification-status-text{
+		display: inline-block;
+	vertical-align: middle;
+	font-size: 14px;
+	font-style: italic;
+	color: #555;
+}
+
+.field-duns.is-verified .verification-status-text{
+	color: green;
+	font-weight: 600;
+	font-style: normal;
+}
+
+.field-duns.is-verified .verification-status-icon,
+.field-duns.is-verifying .verification-status-icon{
+	width: 16px;
+	height: 16px;
+	vertical-align: middle;
+	padding-left: 20px;
+	background: url(images/png/checkmark.png) left center no-repeat;
+	background-size: 16px;	
+}
+
+.field-duns.is-verifying .verification-status-icon{
+	background: url(images/gif/ajax.gif) left center no-repeat;
+	background-size: 16px;	
+}
+
+
+/* @end */
+
 /* @group layout-sign-up */
 
 .layout-sign-up main .wrapper{
-	width: 540px;
-
+	width: 680px;
+	border: 1px solid #ccc;
+	box-shadow: 2px 2px 0 0 #eee;
+	padding: 40px;
+	border-radius: 1em
 }
+
 
 .layout-sign-up{
 	counter-reset: step;
 }
 
 .layout-sign-up h2{
-	counter-increment: step;	
+	counter-increment: step;
+	margin-top: 2em;	
 }
+
 .layout-sign-up h2::before{
 	content: counter(step) ". ";
 }
 
+.layout-sign-up .field .label-text,
+.layout-profile .field .label-text{
+	font-weight: 600;
+	color: #555;
+}
+
+.layout-sign-up .field.field-checkbox .label-text{
+	font-weight: normal;
+	color: inherit;
+}
 .layout-sign-up .field-name,
-.layout-sign-up .field-email{
+.layout-sign-up .field-email,
+.layout-profile .field-name,
+.layout-profile .field-email{
 	width: 50%;
 	margin-left: 0;
 }
@@ -1604,8 +1663,21 @@ a[id]{
 	overflow: auto;
 	border: 1px solid #ccc;
 	padding: 10px;
-	margin-bottom: 2em;
+	margin-bottom: 1em;
 }
+
+.layout-sign-up main footer{
+	margin-top: 2em;
+	padding-top: 1.6em;
+	border-top: 2px solid #eee;
+}
+
+.layout-sign-up main footer a{
+	float: right;
+	margin-top: 0.5em;
+	color: #555;
+}
+
 .layout-sign-up .terms h1{
 	font-size: inherit;
 	letter-spacing: normal;
@@ -1616,7 +1688,7 @@ a[id]{
 	font-size: inherit;
 	font: inherit;
 	font-size: 14px;
-	line-height: 1.4em;
+	line-height: 1.3em;
 	margin-bottom: 0.7em;
 	
 }
@@ -2158,24 +2230,5 @@ a[id]{
 
 
 /* @end */
-
-/* @end */
-
-/* @group layout-profile */
-
-.field-duns input{
-	display: block;
-	margin-bottom: 8px;
-	max-width: 10em;
-}
-
-.field-duns .help-text{
-	margin-top: 8px;
-	display: block;
-	font-size: 14px;
-	padding-left: 20px;
-	background: url(images/png/checkmark.png) left center no-repeat;
-	background-size: 16px;	
-}
 
 /* @end */
