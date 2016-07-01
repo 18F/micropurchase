@@ -6,6 +6,10 @@ class Admin::BidListItem
     @user = user
   end
 
+  def bidder_id
+    bid.bidder_id
+  end
+
   def veiled_name
     bid.bidder.name
   end
