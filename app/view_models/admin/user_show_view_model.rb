@@ -49,6 +49,14 @@ class Admin::UserShowViewModel < Admin::BaseViewModel
     end
   end
 
+  def bids_partial
+    if bids?
+      'bid_history'
+    else
+      'components/null'
+    end
+  end
+
   def bids?
     user_auctions.count > 0
   end

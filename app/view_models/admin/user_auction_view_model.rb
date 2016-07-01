@@ -2,7 +2,7 @@ class Admin::UserAuctionViewModel
   attr_reader :auction, :user
 
   DATE_FORMAT = '%m/%d/%Y'.freeze
-  NA_RESPONSE_STRING = '-'
+  NA_RESPONSE_STRING = '-'.freeze
 
   def initialize(auction, user)
     @auction = auction
@@ -30,24 +30,20 @@ class Admin::UserAuctionViewModel
   end
 
   def user_won_label
-    if auction_over?
-      if user_won?
-        'Yes'
-      else
-        'No'
-      end
+    if user_won?
+      'Yes'
+    elsif auction_over?
+      'No'
     else
       NA_RESPONSE_STRING
     end
   end
 
   def accepted_label
-    if user_won?
-      if auction_accepted?
-        'Yes'
-      else
-        'No'
-      end
+    if user_won? && auction_accepted?
+      'Yes'
+    elsif user_won?
+      'No'
     else
       NA_RESPONSE_STRING
     end
