@@ -19,4 +19,7 @@
 /public/commit.txt
 .env
 
+# Rubocop will pull the inherit_from to a local file, so suppress that
+.rubocop-https*
+
 cf-ssh.yml
