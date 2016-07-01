@@ -1039,20 +1039,30 @@ nav.breadcrumbsli{
 }
 
 .auction a h1{
-	margin-right: 64px;
+	margin-right: 96px;
 	font-size: 20px;
 	font-family: Merriweather, Georgia, serif;
 	letter-spacing: 0;
 	font-weight: 600;
-	line-height: 1.2;
-	margin-bottom: 0.1em;
-	text-decoration: underline;
-	color: #006fbe;
+	line-height: 1.25em;
+	margin-bottom: 0.25em;
+	color: #004a7f;
 }
 
 .auction a:hover h1{
-	color: #00aedf; 
+	color: #002b7e; 
 	text-decoration: none;
+}
+
+.layout-home .auction:hover{
+	border-color: #dbc29a;
+	border-right-color: #cbac7a;
+	border-bottom-color: #cbac7a;
+	background: #fffdf7;
+}
+
+.layout-home .auction:hover footer{
+	background: #f8f5ef;
 }
 
 .auction .auction-header{
@@ -1064,6 +1074,7 @@ nav.breadcrumbsli{
 	line-height: 1.4;
 	font-family: Merriweather, Georgia, serif;
 	font-size: 13px;
+	font-weight: 600;
 	font-style: italic;
 }
 
@@ -1210,14 +1221,24 @@ dd.auction-status::after{
     border-right: 38px solid #2D3F5B;
 }
 
-.auction-status-closed{
+dd.auction-status-closed{
 	background: #992d00;
 	color: white !important;	
 }
 
-.auction-status-closed::after{
+dd.auction-status-closed::after{
 	border-left-color: #992d00;
 	border-right-color: #992d00;
+}
+
+dd.auction-status-ending-soon{
+	background: #ffe992;
+	color: #992d00;
+}
+
+dd.auction-status-ending-soon::after{
+	border-left-color: #ffe992;
+	border-right-color: #ffe992;
 }
 
 dd.auction-status.auction-status-open{
@@ -2232,7 +2253,7 @@ a[id]{
 	margin-bottom: 32px;
 }
 
-.layout-home main .auction{
+.layout-home .auction{
 	border: 1px solid #ddd;
 	padding: 14px 16px 0;
 	margin-bottom: 20px;
@@ -2247,7 +2268,7 @@ a[id]{
 	display: block;
 }
 
-.layout-home main .auction p{
+.layout-home .auction p{
 	font-size: 16px;
 	line-height: 1.4em;
 }
