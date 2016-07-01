@@ -238,19 +238,19 @@ describe AuctionQuery do
     end
   end
 
-  describe '#user_has_bid' do
+  describe '#with_bid_from_user' do
     it 'returns auctions where the user has placed a bid' do
       auction = create(:auction, :with_bidders)
       bidder = auction.bids.first.bidder
 
-      expect(AuctionQuery.new.user_has_bid(bidder.id)).to eq([auction])
+      expect(AuctionQuery.new.with_bid_from_user(bidder.id)).to eq([auction])
     end
 
     it 'does not return auctions where the user has not bid' do
       create(:auction, :with_bidders)
       user = create(:user)
 
-      expect(AuctionQuery.new.user_has_bid(user.id)).to eq([])
+      expect(AuctionQuery.new.with_bid_from_user(user.id)).to eq([])
     end
   end
 end

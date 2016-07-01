@@ -18,11 +18,11 @@ class Admin::UserAuctionViewModel
   end
 
   def start_date
-    DcTimePresenter.convert_and_format(auction.started_at, DATE_FORMAT, timezone_label: false)
+    DcTimePresenter.convert_and_format(auction.started_at, DATE_FORMAT)
   end
 
   def end_date
-    DcTimePresenter.convert_and_format(auction.ended_at, DATE_FORMAT, timezone_label: false)
+    DcTimePresenter.convert_and_format(auction.ended_at, DATE_FORMAT)
   end
 
   def user_bid_count

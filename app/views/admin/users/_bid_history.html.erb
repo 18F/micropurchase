@@ -12,7 +12,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @view_model.user_auctions.each do |auction| %>
+    <% view_model.user_auctions.each do |auction| %>
       <tr>
         <td><%= link_to auction.title, admin_auction_path(auction.id) %></td>
         <td><%= auction.start_date %></td>

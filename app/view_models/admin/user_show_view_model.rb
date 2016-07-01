@@ -62,6 +62,6 @@ class Admin::UserShowViewModel < Admin::BaseViewModel
   end
 
   def user_auctions
-    AuctionQuery.new.user_has_bid(user.id).map { |auction| Admin::UserAuctionViewModel.new(auction, user) }
+    AuctionQuery.new.with_bid_from_user(user.id).map { |auction| Admin::UserAuctionViewModel.new(auction, user) }
   end
 end

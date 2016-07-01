@@ -6,14 +6,14 @@ describe Admin::UserAuctionViewModel do
   describe '#start_date' do
     it 'should return a mm/dd/yy date in EST' do
       auction = create(:auction, started_at: '2016-04-01 00:00 UTC')
-      expect(Admin::UserAuctionViewModel.new(auction, user).start_date).to eq('03/31/2016')
+      expect(Admin::UserAuctionViewModel.new(auction, user).start_date).to eq('03/31/2016 EDT')
     end
   end
 
   describe '#end_date' do
     it 'should return a mm/dd/yy date in EST' do
       auction = create(:auction, ended_at: '2016-04-01 00:00 UTC')
-      expect(Admin::UserAuctionViewModel.new(auction, user).end_date).to eq('03/31/2016')
+      expect(Admin::UserAuctionViewModel.new(auction, user).end_date).to eq('03/31/2016 EDT')
     end
   end
 
