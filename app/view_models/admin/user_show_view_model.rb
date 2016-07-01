@@ -48,4 +48,12 @@ class Admin::UserShowViewModel < Admin::BaseViewModel
       "No"
     end
   end
+
+  def bids?
+    user_auctions.count > 0
+  end
+
+  def user_auctions
+    AuctionQuery.new.user_has_bid(user.id).map { |auction| Admin::UserAuctionViewModel.new(auction, user) }
+  end
 end

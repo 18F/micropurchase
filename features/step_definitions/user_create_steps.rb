@@ -66,3 +66,8 @@ Given(/^there are users in the system$/) do
   @number_of_users = 1
   FactoryGirl.create(:user)
 end
+
+Given(/^there is a user in the system who has bid on an auction$/) do
+  @user = FactoryGirl.create(:user, sam_status: :sam_accepted)
+  @auction = FactoryGirl.create(:auction, :closed, :with_bidders, bidder_ids: [@user.id])
+end

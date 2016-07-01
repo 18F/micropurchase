@@ -98,7 +98,7 @@ class AuctionQuery
       .find(id)
   end
 
-  def my_bids(user_id)
+  def user_has_bid(user_id)
     @relation
       .joins(:bids)
       .where(bids: { bidder_id: user_id })

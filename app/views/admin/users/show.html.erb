@@ -9,3 +9,31 @@
   <li><b>Small business</b>: <%= @view_model.small_business %></li>
   <li><b>Contracting officer</b>: <%= @view_model.contracting_officer %></li>
 </ul>
+
+<% if @view_model.bids? %>
+<h2>Bidding History</h2>
+
+<table class="usa-table-borderless" id="bidding-history">
+  <thead>
+    <tr>
+      <th scope="col">Auction</th>
+      <th scope="col">Start Date</th>
+      <th scope="col">End Date</th>
+      <th scope="col">User Bids</th>
+      <th scope="col">User Won?</th>
+      <th scope="col">Accepted?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @view_model.user_auctions.each do |auction| %>
+      <tr>
+        <td><%= link_to auction.title, admin_auction_path(auction.id) %></td>
+        <td><%= auction.start_date %></td>
+        <td><%= auction.end_date %></td>
+        <td><%= auction.user_bid_count %></td>
+        <td><%= auction.user_won_label %></td>
+        <td><%= auction.accepted_label %></td>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
