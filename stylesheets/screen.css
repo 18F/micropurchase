@@ -2,6 +2,8 @@
 
 /* @override http://localhost:4000/stylesheets/screen.css */
 
+/* @override http://localhost:4000/stylesheets/screen.css */
+
 /* @group bootstrap */
 
 html {
@@ -349,9 +351,6 @@ fieldset > p{
 div.field,
 fieldset{ 
 	margin-bottom: 24px; 
-	max-width: 640px;
-	margin-left: auto;
-	margin-right: auto;
 }
 
 .field .help-text{
@@ -604,9 +603,10 @@ fieldset.fieldset-mailing-address div.field.field-zip input{
 
 /* @end */
 
-.section-form .branch{
+.branch{
 	padding: 0 0 0 12px;
 	position: relative;
+	display: none;
 }
 
 .section-form .fieldset-radio+.branch,
@@ -632,7 +632,7 @@ fieldset.fieldset-mailing-address div.field.field-zip input{
 body.branches .branch h1.branch-logic,
 body.branches .branch > header > h1.branch-logic{ display: none; }
 
-.section-form .branch::after{
+.branch::after{
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -793,9 +793,8 @@ main div.wrap > form { max-width: 576px; }
 	margin-top: -0.33em;
 }
 
-.site-header .nav-header-nav > span,
-.site-header .nav-header-nav a{
-	margin-right: 0.8em;
+.site-header .nav-header-nav .signed-in a:last-of-type{
+	margin-left: 0.8em;
 }
 
 .site-header .nav-header-nav a:last-of-type{ margin-right: 0; }
@@ -1041,9 +1040,10 @@ nav.breadcrumbsli{
 
 .auction a h1{
 	margin-right: 64px;
-	font-size: 24px;
+	font-size: 20px;
+	font-family: Merriweather, Georgia, serif;
 	letter-spacing: 0;
-	font-weight: normal;
+	font-weight: 600;
 	line-height: 1.2;
 	margin-bottom: 0.1em;
 	text-decoration: underline;
@@ -1053,7 +1053,6 @@ nav.breadcrumbsli{
 .auction a:hover h1{
 	color: #00aedf; 
 	text-decoration: none;
-	
 }
 
 .auction .auction-header{
@@ -1061,9 +1060,13 @@ nav.breadcrumbsli{
 }
 
 .auction .auction-header dl{
-	padding: 2px 0 16px;
+	padding: 4px 0 16px;
 	line-height: 1.4;
+	font-family: Merriweather, Georgia, serif;
+	font-size: 13px;
+	font-style: italic;
 }
+
 .auction .auction-header dl dt,
 .auction .auction-header dl dd{
 	display: inline-block;
@@ -1110,9 +1113,8 @@ nav.breadcrumbsli{
 }
 
 .auction .auction-header nav a:hover{
-	background: rgba(0,0,0,0.2);
+	background: rgba(255,255,255,0.8);
 }
-
 
 .auction .auction-footer{
 	padding: 12px 16px 0;
@@ -1126,9 +1128,9 @@ nav.breadcrumbsli{
 }
 
 .auction .auction-footer h2{
-	font-size: 12px;
+	font-size: 14px;
 	line-height: 14px;
-	margin-bottom: 6px;
+	margin-bottom: 8px;
 }
 
 .auction .auction-footer span{
@@ -1148,7 +1150,7 @@ nav.breadcrumbsli{
 .auction .auction-footer li{
 	float: left;
 	width: 50%;
-	margin-bottom: 16px;
+	margin-bottom: 18px;
 }
 
 .auction .auction-footer dd img{
@@ -1178,6 +1180,8 @@ nav.breadcrumbsli{
 }
 
 dd.auction-status{
+	font-family: Source Sans Pro, Verdana, sans-serif;
+	font-style: normal;
 	font-size: 14px;
 	line-height: 16px;
 	color: #fff;
@@ -1231,11 +1235,6 @@ dd.auction-status.auction-status-open::after{
 /* @group .page */
 
 .page{ padding-top: 1em; }
-
-.page .wrapper{ 
-	width: auto;
-	max-width: none;
-}
 
 .page .page-title,
 .page h1,
@@ -1334,16 +1333,18 @@ a[id]{
 	font-weight: 600;
 	font-size: 21px;
 	line-height: 1.3em;
-	font-family: Merriweather, Georgia;
+	font-family: Merriweather, Georgia, serif;
 	color: #c56815;
 	max-width: 640px;
 	margin: 28px auto 16px;
 }
 
 .page h3,
-.page h4{
+.page h4,
+.layout-auctions-show main .page h2{
 	font-weight: 600;
 	font-size: 21px;
+	font-family: inherit;
 	line-height: 1.4em;
 	margin-top: 28px;
 	margin-bottom: 16px;
@@ -1602,6 +1603,7 @@ a[id]{
 .field-duns.is-verifying .verification-status-icon{
 	width: 16px;
 	height: 16px;
+	display: inline-block;
 	vertical-align: middle;
 	padding-left: 20px;
 	background: url(images/png/checkmark.png) left center no-repeat;
@@ -1618,7 +1620,8 @@ a[id]{
 
 /* @group layout-sign-up */
 
-.layout-sign-up main .wrapper{
+.layout-sign-up main .wrapper,
+.layout-profile main .wrapper{
 	width: 680px;
 	border: 1px solid #ccc;
 	box-shadow: 2px 2px 0 0 #eee;
@@ -1626,6 +1629,12 @@ a[id]{
 	border-radius: 1em
 }
 
+.layout-sign-up main .wrapper p,
+.layout-profile main .wrapper p{
+	line-height: 1.4;
+}
+
+.layout-profile main .wrapper p a{ color: inherit; }
 
 .layout-sign-up{
 	counter-reset: step;
@@ -1666,7 +1675,8 @@ a[id]{
 	margin-bottom: 1em;
 }
 
-.layout-sign-up main footer{
+.layout-sign-up main footer,
+.layout-profile footer{
 	margin-top: 2em;
 	padding-top: 1.6em;
 	border-top: 2px solid #eee;
@@ -1713,12 +1723,20 @@ a[id]{
 .layout-auctions-show main .auction-header h1,
 .layout-auctions-bids main .auction-header h1{
 	display: inline-block;
-	font-size: 28px;
-	line-height: 1.1;
 	margin-bottom: 0.2em;
 	margin-left: 20px;
 	padding-top: 16px;
 	margin-right: 96px;
+}
+
+.layout-auctions-show main .auction-header h1,
+.layout-auctions-bids main .auction-header h1,
+.layout-auctions-edit main .auction-header .field-title input{
+	font-size: 25px;
+	font-family: Merriweather, Georgia, serif;
+	line-height: 1.1;
+	font-weight: 600;
+	color: #384f7e;
 }
 
 .layout-auctions-show main .auction-header h1+a,
@@ -1732,7 +1750,7 @@ a[id]{
 
 .layout-auctions-show main .auction-header dl,
 .layout-auctions-bids main .auction-header dl{
-	color: #555;
+	font-size: 15px;
 	margin: 0 20px;
 }
 
@@ -1740,9 +1758,6 @@ a[id]{
 .layout-auctions-bids main .auction-header dd.auction-time-remaining{
 	margin-right: 1.4em;
 }
-
-
-
 
 
 .layout-auctions-show .auction .auction-header .auction-current-bid{
@@ -1845,11 +1860,14 @@ a[id]{
 	position: relative;
 }
 
+.layout-auctions-show main .page h2{
+	color: #b83728;
+}
+
 .auction-place-bid h1,
 .auction-place-bid p{
 	line-height: 1.3;
 }
-
 
 .auction-place-bid form{
 	padding-top: 18px;
@@ -1901,7 +1919,6 @@ a[id]{
 	.layout-auctions-edit .auction .page{
 		width: 630px;
 		padding-left: 20px;
-		padding-top: 0;
 	}
 	
 	.layout-auctions-show main .wrapper .page p{
@@ -1913,7 +1930,6 @@ a[id]{
 		width: 312px;
 		float: right;
 		margin: 0;
-		padding-top: 0;
 	}
 
 	.layout-auctions-show main .wrapper .page h1,
@@ -1973,20 +1989,73 @@ a[id]{
 /* @group layout-auctions-edit */
 
 .layout-auctions-edit .auction .auction-header{
-	padding: 20px 20px 0;
+	padding: 12px 20px 8px;
 	border-bottom: 1px solid #eee;
-}
-.layout-auctions-edit .auction .auction-header .field-title input{
-	font-size: 28px;
-	font-family: inherit;	
+	margin-bottom: 0;
 }
 
-.layout-auctions-edit .auction .auction-header .field-time-remaining,
-.layout-auctions-edit .auction .auction-header .field-time-remaining .label-text,
-.layout-auctions-edit .auction .auction-header .field-time-remaining input,
-.layout-auctions-edit .auction .auction-header .field-time-starting-bid{
+.layout-auctions-edit .field-starting-bid,
+.layout-auctions-edit .field-status{
+	font-family: Merriweather, Georgia, serif;
+	font-size: 13px;
+	font-style: italic;
 	display: inline-block;
+	vertical-align: middle;
+	margin-bottom: 0;
+}
+
+.layout-auctions-edit .field-title{
+	margin-bottom: 4px;
+}
+
+
+.layout-auctions-edit .field-title input{
+	padding-top: 8px;
+	line-height: 1;
+}
+
+.layout-auctions-edit .field-title .label-text{
+	font-size: 12px;
+	font-weight: 600;
+	position: absolute;
+	left: -9999em;
+}
+
+.layout-auctions-edit .field-starting-bid .label-text,
+.layout-auctions-edit .field-status .label-text,
+.layout-auctions-edit .field-starting-bid input,
+.layout-auctions-edit .field-status select{
+	display: inline-block;
+	vertical-align: middle;
 	width: auto;
+}
+
+.layout-auctions-edit .field-starting-bid{
+	margin-right: 1em;
+}
+.layout-auctions-edit .field-starting-bid .label-text,
+.layout-auctions-edit .field-status .label-text{
+	margin-top: 10px;
+	font-weight: 600;
+	margin-right: 0.4em;
+}
+
+.layout-auctions-edit .field-starting-bid input,
+.layout-auctions-edit .field-status select{
+	padding-top: 4px;
+	padding-bottom: 4px;
+	min-height: 28px;
+	height: 28px;
+}
+
+.layout-auctions-edit .field-status select{
+	padding-right: 28px;
+}
+
+
+.layout-auctions-edit .auction .page{
+	padding-top: 20px;
+	
 }
 
 
@@ -1994,7 +2063,7 @@ a[id]{
 .layout-auctions-edit .fieldset-time{
 	padding: 0;
 	border: none;
-	margin: ;
+	margin-top: 0;
 }
 
 .layout-auctions-edit .fieldset-date-time .fieldset-time{
@@ -2003,7 +2072,6 @@ a[id]{
 }
 
 .layout-auctions-edit .fieldset-date-time .fieldset-time .field {
-	padding-bottom: 28px;
 	position: relative;
 }
 
@@ -2012,7 +2080,6 @@ a[id]{
 }
 
 .layout-auctions-edit .fieldset-date-time .fieldset-time .field::after{
-	bottom: 28px;
 	z-index: 1;
 	border-width: 5px;
 }
@@ -2027,23 +2094,34 @@ a[id]{
 	border-right: none;
 }
 
-.layout-auctions-edit .fieldset-date-time .fieldset-time .field-time-meridian select{
+.layout-auctions-edit .fieldset-date-time .fieldset-time .field-time-meridiem select{
 	border-radius: 0 3px 3px 0;
 }
-
 
 .layout-auctions-edit .fieldset-date-time .fieldset-time .field .label-text{
 	position: absolute;
 	bottom: 0;
-	left: 0;
+	left: -9999em;
 	font-size: 12px;
 	
 }
 .layout-auctions-edit .fieldset-date-time .fieldset-time .field-time-hours,
 .layout-auctions-edit .fieldset-date-time .fieldset-time .field-time-minutes,
-.layout-auctions-edit .fieldset-date-time .fieldset-time .field-time-meridian{
-	width: 30%;
+.layout-auctions-edit .fieldset-date-time .fieldset-time .field-time-meridiem{
+	width: 3.5em;
 	float: left;
+	margin-bottom: 0;
+}
+
+.layout-auctions-edit .auction .auction-footer{
+	padding-top: 20px;
+}
+
+.layout-auctions-edit .auction .auction-footer .help-text{
+	font-size: 14px;
+	line-height: 1.3;
+	color: #333;
+	margin-bottom: 2em;
 }
 
 .layout-auctions-edit .auction .auction-footer dl,
@@ -2054,6 +2132,13 @@ a[id]{
 }
 
 .layout-auctions-edit .auction .auction-footer p a { color: #006fbe; text-decoration: underline;}
+
+.layout-auctions-edit .time-zone{
+	position: relative;
+	top: 8px;
+	left: 8px;
+
+}
 
 /* @end */
 
@@ -2087,8 +2172,8 @@ a[id]{
 
 .h-feed-header h1{
 	font-size: 48px;
-	font-weight: 100;
-	letter-spacing: -0.03em;	
+	font-weight: 300;
+	letter-spacing: -0.02em;	
 	display: inline-block;
 }
 
@@ -2160,6 +2245,11 @@ a[id]{
 	position: relative;
 	max-width: 100%;
 	display: block;
+}
+
+.layout-home main .auction p{
+	font-size: 16px;
+	line-height: 1.4em;
 }
 
 @media screen and (min-width: 799.99px){

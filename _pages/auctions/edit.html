@@ -18,7 +18,8 @@ excerpt: None
       <header class="auction-header">
         <div class="field field-title">
           <label>
-            <input type="text" name="" value="Open Opportunities: Create Agency Admin User Role">
+            <span class="label-text">Title</span>
+            <input type="text" name="" value="Open Opportunities: Create Agency Admin User Role" placeholder="title">
           </label>
         </div>
         <div class="field field-starting-bid">
@@ -41,7 +42,7 @@ excerpt: None
         <div class="field">
           <label>
             <span class="label-text">Project background</span>
-            <textarea rows="5">Open Opportunities uses the open source sails.js MVC framework (Node.js / Express). Currently, a task creator should receive the following notification if a task they created receives a comment. However, this functionality has broken, without breaking the build's test suite. This issue sees the creation of a failing test (or tests) that will only pass when the notification functionality is restored, along with the fix to make those tests pass.</textarea>
+            <textarea rows="10">Open Opportunities uses the open source sails.js MVC framework (Node.js / Express). Currently, a task creator should receive the following notification if a task they created receives a comment. However, this functionality has broken, without breaking the build's test suite. This issue sees the creation of a failing test (or tests) that will only pass when the notification functionality is restored, along with the fix to make those tests pass.</textarea>
           </label>
         </div>
         <div class="field">
@@ -96,9 +97,9 @@ excerpt: None
                 </select>
               </label>
             </div>
-            <div class="field field-select field-time-meridian">
+            <div class="field field-select field-time-meridiem">
               <label>
-                <span class="label-text">Meridian</span>
+                <span class="label-text">Meridiem</span>
                 <select>
                   <option>AM</option>
                   <option>PM</option>
@@ -108,135 +109,119 @@ excerpt: None
             <span class="time-zone">EST</span>
           </fieldset>
         </fieldset>
-        <pre><code>&lt;!-- Shows if javascript is enabled. --&gt;</code></pre>
         <dl>
           <dt>End date/time: </dt>
           <dd>7/11/2016 at 5:30pm</dd>
           <dt>Delivery deadline:</dt>
           <dd>7/18/2016 at 5:30pm</dd>
         </dl>
-        <pre><code>&lt;!-- /end if javascript is enabled. --&gt;</code></pre>
-
         <p class="help-text">
-          By default, auctions are listed for one week and vendors have five business days to deliver.
-          <a href="#">Customize this</a>
+          By default, auctions are listed for one week and vendors have five business days to deliver. <a href="#">Edit</a>
         </p>
-
-        <fieldset class="fieldset fieldset-date-time fieldset-end-date-time">
-          <div class="field field-date">
-            <label>
-              <span class="label-text">End date</span>
-              <input type="date" name="">
-            </label>
-          </div>
-          <fieldset class="fieldset fieldset-time">
-            <legend>End time</legend>
-            <div class="field field-select field-time-hours">
+        <aside class="branch">
+          <fieldset class="fieldset fieldset-date-time fieldset-end-date-time">
+            <div class="field field-date">
               <label>
-                <span class="label-text">Hours</span>
-                <select>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  <option>7</option>
-                  <option>8</option>
-                  <option>9</option>
-                  <option>10</option>
-                  <option>11</option>
-                  <option>12</option>
-                </select>
+                <span class="label-text">End date</span>
+                <input type="date" name="">
               </label>
             </div>
-            <div class="field field-select field-time-minutes">
-              <label>
-                <span class="label-text">Minutes</span>
-                <select>
-                  <option>00</option>
-                  <option>15</option>
-                  <option>30</option>
-                  <option>45</option>
-                </select>
-              </label>
-            </div>
-            <div class="field field-select field-time-meridian">
-              <label>
-                <span class="label-text">Meridian</span>
-                <select>
-                  <option>AM</option>
-                  <option>PM</option>
-                </select>
-              </label>
-            </div>
-            <span class="time-zone">EST</span>
+            <fieldset class="fieldset fieldset-time">
+              <legend>End time</legend>
+              <div class="field field-select field-time-hours">
+                <label>
+                  <span class="label-text">Hours</span>
+                  <select>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                  </select>
+                </label>
+              </div>
+              <div class="field field-select field-time-minutes">
+                <label>
+                  <span class="label-text">Minutes</span>
+                  <select>
+                    <option>00</option>
+                    <option>15</option>
+                    <option>30</option>
+                    <option>45</option>
+                  </select>
+                </label>
+              </div>
+              <div class="field field-select field-time-meridiem">
+                <label>
+                  <span class="label-text">Meridiem</span>
+                  <select>
+                    <option>AM</option>
+                    <option>PM</option>
+                  </select>
+                </label>
+              </div>
+              <span class="time-zone">EST</span>
+            </fieldset>
           </fieldset>
-        </fieldset>
-        <fieldset class="fieldset fieldset-date-time fieldset-delivery-date-time">
-          <div class="field field-date">
-            <label>
-              <span class="label-text">Delivery date</span>
-              <input type="date" name="">
-            </label>
-          </div>
-          <fieldset class="fieldset fieldset-time">
-            <legend>Delivery time</legend>
-            <div class="field field-select field-time-hours">
+          <fieldset class="fieldset fieldset-date-time fieldset-delivery-date-time">
+            <div class="field field-date">
               <label>
-                <span class="label-text">Hours</span>
-                <select>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  <option>7</option>
-                  <option>8</option>
-                  <option>9</option>
-                  <option>10</option>
-                  <option>11</option>
-                  <option>12</option>
-                </select>
+                <span class="label-text">Delivery date</span>
+                <input type="date" name="">
               </label>
             </div>
-            <div class="field field-select field-time-minutes">
-              <label>
-                <span class="label-text">Minutes</span>
-                <select>
-                  <option>00</option>
-                  <option>15</option>
-                  <option>30</option>
-                  <option>45</option>
-                </select>
-              </label>
-            </div>
-            <div class="field field-select field-time-meridian">
-              <label>
-                <span class="label-text">Meridian</span>
-                <select>
-                  <option>AM</option>
-                  <option>PM</option>
-                </select>
-              </label>
-            </div>
-            <span class="time-zone">EST</span>
+            <fieldset class="fieldset fieldset-time">
+              <legend>Delivery time</legend>
+              <div class="field field-select field-time-hours">
+                <label>
+                  <span class="label-text">Hours</span>
+                  <select>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                  </select>
+                </label>
+              </div>
+              <div class="field field-select field-time-minutes">
+                <label>
+                  <span class="label-text">Minutes</span>
+                  <select>
+                    <option>00</option>
+                    <option>15</option>
+                    <option>30</option>
+                    <option>45</option>
+                  </select>
+                </label>
+              </div>
+              <div class="field field-select field-time-meridiem">
+                <label>
+                  <span class="label-text">Meridiem</span>
+                  <select>
+                    <option>AM</option>
+                    <option>PM</option>
+                  </select>
+                </label>
+              </div>
+              <span class="time-zone">EST</span>
+            </fieldset>
           </fieldset>
-        </fieldset>
-
-        <div class="field field-select">
-          <label>
-            <span class="label-text">Delivery deadline</span>
-            <select>
-              <option>1 days</option>
-              <option>2 days</option>
-              <option>3 days</option>
-              <option>5 days</option>
-              <option>7 days</option>
-            </select>
-          </label>
-        </div>
+        </aside>
         <div class="field">
           <label>
             <span class="label-text">Github Repo</span>
