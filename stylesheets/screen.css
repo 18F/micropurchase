@@ -1676,7 +1676,7 @@ a[id]{
 }
 
 .layout-sign-up main footer,
-.layout-profile footer{
+.layout-profile main footer{
 	margin-top: 2em;
 	padding-top: 1.6em;
 	border-top: 2px solid #eee;
