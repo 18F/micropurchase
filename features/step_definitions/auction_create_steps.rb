@@ -2,10 +2,6 @@ Given(/^there is an unpublished auction$/) do
   @auction = FactoryGirl.create(:auction, :unpublished)
 end
 
-Given(/^there is an auction where the winning vendor is missing a payment method$/) do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
 Given(/^there is a future auction$/) do
   @auction = FactoryGirl.create(:auction, :future)
 end

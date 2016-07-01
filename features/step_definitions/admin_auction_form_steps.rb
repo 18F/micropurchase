@@ -17,8 +17,8 @@ When(/^I select the result as accepted$/) do
 end
 
 Then(/^I should see that the auction does not have a CAP Proposal URL$/) do
-  field = find_field(I18n.t('simple_form.labels.auction.cap_proposal_url'))
-  expect(field.value).to eq('')
+  element = find(:id, 'auction-label-info-CAP-proposal-URL')
+  expect(element.value).to eq(nil)
 end
 
 Then(/^I expect my auction changes to have been saved$/) do
@@ -121,7 +121,7 @@ Then(/^I should be able to edit the existing auction form$/) do
   select('5', from: 'auction_ended_at_1i')
   select('30', from: 'auction_ended_at_2i')
   select('PM', from: 'auction_ended_at_3i')
-  @end_time = DcTimePresenter.time_zone.parse("#{@end_day.strftime('%Y-%m-%d')} 5:30 PM") 
+  @end_time = DcTimePresenter.time_zone.parse("#{@end_day.strftime('%Y-%m-%d')} 5:30 PM")
 
   @deadline_day = DcTimePresenter.convert(Time.now + 5.days)
   fill_in "auction_delivery_due_at", with: @deadline_day.strftime('%Y-%m-%d')
