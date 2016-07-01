@@ -9,3 +9,5 @@
   <li><b>Small business</b>: <%= @view_model.small_business %></li>
   <li><b>Contracting officer</b>: <%= @view_model.contracting_officer %></li>
 </ul>
+
+<%= render partial: @view_model.bids_partial, locals: {view_model: @view_model} %>

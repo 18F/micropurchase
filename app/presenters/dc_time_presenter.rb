@@ -13,8 +13,8 @@ class DcTimePresenter
     new(time).convert
   end
 
-  def self.convert_and_format(time, format = FORMAT)
-    new(time).convert_and_format(format)
+  def self.convert_and_format(time, format = FORMAT, timezone_label: true)
+    new(time).convert_and_format(format, timezone_label: timezone_label)
   end
 
   def self.time_zone
@@ -26,9 +26,11 @@ class DcTimePresenter
     time.in_time_zone(time_zone)
   end
 
-  def convert_and_format(format = FORMAT)
+  def convert_and_format(format = FORMAT, timezone_label: true)
     if time
-      convert.strftime(format) + " #{timezone_label}"
+      str = convert.strftime(format)
+      str += " #{timezone_string}" if timezone_label
+      str
     else
       NULL
     end
@@ -38,7 +40,7 @@ class DcTimePresenter
     self.class.time_zone
   end
 
-  def timezone_label
+  def timezone_string
     convert.zone
   end
 end

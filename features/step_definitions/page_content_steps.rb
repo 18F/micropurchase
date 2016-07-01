@@ -69,8 +69,10 @@ Then(/^I should see a page title "([^"]+)"$/) do |title|
   expect(page).to have_title title
 end
 
-Then(/^I should see a header "([^"]+)"$/) do |header|
-  within(:css, 'h2') do
-    expect(page).to have_content(header)
-  end
+Then(/^I should see a section labeled "([^"]+)"$/) do |header|
+  page.find('h2', text: header)
+end
+
+Then(/^I should not see a section labeled "([^"]+)"$/) do |header|
+  expect(page.first('h2', text: header)).to be_nil
 end

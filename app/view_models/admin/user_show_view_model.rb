@@ -48,4 +48,20 @@ class Admin::UserShowViewModel < Admin::BaseViewModel
       "No"
     end
   end
+
+  def bids_partial
+    if bids?
+      'bid_history'
+    else
+      'components/null'
+    end
+  end
+
+  def bids?
+    user_auctions.count > 0
+  end
+
+  def user_auctions
+    AuctionQuery.new.with_bid_from_user(user.id).map { |auction| Admin::UserAuctionViewModel.new(auction, user) }
+  end
 end
