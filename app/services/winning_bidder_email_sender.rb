@@ -4,14 +4,20 @@ class WinningBidderEmailSender
   end
 
   def perform
-    AuctionMailer
-      .winning_bidder_notification(bidder: winning_bidder, auction: auction)
-      .deliver_later
+    if auction_has_winner?
+      AuctionMailer
+        .winning_bidder_notification(bidder: winning_bidder, auction: auction)
+        .deliver_later
+    end
   end
 
   private
 
   attr_reader :auction
+
+  def auction_has_winner?
+    WinningBid.new(auction).find.present?
+  end
 
   def winning_bidder
     WinningBid.new(auction).find.bidder

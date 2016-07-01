@@ -28,10 +28,17 @@ describe SaveAuction do
 
       it 'returns false' do
         auction = build(:auction, title: nil)
-        saved = SaveAuction.new(auction).perform
+        SaveAuction.new(auction).perform
 
-        expect(saved).to be(false)
+        expect(auction).not_to be_persisted
       end
+    end
+
+    it 'queues and schedules AuctionEndedJob' do
+      auction = build(:auction, ended_at: 2.days.from_now)
+
+      expect { SaveAuction.new(auction).perform }
+        .to change { Delayed::Job.count }.by(1)
     end
   end
 end
