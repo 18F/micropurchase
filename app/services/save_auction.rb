@@ -6,7 +6,6 @@ class SaveAuction
   def perform
     auction.save
     schedule_auction_ended_job
-
     auction.persisted?
   end
 
@@ -16,11 +15,7 @@ class SaveAuction
 
   def schedule_auction_ended_job
     if auction.persisted?
-      job = AuctionEndedJob.new(auction.id)
-      Delayed::Job.enqueue(job,
-                           run_at: auction.ended_at,
-                           queue: 'auction_ended',
-                           auction_id: auction.id)
+      CreateAuctionEndedJob.new(auction).perform
     end
   end
 end

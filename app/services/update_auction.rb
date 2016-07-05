@@ -29,19 +29,24 @@ class UpdateAuction
 
   def update_auction_ended_job
     if updating_ended_at?
-      job = auction_ended_job
-
-      if job
-        job.update(run_at: auction.ended_at)
+      if find_auction_ended_job
+        find_auction_ended_job.update(run_at: auction.ended_at)
+      else
+        create_auction_ended_job
       end
     end
   end
 
-  def auction_ended_job
-    Delayed::Job
+  def find_auction_ended_job
+    @_find_auction_ended_job ||=
+      Delayed::Job
       .where(queue: 'auction_ended')
       .where(auction_id: auction.id)
       .first
+  end
+
+  def create_auction_ended_job
+    CreateAuctionEndedJob.new(auction).perform
   end
 
   def updating_ended_at?
