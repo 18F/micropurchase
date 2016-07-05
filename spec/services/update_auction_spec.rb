@@ -141,6 +141,15 @@ describe UpdateAuction do
     end
 
     context 'when result is set to rejected' do
+      it 'sets rejected_at to the time the auction was rejected' do
+        auction = create(:auction, :delivery_due_at_expired)
+        params = { auction: { result: 'rejected' } }
+
+        updater = UpdateAuction.new(auction: auction, params: params, current_user: auction.user)
+
+        expect { updater.perform }.to change { auction.rejected_at }
+      end
+
       it 'does not set cap_proposal_url' do
         auction = create(:auction, :delivery_due_at_expired)
         params = { auction: { result: 'rejected' } }
