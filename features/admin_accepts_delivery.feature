@@ -22,4 +22,14 @@ Feature: Admin accepts delivery of a project
       And I select the result as accepted
       And I click on the "Update" button
       Then I should see that the auction does not have a CAP Proposal URL
-      And I should see an error that "The vendor cannot be paid"
+      And I should see an error that "The vendor is ineligible from being paid"
+
+    Scenario: Marking an auction as accepted where the vendor is missing a payment method
+      Given I am an administrator
+      And there is an auction where the winning vendor is missing a payment method
+      And I sign in
+      When I visit the admin form for that auction
+      And I select the result as accepted
+      And I click on the "Update" button
+      Then I should see that the auction does not have a CAP Proposal URL
+      And I should see an error that "The vendor is missing their credit card. An email was sent to them requesting a credit card form URL."

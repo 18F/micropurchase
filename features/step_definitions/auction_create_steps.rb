@@ -100,6 +100,17 @@ Given(/^there is an auction where the winning vendor is not eligible to be paid$
   )
 end
 
+Given(/^there is an auction where the winning vendor is missing a payment method$/) do
+  @auction = FactoryGirl.create(
+    :auction,
+    :between_micropurchase_and_sat_threshold,
+    :winning_vendor_is_non_small_business,
+    :evaluation_needed
+  )
+  winning_bidder = WinningBid.new(@auction).find.bidder
+  winning_bidder.update(credit_card_form_url: nil)
+end
+
 Given(/^there is a paid auction$/) do
   @auction = FactoryGirl.create(:auction, :closed, :paid)
 end

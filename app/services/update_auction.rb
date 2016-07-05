@@ -7,7 +7,6 @@ class UpdateAuction
 
   def perform
     assign_attributes
-
     update_auction_ended_job
 
     if vendor_ineligible?
@@ -17,6 +16,8 @@ class UpdateAuction
       perform_approved_auction_tasks
       auction.save
     end
+
+    auction.persisted?
   end
 
   private
@@ -102,6 +103,10 @@ class UpdateAuction
 
   def winning_bidder
     WinningBid.new(auction).find.bidder
+  end
+
+  def auction_accepted?
+    attributes[:result] == 'accepted'
   end
 
   def attributes
