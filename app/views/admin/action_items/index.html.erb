@@ -19,5 +19,5 @@
   locals: { id: 'successful', auctions: @view_model.complete_and_successful } %>
 
 <h2>Rejected</h2>
-<%= render partial: 'items',
-  locals: { id: 'rejected', auctions: @view_model.rejected } %>
+<%= render partial: 'rejected_auctions',
+  locals: { auctions: @view_model.rejected } %>

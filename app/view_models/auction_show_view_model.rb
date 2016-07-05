@@ -154,7 +154,7 @@ class AuctionShowViewModel
   end
 
   def lowest_bidder_name
-    auction.lowest_bid.bidder.name
+    auction.lowest_bid.bidder_name
   end
 
   def available_and_user_is_bidder?

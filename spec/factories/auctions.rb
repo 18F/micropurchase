@@ -117,10 +117,12 @@ FactoryGirl.define do
 
     trait :accepted do
       result :accepted
+      accepted_at { Time.now }
     end
 
     trait :rejected do
       result :rejected
+      rejected_at { Time.now }
     end
 
     trait :not_paid do

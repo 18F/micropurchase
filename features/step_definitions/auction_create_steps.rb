@@ -92,7 +92,7 @@ Given(/^there are complete and successful auctions$/) do
 end
 
 Given(/^there is a rejected auction$/) do
-  @rejected = FactoryGirl.create(:auction, :rejected)
+  @rejected = FactoryGirl.create(:auction, :closed, :with_bidders, :delivered, :rejected)
 end
 
 Given(/^there is an auction where the winning vendor is not eligible to be paid$/) do

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160630211309) do
+ActiveRecord::Schema.define(version: 20160705175025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20160630211309) do
     t.integer  "purchase_card",    default: 0,    null: false
     t.datetime "paid_at"
     t.datetime "accepted_at"
+    t.datetime "rejected_at"
   end
 
   add_index "auctions", ["user_id"], name: "index_auctions_on_user_id", using: :btree
@@ -94,8 +95,8 @@ ActiveRecord::Schema.define(version: 20160630211309) do
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
     t.string   "email"
-    t.string   "credit_card_form_url", default: "",    null: false
     t.string   "github_login"
+    t.string   "credit_card_form_url", default: "",    null: false
     t.integer  "sam_status",           default: 0,     null: false
     t.boolean  "contracting_officer",  default: false, null: false
     t.boolean  "small_business",       default: false, null: false

@@ -15,6 +15,7 @@ class UpdateAuction
       false
     else
       perform_approved_auction_tasks
+      perform_rejected_auction_tasks
       auction.save
     end
   end
@@ -58,6 +59,12 @@ class UpdateAuction
     end
   end
 
+  def perform_rejected_auction_tasks
+    if auction_rejected? && auction.rejected_at.nil?
+      auction.rejected_at = Time.current
+    end
+  end
+
   def should_create_cap_proposal?
     auction_accepted_and_cap_proposal_is_blank? &&
       auction.purchase_card == "default"
@@ -74,6 +81,10 @@ class UpdateAuction
 
   def auction_accepted?
     attributes[:result] == 'accepted'
+  end
+
+  def auction_rejected?
+    attributes[:result] == 'rejected'
   end
 
   def winning_bidder_is_eligible_to_be_paid?
