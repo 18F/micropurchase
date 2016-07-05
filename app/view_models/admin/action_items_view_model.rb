@@ -23,6 +23,10 @@ class Admin::ActionItemsViewModel < Admin::BaseViewModel
     list_items(AuctionQuery.new.payment_needed)
   end
 
+  def rejected
+    list_items(AuctionQuery.new.rejected)
+  end
+
   private
 
   def list_items(auctions)

@@ -47,6 +47,11 @@ class AuctionQuery
       .paid
   end
 
+  def rejected
+    @relation
+      .rejected
+  end
+
   def payment_pending
     @relation
       .delivery_due_at_expired
