@@ -123,6 +123,17 @@ describe AuctionQuery do
     end
   end
 
+  describe '#rejected' do
+    let!(:complete_and_successful) do
+      create(:auction, :complete_and_successful)
+    end
+    let!(:rejected_auction) { create(:auction, result: :rejected) }
+
+    it 'should only return unpublished auctions' do
+      expect(query.rejected).to match_array([rejected_auction])
+    end
+  end
+
   describe '#payment_pending' do
     let(:payment_pending) { create(:auction, :payment_pending) }
     let!(:running_auction) { create(:auction, :running) }

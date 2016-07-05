@@ -15,22 +15,22 @@ Then(/^I should be able to see the full details for each bid$/) do
     unredacted_bidder_duns = bid.bidder.duns_number
 
     # check the "name" column
-    within(:xpath, cel_xpath(row_number, 1)) do
+    within(:xpath, cel_xpath(row: row_number, column: 1)) do
       expect(page).to have_content(unredacted_bidder_name)
     end
 
-    within(:xpath, cel_xpath(row_number, 2)) do
+    within(:xpath, cel_xpath(row: row_number, column: 2)) do
       expect(page).to have_content(unredacted_bidder_duns)
     end
 
     # check the "amount" column
     amount = ApplicationController.helpers.number_to_currency(bid.amount)
-    within(:xpath, cel_xpath(row_number, 3)) do
+    within(:xpath, cel_xpath(row: row_number, column: 3)) do
       expect(page).to have_content(amount)
     end
 
     # check the "date" column
-    within(:xpath, cel_xpath(row_number, 4)) do
+    within(:xpath, cel_xpath(row: row_number, column: 4)) do
       expect(page).to have_content(
         DcTimePresenter.convert_and_format(bid.created_at)
       )
@@ -49,23 +49,23 @@ Then(/^I should not see the bidder name or duns for any bid$/) do
     unredacted_bidder_duns = bid.bidder.duns_number
 
     # check the "name" column
-    within(:xpath, cel_xpath(row_number, 1)) do
+    within(:xpath, cel_xpath(row: row_number, column: 1)) do
       expect(page).not_to have_content(unredacted_bidder_name)
       expect(page).to have_content("[Name withheld until the auction ends]")
     end
 
-    within(:xpath, cel_xpath(row_number, 2)) do
+    within(:xpath, cel_xpath(row: row_number, column: 2)) do
       expect(page).not_to have_content(unredacted_bidder_duns)
       expect(page).to have_content("[Withheld]")
     end
 
     # check the "amount" column
-    within(:xpath, cel_xpath(row_number, 3)) do
+    within(:xpath, cel_xpath(row: row_number, column: 3)) do
       expect(page).to have_content(Currency.new(bid.amount).to_s)
     end
 
     # check the "date" column
-    within(:xpath, cel_xpath(row_number, 4)) do
+    within(:xpath, cel_xpath(row: row_number, column: 4)) do
       expect(page).to have_content(
         DcTimePresenter.convert_and_format(bid.created_at)
       )
@@ -89,23 +89,23 @@ Then(/^I should see my name and DUNS only on my bids$/) do
     end
 
     # check the "name" column
-    within(:xpath, cel_xpath(row_number, 1)) do
+    within(:xpath, cel_xpath(row: row_number, column: 1)) do
       expect(page).to have_content(bidder_name)
     end
 
-    within(:xpath, cel_xpath(row_number, 2)) do
+    within(:xpath, cel_xpath(row: row_number, column: 2)) do
       expect(page).to have_content(bidder_duns)
     end
 
     # check the "amount" column
 
     amount = Currency.new(bid.amount).to_s
-    within(:xpath, cel_xpath(row_number, 3)) do
+    within(:xpath, cel_xpath(row: row_number, column: 3)) do
       expect(page).to have_content(amount)
     end
 
     # check the "date" column
-    within(:xpath, cel_xpath(row_number, 4)) do
+    within(:xpath, cel_xpath(row: row_number, column: 4)) do
       expect(page).to have_content(
         DcTimePresenter.convert_and_format(bid.created_at)
       )

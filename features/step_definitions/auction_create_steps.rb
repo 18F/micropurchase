@@ -91,6 +91,10 @@ Given(/^there are complete and successful auctions$/) do
   @complete_and_successful = FactoryGirl.create_list(:auction, 2, :complete_and_successful)
 end
 
+Given(/^there is a rejected auction$/) do
+  @rejected = FactoryGirl.create(:auction, :rejected)
+end
+
 Given(/^there is an auction where the winning vendor is not eligible to be paid$/) do
   @auction = FactoryGirl.create(
     :auction,

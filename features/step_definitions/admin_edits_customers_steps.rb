@@ -17,15 +17,15 @@ end
 
 Then(/^I should see the new customer on the page$/) do
 
-  within(:xpath, "//table/tbody/tr/td[1]") do
+  within(:xpath, cel_xpath(column: 1)) do
     expect(page).to have_content(@agency_name)
   end
 
-  within(:xpath, "//table/tbody/tr/td[2]") do
+  within(:xpath, cel_xpath(column: 2)) do
     expect(page).to have_content(@contact_name)
   end
 
-  within(:xpath, "//table/tbody/tr/td[3]") do
+  within(:xpath, cel_xpath(column: 3)) do
     expect(page).to have_content(@email)
   end
 end

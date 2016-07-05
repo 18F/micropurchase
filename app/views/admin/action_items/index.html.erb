@@ -1,19 +1,23 @@
 <h2>Delivery past due</h2>
 <%= render partial: 'items',
-  locals: { auctions: @view_model.delivery_past_due } %>
+  locals: { id: 'overdue', auctions: @view_model.delivery_past_due } %>
 
 <h2>Evaluation needed</h2>
 <%= render partial: 'items',
-  locals: { auctions: @view_model.evaluation_needed } %>
+  locals: { id: 'eval-needed', auctions: @view_model.evaluation_needed } %>
 
 <h2>Payment needed</h2>
 <%= render partial: 'items',
-  locals: { auctions: @view_model.payment_needed } %>
+  locals: { id: 'payment-needed', auctions: @view_model.payment_needed } %>
 
 <h2>Payment pending</h2>
 <%= render partial: 'items',
-  locals: { auctions: @view_model.payment_pending } %>
+  locals: { id: 'payment-pending', auctions: @view_model.payment_pending } %>
 
 <h2>Complete &amp; successful</h2>
 <%= render partial: 'items',
-  locals: { auctions: @view_model.complete_and_successful } %>
+  locals: { id: 'successful', auctions: @view_model.complete_and_successful } %>
+
+<h2>Rejected</h2>
+<%= render partial: 'items',
+  locals: { id: 'rejected', auctions: @view_model.rejected } %>
