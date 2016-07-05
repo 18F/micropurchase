@@ -130,7 +130,7 @@ class BidSubmitted
   end
 
   def header
-    'Bid Submitted! You currently have the winning bid.'
+    'Bid submitted! You currently have the winning bid.'
   end
 
   def body
