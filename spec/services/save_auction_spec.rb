@@ -34,11 +34,16 @@ describe SaveAuction do
       end
     end
 
-    it 'queues and schedules AuctionEndedJob' do
+    it 'calls CreateAuctionEndedJob' do
       auction = build(:auction, ended_at: 2.days.from_now)
+      create_auction_ended_job_double = double(perform: true)
+      allow(CreateAuctionEndedJob).to receive(:new).with(auction).and_return(
+        create_auction_ended_job_double
+      )
 
-      expect { SaveAuction.new(auction).perform }
-        .to change { Delayed::Job.count }.by(1)
+      SaveAuction.new(auction).perform
+
+      expect(create_auction_ended_job_double).to have_received(:perform)
     end
   end
 end
