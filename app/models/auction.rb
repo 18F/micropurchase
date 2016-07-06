@@ -33,11 +33,6 @@ class Auction < ActiveRecord::Base
     bids.select { |b| b.amount == lowest_amount }.sort_by(&:created_at)
   end
 
-  def customer_name
-    return nil if customer.nil?
-    customer.agency_name
-  end
-
   private
 
   def lowest_amount

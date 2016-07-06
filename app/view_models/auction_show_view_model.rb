@@ -224,7 +224,11 @@ class AuctionShowViewModel
   end
 
   def customer_label
-    auction.customer_name
+    customer.agency_name
+  end
+
+  def customer
+    auction.customer || NullCustomer.new
   end
 
   def formatted_date(date)

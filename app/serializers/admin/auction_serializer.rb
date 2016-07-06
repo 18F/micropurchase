@@ -5,10 +5,10 @@ class Admin::AuctionSerializer < ActiveModel::Serializer
     :billable_to,
     :cap_proposal_url,
     :created_at,
+    :customer,
     :delivery_due_at,
     :delivery_url,
     :description,
-    :customer,
     :ended_at,
     :github_repo,
     :id,
@@ -47,6 +47,12 @@ class Admin::AuctionSerializer < ActiveModel::Serializer
   end
 
   def customer
-    object.customer_name
+    find_customer.agency_name
+  end
+
+  private
+
+  def find_customer
+    object.customer || NullCustomer.new
   end
 end

@@ -21,6 +21,7 @@ class AuctionParser
     strong_params.require(:auction).permit(
       :billable_to,
       :cap_proposal_url,
+      :customer_id,
       :delivery_url,
       :description,
       :github_repo,
@@ -31,8 +32,7 @@ class AuctionParser
       :start_price,
       :summary,
       :title,
-      :type,
-      :customer_id
+      :type
     )
   end
 
