@@ -11,6 +11,16 @@ describe AuctionQuery do
     end
   end
 
+  describe '#completed' do
+    it 'returns published auctions with bids where delivery deadline is in past' do
+      completed = create(:auction, :complete_and_successful)
+      payment_pending = create(:auction, :with_bidders, :delivery_due_at_expired)
+      create(:auction, :available)
+
+      expect(query.completed).to match_array([completed, payment_pending])
+    end
+  end
+
   describe '#not_evaluated' do
     let(:unevaluated_auction) { create(:auction, :running) }
     let!(:evaluated_auction) { create(:auction, :accepted) }
