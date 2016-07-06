@@ -2,40 +2,32 @@
 <% content_for :description do %>Login or create an account to participate in Micro-purchase auctions.<% end %>
 
 <div class="usa-grid">
-  <h1>Getting started</h1>
+  <div class="usa-width-one-half">
+    <h1>Sign in</h1>
+    <p>
+      <%= link_to 'Authorize with GitHub',
+        '/auth/github',
+        class: 'usa-button usa-button usa-button-outline' %>
+    </p>
+  </div>
 
-  <p>Before participating in this marketplace, you’ll first need to register
-  your company with <a href="https://www.sam.gov/portal/SAM/##11">SAM.gov</a>,
-  enter a DUNS number, and have a GitHub account. </p>
-
-  <p>Once you’re ready, continue with GitHub authorization (only public account
-  information will be requested). If you encounter any issues, let us know at
-  <%= mail_to 'micropurchase@gsa.gov' %>.</p>
-
-  <a class='usa-button usa-button usa-button-outline'
-    href="/auth/github">Authorize with GitHub <icon class="fa
-    fa-angle-double-right"></icon></a>
-  <p></p>
-  <p></p>
-  <h3>Administrative notes:</h3>
-  <p>None of the content in this GitHub repository is considered proprietary or
-  procurement-sensitive information.  Furthermore, all users who submit bids
-  consent to the publication of their GitHub usernames, DUNS numbers, and bid
-  amounts following the conclusion of the bidding process.  Bidders' email
-  addresses will not be disclosed and will only be used for
-  micro-purchase-related communication on an as-needed basis.</p>
-  <p>In order to bid, all users must be listed as "Active" in SAM.gov on the day
-  the auction opens. The process for SAM.gov activation may take several days,
-  and we encourage interested vendors to sign up at least one week prior to
-  bidding. To check your status with SAM.gov, you may use the <a
-    href="https://www.sam.gov/sam/helpPage/SAM_Reg_Status_Help_Page.html">SAM
-    Status Tracker</a>. If you need help with SAM.gov, call the toll-free
-  SAM.gov Help Desk: <a href="tel:1-866-606-8220">1-866-606-8220.</a></p>
-  <p>This platform is the primary method of bidding on micro-purchase
-  opportunities. Vendor organizations may have multiple user accounts registered
-  on this micro-purchase platform and on GitHub, as well as associated with each
-  vendor and the vendor's DUNS number. Furthermore, vendors may register as
-  either individuals or businesses on SAM.gov. Please file a GitHub issue <a
-    href="https://github.com/18F/micropurchase/issues">in this repo</a> if you
-  have any questions.</p>
+  <div class="usa-width-one-half">
+    <h2>Sign up</h2>
+    <p>
+      Don't yet have an account? No worries. Before you can bid on an auction
+      you'll need participating in this marketplace, you’ll need to:
+    </p>
+    <ol>
+      <li>Register your company with <%= link_to 'SAM.gov',
+        'https://www.sam.gov/portal/SAM/##11'%></li>
+        <li>Obtain a <%= link_to 'DUNS number', 'https://fedgov.dnb.com/webform'
+        %>.</li>
+        <li>Have a <%= link_to 'GitHub', 'https://github.com/' %> account.</li>
+    </ol>
+    <p>
+      Once you’re ready, you can sign in using your GitHub account. Only public
+      account information will be requested. If you encounter any issues, let us know
+      at <%= mail_to 'micropurchase@gsa.gov' %>.
+    </p>
+  </div>
 </div>
