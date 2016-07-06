@@ -7,8 +7,84 @@ class InsightsViewModel
     AuctionQuery.new.upcoming_auction_count
   end
 
-  def total_auctions
-    published_auction_count
+  def hero_metrics
+    [
+      published_auction_stat,
+      accepted_auction_stat,
+      unique_winners_stat,
+      average_bids_stat,
+      unique_bidders_stat,
+      vendors_with_bids_stat,
+      average_auction_length_stat,
+      { statistic: average_delivery_time, label: 'average delivery time' },
+      { statistic: average_starting_price, label: 'average starting price' },
+      average_winning_bid_stat,
+      { statistic: small_business_count, label: 'small businesses registered' },
+      { statistic: in_sam_count, label: 'Sam.gov qualified vendors' }
+    ]
+  end
+
+  def published_auction_stat
+    {
+      statistic: published_auction_count,
+      label: 'total auctions',
+      href: 'chart-bids-by-auction'
+    }
+  end
+
+  def accepted_auction_stat
+    {
+      statistic: accepted_auctions_count,
+      label: 'successful delieries',
+      label_stat: "(#{accepted_auction_percent} success rate)"
+    }
+  end
+
+  def unique_winners_stat
+    {
+      statistic: unique_auction_winners,
+      label: 'unique auction winners',
+      href: 'chart-winning-bid'
+    }
+  end
+
+  def average_bids_stat
+    {
+      statistic: average_bids_per_auction,
+      label: 'bids/auction',
+      href: 'chart4'
+    }
+  end
+
+  def unique_bidders_stat
+    {
+      statistic: unique_bidders_per_auction,
+      label: 'unique bidders per auction'
+    }
+  end
+
+  def vendors_with_bids_stat
+    {
+      statistic: vendors_with_bids_count,
+      href: 'agency-savings',
+      label: 'vendors who have placed bids'
+    }
+  end
+
+  def average_auction_length_stat
+    {
+      statistic: average_auction_length,
+      href: 'auction-length',
+      label: 'average auction length'
+    }
+  end
+
+  def average_winning_bid_stat
+    {
+      href: 'chart-winning-bid',
+      statistic: average_winning_bid,
+      label: 'average winning bid'
+    }
   end
 
   def unique_bidders_per_auction
@@ -63,7 +139,9 @@ class InsightsViewModel
     accepted_auctions.count
   end
 
-  private
+  def accepted_auction_percent
+    Percent.new(accepted_auctions_count, published_auction_count).to_s
+  end
 
   def unique_bidders_count_per_auction
     completed_auctions.map(&:bidders).map do |bidders|
