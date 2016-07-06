@@ -664,24 +664,25 @@ main div.wrap > form { max-width: 576px; }
 	color: #8a490e;
 	text-align: center;
 	padding: 12px 0;
-	border-bottom: 1px solid #e7d49b;
+	border: 1px solid #e7d49b;
+	border-radius: 4px;
+	margin-bottom: 1em;
+}
+
+.notice a{
+	color: #8a1132;
 }
 
 .site-header{ 
 	padding: 10px 0 10px;
 }
 
-.site-header a{
-	color: #53d3fe;	 
-}
+.site-header a{ color: #53d3fe;	  }
 
 .site-header .logo a,
 .site-header .logo a img{ float: left; }
 
 .site-header .logo a{ padding-left: 56px; }
-.site-header .logo{ 
-	margin-bottom: 0.5em; 
-}
 
 .site-header .logo::after{
 	content: "";
@@ -793,25 +794,17 @@ main div.wrap > form { max-width: 576px; }
 }
 
 .site-header .nav-header-nav{
-	padding-top: 8px;
-	padding-bottom: 8px;
 	line-height: 1.4em;
 	font-size: 16px;
 }
 
-.site-header .nav-header-nav .user-name{
-	max-width: 10em;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
+.site-header .nav-header-nav li{
 	display: inline-block;
 	vertical-align: middle;
-	margin-top: -0.33em;
 }
 
-.site-header .nav-header-nav .signed-in a:last-of-type{
-	margin-left: 0.8em;
-}
+.site-header .nav-header-nav li a{ color: white; }
+.site-header .nav-header-nav .signed-in a:last-of-type{ margin-left: 0.8em; }
 
 .site-header .nav-header-nav a:last-of-type{ margin-right: 0; }
 
@@ -1624,28 +1617,33 @@ a[id]{
 	max-width: 10em;
 }
 
-.field-duns.is-verified .verification-status-text,
-.field-duns.is-verifying .verification-status-text{
-		display: inline-block;
+.field-duns .verification-status-text{
+	display: inline-block;
 	vertical-align: middle;
 	font-size: 14px;
 	font-style: italic;
 	color: #555;
 }
 
+.field-duns.is-error .verification-status-text,
 .field-duns.is-verified .verification-status-text{
 	color: green;
 	font-weight: 600;
 	font-style: normal;
 }
 
+.field-duns.is-error .verification-status-text{
+	color: darkred;
+}
+
+.field-duns.is-error .verification-status-icon,
 .field-duns.is-verified .verification-status-icon,
 .field-duns.is-verifying .verification-status-icon{
 	width: 16px;
 	height: 16px;
 	display: inline-block;
 	vertical-align: middle;
-	padding-left: 20px;
+	padding-left: 18px;
 	background: url(images/png/checkmark.png) left center no-repeat;
 	background-size: 16px;	
 }
@@ -1655,6 +1653,26 @@ a[id]{
 	background-size: 16px;	
 }
 
+.field-duns.is-error .verification-status-icon{
+	background: url(images/png/notification.png) left center no-repeat;
+	background-size: 16px;	
+}
+
+.layout-profile .button-delete{
+	float: right;
+	color: #992d00;
+}
+
+.layout-profile .button-delete:hover,
+.layout-profile .button-delete:active{
+	background: #992d00;
+	color: white;
+	border-color: #992d00;
+}
+
+.layout-profile .button-delete:active{
+	color: #ffe992;
+}
 
 /* @end */
 
@@ -1672,6 +1690,7 @@ a[id]{
 .layout-sign-up .wrapper p,
 .layout-profile .wrapper p{
 	line-height: 1.6;
+	margin-bottom: 1em;
 }
 
 .layout-sign-up .field .label-text,
@@ -1705,11 +1724,7 @@ a[id]{
 }
 
 .layout-sign-up main footer,
-.layout-profile main footer{
-	margin-top: 2em;
-	padding-top: 1.6em;
-	border-top: 2px solid #eee;
-}
+.layout-profile main footer{ margin-top: 2em; }
 
 .layout-sign-up main footer a{
 	float: right;
@@ -2298,7 +2313,7 @@ a[id]{
 		margin-right: 3%;
 		float: left;
 	}
-	.layout-home main .auction:nth-child(2n+1){
+	.layout-home main .auction:nth-child(2n+2){
 		margin-right: 0;
 	}
 }
