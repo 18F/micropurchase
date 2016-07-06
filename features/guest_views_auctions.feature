@@ -27,3 +27,13 @@ Feature: Basic Auction Views
     When I visit the home page
     Then I should see a message about no auctions
     And there should be meta tags for the index page for 0 open and 0 future auctions
+
+  Scenario: Public sees the auction customer
+    Given there is an auction with an associated customer
+    When I visit the auction page
+    Then I should see the customer name on the page
+
+  Scenario: Public should not see a customer label if it's not set
+    Given there is an open auction
+    When I visit the auction page
+    Then I should not see a label for the customer on the page
