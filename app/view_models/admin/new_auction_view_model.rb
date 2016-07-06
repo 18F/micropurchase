@@ -39,6 +39,10 @@ class Admin::NewAuctionViewModel < Admin::BaseViewModel
     ['unpublished']
   end
 
+  def customer_options
+    Customer.sorted
+  end
+
   private
 
   def default_date_time

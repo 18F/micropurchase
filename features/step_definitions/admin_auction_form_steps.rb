@@ -1,4 +1,3 @@
-
 When(/^I click on the link to generate a winning bidder CSV report$/) do
   click_on(I18n.t('admin.auctions.show.winner_report'))
 end
@@ -118,7 +117,7 @@ Then(/^I should be able to edit the existing auction form$/) do
   select('5', from: 'auction_ended_at_1i')
   select('30', from: 'auction_ended_at_2i')
   select('PM', from: 'auction_ended_at_3i')
-  @end_time = DcTimePresenter.time_zone.parse("#{@end_day.strftime('%Y-%m-%d')} 5:30 PM") 
+  @end_time = DcTimePresenter.time_zone.parse("#{@end_day.strftime('%Y-%m-%d')} 5:30 PM")
 
   @deadline_day = DcTimePresenter.convert(Time.now + 5.days)
   fill_in "auction_delivery_due_at", with: @deadline_day.strftime('%Y-%m-%d')
@@ -155,4 +154,24 @@ end
 Then(/^I should see the end time I set for the auction$/) do
   expect(DcTimePresenter.convert_and_format(@auction.ended_at)).to eq(DcTimePresenter.convert_and_format(@end_time))
   expect(page).to have_text(DcTimePresenter.convert_and_format(@end_time))
+end
+
+Then(/^I should see a select box with all the customers in the system$/) do
+  find_field('Customer')
+end
+
+When(/^I select a customer on the form$/) do
+  @customer_select = Customer.first
+  select(@customer_select.agency_name, from: 'Customer')
+end
+
+Then(/^I expect the customer to have been saved$/) do
+  @auction.reload
+  expect(@auction.customer).to_not be_nil
+  expect(@auction.customer).to eq(@customer_select)
+end
+
+Then(/^I should see the customer selected for the auction$/) do
+  field = find_field('Customer')
+  expect(field.value.to_i).to eq(@customer.id)
 end

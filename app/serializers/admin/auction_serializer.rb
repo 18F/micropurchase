@@ -5,6 +5,7 @@ class Admin::AuctionSerializer < ActiveModel::Serializer
     :billable_to,
     :cap_proposal_url,
     :created_at,
+    :customer,
     :delivery_due_at,
     :delivery_url,
     :description,
@@ -43,5 +44,15 @@ class Admin::AuctionSerializer < ActiveModel::Serializer
 
   def updated_at
     object.updated_at.iso8601
+  end
+
+  def customer
+    find_customer.agency_name
+  end
+
+  private
+
+  def find_customer
+    object.customer || NullCustomer.new
   end
 end
