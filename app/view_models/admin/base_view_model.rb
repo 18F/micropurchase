@@ -7,6 +7,10 @@ class Admin::BaseViewModel
     ''
   end
 
+  def customers_nav_class
+    ''
+  end
+
   def drafts_nav_class
     ''
   end

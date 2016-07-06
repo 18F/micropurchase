@@ -36,10 +36,6 @@ When(/^I fill out the profile form$/) do
   fill_in("user_email", with: @new_email)
 end
 
-When(/^I fill the "([^"]*)" field with "([^"]*)"$/) do |field, value|
-  fill_in(field, with: value)
-end
-
 When(/^there is no (.+) associated with my account$/) do |attribute|
   attribute = attribute.parameterize('_')
   @user.update(attribute.to_sym => '')

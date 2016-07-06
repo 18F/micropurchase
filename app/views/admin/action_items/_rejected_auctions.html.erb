@@ -1,0 +1,24 @@
+<table class="usa-table-borderless" id="table-rejected">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Delivery Deadline</th>
+      <th scope="col">Delivery URL</th>
+      <th scope="col">Vendor Name</th>
+      <th scope="col">Rejected At</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% auctions.each do |auction| %>
+    <tr>
+      <td><%= link_to(auction.title, admin_auction_path(auction.id)) %></td>
+      <td><%= auction.delivery_due_at %></td>
+      <td><%= auction.delivery_url %></td>
+      <td><%= link_to auction.winning_bidder_name, admin_user_path(auction.winning_bidder_id) %></td>
+      <td><%= auction.rejected_at %></td>
+      <td><%= link_to('edit', edit_admin_auction_path(auction.id)) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

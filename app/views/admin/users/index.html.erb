@@ -1,5 +1,5 @@
 <h2>Admins (<%= @view_model.admin_count %>)</h2>
-<table class="usa-table-borderless">
+<table class="usa-table-borderless" id="table-admins">
   <thead>
     <tr>
       <th scope="col">Name</th>
@@ -14,7 +14,7 @@
   <tbody>
     <% @view_model.admins.each do |user| %>
       <tr>
-        <td><%= user.name %></td>
+        <td><%= link_to user.name, admin_user_path(user.id) %></td>
         <td><%= user.email %></td>
         <td><%= user.duns_number %></td>
         <td><%= user.sam_status %></td>
@@ -33,8 +33,8 @@
 </h2>
 
 <%= link_to "Download CSV", admin_user_reports_path(format: :csv) %>
-y
-<table class="usa-table-borderless">
+
+<table class="usa-table-borderless" id="table-users">
   <thead>
     <tr>
       <th scope="col">Name</th>
@@ -49,7 +49,7 @@ y
   <tbody>
     <% @view_model.users.each do |user| %>
       <tr>
-        <td><%= user.name %></td>
+        <td><%= link_to user.name, admin_user_path(user.id) %></td>
         <td><%= user.email %></td>
         <td><%= user.duns_number %></td>
         <td><%= user.in_sam? %></td>

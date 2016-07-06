@@ -2,6 +2,7 @@ class AuctionSerializer < ActiveModel::Serializer
   attributes(
     :bids,
     :created_at,
+    :customer,
     :description,
     :ended_at,
     :github_repo,
@@ -17,7 +18,7 @@ class AuctionSerializer < ActiveModel::Serializer
 
   def bids
     veiled_bids.map do |bid|
-      BidSerializer.new(bid, { scope: scope, root: false })
+      BidSerializer.new(bid, scope: scope, root: false)
     end
   end
 
@@ -35,6 +36,10 @@ class AuctionSerializer < ActiveModel::Serializer
 
   def started_at
     object.started_at.iso8601
+  end
+
+  def customer
+    find_customer.agency_name
   end
 
   def winning_bid
@@ -57,6 +62,10 @@ class AuctionSerializer < ActiveModel::Serializer
     else
       WinningBid.new(object).find
     end
+  end
+
+  def find_customer
+    object.customer || NullCustomer.new
   end
 
   def auction_status

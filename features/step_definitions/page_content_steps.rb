@@ -50,7 +50,29 @@ Then(/^I will not see a warning I must be an admin$/) do
 end
 
 Then(/^I should see the auctions in reverse start date order$/) do
-  first_start_date = page.find(:xpath, '/html/body/div/div/div/div/table/tbody/tr[1]/td[3]').text
-  second_start_date = page.find(:xpath, '/html/body/div/div/div/div/table/tbody/tr[2]/td[3]').text
+  first_start_date = page.find(:xpath, cel_xpath(row: 1, column: 3)).text
+  second_start_date = page.find(:xpath, cel_xpath(row: 2, column: 3)).text
   expect(DateTime.parse(first_start_date)).to be > DateTime.parse(second_start_date)
+end
+
+Then(/^I should see that user's information$/) do
+  expect(page).to have_content(@user.name)
+  expect(page).to have_content(@user.email)
+  expect(page).to have_content(@user.credit_card_form_url)
+  expect(page).to have_content(@user.duns_number)
+  expect(page).to have_content(@user.github_id)
+  expect(page).to have_content(@user.github_login)
+  expect(page).to have_content(@user.sam_status)
+end
+
+Then(/^I should see a page title "([^"]+)"$/) do |title|
+  expect(page).to have_title title
+end
+
+Then(/^I should see a section labeled "([^"]+)"$/) do |header|
+  page.find('h2', text: header)
+end
+
+Then(/^I should not see a section labeled "([^"]+)"$/) do |header|
+  expect(page.first('h2', text: header)).to be_nil
 end

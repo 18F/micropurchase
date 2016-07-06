@@ -13,6 +13,17 @@ Then(/^I should see the auction's (.+)$/) do |field|
   end
 end
 
+Then(/^I should see that the auction has a CAP Proposal URL$/) do
+  expect(@auction.reload.cap_proposal_url).to be_present
+  within(:css, '.auction-info') do
+    expect(page).to have_content(@auction.cap_proposal_url)
+  end
+end
+
+Then(/^I should see that the auction does not have a CAP Proposal URL$/) do
+  expect(@auction.cap_proposal_url).not_to be_present
+end
+
 Then(/^I should see when bidding starts and ends in ET$/) do
   expect(page).to have_text(DcTimePresenter.convert_and_format(@auction.started_at))
   expect(page).to have_text(DcTimePresenter.convert_and_format(@auction.ended_at))
@@ -46,10 +57,6 @@ end
 
 Then(/^I should see the start price for the auction is \$(\d+)$/) do |price|
   expect(page).to have_field('auction_start_price', with: price)
-end
-
-Then(/^I should see that the auction has a CAP Proposal URL$/) do
-  expect(page).to have_content("CAP proposal URL #{@auction.reload.cap_proposal_url}")
 end
 
 Then(/^I should see that the auction was accepted$/) do
@@ -105,4 +112,12 @@ end
 
 Then(/^I should not see the unpublished auction$/) do
   expect(page).to_not have_content(@unpublished_auction.title)
+end
+
+Then(/^I should be able to set the auction to published$/) do
+  expect(page).to have_select('auction_published', with_options: ['published'])
+end
+
+Then(/^I should not be able to set the auction to published$/) do
+  expect(page).not_to have_select('auction_published', options: ['published'])
 end

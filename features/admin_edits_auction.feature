@@ -2,11 +2,13 @@ Feature: Admin edits auctions in the admins panel
   As an admin
   I should be able to modify existing auctions
 
-  Scenario: Updating an auction
+  Background:
     Given I am an administrator
-    And there is an open auction
-    And there is a client account to bill to
     And I sign in
+
+  Scenario: Updating an auction
+    Given there is an open auction
+    And there is a client account to bill to
     And I visit the auctions admin page
 
     When I click to edit the auction
@@ -21,3 +23,18 @@ Feature: Admin edits auctions in the admins panel
 
     When I click on the auction's title
     Then I should see new content on the page
+
+  Scenario: Associating an auction with a customer
+    Given there is an open auction
+    And there is a customer
+    And I visit the auctions admin page
+
+    When I click to edit the auction
+    Then I should see a select box with all the customers in the system
+
+    When I select a customer on the form
+    And I click on the "Update" button
+    Then I expect the customer to have been saved
+
+    When I click to edit the auction
+    Then I should see the customer selected for the auction

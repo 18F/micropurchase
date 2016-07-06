@@ -47,6 +47,11 @@ class AuctionQuery
       .paid
   end
 
+  def rejected
+    @relation
+      .rejected
+  end
+
   def payment_pending
     @relation
       .delivery_due_at_expired
@@ -98,7 +103,7 @@ class AuctionQuery
       .find(id)
   end
 
-  def my_bids(user_id)
+  def with_bid_from_user(user_id)
     @relation
       .joins(:bids)
       .where(bids: { bidder_id: user_id })

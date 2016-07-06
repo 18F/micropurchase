@@ -42,7 +42,7 @@ describe AuctionQuery do
   end
 
   describe '#cap_submitted' do
-    let(:cap_submitted) { create(:auction, :cap_submitted) }
+    let(:cap_submitted) { create(:auction, :c2_approved) }
     let!(:running_auction) { create(:auction, :running) }
 
     it 'should return only cap_submitted auctions' do
@@ -51,7 +51,7 @@ describe AuctionQuery do
   end
 
   describe '#cap_not_submitted' do
-    let!(:cap_submitted) { create(:auction, :cap_submitted) }
+    let!(:cap_submitted) { create(:auction, :c2_approved) }
     let(:running_auction) { create(:auction, :running) }
 
     it 'should return only auctions where CAP has not been submitted' do
@@ -120,6 +120,17 @@ describe AuctionQuery do
     it 'should only return complete and successful auctions' do
       expect(query.complete_and_successful)
         .to match_array([complete_and_successful])
+    end
+  end
+
+  describe '#rejected' do
+    let!(:complete_and_successful) do
+      create(:auction, :complete_and_successful)
+    end
+    let!(:rejected_auction) { create(:auction, result: :rejected) }
+
+    it 'should only return unpublished auctions' do
+      expect(query.rejected).to match_array([rejected_auction])
     end
   end
 
@@ -235,6 +246,22 @@ describe AuctionQuery do
 
         expect(AuctionQuery.new.closed_within_last_24_hours).to eq [newly_closed_auction]
       end
+    end
+  end
+
+  describe '#with_bid_from_user' do
+    it 'returns auctions where the user has placed a bid' do
+      auction = create(:auction, :with_bidders)
+      bidder = auction.bids.first.bidder
+
+      expect(AuctionQuery.new.with_bid_from_user(bidder.id)).to eq([auction])
+    end
+
+    it 'does not return auctions where the user has not bid' do
+      create(:auction, :with_bidders)
+      user = create(:user)
+
+      expect(AuctionQuery.new.with_bid_from_user(user.id)).to eq([])
     end
   end
 end

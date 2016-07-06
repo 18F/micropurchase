@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160627225519) do
+ActiveRecord::Schema.define(version: 20160706014644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,8 +39,12 @@ ActiveRecord::Schema.define(version: 20160627225519) do
     t.integer  "purchase_card",    default: 0,    null: false
     t.datetime "paid_at"
     t.datetime "accepted_at"
+    t.datetime "rejected_at"
+    t.datetime "c2_approved_at"
+    t.integer  "customer_id"
   end
 
+  add_index "auctions", ["customer_id"], name: "index_auctions_on_customer_id", using: :btree
   add_index "auctions", ["user_id"], name: "index_auctions_on_user_id", using: :btree
 
   create_table "bids", force: :cascade do |t|
@@ -62,6 +66,14 @@ ActiveRecord::Schema.define(version: 20160627225519) do
 
   add_index "client_accounts", ["tock_id"], name: "index_client_accounts_on_tock_id", unique: true, using: :btree
 
+  create_table "customers", force: :cascade do |t|
+    t.string   "agency_name",  null: false
+    t.string   "contact_name"
+    t.string   "email"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
     t.integer  "attempts",   default: 0, null: false
@@ -74,6 +86,7 @@ ActiveRecord::Schema.define(version: 20160627225519) do
     t.string   "queue"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "auction_id"
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree

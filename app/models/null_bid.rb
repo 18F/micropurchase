@@ -3,11 +3,15 @@ class NullBid
     nil
   end
 
+  def bidder
+    nil
+  end
+
   def bidder_id
     nil
   end
 
-  def bidder
+  def bidder_name
     nil
   end
 end

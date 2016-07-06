@@ -6,7 +6,7 @@ Feature: Admin views public auction pages
   Scenario: Admin navigates to edit page from auction show page
     Given I am an administrator
     And I sign in
-    And there is an open auction
+    And there is a budget approved auction
     And I visit the auction page
     Then I should see the "Edit" link for the auction
 
@@ -22,3 +22,13 @@ Feature: Admin views public auction pages
     And there is an open auction
     When I visit the auction page
     Then I should not see an "Edit" link for the auction
+
+  Scenario: Seeing the customer on the auction page
+    Given I am an administrator
+    And I sign in
+    And there is an auction with an associated customer
+    When I visit the auction page
+    Then I should see the customer name on the page
+
+    When I visit the admin auction page for that auction
+    Then I should see the customer name on the page

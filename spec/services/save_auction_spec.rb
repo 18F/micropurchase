@@ -28,10 +28,22 @@ describe SaveAuction do
 
       it 'returns false' do
         auction = build(:auction, title: nil)
-        saved = SaveAuction.new(auction).perform
+        SaveAuction.new(auction).perform
 
-        expect(saved).to be(false)
+        expect(auction).not_to be_persisted
       end
+    end
+
+    it 'calls CreateAuctionEndedJob' do
+      auction = build(:auction, ended_at: 2.days.from_now)
+      create_auction_ended_job_double = double(perform: true)
+      allow(CreateAuctionEndedJob).to receive(:new).with(auction).and_return(
+        create_auction_ended_job_double
+      )
+
+      SaveAuction.new(auction).perform
+
+      expect(create_auction_ended_job_double).to have_received(:perform)
     end
   end
 end

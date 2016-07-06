@@ -17,11 +17,13 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :auctions
-    resources :users, only: [:index, :edit, :update]
+    resources :users, only: [:index, :show, :edit, :update]
+    resources :customers
     resources :auction_reports, only: [:show]
     resources :user_reports, only: [:index]
     resources :action_items, only: [:index]
     resources :drafts, only: [:index]
+    resources :proposals, only: [:create]
   end
 
   # Temporarily send JSON requests to web to API

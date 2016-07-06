@@ -1,0 +1,8 @@
+<h2>Editing customer</h2>
+
+<div class="customer-form">
+  <%= simple_form_for [:admin, @view_model.record] do |f| %>
+    <%= render partial: 'form', locals: { f: f, customer: @view_model } %>
+    <%= f.submit class: 'usa-button usa-button-outline' %>
+  <% end %>
+</div>

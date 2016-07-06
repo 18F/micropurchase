@@ -18,11 +18,11 @@ describe CreateCapProposal do
         allow(C2::Client).to receive(:new).and_return(c2_client_double)
         allow(c2_client_double).to receive(:post).with('proposals', fake_cap_attributes).and_return(response_double)
 
-        cap_proposal = CreateCapProposal.new(auction).perform
+        CreateCapProposal.new(auction).perform
 
         expect(c2_client_double).to have_received(:post).with('proposals', fake_cap_attributes)
-        expect(cap_proposal).to include("proposals/#{fake_cap_proposal_id}")
-        expect(cap_proposal).to be_url
+        expect(auction.cap_proposal_url).to include("proposals/#{fake_cap_proposal_id}")
+        expect(auction.cap_proposal_url).to be_url
       end
 
       it 'updates the auction with the cap_proposal' do
@@ -46,7 +46,7 @@ describe CreateCapProposal do
         end
           .to change { auction.cap_proposal_url }
             .from('')
-            .to("https://cap.18f.gov/proposals/#{fake_cap_proposal_id}")
+            .to("https://c2-dev.18f.gov/proposals/#{fake_cap_proposal_id}")
       end
     end
 

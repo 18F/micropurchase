@@ -6,9 +6,17 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
     @current_user = current_user
   end
 
-  def csv_report
+  def csv_report_partial
     if over?
       'admin/auctions/csv_report'
+    else
+      'components/null'
+    end
+  end
+
+  def create_c2_proposal_partial
+    if auction.purchase_card == 'default' && auction.cap_proposal_url.blank?
+      'admin/auctions/create_c2_proposal'
     else
       'components/null'
     end
@@ -27,10 +35,12 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
       'GitHub issue URL' => auction.issue_url,
       'Accepted at' => formatted_date(auction.accepted_at),
       'Delivery URL' => auction.delivery_url,
+      'Customer' => customer.agency_name,
       'Billable to' => auction.billable_to,
       'Purchase card' => auction.purchase_card,
       'Paid at' => formatted_date(auction.paid_at),
-      'CAP proposal URL' => auction.cap_proposal_url
+      'CAP proposal URL' => auction.cap_proposal_url,
+      'CAP approved at' => auction.c2_approved_at
     }
   end
 
@@ -52,10 +62,6 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
 
   def relative_time
     status_presenter.relative_time
-  end
-
-  def sealed_bids_partial
-    'components/null'
   end
 
   def veiled_bids
@@ -108,6 +114,10 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
 
   def auction_status
     AuctionStatus.new(auction)
+  end
+
+  def customer
+    auction.customer || NullCustomer.new
   end
 
   def rules

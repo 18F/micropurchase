@@ -378,6 +378,7 @@
         "title",
         "summary",
         "description",
+        "customer",
         "issue_url",
         "github_repo",
         "start_price",
@@ -426,6 +427,11 @@
           "description": "The starting price of the auction. This is the exclusive ceiling of all bids. For sealed-bid auctions, the highest allowed bid is the starting price minus $1. For open reverse auctions, bidding starts at this amount, but any new bid must be lower than the previous lowest bid.",
           "maximum": 15000,
           "minimum": 1
+        },
+        "customer": {
+          "title": "Customer",
+          "description": "The name of the agency that is requesting the micropurchase auction.",
+          "type": ["string", "null"]
         },
         "started_at": {
           "title": "Start Time",

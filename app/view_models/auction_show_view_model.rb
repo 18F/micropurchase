@@ -31,8 +31,9 @@ class AuctionShowViewModel
       start_label => formatted_date(auction.started_at),
       deadline_label => formatted_date(auction.ended_at),
       'Delivery deadline' => formatted_date(auction.delivery_due_at),
-      'Eligible vendors' => eligibility_label
-    }
+      'Eligible vendors' => eligibility_label,
+      'Customer' => customer_label
+    }.compact
   end
 
   def issue_url
@@ -154,7 +155,7 @@ class AuctionShowViewModel
   end
 
   def lowest_bidder_name
-    auction.lowest_bid.bidder.name
+    auction.lowest_bid.bidder_name
   end
 
   def available_and_user_is_bidder?
@@ -220,6 +221,14 @@ class AuctionShowViewModel
     else
       'SAM.gov only'
     end
+  end
+
+  def customer_label
+    customer.agency_name
+  end
+
+  def customer
+    auction.customer || NullCustomer.new
   end
 
   def formatted_date(date)
