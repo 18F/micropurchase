@@ -1671,11 +1671,6 @@ a[id]{
 	line-height: 1.6;
 }
 
-.layout-profile main .wrapper p a{ color: inherit; }
-
-.layout-sign-up h2{
-}
-
 .layout-sign-up .field .label-text,
 .layout-profile .field .label-text,
 .layout-sign-up .page h2{
