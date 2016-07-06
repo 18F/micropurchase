@@ -1,3 +1,5 @@
+/* @override https://pages.18f.gov/micropurchase/stylesheets/screen.css */
+
 /* @override http://localhost:4000/stylesheets/screen.css */
 
 /* @override http://localhost:4000/stylesheets/screen.css */
@@ -1359,7 +1361,7 @@ a[id]{
 	color: #444;
 	font-size: 18px;
 	margin: -1em auto 2em;
-	max-width: 36em;
+	max-width: 640px;
 }
 
 .page h2{
@@ -1432,7 +1434,7 @@ a[id]{
 
 @media screen and (min-width: 568.88px){
 	
-	.page{ padding-top: 1.6em; }
+	.page{ padding-top: 1.6em; padding-bottom: 2.4em;}
 
 	.page .page-title,
 	.page h1,
