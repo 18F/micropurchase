@@ -42,7 +42,7 @@ describe AuctionQuery do
   end
 
   describe '#cap_submitted' do
-    let(:cap_submitted) { create(:auction, :cap_submitted) }
+    let(:cap_submitted) { create(:auction, :c2_approved) }
     let!(:running_auction) { create(:auction, :running) }
 
     it 'should return only cap_submitted auctions' do
@@ -51,7 +51,7 @@ describe AuctionQuery do
   end
 
   describe '#cap_not_submitted' do
-    let!(:cap_submitted) { create(:auction, :cap_submitted) }
+    let!(:cap_submitted) { create(:auction, :c2_approved) }
     let(:running_auction) { create(:auction, :running) }
 
     it 'should return only auctions where CAP has not been submitted' do

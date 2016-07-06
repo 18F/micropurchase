@@ -9,6 +9,6 @@
 <%= render partial: auction.delivery_due_partial, locals: { f: f, auction: auction } %>
 <%= f.input :billable_to, collection: auction.billable_to_options %>
 <%= f.input :start_price %>
-<%= f.input :published, collection: Auction.publisheds.keys.to_a %>
+<%= f.input :published, collection: auction.published_options, selected: auction.published %>
 <%= f.input :purchase_card, collection: Auction.purchase_cards.keys.to_a %>
 <%= f.input :notes, as: :text %>

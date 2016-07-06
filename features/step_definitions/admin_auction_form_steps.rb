@@ -4,20 +4,17 @@ When(/^I click on the link to generate a winning bidder CSV report$/) do
 end
 
 When(/^I select the result as accepted$/) do
-  fake_cap_proposal_attributes = ConstructCapAttributes.new(@auction).perform
-  c2_proposal_double = double(id: 8888)
-  c2_response_double = double(body: c2_proposal_double)
-  c2_client_double = double
-  allow(c2_client_double).to receive(:post)
-    .with('proposals', fake_cap_proposal_attributes)
-    .and_return(c2_response_double)
-  allow(C2::Client).to receive(:new).and_return(c2_client_double)
-
   select("accepted", from: "auction_result")
 end
 
-Then(/^I should see that the auction does not have a CAP Proposal URL$/) do
-  field = find_field(I18n.t('simple_form.labels.auction.cap_proposal_url'))
+Then(/^I should see that the auction form has a CAP Proposal URL$/) do
+  expect(@auction.cap_proposal_url).to be_present
+  field = find_field(I18n.t('simple_form.labels.auction.cap_proposal_url'), disabled: true)
+  expect(field.value).to eq(@auction.cap_proposal_url)
+end
+
+Then(/^I should see that the auction form does not have a CAP Proposal URL$/) do
+  field = find_field(I18n.t('simple_form.labels.auction.cap_proposal_url'), disabled: true)
   expect(field.value).to eq('')
 end
 

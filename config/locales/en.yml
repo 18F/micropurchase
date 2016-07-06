@@ -36,6 +36,10 @@ en:
       customers:
         create:
           success: "Customer created successfully"
+      proposals:
+        create:
+          success: "C2 proposal create job enqueued successfully"
+          failure: "There was a problem enqueueing the C2 proposal create job"
   mailers:
     auction_mailer:
       losing_bidder_notification:

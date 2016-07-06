@@ -31,6 +31,14 @@ class Admin::NewAuctionViewModel < Admin::BaseViewModel
     ClientAccount.all.map(&:to_s)
   end
 
+  def published
+    'unpublished'
+  end
+
+  def published_options
+    ['unpublished']
+  end
+
   private
 
   def default_date_time

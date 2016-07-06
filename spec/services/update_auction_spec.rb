@@ -68,21 +68,21 @@ describe UpdateAuction do
 
     context 'result is set to accepted' do
       context 'auction is below the micropurchase threshold' do
-        it 'calls the CreateCapProposalJob' do
+        it 'calls the UpdateCapProposalJob' do
           auction = create(
             :auction,
             :below_micropurchase_threshold,
             :winning_vendor_is_small_business,
             :delivery_due_at_expired
           )
-          allow(CreateCapProposalJob).to receive(:perform_later)
+          allow(UpdateCapProposalJob).to receive(:perform_later)
             .with(auction.id)
             .and_return(nil)
           params = { auction: { result: 'accepted' } }
 
           UpdateAuction.new(auction: auction, params: params, current_user: auction.user).perform
 
-          expect(CreateCapProposalJob).to have_received(:perform_later).with(auction.id)
+          expect(UpdateCapProposalJob).to have_received(:perform_later).with(auction.id)
         end
 
         it 'sets accepted_at' do
@@ -101,40 +101,40 @@ describe UpdateAuction do
 
       context 'auction is between micropurchase and SAT threshold' do
         context 'winning vendor is a small business' do
-          it 'calls the CreateCapProposalJob' do
+          it 'calls the UpdateCapProposalJob' do
             auction = create(
               :auction,
               :between_micropurchase_and_sat_threshold,
               :winning_vendor_is_small_business,
               :delivery_due_at_expired
             )
-            allow(CreateCapProposalJob).to receive(:perform_later)
+            allow(UpdateCapProposalJob).to receive(:perform_later)
               .with(auction.id)
               .and_return(nil)
             params = { auction: { result: 'accepted' } }
 
             UpdateAuction.new(auction: auction, params: params, current_user: auction.user).perform
 
-            expect(CreateCapProposalJob).to have_received(:perform_later).with(auction.id)
+            expect(UpdateCapProposalJob).to have_received(:perform_later).with(auction.id)
           end
         end
 
         context 'winning vendor is not a small business' do
-          it 'does not call the CreateCapProposalJob' do
+          it 'does not call the UpdateCapProposalJob' do
             auction = create(
               :auction,
               :between_micropurchase_and_sat_threshold,
               :winning_vendor_is_non_small_business,
               :delivery_due_at_expired
             )
-            allow(CreateCapProposalJob).to receive(:perform_later)
+            allow(UpdateCapProposalJob).to receive(:perform_later)
               .with(auction.id)
               .and_return(nil)
             params = { auction: { result: 'accepted' } }
 
             UpdateAuction.new(auction: auction, params: params, current_user: auction.user).perform
 
-            expect(CreateCapProposalJob).to_not have_received(:perform_later).with(auction.id)
+            expect(UpdateCapProposalJob).to_not have_received(:perform_later).with(auction.id)
           end
         end
       end

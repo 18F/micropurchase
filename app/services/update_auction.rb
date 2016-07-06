@@ -7,7 +7,6 @@ class UpdateAuction
 
   def perform
     assign_attributes
-
     update_auction_ended_job
 
     if vendor_ineligible?
@@ -57,10 +56,7 @@ class UpdateAuction
   def perform_approved_auction_tasks
     if auction_accepted? && auction.accepted_at.nil?
       auction.accepted_at = Time.current
-    end
-
-    if should_create_cap_proposal?
-      CreateCapProposalJob.perform_later(auction.id)
+      UpdateCapProposalJob.perform_later(auction.id)
     end
   end
 
@@ -70,18 +66,9 @@ class UpdateAuction
     end
   end
 
-  def should_create_cap_proposal?
-    auction_accepted_and_cap_proposal_is_blank? &&
-      auction.purchase_card == "default"
-  end
-
   def vendor_ineligible?
-    auction_accepted_and_cap_proposal_is_blank? &&
+    auction_accepted? &&
       !winning_bidder_is_eligible_to_be_paid?
-  end
-
-  def auction_accepted_and_cap_proposal_is_blank?
-    auction_accepted? && auction.cap_proposal_url.blank?
   end
 
   def auction_accepted?

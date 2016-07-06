@@ -7,13 +7,20 @@ class FakeC2Api < Sinatra::Base
     json_response 200, 'c2_access_token.json'
   end
 
-  get '/proposals/:id' do
+  post '/api/v2/proposals' do
+   json_response 200, 'c2_proposal_created.json'
+  end
+
+  put '/api/v2/proposals/:id' do
+   json_response 200, 'c2_proposal_created.json'
+  end
+
+  get '/api/v2/proposals/:id' do
     if params[:id] == PURCHASED_PROPOSAL_ID
       json_response 200, 'c2_proposal_purchased.json'
     else
       json_response 200, 'c2_proposal_not_purchased.json'
     end
-
   end
 
   private

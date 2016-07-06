@@ -53,6 +53,10 @@ Given(/^there is an open auction$/) do
   @auction = FactoryGirl.create(:auction, :with_bidders)
 end
 
+Given(/^there is a budget approved auction$/) do
+  @auction = FactoryGirl.create(:auction, :c2_approved, :with_bidders)
+end
+
 Given(/^there is a sealed-bid auction$/) do
   @auction = FactoryGirl.create(:auction, :running, :sealed_bid)
 end
@@ -62,7 +66,7 @@ Given(/^there is a closed sealed-bid auction$/) do
 end
 
 Given(/^there is an auction that needs evaluation$/) do
-  @auction = FactoryGirl.create(:auction, :with_bidders, :evaluation_needed)
+  @auction = FactoryGirl.create(:auction, :with_bidders, :evaluation_needed, :c2_approved)
 end
 
 Given(/^there is an auction within the simplified acquisition threshold$/) do
@@ -106,4 +110,28 @@ end
 
 Given(/^there is a paid auction$/) do
   @auction = FactoryGirl.create(:auction, :closed, :paid)
+end
+
+Given(/^the auction is for the default purchase card$/) do
+  @auction.update(purchase_card: :default)
+end
+
+Given(/^the auction is for a different purchase card$/) do
+  @auction.update(purchase_card: :other)
+end
+
+Given(/^the c2 proposal for the auction is approved$/) do
+  @auction.update(c2_approved_at: Time.current)
+end
+
+Given(/^the c2 proposal for the auction is not approved$/) do
+  @auction.update(c2_approved_at: nil)
+end
+
+Given(/^the auction does not have a cap proposal url$/) do
+  @auction.update(cap_proposal_url: nil)
+end
+
+Given(/^the auction has a cap proposal url$/) do
+  @auction.update(cap_proposal_url: 'https://www.example.com')
 end

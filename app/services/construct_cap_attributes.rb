@@ -16,13 +16,11 @@ class ConstructCapAttributes
         purchase_type: ConstructCapAttributes::PURCHASE_TYPE,
         product_name_and_description: product_name_and_description,
         justification: justification,
-        link_to_product: link_to_product,
         cost_per_unit: cost_per_unit,
         quantity: ConstructCapAttributes::QUANTITY,
         recurring: ConstructCapAttributes::RECURRING,
         date_requested: date_requested,
-        urgency: ConstructCapAttributes::URGENCY,
-        additional_info: additional_info
+        urgency: ConstructCapAttributes::URGENCY
       }
     }
   end
@@ -41,31 +39,16 @@ class ConstructCapAttributes
       #{auction.summary})
   end
 
-  def link_to_product
-    auction.delivery_url
-  end
-
   def justification
     "Tock line item: #{auction.billable_to}"
   end
 
   def cost_per_unit
-    winning_bid.amount
+    auction.start_price
   end
 
   def date_requested
     Date.current.iso8601
-  end
-
-  def additional_info
-    %(Vendor name: #{winning_bid.bidder.name}
-      Vendor email: #{winning_bid.bidder.email}
-      Vendor DUNS: #{winning_bid.bidder.duns_number}
-      Use the following credit card form: #{winning_bid.bidder.credit_card_form_url}.)
-  end
-
-  def winning_bid
-    WinningBid.new(auction).find
   end
 
   def url
