@@ -8,6 +8,7 @@ class Admin::AuctionSerializer < ActiveModel::Serializer
     :delivery_due_at,
     :delivery_url,
     :description,
+    :customer,
     :ended_at,
     :github_repo,
     :id,
@@ -43,5 +44,9 @@ class Admin::AuctionSerializer < ActiveModel::Serializer
 
   def updated_at
     object.updated_at.iso8601
+  end
+
+  def customer
+    object.customer_name
   end
 end

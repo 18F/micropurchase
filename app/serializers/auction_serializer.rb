@@ -5,6 +5,7 @@ class AuctionSerializer < ActiveModel::Serializer
     :description,
     :ended_at,
     :github_repo,
+    :customer,
     :id,
     :issue_url,
     :started_at,
@@ -35,6 +36,10 @@ class AuctionSerializer < ActiveModel::Serializer
 
   def started_at
     object.started_at.iso8601
+  end
+
+  def customer
+    object.customer_name
   end
 
   def winning_bid
