@@ -1,2 +1,3 @@
-<!-- <a href="/login" class="button&#45;login usa&#45;button usa&#45;button&#45;outline&#45;inverse">Login</a> -->
-<%= link_to 'Login', login_path, class: 'usa-button usa-button-outline-inverse' %>
+<% if request.path != '/login' %>
+  <%= link_to 'Login', login_path, class: 'usa-button usa-button-outline-inverse' %>
+<% end %>
