@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160705175026) do
+ActiveRecord::Schema.define(version: 20160706014644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,8 +41,10 @@ ActiveRecord::Schema.define(version: 20160705175026) do
     t.datetime "accepted_at"
     t.datetime "rejected_at"
     t.datetime "c2_approved_at"
+    t.integer  "customer_id"
   end
 
+  add_index "auctions", ["customer_id"], name: "index_auctions_on_customer_id", using: :btree
   add_index "auctions", ["user_id"], name: "index_auctions_on_user_id", using: :btree
 
   create_table "bids", force: :cascade do |t|

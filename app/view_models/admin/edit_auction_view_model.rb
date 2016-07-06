@@ -45,6 +45,10 @@ class Admin::EditAuctionViewModel < Admin::BaseViewModel
     end
   end
 
+  def customer_options
+    ([auction.customer] + Customer.sorted).uniq.compact
+  end
+
   private
 
   def dc_time(field)

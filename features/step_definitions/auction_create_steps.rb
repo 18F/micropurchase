@@ -135,3 +135,8 @@ end
 Given(/^the auction has a cap proposal url$/) do
   @auction.update(cap_proposal_url: 'https://www.example.com')
 end
+
+Given(/^there is an auction with an associated customer$/) do
+  @customer = FactoryGirl.create(:customer)
+  @auction = FactoryGirl.create(:auction, customer: @customer)
+end

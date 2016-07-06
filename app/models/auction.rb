@@ -2,6 +2,7 @@ class Auction < ActiveRecord::Base
   attr_accessor :due_in_days
 
   belongs_to :user
+  belongs_to :customer
   has_many :bids
   has_many :bidders, through: :bids
   enum result: { not_applicable: 0, accepted: 1, rejected: 2 }
@@ -30,6 +31,11 @@ class Auction < ActiveRecord::Base
 
   def lowest_bids
     bids.select { |b| b.amount == lowest_amount }.sort_by(&:created_at)
+  end
+
+  def customer_name
+    return nil if customer.nil?
+    customer.agency_name
   end
 
   private

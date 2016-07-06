@@ -156,3 +156,24 @@ Then(/^I should see the end time I set for the auction$/) do
   expect(DcTimePresenter.convert_and_format(@auction.ended_at)).to eq(DcTimePresenter.convert_and_format(@end_time))
   expect(page).to have_text(DcTimePresenter.convert_and_format(@end_time))
 end
+
+Then(/^I should see a select box with all the customers in the system$/) do
+  #customers = Customer.sorted.all
+  find_field('Customer')
+end
+
+When(/^I select a customer on the form$/) do
+  @customer_select = Customer.first
+  select(@customer_select.agency_name, :from => 'Customer')
+end
+
+Then(/^I expect the customer to have been saved$/) do
+  @auction.reload
+  expect(@auction.customer).to_not be_nil
+  expect(@auction.customer).to eq(@customer_select)
+end
+
+Then(/^I should see the customer selected for the auction$/) do
+  field = find_field('Customer')
+  expect(field.value.to_i).to eq(@customer.id)
+end

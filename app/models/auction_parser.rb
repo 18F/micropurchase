@@ -31,7 +31,8 @@ class AuctionParser
       :start_price,
       :summary,
       :title,
-      :type
+      :type,
+      :customer_id
     )
   end
 
