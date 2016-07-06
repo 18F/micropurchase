@@ -668,7 +668,7 @@ main div.wrap > form { max-width: 576px; }
 }
 
 .site-header{ 
-	padding: 8px 0 10px;
+	padding: 10px 0 10px;
 }
 
 .site-header a{
@@ -677,6 +677,8 @@ main div.wrap > form { max-width: 576px; }
 
 .site-header .logo a,
 .site-header .logo a img{ float: left; }
+
+.site-header .logo a{ padding-left: 56px; }
 .site-header .logo{ 
 	margin-bottom: 0.5em; 
 }
@@ -688,19 +690,33 @@ main div.wrap > form { max-width: 576px; }
 }
 
 .site-header .logo a{
-	font-size: 24px;
-	font-weight: 200;
+	font-size: 21px;
+	font-weight: 400;
 	text-decoration: none;
-	line-height: 44px;
+	line-height: 24px;
 	color: #fff;
 	letter-spacing: -1px;
+	padding-top: 2px;
+}
+
+.site-header .logo .tagline{
+	font-size: 12px;
+	letter-spacing: normal;
+	font-weight: 200;
+	font-family: Merriweather;
+	font-style: italic;
+	display: block;
+	text-indent: 2px;
+	
 }
 
 .site-header .logo img{
-	width: 44px;
-	height: 44px;
-	margin-right: 6px;
+	width: 48px;
+	height: 48px;
 	border: 1px solid #2a4674;
+	border-radius: 2px;
+	margin-left: -56px;
+	margin-top: -2px;
 }
 
 
@@ -1650,30 +1666,24 @@ a[id]{
 	border-radius: 1em
 }
 
-.layout-sign-up main .wrapper p,
-.layout-profile main .wrapper p{
-	line-height: 1.4;
+.layout-sign-up .wrapper p,
+.layout-profile .wrapper p{
+	line-height: 1.6;
 }
 
 .layout-profile main .wrapper p a{ color: inherit; }
 
-.layout-sign-up{
-	counter-reset: step;
-}
-
 .layout-sign-up h2{
-	counter-increment: step;
-	margin-top: 2em;	
-}
-
-.layout-sign-up h2::before{
-	content: counter(step) ". ";
 }
 
 .layout-sign-up .field .label-text,
-.layout-profile .field .label-text{
+.layout-profile .field .label-text,
+.layout-sign-up .page h2{
+	font: inherit;
 	font-weight: 600;
 	color: #555;
+	margin-top: 0;
+	margin-bottom: 8px;
 }
 
 .layout-sign-up .field.field-checkbox .label-text{
@@ -2165,7 +2175,7 @@ a[id]{
 
 /* @group layout-home */
 
-.layout-home main { padding-top: 0; }
+.layout-home main { padding-top: 1.6em; }
 
 .layout-home main > header{
 	background: #fbf9eb;
