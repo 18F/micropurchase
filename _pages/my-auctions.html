@@ -1,6 +1,5 @@
 ---
 excerpt: none
-permalink: /
 ---
 
 {% include head.html %}
@@ -8,137 +7,45 @@ permalink: /
   <a class="a-skip-to-main" href="#main">Skip to main content</a>
   {% include site-header.html %}
   <main role="main" id="main">
-    <div class="h-feed">
-      <div class="wrapper">
-        <header class="h-feed-header">
-          <h1 class="p-title">Auctions</h1>
-          <button class="button">Add new</button>
-          <form>
-            <h1>Filter</h1>
-            <div class="field field-checkbox">
-              <label>
-                <input type="checkbox" checked>
-                <span class="label-text">Show closed auctions</span>
-              </label>
-            </div>
-            <div class="field field-checkbox">
-              <label>
-                <input type="checkbox" checked>
-                <span class="label-text">Show sealed auctions</span>
-              </label>
-            </div>
-          </form>
-          <nav>
-            <h2>Sort by</h2>
-            <ul>
-              <li><a href="#">Language</a></li>
-              <li><a href="#">Agency</a></li>
-              <li><a href="#">Project</a></li>
-              <li><a href="#">Time remaining</a></li>
-              <li><a href="#">Current bid</a></li>
-            </ul>
-          </nav>
-        </header>
-        <article class="h-entry auction">
-          <a href="{{site.baseurl}}/auctions/show">
-            <header class="auction-header">
-              <h1 class="p-name auction-name">
-                Create a Google Script to convert Google Sheet data into JSON
-              </h1>
-              <dl>
-                <dt class="auction-time-remaining">Time remaining</dt>
-                <dd class="auction-time-remaining">4 days</dd>
-                <dt class="auction-status">Status</dt>
-                <dd class="auction-status auction-status-open">Open</dd>
-                <dt class="auction-current-bid">Current bid</dt>
-                <dd class="auction-current-bid">
-                  Hidden
-                </dd>
-              </dl>
-            </header>
-            <p class="p-summary auction-summary">The Federal Risk and Authorization Management Program, or FedRAMP, is a government-wide program that provides a standardized approach to security assessment, authorization, and continuous monitoring for cloud products and services. This issue seeks a Google Apps Script that will&hellip;</p>
-          </a>
-          <footer class="auction-footer">
-            <ul>
-              <li class="auction-project">
-                <h2>Project</h2>
-                <span><a href="https://github.com/18F/dolores-landingham-bot">Dolores Landingham</a></span>
-              </li>
-              <li class="auction-type">
-                <h2>Type</h2>
-                <span>Sealed bid</span>
-              </li>
-            </ul>
-          </footer>
-        </article>        <article class="h-entry auction">
-          <a href="{{site.baseurl}}/auctions/show">
-            <header class="auction-header">
-              <h1 class="p-name auction-name">
-                Offer AWS SQS as a managed service via cloud.gov 
-              </h1>
-              <dl>
-                <dt class="auction-time-remaining">Time remaining</dt>
-                <dd class="auction-time-remaining">1 hour</dd>
-                <dt class="auction-status">Status</dt>
-                <dd class="auction-status auction-status-ending-soon">Ending soon</dd>
-                <dt class="auction-current-bid">Current bid</dt>
-                <dd class="auction-current-bid">
-                  $2,750.00
-                </dd>
-              </dl>
-            </header>
-            <p class="p-summary auction-summary">Cloud.gov is a deployment and hosting platform for government digital services. Cloud.gov uses brokers to manage the lifecycle of services for its users. Cloud.gov invokes the AWS broker using the CloudFoundry Service Broker API to manage various AWS services for use by applications deployed to&hellip;</p>
-          </a>
-          <footer class="auction-footer">
-            <ul>
-              <li class="auction-project">
-                <h2>Project</h2>
-                <span><a href="https://github.com/18F/dolores-landingham-bot">Dolores Landingham</a></span>
-              </li>
-              <li class="auction-type">
-                <h2>Type</h2>
-                <span>Multi bid</span>
-              </li>
-            </ul>
-          </footer>
-        </article>
-        <article class="h-entry auction">
-          <a href="{{site.baseurl}}/auctions/show">
-            <header class="auction-header">
-              <h1 class="p-name auction-name">
-                Quarterly Reminders from Dolores Landingham 
-              </h1>
-              <dl>
-                <dt class="auction-time-remaining">Ended</dt>
-                <dd class="auction-time-remaining">9 days ago</dd>
-                <dt class="auction-status">Status</dt>
-                <dd class="auction-status auction-status-closed">Closed</dd>
-                <dt class="auction-current-bid">Winning bid</dt>
-                <dd class="auction-current-bid">
-                  $2,750.00
-                </dd>
-              </dl>
-            </header>
-            <p class="p-summary auction-summary">We need the ability to send recurring policy reminders to our team here at 18F on a quarterly basis and we want to automate this by leveraging the existing Dolores Landingham Slack bot.</p>
-          </a>
-          <footer class="auction-footer">
-            <ul>
-              <li class="auction-project">
-                <h2>Project</h2>
-                <span><a href="https://github.com/18F/dolores-landingham-bot">Dolores Landingham</a></span>
-              </li>
-              <li class="auction-type">
-                <h2>Type</h2>
-                <span>Sealed bid</span>
-              </li>
-            </ul>
-          </footer>
-        </article>
-        {% include _auction.html %}
-        {% include _auction.html %}
-        {% include _auction.html %}
-        {% include _auction.html %}
-      </div>
+    <div class="wrapper">
+      <h1>My auctions</h1>
+      <p>This page is a collection of auctions you&rsquo;ve bid on, auctions you&rsquo;ve starred, auctions you&rsquo;ve won, and auctions for which you&rsquo;re waiting to receive payment.</p>
+      <table>
+        <thead>
+          <tr>
+            <td class="col-title">Title</td>
+            <td class="col-ending">Ending</td>
+            <td class="col-status">Status</td>
+            <td class="col-actions">Actions</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Stand-alone modular utilisation</a></td>
+            <td class="col-ending">2 days ago</td>
+            <td class="col-status">You won!</td>
+            <td class="col-actions">Issue pull request</td>
+          </tr>
+          <tr>
+            <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Switchable system-worthy</a></td>
+            <td class="col-ending">22 hours</td>
+            <td class="col-status">You have the low bid.</td>
+            <td class="col-actions">None</td>
+          </tr>
+          <tr>
+            <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Visionary motivating website</a></td>
+            <td class="col-ending">7/25/2016</td>
+            <td class="col-status">You've been outbid!</td>
+            <td class="col-actions">Place bid</td>
+          </tr>
+          <tr>
+            <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Something wicked this way comes</a></td>
+            <td class="col-ending">7/26/2016</td>
+            <td class="col-status">Bid placed</td>
+            <td class="col-actions">None</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </main>
   {% include site-footer.html %}
