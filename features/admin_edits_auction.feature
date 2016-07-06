@@ -25,9 +25,7 @@ Feature: Admin edits auctions in the admins panel
     Then I should see new content on the page
 
   Scenario: Associating an auction with a customer
-    Given I am an administrator
-    And I sign in
-    And there is an open auction
+    Given there is an open auction
     And there is a customer
     And I visit the auctions admin page
 
