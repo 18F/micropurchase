@@ -129,8 +129,9 @@ FactoryGirl.define do
       paid_at nil
     end
 
-    trait :cap_submitted do
+    trait :c2_approved do
       cap_proposal_url 'https://c2-dev.18f.gov/proposals/2486'
+      c2_approved_at { Time.current }
     end
 
     trait :not_evaluated do
@@ -163,14 +164,14 @@ FactoryGirl.define do
       delivery_due_at_expired
       delivered
       accepted
-      cap_submitted
+      c2_approved
       paid
     end
 
     trait :payment_pending do
       delivered
       accepted
-      cap_submitted
+      c2_approved
       not_paid
       delivery_due_at_expired
     end

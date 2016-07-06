@@ -6,7 +6,7 @@ Feature: Admin views public auction pages
   Scenario: Admin navigates to edit page from auction show page
     Given I am an administrator
     And I sign in
-    And there is an open auction
+    And there is a budget approved auction
     And I visit the auction page
     Then I should see the "Edit" link for the auction
 

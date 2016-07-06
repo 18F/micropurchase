@@ -33,6 +33,18 @@ class Admin::EditAuctionViewModel < Admin::BaseViewModel
     ([auction.billable_to] + ClientAccount.all.map(&:to_s)).uniq
   end
 
+  def published
+    auction.published
+  end
+
+  def published_options
+    if auction.c2_approved_at.present?
+      Auction.publisheds.keys.to_a
+    else
+      ['unpublished']
+    end
+  end
+
   private
 
   def dc_time(field)

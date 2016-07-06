@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     resources :user_reports, only: [:index]
     resources :action_items, only: [:index]
     resources :drafts, only: [:index]
+    resources :proposals, only: [:create]
   end
 
   # Temporarily send JSON requests to web to API
