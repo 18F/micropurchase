@@ -665,12 +665,15 @@ main div.wrap > form { max-width: 576px; }
 	background: #faf5d2;
 	color: #8a490e;
 	text-align: center;
-	padding: 12px 0;
+	padding: 8px 0 12px;
 	border: 1px solid #e7d49b;
 	border-radius: 4px;
 	margin-bottom: 1em;
 }
 
+.notice p{
+	line-height: 1.4;
+}
 .notice a{
 	color: #8a1132;
 }
@@ -686,6 +689,9 @@ main div.wrap > form { max-width: 576px; }
 
 .site-header .logo a{ padding-left: 56px; }
 
+.site-header .logo{
+	margin-bottom: 12px;
+}
 .site-header .logo::after{
 	content: "";
 	display: block;
@@ -704,6 +710,8 @@ main div.wrap > form { max-width: 576px; }
 
 .site-header .logo .tagline{
 	font-size: 12px;
+	line-height: 16px;
+	padding-top: 4px;
 	letter-spacing: normal;
 	font-weight: 200;
 	font-family: Merriweather;
@@ -1044,10 +1052,6 @@ nav.breadcrumbsli{
 /* @group auction */
 
 
-.auction a{
-	color: inherit;
-	text-decoration: none;
-}
 
 .auction a h1{
 	margin-right: 96px;
@@ -1131,7 +1135,9 @@ nav.breadcrumbsli{
 	vertical-align: middle;
 	padding: 4px 12px;
 	line-height: 1.4em;
-	border-radius: 999em
+	border-radius: 999em;
+	text-decoration: none;
+	color: inherit;
 }
 
 .auction .auction-header nav a:hover{
@@ -2229,7 +2235,7 @@ a[id]{
 .h-feed-header h1{
 	font-size: 48px;
 	font-weight: 300;
-	letter-spacing: -0.02em;	
+	letter-spacing: -1.3px;	
 	display: inline-block;
 }
 
@@ -2301,6 +2307,11 @@ a[id]{
 	position: relative;
 	max-width: 100%;
 	display: block;
+}
+
+.layout-home .auction a{
+	color: inherit;
+	text-decoration: none;
 }
 
 .layout-home .auction p{
