@@ -140,3 +140,14 @@ Given(/^there is an auction with an associated customer$/) do
   @customer = FactoryGirl.create(:customer)
   @auction = FactoryGirl.create(:auction, customer: @customer)
 end
+
+Given(/^there is an auction where the winning vendor is missing a payment method$/) do
+  @auction = FactoryGirl.create(
+    :auction,
+    :with_bidders,
+    :evaluation_needed,
+    c2_proposal_url: 'www.example.com'
+  )
+  @winning_bidder = WinningBid.new(@auction).find.bidder
+  @winning_bidder.update(credit_card_form_url: '')
+end
