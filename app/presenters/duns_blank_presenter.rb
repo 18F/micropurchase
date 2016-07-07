@@ -8,7 +8,7 @@ class DunsBlankPresenter < SamStatusPresenter
 
   def index_message
     "In order to bid, you must supply a valid DUNS number. Please update
-    #{link_to 'your profile', edit_user_path}"
+    #{link_to 'your profile', profile_path}"
   end
 
   def message
