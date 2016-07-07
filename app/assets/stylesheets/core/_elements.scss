@@ -6,14 +6,3 @@ html {
 ul li:before {
   display: none;
 }
-
-p,
-li,
-span {
-  font-size: $small-font-size;
-  font-weight: $font-light;
-
-  @include media($small-screen) {
-    font-size: $base-font-size;
-  }
-}

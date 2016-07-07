@@ -29,8 +29,8 @@ class Admin::AuctionsController < Admin::BaseController
       flash[:success] = I18n.t('controllers.admin.auctions.create.success')
       redirect_to admin_auctions_path
     else
-      flash[:error] = auction.errors.full_messages.to_sentence
-      @view_model = Admin::NewAuctionViewModel.new
+      flash.now[:error] = auction.errors.full_messages.to_sentence
+      @view_model = Admin::NewAuctionViewModel.new(params)
       render :new
     end
   end
@@ -45,10 +45,11 @@ class Admin::AuctionsController < Admin::BaseController
     update_auction = UpdateAuction.new(auction: auction, params: params, current_user: current_user)
 
     if update_auction.perform
+      flash[:success] = I18n.t('controllers.admin.auctions.update.success')
       return_to_stored(default: admin_auction_path(auction))
     else
       error_messages = auction.errors.full_messages.to_sentence
-      flash[:error] = error_messages
+      flash.now[:error] = error_messages
       @view_model = Admin::EditAuctionViewModel.new(auction)
       render :edit
     end

@@ -5,3 +5,5 @@
 //= require drawer.js
 //= require auctionToggle.js
 //= require navDropdown.js
+//= require selectize
+//= require selectizer

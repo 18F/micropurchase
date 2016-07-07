@@ -30,6 +30,8 @@ en:
       auctions:
         create:
           success: "Auction created successfully"
+        update:
+          success: "Auction updated successfully"
       auction_reports:
         show:
           error: "Registration not found for winning bidder DUNS number"
