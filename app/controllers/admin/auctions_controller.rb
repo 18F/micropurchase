@@ -30,7 +30,7 @@ class Admin::AuctionsController < Admin::BaseController
       redirect_to admin_auctions_path
     else
       flash.now[:error] = auction.errors.full_messages.to_sentence
-      @view_model = Admin::NewAuctionViewModel.new(params)
+      @view_model = Admin::NewAuctionViewModel.new(auction)
       render :new
     end
   end

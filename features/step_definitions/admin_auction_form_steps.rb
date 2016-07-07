@@ -175,3 +175,12 @@ Then(/^I should see the customer selected for the auction$/) do
   field = find_field('Customer')
   expect(field.value.to_i).to eq(@customer.id)
 end
+
+Then(/^I should see that the form preserves the previously entered values$/) do
+  title = find_field('auction_title')
+  expect(title.value).to eq(@title)
+  description = find_field('auction_description')
+  expect(description.value).to eq(@description)
+  billable = find_field('auction_billable_to')
+  expect(billable.value).to eq(@billable.to_s)
+end
