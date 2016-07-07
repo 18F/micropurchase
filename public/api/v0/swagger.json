@@ -635,7 +635,7 @@
           "type": "object",
           "required": [
             "billable_to",
-            "cap_proposal_url",
+            "c2_proposal_url",
             "notes",
             "delivery_due_at",
             "delivery_url",
@@ -650,9 +650,9 @@
                 "null"
               ]
             },
-            "cap_proposal_url": {
-              "title": "CAP Proposal URL",
-              "description": "The URL for the project in C2",
+            "c2_proposal_url": {
+              "title": "C2 Proposal URL",
+              "description": "The URL for the project's purchase request in C2",
               "format": "url",
               "type": [
                 "string",

@@ -20,7 +20,7 @@ class AuctionParser
   def auction_params
     strong_params.require(:auction).permit(
       :billable_to,
-      :cap_proposal_url,
+      :c2_proposal_url,
       :customer_id,
       :delivery_url,
       :description,

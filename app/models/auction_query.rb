@@ -9,8 +9,8 @@ class AuctionQuery
     :not_evaluated,
     :delivered,
     :not_delivered,
-    :cap_submitted,
-    :cap_not_submitted,
+    :c2_submitted,
+    :c2_not_submitted,
     :paid,
     :not_paid,
     :in_reverse_chron_order,
@@ -41,7 +41,7 @@ class AuctionQuery
       .delivery_due_at_expired
       .delivered
       .accepted
-      .cap_submitted
+      .c2_submitted
       .paid
   end
 
@@ -62,7 +62,7 @@ class AuctionQuery
       .delivery_due_at_expired
       .delivered
       .accepted
-      .cap_submitted
+      .c2_submitted
       .not_paid
   end
 
@@ -71,7 +71,7 @@ class AuctionQuery
       .delivery_due_at_expired
       .delivered
       .accepted
-      .cap_not_submitted
+      .c2_not_submitted
       .not_paid
   end
 
@@ -141,12 +141,12 @@ class AuctionQuery
       where(delivery_url: [nil, ""])
     end
 
-    def cap_submitted
-      where.not(cap_proposal_url: [nil, ""])
+    def c2_submitted
+      where.not(c2_proposal_url: [nil, ""])
     end
 
-    def cap_not_submitted
-      where(cap_proposal_url: [nil, ""])
+    def c2_not_submitted
+      where(c2_proposal_url: [nil, ""])
     end
 
     def paid

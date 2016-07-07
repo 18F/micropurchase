@@ -51,21 +51,21 @@ describe AuctionQuery do
     end
   end
 
-  describe '#cap_submitted' do
-    let(:cap_submitted) { create(:auction, :c2_approved) }
+  describe '#c2_submitted' do
+    let(:c2_submitted) { create(:auction, :c2_approved) }
     let!(:running_auction) { create(:auction, :running) }
 
-    it 'should return only cap_submitted auctions' do
-      expect(query.cap_submitted).to match_array([cap_submitted])
+    it 'should return only c2_submitted auctions' do
+      expect(query.c2_submitted).to match_array([c2_submitted])
     end
   end
 
-  describe '#cap_not_submitted' do
-    let!(:cap_submitted) { create(:auction, :c2_approved) }
+  describe '#c2_not_submitted' do
+    let!(:c2_submitted) { create(:auction, :c2_approved) }
     let(:running_auction) { create(:auction, :running) }
 
-    it 'should return only auctions where CAP has not been submitted' do
-      expect(query.cap_not_submitted).to match_array([running_auction])
+    it 'should return only auctions where C2 has not been submitted' do
+      expect(query.c2_not_submitted).to match_array([running_auction])
     end
   end
 

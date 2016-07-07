@@ -13,15 +13,15 @@ Then(/^I should see the auction's (.+)$/) do |field|
   end
 end
 
-Then(/^I should see that the auction has a CAP Proposal URL$/) do
-  expect(@auction.reload.cap_proposal_url).to be_present
+Then(/^I should see that the auction has a C2 Proposal URL$/) do
+  expect(@auction.reload.c2_proposal_url).to be_present
   within(:css, '.auction-info') do
-    expect(page).to have_content(@auction.cap_proposal_url)
+    expect(page).to have_content(@auction.c2_proposal_url)
   end
 end
 
-Then(/^I should see that the auction does not have a CAP Proposal URL$/) do
-  expect(@auction.cap_proposal_url).not_to be_present
+Then(/^I should see that the auction does not have a C2 Proposal URL$/) do
+  expect(@auction.c2_proposal_url).not_to be_present
 end
 
 Then(/^I should see when bidding starts and ends in ET$/) do

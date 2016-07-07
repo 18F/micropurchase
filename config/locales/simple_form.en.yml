@@ -14,7 +14,7 @@ en:
         delivery_due_at: "Delivery deadline date and time (in ET)"
         issue_url: "GitHub issue URL"
         github_repo: "GitHub repo URL"
-        cap_proposal_url: "CAP proposal URL"
+        c2_proposal_url: "C2 proposal URL"
         paid_at: "Paid at"
         start_price: "Start price"
       bid:
@@ -30,7 +30,7 @@ en:
         delivery_url: "URL of the PR fulfilling the auction requirements"
         billable_to: "Who will this project be billed to?"
         result: "Accepting a project will initiate a payment process"
-        cap_proposal_url: "Filled automatically when the project is accepted for payment"
+        c2_proposal_url: "Filled automatically when the project is accepted for payment"
   helpers:
     submit:
       auction:

@@ -128,12 +128,12 @@ Given(/^the c2 proposal for the auction is not approved$/) do
   @auction.update(c2_approved_at: nil)
 end
 
-Given(/^the auction does not have a cap proposal url$/) do
-  @auction.update(cap_proposal_url: nil)
+Given(/^the auction does not have a c2 proposal url$/) do
+  @auction.update(c2_proposal_url: nil)
 end
 
-Given(/^the auction has a cap proposal url$/) do
-  @auction.update(cap_proposal_url: 'https://www.example.com')
+Given(/^the auction has a c2 proposal url$/) do
+  @auction.update(c2_proposal_url: 'https://www.example.com')
 end
 
 Given(/^there is an auction with an associated customer$/) do

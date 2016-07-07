@@ -10,7 +10,7 @@ describe CheckPayment do
             :auction,
             :payment_pending,
             purchase_card: :default,
-            cap_proposal_url: "https://c2-dev.18f.gov/#{c2_path}"
+            c2_proposal_url: "https://c2-dev.18f.gov/#{c2_path}"
           )
 
           CheckPayment.new.perform
@@ -26,7 +26,7 @@ describe CheckPayment do
             :auction,
             :payment_pending,
             purchase_card: :default,
-            cap_proposal_url: "https://c2-dev.18f.gov/#{c2_path}"
+            c2_proposal_url: "https://c2-dev.18f.gov/#{c2_path}"
           )
 
           CheckPayment.new.perform

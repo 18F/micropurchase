@@ -1,4 +1,4 @@
-class CreateCapProposal < C2ApiWrapper
+class CreateC2Proposal < C2ApiWrapper
   class Error < StandardError; end
 
   def initialize(auction)
@@ -6,9 +6,9 @@ class CreateCapProposal < C2ApiWrapper
   end
 
   def perform
-    auction.update(cap_proposal_url: proposal_url)
+    auction.update(c2_proposal_url: proposal_url)
   rescue Faraday::ClientError => error
-    raise CreateCapProposal::Error, error
+    raise Error, error
   end
 
   private
@@ -28,6 +28,6 @@ class CreateCapProposal < C2ApiWrapper
   end
 
   def c2_proposal_attributes
-    ConstructCapAttributes.new(auction).perform
+    ConstructC2Attributes.new(auction).perform
   end
 end
