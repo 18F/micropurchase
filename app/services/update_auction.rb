@@ -57,6 +57,7 @@ class UpdateAuction
     if auction_accepted? && auction.accepted_at.nil?
       auction.accepted_at = Time.current
       UpdateC2ProposalJob.perform_later(auction.id)
+      AuctionApprovedJob.perform_later(auction.id)
     end
   end
 

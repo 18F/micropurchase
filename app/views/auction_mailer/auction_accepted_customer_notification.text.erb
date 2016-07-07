@@ -1,0 +1,11 @@
+<%= I18n.t(
+  'mailers.auction_mailer.auction_accepted_customer_notification.para1',
+  auction_title: @auction.title,
+  vendor_name: @winning_bid.bidder_name,
+  winning_bid_amount: Currency.new(@winning_bid.amount).to_s) %>
+
+<%= I18n.t('mailers.auction_mailer.auction_accepted_customer_notification.para2') %>
+
+<%= I18n.t('mailers.auction_mailer.auction_accepted_customer_notification.sign_off') %>
+
+<%= I18n.t('mailers.auction_mailer.auction_accepted_customer_notification.from') %>

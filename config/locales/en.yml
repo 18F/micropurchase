@@ -64,6 +64,15 @@ en:
         sign_off: "Sincerely,"
         from: "The 18F Micro-purchase team"
         subject: "18F Micro-purchase Auction Status: You have the winning bid!"
+      auction_accepted_customer_notification:
+        subject: "Your auction has been successfully delivered!"
+        para1: "Your auction \"%{auction_title}\" has been successfully delivered! The
+          winning vendor is %{vendor_name} and the final price of the auction is
+          %{winning_bid_amount}."
+        para2: "Questions? Reply to this email."
+        sign_off: "Sincerely,"
+        from: "The 18F Micro-purchase team"
+
 
   admin:
     auctions:
