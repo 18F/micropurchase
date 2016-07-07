@@ -130,7 +130,7 @@ FactoryGirl.define do
     end
 
     trait :c2_approved do
-      cap_proposal_url 'https://c2-dev.18f.gov/proposals/2486'
+      c2_proposal_url 'https://c2-dev.18f.gov/proposals/2486'
       c2_approved_at { Time.current }
     end
 

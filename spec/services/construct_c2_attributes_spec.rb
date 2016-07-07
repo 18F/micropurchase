@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-describe ConstructCapAttributes do
+describe ConstructC2Attributes do
   describe '#perform' do
     it 'constructs the correct attributes' do
       auction = create(:auction)
       url = AuctionUrl.new(auction).find
 
-      attributes = ConstructCapAttributes.new(auction).perform
+      attributes = ConstructC2Attributes.new(auction).perform
       gsa_attributes = attributes[:gsa18f_procurement]
 
       expect(gsa_attributes[:product_name_and_description]).to include(auction.title)

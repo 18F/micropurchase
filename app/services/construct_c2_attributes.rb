@@ -1,4 +1,4 @@
-class ConstructCapAttributes
+class ConstructC2Attributes
   OFFICE = 'DC'.freeze
   PURCHASE_TYPE = 'Software'.freeze
   QUANTITY = 1
@@ -12,15 +12,15 @@ class ConstructCapAttributes
   def perform
     {
       gsa18f_procurement: {
-        office: ConstructCapAttributes::OFFICE,
-        purchase_type: ConstructCapAttributes::PURCHASE_TYPE,
+        office: OFFICE,
+        purchase_type: PURCHASE_TYPE,
         product_name_and_description: product_name_and_description,
         justification: justification,
         cost_per_unit: cost_per_unit,
-        quantity: ConstructCapAttributes::QUANTITY,
-        recurring: ConstructCapAttributes::RECURRING,
+        quantity: QUANTITY,
+        recurring: RECURRING,
         date_requested: date_requested,
-        urgency: ConstructCapAttributes::URGENCY
+        urgency: URGENCY
       }
     }
   end

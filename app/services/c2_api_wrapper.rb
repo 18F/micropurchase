@@ -6,11 +6,11 @@ class C2ApiWrapper
   end
 
   def proposal_json(auction)
-    c2_client.get(cap_proposal_path(auction))
+    c2_client.get(c2_proposal_path(auction))
   end
 
-  def cap_proposal_path(auction)
-    auction.cap_proposal_url.gsub("#{C2Credentials.host}/", "")
+  def c2_proposal_path(auction)
+    auction.c2_proposal_url.gsub("#{C2Credentials.host}/", "")
   end
 
   def configure_c2_client

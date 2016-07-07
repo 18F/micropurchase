@@ -15,7 +15,7 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
   end
 
   def create_c2_proposal_partial
-    if auction.purchase_card == 'default' && auction.cap_proposal_url.blank?
+    if auction.purchase_card == 'default' && auction.c2_proposal_url.blank?
       'admin/auctions/create_c2_proposal'
     else
       'components/null'
@@ -39,8 +39,8 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
       'Billable to' => auction.billable_to,
       'Purchase card' => auction.purchase_card,
       'Paid at' => formatted_date(auction.paid_at),
-      'CAP proposal URL' => auction.cap_proposal_url,
-      'CAP approved at' => auction.c2_approved_at
+      'C2 proposal URL' => auction.c2_proposal_url,
+      'C2 approved at' => auction.c2_approved_at
     }
   end
 

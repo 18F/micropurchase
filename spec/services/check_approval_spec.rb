@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe CheckApproval do
   describe '#perform' do
-    context 'auction has cap proposal url' do
+    context 'auction has c2 proposal url' do
       context 'auction is not published' do
         context 'c2 proposal is approved' do
           it 'updates the c2_approved_at field' do
@@ -10,7 +10,7 @@ describe CheckApproval do
             auction = create(
               :auction,
               :unpublished,
-              cap_proposal_url: "https://c2-dev.18f.gov/#{c2_path}"
+              c2_proposal_url: "https://c2-dev.18f.gov/#{c2_path}"
             )
 
           CheckApproval.new.perform
@@ -25,7 +25,7 @@ describe CheckApproval do
             auction = create(
               :auction,
               :unpublished,
-              cap_proposal_url: "https://c2-dev.18f.gov/#{c2_path}"
+              c2_proposal_url: "https://c2-dev.18f.gov/#{c2_path}"
             )
 
             CheckApproval.new.perform
@@ -34,9 +34,9 @@ describe CheckApproval do
           end
         end
 
-        context 'auction does not have cap proposal url' do
+        context 'auction does not have c2 proposal url' do
           it 'does not check for approval' do
-            create(:auction, :unpublished, cap_proposal_url: '')
+            create(:auction, :unpublished, c2_proposal_url: '')
             c2_client_double = double
             allow(C2::Client).to receive(:new).and_return(c2_client_double)
             allow(c2_client_double).to receive(:get)
