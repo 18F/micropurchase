@@ -397,7 +397,7 @@ fieldset > legend,
 .field span.label-text{
 	display: block;	
 	max-width: 40em;
-	margin: 0 0 12px;
+	margin: 0 0 8px;
 	padding: 0;
 	position: static;
 	font: inherit;
@@ -2160,6 +2160,46 @@ a[id]{
 	color: #444;
 	width: 100%;
 	max-width: none;
+}
+
+.layout-auctions-edit .fieldset-github,
+.layout-auctions-edit .fieldset-payment{
+	padding-top: 4px;
+}
+
+.layout-auctions-edit .fieldset-github .field,
+.layout-auctions-edit .fieldset-payment .field{
+	width: 20%;
+	display: inline-block;
+	margin-bottom: 0;
+	margin-right: -0.4em;
+}
+
+.layout-auctions-edit .fieldset-github .field .label-text{
+	font-weight: 400;
+}
+
+.layout-auctions-edit .fieldset-github .field.field-github-project-url{
+	width: 75%;
+	margin-right: 5%;
+}
+
+.layout-auctions-edit .fieldset-github .field.field-issue-number{
+	margin-right: 0;
+}
+
+.layout-auctions-edit .fieldset-payment .field{
+	width: 48.5%;
+}
+
+.layout-auctions-edit .fieldset-payment .field.field-customer{
+	margin-right: 2.5%;
+}
+
+.layout-auctions-edit .fieldset-payment .notice{
+	clear: both;
+	margin-top: 12px;
+	font-size: 14px;
 }
 
 
