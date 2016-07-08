@@ -352,18 +352,19 @@ fieldset > p{
 
 div.field,
 fieldset{ 
-	margin-bottom: 24px; 
+	margin-bottom: 28px; 
 }
 
 .field .help-text{
-font-size: 14px;
-display: block;
-margin-top: 8px;
+	font-size: 14px;
+	line-height: 1.33em;
+	display: block;
+	margin-top: 8px;
 }
 
 fieldset.fieldset-radio{ margin-bottom: 18px; }
 
-fieldset{
+.fieldset{
 	border: 1px solid #cfcfcf;
 	padding: 16px;
 	padding-bottom: 19px;
@@ -396,10 +397,11 @@ fieldset > legend,
 .field span.label-text{
 	display: block;	
 	max-width: 40em;
-	margin: 0 0 8px;
+	margin: 0 0 12px;
 	padding: 0;
 	position: static;
 	font: inherit;
+	font-weight: 600;
 	line-height: 20px;
 }
 
@@ -605,46 +607,6 @@ fieldset.fieldset-mailing-address div.field.field-zip input{
 
 /* @end */
 
-.branch{
-	padding: 0 0 0 12px;
-	position: relative;
-	display: none;
-}
-
-.section-form .fieldset-radio+.branch,
-.section-form .fieldset-radio+.branch+.branch{
-	margin-top: 12px;
-}
-
-.branch > h1.branch-logic,
-.branch > header > h1.branch-logic{
-	text-transform: uppercase;
-	font: 13px Courier, mono !important;
-	font-weight: 600 !important;
-	padding: 4px;
-	background: #eee;
-	display: inline-block;
-	color: #ed2766 !important;
-	border-radius: 2px;
-	border: 1px solid #ccc;
-	margin-top: 16px;
-	margin-bottom: 8px !important;
-}
-
-body.branches .branch h1.branch-logic,
-body.branches .branch > header > h1.branch-logic{ display: none; }
-
-.branch::after{
-	position: absolute;
-	left: 0;
-	top: 0;
-	bottom: -1px;
-	width: 3px;
-	border-radius: 2px;
-	content: "";
-	background: #ccc;
-}
-
 main div.wrap > form { max-width: 576px; }
 
 @media screen and (min-width: 640px) {
@@ -668,7 +630,6 @@ main div.wrap > form { max-width: 576px; }
 	padding: 8px 0 12px;
 	border: 1px solid #e7d49b;
 	border-radius: 4px;
-	margin-bottom: 1em;
 }
 
 .notice p{
@@ -1760,20 +1721,17 @@ a[id]{
 /* @group layout-auctions-show */
 
 .layout-auctions-show main .wrapper,
-.layout-auctions-bids main .wrapper,
-.layout-auctions-edit main .wrapper{
+.layout-auctions-bids main .wrapper{
 	border: 1px solid #ccc;
 	border-radius: 6px;
 }
 
-.layout-auctions-show main .auction-header,
-.layout-auctions-edit main .auction-header{
+.layout-auctions-show main .auction-header{
 	position: relative;
 	margin-bottom: 2em;
 }
 
-.layout-auctions-show main .auction-header h1,
-.layout-auctions-bids main .auction-header h1{
+.layout-auctions-show main .auction-header h1{
 	display: inline-block;
 	margin-bottom: 0.2em;
 	margin-left: 20px;
@@ -1782,7 +1740,6 @@ a[id]{
 }
 
 .layout-auctions-show main .auction-header h1,
-.layout-auctions-bids main .auction-header h1,
 .layout-auctions-edit main .auction-header .field-title input{
 	font-size: 25px;
 	font-family: Merriweather, Georgia, serif;
@@ -1960,15 +1917,13 @@ a[id]{
 	.layout-auctions-show .auction-header .auction-place-bid{ display: none; }
 	
 	.layout-auctions-show main .wrapper .page,
-	.layout-auctions-show main .wrapper .auction-footer,
-	.layout-auctions-edit .auction .page,
-	.layout-auctions-edit .auction .auction-footer{
+	.layout-auctions-show main .wrapper .auction-footer{
 		float: left;
 		width: 100%;
+		padding-top: 0;
 	}
 	
-	.layout-auctions-show main .wrapper .page,
-	.layout-auctions-edit .auction .page{
+	.layout-auctions-show main .wrapper .page{
 		width: 630px;
 		padding-left: 20px;
 	}
@@ -1977,8 +1932,7 @@ a[id]{
 		width: 100%;
 	}
 
-	.layout-auctions-show main .wrapper .auction-footer,
-	.layout-auctions-edit .auction .auction-footer{
+	.layout-auctions-show main .wrapper .auction-footer{
 		width: 312px;
 		float: right;
 		margin: 0;
@@ -2050,87 +2004,91 @@ a[id]{
 
 /* @group layout-auctions-edit */
 
-.layout-auctions-edit .auction .auction-header{
-	padding: 12px 20px 8px;
-	border-bottom: 1px solid #eee;
-	margin-bottom: 0;
-}
 
-.layout-auctions-edit .field-starting-bid,
-.layout-auctions-edit .field-status{
-	font-family: Merriweather, Georgia, serif;
-	font-size: 13px;
-	font-style: italic;
-	display: inline-block;
-	vertical-align: middle;
-	margin-bottom: 0;
-}
-
-.layout-auctions-edit .field-title{
-	margin-bottom: 4px;
-}
-
-
-.layout-auctions-edit .field-title input{
-	padding-top: 8px;
-	line-height: 1;
-}
-
-.layout-auctions-edit .field-title .label-text{
-	font-size: 12px;
-	font-weight: 600;
-	position: absolute;
-	left: -9999em;
-}
-
-.layout-auctions-edit .field-starting-bid .label-text,
-.layout-auctions-edit .field-status .label-text,
-.layout-auctions-edit .field-starting-bid input,
-.layout-auctions-edit .field-status select{
-	display: inline-block;
-	vertical-align: middle;
-	width: auto;
-}
-
-.layout-auctions-edit .field-starting-bid{
-	margin-right: 1em;
-}
-.layout-auctions-edit .field-starting-bid .label-text,
-.layout-auctions-edit .field-status .label-text{
-	margin-top: 10px;
-	font-weight: 600;
-	margin-right: 0.4em;
-}
-
-.layout-auctions-edit .field-starting-bid input,
-.layout-auctions-edit .field-status select{
-	padding-top: 4px;
-	padding-bottom: 4px;
-	min-height: 28px;
-	height: 28px;
-}
-
-.layout-auctions-edit .field-status select{
-	padding-right: 28px;
-}
-
-
-.layout-auctions-edit .auction .page{
-	padding-top: 20px;
+.layout-auctions-edit main .wrapper{
+	padding-top: 2em;
+	max-width: 640px;
 	
 }
 
-
-.layout-auctions-edit .fieldset-date-time,
-.layout-auctions-edit .fieldset-time{
+.layout-auctions-edit .fieldset-date-time{
 	padding: 0;
-	border: none;
-	margin-top: 0;
+	border: 0;
 }
 
+.layout-auctions-edit .fieldset-date-time .field-date,
 .layout-auctions-edit .fieldset-date-time .fieldset-time{
 	margin: 0;
-	margin-top: -1px;
+	position: relative;
+	border: 0;
+	padding: 0;
+	padding-bottom: 24px;
+}
+
+.layout-auctions-edit .fieldset-date-time .field-date span.label-text,
+.layout-auctions-edit .fieldset-date-time .fieldset-time legend{
+	position: absolute;
+	bottom: 0;
+	margin: 0;
+	font-size: 14px;
+	font-weight: normal;
+}
+
+.layout-auctions-edit .branch{
+	margin-bottom: 12px;
+	margin-left: -2px;
+}
+.layout-auctions-edit .branch .fieldset-date-time{
+	display: inline-block;
+	vertical-align: middle;
+	width: auto;
+	padding: 36px 12px 12px;
+	border: 3px solid #eee;
+	background: #fafafa;
+	margin: 0;
+	margin-right: 0.4em;
+}
+
+.layout-auctions-edit .branch .fieldset-date-time legend{
+	position: absolute;
+	top: 12px;
+	bottom: auto;
+	font-size: 14px;
+	color: #555;
+	font-weight: normal;
+}
+
+.layout-auctions-edit .branch .fieldset-date-time .field-date,
+.layout-auctions-edit .branch .fieldset-date-time .fieldset-time{
+	display: none;
+}
+
+.layout-auctions-edit .branch+.help-text{
+	font-size: 14px;
+	max-width: 32em;
+	line-height: 1.33em;
+	margin-bottom: 2em;
+}
+
+.layout-auctions-edit .fieldset-date-time::after{
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.layout-auctions-edit .fieldset-date-time .field-date,
+.layout-auctions-edit .fieldset-date-time .fieldset-time{
+	float: left;
+	margin-right: 0.55em;
+	min-width: 11.8em;
+}
+
+.layout-auctions-edit .fieldset-date-time .field-date input{
+	width: 100%;
+}
+
+.layout-auctions-edit .fieldset-date-time.fieldset-start-date-time{
+	margin-bottom: 12px;
 }
 
 .layout-auctions-edit .fieldset-date-time .fieldset-time .field {
@@ -2160,6 +2118,11 @@ a[id]{
 	border-radius: 0 3px 3px 0;
 }
 
+.layout-auctions-edit .field-sealed-bid .label-text{
+	font-weight: 400;
+	font-size: 14px;
+}
+
 .layout-auctions-edit .fieldset-date-time .fieldset-time .field .label-text{
 	position: absolute;
 	bottom: 0;
@@ -2175,32 +2138,30 @@ a[id]{
 	margin-bottom: 0;
 }
 
-.layout-auctions-edit .auction .auction-footer{
-	padding-top: 20px;
+.layout-auctions-edit .field-starting-bid{
+	width: 11.5em;
+	margin-bottom: 8px;
 }
 
-.layout-auctions-edit .auction .auction-footer .help-text{
-	font-size: 14px;
-	line-height: 1.3;
-	color: #333;
-	margin-bottom: 2em;
+.layout-auctions-edit .field-sealed-bid.field-checkbox{
+	margin-bottom: 28px;
 }
-
-.layout-auctions-edit .auction .auction-footer dl,
-.layout-auctions-edit .auction .auction-footer dl dd,
-.layout-auctions-edit .auction .auction-footer p {
-	line-height: 1.4em;	
-	margin-bottom: 0.7em;
-}
-
-.layout-auctions-edit .auction .auction-footer p a { color: #006fbe; text-decoration: underline;}
 
 .layout-auctions-edit .time-zone{
 	position: relative;
-	top: 8px;
+	top: 9px;
 	left: 8px;
-
 }
+
+.layout-auctions-edit textarea{
+	font-family: Monaco, "Courier New", Courier, mono;
+	font-size: 13px;
+	line-height: 1.4em;
+	color: #444;
+	width: 100%;
+	max-width: none;
+}
+
 
 /* @end */
 
