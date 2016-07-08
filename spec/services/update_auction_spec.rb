@@ -70,32 +70,20 @@ describe UpdateAuction do
 
     context 'result is set to accepted' do
       context 'auction is below the micropurchase threshold' do
-        it 'calls the UpdateC2ProposalJob' do
+        it 'calls the AcceptAuction' do
           auction = create(
             :auction,
             :below_micropurchase_threshold,
             :winning_vendor_is_small_business,
             :delivery_due_at_expired
           )
-          allow(UpdateC2ProposalJob).to receive(:perform_later)
+          accept_double = double(perform: true)
+          allow(AcceptAuction).to receive(:new).with(auction).and_return(accept_double)
           params = { auction: { result: 'accepted' } }
 
           UpdateAuction.new(auction: auction, params: params, current_user: auction.user).perform
 
-          expect(UpdateC2ProposalJob).to have_received(:perform_later).with(auction.id)
-        end
-
-        it 'sets accepted_at' do
-          time = Time.parse('10:00:00 UTC')
-
-          Timecop.freeze(time) do
-            auction = create(:auction, accepted_at: nil)
-            params = { auction: { result: 'accepted' } }
-
-            UpdateAuction.new(auction: auction, params: params, current_user: auction.user).perform
-
-            expect(auction.accepted_at).to eq time
-          end
+          expect(accept_double).to have_received(:perform)
         end
       end
 
@@ -108,33 +96,31 @@ describe UpdateAuction do
               :winning_vendor_is_small_business,
               :delivery_due_at_expired
             )
-            allow(UpdateC2ProposalJob).to receive(:perform_later)
-            allow(AuctionApprovedJob).to receive(:perform_later)
+            accept_double = double(perform: true)
+            allow(AcceptAuction).to receive(:new).with(auction).and_return(accept_double)
             params = { auction: { result: 'accepted' } }
 
             UpdateAuction.new(auction: auction, params: params, current_user: auction.user).perform
 
-            expect(UpdateC2ProposalJob).to have_received(:perform_later).with(auction.id)
-            expect(AuctionApprovedJob).to have_received(:perform_later).with(auction.id)
+            expect(accept_double).to have_received(:perform)
           end
         end
 
         context 'winning vendor is not a small business' do
-          it 'does not call the UpdateC2ProposalJob' do
+          it 'does not call the AcceptAuction' do
             auction = create(
               :auction,
               :between_micropurchase_and_sat_threshold,
               :winning_vendor_is_non_small_business,
               :delivery_due_at_expired
             )
-            allow(UpdateC2ProposalJob).to receive(:perform_later)
-              .with(auction.id)
-              .and_return(nil)
+            accept_double = double(perform: true)
+            allow(AcceptAuction).to receive(:new).with(auction).and_return(accept_double)
             params = { auction: { result: 'accepted' } }
 
             UpdateAuction.new(auction: auction, params: params, current_user: auction.user).perform
 
-            expect(UpdateC2ProposalJob).to_not have_received(:perform_later).with(auction.id)
+            expect(accept_double).not_to have_received(:perform)
           end
         end
       end
@@ -160,32 +146,15 @@ describe UpdateAuction do
         expect(auction.c2_proposal_url).to eq ""
       end
 
-      it 'does not call the CreateC2ProposalJob' do
+      it 'does not call AcceptAuction' do
         auction = create(:auction, :delivery_due_at_expired)
         params = { auction: { result: 'rejected' } }
-        allow(CreateC2ProposalJob).to receive(:perform_later)
+        accept_double = double(perform: true)
+        allow(AcceptAuction).to receive(:new).with(auction).and_return(accept_double)
 
         UpdateAuction.new(auction: auction, params: params, current_user: auction.user)
 
-        expect(CreateC2ProposalJob).to_not have_received(:perform_later)
-      end
-    end
-
-    context 'auction is for another purchase card' do
-      it 'does not call CreateC2ProposalJob' do
-        auction = create(
-          :auction,
-          :below_micropurchase_threshold,
-          :winning_vendor_is_small_business,
-          :delivery_due_at_expired,
-          purchase_card: :other
-        )
-        allow(CreateC2ProposalJob).to receive(:perform_later)
-        params = { auction: { result: 'accepted' } }
-
-        UpdateAuction.new(auction: auction, params: params,current_user: auction.user).perform
-
-        expect(CreateC2ProposalJob).not_to have_received(:perform_later)
+        expect(accept_double).to_not have_received(:perform)
       end
     end
   end

@@ -75,7 +75,15 @@ en:
         para_3: "Questions? Reply to this email."
         sign_off: "Sincerely,"
         from: "The 18F Micro-purchase team"
-
+      winning_bidder_missing_payment_method:
+        subject: "Please update your profile so Micro-purchase can pay you for your great work!"
+        para_1: "A payment of %{amount} is pending release regarding work you
+          recently completed on \"%{auction_title}\". In order to take receipt of payment, you
+          will need to first add a credit card URL to your profile. Please go to
+          %{profile_url} to update this information."
+        para_2: "Questions? Please contact us at microupurchase@gsa.gov"
+        sign_off: "Sincerely,"
+        from: "The 18F Micro-purchase team"
 
   admin:
     auctions:

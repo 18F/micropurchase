@@ -20,7 +20,7 @@ end
 
 Then(/^I should receive an email notifying me that I did not win$/) do
   emails = ActionMailer::Base.deliveries
-  email = emails.find {|email| email.to.include? @user.email}
+  email = emails.find {|sent_email| sent_email.to.include? @user.email}
 
   expect(email.to.first).to eq @user.email
   expect(email.body.encoded).to include(
@@ -33,9 +33,24 @@ end
 
 Then(/^I should receive an email notifying me that I won$/) do
   email = ActionMailer::Base.deliveries.first
-
   expect(email.to.first).to eq @user.email
   expect(email.body.encoded).to include(
-    I18n.t('mailers.auction_mailer.winning_bidder_notification.para_2', policy_page_url: faq_url)
+    I18n.t(
+      'mailers.auction_mailer.winning_bidder_notification.para_2',
+      policy_page_url: faq_url
+    )
+  )
+end
+
+Then(/^the vendor should receive an email requesting payment information$/) do
+  email = ActionMailer::Base.deliveries.last
+  expect(email.to.first).to eq @winning_bidder.email
+  winning_bid = WinningBid.new(@auction).find
+  expect(email.body.encoded).to include(
+    I18n.t('mailers.auction_mailer.winning_bidder_missing_payment_method.para_1',
+    auction_title: @auction.title,
+    amount: Currency.new(winning_bid.amount).to_s,
+    profile_url: profile_url
+   )
   )
 end
