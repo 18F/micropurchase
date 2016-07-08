@@ -4,9 +4,8 @@ engines:
   brakeman:
     enabled: true
     exclude_fingerprints:
-    - 508b75e787610c57dc9780baf6be5d74d253df8af35b5c861d6aacc911901a56
-    - 8d8bc90f85c52f9aa9cb5be01fb072fc42aa260520c2d8c0adaf6fc8080546cf
     - 38eaf3a4c38ed941e5397a84c9f95b91a7c3dee9f70c0993131dd3be89180f75
+    - 122ff3e2371af7128b8dbc9444b16a83269494193f99b5f53a8a61565226d7f7
   eslint:
     enabled: true
   csslint:

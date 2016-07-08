@@ -1,6 +1,12 @@
 class Admin::NewAuctionViewModel < Admin::BaseViewModel
+  attr_reader :auction
+
+  def initialize(auction = nil)
+    @auction = auction
+  end
+
   def new_record
-    Auction.new
+    auction || Auction.new
   end
 
   def new_auction_nav_class

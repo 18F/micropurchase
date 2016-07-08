@@ -23,7 +23,8 @@ Feature: Admin creates auctions in the admins panel
     And I edit the new auction form
     And I set the auction start price to $24000
     And I click to create an auction
-    Then I should see an alert that
+    Then I should see that the form preserves the previously entered values
+    And I should see an alert that
     """
     You do not have permission to publish auctions with a start price over $3500
     """
