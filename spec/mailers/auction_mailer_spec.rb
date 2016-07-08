@@ -15,9 +15,7 @@ describe AuctionMailer do
         I18n.t('mailers.auction_mailer.winning_bidder_notification.subject')
       )
 
-      expect(email.subject).to eq I18n.t('mailers.auction_mailer.winning_bidder_notification.subject')
       expect(email.from).to eq [SMTPCredentials.default_from]
-
       expect(email.body.encoded).to include(
         I18n.t(
           'mailers.auction_mailer.winning_bidder_notification.para_1',
@@ -28,7 +26,6 @@ describe AuctionMailer do
           auction_issue_url: auction.issue_url
         )
       )
-
       expect(email.body.encoded).to include(
         I18n.t(
           'mailers.auction_mailer.winning_bidder_notification.para_2',
@@ -52,7 +49,6 @@ describe AuctionMailer do
       expect(email.subject).to eq(
         I18n.t('mailers.auction_mailer.losing_bidder_notification.subject')
       )
-      expect(email.subject).to eq I18n.t('mailers.auction_mailer.losing_bidder_notification.subject')
       expect(email.from).to eq [SMTPCredentials.default_from]
       expect(email.body.encoded).to include(
         I18n.t(
@@ -63,6 +59,40 @@ describe AuctionMailer do
       )
       expect(email.body.encoded).to include(
         I18n.t('mailers.auction_mailer.losing_bidder_notification.para_2')
+      )
+      expect(email.body.encoded).to include(
+        I18n.t('mailers.auction_mailer.losing_bidder_notification.sign_off')
+      )
+    end
+  end
+
+  describe '#auction_accepted_customer_notification' do
+    it 'sends the email to the customer' do
+      customer = create(:customer, email: 'test@example.com')
+      auction = create(:auction, customer: customer)
+      amount = 123
+      bid = create(:bid, auction: auction, amount: amount)
+
+      email = AuctionMailer.auction_accepted_customer_notification(auction: auction)
+
+      expect(email.to).to eq [customer.email]
+      expect(email.subject).to eq(
+        I18n.t('mailers.auction_mailer.auction_accepted_customer_notification.subject')
+      )
+      expect(email.from).to eq [SMTPCredentials.default_from]
+      expect(email.body.encoded).to include(
+        I18n.t(
+          'mailers.auction_mailer.auction_accepted_customer_notification.para_1',
+          auction_title: auction.title,
+          vendor_name: bid.bidder_name,
+          winning_bid_amount: Currency.new(amount).to_s
+        )
+      )
+      expect(email.body.encoded).to include(
+        I18n.t(
+          'mailers.auction_mailer.auction_accepted_customer_notification.para_2',
+          delivery_url: auction.delivery_url
+        )
       )
       expect(email.body.encoded).to include(
         I18n.t('mailers.auction_mailer.losing_bidder_notification.sign_off')

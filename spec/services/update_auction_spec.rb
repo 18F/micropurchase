@@ -44,9 +44,11 @@ describe UpdateAuction do
           params = { auction: new_ended_at}
 
           expect(job.run_at).to eq(auction.ended_at)
-          UpdateAuction.new(auction: auction,
-                            params: params,
-                            current_user: auction.user).perform
+          UpdateAuction.new(
+            auction: auction,
+            params: params,
+            current_user: auction.user
+          ).perform
 
           job.reload
           expect(job.run_at).to eq(parsed_new_ended_at)
@@ -76,8 +78,6 @@ describe UpdateAuction do
             :delivery_due_at_expired
           )
           allow(UpdateC2ProposalJob).to receive(:perform_later)
-            .with(auction.id)
-            .and_return(nil)
           params = { auction: { result: 'accepted' } }
 
           UpdateAuction.new(auction: auction, params: params, current_user: auction.user).perform
@@ -109,13 +109,13 @@ describe UpdateAuction do
               :delivery_due_at_expired
             )
             allow(UpdateC2ProposalJob).to receive(:perform_later)
-              .with(auction.id)
-              .and_return(nil)
+            allow(AuctionApprovedJob).to receive(:perform_later)
             params = { auction: { result: 'accepted' } }
 
             UpdateAuction.new(auction: auction, params: params, current_user: auction.user).perform
 
             expect(UpdateC2ProposalJob).to have_received(:perform_later).with(auction.id)
+            expect(AuctionApprovedJob).to have_received(:perform_later).with(auction.id)
           end
         end
 
@@ -164,12 +164,10 @@ describe UpdateAuction do
         auction = create(:auction, :delivery_due_at_expired)
         params = { auction: { result: 'rejected' } }
         allow(CreateC2ProposalJob).to receive(:perform_later)
-          .with(auction.id)
-          .and_return(nil)
 
         UpdateAuction.new(auction: auction, params: params, current_user: auction.user)
 
-        expect(CreateC2ProposalJob).to_not have_received(:perform_later).with(auction.id)
+        expect(CreateC2ProposalJob).to_not have_received(:perform_later)
       end
     end
 
@@ -183,7 +181,6 @@ describe UpdateAuction do
           purchase_card: :other
         )
         allow(CreateC2ProposalJob).to receive(:perform_later)
-          .with(auction.id)
         params = { auction: { result: 'accepted' } }
 
         UpdateAuction.new(auction: auction, params: params,current_user: auction.user).perform
