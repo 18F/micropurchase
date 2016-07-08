@@ -2006,8 +2006,8 @@ a[id]{
 
 
 .layout-auctions-edit main .wrapper{
-	padding-top: 2em;
-	max-width: 640px;
+	padding-top: 1em;
+	padding-right: 320px;
 	
 }
 
@@ -2043,8 +2043,8 @@ a[id]{
 	vertical-align: middle;
 	width: auto;
 	padding: 36px 12px 12px;
-	border: 3px solid #eee;
-	background: #fafafa;
+	border: 3px solid #e3e3e3;
+	background: #fff;
 	margin: 0;
 	margin-right: 0.4em;
 }
@@ -2165,6 +2165,11 @@ a[id]{
 .layout-auctions-edit .fieldset-github,
 .layout-auctions-edit .fieldset-payment{
 	padding-top: 4px;
+	background: white;
+}
+
+.layout-auctions-edit .fieldset-payment{
+	margin-bottom: 0;
 }
 
 .layout-auctions-edit .fieldset-github .field,
@@ -2202,6 +2207,24 @@ a[id]{
 	font-size: 14px;
 }
 
+.layout-auctions-edit .wrapper .fields{
+	background: #f8f8f8;
+	padding: 12px;
+}
+.layout-auctions-edit .wrapper footer{
+	position: absolute;
+	right: 0;
+	top: 1em;
+	width: 300px;
+}
+
+.layout-auctions-edit .wrapper footer .button{
+	width: 100%;
+	background: #008c52;
+	color: white;
+	border-color: #008c52;
+	margin-bottom: 1em;
+}
 
 /* @end */
 
