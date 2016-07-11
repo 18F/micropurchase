@@ -22,6 +22,7 @@ $ribbon-hang: .25em;
   width: $ribbon-w;
 
   [class*="auction-label-"] {
+    font-size: $base-font-size;
     color: $color-white;
     float: right;
     margin: 0;
