@@ -31,7 +31,7 @@ class UpdateUser < Struct.new(:params, :current_user)
   def update_auctions
     if added_payment_information?
       AuctionQuery.new.accepted_with_bid_from_user(user.id).each do |auction|
-        if auction.accepted_at.nil? && winning_bidder_for(auction) == user
+        if user_payment_info_needed_for?(auction)
           accept(auction)
         end
       end
@@ -42,6 +42,10 @@ class UpdateUser < Struct.new(:params, :current_user)
     user.credit_card_form_url_changed? &&
       user.credit_card_form_url_was == '' &&
       user.valid?
+  end
+
+  def user_payment_info_needed_for?(auction)
+    auction.accepted_at.nil? && winning_bidder_for(auction) == user
   end
 
   def winning_bidder_for(auction)
