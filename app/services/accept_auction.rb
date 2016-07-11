@@ -8,9 +8,7 @@ class AcceptAuction
 
   def perform
     if credit_card_form_url.blank?
-      AuctionMailer
-        .winning_bidder_missing_payment_method(auction: auction)
-        .deliver_later
+      send_winning_vendor_email
     else
       auction.accepted_at = Time.current
       send_customer_email
@@ -20,8 +18,10 @@ class AcceptAuction
 
   private
 
-  def winning_bidder
-    WinningBid.new(auction).find.bidder
+  def send_winning_vendor_email
+    AuctionMailer
+      .winning_bidder_missing_payment_method(auction: auction)
+      .deliver_later
   end
 
   def send_customer_email
