@@ -5,6 +5,8 @@ class Auction < ActiveRecord::Base
   belongs_to :customer
   has_many :bids
   has_many :bidders, through: :bids
+  has_and_belongs_to_many :skills
+
   enum result: { not_applicable: 0, accepted: 1, rejected: 2 }
   enum type: { sealed_bid: 0, reverse: 1 }
   enum published: { unpublished: 0, published: 1 }

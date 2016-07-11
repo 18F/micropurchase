@@ -32,7 +32,8 @@ class AuctionParser
       :start_price,
       :summary,
       :title,
-      :type
+      :type,
+      skill_ids: []
     )
   end
 
