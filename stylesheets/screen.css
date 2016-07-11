@@ -405,6 +405,11 @@ fieldset > legend,
 	line-height: 20px;
 }
 
+.field.is-disabled span.label-text{
+	color: #888;
+	cursor: not-allowed;
+}
+
 .field.field-radio{ 
 	display: inline-block; 
 	vertical-align: middle;
@@ -1946,6 +1951,69 @@ a[id]{
 }
 /* @end */
 
+/* @group layout-auctions-approval */
+
+.layout-auctions-approval form{
+	max-width: 640px;
+	margin: 0 auto;
+	border: 1px solid #ccc;
+	padding: 0;
+	border-radius: 4px;
+}
+
+.layout-auctions-approval form h1{
+	font-weight: 600;
+	font-size: 24px;
+	font-family: inherit;
+	line-height: 1.4em;
+	margin-bottom: 12px;
+	color: #333;
+	padding: 16px 16px 0;
+}
+
+.layout-auctions-approval form p{
+	line-height: 1.33;
+	margin-bottom: 1em;
+	padding: 0 16px;
+}
+
+.layout-auctions-approval form footer{
+	margin-top: 16px;
+	padding: 16px;
+	border-top: 1px solid #ddd;
+	background: #f3f3f3;	
+	border-radius: 0 0 3px 3px;
+}
+
+.layout-auctions-approval form footer::after{
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.layout-auctions-approval form footer button{
+	background: #2D3F5B;
+	color: white;
+	border: none;
+	float: left;
+}
+
+.layout-auctions-approval form footer button:hover{
+	background-color: #122b58;
+}
+
+.layout-auctions-approval form footer button:active{
+	color: #b1cffe;
+}
+
+.layout-auctions-approval form footer a{
+	float: right;
+	margin-top: 8px;
+	
+}
+
+/* @end */
+
 /* @group layout-auctions-bids */
 
 .layout-auctions-bids main .wrapper table,
@@ -2001,7 +2069,6 @@ a[id]{
 
 /* @group layout-auctions-edit */
 
-
 .layout-auctions-edit main .wrapper{
 	padding-top: 1em;
 	padding-right: 320px;
@@ -2046,7 +2113,7 @@ a[id]{
 	margin-right: 0.4em;
 }
 
-.layout-auctions-edit .branch .fieldset-date-time legend{
+.layout-auctions-edit .branch .fieldset-date-time > legend{
 	position: absolute;
 	top: 8px;
 	bottom: auto;
@@ -2058,6 +2125,33 @@ a[id]{
 .layout-auctions-edit .branch .fieldset-date-time .field-date,
 .layout-auctions-edit .branch .fieldset-date-time .fieldset-time{
 	display: none;
+}
+
+.layout-auctions-edit.with-customized-timeline .fieldset-date-time-summary{
+	display: none;
+}
+
+.layout-auctions-edit.with-customized-timeline .branch .fieldset-date-time .field-date,
+.layout-auctions-edit.with-customized-timeline .branch .fieldset-date-time .fieldset-time{
+	display: block;
+}
+
+.layout-auctions-edit.with-customized-timeline .branch .fieldset-date-time{
+	border: none;
+	background: none;
+	padding: 0;
+	padding-top: 28px;
+	margin-bottom: 16px;
+}
+
+.layout-auctions-edit.with-customized-timeline .branch .fieldset-date-time > legend{
+	left: 0;
+	top: 0;
+	display: block;
+	z-index: 1;
+	font-size: inherit;
+	font-weight: 600;
+	color: #333;
 }
 
 .layout-auctions-edit .branch+.help-text{
@@ -2146,8 +2240,11 @@ a[id]{
 
 .layout-auctions-edit .time-zone{
 	position: relative;
-	top: 9px;
+	top: 11px;
 	left: 8px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #555;
 }
 
 .layout-auctions-edit textarea{

@@ -9,7 +9,7 @@ excerpt: None
   {% include site-header.html %}
   <main role="main" id="main">
     <div class="wrapper">
-      <form>
+      <form action="{{site.baseurl}}/auctions/approval">
         <div class="fields">
           <div class="field field-title">
             <label>
@@ -31,18 +31,18 @@ excerpt: None
                 <label>
                   <span class="label-text">Hours</span>
                   <select>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
-                    <option>9</option>
-                    <option>10</option>
-                    <option>11</option>
-                    <option>12</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12" selected>12</option>
                   </select>
                 </label>
               </div>
@@ -50,10 +50,10 @@ excerpt: None
                 <label>
                   <span class="label-text">Minutes</span>
                   <select>
-                    <option>00</option>
-                    <option>15</option>
-                    <option>30</option>
-                    <option>45</option>
+                    <option value="00" selected>00</option>
+                    <option value="15">15</option>
+                    <option value="30">30</option>
+                    <option value="45">45</option>
                   </select>
                 </label>
               </div>
@@ -61,8 +61,8 @@ excerpt: None
                 <label>
                   <span class="label-text">Meridiem</span>
                   <select>
-                    <option>AM</option>
-                    <option>PM</option>
+                    <option value="AM" selected>AM</option>
+                    <option value="PM">PM</option>
                   </select>
                 </label>
               </div>
@@ -72,31 +72,33 @@ excerpt: None
           <aside class="branch">
             <fieldset class="fieldset fieldset-date-time fieldset-end-date-time">
               <legend>Auction ends</legend>
-              <span class="fieldset-date-time-summary">7/11/2016 at 5:30pm EST</span>
+              <span class="fieldset-date-time-summary">
+                <span class="date">Undefined</span> at <span class="time-hours">12</span>:<span class="time-minutes">00</span><span class="time-meridiem">AM</span> EST
+              </span>
               <div class="field field-date">
                 <label>
-                  <span class="label-text">End date</span>
+                  <span class="label-text">Date</span>
                   <input type="date" name="">
                 </label>
               </div>
               <fieldset class="fieldset fieldset-time">
-                <legend>End time</legend>
+                <legend>Time</legend>
                 <div class="field field-select field-time-hours">
                   <label>
                     <span class="label-text">Hours</span>
                     <select>
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                      <option>6</option>
-                      <option>7</option>
-                      <option>8</option>
-                      <option>9</option>
-                      <option>10</option>
-                      <option>11</option>
-                      <option>12</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
                     </select>
                   </label>
                 </div>
@@ -125,31 +127,31 @@ excerpt: None
             </fieldset>
             <fieldset class="fieldset fieldset-date-time fieldset-delivery-date-time">
               <legend>Delivery deadline</legend>
-              <span class="fieldset-date-time-summary">7/16/2016 at 5:30pm EST</span>
+              <span class="fieldset-date-time-summary"><span class="date">Undefined</span> at <span class="time-hours">12</span>:<span class="time-minutes">00</span><span class="time-meridiem">AM</span> EST</span>
               <div class="field field-date">
                 <label>
-                  <span class="label-text">Delivery date</span>
+                  <span class="label-text">Date</span>
                   <input type="date" name="">
                 </label>
               </div>
               <fieldset class="fieldset fieldset-time">
-                <legend>Delivery time</legend>
+                <legend>Time</legend>
                 <div class="field field-select field-time-hours">
                   <label>
                     <span class="label-text">Hours</span>
                     <select>
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                      <option>6</option>
-                      <option>7</option>
-                      <option>8</option>
-                      <option>9</option>
-                      <option>10</option>
-                      <option>11</option>
-                      <option>12</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
                     </select>
                   </label>
                 </div>
@@ -157,10 +159,10 @@ excerpt: None
                   <label>
                     <span class="label-text">Minutes</span>
                     <select>
-                      <option>00</option>
-                      <option>15</option>
-                      <option>30</option>
-                      <option>45</option>
+                      <option value="00">00</option>
+                      <option value="15">15</option>
+                      <option value="30">30</option>
+                      <option value="45">45</option>
                     </select>
                   </label>
                 </div>
@@ -168,8 +170,8 @@ excerpt: None
                   <label>
                     <span class="label-text">Meridiem</span>
                     <select>
-                      <option>AM</option>
-                      <option>PM</option>
+                      <option value="AM">AM</option>
+                      <option value="PM">PM</option>
                     </select>
                   </label>
                 </div>
@@ -177,7 +179,7 @@ excerpt: None
               </fieldset>
             </fieldset>
           </aside>
-          <p class="help-text">By default, auctions are listed for one week and vendors have five business days to deliver. <a href="#">Edit</a></p>
+          <p class="help-text">By default, auctions are listed for one week and vendors have five business days to deliver. <a href="#" class="a-customize-timeline">Edit</a></p>
           <div class="field field-starting-bid">
             <label>
               <span class="label-text">Starting bid</span>
@@ -240,17 +242,15 @@ excerpt: None
                 </select>
               </label>
             </div>    
-            <div class="notice">
-              <p>18F p-cards cannot be used without first having been granted approval in C2 (CommuniCart).</p>
-          </div>
         </fieldset>
         </div>
         <footer>
           <button class="button">Save</button>
-          <div class="field field-checkbox field-sealed-bid">
+          <div class="field field-checkbox field-sealed-bid is-disabled">
             <label>
-              <input type="checkbox" name="">
+              <input type="checkbox" name="" disabled>
               <span class="label-text">Published</span>
+              <p class="help-text">Auctions cannot be published until they&rsquo;re associated with a p-card. Select a p-card and save the auction to enable this.</p>
             </label>
           </div>        
         </footer>

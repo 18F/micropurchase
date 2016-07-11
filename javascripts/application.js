@@ -35,4 +35,42 @@ $(document).ready(function() {
     renderSiteHeaderSignIn()
   });
 
+  $('.layout-auctions-edit .fieldset-start-date-time .field-date input').change(function(){
+    var startDate = $(this).val();
+    console.log(startDate);
+    $('.fieldset-end-date-time .fieldset-date-time-summary .date')
+      .text(startDate);
+    $('.fieldset-delivery-date-time .fieldset-date-time-summary .date')
+      .text(startDate);
+  });
+
+    $('.layout-auctions-edit .fieldset-start-date-time .field-time-hours select').change(function(){
+    var startTime = $(this).find('option:selected').attr("value");
+    $('.fieldset-end-date-time .fieldset-date-time-summary .time-hours')
+      .text(startTime);
+    $('.fieldset-delivery-date-time .fieldset-date-time-summary .time-hours')
+      .text(startTime);
+  });
+
+  $('.layout-auctions-edit .fieldset-start-date-time .field-time-minutes select').change(function(){
+    var startTime = $(this).find('option:selected').attr("value");
+    $('.fieldset-end-date-time .fieldset-date-time-summary .time-minutes')
+      .text(startTime);
+    $('.fieldset-delivery-date-time .fieldset-date-time-summary .time-minutes')
+      .text(startTime);
+  });
+
+  $('.layout-auctions-edit .fieldset-start-date-time .field-time-meridiem select').change(function(){
+    var startTime = $(this).find('option:selected').attr("value");
+    $('.fieldset-end-date-time .fieldset-date-time-summary .time-meridiem')
+      .text(startTime);
+    $('.fieldset-delivery-date-time .fieldset-date-time-summary .time-meridiem')
+      .text(startTime);
+  });
+
+  $('.a-customize-timeline').click(function(){
+    $('.layout-auctions-edit').addClass('with-customized-timeline');
+  });
+
+
 });
