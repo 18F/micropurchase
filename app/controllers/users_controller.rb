@@ -1,14 +1,12 @@
 class UsersController < ApplicationController
-  def edit
-    require_authentication
+  before_action :require_authentication
 
+  def edit
     @user = current_user
     @user.decorate.sam_status_message_for(flash)
   end
 
   def update
-    require_authentication
-
     updater = UpdateUser.new(params, current_user)
     if updater.save
       redirect_to root_path

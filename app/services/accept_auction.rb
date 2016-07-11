@@ -1,29 +1,40 @@
 class AcceptAuction
-  attr_reader :auction
+  attr_reader :auction, :credit_card_form_url
 
-  def initialize(auction)
+  def initialize(auction:, credit_card_form_url: '')
     @auction = auction
+    @credit_card_form_url = credit_card_form_url
   end
 
   def perform
-    if winning_bidder && winning_bidder.credit_card_form_url.blank?
-      AuctionMailer.winning_bidder_missing_payment_method(auction: auction).deliver_later
+    if credit_card_form_url.blank?
+      send_winning_vendor_email
     else
       auction.accepted_at = Time.current
-      UpdateC2ProposalJob.perform_later(auction.id)
       send_customer_email
+      update_purchase_request
     end
   end
 
   private
 
-  def winning_bidder
-    WinningBid.new(auction).find.bidder
+  def send_winning_vendor_email
+    AuctionMailer
+      .winning_bidder_missing_payment_method(auction: auction)
+      .deliver_later
   end
 
   def send_customer_email
     if customer && customer.email.present?
-      AuctionMailer.auction_accepted_customer_notification(auction: auction).deliver_later
+      AuctionMailer
+        .auction_accepted_customer_notification(auction: auction)
+        .deliver_later
+    end
+  end
+
+  def update_purchase_request
+    if auction.purchase_card == "default"
+      UpdateC2ProposalJob.perform_later(auction.id)
     end
   end
 

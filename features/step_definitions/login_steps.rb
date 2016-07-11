@@ -20,3 +20,9 @@ When(/^I sign in and verify my account information/) do
   step "I visit my profile page"
   click_on "Submit"
 end
+
+When(/^I am the winning bidder$/) do
+  @user = @winning_bidder
+  @github_id = @user.github_id
+  mock_sign_in(@winning_bidder.github_id, @winning_bidder.name)
+end

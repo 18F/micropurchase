@@ -55,7 +55,10 @@ class UpdateAuction
 
   def perform_approved_auction_tasks
     if auction.accepted? && auction.accepted_at.nil?
-      AcceptAuction.new(auction).perform
+      AcceptAuction.new(
+        auction: auction,
+        credit_card_form_url: winning_bidder.credit_card_form_url
+      ).perform
     end
   end
 
