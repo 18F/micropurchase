@@ -12,4 +12,5 @@
 <%= f.input :start_price %>
 <%= f.input :published, collection: auction.published_options, selected: auction.published %>
 <%= f.input :purchase_card, collection: Auction.purchase_cards.keys.to_a %>
+<%= f.association :skills, collection: Skill.all, as: :check_boxes %>
 <%= f.input :notes, as: :text %>

@@ -66,6 +66,8 @@ When(/^I edit the new auction form$/) do
 
   select(@billable.to_s, from: "auction_billable_to")
   select("published", from: "auction_published")
+
+  check(@skill.name)
 end
 
 Then(/^I should see the current auction attributes in the form$/) do
@@ -174,6 +176,14 @@ end
 Then(/^I should see the customer selected for the auction$/) do
   field = find_field('Customer')
   expect(field.value.to_i).to eq(@customer.id)
+end
+
+When(/^I select a skill on the form$/) do
+  check(@skill.name)
+end
+
+Then(/^I should see the skill that I set for the auction selected$/) do
+  expect(page).to have_checked_field(@skill.name)
 end
 
 Then(/^I should see that the form preserves the previously entered values$/) do

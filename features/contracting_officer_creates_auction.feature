@@ -5,6 +5,7 @@ Feature: Contracting Officers
   Scenario: contracting office creates auction over $3500
     Given I am a contracting officer
     And there is a client account to bill to
+    And there is a skill in the system
     And I sign in
     When I visit the auctions admin page
     And I click on the "Create New Auction" link

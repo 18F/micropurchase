@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160706213658) do
+ActiveRecord::Schema.define(version: 20160711175740) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,11 @@ ActiveRecord::Schema.define(version: 20160706213658) do
 
   add_index "auctions", ["customer_id"], name: "index_auctions_on_customer_id", using: :btree
   add_index "auctions", ["user_id"], name: "index_auctions_on_user_id", using: :btree
+
+  create_table "auctions_skills", id: false, force: :cascade do |t|
+    t.integer "auction_id", null: false
+    t.integer "skill_id",   null: false
+  end
 
   create_table "bids", force: :cascade do |t|
     t.integer  "bidder_id"
@@ -90,6 +95,14 @@ ActiveRecord::Schema.define(version: 20160706213658) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
+  create_table "skills", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "name"
+  end
+
+  add_index "skills", ["name"], name: "index_skills_on_name", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "github_id"

@@ -5,6 +5,7 @@ Feature: Admin creates auctions in the admins panel
   Scenario: Adding an auction
     Given I am an administrator
     And there is a client account to bill to
+    And there is a skill in the system
     When I sign in
     And I visit the auctions admin page
     When I click on the "Create New Auction" link
@@ -17,6 +18,7 @@ Feature: Admin creates auctions in the admins panel
   Scenario: Creating an invalid auction
     Given I am an administrator
     And there is a client account to bill to
+    And there is a skill in the system
     And I sign in
     And I visit the auctions admin page
     When I click on the "Create New Auction" link
