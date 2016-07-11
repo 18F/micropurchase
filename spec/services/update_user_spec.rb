@@ -1,58 +1,28 @@
 require 'rails_helper'
 
-RSpec.describe UpdateUser do
-  let(:updater) { UpdateUser.new(params, user) }
-  let(:user) { FactoryGirl.create(:user, sam_status: :sam_accepted) }
-  let(:user_id) { user.id }
-  let(:user_duns_number) { user.duns_number }
-  let(:user_credit_card_url) { 'https://random-example.com/pay' }
-
-  let(:params) do
-    ActionController::Parameters.new(
-      id: user_id,
-      user: {
-        name: Faker::Name.name,
-        duns_number: user_duns_number,
-        email: "random#{rand(10000)}@example.com",
-        credit_card_form_url: user_credit_card_url
-      }
-    )
-  end
-
+describe UpdateUser do
   context 'when SAM.gov says the vendor is a small business' do
     it 'sets small_business to true' do
       user = create(:user)
       params = ActionController::Parameters.new(
-        id: user.id,
-        user: {
-          name: Faker::Name.name,
-          duns_number: FakeSamApi::SMALL_BUSINESS_DUNS,
-          email: "random#{rand(10000)}@example.com",
-          credit_card_form_url: user.credit_card_form_url
-        }
+        id: user.id, user: { duns_number: FakeSamApi::SMALL_BUSINESS_DUNS }
       )
+
       UpdateUser.new(params, user).save
 
       Delayed::Worker.new.work_off
       user.reload
-
       expect(user.small_business).to eq(true)
     end
   end
 
   context 'when SAM.gov (via Samwise) says the vendor is not a small business' do
     it 'does not set small_business to true' do
-
       user = create(:user)
       params = ActionController::Parameters.new(
-        id: user.id,
-        user: {
-          name: Faker::Name.name,
-          duns_number: FakeSamApi::BIG_BUSINESS_DUNS,
-          email: "random#{rand(10000)}@example.com",
-          credit_card_form_url: user.credit_card_form_url
-        }
+        id: user.id, user: { duns_number: FakeSamApi::BIG_BUSINESS_DUNS }
       )
+
       UpdateUser.new(params, user).save
 
       Delayed::Worker.new.work_off
@@ -62,38 +32,23 @@ RSpec.describe UpdateUser do
     end
   end
 
-  context 'when current user is not the same as the user being edited' do
-    let(:other_user) { FactoryGirl.create(:user) }
-    let(:user_id) { other_user.id }
-
-    it 'raises UnauthorizedError' do
-      expect { updater.save }.to raise_error(UnauthorizedError)
-    end
-  end
-
-  context 'when the user being edited does not exist' do
-    let(:user_id) { user.id + 1000 }
-
-    it 'raises a ActiveRecord::RecordNotFound when user is not found' do
-      expect { updater.save }.to raise_error(ActiveRecord::RecordNotFound)
-    end
-  end
-
   context 'when the params are insufficient' do
-    let(:user_id) { user.id }
-    let(:params) do
-      ActionController::Parameters.new(id: user_id)
-    end
-
     it 'raises some param related error' do
-      expect { updater.save }.to raise_error(ActionController::ParameterMissing)
+      params = ActionController::Parameters.new(id: user_id)
+
+      expect { UpdateUser.new(params, user).save }.
+        to raise_error(ActionController::ParameterMissing)
     end
   end
 
   context 'when the credit_card_url is not valid' do
-    let(:user_credit_card_url) { 'fiff13t913jt10h' }
-
     it 'raises an error on the save' do
+      params = ActionController::Parameters.new(
+        id: user_id, user: { credit_card_form_url: 'fiff13t913jt10h' }
+      )
+
+      updater = UpdateUser.new(params, user)
+
       expect(updater.save).to be_falsey
       expect(updater.errors).to eq('Credit card form url is not a valid URL')
     end
@@ -101,52 +56,114 @@ RSpec.describe UpdateUser do
 
   context 'when the credit_card_url raises an exception' do
     context 'when the credit_card_url is not valid' do
-      let(:user_credit_card_url) { 'hfdsgih9ghg' }
-      before { allow_any_instance_of(URI::Parser).to receive(:parse).and_raise(URI::InvalidURIError) }
-
       it 'raises an error on the save' do
+        allow_any_instance_of(URI::Parser).to receive(:parse).and_raise(URI::InvalidURIError)
+        params = ActionController::Parameters.new(
+          id: user_id, user: { credit_card_form_url: 'hfdsgih9ghg' }
+        )
+
+        updater = UpdateUser.new(params, user)
+
         expect(updater.save).to be_falsey
         expect(updater.errors).to eq('Credit card form url is not a valid URL')
       end
     end
   end
 
+  context 'credit_card_form_url is updated for winning vendor' do
+    context 'credit_card_form_url set to valid value' do
+      it 'calls AcceptAuction' do
+        auction = create(:auction, :with_bidders, result: :accepted)
+        winning_bidder = WinningBid.new(auction).find.bidder
+        winning_bidder.update(credit_card_form_url: '')
+        accepter = double(perform: true)
+        new_credit_card_url = "http://example.com/payme"
+        allow(AcceptAuction).to receive(:new)
+          .with(auction: auction, credit_card_form_url: new_credit_card_url)
+          .and_return(accepter)
+        params = ActionController::Parameters.new(
+          id: winning_bidder.id, user: { credit_card_form_url: new_credit_card_url }
+        )
+
+        UpdateUser.new(params, winning_bidder).save
+
+        expect(accepter).to have_received(:perform)
+      end
+    end
+
+    context 'credit_card_form_url set to invalid value' do
+      it 'does not calls AcceptAuction' do
+        auction = create(:auction, :with_bidders, result: :accepted)
+        winning_bidder = WinningBid.new(auction).find.bidder
+        winning_bidder.update(credit_card_form_url: '')
+        accepter = double(perform: true)
+        allow(AcceptAuction).to receive(:new)
+          .with(auction: auction, credit_card_form_url: '')
+          .and_return(accepter)
+        params = ActionController::Parameters.new(
+          id: winning_bidder.id, user: { credit_card_form_url: 'blah' }
+        )
+
+        UpdateUser.new(params, winning_bidder).save
+
+        expect(accepter).not_to have_received(:perform)
+      end
+    end
+  end
+
   context 'when user is found and can be edited by current user' do
     context 'user updates DUNS to invalid DUNS number' do
-      let(:user_duns_number) { 'BAD' }
-
       it 'raises validation error' do
+        bad_duns_number = 'BAD'
         old_duns_number = user.duns_number
+        params = ActionController::Parameters.new(
+          id: user_id, user: { duns_number: bad_duns_number }
+        )
+
+        updater = UpdateUser.new(params, user)
         updater.save
+
         expect(updater.errors).to eq('DUNS number format is invalid')
-        expect(user.duns_number).to eq old_duns_number
+        expect(user.reload.duns_number).to eq old_duns_number
       end
     end
 
     context 'user updates DUNS to nothing' do
-      let(:user_duns_number) { '' }
-
       it 'does not raise validation error' do
+        params = ActionController::Parameters.new(
+          id: user_id, user: { duns_number: '' }
+        )
+
+        updater = UpdateUser.new(params, user)
         updater.save
+
         expect(updater.errors).to eq('')
       end
     end
 
     context 'user updates DUNS to a valid number' do
-      let(:user_duns_number) { Faker::Company.duns_number }
-
       it 'clears the sam id, when it has changed' do
+        params = ActionController::Parameters.new(
+          id: user_id, user: { duns_number: Faker::Company.duns_number }
+        )
+
+        updater = UpdateUser.new(params, user)
         updater.save
+
         user.reload
         expect(user).to be_sam_pending
       end
 
       it 'calls the SamAccountReckoner through a delayed job' do
+        params = ActionController::Parameters.new(
+          id: user_id, user: { duns_number: Faker::Company.duns_number }
+        )
         reckoner = double('reckoner', set_default_sam_status: true)
         allow(SamAccountReckoner).to receive(:new).with(user).and_return(reckoner)
         delayed_job = double(set!: true)
         allow(reckoner).to receive(:delay).and_return(delayed_job)
 
+        updater = UpdateUser.new(params, user)
         updater.save
 
         expect(reckoner).to have_received(:delay)
@@ -160,14 +177,22 @@ RSpec.describe UpdateUser do
         params = ActionController::Parameters.new(
           id: user.id, user: { duns_number: '', }
         )
+
         UpdateUser.new(params, user).save
 
         Delayed::Worker.new.work_off
         user.reload
-
         expect(user.small_business).to eq(false)
         expect(user.sam_status).to eq('duns_blank')
       end
     end
+  end
+
+  def user
+    @_user ||= create(:user, sam_status: :sam_accepted)
+  end
+
+  def user_id
+    user.id
   end
 end

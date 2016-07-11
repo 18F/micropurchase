@@ -61,9 +61,8 @@
         <%= @view_model.capitalized_type %>
         (<%= link_to 'rules', @view_model.rules_path %>)
         </p>
-
         <%= render partial: @view_model.paid_at_partial, locals: { auction: @view_model } %>
-
+        <%= render partial: @view_model.accepted_at_partial, locals: { auction: @view_model } %>
         <p>
         <i class="fa fa-github"></i>
         <%= link_to 'View on GitHub <icon class="fa fa-angle-double-right"></icon>'.html_safe,

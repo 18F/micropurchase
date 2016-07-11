@@ -92,8 +92,20 @@ class AuctionShowViewModel
     end
   end
 
+  def accepted_at_partial
+    if auction.accepted_at.nil?
+      'components/null'
+    else
+      'auctions/accepted_at'
+    end
+  end
+
   def formatted_paid_at
     formatted_date(auction.paid_at)
+  end
+
+  def formatted_accepted_at
+    formatted_date(auction.accepted_at)
   end
 
   def tag_data_value_status

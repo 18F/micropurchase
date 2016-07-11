@@ -2,9 +2,9 @@ class UpdateUser < Struct.new(:params, :current_user)
   attr_reader :status
 
   def save
-    fail UnauthorizedError unless allowed_to_edit?
-
     update_user
+    update_auctions
+    update_sam
     user.save
   end
 
@@ -13,24 +13,47 @@ class UpdateUser < Struct.new(:params, :current_user)
   end
 
   def user
-    @user ||= User.find(params[:id])
+    @_user ||= current_user
   end
 
   private
 
   def update_user
     user.assign_attributes(user_params)
-    update_sam
-  end
-
-  def allowed_to_edit?
-    current_user == user
   end
 
   def update_sam
     reckoner = SamAccountReckoner.new(user)
     reckoner.set_default_sam_status
     reckoner.delay.set!
+  end
+
+  def update_auctions
+    if added_payment_information?
+      AuctionQuery.new.accepted_with_bid_from_user(user.id).each do |auction|
+        if auction.accepted_at.nil? && winning_bidder_for(auction) == user
+          accept(auction)
+        end
+      end
+    end
+  end
+
+  def added_payment_information?
+    user.credit_card_form_url_changed? &&
+      user.credit_card_form_url_was == '' &&
+      user.valid?
+  end
+
+  def winning_bidder_for(auction)
+    WinningBid.new(auction).find.bidder
+  end
+
+  def accept(auction)
+    AcceptAuction.new(
+      auction: auction,
+      credit_card_form_url: user.credit_card_form_url
+    ).perform
+    auction.save
   end
 
   def user_params

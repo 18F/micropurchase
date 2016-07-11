@@ -108,6 +108,14 @@ class AuctionQuery
       .uniq
   end
 
+  def accepted_with_bid_from_user(user_id)
+    @relation
+      .accepted
+      .joins(:bids)
+      .where(bids: { bidder_id: user_id })
+      .uniq
+  end
+
   module Scopes
     def delivery_due_at_expired
       where('delivery_due_at < ?', Time.current)
@@ -181,7 +189,6 @@ class AuctionQuery
       today = Time.current.to_date
       last_24_hours = today - 24.hours
       next_24_hours = today + 24.hours
-
       where(ended_at: last_24_hours..next_24_hours)
     end
 
