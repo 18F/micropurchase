@@ -1731,18 +1731,15 @@ a[id]{
 	margin-bottom: 2em;
 }
 
-.layout-auctions-show main .auction-header h1{
+.layout-auctions-show main .auction-header h1,
+.layout-auctions-bids main .auction-header h1{
+	font-size: 25px;
+	font-family: Merriweather, Georgia, serif;
 	display: inline-block;
 	margin-bottom: 0.2em;
 	margin-left: 20px;
-	padding-top: 16px;
 	margin-right: 96px;
-}
-
-.layout-auctions-show main .auction-header h1,
-.layout-auctions-edit main .auction-header .field-title input{
-	font-size: 25px;
-	font-family: Merriweather, Georgia, serif;
+	padding-top: 16px;
 	line-height: 1.1;
 	font-weight: 600;
 	color: #384f7e;
@@ -2042,7 +2039,7 @@ a[id]{
 	display: inline-block;
 	vertical-align: middle;
 	width: auto;
-	padding: 36px 12px 12px;
+	padding: 32px 12px 12px;
 	border: 3px solid #e3e3e3;
 	background: #fff;
 	margin: 0;
@@ -2051,7 +2048,7 @@ a[id]{
 
 .layout-auctions-edit .branch .fieldset-date-time legend{
 	position: absolute;
-	top: 12px;
+	top: 8px;
 	bottom: auto;
 	font-size: 14px;
 	color: #555;
