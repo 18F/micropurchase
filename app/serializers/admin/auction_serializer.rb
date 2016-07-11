@@ -19,6 +19,7 @@ class Admin::AuctionSerializer < ActiveModel::Serializer
     :started_at,
     :summary,
     :title,
+    :type,
     :updated_at
   )
 

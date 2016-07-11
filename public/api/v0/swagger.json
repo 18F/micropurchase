@@ -386,7 +386,8 @@
         "ended_at",
         "created_at",
         "updated_at",
-        "bids"
+        "bids",
+        "type"
       ],
       "properties": {
         "id": {
@@ -408,6 +409,12 @@
           "type": "string",
           "title": "Description",
           "description": "A markdown-formatted description of the auction. This is usually a continuation from the first paragraph of the summary."
+        },
+        "type": {
+          "type": "string",
+          "title": "Auction type",
+          "description": "The type of the auction",
+          "enum": ["reverse", "sealed_bid"]
         },
         "issue_url": {
           "title": "GitHub Issue URL",

@@ -12,6 +12,7 @@ class AuctionSerializer < ActiveModel::Serializer
     :start_price,
     :summary,
     :title,
+    :type,
     :updated_at,
     :winning_bid
   )
