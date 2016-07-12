@@ -17,12 +17,12 @@ class Admin::UserAuctionViewModel
     auction.id
   end
 
-  def start_date
-    DcTimePresenter.convert_and_format(auction.started_at, DATE_FORMAT)
+  def status
+    StatusPresenterFactory.new(auction).create.label
   end
 
-  def end_date
-    DcTimePresenter.convert_and_format(auction.ended_at, DATE_FORMAT)
+  def skills
+    auction.skills.map(&:name).join(', ')
   end
 
   def user_bid_count
