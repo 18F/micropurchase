@@ -387,6 +387,7 @@
         "created_at",
         "updated_at",
         "bids",
+        "skills",
         "type"
       ],
       "properties": {
@@ -495,6 +496,12 @@
           "type": "array",
           "items": {
             "$ref": "#\/definitions\/Bid"
+          }
+        },
+        "skills": {
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       }

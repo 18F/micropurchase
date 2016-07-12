@@ -8,8 +8,9 @@ class AuctionSerializer < ActiveModel::Serializer
     :github_repo,
     :id,
     :issue_url,
-    :started_at,
+    :skills,
     :start_price,
+    :started_at,
     :summary,
     :title,
     :type,
@@ -21,6 +22,10 @@ class AuctionSerializer < ActiveModel::Serializer
     veiled_bids.map do |bid|
       BidSerializer.new(bid, scope: scope, root: false)
     end
+  end
+
+  def skills
+    object.skills.map(&:name)
   end
 
   def created_at

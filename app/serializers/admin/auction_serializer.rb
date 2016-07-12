@@ -15,6 +15,7 @@ class Admin::AuctionSerializer < ActiveModel::Serializer
     :issue_url,
     :notes,
     :paid_at,
+    :skills,
     :start_price,
     :started_at,
     :summary,
@@ -49,6 +50,10 @@ class Admin::AuctionSerializer < ActiveModel::Serializer
 
   def customer
     find_customer.agency_name
+  end
+
+  def skills
+    object.skills.map(&:name) || []
   end
 
   private
