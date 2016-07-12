@@ -15,7 +15,8 @@ permalink: /
       </div>
         <header class="h-feed-header">
           <h1 class="p-title">Auctions</h1>
-<!--           <form>
+          <a href="{{site.baseurl}}/auctions/new" class="button">Add new</a>
+          <form>
             <h1>Filter</h1>
             <div class="field field-checkbox">
               <label>
@@ -26,35 +27,36 @@ permalink: /
             <div class="field field-checkbox">
               <label>
                 <input type="checkbox" checked>
-                <span class="label-text">Show sealed auctions</span>
+                <span class="label-text">Show draft auctions</span>
               </label>
             </div>
           </form>
           <nav>
             <h2>Sort by</h2>
             <ul>
-              <li><a href="#">Language</a></li>
+              <li><a href="#">Skills</a></li>
               <li><a href="#">Agency</a></li>
               <li><a href="#">Project</a></li>
               <li><a href="#">Time remaining</a></li>
               <li><a href="#">Current bid</a></li>
             </ul>
-          </nav> -->
+          </nav>
         </header>
-        <article class="h-entry auction">
-          <a href="{{site.baseurl}}/auctions/show">
+        <article class="h-entry auction is-draft">
+          <a href="{{site.baseurl}}/auctions/draft">
             <header class="auction-header">
+              <span class="draft">Draft</span>
               <h1 class="p-name auction-name">
-                Create a Google Script to convert Google Sheet data into JSON
+                 Create a Google Script to convert Google Sheet data into JSON
               </h1>
               <dl>
-                <dt class="auction-time-remaining">Time remaining</dt>
-                <dd class="auction-time-remaining">4 days</dd>
                 <dt class="auction-status">Status</dt>
-                <dd class="auction-status auction-status-open">Open</dd>
-                <dt class="auction-current-bid">Current bid</dt>
+                <dd class="auction-status auction-status-opens-soon">Opens soon</dd>
+                <dt class="auction-time-remaining">Starts</dt>
+                <dd class="auction-time-remaining">8/1/2016</dd>
+                <dt class="auction-current-bid">Starting bid</dt>
                 <dd class="auction-current-bid">
-                  Hidden
+                  $2,750.00
                 </dd>
               </dl>
             </header>
@@ -66,13 +68,14 @@ permalink: /
                 <h2>Project</h2>
                 <span><a href="https://github.com/18F/dolores-landingham-bot">Dolores Landingham</a></span>
               </li>
-              <li class="auction-type">
-                <h2>Type</h2>
-                <span>Sealed bid</span>
+              <li class="auction-status">
+                <h2>Status</h2>
+                <span class="auction-status-coming-soon">Coming soon</span>
               </li>
             </ul>
           </footer>
-        </article>        <article class="h-entry auction">
+        </article>        
+        <article class="h-entry auction">
           <a href="{{site.baseurl}}/auctions/show">
             <header class="auction-header">
               <h1 class="p-name auction-name">
@@ -82,7 +85,7 @@ permalink: /
                 <dt class="auction-time-remaining">Time remaining</dt>
                 <dd class="auction-time-remaining">1 hour</dd>
                 <dt class="auction-status">Status</dt>
-                <dd class="auction-status auction-status-ending-soon">Ending soon</dd>
+                <dd class="auction-status auction-status-closing-soon">Closing soon</dd>
                 <dt class="auction-current-bid">Current bid</dt>
                 <dd class="auction-current-bid">
                   $2,750.00
@@ -97,9 +100,9 @@ permalink: /
                 <h2>Project</h2>
                 <span><a href="https://github.com/18F/dolores-landingham-bot">Dolores Landingham</a></span>
               </li>
-              <li class="auction-type">
-                <h2>Type</h2>
-                <span>Multi bid</span>
+              <li class="auction-status">
+                <h2>Status</h2>
+                <span class="auction-status-ending-soon">Ending soon</span>
               </li>
             </ul>
           </footer>
@@ -111,11 +114,10 @@ permalink: /
                 Quarterly Reminders from Dolores Landingham 
               </h1>
               <dl>
-                <dt class="auction-time-remaining">Ended</dt>
-                <dd class="auction-time-remaining">9 days ago</dd>
                 <dt class="auction-status">Status</dt>
                 <dd class="auction-status auction-status-closed">Closed</dd>
-                <dt class="auction-current-bid">Winning bid</dt>
+                <dt class="auction-time-remaining">Ended</dt>
+                <dd class="auction-time-remaining">9 days ago</dd>
                 <dd class="auction-current-bid">
                   $2,750.00
                 </dd>
@@ -130,8 +132,8 @@ permalink: /
                 <span><a href="https://github.com/18F/dolores-landingham-bot">Dolores Landingham</a></span>
               </li>
               <li class="auction-type">
-                <h2>Type</h2>
-                <span>Sealed bid</span>
+                <h2>Auction type</h2>
+                <span class="auction-status-closed">Closed</span>
               </li>
             </ul>
           </footer>

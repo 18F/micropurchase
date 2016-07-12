@@ -15,13 +15,17 @@ excerpt: None
       </ol>
     </div>
   </nav>
-  <main class="auction h-entry" role="main" id="main">
+  <main class="auction is-draft h-entry" role="main" id="main">
     <div class="wrapper">
       <header class="auction-header">
+        <span class="draft">Draft</span>
         <h1>
           Open Opportunities: Create Agency Admin User Role
         </h1>
+        <a class="button" href="{{site.baseurl}}/auctions/edit">Edit</a>
         <dl>
+          <dt class="auction-status">Status</dt>
+          <dd class="auction-status auction-status-draft">Starting soon</dd>
           <dt class="auction-time-remaining">Starts</dt>
           <dd class="auction-time-remaining">
             12 days from now
@@ -31,10 +35,6 @@ excerpt: None
             $3,500.00
           </dd>
         </dl>
-        <nav>
-          <a class="nav-auction-show" href="{{site.baseurl}}/auctions/show">Auction</a>
-          <a class="nav-auction-bids" href="{{site.baseurl}}/auctions/bids">Bids</a>
-        </nav>
       </header>
       <div class="page">
         <p class="issue-description p-summary">Open Opportunities uses the open source sails.js MVC framework (Node.js / Express). Currently, a task creator should receive the following notification if a task they created receives a comment. However, this functionality has broken, without breaking the build's test suite. This issue sees the creation of a failing test (or tests) that will only pass when the notification functionality is restored, along with the fix to make those tests pass.</p>
@@ -46,57 +46,10 @@ excerpt: None
         <p>Then test(s) written as part of this micro-purchase will fail.</p>        
       </div>
       <footer class="auction-footer">
-        <section class="auction-place-bid auction-place-bid-closed">
-          <h1>Your profile must contain a valid DUNS number before you can place a bid. Please <a href="{{site.baseurl}}/profile">update your profile</a>. </h1>
-        </section>
-        <section class="auction-place-bid auction-place-bid-closed">
-          <h1>This auction is closed and is no longer accepting bids.</h1>
-        </section>
-        <section class="auction-place-bid auction-place-bid-preview">
-          <h1>This auction has yet to open and is not currently accepting bids.</h1>
-        </section>
-        <section class="auction-place-bid auction-place-bid-bid-placed">
-          <h1>You have placed a bid for $3,400.00.</h1>
-        </section>
-        <section class="auction-place-bid auction-place-bid-low-bid">
-          <h1>You are the lowest bidder.</h1>
-        </section>
-        <section class="auction-place-bid auction-place-bid has-errors">
-          <h1>Your bid was not accepted.</h1>
-          <p>The maximum (current) bid is $3414.00.</p>
-          <form>
-            <div class="field has-error"> 
-              <label>
-                <span class="label-text">Your bid</span>
-                <input type="number" value="3501"></input>
-              </label>
-            </div>
-            <button>Place bid</button>
-          </form>
-        </section>
-        <section class="auction-place-bid">
-          <p>The maximum (current) bid is $3414.00.</p>
-          <form>
-            <div class="field"> 
-              <label>
-                <span class="label-text">Your bid</span>
-                <input type="number"></input>
-              </label>
-            </div>
-            <button>Place bid</button>
-          </form>
-        </section>
-        <section class="auction-place-bid">
-          <p>The starting price for this auction is $3500.00.</p>
-          <form>
-            <div class="field"> 
-              <label>
-                <span class="label-text">Your bid</span>
-                <input type="number"></input>
-              </label>
-            </div>
-            <button>Place bid</button>
-          </form>
+        <section class="auction-workflow">
+          <h1>Approval needed</h1>
+          <p>This auction will be paid for using an 18F purchase card. 18F purchase cards cannot be used without first being granted approval in C2. Would you like to submit this auction to C2 for approval now?</p>
+          <button>Submit for approval</button>
         </section>
         <ul>
           <li class="auction-ended">
