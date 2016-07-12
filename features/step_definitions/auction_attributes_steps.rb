@@ -1,5 +1,6 @@
 Then(/^I should see the auction$/) do
   expect(page).to have_text(@auction.title)
+  expect(page).to have_text(@auction.skills.map(&:name).join(', '))
 end
 
 Then(/^I should see the auction's (.+)$/) do |field|
@@ -10,6 +11,12 @@ Then(/^I should see the auction's (.+)$/) do |field|
         .strftime(DcTimePresenter::FORMAT))
   else
     expect(page).to have_text(@auction.send(field))
+  end
+end
+
+Then(/^I should see the skills required for the auction$/) do
+  within('.auction-description') do
+    expect(page).to have_content(@auction.skills.map(&:name).to_sentence)
   end
 end
 

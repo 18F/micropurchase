@@ -26,6 +26,10 @@ class AuctionShowViewModel
     MarkdownRender.new(auction.description).to_s
   end
 
+  def skills
+    auction.skills.map(&:name).to_sentence
+  end
+
   def auction_data
     {
       start_label => formatted_date(auction.started_at),
