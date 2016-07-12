@@ -413,7 +413,7 @@
         "type": {
           "type": "string",
           "title": "Auction type",
-          "description": "The type of the auction",
+          "description": "The type of the auction. Different types of auctions will have different rules about how you can bid and what information they display.",
           "enum": ["reverse", "sealed_bid"]
         },
         "issue_url": {
