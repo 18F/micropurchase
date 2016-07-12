@@ -25,7 +25,7 @@ class AuctionSerializer < ActiveModel::Serializer
   end
 
   def skills
-    object.skills.map(&:name)
+    object.sorted_skill_names
   end
 
   def created_at
