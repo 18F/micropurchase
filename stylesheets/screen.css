@@ -1047,7 +1047,7 @@ nav.breadcrumbsli{
 	font-size: 16px;
 }
 
-.auction.is-draft .auction-header{ padding-right: 96px ; }
+.auction.is-draft .auction-header{ padding-right: 72px ; }
 .auction.is-draft .auction-header .draft{
 	position: absolute;
 	right: 6px;
@@ -1094,7 +1094,7 @@ nav.breadcrumbsli{
 }
 
 .auction .auction-header dl dd{
-	margin-right: 1em;
+	margin-right: 0.6em;
 }
 .auction .auction-header nav{
 	display: block;
@@ -2068,21 +2068,22 @@ a[id]{
 
 /* @end */
 
-/* @group layout-auctions-edit */
+/* @group auctions new, edit */
 
+.layout-auctions-new main .wrapper,
 .layout-auctions-edit main .wrapper{
-	padding-top: 1em;
-	padding-right: 320px;
-	
+	max-width: 640px;
+	background: #f8f8f8;
+	padding: 20px;
 }
 
-.layout-auctions-edit .fieldset-date-time{
+.fieldset-date-time{
 	padding: 0;
 	border: 0;
 }
 
-.layout-auctions-edit .fieldset-date-time .field-date,
-.layout-auctions-edit .fieldset-date-time .fieldset-time{
+.fieldset-date-time .field-date,
+.fieldset-date-time .fieldset.fieldset-time{
 	margin: 0;
 	position: relative;
 	border: 0;
@@ -2090,8 +2091,8 @@ a[id]{
 	padding-bottom: 24px;
 }
 
-.layout-auctions-edit .fieldset-date-time .field-date span.label-text,
-.layout-auctions-edit .fieldset-date-time .fieldset-time legend{
+.fieldset-date-time .field-date span.label-text,
+.fieldset-date-time .fieldset-time legend{
 	position: absolute;
 	bottom: 0;
 	margin: 0;
@@ -2099,11 +2100,14 @@ a[id]{
 	font-weight: normal;
 }
 
+.layout-auctions-new .branch,
 .layout-auctions-edit .branch{
 	margin-bottom: 12px;
 	margin-left: -2px;
 }
-.layout-auctions-edit .branch .fieldset-date-time{
+
+.layout-auctions-new .branch .fieldset.fieldset-date-time,
+.layout-auctions-edit .branch .fieldset.fieldset-date-time{
 	display: inline-block;
 	vertical-align: middle;
 	width: auto;
@@ -2114,6 +2118,7 @@ a[id]{
 	margin-right: 0.4em;
 }
 
+.layout-auctions-new .branch .fieldset-date-time > legend,
 .layout-auctions-edit .branch .fieldset-date-time > legend{
 	position: absolute;
 	top: 8px;
@@ -2123,11 +2128,14 @@ a[id]{
 	font-weight: normal;
 }
 
+.layout-auctions-new .branch .fieldset-date-time .field-date,
+.layout-auctions-new .branch .fieldset-date-time .fieldset-time,
 .layout-auctions-edit .branch .fieldset-date-time .field-date,
 .layout-auctions-edit .branch .fieldset-date-time .fieldset-time{
 	display: none;
 }
 
+.layout-auctions-new.with-customized-timeline .fieldset-date-time-summary,
 .layout-auctions-edit.with-customized-timeline .fieldset-date-time-summary{
 	display: none;
 }
@@ -2145,7 +2153,7 @@ a[id]{
 	margin-bottom: 16px;
 }
 
-.layout-auctions-edit.with-customized-timeline .branch .fieldset-date-time > legend{
+.with-customized-timeline .branch .fieldset-date-time > legend{
 	left: 0;
 	top: 0;
 	display: block;
@@ -2155,90 +2163,91 @@ a[id]{
 	color: #333;
 }
 
-.layout-auctions-edit .branch+.help-text{
+.branch+.help-text{
 	font-size: 14px;
 	max-width: 32em;
 	line-height: 1.33em;
 	margin-bottom: 2em;
 }
 
-.layout-auctions-edit .fieldset-date-time::after{
+.fieldset-date-time::after{
 	content: "";
 	display: table;
 	clear: both;
 }
 
-.layout-auctions-edit .fieldset-date-time .field-date,
-.layout-auctions-edit .fieldset-date-time .fieldset-time{
+.fieldset-date-time .field-date,
+.fieldset-date-time .fieldset-time{
 	float: left;
 	margin-right: 0.55em;
 	min-width: 11.8em;
 }
 
-.layout-auctions-edit .fieldset-date-time .field-date input{
+.fieldset-date-time .field-date input{
 	width: 100%;
 }
 
-.layout-auctions-edit .fieldset-date-time.fieldset-start-date-time{
+.fieldset-date-time.fieldset-start-date-time{
 	margin-bottom: 12px;
 }
 
-.layout-auctions-edit .fieldset-date-time .fieldset-time .field {
+.fieldset-date-time .fieldset-time .field {
 	position: relative;
 }
 
-.layout-auctions-edit .fieldset-date-time .fieldset-time .field select{
+.fieldset-date-time .fieldset-time .field select{
 	background: white;
 }
 
-.layout-auctions-edit .fieldset-date-time .fieldset-time .field::after{
+.fieldset-date-time .fieldset-time .field::after{
 	z-index: 1;
 	border-width: 5px;
 }
 
-.layout-auctions-edit .fieldset-date-time .fieldset-time .field-time-hours select{
+.fieldset-date-time .fieldset-time .field-time-hours select{
 	border-radius: 3px 0 0 3px;
 }
 
-.layout-auctions-edit .fieldset-date-time .fieldset-time .field-time-minutes select{
+.fieldset-date-time .fieldset-time .field-time-minutes select{
 	border-radius: 0;
 	border-left: none;
 	border-right: none;
 }
 
-.layout-auctions-edit .fieldset-date-time .fieldset-time .field-time-meridiem select{
+.fieldset-date-time .fieldset-time .field-time-meridiem select{
 	border-radius: 0 3px 3px 0;
 }
 
-.layout-auctions-edit .field-sealed-bid .label-text{
+.field-sealed-bid .label-text{
 	font-weight: 400;
 	font-size: 14px;
 }
 
-.layout-auctions-edit .fieldset-date-time .fieldset-time .field .label-text{
+.fieldset-date-time .fieldset-time .field .label-text{
 	position: absolute;
 	bottom: 0;
 	left: -9999em;
 	font-size: 12px;
 	
 }
-.layout-auctions-edit .fieldset-date-time .fieldset-time .field-time-hours,
-.layout-auctions-edit .fieldset-date-time .fieldset-time .field-time-minutes,
-.layout-auctions-edit .fieldset-date-time .fieldset-time .field-time-meridiem{
+.fieldset-date-time .fieldset-time .field-time-hours,
+.fieldset-date-time .fieldset-time .field-time-minutes,
+.fieldset-date-time .fieldset-time .field-time-meridiem{
 	width: 3.5em;
 	float: left;
 	margin-bottom: 0;
 }
 
-.layout-auctions-edit .field-starting-bid{
+.field.field-starting-bid{
 	width: 11.5em;
 	margin-bottom: 8px;
 }
 
-.layout-auctions-edit .field-sealed-bid.field-checkbox{
+.field.field-sealed-bid.field-checkbox{
 	margin-bottom: 28px;
 }
 
+.layout-auctions-new .time-zone,
 .layout-auctions-edit .time-zone{
 	position: relative;
 	top: 11px;
@@ -2248,6 +2257,7 @@ a[id]{
 	color: #555;
 }
 
+.layout-auctions-new textarea,
 .layout-auctions-edit textarea{
 	font-family: Monaco, "Courier New", Courier, mono;
 	font-size: 13px;
@@ -2257,42 +2267,42 @@ a[id]{
 	max-width: none;
 }
 
-.layout-auctions-edit .fieldset-github,
-.layout-auctions-edit .fieldset-payment{
+.fieldset-github,
+.fieldset-payment{
 	padding-top: 4px;
 	background: white;
 }
 
-.layout-auctions-edit .fieldset-payment{
+.fieldset-payment{
 	margin-bottom: 0;
 }
 
-.layout-auctions-edit .fieldset-github .field,
-.layout-auctions-edit .fieldset-payment .field{
+.fieldset-github .field,
+.fieldset-payment .field{
 	width: 20%;
 	display: inline-block;
 	margin-bottom: 0;
 	margin-right: -0.4em;
 }
 
-.layout-auctions-edit .fieldset-github .field .label-text{
+.fieldset-github .field .label-text{
 	font-weight: 400;
 }
 
-.layout-auctions-edit .fieldset-github .field.field-github-project-url{
+.fieldset-github .field.field-github-project-url{
 	width: 75%;
 	margin-right: 5%;
 }
 
-.layout-auctions-edit .fieldset-github .field.field-issue-number{
+.fieldset-github .field.field-issue-number{
 	margin-right: 0;
 }
 
-.layout-auctions-edit .fieldset-payment .field{
+.fieldset-payment .field{
 	width: 48.5%;
 }
 
-.layout-auctions-edit .fieldset-payment .field.field-customer{
+.fieldset-payment .field.field-customer{
 	margin-right: 2.5%;
 }
 
@@ -2300,11 +2310,6 @@ a[id]{
 	clear: both;
 	margin-top: 12px;
 	font-size: 14px;
-}
-
-.layout-auctions-edit .wrapper .fields{
-	background: #f8f8f8;
-	padding: 12px;
 }
 .layout-auctions-edit .wrapper footer{
 	position: absolute;
