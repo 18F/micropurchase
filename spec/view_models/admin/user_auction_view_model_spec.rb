@@ -17,7 +17,7 @@ describe Admin::UserAuctionViewModel do
       auction.skills << skills
 
       expect(Admin::UserAuctionViewModel.new(auction, user).skills).to eq(
-        'sewing, eating'
+        'eating, sewing'
       )
     end
   end
