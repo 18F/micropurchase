@@ -1,8 +1,6 @@
 When(/^I sign in$/) do
   step "I visit the home page"
-  within(".header-account") do
-    click_on "Login"
-  end
+  click_on "Sign in"
   click_on "Authorize with GitHub"
 end
 

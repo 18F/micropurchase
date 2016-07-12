@@ -1,3 +1,9 @@
 <% if request.path != '/login' %>
-  <%= link_to 'Login', login_path, class: 'usa-button usa-button-outline-inverse' %>
+    <ul class="nav">
+      <li class="nav-link sign-in">
+        <%= link_to 'Sign in', login_path %>
+        or
+        <%= link_to 'Sign up', login_path %>
+      </li>
+    </ul>
 <% end %>

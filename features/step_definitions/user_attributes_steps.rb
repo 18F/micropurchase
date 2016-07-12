@@ -10,18 +10,6 @@ Then(/^I should see the name from github authentication$/) do
   expect(field.value).to eq(@name)
 end
 
-Then(/^I should see my name$/) do
-  expect(page).to have_content(@user.name)
-end
-
-Then(/^I should not see my name$/) do
-  expect(page).to_not have_content(@user.name)
-end
-
-Then(/^I should see my email address$/) do
-  expect(page).to have_content(@user.email)
-end
-
 Then(/^I should see "([^"]+)" for the user in the "([^"]+)" column$/) do |value, column|
   user_admin_columns = ['Name', 'Email', 'DUNS Number', 'SAM.gov status',
                         'Small Business?', 'Github ID']
