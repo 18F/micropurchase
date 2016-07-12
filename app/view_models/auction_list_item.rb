@@ -39,7 +39,7 @@ class AuctionListItem
   end
 
   def skills
-    auction.skills.map(&:name).join(', ')
+    auction.sorted_skill_names.join(', ')
   end
 
   def github_repo

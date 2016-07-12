@@ -1,6 +1,6 @@
 Then(/^I should see the auction$/) do
   expect(page).to have_text(@auction.title)
-  expect(page).to have_text(@auction.skills.map(&:name).join(', '))
+  expect(page).to have_text(@auction.sorted_skill_names.join(', '))
 end
 
 Then(/^I should see the auction's (.+)$/) do |field|
@@ -16,7 +16,7 @@ end
 
 Then(/^I should see the skills required for the auction$/) do
   within('.auction-description') do
-    expect(page).to have_content(@auction.skills.map(&:name).to_sentence)
+    expect(page).to have_content(@auction.sorted_skill_names.to_sentence)
   end
 end
 

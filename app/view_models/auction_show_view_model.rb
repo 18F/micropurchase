@@ -27,7 +27,7 @@ class AuctionShowViewModel
   end
 
   def skills
-    auction.skills.map(&:name).to_sentence
+    auction.sorted_skill_names.to_sentence
   end
 
   def auction_data
