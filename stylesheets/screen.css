@@ -2328,9 +2328,12 @@ a[id]{
 	font-size: 14px;
 }
 
+.layout-auctions-new .wrapper footer,
 .layout-auctions-edit .wrapper footer{
 	margin-top: 2em;
 }
+
+.layout-auctions-new .wrapper footer .button,
 .layout-auctions-edit .wrapper footer .button{
 	width: 100%;
 	background: #008c52;
