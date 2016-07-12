@@ -127,11 +127,11 @@ main,
 	color: #333;
 }
 
-main{
-	padding: 1em 0 2em;
-}
+main{ padding: 1em 0 2em; }
 
 img { max-width: 100%; }
+
+table{ color: inherit; }
 
 /* @group icomoon */
 
@@ -1370,11 +1370,6 @@ a[id]{
 	margin-bottom: 16px !important;
 }
 
-.location .h-card .p-name{
-	position: absolute;
-	left: -9999em;
-}
-
 .page blockquote{
 	padding-left: 1em;
 	position: relative;
@@ -1463,28 +1458,6 @@ a[id]{
 }
 
 .page .page-title+h2{ margin-top: 20px; }
-
-.page hr{
-	border: none;
-	height: 0.2em;
-	margin-top: 2em;
-	margin-bottom: 2em;
-	background: #f2f1ec;
-	width: 90%;
-	max-width: 640px;
-}
-
-.page .h-card{
-	line-height: 1.33em;
-	margin: 0 auto 0.6em;
-	padding: 8px 16px 8px 16px;
-	border: 1px solid #ddd;
-	border-radius: 4px;
-	max-width: 480px;
-	position: relative;
-}
-
-.page .h-card:last-of-type{ margin-bottom: 1em; }
 
 .page table{
 	border-radius: 3px;
@@ -2547,5 +2520,53 @@ a[id]{
 
 
 /* @end */
+
+/* @end */
+
+/* @group layout-people */
+
+
+.layout-people main .wrapper > h1{
+	margin-bottom: 0.67em;
+	font-size: 36px;
+	font-weight: 600;
+	line-height: 1.125em;
+	color: #383838;
+	letter-spacing: -1px;
+	max-width: 640px;
+	position: relative;
+	left: -1px;
+}
+
+.layout-people section h1{
+	font-weight: 600;
+	font-size: 21px;
+	line-height: 1.3em;
+	font-family: Merriweather, Georgia, serif;
+	color: #c56815;
+	margin: 28px 0 16px;
+	display: inline-block;
+}
+
+.layout-people table{
+	border-radius: 3px;
+	border: 1px solid #eee;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.layout-people table tbody tr:first-child td:first-child{
+	border-radius: 3px;
+}
+
+.layout-people table tbody tr:nth-child(odd) td{
+	background: #fafafa;
+}
+
+.layout-people table td,
+.layout-people table th{
+	border: 1px solid #ddd;
+	padding: 8px;
+}
 
 /* @end */
