@@ -27,6 +27,10 @@ class Auction < ActiveRecord::Base
   validates :user, presence: true
   validates :billable_to, presence: true
 
+  def sorted_skill_names
+    skills.order(name: :asc).map(&:name)
+  end
+
   def lowest_bid
     lowest_bids.first
   end

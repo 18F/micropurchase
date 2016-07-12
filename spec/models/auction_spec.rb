@@ -66,6 +66,18 @@ describe Auction do
     end
   end
 
+  describe '#sorted_skill_names' do
+    it 'returns alpha ordered skills' do
+      c_skill = create(:skill, name: 'c')
+      a_skill = create(:skill, name: 'a')
+      b_skill = create(:skill, name: 'b')
+      auction = create(:auction)
+      auction.skills << [c_skill, a_skill, b_skill]
+
+      expect(auction.sorted_skill_names).to eq(['a', 'b', 'c'])
+    end
+  end
+
   describe "#lowest_bid" do
     context "multiple bids" do
       it "returns bid with lowest amount" do
