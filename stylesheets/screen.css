@@ -1034,13 +1034,7 @@ nav.breadcrumbsli{
 	text-decoration: none;
 }
 
-.auction a.button{
-	margin-top: -4px;
-	position: relative;
-	left: 0.8em;
-	padding: 4px 6px;
-	font-size: 14px;
-}
+
 
 .auction a.button:hover{
 	color: white;
@@ -1056,10 +1050,24 @@ nav.breadcrumbsli{
 	background: #f8f5ef;
 }
 
-.auction .auction-header{
-	font-size: 16px;
+.auction .auction-header h1{
+	margin-right: 40px;
+	float: left;
 }
 
+.auction .auction-header .button{
+	width: 40px;
+	text-align: center;
+	position: absolute;
+	right: 16px;
+	top: 16px;
+	padding: 4px 6px;
+	font-size: 14px;
+}
+
+.auction.is-draft .auction-header .button{
+	top: 40px;
+}
 
 .auction.is-draft .auction-header .draft{
 	border-radius: 3px 3px 0 0;
@@ -1089,6 +1097,7 @@ nav.breadcrumbsli{
 	font-size: 13px;
 	font-weight: 600;
 	font-style: italic;
+	clear: both;
 }
 
 .auction .auction-header dl dt,
