@@ -1017,6 +1017,7 @@ nav.breadcrumbsli{
 /* @end */
 
 /* @group auction */
+
 .auction h1{
 	font-size: 20px;
 	font-family: Merriweather, Georgia, serif;
@@ -1059,32 +1060,25 @@ nav.breadcrumbsli{
 	font-size: 16px;
 }
 
-.auction.is-draft .auction-header{ padding-right: 72px ; }
+
 .auction.is-draft .auction-header .draft{
-	position: absolute;
-	right: 6px;
-	top: -6px;
-	background: #333;
-	color: white;
-	width: 80px;
+	border-radius: 3px 3px 0 0;
+	background: repeating-linear-gradient(
+		  45deg,
+		  #f6ba52,
+		  #f6ba52 10px,
+		  #ffd180 10px,
+		  #ffd180 20px
+		);
+	color: #400600;
+	font-weight: 600;
+	font-size: 14px;
 	text-align: center;
-	padding: 16px 0;
-	border-radius: 4px 4px 0 0;
+	padding: 6px 0;
+	margin: -14px -16px 12px;
+	display: block;
 }
 
-.auction.is-draft .auction-header .draft::after{
-	position: absolute;
-	content: "";
-    height: 0;
-    left: 0;
-    width: 80px;
-    bottom: -8px;
-    position: absolute;
-    margin: 0;
-    border-bottom: 8px solid transparent;
-    border-left: 38px solid #2D3F5B;
-    border-right: 38px solid #2D3F5B;
-}
 
 .auction .auction-header dl{
 	padding: 4px 0 16px;
@@ -2323,19 +2317,15 @@ a[id]{
 	margin-top: 12px;
 	font-size: 14px;
 }
-.layout-auctions-edit .wrapper footer{
-	position: absolute;
-	right: 0;
-	top: 1em;
-	width: 300px;
-}
 
+.layout-auctions-edit .wrapper footer{
+	margin-top: 2em;
+}
 .layout-auctions-edit .wrapper footer .button{
 	width: 100%;
 	background: #008c52;
 	color: white;
 	border-color: #008c52;
-	margin-bottom: 1em;
 }
 
 /* @end */
