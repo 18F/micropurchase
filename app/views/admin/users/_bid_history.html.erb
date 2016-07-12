@@ -4,8 +4,8 @@
   <thead>
     <tr>
       <th scope="col">Auction</th>
-      <th scope="col">Start Date</th>
-      <th scope="col">End Date</th>
+      <th scope="col">Status</th>
+      <th scope="col">Skills</th>
       <th scope="col">User Bids</th>
       <th scope="col">User Won?</th>
       <th scope="col">Accepted?</th>
@@ -15,8 +15,8 @@
     <% view_model.user_auctions.each do |auction| %>
       <tr>
         <td><%= link_to auction.title, admin_auction_path(auction.id) %></td>
-        <td><%= auction.start_date %></td>
-        <td><%= auction.end_date %></td>
+        <td><%= auction.status %></td>
+        <td><%= auction.skills %></td>
         <td><%= auction.user_bid_count %></td>
         <td><%= auction.user_won_label %></td>
         <td><%= auction.accepted_label %></td>

@@ -1,19 +1,24 @@
 require 'rails_helper'
 
 describe Admin::UserAuctionViewModel do
-  let(:user) { create(:user) }
 
-  describe '#start_date' do
-    it 'should return a mm/dd/yy date in EST' do
-      auction = create(:auction, started_at: '2016-04-01 00:00 UTC')
-      expect(Admin::UserAuctionViewModel.new(auction, user).start_date).to eq('03/31/2016 EDT')
+  describe '#status' do
+    it 'should return the auction status' do
+      auction = create(:auction, :available)
+
+      expect(Admin::UserAuctionViewModel.new(auction, user).status).to eq('Open')
     end
   end
 
-  describe '#end_date' do
+  describe '#skills' do
     it 'should return a mm/dd/yy date in EST' do
-      auction = create(:auction, ended_at: '2016-04-01 00:00 UTC')
-      expect(Admin::UserAuctionViewModel.new(auction, user).end_date).to eq('03/31/2016 EDT')
+      auction = create(:auction)
+      skills = [create(:skill, name: 'sewing'), create(:skill, name: 'eating')]
+      auction.skills << skills
+
+      expect(Admin::UserAuctionViewModel.new(auction, user).skills).to eq(
+        'eating, sewing'
+      )
     end
   end
 
@@ -72,5 +77,9 @@ describe Admin::UserAuctionViewModel do
         expect(Admin::UserAuctionViewModel.new(auction, user).accepted_label).to eq('-')
       end
     end
+  end
+
+  def user
+    @_user ||= create(:user)
   end
 end
