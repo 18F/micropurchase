@@ -1,144 +1,49 @@
 ---
 excerpt: none
-permalink: /
 ---
 
 {% include head.html %}
-<body class="no-js layout-home">
+<body class="no-js layout-index">
   <a class="a-skip-to-main" href="#main">Skip to main content</a>
-  {% include site-header.html %}
-  <main role="main" id="main">
-    <div class="h-feed">
-      <div class="wrapper">
-      <div class="notice">
-        <p>You will need to <a href="{{site.baseurl}}/profile">complete your profile</a> in order to place a bid and get paid.</p>
-      </div>
-        <header class="h-feed-header">
-          <h1 class="p-title">Auctions</h1>
-          <a href="{{site.baseurl}}/auctions/new" class="button">Add new</a>
-          <form>
-            <h1>Filter</h1>
-            <div class="field field-checkbox">
-              <label>
-                <input type="checkbox" checked>
-                <span class="label-text">Show closed auctions</span>
-              </label>
-            </div>
-            <div class="field field-checkbox">
-              <label>
-                <input type="checkbox" checked>
-                <span class="label-text">Show draft auctions</span>
-              </label>
-            </div>
-          </form>
-          <nav>
-            <h2>Sort by</h2>
-            <ul>
-              <li><a href="#">Skills</a></li>
-              <li><a href="#">Agency</a></li>
-              <li><a href="#">Project</a></li>
-              <li><a href="#">Time remaining</a></li>
-              <li><a href="#">Current bid</a></li>
-            </ul>
-          </nav>
-        </header>
-        <article class="h-entry auction is-draft">
-          <a href="{{site.baseurl}}/auctions/draft">
-            <header class="auction-header">
-              <span class="draft">Draft</span>
-              <h1 class="p-name auction-name">
-                 Create a Google Script to convert Google Sheet data into JSON
-              </h1>
-              <a class="button" href="{{site.baseurl}}/auctions/edit">Edit</a>
-              <dl>
-                <dt class="auction-time-remaining">Starts</dt>
-                <dd class="auction-time-remaining">8/1/2016</dd>
-                <dt class="auction-current-bid">Starting bid</dt>
-                <dd class="auction-current-bid">$2,750.00</dd>
-              </dl>
-            </header>
-            <p class="p-summary auction-summary">The Federal Risk and Authorization Management Program, or FedRAMP, is a government-wide program that provides a standardized approach to security assessment, authorization, and continuous monitoring for cloud products and services. This issue seeks a Google Apps Script that will&hellip;</p>
-          </a>
-          <footer class="auction-footer">
-            <ul>
-              <li class="auction-project">
-                <h2>Project</h2>
-                <span><a href="https://github.com/18F/dolores-landingham-bot">Dolores Landingham</a></span>
-              </li>
-              <li class="auction-status">
-                <h2>Status</h2>
-                <span class="auction-status-coming-soon">Coming soon</span>
-              </li>
-            </ul>
-          </footer>
-        </article>        
-        <article class="h-entry auction">
-          <a href="{{site.baseurl}}/auctions/show">
-            <header class="auction-header">
-              <h1 class="p-name auction-name">
-                Offer AWS SQS as a managed service via cloud.gov 
-              </h1>
-              <a class="button" href="{{site.baseurl}}/auctions/edit">Edit</a>
-              <dl>
-                <dt class="auction-status">Status</dt>
-                <dd class="auction-status auction-status-closing-soon">Closing soon</dd>
-                <dt class="auction-time-remaining">Time remaining</dt>
-                <dd class="auction-time-remaining">1 hour</dd>
-                <dt class="auction-current-bid">Current bid</dt>
-                <dd class="auction-current-bid">$2,750.00</dd>
-              </dl>
-            </header>
-            <p class="p-summary auction-summary">Cloud.gov is a deployment and hosting platform for government digital services. Cloud.gov uses brokers to manage the lifecycle of services for its users. Cloud.gov invokes the AWS broker using the CloudFoundry Service Broker API to manage various AWS services for use by applications deployed to&hellip;</p>
-          </a>
-          <footer class="auction-footer">
-            <ul>
-              <li class="auction-project">
-                <h2>Project</h2>
-                <span><a href="https://github.com/18F/dolores-landingham-bot">Dolores Landingham</a></span>
-              </li>
-              <li class="auction-status">
-                <h2>Status</h2>
-                <span class="auction-status-ending-soon">Ending soon</span>
-              </li>
-            </ul>
-          </footer>
-        </article>
-        <article class="h-entry auction">
-          <a href="{{site.baseurl}}/auctions/show">
-            <header class="auction-header">
-              <h1 class="p-name auction-name">
-                Quarterly Reminders from Dolores Landingham 
-              </h1>
-              <a class="button" href="{{site.baseurl}}/auctions/edit">Edit</a>
-              <dl>
-                <dt class="auction-status">Status</dt>
-                <dd class="auction-status auction-status-closed">Closed</dd>
-                <dt class="auction-time-remaining">Ended</dt>
-                <dd class="auction-time-remaining">9 days ago</dd>
-                <dt class="auction-current-bid">Closing bid</dt>
-                <dd class="auction-current-bid">$2,750.00</dd>
-              </dl>
-            </header>
-            <p class="p-summary auction-summary">We need the ability to send recurring policy reminders to our team here at 18F on a quarterly basis and we want to automate this by leveraging the existing Dolores Landingham Slack bot.</p>
-          </a>
-          <footer class="auction-footer">
-            <ul>
-              <li class="auction-project">
-                <h2>Project</h2>
-                <span><a href="https://github.com/18F/dolores-landingham-bot">Dolores Landingham</a></span>
-              </li>
-              <li class="auction-type">
-                <h2>Auction type</h2>
-                <span class="auction-status-closed">Closed</span>
-              </li>
-            </ul>
-          </footer>
-        </article>
-        {% include _auction.html %}
-        {% include _auction.html %}
-        {% include _auction.html %}
-        {% include _auction.html %}
-      </div>
+  <main role="main" id="main" class="page">
+    <div class="wrapper">
+      <ul>
+        <li>
+          Auctions
+          <ul>
+            <li><a href="{{site.baseurl}}">Index (home)</a></li>
+            <li><a href="{{site.baseurl}}/auctions/new">New</a></li>
+            <li><a href="{{site.baseurl}}/auctions/draft">Draft</a></li>
+            <li><a href="{{site.baseurl}}/auctions/show">Show</a></li>
+            <li><a href="{{site.baseurl}}/auctions/bids">Bids</a></li>
+          </ul>
+        </li>
+        <li>
+          Pages
+          <ul>
+            <li><a href="{{site.baseurl}}/about">About</a></li>
+            <li><a href="{{site.baseurl}}/feedback">Feedback</a></li>
+            <li><a href="{{site.baseurl}}/getting-paid">Getting paid</a></li>
+            <li><a href="{{site.baseurl}}/placing-a-bid">Placing a bid</a></li>
+            <li><a href="{{site.baseurl}}/policies">Policies</a></li>
+            <li><a href="{{site.baseurl}}/terms-of-service">Terms of service</a></li>
+            <li><a href="{{site.baseurl}}/auctions/bids">Bids</a></li>
+          </ul>
+        </li>
+        <li>
+          People
+          <ul>
+            <li><a href="{{site.baseurl}}/people">Index</a></li>
+            <li><a href="{{site.baseurl}}/people/new-admin">New admin</a></li>
+          </ul>
+        </li>
+        <li>
+          Registration
+          <ul>
+            <li><a href="{{site.baseurl}}/sign-up">Sign up</a></li>
+          </ul>
+        </li>
+      </ul>      
     </div>
   </main>
   {% include site-footer.html %}
