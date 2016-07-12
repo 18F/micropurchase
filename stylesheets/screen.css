@@ -968,8 +968,6 @@ nav.breadcrumbsli{
 }
 
 .site-footer .nav-contact{
-	position: static;
-	clear: both;
 	font-size: 14px;
 }
 
@@ -1009,7 +1007,9 @@ nav.breadcrumbsli{
 	
 	.site-footer .nav-contact{ 
 		font-size: 14px;
-		padding-top: 0;
+		float: right;
+		clear: right;
+		margin-top: -16px;
 	}
 
 }
@@ -2525,17 +2525,17 @@ a[id]{
 
 /* @group layout-people */
 
+.layout-people main .wrapper{
+	padding-top: 1em;
+}
 
 .layout-people main .wrapper > h1{
-	margin-bottom: 0.67em;
+	margin-bottom: 0;
 	font-size: 36px;
 	font-weight: 600;
 	line-height: 1.125em;
 	color: #383838;
 	letter-spacing: -1px;
-	max-width: 640px;
-	position: relative;
-	left: -1px;
 }
 
 .layout-people section h1{
@@ -2546,6 +2546,13 @@ a[id]{
 	color: #c56815;
 	margin: 28px 0 16px;
 	display: inline-block;
+}
+
+.layout-people section h1+.button{
+	padding: 6px 10px;
+	font-size: 16px;
+	margin-top: -4px;
+	margin-left: 0.6em;
 }
 
 .layout-people table{
@@ -2567,6 +2574,46 @@ a[id]{
 .layout-people table th{
 	border: 1px solid #ddd;
 	padding: 8px;
+}
+
+/* @end */
+
+/* @group layout-people-new */
+
+.layout-people-new form{
+	max-width: 400px;
+	margin: 2em auto 1em;
+	border: 1px solid #ccc;
+	padding: 12px 20px 20px;
+	border-radius: 6px;
+	position: relative;
+}
+
+.layout-people-new form .a-back{
+	position: absolute;
+	bottom: 100%;
+	margin-bottom: 0.8em;
+	left: 0;
+	color: #888;
+	
+}
+
+.layout-people-new h1{
+	margin-bottom: 0.67em;
+	font-size: 36px;
+	font-weight: 600;
+	line-height: 1.125em;
+	color: #383838;
+	letter-spacing: -1px;	
+}
+
+.layout-people-new .field-github-id{
+	max-width: 6em;	
+}
+
+.layout-people-new .button{
+	margin-top: 1em;
+	
 }
 
 /* @end */

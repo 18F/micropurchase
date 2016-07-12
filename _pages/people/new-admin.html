@@ -4,13 +4,38 @@ excerpt: None
 ---
 
 {% include head.html %}
-<body class="no-js layout-admins-new">
+<body class="no-js layout-people-new">
   <a class="a-skip-to-main" href="#main">Skip to main content</a>
   {% include site-header.html %}
   <main role="main" id="main">
     <div class="wrapper">
-      <form action="{{site.baseurl}}/admins/people/">
-        
+      <form action="{{site.baseurl}}/people/">
+      <a href="{{site.baseurl}}/people" class="a-back">Cancel and return</a>
+        <h1>New admin</h1>
+        <div class="field field-name">
+          <label>
+            <span class="label-text">Name</span>
+            <input type="text" name="">
+          </label>
+        </div>
+        <div class="field field-email">
+          <label>
+            <span class="label-text">Email</span>
+            <input type="email" name="">
+          </label>
+        </div>
+        <div class="field field-github-id">
+          <label>
+            <span class="label-text">GitHub ID</span>
+            <input type="number" name="">
+          </label>
+        </div>
+        <div class="field field-checkbox field-contracting-officer">
+          <label>
+            <input type="checkbox" name="">
+            <span class="label-text">Contracting officer</span>
+          </label>
+        </div>
         <footer>
           <button class="button">Save</button>
         </footer>
