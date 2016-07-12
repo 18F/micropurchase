@@ -1017,7 +1017,7 @@ nav.breadcrumbsli{
 /* @end */
 
 /* @group auction */
-.auction a h1{
+.auction h1{
 	font-size: 20px;
 	font-family: Merriweather, Georgia, serif;
 	letter-spacing: 0;
@@ -1025,6 +1025,7 @@ nav.breadcrumbsli{
 	line-height: 1.25em;
 	margin-bottom: 0.25em;
 	color: #004a7f;
+	display: inline-block;
 }
 
 .auction a:hover h1{
@@ -1032,6 +1033,17 @@ nav.breadcrumbsli{
 	text-decoration: none;
 }
 
+.auction a.button{
+	margin-top: -4px;
+	position: relative;
+	left: 0.8em;
+	padding: 4px 6px;
+	font-size: 14px;
+}
+
+.auction a.button:hover{
+	color: white;
+}
 .layout-home .auction:hover{
 	border-color: #dbc29a;
 	border-right-color: #cbac7a;
