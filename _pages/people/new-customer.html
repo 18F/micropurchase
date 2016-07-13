@@ -11,7 +11,7 @@ excerpt: None
     <div class="wrapper">
       <form action="{{site.baseurl}}/people/">
       <a href="{{site.baseurl}}/people" class="a-back">Cancel and return</a>
-        <h1>New admin</h1>
+        <h1>New customer</h1>
         <div class="field field-name">
           <label>
             <span class="label-text">Name</span>
@@ -27,14 +27,18 @@ excerpt: None
         <div class="field field-select field-agency">
           <label>
             <span class="label-text">Agency/Office</span>
-            <input type="number" name="">
+            <select>
+              <option>General Services Administration</option>
+              <option>National Security Administration</option>
+            </select>
           </label>
+          <a href="#" class="button">Add new</a>
         </div>
         <div class="field field-checkbox field-primary-contact">
           <label>
             <input type="checkbox" name="">
             <span class="label-text">Primary contact</span>
-            <span class="help-text">If checked and another primary contact already exists for this agency or office, that customer will no longer be marked as the primary contact.</span>
+            <span class="help-text">If this box is checked <em>and another primary contact already exists for this agency or office</em> that customer will no longer be marked as the primary contact.</span>
           </label>
         </div>
         <footer>

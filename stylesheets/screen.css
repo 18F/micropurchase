@@ -2683,6 +2683,18 @@ a[id]{
 	
 }
 
+.layout-people-new .field em{
+	font-style: italic;
+}
+.layout-people-new .field-agency .button{
+	position: absolute;
+	left: 9.5em;
+	top: -12px;
+	padding: 2px 5px;
+	font-size: 12px;
+	font-weight: 600;
+}
+
 /* @end */
 
 /* @group layout-sign-in */
