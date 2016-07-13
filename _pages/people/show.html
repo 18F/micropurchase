@@ -1,0 +1,73 @@
+---
+excerpt: none
+---
+{% include head.html %}
+<body class="no-js layout-people-show">
+  <a class="a-skip-to-main" href="#main">Skip to main content</a>
+  {% include site-header.html %}
+  <main role="main" id="main">
+    <div class="wrapper">
+    <a class="a-back" href="{{site.baseurl}}/people/">Back to people</a>
+      <h1>Whosit Whatshisface</h1>
+      <table>
+        <tbody>
+          <tr>
+            <th>Email</th>
+            <td>So-and-so@thus-and-such.com</td>
+          </tr>
+          <tr>
+            <th>Payment URL</th>
+            <td><a href="https://secureform.com" target="_blank">https://secureform.com</a></td>
+          </tr>
+          <tr>
+            <th>DUNS number</th>
+            <td>13756421</td>
+          </tr>
+          <tr>
+            <th>GitHub username</th>
+            <td>andrewmaier</td>
+          </tr>
+          <tr>
+            <th>GitHub ID</th>
+            <td>123456</td>
+          </tr>
+          <tr>
+            <th>SAM</th>
+            <td>Verified</td>
+          </tr>
+          <tr>
+            <th>Small business</th>
+            <td>Yes</td>
+          </tr>
+        </tbody>
+      </table>
+      <section>
+        <h1>Bid history</h1>
+        <table>
+          <thead>
+            <td class="col-auction">Auction</td>
+            <td class="col-start-date">Started</td>
+            <td class="col-end-date">Ended</td>
+            <td class="col-bids">Bids</td>
+            <td class="col-won">Won</td>
+            <td class="col-accepted">Accepted</td>
+          </thead>  
+          <tbody>
+            <tr>
+              <td class="col-auction"><a href="{{site.baseurl}}/auctions/show">Sweet auction title</a></td>
+              <td class="col-start-date"><a href="{{site.baseurl}}/auctions/show">7/11/2016</a></td>
+              <td class="col-end-date"><a href="{{site.baseurl}}/auctions/show">7/16/2016</a></td>
+              <td class="col-bids"><a href="{{site.baseurl}}/auctions/show">2</a></td>
+              <td class="col-won"><a href="{{site.baseurl}}/auctions/show">Yes</a></td>
+              <td class="col-accepted"><a href="{{site.baseurl}}/auctions/show">Yes</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+  </main>
+  {% include site-footer.html %}
+</body>
+
+
+
