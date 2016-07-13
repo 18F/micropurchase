@@ -2333,6 +2333,10 @@ a[id]{
 	font-size: 16px;
 }
 
+.fieldset-skills .field:last-of-type label{
+	border-bottom: none;
+}
+
 .fieldset-skills .field label input{
 	left: 4px;
 	top: 4px;
