@@ -942,8 +942,6 @@ nav.breadcrumbsli{
 .pagination .pagination-next::after{
 	content: "\2190";
 	margin-right: 0.4em;
-	position: relative;
-	top: -0.1em;
 }
 
 .pagination .pagination-next::after{
