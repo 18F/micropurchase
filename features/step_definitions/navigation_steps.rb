@@ -11,8 +11,7 @@ Then(/^I visit my bids page$/) do
 end
 
 When(/^I visit my profile page$/) do
-  @user = User.find_by(github_id: @github_id)
-  visit edit_user_path
+  visit profile_path
 end
 
 When(/^I visit the auction page$/) do
@@ -72,7 +71,7 @@ Then(/^I should be on the auction page$/) do
 end
 
 Then(/^I should be on my profile page$/) do
-  expect(page.current_path).to eq(edit_user_path)
+  expect(page.current_path).to eq(profile_path)
 end
 
 Then(/^I should be on the bid confirmation page$/) do

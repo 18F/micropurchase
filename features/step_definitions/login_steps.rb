@@ -1,8 +1,6 @@
 When(/^I sign in$/) do
   step "I visit the home page"
-  within(".header-account") do
-    click_on "Login"
-  end
+  click_on "Sign in"
   click_on "Authorize with GitHub"
 end
 
@@ -19,4 +17,10 @@ When(/^I sign in and verify my account information/) do
   step "I sign in"
   step "I visit my profile page"
   click_on "Submit"
+end
+
+When(/^I am the winning bidder$/) do
+  @user = @winning_bidder
+  @github_id = @user.github_id
+  mock_sign_in(@winning_bidder.github_id, @winning_bidder.name)
 end

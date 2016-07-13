@@ -64,7 +64,6 @@
   font-weight: $font-normal;
   padding: 0;
   padding-bottom: $base-padding-lite;
-  text-decoration: underline;
 
   @include media($medium-screen) {
     padding: $base-padding-lite;

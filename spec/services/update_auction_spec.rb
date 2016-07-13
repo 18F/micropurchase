@@ -44,9 +44,11 @@ describe UpdateAuction do
           params = { auction: new_ended_at}
 
           expect(job.run_at).to eq(auction.ended_at)
-          UpdateAuction.new(auction: auction,
-                            params: params,
-                            current_user: auction.user).perform
+          UpdateAuction.new(
+            auction: auction,
+            params: params,
+            current_user: auction.user
+          ).perform
 
           job.reload
           expect(job.run_at).to eq(parsed_new_ended_at)
@@ -68,73 +70,63 @@ describe UpdateAuction do
 
     context 'result is set to accepted' do
       context 'auction is below the micropurchase threshold' do
-        it 'calls the UpdateCapProposalJob' do
+        it 'calls the AcceptAuction' do
           auction = create(
             :auction,
             :below_micropurchase_threshold,
             :winning_vendor_is_small_business,
             :delivery_due_at_expired
           )
-          allow(UpdateCapProposalJob).to receive(:perform_later)
-            .with(auction.id)
-            .and_return(nil)
+          accept_double = double(perform: true)
+          allow(AcceptAuction).to receive(:new).
+            with(auction: auction, credit_card_form_url: "https://some-website.com/pay").
+            and_return(accept_double)
           params = { auction: { result: 'accepted' } }
 
           UpdateAuction.new(auction: auction, params: params, current_user: auction.user).perform
 
-          expect(UpdateCapProposalJob).to have_received(:perform_later).with(auction.id)
-        end
-
-        it 'sets accepted_at' do
-          time = Time.parse('10:00:00 UTC')
-
-          Timecop.freeze(time) do
-            auction = create(:auction, accepted_at: nil)
-            params = { auction: { result: 'accepted' } }
-
-            UpdateAuction.new(auction: auction, params: params, current_user: auction.user).perform
-
-            expect(auction.accepted_at).to eq time
-          end
+          expect(accept_double).to have_received(:perform)
         end
       end
 
       context 'auction is between micropurchase and SAT threshold' do
         context 'winning vendor is a small business' do
-          it 'calls the UpdateCapProposalJob' do
+          it 'calls the UpdateC2ProposalJob' do
             auction = create(
               :auction,
               :between_micropurchase_and_sat_threshold,
               :winning_vendor_is_small_business,
               :delivery_due_at_expired
             )
-            allow(UpdateCapProposalJob).to receive(:perform_later)
-              .with(auction.id)
-              .and_return(nil)
+            accept_double = double(perform: true)
+            allow(AcceptAuction).to receive(:new).
+              with(auction: auction, credit_card_form_url: "https://some-website.com/pay").
+              and_return(accept_double)
             params = { auction: { result: 'accepted' } }
 
             UpdateAuction.new(auction: auction, params: params, current_user: auction.user).perform
 
-            expect(UpdateCapProposalJob).to have_received(:perform_later).with(auction.id)
+            expect(accept_double).to have_received(:perform)
           end
         end
 
         context 'winning vendor is not a small business' do
-          it 'does not call the UpdateCapProposalJob' do
+          it 'does not call the AcceptAuction' do
             auction = create(
               :auction,
               :between_micropurchase_and_sat_threshold,
               :winning_vendor_is_non_small_business,
               :delivery_due_at_expired
             )
-            allow(UpdateCapProposalJob).to receive(:perform_later)
-              .with(auction.id)
-              .and_return(nil)
+            accept_double = double(perform: true)
+            allow(AcceptAuction).to receive(:new).
+              with(auction: auction, credit_card_form_url: "https://some-website.com/pay").
+              and_return(accept_double)
             params = { auction: { result: 'accepted' } }
 
             UpdateAuction.new(auction: auction, params: params, current_user: auction.user).perform
 
-            expect(UpdateCapProposalJob).to_not have_received(:perform_later).with(auction.id)
+            expect(accept_double).not_to have_received(:perform)
           end
         end
       end
@@ -150,45 +142,25 @@ describe UpdateAuction do
         expect { updater.perform }.to change { auction.rejected_at }
       end
 
-      it 'does not set cap_proposal_url' do
+      it 'does not set c2_proposal_url' do
         auction = create(:auction, :delivery_due_at_expired)
         params = { auction: { result: 'rejected' } }
 
         updater = UpdateAuction.new(auction: auction, params: params, current_user: auction.user)
 
-        expect { updater.perform }.to_not change { auction.cap_proposal_url }
-        expect(auction.cap_proposal_url).to eq ""
+        expect { updater.perform }.to_not change { auction.c2_proposal_url }
+        expect(auction.c2_proposal_url).to eq ""
       end
 
-      it 'does not call the CreateCapProposalJob' do
+      it 'does not call AcceptAuction' do
         auction = create(:auction, :delivery_due_at_expired)
         params = { auction: { result: 'rejected' } }
-        allow(CreateCapProposalJob).to receive(:perform_later)
-          .with(auction.id)
-          .and_return(nil)
+        accept_double = double(perform: true)
+        allow(AcceptAuction).to receive(:new).with(auction: auction, credit_card_form_url: "https://some-website.com/pay" ).and_return(accept_double)
 
         UpdateAuction.new(auction: auction, params: params, current_user: auction.user)
 
-        expect(CreateCapProposalJob).to_not have_received(:perform_later).with(auction.id)
-      end
-    end
-
-    context 'auction is for another purchase card' do
-      it 'does not call CreateCapProposalJob' do
-        auction = create(
-          :auction,
-          :below_micropurchase_threshold,
-          :winning_vendor_is_small_business,
-          :delivery_due_at_expired,
-          purchase_card: :other
-        )
-        allow(CreateCapProposalJob).to receive(:perform_later)
-          .with(auction.id)
-        params = { auction: { result: 'accepted' } }
-
-        UpdateAuction.new(auction: auction, params: params,current_user: auction.user).perform
-
-        expect(CreateCapProposalJob).not_to have_received(:perform_later)
+        expect(accept_double).to_not have_received(:perform)
       end
     end
   end

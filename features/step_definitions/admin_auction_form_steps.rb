@@ -6,14 +6,14 @@ When(/^I select the result as accepted$/) do
   select("accepted", from: "auction_result")
 end
 
-Then(/^I should see that the auction form has a CAP Proposal URL$/) do
-  expect(@auction.cap_proposal_url).to be_present
-  field = find_field(I18n.t('simple_form.labels.auction.cap_proposal_url'), disabled: true)
-  expect(field.value).to eq(@auction.cap_proposal_url)
+Then(/^I should see that the auction form has a C2 Proposal URL$/) do
+  expect(@auction.c2_proposal_url).to be_present
+  field = find_field(I18n.t('simple_form.labels.auction.c2_proposal_url'), disabled: true)
+  expect(field.value).to eq(@auction.c2_proposal_url)
 end
 
-Then(/^I should see that the auction form does not have a CAP Proposal URL$/) do
-  field = find_field(I18n.t('simple_form.labels.auction.cap_proposal_url'), disabled: true)
+Then(/^I should see that the auction form does not have a C2 Proposal URL$/) do
+  field = find_field(I18n.t('simple_form.labels.auction.c2_proposal_url'), disabled: true)
   expect(field.value).to eq('')
 end
 
@@ -66,6 +66,8 @@ When(/^I edit the new auction form$/) do
 
   select(@billable.to_s, from: "auction_billable_to")
   select("published", from: "auction_published")
+
+  check(@skill.name)
 end
 
 Then(/^I should see the current auction attributes in the form$/) do
@@ -174,4 +176,21 @@ end
 Then(/^I should see the customer selected for the auction$/) do
   field = find_field('Customer')
   expect(field.value.to_i).to eq(@customer.id)
+end
+
+When(/^I select a skill on the form$/) do
+  check(@skill.name)
+end
+
+Then(/^I should see the skill that I set for the auction selected$/) do
+  expect(page).to have_checked_field(@skill.name)
+end
+
+Then(/^I should see that the form preserves the previously entered values$/) do
+  title = find_field('auction_title')
+  expect(title.value).to eq(@title)
+  description = find_field('auction_description')
+  expect(description.value).to eq(@description)
+  billable = find_field('auction_billable_to')
+  expect(billable.value).to eq(@billable.to_s)
 end

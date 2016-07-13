@@ -1,5 +1,6 @@
 Then(/^I should see the auction$/) do
   expect(page).to have_text(@auction.title)
+  expect(page).to have_text(@auction.sorted_skill_names.join(', '))
 end
 
 Then(/^I should see the auction's (.+)$/) do |field|
@@ -13,15 +14,21 @@ Then(/^I should see the auction's (.+)$/) do |field|
   end
 end
 
-Then(/^I should see that the auction has a CAP Proposal URL$/) do
-  expect(@auction.reload.cap_proposal_url).to be_present
-  within(:css, '.auction-info') do
-    expect(page).to have_content(@auction.cap_proposal_url)
+Then(/^I should see the skills required for the auction$/) do
+  within('.auction-description') do
+    expect(page).to have_content(@auction.sorted_skill_names.to_sentence)
   end
 end
 
-Then(/^I should see that the auction does not have a CAP Proposal URL$/) do
-  expect(@auction.cap_proposal_url).not_to be_present
+Then(/^I should see that the auction has a C2 Proposal URL$/) do
+  expect(@auction.reload.c2_proposal_url).to be_present
+  within(:css, '.auction-info') do
+    expect(page).to have_content(@auction.c2_proposal_url)
+  end
+end
+
+Then(/^I should see that the auction does not have a C2 Proposal URL$/) do
+  expect(@auction.c2_proposal_url).not_to be_present
 end
 
 Then(/^I should see when bidding starts and ends in ET$/) do
@@ -60,10 +67,15 @@ Then(/^I should see the start price for the auction is \$(\d+)$/) do |price|
 end
 
 Then(/^I should see that the auction was accepted$/) do
-  expect(@auction.accepted_at).not_to eq nil
+  expect(@auction.reload.accepted_at).not_to eq nil
   expect(page).to have_content(
     DcTimePresenter.convert_and_format(@auction.accepted_at)
   )
+end
+
+Then(/^I should see that the auction was not accepted$/) do
+  expect(page).not_to have_content("Accepted at")
+  expect(@auction.reload.accepted_at).to eq nil
 end
 
 Then(/^I should see the number of bid for the auction$/) do

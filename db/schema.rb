@@ -11,32 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160706014644) do
+ActiveRecord::Schema.define(version: 20160711175740) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "auctions", force: :cascade do |t|
-    t.string   "issue_url",        default: ""
-    t.integer  "start_price",      default: 3500, null: false
-    t.datetime "started_at",                      null: false
-    t.datetime "ended_at",                        null: false
-    t.string   "title",                           null: false
-    t.text     "description",      default: "",   null: false
-    t.string   "github_repo",      default: ""
-    t.integer  "published",        default: 0
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.text     "summary",          default: "",   null: false
+    t.string   "issue_url",       default: ""
+    t.integer  "start_price",     default: 3500, null: false
+    t.datetime "started_at",                     null: false
+    t.datetime "ended_at",                       null: false
+    t.string   "title",                          null: false
+    t.text     "description",     default: "",   null: false
+    t.string   "github_repo",     default: ""
+    t.integer  "published",       default: 0
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.text     "summary",         default: "",   null: false
     t.datetime "delivery_due_at"
-    t.text     "notes",            default: ""
-    t.string   "billable_to",      default: ""
-    t.integer  "result",           default: 0
-    t.integer  "type",             default: 0
+    t.text     "notes",           default: ""
+    t.string   "billable_to",     default: ""
+    t.integer  "result",          default: 0
+    t.integer  "type",            default: 0
     t.string   "delivery_url"
-    t.string   "cap_proposal_url", default: ""
+    t.string   "c2_proposal_url", default: ""
     t.integer  "user_id"
-    t.integer  "purchase_card",    default: 0,    null: false
+    t.integer  "purchase_card",   default: 0,    null: false
     t.datetime "paid_at"
     t.datetime "accepted_at"
     t.datetime "rejected_at"
@@ -46,6 +46,11 @@ ActiveRecord::Schema.define(version: 20160706014644) do
 
   add_index "auctions", ["customer_id"], name: "index_auctions_on_customer_id", using: :btree
   add_index "auctions", ["user_id"], name: "index_auctions_on_user_id", using: :btree
+
+  create_table "auctions_skills", id: false, force: :cascade do |t|
+    t.integer "auction_id", null: false
+    t.integer "skill_id",   null: false
+  end
 
   create_table "bids", force: :cascade do |t|
     t.integer  "bidder_id"
@@ -90,6 +95,14 @@ ActiveRecord::Schema.define(version: 20160706014644) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
+  create_table "skills", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "name"
+  end
+
+  add_index "skills", ["name"], name: "index_skills_on_name", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "github_id"

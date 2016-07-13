@@ -27,6 +27,7 @@ gem 'foreman'
 gem 'c2', github: '18f/c2-api-client-ruby'
 gem 'jquery-rails-cdn'
 gem 'jquery-rails'
+gem 'selectize-rails'
 
 group :test do
   gem "codeclimate-test-reporter", require: nil

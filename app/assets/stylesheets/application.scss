@@ -2,6 +2,7 @@
 @import 'uswds_overrides/all';
 @import 'c3.min';
 @import 'source/accessible-mega-menu';
+@import 'selectize.bootstrap3';
 
 @import 'core/variables';
 @import 'core/mixins';
@@ -27,9 +28,6 @@
 @import 'components/header';
 @import 'components/insights';
 @import 'components/intro';
-@import 'components/nav-button';
-@import 'components/nav-drawer';
-@import 'components/nav-dropdown';
 @import 'components/ribbon';
 @import 'components/secondary_nav';
 @import 'components/slabs';

@@ -1,33 +1,6 @@
-<nav class="nav-login">
-  <ul class="nav-menu">
-    <li class="nav-item">
-      <a href="javascript:void(0)">
-        Logged in as <%= current_user.name %>
-        <icon class="fa fa-caret-down"></icon>
-      </a>
-      <div class="sub-nav">
-        <ul class="sub-nav-group">
-          <li>
-          <%= link_to(
-            'Edit profile',
-            edit_user_path,
-            class: "usa-button usa-button-outline-inverse") %>
-          </li>
-          <li>
-          <%= link_to(
-            'My bids',
-            bids_path,
-            class: "usa-button usa-button-outline-inverse") %>
-          </li>
-          <%= render partial: current_user.decorate.nav_drawer_admin_link %>
-          <li>
-          <%= link_to(
-            'Logout',
-            logout_path,
-            class: "usa-button usa-button-outline-inverse") %>
-          </li>
-        </ul>
-      </div>
-    </li>
-  </ul>
-</nav>
+<ul class="nav">
+  <li class="nav-link"><%= link_to('Logout', logout_path) %></li>
+  <li class="nav-link"><%= link_to('My bids', bids_path) %></li>
+  <li class="nav-link"><%= link_to( 'Edit profile', profile_path) %></li>
+  <%= render partial: current_user.decorate.nav_drawer_admin_link %>
+</ul>

@@ -39,3 +39,15 @@ Feature: Vendor updates Credit Card Form URL
     And I click on the "Submit" button
     Then I should see "Credit card form url is not a valid URL"
     And my Credit Card Form URL should not be set
+
+  Scenario: Vendor is winning bidder and updates credit card form url
+    Given there is an accepted auction where the winning vendor is missing a payment method
+    And I am the winning bidder
+    And I sign in
+    When I visit the auction page
+    Then I should see that the auction was not accepted
+    When I visit my profile page
+    And I fill in the Credit Card Form URL field on my profile page
+    And I click on the "Submit" button
+    And I visit the auction page
+    Then I should see that the auction was accepted

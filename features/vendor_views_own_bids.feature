@@ -10,8 +10,7 @@ Feature: Vendor views own bids
     Then I should see an "Authorize with GitHub" button
 
     When I click on the "Authorize with GitHub" button
-    Then I should see my name
-    And I should see a "Logout" button
+    Then I should see a "Logout" link
 
   Scenario: User logs in before viewing my bids
     Given I am a user with a verified SAM account

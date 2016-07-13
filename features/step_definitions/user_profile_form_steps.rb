@@ -85,17 +85,6 @@ Then(/^I should see my (.+) in the "([^"]*)" field$/) do |attribute, field|
   expect(field.value).to eq(@user.send(attribute))
 end
 
-Then(/^I should see my changes$/) do
-  @user = User.where(github_id: @github_id).first
-  expect(@user).to_not be_nil
-
-  expect(@user.duns_number).to eq(@new_duns)
-  expect(@user.email).to eq(@new_email)
-  expect(@user.name).to eq(@new_name)
-
-  expect(page).to have_content(@new_name)
-end
-
 Then(/^I enter an? (.+) DUNS in my profile$/) do |duns_type|
   case duns_type
   when 'valid'

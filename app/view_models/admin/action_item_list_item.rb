@@ -45,8 +45,8 @@ class Admin::ActionItemListItem < Admin::BaseViewModel
     auction.result
   end
 
-  def cap_proposal_url
-    auction.cap_proposal_url
+  def c2_proposal_url
+    auction.c2_proposal_url
   end
 
   def paid?

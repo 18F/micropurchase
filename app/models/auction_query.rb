@@ -9,8 +9,8 @@ class AuctionQuery
     :not_evaluated,
     :delivered,
     :not_delivered,
-    :cap_submitted,
-    :cap_not_submitted,
+    :c2_submitted,
+    :c2_not_submitted,
     :paid,
     :not_paid,
     :in_reverse_chron_order,
@@ -33,9 +33,7 @@ class AuctionQuery
   end
 
   def upcoming_auction_count
-    public_index
-      .started_at_in_future
-      .count
+    public_index.started_at_in_future.count
   end
 
   def complete_and_successful
@@ -43,13 +41,20 @@ class AuctionQuery
       .delivery_due_at_expired
       .delivered
       .accepted
-      .cap_submitted
+      .c2_submitted
       .paid
   end
 
-  def rejected
+  def completed
     @relation
-      .rejected
+      .published
+      .delivery_due_at_expired
+      .with_bids_and_bidders
+      .where.not(bids: { id: nil })
+  end
+
+  def rejected
+    @relation.rejected
   end
 
   def payment_pending
@@ -57,7 +62,7 @@ class AuctionQuery
       .delivery_due_at_expired
       .delivered
       .accepted
-      .cap_submitted
+      .c2_submitted
       .not_paid
   end
 
@@ -66,7 +71,7 @@ class AuctionQuery
       .delivery_due_at_expired
       .delivered
       .accepted
-      .cap_not_submitted
+      .c2_not_submitted
       .not_paid
   end
 
@@ -78,16 +83,11 @@ class AuctionQuery
   end
 
   def delivery_past_due
-    @relation
-      .delivery_due_at_expired
-      .not_delivered
+    @relation.delivery_due_at_expired.not_delivered
   end
 
   def public_index
-    @relation
-      .published
-      .with_bids
-      .in_reverse_chron_order
+    @relation.published.with_bids.in_reverse_chron_order
   end
 
   def bids_index(id)
@@ -98,13 +98,19 @@ class AuctionQuery
   end
 
   def public_find(id)
-    @relation
-      .published
-      .find(id)
+    @relation.published.find(id)
   end
 
   def with_bid_from_user(user_id)
     @relation
+      .joins(:bids)
+      .where(bids: { bidder_id: user_id })
+      .uniq
+  end
+
+  def accepted_with_bid_from_user(user_id)
+    @relation
+      .accepted
       .joins(:bids)
       .where(bids: { bidder_id: user_id })
       .uniq
@@ -143,12 +149,12 @@ class AuctionQuery
       where(delivery_url: [nil, ""])
     end
 
-    def cap_submitted
-      where.not(cap_proposal_url: [nil, ""])
+    def c2_submitted
+      where.not(c2_proposal_url: [nil, ""])
     end
 
-    def cap_not_submitted
-      where(cap_proposal_url: [nil, ""])
+    def c2_not_submitted
+      where(c2_proposal_url: [nil, ""])
     end
 
     def paid
@@ -183,7 +189,6 @@ class AuctionQuery
       today = Time.current.to_date
       last_24_hours = today - 24.hours
       next_24_hours = today + 24.hours
-
       where(ended_at: last_24_hours..next_24_hours)
     end
 

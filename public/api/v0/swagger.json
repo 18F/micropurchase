@@ -386,7 +386,9 @@
         "ended_at",
         "created_at",
         "updated_at",
-        "bids"
+        "bids",
+        "skills",
+        "type"
       ],
       "properties": {
         "id": {
@@ -408,6 +410,12 @@
           "type": "string",
           "title": "Description",
           "description": "A markdown-formatted description of the auction. This is usually a continuation from the first paragraph of the summary."
+        },
+        "type": {
+          "type": "string",
+          "title": "Auction type",
+          "description": "The type of the auction. Different types of auctions will have different rules about how you can bid and what information they display.",
+          "enum": ["reverse", "sealed_bid"]
         },
         "issue_url": {
           "title": "GitHub Issue URL",
@@ -488,6 +496,12 @@
           "type": "array",
           "items": {
             "$ref": "#\/definitions\/Bid"
+          }
+        },
+        "skills": {
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       }
@@ -635,7 +649,7 @@
           "type": "object",
           "required": [
             "billable_to",
-            "cap_proposal_url",
+            "c2_proposal_url",
             "notes",
             "delivery_due_at",
             "delivery_url",
@@ -650,9 +664,9 @@
                 "null"
               ]
             },
-            "cap_proposal_url": {
-              "title": "CAP Proposal URL",
-              "description": "The URL for the project in C2",
+            "c2_proposal_url": {
+              "title": "C2 Proposal URL",
+              "description": "The URL for the project's purchase request in C2",
               "format": "url",
               "type": [
                 "string",

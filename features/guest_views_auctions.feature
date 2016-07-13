@@ -4,24 +4,12 @@ Feature: Basic Auction Views
   So that I can learn about micropurchase
 
   Scenario: Visiting the home page
-    Given there is an open auction
+    Given there is an open auction with some skills
     And there is also an unpublished auction
     When I visit the home page
     Then I should see the auction
     And I should not see the unpublished auction
     And there should be meta tags for the index page for 1 open and 0 future auctions
-
-  Scenario: Visiting a auction detail page
-    Given there is an open auction
-    And there is also an unpublished auction
-    When I visit the auction page
-    Then I should see the auction's title
-    And I should see the auction's description
-    And I should see an "Open" status
-    And I should see when the auction started
-    And I should see when the auction ends
-    And I should see a current bid amount
-    And there should be meta tags for the open auction
 
   Scenario: There are no auctions
     When I visit the home page

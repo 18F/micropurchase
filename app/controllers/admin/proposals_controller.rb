@@ -1,7 +1,7 @@
 class Admin::ProposalsController < Admin::BaseController
   def create
-    if should_create_cap_proposal?
-      CreateCapProposalJob.perform_later(auction.id)
+    if should_create_c2_proposal?
+      CreateC2ProposalJob.perform_later(auction.id)
       flash[:success] = I18n.t('controllers.admin.proposals.create.success')
     else
       flash[:error] = I18n.t('controllers.admin.proposals.create.failure')
@@ -12,8 +12,8 @@ class Admin::ProposalsController < Admin::BaseController
 
   private
 
-  def should_create_cap_proposal?
-    auction.cap_proposal_url.blank? &&
+  def should_create_c2_proposal?
+    auction.c2_proposal_url.blank? &&
       auction.purchase_card == "default"
   end
 

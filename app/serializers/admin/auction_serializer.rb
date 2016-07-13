@@ -3,7 +3,7 @@ class Admin::AuctionSerializer < ActiveModel::Serializer
 
   attributes(
     :billable_to,
-    :cap_proposal_url,
+    :c2_proposal_url,
     :created_at,
     :customer,
     :delivery_due_at,
@@ -15,10 +15,12 @@ class Admin::AuctionSerializer < ActiveModel::Serializer
     :issue_url,
     :notes,
     :paid_at,
+    :skills,
     :start_price,
     :started_at,
     :summary,
     :title,
+    :type,
     :updated_at
   )
 
@@ -48,6 +50,10 @@ class Admin::AuctionSerializer < ActiveModel::Serializer
 
   def customer
     find_customer.agency_name
+  end
+
+  def skills
+    object.skills.map(&:name) || []
   end
 
   private

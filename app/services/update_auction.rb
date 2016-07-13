@@ -54,9 +54,11 @@ class UpdateAuction
   end
 
   def perform_approved_auction_tasks
-    if auction_accepted? && auction.accepted_at.nil?
-      auction.accepted_at = Time.current
-      UpdateCapProposalJob.perform_later(auction.id)
+    if auction.accepted? && auction.accepted_at.nil?
+      AcceptAuction.new(
+        auction: auction,
+        credit_card_form_url: winning_bidder.credit_card_form_url
+      ).perform
     end
   end
 
@@ -67,8 +69,7 @@ class UpdateAuction
   end
 
   def vendor_ineligible?
-    auction_accepted? &&
-      !winning_bidder_is_eligible_to_be_paid?
+    auction_accepted? && !winning_bidder_is_eligible_to_be_paid?
   end
 
   def auction_accepted?

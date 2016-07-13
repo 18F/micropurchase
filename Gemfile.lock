@@ -342,6 +342,7 @@ GEM
     sawyer (0.7.0)
       addressable (>= 2.3.5, < 2.5)
       faraday (~> 0.8, < 0.10)
+    selectize-rails (0.12.2)
     sexp_processor (4.7.0)
     shoulda-matchers (3.1.1)
       activesupport (>= 4.0.0)
@@ -452,6 +453,7 @@ DEPENDENCIES
   rubocop
   samwise (~> 0.4.0)
   sass-rails (~> 5.0)
+  selectize-rails
   shoulda-matchers
   simple_form
   sinatra

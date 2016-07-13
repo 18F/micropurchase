@@ -9,6 +9,7 @@ Feature: Admin edits auctions in the admins panel
   Scenario: Updating an auction
     Given there is an open auction
     And there is a client account to bill to
+    And there is a skill in the system
     And I visit the auctions admin page
 
     When I click to edit the auction
@@ -38,3 +39,13 @@ Feature: Admin edits auctions in the admins panel
 
     When I click to edit the auction
     Then I should see the customer selected for the auction
+
+  Scenario: Associating a auction with a skill
+    Given there is an open auction
+    And there is a skill in the system
+    And I visit the auctions admin page
+    When I click to edit the auction
+    And I select a skill on the form
+    And I click on the "Update" button
+    And I click to edit the auction
+    Then I should see the skill that I set for the auction selected

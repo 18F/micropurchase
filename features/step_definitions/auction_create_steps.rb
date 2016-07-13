@@ -53,6 +53,12 @@ Given(/^there is an open auction$/) do
   @auction = FactoryGirl.create(:auction, :with_bidders)
 end
 
+Given(/^there is an open auction with some skills$/) do
+  @auction = FactoryGirl.create(:auction)
+  skills = FactoryGirl.create_list(:skill, 2)
+  @auction.skills << skills
+end
+
 Given(/^there is a budget approved auction$/) do
   @auction = FactoryGirl.create(:auction, :c2_approved, :with_bidders)
 end
@@ -128,15 +134,34 @@ Given(/^the c2 proposal for the auction is not approved$/) do
   @auction.update(c2_approved_at: nil)
 end
 
-Given(/^the auction does not have a cap proposal url$/) do
-  @auction.update(cap_proposal_url: nil)
+Given(/^the auction does not have a c2 proposal url$/) do
+  @auction.update(c2_proposal_url: nil)
 end
 
-Given(/^the auction has a cap proposal url$/) do
-  @auction.update(cap_proposal_url: 'https://www.example.com')
+Given(/^the auction has a c2 proposal url$/) do
+  @auction.update(c2_proposal_url: 'https://www.example.com')
 end
 
 Given(/^there is an auction with an associated customer$/) do
   @customer = FactoryGirl.create(:customer)
   @auction = FactoryGirl.create(:auction, customer: @customer)
+end
+
+Given(/^there is an auction where the winning vendor is missing a payment method$/) do
+  @auction = FactoryGirl.create( :auction, :with_bidders, :evaluation_needed)
+  @winning_bidder = WinningBid.new(@auction).find.bidder
+  @winning_bidder.update(credit_card_form_url: '')
+end
+
+Given(/^there is an accepted auction where the winning vendor is missing a payment method$/) do
+  @auction = FactoryGirl.create(
+    :auction,
+    :with_bidders,
+    :published,
+    result: :accepted,
+    accepted_at: nil,
+    c2_proposal_url: 'https://c2-dev.18f.gov/proposals/2486'
+  )
+  @winning_bidder = WinningBid.new(@auction).find.bidder
+  @winning_bidder.update(credit_card_form_url: '')
 end

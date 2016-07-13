@@ -1,4 +1,4 @@
-class UpdateCapAttributes
+class UpdateC2Attributes
   def initialize(auction)
     @auction = auction
   end
