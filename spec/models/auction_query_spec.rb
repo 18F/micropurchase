@@ -2,15 +2,6 @@ require 'rails_helper'
 describe AuctionQuery do
   let(:query) { AuctionQuery.new }
 
-  describe '#accepted' do
-    let(:accepted_auction) { create(:auction, :accepted) }
-    let!(:rejected_auction) { create(:auction, result: :rejected) }
-
-    it 'should return only accepted auctions' do
-      expect(query.accepted).to match_array([accepted_auction])
-    end
-  end
-
   describe '#completed' do
     it 'returns published auctions with bids where delivery deadline is in past' do
       completed = create(:auction, :complete_and_successful)
@@ -18,101 +9,6 @@ describe AuctionQuery do
       create(:auction, :available)
 
       expect(query.completed).to match_array([completed, payment_pending])
-    end
-  end
-
-  describe '#not_evaluated' do
-    let(:unevaluated_auction) { create(:auction, :running) }
-    let!(:evaluated_auction) { create(:auction, :accepted) }
-    let!(:rejected_auction) { create(:auction, result: :rejected) }
-
-    it 'should only return non-evaluated auctions' do
-      expect(query.not_evaluated).to match_array([unevaluated_auction])
-    end
-  end
-
-  describe '#delivery_due_at_expired' do
-    let!(:running_auction) { create(:auction, :running) }
-    let(:dd_expired_auction) do
-      create(:auction, :delivery_due_at_expired)
-    end
-
-    it 'should return only delivery deadline expired auctions' do
-      expect(query.delivery_due_at_expired).to match_array([dd_expired_auction])
-    end
-  end
-
-  describe '#delivered' do
-    let(:delivered_auction) { create(:auction, :delivered) }
-    let!(:running_auction) { create(:auction, :running) }
-
-    it 'should return only delivered auctions' do
-      expect(query.delivered).to match_array([delivered_auction])
-    end
-  end
-
-  describe '#c2_submitted' do
-    let(:c2_submitted) { create(:auction, :c2_approved) }
-    let!(:running_auction) { create(:auction, :running) }
-
-    it 'should return only c2_submitted auctions' do
-      expect(query.c2_submitted).to match_array([c2_submitted])
-    end
-  end
-
-  describe '#c2_not_submitted' do
-    let!(:c2_submitted) { create(:auction, :c2_approved) }
-    let(:running_auction) { create(:auction, :running) }
-
-    it 'should return only auctions where C2 has not been submitted' do
-      expect(query.c2_not_submitted).to match_array([running_auction])
-    end
-  end
-
-  describe '#paid' do
-    let(:paid_auction) { create(:auction, :paid) }
-    let!(:running_auction) { create(:auction, :running) }
-
-    it 'should only return paid auctions' do
-      expect(query.paid).to match_array([paid_auction])
-    end
-  end
-
-  describe '#not_paid' do
-    let!(:paid_auction) { create(:auction, :paid) }
-    let(:running_auction) { create(:auction, :running) }
-
-    it 'should only return unpaid auctions' do
-      expect(query.not_paid).to match_array([running_auction])
-    end
-  end
-
-  describe '#in_reverse_chron_order' do
-    let(:auctions) { Array.new(5) { create(:auction) } }
-    let(:sorted_auctions) do
-      auctions.sort_by(&:ended_at)
-    end
-
-    it 'should return auctions in reverse chronological order by endtime' do
-      expect(query.in_reverse_chron_order).to match_array(sorted_auctions)
-    end
-  end
-
-  describe '#published' do
-    let(:published) { create(:auction, :published) }
-    let!(:unpublished) { create(:auction, :unpublished) }
-
-    it 'should only return published auctions' do
-      expect(query.published).to match_array([published])
-    end
-  end
-
-  describe '#unpublished' do
-    let!(:published) { create(:auction, :published) }
-    let(:unpublished) { create(:auction, :unpublished) }
-
-    it 'should only return unpublished auctions' do
-      expect(query.unpublished).to match_array([unpublished])
     end
   end
 
@@ -244,18 +140,6 @@ describe AuctionQuery do
       query = AuctionQuery.new
 
       expect(query.active_auction_count).to eq 1
-    end
-  end
-
-  describe '#closed_within_last_24_hours' do
-    it 'returns auctions with an end datetime that occured today' do
-      Timecop.freeze(Time.parse("19:00:00 UTC")) do
-        _old_auction = create(:auction, ended_at: 2.days.ago)
-        newly_closed_auction = create(:auction, ended_at: 2.hours.ago)
-        _future_auction = create(:auction, ended_at: 2.days.from_now)
-
-        expect(AuctionQuery.new.closed_within_last_24_hours).to eq [newly_closed_auction]
-      end
     end
   end
 

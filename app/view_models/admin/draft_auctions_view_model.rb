@@ -10,6 +10,6 @@ class Admin::DraftAuctionsViewModel < Admin::BaseViewModel
   private
 
   def unpublished_auctions
-    AuctionQuery.new.unpublished.all
+    Auction.unpublished
   end
 end

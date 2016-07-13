@@ -24,7 +24,15 @@ class InsightsViewModel
     ]
   end
 
+  def sorted_skills_count
+    skills_count.sort_by { |skill_count| -skill_count.evaluated_auction_count }
+  end
+
   private
+
+  def skills_count
+    Skill.all.map { |skill| SkillPresenter.new(skill) }
+  end
 
   def published_auction_stat
     {
@@ -111,10 +119,10 @@ class InsightsViewModel
   end
 
   def accepted_auctions_count
-    @_accepted_auctions_count ||= AuctionQuery.new.published.accepted.count
+    @_accepted_auctions_count ||= Auction.published.accepted.count
   end
 
   def published_auction_count
-    @_published_auction_count ||= AuctionQuery.new.published.count
+    @_published_auction_count ||= Auction.published.count
   end
 end
