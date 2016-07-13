@@ -2630,6 +2630,10 @@ a[id]{
 	padding: 8px;
 }
 
+.layout-people table tr.primary-contact td{
+	background: lemonchiffon;
+}
+
 .layout-people table td.col-contracting-officer-false{
 	color: #ddd;
 }
