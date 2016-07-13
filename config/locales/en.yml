@@ -46,7 +46,7 @@ en:
     auction_mailer:
       losing_bidder_notification:
         para_1: "We regret to inform you that the auction period for %{auction_title} recently
-          closed and that your bid %{bid_amount} was not the lowest bid. For more information please see the auction details
+          closed and that your bid %{amount} was not the lowest bid. For more information please see the auction details
           here %{auction_url}. Better luck next time!"
         para_2: "And speaking of next time, keep an eye out for more open and upcoming auctions here: micropurchase.18f.gov."
         sign_off: "Sincerely,"
