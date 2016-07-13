@@ -968,8 +968,10 @@ nav.breadcrumbsli{
 .pagination .preposition{ 
 	font-style: italic;
 	font-family: Merriweather, Georgia;
-	font-size: 0.8em;
-	margin-right: 0.1em;
+	font-size: 0.9em;
+	margin-right: 0.125em;
+	margin-left: 0.1em;
+
 }
 
 .pagination .pagination-signpost{
@@ -2089,6 +2091,11 @@ a[id]{
 	border-bottom: 1px solid #eee;
 	border-right: 1px solid #eee;
 	padding-left: 20px;
+}
+
+.layout-auctions-bids main .wrapper table tbody tr:last-of-type td{
+	border-bottom: none;
+	
 }
 
 .layout-my-auctions main .wrapper table td{
