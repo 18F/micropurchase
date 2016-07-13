@@ -915,6 +915,56 @@ nav.breadcrumbsli{
 
 /* @end */
 
+/* @group nav.pagination */
+
+.pagination{ 
+	margin: 2em 0 0; 
+	font-size: 16px; 
+}
+
+.pagination .pagination-prev,
+.pagination .pagination-next{
+	border: 1px solid #ccc;
+	padding: 4px 8px;
+	text-decoration: none;
+	border-radius: 3px;
+	color: #555; 
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.pagination .pagination-prev:hover,
+.pagination .pagination-next:hover{
+	border-color: #888;
+}
+
+.pagination .pagination-prev::before,
+.pagination .pagination-next::after{
+	content: "\2190";
+	margin-right: 0.4em;
+	position: relative;
+	top: -0.1em;
+}
+
+.pagination .pagination-next::after{
+	content: "\2192";
+	margin-right: 0;
+	margin-left: 0.4em;
+}
+
+.pagination .preposition{ 
+	font-style: italic;
+	font-family: Merriweather, Georgia;
+	font-size: 0.8em;
+	margin-right: 0.1em;
+}
+
+.pagination .pagination-signpost{
+	margin: 0 1em;
+}
+
+/* @end */
+
 /* @group .site-footer */
 
 .site-footer{
@@ -2531,8 +2581,10 @@ a[id]{
 
 .layout-people main .wrapper > h1{
 	margin-bottom: 0;
-	font-size: 36px;
-	font-weight: 600;
+	font-size: 48px;
+	font-weight: 300;
+	letter-spacing: -1.3px;	
+	display: inline-block;
 	line-height: 1.125em;
 	color: #383838;
 	letter-spacing: -1px;
@@ -2549,8 +2601,8 @@ a[id]{
 }
 
 .layout-people section h1+.button{
-	padding: 6px 10px;
-	font-size: 16px;
+	padding: 4px 8px;
+	font-size: 14px;
 	margin-top: -4px;
 	margin-left: 0.6em;
 }
@@ -2574,6 +2626,19 @@ a[id]{
 .layout-people table th{
 	border: 1px solid #ddd;
 	padding: 8px;
+}
+
+.layout-people table td.col-contracting-officer-false{
+	color: #ddd;
+}
+
+.layout-people .col-github-id,
+.layout-people .col-contracting-officer,
+.layout-people .col-actions{ width: 6em; }
+
+.layout-people .col-name{
+	width: 16em;
+	
 }
 
 /* @end */
