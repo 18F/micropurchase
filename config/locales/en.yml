@@ -45,11 +45,10 @@ en:
   mailers:
     auction_mailer:
       losing_bidder_notification:
-        para_1: "This email is to inform you that your bid for %{auction_title}
-          was not the winning bid. For more information please see the auction details
-          here %{auction_url}"
-        para_2: "Thank you for your participation and we look forward to working
-          with you in the future."
+        para_1: "We regret to inform you that the auction period for %{auction_title} recently
+          closed and that your bid was not the lowest bid. For more information please see the auction details
+          here %{auction_url}. Better luck next time!"
+        para_2: "And speaking of next time, keep an eye out for more open and upcoming auctions here: micropurchase.18f.gov."
         sign_off: "Sincerely,"
         from: "The 18F Micro-purchase team"
         subject: "18F Micro-purchase Auction Status"
@@ -65,7 +64,7 @@ en:
         para_4: "Thanks for participating and we look forward to seeing what you can do!"
         sign_off: "Sincerely,"
         from: "The 18F Micro-purchase team"
-        subject: "18F Micro-purchase Auction Status: You have the winning bid!"
+        subject: "Congratulations: You have the winning bid!"
       auction_accepted_customer_notification:
         subject: "Your auction has been successfully delivered!"
         para_1: "Your auction \"%{auction_title}\" has been successfully delivered! The
@@ -77,10 +76,9 @@ en:
         from: "The 18F Micro-purchase team"
       winning_bidder_missing_payment_method:
         subject: "Please update your profile so Micro-purchase can pay you for your great work!"
-        para_1: "A payment of %{amount} is pending release regarding work you
-          recently completed on \"%{auction_title}\". In order to take receipt of payment, you
-          will need to first add a credit card URL to your profile. Please go to
-          %{profile_url} to update this information."
+        para_1: "18F wants to pay you for your work! Our team recently accepted your work on \"%{auction_title}\". 
+          We'd like to pay you %{amount}, but we need you to tell us where we can enter our credit card information. 
+          To get paid, please go to %{profile_url} and enter a payment URL."
         para_2: "Questions? Please contact us at microupurchase@gsa.gov"
         sign_off: "Sincerely,"
         from: "The 18F Micro-purchase team"
