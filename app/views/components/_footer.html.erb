@@ -1,48 +1,57 @@
-<footer class="usa-footer usa-footer-medium usa-sans" role="contentinfo">
-  <div class="usa-grid">
-    <div class="usa-footer-primary-section">
+<footer class="usa-footer usa-footer-slim" role="contentinfo">
+  <div class="usa-grid usa-footer-return-to-top">
+    <a href="#">Return to top</a>
+  </div>
+
+  <div class="usa-footer-primary-section">
+    <div class="usa-grid-full">
+      <nav class="usa-footer-nav usa-width-two-thirds">
       <ul class="usa-unstyled-list">
-        <li class="usa-footer-primary-link-item">
+        <li class="usa-width-one-sixth usa-footer-primary-content">
         <%= link_to 'About',
           'https://18f.gsa.gov/2015/10/13/open-source-micropurchasing/',
           class: 'usa-footer-primary-link' %>
         </li>
-        <li class="usa-footer-primary-link-item">
+        <li class="usa-width-one-sixth usa-footer-primary-content">
         <%= link_to 'Feedback',
           'https://docs.google.com/forms/d/15ycigLrTS7Ld4iVPgIMN-U5dMDFy6TnrHGOSkgk7qTI/viewform?c=0&w=1',
           class: 'usa-footer-primary-link' %>
         </li>
-        <li class="usa-footer-primary-link-item">
+        <li class="usa-width-one-sixth usa-footer-primary-content">
         <%= link_to 'Policies',
           faq_path,
           class: 'usa-footer-primary-link' %>
         </li>
-        <li class="usa-footer-primary-link-item">
+        <li class="usa-width-one-sixth usa-footer-primary-content">
         <%= link_to 'API Docs',
           'https://pages.18f.gov/micropurchase-api-docs/',
           class: 'usa-footer-primary-link' %>
         </li>
-        <li class="usa-footer-primary-link-item">
-        <%= link_to 'Marketplace Insights',
+        <li class="usa-width-one-sixth usa-footer-primary-content">
+        <%= link_to 'Insights',
           insights_path,
           class: 'usa-footer-primary-link' %>
         </li>
       </ul>
-    </div>
-
-    <div class="usa-footer-secondary_section">
-      <div class="usa-footer-logo usa-width-one-half">
-        <%= image_tag "18F-Logo-2016-Blue.svg", class: 'usa-footer-slim-logo-img', alt: 'Logo image' %>
-        <h3 class="usa-footer-slim-logo-heading">Micro-purchase</h3>
-      </div>
-
-      <div class="usa-footer-contact-links usa-width-one-half">
-        <address>
-          <a href="mailto:micropurchase@gsa.gov">micropurchase@gsa.gov</a>
+      </nav>
+      <div class="usa-width-one-third">
+        <div class="usa-footer-primary-content usa-footer-contact_info">
           <a href="https://github.com/18F/micropurchase/">
-            <i class="fa fa-github"></i> View Our Code on GitHub
+            <i class="fa fa-github"></i> View on GitHub
           </a>
-        </address>
+        </div>
+        <div class="usa-footer-primary-content usa-footer-contact_info">
+          <%= mail_to 'micropurchase@gsa.gov' %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="usa-footer-secondary_section">
+    <div class="usa-grid">
+      <div class="usa-footer-logo">
+        <%= image_tag "18F-Logo-2016-Blue.svg", class: 'usa-footer-slim-logo-img logo-img', alt: 'Logo image' %>
+        <div class="usa-footer-slim-logo-heading">Micro-purchase</div>
       </div>
     </div>
   </div>

@@ -27,10 +27,6 @@ class UserPresenter < SimpleDelegator
     "components/null"
   end
 
-  def nav_drawer_submenu_partial
-    "components/user_nav_drawer_submenu"
-  end
-
   def welcome_message_partial
     'components/null'
   end
