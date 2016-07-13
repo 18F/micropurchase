@@ -1,25 +1,27 @@
-<header class="usa-site-header" role="banner">
-  <%= render partial: 'components/disclaimer' %>
-  <nav class="usa-site-navbar">
-    <div class="usa-grid header-table">
-      <div class="logo header-row" class="logo">
-        <a class="header-home-link" href="/" accesskey="1" title="Home" aria-label="Home">
-          <div class="header-image">
-            <%= image_tag '18F-Logo-2016-Blue.svg', alt: '18f-logo' %>
+<%= render partial: 'components/disclaimer' %>
+<header class="header">
+<div class="usa-grid">
+  <div class="header-wrap">
+    <div class="usa-grid-one-half">
+      <div class="header-title">
+        <a href="/" class="logo" title="Home">
+          <div class="logo">
+            <%= image_tag '18F-Logo-2016-Blue.svg', alt: '18f-logo', class: 'logo-img' %>
+            <div class="title-wrapper">
+              <div class="title">Micro-purchase</div>
+              <div class="subtitle">A marketplace for the federal government’s open source projects</div>
+            </div>
           </div>
-          <h1 class="header-title-text">
-            <%= title ||= "Micro-purchase" %>
-          </h1>
         </a>
-        <button class="button-nav-drawer" class="usa-button usa-button-outline-inverse" data-drawer-toggle="menu">
-          <span class="fa fa-bars"></span>
-        </button>
-
-        <div class="header-account">
-          <%= render partial: current_user.decorate.nav_drawer_partial,
-            locals: { current_user: current_user } %>
-        </div>
       </div>
     </div>
-  </nav>
+
+    <div class="usa-grid-one-half">
+      <nav class="header-side">
+        <%= render partial: current_user.decorate.nav_drawer_partial,
+          locals: { current_user: current_user } %>
+      </nav>
+    </div>
+  </div>
+</div>
 </header>

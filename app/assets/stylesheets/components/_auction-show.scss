@@ -30,7 +30,6 @@
 
   .usa-button-outline {
     margin-left: $site-margins;
-    text-decoration: none;
   }
 
   .auction-subtitles {
@@ -120,15 +119,6 @@
   font-size: 2.5rem;
   margin-bottom: $base-padding-lite;
   margin-top: 1rem;
-
-  a {
-    text-decoration: underline;
-
-    &:hover,
-    &:focus {
-      text-decoration: none;
-    }
-  }
 
   span {
     font-weight: $font-normal;

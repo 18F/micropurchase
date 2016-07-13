@@ -19,10 +19,6 @@ class UserPresenter < SimpleDelegator
     sam_status_presenter.auctions_index_flash_message(flash)
   end
 
-  def mobile_nav_partial
-    "components/user_nav_drawer_submenu"
-  end
-
   def nav_drawer_partial
     "components/user_nav_drawer"
   end

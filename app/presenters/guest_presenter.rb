@@ -7,10 +7,6 @@ class GuestPresenter
     nil
   end
 
-  def mobile_nav_partial
-    "components/guest_mobile_nav"
-  end
-
   def nav_drawer_partial
     "components/guest_nav_drawer"
   end
