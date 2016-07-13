@@ -622,15 +622,13 @@ main div.wrap > form { max-width: 576px; }
 	
 }
 
-
-
 /* @end */
 
 /* @group .site-header */
 
 .notice{
 	background: #faf5d2;
-	color: #8a490e;
+	color: #333;
 	padding: 16px;
 	border: 1px solid #e7d49b;
 	border-radius: 4px;
@@ -2198,21 +2196,20 @@ a[id]{
 }
 
 .layout-auctions-edit.with-customized-timeline .branch .fieldset-date-time{
-	border: none;
-	background: none;
-	padding: 0;
-	padding-top: 28px;
+	width: auto;
+	float: none;
+	border: 1px solid #ccc;
+	padding: 16px;
 	margin-bottom: 16px;
 }
 
 .with-customized-timeline .branch .fieldset-date-time > legend{
-	left: 0;
-	top: 0;
+	position: static;
 	display: block;
-	z-index: 1;
 	font-size: inherit;
 	font-weight: 600;
 	color: #333;
+	margin: 0;
 }
 
 .branch+.help-text{
@@ -2323,6 +2320,51 @@ a[id]{
 .fieldset-payment{
 	padding-top: 4px;
 	background: white;
+}
+
+.fieldset-skills{
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.fieldset-skills .field.field-checkbox{
+	margin: 0;
+	padding: 0;
+}
+
+.fieldset-skills .field label{
+	border-bottom: 1px solid #eee;
+	padding: 4px 4px 4px 28px;
+	display: block;
+	font-size: 16px;
+}
+
+.fieldset-skills .field label input{
+	left: 4px;
+	top: 4px;
+}
+
+.fieldset-skills legend{
+	background: none;
+}
+
+.fieldset-skills .button{
+	position: absolute;
+	left: 4em;
+	top: -1px;
+	padding: 2px 5px;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.fieldset-skills-wrapper{
+	max-height: 6em;
+	overflow: auto;
+	background: white;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	
 }
 
 .fieldset-payment{

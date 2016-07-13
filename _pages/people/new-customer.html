@@ -1,0 +1,47 @@
+---
+title: Admins new
+excerpt: None
+---
+
+{% include head.html %}
+<body class="no-js layout-people-new">
+  <a class="a-skip-to-main" href="#main">Skip to main content</a>
+  {% include site-header.html %}
+  <main role="main" id="main">
+    <div class="wrapper">
+      <form action="{{site.baseurl}}/people/">
+      <a href="{{site.baseurl}}/people" class="a-back">Cancel and return</a>
+        <h1>New admin</h1>
+        <div class="field field-name">
+          <label>
+            <span class="label-text">Name</span>
+            <input type="text" name="">
+          </label>
+        </div>
+        <div class="field field-email">
+          <label>
+            <span class="label-text">Email</span>
+            <input type="email" name="">
+          </label>
+        </div>
+        <div class="field field-select field-agency">
+          <label>
+            <span class="label-text">Agency/Office</span>
+            <input type="number" name="">
+          </label>
+        </div>
+        <div class="field field-checkbox field-primary-contact">
+          <label>
+            <input type="checkbox" name="">
+            <span class="label-text">Primary contact</span>
+            <span class="help-text">If checked and another primary contact already exists for this agency or office, that customer will no longer be marked as the primary contact.</span>
+          </label>
+        </div>
+        <footer>
+          <button class="button">Save</button>
+        </footer>
+      </form>
+    </div>
+  </main>
+  {% include site-footer.html %}
+</body>

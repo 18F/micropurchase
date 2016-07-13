@@ -35,7 +35,7 @@ $(document).ready(function() {
     renderSiteHeaderSignIn()
   });
 
-  $('.layout-auctions-edit .fieldset-start-date-time .field-date input').change(function(){
+  $('.fieldset-start-date-time .field-date input').change(function(){
     var startDate = $(this).val();
     console.log(startDate);
     $('.fieldset-end-date-time .fieldset-date-time-summary .date')
@@ -44,7 +44,7 @@ $(document).ready(function() {
       .text(startDate);
   });
 
-    $('.layout-auctions-edit .fieldset-start-date-time .field-time-hours select').change(function(){
+    $('.fieldset-start-date-time .field-time-hours select').change(function(){
     var startTime = $(this).find('option:selected').attr("value");
     $('.fieldset-end-date-time .fieldset-date-time-summary .time-hours')
       .text(startTime);
@@ -52,7 +52,7 @@ $(document).ready(function() {
       .text(startTime);
   });
 
-  $('.layout-auctions-edit .fieldset-start-date-time .field-time-minutes select').change(function(){
+  $('.fieldset-start-date-time .field-time-minutes select').change(function(){
     var startTime = $(this).find('option:selected').attr("value");
     $('.fieldset-end-date-time .fieldset-date-time-summary .time-minutes')
       .text(startTime);
@@ -60,7 +60,7 @@ $(document).ready(function() {
       .text(startTime);
   });
 
-  $('.layout-auctions-edit .fieldset-start-date-time .field-time-meridiem select').change(function(){
+  $('.fieldset-start-date-time .field-time-meridiem select').change(function(){
     var startTime = $(this).find('option:selected').attr("value");
     $('.fieldset-end-date-time .fieldset-date-time-summary .time-meridiem')
       .text(startTime);
@@ -69,7 +69,7 @@ $(document).ready(function() {
   });
 
   $('.a-customize-timeline').click(function(){
-    $('.layout-auctions-edit').addClass('with-customized-timeline');
+    $('body').addClass('with-customized-timeline');
   });
 
 
