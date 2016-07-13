@@ -10,11 +10,20 @@ excerpt: None
   <main role="main" id="main">
     <div class="wrapper">
       <form action="{{site.baseurl}}/auctions/draft">
+        <div class="notice">
+          <p>The following fields cannot be blank</p>
+          <ul>
+            <li><a href="#title">Title</a></li>
+            <li><a href="#description-and-acceptance-criteria">Description and acceptance criteria</a></li>
+          </ul>
+          <p>Additionally, an auction&rsquo;s <strong>end date</strong> must occur after its <strong>start date.</strong></p>
+        </div>
         <div class="fields">
-          <div class="field field-title">
+          <div class="field field-title is-error">
             <label>
               <span class="label-text">Title</span>
-              <input type="text" name="" value="Open Opportunities: Create Agency Admin User Role" placeholder="title">
+              <input id="title" type="text" name="" value="Open Opportunities: Create Agency Admin User Role" placeholder="title">
+              <p class="error-text">Cannot be blank.</p>
             </label>
           </div>
           <fieldset class="fieldset fieldset-date-time fieldset-start-date-time">
@@ -199,12 +208,13 @@ excerpt: None
               <p class="help-text">Please provide a brief description of the auction, in 250 characters or less. This text is used across the site in auction previews. Use <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Markdown</a> for simple formatting.</p>
             </label>
           </div>
-          <div class="field field-description-and-acceptance-criteria">
+          <div class="field field-description-and-acceptance-criteria is-error">
             <label>
               <span class="label-text">Description and acceptance criteria</span>
-              <textarea rows="15">Registered users on micropurchase.18f.gov may bid to deliver the requirements in this auction. The lowest bidder at the time the auction closes shall receive the award. The awarded bidder shall have five business days to deliver the requirements. Upon successful completion of the requirements, 18F shall pay the winning bidder. See our rules page.
+              <textarea rows="15" id="description-and-acceptance-criteria">Registered users on micropurchase.18f.gov may bid to deliver the requirements in this auction. The lowest bidder at the time the auction closes shall receive the award. The awarded bidder shall have five business days to deliver the requirements. Upon successful completion of the requirements, 18F shall pay the winning bidder. See our rules page.
               </textarea>
               <p class="help-text">Please provide a brief description of the project as a whole (or link to your README), the task at hand, and acceptance criteria. Use <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Markdown</a> for simple formatting.</p>
+              <span class="error-text">Cannot be blank</span>
             </label>
           </div> 
           <fieldset class="fieldset fieldset-github">
