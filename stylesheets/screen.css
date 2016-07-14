@@ -2166,8 +2166,6 @@ color: white;
 	color: inherit;
 	line-height: 1.2em;
 	margin-bottom: 0;
-	
-
 }
 
 .auction-place-bid form{
@@ -2701,7 +2699,10 @@ color: white;
 	
 }
 
-body[class^="layout-auctions"] section h1,
+.layout-auctions-drafts section h1,
+.layout-auctions-index section h1,
+.layout-auctions-needs-attention section h1,
+.layout-auctions-closed section h1,
 .layout-people-index section h1,
 .layout-people-show section h1,
 .layout-settings main section > h1{
