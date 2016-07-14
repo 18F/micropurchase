@@ -18,7 +18,7 @@ Then(/^I should see "([^"]+)" for the user in the "([^"]+)" column$/) do |value,
   fail 'Unrecognized column: #{column}' if index.nil?
   css = "tr td:nth-child(#{index+1})"
 
-  within(:xpath, '/html/body/div/div/div/div/table[2]') do
+  within(:xpath, '/html/body/div/div/table[2]') do
     within(css) do
       expect(page).to have_content(value)
     end

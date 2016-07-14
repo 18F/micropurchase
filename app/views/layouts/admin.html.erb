@@ -12,19 +12,16 @@
   <%= favicon_link_tag %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body class='<%= controller_class %>'>
+<body>
+  <%= render partial: 'components/nav_header',
+    locals: { current_user: current_user,
+    title: "Micro-purchase (admin)" } %>
 
-  <div class="container">
-    <%= render partial: 'components/nav_header', locals: { current_user: current_user, title: "Micro-purchase (admin)" } %>
-
-    <div class="content-wrapper">
-      <div class="usa-grid">
-        <%= render partial: 'admin/secondary_nav', locals: { view_model: @view_model } %>
-      <div>
-        <%= render "flashes" %>
-        <%= yield %>
-      </div>
+  <div class="usa-grid">
+    <%= render partial: 'admin/secondary_nav', locals: { view_model: @view_model } %>
+    <div>
+      <%= render "flashes" %>
+      <%= yield %>
     </div>
-  </div>
-</body>
+  </body>
 </html>
