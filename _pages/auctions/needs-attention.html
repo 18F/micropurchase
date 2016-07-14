@@ -10,8 +10,47 @@ excerpt: none
     <div class="h-feed">
       <div class="wrapper">
       {% include auctions-index-header.html %}
+      <section class="section-draft">
+        <h1>Drafts</h1>
+        <table>
+          <thead>
+            <tr>
+              <td class="col-title">Title</td>
+              <td class="col-starting">Starting date</td>
+              <td class="col-ending">Ending date</td>
+              <td class="col-delivery">Delivery date</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Stand-alone modular utilisation</a></td>
+              <td class="col-ending">2 days ago</td>
+              <td class="col-status">You won!</td>
+              <td class="col-actions">Issue pull request</td>
+            </tr>
+            <tr>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Switchable system-worthy</a></td>
+              <td class="col-ending">22 hours</td>
+              <td class="col-status">You have the low bid.</td>
+              <td class="col-actions">None</td>
+            </tr>
+            <tr>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Visionary motivating website</a></td>
+              <td class="col-ending">7/25/2016</td>
+              <td class="col-status">You've been outbid!</td>
+              <td class="col-actions">Place bid</td>
+            </tr>
+            <tr>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Something wicked this way comes</a></td>
+              <td class="col-ending">7/26/2016</td>
+              <td class="col-status">Bid placed</td>
+              <td class="col-actions">None</td>
+            </tr>
+          </tbody>
+        </table>      
+      </section>
       <section class="section-delivery">
-        <h1>Delivery</h1>
+        <h1>Being delivered</h1>
         <table>
           <thead>
             <tr>
@@ -35,7 +74,7 @@ excerpt: none
         </table>
       </section>
       <section class="section-payment">
-        <h1>Payment</h1>
+        <h1>Payment needed</h1>
         <table>
           <thead>
             <tr>
