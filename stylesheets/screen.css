@@ -2682,11 +2682,9 @@ color: white;
 
 /* @group layout-people */
 
-.layout-people-index main .wrapper,
-.layout-people-show main .wrapper{ padding-top: 10px; }
-
 .layout-people-index main .wrapper > h1,
-.layout-people-show main .wrapper > h1{
+.layout-people-show main .wrapper > h1,
+.layout-settings main .wrapper > h1{
 	letter-spacing: -2px;
 	font-size: 48px;
 	font-weight: 300;
@@ -2705,7 +2703,8 @@ color: white;
 
 body[class^="layout-auctions"] section h1,
 .layout-people-index section h1,
-.layout-people-show section h1{
+.layout-people-show section h1,
+.layout-settings main section > h1{
 	font-weight: 600;
 	font-size: 21px;
 	line-height: 1.3em;
@@ -2720,7 +2719,8 @@ body[class^="layout-auctions"] section:first-of-type h1{
 	
 }
 
-.layout-people-index section h1+.button{
+.layout-people-index section h1+.button,
+.layout-settings main section > h1+.button{
 	padding: 4px 8px;
 	font-size: 14px;
 	margin-top: -4px;
@@ -2909,5 +2909,24 @@ body[class^="layout-auctions"] table th,
 
 
 /* @end */
+
+/* @end */
+
+/* @group layout-settings */
+
+.layout-settings article{
+	border-bottom: 1px solid #eee;	
+	padding: 4px 0;
+	max-width: 400px;
+	position: relative;
+}
+
+.layout-settings article a{
+	font-size: 14px;
+	position: absolute;
+	right: 0;
+	top: 4px;
+	
+}
 
 /* @end */
