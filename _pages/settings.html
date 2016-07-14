@@ -1,0 +1,51 @@
+---
+excerpt: none
+---
+
+{% include head.html %}
+<body class="no-js layout-settings">
+  <a class="a-skip-to-main" href="#main">Skip to main content</a>
+  {% include site-header.html %}
+  <main role="main" id="main">
+    <div class="wrapper">
+      <h1>Settings</h1>
+      <section>
+        <h1>Purchase cards</h1>
+        <a href="{{site.baseurl}}/organizations/new/" class="button">Add new</a>
+        <ul>
+          <li>Purchase card 1</li>
+          <li>Purchase card 2</li>
+        </ul>
+      </section>
+      <section>
+        <h1>Customer organizations</h1>
+        <a class="button" href="{{site.baseurl}}/agencies/new">Add new</a>
+        <article>
+          <h1>CSS</h1>
+          <a href="#">Edit</a>
+        </article>
+        <article>
+          <h1>HTML</h1>
+          <a href="#">Edit</a>
+        </article>
+      </section>
+      <section class="settings-skills">
+        <h1>Skills</h1>
+        <a class="button" href="{{site.baseurl}}/skills/new">Add new</a>
+        <article>
+          <h1>CSS</h1>
+          <a href="#">Edit</a>
+        </article>
+        <article>
+          <h1>HTML</h1>
+          <a href="#">Edit</a>
+        </article>
+        <article>
+          <h1>Javascript</h1>
+          <a href="#">Edit</a>
+        </article>
+      </section> 
+    </div>
+  </main>
+  {% include site-footer.html %}
+</body>

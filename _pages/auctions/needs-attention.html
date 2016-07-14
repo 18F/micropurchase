@@ -1,0 +1,74 @@
+---
+excerpt: none
+---
+
+{% include head.html %}
+<body class="no-js layout-auctions-needs-attention">
+  <a class="a-skip-to-main" href="#main">Skip to main content</a>
+  {% include site-header.html %}
+  <main role="main" id="main">
+    <div class="h-feed">
+      <div class="wrapper">
+      {% include auctions-index-header.html %}
+      <section class="section-delivery">
+        <h1>Delivery</h1>
+        <table>
+          <thead>
+            <tr>
+              <td class="col-title">Title</td>
+              <td class="col-delivery-deadline">Delivery deadline</td>
+              <td class="col-status">Status</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Stand-alone modular utilisation</a></td>
+              <td class="col-ending">2 days ago</td>
+              <td class="col-status">Past due</td>
+            </tr>
+            <tr>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Switchable system-worthy</a></td>
+              <td class="col-ending">22 hours from now</td>
+              <td class="col-status">Evaluation needed</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="section-payment">
+        <h1>Payment</h1>
+        <table>
+          <thead>
+            <tr>
+              <td class="col-title">Title</td>
+              <td class="col-accepted">Accepted</td>
+              <td class="col-status">Status</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Stand-alone modular utilisation</a></td>
+              <td class="col-accepted">2 days ago</td>
+              <td class="col-status">Payment needed</td>
+            </tr>
+            <tr>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Switchable system-worthy</a></td>
+              <td class="col-accepted">22 hours</td>
+              <td class="col-status">Payment needed</td>
+            </tr>
+            <tr>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Visionary motivating website</a></td>
+              <td class="col-accepted">You've been outbid!</td>
+              <td class="col-status">Payment pending</td>
+            </tr>
+            <tr>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Something wicked this way comes</a></td>
+              <td class="col-accepted">Bid placed</td>
+              <td class="col-status">Payment pending</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+  </main>
+  {% include site-footer.html %}
+</body>

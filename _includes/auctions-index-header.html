@@ -1,0 +1,35 @@
+<header class="h-feed-header">
+  <h1 class="p-title">Auctions</h1>
+  <a href="{{site.baseurl}}/auctions/new" class="button">Add new</a>
+  <nav class="nav-auctions">
+    <a class="nav-auctions-drafts" href="{{site.baseurl}}/auctions/drafts">Drafts <span class="count">3</span></a>
+    <a class="nav-auctions-index" href="{{site.baseurl}}/">Open <span class="count">13</span></a>
+    <a class="nav-auctions-needs-attention" href="{{site.baseurl}}/auctions/needs-attention">Needs attention <span class="count">6</span></a>
+    <a class="nav-auctions-closed" href="{{site.baseurl}}/auctions/closed">Closed <span class="count">12</span></a>
+  </nav>
+  <form>
+    <h1>Sort</h1>
+    <div class="field field-select">
+      <label>
+        <span class="label-text">Sort by</span>
+        <select>
+          <option>Skills</option>
+          <option>Agency</option>
+          <option>Project</option>
+          <option>Time remaining</option>
+          <option>Current bid</option>
+        </select>
+      </label>
+    </div>
+    <div class="field field-select">
+      <label>
+        <span class="label-text">Sort order</span>
+        <select>
+          <option>Ascending</option>
+          <option>Descending</option>
+        </select>
+      </label>
+    </div>
+    <button>Submit</button>
+  </form>
+</header> 
