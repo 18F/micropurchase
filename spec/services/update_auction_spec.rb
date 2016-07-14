@@ -30,28 +30,30 @@ describe UpdateAuction do
       end
       context 'job already enqueued' do
         it 'updates the AuctionEndedJob to run_at the new ended_at' do
-          auction = build(:auction, :delivery_due_at_expired)
-          SaveAuction.new(auction).perform
-          job = Delayed::Job.first
+          Timecop.freeze(Time.local(2016)) do
+            auction = build(:auction)
+            SaveAuction.new(auction).perform
+            job = Delayed::Job.first
 
-          new_ended_at = {
-            'ended_at' => '2016-10-26',
-            'ended_at(1i)' => '01',
-            'ended_at(2i)' => '15',
-            'ended_at(3i)' => 'PM'
-          }
-          parsed_new_ended_at = DateTimeParser.new(new_ended_at, 'ended_at').parse
-          params = { auction: new_ended_at}
+            new_ended_at = {
+              'ended_at' => '2016-10-26',
+              'ended_at(1i)' => '01',
+              'ended_at(2i)' => '15',
+              'ended_at(3i)' => 'PM'
+            }
+            parsed_new_ended_at = DateTimeParser.new(new_ended_at, 'ended_at').parse
+            params = { auction: new_ended_at}
 
-          expect(job.run_at).to eq(auction.ended_at)
-          UpdateAuction.new(
-            auction: auction,
-            params: params,
-            current_user: auction.user
-          ).perform
+            expect(job.run_at).to eq(auction.ended_at)
+            UpdateAuction.new(
+              auction: auction,
+              params: params,
+              current_user: auction.user
+            ).perform
 
-          job.reload
-          expect(job.run_at).to eq(parsed_new_ended_at)
+            job.reload
+            expect(job.run_at).to eq(parsed_new_ended_at)
+          end
         end
       end
     end
