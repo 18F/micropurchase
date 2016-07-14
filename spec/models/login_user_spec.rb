@@ -2,6 +2,28 @@ require 'rails_helper'
 
 describe LoginUser do
   describe '#perform' do
+    context 'user does not have name in github' do
+      it 'creates the user without a name' do
+        github_id = '1234'
+        auth_hash = {
+          uid: github_id,
+          info: {
+            nickname: 'github_username',
+            name: nil,
+            email: 'test@example.com'
+          }
+        }
+
+        login_user = LoginUser.new(auth_hash, {})
+        login_user.perform
+
+        user = User.last
+        expect(user.github_login).to eq 'github_username'
+        expect(user.name).to eq ''
+        expect(user.email).to eq 'test@example.com'
+      end
+    end
+
     context 'user does not have github username, name, or email' do
       it 'updates from auth hash' do
         github_id = '1234'
@@ -92,22 +114,22 @@ describe LoginUser do
         expect(session[:user_id]).to eq(user.id)
       end
     end
-  end
 
-  def auth_hash
-    OmniAuth::AuthHash.new(
-      provider: 'github',
-      uid: github_id_from_oauth,
-      info: {
-        nickname: 'github_username',
-        name: 'Kane',
-        email: 'email@example.com',
-        image: 'github-image.png'
-      }
-    )
-  end
+    def auth_hash
+      OmniAuth::AuthHash.new(
+        provider: 'github',
+        uid: github_id_from_oauth,
+        info: {
+          nickname: 'github_username',
+          name: 'Kane',
+          email: 'email@example.com',
+          image: 'github-image.png'
+        }
+      )
+    end
 
-  def github_id_from_oauth
-    '12345'
+    def github_id_from_oauth
+      '12345'
+    end
   end
 end
