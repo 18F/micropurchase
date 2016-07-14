@@ -16,17 +16,15 @@ Feature: Vendor edits profile
     And I click on the "Submit" button
     Then I should be on the home page
 
-    When I click on the "Edit profile" link
+    When I click on the "My profile" link
     Then I should see "doris@example.com" in the "Email Address" field
     And I should see "Doris Doogooder" in the "Name" field
 
     When I click on the "Logout" link
     And I click on the "Sign in" link
-    Then I should see an "Authorize with GitHub" button
 
-    When I click on the "Authorize with GitHub" button
-    And I visit my profile page
-    And I should see "doris@example.com" in the "Email Address" field
+    When I visit my profile page
+    Then I should see "doris@example.com" in the "Email Address" field
     And I should see "Doris Doogooder" in the "Name" field
 
   Scenario: User without a DUNS number views and edits their information
@@ -55,5 +53,5 @@ Feature: Vendor edits profile
     Then I should see an alert that "Email is invalid"
 
     When I visit the home page
-    And I click on the "Edit profile" button
+    And I click on the "My profile" link
     Then I should see my email in the "Email Address" field

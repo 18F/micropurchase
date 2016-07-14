@@ -1,7 +1,6 @@
 When(/^I sign in$/) do
   step "I visit the home page"
   click_on "Sign in"
-  click_on "Authorize with GitHub"
 end
 
 Given(/^I am signed in$/) do
