@@ -7,6 +7,29 @@ $(document).ready(function() {
   
   $('body').removeClass('no-js');
 
+  $('.nav-page select').change(function(){
+    window.location.href = $(this).find('option:selected').attr("value");
+  });
+
+  var userType = Cookies.get('mpp-user-type');
+  if (userType) {
+    $('.nav-user select option[value="'+userType+'"]').prop('selected', true);
+  } else {
+    Cookies.set('mpp-user-type', 'admin');
+    $('.nav-user select option[value="admin"]').prop('selected', true);
+  }
+
+  $('.nav-user select').change(function(){
+    var userType = $(this).find('option:selected').attr("value");
+    Cookies.set('mpp-user-type', userType);
+    $('body')
+      .removeClass('user-type-vendor')
+      .removeClass('user-type-admin')
+      .addClass('user-type-' + userType);
+  });
+
+  $('.nav-user select').change();
+
   $('input').focus(function(){
     $(this).parents('.field').addClass('is-focused')
   });

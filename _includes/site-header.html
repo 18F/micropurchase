@@ -1,3 +1,34 @@
+<header class="prototype-header">
+  <div class="nav-page field field-select">
+    <span class="label-text">Page</span>
+    <select>
+      <optgroup label="auctions">
+        <option value="{{site.baseurl}}">Index (home)</option>
+        <option value="{{site.baseurl}}/my-auctions">My auctions</option>
+        <option value="{{site.baseurl}}/auctions/new">New</option>
+        <option value="{{site.baseurl}}/auctions/draft">Draft</option>
+        <option value="{{site.baseurl}}/auctions/show">Show</option>
+        <option value="{{site.baseurl}}/auctions/bids">Bids</option>
+      </optgroup>
+      <optgroup label="people">
+        <option value="{{site.baseurl}}/people">Index</option>
+        <option value="{{site.baseurl}}/profile">Profile edit</option>
+        <option value="{{site.baseurl}}/people/show">Profile show</option>
+        <option value="{{site.baseurl}}/people/new-admin">New admin</option>
+        <option value="{{site.baseurl}}/people/new-admin">New customer</option>
+      </optgroup>
+    </select>
+  </div>
+  <div class="nav-user field field-select">
+    <label>
+      <span class="label-text">User</span>
+      <select>
+        <option value="admin">Admin</option>
+        <option value="vendor">Vendor</option>
+      </select>
+    </label>
+  </div>
+</header>
 <header class="site-header">
   <div class="wrapper">
     <h1 class="logo">
@@ -10,10 +41,10 @@
     <nav class="nav-header-nav">
       <div class="signed-in">
         <ul>
-          <li><a href="{{site.baseurl}}/profile">My profile</a></li>
-          <li><a href="{{site.baseurl}}/people">People</a></li>
-          <li><a href="{{site.baseurl}}/my-auctions">My auctions</a></li>
-          <li><a class="a-sign-out" href="#">Sign out</a></li>
+          <li class="nav-my-profile"><a href="{{site.baseurl}}/profile">My profile</a></li>
+          <li class="nav-people"><a href="{{site.baseurl}}/people">People</a></li>
+          <li class="nav-my-auctions"><a href="{{site.baseurl}}/my-auctions">My auctions</a></li>
+          <li class="nav-sign-out"><a class="a-sign-out" href="#">Sign out</a></li>
         </ul>        
       </div>
       <div class="signed-out">
