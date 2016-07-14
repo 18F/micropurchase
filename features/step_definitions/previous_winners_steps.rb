@@ -7,7 +7,6 @@ Then(/^I should see a section with two donut charts$/) do
   expect(page).to have_selector("#chart-donuts")
 
   expect(page).to have_selector("#donut-by-repo")
-  expect(page).to have_selector("#donut-by-language")
 end
 
 Then(/^I should see a Winning bid section$/) do

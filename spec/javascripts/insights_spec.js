@@ -80,32 +80,6 @@ describe('Insights', function () {
     })
   })
 
-  describe('donut 2 (Languages) data', function () {
-    beforeEach(function(){
-      settings = charts.settings.donut2
-      matcher = {
-        "cols":[
-          ["google sheets",1],
-          ["ruby",2],
-          ["python",2],
-          ["yml",1],
-          [],
-          ["go",1]
-        ]
-      }
-    })
-
-    it('is returning an object', function(){
-      expect(settings).toEqual(jasmine.any(Object))
-      expect(settings.cols).toEqual(jasmine.any(Object))
-      expect(settings.cols).toEqual(jasmine.any(Array))
-    })
-
-    it('has an array with the correct objects', function(){
-      expect(settings).toEqual(matcher)
-    })
-  })
-
   describe('chart 2 (Average winning bid) data', function () {
     beforeEach(function(){
       settings = charts.settings.chart2

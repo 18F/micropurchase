@@ -1,4 +1,6 @@
 class Auction < ActiveRecord::Base
+  include AuctionScopes
+
   attr_accessor :due_in_days
 
   belongs_to :user

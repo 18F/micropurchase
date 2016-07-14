@@ -1,0 +1,39 @@
+.striped-table {
+  $table-border: 1px solid $color-gray-lightest;
+  $table-background: lighten($color-gray-lightest, 12%);
+  $table-header-background: lighten($table-background, 10%);
+  $table-hover-background: darken($table-background, 5%);
+  $table-stripe-background: darken($table-background, 2%);
+
+  border: $table-border;
+  border-collapse: separate;
+  border-left: 0;
+  border-spacing: 0;
+  width: 100%;
+
+  tbody {
+    background-color: $table-background;
+  }
+
+  tr:hover > td {
+    background-color: $table-hover-background;
+  }
+
+  tr:nth-child(even) {
+    background-color: $table-stripe-background;
+  }
+
+  th {
+    background-color: $table-header-background;
+    border: none;
+    border-bottom: 0;
+    border-left: 1px solid $color-gray-lightest;
+  }
+
+  td {
+    border-bottom: 0;
+    border: none;
+    border-left: 1px solid $color-gray-lightest;
+    border-top: 1px solid $color-gray-lightest;
+  }
+}

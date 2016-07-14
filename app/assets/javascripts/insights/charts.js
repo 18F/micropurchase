@@ -205,30 +205,11 @@
             pattern: ['#1C304A','#00CFFF','#046B99','#B3EFFF']
           }
         });
-      },
-      donut2: function donut2 (settings) {
-        c3.generate({
-          bindto: "#donut-by-language",
-          data: {
-            columns: settings.cols ? settings.cols : [
-              ['software', 0],
-              ['non-software', 120]
-            ],
-            type : 'donut'
-          },
-          donut: {
-            title: 'Projects by language'
-          },
-          color: {
-            pattern: ['#046B99','#B3EFFF','#1C304A','#00CFFF']
-          }
-        });
       }
     },
     create: {
       chart2: function chart2 (auctions) {
         var settings = {};
-
         settings.cols = [['bids_dates'], ['bids'], ['means_dates'],['means']];
 
          _.each(auctions, function(auction){
@@ -238,11 +219,9 @@
             settings.cols[0].push(microp.format.date(auction.ended_at));
             settings.cols[1].push(+auction.winning_bid.amount);
           }
-
         });
 
         var pairedDates = _.zip(settings.cols[0],settings.cols[1]);
-
 
         pairedDates = _.groupBy(pairedDates, function(num){
           return num[0];
@@ -373,35 +352,6 @@
 
         settings.cols = _.map(repos, function(value, key) {
           return [key,value];
-        });
-
-        return settings;
-      },
-      donut2: function donut2(auctions) {
-        var settings = {};
-        settings.cols = [];
-
-        var repos = [
-          {'name': '18F/fedramp-micropurchase', 'language': 'google sheets'},
-          {'name': '18F/micropurchase', 'language': 'ruby'},
-          {'name': '18F/openopps-platform', 'language': 'ruby'},
-          {'name': '18F/playbook-in-action', 'language': 'python'},
-          {'name': '18F/procurement-glossary', 'language': 'yml'},
-          {'name': '18F/tock', 'language': 'python'},
-          {'name': '18F/travel-form', 'language':undefined},
-          {'name': '18F/deduplicate-tock-float', 'language': undefined},
-          {'name': '18F/aws-broker', 'language': 'go'}
-        ];
-
-        repos = d3.nest()
-          .key(function(d){ return d.language; })
-          .rollup(function(d) {return d.length;})
-          .map(repos);
-
-        settings.cols = _.map(repos, function(value, key) {
-          if ( key !== 'undefined' &&  key !== undefined) {
-            return [key,value];
-          } else { return []; }
         });
 
         return settings;
