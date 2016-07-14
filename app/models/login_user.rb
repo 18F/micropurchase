@@ -25,7 +25,8 @@ class LoginUser < Struct.new(:auth_hash, :session)
     attribute = field.to_sym
 
     if user.send(attribute).blank?
-      user.send("#{attribute}=", auth_hash[:info][attribute])
+      value = auth_hash[:info][attribute] || ''
+      user.send("#{attribute}=", value)
     end
   end
 end

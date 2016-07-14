@@ -57,11 +57,7 @@ When(/^I fill in the (.+) field on my profile page with "([^"]+)"$/) do |attribu
   @new_values ||= { }
   @new_values[attribute] = value
 
-  step("I fill in the \"user_#{attribute}\" field with \"#{value}\"")
-end
-
-When(/^I fill in the "(.+)" field with "([^"]*)"$/) do |field, value|
-  fill_in(field, with: value)
+  step("I fill the \"user_#{attribute}\" field with \"#{value}\"")
 end
 
 Then(/^the new value should be stored as my (.+)$/) do |attribute|

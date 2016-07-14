@@ -6,4 +6,3 @@ end
 When(/^I fill the "([^"]*)" field with "([^"]*)"$/) do |field, value|
   fill_in(field, with: value)
 end
-

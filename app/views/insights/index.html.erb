@@ -24,9 +24,31 @@
   <div>
     <h1>Projects</h1>
     <h2 class="h4">Where can you get involved?</h2>
+    <div class="usa-width-one-half">
+      <table class="striped-table">
+        <thead>
+          <tr>
+            <th>Skill</th>
+            <th>Total Auctions</th>
+            <th>Total Successful</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @view_model.sorted_skills_count.each do |skill| %>
+            <tr>
+              <td><%= skill.name %></td>
+              <td><%= skill.evaluated_auction_count %></td>
+              <td><%= skill.accepted_auction_count %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
     <div class="usa-width-one-half" id="donut-by-repo"></div>
-    <div class="usa-width-one-half" id="donut-by-language"></div>
   </div>
+</section>
+<section class="usa-grid" id="chart-donuts">
+  <div>
   <p>All micro-purchase auctions are for open source code contributions to
   public code repositories (repos) hosted on GitHub. Auction winners submit
   code to a repository for review, and if the code passes the acceptance

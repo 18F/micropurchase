@@ -1,13 +1,9 @@
-html,
-body {
-  height: 100%;
+.site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
-.container {
-  min-height: 100%;
-  position: relative;
-}
-
-.content-wrapper {
-  padding-bottom: $footer-height;
+.site-content {
+  flex: 1;
 }

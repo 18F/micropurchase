@@ -1,6 +1,7 @@
+<h2>New customer</h2>
+
 <div class="customer-form">
   <%= simple_form_for [:admin, @view_model.new_record] do |f| %>
-    <%= render partial: 'form', locals: { f: f, customer: @view_model } %>
-    <%= f.submit class: 'usa-button usa-button-outline' %>
+    <%= render partial: 'form', locals: { f: f } %>
   <% end %>
 </div>

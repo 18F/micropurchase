@@ -42,7 +42,7 @@ Then(/^I should see an email link to get in touch$/) do
 end
 
 Then(/^I should see a link to the github repository$/) do
-  expect(page).to have_link('View Our Code on GitHub')
+  expect(page).to have_link('View on GitHub')
 end
 
 Then(/^I will not see a warning I must be an admin$/) do

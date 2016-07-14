@@ -22,4 +22,8 @@ class Admin::BaseViewModel
   def new_auction_nav_class
     ''
   end
+
+  def skills_nav_class
+    ''
+  end
 end

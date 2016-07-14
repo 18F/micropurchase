@@ -1,5 +1,5 @@
 class CheckApproval < C2ApiWrapper
-  def initialize(auctions = AuctionQuery.new.unpublished)
+  def initialize(auctions = Auction.unpublished)
     @auctions = auctions
   end
 

@@ -16,6 +16,6 @@ class Statistics::AverageAuctionLength
   end
 
   def published_auctions
-    @_published_auctions ||= AuctionQuery.new.published
+    @_published_auctions ||= Auction.published
   end
 end

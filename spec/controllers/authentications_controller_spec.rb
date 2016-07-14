@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe AuthenticationsController do
+describe AuthenticationsController do
   describe '#create' do
     it 'should store the github uid in the session' do
       request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:github]

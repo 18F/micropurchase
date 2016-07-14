@@ -1,0 +1,22 @@
+<h2>Skills</h2>
+
+<table class="usa-table-borderless">
+  <thead>
+    <tr>
+      <th scope="col">Skill name</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @view_model.skills.each do |skill| %>
+      <tr>
+        <td><%= skill.name %></td>
+        <td><%= link_to('Edit', edit_admin_skill_path(skill)) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Add skill',
+  new_admin_skill_path,
+  class: 'usa-button usa-button-outline' %>

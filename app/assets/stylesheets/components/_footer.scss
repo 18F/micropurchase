@@ -1,105 +1,30 @@
-.usa-footer-medium {
-  @media only screen and (max-width: $small-screen) {
-    display: none;
-  }
-
+.usa-footer-primary-section,
+.usa-footer-secondary_section {
   background: $primary-darkest;
-  bottom: 0;
-  -webkit-box-flex: 0;
-  -ms-flex: none;
-  -webkit-flex: none;
-  flex: none;
-  position: absolute;
-  width: 100%;
-
-  .usa-grid {
-    padding-bottom: $site-margins;
-  }
 }
 
 .usa-footer-primary-section {
-  background-color: transparent;
-  float: right;
-
-  @include media($medium-screen) {
-    width: inherit;
+  .usa-footer-primary-link,
+  .usa-footer-contact_info,
+  a {
+    color: $color-white;
+    font-weight: $font-normal;
+    font-size: $base-font-size;
   }
 }
 
 .usa-footer-secondary_section {
-  background-color: transparent;
-}
-
-.usa-footer-logo img {
-  width: $logo-18f;
+  color: $color-white;
+  font-size: $lead-font-size;
+  padding-top: 0;
 }
 
 .usa-footer-slim-logo-heading {
-  color: $color-white;
-  direction: inline-block;
-  font-size: 2rem;
+  padding-left: 0;
   font-weight: $font-light;
-  letter-spacing: -.5px;
-  margin-top: .5rem;
-  padding-left: .5rem;
-  padding-top: 0;
-  vertical-align: middle;
-
-  @include media($medium-screen) {
-    font-size: 3rem;
-  }
 }
 
-.usa-footer .usa-footer-primary-link-item {
-  display: block;
-
-  @include media($medium-screen) {
-    display: inline-block;
-  }
-}
-
-.usa-footer .usa-footer-primary-link {
-  color: $color-white;
-  font-size: $h4-font-size;
-  font-weight: $font-normal;
-  padding: 0;
-  padding-bottom: $base-padding-lite;
-
-  @include media($medium-screen) {
-    padding: $base-padding-lite;
-  }
-
-  &:hover,
-  &:focus {
-    text-decoration: none;
-  }
-}
-
-.usa-footer address {
-  text-align: left;
-
-  @include media($medium-screen) {
-    text-align: right;
-  }
-}
-
-.usa-footer address a {
-  color: $color-purple-pale;
-  display: block;
-  font-size: $h6-font-size;
-  margin-bottom: $base-padding-lite;
-  margin-right: .4em;
-  text-decoration: none;
-
-  @include media($medium-screen) {
-    display: inline-block;
-    margin-bottom: 0;
-  }
-
-  &:hover,
-  &:focus,
-  &:visited,
-  &:active {
-    text-decoration: underline;
-  }
+.logo-img {
+  width: $logo-18f;
+  margin-right: .5em;
 }
