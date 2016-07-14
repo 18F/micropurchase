@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     resources :action_items, only: [:index]
     resources :drafts, only: [:index]
     resources :proposals, only: [:create]
+    resources :skills, only: [:index, :new, :create, :edit, :update]
   end
 
   # Temporarily send JSON requests to web to API

@@ -1,0 +1,4 @@
+<h2>New skill</h2>
+<%= simple_form_for [:admin, @view_model.record] do |f| %>
+  <%= render partial: 'form', locals: { f: f } %>
+<% end %>

@@ -62,6 +62,14 @@ When(/^I visit the previous winners page$/) do
   visit winners_path
 end
 
+When(/^I visit the skills admin page$/) do
+  visit admin_skills_path
+end
+
+Then(/^I should be on the skills admin page$/) do
+  expect(page.current_path).to eq(admin_skills_path)
+end
+
 Then(/^I should be on the home page$/) do
   expect(page.current_path).to eq("/")
 end

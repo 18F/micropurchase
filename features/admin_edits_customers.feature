@@ -9,8 +9,8 @@ Feature: Admin Edits Customers
 
   Scenario: Admin sees a new customer agency form
     When I visit the admin customers page
-    Then I should see a "Create a New Customer" button
-    When I click on the "Create a New Customer" button
+    Then I should see a "Add customer" button
+    When I click on the "Add customer" button
     And I should see an "Agency name" text field
     And I should see a "Contact name" text field
     And I should see an "Email" text field
@@ -18,7 +18,7 @@ Feature: Admin Edits Customers
 
   Scenario: I save a client without specifying a name
     When I visit the admin customers page
-    And I click on the "Create a New Customer" button
+    And I click on the "Add customer" button
     And I click on the "Create Customer" button
     Then the customer should not be created
     And I should be on the new admin customer form
@@ -26,7 +26,7 @@ Feature: Admin Edits Customers
 
   Scenario: I successfully create a new Customer
     When I visit the admin customers page
-    And I click on the "Create a New Customer" button
+    And I click on the "Add customer" button
     And I fill in values for a new customer
     And I click on the "Create Customer" button
     Then the customer should be created
