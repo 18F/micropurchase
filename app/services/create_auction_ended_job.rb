@@ -4,12 +4,14 @@ class CreateAuctionEndedJob
   end
 
   def perform
-    Delayed::Job.enqueue(
-      job,
-      run_at: auction.ended_at,
-      queue: 'auction_ended',
-      auction_id: auction.id
-    )
+    if auction_not_over?
+      Delayed::Job.enqueue(
+        job,
+        run_at: auction.ended_at,
+        queue: 'auction_ended',
+        auction_id: auction.id
+      )
+    end
   end
 
   private
@@ -18,5 +20,9 @@ class CreateAuctionEndedJob
 
   def job
     AuctionEndedJob.new(auction.id)
+  end
+
+  def auction_not_over?
+    !AuctionStatus.new(auction).over?
   end
 end
