@@ -38,7 +38,7 @@ class Admin::EditAuctionViewModel < Admin::BaseViewModel
   end
 
   def published_options
-    if auction.c2_approved_at.present?
+    if closed? || auction.c2_approved_at.present?
       Auction.publisheds.keys.to_a
     else
       ['unpublished']
@@ -61,5 +61,9 @@ class Admin::EditAuctionViewModel < Admin::BaseViewModel
 
   def default_date_time
     @_default_date_time ||= DefaultDateTime.new.convert
+  end
+
+  def closed?
+    AuctionStatus.new(auction).over?
   end
 end
