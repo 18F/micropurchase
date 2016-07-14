@@ -1,0 +1,28 @@
+---
+title: Payment methods new
+excerpt: None
+---
+
+{% include head.html %}
+<body class="no-js layout-payment-methods-new">
+  <a class="a-skip-to-main" href="#main">Skip to main content</a>
+  {% include site-header.html %}
+  <main role="main" id="main">
+    <div class="wrapper">
+      <form action="{{site.baseurl}}/settings/">
+      <a href="{{site.baseurl}}/settings" class="a-back">Cancel and return</a>
+        <h1>New payment method</h1>
+        <div class="field field-name">
+          <label>
+            <span class="label-text">Name</span>
+            <input type="text" name="">
+          </label>
+        </div>
+        <footer>
+          <button class="button">Save</button>
+        </footer>
+      </form>
+    </div>
+  </main>
+  {% include site-footer.html %}
+</body>

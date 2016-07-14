@@ -666,12 +666,12 @@ main div.wrap > form { max-width: 576px; }
 
 .user-type-admin .site-header .nav-header-nav .nav-my-profile,
 .user-type-vendor .site-header .nav-header-nav .nav-people,
-.user-type-vendor.layout-auctions-index main header .button,
-.user-type-vendor.layout-auctions-index main header .field,
-.user-type-vendor.layout-auctions-index .auction.is-draft,
-.user-type-vendor.layout-auctions-index .auction .button{ display: none; }
+.user-type-vendor .nav-auctions-drafts,
+.user-type-vendor .h-feed-header .button,
+.user-type-vendor .auction .button,
+.user-type-vendor header .nav-settings{ display: none !important; }
 
-.user-type-vendor.layout-auctions-index main header nav{
+{
 	margin-top: -2em;
 }
 
@@ -848,6 +848,15 @@ main div.wrap > form { max-width: 576px; }
 	vertical-align: middle;
 }
 
+.signed-in .site-header .signed-out,
+.site-header .signed-in{
+	display: none;
+}
+
+.signed-in .site-header .signed-in{
+	display: block;
+	margin-top: -2px;
+}
 
 
 .site-header .nav-header-nav li a{ color: white; }
@@ -1824,7 +1833,7 @@ a[id]{
 
 
 .h-feed-header{
-	margin-bottom: 2em;
+	margin-bottom: 1em;
 }
 
 .h-feed-header::after{
@@ -1852,8 +1861,16 @@ a[id]{
 .h-feed-header nav{
 	position: relative;
 	margin-top: 5px;
+	margin-bottom: 16px;
 	border-top: 1px solid #555;
 	padding-top: 12px;
+	display: none;
+	
+}
+
+.user-type-admin.signed-in .h-feed-header nav,
+.user-type-vendor.signed-in .h-feed-header nav{
+	display: block;
 }
 
 .h-feed-header nav a{ 

@@ -39,11 +39,9 @@ $(document).ready(function() {
 
   function renderSiteHeaderSignIn(){
     if (Cookies.get('mpp-signed-in')) {
-      $('.site-header .signed-in').show();
-      $('.site-header .signed-out').hide();
+      $('body').addClass('signed-in');
     } else {
-      $('.site-header .signed-in').hide();
-      $('.site-header .signed-out').show();
+      $('body').removeClass('signed-in');
     }
   }
 
@@ -54,7 +52,7 @@ $(document).ready(function() {
     renderSiteHeaderSignIn()
   });
   $('.site-header .a-sign-out').click(function(){ 
-    Cookies.remove('mpp-signed-in'); 
+    Cookies.remove('mpp-signed-in');
     renderSiteHeaderSignIn()
   });
 
