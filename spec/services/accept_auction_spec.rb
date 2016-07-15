@@ -12,7 +12,7 @@ describe AcceptAuction do
             .with(auction: auction)
             .and_return(mailer_double)
 
-          AcceptAuction.new(auction: auction, credit_card_form_url: 'example.com').perform
+          AcceptAuction.new(auction: auction, payment_url: 'example.com').perform
 
           expect(AuctionMailer).to have_received(:auction_accepted_customer_notification)
             .with(auction: auction)
@@ -26,7 +26,7 @@ describe AcceptAuction do
           auction = create(:auction, :with_bidders, customer: customer)
           allow(AuctionMailer).to receive(:auction_accepted_customer_notification)
 
-          AcceptAuction.new(auction: auction, credit_card_form_url: 'example.com').perform
+          AcceptAuction.new(auction: auction, payment_url: 'example.com').perform
 
           expect(AuctionMailer).not_to have_received(:auction_accepted_customer_notification)
         end
@@ -38,7 +38,7 @@ describe AcceptAuction do
         auction = create(:auction, :with_bidders, customer: nil)
         allow(AuctionMailer).to receive(:auction_accepted_customer_notification)
 
-        AcceptAuction.new(auction: auction, credit_card_form_url: 'example.com').perform
+        AcceptAuction.new(auction: auction, payment_url: 'example.com').perform
 
         expect(AuctionMailer).not_to have_received(:auction_accepted_customer_notification)
       end
@@ -52,7 +52,7 @@ describe AcceptAuction do
           .with(auction: auction)
           .and_return(mailer_double)
 
-        AcceptAuction.new(auction: auction, credit_card_form_url: '').perform
+        AcceptAuction.new(auction: auction, payment_url: '').perform
 
         expect(AuctionMailer).to have_received(:winning_bidder_missing_payment_method)
           .with(auction: auction)
@@ -65,7 +65,7 @@ describe AcceptAuction do
           auction = create(:auction, :with_bidders)
           allow(UpdateC2ProposalJob).to receive(:perform_later)
 
-          AcceptAuction.new(auction: auction, credit_card_form_url: 'example.com').perform
+          AcceptAuction.new(auction: auction, payment_url: 'example.com').perform
 
           expect(UpdateC2ProposalJob).to have_received(:perform_later).with(auction.id)
         end
@@ -76,7 +76,7 @@ describe AcceptAuction do
           auction = create(:auction, :with_bidders, purchase_card: :other)
           allow(UpdateC2ProposalJob).to receive(:perform_later)
 
-          AcceptAuction.new(auction: auction, credit_card_form_url: 'test.com').perform
+          AcceptAuction.new(auction: auction, payment_url: 'test.com').perform
 
           expect(UpdateC2ProposalJob).not_to have_received(:perform_later).with(auction.id)
         end
@@ -89,7 +89,7 @@ describe AcceptAuction do
         Timecop.freeze(time) do
           auction = create(:auction, :with_bidders, accepted_at: nil)
 
-          AcceptAuction.new(auction: auction, credit_card_form_url: 'test.com').perform
+          AcceptAuction.new(auction: auction, payment_url: 'test.com').perform
 
           expect(auction.accepted_at).to eq time
         end

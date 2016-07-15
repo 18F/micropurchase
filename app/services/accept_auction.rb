@@ -1,13 +1,13 @@
 class AcceptAuction
-  attr_reader :auction, :credit_card_form_url
+  attr_reader :auction, :payment_url
 
-  def initialize(auction:, credit_card_form_url: '')
+  def initialize(auction:, payment_url: '')
     @auction = auction
-    @credit_card_form_url = credit_card_form_url
+    @payment_url = payment_url
   end
 
   def perform
-    if credit_card_form_url.blank?
+    if payment_url.blank?
       send_winning_vendor_email
     else
       auction.accepted_at = Time.current

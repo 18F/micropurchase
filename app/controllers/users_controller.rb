@@ -2,8 +2,7 @@ class UsersController < ApplicationController
   before_action :require_authentication
 
   def edit
-    @user = current_user
-    @user.decorate.sam_status_message_for(flash)
+    @view_model = EditUserViewModel.new(current_user)
   end
 
   def update
@@ -11,7 +10,7 @@ class UsersController < ApplicationController
     if updater.save
       redirect_to root_path
     else
-      @user = updater.user
+      @view_model = EditUserViewModel.new(current_user)
       flash.now[:error] = updater.errors
       render :edit
     end

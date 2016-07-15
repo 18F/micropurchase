@@ -1,7 +1,3 @@
-Then(/^there should be meta tags for the edit profile form$/) do
-  expect(page).to have_css("title", visible: false, text: "18F Micro-purchase - Edit user: #{@user.name}")
-end
-
 Then(/^there should be meta tags for the closed auction$/) do
   expect(page).to have_css(
     "title", visible: false, text: "18F Micro-purchase - #{@auction.title}"

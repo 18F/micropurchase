@@ -15,7 +15,7 @@ end
 When(/^I sign in and verify my account information/) do
   step "I sign in"
   step "I visit my profile page"
-  click_on "Submit"
+  click_on "Update"
 end
 
 When(/^I am the winning bidder$/) do

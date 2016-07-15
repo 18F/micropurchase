@@ -81,7 +81,7 @@ describe UpdateAuction do
           )
           accept_double = double(perform: true)
           allow(AcceptAuction).to receive(:new).
-            with(auction: auction, credit_card_form_url: "https://some-website.com/pay").
+            with(auction: auction, payment_url: "https://some-website.com/pay").
             and_return(accept_double)
           params = { auction: { result: 'accepted' } }
 
@@ -102,7 +102,7 @@ describe UpdateAuction do
             )
             accept_double = double(perform: true)
             allow(AcceptAuction).to receive(:new).
-              with(auction: auction, credit_card_form_url: "https://some-website.com/pay").
+              with(auction: auction, payment_url: "https://some-website.com/pay").
               and_return(accept_double)
             params = { auction: { result: 'accepted' } }
 
@@ -122,7 +122,7 @@ describe UpdateAuction do
             )
             accept_double = double(perform: true)
             allow(AcceptAuction).to receive(:new).
-              with(auction: auction, credit_card_form_url: "https://some-website.com/pay").
+              with(auction: auction, payment_url: "https://some-website.com/pay").
               and_return(accept_double)
             params = { auction: { result: 'accepted' } }
 
@@ -158,7 +158,7 @@ describe UpdateAuction do
         auction = create(:auction, :delivery_due_at_expired)
         params = { auction: { result: 'rejected' } }
         accept_double = double(perform: true)
-        allow(AcceptAuction).to receive(:new).with(auction: auction, credit_card_form_url: "https://some-website.com/pay" ).and_return(accept_double)
+        allow(AcceptAuction).to receive(:new).with(auction: auction, payment_url: "https://some-website.com/pay" ).and_return(accept_double)
 
         UpdateAuction.new(auction: auction, params: params, current_user: auction.user)
 

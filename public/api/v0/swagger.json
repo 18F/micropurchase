@@ -778,7 +778,7 @@
         "updated_at",
         "email",
         "sam_status",
-        "credit_card_form_url",
+        "payment_url",
         "github_login",
         "contracting_officer",
         "small_business"
@@ -841,9 +841,9 @@
           "type": "string",
           "enum": ["duns_blank", "sam_accepted", "sam_rejected", "sam_pending"]
         },
-        "credit_card_form_url": {
-          "title": "Credit Card Form URL",
-          "description": "A URL where the vendor can accept a credit card payment after successfully delivering an auction.",
+        "payment_url": {
+          "title": "Payment URL",
+          "description": "A URL where the vendor can accept payment after successfully delivering an auction.",
           "format": "url",
           "type": [
             "string",

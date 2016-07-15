@@ -30,7 +30,7 @@ class UpdateC2Attributes
       %(Vendor name: #{winning_bid.bidder.name}
         Vendor email: #{winning_bid.bidder.email}
         Vendor DUNS: #{winning_bid.bidder.duns_number}
-        Use the following credit card form: #{winning_bid.bidder.credit_card_form_url}.)
+        Use the following credit card form: #{winning_bid.bidder.payment_url}.)
     end
   end
 
