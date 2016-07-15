@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe LoginUser do
+describe SignInUser do
   describe '#perform' do
     context 'user does not have name in github' do
       it 'creates the user without a name' do
@@ -14,7 +14,7 @@ describe LoginUser do
           }
         }
 
-        login_user = LoginUser.new(auth_hash, {})
+        login_user = SignInUser.new(auth_hash: auth_hash, session: {})
         login_user.perform
 
         user = User.last
@@ -38,7 +38,7 @@ describe LoginUser do
           }
         }
 
-        login_user = LoginUser.new(auth_hash, {})
+        login_user = SignInUser.new(auth_hash: auth_hash, session: {})
         login_user.perform
 
         user.reload
@@ -68,7 +68,7 @@ describe LoginUser do
           }
         }
 
-        login_user = LoginUser.new(auth_hash, {})
+        login_user = SignInUser.new(auth_hash: auth_hash, session: {})
         login_user.perform
 
         user.reload
@@ -81,15 +81,15 @@ describe LoginUser do
 
     context 'when the uid exists in a user' do
       it 'does not create a new user' do
-        FactoryGirl.create(:user, github_id: github_id_from_oauth)
-        authenticator = LoginUser.new(auth_hash, { })
+        create(:user, github_id: github_id_from_oauth)
+        authenticator = SignInUser.new(auth_hash: auth_hash, session: {})
         expect { authenticator.perform }.not_to change { User.count }
       end
 
       it 'signs in the user into the session' do
-        user = FactoryGirl.create(:user, github_id: github_id_from_oauth)
+        user = create(:user, github_id: github_id_from_oauth)
         session = { }
-        authenticator = LoginUser.new(auth_hash, session)
+        authenticator = SignInUser.new(auth_hash: auth_hash, session: session)
 
         authenticator.perform
 
@@ -99,15 +99,15 @@ describe LoginUser do
 
     context 'when the uid does not exist' do
       it 'creates a new user' do
-        authenticator = LoginUser.new(auth_hash, { })
+        authenticator = SignInUser.new(auth_hash: auth_hash, session: {})
 
         expect { authenticator.perform }.to change { User.count }
       end
 
       it 'signs in the user into the session' do
-        user = FactoryGirl.create(:user, github_id: github_id_from_oauth)
-        session = { }
-        authenticator = LoginUser.new(auth_hash, session)
+        user = create(:user, github_id: github_id_from_oauth)
+        session = {}
+        authenticator = SignInUser.new(auth_hash: auth_hash, session: session)
 
         authenticator.perform
 

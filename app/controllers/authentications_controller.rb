@@ -1,7 +1,12 @@
 class AuthenticationsController < ApplicationController
   def create
-    LoginUser.new(request.env['omniauth.auth'], session).perform
-    redirect_back_or_root_path
+    if user.new_record?
+      sign_in_user
+      redirect_to sign_up_path
+    else
+      sign_in_user
+      redirect_back_or_root_path
+    end
   end
 
   def destroy
@@ -10,6 +15,21 @@ class AuthenticationsController < ApplicationController
   end
 
   private
+
+  def sign_in_user
+    @_sign_in_user ||= SignInUser.new(
+      auth_hash: auth_hash,
+      session: session
+    ).perform
+  end
+
+  def user
+    @_user ||= User.find_or_initialize_by(github_id: auth_hash[:uid])
+  end
+
+  def auth_hash
+    @_auth_hash ||= request.env['omniauth.auth']
+  end
 
   def redirect_back_or_root_path
     redirect_to(return_to || root_path)

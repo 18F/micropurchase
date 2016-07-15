@@ -105,3 +105,7 @@ end
 Then(/^I should be on my bids page$/) do
   expect(page.current_path).to eq(bids_path)
 end
+
+Then(/^I should be on the sign up page$/) do
+  expect(page.current_path).to eq(sign_up_path)
+end

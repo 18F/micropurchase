@@ -7,7 +7,7 @@ RSpec.describe UsersController, type: :controller do
     it 'redirects to authenticate when not logged in' do
       put :update, id: user.id, user: { duns_number: '222' }
       expect(response).to be_redirect
-      expect(response.location).to eq('http://test.host/login')
+      expect(response.location).to eq('http://test.host/sign_in')
     end
 
     it 'uses the UpdateUser class to update the user' do

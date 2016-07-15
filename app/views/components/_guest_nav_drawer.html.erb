@@ -1,9 +1,9 @@
-<% if request.path != '/login' %>
+<% if request.path != '/sign_in' %>
     <ul class="nav">
       <li class="nav-link sign-in">
-        <%= link_to 'Sign in', login_path %>
+        <%= link_to 'Sign in', '/auth/github' %>
         or
-        <%= link_to 'Sign up', login_path %>
+        <%= link_to 'Sign up', '/auth/github' %>
       </li>
     </ul>
 <% end %>
