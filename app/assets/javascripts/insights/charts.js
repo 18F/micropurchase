@@ -192,14 +192,16 @@
         c3.generate({
           bindto: "#donut-by-repo",
           data: {
-            columns: settings.cols ? settings.cols : [
-              ['software', 0],
-              ['non-software', 120]
-            ],
+            columns: settings.cols,
             type : 'donut'
           },
           donut: {
             title: 'Projects by repo'
+          },
+          legend: {
+            item: { onclick: function (id) {
+              window.open("https://github.com/".concat(id));
+            }}
           },
           color: {
             pattern: ['#1C304A','#00CFFF','#046B99','#B3EFFF']
