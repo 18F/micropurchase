@@ -39,22 +39,55 @@ excerpt: None
         <p>Then test(s) written as part of this micro-purchase will fail.</p>        
       </div>
       <footer class="auction-footer">
-        <section class="auction-place-bid auction-place-bid-closed">
+        <section class="auction-workflow auction-workflow-incomplete-profile">
           <h1>Your profile must contain a valid DUNS number before you can place a bid. Please <a href="{{site.baseurl}}/profile">update your profile</a>. </h1>
         </section>
-        <section class="auction-place-bid auction-place-bid-closed">
-          <h1>This auction is closed and is no longer accepting bids.</h1>
-        </section>
-        <section class="auction-place-bid auction-place-bid-preview">
+        <section class="auction-workflow auction-workflow-preview">
           <h1>This auction has yet to open and is not currently accepting bids.</h1>
         </section>
-        <section class="auction-place-bid auction-place-bid-bid-placed">
-          <h1>You have placed a bid for $3,400.00.</h1>
+        <section class="auction-workflow auction-workflow-closed">
+          <h1>This auction is closed and is no longer accepting bids.</h1>
         </section>
-        <section class="auction-place-bid auction-place-bid-low-bid">
-          <h1>You are the lowest bidder.</h1>
+        <section class="auction-workflow auction-workflow-biddable-first">
+          <p>The starting price for this auction is $3500.00.</p>
+          <form>
+            <div class="field"> 
+              <label>
+                <span class="label-text">Your bid</span>
+                <input type="number"></input>
+              </label>
+            </div>
+            <button>Place bid</button>
+          </form>
         </section>
-        <section class="auction-place-bid auction-place-bid has-errors">
+        <section class="auction-workflow auction-workflow-biddable-limited">
+          <p>The maximum (current) bid is $3414.00.</p>
+          <form>
+            <div class="field"> 
+              <label>
+                <span class="label-text">Your bid</span>
+                <input type="number"></input>
+              </label>
+            </div>
+            <button>Place bid</button>
+          </form>
+        </section>
+        <section class="auction-workflow auction-workflow-biddable-outbid">
+          <p>You&rsquo;ve been outbid! The maximum (current) bid is $3414.00.</p>
+          <form>
+            <div class="field"> 
+              <label>
+                <span class="label-text">Your bid</span>
+                <input type="number"></input>
+              </label>
+            </div>
+            <button>Place bid</button>
+          </form>
+        </section>
+        <section class="auction-workflow auction-workflow-bid-placed">
+          <h1>You placed a bid for $3414.00.</h1>
+        </section>
+        <section class="auction-workflow auction-workflow-bid-rejected has-errors">
           <h1>Your bid was not accepted.</h1>
           <p>The maximum (current) bid is $3414.00.</p>
           <form>
@@ -67,30 +100,7 @@ excerpt: None
             <button>Place bid</button>
           </form>
         </section>
-        <section class="auction-place-bid">
-          <p>The maximum (current) bid is $3414.00.</p>
-          <form>
-            <div class="field"> 
-              <label>
-                <span class="label-text">Your bid</span>
-                <input type="number"></input>
-              </label>
-            </div>
-            <button>Place bid</button>
-          </form>
-        </section>
-        <section class="auction-place-bid">
-          <p>The starting price for this auction is $3500.00.</p>
-          <form>
-            <div class="field"> 
-              <label>
-                <span class="label-text">Your bid</span>
-                <input type="number"></input>
-              </label>
-            </div>
-            <button>Place bid</button>
-          </form>
-        </section>
+
         <ul>
           <li class="auction-ended">
             <h2>Ended</h2>

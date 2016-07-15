@@ -164,6 +164,31 @@ table{ color: inherit; }
 
 /* @end */
 
+/* @group tables */
+
+td .time{
+	display: block;
+	font-size: 14px;
+	padding-top: 4px;
+}
+
+.is-blank{
+	color: #aaa;
+}
+
+td.col-title{
+	vertical-align: middle;
+}
+
+
+.col-starting,
+.col-ending,
+.col-delivery{
+	width: 8em;
+}
+
+/* @end */
+
 /* @group forms */
 
 /* @group summary.error-message */

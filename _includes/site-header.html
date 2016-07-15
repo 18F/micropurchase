@@ -8,7 +8,7 @@
         <option value="{{site.baseurl}}/auctions/new">New</option>
         <option value="{{site.baseurl}}/auctions/draft">Draft</option>
         <option value="{{site.baseurl}}/auctions/show">Show</option>
-        <option value="{{site.baseurl}}/auctions/bids">Bids</option>
+        <option value="{{site.baseurl}}/auctions/show-bids">Bids</option>
       </optgroup>
       <optgroup label="people">
         <option value="{{site.baseurl}}/people">Index</option>
@@ -17,6 +17,19 @@
         <option value="{{site.baseurl}}/people/new-admin">New admin</option>
         <option value="{{site.baseurl}}/people/new-admin">New customer</option>
       </optgroup>
+    </select>
+  </div>
+  <div class="field-auction-status field field-select">
+    <span class="label-text">Auction status</span>
+    <select name="auction-status" id="auction-status">
+      <option value="incomplete-profile">Incomplete profile</option>
+      <option value="preview">Preview</option>
+      <option value="closed">Closed</option>
+      <option value="biddable-first">Biddable (first)</option>
+      <option value="biddable-limited">Biddable (limited)</option>
+      <option value="biddable-outbid">Biddable (outbid)</option>
+      <option value="bid-placed">Bid placed</option>
+      <option value="bid-rejected">Bid rejected</option>
     </select>
   </div>
   <div class="nav-user field field-select">
