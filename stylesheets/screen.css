@@ -704,13 +704,14 @@ main div.wrap > form { max-width: 576px; }
 
 /* @group .site-header */
 
-.notice{
+.notice,
+.auction-workflow.auction-workflow-incomplete-profile{
 	background: #faf5d2;
 	color: #333;
 	padding: 16px;
 	border: 1px solid #e7d49b;
 	border-radius: 4px;
-	margin-bottom: 20px;
+	text-align: center;
 }
 
 .notice ul,
@@ -2094,16 +2095,8 @@ color: white;
 	display: none;
 }
 
-.auction-place-bid .notice{
-	padding: 0;
-	border: none;
-	background: none;
-	color: inherit;
-	text-align: inherit;
-}
 
-.auction-place-bid.auction-place-bid-low-bid,
-.auction-place-bid.auction-place-bid-bid-placed{
+.auction-workflow.auction-workflow-bid-placed{
 	background: #dcfde9;
 	border-color: #5cbb82;
 	border-right-color: #5cbb82;
@@ -2111,9 +2104,19 @@ color: white;
 	text-align: center;
 }
 
-.auction-place-bid.is-loading,
-.auction-place-bid.auction-place-bid-preview,
-.auction-place-bid.auction-place-bid-closed{
+.auction-workflow.auction-workflow-bid-placed h1{
+	margin-bottom: 0;
+}
+
+.auction-workflow.auction-workflow-bid-placed span{
+	display: block;
+	margin: 1em 0;
+}
+
+
+.auction-workflow.is-loading,
+.auction-workflow.auction-workflow-preview,
+.auction-workflow.auction-workflow-closed{
 	border-color: #d3d3d3;
 	border-right-color: #c0c0c0;
 	border-bottom-color: #bbb;
@@ -2122,16 +2125,19 @@ color: white;
 	text-align: center;
 }
 
-.auction-place-bid.has-errors{
+.auction-workflow.auction-workflow-bid-rejected{
 	border-color: #ff632c;
 	border-right-color: #d60c18;
 	border-bottom-color: #d60c18;
 }
 
-.auction-place-bid.has-errors h1{
+.auction-workflow.auction-workflow-bid-rejected h1{
 	color: #d21d1c;
-	margin-bottom: 0.33em;
-	font-size: 18px;
+	font-weight: 600;
+}
+
+.auction-workflow.auction-workflow-bid-rejected p{
+	margin-bottom: 0.8em;
 }
 .auction-place-bid.is-loading{
 	border-color: #ddd;
@@ -2178,19 +2184,27 @@ color: white;
 	position: relative;
 }
 
-.auction-workflow{ 
-	border-color: goldenrod; 
-	background: #fdfcf8;
-}
 .auction-workflow h1{ 
 	font: inherit;
-	font-weight: 600;
-	color: #553c24; 	font-size: 20px;
-	margin-bottom: 0.6em;
+	color: inherit;
+	line-height: 1.4em;
+	margin-bottom: 0.8em;
 
 }
 .auction-workflow button{
-	margin-top: 1em;
+	margin-top: 1.6em;
+	margin-left: 0.4em;
+	position: relative;
+	top: 1px;
+	height: 2.2em;
+	padding: 4px 10px;
+}
+
+.auction-workflow .field{
+	width: 5.5em;
+	display: inline-block;
+	vertical-align: middle;
+	margin-bottom: 0;
 }
 
 
