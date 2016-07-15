@@ -13,8 +13,8 @@ class Admin::UserShowViewModel < Admin::BaseViewModel
     user.email
   end
 
-  def credit_card_form_url
-    user.credit_card_form_url
+  def payment_url
+    user.payment_url
   end
 
   def duns_number

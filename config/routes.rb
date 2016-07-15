@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   get '/auth/:provider/callback', to: 'authentications#create'
   get '/logout', to: 'authentications#destroy'
-  get '/faq', to: 'logins#faq'
+  get '/faq', to: 'application#faq'
   get '/auctions/rules/sealed-bid', to: 'auctions#sealed_bid_auction_rules'
   get '/auctions/rules/reverse', to: 'auctions#reverse_auction_rules'
   get '/admin/auctions/:id/preview', to: 'admin/auctions#preview', as: 'admin_preview_auction'

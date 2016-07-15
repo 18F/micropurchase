@@ -15,7 +15,7 @@ When(/^I check the 'Contracting officer' checkbox$/) do
 end
 
 When(/^I submit the changes to the user$/) do
-  click_on "Update User"
+  click_on "Update"
 end
 
 Then(/^I expect there to be a contracting officer in the list of admin users$/) do

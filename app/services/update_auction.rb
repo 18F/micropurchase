@@ -57,7 +57,7 @@ class UpdateAuction
     if auction.accepted? && auction.accepted_at.nil?
       AcceptAuction.new(
         auction: auction,
-        credit_card_form_url: winning_bidder.credit_card_form_url
+        payment_url: winning_bidder.payment_url
       ).perform
     end
   end

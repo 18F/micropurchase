@@ -1,8 +1,4 @@
 class SamStatusPresenter
-  def auctions_index_flash_message(flash)
-    flash.now[flash_type] = index_specific_message
-  end
-
   def flash_message(flash)
     flash.now[flash_type] = message
   end
@@ -11,12 +7,12 @@ class SamStatusPresenter
     fail NotImplementedError
   end
 
-  def index_specific_message
-    index_message || message
+  def status_class
+    ''
   end
 
-  def index_message
-    nil
+  def status_text
+    ''
   end
 
   def message

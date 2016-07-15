@@ -3,8 +3,7 @@ en:
     "yes": 'Yes'
     "no": 'No'
     required:
-      text: 'required'
-      mark: '*'
+      html: '<span class="usa-additional_text">Required</span>'
     error_notification:
       default_message: "Please review the problems below:"
     labels:
@@ -19,6 +18,9 @@ en:
         start_price: "Start price"
       bid:
         amount: "Your bid"
+      user:
+        email: "Email address"
+        credit_card_form_url: "Payment URL"
     placeholders:
       auction:
         title: "A short description of the work"
@@ -36,6 +38,7 @@ en:
       auction:
         create: "Create"
         update: "Update"
-    submit:
+      user:
+        update: "Update"
       bid:
         create: "Place bid"

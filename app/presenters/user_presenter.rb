@@ -15,10 +15,6 @@ class UserPresenter < SimpleDelegator
     sam_status_presenter.flash_message(flash)
   end
 
-  def sam_status_message_for_auctions_index(flash)
-    sam_status_presenter.auctions_index_flash_message(flash)
-  end
-
   def nav_drawer_partial
     "components/user_nav_drawer"
   end
