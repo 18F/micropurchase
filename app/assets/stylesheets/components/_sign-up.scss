@@ -1,0 +1,26 @@
+.sign-up {
+  .usa-button {
+    margin-top: 2em;
+  }
+}
+
+.sign-up-wrapper {
+  @include span-columns(8);
+  @include shift(2);
+}
+
+.sign-up-welcome {
+  font-size: $h3-font-size;
+  margin-bottom: 2rem;
+}
+
+.how-it-works-label {
+  font-size: $h4-font-size;
+}
+
+.how-it-works {
+  border: 1px solid $color-gray-neutral;
+  margin-top: .5em;
+  padding-left: 1em;
+  padding-right: 1em;
+}

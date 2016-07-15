@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from 'UnauthorizedError::RedirectToLogin' do |error|
     store_location
-    redirect_to login_path
+    redirect_to sign_in_path
   end
 
   rescue_from 'UnauthorizedError::UserNotFound' do |error|

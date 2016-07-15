@@ -15,7 +15,7 @@
         "class": "AuthenticationsController",
         "method": "create"
       },
-      "user_input": "LoginUser.new(request.env[\"omniauth.auth\"], session).perform",
+      "user_input": "SignInUser.new(request.env[\"omniauth.auth\"], session).perform",
       "confidence": "High",
       "note": "Fixed here: https://github.com/18F/micropurchase/commit/799d74393c394e016fba5eab9df1eb638a7d2b06"
     }

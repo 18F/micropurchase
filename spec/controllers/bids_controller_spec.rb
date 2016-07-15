@@ -26,7 +26,7 @@ describe BidsController do
     context 'when not logged in' do
       it 'redirects to authenticate' do
         post :create, auction_id: auction.id, bid: { amount: 1000.00 }
-        expect(response).to redirect_to("/login")
+        expect(response).to redirect_to(sign_in_path)
       end
     end
 
