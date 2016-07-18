@@ -1,4 +1,8 @@
 class Guest
+  def github_id
+    nil
+  end
+
   def decorate
     GuestPresenter.new
   end
