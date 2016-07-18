@@ -10,18 +10,39 @@ excerpt: none
     <div class="wrapper">
       <h1>Settings</h1>
       <section>
-        <h1>Customer organizations</h1>
-        <a class="button" href="{{site.baseurl}}/organizations/new">Add new</a>
-        <article>
-          <h1>General Services Administration</h1>
-          <a href="#">Edit</a>
-        </article>
-        <article>
-          <h1>National Institutes of Health</h1>
-          <a href="#">Edit</a>
-        </article>
-      </section>
-      <section class="settings-skills">
+        <h1>Customers</h1>
+        <a href="{{site.baseurl}}/people/customers/new" class="button">Add new</a>
+        <table>
+          <thead>
+            <tr>
+              <td class="col-name">Name</td>
+              <td class="col-email-address">Email address</td>
+              <td class="col-agency">Agency</td>
+              <td class="col-actions">Actions</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="primary-contact">
+              <td class="col-name">Whosit Whatshisface <abbr title="Primary contact">*</abbr></td>
+              <td class="col-email-address">who.is@gsa.gov</td>
+              <td class="col-agency">General Services Administration</td>
+              <td class="col-actions"><a href="{{site.baseurl}}/people/new-customer/">Edit</a></td>
+            </tr>
+            <tr>
+              <td class="col-name">Whosit Whatshisface </td>
+              <td class="col-email-address">who.is@gsa.gov</td>
+              <td class="col-agency">General Services Administration</td>
+              <td class="col-actions"><a href="{{site.baseurl}}/people/new-customer/">Edit</a></td>
+            </tr>
+            <tr>
+              <td class="col-name">Whosit Whatshisface </td>
+              <td class="col-email-address">who.is@gsa.gov</td>
+              <td class="col-agency">General Services Administration</td>
+              <td class="col-actions"><a href="{{site.baseurl}}/people/new-customer/">Edit</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>      <section class="settings-skills">
         <h1>Skills</h1>
         <a class="button" href="{{site.baseurl}}/skills/new">Add new</a>
         <article>
