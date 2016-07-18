@@ -3,6 +3,21 @@ require 'rails_helper'
 describe CheckApproval do
   describe '#perform' do
     context 'auction has c2 proposal url' do
+      context 'c2 proposal url is invalid' do
+        it 'does not run a check' do
+          auction = build(
+            :auction,
+            :unpublished,
+            c2_proposal_url: "n/a"
+          )
+          auction.save(validate: false)
+
+          expect {
+            CheckApproval.new.perform
+          }.not_to raise_error
+        end
+      end
+
       context 'auction is not published' do
         context 'c2 proposal is approved' do
           it 'updates the c2_approved_at field' do
