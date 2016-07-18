@@ -2192,7 +2192,6 @@ color: white;
 	background: rgba(255,255,255,0.8);
 }
 
-.auction-place-bid,
 .auction-workflow{
 	color: #333;
 	border: 1px solid #73aee5;
@@ -2226,6 +2225,10 @@ color: white;
 	margin-bottom: 0;
 }
 
+.auction-workflow.auction-workflow-open-incomplete-profile{
+	background: lemonchiffon;
+	
+}
 
 .layout-auctions-show main .page h2{
 	color: #b83728;
@@ -2785,7 +2788,8 @@ body[class^="layout-auctions"] section:first-of-type h1{
 
 body[class^="layout-auctions"] table,
 .layout-people-index table,
-.layout-people-show table{
+.layout-people-show table,
+.layout-settings table{
 	border-radius: 3px;
 	border: 1px solid #eee;
 	width: 100%;
@@ -2825,7 +2829,8 @@ body[class^="layout-auctions"] table,
 body[class^="layout-auctions"]  table tbody tr:nth-child(odd) td,
 .layout-people-index table tbody tr:nth-child(odd) td,
 .layout-people-show table tbody tr:nth-child(odd) td,
-.layout-people-show table tbody tr:nth-child(odd) th{
+.layout-people-show table tbody tr:nth-child(odd) th,
+.layout-settings table tbody tr:nth-child(odd) th{
 	background: #fafafa;
 }
 
@@ -2834,7 +2839,8 @@ body[class^="layout-auctions"] table th,
 .layout-people-index table td,
 .layout-people-index table th,
 .layout-people-show table td,
-.layout-people-show table th{
+.layout-people-show table th,
+.layout-settings table th{
 	border: 1px solid #ddd;
 	padding: 8px;
 }
