@@ -689,6 +689,9 @@ main div.wrap > form { max-width: 576px; }
 
 .prototype-header .field.nav-user{ float: right; }
 
+.field-auction-status{ display: none; }
+.layout-auction-show .field-auction-status{ display: block; }
+
 .user-type-admin .site-header .nav-header-nav .nav-my-profile,
 .user-type-vendor .site-header .nav-header-nav .nav-people,
 .user-type-vendor .nav-auctions-drafts,
@@ -2037,6 +2040,22 @@ color: white;
 
 /* @end */
 
+/* @group layout-auctions-needs-attention */
+
+.layout-auctions-needs-attention.user-type-admin .section-bids,
+.layout-auctions-needs-attention.user-type-admin .section-delivery-needed,
+.layout-auctions-needs-attention.user-type-admin .section-payment-pending{
+	display: none;	
+}
+
+.layout-auctions-needs-attention.user-type-vendor .section-drafts,
+.layout-auctions-needs-attention.user-type-vendor .section-delivery-pending,
+.layout-auctions-needs-attention.user-type-vendor .section-payment-needed{
+	display: none;
+}
+
+/* @end */
+
 /* @group layout-auctions-show */
 
 .layout-auctions-show main .wrapper,
@@ -2712,27 +2731,7 @@ color: white;
 
 /* @end */
 
-/* @group layout-my-auctions */
 
-
-.layout-my-auctions main .wrapper{ padding-top: 10px; }
-
-.layout-my-auctions main h1{
-	font-size: 48px;
-	font-weight: 300;
-	letter-spacing: -1.3px;	
-	display: inline-block;
-	line-height: 1.125em;
-	color: #383838;
-	letter-spacing: -2px;
-	margin-bottom: 0.5em;
-}
-
-.layout-my-auctions main h1+p{
-	margin-left: 0;
-}
-
-/* @end */
 
 /* @group layout-people */
 
@@ -2916,6 +2915,25 @@ body[class^="layout-auctions"] table th,
 
 /* @end */
 
+/* @group layout-settings */
+
+.layout-settings article{
+	border-bottom: 1px solid #eee;	
+	padding: 4px 0;
+	max-width: 400px;
+	position: relative;
+}
+
+.layout-settings article a{
+	font-size: 14px;
+	position: absolute;
+	right: 0;
+	top: 4px;
+	
+}
+
+/* @end */
+
 /* @group layout-sign-in */
 .layout-sign-in .site-header nav{ display: none; }
 .layout-sign-in main { padding-top: 2em; }
@@ -2966,24 +2984,5 @@ body[class^="layout-auctions"] table th,
 
 
 /* @end */
-
-/* @end */
-
-/* @group layout-settings */
-
-.layout-settings article{
-	border-bottom: 1px solid #eee;	
-	padding: 4px 0;
-	max-width: 400px;
-	position: relative;
-}
-
-.layout-settings article a{
-	font-size: 14px;
-	position: absolute;
-	right: 0;
-	top: 4px;
-	
-}
 
 /* @end */

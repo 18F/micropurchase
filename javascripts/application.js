@@ -31,32 +31,12 @@ $(document).ready(function() {
   $('.field-auction-status select').change(function(){
     $('.auction-workflow').hide();
     statusCode = $(this).find('option:selected').attr("value");
-    switch(statusCode){
-      case 'incomplete-profile': 
-        $('.auction-workflow-incomplete-profile').show();
-        break;
-      case 'preview': 
-        $('.auction-workflow-preview').show();
-        break;
-      case 'closed': 
-        $('.auction-workflow-closed').show();
-        break;
-      case 'biddable-first': 
-        $('.auction-workflow-biddable-first').show();
-        break;
-      case 'biddable-outbid': 
-        $('.auction-workflow-biddable-outbid').show();
-        break;
-      case 'biddable-limited': 
-        $('.auction-workflow-biddable-limited').show();
-        break;
-      case 'bid-placed': 
-        $('.auction-workflow-bid-placed').show();
-        break;
-      case 'bid-rejected': 
-        $('.auction-workflow-bid-rejected').show();
-        break;
-    }
+    userType = $(this).find('option:selected').parent('optgroup').attr('label');
+    console.log(userType);
+    $('.nav-user select').find('option[value="' + userType + '"]').prop('selected', true);
+    $('.nav-user select').change();
+    workflowClass = "auction-workflow-" + statusCode;
+    $('.' + workflowClass).show();
   });
 
   $('.field-auction-status select').change();
