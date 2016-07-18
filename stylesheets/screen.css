@@ -644,7 +644,7 @@ main div.wrap > form { max-width: 576px; }
 	background: #222;
 	color: #fff;
 	font-size: 14px;
-	padding: 4px;
+	padding: 4px 8px;
 }
 
 .prototype-header::after{
@@ -690,7 +690,7 @@ main div.wrap > form { max-width: 576px; }
 .prototype-header .field.nav-user{ float: right; }
 
 .field-auction-status{ display: none; }
-.layout-auction-show .field-auction-status{ display: block; }
+.layout-auctions-show .field-auction-status{ display: block; }
 
 .user-type-admin .site-header .nav-header-nav .nav-my-profile,
 .user-type-vendor .site-header .nav-header-nav .nav-people,
