@@ -103,14 +103,14 @@ excerpt: None
           <h1>This auction is closed.</h1>
         </section>
         <section class="auction-workflow auction-workflow-closed-deliverable">
-          <h1>You won this auction on June 3rd, 2016 with a bid of $1,000. Please <a href="#">issue a pull request</a> that meets this auction&rsquo;s acceptance criteria by {{auction.deliveryDate}}. </h1>
+          <h1>You won this auction on June 3rd, 2016 with a bid of $[auction.winBid]. Please <a href="#">issue a pull request</a> that meets this auction&rsquo;s acceptance criteria by [auction.deliveryDate]. </h1>
         </section>
         <section class="auction-workflow auction-workflow-closed-invoiced">
-          <h1>You won this auction on June 3rd, 2016 with a bid of $1,000. Your pull request was accepted on {{auction.acceptanceDate}}, and 18F Micro-purchase has notified the lister that they should remit payment.</h1>
+          <h1>You won this auction on June 3rd, 2016 with a bid of $1,000. Your pull request was accepted on [auction.acceptanceDate], and 18F Micro-purchase has notified the lister that they should remit payment.</h1>
           <p>If their Payment URL 404s: Heads up! It looks like the customer won&rsquo;t be able to pay you. Please <a href="{{site.baseurl}}/profile">double check your payment URL</a>.</p>
         </section>
         <section class="auction-workflow auction-workflow-closed-paid">
-          <h1>You won this auction on {{auction.winDate}} with a bid of $1,000. Your pull request was accepted on {{auction.acceptanceDate}} and you were paid on {{auction.paymentDate}}. </h1>
+          <h1>You won this auction on [auction.winDate] with a bid of $1,000. Your pull request was accepted on [auction.acceptanceDate] and you were paid on [auction.paymentDate]. </h1>
         </section>
         <section class="auction-workflow auction-workflow-draft-approvable">
           <h1>Approval needed</h1>
