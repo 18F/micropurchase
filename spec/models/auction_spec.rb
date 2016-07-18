@@ -14,6 +14,11 @@ describe Auction do
       it { should validate_presence_of(:title) }
       it { should validate_presence_of(:user) }
       it { should validate_presence_of(:purchase_card) }
+      it { should_not allow_values(
+        ENV['C2_HOST'], 'http://www.example.com'
+      ).for(:c2_proposal_url) }
+      it { should allow_value("#{ENV['C2_HOST']}/proposals/123").for(:c2_proposal_url) }
+      it { should allow_value('').for(:c2_proposal_url) }
 
       describe "starting price validations" do
         context "creator is admin" do
