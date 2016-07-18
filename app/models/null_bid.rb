@@ -1,4 +1,8 @@
 class NullBid
+  def bidder?
+    false
+  end
+
   def amount
     nil
   end
