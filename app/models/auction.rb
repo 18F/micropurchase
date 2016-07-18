@@ -1,5 +1,6 @@
 class Auction < ActiveRecord::Base
   include AuctionScopes
+  C2_REGEX = Regexp.escape("#{ENV['C2_HOST']}/proposals/").freeze
 
   attr_accessor :due_in_days
 
@@ -28,6 +29,11 @@ class Auction < ActiveRecord::Base
   validates :title, presence: true
   validates :user, presence: true
   validates :billable_to, presence: true
+  validates(
+    :c2_proposal_url,
+    format: { with: Regexp.new("#{C2_REGEX}[0-9]") },
+    allow_blank: true
+  )
 
   def sorted_skill_names
     skills.order(name: :asc).map(&:name)

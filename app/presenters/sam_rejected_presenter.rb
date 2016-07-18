@@ -3,6 +3,14 @@ class SamRejectedPresenter < SamStatusPresenter
     :error
   end
 
+  def status_class
+    'error'
+  end
+
+  def status_text
+    'Invalid'
+  end
+
   def message
     "Your DUNS number was not found in Sam.gov. Please enter a valid DUNS number
     to complete your profile. Check

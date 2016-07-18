@@ -9,7 +9,7 @@ FactoryGirl.define do
     github_id
     github_login 'github_username'
     sam_status :duns_blank
-    credit_card_form_url 'https://some-website.com/pay'
+    payment_url 'https://some-website.com/pay'
 
     trait :sam_accepted do
       sam_status :sam_accepted

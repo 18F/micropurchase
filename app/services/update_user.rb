@@ -39,8 +39,8 @@ class UpdateUser < Struct.new(:params, :current_user)
   end
 
   def added_payment_information?
-    user.credit_card_form_url_changed? &&
-      user.credit_card_form_url_was == '' &&
+    user.payment_url_changed? &&
+      user.payment_url_was == '' &&
       user.valid?
   end
 
@@ -55,7 +55,7 @@ class UpdateUser < Struct.new(:params, :current_user)
   def accept(auction)
     AcceptAuction.new(
       auction: auction,
-      credit_card_form_url: user.credit_card_form_url
+      payment_url: user.payment_url
     ).perform
     auction.save
   end
@@ -63,6 +63,6 @@ class UpdateUser < Struct.new(:params, :current_user)
   def user_params
     params
       .require(:user)
-      .permit(:name, :duns_number, :email, :credit_card_form_url)
+      .permit(:name, :duns_number, :email, :payment_url)
   end
 end

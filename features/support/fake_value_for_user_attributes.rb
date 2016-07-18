@@ -1,6 +1,6 @@
 def fake_value_for_user_attribute(attribute)
   case attribute
-  when 'credit_card_form_url'
+  when 'payment_url'
     Faker::Internet.url.gsub('http:', 'https:')
   when 'name'
     Faker::Name.name

@@ -3,11 +3,6 @@ input[disabled] {
   color: lighten($color-gray-dark, 50%);
 }
 
-input,
-input[type="text"] {
-  border-radius: $border-radius;
-}
-
 .time-input {
   float: left;
   width: 33%;

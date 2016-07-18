@@ -9,20 +9,19 @@ When(/^I should see my user info$/) do
 end
 
 Then(/^I should see a profile form$/) do
-  expect(page).to have_content("Complete your account")
   expect(page).to have_content("Name")
-  expect(page).to have_content("DUNS Number")
-  expect(page).to have_content("Email Address")
+  expect(page).to have_content("Email address")
+  expect(page).to have_content("DUNS number")
 end
 
 Then(/^I should see a profile form with my info$/) do
-  expect(page).to have_content("Complete your account")
+  expect(page).to have_content("Profile")
 
   field = find_field('Name')
   expect(field.value).to eq(@user.name)
-  field = find_field("DUNS Number")
+  field = find_field("DUNS number")
   expect(field.value).to eq(@user.duns_number)
-  field = find_field("Email Address")
+  field = find_field("Email address")
   expect(field.value).to eq(@user.email)
 end
 
