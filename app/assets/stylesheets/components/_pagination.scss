@@ -1,0 +1,31 @@
+.pagination {
+  $pagination-border-color: $color-gray-light;
+  $pagination-border: 1px solid $pagination-border-color;
+  $pagination-background: lighten($pagination-border-color, 10);
+
+  a {
+    padding-left: ($site-margins / 2);
+    padding-right: ($site-margins / 2);
+  }
+
+  span {
+    background: $color-white;
+    border: $pagination-border;
+    outline: none;
+    margin: ($site-margins / 4);
+
+    &:hover,
+    &:focus {
+      background: $color-white;
+      color: $links-secondary;
+    }
+  }
+
+  .current {
+    display: inline-block;
+    padding-left: ($site-margins / 2);
+    padding-right: ($site-margins / 2);
+    color: $color-white;
+    background: $color-gray-medium;
+  }
+}

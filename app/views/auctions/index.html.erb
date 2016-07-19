@@ -11,7 +11,11 @@
   <h2>Auctions</h2>
 
   <div class="auction-wrapper">
-    <%= render partial: @auction_collection.auctions_list_partial,
-      locals: { auction_collection: @auction_collection } %>
+    <%= render partial: @auction_collection.auctions_list_partial %>
+  </div>
+
+  <%= paginate @auctions %>
+  <div class="pagination-details">
+    <%= page_entries_info @auctions, entry_name: 'auction' %>
   </div>
 </div>
