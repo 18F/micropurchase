@@ -1,6 +1,6 @@
 class ConstructC2Attributes
   OFFICE = 'DC'.freeze
-  PURCHASE_TYPE = 'Software'.freeze
+  PURCHASE_TYPE = 'Micropurchase'.freeze
   QUANTITY = 1
   RECURRING = false
   URGENCY = 20
