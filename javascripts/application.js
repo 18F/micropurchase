@@ -31,8 +31,38 @@ $(document).ready(function() {
   $('.field-auction-status select').change(function(){
     $('.auction-workflow').hide();
     statusCode = $(this).find('option:selected').attr("value");
+    console.log(statusCode);
+    if (statusCode == "open-preview") {
+      $('.auction-header .auction-status')
+        .attr('class', '')
+        .text('Opens soon')
+        .addClass('auction-status auction-status-opens-soon');
+    }
+
+    if (statusCode == "open-biddable-first" || 
+        statusCode == "open-biddable-limited" || 
+        statusCode == "open-biddable-outbid" || 
+        statusCode == "open-biddable-rejected" || 
+        statusCode == "open-bid-placed") {
+      $('.auction-header .auction-status')
+        .attr('class', '')
+        .text('Open')
+        .addClass('auction-status auction-status-open');      
+    }
+
+
+    if (statusCode == "closed" || 
+        statusCode == "closed-deliverable" || 
+        statusCode == "closed-invoiced" || 
+        statusCode == "closed-paid") {
+      $('.auction-header .auction-status')
+        .attr('class', '')
+        .text('Closed')
+        .addClass('auction-status auction-status-closed');
+    }
+
+
     userType = $(this).find('option:selected').parent('optgroup').attr('label');
-    console.log(userType);
     $('.nav-user select').find('option[value="' + userType + '"]').prop('selected', true);
     $('.nav-user select').change();
     workflowClass = "auction-workflow-" + statusCode;

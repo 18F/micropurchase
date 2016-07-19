@@ -104,6 +104,42 @@ a:visited{  color: #8d0058; }
 
 
 
+.notice,
+.auction-workflow.auction-workflow-open-incomplete-profile{
+	background: #faf5d2;
+	color: #333;
+	padding: 16px 16px 18px;
+	border: 1px solid #e7c359;
+	border-radius: 4px;
+	text-align: center;
+}
+
+.notice ul,
+.notice ol{
+	padding-left: 1.4em;
+}
+.notice li{
+	list-style-type: square;
+	margin-left: 1.125em;
+	margin-bottom: 0.6em;
+}
+
+.notice p{
+	line-height: 1.4;
+	margin-bottom: 0.67em;
+}
+
+.notice strong{ font-weight: 600; }
+
+.notice p:last-of-type{
+	margin-bottom: 0 !important;
+}
+
+.notice a{
+	color: #8a1132;
+}
+
+
 @media screen and (min-width: 336.84px){ .wrapper{ width: 90%; }  }
 
 .wrapper::after{
@@ -708,41 +744,6 @@ main div.wrap > form { max-width: 576px; }
 /* @end */
 
 /* @group .site-header */
-
-.notice,
-.auction-workflow.auction-workflow-incomplete-profile{
-	background: #faf5d2;
-	color: #333;
-	padding: 16px;
-	border: 1px solid #e7d49b;
-	border-radius: 4px;
-	text-align: center;
-}
-
-.notice ul,
-.notice ol{
-	padding-left: 1.4em;
-}
-.notice li{
-	list-style-type: square;
-	margin-left: 1.125em;
-	margin-bottom: 0.6em;
-}
-
-.notice p{
-	line-height: 1.4;
-	margin-bottom: 0.67em;
-}
-
-.notice strong{ font-weight: 600; }
-
-.notice p:last-of-type{
-	margin-bottom: 0;
-}
-
-.notice a{
-	color: #8a1132;
-}
 
 .site-header{ 
 	padding: 10px 0 10px;
@@ -1359,7 +1360,7 @@ nav.breadcrumbsli{
 	margin-bottom: 8px;
 }
 
-.auction .auction-footer span{
+.auction .auction-footer ul span{
 	display: block;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -1405,7 +1406,7 @@ nav.breadcrumbsli{
 	padding-top: 12px;
 }
 
-dt.auction-status{ text-indent: -9999em; }
+dt.auction-status{ position: absolute; left: -9999em; }
 dd.auction-status{
 	content: "";
 	display: inline-block;
@@ -1417,12 +1418,13 @@ dd.auction-status{
 	color: #fff;
 	border-radius: 2px;
 	margin-right: 0.8em !important;
-	margin-left: -0.4em;
+	margin-left: -0.2em;
 	margin-top: -2px;
 	padding: 2px 6px 1px;
 	text-shadow: 0 1px 0 rgba(0,0,0,0.2);
 }
 dd.auction-status-closed{ background: #99005c; }
+dd.auction-status-opens-soon,
 dd.auction-status-closing-soon{ background: #c35f00; }
 dd.auction-status.auction-status-open{ background: #008a6c; }
 
@@ -1546,8 +1548,8 @@ a[id]{
 	font-size: 21px;
 	font-family: inherit;
 	line-height: 1.4em;
-	margin-top: 28px;
-	margin-bottom: 16px;
+	margin-top: 18px;
+	margin-bottom: 12px;
 	color: #333;
 }
 
@@ -1893,7 +1895,8 @@ a[id]{
 
 
 .h-feed-header{
-	margin-bottom: 1em;
+	margin-bottom: 32px;
+	position: relative;
 }
 
 .h-feed-header::after{
@@ -1906,11 +1909,9 @@ a[id]{
 	font-size: 48px;
 	font-weight: 300;
 	letter-spacing: -1.3px;	
-	display: inline-block;
-	vertical-align: middle;
 }
 
-.h-feed-header h1+.button{
+.h-feed-header .button{
 	position: absolute;
 	right: 0;
 	top: 16px;
@@ -1921,11 +1922,9 @@ a[id]{
 .h-feed-header nav{
 	position: relative;
 	margin-top: 5px;
-	margin-bottom: 16px;
 	border-top: 1px solid #555;
 	padding-top: 12px;
 	display: none;
-	
 }
 
 .user-type-admin.signed-in .h-feed-header nav,
@@ -1973,7 +1972,13 @@ color: white;
 
 .h-feed-header form{
 	font-size: 14px;
-	display: none;
+	position: absolute;
+	bottom: -2px;
+	right: 0;
+}
+
+.h-feed-header form button{
+	padding: 3px 8px;
 }
 
 .h-feed-header form .field-select {
@@ -1986,7 +1991,27 @@ color: white;
 	width: auto;
 	height: auto;
 	min-height: 0;
+	color: #555;
 }
+
+.h-feed-header form .field-select .label-text{
+	padding-right: 0.4em;
+}
+
+.h-feed-header form .field-select select{ 
+	border-color: #aaa;
+	border-right-color: #a0a0a0;
+	border-bottom-color: #a0a0a0;
+	padding: 3px 20px 3px 6px;
+}
+
+.h-feed-header form .field-select::after{ 
+	margin-bottom: 5px;
+	right: 6px;
+	border-width: 4px;
+	border-top-color: #888;
+}
+
 .h-feed-header form h1{
 	position: absolute;
 	left: -9999em;
@@ -2164,8 +2189,7 @@ color: white;
 
 
 .auction-workflow.is-loading,
-.auction-workflow.auction-workflow-preview,
-.auction-workflow.auction-workflow-closed{
+.auction-workflow.auction-workflow-preview{
 	border-color: #d3d3d3;
 	border-right-color: #c0c0c0;
 	border-bottom-color: #bbb;
@@ -2174,14 +2198,15 @@ color: white;
 	text-align: center;
 }
 
-.auction-workflow.auction-workflow-bid-rejected{
+.auction-workflow.auction-workflow-open-biddable-rejected{
 	border-color: #ff632c;
+	background-color: #fffafb;
 	border-right-color: #d60c18;
 	border-bottom-color: #d60c18;
 }
 
-.auction-workflow.auction-workflow-bid-rejected h1{
-	color: #d21d1c;
+.auction-workflow.auction-workflow-open-biddable-rejected h1{
+	color: #920041;
 	font-weight: 600;
 }
 
@@ -2224,8 +2249,9 @@ color: white;
 
 .auction-workflow{
 	color: #333;
-	border: 1px solid #73aee5;
+	border: 1px solid #a2cae5;
 	box-shadow: 1px 1px 0 0 #f8f8f8;
+	background: #f4fafb;
 	border-radius: 4px;
 	margin-bottom: 1em;
 	padding: 20px;
@@ -2234,11 +2260,19 @@ color: white;
 
 .auction-workflow h1{ 
 	font: inherit;
+	font-size: 18px;
 	color: inherit;
-	line-height: 1.4em;
-	margin-bottom: 0.8em;
-
+	line-height: 1.2em;
+	font-weight: 600;
 }
+
+.auction-workflow .bid-amount{
+  font-weight: 600;
+  display: inline !important;
+}
+
+.auction-workflow form{ padding-top: 1em; }
+
 .auction-workflow button{
 	margin-top: 1.6em;
 	margin-left: 0.4em;
@@ -2255,10 +2289,7 @@ color: white;
 	margin-bottom: 0;
 }
 
-.auction-workflow.auction-workflow-open-incomplete-profile{
-	background: lemonchiffon;
-	
-}
+
 
 .layout-auctions-show main .page h2{
 	color: #b83728;
@@ -2431,6 +2462,17 @@ color: white;
 	border-right: 1px solid #eee;
 	padding-left: 20px;
 }
+
+.layout-auctions-bids main .wrapper table {
+	border: none;
+}
+
+
+.layout-auctions-bids main .wrapper table tr th:first-of-type,
+.layout-auctions-bids main .wrapper table tr td:first-of-type {
+	border-left: none;
+}
+
 
 .layout-auctions-bids main .wrapper table tbody tr:last-of-type td{
 	border-bottom: none;
@@ -2870,7 +2912,8 @@ body[class^="layout-auctions"] table th,
 .layout-people-index table th,
 .layout-people-show table td,
 .layout-people-show table th,
-.layout-settings table th{
+.layout-settings table th,
+.layout-settings table td{
 	border: 1px solid #ddd;
 	padding: 8px;
 }

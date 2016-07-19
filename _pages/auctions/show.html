@@ -40,13 +40,13 @@ excerpt: None
       </div>
       <footer class="auction-footer">
         <section class="auction-workflow auction-workflow-open-incomplete-profile">
-          <h1>Your profile must contain a valid DUNS number before you can place a bid. Please <a href="{{site.baseurl}}/profile">update your profile</a>. </h1>
+          <p>Your profile must contain a valid DUNS number before you can place a bid. Please <a href="{{site.baseurl}}/profile">update your profile</a>.</p>
         </section>
         <section class="auction-workflow auction-workflow-open-preview">
-          <h1>This auction is not currently accepting bids.</h1>
+          <p>This auction is not currently accepting bids.</p>
         </section>
         <section class="auction-workflow auction-workflow-open-biddable-first">
-          <h1>The starting price for this auction is $3500.00.</h1>
+          <p>The starting price for this auction is $3500.00.</p>
           <form>
             <div class="field"> 
               <label>
@@ -58,7 +58,7 @@ excerpt: None
           </form>
         </section>
         <section class="auction-workflow auction-workflow-open-biddable-limited">
-          <h1>The maximum (current) bid is $3414.00.</h1>
+          <p>The maximum (current) bid is $3414.00.</p>
           <form>
             <div class="field"> 
               <label>
@@ -83,7 +83,8 @@ excerpt: None
           </form>
         </section>
         <section class="auction-workflow auction-workflow-open-biddable-outbid">
-          <h1>You&rsquo;ve been outbid! The maximum (current) bid is $3414.00.</h1>
+          <h1>You&rsquo;ve been outbid!</h1> 
+          <p>The maximum (current) bid is $3414.00.</h1>
           <form>
             <div class="field"> 
               <label>
@@ -95,18 +96,18 @@ excerpt: None
           </form>
         </section>
         <section class="auction-workflow auction-workflow-open-bid-placed">
-          <h1>You are currently the low bidder, with a bid of $3414.00.</h1>
+          <p>You are currently the low bidder, with a bid of <span class="bid-amount">$3414.</span></p>
           <span>or, if sealed,</span>
-          <h1>You placed a bid for $3414.</h1>
+          <p>You placed a bid for <span class="bid-amount">$3414.</span></p>
         </section>
         <section class="auction-workflow auction-workflow-closed">
-          <h1>This auction is closed.</h1>
+          <p>This auction is closed.</p>
         </section>
         <section class="auction-workflow auction-workflow-closed-deliverable">
-          <h1>You won this auction on June 3rd, 2016 with a bid of $[auction.winBid]. Please <a href="#">issue a pull request</a> that meets this auction&rsquo;s acceptance criteria by [auction.deliveryDate]. </h1>
+          <p>You won this auction on <strong>June 3rd, 2016</strong> with a bid of <strong>$[auction.winBid].</strong> Please <a href="#">issue a pull request</a> that meets this auction&rsquo;s acceptance criteria by [auction.deliveryDate]. </p>
         </section>
         <section class="auction-workflow auction-workflow-closed-invoiced">
-          <h1>You won this auction on June 3rd, 2016 with a bid of $1,000. Your pull request was accepted on [auction.acceptanceDate], and 18F Micro-purchase has notified the lister that they should remit payment.</h1>
+          <p>You won this auction on <strong>June 3rd, 2016</strong> with a bid of <strong>$1,000.</strong> Your pull request was accepted on [auction.acceptanceDate], and 18F Micro-purchase has notified the lister that they should remit payment.</p>
           <p>If their Payment URL 404s: Heads up! It looks like the customer won&rsquo;t be able to pay you. Please <a href="{{site.baseurl}}/profile">double check your payment URL</a>.</p>
         </section>
         <section class="auction-workflow auction-workflow-closed-paid">
@@ -139,17 +140,21 @@ excerpt: None
           <button class="button">Reject</button>
         </section>        
         <ul>
-          <li class="auction-ended">
-            <h2>Ended</h2>
-            <span>June 03, 2016 04:00:00 PM EDT</span>
-          </li>
           <li class="auction-started">
             <h2>Started</h2>
-            <span>May 16, 2016 12:00:00 AM EDT</span>
+            <span>May 16, 2016 at 12:00 AM EDT</span>
+          </li>
+          <li class="auction-ended">
+            <h2>Ended</h2>
+            <span>June 03, 2016 at 04:00 PM EDT</span>
           </li>
           <li class="auction-delivery-deadline">
-            <h2>Started</h2>
-            <span>May 27, 2016 12:00:00 AM EDT</span>
+            <h2>Delivery deadline</h2>
+            <span>June 17, 2016 at 12:00 AM EDT</span>
+          </li>
+          <li class="auction-accepted">
+            <h2>Accepted</h2>
+            <span>June 11, 2016 at 11:38 AM EDT</span>
           </li>
           <li class="auction-project">
             <h2>Project</h2>
@@ -162,6 +167,14 @@ excerpt: None
           <li class="auction-eligibility">
             <h2>Eligibility</h2>
             <span>SAM.gov only</span>
+          </li>
+          <li class="auction-payment-url">
+            <h2>Payment URL</h2>
+            <a href="#">https://cash.me/andrewmaier</a>
+          </li>
+          <li class="auction-cap-url">
+            <h2>CAP URL</h2>
+            <a href="#">https://c2.gsa.gov/12345</a>
           </li>
         </ul>
       </footer>
