@@ -18,6 +18,12 @@
   }
 }
 
+.skills {
+  display: inline-block;
+  overflow-y: scroll;
+  max-height: 340px;
+}
+
 // Charts
 .winners-chart-directions {
   text-align: center;
