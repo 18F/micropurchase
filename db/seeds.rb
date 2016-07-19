@@ -11,7 +11,6 @@ FactoryGirl.create(:auction, :sealed_bid, :future)
 auction = FactoryGirl.create(:auction, :sealed_bid, :closed, :with_bidders)
 auction.skills << skills
 FactoryGirl.create(:auction, :complete_and_successful)
-FactoryGirl.create(:auction, :payment_pending)
 FactoryGirl.create(:auction, :payment_needed)
 FactoryGirl.create(:auction, :evaluation_needed)
 FactoryGirl.create(:auction, :delivery_past_due)

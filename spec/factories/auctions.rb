@@ -168,17 +168,12 @@ FactoryGirl.define do
       paid
     end
 
-    trait :payment_pending do
-      delivered
+    trait :payment_needed do
+      delivery_due_at_expired
       accepted
+      delivered
       c2_approved
       not_paid
-      delivery_due_at_expired
-    end
-
-    trait :payment_needed do
-      accepted
-      delivered
     end
 
     trait :evaluation_needed do

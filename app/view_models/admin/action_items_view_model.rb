@@ -15,10 +15,6 @@ class Admin::ActionItemsViewModel < Admin::BaseViewModel
     list_items(AuctionQuery.new.complete_and_successful)
   end
 
-  def payment_pending
-    list_items(AuctionQuery.new.payment_pending)
-  end
-
   def payment_needed
     list_items(AuctionQuery.new.payment_needed)
   end

@@ -45,21 +45,12 @@ class AuctionQuery
     relation.rejected
   end
 
-  def payment_pending
-    relation
-      .delivery_due_at_expired
-      .delivered
-      .accepted
-      .c2_submitted
-      .not_paid
-  end
-
   def payment_needed
     relation
       .delivery_due_at_expired
       .delivered
       .accepted
-      .c2_not_submitted
+      .c2_submitted
       .not_paid
   end
 
