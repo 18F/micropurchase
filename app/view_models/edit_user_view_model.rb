@@ -28,6 +28,6 @@ class EditUserViewModel
   end
 
   def sam_status_presenter
-    Object.const_get("#{user.sam_status.camelize}Presenter").new
+    SamStatusPresenterFactory.new(user).create
   end
 end

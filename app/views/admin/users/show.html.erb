@@ -1,13 +1,23 @@
 <h2><%= @view_model.name %></h2>
-<ul>
-  <li><b>Email</b>: <%= @view_model.email %></li>
-  <li><b>Credit card form url</b>: <%= @view_model.payment_url %></li>
-  <li><b>DUNS Number</b>: <%= @view_model.duns_number %></li>
-  <li><b>GitHub ID</b>: <%= @view_model.github_id %></li>
-  <li><b>GitHub login</b>: <%= @view_model.github_login %></li>
-  <li><b>SAM status</b>: <%= @view_model.sam_status %></li>
-  <li><b>Small business</b>: <%= @view_model.small_business %></li>
-  <li><b>Contracting officer</b>: <%= @view_model.contracting_officer %></li>
-</ul>
+<table class="striped-table">
+  <tbody>
+    <%= render partial: 'attribute_row',
+      locals: { label: 'Email', attribute: @view_model.email } %>
+    <%= render partial: 'attribute_row',
+      locals: { label: 'Payment URL', attribute: @view_model.payment_url } %>
+    <%= render partial: 'attribute_row',
+      locals: { label: 'DUNS number', attribute: @view_model.duns_number } %>
+    <%= render partial: 'attribute_row',
+      locals: { label: 'GitHub username', attribute: @view_model.github_login } %>
+    <%= render partial: 'attribute_row',
+      locals: { label: 'GitHub ID', attribute: @view_model.github_id } %>
+    <%= render partial: 'attribute_row',
+      locals: { label: 'SAM', attribute: @view_model.sam_status } %>
+    <%= render partial: 'attribute_row',
+      locals: { label: 'Small business', attribute: @view_model.small_business } %>
+    <%= render partial: 'attribute_row',
+      locals: { label: 'Contracting officer', attribute: @view_model.contracting_officer } %>
+  </tbody>
+</table>
 
 <%= render partial: @view_model.bids_partial, locals: {view_model: @view_model} %>

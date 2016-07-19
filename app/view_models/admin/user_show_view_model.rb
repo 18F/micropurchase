@@ -30,7 +30,7 @@ class Admin::UserShowViewModel < Admin::BaseViewModel
   end
 
   def sam_status
-    user.sam_status
+    SamStatusPresenterFactory.new(user).create.admin_status_text
   end
 
   def small_business

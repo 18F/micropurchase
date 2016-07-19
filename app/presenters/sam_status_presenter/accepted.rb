@@ -1,4 +1,4 @@
-class SamAcceptedPresenter < SamStatusPresenter
+class SamStatusPresenter::Accepted < SamStatusPresenter::Base
   def flash_type
     :success
   end
