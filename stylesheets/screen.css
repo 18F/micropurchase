@@ -139,6 +139,7 @@ a:visited{  color: #8d0058; }
 	max-width: 960px;
 	margin: 0 auto;
 	position: relative;
+	overflow: hidden;
 }
 
 @media screen and (min-width: 568.88){ .wrapper{ width: 90%; }  }
@@ -853,6 +854,7 @@ main div.wrap > form { max-width: 576px; }
 	color: #fff;
 	font-size: 14px;
 	padding: 4px 6px;
+	overflow: hidden;
 }
 
 .prototype-header::after{
@@ -1710,7 +1712,6 @@ a[id]{
 	border: 1px solid #eee;
 	margin: 0 auto;
 	max-width: 640px;
-	table-layout: fixed;
 	box-shadow: 0 0 0 2px #fafafa;
 }
 
