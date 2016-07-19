@@ -27,6 +27,10 @@ class UserPresenter < SimpleDelegator
     'components/null'
   end
 
+  def admin_user_page_link_partial
+    'components/admin_user_page_link'
+  end
+
   def admin_edit_auction_partial
     if admin?
       'auctions/edit_auction_link'

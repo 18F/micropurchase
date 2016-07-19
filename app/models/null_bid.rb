@@ -1,8 +1,4 @@
 class NullBid
-  def bidder?
-    false
-  end
-
   def amount
     nil
   end
@@ -17,5 +13,9 @@ class NullBid
 
   def bidder_name
     nil
+  end
+
+  def decorated_bidder
+    NullBidder.new
   end
 end
