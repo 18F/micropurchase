@@ -93,7 +93,7 @@ describe UpdateAuction do
 
       context 'auction is between micropurchase and SAT threshold' do
         context 'winning vendor is a small business' do
-          it 'calls the UpdateC2ProposalJob' do
+          it 'calls the AcceptAuctionJob' do
             auction = create(
               :auction,
               :between_micropurchase_and_sat_threshold,
@@ -123,6 +123,21 @@ describe UpdateAuction do
             accept_double = double(perform: true)
             allow(AcceptAuction).to receive(:new).
               with(auction: auction, payment_url: "https://some-website.com/pay").
+              and_return(accept_double)
+            params = { auction: { result: 'accepted' } }
+
+            UpdateAuction.new(auction: auction, params: params, current_user: auction.user).perform
+
+            expect(accept_double).not_to have_received(:perform)
+          end
+        end
+
+        context 'there are no bidders' do
+          it 'does not call AcceptAuction' do
+            auction = create(:auction)
+            accept_double = double(perform: true)
+            allow(AcceptAuction).to receive(:new).
+              with(auction: auction, payment_url: nil).
               and_return(accept_double)
             params = { auction: { result: 'accepted' } }
 

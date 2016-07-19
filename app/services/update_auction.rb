@@ -54,7 +54,7 @@ class UpdateAuction
   end
 
   def perform_approved_auction_tasks
-    if auction.accepted? && auction.accepted_at.nil?
+    if auction.accepted? && auction.accepted_at.nil? && auction.bids.any?
       AcceptAuction.new(
         auction: auction,
         payment_url: winning_bidder.payment_url
