@@ -54,6 +54,6 @@ class UserPresenter < SimpleDelegator
   private
 
   def sam_status_presenter
-    Object.const_get("#{model.sam_status.camelize}Presenter").new
+    SamStatusPresenterFactory.new(user).create.admin_status_text
   end
 end

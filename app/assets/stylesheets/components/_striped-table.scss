@@ -15,6 +15,10 @@
     background-color: $table-background;
   }
 
+  .label {
+    font-weight: $font-bold;
+  }
+
   tr:hover > td {
     background-color: $table-hover-background;
   }

@@ -1,4 +1,4 @@
-class SamRejectedPresenter < SamStatusPresenter
+class SamStatusPresenter::Rejected < SamStatusPresenter::Base
   def flash_type
     :error
   end
@@ -9,6 +9,10 @@ class SamRejectedPresenter < SamStatusPresenter
 
   def status_text
     'Invalid'
+  end
+
+  def admin_status_text
+    'Rejected'
   end
 
   def message
