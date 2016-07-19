@@ -5,20 +5,44 @@ excerpt: none
 <body class="no-js">
   <a class="a-skip-to-main" href="#main">Skip to main content</a>
   {% include site-header.html %}
-  <nav class="breadcrumbs">
-    <div class="wrapper">
-      <ol>
-        <li><a href="{{site.baseurl}}">Home</a></li>
-        <li>About</li>
-      </ol>
-    </div>
-  </nav>
   <main class="page" role="main" id="main">
     <div class="wrapper">
       <h1>About</h1>
-      <h3>Rules for multi-bid auctions</h3>
-      <p>A Multi-Bid Auction is the reverse auction type 18F has used throughout the course of the micro-purchase experiment. It is a standard reverse auction where bids begin at $3,500. The lowest possible bid is $1, and an auction automatically ends once a $1 bid has been submitted. Vendors are allowed to submit multiple bids throughout the duration of the auction.</p>
-      <p>Bidders will see whether they are the winning bidder after submitting a bid, and will have an opportunity to submit a lower bid if the auction is still running. The GitHub user names and DUNS numbers of participating bidders are hidden during the auction, but the full bid history will be visible after bidding is over.</p>
+      <p class="introduction">18F Micro-purchase is <a href="https://18f.gsa.gov/2015/10/13/open-source-micropurchasing/">an experiment in federal acquisition</a>. Our team is passionate about making it easier for individuals and businesses, or &ldquo;vendors,&rdquo; to leverage their technical expertise toward building the open source software that powers federal agencies &mdash; and vice versa. </p>
+      <p>Conceptually, the platform is simple: 18F Micro-purchase functions as a reverse auction house. Federal agencies work with 18F to create auctions which start at $3,500 or less (this is the ceiling of our micro-purchase authority, the authority from which we draw our name). Vendors, for their part, evaluate auctions, review any source code associated with that auction, and place their bids. At the end of each auction, winners deliver their work in accordance with our policy and 18F remits payment.</p>
+      <p>We invite everyone to take part in this experiment. Vendors need only have GitHub and SAM.gov accounts to sign up and place a bid. If you work in government and are interested in running auctions for an open-source project, <a href="https://docs.google.com/document/d/1rOEh70KBWDrW8U-LZ6-lGWo0tMJZKXvNfVfJmOcaxCg/edit#">read our getting started guide</a>, and get in touch. We&rsquo;re available to scope features, develop an auction strategy, and run your auctions!</p>
+      <p>PS: Although many of the auctions we&rsquo;ve run thus far have asked for code, we hope that this process can be applied to any kind of contribution to an open source project, including design, content, etc. </p>
+      <p>PPS: We will also soon be extending the experiment to auctions with starting prices of $25,000 or less.</p>
+
+      <h2>Our team</h2>
+      <ul>
+        <li><a href="https://18f.gsa.gov/team/alan/">Alan deLevie</a>, Developer</li>
+        <li><a href="https://18f.gsa.gov/team/jacobharris/">Jacob Harris</a>, Developer</li>
+        <li><a href="https://18f.gsa.gov/team/andrewmaier/">Andrew Maier</a>, Designer</li>
+        <li><a href="https://18f.gsa.gov/team/jacobharris/">Michael Torres</a>, Product Manager</li>
+        <li><a href="https://18f.gsa.gov/team/michael-torres/">Jessie Young</a>, Developer</li>
+        <li><a href="https://18f.gsa.gov/team/vdavez/">Dave Zvenyach</a>, Product Owner</li>  
+      </ul>     
+      <h2>By the numbers</h2>
+      <ul>
+        <li>26 total auctions</li>
+        <li>19 successful deliveries</li>
+        <li>13 unique auction winners</li>
+        <li>12 bids/auction</li>
+        <li>5 unique bidders per auction</li>
+        <li>30 vendors who have placed bids</li>
+        <li>2 days average auction length</li>
+        <li>7 days average delivery time</li>
+        <li>$1,134.00 average winning bid</li>
+        <li>61 small businesses registered</li>
+        <li>91 Sam.gov-qualified vendors</li>  
+      </ul>
+      <h3>Notable articles</h3>
+      <ul>
+        <li><a href="https://18f.gsa.gov/2015/10/13/open-source-micropurchasing/">Open Source Micro-purchasing: An experiment in federal acquisition</a></li>
+        <li><a href="https://18f.gsa.gov/2015/11/06/micro-purchase-lessons/">Early lessons from the micro-purchase experiment</a></li>
+        <li><a href="https://18f.gsa.gov/2015/08/06/communicart-tool-will-streamline-purchase-card-process/">Communicart tool will streamline purchase card process</a></li>
+      </ul>
     </div>
   </main>
   {% include site-footer.html %}

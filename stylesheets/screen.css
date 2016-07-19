@@ -628,6 +628,11 @@ fieldset > legend,
 	line-height: 20px;
 }
 
+fieldset > legend{
+	padding: 4px 8px;
+	border: 1px solid #bbb;
+	border-radius: 2px
+}
 .field.is-disabled span.label-text{
 	color: #888;
 	cursor: not-allowed;
@@ -918,7 +923,7 @@ main div.wrap > form { max-width: 576px; }
 /* @group .site-header */
 
 .site-header{ 
-	padding: 8px 0 10px;
+	padding: 10px 0 10px;
 }
 
 .site-header a{ color: #53d3fe;	  }
@@ -2575,6 +2580,9 @@ color: white;
 .fieldset-date-time .field-date span.label-text,
 .fieldset-date-time .fieldset-time legend{
 	font-weight: normal;
+	padding: 0;
+	border: 0;
+	line-height: 1;
 }
 
 .layout-auctions-new .branch,
@@ -2583,7 +2591,8 @@ color: white;
 	margin-left: -2px;
 }
 
-.branch .fieldset.fieldset-date-time{
+.branch .fieldset.fieldset-date-time,
+.branch .delivery{
 	width: 48.5%;
 	float: left;
 	padding: 32px 12px 12px;
@@ -2591,49 +2600,64 @@ color: white;
 	background: #fff;
 	margin: 0;
 	margin-right: 3%;
+	position: relative;
 }
 
-.branch .fieldset.fieldset-delivery-date-time{
+.branch .delivery{
 	margin-right: 0;
 }
 
-.branch .fieldset-date-time > legend{
+.branch .fieldset-date-time > legend,
+.branch .delivery h1{
 	position: absolute;
-	top: 8px;
+	top: 12px;
+	margin: 0;
+	line-height: 1;
 	bottom: auto;
-	font-size: 14px;
-	color: #555;
-	font-weight: normal;
 }
 
 .branch .fieldset-date-time .field-date,
 .branch .fieldset-date-time .fieldset-time,
+.branch .delivery .field,
 .with-customized-timeline .fieldset-date-time-summary,
 .with-customized-timeline .p-date-time-defaults{
 	display: none;
 }
 
 .with-customized-timeline .branch .fieldset-date-time .field-date,
-.with-customized-timeline .branch .fieldset-date-time .fieldset-time{
+.with-customized-timeline .branch .fieldset-date-time .fieldset-time,
+.with-customized-timeline .branch .delivery .field{
 	display: block;
 }
 
-.with-customized-timeline .branch .fieldset-date-time{
+.with-customized-timeline .branch .fieldset-date-time,
+.with-customized-timeline .branch .delivery{
 	width: auto;
 	float: none;
 	margin-right: 0;
 	border: 1px solid #ccc;
 	padding: 16px;
-	margin-bottom: 16px;
+	padding-top: 24px;
+	margin-bottom: 24px;
 }
 
-.with-customized-timeline .branch .fieldset-date-time > legend{
-	position: static;
-	display: block;
+.with-customized-timeline .branch .fieldset-date-time > legend,
+.with-customized-timeline .branch .delivery h1{
+	position: absolute;
+	top: 0;
+	margin-top: -12px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	border: 1px solid #bbb;
+	border-radius: 2px;
+	padding: 4px 8px;
+	line-height: 20px;
+	background: white;
+	display: inline-block;
 	font-size: inherit;
 	font-weight: 600;
 	color: #333;
-	margin: 0;
 }
 
 .branch+.help-text{
