@@ -58,6 +58,6 @@ class UserPresenter < SimpleDelegator
   private
 
   def sam_status_presenter
-    SamStatusPresenterFactory.new(user).create.admin_status_text
+    SamStatusPresenterFactory.new(model).create
   end
 end

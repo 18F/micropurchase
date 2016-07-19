@@ -17,7 +17,7 @@ Feature: Admin views user
     Given there is a user in the system who has bid on an auction
     When I visit the admin users page
     And I click on the name of the first user
-    Then I should see a section labeled "Bidding History"
+    Then I should see a section labeled "Bid History"
     And in that section I should see a table of the user's bids
 
   Scenario: I see a user who has not bid
