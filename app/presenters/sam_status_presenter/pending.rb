@@ -1,4 +1,4 @@
-class SamStatuPresenter::Pending < SamStatusPresenter::Base
+class SamStatusPresenter::Pending < SamStatusPresenter::Base
   def flash_type
     :warning
   end

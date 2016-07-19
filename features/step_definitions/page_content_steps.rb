@@ -62,7 +62,6 @@ Then(/^I should see that user's information$/) do
   expect(page).to have_content(@user.duns_number)
   expect(page).to have_content(@user.github_id)
   expect(page).to have_content(@user.github_login)
-  expect(page).to have_content(@user.sam_status)
 end
 
 Then(/^I should see a page title "([^"]+)"$/) do |title|
