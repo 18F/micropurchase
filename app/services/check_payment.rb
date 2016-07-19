@@ -1,5 +1,5 @@
 class CheckPayment < C2ApiWrapper
-  def initialize(auctions = AuctionQuery.new.payment_pending)
+  def initialize(auctions = AuctionQuery.new.payment_needed)
     @auctions = auctions
   end
 
