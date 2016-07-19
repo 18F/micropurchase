@@ -23,3 +23,8 @@ Feature: Admin view action items
     Given there is a rejected auction
     When I visit the admin action items page
     Then I should see the rejected auction as an action item
+
+  Scenario: Viewing rejected auction with no bids
+    Given there is a rejected auction with no bids
+    When I visit the admin action items page
+    Then I should see the rejected auction as an action item
