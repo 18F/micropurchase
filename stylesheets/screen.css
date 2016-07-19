@@ -1,3 +1,5 @@
+/* @override http://localhost:4000/stylesheets/screen.css */
+
 /* @override https://pages.18f.gov/micropurchase/stylesheets/screen.css */
 
 /* @override http://localhost:4000/stylesheets/screen.css */
@@ -1033,19 +1035,45 @@ nav.breadcrumbsli{
 }
 
 .pagination .pagination-prev,
-.pagination .pagination-next{
+.pagination .pagination-next,
+.pagination .pagination-page,
+.pagination .pagination-ellipsis{
+	font-size: 14px;
+	float: left;
+	padding: 4px 8px;
+	text-decoration: none;
+
+}
+
+.pagination .pagination-ellipsis{
+	margin-left: -0.4em;
+	color: #aaa;
+}
+
+.pagination .pagination-prev,
+.pagination .pagination-next,
+.pagination .pagination-page{
 	border: 1px solid #ccc;
+	border-radius: 3px;
 	padding: 4px 8px;
 	text-decoration: none;
 	border-radius: 3px;
 	color: #555; 
-	font-size: 14px;
 	font-weight: 600;
+	margin-right: 0.4em;
+}
+
+.pagination .pagination-page.is-current{
+	background: #555;
+	border-color: #555 !important;
+	color: white !important;
 }
 
 .pagination .pagination-prev:hover,
-.pagination .pagination-next:hover{
-	border-color: #888;
+.pagination .pagination-next:hover,
+.pagination .pagination-page:hover{
+	border-color: #006fbe;
+	color: #006fbe;
 }
 
 .pagination .pagination-prev::before,
@@ -1072,7 +1100,10 @@ nav.breadcrumbsli{
 }
 
 .pagination .pagination-signpost{
-	margin: 0 1em;
+	margin: 0;
+	padding-top: 1em;
+	clear: both;
+	font-size: 14px;
 }
 
 /* @end */
@@ -1994,15 +2025,14 @@ color: white;
 }
 
 .layout-auctions-index .auction{
-	border: 1px solid #ddd;
+	border: 1px solid #c3c3c3;
 	padding: 14px 16px 0;
 	margin-bottom: 20px;
 	border-radius: 4px;
-	border-right-color: #d8d8d8;
-	border-bottom-color: #d5d5d5;
+	border-right-color: #bbb;
+	border-bottom-color: #b8b8b8;
 	box-shadow: 1px 1px 0 #f8f8f8;
 	background: #fff;
-	color: #555;
 	position: relative;
 	max-width: 100%;
 	display: block;
