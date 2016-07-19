@@ -4,7 +4,7 @@ class AuctionStatus
   end
 
   def available?
-    started_in_past? && ends_in_future?
+    published? && started_in_past? && ends_in_future?
   end
 
   def over?
@@ -22,6 +22,10 @@ class AuctionStatus
   private
 
   attr_reader :auction
+
+  def published?
+    auction.published?
+  end
 
   def ends_in_future?
     auction.ended_at > Time.current

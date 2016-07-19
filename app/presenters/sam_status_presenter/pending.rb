@@ -1,10 +1,14 @@
-class SamPendingPresenter < SamStatusPresenter
+class SamStatusPresenter::Pending < SamStatusPresenter::Base
   def flash_type
     :warning
   end
 
   def status_class
     'pending'
+  end
+
+  def admin_status_text
+    'Pending'
   end
 
   def status_text

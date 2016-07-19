@@ -8,7 +8,7 @@ describe CheckPayment do
           c2_path = 'proposals/1234'
           auction = create(
             :auction,
-            :payment_pending,
+            :payment_needed,
             purchase_card: :default,
             c2_proposal_url: "https://c2-dev.18f.gov/#{c2_path}"
           )
@@ -24,7 +24,7 @@ describe CheckPayment do
           c2_path = "proposals/#{FakeC2Api::PURCHASED_PROPOSAL_ID}"
           auction = create(
             :auction,
-            :payment_pending,
+            :payment_needed,
             purchase_card: :default,
             c2_proposal_url: "https://c2-dev.18f.gov/#{c2_path}"
           )

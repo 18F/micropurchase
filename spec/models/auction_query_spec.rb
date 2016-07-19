@@ -5,10 +5,10 @@ describe AuctionQuery do
   describe '#completed' do
     it 'returns published auctions with bids where delivery deadline is in past' do
       completed = create(:auction, :complete_and_successful)
-      payment_pending = create(:auction, :with_bidders, :delivery_due_at_expired)
+      payment_needed = create(:auction, :with_bidders, :payment_needed)
       create(:auction, :available)
 
-      expect(query.completed).to match_array([completed, payment_pending])
+      expect(query.completed).to match_array([completed, payment_needed])
     end
   end
 
@@ -40,23 +40,9 @@ describe AuctionQuery do
     end
   end
 
-  describe '#payment_pending' do
-    let(:payment_pending) { create(:auction, :payment_pending) }
-    let!(:running_auction) { create(:auction, :running) }
-    let!(:paid_auction) { create(:auction, :paid) }
-    let!(:complete_and_successful) do
-      create(:auction, :complete_and_successful)
-    end
-
-    it 'should only return finished auctions where payment is pending' do
-      expect(query.payment_pending).to match_array([payment_pending])
-    end
-  end
-
   describe '#payment_needed' do
     let(:payment_needed) { create(:auction, :payment_needed) }
     let!(:running_auction) { create(:auction, :running) }
-    let!(:payment_pending) { create(:auction, :payment_pending) }
     let!(:complete_and_successful) do
       create(:auction, :complete_and_successful)
     end
@@ -72,7 +58,6 @@ describe AuctionQuery do
       create(:auction, :complete_and_successful)
     end
     let!(:running_auction) { create(:auction, :running) }
-    let!(:payment_pending) { create(:auction, :payment_pending) }
     let!(:payment_needed) { create(:auction, :payment_needed) }
 
     it 'should only return auctions where an evaluation is needed' do
@@ -86,7 +71,6 @@ describe AuctionQuery do
       create(:auction, :complete_and_successful)
     end
     let!(:running_auction) { create(:auction, :running) }
-    let!(:payment_pending) { create(:auction, :payment_pending) }
     let!(:payment_needed) { create(:auction, :payment_needed) }
     let!(:rejected) { create(:auction, :rejected) }
 

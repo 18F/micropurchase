@@ -105,6 +105,10 @@ Given(/^there is a rejected auction$/) do
   @rejected = FactoryGirl.create(:auction, :closed, :with_bidders, :delivered, :rejected)
 end
 
+Given(/^there is a rejected auction with no bids$/) do
+  @rejected = FactoryGirl.create(:auction, :closed, :rejected)
+end
+
 Given(/^there is an auction where the winning vendor is not eligible to be paid$/) do
   @auction = FactoryGirl.create(
     :auction,

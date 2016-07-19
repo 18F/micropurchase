@@ -13,12 +13,8 @@ class Admin::ActionItemListItem < Admin::BaseViewModel
     @_winner ||= WinningBid.new(auction).find
   end
 
-  def winning_bidder_id
-    winning_bid.bidder_id
-  end
-
-  def winning_bidder_name
-    winning_bid.bidder_name
+  def winning_bidder
+    winning_bid.decorated_bidder
   end
 
   def id

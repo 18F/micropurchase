@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   end
 
   # Web requests
+  constraints AdminConstraint.new do
+    root to: 'admin/action_items#index', as: :admin_root
+  end
+
   root 'auctions#index'
 
   get '/auth/:provider/callback', to: 'authentications#create'

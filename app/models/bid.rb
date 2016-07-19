@@ -5,4 +5,8 @@ class Bid < ActiveRecord::Base
   def bidder_name
     bidder.name
   end
+
+  def decorated_bidder
+    UserPresenter.new(bidder)
+  end
 end

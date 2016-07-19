@@ -10,10 +10,6 @@
 <%= render partial: 'items',
   locals: { id: 'payment-needed', auctions: @view_model.payment_needed } %>
 
-<h2>Payment pending</h2>
-<%= render partial: 'items',
-  locals: { id: 'payment-pending', auctions: @view_model.payment_pending } %>
-
 <h2>Complete &amp; successful</h2>
 <%= render partial: 'items',
   locals: { id: 'successful', auctions: @view_model.complete_and_successful } %>

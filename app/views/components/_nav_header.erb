@@ -4,7 +4,7 @@
   <div class="header-wrap">
     <div class="usa-grid-one-half">
       <div class="header-title">
-        <a href="/" class="logo" title="Home">
+        <%= link_to auctions_path, title: 'Home' do %>
           <div class="logo">
             <%= image_tag '18F-Logo-2016-Blue.svg', alt: '18f-logo', class: 'logo-img' %>
             <div class="title-wrapper">
@@ -12,7 +12,7 @@
               <div class="subtitle">A marketplace for the federal government’s open source projects</div>
             </div>
           </div>
-        </a>
+        <% end %>
       </div>
     </div>
 
