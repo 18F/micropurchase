@@ -109,3 +109,9 @@ end
 Then(/^I should be on the sign up page$/) do
   expect(page.current_path).to eq(sign_up_path)
 end
+
+When(/^I should be on the admin action items page$/) do
+  expect(page).to have_content('Delivery past due')
+  expect(page).to have_content('Evaluation needed')
+  expect(page).to have_content('Payment needed')
+end
