@@ -28,7 +28,7 @@ class AuctionQuery
     relation
       .delivery_due_at_expired
       .delivered
-      .accepted
+      .delivery_accepted
       .c2_submitted
       .paid
   end
@@ -49,7 +49,7 @@ class AuctionQuery
     relation
       .delivery_due_at_expired
       .delivered
-      .accepted
+      .delivery_accepted
       .c2_submitted
       .not_paid
   end

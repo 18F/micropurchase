@@ -9,7 +9,7 @@ class InsightsViewModel
 
   def hero_metrics
     [
-      published_auction_stat,
+      total_auction_stat,
       accepted_auction_stat,
       unique_winners_stat,
       average_bids_stat,
@@ -34,9 +34,9 @@ class InsightsViewModel
     Skill.all.map { |skill| SkillPresenter.new(skill) }
   end
 
-  def published_auction_stat
+  def total_auction_stat
     {
-      statistic: published_auction_count,
+      statistic: accepted_and_rejected_auction_count,
       label: 'total auctions',
       href: 'chart-bids-by-auction'
     }
@@ -115,14 +115,11 @@ class InsightsViewModel
   end
 
   def accepted_and_rejected_auction_count
-    accepted_auctions_count + AuctionQuery.new.rejected.count
+    @_accepted_and_rejected_auction_count ||=
+      accepted_auctions_count + AuctionQuery.new.rejected.count
   end
 
   def accepted_auctions_count
-    @_accepted_auctions_count ||= Auction.published.accepted.count
-  end
-
-  def published_auction_count
-    @_published_auction_count ||= Auction.published.count
+    @_accepted_auctions_count ||= Auction.delivery_accepted.count
   end
 end

@@ -3,6 +3,7 @@ module AuctionScopes
 
   included do
     scope :accepted, -> { where(result: results['accepted']) }
+    scope :delivery_accepted, -> { where(result: results['accepted']).where.not(accepted_at: nil) }
     scope :c2_not_submitted, -> { where(c2_proposal_url: [nil, '']) }
     scope :c2_submitted, -> { where.not(c2_proposal_url: [nil, '']) }
     scope :closed_within_last_24_hours, -> { where(ended_at: last_24_hours..next_24_hours) }
