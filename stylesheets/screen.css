@@ -1063,8 +1063,8 @@ main div.wrap > form { max-width: 576px; }
 
 
 .site-header .nav-header-nav li a{ color: white; }
-.site-header .nav-header-nav a{ margin-right: 0.8em; }
-.site-header .nav-header-nav .a-sign-out{ margin-right: 0; }
+.signed-in .site-header .nav-header-nav a{ margin-right: 0.8em; }
+.signed-in .site-header .nav-header-nav .a-sign-out{ margin-right: 0; }
 
 @media screen and (min-width: 600px){
 	.site-header .logo{
@@ -1097,7 +1097,7 @@ main div.wrap > form { max-width: 576px; }
 .pagination .pagination-next,
 .pagination .pagination-page,
 .pagination .pagination-ellipsis{
-	font-size: 14px;
+	font-size: 16px;
 	float: left;
 	padding: 4px 8px;
 	text-decoration: none;
@@ -1114,11 +1114,9 @@ main div.wrap > form { max-width: 576px; }
 .pagination .pagination-page{
 	border: 1px solid #ccc;
 	border-radius: 3px;
-	padding: 4px 8px;
 	text-decoration: none;
 	border-radius: 3px;
 	color: #555; 
-	font-weight: 600;
 	margin-right: 0.4em;
 }
 
@@ -1141,8 +1139,6 @@ main div.wrap > form { max-width: 576px; }
 	margin-right: 0.4em;
 }
 
-
-	
 .pagination .pagination-next::after{
 	content: "\2192";
 	margin-right: 0;
@@ -1162,7 +1158,7 @@ main div.wrap > form { max-width: 576px; }
 	margin: 0;
 	padding-top: 1em;
 	clear: both;
-	font-size: 14px;
+	line-height: 1.2;
 }
 
 /* @end */
@@ -1707,40 +1703,6 @@ a[id]{
 
 .page .page-title+h2{ margin-top: 20px; }
 
-.page table{
-	border-radius: 3px;
-	border: 1px solid #eee;
-	margin: 0 auto;
-	max-width: 640px;
-	box-shadow: 0 0 0 2px #fafafa;
-}
-
-.page .table-wrapper{
-	margin: 0 auto 1.8em;
-	padding-bottom: 0.2em;
-	max-width: 90%;
-	overflow: auto;
-}
-
-@media screen and (min-width: 711.11px){
-	.page form,
-	.page .table-wrapper{ max-width: 640px; }
-}
-
-.page table tbody tr:first-child td:first-child{
-	border-radius: 3px;
-}
-
-.page table tbody tr:nth-child(odd) td{
-	background: #fafafa;
-}
-
-.page table td,
-.page table th{
-	border: 1px solid #ddd;
-	padding: 8px;
-}
-
 .page .h-card .p-job-title{
 	clear: left;
 	display: block;
@@ -2028,6 +1990,9 @@ color: white;
 	right: 0;
 }
 
+.layout-auctions-closed .h-feed-header form,
+.layout-auctions-needs-attention .h-feed-header form{ display: none; }
+
 .h-feed-header form button{
 	padding: 3px 8px;
 }
@@ -2147,6 +2112,7 @@ color: white;
 /* @end */
 
 /* @group layout-auctions-needs-attention */
+
 
 .layout-auctions-needs-attention.user-type-admin .section-bids,
 .layout-auctions-needs-attention.user-type-admin .section-delivery-needed,
@@ -2524,20 +2490,14 @@ color: white;
 
 @media (min-width: 40em) {
 	
-	.layout-auctions-bids main .wrapper table,
-	.layout-my-auctions main .wrapper table{
+	.layout-auctions-bids main .wrapper table{
 		width: 100%;
 		color: inherit;
 		text-align: left;
 	}
-	
-	.layout-my-auctions main .wrapper table{
-		margin-top: 2em;
-	}
-	
+		
 	.layout-auctions-bids main .wrapper table th,
-	.layout-auctions-bids main .wrapper table td,
-	.layout-my-auctions main .wrapper table td{
+	.layout-auctions-bids main .wrapper table td{
 		padding: 8px 0;
 		border-bottom: 1px solid #eee;
 		border-right: 1px solid #eee;
@@ -2547,7 +2507,6 @@ color: white;
 	.layout-auctions-bids main .wrapper table {
 		border: none;
 	}
-	
 	
 	.layout-auctions-bids main .wrapper table tr th:first-of-type,
 	.layout-auctions-bids main .wrapper table tr td:first-of-type {
@@ -2910,7 +2869,6 @@ color: white;
 .layout-people-show main .wrapper > h1{
 	margin-bottom: 0.4em;
 	display: block;
-	
 }
 
 .layout-auctions-drafts section h1,
@@ -2942,6 +2900,8 @@ body[class^="layout-auctions"] section:first-of-type h1{
 	margin-left: 0.6em;
 }
 
+.layout-auctions-needs-attention table,
+.layout-auctions-closed table,
 .layout-people-index table,
 .layout-people-show table,
 .layout-settings table{
@@ -2988,6 +2948,8 @@ body[class^="layout-auctions"] section:first-of-type h1{
 	background: #fafafa;
 }
 
+.layout-auctions-needs-attention table td,
+.layout-auctions-closed table td,
 .layout-people-index table td,
 .layout-people-index table th,
 .layout-people-show table td,
