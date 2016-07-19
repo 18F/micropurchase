@@ -205,6 +205,175 @@ table{ color: inherit; }
 
 /* @group tables */
 
+/* @group tablesaw.stackonly.js */
+
+/*! Tablesaw - v2.0.3 - 2016-06-03
+* https://github.com/filamentgroup/tablesaw
+* Copyright (c) 2016 Filament Group; Licensed MIT */
+
+table.tablesaw {
+  empty-cells: show;
+  max-width: 100%;
+  width: 100%;
+}
+
+.tablesaw {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/* Structure */
+
+.tablesaw {
+  border: 0;
+  padding: 0;
+}
+
+.tablesaw th,
+.tablesaw td {
+  box-sizing: border-box;
+  padding: .5em .7em;
+}
+
+.tablesaw thead tr:first-child th {
+  padding-top: .9em;
+  padding-bottom: .7em;
+}
+
+/* Table rows have a gray bottom stroke by default */
+
+.tablesaw-stack tbody tr {
+}
+
+.tablesaw-stack td .tablesaw-cell-label,
+.tablesaw-stack th .tablesaw-cell-label {
+  display: none;
+}
+
+/* Mobile first styles: Begin with the stacked presentation at narrow widths */
+
+@media only all {
+  /* Show the table cells as a block level element */
+
+  .tablesaw-stack td,
+  .tablesaw-stack th {
+    text-align: left;
+    display: block;
+  }
+
+  .tablesaw-stack tr {
+    clear: both;
+    display: table-row;
+  }
+
+  /* Make the label elements a percentage width */
+
+  .tablesaw-stack td .tablesaw-cell-label,
+  .tablesaw-stack th .tablesaw-cell-label {
+    display: block;
+    padding: 0 .6em 0 0;
+    width: 30%;
+    display: inline-block;
+  }
+
+  /* For grouped headers, have a different style to visually separate the levels by classing the first label in each col group */
+
+  .tablesaw-stack th .tablesaw-cell-label-top,
+  .tablesaw-stack td .tablesaw-cell-label-top {
+    display: block;
+    padding: .4em 0;
+    margin: .4em 0;
+  }
+
+  .tablesaw-cell-label {
+    display: block;
+  }
+
+  /* Avoid double strokes when stacked */
+
+  .tablesaw-stack tbody th.group {
+    margin-top: -1px;
+  }
+
+  /* Avoid double strokes when stacked */
+
+  .tablesaw-stack th.group b.tablesaw-cell-label {
+    display: none !important;
+  }
+}
+
+@media (max-width: 39.9375em) {
+  .tablesaw-stack thead td,
+  .tablesaw-stack thead th {
+    display: none;
+  }
+
+  .tablesaw-stack tbody td,
+  .tablesaw-stack tbody th {
+    clear: left;
+    float: left;
+    width: 100%;
+  }
+
+  .tablesaw-cell-label {
+    vertical-align: top;
+    color: #555;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    
+  }
+
+  .tablesaw-cell-content {
+    max-width: 67%;
+    display: inline-block;
+  }
+  
+  .tablesaw-stack tr{
+	border-bottom: 1px solid #ccc;
+}
+
+  .tablesaw-stack td:empty,
+  .tablesaw-stack th:empty {
+    display: none;
+  }
+}
+
+/* Media query to show as a standard table at 560px (35em x 16px) or wider */
+
+@media (min-width: 40em) {
+  .tablesaw-stack tr {
+    display: table-row;
+  }
+
+  /* Show the table header rows */
+
+  .tablesaw-stack td,
+  .tablesaw-stack th,
+  .tablesaw-stack thead td,
+  .tablesaw-stack thead th {
+    display: table-cell;
+    margin: 0;
+  }
+
+  /* Hide the labels in each cell */
+
+  .tablesaw-stack td .tablesaw-cell-label,
+  .tablesaw-stack th .tablesaw-cell-label {
+    display: none !important;
+  }
+  
+  .tablesaw-cell-content {
+	display: block;
+	width: 95%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+  }
+}
+
+/* @end */
+
 td .time{
 	display: block;
 	font-size: 14px;
@@ -747,19 +916,21 @@ main div.wrap > form { max-width: 576px; }
 /* @group .site-header */
 
 .site-header{ 
-	padding: 10px 0 10px;
+	padding: 8px 0 10px;
 }
 
 .site-header a{ color: #53d3fe;	  }
 
+.site-header .logo{
+	padding-bottom: 8px;
+	margin-bottom: 8px;
+	border-bottom: 1px solid #364e80;
+}
 .site-header .logo a,
 .site-header .logo a img{ float: left; }
 
-.site-header .logo a{ padding-left: 56px; }
+.site-header .logo a{ padding-left: 48px; }
 
-.site-header .logo{
-	margin-bottom: 12px;
-}
 .site-header .logo::after{
 	content: "";
 	display: block;
@@ -770,10 +941,9 @@ main div.wrap > form { max-width: 576px; }
 	font-size: 21px;
 	font-weight: 400;
 	text-decoration: none;
-	line-height: 24px;
+	line-height: 21px;
 	color: #fff;
 	letter-spacing: -1px;
-	padding-top: 2px;
 }
 
 .site-header .logo .tagline{
@@ -790,12 +960,11 @@ main div.wrap > form { max-width: 576px; }
 }
 
 .site-header .logo img{
-	width: 48px;
-	height: 48px;
+	width: 40px;
+	height: 40px;
 	border: 1px solid #2a4674;
 	border-radius: 2px;
-	margin-left: -56px;
-	margin-top: -2px;
+	margin-left: -48px;
 }
 
 
@@ -872,7 +1041,6 @@ main div.wrap > form { max-width: 576px; }
 }
 
 .site-header .nav-header-nav{
-	line-height: 1.4em;
 	font-size: 16px;
 }
 
@@ -893,136 +1061,23 @@ main div.wrap > form { max-width: 576px; }
 
 
 .site-header .nav-header-nav li a{ color: white; }
-.site-header .nav-header-nav .signed-in a:last-of-type{ margin-left: 0.8em; }
+.site-header .nav-header-nav a{ margin-right: 0.8em; }
+.site-header .nav-header-nav .a-sign-out{ margin-right: 0; }
 
-.site-header .nav-header-nav a:last-of-type{ margin-right: 0; }
-
-@media screen and (min-width: 799.99px){
+@media screen and (min-width: 600px){
 	.site-header .logo{
 		float: left;
+		border: none;
+		padding: 0;
 	}
 	
 	.site-header .nav-header-nav{
 		float: right;
-		text-align: right;
 		padding-top: 14px;
 	}
 	.site-header .logo{ margin-bottom: 0;}
 	.site-header form{ clear: none; }
 
-}
-
-/* @end */
-
-/* @group nav.breadcrumbs*/
-
-.breadcrumbs{
-	padding-top: 12px;
-	padding-bottom: 12px;
-	background: #f3f3f3;
-	border-bottom: 1px solid #eee;
-}
-
-.breadcrumbs.tools h1{
-	position: absolute;
-	left: -9999em;
-	top: -9999em;
-}
-
-.breadcrumbs ol li{
-	max-width: 8em;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	display: inline-block;
-}
-
-.breadcrumbs ol li::after{
-	content: "\25B6";
-	margin-left: 8px;
-	margin-right: 0.2em;
-	color: #777;
-	font-size: 12px;
-}
-
-nav.breadcrumbs ol li:last-child::after{
-	display: none;
-}
-
-@media screen and (min-width: 1066.66px){	
-    .breadcrumbs.wrapper{ padding-right: 320px; }
-
-    .breadcrumbs.tools{ 
-    	width: 256px; 
-    	float: right;
-    	margin-right: -320px;
-    	text-align: right;
-    }
-    
-    .breadcrumbs.tools li:last-child a{
-	margin-right: 0; 
-	}
-
-}
-
-nav.breadcrumbsol{
-	float: left;
-	width: 75%;
-}
-
-
-nav.breadcrumbsli{
-	display: inline-block;
-	vertical-align: middle;
-	margin-bottom: 0;
-}
-
-.breadcrumbsa{
-	color: #666;
-}
-
-.breadcrumbs.tools a{
-  border: 1px solid #d3d3d3;
-  border-bottom-color: #ccc;
-  border-radius: 2px;
-  background: #f8f8f8;
-  background: linear-gradient(#fff, #eee);
-  font: inherit;
-  font-size: 14px;
-  color: #333;
-  text-shadow: 0 1px 0 #fff;
-  padding: 4px 12px 6px;
-  -webkit-box-shadow: 0 1px 0 #eee;
-  display: inline-block;
-  line-height: 1.33em;
-  margin-right: 0.4em;
-  white-space: nowrap;
-  cursor: default;
-  text-decoration: none;
-
-}
-
-.breadcrumbs.tools a:hover{
-  background: linear-gradient(#fff, #e3e3e3);
-  border-color: #c3c3c3;
-  border-bottom-color: #b8b8b8;
-  text-decoration: none;
-}
-
-.breadcrumbs.tools a:active{
-  color: #888;
-  background: linear-gradient(#e3e3e3, #eee);
-  border-color: #bbb;
-  border-top-color: #aaa;
-  border-bottom-color: #b3b3b3;
-  text-shadow: none;
-  -webkit-box-shadow: inset 1px 1px 0 #ddd;
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none;   /* Chrome/Safari/Opera */
-    -khtml-user-select: none;    /* Konqueror */
-    -moz-user-select: none;      /* Firefox */
-    -ms-user-select: none;       /* IE/Edge */
-    user-select: none;           
 }
 
 /* @end */
@@ -1221,7 +1276,6 @@ nav.breadcrumbsli{
 	line-height: 1.25em;
 	margin-bottom: 0.25em;
 	color: #004a7f;
-	display: inline-block;
 }
 
 .auction a:hover h1{
@@ -1243,11 +1297,6 @@ nav.breadcrumbsli{
 
 .layout-auctions-index .auction:hover footer{
 	background: #f8f5ef;
-}
-
-.auction .auction-header h1{
-	margin-right: 40px;
-	float: left;
 }
 
 .auction .auction-header .button{
@@ -1286,7 +1335,7 @@ nav.breadcrumbsli{
 
 
 .auction .auction-header dl{
-	padding: 4px 0 16px;
+	padding: 4px 0 12px;
 	line-height: 1.4;
 	font-family: Merriweather, Georgia, serif;
 	font-size: 13px;
@@ -1313,8 +1362,8 @@ nav.breadcrumbsli{
 	clear: both;
 	background: #f3f3f3;
 	background: linear-gradient(#f3f3f3, #f0f0f0);
-	border-top: 1px solid #c8c8c8;
-	padding: 8px 16px 8px 14px;
+	border-top: 1px solid #c3c3c3;
+	padding: 5px 16px 5px 14px;
 	box-shadow: inset 0 1px 0 #e8e8e8;
 }
 
@@ -1332,8 +1381,8 @@ nav.breadcrumbsli{
 .auction .auction-header nav a{
 	display: inline-block;
 	vertical-align: middle;
-	padding: 4px 10px;
-	line-height: 1.4em;
+	padding: 6px 10px;
+	line-height: 1em;
 	border-radius: 999em;
 	text-decoration: none;
 	color: inherit;
@@ -2122,7 +2171,6 @@ color: white;
 
 .layout-auctions-show main .auction-header{
 	position: relative;
-	margin-bottom: 2em;
 	border-bottom: 1px solid #ccc;
 }
 
@@ -2130,33 +2178,50 @@ color: white;
 .layout-auctions-bids main .auction-header h1{
 	font-size: 24px;
 	font-family: Merriweather, Georgia, serif;
-	display: inline-block;
-	margin-bottom: 0.2em;
-	margin-left: 20px;
-	padding-top: 16px;
+	margin: 0 12px 8px;
+	padding-top: 12px;
 	line-height: 1.3;
 	font-weight: 400;
 	letter-spacing: -1px;
 	color: #384f7e;
 }
 
-@media screen and (min-width: 568.88px){	
-	.layout-auctions-show main .auction-header h1,
-	.layout-auctions-bids main .auction-header h1{
-		font-size: 28px;
-	}
-}
-
-.layout-auctions-show main .auction-header h1,
-.layout-auctions-bids main .auction-header h1{
-}
-
 .layout-auctions-show main .auction-header dl,
 .layout-auctions-bids main .auction-header dl{
-	font-size: 15px;
-	margin: 0 20px;
-	font-weight: normal;
+	margin: 0 12px;
 }
+
+.layout-auctions-show main .wrapper .page{
+	padding: 16px;
+}
+
+@media (min-width: 568.88px){	
+	.layout-auctions-show main .auction-header h1,
+	.layout-auctions-bids main .auction-header h1{
+		margin: 0 20px 8px;
+	}
+	
+	.layout-auctions-show main .auction-header dl,
+	.layout-auctions-bids main .auction-header dl{
+		font-size: 15px;
+		margin: 0 20px;
+		font-weight: normal;
+	}
+	
+	.layout-auctions-show main .wrapper .page h1,
+	.layout-auctions-show main .wrapper .page h2,
+	.layout-auctions-show main .wrapper .page h3,
+	.layout-auctions-show main .wrapper .page p{
+		width: 100%;
+		max-width: none;
+	}
+	
+	.layout-auctions-show main .wrapper .page{
+		padding: 20px;
+	}
+
+}
+
 
 .layout-auctions-show main .auction-header dd.auction-time-remaining,
 .layout-auctions-bids main .auction-header dd.auction-time-remaining{
@@ -2181,6 +2246,11 @@ color: white;
 	display: none;
 }
 
+.layout-auctions-show main .page h2{
+	color: #b83728;
+}
+
+/* @group auction-workflow */
 
 .auction-workflow.auction-workflow-bid-placed{
 	background: #dcfde9;
@@ -2301,50 +2371,16 @@ color: white;
 	margin-bottom: 0;
 }
 
+.auction-workflow p{ line-height: 1.4em; }
 
 
-.layout-auctions-show main .page h2{
-	color: #b83728;
-}
 
-.auction-workflow p,
-.auction-place-bid p{
-	line-height: 1.4em;
-}
-
-.auction-place-bid h1{
-	font: inherit;
-	color: inherit;
-	line-height: 1.2em;
-	margin-bottom: 0;
-}
-
-.auction-place-bid form{
-	padding-top: 18px;
-}
-
-.auction-place-bid form .field{
-	width: 50%;
-}
-
-.auction-place-bid form input{
-	font-weight: normal;
-}
-
-.auction-place-bid form label{
-	font-weight: 600;
-	color: #555;
-}
-
-.auction-place-bid form button{
-	display: block;
-	width: 100%;
-}
+/* @end */
 
 .layout-auctions-show main .auction-footer ul{
 	background: #f3f3f3;
 	padding: 20px;
-	margin-bottom: 20px;
+	border-radius: 0 0 4px 4px;
 }
 
 .layout-auctions-show main .auction-footer ul li{
@@ -2352,14 +2388,44 @@ color: white;
 	width: auto;
 }
 
-.layout-auctions-show main .wrapper .page{
-	padding: 12px;
+.layout-auctions-show main .wrapper .auction-footer .auction-workflow{ margin: 0 20px 20px; }
+
+@media screen and (min-width: 711.11px){	
+	.layout-auctions-show main .auction-header h1,
+	.layout-auctions-bids main .auction-header h1{ font-size: 27px; }
+		
+	.layout-auctions-show main .wrapper .page,
+	.layout-auctions-show main .wrapper .auction-footer{
+		float: left;
+		width: 50%;
+		padding-top: 0;
+	}
+	
+	.layout-auctions-show main .wrapper .auction-footer .auction-workflow{ margin: 0 0 20px; }
+	
+	.layout-auctions-show main .wrapper .page{
+		width: 55%;
+		padding: 20px;
+	}
+	
+	.layout-auctions-show main .wrapper .auction-footer{
+		width: 45%;
+		margin: 0;
+		padding: 20px;
+		border-radius: 3px !important;
+	}
+
+	.layout-auctions-show main .wrapper .page h1,
+	.layout-auctions-show main .wrapper .page h2,
+	.layout-auctions-show main .wrapper .page h3,
+	.layout-auctions-show main .wrapper .page p,
+	.layout-auctions-show main .wrapper .page li{
+		margin-left: 0;
+	}	
 }
 
-
 @media screen and (min-width: 1066.66px){	
-	.layout-auctions-show .auction-header .auction-place-bid{ display: none; }
-	
+
 	.layout-auctions-show main .wrapper .page,
 	.layout-auctions-show main .wrapper .auction-footer{
 		float: left;
@@ -2368,18 +2434,15 @@ color: white;
 	}
 	
 	.layout-auctions-show main .wrapper .page{
-		width: 630px;
-		padding-left: 20px;
+		width: 640px;
+		padding: 20px;
 	}
 	
-	.layout-auctions-show main .wrapper .page p{
-		width: 100%;
-	}
-
 	.layout-auctions-show main .wrapper .auction-footer{
-		width: 312px;
-		float: right;
+		width: 318px;
 		margin: 0;
+		padding: 20px;
+		border-radius: 3px !important;
 	}
 
 	.layout-auctions-show main .wrapper .page h1,
@@ -2458,69 +2521,74 @@ color: white;
 
 /* @group layout-auctions-bids */
 
-.layout-auctions-bids main .wrapper table,
-.layout-my-auctions main .wrapper table{
-	width: 100%;
-	color: inherit;
-	text-align: left;
-}
-
-.layout-my-auctions main .wrapper table{
-	margin-top: 2em;
-}
-
-.layout-auctions-bids main .wrapper table th,
-.layout-auctions-bids main .wrapper table td,
-.layout-my-auctions main .wrapper table td{
-	padding: 8px 0;
-	border-bottom: 1px solid #eee;
-	border-right: 1px solid #eee;
-	padding-left: 20px;
-}
-
-.layout-auctions-bids main .wrapper table {
-	border: none;
-}
-
-
-.layout-auctions-bids main .wrapper table tr th:first-of-type,
-.layout-auctions-bids main .wrapper table tr td:first-of-type {
-	border-left: none;
-}
-
-
-.layout-auctions-bids main .wrapper table tbody tr:last-of-type td{
-	border-bottom: none;
+@media (min-width: 40em) {
 	
+	.layout-auctions-bids main .wrapper table,
+	.layout-my-auctions main .wrapper table{
+		width: 100%;
+		color: inherit;
+		text-align: left;
+	}
+	
+	.layout-my-auctions main .wrapper table{
+		margin-top: 2em;
+	}
+	
+	.layout-auctions-bids main .wrapper table th,
+	.layout-auctions-bids main .wrapper table td,
+	.layout-my-auctions main .wrapper table td{
+		padding: 8px 0;
+		border-bottom: 1px solid #eee;
+		border-right: 1px solid #eee;
+		padding-left: 20px;
+	}
+	
+	.layout-auctions-bids main .wrapper table {
+		border: none;
+	}
+	
+	
+	.layout-auctions-bids main .wrapper table tr th:first-of-type,
+	.layout-auctions-bids main .wrapper table tr td:first-of-type {
+		border-left: none;
+	}
+	
+	
+	.layout-auctions-bids main .wrapper table tbody tr:last-of-type td{
+		border-bottom: none;
+		
+	}
+	
+	.layout-my-auctions main .wrapper table td{
+		border: 1px solid #eee;
+	}
+	
+	.layout-auctions-bids main .wrapper table .th td,
+	.layout-auctions-bids main .wrapper table .col-timestamp{
+		border-right: none;
+	}
+	
+	.layout-auctions-bids main .wrapper table .is-winning td{
+		background: lemonchiffon;
+	}
+	
+	.layout-auctions-bids main .wrapper table .col-duns,
+	.layout-auctions-bids main .wrapper table .col-amount,
+	.layout-auctions-bids main .wrapper table .col-timestamp{
+		padding-right: 20px;
+		width: 180px;
+	}
+	
+	.layout-auctions-bids main .wrapper table thead th{
+		padding-top: 8px;
+	}
+	
+	.layout-auctions-bids main .wrapper table .th td{
+		font-weight: 600;
+	}
+
 }
 
-.layout-my-auctions main .wrapper table td{
-	border: 1px solid #eee;
-}
-
-.layout-auctions-bids main .wrapper table .th td,
-.layout-auctions-bids main .wrapper table .col-timestamp{
-	border-right: none;
-}
-
-.layout-auctions-bids main .wrapper table .is-winning td{
-	background: lemonchiffon;
-}
-
-.layout-auctions-bids main .wrapper table .col-duns,
-.layout-auctions-bids main .wrapper table .col-amount,
-.layout-auctions-bids main .wrapper table .col-timestamp{
-	padding-right: 20px;
-	width: 180px;
-}
-
-.layout-auctions-bids main .wrapper table thead th{
-	padding-top: 8px;
-}
-
-.layout-auctions-bids main .wrapper table .th td{
-	font-weight: 600;
-}
 
 
 /* @end */
@@ -2873,7 +2941,6 @@ body[class^="layout-auctions"] section:first-of-type h1{
 	margin-left: 0.6em;
 }
 
-body[class^="layout-auctions"] table,
 .layout-people-index table,
 .layout-people-show table,
 .layout-settings table{
@@ -2913,7 +2980,6 @@ body[class^="layout-auctions"] table,
 	border-radius: 3px;
 }
 
-body[class^="layout-auctions"]  table tbody tr:nth-child(odd) td,
 .layout-people-index table tbody tr:nth-child(odd) td,
 .layout-people-show table tbody tr:nth-child(odd) td,
 .layout-people-show table tbody tr:nth-child(odd) th,
@@ -2921,8 +2987,6 @@ body[class^="layout-auctions"]  table tbody tr:nth-child(odd) td,
 	background: #fafafa;
 }
 
-body[class^="layout-auctions"] table td,
-body[class^="layout-auctions"] table th,
 .layout-people-index table td,
 .layout-people-index table th,
 .layout-people-show table td,
