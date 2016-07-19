@@ -12,7 +12,7 @@ class SamStatusPresenterFactory
   private
 
   def sam_status
-    if user.sam_status.match(/sam/)
+    if user.sam_status =~ /sam/
       user.sam_status.gsub('sam_', '')
     else
       user.sam_status
