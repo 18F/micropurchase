@@ -40,9 +40,12 @@ permalink: /
                 <h2>Project</h2>
                 <span><a href="https://github.com/18F/dolores-landingham-bot">Dolores Landingham</a></span>
               </li>
-              <li class="auction-status">
-                <h2>Status</h2>
-                <span class="auction-status-ending-soon">Ending soon</span>
+              <li class="auction-skills">
+                <h2>Skills</h2>
+                <ul>
+                  <li>Python</li>
+                  <li>Django</li>
+                </ul>
               </li>
             </ul>
           </footer>
@@ -71,9 +74,11 @@ permalink: /
                 <h2>Project</h2>
                 <span><a href="https://github.com/18F/dolores-landingham-bot">Dolores Landingham</a></span>
               </li>
-              <li class="auction-type">
-                <h2>Auction type</h2>
-                <span class="auction-status-closed">Closed</span>
+              <li class="auction-skills">
+                <h2>Skills</h2>
+                <ul>
+                  <li>Docker</li>
+                </ul>
               </li>
             </ul>
           </footer>
@@ -83,7 +88,7 @@ permalink: /
         {% include _auction.html %}
         {% include _auction.html %}
         <nav class="pagination">
-          <a href="#" class="pagination-prev">Prev</a>
+          <a href="#" class="pagination-prev is-disabled">Prev</a>
           <span class="pagination-page is-current">1</span>
           <a class="pagination-page" href="#">2</a>
           <a class="pagination-page" href="#">3</a>
@@ -97,6 +102,31 @@ permalink: /
             <span class="pagination-total">43</span> results.
           </p>
         </nav>
+        <form class="sort">
+          <h1>Sort</h1>
+          <div class="field field-select">
+            <label>
+              <span class="label-text">Sort by</span>
+              <select>
+                <option>Skills</option>
+                <option>Agency</option>
+                <option>Project</option>
+                <option>Time remaining</option>
+                <option>Current bid</option>
+              </select>
+            </label>
+          </div>
+          <div class="field field-select">
+            <label>
+              <span class="label-text">Sort order</span>
+              <select>
+                <option>Ascending</option>
+                <option>Descending</option>
+              </select>
+            </label>
+          </div>
+          <button>Submit</button>
+        </form>
       </div>
     </div>
   </main>

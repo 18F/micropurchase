@@ -1071,11 +1071,27 @@ main div.wrap > form { max-width: 576px; }
 .signed-in .site-header .nav-header-nav a{ margin-right: 0.8em; }
 .signed-in .site-header .nav-header-nav .a-sign-out{ margin-right: 0; }
 
-@media screen and (min-width: 600px){
+@media screen and (min-width: 622.222px){
+	.site-header{ padding: 12px 0; }
+	
 	.site-header .logo{
 		float: left;
 		border: none;
 		padding: 0;
+	}
+
+	.site-header .logo a{ 
+		padding-left: 56px; 
+		font-size: 24px;
+		padding-top: 4px;
+	}
+
+	
+	.site-header .logo img{
+		width: 48px;
+		height: 48px;
+		margin-left: -56px;
+		margin-top: -4px;
 	}
 	
 	.site-header .nav-header-nav{
@@ -1085,85 +1101,6 @@ main div.wrap > form { max-width: 576px; }
 	.site-header .logo{ margin-bottom: 0;}
 	.site-header form{ clear: none; }
 
-}
-
-/* @end */
-
-/* @group nav.pagination */
-
-.pagination{ 
-	margin: 1em 0 0; 
-	padding-top: 1em;
-	font-size: 16px; 
-	clear: both;
-}
-
-.pagination .pagination-prev,
-.pagination .pagination-next,
-.pagination .pagination-page,
-.pagination .pagination-ellipsis{
-	font-size: 16px;
-	float: left;
-	padding: 4px 8px;
-	text-decoration: none;
-
-}
-
-.pagination .pagination-ellipsis{
-	margin-left: -0.4em;
-	color: #aaa;
-}
-
-.pagination .pagination-prev,
-.pagination .pagination-next,
-.pagination .pagination-page{
-	border: 1px solid #ccc;
-	border-radius: 3px;
-	text-decoration: none;
-	border-radius: 3px;
-	color: #555; 
-	margin-right: 0.4em;
-}
-
-.pagination .pagination-page.is-current{
-	background: #555;
-	border-color: #555 !important;
-	color: white !important;
-}
-
-.pagination .pagination-prev:hover,
-.pagination .pagination-next:hover,
-.pagination .pagination-page:hover{
-	border-color: #006fbe;
-	color: #006fbe;
-}
-
-.pagination .pagination-prev::before,
-.pagination .pagination-next::after{
-	content: "\2190";
-	margin-right: 0.4em;
-}
-
-.pagination .pagination-next::after{
-	content: "\2192";
-	margin-right: 0;
-	margin-left: 0.4em;
-}
-
-.pagination .preposition{ 
-	font-style: italic;
-	font-family: Merriweather, Georgia;
-	font-size: 0.9em;
-	margin-right: 0.125em;
-	margin-left: 0.1em;
-
-}
-
-.pagination .pagination-signpost{
-	margin: 0;
-	padding-top: 1em;
-	clear: both;
-	line-height: 1.2;
 }
 
 /* @end */
@@ -1269,6 +1206,167 @@ main div.wrap > form { max-width: 576px; }
 
 /* @end */
 
+/* @group nav.pagination */
+
+.pagination{ 
+	margin: 1em 0 0; 
+	padding-top: 1em;
+	clear: both;
+}
+
+
+}
+
+.pagination .pagination-ellipsis{
+	margin-left: -0.4em;
+	color: #aaa;
+}
+
+.pagination .pagination-prev,
+.pagination .pagination-next,
+.pagination .pagination-page,
+.pagination .pagination-ellipsis{
+	border: 1px solid #ccc;
+	border-bottom-color: #c3c3c3;
+	border-radius: 3px;
+	text-decoration: none;
+	border-radius: 3px;
+	color: #555; 
+	float: left;
+	padding: 6px 8px;
+	text-decoration: none;
+	min-width: 1.8em;
+	text-align: center;
+}
+
+.pagination .pagination-prev{
+	border-radius: 3px 0 0 3px;
+	border-right: none;
+}
+
+.pagination .pagination-next{
+	border-radius: 0 3px 3px 0;
+	border-right-color: #c3c3c3;
+}
+
+.pagination .pagination-page,
+.pagination .pagination-ellipsis{
+	border-right: none;
+	border-radius: 0;
+}
+
+.pagination .is-disabled{
+	color: #ccc !important;
+	border-color: #ccc !important;
+	border-bottom-color: #c3c3c3 !important;
+}
+
+.pagination .pagination-page.is-current{
+	background: #444;
+	border-top-color: #444;
+	border-bottom-color: #333;
+	color: #fff !important;
+}
+
+.pagination .pagination-prev:hover,
+.pagination .pagination-next:hover,
+.pagination .pagination-page:hover{
+	border-top-color: #006fbe;
+	border-bottom-color: #006fbe;
+	color: #006fbe;
+}
+
+.pagination .pagination-next:hover{ border-right-color: #006fbe; }
+.pagination .pagination-prev:hover{ border-left-color: #006fbe; }
+
+.pagination .pagination-prev::before,
+.pagination .pagination-next::after{
+	content: "\2190";
+	margin-right: 0.4em;
+}
+
+.pagination .pagination-next::after{
+	content: "\2192";
+	margin-right: 0;
+	margin-left: 0.4em;
+}
+
+.pagination .preposition{ 
+	font-style: italic;
+	font-family: Merriweather, Georgia;
+	font-size: 0.9em;
+	margin-right: 0.125em;
+	margin-left: 0.1em;
+
+}
+
+.pagination .pagination-signpost{
+	margin: 0;
+	padding-top: 1em;
+	clear: both;
+	line-height: 1.2;
+}
+
+/* @end */
+
+/* @group .sort */
+
+
+
+.sort{
+	float: right;
+}
+
+.sort button{
+	padding: 3px 8px;
+}
+
+.sort .field-select {
+	display: inline-block;
+}
+
+.sort .field-select .label-text,
+.sort .field-select select{ 
+	display: inline; 
+	width: auto;
+	height: auto;
+	min-height: 0;
+	color: #555;
+}
+
+.sort .field-select .label-text{
+	padding-right: 0.4em;
+}
+
+.sort .field-select select{ 
+	border-color: #aaa;
+	border-right-color: #a0a0a0;
+	border-bottom-color: #a0a0a0;
+	padding: 3px 20px 3px 6px;
+}
+
+.sort .field-select::after{ 
+	margin-bottom: 5px;
+	right: 6px;
+	border-width: 4px;
+	border-top-color: #888;
+}
+
+.sort h1{
+	position: absolute;
+	left: -9999em;
+	top: -9999em;
+}
+
+.sort .field{
+	float: left;
+	margin-right: 1em;
+	margin-left: -2px;
+	margin-bottom: 0;
+}
+
+/* @end */
+
 /* @group auction */
 
 .auction h1{
@@ -1339,7 +1437,7 @@ main div.wrap > form { max-width: 576px; }
 
 .auction .auction-header dl{
 	padding: 4px 0 12px;
-	line-height: 1.4;
+	line-height: 1.67;
 	font-family: Merriweather, Georgia, serif;
 	font-size: 13px;
 	font-weight: 600;
@@ -1433,6 +1531,14 @@ main div.wrap > form { max-width: 576px; }
 	margin-bottom: 18px;
 }
 
+.auction .auction-footer .auction-skills li{ 
+	display: inline; 
+	width: auto;
+	float: none;
+}
+.auction .auction-footer .auction-skills li::after{  content: ", "; }
+.auction .auction-footer .auction-skills li:last-of-type::after{  content: ""; }
+
 .auction .auction-footer dd img{
 	width: 24px;
 	height: 24px;
@@ -1465,15 +1571,16 @@ dd.auction-status{
 	display: inline-block;
 	vertical-align: middle;
 	font-size: 14px;
+	line-height: 1;
 	font-family: Source Sans Pro;
 	font-style: normal;
 	background-color: #0095c8;
 	color: #fff;
 	border-radius: 2px;
-	margin-right: 0.8em !important;
+	margin-right: 0.4em !important;
 	margin-left: -0.2em;
 	margin-top: -2px;
-	padding: 2px 6px 1px;
+	padding: 4px 6px 4px;
 	text-shadow: 0 1px 0 rgba(0,0,0,0.2);
 }
 dd.auction-status-closed{ background: #99005c; }
@@ -1840,10 +1947,10 @@ a[id]{
 
 .layout-sign-up main .wrapper,
 .layout-profile main .wrapper{
-	width: 680px;
+	max-width: 640px;
 	border: 1px solid #ccc;
 	box-shadow: 2px 2px 0 0 #eee;
-	padding: 40px;
+	padding: 20px;
 	border-radius: 1em
 }
 
@@ -1913,7 +2020,7 @@ a[id]{
 
 
 .h-feed-header{
-	margin-bottom: 32px;
+	margin-bottom: 24px;
 	position: relative;
 }
 
@@ -1924,9 +2031,9 @@ a[id]{
 }
 
 .h-feed-header h1{
-	font-size: 48px;
-	font-weight: 300;
-	letter-spacing: -1.3px;	
+	font-size: 36px;
+	font-weight: 400;
+	letter-spacing: -1px;
 }
 
 .h-feed-header .button{
@@ -1935,9 +2042,10 @@ a[id]{
 	top: 16px;
 	padding: 6px 10px;
 	margin-left: 0.6em;
+	display: none;
 }
 
-.h-feed-header nav{
+.nav-auctions{
 	position: relative;
 	margin-top: 5px;
 	border-top: 1px solid #555;
@@ -1945,8 +2053,9 @@ a[id]{
 	display: none;
 }
 
-.user-type-admin.signed-in .h-feed-header nav,
-.user-type-vendor.signed-in .h-feed-header nav{
+.user-type-admin.signed-in .nav-auctions,
+.user-type-vendor.signed-in .nav-auctions,
+.signed-in .h-feed-header .button{
 	display: block;
 }
 
@@ -1963,22 +2072,19 @@ a[id]{
 	color: #333;
 }
 
-.layout-auctions-drafts .nav-auctions-drafts .count,
-.layout-auctions-index .nav-auctions-index .count,
-.layout-auctions-needs-attention .nav-auctions-needs-attention .count,
-.layout-auctions-closed .nav-auctions-closed .count { 
+.nav-auctions .count { 
 	background: #333;
 	color: white;
 	border-color: #333;
 }
 
-body[class^="layout-auctions"] .nav-auctions-needs-attention .count{ 
+.nav-auctions .nav-auctions-needs-attention .count{ 
 background: #99005c;
 border-color: #99005c;
 color: white;
 }
 
-.h-feed-header nav .count{
+.nav-auctions .count{
 	background: #f3f3f3;
 	padding: 1px 8px;
 	border: 1px solid #e3e3e3;
@@ -1988,87 +2094,8 @@ color: white;
 	margin-left: 0.2em;
 }
 
-.h-feed-header form{
-	font-size: 14px;
-	position: absolute;
-	bottom: -2px;
-	right: 0;
-}
-
-.layout-auctions-closed .h-feed-header form,
-.layout-auctions-needs-attention .h-feed-header form{ display: none; }
-
-.h-feed-header form button{
-	padding: 3px 8px;
-}
-
-.h-feed-header form .field-select {
-	display: inline-block;
-}
-
-.h-feed-header form .field-select .label-text,
-.h-feed-header form .field-select select{ 
-	display: inline; 
-	width: auto;
-	height: auto;
-	min-height: 0;
-	color: #555;
-}
-
-.h-feed-header form .field-select .label-text{
-	padding-right: 0.4em;
-}
-
-.h-feed-header form .field-select select{ 
-	border-color: #aaa;
-	border-right-color: #a0a0a0;
-	border-bottom-color: #a0a0a0;
-	padding: 3px 20px 3px 6px;
-}
-
-.h-feed-header form .field-select::after{ 
-	margin-bottom: 5px;
-	right: 6px;
-	border-width: 4px;
-	border-top-color: #888;
-}
-
-.h-feed-header form h1{
-	position: absolute;
-	left: -9999em;
-	top: -9999em;
-}
-
-.h-feed-header form .field{
-	float: left;
-	margin-right: 1em;
-	margin-left: -2px;
-	margin-bottom: 0;
-}
-
-.h-feed-header nav h2{
-	font-size: 11px;
-	text-transform: uppercase;
-	font-family: Lucida Grande;
-	position: absolute;
-	left: 0;
-	bottom: 1px;
-}
-
-.h-feed-header nav a{ color: #666; }
-.h-feed-header nav a:hover{ color: #333; }
-
-.h-feed-header ul{
-	margin-right: -0.8em;
-}
-.h-feed-header ul li{
-	display: inline;
-	margin-right: 0.8em;
-}
-
-.h-feed{
-	margin-bottom: 32px;
-}
+.nav-auctions a{ color: #666; }
+.nav-auctions a:hover{ color: #333; }
 
 .layout-auctions-index .auction{
 	border: 1px solid #c3c3c3;
@@ -2082,6 +2109,10 @@ color: white;
 	position: relative;
 	max-width: 100%;
 	display: block;
+}
+
+.layout-auctions-index.user-type-admin .auction h1{
+	margin-right: 2.67em;
 }
 
 .layout-auctions-index .auction.is-draft .draft{
@@ -2098,7 +2129,19 @@ color: white;
 	line-height: 1.4em;
 }
 
+@media screen and (min-width: 622.222px){
+	
+	.h-feed-header{ margin-bottom: 32px; }
+
+	.h-feed-header h1{
+		font-size: 48px;
+		font-weight: 300;
+		letter-spacing: -1.4px;
+	}
+}
+
 @media screen and (min-width: 799.99px){
+
 
 	.layout-auctions-index main .auction{
 		width: 48.5%;
@@ -2168,6 +2211,10 @@ color: white;
 }
 
 @media (min-width: 568.88px){	
+	.layout-auctions-show main .wrapper,
+	.layout-auctions-bids main .wrapper{
+	margin-top: 6px;
+	}
 	.layout-auctions-show main .auction-header h1,
 	.layout-auctions-bids main .auction-header h1{
 		margin: 0 20px 8px;
@@ -2911,9 +2958,9 @@ color: white;
 	display: inline-block;
 }
 
-body[class^="layout-auctions"] section:first-of-type h1{
+.layout-auctions-needs-attention .section-bids h1,
+.layout-auctions-closed .section-delivered h1{
 	margin-top: 0;
-	
 }
 
 .layout-people-index section h1+.button,
