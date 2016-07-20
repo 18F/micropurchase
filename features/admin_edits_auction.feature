@@ -2,12 +2,10 @@ Feature: Admin edits auctions in the admins panel
   As an admin
   I should be able to modify existing auctions
 
-  Background:
+  Scenario: Updating an auction
     Given I am an administrator
     And I sign in
-
-  Scenario: Updating an auction
-    Given there is an open auction
+    And there is an open auction
     And there is a client account to bill to
     And there is a skill in the system
     And I visit the auctions admin page
@@ -26,11 +24,12 @@ Feature: Admin edits auctions in the admins panel
     Then I should see new content on the page
 
   Scenario: Associating an auction with a customer
-    Given there is an open auction
+    Given I am an administrator
+    And I sign in
+    And there is an open auction
     And there is a customer
-    And I visit the auctions admin page
 
-    When I click to edit the auction
+    When I visit the admin form for that auction
     Then I should see a select box with all the customers in the system
 
     When I select a customer on the form
@@ -40,12 +39,39 @@ Feature: Admin edits auctions in the admins panel
     When I click to edit the auction
     Then I should see the customer selected for the auction
 
-  Scenario: Associating a auction with a skill
-    Given there is an open auction
+  Scenario: Associating an auction with a skill
+    Given I am an administrator
+    And I sign in
+    And there is an open auction
     And there is a skill in the system
-    And I visit the auctions admin page
-    When I click to edit the auction
+    When I visit the admin form for that auction
     And I select a skill on the form
     And I click on the "Update" button
     And I click to edit the auction
     Then I should see the skill that I set for the auction selected
+
+  Scenario: Marking accepted auction as paid
+    Given I am an administrator
+    And I sign in
+    And there is an accepted auction
+    And the auction is for a different purchase card
+    When I visit the admin form for that auction
+    And I check the "Paid" checkbox
+    And I click on the "Update" button
+    Then I should see when the winning vendor was paid in ET
+
+  Scenario: Accepted auction already marked as paid
+    Given I am an administrator
+    And I sign in
+    And there is a paid auction
+    And the auction is for a different purchase card
+    When I visit the admin form for that auction
+    Then I should see the disabled "Paid" checkbox
+
+  Scenario: Marking non-accepted auction as paid
+    Given I am an administrator
+    And I sign in
+    And there is an auction that needs evaluation
+    And the auction is for a different purchase card
+    When I visit the admin form for that auction
+    Then I should not see the "Paid" checkbox

@@ -76,8 +76,8 @@ en:
         from: "The 18F Micro-purchase team"
       winning_bidder_missing_payment_method:
         subject: "Please update your profile so Micro-purchase can pay you for your great work!"
-        para_1: "18F wants to pay you for your work! Our team recently accepted your work on \"%{auction_title}\". 
-          We'd like to pay you %{amount}, but we need you to tell us where we can enter our credit card information. 
+        para_1: "18F wants to pay you for your work! Our team recently accepted your work on \"%{auction_title}\".
+          We'd like to pay you %{amount}, but we need you to tell us where we can enter our credit card information.
           To get paid, please go to %{profile_url} and enter a payment URL."
         para_2: "Questions? Please contact us at microupurchase@gsa.gov"
         sign_off: "Sincerely,"

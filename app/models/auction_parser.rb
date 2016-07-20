@@ -11,7 +11,8 @@ class AuctionParser
       delivery_due_at: delivery_due_at,
       ended_at: ended_at,
       started_at: started_at,
-      user: user
+      user: user,
+      paid_at: paid_at
     ).delete_if { |_key, value| value.nil? }
   end
 
@@ -65,6 +66,12 @@ class AuctionParser
 
   def started_at
     parse_datetime("started_at")
+  end
+
+  def paid_at
+    if params[:auction][:paid_at] == '1'
+      Time.current
+    end
   end
 
   def parse_datetime(field)

@@ -1,6 +1,4 @@
-.usa-checklist-checked {
-  &::before {
-    background-image: image-url('uswds/correct9.png');
-    background-image: image-url('uswds/correct9.svg');
-  }
+input[type="checkbox"]:checked + label::before {
+  background-image: image-url("uswds/correct8.png");
+  background-image: image-url("uswds/correct8.svg");
 }

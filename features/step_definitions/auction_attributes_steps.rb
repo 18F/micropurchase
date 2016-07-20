@@ -41,6 +41,7 @@ Then(/^I should see the delivery_due_at timestamp in ET$/) do
 end
 
 Then(/^I should see when the winning vendor was paid in ET$/) do
+  @auction.reload
   expect(page).to have_text(DcTimePresenter.convert_and_format(@auction.paid_at))
 end
 
