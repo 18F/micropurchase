@@ -9,7 +9,7 @@ describe Admin::EditAuctionViewModel do
 
           view_model = Admin::EditAuctionViewModel.new(auction)
 
-          expect(view_model.published_options).to eq(['unpublished', 'published'])
+          expect(view_model.published_options).to eq(%w(unpublished published))
         end
       end
 
@@ -19,7 +19,7 @@ describe Admin::EditAuctionViewModel do
 
           view_model = Admin::EditAuctionViewModel.new(auction)
 
-          expect(view_model.published_options).to eq(['unpublished'])
+          expect(view_model.published_options).to eq(%w(unpublished))
         end
       end
     end
@@ -30,7 +30,7 @@ describe Admin::EditAuctionViewModel do
 
         view_model = Admin::EditAuctionViewModel.new(auction)
 
-        expect(view_model.published_options).to eq(['unpublished', 'published'])
+        expect(view_model.published_options).to eq(%w(unpublished published))
       end
     end
   end
@@ -43,7 +43,7 @@ describe Admin::EditAuctionViewModel do
           view_model = Admin::EditAuctionViewModel.new(auction)
 
           expect(view_model.hour_default('delivery_due')).to eq '6'
-         end
+        end
       end
     end
 
@@ -65,7 +65,7 @@ describe Admin::EditAuctionViewModel do
           view_model = Admin::EditAuctionViewModel.new(auction)
 
           expect(view_model.minute_default('delivery_due')).to eq '30'
-         end
+        end
       end
     end
 
@@ -87,7 +87,7 @@ describe Admin::EditAuctionViewModel do
           view_model = Admin::EditAuctionViewModel.new(auction)
 
           expect(view_model.meridiem_default('delivery_due')).to eq "AM"
-         end
+        end
       end
     end
 

@@ -1,4 +1,4 @@
-require Rails.root.join('spec', 'support', 'time_helpers.rb')
+require Rails.root.join('spec', 'support', 'helpers', 'factory_girl.rb')
 
 skills = FactoryGirl.create_list(:skill, 2)
 FactoryGirl.create(:auction, :reverse, :with_bidders)

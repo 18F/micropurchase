@@ -1,10 +1,10 @@
 require 'sinatra/base'
 
 class FakeSamApi < Sinatra::Base
-  VALID_DUNS = '0123456780000'
-  INVALID_DUNS = '0876543210000'
-  SMALL_BUSINESS_DUNS = '0123456780001'
-  BIG_BUSINESS_DUNS = '0123456780002'
+  VALID_DUNS = '0123456780000'.freeze
+  INVALID_DUNS = '0876543210000'.freeze
+  SMALL_BUSINESS_DUNS = '0123456780001'.freeze
+  BIG_BUSINESS_DUNS = '0123456780002'.freeze
 
   get '/sam/v4/registrations/:duns' do
     case params[:duns]

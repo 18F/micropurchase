@@ -1,5 +1,5 @@
-RSpec::Matchers.define :be_url do |expected|
+RSpec::Matchers.define :be_url do
   match do |actual|
-    URI.parse(actual) rescue false
+    URI.parse(actual)
   end
 end

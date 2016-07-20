@@ -33,7 +33,7 @@ end
 
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
-Before do |scenario|
+Before do
   WebMock.stub_request(:any, /api.data.gov/).to_rack(FakeSamApi)
   WebMock.stub_request(:any, /cap.18f.gov/).to_rack(FakeC2Api)
   WebMock.stub_request(:any, /c2-dev.18f.gov/).to_rack(FakeC2Api)

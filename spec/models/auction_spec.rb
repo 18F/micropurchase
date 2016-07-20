@@ -14,9 +14,11 @@ describe Auction do
       it { should validate_presence_of(:title) }
       it { should validate_presence_of(:user) }
       it { should validate_presence_of(:purchase_card) }
-      it { should_not allow_values(
-        ENV['C2_HOST'], 'http://www.example.com'
-      ).for(:c2_proposal_url) }
+      it do
+        should_not allow_values(
+          ENV['C2_HOST'], 'http://www.example.com'
+        ).for(:c2_proposal_url)
+      end
       it { should allow_value("#{ENV['C2_HOST']}/proposals/123").for(:c2_proposal_url) }
       it { should allow_value('').for(:c2_proposal_url) }
 
@@ -79,7 +81,7 @@ describe Auction do
       auction = create(:auction)
       auction.skills << [c_skill, a_skill, b_skill]
 
-      expect(auction.sorted_skill_names).to eq(['a', 'b', 'c'])
+      expect(auction.sorted_skill_names).to eq(%w(a b c))
     end
   end
 

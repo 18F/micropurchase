@@ -10,10 +10,12 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
         login
         api_key = FakeGitHub::INVALID_API_KEY
 
-        expect(subject).to validate(:get,
-                                    '/auctions',
-                                    200,
-                                    "_headers" => headers(api_key))
+        expect(subject).to validate(
+          :get,
+          '/auctions',
+          200,
+          "_headers" => headers(api_key)
+        )
       end
     end
 
@@ -22,10 +24,12 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
         login
         api_key = nil
 
-        expect(subject).to validate(:get,
-                                    '/auctions',
-                                    200,
-                                    "_headers" => headers(api_key))
+        expect(subject).to validate(
+          :get,
+          '/auctions',
+          200,
+          "_headers" => headers(api_key)
+        )
       end
     end
 
@@ -34,10 +38,12 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
         login
         api_key = FakeGitHub::VALID_API_KEY
 
-        expect(subject).to validate(:get,
-                                    '/auctions',
-                                    200,
-                                    "_headers" => headers(api_key))
+        expect(subject).to validate(
+          :get,
+          '/auctions',
+          200,
+          "_headers" => headers(api_key)
+        )
       end
 
       it 'returns valid auctions' do
@@ -45,10 +51,12 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
         create(:auction, :with_bidders)
         api_key = FakeGitHub::VALID_API_KEY
 
-        expect(subject).to validate(:get,
-                                    '/auctions',
-                                    200,
-                                    "_headers" => headers(api_key))
+        expect(subject).to validate(
+          :get,
+          '/auctions',
+          200,
+          "_headers" => headers(api_key)
+        )
       end
     end
   end
@@ -60,10 +68,12 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
         api_key = FakeGitHub::INVALID_API_KEY
         auction = create(:auction, :with_bidders)
 
-        expect(subject).to validate(:get,
-                                    '/auctions/{id}',
-                                    200,
-                                    "id" => auction.id, "_headers" => headers(api_key))
+        expect(subject).to validate(
+          :get,
+          '/auctions/{id}',
+          200,
+          "id" => auction.id, "_headers" => headers(api_key)
+        )
       end
     end
 
@@ -73,10 +83,12 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
         api_key = nil
         auction = create(:auction, :with_bidders)
 
-        expect(subject).to validate(:get,
-                                    '/auctions/{id}',
-                                    200,
-                                    "id" => auction.id, "_headers" => headers(api_key))
+        expect(subject).to validate(
+          :get,
+          '/auctions/{id}',
+          200,
+          "id" => auction.id, "_headers" => headers(api_key)
+        )
       end
     end
 
@@ -86,10 +98,12 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
         auction = create(:auction, :with_bidders)
         api_key = FakeGitHub::VALID_API_KEY
 
-        expect(subject).to validate(:get,
-                                    '/auctions/{id}',
-                                    200,
-                                    "id" => auction.id, "_headers" => headers(api_key))
+        expect(subject).to validate(
+          :get,
+          '/auctions/{id}',
+          200,
+          "id" => auction.id, "_headers" => headers(api_key)
+        )
       end
 
       context 'winning bid not present' do
@@ -99,10 +113,12 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
           _bid = create(:bid, auction: auction)
           api_key = FakeGitHub::VALID_API_KEY
 
-          expect(subject).to validate(:get,
-                                      '/auctions/{id}',
-                                      200,
-                                      "id" => auction.id, "_headers" => headers(api_key))
+          expect(subject).to validate(
+            :get,
+            '/auctions/{id}',
+            200,
+            "id" => auction.id, "_headers" => headers(api_key)
+          )
         end
       end
     end
@@ -113,10 +129,12 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
         auction = create(:auction, :with_bidders)
         api_key = FakeGitHub::VALID_API_KEY
 
-        expect(subject).to validate(:get,
-                                    '/auctions/{id}',
-                                    404,
-                                    "id" => auction.id+10, "_headers" => headers(api_key))
+        expect(subject).to validate(
+          :get,
+          '/auctions/{id}',
+          404,
+          "id" => auction.id + 10, "_headers" => headers(api_key)
+        )
       end
     end
   end
@@ -129,26 +147,9 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
     end
 
     let(:user) { create(:user, sam_status: :sam_accepted) }
-    let(:headers) do
-      {
-        'HTTP_ACCEPT' => 'text/x-json',
-        'HTTP_API_KEY' => api_key
-      }
-    end
-    let(:body) do
-      {
-        bid: {
-          amount: bid_amount
-        }
-      }
-    end
-    let(:second_body) do
-      {
-        bid: {
-          amount: second_bid_amount
-        }
-      }
-    end
+    let(:headers) { { 'HTTP_ACCEPT' => 'text/x-json', 'HTTP_API_KEY' => api_key } }
+    let(:body) { { bid: { amount: bid_amount } } }
+    let(:second_body) { { bid: { amount: second_bid_amount } } }
     let(:status) { response.status }
 
     context 'when the API key is missing' do
@@ -161,11 +162,13 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
 
       it 'returns a 403 error and does not create a bid' do
         expect do
-          expect(subject).to validate(:post,
-                                      '/auctions/{id}/bids',
-                                      403,
-                                      'id' => auction.id, '_headers' => headers,
-                                      '_data' => body)
+          expect(subject).to validate(
+            :post,
+            '/auctions/{id}/bids',
+            403,
+            'id' => auction.id, '_headers' => headers,
+            '_data' => body
+          )
         end.to_not change { auction.bids.count }
       end
     end
@@ -180,11 +183,13 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
 
       it 'returns a 403 error and does not create a bid' do
         expect do
-          expect(subject).to validate(:post,
-                                      '/auctions/{id}/bids',
-                                      403,
-                                      'id' => auction.id, '_headers' => headers,
-                                      '_data' => body)
+          expect(subject).to validate(
+            :post,
+            '/auctions/{id}/bids',
+            403,
+            'id' => auction.id, '_headers' => headers,
+            '_data' => body
+          )
         end.to_not change { auction.bids.count }
       end
     end
@@ -195,11 +200,13 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
 
       it 'returns a 404 error and does not create a bid' do
         expect do
-          expect(subject).to validate(:post,
-                                      '/auctions/{id}/bids',
-                                      404,
-                                      'id' => 27, '_headers' => headers,
-                                      '_data' => body)
+          expect(subject).to validate(
+            :post,
+            '/auctions/{id}/bids',
+            404,
+            'id' => 27, '_headers' => headers,
+            '_data' => body
+          )
         end.to_not change { Bid.count }
       end
     end
@@ -214,11 +221,13 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
 
       it 'returns a 403 error and does not create a bid' do
         expect do
-          expect(subject).to validate(:post,
-                                      '/auctions/{id}/bids',
-                                      403,
-                                      'id' => auction.id, '_headers' => headers,
-                                      '_data' => body)
+          expect(subject).to validate(
+            :post,
+            '/auctions/{id}/bids',
+            403,
+            'id' => auction.id, '_headers' => headers,
+            '_data' => body
+          )
         end.to_not change { auction.bids.count }
       end
     end
@@ -233,11 +242,13 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
 
       it 'returns a 403 error and does not create a bid' do
         expect do
-          expect(subject).to validate(:post,
-                                      '/auctions/{id}/bids',
-                                      403,
-                                      'id' => auction.id, '_headers' => headers,
-                                      '_data' => body)
+          expect(subject).to validate(
+            :post,
+            '/auctions/{id}/bids',
+            403,
+            'id' => auction.id, '_headers' => headers,
+            '_data' => body
+          )
         end.to_not change { auction.bids.count }
       end
     end
@@ -252,11 +263,13 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
 
       it 'returns a 200 response and creates the bid' do
         expect do
-          expect(subject).to validate(:post,
-                                      '/auctions/{id}/bids',
-                                      200,
-                                      'id' => auction.id, '_headers' => headers,
-                                      '_data' => body)
+          expect(subject).to validate(
+            :post,
+            '/auctions/{id}/bids',
+            200,
+            'id' => auction.id, '_headers' => headers,
+            '_data' => body
+          )
         end.to change { auction.bids.count }.by(1)
       end
     end
@@ -268,10 +281,12 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
         login
         api_key = FakeGitHub::INVALID_API_KEY
 
-        expect(subject).to validate(:get,
-                                    '/admin/auctions',
-                                    403,
-                                    "_headers" => headers(api_key))
+        expect(subject).to validate(
+          :get,
+          '/admin/auctions',
+          403,
+          "_headers" => headers(api_key)
+        )
       end
     end
 
@@ -280,10 +295,12 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
         login
         api_key = nil
 
-        expect(subject).to validate(:get,
-                                    '/admin/auctions',
-                                    403,
-                                    "_headers" => headers(api_key))
+        expect(subject).to validate(
+          :get,
+          '/admin/auctions',
+          403,
+          "_headers" => headers(api_key)
+        )
       end
     end
 
@@ -292,10 +309,12 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
         login
         api_key = FakeGitHub::VALID_API_KEY
 
-        expect(subject).to validate(:get,
-                                    '/admin/auctions',
-                                    403,
-                                    "_headers" => headers(api_key))
+        expect(subject).to validate(
+          :get,
+          '/admin/auctions',
+          403,
+          "_headers" => headers(api_key)
+        )
       end
     end
 
@@ -306,10 +325,12 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
         login(user)
         api_key = FakeGitHub::VALID_API_KEY
 
-        expect(subject).to validate(:get,
-                                    '/admin/auctions',
-                                    200,
-                                    "_headers" => headers(api_key))
+        expect(subject).to validate(
+          :get,
+          '/admin/auctions',
+          200,
+          "_headers" => headers(api_key)
+        )
       end
 
       it 'returns valid auctions' do
@@ -317,10 +338,12 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
         create(:auction, :with_bidders)
         api_key = FakeGitHub::VALID_API_KEY
 
-        expect(subject).to validate(:get,
-                                    '/admin/auctions',
-                                    200,
-                                    "_headers" => headers(api_key))
+        expect(subject).to validate(
+          :get,
+          '/admin/auctions',
+          200,
+          "_headers" => headers(api_key)
+        )
       end
     end
   end
@@ -332,10 +355,12 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
         api_key = FakeGitHub::INVALID_API_KEY
         auction = create(:auction, :with_bidders)
 
-        expect(subject).to validate(:get,
-                                    '/admin/auctions/{id}',
-                                    403,
-                                    "id" => auction.id, "_headers" => headers(api_key))
+        expect(subject).to validate(
+          :get,
+          '/admin/auctions/{id}',
+          403,
+          "id" => auction.id, "_headers" => headers(api_key)
+        )
       end
     end
 
@@ -345,10 +370,12 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
         api_key = nil
         auction = create(:auction, :with_bidders)
 
-        expect(subject).to validate(:get,
-                                    '/admin/auctions/{id}',
-                                    403,
-                                    "id" => auction.id, "_headers" => headers(api_key))
+        expect(subject).to validate(
+          :get,
+          '/admin/auctions/{id}',
+          403,
+          "id" => auction.id, "_headers" => headers(api_key)
+        )
       end
     end
 
@@ -359,10 +386,12 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
         auction = create(:auction, :with_bidders)
         api_key = FakeGitHub::VALID_API_KEY
 
-        expect(subject).to validate(:get,
-                                    '/admin/auctions/{id}',
-                                    200,
-                                    "id" => auction.id, "_headers" => headers(api_key))
+        expect(subject).to validate(
+          :get,
+          '/admin/auctions/{id}',
+          200,
+          "id" => auction.id, "_headers" => headers(api_key)
+        )
       end
     end
 
@@ -372,10 +401,12 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
         login(user)
         api_key = FakeGitHub::VALID_API_KEY
 
-        expect(subject).to validate(:get,
-                                    '/admin/auctions/{id}',
-                                    404,
-                                    "id" => 87, "_headers" => headers(api_key))
+        expect(subject).to validate(
+          :get,
+          '/admin/auctions/{id}',
+          404,
+          "id" => 87, "_headers" => headers(api_key)
+        )
       end
     end
   end
@@ -386,10 +417,12 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
         login
         api_key = FakeGitHub::INVALID_API_KEY
 
-        expect(subject).to validate(:get,
-                                    '/admin/users',
-                                    403,
-                                    "_headers" => headers(api_key))
+        expect(subject).to validate(
+          :get,
+          '/admin/users',
+          403,
+          "_headers" => headers(api_key)
+        )
       end
     end
 
@@ -398,10 +431,12 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
         login
         api_key = nil
 
-        expect(subject).to validate(:get,
-                                    '/admin/users',
-                                    403,
-                                    "_headers" => headers(api_key))
+        expect(subject).to validate(
+          :get,
+          '/admin/users',
+          403,
+          "_headers" => headers(api_key)
+        )
       end
     end
 
@@ -410,10 +445,12 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
         login
         api_key = FakeGitHub::INVALID_API_KEY
 
-        expect(subject).to validate(:get,
-                                    '/admin/users',
-                                    403,
-                                    "_headers" => headers(api_key))
+        expect(subject).to validate(
+          :get,
+          '/admin/users',
+          403,
+          "_headers" => headers(api_key)
+        )
       end
     end
 
@@ -424,10 +461,12 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
         login(user)
         api_key = FakeGitHub::VALID_API_KEY
 
-        expect(subject).to validate(:get,
-                                    '/admin/users',
-                                    200,
-                                    "_headers" => headers(api_key))
+        expect(subject).to validate(
+          :get,
+          '/admin/users',
+          200,
+          "_headers" => headers(api_key)
+        )
       end
 
       it 'returns information about all users' do
@@ -438,14 +477,16 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
         create(:auction, :with_bidders)
         api_key = FakeGitHub::VALID_API_KEY
 
-        expect(subject).to validate(:get,
-                                    '/admin/users',
-                                    200,
-                                    "_headers" => headers(api_key))
+        expect(subject).to validate(
+          :get,
+          '/admin/users',
+          200,
+          "_headers" => headers(api_key)
+        )
       end
     end
   end
-  
+
   context 'and' do
     it 'tests all documented routes' do
       expect(subject).to validate_all_paths

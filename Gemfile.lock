@@ -190,6 +190,9 @@ GEM
     json-schema (2.6.1)
       addressable (~> 2.3.8)
     jwt (1.5.1)
+    kaminari (0.17.0)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     launchy (2.4.3)
       addressable (~> 2.3)
     letter_opener (1.4.1)
@@ -434,6 +437,7 @@ DEPENDENCIES
   jquery-rails
   jquery-rails-cdn
   json-schema
+  kaminari
   letter_opener
   letter_opener_web
   newrelic_rpm

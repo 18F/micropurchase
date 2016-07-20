@@ -8,11 +8,11 @@ class FakeC2Api < Sinatra::Base
   end
 
   post '/api/v2/proposals' do
-   json_response 200, 'c2_proposal_created.json'
+    json_response 200, 'c2_proposal_created.json'
   end
 
   put '/api/v2/proposals/:id' do
-   json_response 200, 'c2_proposal_created.json'
+    json_response 200, 'c2_proposal_created.json'
   end
 
   get '/api/v2/proposals/:id' do

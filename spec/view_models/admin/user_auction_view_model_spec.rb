@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe Admin::UserAuctionViewModel do
-
   describe '#status' do
     it 'should return the auction status' do
       auction = create(:auction, :available)

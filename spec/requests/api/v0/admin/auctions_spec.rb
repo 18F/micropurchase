@@ -10,8 +10,8 @@ describe Api::V0::Admin::AuctionsController do
       stub_github('/user') { github_response_for_user(admin) }
       api_key = FakeGitHub::VALID_API_KEY
       headers = {
-          'HTTP_ACCEPT' => 'text/x-json',
-          'HTTP_API_KEY' => api_key
+        'HTTP_ACCEPT' => 'text/x-json',
+        'HTTP_API_KEY' => api_key
       }
 
       get api_v0_admin_auctions_path, nil, headers
