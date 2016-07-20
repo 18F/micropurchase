@@ -3,9 +3,6 @@ engines:
     enabled: true
   brakeman:
     enabled: true
-    exclude_fingerprints:
-    - 38eaf3a4c38ed941e5397a84c9f95b91a7c3dee9f70c0993131dd3be89180f75
-    - 122ff3e2371af7128b8dbc9444b16a83269494193f99b5f53a8a61565226d7f7
   eslint:
     enabled: true
   csslint:
