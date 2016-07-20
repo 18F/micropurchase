@@ -631,7 +631,8 @@ fieldset > legend,
 fieldset > legend{
 	padding: 4px 8px;
 	border: 1px solid #bbb;
-	border-radius: 2px
+	border-radius: 2px;
+	margin-left: -6px;
 }
 .field.is-disabled span.label-text{
 	color: #888;
@@ -2614,8 +2615,6 @@ color: white;
 	padding: 20px;
 }
 
-
-
 .fieldset-date-time .field-date,
 .fieldset-date-time .fieldset.fieldset-time{
 	margin: 0;
@@ -2629,6 +2628,7 @@ color: white;
 	font-weight: normal;
 	padding: 0;
 	border: 0;
+	margin: 0 0 8px;
 	line-height: 1;
 }
 
@@ -2655,12 +2655,21 @@ color: white;
 }
 
 .branch .fieldset-date-time > legend,
-.branch .delivery h1{
+.branch .delivery h2{
 	position: absolute;
 	top: 12px;
-	margin: 0;
 	line-height: 1;
 	bottom: auto;
+	padding: 0;
+	border: 0;
+	margin: 0;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.branch .delivery h1{
+	position: absolute;
+	left: -9999em;
 }
 
 .branch .fieldset-date-time .field-date,
@@ -2671,13 +2680,17 @@ color: white;
 	display: none;
 }
 
+.with-customized-timeline .fieldset-date-time.fieldset-start-date-time{
+	margin-bottom: 24px;
+}
 .with-customized-timeline .branch .fieldset-date-time .field-date,
 .with-customized-timeline .branch .fieldset-date-time .fieldset-time,
 .with-customized-timeline .branch .delivery .field{
 	display: block;
 }
 
-.with-customized-timeline .branch .fieldset-date-time,
+
+.with-customized-timeline .branch .fieldset-date-time.fieldset-end-date-time,
 .with-customized-timeline .branch .delivery{
 	width: auto;
 	float: none;
@@ -2688,10 +2701,38 @@ color: white;
 	margin-bottom: 24px;
 }
 
+.with-customized-timeline .branch .fieldset-date-time.fieldset-end-date-time,
+.with-customized-timeline .branch .delivery{
+	padding-top: 30px;
+}
+
+.with-customized-timeline .delivery::after{
+	content: "";
+	display: table;
+	clear: both;
+}
+.with-customized-timeline .delivery .field,
+.with-customized-timeline .delivery .estimate{
+	float: right;
+	position: relative;
+	width: 48.5%;
+	margin: 0;
+}
+
+.with-customized-timeline .delivery .field{ margin-right: 3%; }
+.with-customized-timeline .delivery .field .label-text{ font-weight: 400; }
+.with-customized-timeline .delivery .field input{ width: 5em; }
+
+.with-customized-timeline .delivery .estimate{ 
+	padding: 36px 12px 12px;
+	background: #f3f3f3;
+}
+
 .with-customized-timeline .branch .fieldset-date-time > legend,
 .with-customized-timeline .branch .delivery h1{
 	position: absolute;
 	top: 0;
+	left: 9px;
 	margin-top: -12px;
 	white-space: nowrap;
 	overflow: hidden;
@@ -2783,7 +2824,6 @@ color: white;
 	margin-bottom: 0;
 }
 
-.field.field-starting-bid{ margin-bottom: 8px; }
 .field.field-starting-bid input{ width: 5.5em; }
 
 .field.field-sealed-bid.field-checkbox{
@@ -2846,12 +2886,13 @@ color: white;
 
 .fieldset-skills legend{
 	background: none;
+	border: none;
 }
 
 .fieldset-skills .button{
 	position: absolute;
-	left: 4em;
-	top: -1px;
+	left: 4.25em;
+	top: 3px;
 	padding: 2px 5px;
 	font-size: 12px;
 	font-weight: 600;
@@ -2866,9 +2907,7 @@ color: white;
 	
 }
 
-.fieldset-payment{
-	margin-bottom: 0;
-}
+
 
 .fieldset-github .field,
 .fieldset-payment .field{
@@ -2891,13 +2930,9 @@ color: white;
 	margin-right: 0;
 }
 
-.fieldset-payment .field{
-	width: 48.5%;
-}
-
-.fieldset-payment .field.field-customer{
-	margin-right: 2.5%;
-}
+.fieldset-payment .field{ width: 48.5%; }
+.fieldset-payment .field .label-text{ font-weight: normal;	 }
+.fieldset-payment .field.field-customer{ margin-right: 3%; }
 
 .layout-auctions-edit .fieldset-payment .notice{
 	clear: both;
