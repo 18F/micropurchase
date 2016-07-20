@@ -48,8 +48,9 @@ describe CreateC2Proposal do
 
         expect do
           CreateC2Proposal.new(auction).perform
+          auction.reload
         end
-          .to change { auction.reload.c2_proposal_url }
+          .to change { auction.c2_proposal_url }
           .from('')
           .to("https://c2-dev.18f.gov/proposals/#{fake_c2_proposal_id}")
       end
