@@ -6,7 +6,7 @@ describe Admin::CustomersController do
       user = create(:admin_user)
       customer1 = create(:customer, agency_name: 'XYZ')
       customer2 = create(:customer, agency_name: 'ABC')
-      get :index, {}, user_id: user.id
+      get :index, { }, user_id: user.id
 
       vm = assigns(:view_model)
       expect(vm.customers).to eq([customer2, customer1])

@@ -1,7 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe AuctionParser do
-
+describe AuctionParser do
   describe '#perform' do
     context 'attributes in params' do
       it 'assigns attributes correctly' do
@@ -32,7 +31,7 @@ RSpec.describe AuctionParser do
             'started_at' => '2016-04-15',
             'started_at(1i)' => '13',
             'started_at(2i)' => '00',
-            'started_at(3i)' => 'PM',
+            'started_at(3i)' => 'PM'
           }
         }
 

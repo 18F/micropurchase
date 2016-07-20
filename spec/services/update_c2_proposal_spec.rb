@@ -13,8 +13,8 @@ describe UpdateC2Proposal do
 
       c2_client_double = double
       allow(C2::Client).to receive(:new).and_return(c2_client_double)
-      allow(c2_client_double).to receive(:put).
-        with(c2_path, fake_c2_attributes)
+      allow(c2_client_double).to receive(:put)
+        .with(c2_path, fake_c2_attributes)
 
       UpdateC2Proposal.new(auction).perform
 

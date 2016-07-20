@@ -36,7 +36,6 @@ When(/^the auction ends$/) do
   Delayed::Worker.new.work_off
 end
 
-
 Given(/^there is a closed bidless auction$/) do
   @auction = FactoryGirl.create(:auction, :closed)
 end
@@ -84,7 +83,11 @@ Given(/^there is an auction below the micropurchase threshold$/) do
 end
 
 Given(/^there is an auction with a starting price between the micropurchase threshold and simplified acquisition threshold$/) do
-  @auction = FactoryGirl.create(:auction, :between_micropurchase_and_sat_threshold, :available)
+  @auction = FactoryGirl.create(
+    :auction,
+    :between_micropurchase_and_sat_threshold,
+    :available
+  )
 end
 
 Given(/^there are many different auctions$/) do
@@ -152,7 +155,7 @@ Given(/^there is an auction with an associated customer$/) do
 end
 
 Given(/^there is an auction where the winning vendor is missing a payment method$/) do
-  @auction = FactoryGirl.create( :auction, :with_bidders, :evaluation_needed)
+  @auction = FactoryGirl.create(:auction, :with_bidders, :evaluation_needed)
   @winning_bidder = WinningBid.new(@auction).find.bidder
   @winning_bidder.update(payment_url: '')
 end

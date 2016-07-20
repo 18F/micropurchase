@@ -12,9 +12,9 @@ describe CheckApproval do
           )
           auction.save(validate: false)
 
-          expect {
+          expect do
             CheckApproval.new.perform
-          }.not_to raise_error
+          end.not_to raise_error
         end
       end
 
@@ -28,9 +28,9 @@ describe CheckApproval do
               c2_proposal_url: "https://c2-dev.18f.gov/#{c2_path}"
             )
 
-          CheckApproval.new.perform
+            CheckApproval.new.perform
 
-          expect(auction.reload.c2_approved_at).not_to be_nil
+            expect(auction.reload.c2_approved_at).not_to be_nil
           end
         end
 

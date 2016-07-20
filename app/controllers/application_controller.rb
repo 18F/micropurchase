@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
     handle_error(message, 403)
   end
 
-  rescue_from 'UnauthorizedError::RedirectToLogin' do |error|
+  rescue_from 'UnauthorizedError::RedirectToLogin' do
     store_location
     redirect_to sign_in_path
   end

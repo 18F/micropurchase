@@ -36,8 +36,8 @@ describe UpdateUser do
     it 'raises some param related error' do
       params = ActionController::Parameters.new(id: user_id)
 
-      expect { UpdateUser.new(params, user).save }.
-        to raise_error(ActionController::ParameterMissing)
+      expect { UpdateUser.new(params, user).save }
+        .to raise_error(ActionController::ParameterMissing)
     end
   end
 
@@ -175,7 +175,7 @@ describe UpdateUser do
       it 'set small_business to false and sam_status to :duns_blank' do
         user = create(:user, sam_status: :sam_accepted, small_business: true)
         params = ActionController::Parameters.new(
-          id: user.id, user: { duns_number: '', }
+          id: user.id, user: { duns_number: '' }
         )
 
         UpdateUser.new(params, user).save

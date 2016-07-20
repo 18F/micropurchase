@@ -79,7 +79,7 @@ end
 Then(/^I should see the maximum bid amount in the bidding form$/) do
   within(".auction-bid") do
     expect(page).to have_content(
-      "Maximum bid: #{Currency.new(RulesFactory.new(@auction).create.max_allowed_bid).to_s}"
+      "Maximum bid: #{Currency.new(RulesFactory.new(@auction).create.max_allowed_bid)}"
     )
   end
 end
