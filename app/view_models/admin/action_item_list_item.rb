@@ -42,7 +42,11 @@ class Admin::ActionItemListItem < Admin::BaseViewModel
   end
 
   def c2_proposal_url
-    auction.c2_proposal_url
+    if auction.purchase_card == 'default'
+      auction.c2_proposal_url
+    else
+      'N/A'
+    end
   end
 
   def paid?
