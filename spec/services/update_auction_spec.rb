@@ -17,7 +17,7 @@ describe UpdateAuction do
             'ended_at(2i)' => '15',
             'ended_at(3i)' => 'PM'
           }
-          params = { auction: new_ended_at}
+          params = { auction: new_ended_at }
 
           UpdateAuction.new(
             auction: auction,
@@ -42,7 +42,7 @@ describe UpdateAuction do
               'ended_at(3i)' => 'PM'
             }
             parsed_new_ended_at = DateTimeParser.new(new_ended_at, 'ended_at').parse
-            params = { auction: new_ended_at}
+            params = { auction: new_ended_at }
 
             expect(job.run_at).to eq(auction.ended_at)
             UpdateAuction.new(
@@ -64,9 +64,13 @@ describe UpdateAuction do
         new_title = 'The New Title'
         params = { auction: { title: new_title } }
 
-        updater = UpdateAuction.new(auction: auction, params: params, current_user: auction.user)
-
-        expect { updater.perform }.to change { auction.title }.to(new_title)
+        expect do
+          UpdateAuction.new(
+            auction: auction,
+            params: params,
+            current_user: auction.user
+          ).perform
+        end.to change { auction.title }.to(new_title)
       end
     end
 
@@ -80,12 +84,16 @@ describe UpdateAuction do
             :delivery_due_at_expired
           )
           accept_double = double(perform: true)
-          allow(AcceptAuction).to receive(:new).
-            with(auction: auction, payment_url: "https://some-website.com/pay").
-            and_return(accept_double)
+          allow(AcceptAuction).to receive(:new)
+            .with(auction: auction, payment_url: "https://some-website.com/pay")
+            .and_return(accept_double)
           params = { auction: { result: 'accepted' } }
 
-          UpdateAuction.new(auction: auction, params: params, current_user: auction.user).perform
+          UpdateAuction.new(
+            auction: auction,
+            params: params,
+            current_user: auction.user
+          ).perform
 
           expect(accept_double).to have_received(:perform)
         end
@@ -101,12 +109,16 @@ describe UpdateAuction do
               :delivery_due_at_expired
             )
             accept_double = double(perform: true)
-            allow(AcceptAuction).to receive(:new).
-              with(auction: auction, payment_url: "https://some-website.com/pay").
-              and_return(accept_double)
+            allow(AcceptAuction).to receive(:new)
+              .with(auction: auction, payment_url: "https://some-website.com/pay")
+              .and_return(accept_double)
             params = { auction: { result: 'accepted' } }
 
-            UpdateAuction.new(auction: auction, params: params, current_user: auction.user).perform
+            UpdateAuction.new(
+              auction: auction,
+              params: params,
+              current_user: auction.user
+            ).perform
 
             expect(accept_double).to have_received(:perform)
           end
@@ -121,12 +133,16 @@ describe UpdateAuction do
               :delivery_due_at_expired
             )
             accept_double = double(perform: true)
-            allow(AcceptAuction).to receive(:new).
-              with(auction: auction, payment_url: "https://some-website.com/pay").
-              and_return(accept_double)
+            allow(AcceptAuction).to receive(:new)
+              .with(auction: auction, payment_url: "https://some-website.com/pay")
+              .and_return(accept_double)
             params = { auction: { result: 'accepted' } }
 
-            UpdateAuction.new(auction: auction, params: params, current_user: auction.user).perform
+            UpdateAuction.new(
+              auction: auction,
+              params: params,
+              current_user: auction.user
+            ).perform
 
             expect(accept_double).not_to have_received(:perform)
           end
@@ -136,12 +152,16 @@ describe UpdateAuction do
           it 'does not call AcceptAuction' do
             auction = create(:auction)
             accept_double = double(perform: true)
-            allow(AcceptAuction).to receive(:new).
-              with(auction: auction, payment_url: nil).
-              and_return(accept_double)
+            allow(AcceptAuction).to receive(:new)
+              .with(auction: auction, payment_url: nil)
+              .and_return(accept_double)
             params = { auction: { result: 'accepted' } }
 
-            UpdateAuction.new(auction: auction, params: params, current_user: auction.user).perform
+            UpdateAuction.new(
+              auction: auction,
+              params: params,
+              current_user: auction.user
+            ).perform
 
             expect(accept_double).not_to have_received(:perform)
           end
@@ -154,16 +174,24 @@ describe UpdateAuction do
         auction = create(:auction, :delivery_due_at_expired)
         params = { auction: { result: 'rejected' } }
 
-        updater = UpdateAuction.new(auction: auction, params: params, current_user: auction.user)
-
-        expect { updater.perform }.to change { auction.rejected_at }
+        expect do
+          UpdateAuction.new(
+            auction: auction,
+            params: params,
+            current_user: auction.user
+          ).perform
+        end.to change { auction.rejected_at }
       end
 
       it 'does not set c2_proposal_url' do
         auction = create(:auction, :delivery_due_at_expired)
         params = { auction: { result: 'rejected' } }
 
-        updater = UpdateAuction.new(auction: auction, params: params, current_user: auction.user)
+        updater = UpdateAuction.new(
+          auction: auction,
+          params: params,
+          current_user: auction.user
+        )
 
         expect { updater.perform }.to_not change { auction.c2_proposal_url }
         expect(auction.c2_proposal_url).to eq ""
@@ -173,7 +201,9 @@ describe UpdateAuction do
         auction = create(:auction, :delivery_due_at_expired)
         params = { auction: { result: 'rejected' } }
         accept_double = double(perform: true)
-        allow(AcceptAuction).to receive(:new).with(auction: auction, payment_url: "https://some-website.com/pay" ).and_return(accept_double)
+        allow(AcceptAuction).to receive(:new).with(
+          auction: auction, payment_url: "https://some-website.com/pay"
+        ).and_return(accept_double)
 
         UpdateAuction.new(auction: auction, params: params, current_user: auction.user)
 

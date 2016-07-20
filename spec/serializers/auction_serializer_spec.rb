@@ -27,7 +27,7 @@ describe AuctionSerializer do
       end
 
       context 'auction is over' do
-        it  'returns winning bid' do
+        it 'returns winning bid' do
           auction = create(:auction)
           bid = create(:bid, auction: auction)
           allow(AuctionStatus).to receive(:new).with(auction).and_return(double(available?: false))

@@ -1,4 +1,4 @@
-RSpec::Matchers.define :be_iso8601 do |expected|
+RSpec::Matchers.define :be_iso8601 do
   def to_iso8601(string)
     # JSON iso has 3 digits of milliseconds sometimes, but don't include if 000
     DateTime.parse(string).iso8601(3).gsub('.000+', '+')

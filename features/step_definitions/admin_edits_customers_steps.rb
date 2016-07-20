@@ -16,7 +16,6 @@ When(/^I fill in values for a new customer$/) do
 end
 
 Then(/^I should see the new customer on the page$/) do
-
   within(:xpath, cel_xpath(column: 1)) do
     expect(page).to have_content(@agency_name)
   end

@@ -25,4 +25,3 @@ Then(/^I expect there to be a contracting officer in the list of admin users$/) 
     end
   end
 end
-

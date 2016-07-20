@@ -6,14 +6,13 @@ describe 'GET /auctions' do
   it 'returns iso8601 dates' do
     login
     create(:auction)
-    api_key = FakeGitHub::VALID_API_KEY
 
     get api_v0_auctions_path(format: :json), nil, headers
 
-    expect(json_auctions.map {|a| a['created_at'] }).to all(be_iso8601)
-    expect(json_auctions.map {|a| a['updated_at'] }).to all(be_iso8601)
-    expect(json_auctions.map {|a| a['started_at'] }).to all(be_iso8601)
-    expect(json_auctions.map {|a| a['ended_at'] }).to all(be_iso8601)
+    expect(json_auctions.map { |a| a['created_at'] }).to all(be_iso8601)
+    expect(json_auctions.map { |a| a['updated_at'] }).to all(be_iso8601)
+    expect(json_auctions.map { |a| a['started_at'] }).to all(be_iso8601)
+    expect(json_auctions.map { |a| a['ended_at'] }).to all(be_iso8601)
   end
 
   context 'when the auction is reverse' do
@@ -46,14 +45,14 @@ describe 'GET /auctions' do
 
           json_bids.each do |bid|
             expect(bid['bidder_id']).to_not be_nil
-              bidder = bid['bidder']
-              expect(bidder['id']).to_not be_nil
-              expect(bidder['name']).to_not be_nil
-              expect(bidder['duns_number']).to_not be_nil
-              expect(bidder['github_id']).to_not be_nil
-              expect(bidder['created_at']).to_not be_nil
-              expect(bidder['updated_at']).to_not be_nil
-              expect(bidder['sam_status']).to_not be_nil
+            bidder = bid['bidder']
+            expect(bidder['id']).to_not be_nil
+            expect(bidder['name']).to_not be_nil
+            expect(bidder['duns_number']).to_not be_nil
+            expect(bidder['github_id']).to_not be_nil
+            expect(bidder['created_at']).to_not be_nil
+            expect(bidder['updated_at']).to_not be_nil
+            expect(bidder['sam_status']).to_not be_nil
           end
         end
       end
@@ -79,12 +78,12 @@ describe 'GET /auctions' do
           json_bids.each do |bid|
             expect(bid['bidder_id']).to_not be_nil
             bidder = bid['bidder']
-              expect(bidder['id']).to_not be_nil
-              expect(bidder['name']).to_not be_nil
-              expect(bidder['duns_number']).to_not be_nil
-              expect(bidder['github_id']).to_not be_nil
-              expect(bidder['created_at']).to_not be_nil
-              expect(bidder['updated_at']).to_not be_nil
+            expect(bidder['id']).to_not be_nil
+            expect(bidder['name']).to_not be_nil
+            expect(bidder['duns_number']).to_not be_nil
+            expect(bidder['github_id']).to_not be_nil
+            expect(bidder['created_at']).to_not be_nil
+            expect(bidder['updated_at']).to_not be_nil
           end
 
           expect(json_bids.length).to eq(auction.bids.length)

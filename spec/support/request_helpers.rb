@@ -10,10 +10,7 @@ module RequestHelpers
   end
 
   def headers(api_key = valid_api_key)
-    {
-      'HTTP_ACCEPT' => 'text/x-json',
-      'HTTP_API_KEY' => api_key
-    }
+    { 'HTTP_ACCEPT' => 'text/x-json', 'HTTP_API_KEY' => api_key }
   end
 
   def valid_api_key
@@ -22,11 +19,11 @@ module RequestHelpers
 
   def github_request_headers
     {
-      'Accept'=>'application/vnd.github.v3+json',
-      'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-      'Authorization'=>'token validKeyAbcdfgh123',
-      'Content-Type'=>'application/json',
-      'User-Agent'=>'Octokit Ruby Gem 4.3.0'
+      'Accept' => 'application/vnd.github.v3+json',
+      'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+      'Authorization' => 'token validKeyAbcdfgh123',
+      'Content-Type' => 'application/json',
+      'User-Agent' => 'Octokit Ruby Gem 4.3.0'
     }
   end
 
@@ -43,21 +40,23 @@ module RequestHelpers
     { status: response_status, body: response_body, headers: response_headers }
   end
 
-  def stub_github(path, response_status: 200, &block)
-    url                          = "https://api.github.com#{path}"
+  def stub_github(path, &block)
+    url = "https://api.github.com#{path}"
     request_headers_without_auth = github_request_headers
-    request_headers_with_auth    = github_request_headers.merge({'Authorization' => /token ()/})
-    default_response_body        = JSON.generate(block.call)
+    request_headers_with_auth = github_request_headers.merge('Authorization' => /token ()/)
+    default_response_body = JSON.generate(block.call)
 
     # stub requests where no Authorization header is set
-    WebMock.stub_request(:get, url)
+    WebMock
+      .stub_request(:get, url)
       .with(headers: request_headers_without_auth)
-      .to_return {|request| handle_request(request, response_body: default_response_body)}
+      .to_return { |request| handle_request(request, response_body: default_response_body) }
 
     # stub requests that include an Authorization header
-    WebMock.stub_request(:get, url)
+    WebMock
+      .stub_request(:get, url)
       .with(headers: request_headers_with_auth)
-      .to_return {|request| handle_request(request, response_body: default_response_body)}
+      .to_return { |request| handle_request(request, response_body: default_response_body) }
   end
 
   def github_response_for_user(user)

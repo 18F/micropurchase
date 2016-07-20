@@ -38,7 +38,6 @@ describe WinningBidderExport do
         expect(parsed[1][19]).to include('Sudol, Brendan')
         expect(parsed[1][20]).to include(WinningBidderExport::COMMERCIAL_ITEM_TEST_PROGRAM)
         expect(parsed[1][21]).to include(WinningBidderExport::SOLICITATION_PROCEDURES)
-
       end
     end
 
@@ -48,9 +47,9 @@ describe WinningBidderExport do
         winning_bidder = WinningBid.new(auction).find.bidder
         winning_bidder.update(duns_number: FakeSamApi::INVALID_DUNS)
 
-        expect {
+        expect do
           WinningBidderExport.new(auction).export_csv
-        }.to raise_error(WinningBidderExport::Error)
+        end.to raise_error(WinningBidderExport::Error)
       end
     end
   end

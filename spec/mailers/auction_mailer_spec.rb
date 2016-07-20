@@ -7,8 +7,7 @@ describe AuctionMailer do
       winning_bid = WinningBid.new(auction).find
       winning_bidder = winning_bid.bidder
 
-      email = AuctionMailer
-        .winning_bidder_notification(bidder: winning_bidder, auction: auction)
+      email = AuctionMailer.winning_bidder_notification(bidder: winning_bidder, auction: auction)
 
       expect(email.to).to eq [winning_bidder.email]
       expect(email.subject).to eq(
@@ -43,7 +42,7 @@ describe AuctionMailer do
       bidder = create(:user, email: "test@example.com")
       bid = create(:bid, bidder: bidder)
       email = AuctionMailer
-        .losing_bidder_notification(bidder: bidder, auction: bid.auction)
+              .losing_bidder_notification(bidder: bidder, auction: bid.auction)
 
       expect(email.to).to eq [bidder.email]
       expect(email.subject).to eq(

@@ -14,7 +14,7 @@ describe SignInUser do
           }
         }
 
-        login_user = SignInUser.new(auth_hash: auth_hash, session: {})
+        login_user = SignInUser.new(auth_hash: auth_hash, session: { })
         login_user.perform
 
         user = User.last
@@ -38,7 +38,7 @@ describe SignInUser do
           }
         }
 
-        login_user = SignInUser.new(auth_hash: auth_hash, session: {})
+        login_user = SignInUser.new(auth_hash: auth_hash, session: { })
         login_user.perform
 
         user.reload
@@ -68,7 +68,7 @@ describe SignInUser do
           }
         }
 
-        login_user = SignInUser.new(auth_hash: auth_hash, session: {})
+        login_user = SignInUser.new(auth_hash: auth_hash, session: { })
         login_user.perform
 
         user.reload
@@ -82,7 +82,7 @@ describe SignInUser do
     context 'when the uid exists in a user' do
       it 'does not create a new user' do
         create(:user, github_id: github_id_from_oauth)
-        authenticator = SignInUser.new(auth_hash: auth_hash, session: {})
+        authenticator = SignInUser.new(auth_hash: auth_hash, session: { })
         expect { authenticator.perform }.not_to change { User.count }
       end
 
@@ -99,14 +99,14 @@ describe SignInUser do
 
     context 'when the uid does not exist' do
       it 'creates a new user' do
-        authenticator = SignInUser.new(auth_hash: auth_hash, session: {})
+        authenticator = SignInUser.new(auth_hash: auth_hash, session: { })
 
         expect { authenticator.perform }.to change { User.count }
       end
 
       it 'signs in the user into the session' do
         user = create(:user, github_id: github_id_from_oauth)
-        session = {}
+        session = { }
         authenticator = SignInUser.new(auth_hash: auth_hash, session: session)
 
         authenticator.perform
