@@ -1,23 +1,10 @@
 {
   "ignored_warnings": [
     {
-      "warning_type": "Redirect",
-      "warning_code": 18,
-      "fingerprint": "1f5e56ec432800fd1896435e9cd488f3c75047cdb1855add003acf99052a04f3",
-      "message": "Possible unprotected redirect",
-      "file": "app/controllers/authentications_controller.rb",
-      "line": 4,
-      "link": "http://brakemanscanner.org/docs/warning_types/redirect/",
-      "code": "redirect_to(LoginUser.new(request.env[\"omniauth.auth\"], session).perform)",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "AuthenticationsController",
-        "method": "create"
-      },
-      "user_input": "SignInUser.new(request.env[\"omniauth.auth\"], session).perform",
-      "confidence": "High",
-      "note": "Fixed here: https://github.com/18F/micropurchase/commit/799d74393c394e016fba5eab9df1eb638a7d2b06"
+      "fingerprint": "38eaf3a4c38ed941e5397a84c9f95b91a7c3dee9f70c0993131dd3be89180f75"
+    },
+    {
+      "fingerprint": "122ff3e2371af7128b8dbc9444b16a83269494193f99b5f53a8a61565226d7f7"
     }
   ],
   "updated": "2015-11-17 18:38:44 -0500",

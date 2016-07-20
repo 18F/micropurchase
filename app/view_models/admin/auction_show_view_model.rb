@@ -7,7 +7,7 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
   end
 
   def csv_report_partial
-    if over?
+    if auction_status.over?
       'admin/auctions/csv_report'
     else
       'components/null'
@@ -38,10 +38,8 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
       'Customer' => customer.agency_name,
       'Billable to' => auction.billable_to,
       'Purchase card' => auction.purchase_card,
-      'Paid at' => formatted_date(auction.paid_at),
-      'C2 proposal URL' => auction.c2_proposal_url,
-      'C2 approved at' => auction.c2_approved_at
-    }
+      'Paid at' => formatted_date(auction.paid_at)
+    }.merge(c2_fields)
   end
 
   def id
@@ -56,10 +54,6 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
     auction.summary
   end
 
-  def capitalized_type
-    auction.type.dasherize.capitalize
-  end
-
   def relative_time
     status_presenter.relative_time
   end
@@ -67,14 +61,6 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
   def veiled_bids
     auction.bids.map do |bid|
       Admin::BidListItem.new(bid: bid, user: current_user)
-    end
-  end
-
-  def eligibility_label
-    if AuctionThreshold.new(auction).small_business?
-      'Small-business only'
-    else
-      'SAM.gov only'
     end
   end
 
@@ -104,12 +90,31 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
 
   private
 
-  def status_presenter
-    @_status_presenter ||= StatusPresenterFactory.new(auction).create
+  def eligibility_label
+    if AuctionThreshold.new(auction).small_business?
+      'Small-business only'
+    else
+      'SAM.gov only'
+    end
   end
 
-  def over?
-    auction_status.over?
+  def capitalized_type
+    auction.type.dasherize.capitalize
+  end
+
+  def c2_fields
+    if auction.purchase_card == 'default'
+      {
+        'C2 proposal URL' => auction.c2_proposal_url,
+        'C2 approved at' => auction.c2_approved_at
+      }
+    else
+      { }
+    end
+  end
+
+  def status_presenter
+    @_status_presenter ||= StatusPresenterFactory.new(auction).create
   end
 
   def auction_status
@@ -118,10 +123,6 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
 
   def customer
     auction.customer || NullCustomer.new
-  end
-
-  def rules
-    @_rules ||= RulesFactory.new(auction).create
   end
 
   def formatted_date(date)
