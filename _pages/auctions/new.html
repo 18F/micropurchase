@@ -40,7 +40,7 @@ excerpt: None
                 <label>
                   <span class="label-text">Hours</span>
                   <select>
-                    <option value="1">1</option>
+                    <option value="1" selected>1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
@@ -51,7 +51,7 @@ excerpt: None
                     <option value="9">9</option>
                     <option value="10">10</option>
                     <option value="11">11</option>
-                    <option value="12" selected>12</option>
+                    <option value="12" >12</option>
                   </select>
                 </label>
               </div>
@@ -70,8 +70,8 @@ excerpt: None
                 <label>
                   <span class="label-text">Meridiem</span>
                   <select>
-                    <option value="AM" selected>AM</option>
-                    <option value="PM">PM</option>
+                    <option value="AM">AM</option>
+                    <option value="PM" selected>PM</option>
                   </select>
                 </label>
               </div>
@@ -82,7 +82,7 @@ excerpt: None
             <fieldset class="fieldset fieldset-date-time fieldset-end-date-time">
               <legend>Auction ends</legend>
               <span class="fieldset-date-time-summary">
-                <span class="date">Undefined</span> at <span class="time-hours">12</span>:<span class="time-minutes">00</span><span class="time-meridiem">AM</span> EST
+                <span class="date">Undefined</span> at <span class="time-hours">1</span>:<span class="time-minutes">00</span><span class="time-meridiem">AM</span> EST
               </span>
               <div class="field field-date">
                 <label>
@@ -127,66 +127,26 @@ excerpt: None
                     <span class="label-text">Meridiem</span>
                     <select>
                       <option>AM</option>
-                      <option>PM</option>
+                      <option selected>PM</option>
                     </select>
                   </label>
                 </div>
                 <span class="time-zone">EST</span>
               </fieldset>
             </fieldset>
-            <fieldset class="fieldset fieldset-date-time fieldset-delivery-date-time">
-              <legend>Delivery deadline</legend>
-              <span class="fieldset-date-time-summary"><span class="date">Undefined</span> at <span class="time-hours">12</span>:<span class="time-minutes">00</span><span class="time-meridiem">AM</span> EST</span>
-              <div class="field field-date">
+            <section class="delivery">
+              <h1>Delivery timeline</h1>
+              <div class="estimate">
+                <h2>Estimated delivery date</h2>
+                <span class="delivery-estimate"><span class="date">Undefined</span> at <span class="time-hours">1</span>:<span class="time-minutes">00</span><span class="time-meridiem">PM</span> EST</span>
+              </div>
+              <div class="field">
                 <label>
-                  <span class="label-text">Date</span>
-                  <input type="date" name="">
+                  <span class="label-text">Days</span>
+                  <input type="number" name="" value="5">
                 </label>
               </div>
-              <fieldset class="fieldset fieldset-time">
-                <legend>Time</legend>
-                <div class="field field-select field-time-hours">
-                  <label>
-                    <span class="label-text">Hours</span>
-                    <select>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                      <option value="7">7</option>
-                      <option value="8">8</option>
-                      <option value="9">9</option>
-                      <option value="10">10</option>
-                      <option value="11">11</option>
-                      <option value="12">12</option>
-                    </select>
-                  </label>
-                </div>
-                <div class="field field-select field-time-minutes">
-                  <label>
-                    <span class="label-text">Minutes</span>
-                    <select>
-                      <option value="00">00</option>
-                      <option value="15">15</option>
-                      <option value="30">30</option>
-                      <option value="45">45</option>
-                    </select>
-                  </label>
-                </div>
-                <div class="field field-select field-time-meridiem">
-                  <label>
-                    <span class="label-text">Meridiem</span>
-                    <select>
-                      <option value="AM">AM</option>
-                      <option value="PM">PM</option>
-                    </select>
-                  </label>
-                </div>
-                <span class="time-zone">EST</span>
-              </fieldset>
-            </fieldset>
+            </section>
           </aside>
           <p class="help-text p-date-time-defaults">By default, auctions are listed for one week and vendors have five business days to deliver. <a href="#" class="a-customize-timeline">Edit</a></p>
           <div class="field field-starting-bid">
