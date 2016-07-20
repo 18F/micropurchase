@@ -122,7 +122,7 @@ Given(/^there is an auction where the winning vendor is not eligible to be paid$
 end
 
 Given(/^there is a paid auction$/) do
-  @auction = FactoryGirl.create(:auction, :closed, :paid)
+  @auction = FactoryGirl.create(:auction, :closed, :accepted, :paid)
 end
 
 Given(/^the auction is for the default purchase card$/) do
@@ -171,4 +171,14 @@ Given(/^there is an accepted auction where the winning vendor is missing a payme
   )
   @winning_bidder = WinningBid.new(@auction).find.bidder
   @winning_bidder.update(payment_url: '')
+end
+
+Given(/^there is an accepted auction$/) do
+  @auction = FactoryGirl.create(
+    :auction,
+    :with_bidders,
+    :published,
+    result: :accepted,
+    accepted_at: nil,
+  )
 end

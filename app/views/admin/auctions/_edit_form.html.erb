@@ -1,3 +1,4 @@
 <%= f.input :delivery_url %>
 <%= f.input :result, collection: Auction.results.keys.to_a %>
-<%= f.input :c2_proposal_url, disabled: true %>
+<%= render partial: auction.c2_proposal_partial, locals: { f: f } %>
+<%= render partial: auction.paid_at_partial, locals: { f: f } %>

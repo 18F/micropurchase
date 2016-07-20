@@ -24,7 +24,7 @@ class UpdateAuction
   attr_reader :auction, :params, :current_user
 
   def assign_attributes
-    auction.assign_attributes(attributes)
+    auction.assign_attributes(parsed_attributes)
   end
 
   def update_auction_ended_job
@@ -50,7 +50,7 @@ class UpdateAuction
   end
 
   def updating_ended_at?
-    attributes.key?(:ended_at)
+    parsed_attributes.key?(:ended_at)
   end
 
   def perform_approved_auction_tasks
@@ -73,11 +73,11 @@ class UpdateAuction
   end
 
   def auction_accepted?
-    attributes[:result] == 'accepted'
+    parsed_attributes[:result] == 'accepted'
   end
 
   def auction_rejected?
-    attributes[:result] == 'rejected'
+    parsed_attributes[:result] == 'rejected'
   end
 
   def winning_bidder_is_eligible_to_be_paid?
@@ -108,8 +108,8 @@ class UpdateAuction
     WinningBid.new(auction).find.bidder
   end
 
-  def attributes
-    @_attributes ||= AuctionParser.new(params, user).attributes
+  def parsed_attributes
+    @_parsed_attributes ||= AuctionParser.new(params, user).attributes
   end
 
   def user

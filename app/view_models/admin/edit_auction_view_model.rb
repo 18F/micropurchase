@@ -49,6 +49,24 @@ class Admin::EditAuctionViewModel < Admin::BaseViewModel
     ([auction.customer] + Customer.sorted).uniq.compact
   end
 
+  def c2_proposal_partial
+    if auction.purchase_card == "default"
+      'admin/auctions/c2_proposal_url'
+    else
+      'components/null'
+    end
+  end
+
+  def paid_at_partial
+    if auction.purchase_card == "default" || auction.result != "accepted"
+      'components/null'
+    elsif auction.paid_at.present?
+      'admin/auctions/disabled_paid_at'
+    else
+      'admin/auctions/paid_at'
+    end
+  end
+
   private
 
   def dc_time(field)
