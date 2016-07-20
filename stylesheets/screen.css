@@ -2804,6 +2804,10 @@ color: white;
 	border-radius: 0 3px 3px 0;
 }
 
+.field-starting-bid+.field-checkbox.field-sealed-bid{
+	margin-top: -18px;
+}
+
 .field-checkbox.field-sealed-bid .label-text{
 	font-weight: 400;
 	font-size: 14px;
