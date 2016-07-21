@@ -66,6 +66,7 @@ $(document).ready(function() {
     $('.nav-user select').find('option[value="' + userType + '"]').prop('selected', true);
     $('.nav-user select').change();
     workflowClass = "auction-workflow-" + statusCode;
+    console.log(workflowClass);
     $('.' + workflowClass).show();
   });
 

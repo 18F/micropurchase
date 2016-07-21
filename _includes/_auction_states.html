@@ -1,0 +1,228 @@
+<section class="auction-workflow auction-workflow-unpublished-closed-publishable-pending-approval-admins">
+  <p>This auction will be paid for using an 18F purchase card, which cannot be used without first being granted approval in C2.</p>
+  <button>Request approval</button>
+</section>
+<section class="auction-workflow auction-workflow-unpublished-closed-publishable-admins">
+  <p>This auction is ready to publish. Please select the auction start date, auction end date, and the delivery period.</p>
+  <fieldset class="fieldset fieldset-date-time fieldset-start-date-time">
+    <legend>Auction starts</legend>
+    <div class="field field-date">
+      <label>
+        <span class="label-text">Date</span>
+        <input type="date" name="">
+      </label>
+    </div>
+    <fieldset class="fieldset fieldset-time">
+      <legend>Time</legend>
+      <div class="field field-select field-time-hours">
+        <label>
+          <span class="label-text">Hours</span>
+          <select>
+            <option value="1" selected>1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+          </select>
+        </label>
+      </div>
+      <div class="field field-select field-time-minutes">
+        <label>
+          <span class="label-text">Minutes</span>
+          <select>
+            <option value="00" selected>00</option>
+            <option value="15">15</option>
+            <option value="30">30</option>
+            <option value="45">45</option>
+          </select>
+        </label>
+      </div>
+      <div class="field field-select field-time-meridiem">
+        <label>
+          <span class="label-text">Meridiem</span>
+          <select>
+            <option value="AM">AM</option>
+            <option value="PM" selected>PM</option>
+          </select>
+        </label>
+      </div>
+      <span class="time-zone">EST</span>
+    </fieldset>
+  </fieldset>
+  <aside class="branch">
+    <fieldset class="fieldset fieldset-date-time fieldset-end-date-time">
+      <legend>Auction ends</legend>
+      <span class="fieldset-date-time-summary">
+        <span class="date">Undefined</span> at <span class="time-hours">1</span>:<span class="time-minutes">00</span><span class="time-meridiem">PM</span> EST
+      </span>
+      <div class="field field-date">
+        <label>
+          <span class="label-text">Date</span>
+          <input type="date" name="">
+        </label>
+      </div>
+      <fieldset class="fieldset fieldset-time">
+        <legend>Time</legend>
+        <div class="field field-select field-time-hours">
+          <label>
+            <span class="label-text">Hours</span>
+            <select>
+              <option value="1" selected>1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+            </select>
+          </label>
+        </div>
+        <div class="field field-select field-time-minutes">
+          <label>
+            <span class="label-text">Minutes</span>
+            <select>
+              <option>00</option>
+              <option>15</option>
+              <option>30</option>
+              <option>45</option>
+            </select>
+          </label>
+        </div>
+        <div class="field field-select field-time-meridiem">
+          <label>
+            <span class="label-text">Meridiem</span>
+            <select>
+              <option>AM</option>
+              <option selected>PM</option>
+            </select>
+          </label>
+        </div>
+        <span class="time-zone">EST</span>
+      </fieldset>
+    </fieldset>
+    <section class="delivery">
+      <h1>Delivery timeline</h1>
+      <div class="estimate">
+        <h2>Estimated delivery date</h2>
+        <span class="delivery-estimate"><span class="date">Undefined</span> at <span class="time-hours">1</span>:<span class="time-minutes">00</span><span class="time-meridiem">PM</span> EST</span>
+      </div>
+      <div class="field">
+        <label>
+          <span class="label-text">Days</span>
+          <input type="number" name="" value="5">
+        </label>
+      </div>
+    </section>
+  </aside>
+</section>
+<section class="auction-workflow auction-workflow-published-closed-unpublishable-admins">
+  <p>This auction is visible to the public but is not currently accepting bids. It will open on [auction.startDate].</p>
+  <p>If you need to take it down for whatever reason, press the unpublish button, below.</p>
+  <button>Un-publish</button>
+</section>
+<section class="auction-workflow auction-workflow-published-unbiddable-vendors">
+  <p>This auction is not currently accepting bids. It will open on [auction.startDate].</p>
+</section>
+<section class="auction-workflow auction-workflow-published-open-no-bids-admins">
+  <p>This auction is accepting bids until [auction.endDate].</p>
+</section>
+<section class="auction-workflow auction-workflow-published-open-with-bids-admins">
+  <p>There are <a href="{{site.baseurl}}/auctions/bids">[auction.totalBids] bids on this auction,</a> and [winningVendor.Name] is currently winning. This auction is accepting bids until [auction.endDate]!</p>
+</section>
+<section class="auction-workflow auction-workflow-published-biddable-not-allowed-vendors">
+  <p>Your profile must contain a valid DUNS number before you can place a bid. Please <a href="{{site.baseurl}}/profile">update your profile</a>.</p>
+</section>
+<section class="auction-workflow auction-workflow-published-biddable-not-allowed-logged-out">
+  <p>You must be logged in to place a bid! Use your <a href="https://github.com">GitHub</a> account to <a href="{{site.baseurl}}/sign_up" class="a-sign-up">sign up</a> or <a href="#" class="a-sign-in">sign in</a>.</p>
+</section>
+<section class="auction-workflow auction-workflow-published-biddable-first-vendors">
+  <p>The starting price for this auction is $[auction.startPrice].</p>
+</section>
+<section class="auction-workflow auction-workflow-published-biddable-limited-vendors">
+  <p>The maximum (current) bid is $[auction.currentBid].</p>
+</section>
+<section class="auction-workflow auction-workflow-published-biddable-outbid-vendors">
+  <p>You&rsquo;ve been outbid! The maximum (current) bid is now $[auction.currentBid].</p>
+  <div class="field"> 
+    <label>
+      <span class="label-text">Your bid</span>
+      <input type="number"></input>
+    </label>
+  </div>
+  <button>Place bid</button>
+</section>
+<section class="auction-workflow auction-workflow-published-biddable-rejected-vendors has-errors">
+  <p>Your bid was not accepted. Please enter a whole number less than the current bid of $[auction.currentBid]</p>
+</section>
+<section class="auction-workflow auction-workflow-published-biddable-bid-placed-vendors">
+  <p>You are currently the low bidder, with a bid of $[auction.currentBid].</p>
+</section>
+<section class="auction-workflow auction-workflow-published-closed-deliverable-admins">
+  <p>[auction.winner] won this auction on [auction.winDate] with a bid of $[auction.winBid]. They&rsquo;ve received <a href="#">an email</a> instructing them to begin work and to deliver before the delivery deadline ([auction.deliveryDeadline]).</p>
+</section>
+<section class="auction-workflow auction-workflow-published-deliverable-vendors">
+  <p>You won this auction on [auction.winDate] with a bid of $[auction.winBid]. Please complete the work in accordance with this auction&rsquo;s acceptance criteria before the delivery deadline on [auction.deliveryDeadline]. When you’re done, create a pull request and tag the the issue associated with this auction, then click &ldquo;mark as delivered,&rdquo; below.</p>
+  <p>If you have any questions, please leave a comment on the issue associated with this auction. If you are unable to deliver, click &ldquo;forfeit this auction,&rdquo; below.</p>
+  <button>Mark as delivered</button> 
+  <button>Forfeit this auction</button>
+</section>
+<section class="auction-workflow auction-workflow-published-closed-deliverable-overdue-admins">
+  <p>[auction.winner] was supposed to have delivered this auction before [auction.deliveryDeadline], but has yet to mark this auction as delivered. You can either issue an extension on this delivery period or reject this vendor.</p>
+  <button>Issue an extension</button>
+  <button>Reject vendor</button> 
+</section>
+<section class="auction-workflow auction-workflow-published-deliverable-overdue-vendors">
+  <p>You won this auction on [auction.winDate] with a bid of $[auction.winBid], and were supposed to have delivered this auction before [auction.deliveryDeadline]. In accordance with our <a href="">delivery policy</a>, administrators now have the option to reject your bid altogether or issue an extension.</p>
+  <p>In the interim, please either deliver or forfeit this auction. To deliver, complete your work in accordance with this auction&rsquo;s acceptance criteria, issue a pull request (making sure to tag the the issue associated with this auction), and click "mark as delivered," below. To forfeit, click "forfeit this auction."</p>
+</section>
+<section class="auction-workflow auction-workflow-published-closed-acceptable-admins">
+  <p>[auction.winner] made <a href="#">a pull request</a> and marked this auction as having been delivered. If their work meets this auction&rsquo;s acceptance criteria, click &ldquo;accept.&rdquo; Otherwise, click &ldquo;reject.&rdquo;</p>
+  <button>Accept</button>
+  <button>Reject</button>
+</section>
+<section class="auction-workflow auction-workflow-published-acceptable-vendors">
+  <p>18F is working with [auction.customerName] to determine if your pull request meets the auction&rsquo;s acceptance criteria. You will receive an email when this determination is made.
+</p>
+</section>
+<section class="auction-workflow auction-workflow-published-closed-payable-admins">
+  <p>[auction.winner]&rsquo;s pull request was accepted on [auction.acceptanceDate]. Please remit payment at <a href="#">the vendor&rsquo;s payment URL</a> and then mark this auction as having been paid. If you have any problems, please <a href="#">contact the vendor directly</a>.</p>
+</section>
+<section class="auction-workflow auction-workflow-published-payable-vendors">
+  <p>Your pull request was accepted! 18F is working with [auction.customerName] to issue payment. You will receive an email when payment is issued.</p>
+</section>
+<section class="auction-workflow auction-workflow-published-closed-success-admins">
+  <p><a href="#">[auction.winner]&rsquo;s pull request</a> was accepted on [auction.acceptanceDate]. The vendor was paid on [auction.paymentDate].
+</p>
+</section>
+<section class="auction-workflow auction-workflow-published-closed-success-vendors">
+  <p>You won this auction on [auction.winDate], and <a href="#">your pull request</a> was accepted on [auction.acceptanceDate]. You were paid on [auction.paymentDate].
+</p>
+</section>
+<section class="auction-workflow auction-workflow-published-closed-forfeited-admins">
+  <p>[auction.winner] won this auction on [auction.winDate], but forfeited delivery.</p>
+  <button>Award next-highest bidder</button>
+</section>
+<section class="auction-workflow auction-workflow-published-closed-forfeited-vendors">
+  <p>You forfeited this auction on [auction.forefeitDate].</p>
+</section>
+<section class="auction-workflow auction-workflow-published-closed-rejected-admins">
+  <p>You rejected [auction.winner]&rsquo;s bid on [auction.rejectionDate].</p>
+</section>
+<section class="auction-workflow auction-workflow-published-closed-rejected-vendors">
+  <p>Your bid was rejected on [auction.rejectionDate].</p>
+</section>
+<section class="auction-workflow auction-workflow-published-closed-no-relation-everyone">
+  <p>Bidding for this auction closed on [auction.closedDate].</p>
+</section>

@@ -37,111 +37,15 @@ excerpt: None
         <h3>1. Conditions for the test to fail</h3>
         <p>When the bug is present, and a user who is not the task creator comments on the task, and no email is generated</p>
         <p>Then test(s) written as part of this micro-purchase will fail.</p>        
+        <h3>2. Conditions for the test to fail</h3>
+        <p>When the bug is present, and a user who is not the task creator comments on the task, and no email is generated</p>
+        <p>Then test(s) written as part of this micro-purchase will fail.</p>
+        <h3>3. Conditions for the test to fail</h3>
+        <p>When the bug is present, and a user who is not the task creator comments on the task, and no email is generated</p>
+        <p>Then test(s) written as part of this micro-purchase will fail.</p>        
       </div>
       <footer class="auction-footer">
-        <section class="auction-workflow auction-workflow-open-incomplete-profile">
-          <p>Your profile must contain a valid DUNS number before you can place a bid. Please <a href="{{site.baseurl}}/profile">update your profile</a>.</p>
-        </section>
-        <section class="auction-workflow auction-workflow-open-preview">
-          <p>This auction is not currently accepting bids.</p>
-        </section>
-        <section class="auction-workflow auction-workflow-open-biddable-first">
-          <p>The starting price for this auction is $3500.00.</p>
-          <form>
-            <div class="field"> 
-              <label>
-                <span class="label-text">Your bid</span>
-                <input type="number"></input>
-              </label>
-            </div>
-            <button>Place bid</button>
-          </form>
-        </section>
-        <section class="auction-workflow auction-workflow-open-biddable-limited">
-          <p>The maximum (current) bid is $3414.00.</p>
-          <form>
-            <div class="field"> 
-              <label>
-                <span class="label-text">Your bid</span>
-                <input type="number"></input>
-              </label>
-            </div>
-            <button>Place bid</button>
-          </form>
-        </section>
-        <section class="auction-workflow auction-workflow-open-biddable-rejected has-errors">
-          <h1>Your bid was not accepted.</h1>
-          <p>Please enter a whole-dollar bid less than the current bid of $3414.</p>
-          <form>
-            <div class="field has-error"> 
-              <label>
-                <span class="label-text">Your bid</span>
-                <input type="number" value="3501"></input>
-              </label>
-            </div>
-            <button>Place bid</button>
-          </form>
-        </section>
-        <section class="auction-workflow auction-workflow-open-biddable-outbid">
-          <h1>You&rsquo;ve been outbid!</h1> 
-          <p>The maximum (current) bid is $3414.00.</h1>
-          <form>
-            <div class="field"> 
-              <label>
-                <span class="label-text">Your bid</span>
-                <input type="number"></input>
-              </label>
-            </div>
-            <button>Place bid</button>
-          </form>
-        </section>
-        <section class="auction-workflow auction-workflow-open-bid-placed">
-          <p>You are currently the low bidder, with a bid of <span class="bid-amount">$3414.</span></p>
-          <span>or, if sealed,</span>
-          <p>You placed a bid for <span class="bid-amount">$3414.</span></p>
-        </section>
-        <section class="auction-workflow auction-workflow-closed">
-          <p>This auction is closed.</p>
-        </section>
-        <section class="auction-workflow auction-workflow-closed-deliverable">
-          <p>You won this auction on <strong>June 3rd, 2016</strong> with a bid of <strong>$[auction.winBid].</strong> Please <a href="#">issue a pull request</a> that meets this auction&rsquo;s acceptance criteria by [auction.deliveryDate]. </p>
-        </section>
-        <section class="auction-workflow auction-workflow-closed-invoiced">
-          <p>You won this auction on <strong>June 3rd, 2016</strong> with a bid of <strong>$1,000.</strong> Your pull request was accepted on [auction.acceptanceDate], and 18F Micro-purchase has notified the lister that they should remit payment.</p>
-          <p>If their Payment URL 404s: Heads up! It looks like the customer won&rsquo;t be able to pay you. Please <a href="{{site.baseurl}}/profile">double check your payment URL</a>.</p>
-        </section>
-        <section class="auction-workflow auction-workflow-closed-paid">
-          <h1>You won this auction on [auction.winDate] with a bid of $1,000. Your pull request was accepted on [auction.acceptanceDate] and you were paid on [auction.paymentDate]. </h1>
-        </section>
-        <section class="auction-workflow auction-workflow-draft-approvable">
-          <h1>Approval needed</h1>
-          <p>This auction will be paid for using an 18F purchase card. 18F purchase cards cannot be used without first being granted approval in C2. Would you like to submit this auction to C2 for approval now?</p>
-          <button>Submit for approval</button>
-        </section>
-        <section class="auction-workflow auction-workflow-draft-approval-requested">
-          <h1>Approval pending</h1>
-          <p>This auction is set to be paid using an 18F purchase card, and that purchase card is <a href="#">pending approval in C2</a>.</p>
-        </section>
-        <section class="auction-workflow auction-workflow-draft-publishable">
-          <h1>Ready to publish</h1>
-          <p>This auction is ready to publish.</p>
-          <button>Publish</button>
-        </section>        
-        <section class="auction-workflow auction-workflow-open-running">
-          <h1>Running</h1>
-          <p>Wahoo! This auction is open and accepting bids!</p>
-        </section>        
-        <section class="auction-workflow auction-workflow-closed-awaiting-delivery">
-          <h1>[auction.winner] won this auction on [auction.winDate] with a bid of $[auction.winBid]. They should deliver before [auction.deliveryDate] by issuing a pull request against <a href="#">this GitHub issue</a>.</h1>
-        </section>        
-        <section class="auction-workflow auction-workflow-closed-acceptable">
-          <h1>[auction.winner] won this auction on [auction.winDate] with a bid of $[auction.winBid] and has <a href="#">issued a pull request</a>. Please confirm that their solution meets the acceptance criteria</h1>
-          <button class="button">Accept</button>
-          <button class="button">Reject</button>
-        </section>        
-        <section class="auction-workflow auction-workflow-closed-payable">
-          <h1>[auction.winner] won this auction on [auction.winDate] with a bid of $[auction.winBid]. Their work was accepted on [auction.acceptanceDate]. Please issue payment at [their paymentUrl].</h1>
-        </section>        
+        {% include _auction_states.html %}
         <ul>
           <li class="auction-started">
             <h2>Started</h2>
