@@ -9,7 +9,7 @@ excerpt: None
   {% include site-header.html %}
   <main role="main" id="main">
     <div class="wrapper">
-      <form action="{{site.baseurl}}/auctions/draft">
+      <form action="{{site.baseurl}}/auctions/show">
         <div class="notice">
           <p>The following fields cannot be blank</p>
           <ul>
@@ -51,7 +51,7 @@ excerpt: None
                     <option value="9">9</option>
                     <option value="10">10</option>
                     <option value="11">11</option>
-                    <option value="12" >12</option>
+                    <option value="12">12</option>
                   </select>
                 </label>
               </div>
@@ -82,7 +82,7 @@ excerpt: None
             <fieldset class="fieldset fieldset-date-time fieldset-end-date-time">
               <legend>Auction ends</legend>
               <span class="fieldset-date-time-summary">
-                <span class="date">Undefined</span> at <span class="time-hours">1</span>:<span class="time-minutes">00</span><span class="time-meridiem">AM</span> EST
+                <span class="date">Undefined</span> at <span class="time-hours">1</span>:<span class="time-minutes">00</span><span class="time-meridiem">PM</span> EST
               </span>
               <div class="field field-date">
                 <label>
@@ -96,7 +96,7 @@ excerpt: None
                   <label>
                     <span class="label-text">Hours</span>
                     <select>
-                      <option value="1">1</option>
+                      <option value="1" selected>1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
                       <option value="4">4</option>
@@ -168,16 +168,15 @@ excerpt: None
               <p class="help-text">Please provide a brief description of the auction, in 250 characters or less. This text is used across the site in auction previews. Use <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Markdown</a> for simple formatting.</p>
             </label>
           </div>
-          <div class="field field-description-and-acceptance-criteria is-error">
+          <div class="field field-description-and-acceptance-criteria">
             <label>
               <span class="label-text">Description and acceptance criteria</span>
-              <textarea rows="15" id="description-and-acceptance-criteria">Registered users on micropurchase.18f.gov may bid to deliver the requirements in this auction. The lowest bidder at the time the auction closes shall receive the award. The awarded bidder shall have five business days to deliver the requirements. Upon successful completion of the requirements, 18F shall pay the winning bidder. See our rules page.
+              <textarea rows="15">Registered users on micropurchase.18f.gov may bid to deliver the requirements in this auction. The lowest bidder at the time the auction closes shall receive the award. The awarded bidder shall have five business days to deliver the requirements. Upon successful completion of the requirements, 18F shall pay the winning bidder. See our rules page.
               </textarea>
               <p class="help-text">Please provide a brief description of the project as a whole (or link to your README), the task at hand, and acceptance criteria. Use <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Markdown</a> for simple formatting.</p>
-              <span class="error-text">Cannot be blank</span>
             </label>
           </div> 
-          <fieldset class="fieldset fieldset-skills">
+         <fieldset class="fieldset fieldset-skills">
             <legend>Skills</legend>
             <a href="#" class="button">Add new</a>
             <div class="fieldset-skills-wrapper">
@@ -261,6 +260,20 @@ excerpt: None
               </label>
             </div>    
           </fieldset>
+          <div class="field field-notes field-textarea">
+            <label>
+              <span class="label-text">Notes</span>
+              <textarea rows="4"></textarea>
+              <p class="help-text">Note are only viewable by admins.</p>
+            </label>
+          </div> 
+          <div class="field field-checkbox">
+            <input type="checkbox" name="">
+            <span class="label-text">Unpublish this auction</span>
+            <span class="help-text">
+              Vendors cannot view or submit bids on unpublished auctions. Unpublished auctions appear in your &ldquo;Needs attention&rdquo; page as drafts. You cannot unpublish an auction once it has a bid.
+            </span>
+          </div>
         </div>
         <footer>
           <button class="button">Save</button>
