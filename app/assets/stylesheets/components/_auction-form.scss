@@ -7,17 +7,15 @@ textarea#auction_description {
 }
 
 .auction-form {
-  .url,
-  textarea {
-    width: 500px;
+  margin: $base-padding;
+  padding: $base-padding-large;
+  background-color: $color-gray-lightest;
+  @include shift(2);
+
+  form,
+  input,
+  textarea,
+  select {
+    max-width: none;
   }
-}
-
-.auction_skills span {
-  float: left;
-  padding-right: 1em;
-}
-
-.auction_notes label {
-  clear: both;
 }
