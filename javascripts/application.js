@@ -19,31 +19,28 @@ $(document).ready(function() {
   
   $('body').removeClass('no-js');
 
-  $('.nav-page select').change(function(){
-    window.location.href = $(this).find('option:selected').attr("value");
-  });
 
-  $('.auction-workflow').hide();
-
-  $('.field-auction-status select').change(function(){
+  if ($('body').hasClass('layout-auctions-show')) {
     $('.auction-workflow').hide();
-    statusCode = $(this).find('option:selected').attr("value");
-    console.log(statusCode);
-    userType = $(this).find('option:selected').parent('optgroup').attr('label');
-    $('.nav-user select').find('option[value="' + userType + '"]').prop('selected', true);
-    $('.nav-user select').change();
-    workflowClass = "auction-workflow-" + statusCode;
-    window.location.search = "auctionWorkflowState=" + statusCode;
-    console.log(workflowClass);
-    $('.' + workflowClass).show();
-  });
 
-  var auctionWorkflowState = getQueryVariable("auctionWorkflowState");
-  console.log(auctionWorkflowState);
-  if (auctionWorkflowState != null) {
-    $('.field-auction-status select').find('option[value="' + auctionWorkflowState + '"]').prop('selected', true);
+    $('.field-auction-status select').change(function(){
+      $('.auction-workflow').hide();
+      statusCode = $(this).find('option:selected').attr("value");
+      userType = $(this).find('option:selected').parent('optgroup').attr('label');
+      $('.nav-user select').find('option[value="' + userType + '"]').prop('selected', true);
+      $('.nav-user select').change();
+      window.location.search = "auctionWorkflowState=" + statusCode;
+      workflowClass = "auction-workflow-" + statusCode;
+      $('.' + workflowClass).show();
+    });
+
+    var auctionWorkflowState = getQueryVariable("auctionWorkflowState");
+    console.log(auctionWorkflowState);
+    if (auctionWorkflowState != null) {
+      $('.field-auction-status select').find('option[value="' + auctionWorkflowState + '"]').prop('selected', true);
+    }
+    $('.field-auction-status select').change();
   }
-  $('.field-auction-status select').change();
 
   var userType = Cookies.get('mpp-user-type');
   if (userType) {

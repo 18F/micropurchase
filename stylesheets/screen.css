@@ -2377,10 +2377,8 @@ color: white;
 
 .auction-workflow button{
 	margin-top: 1.6em;
-	margin-left: 0.4em;
 	position: relative;
 	top: 1px;
-	height: 2.2em;
 	padding: 4px 10px;
 }
 
@@ -2391,9 +2389,14 @@ color: white;
 	margin-bottom: 0;
 }
 
-.auction-workflow p{ line-height: 1.4em; }
+.auction-workflow p{ 
+	line-height: 1.4em; 
+	margin-bottom: 0.6em;
+}
 
-
+.auction-workflow p:last-of-type{
+  margin-bottom: 0;
+}
 
 /* @end */
 
@@ -2429,6 +2432,7 @@ color: white;
 	}
 	
 	.layout-auctions-show main .wrapper .auction-footer{
+		font-size: 14px;
 		width: 45%;
 		margin: 0;
 		padding: 20px;
