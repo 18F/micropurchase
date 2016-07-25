@@ -188,9 +188,8 @@
 </section>
 <section class="auction-workflow auction-workflow-published-closed-deliverable-vendors">
   <p>You won this auction on [auction.winDate] with a bid of $[auction.winBid]. Please complete the work in accordance with this auction&rsquo;s acceptance criteria before the delivery deadline ([auction.deliveryDeadline]).</p>
-  <p>When you&rsquo;re done, create a pull request and tag <a href="#">the issue associated with this auction</a>, then click &ldquo;mark as delivered,&rdquo; below. If you have any questions, please leave a comment on <a href=""></a>the issue associated with this auction</a>. If you are unable to deliver, click &ldquo;forfeit this auction,&rdquo; below.</p>
-  <button>Mark as delivered</button> 
-  <button>Forfeit this auction</button>
+  <p>When you&rsquo;re done, create a pull request and tag <a href="#">the issue associated with this auction</a>, then click &ldquo;mark as delivered,&rdquo; below. If you have any questions, please leave a comment on <a href="#">the issue associated with this auction</a>.
+  <button class="button button-deliver">Mark as delivered</button> 
 </section>
 <section class="auction-workflow auction-workflow-published-closed-deliverable-overdue-admins">
   <p>[auction.winner] was supposed to have delivered this auction before [auction.deliveryDeadline], but has yet to mark this auction as delivered. You can either issue an extension on this delivery period or reject this vendor.</p>
@@ -199,9 +198,8 @@
 </section>
 <section class="auction-workflow auction-workflow-published-closed-deliverable-overdue-vendors">
   <p>You won this auction on [auction.winDate] with a bid of $[auction.winBid], and were supposed to have delivered this auction before [auction.deliveryDeadline]. In accordance with our <a href="{{site.baseurl}}/policies">delivery policy</a>, administrators now have the option to reject your bid altogether or issue an extension.</p>
-  <p>In the interim, please either deliver or forfeit this auction. To deliver, complete your work in accordance with this auction&rsquo;s acceptance criteria, issue a pull request (making sure to tag <a href="#">the issue associated with this auction</a>), and click &ldquo;mark as delivered,&rdquo; below. To forfeit, click &ldquo;forfeit this auction.&rdquo;</p>
+  <p>In the interim, please either deliver or forfeit this auction. To deliver, complete your work in accordance with this auction&rsquo;s acceptance criteria, issue a pull request (making sure to tag <a href="#">the issue associated with this auction</a>), and click &ldquo;mark as delivered,&rdquo; below.</p>
   <button class="button button-deliver">Mark as delivered</button>
-  <button class="button button-forfeit">Forfeit this auction</button> 
 </section>
 <section class="auction-workflow auction-workflow-published-closed-acceptable-admins">
   <p>[auction.winner] made <a href="#">a pull request</a> and marked this auction as having been delivered. If their work meets this auction&rsquo;s acceptance criteria, click &ldquo;accept.&rdquo; Otherwise, click &ldquo;reject.&rdquo;</p>

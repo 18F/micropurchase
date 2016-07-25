@@ -519,7 +519,7 @@ button,
 .button {
 	background: none;
 	border: 1px solid;
-	color: #008c52;
+	color: #2e8540;
 	font: inherit;
 	padding: 10px 12px;
 	margin: 0;
@@ -533,8 +533,8 @@ button,
 
 button:hover,
 .button:hover {
-	background: #00834d;
-	border-color: #00834d;
+	background: #2e8540;
+	border-color: #2e8540;
 	color: white;
 	box-shadow: 0 1px 0 #f3f3f3;
 }
@@ -542,9 +542,19 @@ button:hover,
 button:active,
 .button:active {
 	color: #7aa79d;
-	background: #006e52;
+	background: #1d5529;
 	border-color: #006e52;
 	box-shadow: inset 0 1px 0 rgba(0,0,0,0.1);
+}
+
+.button-reject{
+  border-color: #981b1e;
+  color: #981b1e;
+}
+
+.button-reject:hover{
+  background: #981b1e;
+  color: white;
 }
 
 form a.a-return + h1{
@@ -2600,14 +2610,9 @@ color: white;
 	position: relative;
 }
 
-.branch .fieldset.fieldset-date-time.fieldset-end-date-time{
-	margin-bottom: 6px;
-  
-}
+.branch .fieldset.fieldset-date-time.fieldset-end-date-time{ margin-bottom: 6px; }
 
-.branch .delivery{
-	margin-bottom: 16px;
-}
+.branch .delivery{ margin-bottom: 16px; }
 
 .branch .fieldset-date-time > legend,
 .branch .delivery h2{
