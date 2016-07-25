@@ -29,7 +29,7 @@ $(document).ready(function() {
       userType = $(this).find('option:selected').parent('optgroup').attr('label');
       $('.nav-user select').find('option[value="' + userType + '"]').prop('selected', true);
       $('.nav-user select').change();
-      window.location.search = "auctionWorkflowState=" + statusCode;
+      window.history.pushState('Test', 'Title', '?auctionWorkflowState=' + statusCode);
       workflowClass = "auction-workflow-" + statusCode;
       $('.' + workflowClass).show();
     });
