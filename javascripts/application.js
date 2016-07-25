@@ -1,17 +1,14 @@
-// var GET = {};
-// var query = window.location.search.substring(1).split("&");
-// for (var i = 0, max = query.length; i < max; i++)
-// {
-//     if (query[i] === "") // check for trailing & with no param
-//         continue;
-
-//     var param = query[i].split("=");
-//     GET[decodeURIComponent(param[0])] = decodeURIComponent(param[1] || "");
-// }
-
-// unless (typeof auctionStatus === "null){
-//   $('.field-auction-status select').find(auctionStatus).prop('selected', true);
-// }
+function getQueryVariable(variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if (pair[0] == variable) {
+            return pair[1];
+        }
+    }
+    return null;
+}
 
 function initBody() {
   $('body').removeClass('no-js');
@@ -32,44 +29,20 @@ $(document).ready(function() {
     $('.auction-workflow').hide();
     statusCode = $(this).find('option:selected').attr("value");
     console.log(statusCode);
-    if (statusCode == "open-preview") {
-      $('.auction-header .auction-status')
-        .attr('class', '')
-        .text('Opens soon')
-        .addClass('auction-status auction-status-opens-soon');
-    }
-
-    if (statusCode == "open-biddable-first" || 
-        statusCode == "open-biddable-limited" || 
-        statusCode == "open-biddable-outbid" || 
-        statusCode == "open-biddable-rejected" || 
-        statusCode == "open-bid-placed") {
-      $('.auction-header .auction-status')
-        .attr('class', '')
-        .text('Open')
-        .addClass('auction-status auction-status-open');      
-    }
-
-
-    if (statusCode == "closed" || 
-        statusCode == "closed-deliverable" || 
-        statusCode == "closed-invoiced" || 
-        statusCode == "closed-paid") {
-      $('.auction-header .auction-status')
-        .attr('class', '')
-        .text('Closed')
-        .addClass('auction-status auction-status-closed');
-    }
-
-
     userType = $(this).find('option:selected').parent('optgroup').attr('label');
     $('.nav-user select').find('option[value="' + userType + '"]').prop('selected', true);
     $('.nav-user select').change();
     workflowClass = "auction-workflow-" + statusCode;
+    window.location.search = "auctionWorkflowState=" + statusCode;
     console.log(workflowClass);
     $('.' + workflowClass).show();
   });
 
+  var auctionWorkflowState = getQueryVariable("auctionWorkflowState");
+  console.log(auctionWorkflowState);
+  if (auctionWorkflowState != null) {
+    $('.field-auction-status select').find('option[value="' + auctionWorkflowState + '"]').prop('selected', true);
+  }
   $('.field-auction-status select').change();
 
   var userType = Cookies.get('mpp-user-type');
@@ -87,6 +60,8 @@ $(document).ready(function() {
       .removeClass('user-type-vendor')
       .removeClass('user-type-admin')
       .addClass('user-type-' + userType);
+    Cookies.set('mpp-signed-in', 'true');
+    renderSiteHeaderSignIn()
   });
 
   $('.nav-user select').change();
