@@ -148,9 +148,23 @@
 </section>
 <section class="auction-workflow auction-workflow-published-open-first-bid-vendors">
   <p>The starting price for this auction is $[auction.startPrice].</p>
+  <div class="field"> 
+    <label>
+      <span class="label-text">Your bid</span>
+      <input type="number"></input>
+    </label>
+  </div>
+  <button class="button button-bid">Place bid</button>
 </section>
 <section class="auction-workflow auction-workflow-published-open-bid-limited-vendors">
   <p>The maximum (current) bid is $[auction.currentBid].</p>
+  <div class="field"> 
+    <label>
+      <span class="label-text">Your bid</span>
+      <input type="number"></input>
+    </label>
+  </div>
+  <button class="button button-bid">Place bid</button>
 </section>
 <section class="auction-workflow auction-workflow-published-open-outbid-vendors">
   <p>You&rsquo;ve been outbid! The maximum (current) bid is now $[auction.currentBid].</p>
@@ -160,7 +174,7 @@
       <input type="number"></input>
     </label>
   </div>
-  <button>Place bid</button>
+  <button class="button button-bid">Place bid</button>
 </section>
 <section class="auction-workflow auction-workflow-published-open-bid-rejected-vendors has-errors">
   <p>Your bid was not accepted. Please enter a whole number less than the current bid of $[auction.currentBid]</p>
