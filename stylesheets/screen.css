@@ -629,7 +629,7 @@ fieldset > legend,
 }
 
 fieldset > legend{
-	padding: 4px 8px;
+	padding: 2px 6px;
 	border: 1px solid #bbb;
 	border-radius: 2px;
 	margin-left: -6px;
@@ -912,7 +912,6 @@ main div.wrap > form { max-width: 576px; }
 .user-type-vendor .site-header .nav-header-nav .nav-people,
 .user-type-vendor .nav-auctions-drafts,
 .user-type-vendor .h-feed-header .button,
-.user-type-vendor .auction .button,
 .user-type-vendor header .nav-settings{ display: none !important; }
 
 {
@@ -2289,7 +2288,6 @@ color: white;
 	margin: 1em 0;
 }
 
-
 .auction-workflow.is-loading,
 .auction-workflow.auction-workflow-preview{
 	border-color: #d3d3d3;
@@ -2373,16 +2371,26 @@ color: white;
   display: inline !important;
 }
 
-.auction-workflow form{ padding-top: 1em; }
-
-.auction-workflow button{
-	margin-top: 1.6em;
-	position: relative;
-	top: 1px;
-	padding: 4px 10px;
+.auction-workflow form{ 
+	padding-top: 1em; 
+	margin-top: 1em;
+	border-top: 1px solid #a2cae5;
 }
 
-.auction-workflow .field{
+.auction-workflow input{
+	padding: 4px 10px;
+	min-height: 0;
+}
+
+.auction-workflow button{ 
+	padding: 4px 10px; 
+	margin-top: 0.8em;
+}
+
+.auction-workflow[class*="auction-workflow-published-open"]  button{ margin-top: 2em; }
+
+
+.auction-workflow[class*="auction-workflow-published-open"] .field{
 	width: 5.5em;
 	display: inline-block;
 	vertical-align: middle;
@@ -2458,12 +2466,12 @@ color: white;
 	}
 	
 	.layout-auctions-show main .wrapper .page{
-		width: 640px;
+		width: 600px;
 		padding: 20px;
 	}
 	
 	.layout-auctions-show main .wrapper .auction-footer{
-		width: 318px;
+		width: 358px;
 		margin: 0;
 		padding: 20px;
 		border-radius: 3px !important;
@@ -2478,69 +2486,6 @@ color: white;
 	}	
 
 }
-/* @end */
-
-/* @group layout-auctions-approval */
-
-.layout-auctions-approval form{
-	max-width: 640px;
-	margin: 0 auto;
-	border: 1px solid #ccc;
-	padding: 0;
-	border-radius: 4px;
-}
-
-.layout-auctions-approval form h1{
-	font-weight: 600;
-	font-size: 24px;
-	font-family: inherit;
-	line-height: 1.4em;
-	margin-bottom: 12px;
-	color: #333;
-	padding: 16px 16px 0;
-}
-
-.layout-auctions-approval form p{
-	line-height: 1.33;
-	margin-bottom: 1em;
-	padding: 0 16px;
-}
-
-.layout-auctions-approval form footer{
-	margin-top: 16px;
-	padding: 16px;
-	border-top: 1px solid #ddd;
-	background: #f3f3f3;	
-	border-radius: 0 0 3px 3px;
-}
-
-.layout-auctions-approval form footer::after{
-	content: "";
-	display: table;
-	clear: both;
-}
-
-.layout-auctions-approval form footer button{
-	background: #2D3F5B;
-	color: white;
-	border: none;
-	float: left;
-}
-
-.layout-auctions-approval form footer button:hover{
-	background-color: #122b58;
-}
-
-.layout-auctions-approval form footer button:active{
-	color: #b1cffe;
-}
-
-.layout-auctions-approval form footer a{
-	float: right;
-	margin-top: 8px;
-	
-}
-
 /* @end */
 
 /* @group layout-auctions-bids */
@@ -2627,6 +2572,10 @@ color: white;
 	padding: 0;
 }
 
+.fieldset-date-time .field-date{
+  margin-bottom: 1em;
+}
+
 .fieldset-date-time .field-date span.label-text,
 .fieldset-date-time .fieldset-time legend{
 	font-weight: normal;
@@ -2644,18 +2593,20 @@ color: white;
 
 .branch .fieldset.fieldset-date-time,
 .branch .delivery{
-	width: 48.5%;
-	float: left;
 	padding: 32px 12px 12px;
 	border: 2px solid #e3e3e3;
 	background: #fff;
 	margin: 0;
-	margin-right: 3%;
 	position: relative;
 }
 
+.branch .fieldset.fieldset-date-time.fieldset-end-date-time{
+	margin-bottom: 6px;
+  
+}
+
 .branch .delivery{
-	margin-right: 0;
+	margin-bottom: 16px;
 }
 
 .branch .fieldset-date-time > legend,
@@ -2679,8 +2630,7 @@ color: white;
 .branch .fieldset-date-time .field-date,
 .branch .fieldset-date-time .fieldset-time,
 .branch .delivery .field,
-.with-customized-timeline .fieldset-date-time-summary,
-.with-customized-timeline .p-date-time-defaults{
+.with-customized-timeline .fieldset-date-time-summary{
 	display: none;
 }
 
@@ -2719,8 +2669,12 @@ color: white;
 .with-customized-timeline .delivery .estimate{
 	float: right;
 	position: relative;
-	width: 48.5%;
+	width: 33.33%;
 	margin: 0;
+}
+
+.with-customized-timeline .delivery .estimate{
+	width: 63.333%;
 }
 
 .with-customized-timeline .delivery .field{ margin-right: 3%; }
@@ -2728,7 +2682,7 @@ color: white;
 .with-customized-timeline .delivery .field input{ width: 5em; }
 
 .with-customized-timeline .delivery .estimate{ 
-	padding: 36px 12px 12px;
+	padding:  12px 12px;
 	background: #f3f3f3;
 }
 
@@ -2752,6 +2706,16 @@ color: white;
 	color: #333;
 }
 
+.with-customized-timeline .branch .delivery .estimate,
+.with-customized-timeline .branch .delivery .estimate h2{
+  font-size: 12px;
+}
+
+.with-customized-timeline .branch .delivery .estimate h2{
+	position: static;
+	margin-bottom: 0.4em;
+}
+
 .branch+.help-text{
 	font-size: 14px;
 	line-height: 1.33em;
@@ -2766,24 +2730,27 @@ color: white;
 	clear: both;
 }
 
-.fieldset-date-time .field-date,
-.fieldset-date-time .fieldset-time{
-	float: left;
-	margin-right: 0.55em;
-	min-width: 11.8em;
-}
 
 .fieldset-date-time .field-date input{
 	width: 100%;
+	max-width: 148px;
 }
 
-.fieldset-date-time.fieldset-start-date-time{
-	margin-bottom: 12px;
+.fieldset-date-time.fieldset-start-date-time{ 
+	margin-top: 24px;
+	margin-bottom: 12px; 
 }
 
-.fieldset-date-time .fieldset-time .field {
+
+.fieldset-date-time .fieldset-time .time-zone {
 	position: relative;
+	top: 6px;
+	font-size: 12px;
+	font-weight: 600;
+	margin-left: 0.4em;
+  
 }
+.fieldset-date-time .fieldset-time .field { position: relative; }
 
 .fieldset-date-time .fieldset-time .field select{
 	background: white;
@@ -2828,8 +2795,25 @@ color: white;
 .fieldset-date-time .fieldset-time .field-time-minutes,
 .fieldset-date-time .fieldset-time .field-time-meridiem{
 	width: 3.5em;
+	min-width: 32px;
 	float: left;
 	margin-bottom: 0;
+}
+
+.fieldset-date-time .fieldset-time .field-time-hours::after,
+.fieldset-date-time .fieldset-time .field-time-minutes::after,
+.fieldset-date-time .fieldset-time .field-time-meridiem::after{
+	border-width: 4px;
+	right: 5px;
+	margin-bottom: 8px;
+}
+
+.fieldset-date-time .fieldset-time .field-time-hours select,
+.fieldset-date-time .fieldset-time .field-time-minutes select,
+.fieldset-date-time .fieldset-time .field-time-meridiem select{
+	height: 1em;
+	min-height: 28px;
+	padding-right: 18px;
 }
 
 .field.field-starting-bid input{ width: 5.5em; }

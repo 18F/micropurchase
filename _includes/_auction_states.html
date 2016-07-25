@@ -3,7 +3,7 @@
   <button>Request approval</button>
 </section>
 <section class="auction-workflow auction-workflow-publishable-admins">
-  <p>This auction is ready to publish. Please select the auction start date, auction end date, and the delivery period.</p>
+  <p class="p-date-time-defaults">This auction is ready to publish. Please select a start date for this auction. (By default, auctions are listed for one week and vendors have five business days to deliver. But you can <a href="#" class="a-customize-timeline">edit</a> this.)</p>
   <fieldset class="fieldset fieldset-date-time fieldset-start-date-time">
     <legend>Auction starts</legend>
     <div class="field field-date">
@@ -126,10 +126,11 @@
       </div>
     </section>
   </aside>
+  <button class="button button-publish">Publish</button>
 </section>
 <section class="auction-workflow auction-workflow-published-closed-opens-soon-admins">
   <p>This auction is visible to the public but is not currently accepting bids. It will open on [auction.startDate]. If you need to take it down for whatever reason, press the &ldquo;un-publish&rdquo; button, below.</p>
-  <button>Un-publish</button>
+  <button class="button button-un-publish">Un-publish</button>
 </section>
 <section class="auction-workflow auction-workflow-published-closed-opens-soon-vendors">
   <p>This auction is not currently accepting bids. It will open on [auction.startDate].</p>
@@ -167,7 +168,7 @@
   <button class="button button-bid">Place bid</button>
 </section>
 <section class="auction-workflow auction-workflow-published-open-outbid-vendors">
-  <p>You&rsquo;ve been outbid! The maximum (current) bid is now $[auction.currentBid].</p>
+  <p><strong>You&rsquo;ve been outbid!</strong> The maximum (current) bid is now $[auction.currentBid].</p>
   <div class="field"> 
     <label>
       <span class="label-text">Your bid</span>
@@ -197,7 +198,7 @@
   <button class="button button-reject">Reject vendor</button> 
 </section>
 <section class="auction-workflow auction-workflow-published-closed-deliverable-overdue-vendors">
-  <p>You won this auction on [auction.winDate] with a bid of $[auction.winBid], and were supposed to have delivered this auction before [auction.deliveryDeadline]. In accordance with our <a href="">delivery policy</a>, administrators now have the option to reject your bid altogether or issue an extension.</p>
+  <p>You won this auction on [auction.winDate] with a bid of $[auction.winBid], and were supposed to have delivered this auction before [auction.deliveryDeadline]. In accordance with our <a href="{{site.baseurl}}/policies">delivery policy</a>, administrators now have the option to reject your bid altogether or issue an extension.</p>
   <p>In the interim, please either deliver or forfeit this auction. To deliver, complete your work in accordance with this auction&rsquo;s acceptance criteria, issue a pull request (making sure to tag <a href="#">the issue associated with this auction</a>), and click &ldquo;mark as delivered,&rdquo; below. To forfeit, click &ldquo;forfeit this auction.&rdquo;</p>
   <button class="button button-deliver">Mark as delivered</button>
   <button class="button button-forfeit">Forfeit this auction</button> 
