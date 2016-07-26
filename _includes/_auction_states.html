@@ -133,6 +133,7 @@
   <button class="button button-un-publish">Un-publish</button>
 </section>
 <section class="auction-workflow auction-workflow-published-closed-opens-soon-vendors">
+  <h1>Bidding opens soon</h1>
   <p>This auction is not currently accepting bids. It will open on [auction.startDate].</p>
 </section>
 <section class="auction-workflow auction-workflow-published-open-no-bids-admins">
@@ -142,12 +143,15 @@
   <p>There are <a href="{{site.baseurl}}/auctions/show-bids">[auction.totalBids] bids on this auction,</a> and [winningVendor.Name] is currently winning. This auction is accepting bids until [auction.endDate]!</p>
 </section>
 <section class="auction-workflow auction-workflow-published-open-bid-not-allowed-vendors">
+  <h1>You cannot place a bid</h1>
   <p>Your profile must contain a valid DUNS number before you can place a bid. Please <a href="{{site.baseurl}}/profile">update your profile</a>.</p>
 </section>
 <section class="auction-workflow auction-workflow-published-open-bid-not-allowed-logged-out">
+  <h1>Place a bid</h1>
   <p>You must be logged in to place a bid! Use your <a href="https://github.com">GitHub</a> account to <a href="{{site.baseurl}}/sign_up" class="a-sign-up">sign up</a> or <a href="#" class="a-sign-in">sign in</a>.</p>
 </section>
 <section class="auction-workflow auction-workflow-published-open-first-bid-vendors">
+  <h1>Place a bid</h1>
   <p>The starting price for this auction is $[auction.startPrice].</p>
   <div class="field"> 
     <label>
@@ -158,6 +162,7 @@
   <button class="button button-bid">Place bid</button>
 </section>
 <section class="auction-workflow auction-workflow-published-open-bid-limited-vendors">
+  <h1>Place a bid</h1>
   <p>The maximum (current) bid is $[auction.currentBid].</p>
   <div class="field"> 
     <label>
@@ -168,7 +173,8 @@
   <button class="button button-bid">Place bid</button>
 </section>
 <section class="auction-workflow auction-workflow-published-open-outbid-vendors">
-  <p><strong>You&rsquo;ve been outbid!</strong> The maximum (current) bid is now $[auction.currentBid].</p>
+  <h1>You&rsquo;ve been outbid!</h1> 
+  <p>The maximum (current) bid is now $[auction.currentBid].</p>
   <div class="field"> 
     <label>
       <span class="label-text">Your bid</span>
@@ -178,6 +184,7 @@
   <button class="button button-bid">Place bid</button>
 </section>
 <section class="auction-workflow auction-workflow-published-open-bid-rejected-vendors has-errors">
+  <h1>Place a bid</h1>
   <p>Your bid was not accepted. Please enter a whole number less than the current bid of $[auction.currentBid]</p>
   <div class="field"> 
     <label>
@@ -188,12 +195,15 @@
   <button class="button button-bid">Place bid</button>
 </section>
 <section class="auction-workflow auction-workflow-published-open-bid-placed-vendors">
+  <h1>Bid placed</h1>
   <p>You are currently the low bidder, with a bid of $[auction.currentBid].</p>
 </section>
 <section class="auction-workflow auction-workflow-published-closed-pending-delivery-admins">
+  <h1>Pending delivery</h1>
   <p>[auction.winner] won this auction on [auction.winDate] with a bid of $[auction.winBid]. They&rsquo;ve received <a href="#">an email</a> instructing them to begin work and to deliver before the delivery deadline ([auction.deliveryDeadline]).</p>
 </section>
 <section class="auction-workflow auction-workflow-published-closed-pending-delivery-vendors">
+  <h1>Pending delivery</h1>
   <p>You won this auction on [auction.winDate] with a bid of $[auction.winBid]. Please complete the work in accordance with this auction&rsquo;s acceptance criteria before the delivery deadline ([auction.deliveryDeadline]).</p>
   <p>When you&rsquo;re done, create a pull request and tag <a href="#">the issue associated with this auction</a>, then click &ldquo;mark as delivered,&rdquo; below. If you have any questions, please leave a comment on <a href="#">the issue associated with this auction</a>.
   <div>
@@ -201,27 +211,32 @@
   </div>
 </section>
 <section class="auction-workflow auction-workflow-published-closed-pending-delivery-overdue-admins">
+  <h1>Delivery past due</h1>
   <p>[auction.winner] was supposed to have delivered this auction before [auction.deliveryDeadline], but has yet to mark this auction as delivered. You can either issue an extension on this delivery period or reject this vendor.</p>
   <button class="button button-issue-extension">Issue an extension</button>
   <button class="button button-reject">Reject vendor</button> 
 </section>
 <section class="auction-workflow auction-workflow-published-closed-pending-delivery-overdue-vendors">
+  <h1>Delivery past due</h1>
   <p>You won this auction on [auction.winDate] with a bid of $[auction.winBid], and were supposed to have delivered this auction before [auction.deliveryDeadline]. In accordance with our <a href="{{site.baseurl}}/policies">delivery policy</a>, administrators now have the option to reject your bid altogether or issue an extension.</p>
   <p>In the interim, please either deliver or forfeit this auction. To deliver, complete your work in accordance with this auction&rsquo;s acceptance criteria, issue a pull request (making sure to tag <a href="#">the issue associated with this auction</a>), and click &ldquo;mark as delivered,&rdquo; below.</p>
   <button class="button button-deliver">Mark as delivered</button>
 </section>
 <section class="auction-workflow auction-workflow-published-closed-pending-acceptance-admins">
+  <h1>Pending acceptance</h1>
   <p>[auction.winner] made <a href="#">a pull request</a> and marked this auction as having been delivered. If their work meets this auction&rsquo;s acceptance criteria, click &ldquo;accept.&rdquo; Otherwise, click &ldquo;reject.&rdquo;</p>
   <button class="button button-accept">Accept</button>
   <button class="button button-reject">Reject</button>
 </section>
 <section class="auction-workflow auction-workflow-published-closed-pending-acceptance-vendors">
+  <h1>Pending acceptance</h1>
   <p>18F is working with [auction.customerName] to determine if your pull request meets the auction&rsquo;s acceptance criteria. You will receive an email when this determination is made.
 </p>
 </section>
 <section class="auction-workflow auction-workflow-published-closed-pending-payment-admins">
   <h1>Pending payment</h1>
   <p>[auction.winner]&rsquo;s pull request was accepted on [auction.acceptanceDate]. Please remit payment at <a href="#">the vendor&rsquo;s payment URL</a> and then mark this auction as having been paid. If you have any problems, please <a href="#">contact the vendor directly</a>.</p>
+  <button>Mark as paid</button>
 </section>
 <section class="auction-workflow auction-workflow-published-closed-pending-payment-vendors">
   <h1>Pending payment</h1>
