@@ -62,12 +62,24 @@ When(/^I edit the new auction form$/) do
 
   @time_in_days = 3
   @deadline_day = DcTimePresenter.convert(@time_in_days.business_days.from_now)
-  fill_in("auction_due_in_days", with: @time_in_days)
+  select("6", from: "auction_due_in_days")
 
   select(@billable.to_s, from: "auction_billable_to")
   select("published", from: "auction_published")
 
   select(@skill.name, from: "auction_skill_ids")
+end
+
+When(/^I change the auction end date$/) do
+  @end_day = DcTimePresenter.convert(3.days.from_now)
+  fill_in "auction_ended_at", with: @end_day.strftime('%Y-%m-%d')
+end
+
+Then(/^I should see an estimated delivery deadline of 12 business days from now$/) do
+  within('.estimated-delivery-date') do
+    default_delivery_date = DefaultDateTime.new(12.business_days.from_now).convert
+    expect(page).to have_content("Estimated delivery date #{DcTimePresenter.convert_and_format(default_delivery_date)}")
+  end
 end
 
 Then(/^I should see the current auction attributes in the form$/) do
