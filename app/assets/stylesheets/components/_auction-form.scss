@@ -44,10 +44,10 @@
   padding: 1rem;
   margin-top: 2rem;
   margin-bottom: 2rem;
-}
 
-.date {
-  margin-right: 0;
+  .usa-width-one-half:nth-child(odd) {
+    margin-right: 0;
+  }
 }
 
 .time {

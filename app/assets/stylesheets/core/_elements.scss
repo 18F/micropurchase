@@ -6,3 +6,10 @@ html {
 ul li:before {
   display: none;
 }
+
+legend {
+  font-size: $base-font-size;
+  background-color: $color-white;
+  padding: .5em;
+  border: 1px solid $color-gray-neutral;
+}
