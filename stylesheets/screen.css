@@ -1,15 +1,5 @@
 /* @override http://localhost:4000/stylesheets/screen.css */
 
-/* @override http://localhost:4000/stylesheets/screen.css */
-
-/* @override https://pages.18f.gov/micropurchase/stylesheets/screen.css */
-
-/* @override http://localhost:4000/stylesheets/screen.css */
-
-/* @override http://localhost:4000/stylesheets/screen.css */
-
-/* @override http://localhost:4000/stylesheets/screen.css */
-
 /* @group bootstrap */
 
 html {
@@ -548,7 +538,7 @@ button:active,
 }
 
 .button-reject{
-  border-color: #981b1e;
+  border-color: #981b1e !important;
   color: #981b1e;
 }
 
@@ -598,7 +588,7 @@ fieldset{
 fieldset.fieldset-radio{ margin-bottom: 18px; }
 
 .fieldset{
-	border: 1px solid #cfcfcf;
+	border: 1px solid #ccc;
 	padding: 16px;
 	padding-bottom: 19px;
 	position: relative;
@@ -809,48 +799,6 @@ fieldset.fieldset-mailing-address div.field.field-zip input{
 	min-width: 0;
 }
 
-/* @group widths */
-
-@media screen and (min-width: 533.33px){
-	.field-telephone-number input,
-	.field-email-address input,
-	.field-additional-classification input{
-	  width: 50%;
-	  min-width: 10em;
-	}
-	
-	.field-project-number input,
-	.field-phone-number input,
-	.field-telephone-number input,
-	.field-fax-number input,
-	.field-date input,
-	.field-direct-cost input,
-	.field-overhead-fees input,
-	.field-total-estimated-amount input,
-	.field-expiry-date input,
-	.field-cancellation-date input,
-	.field-alc input,
-	.field-component-tas input,
-	.field-betc input,
-	.field-object-class-code input,
-	.field-sp input,
-	.field-ata input,
-	.field-aid input,
-	.field-bpoa input,
-	.field-a input,
-	.field-main input,
-	.field-sub input,
-	.field-bpn input,
-	.field-bpn-4 input,
-	.field-servicing-agency-tracking-number input,
-	.field-total-net-order-amount input{
-		width: 10em;
-	}
-
-}
-
-/* @end */
-
 main div.wrap > form { max-width: 576px; }
 
 @media screen and (min-width: 640px) {
@@ -858,8 +806,252 @@ main div.wrap > form { max-width: 576px; }
 		padding-right: 16px;
 		border-right: 1px solid #eee;
 	}	
+}
+
+
+
+/* @group fieldset-date-time */
+
+.fieldset-date-time .field-date,
+.fieldset-date-time .fieldset.fieldset-time{
+	margin: 0;
+	position: relative;
+	border: 0;
+	padding: 0;
+}
+
+.fieldset-date-time .field-date{
+  margin-bottom: 1em;
+}
+
+.fieldset-date-time .field-date span.label-text,
+.fieldset-date-time .fieldset-time legend{
+	font-weight: normal;
+	padding: 0;
+	border: 0;
+	margin: 0 0 8px;
+	line-height: 1;
+}
+
+.layout-auctions-new .branch,
+.layout-auctions-edit .branch{
+	margin-bottom: 12px;
+	margin-left: -2px;
+}
+
+.branch .fieldset.fieldset-date-time,
+.branch .delivery{
+	padding: 32px 12px 12px;
+	border: 1px solid #ccc;
+	background: #fff;
+	margin: 0;
+	position: relative;
+}
+
+
+.branch .fieldset.fieldset-date-time{ border-radius: 4px 4px 0 0; }
+
+.branch .delivery{
+	margin-bottom: 16px; 
+	border-radius: 0 0 4px 4px;
+	border-top: none;
+}
+
+.branch .fieldset-date-time > legend,
+.branch .delivery h2{
+	position: absolute;
+	top: 12px;
+	line-height: 1;
+	bottom: auto;
+	padding: 0;
+	border: 0;
+	margin: 0;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.branch .delivery h1{
+	position: absolute;
+	left: -9999em;
+}
+
+.branch .fieldset-date-time .field-date,
+.branch .fieldset-date-time .fieldset-time,
+.branch .delivery .field,
+.with-customized-timeline .fieldset-date-time-summary{
+	display: none;
+}
+
+.with-customized-timeline .fieldset-date-time.fieldset-start-date-time{
+	margin-bottom: 24px;
+}
+.with-customized-timeline .branch .fieldset-date-time .field-date,
+.with-customized-timeline .branch .fieldset-date-time .fieldset-time,
+.with-customized-timeline .branch .delivery .field{
+	display: block;
+}
+
+
+.with-customized-timeline .branch .fieldset-date-time.fieldset-end-date-time,
+.with-customized-timeline .branch .delivery{
+	width: auto;
+	float: none;
+	margin-right: 0;
+	border: 1px solid #ccc;
+	padding: 16px;
+	padding-top: 24px;
+	margin-bottom: 24px;
+	border-radius: 4px;
+}
+
+.with-customized-timeline .branch .fieldset-date-time.fieldset-end-date-time,
+.with-customized-timeline .branch .delivery{
+	padding-top: 30px;
+}
+
+.with-customized-timeline .delivery::after{
+	content: "";
+	display: table;
+	clear: both;
+}
+.with-customized-timeline .delivery .field,
+.with-customized-timeline .delivery .estimate{
+	float: right;
+	position: relative;
+	width: 33.33%;
+	margin: 0;
+}
+
+.with-customized-timeline .delivery .estimate{
+	width: 63.333%;
+}
+
+.with-customized-timeline .delivery .field{ margin-right: 3%; }
+.with-customized-timeline .delivery .field .label-text{ font-weight: 400; }
+.with-customized-timeline .delivery .field input{ width: 5em; }
+
+.with-customized-timeline .delivery .estimate{ 
+	padding:  12px 12px;
+	background: #f3f3f3;
+}
+
+.with-customized-timeline .branch .fieldset-date-time > legend,
+.with-customized-timeline .branch .delivery h1{
+	position: absolute;
+	top: 0;
+	left: 9px;
+	margin-top: -12px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	border: 1px solid #bbb;
+	border-radius: 2px;
+	padding: 4px 8px;
+	line-height: 20px;
+	background: white;
+	display: inline-block;
+	font-size: inherit;
+	font-weight: 600;
+	color: #333;
+}
+
+.with-customized-timeline .branch .delivery .estimate,
+.with-customized-timeline .branch .delivery .estimate h2{
+  font-size: 12px;
+}
+
+.with-customized-timeline .branch .delivery .estimate h2{
+	position: static;
+	margin-bottom: 0.4em;
+}
+
+.branch+.help-text{
+	font-size: 14px;
+	line-height: 1.33em;
+	padding-top: 12px;
+	margin-bottom: 2em;
+	clear: both;
+}
+
+.fieldset-date-time::after{
+	content: "";
+	display: table;
+	clear: both;
+}
+
+
+.fieldset-date-time .field-date input{
+	width: 100%;
+	max-width: 148px;
+}
+
+.fieldset-date-time.fieldset-start-date-time{ 
+	margin-top: 24px;
+	margin-bottom: 12px; 
+}
+
+
+.fieldset-date-time .fieldset-time .time-zone {
+	position: relative;
+	top: 6px;
+	font-size: 12px;
+	font-weight: 600;
+	margin-left: 0.4em;
+  
+}
+.fieldset-date-time .fieldset-time .field { position: relative; }
+
+.fieldset-date-time .fieldset-time .field select{
+	background: white;
+}
+
+.fieldset-date-time .fieldset-time .field::after{
+	z-index: 1;
+	border-width: 5px;
+}
+
+.fieldset-date-time .fieldset-time .field-time-hours select{
+	border-radius: 3px 0 0 3px;
+}
+
+.fieldset-date-time .fieldset-time .field-time-minutes select{
+	border-radius: 0;
+	border-left: none;
+	border-right: none;
+}
+
+.fieldset-date-time .fieldset-time .field-time-meridiem select{
+	border-radius: 0 3px 3px 0;
+}
+
+.field-starting-bid+.field-checkbox.field-sealed-bid{
+	margin-top: -18px;
+}
+
+.field-checkbox.field-sealed-bid .label-text{
+	font-weight: 400;
+	font-size: 14px;
+}
+
+.fieldset-date-time .fieldset-time .field .label-text{
+	position: absolute;
+	bottom: 0;
+	left: -9999em;
+	font-size: 12px;
 	
 }
+.fieldset-date-time .fieldset-time .field-time-hours,
+.fieldset-date-time .fieldset-time .field-time-minutes,
+.fieldset-date-time .fieldset-time .field-time-meridiem{
+	width: 3.5em;
+	min-width: 32px;
+	float: left;
+	margin-bottom: 0;
+}
+
+
+
+/* @end */
 
 /* @end */
 
@@ -924,6 +1116,7 @@ main div.wrap > form { max-width: 576px; }
 .user-type-vendor .h-feed-header .button,
 .user-type-vendor header .nav-settings{ display: none !important; }
 
+
 {
 	margin-top: -2em;
 }
@@ -966,7 +1159,7 @@ main div.wrap > form { max-width: 576px; }
 .site-header .logo .tagline{
 	font-size: 12px;
 	line-height: 16px;
-	padding-top: 4px;
+	padding-top: 6px;
 	letter-spacing: normal;
 	font-weight: 200;
 	font-family: Merriweather;
@@ -1418,31 +1611,9 @@ main div.wrap > form { max-width: 576px; }
 	top: 16px;
 	padding: 4px 6px;
 	font-size: 14px;
+	display: none;
 }
 
-.auction.is-draft .auction-header .button{
-	top: 40px;
-}
-
-.auction.is-draft .auction-header .draft{
-	border-radius: 3px 3px 0 0;
-	background: repeating-linear-gradient(
-		  45deg,
-		  #f6d27b,
-		  #f6d27b 10px,
-		  #ffe5a4 10px,
-		  #ffe5a4 20px
-		);
-	color: #400600;
-	font-weight: 600;
-	font-size: 14px;
-	text-transform: uppercase;
-	text-align: center;
-	letter-spacing: 2px;
-	padding: 6px 0;
-	margin-bottom: 6px;
-	display: block;
-}
 
 
 .auction .auction-header dl{
@@ -2049,8 +2220,9 @@ a[id]{
 .h-feed-header .button{
 	position: absolute;
 	right: 0;
-	top: 16px;
-	padding: 6px 10px;
+	top: 7px;
+	padding: 4px 10px;
+	font-size: 14px;
 	margin-left: 0.6em;
 	display: none;
 }
@@ -2063,6 +2235,9 @@ a[id]{
 	display: none;
 }
 
+
+
+.user-type-admin.signed-in .auction .auction-header .button,
 .user-type-admin.signed-in .nav-auctions,
 .user-type-vendor.signed-in .nav-auctions,
 .signed-in .h-feed-header .button{
@@ -2148,6 +2323,10 @@ color: white;
 		font-weight: 300;
 		letter-spacing: -1.4px;
 	}
+	
+	.h-feed-header .button{
+	top: 16px;
+	}
 }
 
 @media screen and (min-width: 799.99px){
@@ -2188,6 +2367,26 @@ color: white;
 
 /* @group layout-auctions-show */
 
+/* @group fieldset-date-time */
+
+.layout-auctions-show .fieldset-date-time .fieldset-time .field-time-hours::after,
+.layout-auctions-show .fieldset-date-time .fieldset-time .field-time-minutes::after,
+.layout-auctions-show .fieldset-date-time .fieldset-time .field-time-meridiem::after{
+	border-width: 4px;
+	right: 5px;
+	margin-bottom: 8px;
+}
+
+.layout-auctions-show .fieldset-date-time .fieldset-time .field-time-hours select,
+.layout-auctions-show .fieldset-date-time .fieldset-time .field-time-minutes select,
+.layout-auctions-show .fieldset-date-time .fieldset-time .field-time-meridiem select{
+	height: 1em;
+	min-height: 28px;
+	padding-right: 18px;
+}
+
+/* @end */
+
 .layout-auctions-show main .wrapper,
 .layout-auctions-bids main .wrapper{
 	border: 1px solid #ccc;
@@ -2211,6 +2410,11 @@ color: white;
 	color: #384f7e;
 }
 
+.user-type-admin.layout-auctions-show .auction-header h1,
+.user-type-admin.layout-auctions-bids .auction-header h1{
+	margin-right: 72px;
+}
+
 .layout-auctions-show main .auction-header dl,
 .layout-auctions-bids main .auction-header dl{
 	margin: 0 12px;
@@ -2227,12 +2431,12 @@ color: white;
 	}
 	.layout-auctions-show main .auction-header h1,
 	.layout-auctions-bids main .auction-header h1{
-		margin: 0 20px 8px;
+		margin: 0 20px 4px;
 	}
 	
 	.layout-auctions-show main .auction-header dl,
 	.layout-auctions-bids main .auction-header dl{
-		font-size: 15px;
+		font-size: 14px;
 		margin: 0 20px;
 		font-weight: normal;
 	}
@@ -2308,21 +2512,22 @@ color: white;
 	text-align: center;
 }
 
-.auction-workflow.auction-workflow-open-biddable-rejected{
+.auction-workflow.has-errors{
 	border-color: #ff632c;
 	background-color: #fffafb;
 	border-right-color: #d60c18;
 	border-bottom-color: #d60c18;
 }
 
-.auction-workflow.auction-workflow-open-biddable-rejected h1{
+.auction-workflow.has-errors h1{
 	color: #920041;
 	font-weight: 600;
 }
 
-.auction-workflow.auction-workflow-bid-rejected p{
+.auction-workflow.has-errors p{
 	margin-bottom: 0.8em;
 }
+
 .auction-place-bid.is-loading{
 	border-color: #ddd;
 	border-right-color: #c8c8c8;
@@ -2393,14 +2598,15 @@ color: white;
 }
 
 .auction-workflow button{ 
-	padding: 4px 10px; 
-	margin-top: 0.8em;
+	padding: 6px 10px 6px; 
+	margin-top: 1em;
 }
 
-.auction-workflow[class*="auction-workflow-published-open"]  button{ margin-top: 2em; }
+.auction-workflow[class*="auction-workflow-published-open"]  button{ margin-top: 43px; }
 
 
 .auction-workflow[class*="auction-workflow-published-open"] .field{
+	padding-top: 16px;
 	width: 5.5em;
 	display: inline-block;
 	vertical-align: middle;
@@ -2450,7 +2656,7 @@ color: white;
 	}
 	
 	.layout-auctions-show main .wrapper .auction-footer{
-		font-size: 14px;
+		font-size: 16px;
 		width: 45%;
 		margin: 0;
 		padding: 20px;
@@ -2567,6 +2773,36 @@ color: white;
 
 /* @group auctions new, edit */
 
+/* @group fieldset-date-time */
+
+.layout-auctions-new .fieldset.fieldset-date-time .fieldset-time{
+	width: 15em;
+}
+
+.layout-auctions-new .fieldset-date-time .fieldset-time .time-zone,
+.layout-auctions-edit .fieldset-date-time .fieldset-time .time-zone{
+	position: relative;
+	top: 11px;
+	left: 8px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #555;
+}
+
+@media screen and (min-width: 512px){
+	  .layout-auctions-new .fieldset.fieldset-date-time .field-date,
+	.layout-auctions-new .fieldset.fieldset-date-time .fieldset-time{
+	  float: left;
+	  min-width: 11.8em;
+	  margin-bottom: 0;
+	}
+
+}
+
+.layout-auctions-new .fieldset.fieldset-date-time .fieldset-time .field-select{
+}
+/* @end */
+
 .layout-auctions-new main .wrapper,
 .layout-auctions-edit main .wrapper{
 	max-width: 640px;
@@ -2574,267 +2810,10 @@ color: white;
 	padding: 20px;
 }
 
-.fieldset-date-time .field-date,
-.fieldset-date-time .fieldset.fieldset-time{
-	margin: 0;
-	position: relative;
-	border: 0;
-	padding: 0;
-}
-
-.fieldset-date-time .field-date{
-  margin-bottom: 1em;
-}
-
-.fieldset-date-time .field-date span.label-text,
-.fieldset-date-time .fieldset-time legend{
-	font-weight: normal;
-	padding: 0;
-	border: 0;
-	margin: 0 0 8px;
-	line-height: 1;
-}
-
-.layout-auctions-new .branch,
-.layout-auctions-edit .branch{
-	margin-bottom: 12px;
-	margin-left: -2px;
-}
-
-.branch .fieldset.fieldset-date-time,
-.branch .delivery{
-	padding: 32px 12px 12px;
-	border: 2px solid #e3e3e3;
-	background: #fff;
-	margin: 0;
-	position: relative;
-}
-
-.branch .fieldset.fieldset-date-time.fieldset-end-date-time{ margin-bottom: 6px; }
-
-.branch .delivery{ margin-bottom: 16px; }
-
-.branch .fieldset-date-time > legend,
-.branch .delivery h2{
-	position: absolute;
-	top: 12px;
-	line-height: 1;
-	bottom: auto;
-	padding: 0;
-	border: 0;
-	margin: 0;
-	font-size: 14px;
-	font-weight: 600;
-}
-
-.branch .delivery h1{
-	position: absolute;
-	left: -9999em;
-}
-
-.branch .fieldset-date-time .field-date,
-.branch .fieldset-date-time .fieldset-time,
-.branch .delivery .field,
-.with-customized-timeline .fieldset-date-time-summary{
-	display: none;
-}
-
-.with-customized-timeline .fieldset-date-time.fieldset-start-date-time{
-	margin-bottom: 24px;
-}
-.with-customized-timeline .branch .fieldset-date-time .field-date,
-.with-customized-timeline .branch .fieldset-date-time .fieldset-time,
-.with-customized-timeline .branch .delivery .field{
-	display: block;
-}
-
-
-.with-customized-timeline .branch .fieldset-date-time.fieldset-end-date-time,
-.with-customized-timeline .branch .delivery{
-	width: auto;
-	float: none;
-	margin-right: 0;
-	border: 1px solid #ccc;
-	padding: 16px;
-	padding-top: 24px;
-	margin-bottom: 24px;
-}
-
-.with-customized-timeline .branch .fieldset-date-time.fieldset-end-date-time,
-.with-customized-timeline .branch .delivery{
-	padding-top: 30px;
-}
-
-.with-customized-timeline .delivery::after{
-	content: "";
-	display: table;
-	clear: both;
-}
-.with-customized-timeline .delivery .field,
-.with-customized-timeline .delivery .estimate{
-	float: right;
-	position: relative;
-	width: 33.33%;
-	margin: 0;
-}
-
-.with-customized-timeline .delivery .estimate{
-	width: 63.333%;
-}
-
-.with-customized-timeline .delivery .field{ margin-right: 3%; }
-.with-customized-timeline .delivery .field .label-text{ font-weight: 400; }
-.with-customized-timeline .delivery .field input{ width: 5em; }
-
-.with-customized-timeline .delivery .estimate{ 
-	padding:  12px 12px;
-	background: #f3f3f3;
-}
-
-.with-customized-timeline .branch .fieldset-date-time > legend,
-.with-customized-timeline .branch .delivery h1{
-	position: absolute;
-	top: 0;
-	left: 9px;
-	margin-top: -12px;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	border: 1px solid #bbb;
-	border-radius: 2px;
-	padding: 4px 8px;
-	line-height: 20px;
-	background: white;
-	display: inline-block;
-	font-size: inherit;
-	font-weight: 600;
-	color: #333;
-}
-
-.with-customized-timeline .branch .delivery .estimate,
-.with-customized-timeline .branch .delivery .estimate h2{
-  font-size: 12px;
-}
-
-.with-customized-timeline .branch .delivery .estimate h2{
-	position: static;
-	margin-bottom: 0.4em;
-}
-
-.branch+.help-text{
-	font-size: 14px;
-	line-height: 1.33em;
-	padding-top: 12px;
-	margin-bottom: 2em;
-	clear: both;
-}
-
-.fieldset-date-time::after{
-	content: "";
-	display: table;
-	clear: both;
-}
-
-
-.fieldset-date-time .field-date input{
-	width: 100%;
-	max-width: 148px;
-}
-
-.fieldset-date-time.fieldset-start-date-time{ 
-	margin-top: 24px;
-	margin-bottom: 12px; 
-}
-
-
-.fieldset-date-time .fieldset-time .time-zone {
-	position: relative;
-	top: 6px;
-	font-size: 12px;
-	font-weight: 600;
-	margin-left: 0.4em;
-  
-}
-.fieldset-date-time .fieldset-time .field { position: relative; }
-
-.fieldset-date-time .fieldset-time .field select{
-	background: white;
-}
-
-.fieldset-date-time .fieldset-time .field::after{
-	z-index: 1;
-	border-width: 5px;
-}
-
-.fieldset-date-time .fieldset-time .field-time-hours select{
-	border-radius: 3px 0 0 3px;
-}
-
-.fieldset-date-time .fieldset-time .field-time-minutes select{
-	border-radius: 0;
-	border-left: none;
-	border-right: none;
-}
-
-.fieldset-date-time .fieldset-time .field-time-meridiem select{
-	border-radius: 0 3px 3px 0;
-}
-
-.field-starting-bid+.field-checkbox.field-sealed-bid{
-	margin-top: -18px;
-}
-
-.field-checkbox.field-sealed-bid .label-text{
-	font-weight: 400;
-	font-size: 14px;
-}
-
-.fieldset-date-time .fieldset-time .field .label-text{
-	position: absolute;
-	bottom: 0;
-	left: -9999em;
-	font-size: 12px;
-	
-}
-.fieldset-date-time .fieldset-time .field-time-hours,
-.fieldset-date-time .fieldset-time .field-time-minutes,
-.fieldset-date-time .fieldset-time .field-time-meridiem{
-	width: 3.5em;
-	min-width: 32px;
-	float: left;
-	margin-bottom: 0;
-}
-
-.fieldset-date-time .fieldset-time .field-time-hours::after,
-.fieldset-date-time .fieldset-time .field-time-minutes::after,
-.fieldset-date-time .fieldset-time .field-time-meridiem::after{
-	border-width: 4px;
-	right: 5px;
-	margin-bottom: 8px;
-}
-
-.fieldset-date-time .fieldset-time .field-time-hours select,
-.fieldset-date-time .fieldset-time .field-time-minutes select,
-.fieldset-date-time .fieldset-time .field-time-meridiem select{
-	height: 1em;
-	min-height: 28px;
-	padding-right: 18px;
-}
-
 .field.field-starting-bid input{ width: 5.5em; }
 
 .field.field-sealed-bid.field-checkbox{
 	margin-bottom: 28px;
-}
-
-.layout-auctions-new .time-zone,
-.layout-auctions-edit .time-zone{
-	position: relative;
-	top: 11px;
-	left: 8px;
-	font-size: 14px;
-	font-weight: 600;
-	color: #555;
 }
 
 .layout-auctions-new textarea,
