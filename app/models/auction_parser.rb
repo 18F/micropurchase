@@ -29,6 +29,7 @@ class AuctionParser
       :issue_url,
       :notes,
       :published,
+      :purchase_card,
       :result,
       :start_price,
       :summary,
