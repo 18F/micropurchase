@@ -1422,13 +1422,12 @@ main div.wrap > form { max-width: 576px; }
 
 .signed-in .nav-facets{ display: block; }
 
-.signed-in .nav-facets a{ 
-	text-decoration: none; 
-	margin-right: 1em;
+.nav-facets a{ 
+  text-decoration: none; 
+  margin-right: 1em;
+  color: #666; 
 }
-
-.signed-in .nav-facets a{ color: #666; }
-.signed-in .nav-facets a:hover{ color: #333; }
+.nav-facets a:hover{ color: #333; }
 
 /* @end */
 
@@ -1440,11 +1439,7 @@ main div.wrap > form { max-width: 576px; }
 	clear: both;
 }
 
-
-}
-
 .pagination .pagination-ellipsis{
-	margin-left: -0.4em;
 	color: #aaa;
 }
 
@@ -1452,14 +1447,16 @@ main div.wrap > form { max-width: 576px; }
 .pagination .pagination-next,
 .pagination .pagination-page,
 .pagination .pagination-ellipsis{
-	border: 1px solid #ccc;
-	border-bottom-color: #c3c3c3;
+	border: 1px solid #ddd;
+	border-bottom-color: #d3d3d3;
 	border-radius: 3px;
 	text-decoration: none;
 	border-radius: 3px;
 	color: #555; 
 	float: left;
-	padding: 6px 8px;
+  font-weight: 600;
+  font-size: 16px;
+	padding: 8px 12px 10px;
 	text-decoration: none;
 	min-width: 1.8em;
 	text-align: center;
@@ -1472,7 +1469,7 @@ main div.wrap > form { max-width: 576px; }
 
 .pagination .pagination-next{
 	border-radius: 0 3px 3px 0;
-	border-right-color: #c3c3c3;
+	border-right-color: #d3d3d3;
 }
 
 .pagination .pagination-page,
@@ -1482,28 +1479,25 @@ main div.wrap > form { max-width: 576px; }
 }
 
 .pagination .is-disabled{
-	color: #ccc !important;
-	border-color: #ccc !important;
-	border-bottom-color: #c3c3c3 !important;
+	color: #ddd !important;
+	border-color: #ddd !important;
+	border-bottom-color: #d3d3d3 !important;
 }
 
 .pagination .pagination-page.is-current{
-	background: #444;
-	border-top-color: #444;
-	border-bottom-color: #333;
+	background: #006fbe !important;
+	border-top-color: #0062a8;
+	border-bottom-color: #0062a8;
 	color: #fff !important;
 }
 
 .pagination .pagination-prev:hover,
 .pagination .pagination-next:hover,
 .pagination .pagination-page:hover{
-	border-top-color: #006fbe;
-	border-bottom-color: #006fbe;
+	background: #eee;
 	color: #006fbe;
 }
 
-.pagination .pagination-next:hover{ border-right-color: #006fbe; }
-.pagination .pagination-prev:hover{ border-left-color: #006fbe; }
 
 .pagination .pagination-prev::before,
 .pagination .pagination-next::after{
@@ -2292,7 +2286,8 @@ color: white;
 	margin-left: 0.2em;
 }
 
-.layout-auctions-index .auction{
+.layout-auctions-index .auction,
+.layout-auctions-index .boilerplate{
 	border: 1px solid #c3c3c3;
 	padding: 14px 16px 0;
 	margin-bottom: 20px;
@@ -2304,6 +2299,28 @@ color: white;
 	position: relative;
 	max-width: 100%;
 	display: block;
+}
+
+.layout-auctions-index .boilerplate{
+	clear: both;
+	padding: 16px;
+	max-width: 39em;
+	background: #f3f3f3;
+	box-shadow: inset 0 0 0 4px #fff
+}
+
+.layout-auctions-index .boilerplate h1{
+	font-weight: 600;
+	font-size: 21px;
+	font-family: inherit;
+	line-height: 1.4em;
+	margin-bottom: 12px;
+	color: #333;
+}
+
+.layout-auctions-index .boilerplate p{
+	line-height: 1.4;
+	max-width: 36em;
 }
 
 .layout-auctions-index.user-type-admin .auction h1{

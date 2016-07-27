@@ -205,10 +205,14 @@
 <section class="auction-workflow auction-workflow-published-closed-pending-delivery-vendors">
   <h1>Pending delivery</h1>
   <p>You won this auction on [auction.winDate] with a bid of $[auction.winBid]. Please complete the work in accordance with this auction&rsquo;s acceptance criteria before the delivery deadline ([auction.deliveryDeadline]).</p>
-  <p>When you&rsquo;re done, create a pull request and tag <a href="#">the issue associated with this auction</a>, then click &ldquo;mark as delivered,&rdquo; below. If you have any questions, please leave a comment on <a href="#">the issue associated with this auction</a>.
-  <div>
-    <button class="button button-deliver">Mark as delivered</button>  
+  <p>When you&rsquo;re done, create a pull request and tag <a href="#">the issue associated with this auction</a>. Then enter the <abbr title="Uniform resource locator">URL</abbr> of your pull request, below, and click &ldquo;mark as delivered.&rdquo; If you have any questions, please leave a comment on <a href="#">the issue associated with this auction</a>.
+  <div class="field field-delivery-url">
+    <label>
+      <span class="label-text">Delivery <abbr title="Uniform resource locator">URL</abbr></span>
+      <input type="date" name="">
+    </label>
   </div>
+  <button class="button button-deliver">Mark as delivered</button>  
 </section>
 <section class="auction-workflow auction-workflow-published-closed-pending-delivery-overdue-admins">
   <h1>Delivery past due</h1>
@@ -218,9 +222,15 @@
 </section>
 <section class="auction-workflow auction-workflow-published-closed-pending-delivery-overdue-vendors">
   <h1>Delivery past due</h1>
-  <p>You won this auction on [auction.winDate] with a bid of $[auction.winBid], and were supposed to have delivered this auction before [auction.deliveryDeadline]. In accordance with our <a href="{{site.baseurl}}/policies">delivery policy</a>, administrators now have the option to reject your bid altogether or issue an extension.</p>
-  <p>In the interim, please either deliver or forfeit this auction. To deliver, complete your work in accordance with this auction&rsquo;s acceptance criteria, issue a pull request (making sure to tag <a href="#">the issue associated with this auction</a>), and click &ldquo;mark as delivered,&rdquo; below.</p>
-  <button class="button button-deliver">Mark as delivered</button>
+  <p>You won this auction on <strong>[auction.winDate]</strong> with a bid of <strong>$[auction.winBid],</strong> and were supposed to have delivered before <strong>[auction.deliveryDeadline].</strong> In accordance with our <a href="{{site.baseurl}}/policies">policies</a>, administrators now have the option to issue an extension or reject your bid altogether.</p>
+  <p>To avoid having your bid rejected, please complete your work (in accordance with this auction&rsquo;s acceptance criteria) as soon as possible. When you&rsquo;re done, issue a pull request and tag <a href="#">the issue associated with this auction</a>. Finally, enter the <abbr title="Uniform resource locator">URL</abbr> of your pull request below, and click &ldquo;mark as delivered.&rdquo;If you have any questions, please leave a comment on <a href="#">the issue associated with this auction</a>.</p>
+  <div class="field field-delivery-url">
+    <label>
+      <span class="label-text">Delivery <abbr title="Uniform resource locator">URL</abbr></span>
+      <input type="date" name="">
+    </label>
+  </div>
+  <button class="button button-deliver">Mark as delivered</button>  
 </section>
 <section class="auction-workflow auction-workflow-published-closed-pending-acceptance-admins">
   <h1>Pending acceptance</h1>

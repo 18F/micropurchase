@@ -10,13 +10,12 @@ permalink: /
   <main role="main" id="main">
     <div class="h-feed">
       <div class="wrapper">
-<!--         <div class="notice">
+        <!--<div class="notice">
           <p>You will need to <a href="{{site.baseurl}}/profile">complete your profile</a> in order to place a bid and get paid.</p>
-        </div>
- -->
+        </div>-->
         {% include auctions-index-header.html %}
         
-        <article class="h-entry auction">
+        <article class="h-entry auction is-closing-soon">
           <a href="{{site.baseurl}}/auctions/show">
             <header class="auction-header">
               <h1 class="p-name auction-name">
@@ -25,7 +24,7 @@ permalink: /
               <a class="button" href="{{site.baseurl}}/auctions/edit">Edit</a>
               <dl>
                 <dt class="auction-status">Status</dt>
-                <dd class="auction-status auction-status-closing-soon">Closing soon</dd>
+                <dd class="auction-status auction-status-open">Open</dd>
                 <dt class="auction-time-remaining">Time remaining</dt>
                 <dd class="auction-time-remaining">1 hour</dd>
                 <dt class="auction-current-bid">Current bid</dt>
@@ -50,43 +49,14 @@ permalink: /
             </ul>
           </footer>
         </article>
-        <article class="h-entry auction">
-          <a href="{{site.baseurl}}/auctions/show">
-            <header class="auction-header">
-              <h1 class="p-name auction-name">
-                Quarterly Reminders from Dolores Landingham 
-              </h1>
-              <a class="button" href="{{site.baseurl}}/auctions/edit">Edit</a>
-              <dl>
-                <dt class="auction-status">Status</dt>
-                <dd class="auction-status auction-status-closed">Closed</dd>
-                <dt class="auction-time-remaining">Ended</dt>
-                <dd class="auction-time-remaining">9 days ago</dd>
-                <dt class="auction-current-bid">Closing bid</dt>
-                <dd class="auction-current-bid">$2,750.00</dd>
-              </dl>
-            </header>
-            <p class="p-summary auction-summary">We need the ability to send recurring policy reminders to our team here at 18F on a quarterly basis and we want to automate this by leveraging the existing Dolores Landingham Slack bot.</p>
-          </a>
-          <footer class="auction-footer">
-            <ul>
-              <li class="auction-project">
-                <h2>Project</h2>
-                <span><a href="https://github.com/18F/dolores-landingham-bot">Dolores Landingham</a></span>
-              </li>
-              <li class="auction-skills">
-                <h2>Skills</h2>
-                <ul>
-                  <li>Docker</li>
-                </ul>
-              </li>
-            </ul>
-          </footer>
-        </article>
         {% include _auction.html %}
         {% include _auction.html %}
         {% include _auction.html %}
         {% include _auction.html %}
+        <div class="boilerplate">
+          <h1>No open auctions</h1>
+          <p>Arg! It looks like we don&rsquo;t have any open or upcoming auctions to show you right now. In the meantime, take a look at our <a href="{{site.baseurl}}/auctions/closed">closed auctions</a>, or read more <a href="{{site.baseurl}}">about the site itself</a>.</p>
+        </div>
         <nav class="pagination">
           <a href="#" class="pagination-prev is-disabled">Prev</a>
           <span class="pagination-page is-current">1</span>
