@@ -49,50 +49,72 @@ excerpt: None
       <footer class="auction-footer">
         {% include _auction_states.html %}
         <ul>
-          <li class="auction-started">
-            <h2>Started</h2>
-            <span>May 16, 2016 at 12:00 AM EDT</span>
-          </li>
-          <li class="auction-ended">
-            <h2>Ended</h2>
-            <span>June 03, 2016 at 04:00 PM EDT</span>
-          </li>
-          <li class="auction-delivery-deadline">
-            <h2>Delivery deadline</h2>
-            <span>June 17, 2016 at 12:00 AM EDT</span>
-          </li>
-          <li class="auction-accepted">
-            <h2>Accepted</h2>
-            <span>June 11, 2016 at 11:38 AM EDT</span>
-          </li>
           <li class="auction-project">
             <h2>Project</h2>
-            <span>Open Opportunities</span>
+            <span>Dolores Landingham</span>
+          </li>
+          <li class="auction-issue">
+            <h2>Issue</h2>
+            <span><a href="https://github.com/18F/dolores-landingham-bot/issues/125">#23 Ability to send message to all Dolores users right now</a></span>
           </li>
           <li class="auction-type">
             <h2>Type</h2>
             <span>Reverse-auction</span>
           </li>
-          <li class="auction-type">
-            <h2>Type</h2>
-            <span>Multi-bid</span>
-          </li>
-          <li class="auction-eligibility">
-            <h2>Eligibility</h2>
-            <span>SAM.gov only</span>
-          </li>
-          <li class="auction-payment-url">
-            <h2>Payment URL</h2>
-            <a href="#">https://cash.me/andrewmaier</a>
-          </li>
-          <li class="auction-cap-url">
-            <h2>CAP URL</h2>
-            <a href="#">https://c2.gsa.gov/12345</a>
+          <li class="auction-skills">
+            <h2>Skills</h2>
+            <ul>
+              <li>Ruby</li>
+              <li>Rails</li>
+              <li>Javascript</li>
+            </ul>
           </li>
         </ul>
       </footer>
     </div>
   </main>
+  <section class="auction-timeline">
+    <dl>
+      <dt><time>May 11, 2016 at 11:37 AM EDT</time></dt>
+      <dd>Michael Torres requested permission to use the 18F P Card:</dd>
+      <dd>
+        <dl>
+          <dt>CAP URL</dt>
+          <dd><a href="#">https://cap.me</a></dd>
+        </dl>
+      </dd>
+      <dt><time>May 11, 2016 at 12:00 PM EDT</time></dt>
+      <dd>Michael Torres set the auction timeline:</dd>
+      <dd>
+        <dl>
+          <dt>Start date</dt>
+          <dd><time>May 12, 2016 at 12:00 AM EDT</time></dd>
+          <dt>End date</dt>
+          <dd><time>May 14, 2016 at 12:00 AM EDT</time></dd>
+          <dt>Delivery deadline</dt>
+          <dd>5 days</dd>
+        </dl>
+      </dd>
+      <dt><time>May 12, 2016 at 12:00 AM EDT</time></dt>
+      <dd>Vendorname made a bid of $1,500</dd>
+      <dt><time>May 12, 2016 at 12:01 AM EDT</time></dt>
+      <dd>Vendorname 2 made a bid of $400</dd>
+      <dt><time>May 14, 2016 at 12:00 AM EDT</time></dt>
+      <dd>Auction ended</dd>
+      <dt><time>May 15, 2016 at 2:32 PM EDT</time></dt>
+      <dd>Vendorname 2 marked this auction as delivered</dd>
+      <dd>
+        <dl>
+          <dt>Delivery URL</dt>
+          <dd>https://github.com/pull-request</dd>
+        </dl>
+      </dd>
+      <dt><time>May 15, 2016 at 5:02 PM EDT</time></dt>
+      <dd>Michael Torres accepted Vendorname 2&rsquo;s work</dd>
+      <dt><time>May 17, 2016 at 1:17 PM EDT</time></dt>
+      <dd>Michael Torres issued payment to Vendorname 2</dd>
+    </dl>
+  </section>
   <aside class="modal">
     <h1>Are you sure?</h1>
     <p>You&rsquo;re about to place a bid for <span class="bid-amount">$3,413.00</span>.</p>

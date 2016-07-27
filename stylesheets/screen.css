@@ -364,7 +364,12 @@ table.tablesaw {
 }
 
 /* @end */
-
+table td,
+th{
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+th{ text-align: left; }
 td .time{
 	display: block;
 	font-size: 14px;
@@ -380,10 +385,24 @@ td.col-title{
 }
 
 
+.col-num-bids{
+	width: 4em;
+}
+
 .col-starting,
 .col-ending,
 .col-delivery{
 	width: 8em;
+}
+
+.col-project{
+	width: 12em;
+}
+
+.col-winner{
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 /* @end */
@@ -1469,7 +1488,7 @@ main div.wrap > form { max-width: 576px; }
 
 .pagination .pagination-next{
 	border-radius: 0 3px 3px 0;
-	border-right-color: #d3d3d3;
+	border-right-color: #ccc;
 }
 
 .pagination .pagination-page,
@@ -1522,9 +1541,11 @@ main div.wrap > form { max-width: 576px; }
 
 .pagination .pagination-signpost{
 	margin: 0;
-	padding-top: 1em;
-	clear: both;
+	padding-top: 1.4em;
 	line-height: 1.2;
+	clear: left;
+	font-size: 14px;
+	color: #555;
 }
 
 /* @end */
@@ -3067,18 +3088,11 @@ color: white;
 	background: #fafafa;
 }
 
-.layout-auctions-needs-attention table td,
-.layout-auctions-closed table td,
-.layout-admins-index table td,
-.layout-admins-index table th,
-.layout-vendors-index table td,
-.layout-vendors-index table th,
-.layout-people-show table td,
-.layout-people-show table th,
-.layout-settings table th,
-.layout-settings table td{
-	border: 1px solid #ddd;
-	padding: 8px;
+
+.layout-auctions-needs-attention table td.is-overdue{
+	border-bottom-color: #ce6246;
+	color: #990017;
+	
 }
 
 .layout-people-show table th{
