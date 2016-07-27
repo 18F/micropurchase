@@ -1,0 +1,29 @@
+<h2>People</h2>
+
+<nav class="site-nav-secondary">
+<ul>
+  <li><%= link_to 'Admins', admin_admins_path, class: 'usa-current' %></li>
+  <li><%= link_to 'Vendors', admin_vendors_path %></li>
+</ul>
+</nav>
+
+<table class="usa-table-borderless" id="table-admins">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Email address</th>
+      <th scope="col">Contracting officer?</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @view_model.admins.each do |user| %>
+      <tr>
+        <td><%= link_to user.name, admin_user_path(user.id) %></td>
+        <td><%= user.email %></td>
+        <td><%= user.contracting_officer? %></td>
+        <td><%= link_to('Edit', edit_admin_user_path(user)) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

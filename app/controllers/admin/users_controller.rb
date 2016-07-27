@@ -1,8 +1,4 @@
 class Admin::UsersController < Admin::BaseController
-  def index
-    @view_model = Admin::UsersIndexViewModel.new
-  end
-
   def show
     user = User.find(params[:id])
     @view_model = Admin::UserShowViewModel.new(user)
@@ -18,7 +14,7 @@ class Admin::UsersController < Admin::BaseController
 
     if user.update(user_params)
       flash[:success] = "User with email #{user.email} updated successfully"
-      redirect_to admin_users_path
+      redirect_to admin_admins_path
     else
       flash.now[:error] = user.errors.full_messages.to_sentence
       @view_model = Admin::EditUserViewModel.new(user)

@@ -55,15 +55,6 @@ Then(/^I should see the auctions in reverse start date order$/) do
   expect(DateTime.parse(first_start_date)).to be > DateTime.parse(second_start_date)
 end
 
-Then(/^I should see that user's information$/) do
-  expect(page).to have_content(@user.name)
-  expect(page).to have_content(@user.email)
-  expect(page).to have_content(@user.payment_url)
-  expect(page).to have_content(@user.duns_number)
-  expect(page).to have_content(@user.github_id)
-  expect(page).to have_content(@user.github_login)
-end
-
 Then(/^I should see a page title "([^"]+)"$/) do |title|
   expect(page).to have_title title
 end

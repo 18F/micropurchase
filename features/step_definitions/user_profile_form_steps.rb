@@ -1,13 +1,3 @@
-When(/^I should see my user info$/) do
-  user = UserPresenter.new(@user)
-
-  expect(page).to have_text(user.duns_number)
-  expect(page).to have_text(user.email)
-  expect(page).to have_text(user.name)
-  expect(page).to have_text(user.github_id)
-  expect(page).to have_text(user.in_sam?)
-end
-
 Then(/^I should see a profile form$/) do
   expect(page).to have_content("Name")
   expect(page).to have_content("Email address")
