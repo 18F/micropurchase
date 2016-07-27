@@ -1,5 +1,4 @@
-<h2>Editing auction</h2>
-<div class="auction-form">
+<div class="auction-form usa-width-two-thirds">
   <%= simple_form_for [:admin, @view_model.record] do |f| %>
     <%= render partial: 'form', locals: { f: f, auction: @view_model } %>
     <%= render partial: 'edit_form', locals: { f: f, auction: @view_model } %>

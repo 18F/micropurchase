@@ -4,8 +4,8 @@ class DefaultDateTime
 
   attr_reader :dc_time
 
-  def initialize
-    @dc_time = DcTimePresenter.new(Time.current).convert
+  def initialize(time = Time.current)
+    @dc_time = DcTimePresenter.new(time).convert
   end
 
   def convert

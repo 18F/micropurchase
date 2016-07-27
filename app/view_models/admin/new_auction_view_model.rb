@@ -1,5 +1,8 @@
 class Admin::NewAuctionViewModel < Admin::BaseViewModel
   attr_reader :auction
+  DEFAULT_START_DAYS = 5
+  DEFAULT_END_DAYS = 7
+  DEFAULT_DELIVERY_DAYS = 12
 
   def initialize(auction = nil)
     @auction = auction
@@ -17,20 +20,24 @@ class Admin::NewAuctionViewModel < Admin::BaseViewModel
     'admin/auctions/due_in_days'
   end
 
-  def date_default(_field)
-    default_date_time.convert.to_date
+  def estimated_delivery_due_at
+    DcTimePresenter.convert_and_format(default_date_time('delivery_due_at').convert)
   end
 
-  def hour_default(_field)
-    default_date_time.hour
+  def date_default(field)
+    default_date_time(field).convert.to_date
   end
 
-  def minute_default(_field)
-    default_date_time.minute
+  def hour_default(field)
+    default_date_time(field).hour
   end
 
-  def meridiem_default(_field)
-    default_date_time.meridiem
+  def minute_default(field)
+    default_date_time(field).minute
+  end
+
+  def meridiem_default(field)
+    default_date_time(field).meridiem
   end
 
   def billable_to_options
@@ -51,7 +58,13 @@ class Admin::NewAuctionViewModel < Admin::BaseViewModel
 
   private
 
-  def default_date_time
-    DefaultDateTime.new
+  def default_date_time(field)
+    if field == 'started'
+      DefaultDateTime.new(DEFAULT_START_DAYS.business_days.from_now)
+    elsif field == 'ended'
+      DefaultDateTime.new(DEFAULT_END_DAYS.business_days.from_now)
+    else
+      DefaultDateTime.new(DEFAULT_DELIVERY_DAYS.business_days.from_now)
+    end
   end
 end

@@ -1,11 +1,12 @@
-<div>
-<select class="time-input" name="auction[<%=field%>_at(1i)]" id="auction_<%=field%>_at_1i">
-  <%= options_for_select((1..12).to_a, auction.hour_default(field)) %>
+<div class="time usa-width-one-half">
+  <div><%= label_tag("Time") %></div>
+  <select class="usa-width-one-third" name="auction[<%=field%>_at(1i)]" id="auction_<%=field%>_at_1i">
+    <%= options_for_select((1..12).to_a, auction.hour_default(field)) %>
   </select>
-  <select class="time-input" name="auction[<%=field%>_at(2i)]" id="auction_<%=field%>_at_2i">
+  <select class="usa-width-one-third" name="auction[<%=field%>_at(2i)]" id="auction_<%=field%>_at_2i">
     <%= options_for_select(['00', '15', '30', '45'], auction.minute_default(field)) %>
   </select>
-  <select class="time-input" name="auction[<%=field%>_at(3i)]" id="auction_<%=field%>_at_3i">
+  <select class="usa-width-one-third" name="auction[<%=field%>_at(3i)]" id="auction_<%=field%>_at_3i">
     <%= options_for_select(['AM', 'PM'], auction.meridiem_default(field)) %>
   </select>
 </div>

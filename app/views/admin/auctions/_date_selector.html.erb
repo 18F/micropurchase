@@ -1,6 +1,10 @@
-<%= simple_fields_for :auction do |auction_fields| %>
-  <%= auction_fields.input "#{field}_at".to_sym,
-    as: :date,
-    html5: true,
-    input_html: { value: auction.date_default(field) } %>
-<% end %>
+<div class="date usa-width-one-half">
+  <div><%= label_tag("Date") %></div>
+  <%= simple_fields_for :auction do |auction_fields| %>
+    <%= auction_fields.input "#{field}_at".to_sym,
+      as: :date,
+      html5: true,
+      label: false,
+      input_html: { value: auction.date_default(field) } %>
+  <% end %>
+</div>
