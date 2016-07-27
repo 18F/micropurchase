@@ -16,6 +16,14 @@ class Admin::NewAuctionViewModel < Admin::BaseViewModel
     'usa-current'
   end
 
+  def c2_proposal_partial
+    'components/null'
+  end
+
+  def paid_at_partial
+    'components/null'
+  end
+
   def delivery_due_partial
     'admin/auctions/due_in_days'
   end
@@ -54,6 +62,10 @@ class Admin::NewAuctionViewModel < Admin::BaseViewModel
 
   def customer_options
     Customer.sorted
+  end
+
+  def delivery_url_partial
+    'components/null'
   end
 
   private
