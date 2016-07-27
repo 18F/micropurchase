@@ -1409,6 +1409,29 @@ main div.wrap > form { max-width: 576px; }
 
 /* @end */
 
+/* @group nav.facets */
+
+.nav-facets{
+	position: relative;
+	margin-top: 5px;
+	border-top: 1px solid #555;
+	padding-top: 12px;
+	display: none;
+	margin-bottom: 1em;
+}
+
+.signed-in .nav-facets{ display: block; }
+
+.signed-in .nav-facets a{ 
+	text-decoration: none; 
+	margin-right: 1em;
+}
+
+.signed-in .nav-facets a{ color: #666; }
+.signed-in .nav-facets a:hover{ color: #333; }
+
+/* @end */
+
 /* @group nav.pagination */
 
 .pagination{ 
@@ -2211,7 +2234,9 @@ a[id]{
 	clear: both;
 }
 
-.h-feed-header h1{
+.h-feed-header h1,
+.layout-admins-index h1,
+.layout-vendors-index h1{
 	font-size: 36px;
 	font-weight: 400;
 	letter-spacing: -1px;
@@ -2227,28 +2252,16 @@ a[id]{
 	display: none;
 }
 
-.nav-auctions{
-	position: relative;
-	margin-top: 5px;
-	border-top: 1px solid #555;
-	padding-top: 12px;
-	display: none;
-}
-
 
 
 .user-type-admin.signed-in .auction .auction-header .button,
-.user-type-admin.signed-in .nav-auctions,
-.user-type-vendor.signed-in .nav-auctions,
+.signed-in .nav-facets,
 .signed-in .h-feed-header .button{
 	display: block;
 }
 
-.h-feed-header nav a{ 
-	text-decoration: none; 
-	margin-right: 1em;
-}
-
+.layout-admins-index .nav-people-admins,
+.layout-vendors-index .nav-people-vendors,
 .layout-auctions-drafts .nav-auctions-drafts,
 .layout-auctions-index .nav-auctions-index,
 .layout-auctions-needs-attention .nav-auctions-needs-attention,
@@ -2278,9 +2291,6 @@ color: white;
 	font-weight: 600;
 	margin-left: 0.2em;
 }
-
-.nav-auctions a{ color: #666; }
-.nav-auctions a:hover{ color: #333; }
 
 .layout-auctions-index .auction{
 	border: 1px solid #c3c3c3;
@@ -2318,6 +2328,8 @@ color: white;
 	
 	.h-feed-header{ margin-bottom: 32px; }
 
+	.layout-admins-index h1,
+	.layout-vendors-index h1,
 	.h-feed-header h1{
 		font-size: 48px;
 		font-weight: 300;
@@ -2935,7 +2947,14 @@ color: white;
 
 /* @group layout-people */
 
-.layout-people-index main .wrapper > h1,
+.layout-admins-index a.button{
+  position: absolute;
+  top: 16px;
+  right: 0;
+  padding: 4px 10px;
+}
+
+.layout-admins-index main .wrapper > h1,
 .layout-people-show main .wrapper > h1,
 .layout-settings main .wrapper > h1{
 	letter-spacing: -2px;
@@ -2957,7 +2976,7 @@ color: white;
 .layout-auctions-index section h1,
 .layout-auctions-needs-attention section h1,
 .layout-auctions-closed section h1,
-.layout-people-index section h1,
+.layout-admins-index section h1,
 .layout-people-show section h1,
 .layout-settings main section > h1{
 	font-weight: 600;
@@ -2974,7 +2993,7 @@ color: white;
 	margin-top: 0;
 }
 
-.layout-people-index section h1+.button,
+.layout-admins-index section h1+.button,
 .layout-settings main section > h1+.button{
 	padding: 4px 8px;
 	font-size: 14px;
@@ -2984,7 +3003,8 @@ color: white;
 
 .layout-auctions-needs-attention table,
 .layout-auctions-closed table,
-.layout-people-index table,
+.layout-admins-index table,
+.layout-vendors-index table,
 .layout-people-show table,
 .layout-settings table{
 	border-radius: 3px;
@@ -2993,12 +3013,12 @@ color: white;
 	margin: 0 auto;
 }
 
-.layout-people-index .people-vendors table tbody td,
+.layout-vendors-index table tbody td,
 .layout-people-show section table tbody td{
 	padding: 0;
 }
 
-.layout-people-index .people-vendors table tbody td a,
+.layout-vendors-index table tbody td a,
 .layout-people-show section table tbody td a{
 	display: block;
 	padding: 8px;
@@ -3006,24 +3026,24 @@ color: white;
 	text-decoration: none;
 }
 
-.layout-people-index section table tbody td.col-name a,
+.layout-admins-index section table tbody td.col-name a,
 .layout-people-show section table tbody td.col-auction a{
 	color: #006fbe;
 	text-decoration: underline;
 }
 
-.layout-people-index .people-vendors table tbody tr:hover td,
+.layout-vendors-index table tbody tr:hover td,
 .layout-people-show section table tbody tr:hover td{
 	background: lemonchiffon;
 	
 }
 
-.layout-people-index table tbody tr:first-child td:first-child,
+.layout-admins-index table tbody tr:first-child td:first-child,
 .layout-people-show table tbody tr:first-child td:first-child{
 	border-radius: 3px;
 }
 
-.layout-people-index table tbody tr:nth-child(odd) td,
+.layout-admins-index table tbody tr:nth-child(odd) td,
 .layout-people-show table tbody tr:nth-child(odd) td,
 .layout-people-show table tbody tr:nth-child(odd) th,
 .layout-settings table tbody tr:nth-child(odd) th{
@@ -3032,8 +3052,10 @@ color: white;
 
 .layout-auctions-needs-attention table td,
 .layout-auctions-closed table td,
-.layout-people-index table td,
-.layout-people-index table th,
+.layout-admins-index table td,
+.layout-admins-index table th,
+.layout-vendors-index table td,
+.layout-vendors-index table th,
 .layout-people-show table td,
 .layout-people-show table th,
 .layout-settings table th,
@@ -3049,19 +3071,19 @@ color: white;
 	color: #555;
 }
 
-.layout-people-index table tr.primary-contact td{
+.layout-admins-index table tr.primary-contact td{
 	background: lemonchiffon;
 }
 
-.layout-people-index table td.col-contracting-officer-false{
+.layout-admins-index table td.col-contracting-officer-false{
 	color: #ddd;
 }
 
-.layout-people-index .col-github-id,
-.layout-people-index .col-contracting-officer,
-.layout-people-index .col-actions{ width: 6em; }
+.layout-admins-index .col-github-id,
+.layout-admins-index .col-contracting-officer,
+.layout-admins-index .col-actions{ width: 6em; }
 
-.layout-people-index .col-name{
+.layout-admins-index .col-name{
 	width: 16em;
 	
 }
