@@ -2867,7 +2867,7 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	top: 0;
 	width: 12px;
 	left: -7px;
-	border-bottom: 1px solid #ccc;
+	border-bottom: 2px solid #ddd;
 }
 
 .layout-auctions-history main .wrapper > dl::after{
@@ -2902,6 +2902,8 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	position: absolute;
 	left: 0;
 	margin-left: -21px;
+	margin-top: -1px;
+	box-shadow: 1px 1px rgba(0,0,0,0.06)
 }
 
 
