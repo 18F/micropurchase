@@ -1,29 +1,44 @@
 require 'rails_helper'
 
 describe StatusPresenter::Over do
-  context "when the auction is over" do
-    let(:presenter) { StatusPresenter::Over.new(auction) }
-    let(:auction) do
-      a = create(
-        :auction,
-        started_at: Time.now - 5.days,
-        ended_at: Time.now - 5.hours,
-        start_price: 3500
-      )
-      create(:bid, auction: a, amount: 3000)
-      a
+  describe '#tag_data_value_status' do
+    it 'is closed' do
+      presenter = StatusPresenter::Over.new(auction)
+      expect(presenter.tag_data_value_status).to eq('Closed')
     end
+  end
 
-    it "has a twitter status data value with human readable time expression" do
-      expect(presenter.tag_data_value_status).to eq("Closed")
+  describe '#tag_data_label_2' do
+    it 'has a label about the winning bid amount' do
+      presenter = StatusPresenter::Over.new(auction)
+      expect(presenter.tag_data_label_2).to eq('Winning Bid')
     end
+  end
 
-    it "has a twitter second label about the winning bid amount" do
-      expect(presenter.tag_data_label_2).to eq("Winning Bid")
+  describe '#tag_data_value_2' do
+    it 'returns winning bid amount' do
+      presenter = StatusPresenter::Over.new(auction)
+      expect(presenter.tag_data_value_2).to eq('$3,000.00')
     end
+  end
 
-    it "has some weird value associated with the bidding label" do
-      expect(presenter.tag_data_value_2).to eq("$3,000.00")
+  describe '#relative_time' do
+    it 'returns date that auction ended' do
+      time = Time.local(2008, 9, 1)
+      auction = create(:auction, :closed, ended_at: time)
+
+      presenter = StatusPresenter::Over.new(auction)
+
+      expect(presenter.relative_time).to eq 'Ended on: 09/01/2008'
     end
+  end
+
+  def auction
+    @_auction ||= create(
+      :auction,
+      :closed,
+      start_price: 3500,
+      bids: [create(:bid, amount: 3000)]
+    )
   end
 end
