@@ -24,8 +24,8 @@ Feature: Admin creates auctions in the admins panel
     And I visit the auctions admin page
     When I click on the "Create New Auction" link
     Then I should see an estimated delivery deadline of 12 business days from now
-    And I change the auction end date
-    Then I should see "Save your changes to see updated delivery date and time"
+    When I change the auction end date
+    Then I should see the updated delivery deadline
 
   Scenario: Creating an invalid auction
     Given I am an administrator
