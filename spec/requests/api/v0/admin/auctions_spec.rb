@@ -8,7 +8,7 @@ describe Api::V0::Admin::AuctionsController do
       FactoryGirl.create_list(:auction, 2, :with_bidders)
       admin = FactoryGirl.create(:admin_user)
       stub_github('/user') { github_response_for_user(admin) }
-      api_key = FakeGitHub::VALID_API_KEY
+      api_key = FakeGitHubApi::VALID_API_KEY
       headers = {
         'HTTP_ACCEPT' => 'text/x-json',
         'HTTP_API_KEY' => api_key
