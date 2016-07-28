@@ -63,9 +63,7 @@ class AuctionListItem
   end
 
   def winning_bid_partial
-    if over? && !auction.bids.any?
-      'auctions/no_bids'
-    elsif over?
+    if over?
       'auctions/over_winning_bid_details'
     elsif auction.type == 'reverse' && available? && auction.bids.any?
       'auctions/winning_bid_details'
@@ -78,8 +76,12 @@ class AuctionListItem
     status_presenter.relative_time
   end
 
-  def highlighted_bid_amount_as_currency
-    Currency.new(highlighted_bid.amount).to_s
+  def winning_bid_amount_as_currency
+    if auction.lowest_bid
+      Currency.new(auction.lowest_bid.amount).to_s
+    else
+      'No bids'
+    end
   end
 
   private
@@ -98,11 +100,6 @@ class AuctionListItem
 
   def user_bids
     auction.bids.where(bidder: current_user)
-  end
-
-  def highlighted_bid
-    @_highlighted_bid ||=
-      HighlightedBid.new(auction: auction, user: current_user).find
   end
 
   def for_small_business?

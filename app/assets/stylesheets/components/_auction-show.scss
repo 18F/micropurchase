@@ -64,10 +64,6 @@
   margin-bottom: $site-margins;
   position: relative;
 
-  &:last-of-type {
-    margin-bottom: $base-padding-large;
-  }
-
   .issue-content-wrapper {
     flex: 1 0 auto;
   }
@@ -187,13 +183,6 @@
   margin-bottom: $base-padding;
   margin-top: $base-padding;
   width: 100%;
-}
-
-.issue-current-bid.issue-current-bid-new-line {
-  &::before {
-    content: '\A';
-    white-space: pre;
-  }
 }
 
 .issue-bid-deadline {

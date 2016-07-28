@@ -2,17 +2,17 @@
   <div class="issue-content-wrapper">
     <div class="usa-width-one-whole issue-label">
       <h3 class="issue-title">
-        <div class="issue-ribbon">
-          <span class="<%= auction.label_class %>"><%= auction.label %></span>
-        </div>
         <%= link_to auction.title, auction_path(auction.id) %>
       </h3>
       <div class="issue-vitals">
         <div class="issue-bid-deadline">
+          <span class="status-label <%= auction.label_class %>"><%= auction.label %></span>
           <%= auction.relative_time %>
         </div>
-        <%= render partial: auction.winning_bid_partial,
-          locals: { auction: auction } %>
+        <div class="winning-bid-detail">
+          <%= render partial: auction.winning_bid_partial,
+            locals: { auction: auction } %>
+        </div>
       </div>
       <p class="issue-description">
         <%= auction.html_summary %>
@@ -39,7 +39,7 @@
           </li>
 
           <li class="issue-details-list-item">
-            <div class="issue-details-label">Skills</div>
+            <div class="issue-details-label">Skills required</div>
             <div class="issue-details-title">
               <%= auction.skills %>
             </div>
