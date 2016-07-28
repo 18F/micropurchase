@@ -1,0 +1,47 @@
+---
+excerpt: none
+permalink: settings/customers/
+---
+
+{% include head.html %}
+<body class="no-js layout-customers-index">
+  <a class="a-skip-to-main" href="#main">Skip to main content</a>
+  {% include site-header.html %}
+  <main role="main" id="main">
+    <div class="wrapper">
+      {% include settings-index-header.html %}
+      <a href="{{site.baseurl}}/people/customers/new" class="button">Add new</a>
+      <table>
+        <thead>
+          <tr>
+            <td class="col-name">Name</td>
+            <td class="col-email-address">Email address</td>
+            <td class="col-agency">Agency</td>
+            <td class="col-actions">Actions</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="primary-contact">
+            <td class="col-name">Whosit Whatshisface <abbr title="Primary contact">*</abbr></td>
+            <td class="col-email-address">who.is@gsa.gov</td>
+            <td class="col-agency">General Services Administration</td>
+            <td class="col-actions"><a href="{{site.baseurl}}/people/new-customer/">Edit</a></td>
+          </tr>
+          <tr>
+            <td class="col-name">Whosit Whatshisface </td>
+            <td class="col-email-address">who.is@gsa.gov</td>
+            <td class="col-agency">General Services Administration</td>
+            <td class="col-actions"><a href="{{site.baseurl}}/people/new-customer/">Edit</a></td>
+          </tr>
+          <tr>
+            <td class="col-name">Whosit Whatshisface </td>
+            <td class="col-email-address">who.is@gsa.gov</td>
+            <td class="col-agency">General Services Administration</td>
+            <td class="col-actions"><a href="{{site.baseurl}}/people/new-customer/">Edit</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+  {% include site-footer.html %}
+</body>

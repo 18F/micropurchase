@@ -1,0 +1,125 @@
+---
+excerpt: none
+---
+{% include head.html %}
+<body class="no-js layout-recent-activity">
+  <a class="a-skip-to-main" href="#main">Skip to main content</a>
+  {% include site-header.html %}
+  {% include my-account-header.html %}
+  <main role="main" id="main">
+    <div class="wrapper">
+      <h1>Recent activity</h1>
+      <div class="boilerplate">
+        <p>You don&rsquo;t have any auction activity because you&rsquo;ve yet to bid on an auction! Peruse our list of <a href="{{site.baseurl}}/auctions/">open and upcoming auctions</a> to find one that interests you.</p>
+      </div>
+      <section class="section-bids-placed">
+        <h1>Bids placed</h1>
+        <a href="#" class="a-see-all">See all</a> 
+        <table>
+          <thead>
+            <tr>
+              <td class="col-title">Auction</td>
+              <td class="col-bid">Bid</td>
+              <td class="col-closing">Closing date</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Stand-alone modular utilisation</a></td>
+              <td class="col-bid">$450</td>
+              <td class="col-closing"><time><span class="date">7/29/2016</span> <span class="time">10:00am EST</span></time></td>
+            </tr>
+            <tr>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Switchable system-worthy</a></td>
+              <td class="col-bid">$1337</td>
+              <td class="col-closing"><time><span class="date">8/6/2016</span> <span class="time">12:00am EST</span></time></td>
+            </tr>
+            <tr>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Visionary motivating website</a></td>
+              <td class="col-bid">$1337</td>
+              <td class="col-closing"><time><span class="date">8/6/2016</span> <span class="time">12:00am EST</span></time></td>
+            </tr>
+            <tr>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Untitled</a></td>
+              <td class="col-bid">$500</td>
+              <td class="col-ending"><time><span class="date">8/6/2016</span> <span class="time">12:00am EST</span></time></td>
+            </tr>
+          </tbody>
+        </table>      
+      </section>
+      <section class="section-paid">
+        <h1>Payments received</h1>
+        <a href="#" class="a-see-all">See all</a>          
+        <table>
+          <thead>
+            <tr>
+              <td class="col-title">Auction</td>
+              <td class="col-date">Date paid</td>
+              <td class="col-amount">Amount</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Stand-alone modular utilisation</a></td>
+              <td class="col-accepted"><span class="date">8/13/2016</span> <span class="time">12:00am EST</span></td>
+              <td class="col-amount">$500</td>
+            </tr>
+            <tr>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Switchable system-worthy</a></td>
+              <td class="col-accepted"><span class="date">8/13/2016</span> <span class="time">12:00am EST</span></td>
+              <td class="col-amount">$500</td>
+            </tr>
+            <tr>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Visionary motivating website</a></td>
+              <td class="col-accepted"><span class="date">8/13/2016</span> <span class="time">12:00am EST</span></td>
+              <td class="col-amount">$500</td>
+            </tr>
+            <tr>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Something wicked this way comes</a></td>
+              <td class="col-accepted"><span class="date">8/13/2016</span> <span class="time">12:00am EST</span></td>
+              <td class="col-amount">$500</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="section-deliveries-rejected">
+        <h1>Deliveries rejected</h1>
+        <a href="#" class="a-see-all">See all</a>          
+        <table>
+          <thead>
+            <tr>
+              <td class="col-title">Auction</td>
+              <td class="col-rejected">Date rejected</td>
+              <td class="col-amount">Amount</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Stand-alone modular utilisation</a></td>
+              <td class="col-rejected"><span class="date">8/13/2016</span> <span class="time">12:00am EST</span></td>
+              <td class="col-amount">$500</td>
+            </tr>
+            <tr>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Switchable system-worthy</a></td>
+              <td class="col-rejected"><span class="date">8/13/2016</span> <span class="time">12:00am EST</span></td>
+              <td class="col-amount">$500</td>
+            </tr>
+            <tr>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Visionary motivating website</a></td>
+              <td class="col-rejected"><span class="date">8/13/2016</span> <span class="time">12:00am EST</span></td>
+              <td class="col-amount">$500</td>
+            </tr>
+            <tr>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Something wicked this way comes</a></td>
+              <td class="col-rejected"><span class="date">8/13/2016</span> <span class="time">12:00am EST</span></td>
+              <td class="col-amount">$500</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+  </main>
+  {% include site-footer.html %}
+</body>
+
+
+

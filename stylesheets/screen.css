@@ -1,5 +1,9 @@
 /* @override http://localhost:4000/stylesheets/screen.css */
 
+/* @override http://localhost:4000/stylesheets/screen.css */
+
+/* @override http://localhost:4000/stylesheets/screen.css */
+
 /* @group bootstrap */
 
 html {
@@ -87,8 +91,6 @@ a:visited{  color: #8d0058; }
   background: #ffe4c5; /* Gecko Browsers */
 }
 
-
-
 .notice,
 .auction-workflow.auction-workflow-open-incomplete-profile{
 	background: #faf5d2;
@@ -140,13 +142,11 @@ a:visited{  color: #8d0058; }
 	clear: both;
 }
 
-main,
-.breadcrumbs{
+main{
 	background: white;
 	color: #333;
+	padding-bottom: 2em;
 }
-
-main{ padding: 1em 0 2em; }
 
 img { max-width: 100%; }
 
@@ -188,8 +188,323 @@ table{ color: inherit; }
 }
 
 
+/* @end */
 
 /* @end */
+
+/* @group typography */
+
+.layout-admins-index h1,
+.layout-vendors-index h1,
+.layout-profile header h1{
+	font-size: 36px;
+	font-weight: 400;
+	letter-spacing: -1px;
+}
+
+@media screen and (min-width: 622.222px){
+	.layout-admins-index h1,
+	.layout-vendors-index h1,
+	.h-feed-header h1,
+	.layout-profile header h1{
+		font-size: 48px;
+		font-weight: 300;
+		letter-spacing: -1.4px;
+	}
+}
+
+
+/* @group .page */
+
+.page{ padding-top: 1em; }
+
+.page .page-title,
+.page h1,
+.page h2,
+.page h3,
+.page h4,
+.page h5,
+.page nav,
+.page figure,
+.page p,
+.page ul,
+.page ol,
+.page dl,
+.page li,
+.layout-profile form p{
+	line-height: 1.4em;
+	margin: 0 auto 0.7em;
+	max-width: 640px;
+}
+
+.layout-profile form p{ margin-left: 0; }
+
+.page td{ line-height: 1.4em; }
+
+.page h1,
+.page h2,
+.page h3,
+.page h4,
+.page h5{
+	line-height: 1.125em;
+}
+
+.page figure.figure-fill{
+	width: 100%;
+	max-width: none;
+	text-align: center;
+}
+
+.page ul,
+.page ol{
+	padding-left: 1.4em;
+}
+
+.page ul ol,
+.page ul ul,
+.page ol ol,
+.page ol ul{
+	margin-left: 0;
+}
+
+.page strong{ font-weight: 600; }
+.page em{ font-style: italic; }
+
+a[id]{
+	color: inherit;
+	text-decoration: none;
+}
+
+.page code{
+	background: #eee;
+	border: 1px solid #e3e3e3;
+	padding: 1px 2px;
+	font-family: "Courier New", Courier, mono;
+	font-size: 0.8em;
+	font-weight: 600;
+	border-radius: 2px;
+	color: #d40b79;
+	top: -1px;
+	position: relative;
+	clear: none;
+}
+
+
+
+.page h1,
+.page .page-title{
+	margin-bottom: 0.67em;
+	font-size: 36px;
+	font-weight: 600;
+	line-height: 1.125em;
+	color: #383838;
+	letter-spacing: -1px;
+	max-width: 640px;
+	position: relative;
+	left: -1px;
+}
+
+.page h1+p{
+	padding-top: 0.4em;
+	font-family: merriweather;
+	line-height: 1.5em;
+	color: #444;
+	font-size: 18px;
+	margin: -1em auto 2em;
+	max-width: 640px;
+}
+
+.page h2,
+.layout-recent-activity section h1{
+	font-weight: 600;
+	font-size: 21px;
+	line-height: 1.3em;
+	font-family: Merriweather, Georgia, serif;
+	color: #c56815;
+	max-width: 640px;
+	margin: 28px auto 16px;
+}
+
+.page h3,
+.page h4,
+.layout-auctions-show main .page h2,
+.layout-profile h2,
+.layout-profile .section-auction-history section h1{
+	font-weight: 600;
+	font-size: 21px;
+	font-family: inherit;
+	line-height: 1.4em;
+	margin-top: 18px;
+	margin-bottom: 12px;
+	color: #333;
+}
+
+.page h4{
+	font: inherit;
+	font-family: Merriweather, Georgia;
+	text-transform: uppercase;
+	font-size: 14px;
+	font-weight: 600;
+	color: #222;
+	letter-spacing: 0.05em;
+	word-spacing: 0.125em;
+	margin-top: 24px !important;
+	margin-bottom: 16px !important;
+}
+
+.page blockquote{
+	padding-left: 1em;
+	position: relative;
+	max-width: 640px;
+	margin: 0 auto;
+}
+
+.page blockquote::after{
+	content: "";
+	position: absolute;
+	left: 1px;
+	top: 0;
+	bottom: 0;
+	width: 3px;
+	background: #e3e3e3;
+	border-radius: 3px;
+}
+
+.page blockquote p{
+	font-family: Merriweather, Georgia, serif;
+	font-style: italic;
+	color: #555;
+	font-size: 17px;
+	line-height: 1.67em;
+	width: auto;
+	max-width: none;
+}
+
+@media screen and (min-width: 568.88px){
+	
+	.page{ padding-top: 1.6em; padding-bottom: 2.4em;}
+
+	.page .page-title,
+	.page h1,
+	.page h2,
+	.page h3,
+	.page h4,
+	.page h5,
+	.page figure,
+	.page form,
+	.page p,
+	.page ul,
+	.page ol,
+	.page dl,
+	.page li{
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.page p,
+	.page figure,
+	.page ul,
+	.page ol,
+	.page dl,
+	.page li,
+	.page td,
+	.layout-profile form p{
+		margin: 0 auto 0.8em;
+		line-height: 1.6em;
+	}
+	
+	.layout-profile form p{
+  		margin-left: 0;
+	}
+	
+	.page li p{
+		margin-left: 0;
+		width: auto;
+	}
+	
+	.page h1,
+	.page h2,
+	.page h3,
+	.page h4 {
+		line-height: 1.2em;
+	}
+	
+	.page h1,
+	.page .page-title{ font-size: 40px; }
+	.page h1+p,
+	.page .page-title+p{ 
+		font-size: 20px;
+		line-height: 1.67em; 
+	}
+	.page h2{ 
+		margin-top: 28px;
+		font-size: 21px;
+		line-height: 1.3em;
+	}
+}
+
+}
+
+.page .page-title+h2{ margin-top: 20px; }
+
+.page .h-card .p-job-title{
+	clear: left;
+	display: block;
+
+}
+
+
+@media screen and (min-width: 711.11px){
+	.page .h-card{
+		position: relative;
+		left: -80px;
+	}	
+}
+
+.page .h-card::before{
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 6px;
+	background: #e7f3f4;
+	border-radius: 5px 0 0 5px
+}
+
+.page .h-card .p-tel{ clear: left; }
+
+.page li{
+	list-style-type: square;
+	margin-left: 1.125em;
+	margin-bottom: 0.6em;
+}
+
+.page ol li{ list-style-type: decimal; }
+.page ol li li { list-style-type: lower-latin; }
+.page ol li a {
+	text-decoration: none;
+}
+
+
+.page ol > li li{
+	margin-bottom: 0.2em;
+}
+.page ol > li li li{ margin-bottom: 0.3em;}
+
+.page ol .offices a {
+	color: #aa470f;
+}
+.page ol .offices a:hover{
+	color: #8d0058;
+	text-decoration: underline;
+}
+
+
+
+.page table thead td{ font-weight: 300; }
+
+/* @end */
+
 
 
 /* @end */
@@ -364,6 +679,12 @@ table.tablesaw {
 }
 
 /* @end */
+
+table{ 
+	width: 100%;
+	table-layout: fixed;
+}
+
 table td,
 th{
 	border: 1px solid #ddd;
@@ -385,13 +706,16 @@ td.col-title{
 }
 
 
-.col-num-bids{
-	width: 4em;
-}
+.col-num-bids{ width: 4em; }
+
+.col-amount,
+.col-bid{ width: 6em; }
 
 .col-starting,
+.col-closing,
 .col-ending,
-.col-delivery{
+.col-delivery,
+.col-date{
 	width: 8em;
 }
 
@@ -1074,6 +1398,40 @@ main div.wrap > form { max-width: 576px; }
 
 /* @end */
 
+/* @group .boilerplate */
+
+.boilerplate{
+	clear: both;
+	padding: 16px;
+	max-width: 39em;
+	background: #f3f3f3;
+	border: 1px solid #ccc;
+	box-shadow: inset 0 0 0 4px #fff;
+	border-radius: 4px;
+}
+
+.boilerplate h1{
+	font-weight: 600;
+	font-size: 21px;
+	font-family: inherit;
+	line-height: 1.4em;
+	margin-bottom: 12px;
+	color: #333;
+}
+
+.boilerplate p{
+	line-height: 1.4em;
+	margin-bottom: 0.7em;
+	max-width: 36em;
+}
+
+.boilerplate p:last-of-type,
+.boilerplate p:last-child{
+	margin-bottom: 0;
+}
+
+/* @end */
+
 /* @group .prototype-header */
 
 .prototype-header{
@@ -1428,29 +1786,62 @@ main div.wrap > form { max-width: 576px; }
 
 /* @end */
 
-/* @group nav.facets */
+/* @group .nav-facets */
 
 .nav-facets{
-	position: relative;
-	margin-top: 5px;
+	position: relative;	
 	border-top: 1px solid #555;
 	padding-top: 12px;
 	display: none;
-	margin-bottom: 1em;
+	background: white;
+	color: #333;
 }
 
 .signed-in .nav-facets{ display: block; }
+
+.nav-facets h1{
+	font-size: 36px;
+	font-weight: 400;
+	letter-spacing: -1px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	border-bottom: 1px solid;
+	margin-bottom: 8px;
+}
+
+@media screen and (min-width: 622.222px){
+	.nav-facets h1{
+		font-size: 48px;
+		font-weight: 300;
+		letter-spacing: -1.4px;
+	}
+}
 
 .nav-facets a{ 
   text-decoration: none; 
   margin-right: 1em;
   color: #666; 
 }
+
 .nav-facets a:hover{ color: #333; }
+
+.layout-admins-index .nav-people-admins,
+.layout-vendors-index .nav-people-vendors,
+.layout-auctions-drafts .nav-auctions-drafts,
+.layout-auctions-index .nav-auctions-index,
+.layout-auctions-needs-attention .nav-auctions-needs-attention,
+.layout-auctions-closed .nav-auctions-closed,
+.layout-customers-index .nav-customers-index,
+.layout-skills-index .nav-skills-index,
+.layout-profile .a-profile,
+.layout-recent-activity .a-recent-activity{ 
+	font-weight: 600;
+	color: #333;
+}
 
 /* @end */
 
-/* @group nav.pagination */
+/* @group .nav-pagination */
 
 .pagination{ 
 	margin: 1em 0 0; 
@@ -1624,8 +2015,6 @@ main div.wrap > form { max-width: 576px; }
 	color: #002b7e; 
 	text-decoration: none;
 }
-
-
 
 .auction a.button:hover{
 	color: white;
@@ -1809,375 +2198,9 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 /* @end */
 
-
-/* @group .page */
-
-.page{ padding-top: 1em; }
-
-.page .page-title,
-.page h1,
-.page h2,
-.page h3,
-.page h4,
-.page h5,
-.page nav,
-.page figure,
-.page p,
-.page ul,
-.page ol,
-.page dl,
-.page li{
-	line-height: 1.4em;
-	margin: 0 auto 0.7em;
-	max-width: 640px;
-}
-
-
-.page td{ line-height: 1.4em; }
-
-.page h1,
-.page h2,
-.page h3,
-.page h4,
-.page h5{
-	line-height: 1.125em;
-}
-
-.page figure.figure-fill{
-	width: 100%;
-	max-width: none;
-	text-align: center;
-}
-
-.page ul,
-.page ol{
-	padding-left: 1.4em;
-}
-
-.page ul ol,
-.page ul ul,
-.page ol ol,
-.page ol ul{
-	margin-left: 0;
-}
-
-.page strong{ font-weight: 600; }
-.page em{ font-style: italic; }
-
-a[id]{
-	color: inherit;
-	text-decoration: none;
-}
-
-.page code{
-	background: #eee;
-	border: 1px solid #e3e3e3;
-	padding: 1px 2px;
-	font-family: "Courier New", Courier, mono;
-	font-size: 0.8em;
-	font-weight: 600;
-	border-radius: 2px;
-	color: #d40b79;
-	top: -1px;
-	position: relative;
-	clear: none;
-}
-
-
-
-.page h1,
-.page .page-title,
-.layout-my-auctions main h1{
-	margin-bottom: 0.67em;
-	font-size: 36px;
-	font-weight: 600;
-	line-height: 1.125em;
-	color: #383838;
-	letter-spacing: -1px;
-	max-width: 640px;
-	position: relative;
-	left: -1px;
-}
-
-.page h1+p,
-.layout-my-auctions main h1+p{
-	padding-top: 0.4em;
-	font-family: merriweather;
-	line-height: 1.5em;
-	color: #444;
-	font-size: 18px;
-	margin: -1em auto 2em;
-	max-width: 640px;
-}
-
-.page h2{
-	font-weight: 600;
-	font-size: 21px;
-	line-height: 1.3em;
-	font-family: Merriweather, Georgia, serif;
-	color: #c56815;
-	max-width: 640px;
-	margin: 28px auto 16px;
-}
-
-.page h3,
-.page h4,
-.layout-auctions-show main .page h2{
-	font-weight: 600;
-	font-size: 21px;
-	font-family: inherit;
-	line-height: 1.4em;
-	margin-top: 18px;
-	margin-bottom: 12px;
-	color: #333;
-}
-
-.page h4{
-	font: inherit;
-	font-family: Merriweather, Georgia;
-	text-transform: uppercase;
-	font-size: 14px;
-	font-weight: 600;
-	color: #222;
-	letter-spacing: 0.05em;
-	word-spacing: 0.125em;
-	margin-top: 24px !important;
-	margin-bottom: 16px !important;
-}
-
-.page blockquote{
-	padding-left: 1em;
-	position: relative;
-	max-width: 640px;
-	margin: 0 auto;
-}
-
-.page blockquote::after{
-	content: "";
-	position: absolute;
-	left: 1px;
-	top: 0;
-	bottom: 0;
-	width: 3px;
-	background: #e3e3e3;
-	border-radius: 3px;
-}
-
-.page blockquote p{
-	font-family: Merriweather, Georgia, serif;
-	font-style: italic;
-	color: #555;
-	font-size: 17px;
-	line-height: 1.67em;
-	width: auto;
-	max-width: none;
-}
-
-@media screen and (min-width: 568.88px){
-	
-	.page{ padding-top: 1.6em; padding-bottom: 2.4em;}
-
-	.page .page-title,
-	.page h1,
-	.page h2,
-	.page h3,
-	.page h4,
-	.page h5,
-	.page figure,
-	.page form,
-	.page p,
-	.page ul,
-	.page ol,
-	.page dl,
-	.page li{
-		margin-left: auto;
-		margin-right: auto;
-	}
-	.page p,
-	.page figure,
-	.page ul,
-	.page ol,
-	.page dl,
-	.page li,
-	.page td {
-		margin: 0 auto 0.8em;
-		line-height: 1.6em;
-	}
-	
-	.page li p{
-		margin-left: 0;
-		width: auto;
-	}
-	
-	.page h1,
-	.page h2,
-	.page h3,
-	.page h4 {
-		line-height: 1.2em;
-	}
-	
-	.page h1,
-	.page .page-title{ font-size: 40px; }
-	.page h1+p,
-	.page .page-title+p{ 
-		font-size: 20px;
-		line-height: 1.67em; 
-	}
-	.page h2{ 
-		margin-top: 28px;
-		font-size: 21px;
-		line-height: 1.3em;
-	}
-}
-
-}
-
-.page .page-title+h2{ margin-top: 20px; }
-
-.page .h-card .p-job-title{
-	clear: left;
-	display: block;
-
-}
-
-
-@media screen and (min-width: 711.11px){
-	.page .h-card{
-		position: relative;
-		left: -80px;
-	}	
-}
-
-.page .h-card::before{
-	content: "";
-	position: absolute;
-	left: 0;
-	top: 0;
-	bottom: 0;
-	width: 6px;
-	background: #e7f3f4;
-	border-radius: 5px 0 0 5px
-}
-
-.page .h-card .p-tel{ clear: left; }
-
-.page li{
-	list-style-type: square;
-	margin-left: 1.125em;
-	margin-bottom: 0.6em;
-}
-
-.page ol li{ list-style-type: decimal; }
-.page ol li li { list-style-type: lower-latin; }
-.page ol li a {
-	text-decoration: none;
-}
-
-
-.page ol > li li{
-	margin-bottom: 0.2em;
-}
-.page ol > li li li{ margin-bottom: 0.3em;}
-
-.page ol .offices a {
-	color: #aa470f;
-}
-.page ol .offices a:hover{
-	color: #8d0058;
-	text-decoration: underline;
-}
-
-
-
-.page table thead td{ font-weight: 300; }
-
-/* @end */
-
 /* @group layouts */
 
-/* @group layout-profile */
-
-.field-duns input{
-	display: block;
-	margin-bottom: 8px;
-	max-width: 10em;
-}
-
-.field-duns .verification-status-text{
-	display: inline-block;
-	vertical-align: middle;
-	font-size: 14px;
-	font-style: italic;
-	color: #555;
-}
-
-.field-duns.is-error .verification-status-text,
-.field-duns.is-verified .verification-status-text{
-	color: green;
-	font-weight: 600;
-	font-style: normal;
-}
-
-.field-duns.is-error .verification-status-text{
-	color: darkred;
-}
-
-.field-duns.is-error .verification-status-icon,
-.field-duns.is-verified .verification-status-icon,
-.field-duns.is-verifying .verification-status-icon{
-	width: 16px;
-	height: 16px;
-	display: inline-block;
-	vertical-align: middle;
-	padding-left: 18px;
-	background: url(images/png/checkmark.png) left center no-repeat;
-	background-size: 16px;	
-}
-
-.field-duns.is-verifying .verification-status-icon{
-	background: url(images/gif/ajax.gif) left center no-repeat;
-	background-size: 16px;	
-}
-
-.field-duns.is-error .verification-status-icon{
-	background: url(images/png/notification.png) left center no-repeat;
-	background-size: 16px;	
-}
-
-.layout-profile .button-delete{
-	float: right;
-	color: #992d00;
-}
-
-.layout-profile .button-delete:hover,
-.layout-profile .button-delete:active{
-	background: #992d00;
-	color: white;
-	border-color: #992d00;
-}
-
-.layout-profile .button-delete:active{
-	color: #ffe992;
-}
-
-/* @end */
-
 /* @group layout-sign-up */
-
-.layout-sign-up main .wrapper,
-.layout-profile main .wrapper{
-	max-width: 640px;
-	border: 1px solid #ccc;
-	box-shadow: 2px 2px 0 0 #eee;
-	padding: 20px;
-	border-radius: 1em
-}
-
-.layout-sign-up .wrapper p,
-.layout-profile .wrapper p{
-	line-height: 1.6;
-	margin-bottom: 1em;
-}
 
 .layout-sign-up .field .label-text,
 .layout-profile .field .label-text,
@@ -2197,7 +2220,7 @@ a[id]{
 .layout-sign-up .field-email,
 .layout-profile .field-name,
 .layout-profile .field-email{
-	width: 50%;
+	max-width: 16em;
 	margin-left: 0;
 }
 
@@ -2249,14 +2272,6 @@ a[id]{
 	clear: both;
 }
 
-.h-feed-header h1,
-.layout-admins-index h1,
-.layout-vendors-index h1{
-	font-size: 36px;
-	font-weight: 400;
-	letter-spacing: -1px;
-}
-
 .h-feed-header .button{
 	position: absolute;
 	right: 0;
@@ -2270,19 +2285,8 @@ a[id]{
 
 
 .user-type-admin.signed-in .auction .auction-header .button,
-.signed-in .nav-facets,
 .signed-in .h-feed-header .button{
 	display: block;
-}
-
-.layout-admins-index .nav-people-admins,
-.layout-vendors-index .nav-people-vendors,
-.layout-auctions-drafts .nav-auctions-drafts,
-.layout-auctions-index .nav-auctions-index,
-.layout-auctions-needs-attention .nav-auctions-needs-attention,
-.layout-auctions-closed .nav-auctions-closed{ 
-	font-weight: 600;
-	color: #333;
 }
 
 .nav-auctions .count { 
@@ -2307,8 +2311,7 @@ color: white;
 	margin-left: 0.2em;
 }
 
-.layout-auctions-index .auction,
-.layout-auctions-index .boilerplate{
+.layout-auctions-index .auction{
 	border: 1px solid #c3c3c3;
 	padding: 14px 16px 0;
 	margin-bottom: 20px;
@@ -2322,27 +2325,6 @@ color: white;
 	display: block;
 }
 
-.layout-auctions-index .boilerplate{
-	clear: both;
-	padding: 16px;
-	max-width: 39em;
-	background: #f3f3f3;
-	box-shadow: inset 0 0 0 4px #fff
-}
-
-.layout-auctions-index .boilerplate h1{
-	font-weight: 600;
-	font-size: 21px;
-	font-family: inherit;
-	line-height: 1.4em;
-	margin-bottom: 12px;
-	color: #333;
-}
-
-.layout-auctions-index .boilerplate p{
-	line-height: 1.4;
-	max-width: 36em;
-}
 
 .layout-auctions-index.user-type-admin .auction h1{
 	margin-right: 2.67em;
@@ -2364,19 +2346,8 @@ color: white;
 
 @media screen and (min-width: 622.222px){
 	
-	.h-feed-header{ margin-bottom: 32px; }
-
-	.layout-admins-index h1,
-	.layout-vendors-index h1,
-	.h-feed-header h1{
-		font-size: 48px;
-		font-weight: 300;
-		letter-spacing: -1.4px;
-	}
-	
-	.h-feed-header .button{
-	top: 16px;
-	}
+	.h-feed-header{ margin-bottom: 12px; }
+	.h-feed-header .button{ top: 16px; }
 }
 
 @media screen and (min-width: 799.99px){
@@ -2821,6 +2792,29 @@ color: white;
 
 /* @end */
 
+/* @group layout-customers-index */
+
+.layout-customers-index h1{
+	letter-spacing: -2px;
+	font-size: 48px;
+	font-weight: 300;
+	letter-spacing: -1.3px;	
+	display: inline-block;
+	line-height: 1.125em;
+	color: #383838;
+	letter-spacing: -2px;
+}
+
+.layout-customers-index .button{
+  position: absolute;
+  top: 16px;
+  right: 0;
+  padding: 4px 10px;
+}
+
+
+/* @end */
+
 /* @group auctions new, edit */
 
 /* @group fieldset-date-time */
@@ -2993,8 +2987,7 @@ color: white;
 }
 
 .layout-admins-index main .wrapper > h1,
-.layout-people-show main .wrapper > h1,
-.layout-settings main .wrapper > h1{
+.layout-people-show main .wrapper > h1{
 	letter-spacing: -2px;
 	font-size: 48px;
 	font-weight: 300;
@@ -3171,16 +3164,171 @@ color: white;
 
 /* @end */
 
-/* @group layout-settings */
+/* @group layout-profile */
 
-.layout-settings article{
+.layout-profile form{
+	margin-top: 1em;
+	max-width: 28em;
+}
+
+.layout-profile main h1{
+	position: absolute;
+	left: -9999em;
+}
+
+.layout-profile form h2{ margin-top: 0; }
+
+.layout-profile svg{
+  float: left;
+  width: 32px;
+  height: 32px;
+  margin-right: 10px;
+  margin-top: 2px;
+  margin-left: 4px;
+}
+
+.layout-profile form{
+	border: 3px solid #ddd;
+	padding: 12px;
+	border-radius: 4px;
+}
+
+
+@media screen and (min-width: 622.222px){
+	.layout-profile svg{
+	  float: left;
+	  width: 42px;
+	  height: 42px;
+	  margin-right: 6px;
+	}
+	.layout-profile form{
+		padding: 20px;
+	}
+}
+
+.field-duns input{
+	display: block;
+	margin-bottom: 8px;
+	max-width: 10em;
+}
+
+.field-duns .verification-status-text{
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 14px;
+	font-style: italic;
+	color: #555;
+}
+
+.field-duns.is-error .verification-status-text,
+.field-duns.is-verified .verification-status-text{
+	color: green;
+	font-weight: 600;
+	font-style: normal;
+}
+
+.field-duns.is-error .verification-status-text{
+	color: darkred;
+}
+
+.field-duns.is-error .verification-status-icon,
+.field-duns.is-verified .verification-status-icon,
+.field-duns.is-verifying .verification-status-icon{
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	vertical-align: middle;
+	padding-left: 18px;
+	background: url(images/png/checkmark.png) left center no-repeat;
+	background-size: 16px;	
+}
+
+.field-duns.is-verifying .verification-status-icon{
+	background: url(images/gif/ajax.gif) left center no-repeat;
+	background-size: 16px;	
+}
+
+.field-duns.is-error .verification-status-icon{
+	background: url(images/png/notification.png) left center no-repeat;
+	background-size: 16px;	
+}
+
+.layout-profile .button-delete{
+	float: right;
+	color: #992d00;
+}
+
+.layout-profile .button-delete:hover,
+.layout-profile .button-delete:active{
+	background: #992d00;
+	color: white;
+	border-color: #992d00;
+}
+
+.layout-profile .button-delete:active{
+	color: #ffe992;
+}
+
+/* @end */
+
+/* @group layout-recent-activity */
+
+.layout-recent-activity .boilerplate{
+	margin-top: 1em;
+}
+
+.layout-recent-activity main .wrapper > h1{
+	position: absolute;
+	left: -99999em;
+}
+.layout-recent-activity section h1{
+  margin-left: 0;
+  display: inline-block;
+  vertical-align: middle;  
+}
+
+.layout-recent-activity section h1+a{
+	display: inline-block;
+	vertical-align: middle;
+	white-space: nowrap;
+	margin-bottom: -1em;
+	margin-left: 0.2em;
+	font-size: 14px;
+	
+}
+
+
+/* @end */
+
+/* @group layout-skills-index */
+
+.layout-skills-index .button{
+  position: absolute;
+  top: 16px;
+  right: 0;
+  padding: 4px 10px;
+}
+
+
+.layout-skills-index header > h1{
+	letter-spacing: -2px;
+	font-size: 48px;
+	font-weight: 300;
+	letter-spacing: -1.3px;	
+	display: inline-block;
+	line-height: 1.125em;
+	color: #383838;
+	letter-spacing: -2px;
+}
+
+.layout-skills-index article{
 	border-bottom: 1px solid #eee;	
 	padding: 4px 0;
 	max-width: 400px;
 	position: relative;
 }
 
-.layout-settings article a{
+.layout-skills-index article a{
 	font-size: 14px;
 	position: absolute;
 	right: 0;
@@ -3191,6 +3339,7 @@ color: white;
 /* @end */
 
 /* @group layout-sign-in */
+
 .layout-sign-in .site-header nav{ display: none; }
 .layout-sign-in main { padding-top: 2em; }
 .layout-sign-in main section {
@@ -3238,6 +3387,17 @@ color: white;
 	}
 }
 
+
+/* @end */
+
+/* @group layout-vendors-index */
+
+.layout-vendors-index .a-download-csv{
+  position: absolute;
+  top: 16px;
+  right: 0;
+  padding: 4px 10px;
+}
 
 /* @end */
 
