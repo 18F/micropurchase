@@ -2903,7 +2903,7 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	left: 0;
 	margin-left: -21px;
 	margin-top: -1px;
-	box-shadow: 1px 1px rgba(0,0,0,0.06)
+	box-shadow: 1px 1px 0 rgba(0,0,0,0.06);
 }
 
 
