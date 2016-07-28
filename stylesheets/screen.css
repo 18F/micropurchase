@@ -131,7 +131,6 @@ a:visited{  color: #8d0058; }
 	max-width: 960px;
 	margin: 0 auto;
 	position: relative;
-	overflow: hidden;
 }
 
 @media screen and (min-width: 568.88){ .wrapper{ width: 90%; }  }
@@ -145,7 +144,7 @@ a:visited{  color: #8d0058; }
 main{
 	background: white;
 	color: #333;
-	padding-bottom: 2em;
+	padding: 12px 0 24px;
 }
 
 img { max-width: 100%; }
@@ -1646,6 +1645,8 @@ main div.wrap > form { max-width: 576px; }
 	margin-top: -2px;
 }
 
+.user-type-admin .site-header .nav-my-account{ display: none; }
+
 
 .site-header .nav-header-nav li a{ color: white; }
 .signed-in .site-header .nav-header-nav a{ margin-right: 0.8em; }
@@ -1791,7 +1792,7 @@ main div.wrap > form { max-width: 576px; }
 .nav-facets{
 	position: relative;	
 	border-top: 1px solid #555;
-	padding-top: 12px;
+	padding: 12px 0;
 	display: none;
 	background: white;
 	color: #333;
@@ -1803,7 +1804,6 @@ main div.wrap > form { max-width: 576px; }
 	font-size: 36px;
 	font-weight: 400;
 	letter-spacing: -1px;
-	padding-top: 8px;
 	padding-bottom: 8px;
 	border-bottom: 1px solid;
 	margin-bottom: 8px;
@@ -1825,16 +1825,50 @@ main div.wrap > form { max-width: 576px; }
 
 .nav-facets a:hover{ color: #333; }
 
-.layout-admins-index .nav-people-admins,
-.layout-vendors-index .nav-people-vendors,
+.nav-facets .count { 
+	color: white;
+	background: #99005c;
+	border-color: #99005c;
+	padding: 1px 8px;
+	border-radius: 99em;
+	font-size: 14px;
+	font-weight: 600;
+	margin-left: 0.2em;
+}
+
+.nav-facets .button{
+	position: absolute;
+	right: 0;
+	top: 7px;
+	padding: 4px 10px;
+	font-size: 14px;
+	margin-left: 0.6em;
+}
+
+
+.user-type-admin.signed-in .auction .auction-header .button,
+.signed-in .h-feed-header .button{
+	display: block;
+}
+
+.layout-admins-index main .wrapper > h1,
+.layout-customers-index main .wrapper > h1,
+.layout-skills-index main .wrapper > h1,
+.layout-vendors-index main .wrapper > h1{
+	position: absolute;
+	left: -9999em;
+}
+
+.layout-admins-index .a-admins-index,
 .layout-auctions-drafts .nav-auctions-drafts,
 .layout-auctions-index .nav-auctions-index,
 .layout-auctions-needs-attention .nav-auctions-needs-attention,
 .layout-auctions-closed .nav-auctions-closed,
-.layout-customers-index .nav-customers-index,
+.layout-customers-index .a-customers-index,
 .layout-skills-index .nav-skills-index,
 .layout-profile .a-profile,
-.layout-recent-activity .a-recent-activity{ 
+.layout-recent-activity .a-recent-activity,
+.layout-vendors-index .a-vendors-index{ 
 	font-weight: 600;
 	color: #333;
 }
@@ -1866,7 +1900,7 @@ main div.wrap > form { max-width: 576px; }
 	float: left;
   font-weight: 600;
   font-size: 16px;
-	padding: 8px 12px 10px;
+	padding: 6px 12px 7px;
 	text-decoration: none;
 	min-width: 1.8em;
 	text-align: center;
@@ -2272,45 +2306,6 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	clear: both;
 }
 
-.h-feed-header .button{
-	position: absolute;
-	right: 0;
-	top: 7px;
-	padding: 4px 10px;
-	font-size: 14px;
-	margin-left: 0.6em;
-	display: none;
-}
-
-
-
-.user-type-admin.signed-in .auction .auction-header .button,
-.signed-in .h-feed-header .button{
-	display: block;
-}
-
-.nav-auctions .count { 
-	background: #333;
-	color: white;
-	border-color: #333;
-}
-
-.nav-auctions .nav-auctions-needs-attention .count{ 
-background: #99005c;
-border-color: #99005c;
-color: white;
-}
-
-.nav-auctions .count{
-	background: #f3f3f3;
-	padding: 1px 8px;
-	border: 1px solid #e3e3e3;
-	border-radius: 99em;
-	font-size: 14px;
-	font-weight: 600;
-	margin-left: 0.2em;
-}
-
 .layout-auctions-index .auction{
 	border: 1px solid #c3c3c3;
 	padding: 14px 16px 0;
@@ -2358,7 +2353,7 @@ color: white;
 		margin-right: 3%;
 		float: left;
 	}
-	.layout-auctions-index main .auction:nth-child(2n+1){
+	.layout-auctions-index main .auction:nth-child(2n){
 		margin-right: 0;
 	}
 }
@@ -2374,7 +2369,7 @@ color: white;
 
 .layout-auctions-needs-attention.user-type-admin .section-bids,
 .layout-auctions-needs-attention.user-type-admin .section-delivery-needed,
-.layout-auctions-needs-attention.user-type-admin .section-payment-pending{
+.layout-auctions-needs-attention.user-type-admin .section-payments-pending{
 	display: none;	
 }
 
@@ -2788,29 +2783,9 @@ color: white;
 
 }
 
-
-
 /* @end */
 
 /* @group layout-customers-index */
-
-.layout-customers-index h1{
-	letter-spacing: -2px;
-	font-size: 48px;
-	font-weight: 300;
-	letter-spacing: -1.3px;	
-	display: inline-block;
-	line-height: 1.125em;
-	color: #383838;
-	letter-spacing: -2px;
-}
-
-.layout-customers-index .button{
-  position: absolute;
-  top: 16px;
-  right: 0;
-  padding: 4px 10px;
-}
 
 
 /* @end */
