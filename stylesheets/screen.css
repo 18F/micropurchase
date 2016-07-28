@@ -1392,7 +1392,6 @@ main div.wrap > form { max-width: 576px; }
 }
 
 
-
 /* @end */
 
 /* @end */
@@ -1407,6 +1406,7 @@ main div.wrap > form { max-width: 576px; }
 	border: 1px solid #ccc;
 	box-shadow: inset 0 0 0 4px #fff;
 	border-radius: 4px;
+	margin-bottom: 1em;
 }
 
 .boilerplate h1{
@@ -1838,6 +1838,8 @@ main div.wrap > form { max-width: 576px; }
 
 .nav-facets .button,
 .layout-admins-index .button,
+.layout-auctions-needs-attention .button,
+.layout-vendors-index .button,
 .layout-customers-index .button,
 .layout-skills-index .button,
 .layout-vendors-index .button{
@@ -1849,6 +1851,14 @@ main div.wrap > form { max-width: 576px; }
   font-weight: 600;
   margin-top: -86px;
 }
+
+.nav-facets .button{
+  color: #2e8540;
+  margin-top: 12px;
+  margin-right: 0;
+}
+
+.nav-facets .button:hover{ color: white; }
 
 .layout-admins-index .button,
 .layout-customers-index .button,
@@ -1864,7 +1874,12 @@ main div.wrap > form { max-width: 576px; }
 }
 
 .layout-admins-index main .wrapper > h1,
+.layout-bids-placed main .wrapper > h1,
+.layout-auctions-needs-attention main .wrapper > h1,
 .layout-customers-index main .wrapper > h1,
+.layout-deliveries-rejected main .wrapper > h1,
+.layout-payments-received main .wrapper > h1,
+.layout-profile main .wrapper > h1,
 .layout-skills-index main .wrapper > h1,
 .layout-vendors-index main .wrapper > h1{
 	position: absolute;
@@ -1873,10 +1888,13 @@ main div.wrap > form { max-width: 576px; }
 
 .layout-admins-index .a-admins-index,
 .layout-auctions-drafts .nav-auctions-drafts,
-.layout-auctions-index .nav-auctions-index,
-.layout-auctions-needs-attention .nav-auctions-needs-attention,
-.layout-auctions-closed .nav-auctions-closed,
+.layout-auctions-index .a-auctions-index,
+.layout-auctions-needs-attention .a-auctions-needs-attention,
+.layout-auctions-closed .a-auctions-closed,
+.layout-bids-placed .a-bids-placed,
 .layout-customers-index .a-customers-index,
+.layout-deliveries-rejected .a-deliveries-rejected,
+.layout-payments-received .a-payments-received,
 .layout-skills-index .a-skills-index,
 .layout-profile .a-profile,
 .layout-recent-activity .a-recent-activity,
@@ -1925,6 +1943,13 @@ main div.wrap > form { max-width: 576px; }
 .pagination .pagination-ellipsis{
 	border-right: none;
 	border-radius: 0;
+}
+
+.pagination .pagination-ellipsis{
+	color: #888;
+	font-weight: normal;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 .pagination .is-disabled{
@@ -2144,7 +2169,7 @@ main div.wrap > form { max-width: 576px; }
 }
 
 .auction .auction-footer{
-	padding: 12px 16px 0;
+	padding: 12px 16px 4px;
 	margin: 14px -16px 0;
 	background: #fafafa;
 	border-radius: 0 0 3px 3px;
@@ -2300,17 +2325,13 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 /* @group layout-auctions-index */
 
+.layout-auctions-index .button,
+.layout-auctions-needs-attention .button,
+.layout-auctions-needs-closed .button{ display: none; }
 
-.h-feed-header{
-	margin-bottom: 24px;
-	position: relative;
-}
-
-.h-feed-header::after{
-	content: "";
-	display: table;
-	clear: both;
-}
+.layout-auctions-index.user-type-admin .button,
+.layout-auctions-needs-attention.user-type-admin .button,
+.layout-auctions-needs-closed.user-type-admin .button{ display: block; }
 
 .layout-auctions-index .auction{
 	border: 1px solid #c3c3c3;
@@ -2325,7 +2346,6 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	max-width: 100%;
 	display: block;
 }
-
 
 .layout-auctions-index.user-type-admin .auction h1{
 	margin-right: 2.67em;
@@ -2661,11 +2681,14 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
   border: 1px solid goldenrod;
   margin-bottom: 1em;
   border-radius: 4px;
+  display: none;
 }
+
+.layout-auctions-show.user-type-admin main .auction-footer .notes{ display: block; }
 
 .layout-auctions-show main .auction-footer .notes h1{
 	font: inherit;
-	font-size: 20px;
+	font-size: 18px;
 	font-weight: 600;
 	color: maroon;
 	margin-bottom: 0.6em;
@@ -2702,7 +2725,7 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 		padding-top: 0;
 	}
 	
-	.layout-auctions-show main .wrapper .auction-footer .auction-workflow{ margin: 0 0 20px; }
+	.layout-auctions-show main .wrapper .auction-footer .auction-workflow{ margin: 0 0 16px; }
 	
 	.layout-auctions-show main .wrapper .page{
 		width: 55%;
