@@ -19,12 +19,18 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :auctions
-    resources :users, only: [:index, :show, :edit, :update]
     resources :auction_reports, only: [:show]
     resources :user_reports, only: [:index]
     resources :action_items, only: [:index]
     resources :drafts, only: [:index]
     resources :proposals, only: [:create]
+    resources :users, only: [:show, :edit, :update]
+
+    scope '/people' do
+      resources :admins, only: [:index]
+      resources :vendors, only: [:index]
+    end
+
     scope '/settings' do
       resources :customers, only: [:index, :new, :create, :edit, :update]
       resources :skills, only: [:index, :new, :create, :edit, :update]

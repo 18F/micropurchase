@@ -46,8 +46,12 @@ When(/^I visit the preview page for the unpublished auction$/) do
   visit admin_preview_auction_path(@unpublished_auction)
 end
 
-When(/^I visit the admin users page$/) do
-  visit admin_users_path
+When(/^I visit the admin admins page$/) do
+  visit admin_admins_path
+end
+
+When(/^I visit the admin vendors page$/) do
+  visit admin_vendors_path
 end
 
 When(/^I visit the insights page$/) do
@@ -112,4 +116,12 @@ end
 
 When(/^I should be on the admin action items page$/) do
   expect(page.current_path).to eq admin_action_items_path
+end
+
+When(/^I should be on the admin admins page$/) do
+  expect(page.current_path).to eq(admin_admins_path)
+end
+
+When(/^I should be on the admin vendors page$/) do
+  expect(page.current_path).to eq(admin_vendors_path)
 end
