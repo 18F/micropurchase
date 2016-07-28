@@ -2857,6 +2857,7 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	margin-top: 24px;
 	margin-bottom: 24px;
 	position: relative;
+	max-width: 28em;
 }
 
 .layout-auctions-history main .wrapper > dl::before,
@@ -2880,9 +2881,15 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 .layout-auctions-history main .wrapper > dl > dt{
 	font-size: 14px;
+	color: #555;
+	line-height: 1;
 	margin-top: 28px;
 	margin-bottom: 12px;
 	position: relative;
+}
+
+.layout-auctions-history main .wrapper > dl > dd{
+	line-height: 1.33;
 }
 
 .layout-auctions-history main .wrapper > dl > dt::before{
@@ -2897,8 +2904,6 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	margin-left: -21px;
 }
 
-.layout-auctions-history main .wrapper > dl > dd{
-}
 
 .layout-auctions-history main .wrapper > dl dl{
   font-size: 14px;
