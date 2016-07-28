@@ -11,14 +11,13 @@ Then(/^I should see the name from github authentication$/) do
 end
 
 Then(/^I should see "([^"]+)" for the user in the "([^"]+)" column$/) do |value, column|
-  user_admin_columns = ['Name', 'Email', 'DUNS Number', 'SAM.gov status',
-                        'Small Business?', 'Github ID']
+  user_admin_columns = ['Name', 'Email address', 'DUNS #', 'Small business', 'SAM status']
 
   index = user_admin_columns.index(column)
   fail 'Unrecognized column: #{column}' if index.nil?
   css = "tr td:nth-child(#{index + 1})"
 
-  within(:xpath, '/html/body/div/div/table[2]') do
+  within(:xpath, '/html/body/div/div/table[1]') do
     within(css) do
       expect(page).to have_content(value)
     end

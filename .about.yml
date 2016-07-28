@@ -29,6 +29,7 @@ status: active
 # Description of the project
 description: |
 This is a web application used to manage the bidding process for 18F's micro-purchase threshold experiment. The platform will allow vendors to bid on open opportunities with 18F, track their bids, and learn of the winning bidder. 
+
 # Should be 'true' if the project has a continuous build (required)
 # values: true, false
 testable: true
@@ -72,18 +73,20 @@ partners:
 - 18F
 
 # Brief descriptions of significant project developments
-#milestones:
+milestones:
 #-
-Launching minimum viable product for October 2015 micro purchase.
+- Launching minimum viable product for October 2015 micro purchase.
 #-
-Launching alpha bidding platform in December 2015.
+- Launching alpha bidding platform in December 2015.
+- Platform can support auctions with starting prices greater than $3500 and less than $25000 May 2016
+- Platform can support external customers (not just internal 18F) June 2016
 
 # Technologies used to build the project
 Ruby/Rails application using ActiveRecord and PostgreSQL.
 
 # Brief description of the project's outcomes
-#impact:
-We've long known at 18F that opening our source code from day one improves our ability to deliver. But we want to show that opening our source code improves our ability to contract for digital services. We also want to see whether this is a sustainable way to engage small businesses and non-traditional contractors in the government space.
+impact:
+- We've long known at 18F that opening our source code from day one improves our ability to deliver. But we want to show that opening our source code improves our ability to contract for digital services. We also want to see whether this is a sustainable way to engage small businesses and non-traditional contractors in the government space.
 
 # Services used to supply project status information
 # Items:

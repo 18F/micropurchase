@@ -1,14 +1,10 @@
 class UserPresenter < SimpleDelegator
-  def github_json_url
-    "https://api.github.com/user/#{github_id}"
-  end
-
   def admin?
     Admins.verify?(model.github_id)
   end
 
-  def in_sam?
-    model.sam_accepted?
+  def admin_sam_status
+    sam_status_presenter.admin_status_text
   end
 
   def sam_status_message_for(flash)
@@ -56,6 +52,10 @@ class UserPresenter < SimpleDelegator
   end
 
   private
+
+  def in_sam?
+    model.sam_accepted?
+  end
 
   def sam_status_presenter
     SamStatusPresenterFactory.new(model).create

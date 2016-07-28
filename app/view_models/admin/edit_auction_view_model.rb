@@ -67,6 +67,10 @@ class Admin::EditAuctionViewModel < Admin::BaseViewModel
     end
   end
 
+  def delivery_url_partial
+    'admin/auctions/delivery_url'
+  end
+
   private
 
   def dc_time(field)

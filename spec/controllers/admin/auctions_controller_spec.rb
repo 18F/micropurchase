@@ -12,6 +12,24 @@ describe Admin::AuctionsController do
   end
 
   describe '#update' do
+    context 'change to other purchase card' do
+      it 'assigns the purchase card correctly' do
+        user = create(:admin_user)
+        auction_record = create(:auction)
+
+        params = {
+          id: auction_record.id,
+          auction: {
+            purchase_card: 'other'
+          }
+        }
+
+        put :update, params, user_id: user.id
+
+        expect(auction_record.reload.purchase_card).to eq('other')
+      end
+    end
+
     context 'when the params are invalid' do
       it 'assigns the un-updated auction and renders edit' do
         user = create(:admin_user)

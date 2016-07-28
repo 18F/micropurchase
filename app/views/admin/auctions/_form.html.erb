@@ -1,16 +1,53 @@
-<%= f.input :type, collection: Auction.types.keys.to_a %>
 <%= f.input :title %>
-<%= f.input :github_repo, as: :url %>
-<%= f.input :issue_url, as: :url %>
+<fieldset class="datetime">
+  <legend>Auction starts</legend>
+  <%= render partial: 'datetime_fields',
+    locals: { field: 'started', auction: auction } %>
+</fieldset>
+
+<fieldset class="datetime">
+  <legend>Auction ends</legend>
+  <%= render partial: 'datetime_fields',
+    locals: { field: 'ended', auction: auction } %>
+</fieldset>
+
+<fieldset class="datetime">
+  <legend>Delivery deadline</legend>
+  <%= render partial: auction.delivery_due_partial, locals: { f: f, auction: auction } %>
+</fieldset>
+
+<%= f.input :start_price %>
+<%= f.input :type, collection: Auction.types.keys.to_a %>
 <%= f.input :summary, as: :text %>
 <%= f.input :description, as: :text %>
-<%= render partial: 'datetime_fields', locals: { field: 'started', auction: auction } %>
-<%= render partial: 'datetime_fields', locals: { field: 'ended', auction: auction } %>
-<%= render partial: auction.delivery_due_partial, locals: { f: f, auction: auction } %>
-<%= f.input :customer_id, collection: auction.customer_options, label_method: :agency_name, value_method: :id %>
-<%= f.input :billable_to, collection: auction.billable_to_options %>
-<%= f.input :start_price %>
-<%= f.input :published, collection: auction.published_options, selected: auction.published %>
-<%= f.input :purchase_card, collection: Auction.purchase_cards.keys.to_a %>
-<%= f.association :skills, collection: Skill.all, as: :check_boxes %>
+<%= f.association :skills, collection: Skill.all, input_html: { multiple: true } %>
+
+<fieldset class="datetime">
+  <legend>GitHub</legend>
+  <div class="usa-width-one-half">
+    <%= f.input :github_repo, as: :url %>
+  </div>
+  <div class="usa-width-one-half">
+    <%= f.input :issue_url, as: :url %>
+  </div>
+  <%= render partial: auction.delivery_url_partial, locals: { f: f } %>
+</fieldset>
+
+
+<fieldset class="datetime">
+  <legend>Payment</legend>
+  <div class="usa-width-one-half">
+    <%= f.input :purchase_card, collection: Auction.purchase_cards.keys.to_a %>
+  </div>
+  <div class="usa-width-one-half">
+    <%= f.association :customer, collection: auction.customer_options, label_method: :agency_name %>
+  </div>
+  <%= render partial: auction.c2_proposal_partial, locals: { f: f } %>
+  <%= render partial: auction.paid_at_partial, locals: { f: f } %>
+  <div class="usa-width-one-half">
+    <%= f.input :billable_to, collection: auction.billable_to_options %>
+  </div>
+</fieldset>
+
 <%= f.input :notes, as: :text %>
+<%= f.input :published, collection: auction.published_options, selected: auction.published %>

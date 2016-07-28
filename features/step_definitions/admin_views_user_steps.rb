@@ -1,3 +1,19 @@
+When(/^I should see my user info$/) do
+  user = UserPresenter.new(@user)
+
+  expect(page).to have_text(user.email)
+  expect(page).to have_text(user.name)
+end
+
+Then(/^I should see that user's information$/) do
+  expect(page).to have_content(@user.name)
+  expect(page).to have_content(@user.email)
+  expect(page).to have_content(@user.payment_url)
+  expect(page).to have_content(@user.duns_number)
+  expect(page).to have_content(@user.github_id)
+  expect(page).to have_content(@user.github_login)
+end
+
 Then(/^in that section I should see a table of the user's bids$/) do
   table_headers = ['Auction', 'Status', 'Skills', 'User Bids', 'User Won?', 'Accepted?']
 

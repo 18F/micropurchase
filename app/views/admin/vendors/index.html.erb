@@ -1,0 +1,37 @@
+<h2>People</h2>
+
+<nav class="site-nav-secondary">
+<ul>
+  <li><%= link_to 'Admins', admin_admins_path %></li>
+  <li><%= link_to 'Vendors', admin_vendors_path, class: 'usa-current' %></li>
+  <li class='new-button'>
+    <%= link_to "Download CSV",
+      admin_user_reports_path(format: :csv),
+      class: 'settings-new usa-button usa-button-outline' %>
+  </li>
+</ul>
+</nav>
+
+
+<table class="usa-table-borderless" id="table-users">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Email address</th>
+      <th scope="col">DUNS #</th>
+      <th scope="col">Small business</th>
+      <th scope="col">SAM status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @view_model.users.each do |user| %>
+      <tr>
+        <td><%= link_to user.name, admin_user_path(user.id) %></td>
+        <td><%= user.email %></td>
+        <td><%= user.duns_number %></td>
+        <td><%= user.small_business_label %></td>
+        <td><%= user.admin_sam_status %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

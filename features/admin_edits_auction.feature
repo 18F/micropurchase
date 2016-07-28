@@ -39,6 +39,7 @@ Feature: Admin edits auctions in the admins panel
     When I click to edit the auction
     Then I should see the customer selected for the auction
 
+  @javascript
   Scenario: Associating an auction with a skill
     Given I am an administrator
     And I sign in

@@ -1,23 +1,57 @@
-textarea#auction_summary {
-  height: 150px;
-}
-
-textarea#auction_description {
-  height: 500px;
-}
-
 .auction-form {
-  .url,
-  textarea {
-    width: 500px;
+  margin-top: $base-padding;
+  margin-bottom: $base-padding;
+  padding: $base-padding-large;
+  background-color: $color-gray-lightest;
+
+  @include media($large-screen) {
+    @include shift(2);
+  }
+
+  @include media($medium-screen) {
+    @include shift(2);
+  }
+
+  input,
+  textarea,
+  select,
+  form {
+    max-width: none;
+  }
+
+  label {
+    clear: both;
   }
 }
 
-.auction_skills span {
-  float: left;
-  padding-right: 1em;
+.auction_summary textarea {
+  height: 150px;
 }
 
-.auction_notes label {
-  clear: both;
+.auction_description textarea {
+  height: 500px;
+}
+
+.estimated-delivery-date {
+  background-color: $color-gray-lightest;
+  padding: 1em;
+  margin-top: 21px;
+}
+
+.datetime {
+  background: $color-white;
+  border: 1px solid $color-gray-neutral;
+  padding: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+
+  .usa-width-one-half:nth-child(odd) {
+    margin-right: 0;
+  }
+}
+
+.time {
+  .usa-width-one-third {
+    margin-right: 0;
+  }
 }

@@ -5,7 +5,7 @@ When(/^I click the edit user link next to the first non-admin user$/) do
 end
 
 When(/^I click the edit user link next to the first admin user$/) do
-  within(:xpath, cel_xpath(table_id: 'table-admins', row: 1, column: 7)) do
+  within(:xpath, cel_xpath(table_id: 'table-admins', row: 1, column: 4)) do
     click_on "Edit"
   end
 end
@@ -20,7 +20,7 @@ end
 
 Then(/^I expect there to be a contracting officer in the list of admin users$/) do
   within(:xpath, '//table[@id="table-admins"]') do
-    within(:css, "tr td:nth-child(5)") do
+    within(:css, "tr td:nth-child(3)") do
       expect(page).to have_content("true")
     end
   end
