@@ -1,0 +1,83 @@
+---
+title: Auction show
+excerpt: None
+---
+
+{% include head.html %}
+<body class="no-js layout-auctions-history">
+  <a class="a-skip-to-main" href="#main">Skip to main content</a>
+  {% include site-header.html %}
+  <main class="auction" role="main" id="main">
+    <div class="wrapper">
+      <header class="auction-header">
+        <h1>Open Opportunities: Create Agency Admin User Role</h1>
+        <a href="{{site.baseurl}}/auctions/edit" class="button">Edit</a>
+        <dl>
+          <dt class="auction-status">Status</dt>
+          <dd class="auction-status auction-status-open">Open</dd>
+          <dt class="auction-time-remaining">Closes</dt>
+          <dd class="auction-time-remaining">
+            12 days from now
+          </dd>
+          <dt class="auction-current-bid">Starting bid</dt>
+          <dd class="auction-current-bid">
+            $3,500.00
+          </dd>
+        </dl>
+        <nav>
+          <a class="nav-auction-show" href="{{site.baseurl}}/auctions/show">Auction</a>
+          <a class="nav-auction-bids" href="{{site.baseurl}}/auctions/show-bids">
+            <span class="count">6</span> Bids
+          </a>
+          <a class="nav-auction-history" href="{{site.baseurl}}/auctions/show-bids">
+            History
+          </a>
+        </nav>
+      </header>
+    <dl>
+      <dt><time>May 11, 2016 at 11:37 AM EDT</time></dt>
+      <dd>Michael Torres created this auction.</dd>
+      <dt><time>May 11, 2016 at 11:42 AM EDT</time></dt>
+      <dd>Michael Torres requested permission to use the 18F P Card.</dd>
+      <dd>
+        <dl>
+          <dt>CAP URL</dt>
+          <dd><a href="#">https://cap.me</a></dd>
+        </dl>
+      </dd>
+      <dt><time>May 11, 2016 at 12:00 PM EDT</time></dt>
+      <dd>Michael Torres set the auction timeline.</dd>
+      <dd>
+        <dl>
+          <dt>Start date</dt>
+          <dd><time>May 12, 2016 at 12:00 AM EDT</time></dd>
+          <dt>End date</dt>
+          <dd><time>May 14, 2016 at 12:00 AM EDT</time></dd>
+          <dt>Delivery deadline</dt>
+          <dd>5 days</dd>
+        </dl>
+      </dd>
+      <dt><time>May 11, 2016 at 12:00 PM EDT</time></dt>
+      <dd>Michael Torres published this auction.</dd>
+      <dt><time>May 12, 2016 at 12:00 AM EDT</time></dt>
+      <dd>Vendorname placed a bid of $1,500.</dd>
+      <dt><time>May 12, 2016 at 12:01 AM EDT</time></dt>
+      <dd>Vendorname 2 placed a bid of $400.</dd>
+      <dt><time>May 14, 2016 at 12:00 AM EDT</time></dt>
+      <dd>Auction ended</dd>
+      <dt><time>May 15, 2016 at 2:32 PM EDT</time></dt>
+      <dd>Vendorname 2 marked this auction as delivered</dd>
+      <dd>
+        <dl>
+          <dt>Delivery URL</dt>
+          <dd><a href="#">https://github.com/pull-request</a></dd>
+        </dl>
+      </dd>
+      <dt><time>May 15, 2016 at 5:02 PM EDT</time></dt>
+      <dd>Michael Torres accepted Vendorname 2&rsquo;s work</dd>
+      <dt><time>May 17, 2016 at 1:17 PM EDT</time></dt>
+      <dd>Michael Torres issued payment to Vendorname 2</dd>
+    </dl>
+  </main>
+  {% include site-footer.html %}
+</body>
