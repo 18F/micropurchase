@@ -1836,13 +1836,25 @@ main div.wrap > form { max-width: 576px; }
 	margin-left: 0.2em;
 }
 
-.nav-facets .button{
-	position: absolute;
-	right: 0;
-	top: 7px;
-	padding: 4px 10px;
-	font-size: 14px;
-	margin-left: 0.6em;
+.nav-facets .button,
+.layout-admins-index .button,
+.layout-customers-index .button,
+.layout-skills-index .button,
+.layout-vendors-index .button{
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 4px 8px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: -86px;
+}
+
+.layout-admins-index .button,
+.layout-customers-index .button,
+.layout-skills-index .button,
+.layout-vendors-index .button{
+	margin-top: -92px;
 }
 
 
@@ -1865,7 +1877,7 @@ main div.wrap > form { max-width: 576px; }
 .layout-auctions-needs-attention .nav-auctions-needs-attention,
 .layout-auctions-closed .nav-auctions-closed,
 .layout-customers-index .a-customers-index,
-.layout-skills-index .nav-skills-index,
+.layout-skills-index .a-skills-index,
 .layout-profile .a-profile,
 .layout-recent-activity .a-recent-activity,
 .layout-vendors-index .a-vendors-index{ 
@@ -1877,15 +1889,8 @@ main div.wrap > form { max-width: 576px; }
 
 /* @group .nav-pagination */
 
-.pagination{ 
-	margin: 1em 0 0; 
-	padding-top: 1em;
-	clear: both;
-}
-
-.pagination .pagination-ellipsis{
-	color: #aaa;
-}
+.pagination{  padding-top: 20px; }
+.pagination .pagination-ellipsis{ color: #aaa; }
 
 .pagination .pagination-prev,
 .pagination .pagination-next,
@@ -2150,18 +2155,11 @@ main div.wrap > form { max-width: 576px; }
 }
 
 .auction .auction-footer h2{
-	font-size: 14px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #555;
 	line-height: 14px;
-	margin-bottom: 8px;
-}
-
-.auction .auction-footer ul span{
-	display: block;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	color: #333;
-	line-height: 1.2em;
+	margin-bottom: 4px;
 }
 
 .auction .auction-footer ul::after{
@@ -2172,7 +2170,13 @@ main div.wrap > form { max-width: 576px; }
 .auction .auction-footer li{
 	float: left;
 	width: 50%;
-	margin-bottom: 18px;
+	margin-bottom: 12px;
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color: #333;
+	line-height: 1.2em;
 }
 
 .auction .auction-footer .auction-skills li{ 
@@ -2445,19 +2449,24 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	padding: 16px;
 }
 
-@media (min-width: 568.88px){	
+@media (min-width: 568.88px){
+		
 	.layout-auctions-show main .wrapper,
-	.layout-auctions-bids main .wrapper{
-	margin-top: 6px;
-	}
-	.layout-auctions-show main .auction-header h1,
-	.layout-auctions-bids main .auction-header h1{
-		margin: 0 20px 4px;
+	.layout-auctions-bids main .wrapper,
+	.layout-auctions-history main .wrapper{
+		margin-top: 6px;
 	}
 	
-	.layout-auctions-show main .auction-header dl,
-	.layout-auctions-bids main .auction-header dl,
-	.layout-auctions-history main .auction-header dl{
+	.layout-auctions-show .auction-header h1,
+	.layout-auctions-bids .auction-header h1,
+	.layout-auctions-history .auction-header h1{
+		margin: 0 20px 4px;
+		text-indent: -2px;
+	}
+	
+	.layout-auctions-show .auction .auction-header dl,
+	.layout-auctions-bids .auction .auction-header dl,
+	.layout-auctions-history .auction .auction-header dl{
 		font-size: 14px;
 		margin: 0 20px;
 		font-weight: normal;
@@ -2646,7 +2655,28 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 /* @end */
 
-.layout-auctions-show main .auction-footer ul{
+.layout-auctions-show main .auction-footer .notes{
+  background: lemonchiffon;
+  padding: 20px;
+  border: 1px solid goldenrod;
+  margin-bottom: 1em;
+  border-radius: 4px;
+}
+
+.layout-auctions-show main .auction-footer .notes h1{
+	font: inherit;
+	font-size: 20px;
+	font-weight: 600;
+	color: maroon;
+	margin-bottom: 0.6em;
+}
+
+.layout-auctions-show main .auction-footer .notes p{
+	line-height: 1.33em;
+}
+
+
+.layout-auctions-show main .auction-footer > ul{
 	background: #f3f3f3;
 	padding: 20px;
 	border-radius: 0 0 4px 4px;
@@ -2655,13 +2685,15 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 .layout-auctions-show main .auction-footer ul li{
 	float: none;
 	width: auto;
+	margin-bottom: 18px;
 }
 
 .layout-auctions-show main .wrapper .auction-footer .auction-workflow{ margin: 0 20px 20px; }
 
 @media screen and (min-width: 711.11px){	
 	.layout-auctions-show main .auction-header h1,
-	.layout-auctions-bids main .auction-header h1{ font-size: 27px; }
+	.layout-auctions-bids main .auction-header h1,
+	.layout-auctions-history main .auction-header h1{ font-size: 27px; }
 		
 	.layout-auctions-show main .wrapper .page,
 	.layout-auctions-show main .wrapper .auction-footer{
@@ -2794,10 +2826,33 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 /* @group layout-auctions-history */
 
 .layout-auctions-history main .wrapper > dl{
-	border-left: 2px solid;  
+	border-left: 2px solid #ddd;  
 	margin-left: 24px;
 	padding-left: 12px;
-	margin-bottom: 12px;
+	padding-top: 18px;
+	padding-bottom: 18px;
+	margin-top: 24px;
+	margin-bottom: 24px;
+	position: relative;
+}
+
+.layout-auctions-history main .wrapper > dl::before,
+.layout-auctions-history main .wrapper > dl::after{
+	content: "";
+	position: absolute;
+	top: 0;
+	width: 12px;
+	left: -7px;
+	border-bottom: 1px solid #ccc;
+}
+
+.layout-auctions-history main .wrapper > dl::after{
+	top: auto;
+	bottom: 0;
+}
+
+.layout-auctions-history main .wrapper > dl > dt:first-of-type{
+	margin-top: 0;
 }
 
 .layout-auctions-history main .wrapper > dl > dt{
@@ -2812,7 +2867,7 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	width: 16px;
 	height: 16px;
 	border-radius: 100%;
-	border: 1px solid #333;
+	border: 1px solid #ccc;
 	background: white;
 	position: absolute;
 	left: 0;
@@ -2861,7 +2916,6 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 /* @end */
 
 /* @group layout-customers-index */
-
 
 /* @end */
 
@@ -3029,13 +3083,6 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 /* @group layout-people */
 
-.layout-admins-index a.button{
-  position: absolute;
-  top: 16px;
-  right: 0;
-  padding: 4px 10px;
-}
-
 .layout-admins-index main .wrapper > h1,
 .layout-people-show main .wrapper > h1{
 	letter-spacing: -2px;
@@ -3164,9 +3211,9 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 /* @end */
 
-/* @group layout-people-new */
+/* @group layout-customers-new */
 
-.layout-people-new form{
+.layout-customers-new form{
 	max-width: 400px;
 	margin: 2em auto 1em;
 	border: 1px solid #ccc;
@@ -3175,14 +3222,14 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	position: relative;
 }
 
-.layout-people-new form .a-back{
+.layout-customers-new form .a-back{
 	position: absolute;
 	bottom: 100%;
 	margin-bottom: 8px;
 	left: 0;
 }
 
-.layout-people-new h1{
+.layout-customers-new h1{
 	margin-bottom: 0.67em;
 	font-size: 36px;
 	font-weight: 600;
@@ -3191,19 +3238,19 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	letter-spacing: -1px;	
 }
 
-.layout-people-new .field-github-id{
+.layout-customers-new .field-github-id{
 	max-width: 6em;	
 }
 
-.layout-people-new .button{
+.layout-customers-new .button{
 	margin-top: 1em;
 	
 }
 
-.layout-people-new .field em{
+.layout-customers-new .field em{
 	font-style: italic;
 }
-.layout-people-new .field-agency .button{
+.layout-customers-new .field-agency .button{
 	position: absolute;
 	left: 9.5em;
 	top: -12px;
@@ -3352,14 +3399,6 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 /* @group layout-skills-index */
 
-.layout-skills-index .button{
-  position: absolute;
-  top: 16px;
-  right: 0;
-  padding: 4px 10px;
-}
-
-
 .layout-skills-index header > h1{
 	letter-spacing: -2px;
 	font-size: 48px;
@@ -3442,12 +3481,6 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 /* @group layout-vendors-index */
 
-.layout-vendors-index .a-download-csv{
-  position: absolute;
-  top: 16px;
-  right: 0;
-  padding: 4px 10px;
-}
 
 /* @end */
 
