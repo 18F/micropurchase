@@ -3,14 +3,14 @@ require 'rails_helper'
 describe StatusPresenter::Available do
   describe '#tag_data_value_status' do
     it "has a twitter status data value with human readable time expression" do
-        presenter = StatusPresenter::Available.new(auction)
+      presenter = StatusPresenter::Available.new(auction)
       expect(presenter.tag_data_value_status).to eq("2 days left")
     end
   end
 
   describe '#tag_data_label_2' do
     it "has a twitter second label that indicates bidding is open" do
-        presenter = StatusPresenter::Available.new(auction)
+      presenter = StatusPresenter::Available.new(auction)
       expect(presenter.tag_data_label_2).to eq("Bidding")
     end
   end
