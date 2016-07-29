@@ -17,6 +17,10 @@ class DcTimePresenter
     new(time).convert_and_format(format, timezone_label: timezone_label)
   end
 
+  def self.format(time, format = FORMAT)
+    new(time).format(format)
+  end
+
   def self.time_zone
     ActiveSupport::TimeZone[TIME_ZONE_NAME]
   end
@@ -24,6 +28,10 @@ class DcTimePresenter
   def convert
     return unless time
     time.in_time_zone(time_zone)
+  end
+
+  def format(format)
+    "#{time.strftime(format)} #{timezone_string}"
   end
 
   def convert_and_format(format = FORMAT, timezone_label: true)

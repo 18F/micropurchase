@@ -1,16 +1,4 @@
-<h2>Settings</h2>
-
-<nav class="site-nav-secondary">
-<ul>
-  <li><%= link_to 'Customers', admin_customers_path %></li>
-  <li><%= link_to 'Skills', admin_skills_path, class: 'usa-current' %></li>
-  <li class='new-button'>
-    <%= link_to 'Add skill',
-      new_admin_skill_path,
-      class: 'settings-new usa-button usa-button-outline' %>
-  </li>
-</ul>
-</nav>
+<%= render partial: 'admin/settings_subnav', locals: { view_model: @view_model } %>
 
 <table class="usa-table-borderless">
   <thead>

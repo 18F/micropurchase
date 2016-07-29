@@ -30,6 +30,10 @@ class AuctionListItem
     auction.type.dasherize.capitalize
   end
 
+  def starting_price
+    Currency.new(auction.start_price).to_s
+  end
+
   def eligibility_label
     if for_small_business?
       'Small-business only'
@@ -59,68 +63,12 @@ class AuctionListItem
   end
 
   def winning_bid_partial
-    if over? && !auction.bids.any?
-      'auctions/no_bids'
-    elsif auction.type == 'reverse' && over?
+    if over?
       'auctions/over_winning_bid_details'
-    elsif auction.type == 'sealed_bid' && over?
-      'auctions/over_with_bids'
-    elsif auction.type == 'reverse' && available?
-      auction_available_bids_partial
-    elsif auction.type == 'sealed_bid' && available?
-      sealed_bid_bidder_partial
-    else # future
-      'components/null'
-    end
-  end
-
-  def auction_available_bids_partial
-    if auction.bids.any?
+    elsif auction.type == 'reverse' && available? && auction.bids.any?
       'auctions/winning_bid_details'
-    else
-      'auctions/no_bids_yet'
-    end
-  end
-
-  def sealed_bid_bidder_partial
-    if user_is_bidder?
-      'auctions/sealed_bid_auction_user_is_bidder'
-    else
-      'components/null'
-    end
-  end
-
-  def winning_bidder_partial
-    if user_is_winning_bidder? && auction.type == 'sealed_bid'
-      'auctions/sealed_bid_auction_user_is_winning_bidder'
-    elsif user_is_winning_bidder? && auction.type == 'reverse'
-      'auctions/reverse_auction_user_is_winning_bidder'
-    else
-      'auctions/user_is_not_winning_bidder'
-    end
-  end
-
-  def user_is_bidder_partial
-    if user_is_bidder?
-      'auctions/user_is_bidder'
-    else
-      'components/null'
-    end
-  end
-
-  def over_user_is_winner_class
-    if !user_is_winning_bidder?
-      'issue-current-bid-long'
-    else
-      ''
-    end
-  end
-
-  def current_winning_bidder_partial
-    if user_is_winning_bidder? && auction.type == 'reverse'
-      'auctions/user_is_current_winning_bidder'
-    else
-      'auctions/user_is_not_current_winning_bidder'
+    else # sealed or reverse with no bids or future
+      'auctions/starting_price'
     end
   end
 
@@ -128,12 +76,12 @@ class AuctionListItem
     status_presenter.relative_time
   end
 
-  def highlighted_bid_amount_as_currency
-    Currency.new(highlighted_bid.amount).to_s
-  end
-
-  def user_bid_amount_as_currency
-    Currency.new(lowest_user_bid.amount).to_s
+  def winning_bid_amount_as_currency
+    if auction.lowest_bid
+      Currency.new(auction.lowest_bid.amount).to_s
+    else
+      'No bids'
+    end
   end
 
   private
@@ -152,11 +100,6 @@ class AuctionListItem
 
   def user_bids
     auction.bids.where(bidder: current_user)
-  end
-
-  def highlighted_bid
-    @_highlighted_bid ||=
-      HighlightedBid.new(auction: auction, user: current_user).find
   end
 
   def for_small_business?

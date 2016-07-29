@@ -1,4 +1,10 @@
 Then(/^I should see an? "(.+)" status$/) do |label|
+  within(:css, '.status-label') do
+    expect(page).to have_content(label)
+  end
+end
+
+Then(/^I should see an? "(.+)" label$/) do |label|
   within(:css, '.issue-ribbon') do
     expect(page).to have_content(label)
   end
@@ -11,7 +17,7 @@ Then(/^I should see an? "(.+)" eligibility$/) do |type|
 end
 
 Then(/^I should not see an? (.+) status$/) do |label|
-  within(:css, '.issue-ribbon') do
+  within(:css, '.status-label') do
     expect(page).to_not have_content(label)
   end
 end
@@ -24,10 +30,4 @@ end
 
 Then(/^I should see a column labeled "([^"]+)"$/) do |text|
   find('th', text: text)
-end
-
-Then(/^I should see an? "([^"]+)" label$/) do |label|
-  within(:css, '.issue-ribbon') do
-    expect(page).to have_content(label)
-  end
 end

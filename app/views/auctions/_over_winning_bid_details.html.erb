@@ -1,5 +1,1 @@
-<%= render partial: auction.winning_bidder_partial,
-  locals: { auction: auction } %>
-<span class="issue-winning-bid">
-  <%= auction.highlighted_bid_amount_as_currency %>
-</span>
+Winning bid: <%= auction.winning_bid_amount_as_currency %>

@@ -3,6 +3,14 @@ class Admin::AdminsIndexViewModel < Admin::BaseViewModel
     all_users.select(&:admin?)
   end
 
+  def admins_nav_class
+    'usa-current'
+  end
+
+  def csv_download_partial
+    'components/null'
+  end
+
   private
 
   def all_users

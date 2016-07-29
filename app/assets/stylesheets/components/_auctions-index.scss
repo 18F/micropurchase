@@ -17,9 +17,45 @@
 }
 
 .auction-wrapper .issue-label {
-  padding: $site-margins;
+  padding: $site-margins / 2;
 }
 
 .pagination-details {
   margin-top: $site-margins;
+}
+
+.issue-vitals {
+  font-size: $h5-font-size;
+  font-style: oblique;
+  font-weight: $font-normal;
+
+  .status-label {
+    padding: .25em .5em;
+    margin-right: .5em;
+    font-weight: $font-bold;
+  }
+
+  .auction-label-expiring {
+    background-color: $color-gold;
+  }
+
+  .auction-label-over {
+    background-color: $color-gray-light;
+  }
+
+  .auction-label-future {
+    background-color: $color-cool-blue;
+    color: $color-white;
+  }
+
+  .auction-label-open {
+    background-color: $color-green;
+    color: $color-white;
+  }
+}
+
+@include media($medium-screen) {
+  .winning-bid-detail {
+    float: right;
+  }
 }

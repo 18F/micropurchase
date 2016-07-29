@@ -8,8 +8,9 @@ Feature: Admin creates auctions in the admins panel
     And there is a skill in the system
     When I sign in
     And I visit the auctions admin page
-    When I click on the "Create New Auction" link
+    When I click on the "Add auction" link
     And I edit the new auction form
+    Then I should see that the auction type is sealed bid
     And I click to create an auction
     Then I should see the auction's title
     And I should see the start time I set for the auction
@@ -22,10 +23,10 @@ Feature: Admin creates auctions in the admins panel
     And there is a skill in the system
     When I sign in
     And I visit the auctions admin page
-    When I click on the "Create New Auction" link
+    When I click on the "Add auction" link
     Then I should see an estimated delivery deadline of 12 business days from now
-    And I change the auction end date
-    Then I should see "Save your changes to see updated delivery date and time"
+    When I change the auction end date
+    Then I should see the updated delivery deadline
 
   Scenario: Creating an invalid auction
     Given I am an administrator
@@ -33,7 +34,7 @@ Feature: Admin creates auctions in the admins panel
     And there is a skill in the system
     And I sign in
     And I visit the auctions admin page
-    When I click on the "Create New Auction" link
+    When I click on the "Add auction" link
     And I edit the new auction form
     And I set the auction start price to $24000
     And I click to create an auction

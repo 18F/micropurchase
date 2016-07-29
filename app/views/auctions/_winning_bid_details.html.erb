@@ -1,4 +1,1 @@
-<%= render partial: auction.current_winning_bidder_partial,
-  locals: { auction: auction } %>
-
-<%= auction.highlighted_bid_amount_as_currency %>
+Current winning bid: <%= auction.winning_bid_amount_as_currency %>

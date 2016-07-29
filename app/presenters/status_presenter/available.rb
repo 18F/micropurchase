@@ -8,7 +8,7 @@ class StatusPresenter::Available < Struct.new(:auction)
   end
 
   def relative_time
-    "Time remaining: #{HumanTime.new(time: auction.ended_at).distance_of_time_to_now}"
+    "Ending in #{HumanTime.new(time: auction.ended_at).distance_of_time_to_now}"
   end
 
   def label_class

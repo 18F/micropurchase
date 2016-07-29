@@ -14,7 +14,7 @@ module RequestHelpers
   end
 
   def valid_api_key
-    FakeGitHub::VALID_API_KEY
+    FakeGitHubApi::VALID_API_KEY
   end
 
   def github_request_headers
@@ -32,7 +32,7 @@ module RequestHelpers
     bad_credentials  = "{\"message\":\"Bad Credentials\"}"
     token = request.headers['Authorization'].split[1] rescue nil
 
-    if token != FakeGitHub::VALID_API_KEY
+    if token != FakeGitHubApi::VALID_API_KEY
       response_body = bad_credentials
       response_status = 401
     end

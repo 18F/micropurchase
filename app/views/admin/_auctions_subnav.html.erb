@@ -1,0 +1,14 @@
+<h2>Auctions</h2>
+
+<nav class="site-nav-secondary">
+  <ul>
+    <li><%= link_to 'All', admin_auctions_path, class: view_model.auctions_nav_class %></li>
+    <li><%= link_to 'Action Items', admin_action_items_path, class: view_model.action_items_nav_class %></li>
+    <li><%= link_to 'Draft Auctions', admin_drafts_path, class: view_model.drafts_nav_class %></li>
+    <li class='new-button'>
+      <%= link_to 'Add auction',
+        new_admin_auction_path,
+        class: 'settings-new usa-button usa-button-outline' %>
+    </li>
+  </ul>
+</nav>

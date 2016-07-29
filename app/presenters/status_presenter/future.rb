@@ -8,7 +8,7 @@ class StatusPresenter::Future < Struct.new(:auction)
   end
 
   def relative_time
-    "Starts #{HumanTime.new(time: auction.started_at).relative_time} from now"
+    "Starting #{HumanTime.new(time: auction.started_at).relative_time}"
   end
 
   def label_class

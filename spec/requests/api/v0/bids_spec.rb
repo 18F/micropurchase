@@ -56,7 +56,7 @@ describe 'API bid requests' do
     end
 
     context 'when the API key is invalid' do
-      let(:api_key) { FakeGitHub::INVALID_API_KEY }
+      let(:api_key) { FakeGitHubApi::INVALID_API_KEY }
       let(:auction) { FactoryGirl.create(:auction, :running) }
       let(:current_auction_price) do
         auction.bids.sort_by(&:amount).first.amount
@@ -76,7 +76,7 @@ describe 'API bid requests' do
     end
 
     context 'when the auction has ended' do
-      let(:api_key) { FakeGitHub::VALID_API_KEY }
+      let(:api_key) { FakeGitHubApi::VALID_API_KEY }
       let(:auction) { FactoryGirl.create(:auction, :closed, :with_bidders) }
       let(:current_auction_price) do
         auction.bids.sort_by(&:amount).first.amount
@@ -98,7 +98,7 @@ describe 'API bid requests' do
     end
 
     context 'when the auction has not yet started' do
-      let(:api_key) { FakeGitHub::VALID_API_KEY }
+      let(:api_key) { FakeGitHubApi::VALID_API_KEY }
       let(:auction) { FactoryGirl.create(:auction, :future, :with_bidders) }
       let(:current_auction_price) do
         auction.bids.sort_by(&:amount).first.amount
@@ -120,7 +120,7 @@ describe 'API bid requests' do
     end
 
     context 'when the auction is running' do
-      let(:api_key) { FakeGitHub::VALID_API_KEY }
+      let(:api_key) { FakeGitHubApi::VALID_API_KEY }
       let(:auction) { FactoryGirl.create(:auction, :running) }
       let(:current_auction_price) do
         auction.bids.sort_by(&:amount).first.amount

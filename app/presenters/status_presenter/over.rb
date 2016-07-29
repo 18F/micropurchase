@@ -8,7 +8,7 @@ class StatusPresenter::Over < Struct.new(:auction)
   end
 
   def relative_time
-    "Ended #{HumanTime.new(time: auction.ended_at).relative_time}"
+    auction.ended_at.strftime("Ended on: %m/%d/%Y")
   end
 
   def label_class

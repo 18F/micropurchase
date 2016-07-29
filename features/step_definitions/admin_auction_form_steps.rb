@@ -12,6 +12,11 @@ Then(/^I should see that the auction form has a C2 Proposal URL$/) do
   expect(field.value).to eq(@auction.c2_proposal_url)
 end
 
+Then(/^I should see that the auction type is sealed bid$/) do
+  auction_type = find_field('Type').value
+  expect(auction_type).to eq('sealed_bid')
+end
+
 Then(/^I should see that the auction form does not have a C2 Proposal URL$/) do
   field = find_field(I18n.t('simple_form.labels.auction.c2_proposal_url'), disabled: true)
   expect(field.value).to eq('')
@@ -71,7 +76,8 @@ When(/^I edit the new auction form$/) do
 end
 
 When(/^I change the auction end date$/) do
-  @end_day = DcTimePresenter.convert(3.days.from_now)
+  datetime = DefaultDateTime.new(3.business_days.from_now).convert
+  @end_day = DcTimePresenter.convert(datetime)
   fill_in "auction_ended_at", with: @end_day.strftime('%Y-%m-%d')
 end
 
@@ -79,6 +85,16 @@ Then(/^I should see an estimated delivery deadline of 12 business days from now$
   within('.estimated-delivery-date') do
     default_delivery_date = DefaultDateTime.new(12.business_days.from_now).convert
     expect(page).to have_content("Estimated delivery date #{DcTimePresenter.convert_and_format(default_delivery_date)}")
+  end
+end
+
+Then(/^I should see the updated delivery deadline$/) do
+  within('.estimated-delivery-date') do
+    delivery_date = DefaultDateTime.new(5.business_days.after(3.business_days.from_now)).convert
+    formatted_delivery_date = DcTimePresenter.convert_and_format(delivery_date)
+    expect(page).to have_content(
+      "Estimated delivery date #{formatted_delivery_date}"
+    )
   end
 end
 

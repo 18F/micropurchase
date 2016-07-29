@@ -1,8 +1,9 @@
 <li class="issue-details-list-item">
   <div class="issue-details-label">Project</div>
   <div class="issue-details-title">
-    <%= link_to "<i class='fa fa-github'></i>#{auction.project_label}".html_safe,
+    <%= link_to auction.github_repo,
       auction.github_repo,
-      class: "issue-details-title" %>
+      target: '_blank',
+      class: 'issue-details-title' %>
   </div>
 </li>
