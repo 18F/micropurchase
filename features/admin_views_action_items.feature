@@ -8,11 +8,11 @@ Feature: Admin view action items
     And I sign in
 
   Scenario: Viewing the action items dashboard
-    Given there are complete and successful auctions
-    And there is an unpublished auction
+    Given there is a complete and successful auction
+    And there is also an unpublished auction
     When I visit the admin action items page
-    Then I should see the name of each dashboard auction
-    And I should see edit links for each dashboard auction
+    Then I should see the name of the auction
+    And I should see the edit link for the auction
 
   Scenario: Viewing the drafts dashboard
     Given there is an unpublished auction

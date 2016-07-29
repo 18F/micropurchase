@@ -3,7 +3,7 @@ class Rules::SealedBidAuction < Rules::BaseRules
     if auction_available?
       NullBid.new
     else
-      auction.lowest_bid
+      auction.lowest_bid || NullBid.new
     end
   end
 

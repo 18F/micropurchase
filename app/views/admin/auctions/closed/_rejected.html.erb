@@ -1,0 +1,22 @@
+<table class="usa-table-borderless">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Vendor</th>
+      <th scope="col">Delivery URL</th>
+      <th scope="col">Date rejected</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @view_model.rejected.each do |auction| %>
+      <tr>
+        <td><%= link_to(auction.title, admin_auction_path(auction.id)) %></td>
+        <td><%= auction.winning_vendor_github_login %></td>
+        <td><%= auction.delivery_url %></td>
+        <td><%= auction.rejected_at %></td>
+        <td><%= link_to 'edit', edit_admin_auction_path(auction.id) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

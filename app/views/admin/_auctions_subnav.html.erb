@@ -5,6 +5,7 @@
     <li><%= link_to 'All', admin_auctions_path, class: view_model.auctions_nav_class %></li>
     <li><%= link_to 'Action Items', admin_action_items_path, class: view_model.action_items_nav_class %></li>
     <li><%= link_to 'Draft Auctions', admin_drafts_path, class: view_model.drafts_nav_class %></li>
+    <li><%= link_to 'Closed', admin_auctions_closed_path, class: view_model.closed_auctions_nav_class %></li>
     <li class='new-button'>
       <%= link_to 'Add auction',
         new_admin_auction_path,

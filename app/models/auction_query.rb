@@ -29,7 +29,6 @@ class AuctionQuery
       .delivery_due_at_expired
       .delivered
       .delivery_accepted
-      .c2_submitted
       .paid
   end
 
