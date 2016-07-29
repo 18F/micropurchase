@@ -314,7 +314,14 @@ a[id]{
 }
 
 .page h2,
-.layout-recent-activity section h1{
+.layout-recent-activity section h1,
+.layout-auctions-drafts section h1,
+.layout-auctions-index section h1,
+.layout-auctions-needs-attention section h1,
+.layout-auctions-closed section h1,
+.layout-admins-index section h1,
+.layout-vendors-show section h1,
+.layout-settings main section > h1{
 	font-weight: 600;
 	font-size: 21px;
 	line-height: 1.3em;
@@ -322,6 +329,16 @@ a[id]{
 	color: #c56815;
 	max-width: 640px;
 	margin: 28px auto 16px;
+}
+
+.layout-auctions-drafts section h1,
+.layout-auctions-index section h1,
+.layout-auctions-needs-attention section h1,
+.layout-auctions-closed section h1,
+.layout-admins-index section h1,
+.layout-vendors-show section h1,
+.layout-settings main section > h1{
+  margin-left: 0;
 }
 
 .page h3,
@@ -708,16 +725,20 @@ td.col-title{
 .col-num-bids{ width: 4em; }
 
 .col-amount,
-.col-bid{ width: 6em; }
+.col-bid,
+.col-duns-number,
+.col-github-id{ width: 6em; }
 
 .col-starting,
 .col-closing,
 .col-ending,
 .col-delivery,
-.col-date{
+.col-date,
+.col-sam-status{
 	width: 8em;
 }
 
+.col-email-address,
 .col-project{
 	width: 12em;
 }
@@ -3110,11 +3131,10 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 /* @end */
 
 
-
-/* @group layout-people */
+/* @group layout-vendors-showw */
 
 .layout-admins-index main .wrapper > h1,
-.layout-people-show main .wrapper > h1{
+.layout-vendors-show main .wrapper > h1{
 	letter-spacing: -2px;
 	font-size: 48px;
 	font-weight: 300;
@@ -3125,26 +3145,11 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	letter-spacing: -2px;
 }
 
-.layout-people-show main .wrapper > h1{
+.layout-vendors-show main .wrapper > h1{
 	margin-bottom: 0.4em;
 	display: block;
 }
 
-.layout-auctions-drafts section h1,
-.layout-auctions-index section h1,
-.layout-auctions-needs-attention section h1,
-.layout-auctions-closed section h1,
-.layout-admins-index section h1,
-.layout-people-show section h1,
-.layout-settings main section > h1{
-	font-weight: 600;
-	font-size: 21px;
-	line-height: 1.3em;
-	font-family: Merriweather, Georgia, serif;
-	color: #c56815;
-	margin: 28px 0 16px;
-	display: inline-block;
-}
 
 .layout-auctions-needs-attention .section-bids h1,
 .layout-auctions-closed .section-delivered h1{
@@ -3163,7 +3168,7 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 .layout-auctions-closed table,
 .layout-admins-index table,
 .layout-vendors-index table,
-.layout-people-show table,
+.layout-vendors-show table,
 .layout-settings table{
 	border-radius: 3px;
 	border: 1px solid #eee;
@@ -3172,12 +3177,12 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 }
 
 .layout-vendors-index table tbody td,
-.layout-people-show section table tbody td{
+.layout-vendors-show section table tbody td{
 	padding: 0;
 }
 
 .layout-vendors-index table tbody td a,
-.layout-people-show section table tbody td a{
+.layout-vendors-show section table tbody td a{
 	display: block;
 	padding: 8px;
 	color: inherit;
@@ -3185,25 +3190,25 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 }
 
 .layout-admins-index section table tbody td.col-name a,
-.layout-people-show section table tbody td.col-auction a{
+.layout-vendors-show section table tbody td.col-auction a{
 	color: #006fbe;
 	text-decoration: underline;
 }
 
 .layout-vendors-index table tbody tr:hover td,
-.layout-people-show section table tbody tr:hover td{
+.layout-vendors-show section table tbody tr:hover td{
 	background: lemonchiffon;
 	
 }
 
 .layout-admins-index table tbody tr:first-child td:first-child,
-.layout-people-show table tbody tr:first-child td:first-child{
+.layout-vendors-show table tbody tr:first-child td:first-child{
 	border-radius: 3px;
 }
 
 .layout-admins-index table tbody tr:nth-child(odd) td,
-.layout-people-show table tbody tr:nth-child(odd) td,
-.layout-people-show table tbody tr:nth-child(odd) th,
+.layout-vendors-show table tbody tr:nth-child(odd) td,
+.layout-vendors-show table tbody tr:nth-child(odd) th,
 .layout-settings table tbody tr:nth-child(odd) th{
 	background: #fafafa;
 }
@@ -3215,7 +3220,7 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	
 }
 
-.layout-people-show table th{
+.layout-vendors-show table th{
 	width: 12em;
 	text-align: right;
 	font-weight: 600;
