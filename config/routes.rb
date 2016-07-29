@@ -64,6 +64,8 @@ Rails.application.routes.draw do
         resources :auctions, only: [:index, :show]
         resources :users, only: [:index]
       end
+
+      get 'business_day', to: 'business_days#show'
     end
   end
 end

@@ -15,9 +15,9 @@ class ApiAuthenticator < Struct.new(:controller)
   end
 
   def github_id
-    return github_id_from_api_key(api_key)
+    github_id_from_api_key(api_key)
   rescue UnauthorizedError::GitHubAuthenticationError
-    return nil
+    nil
   end
 
   def api_current_user(raise_errors: false)
