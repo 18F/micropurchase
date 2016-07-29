@@ -8,7 +8,7 @@ Feature: Contracting Officers
     And there is a skill in the system
     And I sign in
     When I visit the auctions admin page
-    And I click on the "Create New Auction" link
+    And I click on the "Add auction" link
     And I edit the new auction form
     And I set the auction start price to $24000
     And I click to create an auction

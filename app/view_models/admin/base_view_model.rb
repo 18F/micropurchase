@@ -3,7 +3,11 @@ class Admin::BaseViewModel
     ''
   end
 
-  def users_nav_class
+  def vendors_nav_class
+    ''
+  end
+
+  def admins_nav_class
     ''
   end
 

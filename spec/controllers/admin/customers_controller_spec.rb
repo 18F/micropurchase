@@ -10,7 +10,6 @@ describe Admin::CustomersController do
 
       vm = assigns(:view_model)
       expect(vm.customers).to eq([customer2, customer1])
-      expect(vm.customer_count).to eq(2)
     end
   end
 end

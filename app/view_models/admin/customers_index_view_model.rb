@@ -3,8 +3,8 @@ class Admin::CustomersIndexViewModel < Admin::BaseViewModel
     Customer.order(:agency_name).all.map { |customer| CustomerPresenter.new(customer) }
   end
 
-  def customer_count
-    Customer.count
+  def new_button_partial
+    'admin/customers/new_customer_button'
   end
 
   def customers_nav_class
