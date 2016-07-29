@@ -17,7 +17,7 @@
 </fieldset>
 
 <%= f.input :start_price %>
-<%= f.input :type, collection: Auction.types.keys.to_a %>
+<%= f.input :type, collection: AuctionTypes.new.to_a %>
 <%= f.input :summary, as: :text %>
 <%= f.input :description, as: :text %>
 <%= f.association :skills, collection: Skill.all, input_html: { multiple: true } %>

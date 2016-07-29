@@ -12,6 +12,11 @@ Then(/^I should see that the auction form has a C2 Proposal URL$/) do
   expect(field.value).to eq(@auction.c2_proposal_url)
 end
 
+Then(/^I should see that the auction type is sealed bid$/) do
+  auction_type = find_field('Type').value
+  expect(auction_type).to eq('sealed_bid')
+end
+
 Then(/^I should see that the auction form does not have a C2 Proposal URL$/) do
   field = find_field(I18n.t('simple_form.labels.auction.c2_proposal_url'), disabled: true)
   expect(field.value).to eq('')
