@@ -30,6 +30,9 @@ gem 'jquery-rails-cdn'
 gem 'jquery-rails'
 gem 'selectize-rails'
 
+gem 'rouge-rails'
+gem 'swagger_jekyll', github: "harrisj/swagger-jekyll", branch: "develop"
+
 group :test do
   gem "codeclimate-test-reporter", require: nil
   gem 'codeclimate_batch', require: nil

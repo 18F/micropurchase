@@ -1,0 +1,52 @@
+<div class="usa-grid">
+<% @swagger.paths.each do |path| %>
+
+<h3><%= path.path %></h3>
+
+<% path.verbs.each do |v| %>
+<h4><%= v.verb %></h4>
+
+<p><%= v.description %></p>
+
+<% if v.sample_response %>
+<p>Example response:</p>
+
+
+<%= v.sample_response%>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Meaning</th>
+      <th>Return Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% v.responses.each do |response| %>
+    <tr>
+      <td><%= response.code %></td>
+      <td><%= response.description %></td>
+      <td><%= response.compact_type %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% end %>
+<% end %>
+
+<h3>Definitions</h3>
+
+<% @swagger.definitions.each do |definition| %>
+<h4><%= definition.name %></h4>
+
+<dl>
+  <% definition.properties.each do |property| %>
+  <dt><code><%= property.name %></code>, <em><%= property.compact_type %></em></dt>
+  <dd><strong><%= property.title %>:</strong> <%= property.description %></dd>
+  <% end %>
+</dl>
+<% end %>
+</div>

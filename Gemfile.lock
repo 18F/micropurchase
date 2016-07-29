@@ -9,6 +9,14 @@ GIT
       hashie
       oauth2
 
+GIT
+  remote: git://github.com/harrisj/swagger-jekyll.git
+  revision: d33932752b625a90b87657ba343b6aeedd524b50
+  branch: develop
+  specs:
+    swagger_jekyll (0.0.1)
+      hana
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -166,6 +174,7 @@ GEM
       terminal-table
     haml (4.0.7)
       tilt
+    hana (1.3.2)
     hashdiff (0.3.0)
     hashie (3.4.4)
     highline (1.7.8)
@@ -298,6 +307,11 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
+    rouge (2.0.5)
+    rouge-rails (0.2.1)
+      actionview
+      railties
+      rouge
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
       rspec-expectations (~> 3.4.0)
@@ -453,6 +467,7 @@ DEPENDENCIES
   rails-erd
   rails_12factor
   redcarpet
+  rouge-rails
   rspec-rails
   rubocop
   samwise (~> 0.4.0)
@@ -461,6 +476,7 @@ DEPENDENCIES
   shoulda-matchers
   simple_form
   sinatra
+  swagger_jekyll!
   timecop
   uglifier
   validate_url
