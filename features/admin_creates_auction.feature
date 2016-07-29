@@ -10,6 +10,7 @@ Feature: Admin creates auctions in the admins panel
     And I visit the auctions admin page
     When I click on the "Add auction" link
     And I edit the new auction form
+    Then I should see that the auction type is sealed bid
     And I click to create an auction
     Then I should see the auction's title
     And I should see the start time I set for the auction
