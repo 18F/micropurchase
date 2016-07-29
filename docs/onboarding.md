@@ -44,6 +44,15 @@ The existing team members all have access to New Relic monitoring for staging
 and production. Ask to be added to the Micro-purchase New Relic organization.
 
 Once added, developers should also add themselves to the "Micropurchase devs"
-group on New Relic: https://rpm.newrelic.com/accounts/1345535/notification_channels
+group on New Relic: <https://rpm.newrelic.com/accounts/1345535/notification_channels>
 
 New Relic is set up to send alerts to everyone in this group by default.
+
+### Start working on a feature
+
+We use Waffle.io to categorize and prioritize our backlog. Visit our [Waffle
+board](https://waffle.io/18F/micropurchase) and see the "Ready" swimlane for
+features that are ready to be worked on.
+
+Once you've selected a story, assign it to yourself and move it to "In Progress"
+so others know that you are working on it.
