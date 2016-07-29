@@ -6,12 +6,12 @@ Feature: Guest views closed auction
   Scenario: There is a closed auction
     Given there is a closed auction
     When I visit the home page
-    Then I should see a "Closed" label
+    Then I should see a "Closed" status
     And I should see the auction had a winning bid
     And there should be meta tags for the index page for 0 open and 0 future auctions
 
     When I visit the auction page
-    Then I should see a "Closed" status
+    Then I should see a "Closed" label
     And I should see the auction had a winning bid with name
     And I should see when the auction started
     And I should see when the auction ended

@@ -24,12 +24,14 @@ describe StatusPresenter::Future do
 
   describe '#relative_time' do
     it 'returns time until auction starts' do
-      time = Time.current + 1.day
-      auction = create(:auction, :future, ended_at: time)
+      Timecop.freeze do
+        time = Time.current + 1.day
+        auction = create(:auction, :future, started_at: time)
 
-      presenter = StatusPresenter::Future.new(auction)
+        presenter = StatusPresenter::Future.new(auction)
 
-      expect(presenter.relative_time).to eq 'Starting in about 23 hours'
+        expect(presenter.relative_time).to eq 'Starting in 1 day'
+      end
     end
   end
 

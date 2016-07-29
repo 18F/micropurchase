@@ -17,7 +17,7 @@ Feature: Guest views open auction
     When I visit the auction page
     Then I should see the auction's title
     And I should see the auction's description
-    And I should see an "Open" status
+    And I should see an "Open" label
     And I should see when the auction started
     And I should see when the auction ends
     And I should see a current bid amount
@@ -31,11 +31,11 @@ Feature: Guest views open auction
   Scenario: There is an expiring auction
     Given there is an expiring auction
     When I visit the home page
-    Then I should see an "Expiring" label
+    Then I should see an "Expiring" status
     And there should be meta tags for the index page for 1 open and 0 future auctions
 
     When I visit the auction page
-    Then I should see an "Expiring" status
+    Then I should see an "Expiring" label
     And I should see when the auction started
     And I should see when the auction ends
     And I should see the delivery deadline
