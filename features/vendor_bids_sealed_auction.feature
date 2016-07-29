@@ -34,9 +34,6 @@ Feature: Vendor bids on a sealed-bid auction
     Then I should not see the bid form
     And I should see "Your bid: $3,493.00"
 
-    When I visit the home page
-    And I should see "Your bid: $3,493.00"
-
   Scenario: viewing your own bid
     Given there is a sealed-bid auction
     And I am an authenticated vendor
