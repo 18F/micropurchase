@@ -26,7 +26,7 @@ information on setting up the back end of the web app, see below.
 * [Problem statement](https://docs.google.com/a/gsa.gov/document/d/125NY6oXBOdlL7gDiHFQ5Aog5FEjoddbZVVCeYCz6d9A/edit?usp=sharing)
 * [Roadmap](https://18f.storiesonboard.com/m/18f-micro-purchase-platform)
 * [Leads tracker] (https://trello.com/b/YoEbAui9/micropurchase-leads)
-* [Backlog] (https://waffle.io/18F/micropurchase)
+* [Backlog](https://waffle.io/18F/micropurchase)
 
 ## Documentation
 
