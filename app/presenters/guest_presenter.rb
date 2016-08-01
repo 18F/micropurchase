@@ -1,4 +1,8 @@
 class GuestPresenter
+  def admin?
+    false
+  end
+
   def sam_status_message_for(_flash)
     nil
   end

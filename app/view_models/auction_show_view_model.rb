@@ -33,7 +33,7 @@ class AuctionShowViewModel
   def auction_data
     {
       start_label => formatted_date(auction.started_at),
-      deadline_label => formatted_date(auction.ended_at),
+      deadline_label => formatted_ended_at,
       'Delivery deadline' => formatted_date(auction.delivery_due_at),
       'Eligible vendors' => eligibility_label,
       'Customer' => customer_label
@@ -53,7 +53,7 @@ class AuctionShowViewModel
   end
 
   def bid_form_partial
-    if show_bid_form?
+    if rules.user_can_bid?(current_user)
       'auctions/bid_form'
     else
       'components/null'
@@ -68,12 +68,24 @@ class AuctionShowViewModel
     BidStatusFlashFactory.new(auction: auction, flash: flash, user: current_user).create
   end
 
-  def bid_flash_partial
+  def bid_status_partial
     if auction.type == 'reverse' && (over? || available_and_user_is_bidder?)
       'auctions/bid_status_header'
     else
       'components/null'
     end
+  end
+
+  def auction_status_partial
+    if (current_user.is_a?(Guest) || current_user.decorate.admin?) && available?
+      'auctions/status'
+    else
+      'components/null'
+    end
+  end
+
+  def auction_status_presenter
+    AuctionStatusPresenterFactory.new(auction: auction, current_user: current_user).create
   end
 
   def bid_status
@@ -102,6 +114,10 @@ class AuctionShowViewModel
     else
       'auctions/accepted_at'
     end
+  end
+
+  def formatted_ended_at
+    formatted_date(auction.ended_at)
   end
 
   def formatted_paid_at
@@ -197,14 +213,6 @@ class AuctionShowViewModel
 
   def status_presenter
     @_status_presenter ||= StatusPresenterFactory.new(auction).create
-  end
-
-  def show_bid_form?
-    if available? && current_user.is_a?(Guest)
-      true
-    else
-      rules.user_can_bid?(current_user)
-    end
   end
 
   def over?
