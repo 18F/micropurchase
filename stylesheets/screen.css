@@ -1,3 +1,5 @@
+/* @override http://127.0.0.1:4000/stylesheets/screen.css */
+
 /* @override http://localhost:4000/stylesheets/screen.css */
 
 /* @override http://localhost:4000/stylesheets/screen.css */
@@ -722,7 +724,8 @@ td.col-title{
 }
 
 
-.col-num-bids{ width: 4em; }
+.col-actions,
+.col-num-bids{ width: 4.2em; }
 
 .col-amount,
 .col-bid,
@@ -734,12 +737,14 @@ td.col-title{
 .col-ending,
 .col-delivery,
 .col-date,
-.col-sam-status{
+.col-sam-status,
+.col-accepted{
 	width: 8em;
 }
 
 .col-email-address,
-.col-project{
+.col-project,
+.col-vendor{
 	width: 12em;
 }
 
