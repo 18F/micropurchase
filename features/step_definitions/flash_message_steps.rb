@@ -47,3 +47,7 @@ Then(/^I should see a success message that "([^"]*)"$/) do |message|
     expect(page).to have_content(message)
   end
 end
+
+Then(/^I should not see a flash message$/) do
+  expect(page).not_to have_css('.flashes')
+end
