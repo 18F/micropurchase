@@ -2440,6 +2440,15 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 /* @group layout-auctions-show */
 
+/* @group workflow */
+
+.field.field-delivery-url{
+	margin-top: 18px;
+	margin-bottom: 0;
+}
+
+/* @end */
+
 /* @group fieldset-date-time */
 
 .layout-auctions-show .fieldset-date-time .fieldset-time .field-time-hours::after,
@@ -3141,7 +3150,7 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 /* @end */
 
 
-/* @group layout-vendors-showw */
+/* @group layout-vendors-show */
 
 .layout-admins-index main .wrapper > h1,
 .layout-vendors-show main .wrapper > h1{
