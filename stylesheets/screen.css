@@ -1560,7 +1560,7 @@ main div.wrap > form { max-width: 576px; }
 
 .site-header .logo .tagline{
 	font-size: 12px;
-	line-height: 16px;
+	line-height: 12px;
 	padding-top: 6px;
 	letter-spacing: normal;
 	font-weight: 200;
@@ -1691,6 +1691,10 @@ main div.wrap > form { max-width: 576px; }
 		padding-left: 56px; 
 		font-size: 24px;
 		padding-top: 4px;
+	}
+	
+	.site-header .logo .tagline{
+		line-height: 16px;
 	}
 
 	
@@ -2362,7 +2366,7 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 .layout-auctions-index .auction{
 	border: 1px solid #c3c3c3;
 	padding: 14px 16px 0;
-	margin-bottom: 20px;
+	margin-bottom: 12px;
 	border-radius: 4px;
 	border-right-color: #bbb;
 	border-bottom-color: #b8b8b8;
@@ -2395,6 +2399,7 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	
 	.h-feed-header{ margin-bottom: 12px; }
 	.h-feed-header .button{ top: 16px; }
+	.layout-auctions-index main .auction{ margin-bottom: 20px; }
 }
 
 @media screen and (min-width: 799.99px){
