@@ -1,7 +1,7 @@
 class Admin::AuctionsIndexViewModel < Admin::BaseViewModel
   def auctions
     Auction.all.order(started_at: :desc).map do |auction|
-      Admin::AuctionListItem.new(auction)
+      Admin::AuctionListItem.new(auction: auction)
     end
   end
 

@@ -11,6 +11,7 @@ Feature: Admin views auctions in the admin panel
     And I visit the auctions admin page
     Then I will not see a warning I must be an admin
     And I should see the auctions in reverse start date order
+    And I should see an "Edit" button
 
     When I click on the auction's title
     Then I should see the winning bid for the auction
