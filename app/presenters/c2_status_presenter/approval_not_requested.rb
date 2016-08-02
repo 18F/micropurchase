@@ -8,15 +8,17 @@ class C2StatusPresenter::ApprovalNotRequested < C2StatusPresenter::Base
     @auction = auction
   end
 
+  def status
+    I18n.t('statuses.c2_presenter.approval_not_requested.status')
+  end
+
   def header
-    'C2 approval required'
+    I18n.t('statuses.c2_presenter.approval_not_requested.header')
   end
 
   def body
-    I18n.t('admin.auctions.show.approval_not_requested', link: link)
+    I18n.t('statuses.c2_presenter.approval_not_requested.body', link: link)
   end
-
-  private
 
   def link
     link_to(

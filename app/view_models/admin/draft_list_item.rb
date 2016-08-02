@@ -17,23 +17,25 @@ class Admin::DraftListItem < Admin::BaseViewModel
     auction.id
   end
 
-  def billable_to
-    auction.billable_to
+  def c2_proposal_status
+    c2_proposal_status_presenter.status
   end
 
   def started_at
-    auction.started_at
+    DcTimePresenter.convert_and_format(auction.started_at)
   end
 
   def ended_at
-    auction.ended_at
-  end
-
-  def start_price
-    auction.start_price
+    DcTimePresenter.convert_and_format(auction.ended_at)
   end
 
   def delivery_due_at
-    auction.delivery_due_at
+    DcTimePresenter.convert_and_format(auction.delivery_due_at)
+  end
+
+  private
+
+  def c2_proposal_status_presenter
+    C2StatusPresenterFactory.new(auction: auction).create
   end
 end

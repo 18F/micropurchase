@@ -14,7 +14,7 @@ class Auction < ActiveRecord::Base
   enum type: { sealed_bid: 0, reverse: 1 }
   enum published: { unpublished: 0, published: 1 }
   enum purchase_card: { default: 0, other: 1 }
-  enum c2_approval_status: { not_requested: 0, pending: 1, pending_approval: 2, approved: 3 }
+  enum c2_approval_status: { not_requested: 0, pending: 1, sent: 2, approved: 3 }
 
   # Disable STI
   self.inheritance_column = :__disabled
