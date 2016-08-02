@@ -33,7 +33,7 @@ class AuthenticationsController < ApplicationController
 
   def redirect_back_or_root_path
     if Admins.verify?(current_user.github_id)
-      redirect_to(return_to || admin_action_items_path)
+      redirect_to(return_to || admin_auctions_needs_attention_path)
     else
       redirect_to(return_to || root_path)
     end

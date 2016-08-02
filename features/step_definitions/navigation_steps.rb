@@ -34,8 +34,8 @@ When(/^I visit the admin form for that auction$/) do
   visit edit_admin_auction_path(@auction)
 end
 
-When(/^I visit the admin action items page$/) do
-  visit admin_action_items_path
+When(/^I visit the admin needs attention auctions page$/) do
+  visit admin_auctions_needs_attention_path
 end
 
 When(/^I visit the admin drafts page$/) do
@@ -118,8 +118,8 @@ Then(/^I should be on the sign up page$/) do
   expect(page.current_path).to eq(sign_up_path)
 end
 
-When(/^I should be on the admin action items page$/) do
-  expect(page.current_path).to eq admin_action_items_path
+When(/^I should be on the admin needs attention auctions page$/) do
+  expect(page.current_path).to eq admin_auctions_needs_attention_path
 end
 
 When(/^I should be on the admin admins page$/) do
