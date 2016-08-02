@@ -7,8 +7,10 @@ class BidStatusFlashFactory
   end
 
   def create
-    if available?
+    if available? && auction.type == 'reverse'
       AvailableUserIsWinningBidder.new(bid_amount: lowest_user_bid.try(:amount))
+    elsif available? && auction.type == 'sealed_bid'
+      AvailableSealedUserIsBidder.new(bid: lowest_user_bid)
     else
       over_message
     end
@@ -110,5 +112,21 @@ class AvailableUserIsWinningBidder
 
   def body
     "You are currently the low bidder, with a bid of #{Currency.new(bid_amount)}"
+  end
+end
+
+class AvailableSealedUserIsBidder
+  attr_reader :bid
+
+  def initialize(bid:)
+    @bid = bid
+  end
+
+  def header
+    ''
+  end
+
+  def body
+    "You bid #{Currency.new(bid.amount)} on #{DcTimePresenter.convert_and_format(bid.created_at)}."
   end
 end

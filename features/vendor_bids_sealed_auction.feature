@@ -33,6 +33,7 @@ Feature: Vendor bids on a sealed-bid auction
     When I visit the auction page
     Then I should not see the bid form
     And I should see "Your bid: $3,493.00"
+    And I should see the time I placed my bid
 
   Scenario: viewing your own bid
     Given there is a sealed-bid auction
