@@ -59,3 +59,9 @@ Feature: Automatically checking a user's SAM status
     And I am signed in
     When I visit the home page
     Then I should see a warning that "In order to bid, you must supply a valid DUNS number. Please update your profile"
+
+  Scenario: Admin user
+    Given I am an administrator
+    And I am signed in
+    When I visit the home page
+    Then I should not see a flash message
