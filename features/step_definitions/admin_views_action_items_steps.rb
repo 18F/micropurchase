@@ -1,5 +1,5 @@
 Then(/^I should see the rejected auction as an action item$/) do
-  auction = Admin::ActionItemListItem.new(@rejected)
+  auction = Admin::ActionItemListItem.new(@auction)
 
   ['Title', 'Delivery Deadline', 'Delivery URL', 'Vendor Name', 'Rejected At'].each_with_index do |header, i|
     within(:xpath, th_xpath(table_id: 'table-rejected', column: i + 1)) do

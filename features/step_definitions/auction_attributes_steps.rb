@@ -111,16 +111,12 @@ Then(/^I should see a preview of the auction$/) do
   expect(page).to have_text(@unpublished_auction.description)
 end
 
-Then(/^I should see the name of each dashboard auction$/) do
-  @complete_and_successful.each do |auction|
-    expect(page).to have_text(auction.title)
-  end
+Then(/^I should see the name of the auction$/) do
+  expect(page).to have_text(@auction.title)
 end
 
-Then(/^I should see edit links for each dashboard auction$/) do
-  @complete_and_successful.each do |auction|
-    expect(page).to have_link('edit', href: edit_admin_auction_path(auction.id))
-  end
+Then(/^I should see the edit link for the auction$/) do
+  expect(page).to have_link('edit', href: edit_admin_auction_path(@auction.id))
 end
 
 Then(/^I should not see the unpublished auction$/) do

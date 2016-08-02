@@ -18,13 +18,18 @@ Rails.application.routes.draw do
   get '/sign_in', to: 'sign_ins#show'
 
   namespace :admin do
-    resources :auctions
     resources :auction_reports, only: [:show]
     resources :user_reports, only: [:index]
     resources :action_items, only: [:index]
     resources :drafts, only: [:index]
     resources :proposals, only: [:create]
     resources :users, only: [:show, :edit, :update]
+
+    namespace :auctions do
+      get '/closed', to: 'closed#index'
+    end
+
+    resources :auctions
 
     scope '/people' do
       resources :admins, only: [:index]

@@ -3,6 +3,10 @@ class Admin::BaseViewModel
     ''
   end
 
+  def closed_auctions_nav_class
+    ''
+  end
+
   def vendors_nav_class
     ''
   end
