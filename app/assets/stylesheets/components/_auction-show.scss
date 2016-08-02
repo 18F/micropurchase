@@ -110,8 +110,6 @@
 }
 
 .issue-title {
-  @include calc(padding-right, "80px + -#{$site-margins} + .25em + #{$base-padding-lite}");
-
   font-size: 2.5rem;
   margin-bottom: $base-padding-lite;
   margin-top: 1rem;

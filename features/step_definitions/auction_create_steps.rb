@@ -100,16 +100,16 @@ Given(/^there is also an unpublished auction$/) do
   @unpublished_auction = FactoryGirl.create(:auction, published: false)
 end
 
-Given(/^there are complete and successful auctions$/) do
-  @complete_and_successful = FactoryGirl.create_list(:auction, 2, :complete_and_successful)
+Given(/^there is a complete and successful auction$/) do
+  @auction = FactoryGirl.create(:auction, :complete_and_successful)
 end
 
 Given(/^there is a rejected auction$/) do
-  @rejected = FactoryGirl.create(:auction, :closed, :with_bidders, :delivered, :rejected)
+  @auction = FactoryGirl.create(:auction, :closed, :with_bidders, :delivered, :rejected)
 end
 
 Given(/^there is a rejected auction with no bids$/) do
-  @rejected = FactoryGirl.create(:auction, :closed, :rejected)
+  @auction = FactoryGirl.create(:auction, :closed, :rejected)
 end
 
 Given(/^there is an auction where the winning vendor is not eligible to be paid$/) do

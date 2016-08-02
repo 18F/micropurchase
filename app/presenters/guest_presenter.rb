@@ -1,9 +1,9 @@
 class GuestPresenter
-  def sam_status_message_for(_flash)
-    nil
+  def admin?
+    false
   end
 
-  def sam_status_message_for_auctions_index(_flash)
+  def sam_status_message_for(_flash)
     nil
   end
 

@@ -1,9 +1,8 @@
 <div class="usa-width-one-half issue-list-item">
   <div class="issue-content-wrapper">
-    <div class="usa-width-one-whole issue-label">
-      <h3 class="issue-title">
-        <%= link_to auction.title, auction_path(auction.id) %>
-      </h3>
+    <div class="issue-label">
+      <%= render partial: auction.auction_title_partial, locals: { auction: auction } %>
+
       <div class="issue-vitals">
         <div class="issue-bid-deadline">
           <span class="status-label <%= auction.label_class %>"><%= auction.label %></span>

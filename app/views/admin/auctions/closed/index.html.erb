@@ -1,0 +1,9 @@
+<%= render partial: 'admin/auctions_subnav', locals: { view_model: @view_model } %>
+
+<h2>Successfully Delivered</h2>
+
+<%= render partial: @view_model.successful_partial, locals: { view_model: @view_model } %>
+
+<h2>Rejected Auctions</h2>
+
+<%= render partial: @view_model.rejected_partial, locals: { view_model: @view_model } %>

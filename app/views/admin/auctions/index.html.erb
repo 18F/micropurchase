@@ -1,24 +1,12 @@
 <%= render partial: 'admin/auctions_subnav', locals: { view_model: @view_model } %>
 
-<table class="usa-table-borderless">
-  <thead>
-    <tr>
-      <th scope="col">Auction title</th>
-      <th scope="col">Status</th>
-      <th scope="col">Starts</th>
-      <th scope="col">Ends</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @view_model.auctions.each do |auction| %>
-      <tr>
-        <td><%= link_to auction.title, admin_auction_path(auction.id) %></td>
-        <td><%= auction.availability %></td>
-        <td><%= auction.formatted_start_time %></td>
-        <td><%= auction.formatted_end_time %></td>
-        <td><%= link_to 'Edit', edit_admin_auction_path(auction.id) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="admin-auction-wrapper auction-wrapper">
+  <% @view_model.auctions.each do |auction| %>
+    <%= render partial: 'auctions/list_item', locals: { auction: auction } %>
+  <% end %>
+</div>
+
+<%= paginate @auctions %>
+<div class="pagination-details">
+  <%= page_entries_info @auctions, entry_name: 'auction' %>
+</div>

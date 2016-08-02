@@ -70,6 +70,10 @@ When(/^I visit the skills admin page$/) do
   visit admin_skills_path
 end
 
+When(/^I visit the admin closed auctions page$/) do
+  visit admin_auctions_closed_path
+end
+
 Then(/^I should be on the skills admin page$/) do
   expect(page.current_path).to eq(admin_skills_path)
 end
