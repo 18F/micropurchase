@@ -1,5 +1,5 @@
-class Admin::ActionItemsViewModel < Admin::BaseViewModel
-  def action_items_nav_class
+class Admin::NeedsAttentionAuctionsViewModel < Admin::BaseViewModel
+  def needs_attention_auctions_nav_class
     'usa-current'
   end
 
@@ -26,6 +26,6 @@ class Admin::ActionItemsViewModel < Admin::BaseViewModel
   private
 
   def list_items(auctions)
-    auctions.map { |auction| Admin::ActionItemListItem.new(auction) }
+    auctions.map { |auction| Admin::NeedsAttentionAuctionListItem.new(auction) }
   end
 end
