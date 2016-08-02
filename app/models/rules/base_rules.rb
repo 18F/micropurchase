@@ -13,7 +13,6 @@ class Rules::BaseRules
 
   def user_can_bid?(user)
     auction_available? &&
-      user.present? &&
       user != winning_bidder &&
       user_is_eligible_to_bid?(user)
   end

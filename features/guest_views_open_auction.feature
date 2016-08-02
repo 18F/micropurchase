@@ -13,7 +13,6 @@ Feature: Guest views open auction
 
   Scenario: There is an open auction
     Given there is an open auction
-    And there is also an unpublished auction
     When I visit the auction page
     Then I should see the auction's title
     And I should see the auction's description
@@ -22,6 +21,8 @@ Feature: Guest views open auction
     And I should see when the auction ends
     And I should see a current bid amount
     And there should be meta tags for the open auction
+    And I should not see the bid form
+    And I should the open auction message for guests
 
   Scenario: There is an open auction with required skills
     Given there is an open auction with some skills
