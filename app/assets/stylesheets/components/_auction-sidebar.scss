@@ -1,0 +1,44 @@
+.auction-detail-panel {
+  border-radius: $border-radius;
+  margin-bottom: $base-padding-large;
+  margin-top: 1em;
+
+  .auction-bid {
+    background-color: $color-primary-alt-lightest;
+    border: 1px solid $color-primary-alt-light;
+    padding: $base-padding;
+  }
+
+  .bid-button {
+    background-color: $color-primary-alt-lightest;
+    box-shadow: inset 0 0 0 2px $color-green;
+    color: $color-green;
+    margin-top: 55px;
+
+    &:hover,
+    &.usa-button-hover {
+      color: $color-white;
+      background-color: $color-green;
+      box-shadow: inset 0 0 0 2px $color-green;
+    }
+  }
+}
+
+.auction-info {
+  background-color: $color-gray-lightest;
+  font-size: 2rem;
+  padding: $site-margins;
+
+  p {
+    margin: 0;
+    padding-bottom: 1rem;
+  }
+
+  i {
+    margin-right: 5px;
+  }
+}
+
+.auction-detail-bid {
+  padding-bottom: $base-padding;
+}
