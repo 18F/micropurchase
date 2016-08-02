@@ -17,11 +17,11 @@ Feature: Admin edits auctions in the admins panel
     When I click on the "Update" button
     Then I should be on the admin auctions page
     And I expect my auction changes to have been saved
-    And I should see the start time I set for the auction
-    And I should see the end time I set for the auction
 
     When I click on the auction's title
-    Then I should see new content on the page
+    Then I should see the start time I set for the auction
+    And I should see the end time I set for the auction
+    And I should see new content on the page
 
   Scenario: Associating an auction with a customer
     Given I am an administrator

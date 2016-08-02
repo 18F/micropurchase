@@ -1,5 +1,9 @@
 .new-button {
-  float: right;
+  float: left;
+
+  @include media($medium-screen) {
+    float: right;
+  }
 }
 
 .settings-new.usa-button {

@@ -50,9 +50,13 @@ Then(/^I will not see a warning I must be an admin$/) do
 end
 
 Then(/^I should see the auctions in reverse start date order$/) do
-  first_start_date = page.find(:xpath, cel_xpath(row: 1, column: 3)).text
-  second_start_date = page.find(:xpath, cel_xpath(row: 2, column: 3)).text
-  expect(DateTime.parse(first_start_date)).to be > DateTime.parse(second_start_date)
+  first_start_date = Auction.find_by(title: find(:xpath, auction_xpath(1)).text).started_at
+  second_start_date = Auction.find_by(title: find(:xpath, auction_xpath(2)).text).started_at
+  expect(first_start_date).to be > second_start_date
+end
+
+def auction_xpath(position)
+  "/html/body/div[2]/div/div[1]/div[#{position}]/div[1]/div/div[1]/h3/a"
 end
 
 Then(/^I should see a page title "([^"]+)"$/) do |title|

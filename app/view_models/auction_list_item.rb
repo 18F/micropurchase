@@ -1,9 +1,12 @@
 class AuctionListItem
-  attr_reader :auction, :current_user
+  attr_reader :auction
 
-  def initialize(auction:, current_user:)
+  def initialize(auction:)
     @auction = auction
-    @current_user = current_user
+  end
+
+  def auction_title_partial
+    'auctions/title'
   end
 
   def label
@@ -85,22 +88,6 @@ class AuctionListItem
   end
 
   private
-
-  def user_is_bidder?
-    user_bids.any?
-  end
-
-  def user_is_winning_bidder?
-    auction.bids.any? && lowest_user_bid == auction.lowest_bid
-  end
-
-  def lowest_user_bid
-    user_bids.order(amount: :asc).first
-  end
-
-  def user_bids
-    auction.bids.where(bidder: current_user)
-  end
 
   def for_small_business?
     AuctionThreshold.new(auction).small_business?

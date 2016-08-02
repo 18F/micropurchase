@@ -3,6 +3,7 @@ class Admin::AuctionsController < Admin::BaseController
 
   def index
     @view_model = Admin::AuctionsIndexViewModel.new
+    @auctions = paginated_auctions
   end
 
   def show
@@ -53,5 +54,11 @@ class Admin::AuctionsController < Admin::BaseController
       @view_model = Admin::EditAuctionViewModel.new(auction)
       render :edit
     end
+  end
+
+  private
+
+  def paginated_auctions
+    Kaminari.paginate_array(@view_model.auctions).page(params[:page]).per(10)
   end
 end
