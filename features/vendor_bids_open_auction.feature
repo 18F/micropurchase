@@ -3,7 +3,15 @@ Feature: Vendor bids on an open auction
   I want to be able to bid on auctions
   So I can be paid for work
 
-  Scenario: Logging in before bidding
+  Scenario: Auction has no bids
+    Given there is an open bidless auction
+    And the auction has a start price of 1000
+    And I am a user with a verified SAM account
+    And I sign in
+    When I visit the auction page
+    Then I should see "The maximum you can bid is $999."
+
+  Scenario: Auction already has bids
     Given there is an open auction
     And the auction has a lowest bid amount of 1000
     When I visit the home page

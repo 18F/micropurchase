@@ -60,17 +60,21 @@ class AuctionShowViewModel
     end
   end
 
-  def bid_form_prompt
-    Currency.new(rules.max_allowed_bid).to_s
+  def bid_form_header
+    if user_bids.any?
+      'auctions/outbid_bid_form_header'
+    else
+      'auctions/bid_form_header'
+    end
   end
 
-  def bid_status_class(flash)
-    BidStatusFlashFactory.new(auction: auction, flash: flash, user: current_user).create
+  def bid_status_class
+    BidStatusFlashFactory.new(auction: auction, user: current_user).create
   end
 
   def bid_status_partial
-    if auction.type == 'reverse' && (over? || available_and_user_is_bidder?)
-      'auctions/bid_status_header'
+    if auction.type == 'reverse' && (over? || available_and_user_is_winning_bidder?)
+      'auctions/bid_status'
     else
       'components/null'
     end
@@ -156,6 +160,10 @@ class AuctionShowViewModel
     Currency.new(highlighted_bid.amount).to_s
   end
 
+  def max_allowed_bid_as_currency
+    Currency.new(rules.max_allowed_bid).to_s
+  end
+
   def relative_time
     status_presenter.relative_time
   end
@@ -190,8 +198,12 @@ class AuctionShowViewModel
     auction.lowest_bid.bidder_name
   end
 
-  def available_and_user_is_bidder?
-    available? && user_bids.any?
+  def available_and_user_is_winning_bidder?
+    available? && user_is_winning_bidder?
+  end
+
+  def user_is_winning_bidder?
+    user_bids.any? && lowest_user_bid == auction.lowest_bid
   end
 
   def lowest_user_bid_amount

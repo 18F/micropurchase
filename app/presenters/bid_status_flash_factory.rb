@@ -1,33 +1,22 @@
 class BidStatusFlashFactory
-  attr_reader :auction, :flash, :user
+  attr_reader :auction, :user
 
-  def initialize(auction:, flash:, user:)
+  def initialize(auction:, user:)
     @auction = auction
-    @flash = flash
     @user = user
   end
 
   def create
     if available?
-      available_flash
+      AvailableUserIsWinningBidder.new(bid_amount: lowest_user_bid.try(:amount))
     else
-      over_flash
+      over_message
     end
   end
 
   private
 
-  def available_flash
-    if user_is_bidder? && flash['bid']
-      BidSubmitted.new
-    elsif user_is_winning_bidder?
-      AvailableUserIsWinningBidder.new
-    else # user is bidder
-      AvailableUserIsBidder.new(bid_amount: lowest_user_bid.try(:amount))
-    end
-  end
-
-  def over_flash
+  def over_message
     if user_is_winning_bidder?
       OverUserIsWinner.new
     elsif user_is_bidder?
@@ -69,10 +58,6 @@ class BidStatusFlashFactory
 end
 
 class OverWithBids
-  def alert_class
-    'info'
-  end
-
   def header
     'Auction Now Closed'
   end
@@ -83,10 +68,6 @@ class OverWithBids
 end
 
 class OverUserIsWinner
-  def alert_class
-    'success'
-  end
-
   def header
     'You are the winner'
   end
@@ -97,10 +78,6 @@ class OverUserIsWinner
 end
 
 class OverUserIsBidder
-  def alert_class
-    'error'
-  end
-
   def header
     'You are not the winner'
   end
@@ -111,10 +88,6 @@ class OverUserIsBidder
 end
 
 class OverNoBids
-  def alert_class
-    'alert'
-  end
-
   def header
     'Auction Now Closed'
   end
@@ -124,52 +97,18 @@ class OverNoBids
   end
 end
 
-class BidSubmitted
-  def alert_class
-    'success'
-  end
-
-  def header
-    'Bid submitted! You currently have the winning bid.'
-  end
-
-  def body
-    "If your bid is selected as the winner, we will contact you with further
-    instructions. <a class='button-view-bids' href='/my-bids'>View your bids <icon
-    class='fa fa-angle-double-right'></icon></a>".html_safe
-  end
-end
-
 class AvailableUserIsWinningBidder
-  def alert_class
-    'success'
-  end
-
-  def header
-    'You currently have the winning bid.'
-  end
-
-  def body
-    'If your bid is selected as the winner, we will contact you with further instructions.'
-  end
-end
-
-class AvailableUserIsBidder
   attr_reader :bid_amount
 
   def initialize(bid_amount:)
     @bid_amount = bid_amount
   end
 
-  def alert_class
-    'success'
-  end
-
   def header
-    'Your bid:'
+    'Bid placed'
   end
 
   def body
-    Currency.new(bid_amount).to_s
+    "You are currently the low bidder, with a bid of #{Currency.new(bid_amount)}"
   end
 end
