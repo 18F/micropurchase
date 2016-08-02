@@ -40,6 +40,13 @@ $(document).ready(function() {
       $('.field-auction-status select').find('option[value="' + auctionWorkflowState + '"]').prop('selected', true);
     }
     $('.field-auction-status select').change();
+
+    $('.auction-workflow form').submit(function(e){
+      e.preventDefault();
+      var auctionWorkflowState = $(this).data('auction-workflow-state');
+      $('.field-auction-status select').find('option[value="' + auctionWorkflowState + '"]').prop('selected', true);
+      $('.field-auction-status select').change();
+    })
   }
 
   var userType = Cookies.get('mpp-user-type');

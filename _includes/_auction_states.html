@@ -1,67 +1,20 @@
-<section class="auction-workflow auction-workflow-publishable-pending-approval-admins">
-  <p>This auction will be paid for using an 18F purchase card, which cannot be used without first being granted approval in C2.</p>
-  <button>Request approval</button>
+<section class="auction-workflow auction-workflow-c2-approval-required-admins">
+  <h1>C2 approval required</h1>
+  <p>Because this auction will be paid for using an 18F purchase card, it must be approved in C2 before it can be published.</p>
+  <form data-auction-workflow-state="pending-c2-approval-admins">
+    <button>Request approval</button>
+  </form>
 </section>
-<section class="auction-workflow auction-workflow-publishable-admins">
+<section class="auction-workflow auction-workflow-pending-c2-approval-admins">
+  <h1>Pending C2 approval</h1>
+  <p>This auction has been sent to C2 for approval. [If C2 url] You can check on the status by <a href="#">viewing this auction on C2</a>.[/if]</p>
+</section>
+<section class="auction-workflow auction-workflow-ready-to-publish-admins">
+  <h1>Ready to publish</h1>
   <p class="p-date-time-defaults">This auction is ready to publish. Please select a start date for this auction. (By default, auctions are listed for one week and vendors have five business days to deliver. But you can <a href="#" class="a-customize-timeline">edit</a> this.)</p>
-  <fieldset class="fieldset fieldset-date-time fieldset-start-date-time">
-    <legend>Auction starts</legend>
-    <div class="field field-date">
-      <label>
-        <span class="label-text">Date</span>
-        <input type="date" name="">
-      </label>
-    </div>
-    <fieldset class="fieldset fieldset-time">
-      <legend>Time</legend>
-      <div class="field field-select field-time-hours">
-        <label>
-          <span class="label-text">Hours</span>
-          <select>
-            <option value="1" selected>1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-          </select>
-        </label>
-      </div>
-      <div class="field field-select field-time-minutes">
-        <label>
-          <span class="label-text">Minutes</span>
-          <select>
-            <option value="00" selected>00</option>
-            <option value="15">15</option>
-            <option value="30">30</option>
-            <option value="45">45</option>
-          </select>
-        </label>
-      </div>
-      <div class="field field-select field-time-meridiem">
-        <label>
-          <span class="label-text">Meridiem</span>
-          <select>
-            <option value="AM">AM</option>
-            <option value="PM" selected>PM</option>
-          </select>
-        </label>
-      </div>
-      <span class="time-zone">EST</span>
-    </fieldset>
-  </fieldset>
-  <aside class="branch">
-    <fieldset class="fieldset fieldset-date-time fieldset-end-date-time">
-      <legend>Auction ends</legend>
-      <span class="fieldset-date-time-summary">
-        <span class="date">Undefined</span> at <span class="time-hours">1</span>:<span class="time-minutes">00</span><span class="time-meridiem">PM</span> EST
-      </span>
+  <form data-auction-workflow-state="coming-soon-admins">
+    <fieldset class="fieldset fieldset-date-time fieldset-start-date-time">
+      <legend>Auction starts</legend>
       <div class="field field-date">
         <label>
           <span class="label-text">Date</span>
@@ -93,10 +46,10 @@
           <label>
             <span class="label-text">Minutes</span>
             <select>
-              <option>00</option>
-              <option>15</option>
-              <option>30</option>
-              <option>45</option>
+              <option value="00" selected>00</option>
+              <option value="15">15</option>
+              <option value="30">30</option>
+              <option value="45">45</option>
             </select>
           </label>
         </div>
@@ -104,43 +57,105 @@
           <label>
             <span class="label-text">Meridiem</span>
             <select>
-              <option>AM</option>
-              <option selected>PM</option>
+              <option value="AM">AM</option>
+              <option value="PM" selected>PM</option>
             </select>
           </label>
         </div>
         <span class="time-zone">EST</span>
       </fieldset>
     </fieldset>
-    <section class="delivery">
-      <h1>Delivery timeline</h1>
-      <div class="estimate">
-        <h2>Estimated delivery date</h2>
-        <span class="delivery-estimate"><span class="date">Undefined</span> at <span class="time-hours">1</span>:<span class="time-minutes">00</span><span class="time-meridiem">PM</span> EST</span>
-      </div>
-      <div class="field">
-        <label>
-          <span class="label-text">Days</span>
-          <input type="number" name="" value="5" min="1" max="10">
-        </label>
-      </div>
-    </section>
-  </aside>
-  <button class="button button-publish">Publish</button>
+    <aside class="branch">
+      <fieldset class="fieldset fieldset-date-time fieldset-end-date-time">
+        <legend>Auction ends</legend>
+        <span class="fieldset-date-time-summary">
+          <span class="date">Undefined</span> at <span class="time-hours">1</span>:<span class="time-minutes">00</span><span class="time-meridiem">PM</span> EST
+        </span>
+        <div class="field field-date">
+          <label>
+            <span class="label-text">Date</span>
+            <input type="date" name="">
+          </label>
+        </div>
+        <fieldset class="fieldset fieldset-time">
+          <legend>Time</legend>
+          <div class="field field-select field-time-hours">
+            <label>
+              <span class="label-text">Hours</span>
+              <select>
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+              </select>
+            </label>
+          </div>
+          <div class="field field-select field-time-minutes">
+            <label>
+              <span class="label-text">Minutes</span>
+              <select>
+                <option>00</option>
+                <option>15</option>
+                <option>30</option>
+                <option>45</option>
+              </select>
+            </label>
+          </div>
+          <div class="field field-select field-time-meridiem">
+            <label>
+              <span class="label-text">Meridiem</span>
+              <select>
+                <option>AM</option>
+                <option selected>PM</option>
+              </select>
+            </label>
+          </div>
+          <span class="time-zone">EST</span>
+        </fieldset>
+      </fieldset>
+      <section class="delivery">
+        <h1>Delivery timeline</h1>
+        <div class="estimate">
+          <h2>Estimated delivery date</h2>
+          <span class="delivery-estimate"><span class="date">Undefined</span> at <span class="time-hours">1</span>:<span class="time-minutes">00</span><span class="time-meridiem">PM</span> EST</span>
+        </div>
+        <div class="field">
+          <label>
+            <span class="label-text">Days</span>
+            <input type="number" name="" value="5">
+          </label>
+        </div>
+      </section>
+    </aside>
+    <button class="button button-publish">Publish</button>    
+  </form>
 </section>
-<section class="auction-workflow auction-workflow-published-closed-opens-soon-admins">
+<section class="auction-workflow auction-workflow-coming-soon-admins">
+  <h1>Coming soon</h1>
   <p>This auction is visible to the public but is not currently accepting bids. It will open on [auction.startDate]. If you need to take it down for whatever reason, press the &ldquo;un-publish&rdquo; button, below.</p>
-  <button class="button button-un-publish">Un-publish</button>
+  <form data-auction-workflow-state="ready-to-publish-admins">
+    <button class="button button-un-publish">Un-publish</button>    
+  </form>
 </section>
-<section class="auction-workflow auction-workflow-published-closed-opens-soon-vendors">
-  <h1>Bidding opens soon</h1>
+<section class="auction-workflow auction-workflow-coming-soon-vendors">
+  <h1>Coming soon</h1>
   <p>This auction is not currently accepting bids. It will open on [auction.startDate].</p>
 </section>
-<section class="auction-workflow auction-workflow-published-open-no-bids-admins">
+<section class="auction-workflow auction-workflow-accepting-bids-admins">
+  <h1>Accepting bids</h1>
   <p>This auction is accepting bids until [auction.endDate].</p>
 </section>
-<section class="auction-workflow auction-workflow-published-open-with-bids-admins">
-  <p>There are <a href="{{site.baseurl}}/auctions/show-bids">[auction.totalBids] bids on this auction,</a> and [winningVendor.Name] is currently winning. This auction is accepting bids until [auction.endDate]!</p>
+<section class="auction-workflow auction-workflow-accepting-bids-bids-placed-admins">
+  <h1>Accepting bids</h1>
+  <p>There are <a href="{{site.baseurl}}/auctions/show-bids">[auction.totalBids] bids on this auction,</a> and [winningVendor.Name] is currently winning. This auction is accepting bids until [auction.endDate].</p>
 </section>
 <section class="auction-workflow auction-workflow-published-open-bid-not-allowed-vendors">
   <h1>You cannot place a bid</h1>
