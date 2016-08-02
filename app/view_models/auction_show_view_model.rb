@@ -81,7 +81,7 @@ class AuctionShowViewModel
   end
 
   def auction_status_partial
-    if (current_user.is_a?(Guest) || current_user.decorate.admin?) && available?
+    if (available? && (current_user.is_a?(Guest) || current_user.decorate.admin?)) || future?
       'auctions/status'
     else
       'components/null'
@@ -233,6 +233,10 @@ class AuctionShowViewModel
 
   def available?
     auction_status.available?
+  end
+
+  def future?
+    auction_status.future?
   end
 
   def auction_status

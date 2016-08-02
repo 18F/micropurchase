@@ -22,7 +22,7 @@ Feature: Guest views open auction
     And I should see a current bid amount
     And there should be meta tags for the open auction
     And I should not see the bid form
-    And I should the open auction message for guests
+    And I should see the open auction message for guests
 
   Scenario: There is an open auction with required skills
     Given there is an open auction with some skills
