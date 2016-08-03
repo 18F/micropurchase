@@ -1,0 +1,21 @@
+---
+applications:
+- name: micropurchase-staging
+  memory: 1G
+  instances: 1
+  domain: 18f.gov
+  host: micropurchase-staging
+  buildpack: https://github.com/cloudfoundry/ruby-buildpack.git
+  services:
+    - data-dot-gov
+    - micropurchase-c2
+    - micropurchase-github
+    - micropurchase-psql
+    - micropurchase-smtp
+    - new-relic
+  command: script/start
+  env:
+    RAILS_ENV: production
+    RACK_ENV: production
+    C2_HOST: 'https://c2-staging.18f.gov'
+    ROOT_URL: 'https://micropurchase-staging.18f.gov'
