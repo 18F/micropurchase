@@ -762,28 +762,32 @@ td.col-title{
 
 /* @group summary.error-message */
 
-summary.error-message{
+.form-errors{
 	background: #990017;
 	color: white;
-	padding: 8px;
+	padding: 12px;
 	border-radius: 3px;
 	font-size: 14px;
 	line-height: 18px;
-	margin-bottom: 24px;
-	margin-top: -8px;
+	margin: 12px 0 12px;
 }
 
-summary.error-message details{ margin-top: 8px; }
-summary.error-message details p:first-of-type{ margin-top: 8px; }
-summary.error-message details ol{
-	list-style-type: decimal;
+.form-errors ul{
 	margin: 0 0 0 1.4em;
 	padding-top: 0;
 }
 
-summary.error-message details ol li{
-	margin-bottom: 6px;
+.form-errors ul li{
+	list-style-type: disc;
+	margin-bottom: 0.7em;
+	padding: 0;
 }
+
+.form-errors ul li:last-of-type{
+	margin-bottom: 0.33em;
+}
+
+
 
 /* @end */
 
@@ -1351,8 +1355,7 @@ main div.wrap > form { max-width: 576px; }
 
 
 .fieldset-date-time .field-date input{
-	width: 100%;
-	max-width: 148px;
+	width: 99.5%;
 }
 
 .fieldset-date-time.fieldset-start-date-time{ 
@@ -2224,7 +2227,7 @@ main div.wrap > form { max-width: 576px; }
 	display: table;
 	clear: both;
 }
-.auction .auction-footer li{
+.auction .auction-footer > ul > li{
 	float: left;
 	width: 50%;
 	margin-bottom: 12px;
@@ -2232,7 +2235,6 @@ main div.wrap > form { max-width: 576px; }
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	color: #333;
 	line-height: 1.2em;
 }
 
@@ -2578,12 +2580,15 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 /* @group auction-workflow */
 
-.auction-workflow.auction-workflow-bid-placed{
+.auction-workflow form {
+	display: inline;
+}
+
+.auction-workflow[class*="bid-placed"]{
 	background: #dcfde9;
 	border-color: #5cbb82;
 	border-right-color: #5cbb82;
-	color: #005d1f;
-	text-align: center;
+	color: #0e401f;
 }
 
 .auction-workflow.auction-workflow-bid-placed h1{
@@ -2679,12 +2684,6 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
   display: inline !important;
 }
 
-.auction-workflow form{ 
-	padding-top: 1em; 
-	margin-top: 1em;
-	border-top: 1px solid #a2cae5;
-}
-
 .auction-workflow input{
 	padding: 4px 10px;
 	min-height: 0;
@@ -2695,10 +2694,11 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	margin-top: 1em;
 }
 
-.auction-workflow[class*="auction-workflow-published-open"]  button{ margin-top: 43px; }
 
-
-.auction-workflow[class*="auction-workflow-published-open"] .field{
+.auction-workflow[class*="auction-workflow-bid"] button,
+.auction-workflow[class*="auction-workflow-youve-been-underbid"] button{ margin-top: 43px; margin-left: 0.4em;}
+.auction-workflow[class*="auction-workflow-bid"] .field,
+.auction-workflow[class*="auction-workflow-youve-been-underbid"] .field{
 	padding-top: 16px;
 	width: 5.5em;
 	display: inline-block;
@@ -2747,7 +2747,7 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	border-radius: 0 0 4px 4px;
 }
 
-.layout-auctions-show main .auction-footer ul li{
+.layout-auctions-show main .auction-footer > ul > li{
 	float: none;
 	width: auto;
 	margin-bottom: 18px;
