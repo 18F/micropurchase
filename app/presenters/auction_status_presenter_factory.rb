@@ -7,7 +7,7 @@ class AuctionStatusPresenterFactory
   end
 
   def create
-    if available? && current_user.decorate.admin?
+    if available? && admin?
       AvailableUserIsAdmin.new(auction: auction)
     elsif available?
       AvailableUserIsGuest.new(auction: auction)
