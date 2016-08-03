@@ -1,5 +1,7 @@
 /* @override http://127.0.0.1:4000/stylesheets/screen.css */
 
+/* @override http://127.0.0.1:4000/stylesheets/screen.css */
+
 /* @override http://localhost:4000/stylesheets/screen.css */
 
 /* @override http://localhost:4000/stylesheets/screen.css */
@@ -2829,6 +2831,7 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 		width: 100%;
 		color: inherit;
 		text-align: left;
+		table-layout: fixed;
 	}
 		
 	.layout-auctions-bids main .wrapper table th,
@@ -2839,27 +2842,14 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 		padding-left: 20px;
 	}
 	
-	.layout-auctions-bids main .wrapper table {
-		border: none;
-	}
-	
+	.layout-auctions-bids main .wrapper table { border: none; }
 	.layout-auctions-bids main .wrapper table tr th:first-of-type,
-	.layout-auctions-bids main .wrapper table tr td:first-of-type {
-		border-left: none;
-	}
-	
-	
-	.layout-auctions-bids main .wrapper table tbody tr:last-of-type td{
-		border-bottom: none;
-		
-	}
-	
-	.layout-my-auctions main .wrapper table td{
-		border: 1px solid #eee;
-	}
+	.layout-auctions-bids main .wrapper table tr td:first-of-type { border-left: none; }
+	.layout-auctions-bids main .wrapper table tbody tr:last-of-type td{ border-bottom: none; }
+	.layout-my-auctions main .wrapper table td{ border: 1px solid #eee; }
 	
 	.layout-auctions-bids main .wrapper table .th td,
-	.layout-auctions-bids main .wrapper table .col-timestamp{
+	.layout-auctions-bids main .wrapper table .col-time{
 		border-right: none;
 	}
 	
@@ -2867,9 +2857,8 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 		background: lemonchiffon;
 	}
 	
-	.layout-auctions-bids main .wrapper table .col-duns,
 	.layout-auctions-bids main .wrapper table .col-amount,
-	.layout-auctions-bids main .wrapper table .col-timestamp{
+	.layout-auctions-bids main .wrapper table .col-time{
 		padding-right: 20px;
 		width: 180px;
 	}
