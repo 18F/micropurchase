@@ -10,7 +10,7 @@ applications:
     - data-dot-gov
     - micropurchase-c2
     - micropurchase-github
-    - micropurchase-psql
+    - micropurchase-staging-psql
     - micropurchase-smtp
     - new-relic
   command: script/start
