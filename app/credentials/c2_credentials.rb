@@ -1,13 +1,25 @@
+require 'concerns/user_provided_service'
+
 class C2Credentials
+  extend UserProvidedService
+
   def self.host
     ENV['C2_HOST']
   end
 
   def self.oauth_key
-    ENV['MICROPURCHASE_C2_OAUTH_KEY']
+    if use_env_var?
+      ENV['MICROPURCHASE_C2_OAUTH_KEY']
+    else
+      credentials('micropurchase-c2')['oauth_key']
+    end
   end
 
   def self.oauth_secret
-    ENV['MICROPURCHASE_C2_OAUTH_SECRET']
+    if use_env_var?
+      ENV['MICROPURCHASE_C2_OAUTH_SECRET']
+    else
+      credentials('micropurchase-c2')['oauth_secret']
+    end
   end
 end

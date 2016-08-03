@@ -27,9 +27,8 @@ Cloud.gov allows you to set environment variables manually, but they are wiped
 out by a zero-downtime deploy. To get around this issue, we are accessing
 environment variables via `Credentials` classes locally.
 
-The classes pick up environment variables set in the shell by the 18F-cli's
-deploy script; more information about how it works can be found in [that
-project](https://github.com/18F/18f-cli/blob/develop/bin/deploy).
+The classes pick up environment variables set in the shell by the
+`UserProvidedService` module.
 
 If you're not using Cloud Foundry to deploy, just set the environment variables
 directly in your system.
@@ -99,6 +98,29 @@ Steps to set new environment variables:
   example above, we are setting values for `MICROPURCHASE_GITHUB_CLIENT_ID` and
   `MICROPURCHASE_GITHUB_SECRET` env vars ('micropurchase-github' + 'client_id'
   and 'micropurchase-github' + 'secret')
+
+1. Add the service to the manifests:
+
+```
+# manifest.yml
+
+services:
+- micropurchase-github
+```
+
+```
+# manifest-staging.yml
+
+services:
+- micropurchase-github
+```
+
+1. If you want to bind your service to the app before deploying, you can do so
+manually.
+
+```bash
+$ cf bind-service micropurchase-staging micropurchase-github
+```
 
 1. The service keys will automatically be bound to your app and translated into
    environment variables on deploy (which happens via Travis CI).
