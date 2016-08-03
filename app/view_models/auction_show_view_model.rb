@@ -73,7 +73,9 @@ class AuctionShowViewModel
   end
 
   def bid_status_partial
-    if auction.type == 'reverse' && (over? || available_and_user_is_winning_bidder?)
+    if reverse_auction_over? ||
+       reverse_auction_available_user_is_winner? ||
+       sealed_bid_auction_user_is_bidder?
       'auctions/bid_status'
     else
       'components/null'
@@ -190,16 +192,24 @@ class AuctionShowViewModel
 
   private
 
+  def reverse_auction_over?
+    auction.type == 'reverse' && over?
+  end
+
+  def reverse_auction_available_user_is_winner?
+    auction.type == 'reverse' && available? && user_is_winning_bidder?
+  end
+
+  def sealed_bid_auction_user_is_bidder?
+    auction.type == 'sealed_bid' && user_bids.any?
+  end
+
   def user_bid_amount_as_currency
     Currency.new(lowest_user_bid_amount).to_s
   end
 
   def lowest_bidder_name
     auction.lowest_bid.bidder_name
-  end
-
-  def available_and_user_is_winning_bidder?
-    available? && user_is_winning_bidder?
   end
 
   def user_is_winning_bidder?
