@@ -138,6 +138,141 @@
     <button class="button button-publish">Publish</button>    
   </form>
 </section>
+<section class="auction-workflow auction-workflow-ready-to-publish-admins has-errors">
+  <h1>Ready to publish</h1>
+  <div class="form-errors">
+    <ul>
+    <li>You must specify an auction start date/time </li>
+    <li>You must specify an auction end date/time. This date/time must come after the auction start date/time.</li>
+    </ul>
+  </div>
+  <p class="p-date-time-defaults">This auction is ready to publish! Please select a start date for this auction. (By default, auctions are listed for one week and vendors have five business days to deliver. But you can <a href="#" class="a-customize-timeline">edit</a> this.)</p>
+  <form data-auction-workflow-state="coming-soon-admins">
+    <fieldset class="fieldset fieldset-date-time fieldset-start-date-time">
+      <legend>Auction starts</legend>
+      <div class="field field-date has-error">
+        <label>
+          <span class="label-text">Date</span>
+          <input type="date" name="">
+        </label>
+      </div>
+      <fieldset class="fieldset fieldset-time">
+        <legend>Time</legend>
+        <div class="field field-select field-time-hours has-error">
+          <label>
+            <span class="label-text">Hours</span>
+            <select>
+              <option value="1" selected>1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+            </select>
+          </label>
+        </div>
+        <div class="field field-select field-time-minutes has-error">
+          <label>
+            <span class="label-text">Minutes</span>
+            <select>
+              <option value="00" selected>00</option>
+              <option value="15">15</option>
+              <option value="30">30</option>
+              <option value="45">45</option>
+            </select>
+          </label>
+        </div>
+        <div class="field field-select field-time-meridiem has-error">
+          <label>
+            <span class="label-text">Meridiem</span>
+            <select>
+              <option value="AM">AM</option>
+              <option value="PM" selected>PM</option>
+            </select>
+          </label>
+        </div>
+        <span class="time-zone">EST</span>
+      </fieldset>
+    </fieldset>
+    <aside class="branch">
+      <fieldset class="fieldset fieldset-date-time fieldset-end-date-time">
+        <legend>Auction ends</legend>
+        <span class="fieldset-date-time-summary">
+          <span class="date">Undefined</span> at <span class="time-hours">1</span>:<span class="time-minutes">00</span><span class="time-meridiem">PM</span> EST
+        </span>
+        <div class="field field-date">
+          <label>
+            <span class="label-text">Date</span>
+            <input type="date" name="">
+          </label>
+        </div>
+        <fieldset class="fieldset fieldset-time">
+          <legend>Time</legend>
+          <div class="field field-select field-time-hours">
+            <label>
+              <span class="label-text">Hours</span>
+              <select>
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+              </select>
+            </label>
+          </div>
+          <div class="field field-select field-time-minutes">
+            <label>
+              <span class="label-text">Minutes</span>
+              <select>
+                <option>00</option>
+                <option>15</option>
+                <option>30</option>
+                <option>45</option>
+              </select>
+            </label>
+          </div>
+          <div class="field field-select field-time-meridiem">
+            <label>
+              <span class="label-text">Meridiem</span>
+              <select>
+                <option>AM</option>
+                <option selected>PM</option>
+              </select>
+            </label>
+          </div>
+          <span class="time-zone">EST</span>
+        </fieldset>
+      </fieldset>
+      <section class="delivery">
+        <h1>Delivery timeline</h1>
+        <div class="estimate">
+          <h2>Estimated delivery date</h2>
+          <span class="delivery-estimate"><span class="date">Undefined</span> at <span class="time-hours">1</span>:<span class="time-minutes">00</span><span class="time-meridiem">PM</span> EST</span>
+        </div>
+        <div class="field">
+          <label>
+            <span class="label-text">Days</span>
+            <input type="number" name="" value="5">
+          </label>
+        </div>
+      </section>
+    </aside>
+    <button class="button button-publish">Publish</button>    
+  </form>
+</section>
 <section class="auction-workflow auction-workflow-coming-soon-admins">
   <h1>Coming soon</h1>
   <p>This auction is visible to the public but is not currently accepting bids. It will open on [auction.startDate]. If you need to take it down for whatever reason, press the &ldquo;un-publish&rdquo; button, below.</p>
@@ -155,7 +290,7 @@
 </section>
 <section class="auction-workflow auction-workflow-accepting-bids-bids-placed-admins">
   <h1>Accepting bids</h1>
-  <p>There are <a href="{{site.baseurl}}/auctions/show-bids">[auction.totalBids] bids on this auction,</a> and [winningVendor.Name] is currently winning. This auction is accepting bids until [auction.endDate].</p>
+  <p>There are <a href="{{site.baseurl}}/auctions/show-bids">[auction.totalBids] bids on this auction,</a> and <a href="{{site.baseurl}}/people/vendors/show">[winningVendor.Name]</a> is currently winning. This auction is accepting bids until [auction.endDate].</p>
 </section>
 <section class="auction-workflow auction-workflow-please-update-your-profile-vendors">
   <h1>Please update your profile</h1>
@@ -234,22 +369,24 @@
 </section>
 <section class="auction-workflow auction-workflow-ready-for-work-admins">
   <h1>Ready for work</h1>
-  <p>[auction.winner] won this auction on [auction.winDate] with a bid of $[auction.winBid]. They&rsquo;ve received <a href="https://docs.google.com/document/d/1G9WboqAi2ESDjZEkVhlrCGL3MbRqW2QodWdtWRhnKnc/edit%23heading%3Dh.nte24vv2a7o&sa=D&ust=1470089121861000&usg=AFQjCNHWlLpesvlsiCJkbs-g6b-u4lxYrQ">an email</a> letting them know the delivery deadline ([auction.deliveryDeadline]) and how to get started.</p>
+  <p><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a> won this auction on [auction.winDate] with a bid of $[auction.winBid]. They&rsquo;ve received <a href="https://docs.google.com/document/d/1G9WboqAi2ESDjZEkVhlrCGL3MbRqW2QodWdtWRhnKnc/edit%23heading%3Dh.nte24vv2a7o&sa=D&ust=1470089121861000&usg=AFQjCNHWlLpesvlsiCJkbs-g6b-u4lxYrQ">an email</a> letting them know the delivery deadline ([auction.deliveryDeadline]) and how to get started.</p>
 </section>
 <section class="auction-workflow auction-workflow-ready-for-work-vendors">
   <h1>Ready for work</h1>
   <p>You won this auction on [auction.winDate] and must deliver by [auction.deliveryDeadline]. Please use GitHub to create a pull request and reference <a href="">the issue associated with this auction</a>. Then enter the pull request URL, below, and click &ldquo;start work.&rdquo;</p>
-  <div class="field field-delivery-url">
-    <label>
-      <span class="label-text">Pull request <abbr title="Uniform resource locator">URL</abbr></span>
-      <input type="text" name="">
-    </label>
-  </div>
-  <button class="button button-deliver">Start work</button>  
+  <form data-auction-workflow-state="work-in-progress-vendors">
+    <div class="field field-delivery-url">
+      <label>
+        <span class="label-text">Pull request <abbr title="Uniform resource locator">URL</abbr></span>
+        <input type="text" name="">
+      </label>
+    </div>
+    <button class="button button-deliver">Start work</button>  
+  </form>
 </section>
 <section class="auction-workflow auction-workflow-work-in-progress-admins">
   <h1>Work in progress</h1>
-  <p>[auction.winner] won this auction on [auction.winDate] and started work on . They&rsquo;ve received <a href="#">an email</a> instructing them to begin work and to deliver before the delivery deadline ([auction.deliveryDeadline]).</p>
+  <p><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a> won this auction on [auction.winDate] and started work on . They&rsquo;ve received <a href="#">an email</a> instructing them to begin work and to deliver before the delivery deadline ([auction.deliveryDeadline]).</p>
 </section>
 <section class="auction-workflow auction-workflow-work-in-progress-vendors">
   <h1>Work in progress</h1>
@@ -260,27 +397,47 @@
 </section>
 <section class="auction-workflow auction-workflow-delivery-past-due-admins">
   <h1>Delivery past due</h1>
-  <p>[auction.winner] was supposed to have delivered this auction before [auction.deliveryDeadline], but has yet to mark this auction as delivered. You can either issue an extension on this delivery period or reject this vendor.</p>
-  <button class="button button-issue-extension">Issue an extension</button>
-  <button class="button button-reject">Reject vendor</button> 
+  <p><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a> was supposed to have delivered this auction before [auction.deliveryDeadline], but has yet to complete their work. You can either issue an extension on this delivery period or reject this vendor. (Extensions made to delivery deadlines are usually done by the length of the originally specified delivery timeline, which is [auction.deliveryTimeline] in this case. You can <a href="#">change this</a>, though.)</p>
+  <form>
+    <div class="field field-select">
+      <label>
+        <span class="label-text">Extension length</span>
+        <select>
+          <option>1 day</option>
+          <option>2 days</option>
+          <option>3 days</option>
+          <option>4 days</option>
+          <option>5 days</option>
+        </select>
+      </label>
+    </div>
+    <button class="button button-issue-extension">Issue an extension</button>
+    <button class="button button-reject">Reject vendor</button> 
+  </form>
 </section>
 <section class="auction-workflow auction-workflow-delivery-past-due-vendors">
   <h1>Delivery past due</h1>
-  <p>You won this auction on <strong>[auction.winDate]</strong> with a bid of <strong>$[auction.winBid],</strong> and were supposed to have delivered before <strong>[auction.deliveryDeadline].</strong> In accordance with our <a href="{{site.baseurl}}/policies">policies</a>, administrators now have the option to issue an extension or reject Amount altogether.</p>
-  <p>To avoid having Amount rejected, please complete your work (in accordance with this auction&rsquo;s acceptance criteria) as soon as possible. When you&rsquo;re done, issue a pull request and tag <a href="#">the issue associated with this auction</a>. Finally, enter the <abbr title="Uniform resource locator">URL</abbr> of your pull request below, and click &ldquo;mark as delivered.&rdquo;If you have any questions, please leave a comment on <a href="#">the issue associated with this auction</a>.</p>
-  <div class="field field-delivery-url">
-    <label>
-      <span class="label-text">Delivery <abbr title="Uniform resource locator">URL</abbr></span>
-      <input type="text" name="">
-    </label>
-  </div>
-  <button class="button button-deliver">Mark as delivered</button>  
+  <p>You won this auction on <strong>[auction.winDate]</strong> and were supposed to have completed your work before <strong>[auction.deliveryDeadline].</strong> In accordance with our <a href="{{site.baseurl}}/policies">policies</a>, administrators now have the option to issue an extension or reject Amount altogether.</p>
+  <p>In the interim, please provide the <abbr title="Uniform resource locator">URL</abbr> of a pull request that satisfies this auction&rsquo;s acceptance criteria. Then click &ldquo;I&rsquo;m done,&rdquo; below.</p>
+  <form data-auction-workflow-state="pending-acceptance-vendors">
+    <div class="field field-delivery-url">
+      <label>
+        <span class="label-text">Pull request <abbr title="Uniform resource locator">URL</abbr></span>
+        <input type="text" name="">
+      </label>
+    </div>
+    <button class="button button-deliver">I&rsquo;m done</button>  
+  </form>
 </section>
 <section class="auction-workflow auction-workflow-acceptance-needed-admins">
   <h1>Pending acceptance</h1>
-  <p>[auction.winner] made <a href="#">a pull request</a> and marked this auction as having been delivered. If their work meets this auction&rsquo;s acceptance criteria, click &ldquo;accept.&rdquo; Otherwise, click &ldquo;reject.&rdquo;</p>
-  <button class="button button-accept">Accept</button>
-  <button class="button button-reject">Reject</button>
+  <p><a href="{{site.baseurl}}/people/vendors/show"><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a></a> made <a href="#">a pull request</a> and marked this auction as having been delivered. If their work meets this auction&rsquo;s acceptance criteria, click &ldquo;accept.&rdquo; Otherwise, click &ldquo;reject.&rdquo;</p>
+  <form data-auction-workflow-state="awaiting-payment-admins">
+    <button class="button button-accept">Accept</button>
+  </form>
+  <form data-auction-workflow-state="rejected-admins">
+    <button class="button button-reject">Reject</button>
+  </form>
 </section>
 <section class="auction-workflow auction-workflow-pending-acceptance-vendors">
   <h1>Pending acceptance</h1>
@@ -289,12 +446,12 @@
 </section>
 <section class="auction-workflow auction-workflow-awaiting-payment-admins">
   <h1>Pending payment</h1>
-  <p>[auction.winner]&rsquo;s <a href="#">pull request</a> was accepted by [auction.acceptanceAdmin] on [auction.acceptanceDate]. The p-card holder has been asked (<a href="#">via C2</a>) to remit payment at <a href="#">[auction.winner]&rsquo;s payment URL</a>. Alternatively, you can manually mark this auction as paid.</p>
+  <p><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a>&rsquo;s <a href="#">pull request</a> was accepted by [auction.acceptanceAdmin] on [auction.acceptanceDate]. The p-card holder has been asked (<a href="#">via C2</a>) to remit payment at <a href="#"><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a>&rsquo;s payment URL</a>. Alternatively, you can manually mark this auction as paid.</p>
   <button>Mark as paid</button>
 </section>
 <section class="auction-workflow auction-workflow-payment-needed-admins">
   <h1>Pending payment</h1>
-  <p>[auction.winner]&rsquo;s pull request was accepted on [auction.acceptanceDate]. Please remit payment at <a href="#">the vendor&rsquo;s payment URL</a> and then mark this auction as having been paid. If you have any problems, please <a href="#">contact the vendor directly</a>.</p>
+  <p><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a>&rsquo;s pull request was accepted on [auction.acceptanceDate]. Please remit payment at <a href="#">the vendor&rsquo;s payment URL</a> and then mark this auction as having been paid. If you have any problems, please <a href="#">contact the vendor directly</a>.</p>
   <button>Mark as paid</button>
 </section>
 <section class="auction-workflow auction-workflow-pending-payment-vendors">
@@ -315,7 +472,7 @@
 </section>
 <section class="auction-workflow auction-workflow-paid-admins">
   <h1>Paid</h1>
-  <p><a href="#">[auction.winner]&rsquo;s pull request</a> was accepted on [auction.acceptanceDate]. The vendor was paid on [auction.paymentDate].
+  <p><a href="#"><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a>&rsquo;s pull request</a> was accepted on [auction.acceptanceDate]. The vendor was paid on [auction.paymentDate].
 </p>
 </section>
 <section class="auction-workflow auction-workflow-paid-vendors">
@@ -325,11 +482,11 @@
 </section>
 <section class="auction-workflow auction-workflow-rejected-admins">
   <h1>Rejected</h1>
-  <p>Admins rejected [auction.winner]&rsquo;s bid on <time>[auction.rejectionDate]</time>.</p>
+  <p>[RejectingAdmin] rejected <a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a>&rsquo;s bid on <time>[auction.rejectionDate]</time>.</p>
 </section>
 <section class="auction-workflow auction-workflow-rejected-vendors">
   <h1>Rejected</h1>
-  <p>Amount was rejected on <time>[auction.rejectionDate]</time>.</p>
+  <p>Your winning bid was rejected on <time>[auction.rejectionDate]</time>.</p>
 </section>
 <section class="auction-workflow auction-workflow-closed">
   <h1>Bidding closed</h1>
