@@ -23,7 +23,7 @@ class SMTPCredentials
     if use_env_var?
       ENV['MICROPURCHASE_SMTP_DEFAULT_URL_HOST']
     else
-      credentials('micropurchase-smtp')['default_urL_host']
+      credentials('micropurchase-smtp')['default_url_host']
     end
   end
 
