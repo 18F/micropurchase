@@ -36,15 +36,16 @@ before_deploy:
   - export GOPATH=${HOME}/Godeps/_workspace
   - go get github.com/concourse/autopilot
   - cf install-plugin -f $GOPATH/bin/autopilot
-  - bundle exec rake git:dump_sha
+  - travis_retry curl -L -o $HOME/18f.zip "https://github.com/18F/18f-cli/archive/release.zip"
+  - unzip $HOME/18f.zip -d $HOME/18f-cli
 deploy:
   - provider: script
-    script: "./deploy.sh staging"
+    script: bash $HOME/18f-cli/18f-cli-release/bin/deploy -o 18f-acq -s staging micropurchase-staging
     skip_cleanup: true
     on:
       branch: develop
   - provider: script
-    script: "./deploy.sh production"
+    script: bash $HOME/18f-cli/18f-cli-release/bin/deploy -o 18f-acq -s staging micropurchase
     skip_cleanup: true
     on:
       branch: master
