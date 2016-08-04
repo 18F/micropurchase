@@ -1,11 +1,5 @@
 /* @override http://127.0.0.1:4000/stylesheets/screen.css */
 
-/* @override http://127.0.0.1:4000/stylesheets/screen.css */
-
-/* @override http://localhost:4000/stylesheets/screen.css */
-
-/* @override http://localhost:4000/stylesheets/screen.css */
-
 /* @override http://localhost:4000/stylesheets/screen.css */
 
 /* @group bootstrap */
@@ -93,41 +87,6 @@ a:visited{  color: #8d0058; }
 
 ::-moz-selection {
   background: #ffe4c5; /* Gecko Browsers */
-}
-
-.notice,
-.auction-workflow.auction-workflow-open-incomplete-profile{
-	background: #faf5d2;
-	color: #333;
-	padding: 16px 16px 18px;
-	border: 1px solid #e7c359;
-	border-radius: 4px;
-	text-align: center;
-}
-
-.notice ul,
-.notice ol{
-	padding-left: 1.4em;
-}
-.notice li{
-	list-style-type: square;
-	margin-left: 1.125em;
-	margin-bottom: 0.6em;
-}
-
-.notice p{
-	line-height: 1.4;
-	margin-bottom: 0.67em;
-}
-
-.notice strong{ font-weight: 600; }
-
-.notice p:last-of-type{
-	margin-bottom: 0 !important;
-}
-
-.notice a{
-	color: #8a1132;
 }
 
 .wrapper{
@@ -725,7 +684,6 @@ td.col-title{
 	vertical-align: middle;
 }
 
-
 .col-actions,
 .col-num-bids{ width: 4.2em; }
 
@@ -734,9 +692,9 @@ td.col-title{
 .col-duns-number,
 .col-github-id{ width: 6em; }
 
-.col-starting,
-.col-closing,
-.col-ending,
+.col-opening-date,
+.col-closing-date,
+.col-ending-date,
 .col-delivery,
 .col-date,
 .col-sam-status,
@@ -2443,16 +2401,15 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	
 }
 
-.layout-auctions-needs-attention.user-type-admin .section-bids,
-.layout-auctions-needs-attention.user-type-admin .section-bidding-vendors,
+.layout-auctions-needs-attention.user-type-admin .section-open-vendors,
 .layout-auctions-needs-attention.user-type-admin .section-delivery-vendors,
 .layout-auctions-needs-attention.user-type-admin .section-acceptance-vendors,
 .layout-auctions-needs-attention.user-type-admin .section-payment-vendors{
 	display: none;	
 }
 
-.layout-auctions-needs-attention.user-type-vendor .section-pre-bidding,
-.layout-auctions-needs-attention.user-type-vendor .section-bidding-admins,
+.layout-auctions-needs-attention.user-type-vendor .section-coming-soon,
+.layout-auctions-needs-attention.user-type-vendor .section-open-admins,
 .layout-auctions-needs-attention.user-type-vendor .section-delivery-admins,
 .layout-auctions-needs-attention.user-type-vendor .section-acceptance-admins,
 .layout-auctions-needs-attention.user-type-vendor .section-payment-admins{
@@ -2846,18 +2803,10 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 @media (min-width: 40em) {
 	
-	.layout-auctions-bids main .wrapper table{
-		width: 100%;
-		color: inherit;
-		text-align: left;
-		table-layout: fixed;
-	}
-		
+
 	.layout-auctions-bids main .wrapper table th,
 	.layout-auctions-bids main .wrapper table td{
 		padding: 8px 0;
-		border-bottom: 1px solid #eee;
-		border-right: 1px solid #eee;
 		padding-left: 20px;
 	}
 	
@@ -2868,13 +2817,9 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	.layout-my-auctions main .wrapper table td{ border: 1px solid #eee; }
 	
 	.layout-auctions-bids main .wrapper table .th td,
-	.layout-auctions-bids main .wrapper table .col-time{
-		border-right: none;
-	}
+	.layout-auctions-bids main .wrapper table .col-time{ border-right: none; }
 	
-	.layout-auctions-bids main .wrapper table .is-winning td{
-		background: lemonchiffon;
-	}
+	.layout-auctions-bids main .wrapper table .is-winning td{ background: lemonchiffon; }
 	
 	.layout-auctions-bids main .wrapper table .col-amount,
 	.layout-auctions-bids main .wrapper table .col-time{
@@ -3016,7 +2961,7 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 }
 
 @media screen and (min-width: 512px){
-	  .layout-auctions-new .fieldset.fieldset-date-time .field-date,
+	.layout-auctions-new .fieldset.fieldset-date-time .field-date,
 	.layout-auctions-new .fieldset.fieldset-date-time .fieldset-time{
 	  float: left;
 	  min-width: 11.8em;
@@ -3025,8 +2970,6 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 }
 
-.layout-auctions-new .fieldset.fieldset-date-time .fieldset-time .field-select{
-}
 /* @end */
 
 .layout-auctions-new main .wrapper,
@@ -3037,10 +2980,7 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 }
 
 .field.field-starting-bid input{ width: 5.5em; }
-
-.field.field-sealed-bid.field-checkbox{
-	margin-bottom: 28px;
-}
+.field.field-sealed-bid.field-checkbox{ margin-bottom: 28px; }
 
 .layout-auctions-new textarea,
 .layout-auctions-edit textarea{
