@@ -9,7 +9,6 @@ require 'action_controller/railtie'
 require 'action_mailer/railtie'
 require 'action_view/railtie'
 require 'sprockets/railtie'
-require_relative './load_cf_env'
 
 Bundler.require(*Rails.groups)
 

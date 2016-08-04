@@ -137,14 +137,6 @@ $ cf bind-service micropurchase-staging micropurchase-github
   you must update *all* keys for that service. On update, Cloud Foundry removes
   all previous keys and values from the user-provided service being updated.
 
-1. If the environment variable is accessed via an outside service, you may not
-   be able to a access it via a `Credentials` class. This is the case with New
-   Relic, where New Relic expects certain environment variables to be present so
-   we cannot simply create a `NewRelicCredentials` class and use class methods on
-   that class to access sensitive keys. To address that case, we set up a
-   user-provided service as described above and manually set the environment
-   variable via `config/load_cf_env.rb`.
-
 ### To deploy a new instance of the app
 
 Create the app (it's ok if the deploy fails):
