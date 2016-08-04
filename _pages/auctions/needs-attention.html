@@ -55,7 +55,7 @@ excerpt: none
           <thead>
             <tr>
               <td class="col-title">Auction</td>
-              <td class="col-close-date">Closes on</td>
+              <td class="col-closing-date">Closes on</td>
               <td class="col-low-bid">Low bid</td>
               <td class="col-bid-num"># bids</td>
             </tr>
@@ -63,25 +63,25 @@ excerpt: none
           <tbody>
             <tr>
               <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Stand-alone modular utilisation</a></td>
-              <td class="col-close-date"><time><span class="date">7/29/2016</span> <span class="time">10:00am EST</span></time></td>
+              <td class="col-closing-date"><time><span class="date">7/29/2016</span> <span class="time">10:00am EST</span></time></td>
               <td class="col-low-bid">$450</td>
               <td class="col-bid-num">1</td>
             </tr>
             <tr>
               <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Switchable system-worthy</a></td>
-              <td class="col-close-date"><time><span class="date">7/29/2016</span> <span class="time">10:00am EST</span></time></td>
+              <td class="col-closing-date"><time><span class="date">7/29/2016</span> <span class="time">10:00am EST</span></time></td>
               <td class="col-low-bid is-blank"></td>
               <td class="col-bid-num">0</td>
             </tr>
             <tr>
               <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Visionary motivating website</a></td>
-              <td class="col-close-date"><time><span class="date">7/29/2016</span> <span class="time">10:00am EST</span></time></td>
+              <td class="col-closing-date"><time><span class="date">7/29/2016</span> <span class="time">10:00am EST</span></time></td>
               <td class="col-low-bid">$1450</td>
               <td class="col-bid-num">12</td>
             </tr>
             <tr>
               <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Untitled</a></td>
-              <td class="col-close-date"><time><span class="date">7/29/2016</span> <span class="time">10:00am EST</span></time></td>
+              <td class="col-closing-date"><time><span class="date">7/29/2016</span> <span class="time">10:00am EST</span></time></td>
               <td class="col-low-bid is-blank"></td>
               <td class="col-bid-num">0</td>
             </tr>
@@ -153,11 +153,6 @@ excerpt: none
               <td class="col-delivery-deadline"><time><span class="date">7/29/2016</span> <span class="time">10:00am EST</span></time></td>
               <td class="col-status">Work in progress</td>
             </tr>
-            <tr>
-              <td class="col-title"><a href="{{site.baseurl}}/auctions/show/?auctionWorkflowState=acceptance-needed-vendors">Switchable system-worthy</a></td>
-              <td class="col-delivery-deadline"><time><span class="date">7/29/2016</span> <span class="time">10:00am EST</span></time></td>
-              <td class="col-status">Acceptance needed</td>
-            </tr>
           </tbody>
         </table>
       </section>
@@ -187,6 +182,44 @@ excerpt: none
               <td class="col-delivery-deadline"><time><span class="date">7/29/2016</span> <span class="time">10:00am EST</span></time></td>
               <td class="col-status">Work in progress</td>
             </tr>
+            <tr>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show/?auctionWorkflowState=pending-acceptance-vendors">Switchable system-worthy</a></td>
+              <td class="col-delivery-deadline"><time><span class="date">7/29/2016</span> <span class="time">10:00am EST</span></time></td>
+              <td class="col-status">Pending acceptance</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="section-acceptance-admins">
+        <h1>Acceptance</h1>
+        <table>
+          <thead>
+            <tr>
+              <td class="col-title">Title</td>
+              <td class="col-delivery-deadline">Delivery date</td>
+              <td class="col-status">Status</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show/?auctionWorkflowState=acceptance-needed-admins">Switchable system-worthy</a></td>
+              <td class="col-delivery-deadline"><time><span class="date">7/29/2016</span> <span class="time">10:00am EST</span></time></td>
+              <td class="col-status">Acceptance needed</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="section-acceptance-vendors">
+        <h1>Acceptance</h1>
+        <table>
+          <thead>
+            <tr>
+              <td class="col-title">Title</td>
+              <td class="col-delivery-deadline">Delivery date</td>
+              <td class="col-status">Status</td>
+            </tr>
+          </thead>
+          <tbody>
             <tr>
               <td class="col-title"><a href="{{site.baseurl}}/auctions/show/?auctionWorkflowState=pending-acceptance-vendors">Switchable system-worthy</a></td>
               <td class="col-delivery-deadline"><time><span class="date">7/29/2016</span> <span class="time">10:00am EST</span></time></td>

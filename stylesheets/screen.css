@@ -2437,16 +2437,24 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	width: 8em;	
 }
 
+.layout-auctions-needs-attention .col-low-bid,
+.layout-auctions-needs-attention .col-bid-num{
+	width: 5em;
+	
+}
+
 .layout-auctions-needs-attention.user-type-admin .section-bids,
 .layout-auctions-needs-attention.user-type-admin .section-bidding-vendors,
 .layout-auctions-needs-attention.user-type-admin .section-delivery-vendors,
+.layout-auctions-needs-attention.user-type-admin .section-acceptance-vendors,
 .layout-auctions-needs-attention.user-type-admin .section-payment-vendors{
 	display: none;	
 }
 
 .layout-auctions-needs-attention.user-type-vendor .section-pre-bidding,
-.layout-auctions-needs-attention.user-type-admin .section-bidding-admins,
+.layout-auctions-needs-attention.user-type-vendor .section-bidding-admins,
 .layout-auctions-needs-attention.user-type-vendor .section-delivery-admins,
+.layout-auctions-needs-attention.user-type-vendor .section-acceptance-admins,
 .layout-auctions-needs-attention.user-type-vendor .section-payment-admins{
 	display: none;
 }
