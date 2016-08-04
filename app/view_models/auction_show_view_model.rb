@@ -68,12 +68,13 @@ class AuctionShowViewModel
     end
   end
 
-  def bid_status_class
-    BidStatusFlashFactory.new(auction: auction, user: current_user).create
+  def bid_status
+    BidStatusPresenterFactory.new(auction: auction, user: current_user).create
   end
 
   def bid_status_partial
-    if reverse_auction_over? ||
+    if !available? ||
+       user_not_vendor? ||
        reverse_auction_available_user_is_winner? ||
        sealed_bid_auction_user_is_bidder?
       'auctions/bid_status'
@@ -82,19 +83,7 @@ class AuctionShowViewModel
     end
   end
 
-  def auction_status_partial
-    if (available? && (current_user.is_a?(Guest) || current_user.decorate.admin?)) || future?
-      'auctions/status'
-    else
-      'components/null'
-    end
-  end
-
-  def auction_status_presenter
-    AuctionStatusPresenterFactory.new(auction: auction, current_user: current_user).create
-  end
-
-  def bid_status
+  def bid_status_label
     if over? && auction.bids.any?
       "Winning bid (#{lowest_bidder_name}): #{highlighted_bid_amount_as_currency}"
     elsif user_bids.any?
@@ -192,8 +181,8 @@ class AuctionShowViewModel
 
   private
 
-  def reverse_auction_over?
-    auction.type == 'reverse' && over?
+  def user_not_vendor?
+    current_user.is_a?(Guest) || current_user.decorate.admin?
   end
 
   def reverse_auction_available_user_is_winner?

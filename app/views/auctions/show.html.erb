@@ -31,7 +31,7 @@
         <%= @view_model.relative_time %>
       </div>
       <div class="auction-subtitle">
-        <%= @view_model.bid_status %>
+        <%= @view_model.bid_status_label %>
       </div>
     </div>
   </div>
@@ -45,10 +45,7 @@
 
   <div class="usa-width-one-third">
     <%= render partial: @view_model.bid_status_partial,
-      locals: { status: @view_model.bid_status_class  } %>
-
-    <%= render partial: @view_model.auction_status_partial,
-      locals: { view_model: @view_model } %>
+      locals: { status: @view_model.bid_status  } %>
 
     <%= render partial: @view_model.bid_form_partial, locals: { auction: @view_model } %>
 
