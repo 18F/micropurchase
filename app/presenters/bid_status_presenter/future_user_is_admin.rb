@@ -24,8 +24,4 @@ class BidStatusPresenter::FutureUserIsAdmin < BidStatusPresenter::Base
       class: 'usa-button usa-button-outline auction-button'
     )
   end
-
-  def start_date
-    DcTimePresenter.convert_and_format(auction.started_at)
-  end
 end

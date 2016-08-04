@@ -8,10 +8,4 @@ class BidStatusPresenter::FutureUserIsVendor < BidStatusPresenter::Base
   def body
     "This auction starts on #{start_date}."
   end
-
-  private
-
-  def start_date
-    DcTimePresenter.convert_and_format(auction.started_at)
-  end
 end
