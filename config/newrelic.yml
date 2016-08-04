@@ -1,5 +1,5 @@
 common: &default_settings
-  app_name: Micropurchase
+  app_name: <%= NewRelicCredentials.app_name %>
   audit_log:
     enabled: false
   browser_monitoring:
