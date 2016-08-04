@@ -45,7 +45,7 @@
 
   <div class="usa-width-one-third">
     <%= render partial: @view_model.bid_status_partial,
-      locals: { auction: @view_model, status: @view_model.bid_status_class(flash)  } %>
+      locals: { status: @view_model.bid_status_class  } %>
 
     <%= render partial: @view_model.auction_status_partial,
       locals: { view_model: @view_model } %>

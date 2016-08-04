@@ -5,4 +5,4 @@ Feature: Admin signs in
   Scenario: Admin signs in
     Given I am an administrator
     And I sign in
-    Then I should be on the admin action items page
+    Then I should be on the admin needs attention auctions page

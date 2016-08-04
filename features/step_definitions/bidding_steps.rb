@@ -2,6 +2,10 @@ When(/^the auction has a lowest bid amount of (.+)$/) do |amount|
   @auction.lowest_bid.update(amount: amount.to_i)
 end
 
+When(/^the auction has a start price of (.+)$/) do |amount|
+  @auction.update(start_price: amount.to_i)
+end
+
 When(/^I have placed the lowest bid$/) do
   # sort the bids so that newest is first
   bids = @auction.bids.sort_by(&:created_at).reverse
@@ -41,17 +45,14 @@ Then(/^I should see the auction had a winning bid with name$/) do
 end
 
 Then(/^I should see I am the winner$/) do
-  expect(page).to have_css('.usa-alert-success')
   expect(page).to have_content("You are the winner")
 end
 
 Then(/^I should see I am not the winner$/) do
-  expect(page).to have_css('.usa-alert-error')
   expect(page).to have_content("You are not the winner")
 end
 
 Then(/^I should not see a winner alert box$/) do
-  expect(page).to_not have_css('.usa-alert-error')
   expect(page).to_not have_content("You are not the winner")
 end
 
@@ -79,17 +80,17 @@ end
 Then(/^I should see the maximum bid amount in the bidding form$/) do
   within(".auction-bid") do
     expect(page).to have_content(
-      "Maximum bid: #{Currency.new(RulesFactory.new(@auction).create.max_allowed_bid)}"
+      "The maximum you can bid is #{Currency.new(RulesFactory.new(@auction).create.max_allowed_bid)}"
     )
   end
 end
 
 Then(/^I should see I have the winning bid$/) do
-  expect(page).to have_content("You currently have the winning bid.")
+  expect(page).to have_content("You are currently the low bidder")
 end
 
 Then(/^I should see I do not have the winning bid$/) do
-  expect(page).not_to have_content("You currently have the winning bid.")
+  expect(page).to have_content("You've been outbid!")
 end
 
 Then(/^I should see the bid form$/) do

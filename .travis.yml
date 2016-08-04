@@ -39,12 +39,12 @@ before_deploy:
   - bundle exec rake git:dump_sha
 deploy:
   - provider: script
-    script: "./deploy.sh staging"
+    script: "./bin/deploy.sh staging"
     skip_cleanup: true
     on:
       branch: develop
   - provider: script
-    script: "./deploy.sh production"
+    script: "./bin/deploy.sh production"
     skip_cleanup: true
     on:
       branch: master

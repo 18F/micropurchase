@@ -23,7 +23,7 @@ class Admin::BaseViewModel
     ''
   end
 
-  def action_items_nav_class
+  def needs_attention_auctions_nav_class
     ''
   end
 

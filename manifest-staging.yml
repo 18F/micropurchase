@@ -5,13 +5,13 @@ applications:
   instances: 1
   domain: 18f.gov
   host: micropurchase-staging
-  buildpack: https://github.com/ddollar/heroku-buildpack-multi.git
+  buildpack: https://github.com/cloudfoundry/ruby-buildpack.git
   services:
     - data-dot-gov
     - micropurchase-c2
     - micropurchase-github
-    - micropurchase-smtp
     - micropurchase-staging-psql
+    - micropurchase-smtp
     - new-relic
   command: script/start
   env:

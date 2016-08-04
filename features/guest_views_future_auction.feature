@@ -12,4 +12,4 @@ Feature: Guest views future auction
     When I visit the auction page
     Then I should see a "Coming Soon" label
     And I should not see the bid form
-    And there should be meta tags for the closed auction
+    And I should see the future auction message for guests

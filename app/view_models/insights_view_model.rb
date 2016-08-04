@@ -20,7 +20,8 @@ class InsightsViewModel
       { statistic: Statistics::AverageStartingPrice.new.to_s, label: 'average starting price' },
       average_winning_bid_stat,
       small_business_stat,
-      { statistic: UserQuery.new.in_sam.count, label: 'Sam.gov qualified vendors' }
+      { statistic: UserQuery.new.in_sam.count, label: 'Sam.gov qualified vendors' },
+      { statistic: Statistics::TotalSavings.new.to_s, label: 'total savings' }
     ]
   end
 
