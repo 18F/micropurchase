@@ -3,16 +3,20 @@
 
 <h3><%= path.path %></h3>
 
-<% path.verbs.each do |v| %>
+<% path.operations.each do |v| %>
 <h4><%= v.verb %></h4>
 
 <p><%= v.description %></p>
 
-<% if v.sample_response %>
+<% if v.sample_json_response? %>
 <p>Example response:</p>
 
 
-<%= v.sample_response%>
+<pre>
+  <code>
+    <%= v.sample_json_response%>
+  </code>
+</pre>
 <% end %>
 
 <table>
