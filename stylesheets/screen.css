@@ -2427,16 +2427,27 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 /* @group layout-auctions-needs-attention */
 
+.layout-auctions-needs-attention .col-status{
+	width: 14em;
+}
+.layout-auctions-needs-attention .col-accepted-date,
+.layout-auctions-needs-attention .col-opening-date,
+.layout-auctions-needs-attention .col-closing-date,
+.layout-auctions-needs-attention .col-delivery-deadline{
+	width: 8em;	
+}
 
 .layout-auctions-needs-attention.user-type-admin .section-bids,
-.layout-auctions-needs-attention.user-type-admin .section-delivery-needed,
-.layout-auctions-needs-attention.user-type-admin .section-payments-pending{
+.layout-auctions-needs-attention.user-type-admin .section-bidding-vendors,
+.layout-auctions-needs-attention.user-type-admin .section-delivery-vendors,
+.layout-auctions-needs-attention.user-type-admin .section-payment-vendors{
 	display: none;	
 }
 
-.layout-auctions-needs-attention.user-type-vendor .section-drafts,
-.layout-auctions-needs-attention.user-type-vendor .section-delivery-pending,
-.layout-auctions-needs-attention.user-type-vendor .section-payment-needed{
+.layout-auctions-needs-attention.user-type-vendor .section-pre-bidding,
+.layout-auctions-needs-attention.user-type-admin .section-bidding-admins,
+.layout-auctions-needs-attention.user-type-vendor .section-delivery-admins,
+.layout-auctions-needs-attention.user-type-vendor .section-payment-admins{
 	display: none;
 }
 

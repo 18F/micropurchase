@@ -16,7 +16,7 @@ excerpt: none
           <thead>
             <tr>
               <td class="col-title">Title</td>
-              <td class="col-starting-date">Opens on</td>
+              <td class="col-opening-date">Opens on</td>
               <td class="col-closing-date">Closes on</td>
               <td class="col-status">Status</td>
             </tr>
@@ -24,32 +24,32 @@ excerpt: none
           <tbody>
             <tr>
               <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Stand-alone modular utilisation</a></td>
-              <td class="col-starting-date"><span class="date">7/25/2016</span> <span class="time">10:00am EST</span></td>
-              <td class="col-ending-date"><span class="date">7/25/2016</span> <span class="time">10:00am EST</span></td>
+              <td class="col-opening-date"><span class="date">7/25/2016</span> <span class="time">10:00am EST</span></td>
+              <td class="col-closing-date"><span class="date">7/25/2016</span> <span class="time">10:00am EST</span></td>
               <td class="col-status">Coming soon</td>
             </tr>
             <tr>
               <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Switchable system-worthy</a></td>
-              <td class="col-starting-date"><span class="date">8/3/2016</span> <span class="time">12:00am EST</span></td>
-              <td class="col-ending-date"><span class="date">8/6/2016</span> <span class="time">12:00am EST</span></td>
+              <td class="col-opening-date"><span class="date">8/3/2016</span> <span class="time">12:00am EST</span></td>
+              <td class="col-closing-date"><span class="date">8/6/2016</span> <span class="time">12:00am EST</span></td>
               <td class="col-status">Coming soon</td>
             </tr>
             <tr>
               <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Visionary motivating website</a></td>
-              <td class="col-starting-date is-blank">Not specified</td>
-              <td class="col-ending-date is-blank">Not specified</td>
+              <td class="col-opening-date is-blank">Not specified</td>
+              <td class="col-closing-date is-blank">Not specified</td>
               <td class="col-status">Pending C2 approval</td>
             </tr>
             <tr>
               <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Untitled</a></td>
-              <td class="col-starting-date is-blank">Not specified</td>
-              <td class="col-ending-date is-blank">Not specified</td>
+              <td class="col-opening-date is-blank">Not specified</td>
+              <td class="col-closing-date is-blank">Not specified</td>
               <td class="col-status">Ready to publish</td>
             </tr>
           </tbody>
         </table>      
       </section>
-      <section class="section-bidding">
+      <section class="section-bidding-admins">
         <h1>Bidding</h1>
         <table>
           <thead>
@@ -88,14 +88,14 @@ excerpt: none
           </tbody>
         </table>      
       </section>
-      <section class="section-bidding">
+      <section class="section-bidding-vendors">
         <h1>Bidding</h1>
         <table>
           <thead>
             <tr>
               <td class="col-title">Auction</td>
               <td class="col-bid">Your bid</td>
-              <td class="col-closing-date">Closing date</td>
+              <td class="col-closing-date">Closes on</td>
               <td class="col-status">Status</td>
             </tr>
           </thead>
@@ -127,7 +127,36 @@ excerpt: none
           </tbody>
         </table>      
       </section>
-      <section class="section-delivery">
+      <section class="section-delivery-admins">
+        <h1>Delivery</h1>
+        <table>
+          <thead>
+            <tr>
+              <td class="col-title">Title</td>
+              <td class="col-delivery-deadline">Deadline</td>
+              <td class="col-status">Status</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show/?auctionWorkflowState=ready-for-work-admins">Stand-alone modular utilisation</a></td>
+              <td class="col-delivery-deadline"><time><span class="date">7/22/2016</span> <span class="time">12:00am EST</span></time></td>
+              <td class="col-status">Ready for work</td>
+            </tr>
+            <tr>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show/?auctionWorkflowState=delivery-past-due-admins">Stand-alone modular utilisation</a></td>
+              <td class="col-delivery-deadline"><time><span class="date">7/12/2016</span> <span class="time">14:00pm EST</span></time></td>
+              <td class="col-status">Delivery past due</td>
+            </tr>
+            <tr>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show/?auctionWorkflowState=work-in-progress-admins">Switchable system-worthy</a></td>
+              <td class="col-delivery-deadline"><time><span class="date">7/29/2016</span> <span class="time">10:00am EST</span></time></td>
+              <td class="col-status">Work in progress</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="section-delivery-vendors">
         <h1>Delivery</h1>
         <table>
           <thead>
@@ -139,28 +168,57 @@ excerpt: none
           </thead>
           <tbody>
             <tr>
-              <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Stand-alone modular utilisation</a></td>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show/?auctionWorkflowState=work-in-progress-vendors">Stand-alone modular utilisation</a></td>
               <td class="col-delivery-deadline"><time><span class="date">7/22/2016</span> <span class="time">12:00am EST</span></time></td>
               <td class="col-status">Ready for work</td>
             </tr>
             <tr>
-              <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Stand-alone modular utilisation</a></td>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show/?auctionWorkflowState=work-in-progress-vendors">Stand-alone modular utilisation</a></td>
               <td class="col-delivery-deadline"><time><span class="date">7/12/2016</span> <span class="time">14:00pm EST</span></time></td>
               <td class="col-status">Delivery past due</td>
             </tr>
             <tr>
-              <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Switchable system-worthy</a></td>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show/?auctionWorkflowState=work-in-progress-vendors">Switchable system-worthy</a></td>
               <td class="col-delivery-deadline"><time><span class="date">7/29/2016</span> <span class="time">10:00am EST</span></time></td>
               <td class="col-status">Work in progress</td>
             </tr>
           </tbody>
         </table>
       </section>
-      <section class="section-payment">
+      <section class="section-payment-admins">
         <h1>Payment</h1>
         <div class="boilerplate">
           <p>There are no auctions in need of payment.</p>
         </div>
+        <table>
+          <thead>
+            <tr>
+              <td scope="col" class="col-title">Title</td>
+              <td scope="col" class="col-accepted-date">Accepted date</td>
+              <td scope="col" class="col-status">Status</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show/?auctionWorkflowState=awaiting-payment-admins">Stand-alone modular utilisation</a></td>
+              <td class="col-accepted-date"><time><span class="date">8/6/2016</span> <span class="time">12:00am EST</span></time></td>
+              <td class="col-status">Awaiting payment</td>
+            </tr>
+            <tr>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show/?auctionWorkflowState=payment-needed-admins">Stand-alone modular utilisation</a></td>
+              <td class="col-accepted-date"><time><span class="date">8/6/2016</span> <span class="time">12:00am EST</span></time></td>
+              <td class="col-status">Payment needed</td>
+            </tr>
+            <tr>
+              <td class="col-title"><a href="{{site.baseurl}}/auctions/show/?auctionWorkflowState=pending-payment-confirmation-admins">Switchable system-worthy</a></td>
+              <td class="col-accepted-date"><time><span class="date">8/6/2016</span> <span class="time">12:00am EST</span></time></td>
+              <td class="col-vendor">Pending payment confirmation</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="section-payment-vendors">
+        <h1>Payment</h1>
         <table>
           <thead>
             <tr>
@@ -179,16 +237,6 @@ excerpt: none
               <td class="col-title"><a href="{{site.baseurl}}/auctions/show?auctionWorkflowState=published-closed-pending-payment-admins">Switchable system-worthy</a></td>
               <td class="col-accepted-date"><time><span class="date">8/6/2016</span> <span class="time">12:00am EST</span></time></td>
               <td class="col-vendor">Payment confirmation needed</td>
-            </tr>
-            <tr>
-              <td class="col-title"><a href="{{site.baseurl}}/auctions/show?auctionWorkflowState=published-closed-pending-payment-admins">Visionary motivating website</a></td>
-              <td class="col-accepted-date"><time><span class="date">8/6/2016</span> <span class="time">12:00am EST</span></time></td>
-              <td class="col-status">Pending payment</td>
-            </tr>
-            <tr>
-              <td class="col-title"><a href="{{site.baseurl}}/auctions/show?auctionWorkflowState=published-closed-pending-payment-admins">Something wicked this way comes</a></td>
-              <td class="col-accepted-date"><time><span class="date">8/6/2016</span> <span class="time">12:00am EST</span></time></td>
-              <td class="col-status">Pending payment</td>
             </tr>
           </tbody>
         </table>
