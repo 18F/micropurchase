@@ -10,7 +10,7 @@ describe Admin::AuctionShowViewModel do
       data = view_model.admin_data
 
       expect(data).to have_key('C2 proposal URL')
-      expect(data).to have_key('C2 approved at')
+      expect(data).to have_key('C2 approval status')
     end
   end
 
