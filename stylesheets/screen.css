@@ -2061,6 +2061,7 @@ main div.wrap > form { max-width: 576px; }
 
 /* @group auction */
 
+.auction a,
 .auction a h1{
 	font-size: 20px;
 	font-family: Merriweather, Georgia, serif;
