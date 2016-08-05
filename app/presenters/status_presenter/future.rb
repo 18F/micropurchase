@@ -1,4 +1,4 @@
-class StatusPresenter::Future < Struct.new(:auction)
+class StatusPresenter::Future < StatusPresenter::Base
   def start_label
     "Bid start time"
   end
