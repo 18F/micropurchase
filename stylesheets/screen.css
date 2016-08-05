@@ -2061,8 +2061,8 @@ main div.wrap > form { max-width: 576px; }
 
 /* @group auction */
 
-.auction a,
-.auction a h1{
+.auction a h1,
+.auction a:visited h1{
 	font-size: 20px;
 	font-family: Merriweather, Georgia, serif;
 	letter-spacing: 0;
@@ -2429,8 +2429,8 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 /* @group layout-auctions-closed */
 
-.layout-auctions-closed .auction .auction-title{
-	margin-right: 5em;
+.layout-auctions-closed .auction h1{
+	margin-right: 3.3em;
 
 }
 .layout-auctions-closed .auction dl{
