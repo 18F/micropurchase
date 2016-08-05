@@ -10,7 +10,7 @@ class UpdateAuction
     update_auction_ended_job
 
     if vendor_ineligible?
-      auction.errors.add(:base, 'The vendor cannot be paid')
+      auction.errors.add(:base, I18n.t('errors.update_auction.vendor_ineligible'))
       false
     else
       perform_approved_auction_tasks

@@ -6,9 +6,9 @@ Feature: Admin creates skills in the admins panel
     Given I am an administrator
     When I sign in
     And I visit the skills admin page
-    And I click on the "Add skill" link
+    And I click on the add skill link
     And I fill the "skill_name" field with "baking"
-    And I click on the "Create Skill" button
+    And I click on the create skill button
     Then I should be on the skills admin page
     And I should see "baking" in the list of skills
 
@@ -17,7 +17,7 @@ Feature: Admin creates skills in the admins panel
     And there is a skill for "baking" already
     When I sign in
     And I visit the skills admin page
-    And I click on the "Add skill" link
+    And I click on the add skill link
     And I fill the "skill_name" field with "baking"
-    And I click on the "Create Skill" button
-    Then I should see an error that "Name has already been taken"
+    And I click on the create skill button
+    Then I should see an error that the skill name is invalid
