@@ -14,12 +14,16 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
     end
   end
 
-  def create_c2_proposal_partial
-    if auction.purchase_card == 'default' && auction.c2_proposal_url.blank?
-      'admin/auctions/create_c2_proposal'
+  def c2_approval_partial
+    if auction.purchase_card == 'default' && auction.c2_approval_status != 'approved'
+      'auctions/bid_status'
     else
       'components/null'
     end
+  end
+
+  def c2_proposal_status
+    C2StatusPresenterFactory.new(auction: auction).create
   end
 
   def admin_data
@@ -106,7 +110,7 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
     if auction.purchase_card == 'default'
       {
         'C2 proposal URL' => auction.c2_proposal_url,
-        'C2 approved at' => auction.c2_approved_at
+        'C2 approval status' => auction.c2_approval_status
       }
     else
       { }

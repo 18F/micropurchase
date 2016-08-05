@@ -6,7 +6,7 @@ class StatusPresenterFactory
   end
 
   def create
-    "StatusPresenter::#{status_name}".constantize.new(auction)
+    Object.const_get("StatusPresenter::#{status_name}").new(auction)
   end
 
   private

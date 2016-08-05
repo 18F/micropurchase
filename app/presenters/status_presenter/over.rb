@@ -1,4 +1,4 @@
-class StatusPresenter::Over < Struct.new(:auction)
+class StatusPresenter::Over < StatusPresenter::Base
   def start_label
     "Auction started at"
   end

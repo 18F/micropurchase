@@ -4,8 +4,33 @@ Then(/^I should see an alert that "([^"]*)"$/) do |message|
   end
 end
 
+Then(/^I should see a warning that "([^"]*)"$/) do |message|
+  within("div.usa-alert.usa-alert-warning") do
+    expect(page).to have_content(message)
+  end
+end
+
+Then(/^I should see an error that "([^"]*)"$/) do |message|
+  within("div.usa-alert.usa-alert-error") do
+    expect(page).to have_content(message)
+  end
+end
+
 Then(/^I should see an alert that$/) do |message|
   step("I should see an alert that \"#{message}\"")
+end
+
+Then(/^I should see an error that the skill name is invalid$/) do
+  invalid_message = "Name #{I18n.t('errors.messages.taken')}"
+  step("I should see an error that \"#{invalid_message}\"")
+end
+
+Then(/^I should see an alert that the start price is invalid$/) do
+  invalid_message = I18n.t(
+    'activerecord.errors.models.auction.attributes.start_price.invalid',
+    start_price: AuctionThreshold::MICROPURCHASE
+  )
+  step("I should see an alert that \"#{invalid_message}\"")
 end
 
 Then(/^I should see an alert that my DUNS number was not found in Sam\.gov$/) do
@@ -30,16 +55,9 @@ Then(/^I should not see an alert that my DUNS number was not found in Sam\.gov$/
   )
 end
 
-Then(/^I should see a warning that "([^"]*)"$/) do |message|
-  within("div.usa-alert.usa-alert-warning") do
-    expect(page).to have_content(message)
-  end
-end
-
-Then(/^I should see an error that "([^"]*)"$/) do |message|
-  within("div.usa-alert.usa-alert-error") do
-    expect(page).to have_content(message)
-  end
+Then(/^I should see an error that the vendor cannot be paid$/) do
+  error_message = I18n.t('errors.update_auction.vendor_ineligible')
+  step("I should see an error that \"#{error_message}\"")
 end
 
 Then(/^I should see a success message that "([^"]*)"$/) do |message|

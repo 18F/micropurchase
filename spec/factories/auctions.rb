@@ -131,7 +131,7 @@ FactoryGirl.define do
 
     trait :c2_approved do
       c2_proposal_url 'https://c2-dev.18f.gov/proposals/2486'
-      c2_approved_at { Time.current }
+      c2_approval_status :approved
     end
 
     trait :not_evaluated do

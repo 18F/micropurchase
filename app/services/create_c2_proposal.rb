@@ -6,7 +6,10 @@ class CreateC2Proposal < C2ApiWrapper
   end
 
   def perform
-    auction.update(c2_proposal_url: proposal_url)
+    auction.update(
+      c2_proposal_url: proposal_url,
+      c2_approval_status: :pending_approval
+    )
   rescue Faraday::ClientError => error
     raise Error, error
   end

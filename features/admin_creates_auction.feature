@@ -8,7 +8,7 @@ Feature: Admin creates auctions in the admins panel
     And there is a skill in the system
     When I sign in
     And I visit the auctions admin page
-    When I click on the "Add auction" link
+    When I click on the add auction link
     And I edit the new auction form
     Then I should see that the auction type is sealed bid
     And I click to create an auction
@@ -25,7 +25,7 @@ Feature: Admin creates auctions in the admins panel
     And there is a skill in the system
     When I sign in
     And I visit the auctions admin page
-    When I click on the "Add auction" link
+    When I click on the add auction link
     Then I should see an estimated delivery deadline of 12 business days from now
     When I change the auction end date
     Then I should see the updated delivery deadline
@@ -36,12 +36,9 @@ Feature: Admin creates auctions in the admins panel
     And there is a skill in the system
     And I sign in
     And I visit the auctions admin page
-    When I click on the "Add auction" link
+    When I click on the add auction link
     And I edit the new auction form
     And I set the auction start price to $24000
     And I click to create an auction
     Then I should see that the form preserves the previously entered values
-    And I should see an alert that
-    """
-    You do not have permission to publish auctions with a start price over $3500
-    """
+    And I should see an alert that the start price is invalid

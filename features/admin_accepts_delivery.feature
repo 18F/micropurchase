@@ -10,7 +10,7 @@ Feature: Admin accepts delivery of a project
     And I sign in
     When I visit the admin form for that auction
     And I select the result as accepted
-    And I click on the "Update" button
+    And I click on the update button
     Then I should see that the auction has a C2 Proposal URL
     And I should see that the auction was accepted
 
@@ -20,8 +20,8 @@ Feature: Admin accepts delivery of a project
     And I sign in
     When I visit the admin form for that auction
     And I select the result as accepted
-    And I click on the "Update" button
-    Then I should see an error that "The vendor cannot be paid"
+    And I click on the update button
+    Then I should see an error that the vendor cannot be paid
 
   Scenario: Marking an auction as accepted where the vendor does not have payment information
     Given I am an administrator
@@ -29,5 +29,5 @@ Feature: Admin accepts delivery of a project
     And I sign in
     When I visit the admin form for that auction
     And I select the result as accepted
-    And I click on the "Update" button
+    And I click on the update button
     Then the vendor should receive an email requesting payment information

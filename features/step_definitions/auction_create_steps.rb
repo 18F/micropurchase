@@ -134,11 +134,11 @@ Given(/^the auction is for a different purchase card$/) do
 end
 
 Given(/^the c2 proposal for the auction is approved$/) do
-  @auction.update(c2_approved_at: Time.current)
+  @auction.update(c2_approval_status: :approved)
 end
 
 Given(/^the c2 proposal for the auction is not approved$/) do
-  @auction.update(c2_approved_at: nil)
+  @auction.update(c2_approval_status: :not_requested)
 end
 
 Given(/^the auction does not have a c2 proposal url$/) do
