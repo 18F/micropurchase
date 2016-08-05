@@ -1,0 +1,10 @@
+en:
+  links_and_buttons:
+    auctions:
+      all: 'All'
+      needs_attention: 'Needs Attention'
+      draft: 'Draft Auctions'
+      closed: 'Closed'
+      add: 'Add auction'
+    skills:
+      add: 'Add skill'

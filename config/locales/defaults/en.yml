@@ -8,6 +8,14 @@ en:
 
     errors:
       models:
+        auction:
+          attributes:
+            start_price:
+              invalid:
+               "You do not have permission to publish auctions with a start
+               price over $%{start_price}"
+            delivery_due_at:
+              blank: "(or 'Due in days') can't be blank"
         bid:
           permissions: 'You are not allowed to bid on this auction'
           amount:
@@ -17,14 +25,6 @@ en:
           attributes:
             duns_number:
               invalid: 'format is invalid'
-        auction:
-          attributes:
-            start_price:
-              invalid:
-               "You do not have permission to publish auctions with a start
-               price over $%{start_price}"
-            delivery_due_at:
-              blank: "(or 'Due in days') can't be blank"
   controllers:
     admin:
       auctions:
