@@ -9,153 +9,19 @@ excerpt: none
   {% include auctions-index-header.html %}
   <main role="main" id="main">
     <div class="wrapper">
-      <table>
-        <thead>
-          <tr>
-            <th scope="col" class="col-title">Title</th>
-            <th scope="col" class="col-project">Project</th>
-            <th scope="col" class="col-close-date">Close date</th>
-            <th scope="col" class="col-close-amount">Close amt</th>
-            <th scope="col" class="col-num-bids"># bids</th>
-            <th scope="col" class="col-winner">Winner</th>
-            <th scope="col" class="col-skills">Skills</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Testing C2 integration</a></td>
-            <td class="col-project">C2</td>
-            <td class="col-close-date"><time>5/03/2016</time></td>
-            <td class="col-close-amount">$375</td>
-            <td class="col-num-bids">1</td>
-            <td class="col-winner"><a href="{{site.baseurl}}/people/vendors/show">Dave Zvenyach</a></td>
-            <td class="col-skills">
-              <ul>
-                <li>Ruby</li>
-              </ul>
-            </td>
-          </tr>
-          <tr>
-            <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Stand-alone modular utilisation</a></td>
-            <td class="col-project">18F Handbook</td>
-            <td class="col-close-date"><time>4/27/2016</time></td>
-            <td class="col-close-amount">$2500</td>
-            <td class="col-num-bids">2</td>
-            <td class="col-winner"><a href="{{site.baseurl}}/people/vendors/show">Zac Cohn</a></td>
-            <td class="col-skills">
-              <ul>
-                <li>DevOps</li>
-              </ul>
-            </td>
-          </tr>
-          <tr>
-            <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Expanded multi-tasking adapter</a></td>
-            <td class="col-project">My cool project</td>
-            <td class="col-close-date"><time>4/25/2016</time></td>
-            <td class="col-close-amount">$1</td>
-            <td class="col-num-bids">15</td>
-            <td class="col-winner"><a href="{{site.baseurl}}/people/vendors/show">Whosit Whatshisface</a></td>
-            <td class="col-skills">
-              <ul>
-                <li>Design</li>
-              </ul>
-            </td>
-          </tr>
-          <tr>
-            <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Stand-alone modular utilisation</a></td>
-            <td class="col-project">My cool project</td>
-            <td class="col-close-date"><time>4/22/2016</time></td>
-            <td class="col-close-amount">$375</td>
-            <td class="col-num-bids">5</td>
-            <td class="col-winner"><a href="{{site.baseurl}}/people/vendors/show">M. Blakely</a></td>
-            <td class="col-skills">
-              <ul>
-                <li>Django</li>
-                <li>Python</li>
-              </ul>
-            </td>
-          </tr>
-          <tr>
-            <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Stand-alone modular utilisation</a></td>
-            <td class="col-project">My cool project</td>
-            <td class="col-close-date"><time>5/03/2016</time></td>
-            <td class="col-close-amount">$375</td>
-            <td class="col-num-bids">1</td>
-            <td class="col-winner"><a href="{{site.baseurl}}/people/vendors/show">Dave Zvenyach</a></td>
-            <td class="col-skills">
-              <ul>
-                <li>Ruby</li>
-              </ul>
-            </td>
-          </tr>
-          <tr>
-            <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Stand-alone modular utilisation</a></td>
-            <td class="col-project">Another project</td>
-            <td class="col-close-date"><time>4/27/2016</time></td>
-            <td class="col-close-amount">$2500</td>
-            <td class="col-num-bids">2</td>
-            <td class="col-winner"><a href="{{site.baseurl}}/people/vendors/show">Zac Cohn</a></td>
-            <td class="col-skills">
-              <ul>
-                <li>DevOps</li>
-              </ul>
-            </td>
-          </tr>
-          <tr>
-            <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Stand-alone modular utilisation</a></td>
-            <td class="col-project">My cool project</td>
-            <td class="col-close-date"><time>4/25/2016</time></td>
-            <td class="col-close-amount">$1</td>
-            <td class="col-num-bids">15</td>
-            <td class="col-winner"><a href="{{site.baseurl}}/people/vendors/show">Whosit Whatshisface</a></td>
-            <td class="col-skills">
-              <ul>
-                <li>Design</li>
-              </ul>
-            </td>
-          </tr>
-          <tr>
-            <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Expanded multi-tasking adapter</a></td>
-            <td class="col-project">My cool project</td>
-            <td class="col-close-date"><time>4/22/2016</time></td>
-            <td class="col-close-amount">$375</td>
-            <td class="col-num-bids">5</td>
-            <td class="col-winner"><a href="{{site.baseurl}}/people/vendors/show">M. Blakely</a></td>
-            <td class="col-skills">
-              <ul>
-                <li>Django</li>
-                <li>Python</li>
-              </ul>
-            </td>
-          </tr>
-          <tr>
-            <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Testing losing bidder email send</a></td>
-            <td class="col-project">My cool project</td>
-            <td class="col-close-date"><time>5/03/2016</time></td>
-            <td class="col-close-amount">$375</td>
-            <td class="col-num-bids">1</td>
-            <td class="col-winner"><a href="{{site.baseurl}}/people/vendors/show">Dave Zvenyach</a></td>
-            <td class="col-skills">
-              <ul>
-                <li>Ruby</li>
-              </ul>
-            </td>
-          </tr>
-          <tr>
-            <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Stand-alone modular utilisation</a></td>
-            <td class="col-project">C2</td>
-            <td class="col-close-date"><time>4/27/2016</time></td>
-            <td class="col-close-amount">$2500</td>
-            <td class="col-num-bids">2</td>
-            <td class="col-winner"><a href="{{site.baseurl}}/people/vendors/show">Zac Cohn</a></td>
-            <td class="col-skills">
-              <ul>
-                <li>DevOps</li>
-              </ul>
-            </td>
-          </tr>
-         </tbody>
-      </table>
+
+      {% include _auction_closed.html %}
+      {% include _auction_closed.html %}
+      {% include _auction_closed.html %}
+      {% include _auction_closed.html %}
+      {% include _auction_closed.html %}
+      {% include _auction_closed.html %}
+      {% include _auction_closed.html %}
+      {% include _auction_closed.html %}
+      {% include _auction_closed.html %}
+      {% include _auction_closed.html %}
+      {% include _auction_closed.html %}
+
       <nav class="pagination">
         <a href="#" class="pagination-prev is-disabled">Prev</a>
         <span class="pagination-page is-current">1</span>
