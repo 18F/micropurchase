@@ -132,15 +132,7 @@
           "200": {
             "description": "Returns a single auction",
             "schema": {
-              "type": "object",
-              "required": [
-                "auction"
-              ],
-              "properties": {
-                "auction": {
-                  "$ref": "#\/definitions\/Auction"
-                }
-              }
+              "$ref": "#\/definitions\/AuctionResponse"
             }
           },
           "404": {
@@ -203,15 +195,7 @@
           "200": {
             "description": "Returns the bid object that was created",
             "schema": {
-              "type": "object",
-              "required": [
-                "bid"
-              ],
-              "properties": {
-                "bid": {
-                  "$ref": "#\/definitions\/Bid"
-                }
-              }
+              "$ref": "#\/definitions\/BidResponse"
             },
             "examples": {
               "application/json": {
@@ -264,18 +248,7 @@
           "200": {
             "description": "Returns a list of auctions",
             "schema": {
-              "type": "object",
-              "required": [
-                "auctions"
-              ],
-              "properties": {
-                "auctions": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#\/definitions\/AdminAuction"
-                  }
-                }
-              }
+              "$ref": "#\/definitions\/AdminAuctionListResponse"
             }
           },
           "403": {
@@ -310,15 +283,7 @@
           "200": {
             "description": "Returns a single auction",
             "schema": {
-              "type": "object",
-              "required": [
-                "auction"
-              ],
-              "properties": {
-                "auction": {
-                  "$ref": "#\/definitions\/AdminAuction"
-                }
-              }
+              "$ref": "#\/definitions\/AdminAuctionResponse"
             }
           },
           "403": {
@@ -371,7 +336,39 @@
     }
   },
   "definitions": {
+    "AuctionResponse": {
+      "title": "Auction response",
+      "description": "The API currently returns a wrapper around a single auction in its response",
+      "type": "object",
+      "required": [
+        "auction"
+      ],
+      "properties": {
+        "auction": {
+          "$ref": "#\/definitions\/Auction"
+        }
+      }
+    },
+    "AuctionListResponse": {
+      "title": "Auction list response",
+      "description": "This response contains an array of one or more auctions",
+      "type": "object",
+      "required": [
+        "auctions"
+      ],
+      "properties": {
+        "auctions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#\/definitions\/Auction"
+          }
+        }
+      }
+    },
     "Auction": {
+      "title": "Auction",
+      "description": "The public representation of a single auction",
       "type": "object",
       "required": [
         "id",
@@ -506,7 +503,22 @@
         }
       }
     },
+    "BidResponse": {
+      "title": "Bid Response",
+      "description": "Returned as a response to submitting a bid",
+      "type": "object",
+      "required": [
+        "bid"
+      ],
+      "properties": {
+        "bid": {
+          "$ref": "#\/definitions\/Bid"
+        }
+      }
+    },
     "Bid": {
+      "title": "Bid",
+      "description": "The public representation of a single bid",
       "type": "object",
       "required": [
         "bidder_id",
@@ -640,7 +652,39 @@
         }
       }
     },
+    "AdminAuctionResponse": {
+      "title": "Admin Auction Response",
+      "description": "The response for requesting a single auction via the admin API",
+      "type": "object",
+      "required": [
+        "auction"
+      ],
+      "properties": {
+        "auction": {
+          "$ref": "#\/definitions\/Auction"
+        }
+      }
+    },
+    "AdminAuctionListResponse": {
+      "title": "Admin Auction List Response",
+      "description": "The response for requesting admin auctions",
+      "type": "object",
+      "required": [
+        "auctions"
+      ],
+      "properties": {
+        "auctions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#\/definitions\/Auction"
+          }
+        }
+      }
+    },
     "AdminAuction": {
+      "title": "Admin Auction",
+      "description": "The admin view of a single auction. This includes all of the fields in the regular `Auction` class as well as some additional privileged fields",
       "allOf": [
         {
           "$ref": "#\/definitions\/Auction"
@@ -713,6 +757,7 @@
       ]
     },
     "AdminUserInfo": {
+      "title": "Admin User Info",
       "description": "Metadata about users",
       "type": "object",
       "required": [
@@ -726,6 +771,7 @@
           "properties": {
             "total_users": {
               "title": "Total Users",
+              "description": "The total users in the system",
               "type": "integer",
               "minimum": 0
             },
@@ -741,6 +787,7 @@
             },
             "notes": {
               "title": "Notes",
+              "description": "Used for storing some notes about users",
               "type": "string"
             }
           },
@@ -752,6 +799,8 @@
           ]
         },
         "non_admin_users": {
+          "title": "Non-admin Users",
+          "description": "An array of all the system's users",
           "type": "array",
           "uniqueItems": true,
           "items": {
@@ -759,6 +808,8 @@
           }
         },
         "admin_users": {
+          "title": "Admin Users",
+          "description": "An array of all the admin users",
           "type": "array",
           "uniqueItems": true,
           "items": {
@@ -768,6 +819,8 @@
       }
     },
     "User": {
+      "title": "User",
+      "description": "The admin information about a user",
       "type": "object",
       "required": [
         "id",
@@ -861,6 +914,9 @@
       }
     },
     "Error": {
+      "title": "Error",
+      "description": "The standard format for error messages",
+      "type": "object",
       "required": [
         "error"
       ],

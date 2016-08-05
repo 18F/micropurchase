@@ -6,7 +6,7 @@
 <% path.operations.each do |v| %>
 <h4><%= v.verb %></h4>
 
-<p><%= v.description %></p>
+<p><%= v.html_description %></p>
 
 <% if v.sample_json_response? %>
 <p>Example response:</p>
@@ -31,7 +31,7 @@
     <% v.responses.each do |response| %>
     <tr>
       <td><%= response.code %></td>
-      <td><%= response.description %></td>
+      <td><%= response.html_description %></td>
       <td><%= response.compact_type %></td>
     </tr>
     <% end %>
@@ -49,7 +49,7 @@
 <dl>
   <% definition.properties.each do |property| %>
   <dt><code><%= property.name %></code>, <em><%= property.compact_type %></em></dt>
-  <dd><strong><%= property.title %>:</strong> <%= property.description %></dd>
+  <dd><strong><%= property.title %>:</strong> <%= property.inline_html_description %></dd>
   <% end %>
 </dl>
 <% end %>

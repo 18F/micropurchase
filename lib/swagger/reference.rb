@@ -1,4 +1,5 @@
 class Swagger::Reference
+  include Swagger::Mixins::Description
   attr_accessor :name, :fields
 
   def initialize(name, fields, specification)

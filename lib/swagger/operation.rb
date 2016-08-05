@@ -1,6 +1,8 @@
 require_relative 'response'
 
 class Swagger::Operation
+  include Swagger::Mixins::Description
+
   attr_accessor :fields
 
   def initialize(verb, fields, specification)

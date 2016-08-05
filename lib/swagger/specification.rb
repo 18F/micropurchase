@@ -1,5 +1,6 @@
 require 'open-uri'
 
+require_relative 'mixins/description'
 require_relative 'reference'
 require_relative 'info'
 require_relative 'path'

@@ -10,6 +10,8 @@ require_relative 'schema/array'
 require_relative 'schema/object'
 
 class Swagger::Schema
+  include Swagger::Mixins::Description
+
   attr_accessor :fields
 
   def initialize(name, fields, specification)

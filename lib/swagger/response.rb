@@ -1,4 +1,6 @@
 class Swagger::Response
+  include Swagger::Mixins::Description
+
   attr_accessor :fields
 
   def initialize(code, fields, specification)
