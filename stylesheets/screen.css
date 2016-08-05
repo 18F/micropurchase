@@ -2676,6 +2676,7 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 .auction-workflow h1{ 
 	font: inherit;
 	font-size: 18px;
+	margin-bottom: 0.4em;
 	color: inherit;
 	line-height: 1.2em;
 	font-weight: 600;
