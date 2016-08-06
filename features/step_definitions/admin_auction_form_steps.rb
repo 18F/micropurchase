@@ -223,14 +223,14 @@ Then(/^I should see that the form preserves the previously entered values$/) do
   expect(billable.value).to eq(@billable.to_s)
 end
 
-When(/^I check the "Paid" checkbox$/) do
+When(/^I check the 'Paid' checkbox$/) do
   check('auction_paid_at')
 end
 
-When(/^I should see the disabled "Paid" checkbox$/) do
+When(/^I should see the disabled 'Paid' checkbox$/) do
   expect(page).to have_checked_field('auction_paid_at', disabled: true)
 end
 
-When(/^I should not see the "Paid" checkbox$/) do
+When(/^I should not see the 'Paid' checkbox$/) do
   expect(page).not_to have_field('auction_paid_at')
 end

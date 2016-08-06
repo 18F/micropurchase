@@ -14,7 +14,7 @@ Feature: Admin edits auctions in the admins panel
     Then I should see the current auction attributes in the form
     And I should be able to edit the existing auction form
 
-    When I click on the "Update" button
+    When I click on the update button
     Then I should be on the admin auctions page
     And I expect my auction changes to have been saved
 
@@ -33,7 +33,7 @@ Feature: Admin edits auctions in the admins panel
     Then I should see a select box with all the customers in the system
 
     When I select a customer on the form
-    And I click on the "Update" button
+    And I click on the update button
     Then I expect the customer to have been saved
 
     When I click to edit the auction
@@ -47,7 +47,7 @@ Feature: Admin edits auctions in the admins panel
     And there is a skill in the system
     When I visit the admin form for that auction
     And I select a skill on the form
-    And I click on the "Update" button
+    And I click on the update button
     And I click to edit the auction
     Then I should see the skill that I set for the auction selected
 
@@ -57,8 +57,8 @@ Feature: Admin edits auctions in the admins panel
     And there is an accepted auction
     And the auction is for a different purchase card
     When I visit the admin form for that auction
-    And I check the "Paid" checkbox
-    And I click on the "Update" button
+    And I check the 'Paid' checkbox
+    And I click on the update button
     Then I should see when the winning vendor was paid in ET
 
   Scenario: Accepted auction already marked as paid
@@ -67,7 +67,7 @@ Feature: Admin edits auctions in the admins panel
     And there is a paid auction
     And the auction is for a different purchase card
     When I visit the admin form for that auction
-    Then I should see the disabled "Paid" checkbox
+    Then I should see the disabled 'Paid' checkbox
 
   Scenario: Marking non-accepted auction as paid
     Given I am an administrator
@@ -75,4 +75,4 @@ Feature: Admin edits auctions in the admins panel
     And there is an auction that needs evaluation
     And the auction is for a different purchase card
     When I visit the admin form for that auction
-    Then I should not see the "Paid" checkbox
+    Then I should not see the 'Paid' checkbox

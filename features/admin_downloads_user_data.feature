@@ -7,7 +7,7 @@ Feature: Admin downloads user data
     Given I am an administrator
     And I sign in
     When I visit the admin vendors page
-    Then I should see a "Download CSV" link
+    Then I should see a Download CSV link
 
   Scenario: Downloading a CSV from the users page
     Given I am an administrator
@@ -15,6 +15,6 @@ Feature: Admin downloads user data
 
     Given there is a user in SAM.gov who is a small business
     When I visit the admin vendors page
-    And I click on the "Download CSV" link
+    And I click on the Download CSV link
     Then I should receive a CSV file
     And the file should contain non-admin user data

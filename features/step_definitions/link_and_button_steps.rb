@@ -42,6 +42,26 @@ When(/^I click on the add auction link$/) do
   step("I click on the \"#{add_link}\" link")
 end
 
+When(/^I click on the add customer button$/) do
+  add_link = I18n.t('links_and_buttons.customers.add')
+  step("I click on the \"#{add_link}\" link")
+end
+
+When(/^I click on the create customer button$/) do
+  create_button = I18n.t('helpers.submit.create', model: 'Customer')
+  step("I click on the \"#{create_button}\" button")
+end
+
+When(/^I click on the Download CSV link$/) do
+  link = I18n.t('links_and_buttons.users.download_csv')
+  step("I click on the \"#{link}\" link")
+end
+
+Then(/^I should see a Download CSV link$/) do
+  link = I18n.t('links_and_buttons.users.download_csv')
+  step("I should see a \"#{link}\" link")
+end
+
 When(/^I click on the add skill link$/) do
   add_link = I18n.t('links_and_buttons.skills.add')
   step("I click on the \"#{add_link}\" link")

@@ -25,6 +25,11 @@ Then(/^I should see an error that the skill name is invalid$/) do
   step("I should see an error that \"#{invalid_message}\"")
 end
 
+Then(/^I should see an error that the agency name can't be blank$/) do
+  invalid_message = "Agency name #{I18n.t('errors.messages.blank')}"
+  step("I should see an error that \"#{invalid_message}\"")
+end
+
 Then(/^I should see an alert that the start price is invalid$/) do
   invalid_message = I18n.t(
     'activerecord.errors.models.auction.attributes.start_price.invalid',
@@ -64,6 +69,11 @@ Then(/^I should see a success message that "([^"]*)"$/) do |message|
   within("div.usa-alert.usa-alert-success") do
     expect(page).to have_content(message)
   end
+end
+
+Then(/^I should see a success message that the customer was created successfully$/) do
+  message = I18n.t('controllers.admin.customers.create.success')
+  step("I should see a success message that \"#{message}\"")
 end
 
 Then(/^I should not see a flash message$/) do
