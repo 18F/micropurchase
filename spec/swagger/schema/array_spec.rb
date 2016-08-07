@@ -18,7 +18,7 @@ describe Swagger::Schema::Array do
       let(:array) { Swagger::Schema::Array.new('Name', {'type' => 'array', 'items' => {'$ref' => "#\/definitions\/Thing"}}, nil) }
 
       it 'should not dereference pointers' do
-        expect(array.compact_type).to eq('array of Thing')
+        expect(array.compact_type).to eq('array of <a href="#definition-Thing">Thing</a>')
       end
     end
   end

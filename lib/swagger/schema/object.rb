@@ -14,7 +14,7 @@ class Swagger::Schema::Object < Swagger::Schema
   end
 
   def compact_type
-    name
+    "<a href=\"##{unique_key}\">#{name}</a>".html_safe
     # if properties.length > 0 && properties.length < 3
     #   "<#{name+' ' unless name.nil?}{" + properties.map {|p| '"' + p.name + '": ' + p.compact_type}.join(', ') + '}>'
     # else
@@ -22,8 +22,8 @@ class Swagger::Schema::Object < Swagger::Schema
     # end
   end
 
-  def sample_value
-    ''
+  def default_sample_value
+    "<< #{compact_type} >>".html_safe
   end
 
   private

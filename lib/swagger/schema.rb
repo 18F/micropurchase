@@ -31,6 +31,18 @@ class Swagger::Schema
            :type,
            to: :fields
 
+  def unique_key
+    "definition-#{name}"
+  end
+
+  def sample_value
+    if fields.key?('x-example')
+      fields['x-example']
+    else
+      default_sample_value
+    end
+  end
+
   def self.factory(name, fields, specification)
     if fields.key?('$ref')
       Swagger::Reference.new(name, fields, specification)

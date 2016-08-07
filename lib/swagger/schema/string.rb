@@ -7,7 +7,9 @@ class Swagger::Schema::String < Swagger::Schema
     out
   end
 
-  def sample_value
+  def default_sample_value
+    return fields['x-example'] if fields.key?('x-example')
+
     case format
     when 'date-time'
       '"2016-01-01T13:00:00Z"'
@@ -19,8 +21,10 @@ class Swagger::Schema::String < Swagger::Schema
       '"http://example.com/"'
     when 'markdown'
       '"A **markdown** string"'
+    when 'duns'
+      '"123456789"'
     else
-      ''
+      '"example"'
     end
   end
 end

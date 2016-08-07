@@ -1,0 +1,37 @@
+<aside class="usa-width-one-fourth">
+  <ul class="usa-sidenav-list">
+    <li>
+      <a href="#version">Current Version</a>
+    </li>
+    <li>
+      <a href="#usage">Requests and Errors</a>
+    <li>
+    <li>
+      <a href="#authentication">Authentication</a>
+    </li>
+    <li>
+      <a href="#api">API methods</a>
+      <ul class="usa-sidenav-sub_list">
+        <% @swagger.paths.each do |path| %>
+        <% path.operations.each do |op| %>
+        <li>
+          <a href="#<%= op.unique_key %>"><%= op.verb.upcase %> <%= path.path %></a>
+        </li>
+        <% end %>
+        <% end %>
+      </ul>
+    <li>
+    <li>
+      <a href="#definitions">Type Definitions</a>
+      <ul class="usa-sidenav-sub_list">
+        <% @swagger.definitions.each do |obj| %>
+        <li>
+          <a href="#<%= obj.unique_key %>"><%= obj.name %></a>
+        </li>
+        <% end %>
+      </ul>
+    <li>
+      <a href="#support">Support</a>
+    </li>
+  </ul>
+</aside>

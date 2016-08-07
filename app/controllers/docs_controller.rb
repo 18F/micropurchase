@@ -1,6 +1,6 @@
 require 'swagger'
 
-class PagesController < ApplicationController
+class DocsController < ApplicationController
   before_action :load_swagger
 
   private

@@ -1,0 +1,39 @@
+<h2 id="methods">Methods</h2>
+
+<% @swagger.paths.each do |path| %>
+<% path.operations.each do |v| %>
+<h3 id="<%= v.unique_key %>"><%= v.verb.upcase %> <%= path.path %></h3>
+
+<p><%= v.html_description %></p>
+
+<% if v.sample_json_response? %>
+<p>Example response:</p>
+
+<pre>
+  <code>
+    <%= v.sample_json_response%>
+  </code>
+</pre>
+<% end %>
+
+<table class="usa-table-borderless">
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Meaning</th>
+      <th>Return Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% v.responses.each do |response| %>
+    <tr>
+      <td><%= response.code %></td>
+      <td><%= response.inline_html_description %></td>
+      <td><%= response.compact_type %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% end %>
+<% end %>

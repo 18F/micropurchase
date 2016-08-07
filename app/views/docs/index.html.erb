@@ -1,0 +1,97 @@
+<div class="usa-grid">
+  <h1>API Documentation</h1>
+
+  <%= render partial: 'sidenav' %>
+
+  <div class="usa-width-three-fourths">
+  <p>From <a href="https://18f.gsa.gov/2015/10/13/open-source-micropurchasing/">"Open Source Micro-purchasing: An experiment in federal acquisition"</a>:
+  <blockquote>18F is an open-source team. We currently have hundreds of publicly available repositories, with dozens under active development. We've had numerous contributions from colleagues within government, and contributions from members of the public. But in the next few weeks, we are going to run an experiment: we want to contract for contributions. And we want to do it the 18F way.
+
+    Part of contracting the 18F way is ensuring that all systems are built modularly and with APIs as capable as the human interface. The micro-purchase platform itself is no exception. This means that all data and transactions that are accessible via the web UI can be accessed by software using the API.
+  </blockquote></p>
+
+  <p>This documentation for using the API assumes you have some
+  experience with writing clients for RESTful APIs, although for some
+  situations you can just use <a href="">curl</a> or <a href="">jq</a>
+  to get the information you need.</p>
+
+  <h2 id="version">Current Version</h2>
+
+  <p>This documentation is generated from
+  the <a href="<%= @swagger.base_path %>/swagger.json">API's
+  specification file</a>, written
+  in <a href="http://swagger.io">Swagger</a>. This file can be used to
+  validate API responses and to automatically generate client
+  libraries. We have not verified that auto-generated clients function
+  correctly, but
+  please <a href="https://github.com/18F/micropurchase/issues/new)">file
+  an issue</a> if you try it and it works (or doesn't).</p>
+
+  <p>The current version of the API is <%= @swagger.info.version %></p>
+
+  <p>All requests to the API use a base path that includes a version
+  string. The base path for the current version of the API
+  is <code><%= @swagger.base_path %></code> and this should be
+  prepended to all requests.</p>
+
+  <p>When a new version is introduced, all methods of the prior
+  version will be deprecated and after a few months, the endpoints of
+  the previous version will be removed. It is your responsibility to
+  update your code for the latest version.</p>
+
+  <h2 id="requests">Requests</h2>
+
+  <p>All API access is over HTTPS and all data is returned as
+  JSON. There is no reason to specify the content type for the
+  response.</p>
+
+  <p>Errors will return with the appropriate HTTP status code. In
+  addition, all errors return a
+  standardized <a href="#definition-Error">Error</a> response with an
+  error string within it.</p>
+
+  <h2 id="authentication">Authentication</h2>
+
+  <p>Currently all authentication occurs via the GitHub API. Rather
+  than having the micro-purchase platform generate and store API keys,
+  GitHub Personal API Tokens act as the API key. If you have created
+  an account on the micro-purchase platform, you are automatically
+  signed up to use the API. All you need to do
+  is <a href="https://github.com/blog/1509-personal-api-tokens">generate
+  a GitHub Personal API Token</a> (with no scopes) and put it in the
+  request headers for API requests:</p>
+
+  <pre>
+  <code>
+ Api-Key: the-personal-api-token
+  </code>
+  </pre>
+
+  <p>Note that many routes do not require authentication to return
+  data. For instance, you do not need an API key to see details of a
+  single auction, although it will reveal your bidding information if
+  an authentication key is provided. Administrators use the same
+  mechanism for authentication but also must be marked as admins on
+  the Micropurchase platform.</p>
+
+  <%= render partial: 'methods' %>
+  <%= render partial: 'definitions_code' %>
+
+  <h2 id="support">Support</h2>
+
+<p>If you are having trouble with the API, there are several ways to get help:</p>
+
+<ul>
+<li>File an <a href="https://github.com/18F/micropurchase/issues/new)">issue</a></li>
+<li>Email us at <a href="mailto:micropurchase@gsa.gov">micropurchase@gsa.gov</a>.</li>
+</ul>
+
+<p>If there's anything missing or incorrect in the API documentation,
+please file
+an <a href="https://github.com/18F/micropurchase-api-docs/issues/new">issue</a>. As
+with any 18F API, it is our goal that the micro-purchase API adhere to
+our <a href="https://github.com/18f/api-standards">API
+standards</a>. Please hold us accountable to these standards.</p>
+
+</div>
+</div>

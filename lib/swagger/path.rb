@@ -19,7 +19,7 @@ class Swagger::Path
     if @_operations_hash.nil?
       @_operations_hash = {}
       fields.each do |verb, values|
-        @_operations_hash[verb] = Swagger::Operation.new(verb, values, @specification)
+        @_operations_hash[verb] = Swagger::Operation.new(path, verb, values, @specification)
       end
     end
 

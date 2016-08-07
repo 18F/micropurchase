@@ -5,14 +5,15 @@ class Swagger::Operation
 
   attr_accessor :fields
 
-  def initialize(verb, fields, specification)
-    @fields = Hashie::Mash.new(fields.merge(verb: verb))
+  def initialize(path, verb, fields, specification)
+    @fields = Hashie::Mash.new(fields.merge(verb: verb, path: path))
     @specification = specification
   end
 
   delegate :consumes,
            :deprecated,
            :description,
+           :path,
            :produces,
            :schemes,
            :summary,
@@ -39,6 +40,14 @@ class Swagger::Operation
 
   def responses
     responses_hash.values
+  end
+
+  def operation_id
+    fields['operationId']
+  end
+
+  def unique_key
+    operation_id || "#{verb}-#{path.gsub(/[\/\{\}]/, '-').gsub(/\-\-+/, '-').gsub(/(^\-)|(\-$)/, '')}"
   end
 
   private

@@ -13,7 +13,7 @@ class Swagger::Schema::Number < Swagger::Schema
     out
   end
 
-  def sample_value
+  def default_sample_value
     case type
     when 'integer'
       39

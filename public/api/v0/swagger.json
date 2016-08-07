@@ -34,19 +34,7 @@
           "200": {
             "description": "Returns a list of auctions",
             "schema": {
-              "type": "object",
-              "required": [
-                "auctions"
-              ],
-              "properties": {
-                "auctions": {
-                  "type": "array",
-                  "uniqueItems": true,
-                  "items": {
-                    "$ref": "#\/definitions\/Auction"
-                  }
-                }
-              }
+              "$ref": "#\/definitions\/AuctionListResponse"
             },
             "examples": {
               "application/json": {
@@ -396,6 +384,7 @@
         "title": {
           "title": "Auction Title",
           "description": "The short title for the auction",
+          "x-example": "\"Auction title\"",
           "type": "string"
         },
         "summary": {
@@ -463,31 +452,7 @@
           "format": "date-time"
         },
         "winning_bid": {
-          "title": "Winning Bid",
-          "description": "The current winning bid for the auction. For open reverse auctions, these fields will provide information about the current lowest bid during the auction. For sealed-bid auctions, these values will be nil until the auction is over and the final winning bid has been determined. If there is no bid, these fields will be nil.",
-          "type": "object",
-          "required": [
-            "amount",
-            "bidder_id"
-          ],
-          "properties": {
-            "amount": {
-              "title": "Amount",
-              "description": "The amount of the bid",
-              "type": [
-                "integer",
-                "null"
-              ]
-            },
-            "bidder_id": {
-              "title": "Bidder ID",
-              "description": "The bidder ID for the bid. This can be referenced against all bids in the bids table if you need more details about the bidder. This is provided as a convenient way for your program to check if the winning bid is yours.",
-              "type": [
-                "integer",
-                "null"
-              ]
-            }
-          }
+          "$ref": "#\/definitions\/WinningBid"
         },
         "bids": {
           "type": "array",
@@ -500,6 +465,32 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "WinningBid": {
+      "description": "The current winning bid for the auction. For open reverse auctions, these fields will provide information about the current lowest bid during the auction. For sealed-bid auctions, these values will be nil until the auction is over and the final winning bid has been determined. If there is no bid, these fields will be nil.",
+      "type": "object",
+      "required": [
+        "amount",
+        "bidder_id"
+      ],
+      "properties": {
+        "amount": {
+          "title": "Amount",
+          "description": "The amount of the bid",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "bidder_id": {
+          "title": "Bidder ID",
+          "description": "The bidder ID for the bid. This can be referenced against all bids in the bids table if you need more details about the bidder. This is provided as a convenient way for your program to check if the winning bid is yours.",
+          "type": [
+            "integer",
+            "null"
+          ]
         }
       }
     },
@@ -603,6 +594,7 @@
         "duns_number": {
           "title": "DUNS Number",
           "description": "The bidder's DUNS number. This information may be redacted with a null value while an auction is still running.",
+          "format": "duns",
           "type": [
             "string",
             "null"
@@ -635,6 +627,7 @@
         "created_at": {
           "title": "Account Creation Time",
           "description": "When the bidder signed up for the Micro-purchase system. This information may be redacted with a null value while an auction is still running.",
+          "format": "date-time",
           "type": [
             "string",
             "null"
@@ -644,6 +637,7 @@
         "updated_at": {
           "title": "Account Modification Time",
           "description": "When the bidder's account information was last updated, either as a result of the user editing it or automated SAM validation. This information may be redacted with a null value while an auction is still running.",
+          "format": "date-time",
           "type": [
             "string",
             "null"
@@ -767,36 +761,7 @@
       ],
       "properties": {
         "quick_stats": {
-          "type": "object",
-          "properties": {
-            "total_users": {
-              "title": "Total Users",
-              "description": "The total users in the system",
-              "type": "integer",
-              "minimum": 0
-            },
-            "users_with_duns": {
-              "title": "Users with DUNS Numbers",
-              "type": "integer",
-              "minimum": 0
-            },
-            "users_in_sam": {
-              "title": "Users in SAM.gov",
-              "type": "integer",
-              "minimum": 0
-            },
-            "notes": {
-              "title": "Notes",
-              "description": "Used for storing some notes about users",
-              "type": "string"
-            }
-          },
-          "required": [
-            "total_users",
-            "users_with_duns",
-            "users_in_sam",
-            "notes"
-          ]
+          "$ref": "#\/definitions/QuickStats"
         },
         "non_admin_users": {
           "title": "Non-admin Users",
@@ -817,6 +782,41 @@
           }
         }
       }
+    },
+    "QuickStats": {
+      "type": "object",
+      "properties": {
+        "total_users": {
+          "title": "Total Users",
+          "description": "The total users in the system",
+          "type": "integer",
+          "minimum": 0,
+          "x-example": 87
+        },
+        "users_with_duns": {
+          "title": "Users with DUNS Numbers",
+          "type": "integer",
+          "minimum": 0,
+          "x-example": 23
+        },
+        "users_in_sam": {
+          "title": "Users in SAM.gov",
+          "type": "integer",
+          "minimum": 0,
+          "x-example": 21
+        },
+        "notes": {
+          "title": "Notes",
+          "description": "Used for storing some notes about users",
+          "type": "string"
+        }
+      },
+      "required": [
+        "total_users",
+        "users_with_duns",
+        "users_in_sam",
+        "notes"
+      ]
     },
     "User": {
       "title": "User",
@@ -863,7 +863,8 @@
         "duns_number": {
           "title": "DUNS Number",
           "description": "The DUNS number for the user",
-          "type": "string"
+          "type": "string",
+          "format": "duns"
         },
         "name": {
           "title": "Name",

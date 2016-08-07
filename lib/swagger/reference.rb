@@ -17,8 +17,20 @@ class Swagger::Reference
     @_dereferenced != nil
   end
 
-  def compact_type
+  def object_name
     normalized_ref_string.gsub(/.+\//, '')
+  end
+
+  def name
+    @name || object_name
+  end
+
+  def compact_type
+    "<a href=\"#definition-#{object_name}\">#{object_name}</a>".html_safe
+  end
+
+  def sample_value
+    "<< #{compact_type} >>".html_safe
   end
 
   def dereferenced
