@@ -52,6 +52,10 @@ $(document).ready(function() {
   var userType = Cookies.get('mpp-user-type');
   if (userType) {
     $('.nav-user select option[value="'+userType+'"]').prop('selected', true);
+    $('body')
+      .removeClass('user-type-vendor')
+      .removeClass('user-type-admin')
+      .addClass('user-type-' + userType);
   } else {
     Cookies.set('mpp-user-type', 'admin');
     $('.nav-user select option[value="admin"]').prop('selected', true);
@@ -67,8 +71,6 @@ $(document).ready(function() {
     Cookies.set('mpp-signed-in', 'true');
     renderSiteHeaderSignIn()
   });
-
-  $('.nav-user select').change();
 
   $('input').focus(function(){
     $(this).parents('.field').addClass('is-focused')

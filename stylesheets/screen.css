@@ -2698,8 +2698,10 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 }
 
 
+.auction-workflow[class*="auction-workflow-place-a-bid"] button,
 .auction-workflow[class*="auction-workflow-bid"] button,
 .auction-workflow[class*="auction-workflow-youve-been-underbid"] button{ margin-top: 43px; margin-left: 0.4em;}
+.auction-workflow[class*="auction-workflow-place-a-bid"] .field,
 .auction-workflow[class*="auction-workflow-bid"] .field,
 .auction-workflow[class*="auction-workflow-youve-been-underbid"] .field{
 	padding-top: 16px;
