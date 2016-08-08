@@ -12,7 +12,7 @@ end
 
 Then(/^I should see the future auction message for vendors$/) do
   expect(page).to have_content(
-    "This auction starts on #{start_date}."
+    I18n.t('auctions.status.future.vendor.body', start_date: start_date)
   )
 end
 

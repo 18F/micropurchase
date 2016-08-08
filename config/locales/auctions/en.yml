@@ -1,0 +1,7 @@
+en:
+  auctions:
+    status:
+      future:
+        vendor:
+          header: 'Coming soon'
+          body: 'This auction is not currently accepting bids. It will open on %{start_date}.'
