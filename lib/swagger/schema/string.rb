@@ -1,7 +1,7 @@
 require_relative '../schema'
 
 class Swagger::Schema::String < Swagger::Schema
-  def compact_type
+  def displayed_type
     out = "string"
     out += " (#{format})" if format
     out

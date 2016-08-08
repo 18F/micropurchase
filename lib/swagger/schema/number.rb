@@ -1,5 +1,5 @@
 class Swagger::Schema::Number < Swagger::Schema
-  def compact_type
+  def displayed_type
     out = type.dup
 
     if has_min? && has_max?

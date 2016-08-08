@@ -302,7 +302,7 @@
           "200": {
             "description": "Returns lists of users and metadata",
             "schema": {
-              "$ref": "#\/definition\/AdminReport"
+              "$ref": "#\/definitions\/AdminReport"
             }
           },
           "403": {

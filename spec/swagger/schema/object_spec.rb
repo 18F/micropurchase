@@ -16,40 +16,9 @@ describe Swagger::Schema::Object do
     end
   end
 
-  describe '#sample_value' do
-    # it "should return ''" do
-    #   expect(object.sample_value).to eq('')
-    # end
-  end
-
-  describe '#compact_type' do
-    context 'when an object has no properties' do
-      it 'should display the object name' do
-        expect(object.compact_type).to eq('<a href="#definition-Name">Name</a>')
-      end
+  describe '#displayed_type' do
+    it 'should link the object name to its definition' do
+      expect(object.displayed_type).to eq('<a href="#definition-Name">Name</a>')
     end
-
-    # context 'when an object has only 2 properties or less' do
-    #   let(:object) { Swagger::Schema::Object.new('Name', {'properties' => {
-    #                                                               "foo" => {"type" => "string"},
-    #                                                               "bar" => {"type" => "integer"}}},
-    #                                              nil)}
-
-    #   it 'should display them inline within braces' do
-    #     expect(object.compact_type).to eq('<Name {"foo": string, "bar": integer}>')
-    #   end
-    # end
-
-    # context 'when an object has more than 2 properties' do
-    #   let(:object) { Swagger::Schema::Object.new('Name', {'properties' => {
-    #                                                               "foo" => {"type" => "string"},
-    #                                                               "bar" => {"type" => "integer"},
-    #                                                               "baz" => {"type" => "string"}}},
-    #                                              nil)}
-
-    #   it 'should just display the name' do
-    #     expect(object.compact_type).to eq('<Name object>')
-    #   end
-    # end
   end
 end

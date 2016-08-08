@@ -13,17 +13,33 @@ class Swagger::Schema::Object < Swagger::Schema
     properties_hash[key]
   end
 
-  def compact_type
+  def displayed_type
     "<a href=\"##{unique_key}\">#{name}</a>".html_safe
-    # if properties.length > 0 && properties.length < 3
-    #   "<#{name+' ' unless name.nil?}{" + properties.map {|p| '"' + p.name + '": ' + p.compact_type}.join(', ') + '}>'
-    # else
-    #   "<#{name} object>"
-    # end
   end
 
   def default_sample_value
-    "<< #{compact_type} >>".html_safe
+    "<< #{displayed_type} >>".html_safe
+  end
+
+  def properties_json
+    str = <<-EOF
+    {
+      "id": 34, // nullable
+      "github_id": 3402, // nullable
+      "duns_number": "123456789", // nullable
+      "name": "Micah Purchase", // nullable
+      "github_login": "github_login", // nullable
+      "sam_status": "sam_accepted", // nullable
+      "created_at": "2016-01-01T13:00:00Z", // nullable
+      "updated_at": "2016-01-01T13:00:00Z" // nullable
+    }
+    EOF
+
+    formatter = Rouge::Formatters::HTML.new(css_class: 'highlight')
+    lexer = Rouge::Lexer.find('json')
+    out = formatter.format(lexer.lex(str)).html_safe
+
+    raise out.inspect
   end
 
   private

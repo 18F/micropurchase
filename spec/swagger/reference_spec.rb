@@ -14,8 +14,8 @@ describe Swagger::Reference do
       expect(ref).to_not be_dereferenced
     end
 
-    it 'should not dereference to load the compact_type' do
-      expect(ref.compact_type).to eq('<a href="#definition-Thing">Thing</a>')
+    it 'should not dereference to load the displayed_type' do
+      expect(ref.displayed_type).to eq('<a href="#definition-Thing">Thing</a>')
       expect(ref).to_not be_dereferenced
     end
 

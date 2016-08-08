@@ -1,8 +1,8 @@
 require_relative '../schema'
 
 class Swagger::Schema::Array < Swagger::Schema
-  def compact_type
-    "array of #{element_type.compact_type}".html_safe
+  def displayed_type
+    "array of #{element_type.displayed_type}".html_safe
   end
 
   def default_sample_value

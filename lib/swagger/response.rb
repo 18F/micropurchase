@@ -14,8 +14,8 @@ class Swagger::Response
            :description,
            to: :fields
 
-  def compact_type
-    schema.compact_type
+  def displayed_type
+    schema.displayed_type
   end
 
   def schema

@@ -2,22 +2,22 @@ require 'rails_helper'
 require 'swagger'
 
 describe Swagger::Schema::String do
-  describe 'compact_type' do
+  describe 'displayed_type' do
     it 'should return string' do
       s = Swagger::Schema::String.new('foo', {'type' => 'string'}, nil)
-      expect(s.compact_type).to eq('string')
+      expect(s.displayed_type).to eq('string')
     end
 
     it 'should append the format if specified' do
       s = Swagger::Schema::String.new('foo', {'type' => 'string', 'format' => 'email'}, nil)
-      expect(s.compact_type).to eq('string (email)')
+      expect(s.displayed_type).to eq('string (email)')
     end
   end
 
   describe 'sample_value' do
     it 'should return a basic string if there is no format' do
       s = Swagger::Schema::String.new('foo', {'type' => 'string'}, nil)
-      expect(s.sample_value).to eq('')
+      expect(s.sample_value).to eq('"example"')
     end
 
     it 'should return a sample date-time' do

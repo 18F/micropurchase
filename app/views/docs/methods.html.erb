@@ -32,7 +32,7 @@
     <tr>
       <td><%= response.code %></td>
       <td><%= response.html_description %></td>
-      <td><%= response.compact_type %></td>
+      <td><%= response.displayed_type %></td>
     </tr>
     <% end %>
   </tbody>
@@ -48,7 +48,7 @@
 
 <dl>
   <% definition.properties.each do |property| %>
-  <dt><code><%= property.name %></code>, <em><%= property.compact_type %></em></dt>
+  <dt><code><%= property.name %></code>, <em><%= property.displayed_type %></em></dt>
   <dd><strong><%= property.title %>:</strong> <%= property.inline_html_description %></dd>
   <% end %>
 </dl>

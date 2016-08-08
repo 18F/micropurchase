@@ -25,7 +25,7 @@ class Swagger::Reference
     @name || object_name
   end
 
-  def compact_type
+  def displayed_type
     "<a href=\"#definition-#{object_name}\">#{object_name}</a>".html_safe
   end
 
@@ -38,7 +38,7 @@ class Swagger::Reference
   end
 
   def sample_value
-    "<< #{compact_type} >>".html_safe
+    "<< #{displayed_type} >>".html_safe
   end
 
   def dereferenced
