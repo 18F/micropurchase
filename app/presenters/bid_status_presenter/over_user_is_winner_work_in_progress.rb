@@ -17,18 +17,11 @@ class BidStatusPresenter::OverUserIsWinnerWorkInProgress < BidStatusPresenter::B
       'auctions.show.status.work_in_progress.body',
       ended_at: end_date,
       delivery_deadline: delivery_deadline,
-      delivery_url: auction.delivery_url,
-      link: link
+      delivery_url: auction.delivery_url
     )
   end
 
-  private
-
-  def link
-    link_to(
-      "I'm done",
-      '#',
-      class: 'usa-button usa-button-outline auction-button'
-    )
+  def action_partial
+    'auctions/work_in_progress'
   end
 end

@@ -134,10 +134,6 @@ FactoryGirl.define do
       c2_approval_status :approved
     end
 
-    trait :not_evaluated do
-      result :not_applicable
-    end
-
     trait :published do
       published :published
     end
@@ -178,8 +174,12 @@ FactoryGirl.define do
 
     trait :evaluation_needed do
       delivered
-      not_evaluated
+      pending_acceptance
       delivery_due_at_expired
+    end
+
+    trait :pending_acceptance do
+      result :pending_acceptance
     end
 
     trait :delivery_past_due do

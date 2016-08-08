@@ -51,6 +51,12 @@ Then(/^I should see the work in progress status box$/) do
   )
 end
 
+Then(/^I should see the pending acceptance status box$/) do
+  expect(page).to have_content(
+    I18n.t('auctions.show.status.pending_acceptance.header')
+  )
+end
+
 def end_date
   DcTimePresenter.convert_and_format(@auction.ended_at)
 end

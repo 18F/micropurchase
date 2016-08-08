@@ -8,7 +8,7 @@ class Admin::NeedsAttentionAuctionsViewModel < Admin::BaseViewModel
   end
 
   def evaluation_needed
-    list_items(AuctionQuery.new.evaluation_needed)
+    list_items(AuctionQuery.new.pending_acceptance)
   end
 
   def complete_and_successful

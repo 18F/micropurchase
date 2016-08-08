@@ -53,11 +53,8 @@ class AuctionQuery
       .not_paid
   end
 
-  def evaluation_needed
-    relation
-      .delivery_due_at_expired
-      .delivered
-      .not_evaluated
+  def pending_acceptance
+    relation.pending_acceptance
   end
 
   def delivery_past_due
