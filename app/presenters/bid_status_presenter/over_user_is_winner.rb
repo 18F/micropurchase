@@ -1,9 +1,24 @@
 class BidStatusPresenter::OverUserIsWinner < BidStatusPresenter::Base
+  attr_reader :auction
+
+  def initialize(auction:)
+    @auction = auction
+  end
+
   def header
-    'You are the winner'
+    I18n.t('auctions.show.status.ready_for_work.header')
   end
 
   def body
-    'Congratulations! We will contact you with further instructions.'
+    I18n.t(
+      'auctions.show.status.ready_for_work.body',
+      ended_at: end_date,
+      delivery_deadline: delivery_deadline,
+      issue_url: auction.issue_url
+    )
+  end
+
+  def action_partial
+    'auctions/delivery_url'
   end
 end

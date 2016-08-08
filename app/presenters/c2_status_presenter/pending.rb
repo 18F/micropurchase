@@ -1,4 +1,4 @@
-class C2StatusPresenter::Pending
+class C2StatusPresenter::Pending < C2StatusPresenter::Base
   def header
     'Pending C2 approval'
   end
