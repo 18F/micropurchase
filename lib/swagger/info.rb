@@ -26,10 +26,10 @@ class Swagger::Info
   end
 
   def contact
-    fields['contact'] || {}
+    fields['contact'] || { }
   end
 
   def license
-    fields['license'] || {}
+    fields['license'] || { }
   end
 end

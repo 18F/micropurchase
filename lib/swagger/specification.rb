@@ -59,7 +59,7 @@ class Swagger::Specification
 
   def paths_hash
     if @_paths_hash.nil?
-      @_paths_hash = {}
+      @_paths_hash = { }
       @json['paths'].each do |name, value|
         @_paths_hash[name] = Swagger::Path.new(name, value, self)
       end
@@ -70,7 +70,7 @@ class Swagger::Specification
 
   def definitions_hash
     if @_definitions_hash.nil?
-      @_definitions_hash = {}
+      @_definitions_hash = { }
 
       @json['definitions'].each do |name, hash|
         @_definitions_hash[name] = Swagger::Schema.factory(name, hash, self)

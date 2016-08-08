@@ -47,14 +47,14 @@ class Swagger::Operation
   end
 
   def unique_key
-    operation_id || "#{verb}-#{path.gsub(/[\/\{\}]/, '-').gsub(/\-\-+/, '-').gsub(/(^\-)|(\-$)/, '')}"
+    operation_id || "#{verb}-#{path.gsub(%r([/\{\}]), '-').gsub(/\-\-+/, '-').gsub(/(^\-)|(\-$)/, '')}"
   end
 
   private
 
   def responses_hash
     if @_responses_hash.nil?
-      @_responses_hash = {}
+      @_responses_hash = { }
       fields['responses'].each do |code, response_hash|
         @_responses_hash[code] = Swagger::Response.new(code, response_hash, @specification)
       end

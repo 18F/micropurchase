@@ -8,8 +8,6 @@ class Swagger::Schema::String < Swagger::Schema
   end
 
   def default_sample_value
-    return fields['x-example'] if fields.key?('x-example')
-
     case format
     when 'date-time'
       '"2016-01-01T13:00:00Z"'

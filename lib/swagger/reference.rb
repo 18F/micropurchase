@@ -18,7 +18,7 @@ class Swagger::Reference
   end
 
   def object_name
-    normalized_ref_string.gsub(/.+\//, '')
+    normalized_ref_string.gsub(%r{^.+/}, '')
   end
 
   def name

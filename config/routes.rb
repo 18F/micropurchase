@@ -18,8 +18,6 @@ Rails.application.routes.draw do
   get '/sign_in', to: 'sign_ins#show'
 
   get '/api' => 'docs#index'
-#  get '/api/doc/methods' => 'pages#methods'
-#  get '/api/doc/test' => 'pages#test'
 
   namespace :admin do
     resources :auction_reports, only: [:show]

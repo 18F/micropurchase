@@ -2,11 +2,11 @@ class Swagger::Schema::Number < Swagger::Schema
   def displayed_type
     out = type.dup
 
-    if has_min? && has_max?
+    if min? && max?
       out << " (#{min_display_left} n #{max_display_right})"
-    elsif has_min?
+    elsif min?
       out << " (n #{min_display_right})"
-    elsif has_max?
+    elsif max?
       out << " (n #{max_display_right})"
     end
 
@@ -26,11 +26,11 @@ class Swagger::Schema::Number < Swagger::Schema
 
   private
 
-  def has_min?
+  def min?
     fields['minimum']
   end
 
-  def has_max?
+  def max?
     fields['maximum']
   end
 
