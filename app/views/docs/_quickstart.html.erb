@@ -1,0 +1,28 @@
+<h2 id="quickstart">Quick Start</h2>
+
+<p>You don't need to write code to see results from the API. In your
+terminal, run the following curl command:
+<code>
+  <pre>
+$ curl https://micropurchase.18f.gov<%= @swagger.base_path %>/auctions
+  </pre>
+</code>
+
+This returns a JSON string of
+all <a href="#definition-Auction">Auction</a> resources. Each auction
+resource contains its child <a href="#definition-Bid">Bid</a>
+and <a href="#definition-Bidder">Bidder</a> resources.</p>
+
+<p>If you just want to collect auction data via the API, there is no
+need to authenticate. But if you're an auction participant, you'll
+need to authenticate to do things such as placing bids and viewing
+your own (temporarily) private bidding data.</p>
+
+<p>To get started with authentication,
+visit <a href="https://github.com/settings/tokens/new">your GitHub
+settings</a> to generate a new private token you will use for the
+API. Enter in anything you want in "Token Description". Leave all
+scopes unchecked in "Select scopes". Click "Generate token". Copy and
+save the token somewhere safe. Once you leave the token page, GitHub
+will never reveal it again. The good news is that these tokens are
+easily re-creatable.</p>

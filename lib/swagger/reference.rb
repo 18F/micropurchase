@@ -29,6 +29,10 @@ class Swagger::Reference
     "<a href=\"#definition-#{object_name}\">#{object_name}</a>".html_safe
   end
 
+  def comment
+    nil
+  end
+
   def sample_value
     "<< #{compact_type} >>".html_safe
   end

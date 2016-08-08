@@ -11,6 +11,9 @@
   <pre>
     {
     <% definition.properties.each do |property| %>
+      <% if property.comment %>
+        /* <%= property.comment %> */
+      <% end %>
       "<%= property.name %>": <%= property.sample_value %><%= ',' unless property == definition.properties.last %>
     <% end %>
     }

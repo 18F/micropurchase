@@ -35,9 +35,15 @@ class Swagger::Schema
     "definition-#{name}"
   end
 
+  def comment
+    fields['x-comment']
+  end
+
   def sample_value
-    if fields.key?('x-example')
-      fields['x-example']
+    if fields.key?('example')
+      fields['example'].inspect
+    elsif fields.key?('enum')
+      fields['enum'].first.inspect
     else
       default_sample_value
     end
