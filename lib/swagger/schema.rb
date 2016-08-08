@@ -1,8 +1,8 @@
 class Swagger::Schema
 end
 
+require_relative 'mixins/description'
 require_relative 'schema/all_of'
-require_relative 'schema/any_of'
 require_relative 'schema/boolean'
 require_relative 'schema/number'
 require_relative 'schema/string'
@@ -26,6 +26,7 @@ class Swagger::Schema
            :maximum,
            :minimum,
            :name,
+           :nullable,
            :pattern,
            :title,
            :type,
@@ -57,7 +58,11 @@ class Swagger::Schema
     else
       case fields['type']
       when ::Array
-        Swagger::Schema::AnyOf.new(name, fields, specification)
+        if fields['type'].size == 2 && fields['type'].last == 'null'
+          factory(name, fields.merge('nullable' => true, 'type' => fields['type'].first), specification)
+        else
+          fail "Unhandled array type: #{fields.inspect}"
+        end
       when 'string'
         Swagger::Schema::String.new(name, fields, specification)
       when 'integer', 'number', 'boolean'

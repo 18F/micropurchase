@@ -33,6 +33,10 @@ class Swagger::Reference
     nil
   end
 
+  def nullable
+    false
+  end
+
   def sample_value
     "<< #{compact_type} >>".html_safe
   end

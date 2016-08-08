@@ -14,7 +14,7 @@
       <% if property.comment %>
         /* <%= property.comment %> */
       <% end %>
-      "<%= property.name %>": <%= property.sample_value %><%= ',' unless property == definition.properties.last %>
+      "<%= property.name %>": <%= property.sample_value %><%= ',' unless property == definition.properties.last %><% if property.nullable %> // nullable<% end %>
     <% end %>
     }
   </pre>
