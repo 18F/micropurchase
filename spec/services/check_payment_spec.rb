@@ -33,6 +33,26 @@ describe CheckPayment do
 
           expect(auction.reload.paid_at).not_to be_nil
         end
+
+        it 'sends an email to the vendor' do
+          c2_path = "proposals/#{FakeC2Api::PURCHASED_PROPOSAL_ID}"
+          auction = create(
+            :auction,
+            :payment_needed,
+            purchase_card: :default,
+            c2_proposal_url: "https://c2-dev.18f.gov/#{c2_path}"
+          )
+          mailer_double = double(deliver_later: true)
+          allow(AuctionMailer).to receive(:auction_paid_winning_vendor_notification)
+            .with(auction: auction)
+            .and_return(mailer_double)
+
+          CheckPayment.new.perform
+
+          expect(AuctionMailer).to have_received(:auction_paid_winning_vendor_notification)
+            .with(auction: auction)
+          expect(mailer_double).to have_received(:deliver_later)
+        end
       end
     end
 

@@ -1,6 +1,8 @@
-<%= I18n.t('mailers.auction_mailer.losing_bidder_notification.para_1',
-          auction_title: @auction.title,
-          auction_url: auction_url(@auction)) %>
+<%= I18n.t(
+  'mailers.auction_mailer.losing_bidder_notification.para_1',
+  auction_title: @auction.title,
+  auction_url: auction_url(@auction)
+) %>
 
 <%= I18n.t('mailers.auction_mailer.losing_bidder_notification.para_2') %>
 
