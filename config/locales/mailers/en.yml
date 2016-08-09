@@ -10,15 +10,10 @@ en:
         from: "The 18F Micro-purchase team"
         subject: "18F Micro-purchase Auction Status"
       winning_bidder_notification:
-        para_1: "Congratulations! You have the winning bid for %{auction_title} (%{auction_url}).
-          This means that you have the opportunity to get paid %{bid_amount}
-          if you deliver the requested work by %{auction_delivery_deadline} Eastern Time.
-          If you have any questions about the issue, please add a comment to %{auction_issue_url}."
-        para_2: "Check out the policy page: %{policy_page_url} to
-          read more about the process for submitting the code.
-          We encourage delivery of code (even if it's incomplete) early and often
-          so that we can work out any issues that arise before the deadline."
-        para_4: "Thanks for participating and we look forward to seeing what you can do!"
+        para_1: 'Congratulations! You placed the winning bid for the auction "%{auction_title}".
+          You now have the opportunity to earn %{bid_amount} by delivering on the requested work by %{auction_delivery_deadline}, Eastern Time.'
+        para_2: 'To get started, please use GitHub to create a pull request against this project, making sure to the issue associated with this auction. Then enter the URL to your pull request on the auction\'s page (%{auction_url}) and click "start work".'
+        para_3: 'Thanks for participating, we look forward to seeing what you can do!'
         sign_off: "Sincerely,"
         from: "The 18F Micro-purchase team"
         subject: "Congratulations: You have the winning bid!"
