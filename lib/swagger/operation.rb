@@ -6,21 +6,30 @@ class Swagger::Operation
   attr_accessor :fields
 
   def initialize(path, verb, fields, specification)
-    @fields = Hashie::Mash.new(fields.merge(verb: verb, path: path))
+    @fields = fields.merge('verb' => verb, 'path' => path)
     @specification = specification
   end
 
-  delegate :consumes,
-           :deprecated,
-           :description,
-           :path,
-           :produces,
-           :schemes,
-           :summary,
-           :tags,
-           :title,
-           :verb,
-           to: :fields
+  # fields not needed yet: consumes, deprecated, produces, schemes, tags
+  def description
+    fields['description']
+  end
+
+  def path
+    fields['path']
+  end
+
+  def summary
+    fields['summary']
+  end
+
+  def title
+    fields['title']
+  end
+
+  def verb
+    fields['verb']
+  end
 
   def sample_json_response?
     !sample_json_response.blank?
@@ -31,7 +40,7 @@ class Swagger::Operation
     if @_sample_response.nil?
       example_json = fields.dig('responses', '200', 'examples', 'application/json')
       if example_json
-        @_sample_response = JSON.pretty_generate(example_json)
+        @_sample_response = JSON.pretty_generate(example_json).strip
       end
     end
 

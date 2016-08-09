@@ -1,18 +1,17 @@
 <p>From <a href="https://18f.gsa.gov/2015/10/13/open-source-micropurchasing/">"Open
 Source Micro-purchasing: An experiment in federal acquisition"</a>:
 
-<blockquote>18F is an open-source team. We currently have hundreds of
+<blockquote><p>18F is an open-source team. We currently have hundreds of
 publicly available repositories, with dozens under active
 development. We've had numerous contributions from colleagues within
 government, and contributions from members of the public. But in the
 next few weeks, we are going to run an experiment: we want to contract
-for contributions. And we want to do it the 18F way.
-
-Part of contracting the 18F way is ensuring that all systems are built
+for contributions. And we want to do it the 18F way.</p>
+<p>Part of contracting the 18F way is ensuring that all systems are built
 modularly and with APIs as capable as the human interface. The
 micro-purchase platform itself is no exception. This means that all
 data and transactions that are accessible via the web UI can be
-accessed by software using the API.
+accessed by software using the API.</p>
 </blockquote></p>
 
 <p>This documentation for using the API assumes you have some
@@ -35,11 +34,7 @@ an issue</a> if you try it and it works (or doesn't).</p>
 
 <p>The current version of the API is <%= @swagger.info.version %></p>
 
-<% swagger_spec_url = "https://micropurchase.18f.gov" +
-@swagger.base_path + "/swagger.json" %>
-
-<p>The Swagger specification can be found
-at <a href="<%= swagger_spec_url %>"><%= swagger_spec_url %></a></p>
+<p>The Swagger specification can be found at <%= link_to(@swagger.spec_url, @swagger.spec_url) %></p>
 
 <p>All requests to the API use a base path that includes a version
 string. The base path for the current version of the API

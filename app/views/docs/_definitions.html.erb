@@ -9,33 +9,14 @@
 
 <code>
   <pre>
-    {
-    <% definition.properties.each do |property| %>
-      <% if property.comment %>
-        /* <%= property.comment %> */
-      <% end %>
-      "<%= property.name %>": <%= property.sample_value %><%= ',' unless property == definition.properties.last %><% if property.nullable %> // nullable<% end %>
-    <% end %>
-    }
+{
+<% definition.properties.each do |property| %>
+<% if property.comment %>
+  /* <%= property.comment %> */
+<% end %>
+  "<%= property.name %>": <%= property.sample_value %><%= ',' unless property == definition.properties.last %>
+<% end %>
+}
   </pre>
 </code>
-
-<em>or as a table...</em>
-
-<table>
-  <thead>
-    <tr>
-      <th scope="col" class="def-name">Name</th>
-      <th scope="col" class="def-type">Type</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% definition.properties.each do |property| %>
-    <tr>
-      <td valign="top"><%= property.name %></td>
-      <td valign="top"><%= property.displayed_type %><%= " or NULL" if property.nullable %><% if property.comment %> <em>, <%= property.comment %></em><% end %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
 <% end %>

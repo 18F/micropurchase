@@ -35,6 +35,10 @@ class Swagger::Specification
     Swagger::Info.new(@json['info'])
   end
 
+  def spec_url
+    "https://micropurchase.18f.gov#{base_path}/swagger.json"
+  end
+
   def paths
     paths_hash.values
   end

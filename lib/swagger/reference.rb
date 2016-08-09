@@ -13,6 +13,10 @@ class Swagger::Reference
     fields['$ref'].gsub(/^#/, '')
   end
 
+  def property_json_line
+    "  \"#{name}\": #{sample_value}".html_safe
+  end
+
   def dereferenced?
     @_dereferenced != nil
   end

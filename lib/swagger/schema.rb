@@ -15,22 +15,41 @@ class Swagger::Schema
   attr_accessor :fields
 
   def initialize(name, fields, specification)
-    @fields = Hashie::Mash.new(fields.merge(name: name))
+    @fields = fields.merge('name' => name)
     @specification = specification
   end
 
-  delegate :default,
-           :description,
-           :enum,
-           :format,
-           :maximum,
-           :minimum,
-           :name,
-           :nullable,
-           :pattern,
-           :title,
-           :type,
-           to: :fields
+  def default
+    fields['default']
+  end
+
+  def description
+    fields['description']
+  end
+
+  def enum
+    fields['enum']
+  end
+
+  def format
+    fields['format']
+  end
+
+  def name
+    fields['name']
+  end
+
+  def nullable
+    fields['nullable']
+  end
+
+  def title
+    fields['title']
+  end
+
+  def type
+    fields['type']
+  end
 
   def unique_key
     "definition-#{name}"
@@ -48,6 +67,10 @@ class Swagger::Schema
     else
       default_sample_value
     end
+  end
+
+  def property_json_line
+    "  \"#{name}\": #{sample_value}".html_safe
   end
 
   def self.factory(name, fields, specification)

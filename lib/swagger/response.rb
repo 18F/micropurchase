@@ -4,15 +4,17 @@ class Swagger::Response
   attr_accessor :fields
 
   def initialize(code, fields, specification)
-    @fields = fields.merge(code: code)
+    @fields = fields.merge('code' => code)
     @specification = specification
   end
 
-  # don't need headers
+  def code
+    fields['code']
+  end
 
-  delegate :code,
-           :description,
-           to: :fields
+  def description
+    fields['description']
+  end
 
   def displayed_type
     schema.displayed_type

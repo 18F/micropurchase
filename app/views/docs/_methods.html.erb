@@ -1,39 +1,37 @@
 <h2 id="methods">Methods</h2>
 
 <% @swagger.paths.each do |path| %>
-<% path.operations.each do |v| %>
-<h3 id="<%= v.unique_key %>"><%= v.verb.upcase %> <%= path.path %></h3>
+  <% path.operations.each do |op| %>
+    <h3 id="<%= op.unique_key %>"><%= op.verb.upcase %> <%= path.path %></h3>
 
-<p><%= v.html_description %></p>
+    <p><%= op.html_description %></p>
 
-<% if v.sample_json_response? %>
+    <% if op.sample_json_response? %>
 <p>Example response:</p>
 
-<pre>
-  <code>
-    <%= v.sample_json_response%>
-  </code>
-</pre>
+<pre><code>
+<%= op.sample_json_response %>
+</code></pre>
 <% end %>
 
-<table class="usa-table-borderless">
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Meaning</th>
-      <th>Return Type</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% v.responses.each do |response| %>
-    <tr>
-      <td><%= response.code %></td>
-      <td><%= response.inline_html_description %></td>
-      <td><%= response.displayed_type %></td>
-    </tr>
+    <table class="usa-table-borderless">
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Meaning</th>
+          <th>Return Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% op.responses.each do |response| %>
+        <tr>
+          <td><%= response.code %></td>
+          <td><%= response.inline_html_description %></td>
+          <td><%= response.displayed_type %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
     <% end %>
-  </tbody>
-</table>
-
-<% end %>
 <% end %>
