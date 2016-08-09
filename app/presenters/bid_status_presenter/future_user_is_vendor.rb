@@ -5,7 +5,11 @@ class BidStatusPresenter::FutureUserIsVendor < BidStatusPresenter::Base
     @auction = auction
   end
 
+  def header
+    I18n.t('auctions.status.future.vendor.header')
+  end
+
   def body
-    "This auction starts on #{start_date}."
+    I18n.t('auctions.status.future.vendor.body', start_date: start_date)
   end
 end
