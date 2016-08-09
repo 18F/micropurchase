@@ -310,7 +310,7 @@
   <div class="field"> 
     <label>
       <span class="label-text">Amount</span>
-      <input type="number"></input>
+      <input type="number" required></input>
     </label>
   </div>
   <button class="button button-bid">Place bid</button>
@@ -321,7 +321,7 @@
   <div class="field"> 
     <label>
       <span class="label-text">Amount</span>
-      <input type="number"></input>
+      <input type="number" required></input>
     </label>
   </div>
   <button class="button button-bid">Place bid</button>
@@ -332,7 +332,7 @@
   <div class="field"> 
     <label>
       <span class="label-text">Amount</span>
-      <input type="number"></input>
+      <input type="number" required></input>
     </label>
   </div>
   <button class="button button-bid">Place bid</button>
@@ -343,7 +343,7 @@
   <div class="field"> 
     <label>
       <span class="label-text">Amount</span>
-      <input type="number"></input>
+      <input type="number" required></input>
     </label>
   </div>
   <button class="button button-bid">Place bid</button>
@@ -354,7 +354,7 @@
   <div class="field"> 
     <label>
       <span class="label-text">Amount</span>
-      <input type="number"></input>
+      <input type="number" required></input>
     </label>
   </div>
   <button class="button button-bid">Place bid</button>
@@ -378,7 +378,21 @@
     <div class="field field-delivery-url">
       <label>
         <span class="label-text">Pull request <abbr title="Uniform resource locator">URL</abbr></span>
-        <input type="text" name="">
+        <input type="text" name="" required>
+      </label>
+    </div>
+    <button class="button button-deliver">Start work</button>  
+  </form>
+</section>
+<section class="auction-workflow auction-workflow-ready-for-work-vendors is-error">
+  <h1>Ready for work</h1>
+  <p>You won this auction on [auction.winDate] and must deliver by [auction.deliveryDeadline], Eastern Time. Please use GitHub to create a pull request against this project, making sure to reference <a href="">the issue associated with this auction</a>. Then enter the URL to your pull request, below, and click &ldquo;start work.&rdquo;</p> 
+  <form data-auction-workflow-state="work-in-progress-vendors">
+    <div class="field field-delivery-url is-error">
+      <label>
+        <span class="label-text">Pull request <abbr title="Uniform resource locator">URL</abbr></span>
+        <input type="text" name="" required>
+        <p class="error-text">This field cannot be blank.</p>
       </label>
     </div>
     <button class="button button-deliver">Start work</button>  
@@ -474,10 +488,9 @@
   </form>
 </p>
 </section>
-<section class="auction-workflow auction-workflow-paid-admins">
-  <h1>Paid</h1>
-  <p><a href="#"><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a>&rsquo;s pull request</a> was accepted on [auction.acceptanceDate]. The vendor was paid on [auction.paymentDate].
-</p>
+<section class="auction-workflow auction-workflow-paid-and-confirmed-admins">
+  <h1>Paid and confirmed</h1>
+  <p><a href="#"><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a> was <a href="">paid</a> $[amount] on [date] and confirmed receipt of that payment on [confirmation date].</p>
 </section>
 <section class="auction-workflow auction-workflow-paid-vendors">
   <h1>Paid</h1>
