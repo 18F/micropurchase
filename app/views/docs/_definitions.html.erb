@@ -1,0 +1,22 @@
+<h2 id="definitions">Definitions</h2>
+
+<% @swagger.definitions.each do |definition| %>
+<h3 id="<%= definition.unique_key %>"><%= definition.name %></h3>
+
+<% if definition.description %>
+<%= definition.html_description %>
+<% end %>
+
+<code>
+  <pre>
+{
+<% definition.properties.each do |property| %>
+<% if property.comment %>
+  /* <%= property.comment %> */
+<% end %>
+  "<%= property.name %>": <%= property.sample_value %><%= ',' unless property == definition.properties.last %>
+<% end %>
+}
+  </pre>
+</code>
+<% end %>

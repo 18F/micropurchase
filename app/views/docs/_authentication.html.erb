@@ -1,0 +1,23 @@
+<h2 id="authentication">Authentication</h2>
+
+<p>Currently all authentication occurs via the GitHub API. Rather than
+having the micro-purchase platform generate and store API keys, GitHub
+Personal API Tokens act as the API key. If you have created an account
+on the micro-purchase platform, you are automatically signed up to use
+the API. All you need to do
+is <a href="https://github.com/blog/1509-personal-api-tokens">generate
+a GitHub Personal API Token</a> (with no scopes) and put it in the
+request headers for API requests:</p>
+
+<pre>
+  <code>
+ Api-Key: the-personal-api-token
+  </code>
+</pre>
+
+<p>Note that many routes do not require authentication to return
+data. For instance, you do not need an API key to see details of a
+single auction, although it will reveal your bidding information if an
+authentication key is provided. Administrators use the same mechanism
+for authentication but also must be marked as admins on the
+Micro-purchase platform.</p>

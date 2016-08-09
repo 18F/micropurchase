@@ -1,0 +1,50 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Basic schema dereferencing example",
+    "version": "0.0.1"
+  },
+  "definitions": {
+    "Things": {
+      "type": "array",
+      "items": {
+        "$ref": "#\/definitions\/Thing"
+      }
+    },
+    "ThingRef": {
+      "$ref": "#\/definitions\/Thing"
+    },
+    "Thing": {
+      "type": "object",
+      "title": "The thing!",
+      "description": "The thing does things",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "numbers": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "AllOfThing": {
+      "description": "All of Thing, but one more field",
+      "allOf": [
+        {
+          "$ref": "#\/definitions\/Thing"
+        },
+        {
+          "properties": {
+            "added_field": {
+              "type": "string",
+              "format": "email"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
