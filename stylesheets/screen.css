@@ -2964,6 +2964,9 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	clear: left;
 }
 
+.layout-auctions-history .actor{
+	font-weight: 600;
+}
 
 /* @end */
 
