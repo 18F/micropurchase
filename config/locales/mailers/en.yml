@@ -12,7 +12,7 @@ en:
       winning_bidder_notification:
         para_1: 'Congratulations! You placed the winning bid for the auction "%{auction_title}".
           You now have the opportunity to earn %{bid_amount} by delivering on the requested work by %{auction_delivery_deadline}, Eastern Time.'
-        para_2: 'To get started, please use GitHub to create a pull request against this project, making sure to the issue associated with this auction. Then enter the URL to your pull request on the auction\'s page and click "start work". %{auction_url}'
+        para_2: 'To get started, please use GitHub to create a pull request against this project, making sure to the issue associated with this auction. Then enter the URL to your pull request on the auction\'s page (%{auction_url}) and click "start work".'
         para_3: 'Thanks for participating, we look forward to seeing what you can do!'
         sign_off: "Sincerely,"
         from: "The 18F Micro-purchase team"
