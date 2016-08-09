@@ -18,6 +18,9 @@ en:
           read more about the process for submitting the code.
           We encourage delivery of code (even if it's incomplete) early and often
           so that we can work out any issues that arise before the deadline."
+        para_3: "When you're ready to submit work for the review, visit the auction page (%{auction_url})
+          submit the pull request URL and click the \"Start work\" button. We'll be notified that you've
+          started."
         para_4: "Thanks for participating and we look forward to seeing what you can do!"
         sign_off: "Sincerely,"
         from: "The 18F Micro-purchase team"
