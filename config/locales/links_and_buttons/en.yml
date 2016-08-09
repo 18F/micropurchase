@@ -6,5 +6,9 @@ en:
       draft: 'Draft Auctions'
       closed: 'Closed'
       add: 'Add auction'
+    customers:
+      add: 'Add customer'
     skills:
       add: 'Add skill'
+    users:
+      download_csv: 'Download CSV'

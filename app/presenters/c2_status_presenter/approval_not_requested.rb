@@ -13,8 +13,7 @@ class C2StatusPresenter::ApprovalNotRequested
   end
 
   def body
-    "This auction will be paid for using an 18F purchase card, which cannot be
-    used without first being granted approval in C2. #{link}"
+    I18n.t('admin.auctions.show.approval_not_requested', link: link)
   end
 
   private

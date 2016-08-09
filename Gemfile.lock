@@ -166,6 +166,7 @@ GEM
       terminal-table
     haml (4.0.7)
       tilt
+    hana (1.3.2)
     hashdiff (0.3.0)
     hashie (3.4.4)
     highline (1.7.8)
@@ -432,6 +433,7 @@ DEPENDENCIES
   faker
   foreman
   hakiri
+  hana
   holidays
   jasmine
   jquery-rails

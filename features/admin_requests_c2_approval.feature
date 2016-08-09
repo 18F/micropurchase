@@ -9,7 +9,7 @@ Feature: Admin requests C2 approval for an auction
     And there is an unpublished auction
     And the auction does not have a c2 proposal url
     When I visit the admin auction page for that auction
-    Then I should see "This auction will be paid for using an 18F purchase card, which cannot be used without first being granted approval in C2."
+    Then I should see that approval has not been requested for the auction
 
     When I click on the "Request approval" button
     Then I should see "This auction has been sent to C2 for approval."

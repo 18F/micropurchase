@@ -1,0 +1,20 @@
+en:
+  controllers:
+    admin:
+      auctions:
+        create:
+          success: "Auction created successfully"
+        update:
+          success: "Auction updated successfully"
+        unpublish:
+          success: "Auction: %{title} has been successfully unpublished"
+      auction_reports:
+        show:
+          error: "Registration not found for winning bidder DUNS number"
+      customers:
+        create:
+          success: "Customer created successfully"
+      proposals:
+        create:
+          success: "C2 proposal create job enqueued successfully"
+          failure: "There was a problem enqueueing the C2 proposal create job"
