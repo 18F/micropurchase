@@ -65,6 +65,11 @@ Then(/^I should see an error that the vendor cannot be paid$/) do
   step("I should see an error that \"#{error_message}\"")
 end
 
+When(/^I should see the error message for an empty delivery URL$/) do
+  error_message = I18n.t('errors.update_auction.delivery_url')
+  step("I should see an error that \"#{error_message}\"")
+end
+
 Then(/^I should see a success message that "([^"]*)"$/) do |message|
   within("div.usa-alert.usa-alert-success") do
     expect(page).to have_content(message)

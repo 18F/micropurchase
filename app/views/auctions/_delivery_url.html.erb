@@ -1,0 +1,7 @@
+<%= simple_form_for status.auction do |field| %>
+  <%= field.input :delivery_url,
+    label: t('auctions.show.status.ready_for_work.form_label'),
+    placeholder: false %>
+  <%= field.submit t('auctions.show.status.ready_for_work.form_submit'),
+    class: 'usa-button usa-button-outline auction-button' %>
+<% end %>

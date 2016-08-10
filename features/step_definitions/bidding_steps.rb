@@ -44,10 +44,6 @@ Then(/^I should see the auction had a winning bid with name$/) do
   expect(page).not_to have_content("Current bid:")
 end
 
-Then(/^I should see I am the winner$/) do
-  expect(page).to have_content("You are the winner")
-end
-
 Then(/^I should see I am not the winner$/) do
   expect(page).to have_content("You are not the winner")
 end

@@ -52,8 +52,8 @@ describe AuctionQuery do
     end
   end
 
-  describe '#evaluation_needed' do
-    let(:evaluation_needed) { create(:auction, :evaluation_needed) }
+  describe '#pending_acceptance' do
+    let(:pending_acceptance) { create(:auction, :pending_acceptance) }
     let!(:complete_and_successful) do
       create(:auction, :complete_and_successful)
     end
@@ -61,7 +61,7 @@ describe AuctionQuery do
     let!(:payment_needed) { create(:auction, :payment_needed) }
 
     it 'should only return auctions where an evaluation is needed' do
-      expect(query.evaluation_needed).to match_array([evaluation_needed])
+      expect(query.pending_acceptance).to match_array([pending_acceptance])
     end
   end
 

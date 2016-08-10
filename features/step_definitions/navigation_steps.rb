@@ -74,6 +74,14 @@ When(/^I visit the admin closed auctions page$/) do
   visit admin_auctions_closed_path
 end
 
+Given(/^I visit the Needs Attention page$/) do
+  visit admin_auctions_needs_attention_path
+end
+
+Then(/^I should be on the Needs Attention page$/) do
+  expect(page.current_path).to eq(admin_auctions_needs_attention_path)
+end
+
 Then(/^I should be on the skills admin page$/) do
   expect(page.current_path).to eq(admin_skills_path)
 end

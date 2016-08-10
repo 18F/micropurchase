@@ -1,11 +1,16 @@
 Feature: Admin view needs attention auctions
   As an admin
   I want to see the needs attention auctions dashboard
-  So I can tell what actions I might need to take
+  So I can tell which auctions need my attention
 
   Background:
     Given I am an administrator
     And I sign in
+
+  Scenario: Navigating to the needs attention auctions dashboard
+    Given I visit the auctions admin page
+    When I click on the "Needs Attention" link
+    Then I should be on the Needs Attention page
 
   Scenario: Viewing the needs attention auctions dashboard
     Given there is a complete and successful auction

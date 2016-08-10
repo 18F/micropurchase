@@ -9,6 +9,8 @@ class BidStatusPresenterFactory
   def create
     if future?
       future_message
+    elsif over? && user_is_winning_bidder?
+      over_winning_bidder_message
     elsif over?
       over_message
     else
@@ -40,10 +42,18 @@ class BidStatusPresenterFactory
     end
   end
 
+  def over_winning_bidder_message
+    if auction.pending_acceptance?
+      BidStatusPresenter::OverUserIsWinnerPendingAcceptance.new(auction: auction)
+    elsif auction.delivery_url.present?
+      BidStatusPresenter::OverUserIsWinnerWorkInProgress.new(auction: auction)
+    else
+      BidStatusPresenter::OverUserIsWinner.new(auction: auction)
+    end
+  end
+
   def over_message
-    if user_is_winning_bidder?
-      BidStatusPresenter::OverUserIsWinner.new
-    elsif user_is_bidder?
+    if user_is_bidder?
       BidStatusPresenter::OverUserIsBidder.new
     elsif auction.bids.any?
       BidStatusPresenter::OverWithBids.new

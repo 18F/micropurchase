@@ -28,6 +28,3 @@ en:
     auctions:
       show:
         winner_report: "Generate a CSV Report"
-        approval_not_requested:
-          "This auction will be paid for using an 18F purchase card, which cannot be
-          used without first being granted approval in C2. %{link}"
