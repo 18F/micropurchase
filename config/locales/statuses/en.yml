@@ -1,0 +1,21 @@
+en:
+  statuses:
+    c2_presenter:
+      approval_not_requested:
+        status: "Not requested"
+        body: "This auction will be paid for using an 18F purchase card, which cannot be
+              used without first being granted approval in C2."
+        header: "C2 approval required"
+      sent:
+         status: "Sent"
+         header: "Pending C2 approval"
+         body: "This auction has been sent to C2 for approval."
+      pending:
+        status: "Pending"
+        header: "Pending C2 approval"
+        body: "This auction has been sent to C2 for approval."
+        action: "You can check on the status <a href=%{link}>here</a>."
+      approved:
+        status: "Approved"
+        body: "This auction has been approved in C2: %{link}"
+        header: "Approved in C2"

@@ -1,9 +1,23 @@
 class C2StatusPresenter::Pending < C2StatusPresenter::Base
+  attr_reader :auction
+
+  def initialize(auction:)
+    @auction = auction
+  end
+
+  def status
+    I18n.t('statuses.c2_presenter.pending.status')
+  end
+
   def header
-    'Pending C2 approval'
+    I18n.t('statuses.c2_presenter.pending.header')
   end
 
   def body
-    'This auction has been sent to C2 for approval.'
+    I18n.t('statuses.c2_presenter.pending.body')
+  end
+
+  def action_partial
+    'admin/auctions/pending'
   end
 end

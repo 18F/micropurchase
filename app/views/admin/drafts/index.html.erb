@@ -4,26 +4,22 @@
   <thead>
     <tr>
       <th scope="col">Title</th>
-      <th scope="col">Billable to</th>
-      <th scope="col">Start time</th>
-      <th scope="col">End time</th>
-      <th scope="col">Starting price</th>
+      <th scope="col">Starting Date</th>
+      <th scope="col">Ending Date</th>
       <th scope="col">Delivery Deadline</th>
-      <th scope="col"></th>
-      <th scope="col"></th>
+      <th scope="col">C2 Request</th>
+      <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
     <% @view_model.auctions.each do |auction| %>
       <tr>
         <td><%= link_to(auction.title, admin_auction_path(auction.id)) %></td>
-        <td><%= auction.billable_to %></td>
         <td><%= auction.started_at %></td>
         <td><%= auction.ended_at %></td>
-        <td><%= auction.start_price %></td>
         <td><%= auction.delivery_due_at %></td>
+        <td><%= auction.c2_proposal_status %></td>
         <td><%= link_to 'edit', edit_admin_auction_path(auction.id) %></td>
-        <td><%= link_to 'preview', admin_preview_auction_path(auction.id) %></td>
       </tr>
     <% end %>
   </tbody>

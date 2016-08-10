@@ -24,7 +24,7 @@ Feature: Admin requests C2 approval for an auction
     When I visit the admin auction page for that auction
     Then I should see that the auction does not have a C2 Proposal URL
     When I click on the "Request approval" button
-    Then I should see "This auction has been sent to C2 for approval. You can check on the status here."
+    Then I should see that the C2 status for an auction pending C2 approval
     And I should see that the auction has a C2 Proposal URL
     And I should not see a "Request approval" button
 
