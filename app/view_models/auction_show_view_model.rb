@@ -76,7 +76,8 @@ class AuctionShowViewModel
     if !available? ||
        user_not_vendor? ||
        reverse_auction_available_user_is_winner? ||
-       sealed_bid_auction_user_is_bidder?
+       sealed_bid_auction_user_is_bidder? ||
+       current_user.sam_status != 'sam_accepted'
       'auctions/bid_status'
     else
       'components/null'
