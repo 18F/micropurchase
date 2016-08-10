@@ -7,6 +7,10 @@ class BidStatusPresenter::Base
     ''
   end
 
+  def action_partial
+    'components/null'
+  end
+
   protected
 
   def end_date
@@ -15,6 +19,10 @@ class BidStatusPresenter::Base
 
   def start_date
     DcTimePresenter.convert_and_format(auction.started_at)
+  end
+
+  def delivery_deadline
+    DcTimePresenter.convert_and_format(auction.delivery_due_at)
   end
 
   def sign_in_link

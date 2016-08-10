@@ -41,8 +41,10 @@ class BidStatusPresenterFactory
   end
 
   def over_message
-    if user_is_winning_bidder?
-      BidStatusPresenter::OverUserIsWinner.new
+    if user_is_winning_bidder? && auction.delivery_url.present?
+      BidStatusPresenter::OverUserIsWinnerWorkInProgress.new(auction: auction)
+    elsif user_is_winning_bidder?
+      BidStatusPresenter::OverUserIsWinner.new(auction: auction)
     elsif user_is_bidder?
       BidStatusPresenter::OverUserIsBidder.new
     elsif auction.bids.any?

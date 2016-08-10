@@ -38,6 +38,19 @@ Then(/^I should see the time I placed my bid$/) do
   )
 end
 
+Then(/^I should see the ready for work status box$/) do
+  expect(page).to have_content(
+    I18n.t('auctions.show.status.ready_for_work.header')
+  )
+  expect(find_field('auction_delivery_url')).not_to be_nil
+end
+
+Then(/^I should see the work in progress status box$/) do
+  expect(page).to have_content(
+    I18n.t('auctions.show.status.work_in_progress.header')
+  )
+end
+
 def end_date
   DcTimePresenter.convert_and_format(@auction.ended_at)
 end

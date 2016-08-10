@@ -3,6 +3,7 @@
     <div class="usa-alert-body">
       <h3 class="usa-alert-heading"><%= status.header %></h3>
       <p class="usa-alert-text"><%= raw status.body %></p>
+      <%= render partial: status.action_partial, locals: { status: status } %>
     </div>
   </div>
 </div>

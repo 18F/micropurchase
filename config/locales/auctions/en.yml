@@ -5,3 +5,21 @@ en:
         vendor:
           header: 'Coming soon'
           body: 'This auction is not currently accepting bids. It will open on %{start_date}.'
+    show:
+      status:
+        ready_for_work:
+          form_label: 'Pull request URL'
+          form_submit: 'Start work'
+          header: 'Ready for work'
+          body: >
+            You won this auction on %{ended_at} and must deliver by
+            %{delivery_deadline}. Please use GitHub to create a pull request and reference
+            <a href=%{issue_url}>the issue associated with this auction</a>.
+            Then enter the pull request URL, below, and click "start work."
+        work_in_progress:
+          header: 'Work in progress'
+          body: >
+            You won this auction on %{ended_at} and must complete your work
+            before %{delivery_deadline}. Please update <a href=%{delivery_url}>your pull
+            request</a> with any questions, comments, or partial solutions. When you've
+            completed your work, click "I'm done," below. %{link}

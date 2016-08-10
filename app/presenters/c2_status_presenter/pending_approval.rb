@@ -1,4 +1,4 @@
-class C2StatusPresenter::PendingApproval
+class C2StatusPresenter::PendingApproval < C2StatusPresenter::Base
   include Rails.application.routes.url_helpers
   include ActionView::Helpers::UrlHelper
 

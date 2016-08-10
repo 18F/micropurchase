@@ -2,3 +2,4 @@ en:
   errors:
     update_auction:
       vendor_ineligible: 'The vendor cannot be paid'
+      delivery_url: 'Please enter the URL of your pull request to start work'

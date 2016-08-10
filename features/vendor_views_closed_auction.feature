@@ -11,9 +11,7 @@ Feature: Vendor views closed auctions
     When the auction ends
     And I visit the auction page
     Then I should see the auction had a winning bid with name
-    And I should see I am the winner
-    And I should see when the auction started
-    And I should see when the auction ended
+    And I should see the ready for work status box
     And there should be meta tags for the closed auction
     And I should receive an email notifying me that I won
 
