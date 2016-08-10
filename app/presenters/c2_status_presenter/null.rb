@@ -1,13 +1,2 @@
-class C2StatusPresenter::Null
-  def status
-    ''
-  end
-
-  def header
-    ''
-  end
-
-  def body
-    ''
-  end
+class C2StatusPresenter::Null < C2StatusPresenter::Base
 end

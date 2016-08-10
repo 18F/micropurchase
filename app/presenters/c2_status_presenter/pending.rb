@@ -1,7 +1,4 @@
 class C2StatusPresenter::Pending < C2StatusPresenter::Base
-  include Rails.application.routes.url_helpers
-  include ActionView::Helpers::UrlHelper
-
   attr_reader :auction
 
   def initialize(auction:)
@@ -17,14 +14,10 @@ class C2StatusPresenter::Pending < C2StatusPresenter::Base
   end
 
   def body
-    I18n.t('statuses.c2_presenter.pending.body', link: link)
+    I18n.t('statuses.c2_presenter.pending.body')
   end
 
-  def link
-    link_to(
-      'here',
-      auction.c2_proposal_url,
-      target: '_blank'
-    )
+  def action_partial
+    'admin/auctions/pending'
   end
 end

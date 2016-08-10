@@ -1,4 +1,4 @@
-class C2StatusPresenter::Approved
+class C2StatusPresenter::Approved < C2StatusPresenter::Base
   def initialize(auction:)
     @auction = auction
   end

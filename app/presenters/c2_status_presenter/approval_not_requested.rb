@@ -1,7 +1,4 @@
 class C2StatusPresenter::ApprovalNotRequested < C2StatusPresenter::Base
-  include Rails.application.routes.url_helpers
-  include ActionView::Helpers::UrlHelper
-
   attr_reader :auction
 
   def initialize(auction:)
@@ -17,15 +14,10 @@ class C2StatusPresenter::ApprovalNotRequested < C2StatusPresenter::Base
   end
 
   def body
-    I18n.t('statuses.c2_presenter.approval_not_requested.body', link: link)
+    I18n.t('statuses.c2_presenter.approval_not_requested.body')
   end
 
-  def link
-    link_to(
-      'Request approval',
-      admin_proposals_path(auction_id: auction.id),
-      method: :post,
-      class: 'usa-button usa-button-outline auction-button'
-    )
+  def action_partial
+    'admin/auctions/request_approval'
   end
 end

@@ -17,8 +17,7 @@ describe C2StatusPresenter::Pending do
       presenter = C2StatusPresenter::Pending.new(auction: auction)
 
       expect(presenter.body)
-        .to eq(I18n.t('statuses.c2_presenter.pending.body',
-                      link: presenter.link))
+        .to eq(I18n.t('statuses.c2_presenter.pending.body'))
     end
   end
 

@@ -17,8 +17,7 @@ describe C2StatusPresenter::ApprovalNotRequested do
       presenter = C2StatusPresenter::ApprovalNotRequested.new(auction: auction)
 
       expect(presenter.body)
-        .to eq(I18n.t('statuses.c2_presenter.approval_not_requested.body',
-                      link: presenter.link))
+        .to eq(I18n.t('statuses.c2_presenter.approval_not_requested.body'))
     end
   end
 

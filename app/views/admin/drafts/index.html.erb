@@ -8,8 +8,7 @@
       <th scope="col">Ending Date</th>
       <th scope="col">Delivery Deadline</th>
       <th scope="col">C2 Request</th>
-      <th scope="col"></th>
-      <th scope="col"></th>
+      <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
@@ -21,7 +20,6 @@
         <td><%= auction.delivery_due_at %></td>
         <td><%= auction.c2_proposal_status %></td>
         <td><%= link_to 'edit', edit_admin_auction_path(auction.id) %></td>
-        <td><%= link_to 'preview', admin_preview_auction_path(auction.id) %></td>
       </tr>
     <% end %>
   </tbody>
