@@ -17,5 +17,14 @@ Feature: Winning vendor works on an auction
     And the auction ends
     When I visit the auction page
     And I submit a blank delivery URL
-    And I should see the ready for work status box
+    Then I should see the ready for work status box
     And I should see the error message for an empty delivery URL
+
+  Scenario: Vendor marks work as done
+    Given I am an authenticated vendor
+    And I am going to win an auction
+    And the auction ends
+    When I visit the auction page
+    And I submit a delivery URL
+    And I click on the I'm done button
+    Then I should see the pending acceptance status box

@@ -22,4 +22,11 @@ en:
             You won this auction on %{ended_at} and must complete your work
             before %{delivery_deadline}. Please update <a href=%{delivery_url}>your pull
             request</a> with any questions, comments, or partial solutions. When you've
-            completed your work, click "I'm done," below. %{link}
+            completed your work, click "I'm done," below.
+          action: "I'm done"
+        pending_acceptance:
+          header: 'Pending acceptance'
+          body: >
+            18F is working to determine if <a href=%{delivery_url}>your pull
+            request</a> meets the auction's acceptance criteria. You will receive an email
+            once this determination is made.

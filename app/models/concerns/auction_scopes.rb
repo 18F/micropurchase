@@ -13,7 +13,7 @@ module AuctionScopes
     scope :evaluated, -> { where(result: [results['accepted'], results['rejected']]) }
     scope :in_reverse_chron_order, -> { order('ended_at DESC') }
     scope :not_delivered, -> { where(delivery_url: [nil, '']) }
-    scope :not_evaluated, -> { where(result: [nil, results['not_applicable']]) }
+    scope :pending_acceptance, -> { where(result: results['pending_acceptance']) }
     scope :not_paid, -> { where(paid_at: nil) }
     scope :paid, -> { where.not(paid_at: nil) }
     scope :published, -> { where(published: publishes['published']) }

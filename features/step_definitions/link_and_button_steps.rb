@@ -37,6 +37,11 @@ When(/^I click on the update button$/) do
   step("I click on the \"#{update_button}\" button")
 end
 
+When(/^I click on the I'm done button$/) do
+  button = I18n.t('auctions.show.status.work_in_progress.action')
+  step("I click on the \"#{button}\" button")
+end
+
 When(/^I click on the add auction link$/) do
   add_link = I18n.t('links_and_buttons.auctions.add')
   step("I click on the \"#{add_link}\" link")
