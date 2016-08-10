@@ -9,7 +9,7 @@
 
 <%= I18n.t(
   'mailers.auction_mailer.winning_bidder_notification.para_2',
-  auction_url: @auction.auction_url
+  auction_url(@auction)
 ) %>
 
 <%= I18n.t(
