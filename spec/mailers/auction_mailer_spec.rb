@@ -28,7 +28,7 @@ describe AuctionMailer do
       expect(email.body.encoded).to include(
         I18n.t(
           'mailers.auction_mailer.winning_bidder_notification.para_2',
-          auction_url: auction_url(@auction)
+          auction_url: auction_url(auction)
         )
       )
       expect(email.body.encoded).to include(
