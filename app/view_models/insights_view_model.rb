@@ -46,7 +46,7 @@ class InsightsViewModel
   def accepted_auction_stat
     {
       statistic: accepted_auctions_count,
-      label: 'successful delieries',
+      label: 'successful deliveries',
       label_stat: "(#{accepted_auction_percent} success rate)"
     }
   end
