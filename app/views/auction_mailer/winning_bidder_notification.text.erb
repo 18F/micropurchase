@@ -9,7 +9,11 @@
 
 <%= I18n.t(
   'mailers.auction_mailer.winning_bidder_notification.para_2',
-  policy_page_url: faq_url
+  auction_url: auction_url(@auction)
+) %>
+
+<%= I18n.t(
+  'mailers.auction_mailer.winning_bidder_notification.para_3'
 ) %>
 
 <%= I18n.t('mailers.auction_mailer.winning_bidder_notification.sign_off') %>
