@@ -44,4 +44,19 @@ class AuctionMailer < ActionMailer::Base
       reply_to: 'micropurchase@gsa.gov'
     )
   end
+
+  def auction_paid_winning_vendor_notification(auction:)
+    @auction = auction
+    @winning_bid = WinningBid.new(@auction).find
+
+    mail(
+      to: @winning_bid.bidder.email,
+      subject: I18n.t(
+        'mailers.auction_mailer.auction_paid_winning_vendor_notification.subject',
+        auction_title: @auction.title
+      ),
+      from: SMTPCredentials.default_from,
+      reply_to: 'micropurchase@gsa.gov'
+    )
+  end
 end
