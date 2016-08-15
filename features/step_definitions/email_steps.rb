@@ -38,7 +38,7 @@ Then(/^I should receive an email notifying me that I won$/) do
     I18n.t(
       'mailers.auction_mailer.winning_bidder_notification.para_2',
       policy_page_url: faq_url,
-      auction_url: auction_url(auction)
+      auction_url: auction_url("")
     )
   )
 end
