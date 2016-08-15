@@ -77,7 +77,7 @@ class AuctionShowViewModel
        user_not_vendor? ||
        reverse_auction_available_user_is_winner? ||
        sealed_bid_auction_user_is_bidder? ||
-       current_user.sam_status != 'sam_accepted'
+       !eligibility.eligible?(current_user)
       'auctions/bid_status'
     else
       'components/null'
@@ -256,11 +256,11 @@ class AuctionShowViewModel
   end
 
   def eligibility_label
-    if AuctionThreshold.new(auction).small_business?
-      'Small-business only'
-    else
-      'SAM.gov only'
-    end
+    eligibility.label
+  end
+
+  def eligibility
+    @_eligibility ||= EligibilityFactory.new(auction).create
   end
 
   def customer_label

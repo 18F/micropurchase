@@ -37,3 +37,9 @@ en:
               body: >
                 Your profile must contain a valid DUNS number before you can place a bid. Please
                 <a href="/profile">update your profile</a>.
+            not_small_business:
+              header: You are ineligible to bid
+              body: >
+                Only small businesses are allowed to bid on this auction. If you're
+                in fact a small business, please update your profile on <a
+                href="https://www.sam.gov/portal/SAM/">SAM.gov</a>.
