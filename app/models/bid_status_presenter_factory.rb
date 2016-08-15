@@ -25,6 +25,8 @@ class BidStatusPresenterFactory
       BidStatusPresenter::AvailableUserIsAdmin.new(auction: auction)
     elsif guest?
       BidStatusPresenter::AvailableUserIsGuest.new(auction: auction)
+    elsif user.sam_status != 'sam_accepted'
+      BidStatusPresenter::AvailableUserNotSamVerified.new
     elsif auction.type == 'reverse'
       BidStatusPresenter::AvailableUserIsWinningBidder.new(bid_amount: lowest_user_bid.try(:amount))
     else # sealed bid, user is bidder

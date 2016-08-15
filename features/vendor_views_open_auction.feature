@@ -18,3 +18,10 @@ Feature: Vendor views an open auction
     And I click on the auction's title
     And I should see the maximum bid amount in the bidding form
     And I should see I do not have the winning bid
+
+  Scenario: Vendor is not verified via Sam.gov
+    Given there is an open auction
+    And I am a user without a verified SAM account
+    And I sign in
+    When I visit the auction page
+    Then I should see the open auction message for vendors not verified by Sam.gov

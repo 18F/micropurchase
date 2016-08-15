@@ -30,3 +30,10 @@ en:
             18F is working to determine if <a href=%{delivery_url}>your pull
             request</a> meets the auction's acceptance criteria. You will receive an email
             once this determination is made.
+        open:
+          vendor:
+            not_verified:
+              header: Please update your profile
+              body: >
+                Your profile must contain a valid DUNS number before you can place a bid. Please
+                <a href="/profile">update your profile</a>.

@@ -63,6 +63,12 @@ Then(/^I should see that the C2 status for an auction pending C2 approval$/) do
   )
 end
 
+Then(/^I should see the open auction message for vendors not verified by Sam\.gov$/) do
+  expect(page).to have_content(
+    I18n.t('auctions.show.status.open.vendor.not_verified.header')
+  )
+end
+
 def end_date
   DcTimePresenter.convert_and_format(@auction.ended_at)
 end
