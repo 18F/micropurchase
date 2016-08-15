@@ -23,6 +23,16 @@ After('@background_jobs_off') do
   Delayed::Worker.delay_jobs = false
 end
 
+Before '@enable_caching' do
+  ActionController::Base.perform_caching = true
+  ClearCache.new.perform
+end
+
+After '@enable_caching' do
+  ClearCache.new.perform
+  ActionController::Base.perform_caching = false
+end
+
 ActionController::Base.allow_rescue = false
 
 begin
