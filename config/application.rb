@@ -14,6 +14,7 @@ Bundler.require(*Rails.groups)
 
 module Micropurchase
   class Application < Rails::Application
+    config.action_controller.page_cache_directory = "#{Rails.root}/public/cache"
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
     config.time_zone = 'Etc/UTC'
     config.active_record.raise_in_transactional_callbacks = true

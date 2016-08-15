@@ -18,4 +18,9 @@ module Clockwork
     puts "Checking for approved auctions"
     CheckApproval.new.delay.perform
   end
+
+  every(1.day, "insights_cache.clear") do
+    puts "Clearing the page cache for the Insights page"
+    ClearCache.new.delay.perform
+  end
 end
