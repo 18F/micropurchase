@@ -1,3 +1,7 @@
+Given(/^the insight metrics are updated$/) do
+  UpdateInsightMetrics.new.perform
+end
+
 Then(/^I should see seven numbers on the page$/) do
   hero_metrics = find('.hero-metrics-wrapper').all('a')
   hero_metrics.size
