@@ -13,7 +13,7 @@ describe ReceiptsController do
           get :new, { auction_id: auction.id }, user_id: current_user.id
 
           expect(response.code).to eq '200'
-          expect(response).to render_template(:new)
+          expect(response).to render_template('auctions/show')
         end
       end
 

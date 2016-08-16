@@ -7,6 +7,19 @@ class ReceiptsController < ApplicationController
 
     if current_user != winning_bidder || auction.paid_at.nil?
       redirect_to root_path
+    else
+      @view_model = AuctionReceiptViewModel.new(
+        auction: auction,
+        current_user: current_user
+      )
+      render 'auctions/show'
     end
+  end
+
+  def create
+    auction = Auction.find(params[:auction_id])
+    auction.update(c2_approval_status: :payment_confirmed)
+
+    redirect_to auction_path(auction)
   end
 end

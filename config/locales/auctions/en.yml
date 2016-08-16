@@ -30,6 +30,16 @@ en:
             18F is working to determine if <a href=%{delivery_url}>your pull
             request</a> meets the auction's acceptance criteria. You will receive an email
             once this determination is made.
+        payment_confirmation_needed:
+          header: "Payment confirmation needed"
+          body: >
+            18F issued payment on %{payment_date} via your payment URL. Please
+            confirm that you've received payment.
+          action: 'Got it!'
+        payment_confirmed:
+          header: 'Paid'
+          body: >
+            You won this auction on %{end_date}, your pull request was accepted on %{accepted_date}, and you were paid %{amount} on %{paid_at}.
         open:
           vendor:
             not_verified:
