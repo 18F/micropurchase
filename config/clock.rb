@@ -23,4 +23,9 @@ module Clockwork
     puts "Clearing the page cache for the Insights page"
     ClearCache.new.delay.perform
   end
+
+  every(1.day, "insight_metrics.update", at: "02:00", tz: 'Eastern Time (US & Canada)') do
+    puts "Updating insight metrics"
+    UpdateInsighMetrics.new.delay.perform
+  end
 end

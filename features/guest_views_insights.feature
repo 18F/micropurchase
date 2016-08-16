@@ -5,6 +5,7 @@ Feature: Guest Views Insights page
 
   Scenario: Visiting the insights page
     Given there is an accepted auction
+    And the insight metrics are updated
     When I visit the insights page
     Then I should see seven numbers on the page
     And I should see that there is one total auction
@@ -12,13 +13,3 @@ Feature: Guest Views Insights page
     And I should see a Winning bid section
     And I should see a Community section
     And I should see a Bids by auction section
-
-  @enable_caching
-  Scenario: Visiting the insights page before and after cache clearing
-    Given there is an accepted auction
-    And I visit the insights page
-    Then I should see that there is one total auction
-    When there is another accepted auction
-    And the cache clears
-    And I refresh the page
-    Then I should see that there are two total auctions
