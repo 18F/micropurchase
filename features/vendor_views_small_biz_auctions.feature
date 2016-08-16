@@ -10,6 +10,7 @@ Feature: Vendor views auctions set aside for small businesses only
     When I visit the auction page
     Then I should not see the bid form
     And I should see a "Small-business only" eligibility
+    Then I should see the open auction message for vendors who are not small businesses
 
   Scenario: A vendor sees a non small business only auctions on the auction view page
     Given there is an auction below the micropurchase threshold
