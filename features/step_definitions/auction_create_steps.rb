@@ -13,9 +13,8 @@ end
 Given(/^I am going to win an auction$/) do
   @auction = FactoryGirl.build(:auction, :available, :with_bidders)
   Timecop.freeze(@auction.ended_at - 15.minutes) do
-    bids = @auction.bids.sort_by(&:amount)
-    b = bids.first
-    b.update_attribute(:bidder_id, @user.id)
+    bid = @auction.bids.sort_by(&:amount).first
+    bid.update(bidder: @user)
     SaveAuction.new(@auction).perform
   end
 end
@@ -23,9 +22,8 @@ end
 Given(/^I am going to lose an auction$/) do
   @auction = FactoryGirl.build(:auction, :available, :with_bidders)
   Timecop.freeze(@auction.ended_at - 15.minutes) do
-    bids = @auction.bids.sort_by(&:amount)
-    b = bids.last
-    b.update_attribute(:bidder_id, @user.id)
+    bid = @auction.bids.sort_by(&:amount).last
+    bid.update(bidder: @user)
     SaveAuction.new(@auction).perform
   end
 end
@@ -34,6 +32,10 @@ When(/^the auction ends$/) do
   Timecop.return
   Timecop.travel(@auction.ended_at + 5.minutes)
   Delayed::Worker.new.work_off
+end
+
+When(/^the auction is paid$/) do
+  @auction.update(paid_at: Time.current)
 end
 
 Given(/^there is a closed bidless auction$/) do

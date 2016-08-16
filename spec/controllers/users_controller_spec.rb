@@ -1,8 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe UsersController, type: :controller do
-  let(:user) { FactoryGirl.create(:user) }
-
+describe UsersController do
   describe '#update' do
     it 'redirects to authenticate when not logged in' do
       put :update, id: user.id, user: { duns_number: '222' }
@@ -27,5 +25,9 @@ RSpec.describe UsersController, type: :controller do
       expect(response).to be_redirect
       expect(response.location).to eq('http://test.host/')
     end
+  end
+
+  def user
+    @_user ||=  create(:user)
   end
 end
