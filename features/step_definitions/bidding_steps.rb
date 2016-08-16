@@ -74,7 +74,7 @@ When(/^I submit a bid for \$(.+)$/) do |amount|
 end
 
 Then(/^I should see the maximum bid amount in the bidding form$/) do
-  within(".auction-bid") do
+  within(".usa-alert-info") do
     expect(page).to have_content(
       "The maximum you can bid is #{Currency.new(RulesFactory.new(@auction).create.max_allowed_bid)}"
     )
@@ -91,12 +91,12 @@ end
 
 Then(/^I should see the bid form$/) do
   within('.auction-show') do
-    expect(page).to have_selector(:css, '.auction-bid form')
+    expect(page).to have_selector(:css, '.auction-detail-panel form')
   end
 end
 
 Then(/^I should not see the bid form$/) do
   within('.auction-show') do
-    expect(page).not_to have_selector(:css, '.auction-bid form')
+    expect(page).not_to have_selector(:css, '.auction-detail-panel form')
   end
 end

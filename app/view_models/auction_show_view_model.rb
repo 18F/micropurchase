@@ -52,36 +52,8 @@ class AuctionShowViewModel
     auction.type.dasherize.capitalize
   end
 
-  def bid_form_partial
-    if rules.user_can_bid?(current_user)
-      'auctions/bid_form'
-    else
-      'components/null'
-    end
-  end
-
-  def bid_form_header
-    if user_bids.any?
-      'auctions/outbid_bid_form_header'
-    else
-      'auctions/bid_form_header'
-    end
-  end
-
   def bid_status
     BidStatusPresenterFactory.new(auction: auction, user: current_user).create
-  end
-
-  def bid_status_partial
-    if !available? ||
-       user_not_vendor? ||
-       reverse_auction_available_user_is_winner? ||
-       sealed_bid_auction_user_is_bidder? ||
-       !eligibility.eligible?(current_user)
-      'auctions/bid_status'
-    else
-      'components/null'
-    end
   end
 
   def bid_status_label

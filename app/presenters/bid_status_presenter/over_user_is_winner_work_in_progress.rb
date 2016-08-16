@@ -2,12 +2,6 @@ class BidStatusPresenter::OverUserIsWinnerWorkInProgress < BidStatusPresenter::B
   include Rails.application.routes.url_helpers
   include ActionView::Helpers::UrlHelper
 
-  attr_reader :auction
-
-  def initialize(auction:)
-    @auction = auction
-  end
-
   def header
     I18n.t('auctions.show.status.work_in_progress.header')
   end

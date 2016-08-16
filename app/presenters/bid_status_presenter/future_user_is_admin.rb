@@ -2,12 +2,6 @@ class BidStatusPresenter::FutureUserIsAdmin < BidStatusPresenter::Base
   include Rails.application.routes.url_helpers
   include ActionView::Helpers::UrlHelper
 
-  attr_reader :auction
-
-  def initialize(auction:)
-    @auction = auction
-  end
-
   def body
     "This auction is visible to the public but is not currently accepting bids.
     It will open on #{start_date}. If you need to take it down for whatever

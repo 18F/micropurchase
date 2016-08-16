@@ -1,4 +1,15 @@
 class BidStatusPresenter::Base
+  attr_reader :auction, :user
+
+  def initialize(auction:, user:)
+    @auction = auction
+    @user = user
+  end
+
+  def auction_id
+    auction.id
+  end
+
   def header
     ''
   end

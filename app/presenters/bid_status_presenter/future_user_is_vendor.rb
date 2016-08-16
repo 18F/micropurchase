@@ -1,10 +1,4 @@
 class BidStatusPresenter::FutureUserIsVendor < BidStatusPresenter::Base
-  attr_reader :auction
-
-  def initialize(auction:)
-    @auction = auction
-  end
-
   def header
     I18n.t('auctions.status.future.vendor.header')
   end
