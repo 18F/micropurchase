@@ -39,12 +39,3 @@ Then(/^I should see that there is one total auction$/) do
     expect(page).to have_content 'total auctions'
   end
 end
-
-Then(/^I should see that there are two total auctions$/) do
-  xpath = '/html/body/div[2]/section[1]/div/a[1]'
-
-  within(:xpath, xpath) do
-    expect(page).to have_content '2'
-    expect(page).to have_content 'total auctions'
-  end
-end
