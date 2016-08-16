@@ -34,21 +34,21 @@ describe ReceiptsController do
 
     context 'current user is not winning vendor' do
       it 'redirects the user' do
-          auction = create(:auction, :paid)
-          current_user = create(:user)
+        auction = create(:auction, :paid)
+        current_user = create(:user)
 
-          get :new, { auction_id: auction.id }, user_id: current_user.id
+        get :new, { auction_id: auction.id }, user_id: current_user.id
 
-          expect(response).to be_redirect
-          expect(response.location).to eq('http://test.host/')
+        expect(response).to be_redirect
+        expect(response.location).to eq('http://test.host/')
       end
     end
 
     context 'current user is a guest' do
       it 'redirects the user' do
-          auction = create(:auction, :paid)
+        auction = create(:auction, :paid)
 
-          get :new, { auction_id: auction.id }, user_id: nil
+        get :new, { auction_id: auction.id }, user_id: nil
 
         expect(response).to be_redirect
         expect(response.location).to eq('http://test.host/sign_in')
