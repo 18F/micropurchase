@@ -36,7 +36,7 @@
     </div>
   </div>
 
-  <%= render partial: 'auctions/header', locals: { auction: @view_model } %>
+  <%= render partial: 'auctions/header' %>
 
   <div class="usa-width-two-thirds">
     <%= render partial: 'auctions/auction', locals: { auction: @view_model } %>
@@ -44,10 +44,7 @@
   </div>
 
   <div class="usa-width-one-third">
-    <%= render partial: @view_model.bid_status_partial,
-      locals: { status: @view_model.bid_status  } %>
-
-    <%= render partial: @view_model.bid_form_partial, locals: { auction: @view_model } %>
+    <%= render partial: 'auctions/bid_status', locals: { status: @view_model.bid_status } %>
 
     <div class="auction-detail-panel">
       <div class="auction-info">

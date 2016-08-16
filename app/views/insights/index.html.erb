@@ -11,10 +11,10 @@
     <% @view_model.hero_metrics.each do |metric| %>
       <%= render partial: 'hero_metric',
         locals: {
-        href: "##{metric[:href]}",
-        statistic: metric[:statistic],
-        label: metric[:label],
-        label_stat: metric[:label_stat] || ''
+        href: "##{metric.href}",
+        statistic: metric.statistic,
+        label: metric.label,
+        label_statistic: metric.label_statistic
       } %>
     <% end %>
   </div>

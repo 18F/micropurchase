@@ -69,6 +69,12 @@ Then(/^I should see the open auction message for vendors not verified by Sam\.go
   )
 end
 
+Then(/^I should see the open auction message for vendors who are not small businesses$/) do
+  expect(page).to have_content(
+    I18n.t('auctions.show.status.open.vendor.not_small_business.header')
+  )
+end
+
 def end_date
   DcTimePresenter.convert_and_format(@auction.ended_at)
 end

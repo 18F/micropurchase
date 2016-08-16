@@ -1,17 +1,11 @@
-<div class="auction-detail-panel">
-  <div class="auction-bid">
-    <%= render partial: auction.bid_form_header, locals: { auction: auction } %>
-
-    <%= simple_form_for Bid.new,
-      url: auction_bid_confirmations_path(auction.id), class: "usa-form-large" do |f| %>
-       <fieldset>
-      <div class="usa-input-grid usa-input-grid-small">
-        <%= f.input :amount %>
-      </div>
-      <div class="usa-input-grid usa-input-grid-small">
-        <%= f.submit class: 'usa-button usa-button-outline auction-button' %>
-      </div>
-    </fieldset>
-    <% end %>
-  </div>
-</div>
+<%= simple_form_for Bid.new,
+  url: auction_bid_confirmations_path(status.auction_id), class: "usa-form-large" do |f| %>
+  <fieldset>
+    <div class="usa-input-grid usa-input-grid-small">
+      <%= f.input :amount %>
+    </div>
+    <div class="usa-input-grid usa-input-grid-small">
+      <%= f.submit class: 'usa-button usa-button-outline auction-button' %>
+    </div>
+  </fieldset>
+<% end %>

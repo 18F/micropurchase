@@ -15,52 +15,70 @@ class BidStatusPresenterFactory
       over_message
     else
       available_message
-    end
+    end.new(auction: auction, user: user)
   end
 
   private
 
-  def available_message
-    if admin?
-      BidStatusPresenter::AvailableUserIsAdmin.new(auction: auction)
-    elsif guest?
-      BidStatusPresenter::AvailableUserIsGuest.new(auction: auction)
-    elsif user.sam_status != 'sam_accepted'
-      BidStatusPresenter::AvailableUserNotSamVerified.new
-    elsif auction.type == 'reverse'
-      BidStatusPresenter::AvailableUserIsWinningBidder.new(bid_amount: lowest_user_bid.try(:amount))
-    else # sealed bid, user is bidder
-      BidStatusPresenter::AvailableSealedUserIsBidder.new(bid: lowest_user_bid)
-    end
-  end
-
   def future_message
     if admin?
-      BidStatusPresenter::FutureUserIsAdmin.new(auction: auction)
+      BidStatusPresenter::FutureUserIsAdmin
     elsif guest?
-      BidStatusPresenter::FutureUserIsGuest.new(auction: auction)
+      BidStatusPresenter::FutureUserIsGuest
     else
-      BidStatusPresenter::FutureUserIsVendor.new(auction: auction)
+      BidStatusPresenter::FutureUserIsVendor
     end
   end
 
   def over_winning_bidder_message
     if auction.pending_acceptance?
-      BidStatusPresenter::OverUserIsWinnerPendingAcceptance.new(auction: auction)
+      BidStatusPresenter::OverUserIsWinnerPendingAcceptance
     elsif auction.delivery_url.present?
-      BidStatusPresenter::OverUserIsWinnerWorkInProgress.new(auction: auction)
+      BidStatusPresenter::OverUserIsWinnerWorkInProgress
     else
-      BidStatusPresenter::OverUserIsWinner.new(auction: auction)
+      BidStatusPresenter::OverUserIsWinner
     end
   end
 
   def over_message
     if user_is_bidder?
-      BidStatusPresenter::OverUserIsBidder.new
+      BidStatusPresenter::OverUserIsBidder
     elsif auction.bids.any?
-      BidStatusPresenter::OverWithBids.new
+      BidStatusPresenter::OverWithBids
     else
-      BidStatusPresenter::OverNoBids.new
+      BidStatusPresenter::OverNoBids
+    end
+  end
+
+  def available_message
+    if admin?
+      BidStatusPresenter::AvailableUserIsAdmin
+    elsif guest?
+      BidStatusPresenter::AvailableUserIsGuest
+    elsif ineligible?
+      ineligible_presenter
+    elsif rules.user_can_bid?(user)
+      user_can_bid_message
+    elsif auction.type == 'reverse'
+      BidStatusPresenter::AvailableUserIsWinningBidder
+    else # sealed bid, user is bidder
+      BidStatusPresenter::AvailableSealedUserIsBidder
+    end
+  end
+
+  def user_can_bid_message
+    if user_bids.any?
+      BidStatusPresenter::AvailableReverseUserIsOutbid
+    else
+      BidStatusPresenter::AvailableUserIsEligible
+    end
+  end
+
+  def ineligible_presenter
+    if user.sam_status != 'sam_accepted'
+      BidStatusPresenter::AvailableUserNotSamVerified
+    else
+      BidStatusPresenter::AvailableUserNotSmallBusiness
     end
   end
 
@@ -70,6 +88,10 @@ class BidStatusPresenterFactory
 
   def guest?
     user.is_a?(Guest)
+  end
+
+  def ineligible?
+    !EligibilityFactory.new(auction).create.eligible?(user)
   end
 
   def over?
@@ -102,5 +124,9 @@ class BidStatusPresenterFactory
 
   def user_bids
     auction.bids.where(bidder: user)
+  end
+
+  def rules
+    @_rules ||= RulesFactory.new(auction).create
   end
 end

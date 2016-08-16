@@ -1,3 +1,7 @@
+Given(/^the insight metrics are updated$/) do
+  UpdateInsightMetrics.new.perform
+end
+
 Then(/^I should see seven numbers on the page$/) do
   hero_metrics = find('.hero-metrics-wrapper').all('a')
   hero_metrics.size
@@ -25,4 +29,13 @@ Then(/^I should see a Bids by auction section$/) do
   expect(page).to have_selector("#chart-bids-by-auction")
 
   expect(page).to have_selector("#chart5")
+end
+
+Then(/^I should see that there is one total auction$/) do
+  xpath = '/html/body/div[2]/section[1]/div/a[1]'
+
+  within(:xpath, xpath) do
+    expect(page).to have_content '1'
+    expect(page).to have_content 'total auctions'
+  end
 end

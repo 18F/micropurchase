@@ -18,4 +18,9 @@ module Clockwork
     puts "Checking for approved auctions"
     CheckApproval.new.delay.perform
   end
+
+  every(1.day, "insight_metrics.update", at: "02:00", tz: 'Eastern Time (US & Canada)') do
+    puts "Updating insight metrics"
+    UpdateInsighMetrics.new.delay.perform
+  end
 end

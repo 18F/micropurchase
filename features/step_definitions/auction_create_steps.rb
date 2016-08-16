@@ -174,11 +174,9 @@ Given(/^there is an accepted auction where the winning vendor is missing a payme
 end
 
 Given(/^there is an accepted auction$/) do
-  @auction = FactoryGirl.create(
-    :auction,
-    :with_bidders,
-    :published,
-    result: :accepted,
-    accepted_at: nil,
-  )
+  @auction = FactoryGirl.create(:auction, :accepted, :with_bidders)
+end
+
+When(/^there is another accepted auction$/) do
+  FactoryGirl.create(:auction, :accepted, :with_bidders)
 end

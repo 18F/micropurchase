@@ -21,10 +21,10 @@ Lint/ParenthesesAsGroupedExpression:
   Enabled: true
 
 Metrics/ClassLength:
-  Description: Avoid classes longer than 100 lines of code.
+  Description: Avoid classes longer than 150 lines of code.
   Enabled: true
   CountComments: false
-  Max: 100
+  Max: 150
 
 Metrics/AbcSize:
   # The ABC size is a calculated magnitude, so this number can be a Fixnum or

@@ -1,10 +1,4 @@
 class BidStatusPresenter::OverUserIsWinnerPendingAcceptance < BidStatusPresenter::Base
-  attr_reader :auction
-
-  def initialize(auction:)
-    @auction = auction
-  end
-
   def header
     I18n.t('auctions.show.status.pending_acceptance.header')
   end
