@@ -75,6 +75,28 @@ Then(/^I should see the open auction message for vendors who are not small busin
   )
 end
 
+Then(/^I should see the payment confirmation needed message$/) do
+  expect(page).to have_content(
+    I18n.t('auctions.show.status.payment_confirmation_needed.header')
+  )
+end
+
+
+Then(/^I should see the payment confirmed message$/) do
+  expect(page).to have_content(
+    I18n.t('auctions.show.status.payment_confirmed.header')
+  )
+  expect(page).to have_content(
+    I18n.t(
+      'auctions.show.status.payment_confirmed.body',
+      end_date: end_date,
+      accepted_date: DcTimePresenter.convert_and_format(@auction.accepted_at),
+      amount: Currency.new(WinningBid.new(@auction).find.amount),
+      paid_at: DcTimePresenter.convert_and_format(@auction.paid_at)
+    )
+  )
+end
+
 def end_date
   DcTimePresenter.convert_and_format(@auction.ended_at)
 end

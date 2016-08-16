@@ -38,6 +38,10 @@ When(/^the auction is paid$/) do
   @auction.update(paid_at: Time.current)
 end
 
+When(/^the auction is accepted$/) do
+  @auction.update(accepted_at: Time.current)
+end
+
 Given(/^there is a closed bidless auction$/) do
   @auction = FactoryGirl.create(:auction, :closed)
 end
