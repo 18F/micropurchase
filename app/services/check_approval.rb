@@ -9,7 +9,7 @@ class CheckApproval < C2ApiWrapper
       approved_at = find_approval_timestamp(proposal_json(auction))
 
       if approved_at
-        auction.update(c2_approval_status: :approved)
+        auction.update(c2_status: :approved)
       end
     end
   end

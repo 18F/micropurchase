@@ -52,11 +52,16 @@ class AuctionShowViewModel
     auction.type.dasherize.capitalize
   end
 
-  def bid_status
-    BidStatusPresenterFactory.new(auction: auction, user: current_user).create
+  def status_presenter
+    @_status_presenter ||= StatusPresenterFactory.new(auction).create
   end
 
-  def bid_status_label
+  def bid_status_presenter
+    @_bid_status_presenter ||=
+      BidStatusPresenterFactory.new(auction: auction, user: current_user).create
+  end
+
+  def bid_label
     if over? && auction.bids.any?
       "Winning bid (#{lowest_bidder_name}): #{highlighted_bid_amount_as_currency}"
     elsif user_bids.any?
@@ -106,14 +111,6 @@ class AuctionShowViewModel
 
   def tag_data_value_2
     status_presenter.tag_data_value_2
-  end
-
-  def label
-    status_presenter.label
-  end
-
-  def label_class
-    status_presenter.label_class
   end
 
   def distance_of_time_to_now
@@ -193,10 +190,6 @@ class AuctionShowViewModel
   def highlighted_bid
     @_highlighted_bid ||=
       HighlightedBid.new(auction: auction, user: current_user).find
-  end
-
-  def status_presenter
-    @_status_presenter ||= StatusPresenterFactory.new(auction).create
   end
 
   def over?

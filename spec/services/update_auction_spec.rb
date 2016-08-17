@@ -74,7 +74,7 @@ describe UpdateAuction do
       end
     end
 
-    context 'result is set to accepted' do
+    context 'status is set to accepted' do
       context 'auction is below the micropurchase threshold' do
         it 'calls the AcceptAuction' do
           auction = create(
@@ -87,7 +87,7 @@ describe UpdateAuction do
           allow(AcceptAuction).to receive(:new)
             .with(auction: auction, payment_url: "https://some-website.com/pay")
             .and_return(accept_double)
-          params = { auction: { result: 'accepted' } }
+          params = { auction: { status: 'accepted' } }
 
           UpdateAuction.new(
             auction: auction,
@@ -112,7 +112,7 @@ describe UpdateAuction do
             allow(AcceptAuction).to receive(:new)
               .with(auction: auction, payment_url: "https://some-website.com/pay")
               .and_return(accept_double)
-            params = { auction: { result: 'accepted' } }
+            params = { auction: { status: 'accepted' } }
 
             UpdateAuction.new(
               auction: auction,
@@ -136,7 +136,7 @@ describe UpdateAuction do
             allow(AcceptAuction).to receive(:new)
               .with(auction: auction, payment_url: "https://some-website.com/pay")
               .and_return(accept_double)
-            params = { auction: { result: 'accepted' } }
+            params = { auction: { status: 'accepted' } }
 
             UpdateAuction.new(
               auction: auction,
@@ -155,7 +155,7 @@ describe UpdateAuction do
             allow(AcceptAuction).to receive(:new)
               .with(auction: auction, payment_url: nil)
               .and_return(accept_double)
-            params = { auction: { result: 'accepted' } }
+            params = { auction: { status: 'accepted' } }
 
             UpdateAuction.new(
               auction: auction,
@@ -169,10 +169,10 @@ describe UpdateAuction do
       end
     end
 
-    context 'when result is set to rejected' do
+    context 'when status is set to rejected' do
       it 'sets rejected_at to the time the auction was rejected' do
         auction = create(:auction, :delivery_due_at_expired)
-        params = { auction: { result: 'rejected' } }
+        params = { auction: { status: 'rejected' } }
 
         expect do
           UpdateAuction.new(
@@ -185,7 +185,7 @@ describe UpdateAuction do
 
       it 'does not set c2_proposal_url' do
         auction = create(:auction, :delivery_due_at_expired)
-        params = { auction: { result: 'rejected' } }
+        params = { auction: { status: 'rejected' } }
 
         updater = UpdateAuction.new(
           auction: auction,
@@ -199,7 +199,7 @@ describe UpdateAuction do
 
       it 'does not call AcceptAuction' do
         auction = create(:auction, :delivery_due_at_expired)
-        params = { auction: { result: 'rejected' } }
+        params = { auction: { status: 'rejected' } }
         accept_double = double(perform: true)
         allow(AcceptAuction).to receive(:new).with(
           auction: auction, payment_url: "https://some-website.com/pay"

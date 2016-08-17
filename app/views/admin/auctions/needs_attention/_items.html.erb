@@ -16,7 +16,7 @@
       <td><%= link_to(auction.title, admin_auction_path(auction.id)) %></td>
       <td><%= auction.delivery_due_at_expires_in %></td>
       <td><%= auction.delivery_url %></td>
-      <td><%= auction.result %></td>
+      <td><%= auction.status %></td>
       <td><%= auction.c2_proposal_url %></td>
       <td><%= auction.paid? %></td>
       <td><%= link_to('edit', edit_admin_auction_path(auction.id)) %></td>

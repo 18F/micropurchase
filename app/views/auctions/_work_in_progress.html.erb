@@ -1,6 +1,6 @@
 <%= link_to(
       t('auctions.show.status.work_in_progress.action'),
-      auction_path(status.auction, auction: { result: 'pending_acceptance' }),
+      auction_path(status.auction, auction: { status: 'pending_acceptance' }),
       method: :patch,
       class: 'usa-button usa-button-outline auction-button'
 ) %>

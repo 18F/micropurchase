@@ -140,11 +140,11 @@ Given(/^the auction is for a different purchase card$/) do
 end
 
 Given(/^the c2 proposal for the auction is approved$/) do
-  @auction.update(c2_approval_status: :approved)
+  @auction.update(c2_status: :approved)
 end
 
 Given(/^the c2 proposal for the auction is not approved$/) do
-  @auction.update(c2_approval_status: :not_requested)
+  @auction.update(c2_status: :not_requested)
 end
 
 Given(/^the auction does not have a c2 proposal url$/) do
@@ -171,7 +171,7 @@ Given(/^there is an accepted auction where the winning vendor is missing a payme
     :auction,
     :with_bidders,
     :published,
-    result: :accepted,
+    status: :accepted,
     accepted_at: nil,
     c2_proposal_url: 'https://c2-dev.18f.gov/proposals/2486'
   )

@@ -35,7 +35,7 @@ en:
           body: >
             18F issued payment on %{payment_date} via your payment URL. Please
             confirm that you've received payment.
-          action: 'Got it!'
+          action: "Got it!"
         payment_confirmed:
           header: 'Paid'
           body: >

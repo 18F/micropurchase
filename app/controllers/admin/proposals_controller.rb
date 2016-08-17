@@ -1,7 +1,7 @@
 class Admin::ProposalsController < Admin::BaseController
   def create
     if should_create_c2_proposal?
-      auction.update(c2_approval_status: :pending)
+      auction.update(c2_status: :pending)
       CreateC2ProposalJob.perform_later(auction.id)
       flash[:success] = I18n.t('controllers.admin.proposals.create.success')
     else

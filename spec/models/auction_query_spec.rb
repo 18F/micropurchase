@@ -17,7 +17,7 @@ describe AuctionQuery do
       create(:auction, :complete_and_successful)
     end
     let!(:running_auction) { create(:auction, :running) }
-    let!(:rejected_auction) { create(:auction, result: :rejected) }
+    let!(:rejected_auction) { create(:auction, status: :rejected) }
     let!(:unpaid_auction) do
       create(:auction, :not_paid)
     end
@@ -33,7 +33,7 @@ describe AuctionQuery do
     let!(:complete_and_successful) do
       create(:auction, :complete_and_successful)
     end
-    let!(:rejected_auction) { create(:auction, result: :rejected) }
+    let!(:rejected_auction) { create(:auction, status: :rejected) }
 
     it 'should only return unpublished auctions' do
       expect(query.rejected).to match_array([rejected_auction])

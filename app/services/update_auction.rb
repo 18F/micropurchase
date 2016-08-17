@@ -73,11 +73,11 @@ class UpdateAuction
   end
 
   def auction_accepted?
-    parsed_attributes[:result] == 'accepted'
+    parsed_attributes[:status] == 'accepted'
   end
 
   def auction_rejected?
-    parsed_attributes[:result] == 'rejected'
+    parsed_attributes[:status] == 'rejected'
   end
 
   def winning_bidder_is_eligible_to_be_paid?
