@@ -18,7 +18,7 @@ class ReceiptsController < ApplicationController
 
   def create
     auction = Auction.find(params[:auction_id])
-    auction.update(c2_approval_status: :payment_confirmed)
+    auction.update(c2_status: :payment_confirmed)
 
     redirect_to auction_path(auction)
   end

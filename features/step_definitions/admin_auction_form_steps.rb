@@ -2,8 +2,8 @@ When(/^I click on the link to generate a winning bidder CSV report$/) do
   click_on(I18n.t('admin.auctions.show.winner_report'))
 end
 
-When(/^I select the result as accepted$/) do
-  select("accepted", from: "auction_result")
+When(/^I select the status as accepted$/) do
+  select("accepted", from: "auction_status")
 end
 
 Then(/^I should see that the auction form has a C2 Proposal URL$/) do

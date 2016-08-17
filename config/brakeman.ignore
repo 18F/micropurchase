@@ -20,24 +20,6 @@
     },
     {
       "warning_type": "Cross Site Scripting",
-      "warning_code": 2,
-      "fingerprint": "30534b0d42393db736c4042aec78e43b3a8d0c62788eb5e9bf24f7200332837b",
-      "message": "Unescaped model attribute",
-      "file": "app/views/auctions/_bid_status.html.erb",
-      "line": 5,
-      "link": "http://brakemanscanner.org/docs/warning_types/cross_site_scripting",
-      "code": "::AuctionShowViewModel.new(:auction => Auction.find(params[:id]), :current_user => current_user).bid_status.body",
-      "render_path": [{"type":"controller","class":"Admin::AuctionsController","method":"preview","line":19,"file":"app/controllers/admin/auctions_controller.rb"},{"type":"template","name":"auctions/show","line":47,"file":"app/views/auctions/show.html.erb"}],
-      "location": {
-        "type": "template",
-        "template": "auctions/_bid_status"
-      },
-      "user_input": "Auction.find(params[:id])",
-      "confidence": "Weak",
-      "note": ""
-    },
-    {
-      "warning_type": "Cross Site Scripting",
       "warning_code": 4,
       "fingerprint": "38eaf3a4c38ed941e5397a84c9f95b91a7c3dee9f70c0993131dd3be89180f75",
       "message": "Unsafe model attribute in link_to href",
@@ -52,6 +34,24 @@
       },
       "user_input": "Auction.find(params[:id])",
       "confidence": "Medium",
+      "note": ""
+    },
+    {
+      "warning_type": "Cross Site Scripting",
+      "warning_code": 2,
+      "fingerprint": "419be5183daf252542d63068f2584522d2a84311bb27e584b1270a213711c045",
+      "message": "Unescaped model attribute",
+      "file": "app/views/auctions/_status.html.erb",
+      "line": 5,
+      "link": "http://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "::AuctionShowViewModel.new(:auction => Auction.find(params[:id]), :current_user => current_user).bid_status_presenter.body",
+      "render_path": [{"type":"controller","class":"Admin::AuctionsController","method":"preview","line":19,"file":"app/controllers/admin/auctions_controller.rb"},{"type":"template","name":"auctions/show","line":47,"file":"app/views/auctions/show.html.erb"}],
+      "location": {
+        "type": "template",
+        "template": "auctions/_status"
+      },
+      "user_input": "Auction.find(params[:id])",
+      "confidence": "Weak",
       "note": ""
     },
     {
@@ -109,6 +109,6 @@
       "note": ""
     }
   ],
-  "updated": "2016-08-15 13:56:45 -0700",
+  "updated": "2016-08-17 13:08:37 -0700",
   "brakeman_version": "3.2.1"
 }

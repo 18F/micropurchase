@@ -37,8 +37,8 @@ class Admin::NeedsAttentionAuctionListItem < Admin::BaseViewModel
     auction.delivery_url
   end
 
-  def result
-    auction.result
+  def status
+    auction.status
   end
 
   def c2_proposal_url
