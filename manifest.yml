@@ -19,3 +19,4 @@ applications:
     RACK_ENV: production
     C2_HOST: 'https://cap.18f.gov'
     ROOT_URL: 'https://micropurchase.18f.gov'
+    ANALYTICS: true
