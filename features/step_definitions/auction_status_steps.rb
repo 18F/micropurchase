@@ -57,6 +57,12 @@ Then(/^I should see the pending acceptance status box$/) do
   )
 end
 
+Then(/^I should see the pending payment status box$/) do
+  expect(page).to have_content(
+    I18n.t('auctions.show.status.pending_payment.header')
+  )
+end
+
 Then(/^I should see that the C2 status for an auction pending C2 approval$/) do
   expect(page).to have_content(
     I18n.t('statuses.c2_presenter.pending.body')

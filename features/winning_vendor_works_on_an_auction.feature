@@ -28,3 +28,9 @@ Feature: Winning vendor works on an auction
     And I submit a delivery URL
     And I click on the I'm done button
     Then I should see the pending acceptance status box
+
+  Scenario: Auction is accepted
+    Given I am an authenticated vendor
+    And I won an auction that was accepted
+    When I visit the auction page
+    Then I should see the pending payment status box

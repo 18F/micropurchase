@@ -16,6 +16,12 @@ en:
             %{delivery_deadline}. Please use GitHub to create a pull request and reference
             <a href=%{issue_url}>the issue associated with this auction</a>.
             Then enter the pull request URL, below, and click "start work."
+        pending_payment:
+          header: "Pending payment"
+          body: >
+            Your <a href=%{delivery_url}>pull request</a> was accepted! Payment of %{amount} will be issued
+            to %{payment_url} as soon as possible. You will receive an email once
+            payment is made.
         work_in_progress:
           header: 'Work in progress'
           body: >
