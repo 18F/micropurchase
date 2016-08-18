@@ -19,6 +19,12 @@ Given(/^I am going to win an auction$/) do
   end
 end
 
+Given(/^I won an auction that was accepted$/) do
+  @auction = FactoryGirl.build(:auction, :closed, :accepted, :with_bidders)
+  bid = @auction.bids.sort_by(&:amount).first
+  bid.update(bidder: @user)
+end
+
 Given(/^I am going to lose an auction$/) do
   @auction = FactoryGirl.build(:auction, :available, :with_bidders)
   Timecop.freeze(@auction.ended_at - 15.minutes) do

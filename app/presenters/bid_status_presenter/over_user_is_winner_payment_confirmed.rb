@@ -19,10 +19,6 @@ class BidStatusPresenter::OverUserIsWinnerPaymentConfirmed < BidStatusPresenter:
     DcTimePresenter.convert_and_format(auction.accepted_at)
   end
 
-  def winning_amount
-    Currency.new(WinningBid.new(auction).find.amount)
-  end
-
   def paid_date
     DcTimePresenter.convert_and_format(auction.paid_at)
   end

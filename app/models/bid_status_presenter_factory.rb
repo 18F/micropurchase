@@ -33,6 +33,8 @@ class BidStatusPresenterFactory
   def over_winning_bidder_message
     if auction.pending_acceptance?
       BidStatusPresenter::OverUserIsWinnerPendingAcceptance
+    elsif auction.accepted?
+      BidStatusPresenter::OverUserIsWinnerPendingPayment
     elsif auction.delivery_url.present?
       BidStatusPresenter::OverUserIsWinnerWorkInProgress
     elsif auction.c2_status == 'payment_confirmed'
