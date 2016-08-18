@@ -2466,6 +2466,7 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 .auction-workflow-delivery-past-due-admins .field{
 	margin-top: 16px;
 	margin-bottom: 16px;
+	width: 8em;
 }
 
 /* @end */
