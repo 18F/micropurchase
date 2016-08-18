@@ -16,9 +16,9 @@ describe C2StatusPresenter::Approved do
       auction = create(:auction)
       presenter = C2StatusPresenter::Approved.new(auction: auction)
 
-      expect(presenter.body)
-        .to eq(I18n.t('statuses.c2_presenter.approved.body',
-                      link: presenter.link))
+      expect(presenter.body).to eq(
+        I18n.t('statuses.c2_presenter.approved.body', link: presenter.link)
+      )
     end
   end
 
@@ -27,8 +27,9 @@ describe C2StatusPresenter::Approved do
       auction = create(:auction)
       presenter = C2StatusPresenter::Approved.new(auction: auction)
 
-      expect(presenter.header)
-        .to eq(I18n.t('statuses.c2_presenter.approved.header'))
+      expect(presenter.header).to eq(
+        I18n.t('statuses.c2_presenter.approved.header')
+      )
     end
   end
 end

@@ -2,11 +2,11 @@ require 'rails_helper'
 
 describe C2StatusPresenterFactory do
   context 'when the auction approval is not requested' do
-    it 'should return a C2StatusPresenter::ApprovalNotRequested' do
+    it 'should return a C2StatusPresenter::NotRequested' do
       auction = create(:auction, c2_status: :not_requested)
 
       expect(C2StatusPresenterFactory.new(auction: auction).create)
-        .to be_a(C2StatusPresenter::ApprovalNotRequested)
+        .to be_a(C2StatusPresenter::NotRequested)
     end
   end
 

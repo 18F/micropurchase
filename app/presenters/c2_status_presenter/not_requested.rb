@@ -1,10 +1,4 @@
-class C2StatusPresenter::ApprovalNotRequested < C2StatusPresenter::Base
-  attr_reader :auction
-
-  def initialize(auction:)
-    @auction = auction
-  end
-
+class C2StatusPresenter::NotRequested < C2StatusPresenter::Base
   def status
     I18n.t('statuses.c2_presenter.approval_not_requested.status')
   end
