@@ -1,3 +1,5 @@
+/* @override http://localhost:4000/stylesheets/screen.css */
+
 /* @override http://127.0.0.1:4000/stylesheets/screen.css */
 
 /* @override http://localhost:4000/stylesheets/screen.css */
@@ -2459,6 +2461,11 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 .auction-workflow .p-customize-timeline{
 	margin: 12px 1px !important;
+}
+
+.auction-workflow-delivery-past-due-admins .field{
+	margin-top: 16px;
+	margin-bottom: 16px;
 }
 
 /* @end */
