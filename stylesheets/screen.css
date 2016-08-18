@@ -910,7 +910,8 @@ fieldset{
 	margin-bottom: 28px; 
 }
 
-.field .help-text{
+.field .help-text,
+.p-customize-timeline{
 	font-size: 14px;
 	line-height: 1.33em;
 	display: block;
@@ -1184,7 +1185,6 @@ main div.wrap > form { max-width: 576px; }
 .branch .fieldset.fieldset-date-time{ border-radius: 4px 4px 0 0; }
 
 .branch .delivery{
-	margin-bottom: 16px; 
 	border-radius: 0 0 4px 4px;
 	border-top: none;
 }
@@ -1239,6 +1239,10 @@ main div.wrap > form { max-width: 576px; }
 .with-customized-timeline .branch .fieldset-date-time.fieldset-end-date-time,
 .with-customized-timeline .branch .delivery{
 	padding-top: 30px;
+}
+
+.with-customized-timeline .branch .delivery{
+	margin-bottom: 16px;
 }
 
 .with-customized-timeline .delivery::after{
@@ -2451,6 +2455,10 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 .field.field-delivery-url{
 	margin-top: 18px;
 	margin-bottom: 0;
+}
+
+.auction-workflow .p-customize-timeline{
+	margin: 12px 1px !important;
 }
 
 /* @end */

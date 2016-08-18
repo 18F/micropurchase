@@ -133,6 +133,9 @@ $(document).ready(function() {
 
   $('.a-customize-timeline').click(function(){
     $('body').addClass('with-customized-timeline');
+    $('.auction-workflow-ready-to-publish-admins p.p-date-time-defaults').text("This auction is ready to publish! Please select a start date, end date, and delivery timeline for this auction.")
+    $('.auction-workflow-ready-to-publish-admins p.p-customize-timeline').text("Auctions are usually listed for two days and vendors have five business days to deliver.");
+    return false;
   });
 
 
