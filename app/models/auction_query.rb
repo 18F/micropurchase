@@ -44,12 +44,16 @@ class AuctionQuery
     relation.rejected
   end
 
+  def c2_payment_needed
+    relation
+      .default_purchase_card
+      .delivery_accepted
+      .not_paid
+  end
+
   def payment_needed
     relation
-      .delivery_due_at_expired
-      .delivered
-      .delivery_accepted
-      .c2_submitted
+      .accepted
       .not_paid
   end
 
