@@ -67,6 +67,11 @@ When(/^I click on the Download CSV link$/) do
   step("I click on the \"#{link}\" link")
 end
 
+When(/^I click on the needs attention link$/) do
+  link = I18n.t('links_and_buttons.auctions.needs_attention')
+  step("I click on the \"#{link}\" link")
+end
+
 Then(/^I should see a Download CSV link$/) do
   link = I18n.t('links_and_buttons.users.download_csv')
   step("I should see a \"#{link}\" link")
