@@ -2,15 +2,15 @@
 
 <h2><%= t('needs_attention.index.drafts') %></h2>
 <%= render partial: 'draft',
-  locals: { id: 'overdue', auctions: @view_model.drafts} %>
+  locals: { auctions: @view_model.drafts} %>
 
-<h2><%= t('needs_attention.index.delivery_past_due') %></h2>
-<%= render partial: 'items',
-  locals: { id: 'overdue', auctions: @view_model.delivery_past_due } %>
+<h2><%= t('needs_attention.index.pending_delivery') %></h2>
+<%= render partial: 'pending_delivery',
+  locals: { auctions: @view_model.pending_delivery } %>
 
 <h2><%= t('needs_attention.index.evaluation_needed') %></h2>
 <%= render partial: 'evaluation_needed',
-  locals: { id: 'eval-needed', auctions: @view_model.evaluation_needed } %>
+  locals: { auctions: @view_model.evaluation_needed } %>
 
 <h2><%= t('needs_attention.index.payment_needed') %></h2>
 <%= render partial: 'payment_needed',
