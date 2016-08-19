@@ -1,4 +1,4 @@
-class BidStatusPresenter::PaymentConfirmationNeededUserIsWinner < BidStatusPresenter::Base
+class BidStatusPresenter::Over::Vendor::Winner::PendingPaymentConfirmation < BidStatusPresenter::Base
   def header
     I18n.t('auctions.show.status.payment_confirmation_needed.header')
   end

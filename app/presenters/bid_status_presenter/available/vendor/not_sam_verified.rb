@@ -1,4 +1,4 @@
-class BidStatusPresenter::AvailableUserNotSamVerified < BidStatusPresenter::Base
+class BidStatusPresenter::Available::Vendor::NotSamVerified < BidStatusPresenter::Base
   def header
     I18n.t('auctions.show.status.open.vendor.not_verified.header')
   end

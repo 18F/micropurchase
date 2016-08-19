@@ -1,4 +1,4 @@
-class BidStatusPresenter::AvailableUserIsWinningBidder < BidStatusPresenter::Base
+class BidStatusPresenter::Available::Vendor::WinningBidder < BidStatusPresenter::Base
   def header
     'Bid placed'
   end

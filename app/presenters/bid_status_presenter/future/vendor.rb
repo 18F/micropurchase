@@ -1,4 +1,4 @@
-class BidStatusPresenter::FutureUserIsVendor < BidStatusPresenter::Base
+class BidStatusPresenter::Future::Vendor < BidStatusPresenter::Base
   def header
     I18n.t('auctions.status.future.vendor.header')
   end

@@ -1,4 +1,4 @@
-class BidStatusPresenter::AvailableUserNotSmallBusiness < BidStatusPresenter::Base
+class BidStatusPresenter::Available::Vendor::NotSmallBusiness < BidStatusPresenter::Base
   def header
     I18n.t('auctions.show.status.open.vendor.not_small_business.header')
   end
