@@ -48,18 +48,33 @@ describe AcceptAuction do
       it 'sends an email to the winner' do
         auction = create(:auction, :with_bidders)
         mailer_double = double(deliver_later: true)
-        allow(AuctionMailer).to receive(:winning_bidder_missing_payment_method)
+        allow(WinningBidderMailer).to receive(:auction_accepted_missing_payment_method)
           .with(auction: auction)
           .and_return(mailer_double)
 
         AcceptAuction.new(auction: auction, payment_url: '').perform
 
-        expect(AuctionMailer).to have_received(:winning_bidder_missing_payment_method)
+        expect(WinningBidderMailer).to have_received(:auction_accepted_missing_payment_method)
           .with(auction: auction)
         expect(mailer_double).to have_received(:deliver_later)
       end
     end
+
     context 'winning bidder has credit card information' do
+      it 'sends an email to the winner' do
+        auction = create(:auction, :with_bidders)
+        mailer_double = double(deliver_later: true)
+        allow(WinningBidderMailer).to receive(:auction_accepted)
+          .with(auction: auction)
+          .and_return(mailer_double)
+
+        AcceptAuction.new(auction: auction, payment_url: 'example.com').perform
+
+        expect(WinningBidderMailer).to have_received(:auction_accepted)
+          .with(auction: auction)
+        expect(mailer_double).to have_received(:deliver_later)
+      end
+
       context 'auction is for 18F purchase card' do
         it 'enqueues the UpdateC2ProposalJob' do
           auction = create(:auction, :with_bidders)

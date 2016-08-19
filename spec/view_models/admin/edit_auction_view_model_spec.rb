@@ -5,7 +5,7 @@ describe Admin::EditAuctionViewModel do
     context 'auction does not have c2 approval' do
       context 'auction is closed' do
         it 'returns all options' do
-          auction = create(:auction, :closed, c2_approval_status: :not_requested)
+          auction = create(:auction, :closed, c2_status: :not_requested)
 
           view_model = Admin::EditAuctionViewModel.new(auction)
 
@@ -15,7 +15,7 @@ describe Admin::EditAuctionViewModel do
 
       context 'auction is not closed' do
         it 'does not return published option' do
-          auction = create(:auction, :future, c2_approval_status: :not_requested)
+          auction = create(:auction, :future, c2_status: :not_requested)
 
           view_model = Admin::EditAuctionViewModel.new(auction)
 
@@ -26,7 +26,7 @@ describe Admin::EditAuctionViewModel do
 
     context 'auction does have c2_approved_at' do
       it 'returns all options' do
-        auction = create(:auction, c2_approval_status: :approved)
+        auction = create(:auction, c2_status: :approved)
 
         view_model = Admin::EditAuctionViewModel.new(auction)
 

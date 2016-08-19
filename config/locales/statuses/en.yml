@@ -19,3 +19,16 @@ en:
         status: "Approved"
         body: "This auction has been approved in C2: %{link}"
         header: "Approved in C2"
+      c2_paid:
+        status: "Awaiting payment confirmation"
+        body: >
+          %{winner_email} was paid on %{paid_at}, and has received an email
+          asking them to confirm that payment.
+        header: "Pending payment confirmation"
+      payment_confirmed:
+        status: "Payment confirmed"
+        header: "Paid"
+        body: >
+          %{winner_email}'s pull request was accepted on %{accepted_date}. The
+           vendor was paid %{amount} on %{paid_at} and this payment
+           was confirmed by %{winner_email}.

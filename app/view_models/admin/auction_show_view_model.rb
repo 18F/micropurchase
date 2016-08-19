@@ -14,16 +14,20 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
     end
   end
 
-  def c2_approval_partial
-    if auction.purchase_card == 'default' && auction.c2_approval_status != 'approved'
-      'auctions/bid_status'
+  def c2_status_partial
+    if auction.purchase_card == 'default' && auction.c2_status != 'approved'
+      'auctions/status'
     else
       'components/null'
     end
   end
 
-  def c2_proposal_status
+  def c2_status_presenter
     C2StatusPresenterFactory.new(auction: auction).create
+  end
+
+  def status_presenter
+    @_status_presenter ||= StatusPresenterFactory.new(auction).create
   end
 
   def admin_data
@@ -68,14 +72,6 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
     end
   end
 
-  def label
-    status_presenter.label
-  end
-
-  def label_class
-    status_presenter.label_class
-  end
-
   def distance_of_time_to_now
     "#{HumanTime.new(time: auction.ended_at).distance_of_time_to_now} left"
   end
@@ -110,15 +106,11 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
     if auction.purchase_card == 'default'
       {
         'C2 proposal URL' => auction.c2_proposal_url,
-        'C2 approval status' => auction.c2_approval_status
+        'C2 approval status' => auction.c2_status
       }
     else
       { }
     end
-  end
-
-  def status_presenter
-    @_status_presenter ||= StatusPresenterFactory.new(auction).create
   end
 
   def auction_status

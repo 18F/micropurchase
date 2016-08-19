@@ -4,7 +4,7 @@ FactoryGirl.define do
     billable_to "Project (billable)"
     started_at { quartile_minute(Time.now - 3.days) }
     ended_at { quartile_minute(Time.now + 3.days) }
-    result :not_applicable
+    status :not_applicable
     title { Faker::Company.catch_phrase }
     type :reverse
     published :published
@@ -116,12 +116,12 @@ FactoryGirl.define do
     end
 
     trait :accepted do
-      result :accepted
+      status :accepted
       accepted_at { Time.now }
     end
 
     trait :rejected do
-      result :rejected
+      status :rejected
       rejected_at { Time.now }
     end
 
@@ -131,7 +131,7 @@ FactoryGirl.define do
 
     trait :c2_approved do
       c2_proposal_url 'https://c2-dev.18f.gov/proposals/2486'
-      c2_approval_status :approved
+      c2_status :approved
     end
 
     trait :published do
@@ -179,7 +179,7 @@ FactoryGirl.define do
     end
 
     trait :pending_acceptance do
-      result :pending_acceptance
+      status :pending_acceptance
     end
 
     trait :delivery_past_due do

@@ -1,0 +1,6 @@
+<%= link_to(
+      t('auctions.show.status.payment_confirmation_needed.action'),
+      auction_receipts_path(status.auction),
+      method: :post,
+      class: 'usa-button usa-button-outline auction-button'
+) %>

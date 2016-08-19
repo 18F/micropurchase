@@ -1,0 +1,22 @@
+<table class="usa-table-borderless" id="table-<%= id %>">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Date Delivered</th>
+      <th scope="col">Delivery URL</th>
+      <th scope="col">Winning Vendor</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% auctions.each do |auction| %>
+    <tr>
+      <td><%= link_to(auction.title, admin_auction_path(auction.id)) %></td>
+      <td><%= auction.delivery_due_at_expires_in %></td>
+      <td><%= link_to auction.delivery_url, auction.delivery_url, target: '_blank' %></td>
+      <td><%= auction.winning_bidder.email %></td>
+      <td><%= link_to('edit', edit_admin_auction_path(auction.id)) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

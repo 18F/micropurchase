@@ -53,6 +53,7 @@ Rails.application.routes.draw do
   resources :auctions, only: [:show] do
     resources :bid_confirmations, only: [:create]
     resources :bids, only: [:create]
+    resources :receipts, only: [:new, :create]
   end
 
   resources :bids, only: [:index]

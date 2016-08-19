@@ -3,7 +3,7 @@
     <div class='usa-width-one-whole issue-label'>
       <h3 class='issue-title'>
         <div class="issue-ribbon">
-          <span class="<%= @view_model.label_class %>"><%= @view_model.label %></span>
+          <%= render partial: 'auctions/status_ribbon', locals: { status: @view_model.status_presenter } %>
         </div>
       </h3>
     </div>
@@ -30,8 +30,8 @@
   </div>
 
   <div class="usa-width-one-third">
-    <%= render partial: @view_model.c2_approval_partial,
-      locals: { status: @view_model.c2_proposal_status  } %>
+    <%= render partial: @view_model.c2_status_partial,
+      locals: { status: @view_model.c2_status_presenter  } %>
 
     <div class="auction-detail-panel">
       <div class="auction-info">

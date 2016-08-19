@@ -1,0 +1,12 @@
+<%= I18n.t(
+  'mailers.winning_bidder_mailer.auction_accepted_missing_payment_method.para_1',
+  accepted_date: DcTimePresenter.convert_and_format(@auction.accepted_at),
+  auction_title: @auction.title,
+  amount: Currency.new(@winning_bid.amount).to_s,
+  profile_url: profile_url) %>
+
+<%= I18n.t('mailers.winning_bidder_mailer.auction_accepted_missing_payment_method.para_2') %>
+
+<%= I18n.t('mailers.winning_bidder_mailer.auction_accepted_missing_payment_method.sign_off') %>
+
+<%= I18n.t('mailers.winning_bidder_mailer.auction_accepted_missing_payment_method.from') %>

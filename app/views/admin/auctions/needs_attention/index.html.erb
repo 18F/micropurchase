@@ -1,21 +1,21 @@
 <%= render partial: 'admin/auctions_subnav', locals: { view_model: @view_model } %>
 
-<h2>Delivery past due</h2>
+<h2><%= t('needs_attention.index.delivery_past_due') %></h2>
 <%= render partial: 'items',
   locals: { id: 'overdue', auctions: @view_model.delivery_past_due } %>
 
-<h2>Evaluation needed</h2>
-<%= render partial: 'items',
+<h2><%= t('needs_attention.index.evaluation_needed') %></h2>
+<%= render partial: 'evaluation_needed',
   locals: { id: 'eval-needed', auctions: @view_model.evaluation_needed } %>
 
-<h2>Payment needed</h2>
+<h2><%= t('needs_attention.index.payment_needed') %></h2>
 <%= render partial: 'items',
   locals: { id: 'payment-needed', auctions: @view_model.payment_needed } %>
 
-<h2>Complete &amp; successful</h2>
+<h2><%= raw t('needs_attention.index.complete_and_successful') %></h2>
 <%= render partial: 'items',
   locals: { id: 'successful', auctions: @view_model.complete_and_successful } %>
 
-<h2>Rejected</h2>
+<h2><%= t('needs_attention.index.rejected') %></h2>
 <%= render partial: 'rejected_auctions',
   locals: { auctions: @view_model.rejected } %>

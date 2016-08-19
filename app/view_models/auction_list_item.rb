@@ -9,14 +9,6 @@ class AuctionListItem
     'auctions/title'
   end
 
-  def label
-    status_presenter.label
-  end
-
-  def label_class
-    status_presenter.label_class
-  end
-
   def title
     auction.title
   end
@@ -38,11 +30,7 @@ class AuctionListItem
   end
 
   def eligibility_label
-    if for_small_business?
-      'Small-business only'
-    else
-      'SAM.gov only'
-    end
+    EligibilityFactory.new(auction).create.label
   end
 
   def skills
@@ -87,14 +75,14 @@ class AuctionListItem
     end
   end
 
+  def status_presenter
+    @_status_presenter ||= StatusPresenterFactory.new(auction).create
+  end
+
   private
 
   def for_small_business?
     AuctionThreshold.new(auction).small_business?
-  end
-
-  def status_presenter
-    @_status_presenter ||= StatusPresenterFactory.new(auction).create
   end
 
   def available?

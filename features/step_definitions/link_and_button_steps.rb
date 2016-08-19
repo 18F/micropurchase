@@ -52,6 +52,11 @@ When(/^I click on the add customer button$/) do
   step("I click on the \"#{add_link}\" link")
 end
 
+When(/^I click on the confirm received payment button$/) do
+  link = I18n.t('auctions.show.status.payment_confirmation_needed.action')
+  step("I click on the \"#{link}\" button")
+end
+
 When(/^I click on the create customer button$/) do
   create_button = I18n.t('helpers.submit.create', model: 'Customer')
   step("I click on the \"#{create_button}\" button")
@@ -59,6 +64,11 @@ end
 
 When(/^I click on the Download CSV link$/) do
   link = I18n.t('links_and_buttons.users.download_csv')
+  step("I click on the \"#{link}\" link")
+end
+
+When(/^I click on the needs attention link$/) do
+  link = I18n.t('links_and_buttons.auctions.needs_attention')
   step("I click on the \"#{link}\" link")
 end
 

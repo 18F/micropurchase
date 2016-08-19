@@ -78,6 +78,10 @@ Given(/^I visit the Needs Attention page$/) do
   visit admin_auctions_needs_attention_path
 end
 
+Given(/^I visit the auction receipt page$/) do
+  visit new_auction_receipt_path(@auction)
+end
+
 Then(/^I should be on the Needs Attention page$/) do
   expect(page.current_path).to eq(admin_auctions_needs_attention_path)
 end
@@ -136,4 +140,8 @@ end
 
 When(/^I should be on the admin vendors page$/) do
   expect(page.current_path).to eq(admin_vendors_path)
+end
+
+Then(/^I should be on the auction receipt page$/) do
+  expect(page.current_path).to eq(new_auction_receipt_path(@auction))
 end

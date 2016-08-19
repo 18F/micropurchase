@@ -33,18 +33,6 @@ class AuctionMailer < ActionMailer::Base
     )
   end
 
-  def winning_bidder_missing_payment_method(auction:)
-    @auction = auction
-    @winning_bid = WinningBid.new(@auction).find
-
-    mail(
-      to: @winning_bid.bidder.email,
-      subject: I18n.t('mailers.auction_mailer.winning_bidder_missing_payment_method.subject'),
-      from: SMTPCredentials.default_from,
-      reply_to: 'micropurchase@gsa.gov'
-    )
-  end
-
   def auction_paid_winning_vendor_notification(auction:)
     @auction = auction
     @winning_bid = WinningBid.new(@auction).find

@@ -3,6 +3,10 @@ class NullBidder
     nil
   end
 
+  def email
+    nil
+  end
+
   def github_login
     'N/A'
   end

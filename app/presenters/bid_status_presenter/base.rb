@@ -43,4 +43,8 @@ class BidStatusPresenter::Base
   def sign_up_link
     Url.new(link_text: 'sign up', path_name: 'sign_up')
   end
+
+  def winning_amount
+    Currency.new(WinningBid.new(auction).find.amount)
+  end
 end

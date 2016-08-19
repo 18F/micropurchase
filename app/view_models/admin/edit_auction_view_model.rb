@@ -38,7 +38,7 @@ class Admin::EditAuctionViewModel < Admin::BaseViewModel
   end
 
   def published_options
-    if closed? || auction.c2_approval_status == 'approved'
+    if closed? || auction.c2_status == 'approved'
       Auction.publisheds.keys.to_a
     else
       ['unpublished']
@@ -58,7 +58,7 @@ class Admin::EditAuctionViewModel < Admin::BaseViewModel
   end
 
   def paid_at_partial
-    if auction.purchase_card == "default" || auction.result != "accepted"
+    if auction.purchase_card == "default" || auction.status != "accepted"
       'components/null'
     elsif auction.paid_at.present?
       'admin/auctions/disabled_paid_at'

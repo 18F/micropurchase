@@ -30,7 +30,7 @@ class AuctionParser
       :notes,
       :published,
       :purchase_card,
-      :result,
+      :status,
       :start_price,
       :summary,
       :title,

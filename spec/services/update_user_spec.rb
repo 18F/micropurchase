@@ -73,7 +73,7 @@ describe UpdateUser do
   context 'payment_url is updated for winning vendor' do
     context 'payment_url set to valid value' do
       it 'calls AcceptAuction' do
-        auction = create(:auction, :with_bidders, result: :accepted)
+        auction = create(:auction, :with_bidders, status: :accepted)
         winning_bidder = WinningBid.new(auction).find.bidder
         winning_bidder.update(payment_url: '')
         accepter = double(perform: true)
@@ -93,7 +93,7 @@ describe UpdateUser do
 
     context 'payment_url set to invalid value' do
       it 'does not calls AcceptAuction' do
-        auction = create(:auction, :with_bidders, result: :accepted)
+        auction = create(:auction, :with_bidders, status: :accepted)
         winning_bidder = WinningBid.new(auction).find.bidder
         winning_bidder.update(payment_url: '')
         accepter = double(perform: true)

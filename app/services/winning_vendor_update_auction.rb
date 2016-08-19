@@ -8,8 +8,8 @@ class WinningVendorUpdateAuction
   end
 
   def perform
-    if user_is_winning_bidder? && result.present?
-      auction.update(result: :pending_acceptance)
+    if user_is_winning_bidder? && status.present?
+      auction.update(status: :pending_acceptance)
     elsif user_is_winning_bidder? && delivery_url.present?
       auction.update(delivery_url: delivery_url)
     else
@@ -31,7 +31,7 @@ class WinningVendorUpdateAuction
     params[:auction][:delivery_url]
   end
 
-  def result
-    params[:auction][:result]
+  def status
+    params[:auction][:status]
   end
 end

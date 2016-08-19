@@ -13,19 +13,23 @@ end
 Given(/^I am going to win an auction$/) do
   @auction = FactoryGirl.build(:auction, :available, :with_bidders)
   Timecop.freeze(@auction.ended_at - 15.minutes) do
-    bids = @auction.bids.sort_by(&:amount)
-    b = bids.first
-    b.update_attribute(:bidder_id, @user.id)
+    bid = @auction.bids.sort_by(&:amount).first
+    bid.update(bidder: @user)
     SaveAuction.new(@auction).perform
   end
+end
+
+Given(/^I won an auction that was accepted$/) do
+  @auction = FactoryGirl.build(:auction, :closed, :accepted, :with_bidders)
+  bid = @auction.bids.sort_by(&:amount).first
+  bid.update(bidder: @user)
 end
 
 Given(/^I am going to lose an auction$/) do
   @auction = FactoryGirl.build(:auction, :available, :with_bidders)
   Timecop.freeze(@auction.ended_at - 15.minutes) do
-    bids = @auction.bids.sort_by(&:amount)
-    b = bids.last
-    b.update_attribute(:bidder_id, @user.id)
+    bid = @auction.bids.sort_by(&:amount).last
+    bid.update(bidder: @user)
     SaveAuction.new(@auction).perform
   end
 end
@@ -34,6 +38,22 @@ When(/^the auction ends$/) do
   Timecop.return
   Timecop.travel(@auction.ended_at + 5.minutes)
   Delayed::Worker.new.work_off
+end
+
+When(/^the auction is paid$/) do
+  @auction.update(paid_at: Time.current)
+end
+
+When(/^the auction is accepted$/) do
+  @auction.update(accepted_at: Time.current)
+end
+
+When(/^the auction was marked as paid in C2$/) do
+  @auction.update(c2_status: :c2_paid)
+end
+
+Given(/^the vendor confirmed payment$/) do
+  @auction.update(c2_status: :payment_confirmed)
 end
 
 Given(/^there is a closed bidless auction$/) do
@@ -134,11 +154,11 @@ Given(/^the auction is for a different purchase card$/) do
 end
 
 Given(/^the c2 proposal for the auction is approved$/) do
-  @auction.update(c2_approval_status: :approved)
+  @auction.update(c2_status: :approved)
 end
 
 Given(/^the c2 proposal for the auction is not approved$/) do
-  @auction.update(c2_approval_status: :not_requested)
+  @auction.update(c2_status: :not_requested)
 end
 
 Given(/^the auction does not have a c2 proposal url$/) do
@@ -165,7 +185,7 @@ Given(/^there is an accepted auction where the winning vendor is missing a payme
     :auction,
     :with_bidders,
     :published,
-    result: :accepted,
+    status: :accepted,
     accepted_at: nil,
     c2_proposal_url: 'https://c2-dev.18f.gov/proposals/2486'
   )
