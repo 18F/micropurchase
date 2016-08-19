@@ -12,27 +12,11 @@ Feature: Admin view needs attention auctions
     When I click on the needs attention link
     Then I should be on the Needs Attention page
 
-  Scenario: Viewing the needs attention auctions dashboard
-    Given there is a complete and successful auction
-    And there is also an unpublished auction
-    When I visit the admin needs attention auctions page
-    Then I should see the name of the auction
-    And I should see the edit link for the auction
-
-  Scenario: Viewing the drafts dashboard
+  Scenario: Admin sees data for draft auctions on the Needs Attention page
     Given there is an unpublished auction
-    When I visit the admin drafts page
-    Then I should see the auction's title
-
-  Scenario: Viewing rejected auction
-    Given there is a rejected auction
     When I visit the admin needs attention auctions page
-    Then I should see the rejected auction as a needs attention auction
-
-  Scenario: Viewing rejected auction with no bids
-    Given there is a rejected auction with no bids
-    When I visit the admin needs attention auctions page
-    Then I should see the rejected auction as a needs attention auction
+    Then I should see a table listing all draft auctions
+    And I should see the auction title
 
   Scenario: Admin sees data for needs evaluation auctions
     Given there is an auction that needs evaluation
