@@ -59,6 +59,8 @@ class Admin::AuctionsController < Admin::BaseController
   private
 
   def paginated_auctions
-    Kaminari.paginate_array(@view_model.auctions).page(params[:page]).per(10)
+    Kaminari
+      .paginate_array(@view_model.auction_view_models)
+      .page(params[:page]).per(10)
   end
 end
