@@ -460,16 +460,16 @@
   <p>18F is working with [auction.customerName] to determine if <a href="#">your pull request</a> meets the auction&rsquo;s acceptance criteria. You will receive an email once this determination is made.
 </p>
 </section>
-<section class="auction-workflow auction-workflow-awaiting-payment-admins">
-  <h1>Awaiting payment</h1>
-  <p><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a>&rsquo;s <a href="#">pull request</a> was accepted by [auction.acceptanceAdmin] on [auction.acceptanceDate]. The p-card holder has been asked (<a href="#">via C2</a>) to remit payment at <a href="#"><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a>&rsquo;s payment URL</a>. Alternatively, you can manually mark this auction as paid.</p>
+<section class="auction-workflow auction-workflow-awaiting-18f-payment-admins">
+  <h1>Awaiting 18F payment</h1>
+  <p>[if currentUser != [auction.acceptanceAdmin]][auction.acceptanceAdmin][else]You[/endif] accepted <a href="{{site.baseurl}}/people/vendors/show"></a>[auction.winner]&rsquo;s pull request on [auction.acceptanceDate]. The p-card holder has been asked (<a href="#">via C2</a>) to remit payment at <a href="#"><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a>&rsquo;s payment URL</a>. Alternatively, you can manually mark this auction as paid.</p>
   <form data-auction-workflow-state="pending-payment-confirmation-admins">
     <button>Mark as paid</button>  
   </form>
 </section>
-<section class="auction-workflow auction-workflow-payment-needed-admins">
-  <h1>Pending payment</h1>
-  <p><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a>&rsquo;s pull request was accepted on [auction.acceptanceDate]. Please remit payment at <a href="#">the vendor&rsquo;s payment URL</a> and then mark this auction as having been paid. If you have any problems, please <a href="#">contact the vendor directly</a>.</p>
+<section class="auction-workflow auction-workflow-awaiting-customer-payment-admins">
+  <h1>Awaiting customer payment</h1>
+  <p>[if currentUser != [auction.acceptanceAdmin]][auction.acceptanceAdmin][else]You[/endif] accepted <a href="{{site.baseurl}}/people/vendors/show"></a>[auction.winner]&rsquo;s pull request on [auction.acceptanceDate]. [auction.customer] has been asked to remit payment at [auction.winner]&rsquo;s <a href="#">payment URL</a>. Alternatively, you can manually mark this auction as paid.</p>
   <form data-auction-workflow-state="pending-payment-confirmation-admins">
     <button>Mark as paid</button>  
   </form>
