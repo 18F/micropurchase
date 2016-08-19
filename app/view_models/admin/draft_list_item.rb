@@ -5,10 +5,6 @@ class Admin::DraftListItem < Admin::BaseViewModel
     @auction = auction
   end
 
-  def drafts_nav_class
-    'usa-current'
-  end
-
   def title
     auction.title
   end

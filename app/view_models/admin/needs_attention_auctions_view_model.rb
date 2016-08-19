@@ -3,6 +3,10 @@ class Admin::NeedsAttentionAuctionsViewModel < Admin::BaseViewModel
     'usa-current'
   end
 
+  def drafts
+    Auction.unpublished.map { |auction| Admin::DraftListItem.new(auction) }
+  end
+
   def delivery_past_due
     list_items(AuctionQuery.new.delivery_past_due)
   end
@@ -11,16 +15,8 @@ class Admin::NeedsAttentionAuctionsViewModel < Admin::BaseViewModel
     list_items(AuctionQuery.new.pending_acceptance)
   end
 
-  def complete_and_successful
-    list_items(AuctionQuery.new.complete_and_successful)
-  end
-
   def payment_needed
     list_items(AuctionQuery.new.payment_needed)
-  end
-
-  def rejected
-    list_items(AuctionQuery.new.rejected)
   end
 
   private
