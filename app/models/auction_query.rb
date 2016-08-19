@@ -13,6 +13,10 @@ class AuctionQuery
     relation.published.find(id)
   end
 
+  def upcoming_auction_count
+    public_index.started_at_in_future.count
+  end
+
   def active_auction_count
     public_index
       .started_at_in_past
@@ -20,8 +24,8 @@ class AuctionQuery
       .count
   end
 
-  def upcoming_auction_count
-    public_index.started_at_in_future.count
+  def completed
+    relation.accepted_or_rejected
   end
 
   def complete_and_successful
@@ -32,16 +36,12 @@ class AuctionQuery
       .paid
   end
 
-  def completed
-    relation
-      .published
-      .delivery_due_at_expired
-      .with_bids_and_bidders
-      .where.not(bids: { id: nil })
-  end
-
   def rejected
     relation.rejected
+  end
+
+  def pending_delivery
+    relation.ended.pending_delivery
   end
 
   def c2_payment_needed
@@ -55,21 +55,6 @@ class AuctionQuery
     relation
       .accepted
       .not_paid
-  end
-
-  def pending_acceptance
-    relation.pending_acceptance
-  end
-
-  def delivery_past_due
-    relation.delivery_due_at_expired.not_delivered
-  end
-
-  def bids_index(id)
-    relation
-      .with_bids_and_bidders
-      .published
-      .find(id)
   end
 
   def with_bid_from_user(user_id)

@@ -49,10 +49,6 @@ class Admin::NeedsAttentionAuctionListItem < Admin::BaseViewModel
     auction.delivery_url
   end
 
-  def status
-    auction.status
-  end
-
   def c2_proposal_url
     if auction.purchase_card == 'default'
       auction.c2_proposal_url
