@@ -1,10 +1,4 @@
 class C2StatusPresenter::Pending < C2StatusPresenter::Base
-  attr_reader :auction
-
-  def initialize(auction:)
-    @auction = auction
-  end
-
   def status
     I18n.t('statuses.c2_presenter.pending.status')
   end

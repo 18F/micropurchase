@@ -48,6 +48,14 @@ When(/^the auction is accepted$/) do
   @auction.update(accepted_at: Time.current)
 end
 
+When(/^the auction was marked as paid in C2$/) do
+  @auction.update(c2_status: :c2_paid)
+end
+
+Given(/^the vendor confirmed payment$/) do
+  @auction.update(c2_status: :payment_confirmed)
+end
+
 Given(/^there is a closed bidless auction$/) do
   @auction = FactoryGirl.create(:auction, :closed)
 end

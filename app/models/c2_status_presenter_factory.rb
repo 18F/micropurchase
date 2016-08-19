@@ -6,16 +6,12 @@ class C2StatusPresenterFactory
   end
 
   def create
-    if auction.c2_status == 'not_requested'
-      C2StatusPresenter::ApprovalNotRequested.new(auction: auction)
-    elsif auction.c2_status == 'sent'
-      C2StatusPresenter::Sent.new
-    elsif auction.c2_status == 'pending'
-      C2StatusPresenter::Pending.new(auction: auction)
-    elsif auction.c2_status == 'approved'
-      C2StatusPresenter::Approved.new(auction: auction)
-    else
-      C2StatusPresenter::Null.new
-    end
+    Object.const_get("C2StatusPresenter::#{c2_status}").new(auction: auction)
+  end
+
+  private
+
+  def c2_status
+    auction.c2_status.camelize
   end
 end
