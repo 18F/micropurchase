@@ -1,5 +1,7 @@
 /* @override http://localhost:4000/stylesheets/screen.css */
 
+/* @override http://localhost:4000/stylesheets/screen.css */
+
 /* @override http://127.0.0.1:4000/stylesheets/screen.css */
 
 /* @override http://localhost:4000/stylesheets/screen.css */
@@ -2067,6 +2069,38 @@ main div.wrap > form { max-width: 576px; }
 
 /* @group auction */
 
+.auction.is-draft .auction-header{
+	padding-top: 24px;
+}
+
+.auction.is-draft .auction-header .button{
+	top: 40px;
+}
+
+.auction.is-draft .draft{
+	border-radius: 5px 5px 0 0;
+	background: repeating-linear-gradient(
+		  45deg,
+		  #f6d27b,
+		  #f6d27b 10px,
+		  #ffe5a4 10px,
+		  #ffe5a4 20px
+		);
+	color: #400600;
+	font-weight: 600;
+	font-size: 14px;
+	text-transform: uppercase;
+	text-align: center;
+	letter-spacing: 2px;
+	padding: 6px 0;
+	margin-bottom: 6px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+
+}
+
 .auction a h1,
 .auction a:visited h1{
 	font-size: 20px;
@@ -2759,6 +2793,55 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 .layout-auctions-show main .auction-footer .notes p{
 	line-height: 1.33em;
+}
+
+.layout-auctions-show main .auction-footer .share{
+  position: relative;
+  padding: 0 36px 0 3.6em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #f3f3f3;
+  background: linear-gradient(#f3f3f3, #f0f0f0);
+  margin-bottom: 1em;
+  line-height: 2em;
+  color: #333;
+  font-size: 14px;
+}
+
+.layout-auctions-show main .auction-footer .share h1,
+.layout-auctions-show main .auction-footer .share a{
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+}
+
+.layout-auctions-show main .auction-footer .share h1{
+  padding-left: 0.6em;
+  padding-right: 0.4em;
+}
+
+.layout-auctions-show main .auction-footer .share input{
+	border: none;
+	border-radius: 0;
+	line-height: 2;
+	padding: 0 0.4em;
+	min-height: 0;
+}
+
+.layout-auctions-show main .auction-footer .share a{
+	left: auto;
+	right: 0;
+	background: url(images/png/clipboard.png) 16px center no-repeat;
+	background-size: 16px 16px;
+	width: 3em;
+	height: 2em;
+	
+}
+
+.layout-auctions-show main .auction-footer .share a span{
+	position: absolute;
+	left: -9999em;
 }
 
 
