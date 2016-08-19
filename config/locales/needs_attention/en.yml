@@ -6,3 +6,7 @@ en:
       payment_needed: "Payment needed"
       complete_and_successful: "Complete &amp; successful"
       rejected: "Rejected"
+    list_item:
+      payment_status:
+        pending: "Pending"
+        needs_credit_card_url: "Needs Credit Card URL"

@@ -9,8 +9,8 @@
   locals: { id: 'eval-needed', auctions: @view_model.evaluation_needed } %>
 
 <h2><%= t('needs_attention.index.payment_needed') %></h2>
-<%= render partial: 'items',
-  locals: { id: 'payment-needed', auctions: @view_model.payment_needed } %>
+<%= render partial: 'payment_needed',
+  locals: { auctions: @view_model.payment_needed } %>
 
 <h2><%= raw t('needs_attention.index.complete_and_successful') %></h2>
 <%= render partial: 'items',
