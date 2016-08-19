@@ -49,7 +49,8 @@ Then(/^the vendor should receive an email requesting payment information$/) do
   winning_bid = WinningBid.new(@auction).find
   expect(email.body.encoded).to include(
     I18n.t(
-      'mailers.auction_mailer.winning_bidder_missing_payment_method.para_1',
+      'mailers.winning_bidder_mailer.auction_accepted_missing_payment_method.para_1',
+      accepted_date: DcTimePresenter.convert_and_format(@auction.accepted_at),
       auction_title: @auction.title,
       amount: Currency.new(winning_bid.amount).to_s,
       profile_url: profile_url

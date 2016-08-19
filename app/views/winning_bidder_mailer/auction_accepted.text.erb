@@ -1,0 +1,12 @@
+<%= I18n.t(
+  'mailers.winning_bidder_mailer.auction_accepted.para_1',
+  auction_title: @auction.title,
+  accepted_date: DcTimePresenter.convert_and_format(@auction.accepted_at),
+  payment_url: @winning_bid.bidder.payment_url,
+  amount: Currency.new(@winning_bid.amount).to_s) %>
+
+<%= I18n.t('mailers.winning_bidder_mailer.auction_accepted.para_2') %>
+
+<%= I18n.t('mailers.winning_bidder_mailer.auction_accepted.sign_off') %>
+
+<%= I18n.t('mailers.winning_bidder_mailer.auction_accepted.from') %>
