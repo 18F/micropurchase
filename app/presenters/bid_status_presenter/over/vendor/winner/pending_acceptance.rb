@@ -1,4 +1,4 @@
-class BidStatusPresenter::OverUserIsWinnerPendingAcceptance < BidStatusPresenter::Base
+class BidStatusPresenter::Over::Vendor::Winner::PendingAcceptance < BidStatusPresenter::Base
   def header
     I18n.t('auctions.show.status.pending_acceptance.header')
   end

@@ -22,67 +22,67 @@ class BidStatusPresenterFactory
 
   def future_message
     if admin?
-      BidStatusPresenter::FutureUserIsAdmin
+      BidStatusPresenter::Future::Admin
     elsif guest?
-      BidStatusPresenter::FutureUserIsGuest
+      BidStatusPresenter::Future::Guest
     else
-      BidStatusPresenter::FutureUserIsVendor
+      BidStatusPresenter::Future::Vendor
     end
   end
 
   def over_winning_bidder_message
     if auction.pending_acceptance?
-      BidStatusPresenter::OverUserIsWinnerPendingAcceptance
+      BidStatusPresenter::Over::Vendor::Winner::PendingAcceptance
     elsif auction.accepted?
-      BidStatusPresenter::OverUserIsWinnerPendingPayment
+      BidStatusPresenter::Over::Vendor::Winner::PendingPayment
     elsif auction.delivery_url.present?
-      BidStatusPresenter::OverUserIsWinnerWorkInProgress
-    elsif auction.c2_status == 'payment_confirmed'
-      BidStatusPresenter::OverUserIsWinnerPaymentConfirmed
+      BidStatusPresenter::Over::Vendor::Winner::WorkInProgress
+    elsif auction.payment_confirmed?
+      BidStatusPresenter::Over::Vendor::Winner::PaymentConfirmed
     else
-      BidStatusPresenter::OverUserIsWinner
+      BidStatusPresenter::Over::Vendor::Winner::WorkNotStarted
     end
   end
 
   def over_message
     if user_is_bidder?
-      BidStatusPresenter::OverUserIsBidder
+      BidStatusPresenter::Over::Vendor::Bidder
     elsif auction.bids.any?
-      BidStatusPresenter::OverWithBids
+      BidStatusPresenter::Over::WithBids
     else
-      BidStatusPresenter::OverNoBids
+      BidStatusPresenter::Over::NoBids
     end
   end
 
   def available_message
     if admin?
-      BidStatusPresenter::AvailableUserIsAdmin
+      BidStatusPresenter::Available::Admin
     elsif guest?
-      BidStatusPresenter::AvailableUserIsGuest
+      BidStatusPresenter::Available::Guest
     elsif ineligible?
       ineligible_presenter
     elsif rules.user_can_bid?(user)
       user_can_bid_message
     elsif auction.type == 'reverse'
-      BidStatusPresenter::AvailableUserIsWinningBidder
+      BidStatusPresenter::Available::Vendor::WinningBidder
     else # sealed bid, user is bidder
-      BidStatusPresenter::AvailableSealedUserIsBidder
+      BidStatusPresenter::Available::Vendor::SealedAuctionBidder
     end
   end
 
   def user_can_bid_message
     if user_bids.any?
-      BidStatusPresenter::AvailableReverseUserIsOutbid
+      BidStatusPresenter::Available::Vendor::ReverseAuctionOutbid
     else
-      BidStatusPresenter::AvailableUserIsEligible
+      BidStatusPresenter::Available::Vendor::Eligible
     end
   end
 
   def ineligible_presenter
     if user.sam_status != 'sam_accepted'
-      BidStatusPresenter::AvailableUserNotSamVerified
+      BidStatusPresenter::Available::Vendor::NotSamVerified
     else
-      BidStatusPresenter::AvailableUserNotSmallBusiness
+      BidStatusPresenter::Available::Vendor::NotSmallBusiness
     end
   end
 

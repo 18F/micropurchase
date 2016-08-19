@@ -1,4 +1,4 @@
-class BidStatusPresenter::AvailableReverseUserIsOutbid < BidStatusPresenter::Base
+class BidStatusPresenter::Available::Vendor::ReverseAuctionOutbid < BidStatusPresenter::Base
   def header
     'Place bid'
   end

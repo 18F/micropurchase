@@ -1,4 +1,4 @@
-class BidStatusPresenter::OverUserIsWinnerWorkInProgress < BidStatusPresenter::Base
+class BidStatusPresenter::Over::Vendor::Winner::WorkInProgress < BidStatusPresenter::Base
   include Rails.application.routes.url_helpers
   include ActionView::Helpers::UrlHelper
 

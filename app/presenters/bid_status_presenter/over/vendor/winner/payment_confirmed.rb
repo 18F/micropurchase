@@ -1,4 +1,4 @@
-class BidStatusPresenter::OverUserIsWinnerPaymentConfirmed < BidStatusPresenter::Base
+class BidStatusPresenter::Over::Vendor::Winner::PaymentConfirmed < BidStatusPresenter::Base
   def header
     I18n.t('auctions.show.status.payment_confirmed.header')
   end

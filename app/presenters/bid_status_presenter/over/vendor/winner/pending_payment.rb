@@ -1,4 +1,4 @@
-class BidStatusPresenter::OverUserIsWinnerPendingPayment < BidStatusPresenter::Base
+class BidStatusPresenter::Over::Vendor::Winner::PendingPayment < BidStatusPresenter::Base
   def header
     I18n.t('auctions.show.status.pending_payment.header')
   end

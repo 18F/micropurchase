@@ -1,4 +1,4 @@
-class BidStatusPresenter::FutureUserIsAdmin < BidStatusPresenter::Base
+class BidStatusPresenter::Future::Admin < BidStatusPresenter::Base
   include Rails.application.routes.url_helpers
   include ActionView::Helpers::UrlHelper
 
