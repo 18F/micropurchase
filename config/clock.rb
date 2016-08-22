@@ -8,13 +8,16 @@ module Clockwork
   # puts "Importing Tock projects"
   # TockImporter.new.delay.perform
   # end
+  #
 
-  every(1.hour, "c2_payments.check", at: "04:00", tz: 'Eastern Time (US & Canada)') do
+  c2_update_interval = ENV.fetch('C2_UPDATE_INTERVAL', '10')
+
+  every(c2_update_interval.to_i.minutes, "c2_payments.check") do
     puts "Checking for paid auctions"
     CheckPayment.new.delay.perform
   end
 
-  every(1.hour, "c2_approvals.check") do
+  every(c2_update_interval.to_i.minutes, "c2_approvals.check") do
     puts "Checking for approved auctions"
     CheckApproval.new.delay.perform
   end
