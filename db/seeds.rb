@@ -1,6 +1,13 @@
 require Rails.root.join('spec', 'support', 'helpers', 'factory_girl.rb')
 
-skills = FactoryGirl.create_list(:skill, 2)
+skills = [
+  Skill.find_or_create_by(name: 'rails'),
+  Skill.find_or_create_by(name: 'golang'),
+  Skill.find_or_create_by(name: 'react'),
+  Skill.find_or_create_by(name: 'rust'),
+  Skill.find_or_create_by(name: 'elm'),
+  Skill.find_or_create_by(name: 'a-language-you-never-heard-of')
+]
 FactoryGirl.create(:auction, :reverse, :with_bidders)
 FactoryGirl.create(:auction, :reverse, :expiring, :with_bidders)
 FactoryGirl.create(:auction, :reverse, :future)
