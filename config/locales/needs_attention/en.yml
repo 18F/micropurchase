@@ -6,6 +6,10 @@ en:
       payment_needed: "Payment needed"
       complete_and_successful: "Complete &amp; successful"
       rejected: "Rejected"
+      null_drafts: "There are no draft auctions"
+      null_pending_delivery: "There are no auctions pending delivery"
+      null_evaluation_needed: "There are no auctions needing evaluation"
+      null_payment_needed: "There are no auctions needing payment"
     list_item:
       payment_status:
         pending: "Pending"

@@ -7,6 +7,10 @@ class NullBidder
     nil
   end
 
+  def payment_url
+    nil
+  end
+
   def github_login
     'N/A'
   end
