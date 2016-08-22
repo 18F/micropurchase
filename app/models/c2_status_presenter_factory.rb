@@ -6,7 +6,11 @@ class C2StatusPresenterFactory
   end
 
   def create
-    Object.const_get("C2StatusPresenter::#{c2_status}").new(auction: auction)
+    if auction.pending_acceptance?
+      AdminAuctionStatusPresenter::PendingAcceptance.new(auction: auction)
+    else
+      Object.const_get("C2StatusPresenter::#{c2_status}").new(auction: auction)
+    end
   end
 
   private

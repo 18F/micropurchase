@@ -45,7 +45,8 @@ en:
         payment_confirmed:
           header: 'Paid'
           body: >
-            You won this auction on %{end_date}, your pull request was accepted on %{accepted_date}, and you were paid %{amount} on %{paid_at}.
+            You won this auction on %{end_date}, your pull request was accepted
+            on %{accepted_date}, and you were paid %{amount} on %{paid_at}.
         open:
           vendor:
             not_verified:

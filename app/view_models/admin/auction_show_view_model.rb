@@ -15,7 +15,7 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
   end
 
   def c2_status_partial
-    if auction.purchase_card == 'default' && auction.c2_status != 'approved'
+    if auction.purchase_card == 'default' && auction.c2_status != 'approved' || auction.pending_acceptance?
       'auctions/status'
     else
       'components/null'
