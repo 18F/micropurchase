@@ -1447,6 +1447,13 @@ main div.wrap > form { max-width: 576px; }
 	clear: both;
 }
 
+.prototype-header h1{
+	float: left;
+	margin: 0;
+	margin-right: 1em;
+	padding-top: 5px;
+}
+
 .prototype-header .field{
 	float: left;
 	margin: 0;
