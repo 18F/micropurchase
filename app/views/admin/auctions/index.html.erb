@@ -1,7 +1,7 @@
 <%= render partial: 'admin/auctions_subnav', locals: { view_model: @view_model } %>
 
 <div class="admin-auction-wrapper auction-wrapper">
-  <% @view_model.auctions.each do |auction| %>
+  <% @auctions.each do |auction| %>
     <%= render partial: 'auctions/list_item', locals: { auction: auction } %>
   <% end %>
 </div>
