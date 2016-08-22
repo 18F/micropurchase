@@ -5,16 +5,16 @@ class AuctionListItem
     @auction = auction
   end
 
-  def auction_title_partial
-    'auctions/title'
-  end
-
   def title
     auction.title
   end
 
   def id
     auction.id
+  end
+
+  def auction_title_partial
+    'auctions/title'
   end
 
   def html_summary
