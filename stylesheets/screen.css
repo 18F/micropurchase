@@ -459,6 +459,11 @@ a[id]{
 
 .page table thead td{ font-weight: 300; }
 
+.page figcaption{
+	font-size: 16px;
+	font-style: italic;
+	padding-top: 0.4em;
+}
 /* @end */
 
 
