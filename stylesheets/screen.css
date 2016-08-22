@@ -1452,6 +1452,9 @@ main div.wrap > form { max-width: 576px; }
 	margin: 0;
 	margin-right: 1em;
 	padding-top: 5px;
+	font: inherit;
+	font-weight: 400;
+	letter-spacing: 0;
 }
 
 .prototype-header .field{
