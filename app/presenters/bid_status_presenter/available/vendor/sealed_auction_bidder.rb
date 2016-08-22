@@ -1,4 +1,4 @@
-class BidStatusPresenter::AvailableSealedUserIsBidder < BidStatusPresenter::Base
+class BidStatusPresenter::Available::Vendor::SealedAuctionBidder < BidStatusPresenter::Base
   def header
     ''
   end

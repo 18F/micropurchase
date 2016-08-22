@@ -22,4 +22,36 @@ describe Admin::NeedsAttentionAuctionListItem do
       end
     end
   end
+
+  describe '#payment_status' do
+    context 'winning bidder has a payment url' do
+      it 'is pending' do
+        auction = create(:auction)
+        user = create(:user, payment_url: 'http://example.com')
+        winning_bid = double(find: double(decorated_bidder: user))
+        allow(WinningBid).to receive(:new).with(auction).and_return(winning_bid)
+
+        payment_status = Admin::NeedsAttentionAuctionListItem.new(auction).payment_status
+
+        expect(payment_status).to eq(
+          I18n.t('needs_attention.list_item.payment_status.pending')
+        )
+      end
+    end
+
+    context 'winning bidder does not have a payment url' do
+      it 'needs credit card url' do
+        auction = create(:auction)
+        user = create(:user, payment_url: '')
+        winning_bid = double(find: double(decorated_bidder: user))
+        allow(WinningBid).to receive(:new).with(auction).and_return(winning_bid)
+
+        payment_status = Admin::NeedsAttentionAuctionListItem.new(auction).payment_status
+
+        expect(payment_status).to eq(
+          I18n.t('needs_attention.list_item.payment_status.needs_credit_card_url')
+        )
+      end
+    end
+  end
 end

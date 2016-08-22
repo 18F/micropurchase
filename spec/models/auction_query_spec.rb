@@ -2,16 +2,6 @@ require 'rails_helper'
 describe AuctionQuery do
   let(:query) { AuctionQuery.new }
 
-  describe '#completed' do
-    it 'returns published auctions with bids where delivery deadline is in past' do
-      completed = create(:auction, :complete_and_successful)
-      payment_needed = create(:auction, :with_bidders, :payment_needed)
-      create(:auction, :available)
-
-      expect(query.completed).to match_array([completed, payment_needed])
-    end
-  end
-
   describe '#complete_and_successful' do
     let(:complete_and_successful) do
       create(:auction, :complete_and_successful)
@@ -40,42 +30,45 @@ describe AuctionQuery do
     end
   end
 
+  describe '#c2_payment_needed' do
+    it 'returns auctions that are eligible for c2 payment' do
+      _available_auction = create(:auction, :available)
+      _payment_needed_other_pcard = create(
+        :auction,
+        purchase_card: :other,
+        status: :accepted,
+        accepted_at: Time.current
+      )
+      c2_payment_needed = create(
+        :auction,
+        purchase_card: :default,
+        status: :accepted,
+        accepted_at: Time.current
+      )
+
+      expect(query.c2_payment_needed).to match_array([c2_payment_needed])
+    end
+  end
+
   describe '#payment_needed' do
-    let(:payment_needed) { create(:auction, :payment_needed) }
-    let!(:running_auction) { create(:auction, :running) }
-    let!(:complete_and_successful) do
-      create(:auction, :complete_and_successful)
-    end
+    it 'returns auctions that are accepted but not paid' do
+      _available_auction = create(:auction, :available)
+      payment_needed_other_pcard = create(
+        :auction,
+        purchase_card: :other,
+        status: :accepted,
+        accepted_at: Time.current
+      )
+      c2_payment_needed = create(
+        :auction,
+        purchase_card: :default,
+        status: :accepted,
+        accepted_at: Time.current
+      )
 
-    it 'should only return auctions where payment is needed' do
-      expect(query.payment_needed).to match_array([payment_needed])
-    end
-  end
-
-  describe '#pending_acceptance' do
-    let(:pending_acceptance) { create(:auction, :pending_acceptance) }
-    let!(:complete_and_successful) do
-      create(:auction, :complete_and_successful)
-    end
-    let!(:running_auction) { create(:auction, :running) }
-    let!(:payment_needed) { create(:auction, :payment_needed) }
-
-    it 'should only return auctions where an evaluation is needed' do
-      expect(query.pending_acceptance).to match_array([pending_acceptance])
-    end
-  end
-
-  describe '#delivery_past_due' do
-    let(:delivery_past_due) { create(:auction, :delivery_past_due) }
-    let!(:complete_and_successful) do
-      create(:auction, :complete_and_successful)
-    end
-    let!(:running_auction) { create(:auction, :running) }
-    let!(:payment_needed) { create(:auction, :payment_needed) }
-    let!(:rejected) { create(:auction, :rejected) }
-
-    it 'should only return auctions where delivery is past due' do
-      expect(query.delivery_past_due).to match_array([delivery_past_due])
+      expect(query.payment_needed).to match_array(
+        [payment_needed_other_pcard, c2_payment_needed]
+      )
     end
   end
 

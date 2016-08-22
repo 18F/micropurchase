@@ -22,6 +22,6 @@ class Statistics::TotalSavings
   end
 
   def completed_auctions
-    @_completed_auctions ||= AuctionQuery.new.completed
+    @_completed_auctions ||= AuctionQuery.new.complete_and_successful
   end
 end

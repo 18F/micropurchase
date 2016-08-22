@@ -21,6 +21,18 @@ class Admin::NeedsAttentionAuctionListItem < Admin::BaseViewModel
     auction.id
   end
 
+  def accepted_at
+    DcTimePresenter.convert_and_format(auction.accepted_at)
+  end
+
+  def payment_status
+    if winning_bidder.payment_url.present?
+      I18n.t('needs_attention.list_item.payment_status.pending')
+    else
+      I18n.t('needs_attention.list_item.payment_status.needs_credit_card_url')
+    end
+  end
+
   def delivery_due_at_expires_in
     HumanTime.new(time: auction.delivery_due_at).relative_time
   end
@@ -35,10 +47,6 @@ class Admin::NeedsAttentionAuctionListItem < Admin::BaseViewModel
 
   def delivery_url
     auction.delivery_url
-  end
-
-  def status
-    auction.status
   end
 
   def c2_proposal_url

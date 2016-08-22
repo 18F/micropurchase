@@ -1,4 +1,4 @@
-class BidStatusPresenter::OverUserIsBidder < BidStatusPresenter::Base
+class BidStatusPresenter::Over::Vendor::Bidder < BidStatusPresenter::Base
   def header
     'You are not the winner'
   end

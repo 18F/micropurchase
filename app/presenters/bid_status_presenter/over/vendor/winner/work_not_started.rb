@@ -1,4 +1,4 @@
-class BidStatusPresenter::OverUserIsWinner < BidStatusPresenter::Base
+class BidStatusPresenter::Over::Vendor::Winner::WorkNotStarted < BidStatusPresenter::Base
   def header
     I18n.t('auctions.show.status.ready_for_work.header')
   end

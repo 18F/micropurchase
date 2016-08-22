@@ -1,5 +1,3 @@
-<%= render partial: 'admin/auctions_subnav', locals: { view_model: @view_model } %>
-
 <table class="usa-table-borderless">
   <thead>
     <tr>
@@ -8,11 +6,11 @@
       <th scope="col">Ending Date</th>
       <th scope="col">Delivery Deadline</th>
       <th scope="col">C2 Request</th>
-      <th scope="col">Action</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
-    <% @view_model.auctions.each do |auction| %>
+    <% auctions.each do |auction| %>
       <tr>
         <td><%= link_to(auction.title, admin_auction_path(auction.id)) %></td>
         <td><%= auction.started_at %></td>

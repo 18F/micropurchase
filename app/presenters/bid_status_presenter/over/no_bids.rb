@@ -1,4 +1,4 @@
-class BidStatusPresenter::OverNoBids < BidStatusPresenter::Base
+class BidStatusPresenter::Over::NoBids < BidStatusPresenter::Base
   def header
     'Auction Now Closed'
   end

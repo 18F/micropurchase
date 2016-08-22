@@ -19,10 +19,6 @@ class Admin::BaseViewModel
     ''
   end
 
-  def drafts_nav_class
-    ''
-  end
-
   def needs_attention_auctions_nav_class
     ''
   end

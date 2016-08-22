@@ -1,4 +1,4 @@
-class BidStatusPresenter::AvailableUserIsEligible < BidStatusPresenter::Base
+class BidStatusPresenter::Available::Vendor::Eligible < BidStatusPresenter::Base
   def body
     "The maximum you can bid is #{max_allowed_bid_as_currency}."
   end

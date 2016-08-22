@@ -152,7 +152,7 @@ class UpdateInsightMetrics
 
   def accepted_and_rejected_auction_count
     @_accepted_and_rejected_auction_count ||=
-      accepted_auctions_count + AuctionQuery.new.rejected.count
+      accepted_auctions_count + Auction.rejected.count
   end
 
   def accepted_auctions_count
