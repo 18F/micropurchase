@@ -2,7 +2,7 @@
 
 ### Automated Deployment
 
-Pull requests merged into the `develo` branch will automatically be deployed to
+Pull requests merged into the `develop` branch will automatically be deployed to
 [staging](https://micropurchase-staging.18f.gov).
 
 Pull requests merged into the `master` branch will be automatically deployed to
