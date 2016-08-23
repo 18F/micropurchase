@@ -34,7 +34,7 @@ class Auction < ActiveRecord::Base
   self.inheritance_column = :__disabled
 
   validate :user_is_contracting_officer_if_above_micropurchase
-  validates :delivery_due_at, presence: true, if: :published?
+  validates :delivery_due_at, presence: true
   validates :description, presence: true, if: :published?
   validates :ended_at, presence: true
   validates :purchase_card, presence: true
