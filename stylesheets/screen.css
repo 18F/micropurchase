@@ -2366,58 +2366,59 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 /* @group layout-sign-up */
 
-.layout-sign-up .field .label-text,
-.layout-profile .field .label-text,
-.layout-sign-up .page h2{
-	font: inherit;
-	font-weight: 600;
-	color: #555;
-	margin-top: 0;
-	margin-bottom: 8px;
+.layout-sign-up main .wrapper{
+	text-align: center;
+	border: 2px solid #eee;
+	max-width: 640px;
+	padding: 12px 12px 24px;
+	border-radius: 6px;
 }
 
-.layout-sign-up .field.field-checkbox .label-text{
-	font-weight: normal;
-	color: inherit;
-}
-.layout-sign-up .field-name,
-.layout-sign-up .field-email,
-.layout-profile .field-name,
-.layout-profile .field-email{
-	max-width: 16em;
-	margin-left: 0;
+.layout-sign-up main .wrapper h1,
+.layout-sign-up main .wrapper p{
+	position: static;
 }
 
-.layout-sign-up .terms{
-	max-height: 10em;
-	overflow: auto;
-	border: 1px solid #ccc;
-	padding: 10px;
-	margin-bottom: 1em;
+
+.layout-sign-up main .wrapper ol{
+	padding: 0;
+	margin: 0 auto 2em;	
+	counter-reset: step;
 }
 
-.layout-sign-up main footer,
-.layout-profile main footer{ margin-top: 2em; }
-
-.layout-sign-up main footer a{
-	float: right;
-	margin-top: 0.5em;
-	color: #555;
+.layout-sign-up main .wrapper ol li{
+	list-style-type: none;
+	counter-increment: step;
+	max-width: 20em;
+	margin: 0 auto;
+	position: relative;
 }
 
-.layout-sign-up .terms h1{
-	font-size: inherit;
-	letter-spacing: normal;
-	font-style: italic;
-	margin-bottom: 1.2em;
+.layout-sign-up main .wrapper ol li::before{
+	content: counter(step);
+	border: 2px solid #fff;
+	width: 1.8em;
+	line-height: 1.6em;
+	height: 1.8em;
+	font-size: 20px;
+	display: inline-block;
+	vertical-align: middle;
+	border-radius: 100%;
+	background: #99005c;
+	color: white;
+	margin-bottom: -0.67em;
+	z-index: 2;
+	position: relative;
 }
-.layout-sign-up .terms p{
-	font-size: inherit;
-	font: inherit;
-	font-size: 14px;
-	line-height: 1.3em;
-	margin-bottom: 0.7em;
-	
+
+.layout-sign-up main .wrapper ol li::after{
+	content: "";
+	position: absolute;
+	border-bottom: 3px double #7fdefe;
+	left: 40%;
+	right: 40%;
+	top: 0.95em;
+	z-index: 1;
 }
 
 /* @end */
