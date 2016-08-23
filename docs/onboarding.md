@@ -19,7 +19,7 @@ admin](../config/admins.yml).
 Being an admin means you can:
 * create/edit auctions
 * read users
-* view bids when auctions are running (this info is veiled/sealed when the
+* view bids when auctions are available (this info is veiled/sealed when the
 auctions are running)
 
 Don't forget to submit a pull request! See

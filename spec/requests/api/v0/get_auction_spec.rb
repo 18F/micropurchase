@@ -17,10 +17,10 @@ describe Api::V0::AuctionsController do
     end
 
     context 'when the auction is sealed-bid' do
-      context 'and the auction is running' do
+      context 'and the auction is available, has bids' do
         it 'veils all bids' do
           login
-          auction = create(:auction, :running, :sealed_bid, :with_bidders)
+          auction = create(:auction, :available, :sealed_bid, :with_bidders)
 
           get api_v0_auction_path(auction), nil, headers
 
@@ -31,7 +31,7 @@ describe Api::V0::AuctionsController do
           it 'does not veil the bids from the authenticated user' do
             user = create(:user)
             login(user)
-            auction = create(:auction, :running, :sealed_bid, :with_bidders)
+            auction = create(:auction, :available, :sealed_bid, :with_bidders)
             create(:bid, auction: auction, bidder: user)
 
             get api_v0_auction_path(auction), nil, headers
@@ -50,7 +50,7 @@ describe Api::V0::AuctionsController do
           it 'veils the bids not created by the authenticated user' do
             user = create(:user)
             login(user)
-            auction = create(:auction, :running, :sealed_bid, :with_bidders)
+            auction = create(:auction, :available, :sealed_bid, :with_bidders)
             create(:bid, auction: auction, bidder: user)
 
             get api_v0_auction_path(auction), nil, headers
@@ -84,10 +84,10 @@ describe Api::V0::AuctionsController do
     end
 
     context 'when the auction is mult-bid' do
-      context 'and the auction is running' do
+      context 'and the auction is available' do
         it 'veils all bidder information' do
           login
-          auction = create(:auction, :running, :with_bidders)
+          auction = create(:auction, :available, :with_bidders)
 
           get api_v0_auction_path(auction), nil, headers
 
@@ -108,7 +108,7 @@ describe Api::V0::AuctionsController do
           it 'does not veil the bids from the authenticated user' do
             user = create(:user)
             login(user)
-            auction = create(:auction, :running, bidder_ids: [user.id])
+            auction = create(:auction, :available, bidders: [user])
 
             get api_v0_auction_path(auction), nil, headers
 
@@ -127,7 +127,7 @@ describe Api::V0::AuctionsController do
           it 'veils the bids not created by the authenticated user' do
             user = create(:user)
             login(user)
-            auction = create(:auction, :running, bidder_ids: [user.id])
+            auction = create(:auction, :available, bidder_ids: [user.id])
 
             get api_v0_auction_path(auction), nil, headers
 
