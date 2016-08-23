@@ -2,8 +2,17 @@
 
 ### Automated Deployment
 
+Pull requests merged into the `develop` branch will automatically be deployed to
+[staging](https://micropurchase-staging.18f.gov).
+
 Pull requests merged into the `master` branch will be automatically deployed to
 [production](https://micropurchase.18f.gov).
+
+If you see an error on [Travis CI](https://travis-ci.org/18F/micropurchase)
+related to the Cloud.gov password being expired, post in the
+`#cloud-gov-support` Slack channel to get the password reset. Then you can
+[encrypt the new password](https://docs.travis-ci.com/user/encryption-keys/) and
+add it to `.travis.yml`.
 
 ### Manual Deployment to Staging or Production
 
