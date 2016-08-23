@@ -1,0 +1,18 @@
+---
+excerpt: none
+---
+{% include head.html %}
+<body class="no-js layout-docs layout-getting-paid">
+  <a class="a-skip-to-main" href="#main">Skip to main content</a>
+  {% include site-header.html %}
+  <main class="page" role="main" id="main">
+    <div class="wrapper">
+      <h1>Getting Paid</h1>
+      <p class="introduction">18F Micro-purchase gives vendors the flexibility to choose the payment processor that works best for them. All we need is a place to enter our credit card information. This is known as a vendor&rsquo;s <strong>Payment URL.</strong></p>
+      <p>To specify or update your Payment URL, simply <a href="{{site.baseurl}}/profile">visit your profile</a>. We&rsquo;ll issue payment at your Payment URL whenever you win an auction and meet its acceptance criteria before the delivery deadline. Please note that if you use a payment processor that charges us a fee, that fee will be deducted from the award.</p>
+      <p>PS: One payment processor we&rsquo;ve seen used is <a href="https://stripe.com/docs/checkout/tutorial">Stripe</a>. Stripe is simple to setup, and doesn&rsquo;t charge a fee for those issuing payment. What&rsquo;s more, one vendor actually wrote an open source app to <a href="https://github.com/cwarden/pay">deploy a Stripe payment form via Heroku</a>.</p>
+      <p>PPS: Oh, please also <a href="micropurchase@gsa.gov">let us know</a> if you&rsquo;re interested in using PayPal.</p>
+    </div>
+  </main>
+  {% include site-footer.html %}
+</body>
