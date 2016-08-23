@@ -23,6 +23,10 @@ class Admin::BaseViewModel
     ''
   end
 
+  def needs_attention_auctions_count
+    AuctionQuery.new.needs_attention_count
+  end
+
   def new_auction_nav_class
     ''
   end

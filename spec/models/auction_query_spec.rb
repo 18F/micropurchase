@@ -120,6 +120,20 @@ describe AuctionQuery do
     end
   end
 
+  describe '#needs_attention_count' do
+    it 'returns the sum of unpublished, pending_delivery, pending_acceptance and payment_needed auctions' do
+      _regular = create(:auction)
+      _unpublished = create(:auction, :unpublished)
+      _pending_delivery = create(:auction, :completed)
+      _pending_acceptance = create(:auction, :evaluation_needed)
+      _payment_needed = create(:auction, :payment_needed)
+
+      query = AuctionQuery.new
+
+      expect(query.needs_attention_count).to eq(4)
+    end
+  end
+
   describe '#with_bid_from_user' do
     it 'returns auctions where the user has placed a bid' do
       auction = create(:auction, :with_bidders)

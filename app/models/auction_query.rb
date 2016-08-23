@@ -24,6 +24,21 @@ class AuctionQuery
       .count
   end
 
+  def needs_attention_count
+    unpublished.count +
+      pending_delivery.count +
+      pending_acceptance.count +
+      payment_needed.count
+  end
+
+  def unpublished
+    relation.unpublished
+  end
+
+  def pending_acceptance
+    relation.pending_acceptance
+  end
+
   def completed
     relation.accepted_or_rejected
   end

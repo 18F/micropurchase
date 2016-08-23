@@ -44,4 +44,12 @@ $height-nav-secondary: 5rem;
       font-weight: $font-bold;
     }
   }
+
+  .subnav-number-label {
+    border-radius: $border-radius;
+    margin-right: 0.3rem;
+    padding: 0.1rem 0.5rem;
+    background-color: $color-secondary-darkest;
+    color: $color-white;
+  }
 }
