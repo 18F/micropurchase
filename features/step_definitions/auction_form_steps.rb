@@ -11,3 +11,8 @@ Then(/^I submit a blank delivery URL$/) do
   button = I18n.t('auctions.show.status.ready_for_work.form_submit')
   step("I click on the \"#{button}\" button")
 end
+
+When(/^I mark the auction as rejected$/) do
+  button = I18n.t('statuses.c2_presenter.pending_acceptance.actions.reject')
+  step("I click on the \"#{button}\" button")
+end

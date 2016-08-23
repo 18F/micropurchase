@@ -32,6 +32,6 @@ class Admin::DraftListItem < Admin::BaseViewModel
   private
 
   def c2_proposal_status_presenter
-    C2StatusPresenterFactory.new(auction: auction).create
+    AdminAuctionStatusPresenterFactory.new(auction: auction).create
   end
 end

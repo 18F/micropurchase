@@ -18,7 +18,7 @@ class AdminAuctionStatusPresenter::PendingAcceptance
   end
 
   def action_partial
-    'components/null'
+    'admin/auctions/accept_or_reject'
   end
 
   private
