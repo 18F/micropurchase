@@ -1,0 +1,50 @@
+---
+excerpt: none
+---
+{% include head.html %}
+<body class="no-js layout-deliveries-rejected">
+  <a class="a-skip-to-main" href="#main">Skip to main content</a>
+  {% include site-header.html %}
+  {% include my-account-header.html %}
+  <main role="main" id="main">
+    <div class="wrapper">
+      <h1>Deliveries rejected</h1>
+      <div class="boilerplate">
+        <p>This place is blank because you&rsquo;ve yet to win an auction and have your delivered work rejected &mdash; yay!</p>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <td class="col-title">Auction</td>
+            <td class="col-rejected">Date rejected</td>
+            <td class="col-amount">Amount</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Stand-alone modular utilisation</a></td>
+            <td class="col-rejected"><span class="date">8/13/2016</span> <span class="time">12:00am EST</span></td>
+            <td class="col-amount">$500</td>
+          </tr>
+          <tr>
+            <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Switchable system-worthy</a></td>
+            <td class="col-rejected"><span class="date">8/13/2016</span> <span class="time">12:00am EST</span></td>
+            <td class="col-amount">$500</td>
+          </tr>
+          <tr>
+            <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Visionary motivating website</a></td>
+            <td class="col-rejected"><span class="date">8/13/2016</span> <span class="time">12:00am EST</span></td>
+            <td class="col-amount">$500</td>
+          </tr>
+          <tr>
+            <td class="col-title"><a href="{{site.baseurl}}/auctions/show">Something wicked this way comes</a></td>
+            <td class="col-rejected"><span class="date">8/13/2016</span> <span class="time">12:00am EST</span></td>
+            <td class="col-amount">$500</td>
+          </tr>
+        </tbody>
+      </table>
+      {% include pagination.html %}
+    </div>
+  </main>
+  {% include site-footer.html %}
+</body>

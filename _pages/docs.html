@@ -2,7 +2,7 @@
 excerpt: none
 ---
 {% include head.html %}
-<body class="no-js layout-docs">
+<body class="no-js layout-docs layout-docs-index">
   <a class="a-skip-to-main" href="#main">Skip to main content</a>
   {% include site-header.html %}
   <main class="page" role="main" id="main">
@@ -11,31 +11,20 @@ excerpt: none
       <p class="introduction">A collection of handy articles to help you get up and running.</p>
       <section id="vendors">
         <h1>Vendors</h1>
-        <p>Some microcopy to help people determine if they're a vendor.</p>
+        <p>Articles for those who want to get paid to work on open source software projects.</p>
         <ul>
-          <li>Getting started</li>
-          <li>Placing a bid</li>
-          <li>Getting paid</li>
+          <li><a href="{{site.baseurl}}/docs/placing-a-bid">Placing a bid</a></li>
+          <li><a href="{{site.baseurl}}/docs/getting-paid">Getting paid</a></li>
         </ul>
       </section>
       <section id="customers">
         <h1>Customers</h1>
-        <p>Some microcopy to help people determine if they're a customer.</p>
+        <p>Articles for those who want to solicit contributions to open source software projects.</p>
         <ul>
-          <li>Getting started</li>
-          <li>Issuing payment</li>
-          <li>Something else</li>
+          <li><a href="{{site.baseurl}}/docs/getting-started">Getting started</a></li>
+          <li><a href="{{site.baseurl}}/docs/creating-an-auction">Creating an auction</a></li>
         </ul>
-      </section>        
-      <section id="everyone">
-        <h1>Everyone</h1>
-        <ul>
-          <li>How it works</li>
-          <li>Browsing auctions</li>
-          <li>Keeping track of auctions</li>
-          <li>Our API</li>
-        </ul>
-      </section>        
+      </section>
     </div>
   </main>
   {% include site-footer.html %}

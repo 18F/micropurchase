@@ -286,7 +286,8 @@ a[id]{
 .layout-auctions-closed section h1,
 .layout-admins-index section h1,
 .layout-vendors-show section h1,
-.layout-settings main section > h1{
+.layout-settings main section > h1,
+.layout-docs main section > h1{
 	font-weight: 600;
 	font-size: 21px;
 	line-height: 1.3em;
@@ -2289,6 +2290,26 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 /* @group layouts */
 
 /* @group docs */
+
+	.layout-docs-index h1,
+	.layout-docs-index p,
+	.layout-docs-index section,
+	.layout-docs-index section h1,
+	.layout-docs-index section p{
+		max-width: 640px !important;
+		margin-left: auto !important;
+		margin-right: auto !important;
+		position: static !important;
+	}
+	
+	.layout-docs-index .page section h1{
+		margin-bottom: 1em;
+	}
+	
+	.layout-docs-index section p{
+		font: inherit;
+		line-height: 1.4em;
+	}
 
 	.layout-placing-a-bid .figure-1 {
 		position: relative;
