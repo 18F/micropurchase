@@ -2311,6 +2311,30 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 		line-height: 1.4em;
 	}
 
+	.layout-docs-index main ul{
+		margin: 0;
+		padding: 0;
+		
+	}
+	.layout-docs-index main ul::after{
+		content: "";
+		display: table;
+		clear: both;
+	
+	}	
+	.layout-docs-index main ul li{
+		list-style-type: none;
+		float: left;
+		min-height: 64px;
+		min-width: 128px;
+		background: url(images/png/text.png) center 8px no-repeat #f8f8f8;
+		padding: 48px 8px 8px;
+		text-align: center;
+		margin: 0 12px 0 0;
+		border-radius: 4px;
+		border: 1px solid #eee;
+	}
+
 	.layout-placing-a-bid .figure-1 {
 		position: relative;
 		padding-bottom: 40%;
