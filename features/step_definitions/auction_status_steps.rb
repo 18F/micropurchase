@@ -75,6 +75,12 @@ Then(/^I should see the C2 status for an auction pending payment confirmation$/)
   )
 end
 
+Then(/^I should see the admin status for an auction that needs evaluation$/) do
+  expect(page).to have_content(
+    I18n.t('statuses.c2_presenter.pending_acceptance.header')
+  )
+end
+
 Then(/^I should see the C2 status for an auction with payment confirmation$/) do
   paid_at = DcTimePresenter.convert_and_format(@auction.paid_at)
   accepted_date = DcTimePresenter.convert_and_format(@auction.accepted_at)

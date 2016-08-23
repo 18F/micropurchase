@@ -15,6 +15,12 @@ en:
         header: "Pending C2 approval"
         body: "This auction has been sent to C2 for approval."
         action: "You can check on the status <a href=%{link}>here</a>."
+      pending_acceptance:
+        body: >
+          %{winner_url} made a <a href=%{delivery_url}>pull request</a> and marked this auction as
+          delivered. If their work meets this auction's acceptance criteria, click
+          "accept." Otherwise, click "reject."
+        header: "Pending acceptance"
       approved:
         status: "Approved"
         body: "This auction has been approved in C2: %{link}"
