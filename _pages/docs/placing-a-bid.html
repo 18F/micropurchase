@@ -1,0 +1,37 @@
+---
+excerpt: none
+---
+{% include head.html %}
+<body class="no-js layout-docs layout-placing-a-bid">
+  <a class="a-skip-to-main" href="#main">Skip to main content</a>
+  {% include site-header.html %}
+  <main class="page" role="main" id="main">
+    <div class="wrapper">
+      <h1>Placing a Bid</h1>
+      <p class="introduction">Before you can place a bid you&rsquo;ll need to request a DUNS number and register on SAM.gov. Then you&rsquo;ll need to link those accounts to your 18F Micro-purchase account.</p>
+      <h2 id="request-a-duns-number">Request a DUNS number</h2>
+      <p>Start by <a href="http://www.dnb.com/duns-number/lookup.html">looking up your DUNS number</a> on the Dun &amp; Bradstreet website. If you&rsquo;ve worked with the government in the past, you may already have one. </p>
+      <p>If you don&rsquo;t yet have a DUNS number, you can start by <a href="https://www.dandb.com/product/companyupdate/companyupdateHome?execution=e10s1">creating a Dun &amp; Bradstreet business profile</a>. Your DUNS number (and marketing materials, see below) will be sent to the contact information you specify within 30 days after your profile is created.</p>
+      <p>Please be aware that &ldquo;as a result of obtaining a DUNS number, you [will] be included on D&amp;B&rsquo;s marketing list that is sold to other companies. If you do not want your name/entity included on this marketing list, you must contact D&amp;B &hellip; to request removal.&rdquo; (<a href="https://fsd.gov/fsd-gov/answer.do?sysparm_kbid=4dd0e67e6f585100211956532e3ee43a&sysparm_search=duns">source</a>) Our team is really sorry about this. It&rsquo;s <a href="https://github.com/18F/micropurchase/issues/1090">an issue we&rsquo;re aware of</a> and looking into.</p>
+      <h2 id="register-on-sam-gov">Register on SAM.gov</h2>
+      <p>Once you have your DUNS number, <a href="https://www.sam.gov">visit SAM.gov</a> and create an individual account. The process is demonstrated in the video, below. Note that while registration physically takes about an hour, it can actually take <strong>about a day or two</strong> for the your application to be processed and for your information to propagate across various systems. </p>
+      <figure class="figure-1">
+        <iframe width="100%" maxheight="480" src="https://www.youtube.com/embed/YHq9KAdBI6A" frameborder="0" allowfullscreen></iframe>
+        <figcaption>
+          <p>An overview of the SAM.gov registration process. We recommend playing it at half speed.</p>
+        </figcaption>
+      </figure>
+      <p>Be sure to link your DUNS number with your SAM.gov profile. Also, please note that auctions with a starting bid of $3,500 or more are only available to <a href="https://www.sba.gov/blogs/how-and-why-determine-if-your-business-small">small businesses</a>. If you&rsquo;re a small business, please ensure your Sam.gov profile correctly reflects this.</p>
+      <h2 id="sign-up-or-complete-an-existing-profile">Sign-up or complete an existing profile</h2>
+      <p>Once you have a Sam.gov account, you can either <a href="{{site.baseurl}}/sign-up">create a new 18F Micro-purchase account (using GitHub)</a> or you can link your SAM.gov account with your existing 18F Micro-purchase account. </p>
+      <p>18F Micro-purchase uses your DUNS number to verify your registration on SAM.gov. To initiate this verification, <a href="{{site.baseurl}}/profile">visit your profile</a> and update your DUNS number. The verification process should take no longer than a hour or so. Once you&rsquo;re verified,  you&rsquo;re ready to bid.</p>
+      <h2 id="place-a-bid">Place a bid</h2>
+      <p>To place a bid, simply find an open auction by visiting the 18F Micro-purchase homepage. Once you&rsquo;ve identified an auction on which you&rsquo;d like to bid, visit the auction description page and look for the auction&rsquo;s status box. If you&rsquo;re eligible to bid, you&rsquo;ll see a form that looks like this:</p>
+      <figure class="figure-2">
+        <img src="{{site.baseurl}}/images/placing-a-bid-1.png">
+      </figure>
+      <p>Enter a number less than the maximum bid (or current bid, if the auction&rsquo;s bids are not sealed) and click &ldquo;Place bid&rdquo;. Good luck!</p>
+    </div>
+  </main>
+  {% include site-footer.html %}
+</body>
