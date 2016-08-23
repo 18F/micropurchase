@@ -8,7 +8,7 @@ describe Statistics::UniqueBiddersPerAuction do
       _auction_with_one_unique_bidder =
         create(:auction, :rejected, bids: [create(:bid)])
       user = create(:user)
-      auction_with_three_unique_bidders = create(:auction, :completed)
+      auction_with_three_unique_bidders = create(:auction, :closed)
       create(:bid, auction: auction_with_three_unique_bidders, bidder: user)
       create(:bid, auction: auction_with_three_unique_bidders, bidder: user)
       create(:bid, auction: auction_with_three_unique_bidders)
