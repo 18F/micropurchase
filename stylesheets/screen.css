@@ -154,19 +154,18 @@ table{ color: inherit; }
 
 /* @group typography */
 
-.layout-admins-index h1,
-.layout-vendors-index h1,
-.layout-profile header h1{
+.layout-admins-index main h1,
+.layout-vendors-index main h1,
+.layout-profile header main h1{
 	font-size: 36px;
 	font-weight: 400;
 	letter-spacing: -1px;
 }
 
 @media screen and (min-width: 622.222px){
-	.layout-admins-index h1,
-	.layout-vendors-index h1,
-	.h-feed-header h1,
-	.layout-profile header h1{
+	.layout-admins-index main h1,
+	.layout-vendors-index main h1,
+	.layout-profile header main h1{
 		font-size: 48px;
 		font-weight: 300;
 		letter-spacing: -1.4px;
