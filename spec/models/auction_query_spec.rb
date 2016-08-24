@@ -124,7 +124,7 @@ describe AuctionQuery do
     it 'returns the sum of unpublished, pending_delivery, pending_acceptance and payment_needed auctions' do
       _regular = create(:auction)
       _unpublished = create(:auction, :unpublished)
-      _pending_delivery = create(:auction, :completed)
+      _pending_delivery = create(:auction, :closed)
       _pending_acceptance = create(:auction, :evaluation_needed)
       _payment_needed = create(:auction, :payment_needed)
 

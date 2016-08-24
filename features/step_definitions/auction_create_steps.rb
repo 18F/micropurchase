@@ -211,5 +211,5 @@ When(/^there is each type of auction that needs attention$/) do
   @needs_attention << FactoryGirl.create(:auction, :unpublished)
   @needs_attention << FactoryGirl.create(:auction, :payment_needed)
   @needs_attention << FactoryGirl.create(:auction, :pending_acceptance)
-  @needs_attention << FactoryGirl.create(:auction, :completed)
+  @needs_attention << FactoryGirl.create(:auction, :closed)
 end

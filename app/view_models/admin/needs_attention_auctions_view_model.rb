@@ -12,7 +12,7 @@ class Admin::NeedsAttentionAuctionsViewModel < Admin::BaseViewModel
   end
 
   def drafts
-    @_drafts ||= AuctionQuery.new.unpublished.map do |auction|
+    @_drafts ||= Auction.unpublished.map do |auction|
       Admin::DraftListItem.new(auction)
     end
   end
@@ -38,7 +38,7 @@ class Admin::NeedsAttentionAuctionsViewModel < Admin::BaseViewModel
   end
 
   def evaluation_needed
-    @_evaluation_needed ||= list_items(AuctionQuery.new.pending_acceptance)
+    @_evaluation_needed ||= list_items(Auction.pending_acceptance)
   end
 
   def payment_needed_partial
