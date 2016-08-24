@@ -84,6 +84,12 @@ FactoryGirl.define do
       paid_at nil
     end
 
+   trait :pending_c2_approval do
+     c2_status :pending
+     purchase_card :default
+     unpublished
+   end
+
     trait :c2_approved do
       c2_proposal_url 'https://c2-dev.18f.gov/proposals/2486'
       c2_status :approved
@@ -143,6 +149,7 @@ FactoryGirl.define do
 
     trait :payment_needed do
       delivery_due_at_expired
+      with_bidders
       accepted
       delivered
       c2_approved
@@ -150,9 +157,10 @@ FactoryGirl.define do
     end
 
     trait :evaluation_needed do
+      delivery_due_at_expired
+      with_bidders
       delivered
       pending_acceptance
-      delivery_due_at_expired
     end
   end
 end

@@ -165,7 +165,6 @@ Set up the database:
 ```
 $ cf-ssh -f manifest.yml
 $~ bundle exec rake db:migrate
-$~ bundle exec rake db:seed
 ```
 
 Restage the app:

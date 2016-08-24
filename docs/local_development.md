@@ -17,9 +17,12 @@ You can install poltergeist with homebrew via `brew install phantomjs`
 ```
 $ git clone git@github.com:18F/micropurchase.git
 $ cd micropurchase
-$ ./script/bootstrap
-$ foreman start -p 3000
+$ bin/setup
+$ foreman start
 ```
+
+The app will now be up and running at
+[http://localhost:3000/](http://localhost:3000/)
 
 ### Setting up GitHub OAuth
 
