@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Statistics::AverageAuctionLength do
   describe '#to_s' do
-    context 'there are completed auctions' do
+    context 'there are complete and evaluated auctions' do
       it 'returns correct number' do
         create(
           :auction,
@@ -15,7 +15,7 @@ describe Statistics::AverageAuctionLength do
       end
     end
 
-    context 'there are not any completed auctions' do
+    context 'there are not any complete and evaluated auctions' do
       it 'returns n/a' do
         expect(Statistics::AverageAuctionLength.new.to_s).to eq "n/a"
       end

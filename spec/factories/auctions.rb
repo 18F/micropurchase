@@ -13,31 +13,6 @@ FactoryGirl.define do
     delivery_due_at { quartile_minute(Time.now + 10.days) }
     purchase_card :default
 
-    trait :sealed_bid_with_tie do
-      sealed_bid
-
-      after(:create) do |auction|
-        Timecop.freeze(auction.started_at) do
-          Timecop.scale(3600)
-          2.times do
-            create(:bid, auction: auction, amount: 3000)
-          end
-        end
-      end
-    end
-
-    trait :winning_vendor_is_small_business do
-      after(:create) do |auction|
-        create(:bid, :from_small_business, auction: auction)
-      end
-    end
-
-    trait :winning_vendor_is_non_small_business do
-      after(:create) do |auction|
-        create(:bid, :from_non_small_business, auction: auction)
-      end
-    end
-
     trait :with_bidders do
       published
       transient do
@@ -63,17 +38,6 @@ FactoryGirl.define do
       end
     end
 
-    trait :between_micropurchase_and_sat_threshold do
-      association :user, factory: :contracting_officer
-      start_price do
-        rand(AuctionThreshold::MICROPURCHASE + 1..AuctionThreshold::SAT)
-      end
-    end
-
-    trait :below_micropurchase_threshold do
-      start_price { rand(1..AuctionThreshold::MICROPURCHASE) }
-    end
-
     trait :available do
       started_at { quartile_minute(Time.now - 2.days) }
       ended_at { quartile_minute(Time.now + 2.days) }
@@ -89,8 +53,8 @@ FactoryGirl.define do
       delivery_url 'https://github.com/foo/bar'
     end
 
-    trait :not_delivered do
-      delivery_url nil
+    trait :delivery_due_at_expired do
+      delivery_due_at { quartile_minute(ended_at + 1.day) }
     end
 
     trait :paid do
@@ -104,11 +68,6 @@ FactoryGirl.define do
 
     trait :future do
       started_at { quartile_minute(Time.now + 1.day) }
-    end
-
-    trait :delivery_due_at_expired do
-      closed
-      delivery_due_at { quartile_minute(ended_at + 1.day) }
     end
 
     trait :accepted do
@@ -130,6 +89,10 @@ FactoryGirl.define do
       c2_status :approved
     end
 
+    trait :pending_acceptance do
+      status :pending_acceptance
+    end
+
     trait :published do
       published :published
     end
@@ -146,17 +109,35 @@ FactoryGirl.define do
       type :reverse
     end
 
-    trait :completed do
-      published
-      delivery_due_at_expired
+    trait :between_micropurchase_and_sat_threshold do
+      association :user, factory: :contracting_officer
+      start_price do
+        rand(AuctionThreshold::MICROPURCHASE + 1..AuctionThreshold::SAT)
+      end
+    end
+
+    trait :below_micropurchase_threshold do
+      start_price { rand(1..AuctionThreshold::MICROPURCHASE) }
+    end
+
+    trait :winning_vendor_is_small_business do
+      after(:create) do |auction|
+        create(:bid, :from_small_business, auction: auction)
+      end
+    end
+
+    trait :winning_vendor_is_non_small_business do
+      after(:create) do |auction|
+        create(:bid, :from_non_small_business, auction: auction)
+      end
     end
 
     trait :complete_and_successful do
+      c2_approved
       with_bidders
       delivery_due_at_expired
       delivered
       accepted
-      c2_approved
       paid
     end
 
@@ -171,15 +152,6 @@ FactoryGirl.define do
     trait :evaluation_needed do
       delivered
       pending_acceptance
-      delivery_due_at_expired
-    end
-
-    trait :pending_acceptance do
-      status :pending_acceptance
-    end
-
-    trait :delivery_past_due do
-      not_delivered
       delivery_due_at_expired
     end
   end
