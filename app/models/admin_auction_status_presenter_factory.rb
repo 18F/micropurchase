@@ -6,7 +6,9 @@ class AdminAuctionStatusPresenterFactory
   end
 
   def create
-    if auction.pending_acceptance? || auction.rejected?
+    if auction.payment_confirmed? || auction.c2_paid?
+      Object.const_get("C2StatusPresenter::#{c2_status}").new(auction: auction)
+    elsif !auction.pending_delivery?
       Object.const_get("AdminAuctionStatusPresenter::#{status}").new(auction: auction)
     else
       Object.const_get("C2StatusPresenter::#{c2_status}").new(auction: auction)

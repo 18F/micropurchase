@@ -124,6 +124,10 @@ Given(/^there is also an unpublished auction$/) do
   @unpublished_auction = FactoryGirl.create(:auction, published: false)
 end
 
+Given(/^there is an auction pending acceptance$/) do
+  @auction = FactoryGirl.create(:auction, :with_bidders, :pending_acceptance)
+end
+
 Given(/^there is a complete and successful auction$/) do
   @auction = FactoryGirl.create(:auction, :complete_and_successful)
 end
@@ -146,7 +150,7 @@ Given(/^there is an auction where the winning vendor is not eligible to be paid$
 end
 
 Given(/^there is a paid auction$/) do
-  @auction = FactoryGirl.create(:auction, :closed, :accepted, :paid)
+  @auction = FactoryGirl.create(:auction, :with_bidders, :closed, :accepted, :paid)
 end
 
 Given(/^the auction is for the default purchase card$/) do

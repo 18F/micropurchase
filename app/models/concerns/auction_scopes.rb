@@ -17,7 +17,7 @@ module AuctionScopes
     scope :in_reverse_chron_order, -> { order('ended_at DESC') }
     scope :not_delivered, -> { where(delivery_url: [nil, '']) }
     scope :pending_acceptance, -> { where(status: statuses['pending_acceptance']) }
-    scope :pending_delivery, -> { where(status: statuses['not_applicable']) }
+    scope :pending_delivery, -> { where(status: statuses['pending_delivery']) }
     scope :not_paid, -> { where(paid_at: nil) }
     scope :paid, -> { where.not(paid_at: nil) }
     scope :published, -> { where(published: publishes['published']) }
