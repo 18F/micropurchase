@@ -19,7 +19,7 @@ auction = FactoryGirl.create(:auction, :sealed_bid, :closed, :with_bidders)
 auction.skills << skills
 FactoryGirl.create(:auction, :complete_and_successful)
 FactoryGirl.create(:auction, :payment_needed)
-FactoryGirl.create(:auction, :evaluation_needed)
+FactoryGirl.create(:auction, :evaluation_needed, :with_bidders)
 FactoryGirl.create(:auction, :unpublished)
 rejected_auction = FactoryGirl.create(:auction, :sealed_bid, :closed, :with_bidders)
 rejected_auction.skills << skills

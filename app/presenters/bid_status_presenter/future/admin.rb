@@ -15,7 +15,7 @@ class BidStatusPresenter::Future::Admin < BidStatusPresenter::Base
       "Un-publish",
       admin_auction_published_path(auction),
       method: :patch,
-      class: 'usa-button usa-button-outline auction-button'
+      class: 'usa-button usa-button-outline action-button'
     )
   end
 end

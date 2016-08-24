@@ -21,6 +21,12 @@ en:
           delivered. If their work meets this auction's acceptance criteria, click
           "accept." Otherwise, click "reject."
         header: "Pending acceptance"
+        actions:
+          accept: "Accept"
+          reject: "Reject"
+      rejected:
+        header: "Rejected"
+        body: "<a href=%{delivery_url}>%{winner_email}'s work</a> was rejected on %{rejected_at}."
       approved:
         status: "Approved"
         body: "This auction has been approved in C2: %{link}"
