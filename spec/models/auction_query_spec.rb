@@ -6,7 +6,7 @@ describe AuctionQuery do
     let(:complete_and_successful) do
       create(:auction, :complete_and_successful)
     end
-    let!(:running_auction) { create(:auction, :running) }
+    let!(:available_auction) { create(:auction, :available) }
     let!(:rejected_auction) { create(:auction, status: :rejected) }
     let!(:unpaid_auction) do
       create(:auction, :not_paid)

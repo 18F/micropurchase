@@ -8,7 +8,7 @@ describe 'API bid requests' do
       github_response_for_user(user)
     end
   end
-  let(:user) { FactoryGirl.create(:user, sam_status: :sam_accepted) }
+  let(:user) { create(:user, sam_status: :sam_accepted) }
   let(:headers) do
     {
       'HTTP_ACCEPT' => 'text/x-json',
@@ -37,7 +37,7 @@ describe 'API bid requests' do
 
     context 'when the API key is missing' do
       let(:api_key) { nil }
-      let(:auction) { FactoryGirl.create(:auction, :running) }
+      let(:auction) { create(:auction, :with_bidders) }
       let(:current_auction_price) do
         auction.bids.sort_by(&:amount).first.amount
       end
@@ -57,7 +57,7 @@ describe 'API bid requests' do
 
     context 'when the API key is invalid' do
       let(:api_key) { FakeGitHubApi::INVALID_API_KEY }
-      let(:auction) { FactoryGirl.create(:auction, :running) }
+      let(:auction) { create(:auction, :with_bidders) }
       let(:current_auction_price) do
         auction.bids.sort_by(&:amount).first.amount
       end
@@ -77,7 +77,7 @@ describe 'API bid requests' do
 
     context 'when the auction has ended' do
       let(:api_key) { FakeGitHubApi::VALID_API_KEY }
-      let(:auction) { FactoryGirl.create(:auction, :closed, :with_bidders) }
+      let(:auction) { create(:auction, :closed, :with_bidders) }
       let(:current_auction_price) do
         auction.bids.sort_by(&:amount).first.amount
       end
@@ -99,7 +99,7 @@ describe 'API bid requests' do
 
     context 'when the auction has not yet started' do
       let(:api_key) { FakeGitHubApi::VALID_API_KEY }
-      let(:auction) { FactoryGirl.create(:auction, :future, :with_bidders) }
+      let(:auction) { create(:auction, :future, :with_bidders) }
       let(:current_auction_price) do
         auction.bids.sort_by(&:amount).first.amount
       end
@@ -119,9 +119,9 @@ describe 'API bid requests' do
       end
     end
 
-    context 'when the auction is running' do
+    context 'when the auction has bids' do
       let(:api_key) { FakeGitHubApi::VALID_API_KEY }
-      let(:auction) { FactoryGirl.create(:auction, :running) }
+      let(:auction) { create(:auction, :with_bidders) }
       let(:current_auction_price) do
         auction.bids.sort_by(&:amount).first.amount
       end
@@ -154,7 +154,7 @@ describe 'API bid requests' do
       end
 
       context 'when the auction start price is between the micropurchase and SAT threshold' do
-        let(:auction) { create(:auction, :between_micropurchase_and_sat_threshold, :running) }
+        let(:auction) { create(:auction, :between_micropurchase_and_sat_threshold, :with_bidders) }
         let(:bid_amount) { current_auction_price - 10 }
 
         context 'and the vendor is not small business' do
@@ -179,7 +179,7 @@ describe 'API bid requests' do
       end
 
       context 'when the auction is reverse' do
-        let(:auction) { FactoryGirl.create(:auction, :running, :reverse) }
+        let(:auction) { create(:auction, :reverse, :with_bidders) }
 
         context 'and the bid amount is not the lowest' do
           let(:bid_amount) { current_auction_price + 10 }
@@ -203,7 +203,7 @@ describe 'API bid requests' do
       end
 
       context 'when the auction is sealed-bid' do
-        let(:auction) { FactoryGirl.create(:auction, :running, :sealed_bid) }
+        let(:auction) { create(:auction, :with_bidders, :sealed_bid) }
 
         context 'and the bid amount is not the lowest' do
           let(:amount) { current_auction_price + 10 }
@@ -265,7 +265,7 @@ describe 'API bid requests' do
       end
 
       context 'and the user has a rejected #sam_status' do
-        let(:user) { FactoryGirl.create(:user, sam_status: :sam_rejected) }
+        let(:user) { create(:user, sam_status: :sam_rejected) }
         let(:bid_amount) { current_auction_price - 10 }
 
         it 'returns a json error' do
@@ -288,7 +288,7 @@ describe 'API bid requests' do
       end
 
       context 'and the user has a pending #sam_status' do
-        let(:user) { FactoryGirl.create(:user, sam_status: :sam_pending) }
+        let(:user) { create(:user, sam_status: :sam_pending) }
         let(:bid_amount) { current_auction_price - 10 }
 
         it 'returns a json error' do

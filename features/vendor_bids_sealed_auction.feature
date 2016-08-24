@@ -12,7 +12,7 @@ Feature: Vendor bids on a sealed-bid auction
     Then I should see the rules for Sealed-bid auctions
 
   Scenario: bidding on a sealed-bid auction
-    Given there is a sealed-bid auction
+    Given there is a sealed-bid auction with bids
     And I am an authenticated vendor
     When I visit the home page
     Then I should not see "Current bid:"

@@ -24,7 +24,7 @@
     "/auctions": {
       "get": {
         "summary": "List auctions",
-        "description": "Returns a list of all auctions (upcoming, running, and ended). Each auction contains bids and each bid contains one bidder. If an auction is still running, `bid['bidder_id']` and all keys in `bidder` will be `null`. This request does not require authentication, but if you are authenticated, your bids will not be redacted. This is consistent with the behavior of the web UI.",
+        "description": "Returns a list of all auctions (future, available, and closed). Each auction contains bids and each bid contains one bidder. If an auction is still running, `bid['bidder_id']` and all keys in `bidder` will be `null`. This request does not require authentication, but if you are authenticated, your bids will not be redacted. This is consistent with the behavior of the web UI.",
         "security": [
           {
             "api_key": []

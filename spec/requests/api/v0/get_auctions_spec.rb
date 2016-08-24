@@ -17,10 +17,10 @@ describe Api::V0::Admin::AuctionsController do
     end
 
     context 'when the auction is reverse' do
-      context 'and the auction is running' do
+      context 'and the auction is available, has bidders' do
         it 'veils all bidder information' do
           login
-          create(:auction, :running, :reverse, :with_bidders)
+          create(:auction, :available, :reverse, :with_bidders)
 
           get api_v0_auctions_path(format: :json), nil, headers
 
@@ -61,10 +61,10 @@ describe Api::V0::Admin::AuctionsController do
     end
 
     context 'when the auction is sealed-bid' do
-      context 'and the auction is running' do
+      context 'and the auction is available, has bidders' do
         it 'veils all bids' do
           login
-          create(:auction, :running, :sealed_bid, :with_bidders)
+          create(:auction, :available, :sealed_bid, :with_bidders)
           get '/api/v0/auctions', nil, headers
           expect(json_bids).to be_empty
         end

@@ -98,10 +98,6 @@ FactoryGirl.define do
       paid_at { Time.current }
     end
 
-    trait :running do
-      with_bidders
-    end
-
     trait :expiring do
       ended_at { quartile_minute(Time.now + 3.hours) }
     end

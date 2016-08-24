@@ -83,7 +83,11 @@ Given(/^there is a budget approved auction$/) do
 end
 
 Given(/^there is a sealed-bid auction$/) do
-  @auction = FactoryGirl.create(:auction, :running, :sealed_bid)
+  @auction = FactoryGirl.create(:auction, :available, :sealed_bid)
+end
+
+Given(/^there is a sealed-bid auction with bids$/) do
+  @auction = FactoryGirl.create(:auction, :available, :sealed_bid, :with_bidders)
 end
 
 Given(/^there is a closed sealed-bid auction$/) do
@@ -112,7 +116,7 @@ end
 
 Given(/^there are many different auctions$/) do
   FactoryGirl.create(:auction, :closed, title: Faker::Commerce.product_name)
-  FactoryGirl.create(:auction, :running, title: Faker::Commerce.product_name)
+  FactoryGirl.create(:auction, :available, title: Faker::Commerce.product_name)
   FactoryGirl.create(:auction, :future)
 end
 

@@ -154,7 +154,7 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
 
     context 'when the API key is missing' do
       let(:api_key) { nil }
-      let(:auction) { create(:auction, :running) }
+      let(:auction) { create(:auction, :available, :with_bidders) }
       let(:current_auction_price) do
         auction.bids.sort_by(&:amount).first.amount
       end
@@ -175,7 +175,7 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
 
     context 'when the API key is invalid' do
       let(:api_key) { FakeGitHubApi::INVALID_API_KEY }
-      let(:auction) { create(:auction, :running) }
+      let(:auction) { create(:auction, :available, :with_bidders) }
       let(:current_auction_price) do
         auction.bids.sort_by(&:amount).first.amount
       end
@@ -255,7 +255,7 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
 
     context 'when the user places a successful bid' do
       let(:api_key) { FakeGitHubApi::VALID_API_KEY }
-      let(:auction) { create(:auction, :running) }
+      let(:auction) { create(:auction, :available, :with_bidders) }
       let(:current_auction_price) do
         auction.bids.sort_by(&:amount).first.amount
       end

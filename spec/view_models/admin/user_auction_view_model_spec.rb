@@ -33,7 +33,7 @@ describe Admin::UserAuctionViewModel do
   describe '#user_won_label' do
     context 'when the auction is not over yet' do
       it 'should return "-"' do
-        auction = create(:auction, :running, :with_bidders)
+        auction = create(:auction, :available, :with_bidders)
         user = WinningBid.new(auction).find.bidder
 
         expect(Admin::UserAuctionViewModel.new(auction, user).user_won_label).to eq('-')
