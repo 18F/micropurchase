@@ -27,6 +27,14 @@ class Admin::BaseViewModel
     AuctionQuery.new.needs_attention_count
   end
 
+  def needs_attention_count_partial
+    if needs_attention_auctions_count > 0
+      'admin/needs_attention_auction_count'
+    else
+      'components/null'
+    end
+  end
+
   def new_auction_nav_class
     ''
   end

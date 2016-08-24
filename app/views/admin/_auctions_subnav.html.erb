@@ -8,9 +8,8 @@
     <li><%= link_to t('links_and_buttons.auctions.needs_attention'),
       admin_auctions_needs_attention_path,
       class: view_model.needs_attention_auctions_nav_class %>
-      <% if view_model.needs_attention_auctions_count > 0 %>
-         <span class="subnav-number-label"><%= view_model.needs_attention_auctions_count %></span>
-      <% end %>
+      <%= render partial: view_model.needs_attention_count_partial,
+          locals: {count: view_model.needs_attention_auctions_count} %>
     </li>
     <li><%= link_to t('links_and_buttons.auctions.closed'),
       admin_auctions_closed_path,
