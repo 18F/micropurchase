@@ -1,0 +1,7 @@
+<%= link_to I18n.t('statuses.c2_presenter.pending_acceptance.actions.accept'),
+  '#',
+  class: 'usa-button usa-button-outline action-button' %>
+<%= link_to I18n.t('statuses.c2_presenter.pending_acceptance.actions.reject'),
+  admin_auction_rejection_path(status.auction),
+  method: :patch,
+  class: 'usa-button usa-button-outline red-action-button' %>

@@ -7,6 +7,15 @@ Feature: Admin view needs attention auctions
     Given I am an administrator
     And I sign in
 
+  Scenario: The needs attention tab should have a count
+    Given there is each type of auction that needs attention
+    When I visit the auctions admin page
+    Then I should see the total number of auctions needing my attention next to the needs attention link
+
+  Scenario: There are no auctions that need attention
+    When I visit the auctions admin page
+    Then I should see the no number next to the needs attention link
+
   Scenario: Navigating to the needs attention auctions dashboard
     Given I visit the auctions admin page
     When I click on the needs attention link

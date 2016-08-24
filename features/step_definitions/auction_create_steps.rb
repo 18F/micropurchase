@@ -83,7 +83,11 @@ Given(/^there is a budget approved auction$/) do
 end
 
 Given(/^there is a sealed-bid auction$/) do
-  @auction = FactoryGirl.create(:auction, :running, :sealed_bid)
+  @auction = FactoryGirl.create(:auction, :available, :sealed_bid)
+end
+
+Given(/^there is a sealed-bid auction with bids$/) do
+  @auction = FactoryGirl.create(:auction, :available, :sealed_bid, :with_bidders)
 end
 
 Given(/^there is a closed sealed-bid auction$/) do
@@ -112,7 +116,7 @@ end
 
 Given(/^there are many different auctions$/) do
   FactoryGirl.create(:auction, :closed, title: Faker::Commerce.product_name)
-  FactoryGirl.create(:auction, :running, title: Faker::Commerce.product_name)
+  FactoryGirl.create(:auction, :available, title: Faker::Commerce.product_name)
   FactoryGirl.create(:auction, :future)
 end
 
@@ -199,4 +203,13 @@ end
 
 When(/^there is another accepted auction$/) do
   FactoryGirl.create(:auction, :accepted, :with_bidders)
+end
+
+When(/^there is each type of auction that needs attention$/) do
+  # And there are auctions that are either in draft state, pending delivery, needs acceptance, or needs payment
+  @needs_attention = []
+  @needs_attention << FactoryGirl.create(:auction, :unpublished)
+  @needs_attention << FactoryGirl.create(:auction, :payment_needed)
+  @needs_attention << FactoryGirl.create(:auction, :pending_acceptance)
+  @needs_attention << FactoryGirl.create(:auction, :closed)
 end

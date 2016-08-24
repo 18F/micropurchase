@@ -6,7 +6,7 @@ describe AuctionQuery do
     let(:complete_and_successful) do
       create(:auction, :complete_and_successful)
     end
-    let!(:running_auction) { create(:auction, :running) }
+    let!(:available_auction) { create(:auction, :available) }
     let!(:rejected_auction) { create(:auction, status: :rejected) }
     let!(:unpaid_auction) do
       create(:auction, :not_paid)
@@ -117,6 +117,20 @@ describe AuctionQuery do
       query = AuctionQuery.new
 
       expect(query.active_auction_count).to eq 1
+    end
+  end
+
+  describe '#needs_attention_count' do
+    it 'returns the sum of unpublished, pending_delivery, pending_acceptance and payment_needed auctions' do
+      _regular = create(:auction)
+      _unpublished = create(:auction, :unpublished)
+      _pending_delivery = create(:auction, :closed)
+      _pending_acceptance = create(:auction, :evaluation_needed)
+      _payment_needed = create(:auction, :payment_needed)
+
+      query = AuctionQuery.new
+
+      expect(query.needs_attention_count).to eq(4)
     end
   end
 

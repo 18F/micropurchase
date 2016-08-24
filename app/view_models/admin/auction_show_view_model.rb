@@ -14,17 +14,18 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
     end
   end
 
-  def c2_status_partial
-    if (auction.purchase_card == 'default' && auction.c2_status != 'approved') ||
-       auction.pending_acceptance?
+  def admin_auction_status_partial
+    if auction.pending_acceptance? ||
+       auction.rejected? ||
+       auction.purchase_card == 'default'
       'auctions/status'
     else
       'components/null'
     end
   end
 
-  def c2_status_presenter
-    C2StatusPresenterFactory.new(auction: auction).create
+  def admin_auction_status_presenter
+    AdminAuctionStatusPresenterFactory.new(auction: auction).create
   end
 
   def status_presenter

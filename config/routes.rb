@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :auction_reports, only: [:show]
     resources :auction_published, only: [:update]
+    resources :auction_rejections, only: [:update]
     resources :user_reports, only: [:index]
     resources :proposals, only: [:create]
     resources :users, only: [:show, :edit, :update]

@@ -9,7 +9,7 @@
     padding: $base-padding;
   }
 
-  .auction-button {
+  .action-button {
     background-color: $color-primary-alt-lightest;
     box-shadow: inset 0 0 0 2px $color-green;
     color: $color-green;
@@ -20,6 +20,20 @@
       color: $color-white;
       background-color: $color-green;
       box-shadow: inset 0 0 0 2px $color-green;
+    }
+  }
+
+  .red-action-button {
+    background-color: $color-primary-alt-lightest;
+    box-shadow: inset 0 0 0 2px $color-secondary-dark;
+    color: $color-secondary-dark;
+    margin-top: 55px;
+
+    &:hover,
+    &.usa-button-hover {
+      color: $color-white;
+      background-color: $color-secondary-dark;
+      box-shadow: inset 0 0 0 2px $color-secondary-dark;
     }
   }
 }
