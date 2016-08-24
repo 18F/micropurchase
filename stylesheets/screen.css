@@ -2094,36 +2094,27 @@ main div.wrap > form { max-width: 576px; }
 	right: 0;
 
 }
+.auction .auction-header a,
+.auction .auction-header a:visited{
+	color: #004a7f;
+}
 
-.auction a h1,
-.auction a:visited h1{
+.auction .auction-header h1,
+.auction .auction-header h1{
 	font-size: 20px;
 	font-family: Merriweather, Georgia, serif;
 	letter-spacing: 0;
 	font-weight: 600;
 	line-height: 1.25em;
 	margin-bottom: 0.25em;
-	color: #004a7f;
 }
 
-.auction a:hover h1{
+.auction .auction-header h1 a:hover{
 	color: #002b7e; 
 	text-decoration: none;
 }
 
-.auction a.button:hover{
-	color: white;
-}
-.layout-auctions-index .auction:hover{
-	border-color: #dbc29a;
-	border-right-color: #cbac7a;
-	border-bottom-color: #cbac7a;
-	background: #fffdf7;
-}
-
-.layout-auctions-index .auction:hover footer{
-	background: #f8f5ef;
-}
+.auction a.button:hover{ color: white; }
 
 .auction .auction-header .button{
 	width: 40px;
@@ -2135,8 +2126,6 @@ main div.wrap > form { max-width: 576px; }
 	font-size: 14px;
 	display: none;
 }
-
-
 
 .auction .auction-header dl{
 	padding: 4px 0 12px;
@@ -2286,7 +2275,7 @@ dd.auction-status{
 	padding: 4px 6px 4px;
 	text-shadow: 0 1px 0 rgba(0,0,0,0.2);
 }
-dd.auction-status-closed{ background: #99005c; }
+dd.auction-status-closed{ background: #555; }
 dd.auction-status-opens-soon,
 dd.auction-status-closing-soon{ background: #c35f00; }
 dd.auction-status.auction-status-open{ background: #008a6c; }
@@ -2318,10 +2307,14 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	}
 
 	.layout-docs-index main ul{
-		margin: 0;
+		margin: 0 0 2em;
 		padding: 0;
 		
 	}
+	.layout-docs-index main #customers ul{
+		margin-bottom: 0;
+	}
+
 	.layout-docs-index main ul::after{
 		content: "";
 		display: table;
@@ -2337,7 +2330,8 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	display: block;
 		min-height: 64px;
 		min-width: 128px;
-		background: url(images/png/text.png) center 8px no-repeat #f8f8f8;
+		background: url(images/png/text.png) center 12px no-repeat #f8f8f8;
+		background-size: 32px 32px;
 		padding: 48px 8px 8px;
 		text-align: center;
 		border-radius: 4px;
@@ -2549,7 +2543,7 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 .layout-auctions-closed .auction dl{
 	position: absolute;
 	right: 12px;
-	top: 18px;
+	top: 17px;
 	padding: 0;
 
 }
