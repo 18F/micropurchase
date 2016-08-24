@@ -204,3 +204,12 @@ end
 When(/^there is another accepted auction$/) do
   FactoryGirl.create(:auction, :accepted, :with_bidders)
 end
+
+When(/^there is each type of auction that needs attention$/) do
+  # And there are auctions that are either in draft state, pending delivery, needs acceptance, or needs payment
+  @needs_attention = []
+  @needs_attention << FactoryGirl.create(:auction, :unpublished)
+  @needs_attention << FactoryGirl.create(:auction, :payment_needed)
+  @needs_attention << FactoryGirl.create(:auction, :pending_acceptance)
+  @needs_attention << FactoryGirl.create(:auction, :closed)
+end
