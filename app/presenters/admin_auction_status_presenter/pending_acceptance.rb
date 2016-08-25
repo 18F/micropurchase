@@ -1,10 +1,4 @@
-class AdminAuctionStatusPresenter::PendingAcceptance
-  attr_reader :auction
-
-  def initialize(auction:)
-    @auction = auction
-  end
-
+class AdminAuctionStatusPresenter::PendingAcceptance < AdminAuctionStatusPresenter::Base
   def header
     I18n.t('statuses.c2_presenter.pending_acceptance.header')
   end
@@ -29,9 +23,5 @@ class AdminAuctionStatusPresenter::PendingAcceptance
       path_name: 'admin_user',
       params: { id: winner.id }
     )
-  end
-
-  def winner
-    WinningBid.new(auction).find.bidder
   end
 end

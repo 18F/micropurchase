@@ -4,7 +4,7 @@ FactoryGirl.define do
     billable_to "Project (billable)"
     started_at { quartile_minute(Time.now - 3.days) }
     ended_at { quartile_minute(Time.now + 3.days) }
-    status :not_applicable
+    status :pending_delivery
     title { Faker::Company.catch_phrase }
     type :reverse
     published :published

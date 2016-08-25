@@ -12,7 +12,7 @@ Feature: Admin views closed auction
   Scenario: Auction is paid, winning vendor has not yet confirmed payment
     Given I am an administrator
     And I sign in
-    And there is a complete and successful auction
+    And there is an auction pending acceptance
     And the auction was marked as paid in C2
     When I visit the admin auction page for that auction
     Then I should see the C2 status for an auction pending payment confirmation

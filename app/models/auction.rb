@@ -20,7 +20,7 @@ class Auction < ActiveRecord::Base
   }
 
   enum status: {
-    not_applicable: 0,
+    pending_delivery: 0,
     pending_acceptance: 3,
     accepted: 1,
     rejected: 2
