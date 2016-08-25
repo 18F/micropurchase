@@ -59,6 +59,10 @@ FactoryGirl.define do
       paid_at { Time.current }
     end
 
+    trait :payment_confirmed do
+      c2_status :payment_confirmed
+    end
+
     trait :expiring do
       ended_at { quartile_minute(Time.now + 3.hours) }
     end

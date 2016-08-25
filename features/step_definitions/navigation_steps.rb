@@ -74,8 +74,12 @@ Given(/^I visit the Needs Attention page$/) do
   visit admin_auctions_needs_attention_path
 end
 
-Given(/^I visit the auction receipt page$/) do
+Given(/^I visit the new auction receipt page$/) do
   visit new_auction_receipt_path(@auction)
+end
+
+Given(/^I visit the auction receipt page$/) do
+  visit auction_receipt_path(@auction)
 end
 
 Then(/^I should be on the Needs Attention page$/) do

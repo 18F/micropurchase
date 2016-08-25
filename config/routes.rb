@@ -55,6 +55,8 @@ Rails.application.routes.draw do
     resources :bid_confirmations, only: [:create]
     resources :bids, only: [:create]
     resources :receipts, only: [:new, :create]
+
+    get 'receipt', to: 'receipts#show'
   end
 
   resources :bids, only: [:index]

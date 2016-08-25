@@ -7,7 +7,6 @@ class UpdateC2Attributes
     {
       gsa18f_procurement: {
         cost_per_unit: cost_per_unit,
-        link_to_product: link_to_product,
         additional_info: additional_info
       }
     }
@@ -21,16 +20,13 @@ class UpdateC2Attributes
     winning_bid.amount
   end
 
-  def link_to_product
-    auction.delivery_url
-  end
-
   def additional_info
     if auction.accepted?
       %(Vendor name: #{winning_bid.bidder.name}
         Vendor email: #{winning_bid.bidder.email}
         Vendor DUNS: #{winning_bid.bidder.duns_number}
-        Use the following credit card form: #{winning_bid.bidder.payment_url}.)
+        Use the following credit card form: #{winning_bid.bidder.payment_url}.
+        Pull request URL: #{auction.delivery_url})
     end
   end
 

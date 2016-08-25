@@ -154,6 +154,11 @@ Then(/^I should see the payment confirmed message$/) do
   )
 end
 
+Then(/^the payment receipt should be sent to C2$/) do
+  expect(UpdateC2ProposalJob).to have_received(:perform_later)
+    .with(@auction.id, 'AddReceiptToC2ProposalAttributes')
+end
+
 def end_date
   DcTimePresenter.convert_and_format(@auction.ended_at)
 end

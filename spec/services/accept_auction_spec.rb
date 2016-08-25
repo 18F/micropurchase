@@ -82,7 +82,7 @@ describe AcceptAuction do
 
           AcceptAuction.new(auction: auction, payment_url: 'example.com').perform
 
-          expect(UpdateC2ProposalJob).to have_received(:perform_later).with(auction.id)
+          expect(UpdateC2ProposalJob).to have_received(:perform_later).with(auction.id, 'UpdateC2Attributes')
         end
       end
 
