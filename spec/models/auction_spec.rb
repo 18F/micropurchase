@@ -70,6 +70,16 @@ describe Auction do
 
         expect(auction).to be_invalid
       end
+
+      it 'validates presence of c2_status' do
+        auction = create(:auction, published: :unpublished,
+                                   purchase_card: :default)
+
+        auction.published = :published
+
+        expect(auction).to be_invalid
+        expect(auction.errors.messages).to eq(c2_status: [" is not approved."])
+      end
     end
   end
 
