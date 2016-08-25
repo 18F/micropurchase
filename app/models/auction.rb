@@ -49,6 +49,14 @@ class Auction < ActiveRecord::Base
     format: { with: Regexp.new("#{C2_REGEX}[0-9]") },
     allow_blank: true
   )
+  validate :publishing_auction, on: :update, if: :published_changed?
+
+  def publishing_auction
+    if published_was == 'unpublished' && purchase_card == 'default' &&
+      c2_status != 'approved'
+      errors.add(:c2_status, " is not approved.")
+    end
+  end
 
   def sorted_skill_names
     skills.order(name: :asc).map(&:name)
