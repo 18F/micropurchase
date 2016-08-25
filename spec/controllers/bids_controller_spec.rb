@@ -7,7 +7,7 @@ describe BidsController do
   describe '#index' do
     context 'when logged in' do
       it 'should assign auctions that current user have bidded on, presented' do
-        bid = auction.bids.create(bidder_id: current_bidder.id)
+        bid = create(:bid, bidder: current_bidder, auction: auction)
         expect(bid).to be_valid
         get :index, { }, user_id: current_bidder.id
         assigned_bid = assigns(:bids).first
@@ -15,7 +15,8 @@ describe BidsController do
       end
 
       it 'should not assign auctions that the current user has not bidded on' do
-        auction.bids.create(bidder_id: current_bidder.id + 127)
+        other_person = create(:user)
+        create(:bid, bidder: other_person, auction: auction)
         get :index, { }, user_id: current_bidder.id
         expect(assigns(:bids)).to be_empty
       end

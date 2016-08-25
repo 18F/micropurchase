@@ -24,7 +24,7 @@ FactoryGirl.define do
           Timecop.scale(3600)
           (1..2).each do |i|
             amount = 3499 - (20 * i) - rand(10)
-            instance.bids << create(:bid, auction: instance, amount: amount)
+            instance.bids << create(:bid, bidder: create(:user), auction: instance, amount: amount)
           end
         end
       end
@@ -157,10 +157,13 @@ FactoryGirl.define do
     end
 
     trait :evaluation_needed do
-      delivery_due_at_expired
       with_bidders
       delivered
       pending_acceptance
+    end
+
+    trait :pending_acceptance do
+      status :pending_acceptance
     end
   end
 end
