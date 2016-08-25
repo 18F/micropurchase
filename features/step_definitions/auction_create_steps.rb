@@ -95,7 +95,7 @@ Given(/^there is a closed sealed-bid auction$/) do
 end
 
 Given(/^there is an auction that needs evaluation$/) do
-  @auction = FactoryGirl.create(:auction, :with_bidders, :evaluation_needed, :c2_approved)
+   @auction = FactoryGirl.create(:auction, :with_bidders, :evaluation_needed, :c2_approved)
 end
 
 Given(/^there is an auction within the simplified acquisition threshold$/) do
@@ -143,8 +143,7 @@ end
 Given(/^there is an auction where the winning vendor is not eligible to be paid$/) do
   @auction = FactoryGirl.create(
     :auction,
-    :delivered,
-    :pending_acceptance,
+    :with_bidders,
     :between_micropurchase_and_sat_threshold,
     :winning_vendor_is_non_small_business
   )
@@ -184,7 +183,7 @@ Given(/^there is an auction with an associated customer$/) do
 end
 
 Given(/^there is an auction where the winning vendor is missing a payment method$/) do
-  @auction = FactoryGirl.create(:auction, :with_bidders, :evaluation_needed)
+  @auction = FactoryGirl.create(:auction, :evaluation_needed)
   @winning_bidder = WinningBid.new(@auction).find.bidder
   @winning_bidder.update(payment_url: '')
 end
