@@ -6,6 +6,7 @@ Feature: Admin accepts delivery of a project
   Scenario: Marking an auction status as accepted via auction form
     Given I am an administrator
     And there is an auction that needs evaluation
+    And the auction has a c2 proposal url
     And I sign in
     When I visit the admin form for that auction
     And I select the status as accepted
@@ -16,6 +17,7 @@ Feature: Admin accepts delivery of a project
     Given I am an administrator
     And I sign in
     And there is an auction that needs evaluation
+    And the auction has a c2 proposal url
     When I visit the admin auction page for that auction
     And I mark the auction as accepted
     Then I should see the admin status for an accepted auction

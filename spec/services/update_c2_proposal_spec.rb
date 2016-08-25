@@ -5,7 +5,7 @@ describe UpdateC2Proposal do
     it 'sends the correct attributes to the c2_client' do
       c2_path = "proposals/123"
       c2_proposal_url = "https://c2-dev.18f.gov/#{c2_path}"
-      auction = create(:auction, :with_bidders, :delivered, c2_proposal_url: c2_proposal_url)
+      auction = create(:auction, :with_bidders, c2_proposal_url: c2_proposal_url)
 
       fake_c2_attributes = { fake_c2: 'fake' }
       attributes_double = double(perform: fake_c2_attributes)

@@ -32,12 +32,11 @@ class AuctionQuery
   end
 
   def completed
-    relation.accepted_or_rejected
+    relation.evaluated
   end
 
   def complete_and_successful
     relation
-      .delivery_due_at_expired
       .delivered
       .delivery_accepted
       .paid
