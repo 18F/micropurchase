@@ -52,8 +52,7 @@ class Auction < ActiveRecord::Base
   validate :publishing_auction, on: :update, if: :published_changed?
 
   def publishing_auction
-    if published_was == 'unpublished' && purchase_card == 'default' &&
-      c2_status != 'approved'
+    if published_was == 'unpublished' && purchase_card == 'default' && c2_status != 'approved'
       errors.add(:c2_status, " is not approved.")
     end
   end
