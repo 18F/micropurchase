@@ -46,7 +46,7 @@ class Admin::NeedsAttentionAuctionListItem < Admin::BaseViewModel
   end
 
   def delivery_url
-    auction.delivery_url
+    auction.delivery_url || 'N/A'
   end
 
   def c2_proposal_url

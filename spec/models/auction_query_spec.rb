@@ -121,7 +121,7 @@ describe AuctionQuery do
   end
 
   describe '#needs_attention_count' do
-    it 'returns the sum of unpublished, pending_delivery, pending_acceptance and payment_needed auctions' do
+    it 'returns the sum of unpublished, delivery_needed, pending_acceptance and payment_needed auctions' do
       _regular = create(:auction)
       _unpublished = create(:auction, :unpublished)
       _pending_delivery = create(:auction, :closed)
@@ -147,6 +147,17 @@ describe AuctionQuery do
       user = create(:user)
 
       expect(AuctionQuery.new.with_bid_from_user(user.id)).to eq([])
+    end
+  end
+
+  describe '#delivery_needed' do
+    it 'returns published auctions that have ended but are not yet pending evaluation' do
+      _pending_evaluation = create(:auction, :pending_acceptance)
+      _unpublished_ended = create(:auction, :closed, :unpublished)
+      _pending_payment = create(:auction, :payment_needed)
+      delivery_needed = create(:auction, :closed)
+
+      expect(AuctionQuery.new.delivery_needed).to eq([delivery_needed])
     end
   end
 end

@@ -22,6 +22,7 @@ if Rails.env.development?
       future_reverse = FactoryGirl.create(:auction, :reverse, :future)
       future_reverse.skills << skills
       FactoryGirl.create(:auction, :reverse, :closed, :with_bidders, purchase_card: :other)
+      FactoryGirl.create(:auction, :reverse, :closed, :with_bidders, :c2_approved, :delivered)
       FactoryGirl.create(:auction, :sealed_bid, :with_bidders)
       FactoryGirl.create(:auction, :sealed_bid, :expiring, :with_bidders)
       future_sealed = FactoryGirl.create(:auction, :sealed_bid, :future)
