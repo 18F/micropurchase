@@ -1,6 +1,7 @@
 class UpdateC2Proposal < C2ApiWrapper
-  def initialize(auction)
+  def initialize(auction, attributes_class)
     @auction = auction
+    @attributes_class = attributes_class
   end
 
   def perform
@@ -9,9 +10,9 @@ class UpdateC2Proposal < C2ApiWrapper
 
   private
 
-  attr_reader :auction
+  attr_reader :auction, :attributes_class
 
   def c2_proposal_attributes
-    UpdateC2Attributes.new(auction).perform
+    attributes_class.new(auction).to_h
   end
 end

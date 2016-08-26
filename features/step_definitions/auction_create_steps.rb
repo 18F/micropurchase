@@ -12,6 +12,7 @@ end
 
 Given(/^I am going to win an auction$/) do
   @auction = FactoryGirl.build(:auction, :available, :with_bidders)
+
   Timecop.freeze(@auction.ended_at - 15.minutes) do
     bid = @auction.bids.sort_by(&:amount).first
     bid.update(bidder: @user)
@@ -216,4 +217,11 @@ When(/^there is each type of auction that needs attention$/) do
   @needs_attention << FactoryGirl.create(:auction, :payment_needed)
   @needs_attention << FactoryGirl.create(:auction, :pending_acceptance)
   @needs_attention << FactoryGirl.create(:auction, :closed)
+end
+
+Given(/^there is a payment confirmed auction$/) do
+  @auction = FactoryGirl.create(:auction,
+                                :with_bidders,
+                                :paid,
+                                :payment_confirmed)
 end

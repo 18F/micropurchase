@@ -18,8 +18,15 @@ class ReceiptsController < ApplicationController
 
   def create
     auction = Auction.find(params[:auction_id])
-    auction.update(c2_status: :payment_confirmed)
+    ConfirmPayment.new(auction).perform
 
     redirect_to auction_path(auction)
+  end
+
+  def show
+    auction = Auction.find(params[:auction_id])
+    @view_model = AuctionReceiptShowViewModel.new(auction)
+
+    render 'show.text.erb', layout: false, content_type: 'text/plain'
   end
 end

@@ -1,0 +1,9 @@
+Receipt for 18F Micro-purchase Auction No. <%= @view_model.auction_id %> (<%= @view_model.auction_url.to_s %>)
+
+Payment status: <%= @view_model.auction_c2_status %>
+
+<%= @view_model.winning_bidder_name %> (<%= @view_model.winning_bidder_email %>) confirmed payment of <%= @view_model.winning_bid_amount %> at <%= @view_model.auction_paid_at %>
+
+Item description:
+
+<%= @view_model.auction_description %>
