@@ -47,18 +47,15 @@ FactoryGirl.define do
       ended_at { quartile_minute(Time.now - 2.days) }
     end
 
-    trait :delivered do
-      ended_at { quartile_minute(Time.now - 2.days) }
-      delivery_due_at { quartile_minute(Time.now - 1.day) }
-      delivery_url 'https://github.com/foo/bar'
-    end
-
     trait :delivery_due_at_expired do
       delivery_due_at { quartile_minute(ended_at + 1.day) }
     end
 
+    trait :delivered do
+      delivery_url 'https://github.com/foo/bar'
+    end
+
     trait :paid do
-      delivered
       paid_at { Time.current }
     end
 
@@ -139,20 +136,16 @@ FactoryGirl.define do
     end
 
     trait :complete_and_successful do
-      c2_approved
       with_bidders
-      delivery_due_at_expired
       delivered
       accepted
       paid
     end
 
     trait :payment_needed do
-      delivery_due_at_expired
       with_bidders
       accepted
       delivered
-      c2_approved
       not_paid
     end
 

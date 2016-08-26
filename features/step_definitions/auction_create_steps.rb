@@ -79,7 +79,7 @@ Given(/^there is an open auction with some skills$/) do
 end
 
 Given(/^there is a budget approved auction$/) do
-  @auction = FactoryGirl.create(:auction, :c2_approved, :with_bidders)
+  @auction = FactoryGirl.create(:auction, :with_bidders, c2_status: :approved)
 end
 
 Given(/^there is a sealed-bid auction$/) do
@@ -95,7 +95,7 @@ Given(/^there is a closed sealed-bid auction$/) do
 end
 
 Given(/^there is an auction that needs evaluation$/) do
-   @auction = FactoryGirl.create(:auction, :with_bidders, :evaluation_needed, :c2_approved)
+  @auction = FactoryGirl.create(:auction, :with_bidders, :evaluation_needed)
 end
 
 Given(/^there is an auction within the simplified acquisition threshold$/) do
