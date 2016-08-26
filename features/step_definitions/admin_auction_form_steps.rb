@@ -90,7 +90,7 @@ end
 
 Then(/^I should see the updated delivery deadline$/) do
   within('.estimated-delivery-date') do
-    delivery_date = DefaultDateTime.new(5.business_days.after(DcTimePresenter.convert(3.business_days.from_now))).convert
+    delivery_date = DefaultDateTime.new(5.business_days.after(@end_day)).convert
     formatted_delivery_date = DcTimePresenter.convert_and_format(delivery_date)
     expect(page).to have_content(
       "Estimated delivery date #{formatted_delivery_date}"
