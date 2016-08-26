@@ -3,7 +3,7 @@ class UpdateC2Attributes
     @auction = auction
   end
 
-  def perform
+  def to_h
     {
       gsa18f_procurement: {
         cost_per_unit: cost_per_unit,

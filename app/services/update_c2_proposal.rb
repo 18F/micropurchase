@@ -13,6 +13,6 @@ class UpdateC2Proposal < C2ApiWrapper
   attr_reader :auction, :attributes_class
 
   def c2_proposal_attributes
-    attributes_class.new(auction).perform
+    attributes_class.new(auction).to_h
   end
 end

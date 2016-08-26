@@ -8,9 +8,8 @@ describe UpdateC2Proposal do
       auction = create(:auction, :with_bidders, c2_proposal_url: c2_proposal_url)
 
       fake_c2_attributes = { fake_c2: 'fake' }
-      attributes_double = double(perform: fake_c2_attributes)
+      attributes_double = double(to_h: fake_c2_attributes)
 
-      # e.g. UpdateC2Attributes
       attributes_class = double
       allow(attributes_class).to receive(:new).with(auction).and_return(attributes_double)
 

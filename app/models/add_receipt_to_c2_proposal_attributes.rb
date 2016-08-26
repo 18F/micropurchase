@@ -3,7 +3,7 @@ class AddReceiptToC2ProposalAttributes
     @auction = auction
   end
 
-  def perform
+  def to_h
     {
       gsa18f_procurement: {
         link_to_product: link_to_product

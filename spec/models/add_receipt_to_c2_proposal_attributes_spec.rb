@@ -6,7 +6,7 @@ describe AddReceiptToC2ProposalAttributes do
       auction = create(:auction)
       url = ReceiptUrl.new(auction).to_s
 
-      attributes = AddReceiptToC2ProposalAttributes.new(auction).perform
+      attributes = AddReceiptToC2ProposalAttributes.new(auction).to_h
 
       expect(attributes[:gsa18f_procurement][:link_to_product]).to eq(url)
     end
