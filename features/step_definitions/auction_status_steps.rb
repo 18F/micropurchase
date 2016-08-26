@@ -10,6 +10,12 @@ Then(/^I should see the future auction message for guests$/) do
   )
 end
 
+Then(/^I should see the closed auction message for non-bidders$/) do
+  expect(page).to have_content(
+    I18n.t('auctions.status.closed.not_bidder.body', end_date: end_date)
+  )
+end
+
 Then(/^I should see the future auction message for vendors$/) do
   expect(page).to have_content(
     I18n.t('auctions.status.future.vendor.body', start_date: start_date)

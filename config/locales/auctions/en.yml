@@ -5,6 +5,16 @@ en:
         vendor:
           header: 'Coming soon'
           body: 'This auction is not currently accepting bids. It will open on %{start_date}.'
+      closed:
+        bidder:
+          header: 'Closed'
+          body: >
+            Bidding for this auction closed on %{end_date}. Your bid
+            (%{bid_amount}) was not the lowest bid. Better luck next
+            time!
+        not_bidder:
+          header: 'Bidding closed'
+          body: "Bidding for this auction closed on %{end_date}."
     show:
       status:
         ready_for_work:
