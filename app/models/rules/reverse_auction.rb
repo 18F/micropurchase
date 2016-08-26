@@ -8,7 +8,7 @@ class Rules::ReverseAuction < Rules::BaseRules
   end
 
   def veiled_bids(_user)
-    auction.bids
+    auction.bids.order(created_at: :desc)
   end
 
   def max_allowed_bid

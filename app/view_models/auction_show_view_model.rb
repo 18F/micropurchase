@@ -32,11 +32,11 @@ class AuctionShowViewModel
 
   def auction_data
     {
-      start_label => formatted_date(auction.started_at),
-      deadline_label => formatted_ended_at,
+      status_presenter.start_label => formatted_date(auction.started_at),
+      status_presenter.deadline_label => formatted_ended_at,
       'Delivery deadline' => formatted_date(auction.delivery_due_at),
       'Eligible vendors' => eligibility_label,
-      'Customer' => customer_label
+      'Customer' => customer.agency_name
     }.compact
   end
 
@@ -45,7 +45,7 @@ class AuctionShowViewModel
   end
 
   def rules_path
-    "/auctions/rules/#{auction.type.dasherize}"
+    rules.path
   end
 
   def capitalized_type
@@ -65,7 +65,7 @@ class AuctionShowViewModel
     if over? && auction.bids.any?
       "Winning bid (#{lowest_bidder_name}): #{highlighted_bid_amount_as_currency}"
     elsif user_bids.any?
-      "Your bid: #{user_bid_amount_as_currency}"
+      "Your bid: #{Currency.new(lowest_user_bid_amount)}"
     elsif auction.bids.any?
       "Current bid: #{highlighted_bid_amount_as_currency}"
     else
@@ -113,12 +113,8 @@ class AuctionShowViewModel
     status_presenter.tag_data_value_2
   end
 
-  def distance_of_time_to_now
-    "#{HumanTime.new(time: auction.ended_at).distance_of_time_to_now} left"
-  end
-
   def highlighted_bid_amount_as_currency
-    Currency.new(highlighted_bid.amount).to_s
+    Currency.new(rules.highlighted_bid(current_user).amount).to_s
   end
 
   def max_allowed_bid_as_currency
@@ -138,58 +134,22 @@ class AuctionShowViewModel
   end
 
   def veiled_bids
-    if available? && auction.type == 'sealed_bid'
-      auction.bids.where(bidder: current_user).map do |bid|
-        BidListItem.new(bid: bid, user: current_user)
-      end
-    else
-      auction.bids.order(created_at: :desc).map do |bid|
-        BidListItem.new(bid: bid, user: current_user)
-      end
-    end
+    bids = rules.veiled_bids(current_user)
+    bids.map { |bid| BidListItem.new(bid: bid, user: current_user) }
   end
 
   private
-
-  def user_not_vendor?
-    current_user.is_a?(Guest) || current_user.decorate.admin?
-  end
-
-  def reverse_auction_available_user_is_winner?
-    auction.type == 'reverse' && available? && user_is_winning_bidder?
-  end
-
-  def sealed_bid_auction_user_is_bidder?
-    auction.type == 'sealed_bid' && user_bids.any?
-  end
-
-  def user_bid_amount_as_currency
-    Currency.new(lowest_user_bid_amount).to_s
-  end
 
   def lowest_bidder_name
     auction.lowest_bid.bidder_name
   end
 
-  def user_is_winning_bidder?
-    user_bids.any? && lowest_user_bid == auction.lowest_bid
-  end
-
   def lowest_user_bid_amount
-    lowest_user_bid.try(:amount)
-  end
-
-  def lowest_user_bid
-    user_bids.order(amount: :asc).first
+    user_bids.order(amount: :asc).first.try(:amount)
   end
 
   def user_bids
     auction.bids.where(bidder: current_user)
-  end
-
-  def highlighted_bid
-    @_highlighted_bid ||=
-      HighlightedBid.new(auction: auction, user: current_user).find
   end
 
   def over?
@@ -200,10 +160,6 @@ class AuctionShowViewModel
     auction_status.available?
   end
 
-  def future?
-    auction_status.future?
-  end
-
   def auction_status
     AuctionStatus.new(auction)
   end
@@ -212,24 +168,8 @@ class AuctionShowViewModel
     @_rules ||= RulesFactory.new(auction).create
   end
 
-  def start_label
-    status_presenter.start_label
-  end
-
-  def deadline_label
-    status_presenter.deadline_label
-  end
-
   def eligibility_label
-    eligibility.label
-  end
-
-  def eligibility
-    @_eligibility ||= EligibilityFactory.new(auction).create
-  end
-
-  def customer_label
-    customer.agency_name
+    EligibilityFactory.new(auction).create.label
   end
 
   def customer
