@@ -1,9 +1,7 @@
 class UpdateInsightMetrics
   def perform
-    InsightMetric.destroy_all
-
     metrics.each do |metric|
-      insight_metric = InsightMetric.new
+      insight_metric = InsightMetric.find_or_initialize_by(name: metric.fetch(:name))
       insight_metric.assign_attributes(metric)
       insight_metric.save!
     end

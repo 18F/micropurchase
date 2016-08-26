@@ -20,7 +20,8 @@ describe UpdateInsightMetrics do
           started_at: 3.days.ago,
           ended_at: Time.current
         )
-        InsightMetric.create(
+
+        insight_metric = InsightMetric.create(
           name: 'average_auction_length',
           label: 'average auction length',
           statistic: 'n/a'
@@ -28,9 +29,7 @@ describe UpdateInsightMetrics do
 
         UpdateInsightMetrics.new.perform
 
-        metric = InsightMetric.find_by(name: 'average_auction_length')
-
-        expect(metric.statistic).to eq '3 days'
+        expect(insight_metric.reload.statistic).to eq '3 days'
       end
     end
   end
