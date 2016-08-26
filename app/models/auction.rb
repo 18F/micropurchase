@@ -10,6 +10,8 @@ class Auction < ActiveRecord::Base
   has_many :bidders, through: :bids
   has_and_belongs_to_many :skills
 
+  has_secure_token
+
   enum c2_status: {
     not_requested: 0,
     sent: 2,
@@ -67,6 +69,12 @@ class Auction < ActiveRecord::Base
 
   def lowest_bids
     bids.select { |b| b.amount == lowest_amount }.sort_by(&:created_at)
+  end
+
+  def self.find_by_token(token)
+    a = where(token: token).first
+    fail ActiveRecord::RecordNotFound if a.nil?
+    a
   end
 
   private
