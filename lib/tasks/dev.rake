@@ -16,20 +16,20 @@ namespace :dev do
     ]
 
     FactoryGirl.create(:auction, :reverse, :pending_c2_approval)
-    FactoryGirl.create(:auction, :reverse, :with_bidders)
-    FactoryGirl.create(:auction, :reverse, :expiring, :with_bidders)
+    FactoryGirl.create(:auction, :reverse, :with_bids)
+    FactoryGirl.create(:auction, :reverse, :expiring, :with_bids)
     future_reverse = FactoryGirl.create(:auction, :reverse, :future)
     future_reverse.skills << skills
-    FactoryGirl.create(:auction, :reverse, :closed, :with_bidders, purchase_card: :other)
-    FactoryGirl.create(:auction, :reverse, :closed, :with_bidders, :c2_approved, :delivered)
-    FactoryGirl.create(:auction, :sealed_bid, :with_bidders)
-    FactoryGirl.create(:auction, :sealed_bid, :expiring, :with_bidders)
+    FactoryGirl.create(:auction, :reverse, :closed, :with_bids, purchase_card: :other)
+    FactoryGirl.create(:auction, :reverse, :closed, :with_bids, :c2_approved, :delivered)
+    FactoryGirl.create(:auction, :sealed_bid, :with_bids)
+    FactoryGirl.create(:auction, :sealed_bid, :expiring, :with_bids)
     future_sealed = FactoryGirl.create(:auction, :sealed_bid, :future)
     future_sealed.skills << skills
     FactoryGirl.create(:auction, :complete_and_successful)
     FactoryGirl.create(:auction, :payment_needed)
     FactoryGirl.create(:auction, :evaluation_needed)
     FactoryGirl.create(:auction, :unpublished)
-    FactoryGirl.create(:auction, :rejected, :with_bidders)
+    FactoryGirl.create(:auction, :rejected, :with_bids)
   end
 end
