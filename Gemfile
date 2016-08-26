@@ -30,6 +30,7 @@ gem 'samwise', '~> 0.4.0'
 gem 'sass-rails', '~> 5.0'
 gem 'selectize-rails'
 gem 'simple_form'
+gem 'timecop'
 gem 'uglifier'
 gem 'validate_url'
 
@@ -52,7 +53,6 @@ group :development, :test do
   gem 'byebug'
   gem 'pry'
   gem 'database_cleaner'
-  gem 'timecop'
   gem 'brakeman', require: false
   gem 'hakiri', require: false
   gem 'dotenv-rails'
