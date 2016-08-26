@@ -47,7 +47,7 @@ class AuctionQuery
   end
 
   def delivery_needed
-    relation.published.ended.delivery_needed
+    relation.published.ended.pending_delivery
   end
 
   def c2_payment_needed
