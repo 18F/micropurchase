@@ -13,91 +13,26 @@ FactoryGirl.define do
     delivery_due_at { quartile_minute(Time.now + 10.days) }
     purchase_card :default
 
-    trait :with_bidders do
-      published
-      transient do
-        bidder_ids []
-      end
+    transient do
+      bidders []
+    end
 
-      after(:build) do |instance|
-        Timecop.freeze(instance.started_at) do
+    after(:create) do |auction, evaluator|
+      evaluator.bidders.each_with_index do |bidder, index|
+        auction.bids << create(:bid, bidder: bidder, auction: auction)
+      end
+    end
+
+    trait :with_bids do
+      after(:build) do |auction|
+        Timecop.freeze(auction.started_at) do
           Timecop.scale(3600)
           (1..2).each do |i|
             amount = 3499 - (20 * i) - rand(10)
-            instance.bids << create(:bid, bidder: create(:user), auction: instance, amount: amount)
+            auction.bids << create(:bid, auction: auction, amount: amount)
           end
         end
       end
-
-      after(:create) do |auction, evaluator|
-        evaluator.bidder_ids.each_with_index do |bidder_id, index|
-          lowest_bid = auction.bids.sort_by(&:amount).first
-          amount = lowest_bid.amount - (10 * index) - rand(10)
-          auction.bids << create(:bid, bidder_id: bidder_id, auction: auction, amount: amount)
-        end
-      end
-    end
-
-    trait :available do
-      started_at { quartile_minute(Time.now - 2.days) }
-      ended_at { quartile_minute(Time.now + 2.days) }
-    end
-
-    trait :closed do
-      ended_at { quartile_minute(Time.now - 2.days) }
-    end
-
-    trait :delivery_due_at_expired do
-      delivery_due_at { quartile_minute(ended_at + 1.day) }
-    end
-
-    trait :delivered do
-      delivery_url 'https://github.com/foo/bar'
-    end
-
-    trait :paid do
-      paid_at { Time.current }
-    end
-
-    trait :payment_confirmed do
-      c2_status :payment_confirmed
-    end
-
-    trait :expiring do
-      ended_at { quartile_minute(Time.now + 3.hours) }
-    end
-
-    trait :future do
-      started_at { quartile_minute(Time.now + 1.day) }
-    end
-
-    trait :accepted do
-      status :accepted
-      accepted_at { Time.now }
-    end
-
-    trait :rejected do
-      status :rejected
-      rejected_at { Time.now }
-    end
-
-    trait :not_paid do
-      paid_at nil
-    end
-
-   trait :pending_c2_approval do
-     c2_status :pending
-     purchase_card :default
-     unpublished
-   end
-
-    trait :c2_approved do
-      c2_proposal_url 'https://c2-dev.18f.gov/proposals/2486'
-      c2_status :approved
-    end
-
-    trait :pending_acceptance do
-      status :pending_acceptance
     end
 
     trait :published do
@@ -127,6 +62,57 @@ FactoryGirl.define do
       start_price { rand(1..AuctionThreshold::MICROPURCHASE) }
     end
 
+    trait :future do
+      started_at { quartile_minute(Time.now + 1.day) }
+    end
+
+    trait :available do
+      started_at { quartile_minute(Time.now - 2.days) }
+      ended_at { quartile_minute(Time.now + 2.days) }
+    end
+
+    trait :expiring do
+      ended_at { quartile_minute(Time.now + 3.hours) }
+    end
+
+    trait :closed do
+      ended_at { quartile_minute(Time.now - 2.days) }
+    end
+
+    trait :delivered do
+      delivery_url 'https://github.com/foo/bar'
+    end
+
+    trait :delivery_due_at_expired do
+      delivery_due_at { quartile_minute(ended_at + 1.day) }
+    end
+
+    trait :pending_acceptance do
+      status :pending_acceptance
+    end
+
+    trait :accepted do
+      status :accepted
+      accepted_at { Time.now }
+    end
+
+    trait :rejected do
+      status :rejected
+      rejected_at { Time.now }
+    end
+
+    trait :paid do
+      paid_at { Time.current }
+    end
+
+    trait :not_paid do
+      paid_at nil
+    end
+
+    trait :payment_confirmed do
+      c2_status :payment_confirmed
+    end
+
     trait :winning_vendor_is_small_business do
       after(:create) do |auction|
         create(:bid, :from_small_business, auction: auction)
@@ -139,28 +125,35 @@ FactoryGirl.define do
       end
     end
 
-    trait :complete_and_successful do
-      with_bidders
-      delivered
-      accepted
-      paid
-    end
+   trait :pending_c2_approval do
+     c2_status :pending
+     purchase_card :default
+     unpublished
+   end
 
-    trait :payment_needed do
-      with_bidders
-      accepted
-      delivered
-      not_paid
+    trait :c2_approved do
+      c2_proposal_url 'https://c2-dev.18f.gov/proposals/2486'
+      c2_status :approved
     end
 
     trait :evaluation_needed do
-      with_bidders
+      with_bids
       delivered
       pending_acceptance
     end
 
-    trait :pending_acceptance do
-      status :pending_acceptance
+    trait :payment_needed do
+      with_bids
+      delivered
+      accepted
+      not_paid
+    end
+
+    trait :complete_and_successful do
+      with_bids
+      delivered
+      accepted
+      paid
     end
   end
 end

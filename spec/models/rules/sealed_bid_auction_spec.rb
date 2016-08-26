@@ -4,7 +4,7 @@ describe Rules::SealedBidAuction do
   describe '#winning_bid' do
     context 'if the auction if open' do
       it 'returns a NullBid object' do
-        auction = create(:auction, :sealed_bid, :with_bidders)
+        auction = create(:auction, :sealed_bid, :with_bids)
         eligibility = InSamEligibility.new
         rules = Rules::SealedBidAuction.new(auction, eligibility)
         expect(rules.winning_bid).to be_a(NullBid)
@@ -13,7 +13,7 @@ describe Rules::SealedBidAuction do
 
     context 'if the auction is over' do
       it "returns the auction's lowest bid" do
-        auction = create(:auction, :sealed_bid, :with_bidders, :closed)
+        auction = create(:auction, :sealed_bid, :with_bids, :closed)
         eligibility = InSamEligibility.new
         rules = Rules::SealedBidAuction.new(auction, eligibility)
         expect(rules.winning_bid).to eq(auction.lowest_bid)
@@ -25,7 +25,7 @@ describe Rules::SealedBidAuction do
     context 'if the auction is open' do
       context 'if the user made a bid' do
         it "should return only the user's bid" do
-          auction = create(:auction, :sealed_bid, :with_bidders)
+          auction = create(:auction, :sealed_bid, :with_bids)
           user = auction.bids.first.bidder
           eligibility = InSamEligibility.new
           rules = Rules::SealedBidAuction.new(auction, eligibility)
@@ -47,7 +47,7 @@ describe Rules::SealedBidAuction do
     context 'if the auction is over' do
       it 'should return all bids' do
         user = create(:user)
-        auction = create(:auction, :sealed_bid, :with_bidders, :closed)
+        auction = create(:auction, :sealed_bid, :with_bids, :closed)
         eligibility = InSamEligibility.new
         rules = Rules::SealedBidAuction.new(auction, eligibility)
         expect(rules.veiled_bids(user)).to eq(auction.bids)
@@ -58,7 +58,7 @@ describe Rules::SealedBidAuction do
   describe '#user_can_bid?' do
     context 'when the user has placed a bid' do
       it 'should return false' do
-        auction = create(:auction, :sealed_bid, :with_bidders)
+        auction = create(:auction, :sealed_bid, :with_bids)
         user = auction.bids.first.bidder
         eligibility = InSamEligibility.new
         rules = Rules::SealedBidAuction.new(auction, eligibility)

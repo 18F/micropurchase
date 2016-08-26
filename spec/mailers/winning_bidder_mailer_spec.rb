@@ -3,7 +3,7 @@ require 'rails_helper'
 describe WinningBidderMailer do
   describe '#auction_accepted_notification' do
     it 'sends the email to the winning bidder' do
-      auction = create(:auction, :with_bidders, :closed)
+      auction = create(:auction, :with_bids, :closed)
       winning_bid = WinningBid.new(auction).find
       winning_bidder = winning_bid.bidder
 
@@ -18,7 +18,7 @@ describe WinningBidderMailer do
 
   describe 'auction_accepted_missing_payment_method' do
     it 'sends the email to the winning bidder' do
-      auction = create(:auction, :with_bidders, :closed)
+      auction = create(:auction, :with_bids, :closed)
       winning_bid = WinningBid.new(auction).find
       winning_bidder = winning_bid.bidder
 

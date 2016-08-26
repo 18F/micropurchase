@@ -15,7 +15,7 @@ describe Statistics::TotalSavings do
 
     context 'there are no complete and successful auctions' do
       it 'retrns n/a' do
-        create(:auction, :closed, :rejected, :with_bidders)
+        create(:auction, :closed, :rejected, :with_bids)
         expect(Statistics::TotalSavings.new.to_s).to eq 'n/a'
       end
     end

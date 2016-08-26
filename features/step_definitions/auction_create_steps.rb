@@ -7,12 +7,11 @@ Given(/^there is a future auction$/) do
 end
 
 Given(/^there is a closed auction$/) do
-  @auction = FactoryGirl.create(:auction, :closed, :with_bidders)
+  @auction = FactoryGirl.create(:auction, :closed, :with_bids)
 end
 
 Given(/^I am going to win an auction$/) do
-  @auction = FactoryGirl.build(:auction, :available, :with_bidders)
-
+  @auction = FactoryGirl.build(:auction, :available, :with_bids)
   Timecop.freeze(@auction.ended_at - 15.minutes) do
     bid = @auction.bids.sort_by(&:amount).first
     bid.update(bidder: @user)
@@ -21,13 +20,13 @@ Given(/^I am going to win an auction$/) do
 end
 
 Given(/^I won an auction that was accepted$/) do
-  @auction = FactoryGirl.build(:auction, :closed, :accepted, :with_bidders)
+  @auction = FactoryGirl.build(:auction, :closed, :accepted, :with_bids)
   bid = @auction.bids.sort_by(&:amount).first
   bid.update(bidder: @user)
 end
 
 Given(/^I am going to lose an auction$/) do
-  @auction = FactoryGirl.build(:auction, :available, :with_bidders)
+  @auction = FactoryGirl.build(:auction, :available, :with_bids)
   Timecop.freeze(@auction.ended_at - 15.minutes) do
     bid = @auction.bids.sort_by(&:amount).last
     bid.update(bidder: @user)
@@ -62,7 +61,7 @@ Given(/^there is a closed bidless auction$/) do
 end
 
 Given(/^there is an expiring auction$/) do
-  @auction = FactoryGirl.create(:auction, :expiring, :with_bidders)
+  @auction = FactoryGirl.create(:auction, :expiring, :with_bids)
 end
 
 Given(/^there is an open bidless auction$/) do
@@ -70,7 +69,7 @@ Given(/^there is an open bidless auction$/) do
 end
 
 Given(/^there is an open auction$/) do
-  @auction = FactoryGirl.create(:auction, :with_bidders)
+  @auction = FactoryGirl.create(:auction, :with_bids)
 end
 
 Given(/^there is an open auction with some skills$/) do
@@ -80,7 +79,7 @@ Given(/^there is an open auction with some skills$/) do
 end
 
 Given(/^there is a budget approved auction$/) do
-  @auction = FactoryGirl.create(:auction, :with_bidders, c2_status: :approved)
+  @auction = FactoryGirl.create(:auction, :c2_approved, :with_bids)
 end
 
 Given(/^there is a sealed-bid auction$/) do
@@ -88,15 +87,15 @@ Given(/^there is a sealed-bid auction$/) do
 end
 
 Given(/^there is a sealed-bid auction with bids$/) do
-  @auction = FactoryGirl.create(:auction, :available, :sealed_bid, :with_bidders)
+  @auction = FactoryGirl.create(:auction, :available, :sealed_bid, :with_bids)
 end
 
 Given(/^there is a closed sealed-bid auction$/) do
-  @auction = FactoryGirl.create(:auction, :closed, :with_bidders, :sealed_bid)
+  @auction = FactoryGirl.create(:auction, :closed, :with_bids, :sealed_bid)
 end
 
 Given(/^there is an auction that needs evaluation$/) do
-  @auction = FactoryGirl.create(:auction, :with_bidders, :evaluation_needed)
+   @auction = FactoryGirl.create(:auction, :with_bids, :evaluation_needed, :c2_approved)
 end
 
 Given(/^there is an auction within the simplified acquisition threshold$/) do
@@ -126,7 +125,7 @@ Given(/^there is also an unpublished auction$/) do
 end
 
 Given(/^there is an auction pending acceptance$/) do
-  @auction = FactoryGirl.create(:auction, :with_bidders, :pending_acceptance)
+  @auction = FactoryGirl.create(:auction, :with_bids, :pending_acceptance)
 end
 
 Given(/^there is a complete and successful auction$/) do
@@ -134,7 +133,7 @@ Given(/^there is a complete and successful auction$/) do
 end
 
 Given(/^there is a rejected auction$/) do
-  @auction = FactoryGirl.create(:auction, :closed, :with_bidders, :delivered, :rejected)
+  @auction = FactoryGirl.create(:auction, :closed, :with_bids, :delivered, :rejected)
 end
 
 Given(/^there is a rejected auction with no bids$/) do
@@ -144,14 +143,14 @@ end
 Given(/^there is an auction where the winning vendor is not eligible to be paid$/) do
   @auction = FactoryGirl.create(
     :auction,
-    :with_bidders,
+    :with_bids,
     :between_micropurchase_and_sat_threshold,
     :winning_vendor_is_non_small_business
   )
 end
 
 Given(/^there is a paid auction$/) do
-  @auction = FactoryGirl.create(:auction, :with_bidders, :closed, :accepted, :paid)
+  @auction = FactoryGirl.create(:auction, :with_bids, :closed, :accepted, :paid)
 end
 
 Given(/^the auction is for the default purchase card$/) do
@@ -192,7 +191,7 @@ end
 Given(/^there is an accepted auction where the winning vendor is missing a payment method$/) do
   @auction = FactoryGirl.create(
     :auction,
-    :with_bidders,
+    :with_bids,
     :published,
     status: :accepted,
     accepted_at: nil,
@@ -203,11 +202,11 @@ Given(/^there is an accepted auction where the winning vendor is missing a payme
 end
 
 Given(/^there is an accepted auction$/) do
-  @auction = FactoryGirl.create(:auction, :accepted, :with_bidders)
+  @auction = FactoryGirl.create(:auction, :accepted, :with_bids)
 end
 
 When(/^there is another accepted auction$/) do
-  FactoryGirl.create(:auction, :accepted, :with_bidders)
+  FactoryGirl.create(:auction, :accepted, :with_bids)
 end
 
 When(/^there is each type of auction that needs attention$/) do
@@ -220,8 +219,10 @@ When(/^there is each type of auction that needs attention$/) do
 end
 
 Given(/^there is a payment confirmed auction$/) do
-  @auction = FactoryGirl.create(:auction,
-                                :with_bidders,
-                                :paid,
-                                :payment_confirmed)
+  @auction = FactoryGirl.create(
+    :auction,
+    :with_bids,
+    :paid,
+    :payment_confirmed
+  )
 end
