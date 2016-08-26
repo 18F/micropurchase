@@ -27,3 +27,20 @@ Feature: Admin publishes auction in the admin panel
     And the auction is for a different purchase card
     When I visit the admin form for that auction
     Then I should be able to set the auction to published
+
+  @javascript
+  Scenario: Admin creates and publishes auction with other purchase card
+    Given I am an administrator
+    And there is a client account to bill to
+    And there is a skill in the system
+    When I sign in
+    And I visit the auctions admin page
+    When I click on the add auction link
+    And I fill auction form with choosing "other" purchase card
+    Then I should see that the auction type is sealed bid
+    And I click to create an auction
+    Then I should see the auction's title
+
+    When I click on the auction's title
+    Then I should see the start time I set for the auction
+    And I should see the end time I set for the auction
