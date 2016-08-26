@@ -65,7 +65,7 @@ end
 
 Then(/^I should see that the C2 status for an auction pending C2 approval$/) do
   expect(page).to have_content(
-    I18n.t('statuses.c2_presenter.pending.body')
+    I18n.t('statuses.c2_presenter.pending_approval.body')
   )
 end
 
