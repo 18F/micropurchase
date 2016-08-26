@@ -4,7 +4,7 @@ require File.expand_path('../../server_env', __FILE__)
 namespace :cf do
   desc "Only run on the first application instance"
   task :on_first_instance do
-    unless ServerEnv.instance_index == 0
+    unless ServerEnv.first_instance?
       exit(0)
     end
   end
