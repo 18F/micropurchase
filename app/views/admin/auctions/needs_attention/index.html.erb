@@ -4,9 +4,9 @@
 <%= render partial: @view_model.drafts_partial,
   locals: { auctions: @view_model.drafts } %>
 
-<h2><%= t('needs_attention.index.pending_delivery') %></h2>
-<%= render partial: @view_model.pending_delivery_partial,
-  locals: { auctions: @view_model.pending_delivery } %>
+<h2><%= t('needs_attention.index.delivery_needed') %></h2>
+<%= render partial: @view_model.delivery_needed_partial,
+  locals: { auctions: @view_model.delivery_needed } %>
 
 <h2><%= t('needs_attention.index.evaluation_needed') %></h2>
 <%= render partial: @view_model.evaluation_needed_partial,

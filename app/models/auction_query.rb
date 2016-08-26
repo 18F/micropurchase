@@ -26,7 +26,7 @@ class AuctionQuery
 
   def needs_attention_count
     relation.unpublished.count +
-      pending_delivery.count +
+      delivery_needed.count +
       relation.pending_acceptance.count +
       payment_needed.count
   end
@@ -46,8 +46,8 @@ class AuctionQuery
     relation.rejected
   end
 
-  def pending_delivery
-    relation.ended.pending_delivery
+  def delivery_needed
+    relation.published.ended.pending_delivery
   end
 
   def c2_payment_needed
