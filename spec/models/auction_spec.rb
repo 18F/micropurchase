@@ -72,8 +72,7 @@ describe Auction do
       end
 
       it 'validates presence of c2_status' do
-        auction = create(:auction, published: :unpublished,
-                                   purchase_card: :default)
+        auction = create(:auction, :unpublished, purchase_card: :default)
 
         auction.published = :published
 
