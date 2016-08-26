@@ -45,11 +45,6 @@ class Admin::EditAuctionViewModel < Admin::BaseViewModel
     end
   end
 
-  def publishable?
-    closed? || auction.purchase_card == 'other' ||
-      auction.c2_status == 'approved'
-  end
-
   def customer_options
     ([auction.customer] + Customer.sorted).uniq.compact
   end
@@ -92,5 +87,10 @@ class Admin::EditAuctionViewModel < Admin::BaseViewModel
 
   def closed?
     AuctionStatus.new(auction).over?
+  end
+
+  def publishable?
+    closed? || auction.purchase_card == 'other' ||
+      auction.c2_status == 'approved'
   end
 end
