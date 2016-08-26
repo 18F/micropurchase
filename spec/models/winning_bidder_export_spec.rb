@@ -9,7 +9,7 @@ describe WinningBidderExport do
         auction = create(
           :auction,
           :closed,
-          :with_bidders,
+          :with_bids,
           ended_at: end_date,
           delivery_due_at: delivery_date
         )
@@ -43,7 +43,7 @@ describe WinningBidderExport do
 
     context 'DUNS number invalid' do
       it 'raises invalid duns error' do
-        auction = create(:auction, :closed, :with_bidders)
+        auction = create(:auction, :closed, :with_bids)
         winning_bidder = WinningBid.new(auction).find.bidder
         winning_bidder.update(duns_number: FakeSamApi::INVALID_DUNS)
 

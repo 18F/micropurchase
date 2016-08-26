@@ -5,7 +5,7 @@ describe Api::V0::Admin::AuctionsController do
 
   describe 'GET /admin/auctions' do
     it 'returns iso8601 dates' do
-      FactoryGirl.create_list(:auction, 2, :with_bidders)
+      FactoryGirl.create_list(:auction, 2, :with_bids)
       admin = FactoryGirl.create(:admin_user)
       stub_github('/user') { github_response_for_user(admin) }
       api_key = FakeGitHubApi::VALID_API_KEY

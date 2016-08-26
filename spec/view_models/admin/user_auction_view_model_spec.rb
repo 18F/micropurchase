@@ -24,7 +24,7 @@ describe Admin::UserAuctionViewModel do
   describe '#user_bid_count' do
     it 'should return the total number of bids the user has made' do
       user2 = create(:user)
-      auction = create(:auction, :with_bidders, bidder_ids: [user.id, user2.id, user.id, user2.id, user.id])
+      auction = create(:auction, bidders: [user, user2, user, user2, user])
 
       expect(Admin::UserAuctionViewModel.new(auction, user).user_bid_count).to eq(3)
     end
@@ -33,7 +33,7 @@ describe Admin::UserAuctionViewModel do
   describe '#user_won_label' do
     context 'when the auction is not over yet' do
       it 'should return "-"' do
-        auction = create(:auction, :available, :with_bidders)
+        auction = create(:auction, :available, :with_bids)
         user = WinningBid.new(auction).find.bidder
 
         expect(Admin::UserAuctionViewModel.new(auction, user).user_won_label).to eq('-')
@@ -42,14 +42,14 @@ describe Admin::UserAuctionViewModel do
 
     context 'when the auction is over' do
       it 'should return "Yes" if the user has the winning bid' do
-        auction = create(:auction, :closed, :with_bidders)
+        auction = create(:auction, :closed, :with_bids)
         user = WinningBid.new(auction).find.bidder
 
         expect(Admin::UserAuctionViewModel.new(auction, user).user_won_label).to eq('Yes')
       end
 
       it 'should return "No" if the user does not have the winning bid' do
-        auction = create(:auction, :closed, :with_bidders)
+        auction = create(:auction, :closed, :with_bids)
         expect(Admin::UserAuctionViewModel.new(auction, user).user_won_label).to eq('No')
       end
     end
@@ -58,13 +58,13 @@ describe Admin::UserAuctionViewModel do
   describe '#accepted_label' do
     context 'when the user is the winning_bidder' do
       it 'returns "Yes" when the auction was accepted' do
-        auction = create(:auction, :closed, :with_bidders, :accepted)
+        auction = create(:auction, :closed, :with_bids, :accepted)
         bidder = WinningBid.new(auction).find.bidder
         expect(Admin::UserAuctionViewModel.new(auction, bidder).accepted_label).to eq('Yes')
       end
 
       it 'returns "No" when auction was not accepted yet' do
-        auction = create(:auction, :closed, :rejected, :with_bidders)
+        auction = create(:auction, :closed, :rejected, :with_bids)
         bidder = WinningBid.new(auction).find.bidder
         expect(Admin::UserAuctionViewModel.new(auction, bidder).accepted_label).to eq('No')
       end
@@ -72,7 +72,7 @@ describe Admin::UserAuctionViewModel do
 
     context 'when the user is not the winning bidder' do
       it 'returns "-"' do
-        auction = create(:auction, :closed, :with_bidders, accepted_at: Time.now)
+        auction = create(:auction, :closed, :with_bids, accepted_at: Time.now)
         expect(Admin::UserAuctionViewModel.new(auction, user).accepted_label).to eq('-')
       end
     end

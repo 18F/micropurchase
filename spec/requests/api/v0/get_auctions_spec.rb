@@ -20,7 +20,7 @@ describe Api::V0::Admin::AuctionsController do
       context 'and the auction is available, has bidders' do
         it 'veils all bidder information' do
           login
-          create(:auction, :available, :reverse, :with_bidders)
+          create(:auction, :available, :reverse, :with_bids)
 
           get api_v0_auctions_path(format: :json), nil, headers
 
@@ -40,7 +40,7 @@ describe Api::V0::Admin::AuctionsController do
         context 'and the auction is closed' do
           it 'unveils all bidder information' do
             login
-            create(:auction, :closed, :reverse, :with_bidders)
+            create(:auction, :closed, :reverse, :with_bids)
 
             get api_v0_auctions_path(format: :json), nil, headers
 
@@ -64,7 +64,7 @@ describe Api::V0::Admin::AuctionsController do
       context 'and the auction is available, has bidders' do
         it 'veils all bids' do
           login
-          create(:auction, :available, :sealed_bid, :with_bidders)
+          create(:auction, :available, :sealed_bid, :with_bids)
           get '/api/v0/auctions', nil, headers
           expect(json_bids).to be_empty
         end
@@ -72,7 +72,7 @@ describe Api::V0::Admin::AuctionsController do
         context 'and the auction is closed' do
           it 'unveils all bids' do
             login
-            auction = create(:auction, :closed, :sealed_bid, :with_bidders)
+            auction = create(:auction, :closed, :sealed_bid, :with_bids)
 
             get api_v0_auctions_path(format: :json), nil, headers
 

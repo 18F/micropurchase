@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Rules::ReverseAuction do
   describe '#winning_bid' do
     it "should be the auction's lowest_bid" do
-      auction = create(:auction, :closed, :with_bidders)
+      auction = create(:auction, :closed, :with_bids)
       eligibility = InSamEligibility.new
       rules = Rules::ReverseAuction.new(auction, eligibility)
       expect(rules.winning_bid).to eq(auction.lowest_bid)
@@ -74,7 +74,7 @@ describe Rules::ReverseAuction do
 
     context 'when there is a bid' do
       it 'should be BID_INCREMENT below the lowest bid' do
-        auction = create(:auction, :with_bidders)
+        auction = create(:auction, :with_bids)
         eligibility = InSamEligibility.new
         rules = Rules::ReverseAuction.new(auction, eligibility)
         expect(rules.max_allowed_bid).to eq(auction.lowest_bid.amount - PlaceBid::BID_INCREMENT)
@@ -84,7 +84,7 @@ describe Rules::ReverseAuction do
 
   describe '#show_bids?' do
     it 'should always be true' do
-      auction = create(:auction, :with_bidders)
+      auction = create(:auction, :with_bids)
       eligibility = InSamEligibility.new
       rules = Rules::ReverseAuction.new(auction, eligibility)
       expect(rules.show_bids?).to be_truthy
