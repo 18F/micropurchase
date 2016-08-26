@@ -23,7 +23,7 @@ describe AcceptAuction do
       context 'customer does not have an email' do
         it 'does not send an email to the customer' do
           customer = create(:customer, email: nil)
-          auction = create(:auction, :with_bidders, customer: customer)
+          auction = create(:auction, :with_bids, customer: customer)
           allow(AuctionMailer).to receive(:auction_accepted_customer_notification)
 
           AcceptAuction.new(auction: auction, payment_url: 'example.com').perform
@@ -35,7 +35,7 @@ describe AcceptAuction do
 
     context 'auction does not belong to a customer' do
       it 'does not send an email' do
-        auction = create(:auction, :with_bidders, customer: nil)
+        auction = create(:auction, :with_bids, customer: nil)
         allow(AuctionMailer).to receive(:auction_accepted_customer_notification)
 
         AcceptAuction.new(auction: auction, payment_url: 'example.com').perform
@@ -46,7 +46,7 @@ describe AcceptAuction do
 
     context 'winning bidder does not have credit card information' do
       it 'sends an email to the winner' do
-        auction = create(:auction, :with_bidders)
+        auction = create(:auction, :with_bids)
         mailer_double = double(deliver_later: true)
         allow(WinningBidderMailer).to receive(:auction_accepted_missing_payment_method)
           .with(auction: auction)
@@ -62,7 +62,7 @@ describe AcceptAuction do
 
     context 'winning bidder has credit card information' do
       it 'sends an email to the winner' do
-        auction = create(:auction, :with_bidders)
+        auction = create(:auction, :with_bids)
         mailer_double = double(deliver_later: true)
         allow(WinningBidderMailer).to receive(:auction_accepted)
           .with(auction: auction)
@@ -77,18 +77,18 @@ describe AcceptAuction do
 
       context 'auction is for 18F purchase card' do
         it 'enqueues the UpdateC2ProposalJob' do
-          auction = create(:auction, :with_bidders)
+          auction = create(:auction, :with_bids)
           allow(UpdateC2ProposalJob).to receive(:perform_later)
 
           AcceptAuction.new(auction: auction, payment_url: 'example.com').perform
 
-          expect(UpdateC2ProposalJob).to have_received(:perform_later).with(auction.id)
+          expect(UpdateC2ProposalJob).to have_received(:perform_later).with(auction.id, 'UpdateC2Attributes')
         end
       end
 
       context 'auction is for other purchase card' do
         it 'does not enqueue the UpdateC2ProposalJob' do
-          auction = create(:auction, :with_bidders, purchase_card: :other)
+          auction = create(:auction, :with_bids, purchase_card: :other)
           allow(UpdateC2ProposalJob).to receive(:perform_later)
 
           AcceptAuction.new(auction: auction, payment_url: 'test.com').perform
@@ -98,11 +98,11 @@ describe AcceptAuction do
       end
 
       it 'sets accepted_at' do
-        auction = create(:auction, :with_bidders)
+        auction = create(:auction, :with_bids)
         time = Time.parse('10:00:00 UTC')
 
         Timecop.freeze(time) do
-          auction = create(:auction, :with_bidders, accepted_at: nil)
+          auction = create(:auction, :with_bids, accepted_at: nil)
 
           AcceptAuction.new(auction: auction, payment_url: 'test.com').perform
 

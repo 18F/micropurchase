@@ -48,7 +48,7 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
 
       it 'returns valid auctions' do
         login
-        create(:auction, :with_bidders)
+        create(:auction, :with_bids)
         api_key = FakeGitHubApi::VALID_API_KEY
 
         expect(subject).to validate(
@@ -66,7 +66,7 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
       it 'ignores the key and returns a 200 HTTP response' do
         login
         api_key = FakeGitHubApi::INVALID_API_KEY
-        auction = create(:auction, :with_bidders)
+        auction = create(:auction, :with_bids)
 
         expect(subject).to validate(
           :get,
@@ -81,7 +81,7 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
       it 'returns a 200 HTTP response' do
         login
         api_key = nil
-        auction = create(:auction, :with_bidders)
+        auction = create(:auction, :with_bids)
 
         expect(subject).to validate(
           :get,
@@ -95,7 +95,7 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
     context 'when the API key is valid' do
       it 'returns a 200 HTTP response' do
         login
-        auction = create(:auction, :with_bidders)
+        auction = create(:auction, :with_bids)
         api_key = FakeGitHubApi::VALID_API_KEY
 
         expect(subject).to validate(
@@ -126,7 +126,7 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
     context 'when the auction is not found' do
       it 'returns a 404 HTTP response' do
         login
-        auction = create(:auction, :with_bidders)
+        auction = create(:auction, :with_bids)
         api_key = FakeGitHubApi::VALID_API_KEY
 
         expect(subject).to validate(
@@ -154,7 +154,7 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
 
     context 'when the API key is missing' do
       let(:api_key) { nil }
-      let(:auction) { create(:auction, :available, :with_bidders) }
+      let(:auction) { create(:auction, :available, :with_bids) }
       let(:current_auction_price) do
         auction.bids.sort_by(&:amount).first.amount
       end
@@ -175,7 +175,7 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
 
     context 'when the API key is invalid' do
       let(:api_key) { FakeGitHubApi::INVALID_API_KEY }
-      let(:auction) { create(:auction, :available, :with_bidders) }
+      let(:auction) { create(:auction, :available, :with_bids) }
       let(:current_auction_price) do
         auction.bids.sort_by(&:amount).first.amount
       end
@@ -213,7 +213,7 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
 
     context 'when the auction has ended' do
       let(:api_key) { FakeGitHubApi::VALID_API_KEY }
-      let(:auction) { create(:auction, :closed, :with_bidders) }
+      let(:auction) { create(:auction, :closed, :with_bids) }
       let(:current_auction_price) do
         auction.bids.sort_by(&:amount).first.amount
       end
@@ -234,7 +234,7 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
 
     context 'when the auction has not yet started' do
       let(:api_key) { FakeGitHubApi::VALID_API_KEY }
-      let(:auction) { create(:auction, :future, :with_bidders) }
+      let(:auction) { create(:auction, :future, :with_bids) }
       let(:current_auction_price) do
         auction.bids.sort_by(&:amount).first.amount
       end
@@ -255,7 +255,7 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
 
     context 'when the user places a successful bid' do
       let(:api_key) { FakeGitHubApi::VALID_API_KEY }
-      let(:auction) { create(:auction, :available, :with_bidders) }
+      let(:auction) { create(:auction, :available, :with_bids) }
       let(:current_auction_price) do
         auction.bids.sort_by(&:amount).first.amount
       end
@@ -335,7 +335,7 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
 
       it 'returns valid auctions' do
         login(user)
-        create(:auction, :with_bidders)
+        create(:auction, :with_bids)
         api_key = FakeGitHubApi::VALID_API_KEY
 
         expect(subject).to validate(
@@ -353,7 +353,7 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
       it 'returns a 403 HTTP response' do
         login
         api_key = FakeGitHubApi::INVALID_API_KEY
-        auction = create(:auction, :with_bidders)
+        auction = create(:auction, :with_bids)
 
         expect(subject).to validate(
           :get,
@@ -368,7 +368,7 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
       it 'returns a 403 HTTP response' do
         login
         api_key = nil
-        auction = create(:auction, :with_bidders)
+        auction = create(:auction, :with_bids)
 
         expect(subject).to validate(
           :get,
@@ -383,7 +383,7 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
       it 'returns a 200 HTTP response' do
         user = create(:admin_user)
         login(user)
-        auction = create(:auction, :with_bidders)
+        auction = create(:auction, :with_bids)
         api_key = FakeGitHubApi::VALID_API_KEY
 
         expect(subject).to validate(
@@ -474,7 +474,7 @@ RSpec.describe 'Swagger spec', type: :apivore, order: :defined do
         create(:user)
 
         login(user)
-        create(:auction, :with_bidders)
+        create(:auction, :with_bids)
         api_key = FakeGitHubApi::VALID_API_KEY
 
         expect(subject).to validate(

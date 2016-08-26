@@ -4,7 +4,7 @@ describe WinningBidderEmailSender do
   describe '#perform' do
     context 'the winning bidder has an email address' do
       it 'emails the winning bidder' do
-        auction = create(:auction, :closed, :with_bidders)
+        auction = create(:auction, :closed, :with_bids)
         winning_bid = WinningBid.new(auction).find
         winning_bidder = winning_bid.bidder
 

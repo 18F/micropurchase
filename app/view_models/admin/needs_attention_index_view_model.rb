@@ -1,4 +1,4 @@
-class Admin::NeedsAttentionAuctionsViewModel < Admin::BaseViewModel
+class Admin::NeedsAttentionIndexViewModel < Admin::BaseViewModel
   def needs_attention_auctions_nav_class
     'usa-current'
   end
@@ -17,16 +17,16 @@ class Admin::NeedsAttentionAuctionsViewModel < Admin::BaseViewModel
     end
   end
 
-  def pending_delivery_partial
-    if pending_delivery.any?
-      'pending_delivery'
+  def delivery_needed_partial
+    if delivery_needed.any?
+      'delivery_needed'
     else
-      'null_pending_delivery'
+      'null_delivery_needed'
     end
   end
 
-  def pending_delivery
-    @_pending_delivery ||= list_items(AuctionQuery.new.pending_delivery)
+  def delivery_needed
+    @_delivery_needed ||= list_items(AuctionQuery.new.delivery_needed)
   end
 
   def evaluation_needed_partial

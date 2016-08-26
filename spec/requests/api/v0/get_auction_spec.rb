@@ -6,7 +6,7 @@ describe Api::V0::AuctionsController do
   describe 'GET /auction/:id' do
     it 'returns iso8601 dates' do
       login
-      auction = create(:auction, :with_bidders)
+      auction = create(:auction, :with_bids)
 
       get api_v0_auction_path(auction), nil, headers
 
@@ -20,7 +20,7 @@ describe Api::V0::AuctionsController do
       context 'and the auction is available, has bids' do
         it 'veils all bids' do
           login
-          auction = create(:auction, :available, :sealed_bid, :with_bidders)
+          auction = create(:auction, :available, :sealed_bid, :with_bids)
 
           get api_v0_auction_path(auction), nil, headers
 
@@ -31,7 +31,7 @@ describe Api::V0::AuctionsController do
           it 'does not veil the bids from the authenticated user' do
             user = create(:user)
             login(user)
-            auction = create(:auction, :available, :sealed_bid, :with_bidders)
+            auction = create(:auction, :available, :sealed_bid, :with_bids)
             create(:bid, auction: auction, bidder: user)
 
             get api_v0_auction_path(auction), nil, headers
@@ -50,7 +50,7 @@ describe Api::V0::AuctionsController do
           it 'veils the bids not created by the authenticated user' do
             user = create(:user)
             login(user)
-            auction = create(:auction, :available, :sealed_bid, :with_bidders)
+            auction = create(:auction, :available, :sealed_bid, :with_bids)
             create(:bid, auction: auction, bidder: user)
 
             get api_v0_auction_path(auction), nil, headers
@@ -64,7 +64,7 @@ describe Api::V0::AuctionsController do
       context 'and the auction is closed' do
         it 'unveils all bids information' do
           login
-          auction = create(:auction, :closed, :sealed_bid, :with_bidders)
+          auction = create(:auction, :closed, :sealed_bid, :with_bids)
 
           get api_v0_auction_path(auction), nil, headers
 
@@ -87,7 +87,7 @@ describe Api::V0::AuctionsController do
       context 'and the auction is available' do
         it 'veils all bidder information' do
           login
-          auction = create(:auction, :available, :with_bidders)
+          auction = create(:auction, :available, :with_bids)
 
           get api_v0_auction_path(auction), nil, headers
 
@@ -108,7 +108,7 @@ describe Api::V0::AuctionsController do
           it 'does not veil the bids from the authenticated user' do
             user = create(:user)
             login(user)
-            auction = create(:auction, :available, :with_bidders, bidder_ids: [user.id])
+            auction = create(:auction, :available, bidders: [user])
 
             get api_v0_auction_path(auction), nil, headers
 
@@ -127,7 +127,7 @@ describe Api::V0::AuctionsController do
           it 'veils the bids not created by the authenticated user' do
             user = create(:user)
             login(user)
-            auction = create(:auction, :available, :with_bidders, bidder_ids: [user.id])
+            auction = create(:auction, :available, bidders: [user])
 
             get api_v0_auction_path(auction), nil, headers
 
@@ -149,7 +149,7 @@ describe Api::V0::AuctionsController do
       context 'and the auction is closed' do
         it 'unveils all bidder information' do
           login
-          auction = create(:auction, :closed, :with_bidders)
+          auction = create(:auction, :closed, :with_bids)
 
           get api_v0_auction_path(auction), nil, headers
 

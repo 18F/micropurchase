@@ -8,7 +8,7 @@ Feature: Admin views user
     And I sign in
 
   Scenario: Admin navigates to show page from list of all users
-    And there are users in the system
+    Given there are users in the system
     When I visit the admin vendors page
     And I click on the name of the first user
     Then I should see that user's information

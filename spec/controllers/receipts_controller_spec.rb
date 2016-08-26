@@ -5,7 +5,7 @@ describe ReceiptsController do
     context 'current user is winning vendor' do
       context 'auction is paid' do
         it 'does not redirect the user' do
-          auction = create(:auction, :with_bidders, :paid)
+          auction = create(:auction, :with_bids, :paid)
           current_user = create(:user)
           bid = auction.bids.sort_by(&:amount).first
           bid.update(bidder: current_user)
@@ -19,7 +19,7 @@ describe ReceiptsController do
 
       context 'auction is not paid' do
         it 'redirects the user' do
-          auction = create(:auction, :with_bidders, :available)
+          auction = create(:auction, :with_bids, :available)
           current_user = create(:user)
           bid = auction.bids.sort_by(&:amount).first
           bid.update(bidder: current_user)

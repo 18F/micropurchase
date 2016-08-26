@@ -69,7 +69,7 @@ end
 
 Given(/^there is a user in the system who has bid on an auction$/) do
   @user = FactoryGirl.create(:user, sam_status: :sam_accepted)
-  @auction = FactoryGirl.create(:auction, :closed, :with_bidders, bidder_ids: [@user.id])
+  @auction = FactoryGirl.create(:auction, :closed, :with_bids, bidders: [@user])
   skills = FactoryGirl.create_list(:skill, 2)
   @auction.skills << skills
 end

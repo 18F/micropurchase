@@ -4,4 +4,8 @@ module ServerEnv
   def self.instance_index
     CloudFoundry.instance_index || 0
   end
+
+  def self.first_instance?
+    instance_index == 0
+  end
 end

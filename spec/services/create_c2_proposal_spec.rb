@@ -4,7 +4,7 @@ describe CreateC2Proposal do
   describe '#perform' do
     context 'when the C2 API is working' do
       it 'sends the correct attributes to the c2_client' do
-        auction = create(:auction, :with_bidders)
+        auction = create(:auction, :with_bids)
 
         fake_c2_attributes = { fake_c2: 'fake' }
         attributes_double = double(perform: fake_c2_attributes)
@@ -30,7 +30,7 @@ describe CreateC2Proposal do
       end
 
       it 'updates the auction with the c2_proposal' do
-        auction = create(:auction, :with_bidders)
+        auction = create(:auction, :with_bids)
 
         fake_c2_attributes = { fake_c2: 'fake' }
         attributes_double = double(perform: fake_c2_attributes)
@@ -58,7 +58,7 @@ describe CreateC2Proposal do
 
     context 'when the C2 API is failing' do
       it 'raises a CreateC2Proposal::Error' do
-        auction = create(:auction, :with_bidders)
+        auction = create(:auction, :with_bids)
 
         attributes_double = double(perform: { })
         allow(ConstructC2Attributes).to receive(:new).with(auction).and_return(attributes_double)

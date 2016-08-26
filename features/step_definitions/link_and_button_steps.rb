@@ -53,6 +53,9 @@ When(/^I click on the add customer button$/) do
 end
 
 When(/^I click on the confirm received payment button$/) do
+  allow(UpdateC2ProposalJob).to receive(:perform_later)
+    .with(@auction.id, 'AddReceiptToC2ProposalAttributes')
+
   link = I18n.t('auctions.show.status.payment_confirmation_needed.action')
   step("I click on the \"#{link}\" button")
 end

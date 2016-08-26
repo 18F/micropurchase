@@ -3,6 +3,7 @@
     <tr>
       <th scope="col">Title</th>
       <th scope="col">Delivery Deadline</th>
+      <th scope="col">Delivery URL</th>
       <th scope="col">Winning Vendor</th>
       <th scope="col"></th>
     </tr>
@@ -12,6 +13,7 @@
     <tr>
       <td><%= link_to(auction.title, admin_auction_path(auction.id)) %></td>
       <td><%= auction.delivery_due_at_expires_in %></td>
+      <td><%= auction.delivery_url %></td>
       <td><%= auction.winning_bidder.email %></td>
       <td><%= link_to('edit', edit_admin_auction_path(auction.id)) %></td>
     </tr>

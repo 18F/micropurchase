@@ -37,7 +37,7 @@ describe 'API bid requests' do
 
     context 'when the API key is missing' do
       let(:api_key) { nil }
-      let(:auction) { create(:auction, :with_bidders) }
+      let(:auction) { create(:auction, :with_bids) }
       let(:current_auction_price) do
         auction.bids.sort_by(&:amount).first.amount
       end
@@ -57,7 +57,7 @@ describe 'API bid requests' do
 
     context 'when the API key is invalid' do
       let(:api_key) { FakeGitHubApi::INVALID_API_KEY }
-      let(:auction) { create(:auction, :with_bidders) }
+      let(:auction) { create(:auction, :with_bids) }
       let(:current_auction_price) do
         auction.bids.sort_by(&:amount).first.amount
       end
@@ -77,7 +77,7 @@ describe 'API bid requests' do
 
     context 'when the auction has ended' do
       let(:api_key) { FakeGitHubApi::VALID_API_KEY }
-      let(:auction) { create(:auction, :closed, :with_bidders) }
+      let(:auction) { create(:auction, :closed, :with_bids) }
       let(:current_auction_price) do
         auction.bids.sort_by(&:amount).first.amount
       end
@@ -99,7 +99,7 @@ describe 'API bid requests' do
 
     context 'when the auction has not yet started' do
       let(:api_key) { FakeGitHubApi::VALID_API_KEY }
-      let(:auction) { create(:auction, :future, :with_bidders) }
+      let(:auction) { create(:auction, :future, :with_bids) }
       let(:current_auction_price) do
         auction.bids.sort_by(&:amount).first.amount
       end
@@ -121,7 +121,7 @@ describe 'API bid requests' do
 
     context 'when the auction has bids' do
       let(:api_key) { FakeGitHubApi::VALID_API_KEY }
-      let(:auction) { create(:auction, :with_bidders) }
+      let(:auction) { create(:auction, :with_bids) }
       let(:current_auction_price) do
         auction.bids.sort_by(&:amount).first.amount
       end
@@ -154,7 +154,7 @@ describe 'API bid requests' do
       end
 
       context 'when the auction start price is between the micropurchase and SAT threshold' do
-        let(:auction) { create(:auction, :between_micropurchase_and_sat_threshold, :with_bidders) }
+        let(:auction) { create(:auction, :between_micropurchase_and_sat_threshold, :with_bids) }
         let(:bid_amount) { current_auction_price - 10 }
 
         context 'and the vendor is not small business' do
@@ -179,7 +179,7 @@ describe 'API bid requests' do
       end
 
       context 'when the auction is reverse' do
-        let(:auction) { create(:auction, :reverse, :with_bidders) }
+        let(:auction) { create(:auction, :reverse, :with_bids) }
 
         context 'and the bid amount is not the lowest' do
           let(:bid_amount) { current_auction_price + 10 }
@@ -203,7 +203,7 @@ describe 'API bid requests' do
       end
 
       context 'when the auction is sealed-bid' do
-        let(:auction) { create(:auction, :with_bidders, :sealed_bid) }
+        let(:auction) { create(:auction, :with_bids, :sealed_bid) }
 
         context 'and the bid amount is not the lowest' do
           let(:amount) { current_auction_price + 10 }

@@ -35,7 +35,7 @@ class AcceptAuction
 
   def update_purchase_request
     if auction.purchase_card == "default"
-      UpdateC2ProposalJob.perform_later(auction.id)
+      UpdateC2ProposalJob.perform_later(auction.id, 'UpdateC2Attributes')
     end
   end
 
