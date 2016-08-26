@@ -10,7 +10,7 @@ en:
          status: "Sent"
          header: "Pending C2 approval"
          body: "This auction has been sent to C2 for approval."
-      pending:
+      pending_approval:
         status: "Pending"
         header: "Pending C2 approval"
         body: "This auction has been sent to C2 for approval."

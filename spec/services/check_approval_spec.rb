@@ -40,13 +40,13 @@ describe CheckApproval do
             auction = create(
               :auction,
               :unpublished,
-              c2_status: :pending,
+              c2_status: :pending_approval,
               c2_proposal_url: "https://c2-dev.18f.gov/#{c2_path}"
             )
 
             CheckApproval.new.perform
 
-            expect(auction.reload.c2_status).to eq 'pending'
+            expect(auction.reload.c2_status).to eq 'pending_approval'
           end
         end
 

@@ -13,7 +13,7 @@ class Auction < ActiveRecord::Base
   enum c2_status: {
     not_requested: 0,
     sent: 2,
-    pending: 1,
+    pending_approval: 1,
     approved: 3,
     c2_paid: 4,
     payment_confirmed: 5
