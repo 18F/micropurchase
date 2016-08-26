@@ -79,7 +79,7 @@ Given(/^there is an open auction with some skills$/) do
 end
 
 Given(/^there is a budget approved auction$/) do
-  @auction = FactoryGirl.create(:auction, :c2_approved, :with_bidders)
+  @auction = FactoryGirl.create(:auction, :with_bidders, c2_status: :approved)
 end
 
 Given(/^there is a sealed-bid auction$/) do
@@ -95,7 +95,7 @@ Given(/^there is a closed sealed-bid auction$/) do
 end
 
 Given(/^there is an auction that needs evaluation$/) do
-  @auction = FactoryGirl.create(:auction, :with_bidders, :evaluation_needed, :c2_approved)
+  @auction = FactoryGirl.create(:auction, :with_bidders, :evaluation_needed)
 end
 
 Given(/^there is an auction within the simplified acquisition threshold$/) do
@@ -124,6 +124,10 @@ Given(/^there is also an unpublished auction$/) do
   @unpublished_auction = FactoryGirl.create(:auction, published: false)
 end
 
+Given(/^there is an auction pending acceptance$/) do
+  @auction = FactoryGirl.create(:auction, :with_bidders, :pending_acceptance)
+end
+
 Given(/^there is a complete and successful auction$/) do
   @auction = FactoryGirl.create(:auction, :complete_and_successful)
 end
@@ -139,14 +143,14 @@ end
 Given(/^there is an auction where the winning vendor is not eligible to be paid$/) do
   @auction = FactoryGirl.create(
     :auction,
+    :with_bidders,
     :between_micropurchase_and_sat_threshold,
-    :winning_vendor_is_non_small_business,
-    :evaluation_needed
+    :winning_vendor_is_non_small_business
   )
 end
 
 Given(/^there is a paid auction$/) do
-  @auction = FactoryGirl.create(:auction, :closed, :accepted, :paid)
+  @auction = FactoryGirl.create(:auction, :with_bidders, :closed, :accepted, :paid)
 end
 
 Given(/^the auction is for the default purchase card$/) do
@@ -179,7 +183,7 @@ Given(/^there is an auction with an associated customer$/) do
 end
 
 Given(/^there is an auction where the winning vendor is missing a payment method$/) do
-  @auction = FactoryGirl.create(:auction, :with_bidders, :evaluation_needed)
+  @auction = FactoryGirl.create(:auction, :evaluation_needed)
   @winning_bidder = WinningBid.new(@auction).find.bidder
   @winning_bidder.update(payment_url: '')
 end

@@ -15,8 +15,7 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
   end
 
   def admin_auction_status_partial
-    if auction.pending_acceptance? ||
-       auction.rejected? ||
+    if !auction.pending_delivery? ||
        auction.purchase_card == 'default'
       'auctions/status'
     else

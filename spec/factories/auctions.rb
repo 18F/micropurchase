@@ -4,7 +4,7 @@ FactoryGirl.define do
     billable_to "Project (billable)"
     started_at { quartile_minute(Time.now - 3.days) }
     ended_at { quartile_minute(Time.now + 3.days) }
-    status :not_applicable
+    status :pending_delivery
     title { Faker::Company.catch_phrase }
     type :reverse
     published :published
@@ -24,7 +24,7 @@ FactoryGirl.define do
           Timecop.scale(3600)
           (1..2).each do |i|
             amount = 3499 - (20 * i) - rand(10)
-            instance.bids << create(:bid, auction: instance, amount: amount)
+            instance.bids << create(:bid, bidder: create(:user), auction: instance, amount: amount)
           end
         end
       end
@@ -47,18 +47,15 @@ FactoryGirl.define do
       ended_at { quartile_minute(Time.now - 2.days) }
     end
 
-    trait :delivered do
-      ended_at { quartile_minute(Time.now - 2.days) }
-      delivery_due_at { quartile_minute(Time.now - 1.day) }
-      delivery_url 'https://github.com/foo/bar'
-    end
-
     trait :delivery_due_at_expired do
       delivery_due_at { quartile_minute(ended_at + 1.day) }
     end
 
+    trait :delivered do
+      delivery_url 'https://github.com/foo/bar'
+    end
+
     trait :paid do
-      delivered
       paid_at { Time.current }
     end
 
@@ -83,6 +80,12 @@ FactoryGirl.define do
     trait :not_paid do
       paid_at nil
     end
+
+   trait :pending_c2_approval do
+     c2_status :pending
+     purchase_card :default
+     unpublished
+   end
 
     trait :c2_approved do
       c2_proposal_url 'https://c2-dev.18f.gov/proposals/2486'
@@ -133,26 +136,27 @@ FactoryGirl.define do
     end
 
     trait :complete_and_successful do
-      c2_approved
       with_bidders
-      delivery_due_at_expired
       delivered
       accepted
       paid
     end
 
     trait :payment_needed do
-      delivery_due_at_expired
+      with_bidders
       accepted
       delivered
-      c2_approved
       not_paid
     end
 
     trait :evaluation_needed do
+      with_bidders
       delivered
       pending_acceptance
-      delivery_due_at_expired
+    end
+
+    trait :pending_acceptance do
+      status :pending_acceptance
     end
   end
 end

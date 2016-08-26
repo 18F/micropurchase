@@ -16,3 +16,8 @@ When(/^I mark the auction as rejected$/) do
   button = I18n.t('statuses.c2_presenter.pending_acceptance.actions.reject')
   step("I click on the \"#{button}\" button")
 end
+
+When(/^I mark the auction as accepted$/) do
+  button = I18n.t('statuses.c2_presenter.pending_acceptance.actions.accept')
+  step("I click on the \"#{button}\" button")
+end

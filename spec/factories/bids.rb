@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :bid do
+    amount 3499
     association :bidder, factory: :user
     association :auction
 

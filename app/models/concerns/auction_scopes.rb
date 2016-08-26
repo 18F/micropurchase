@@ -3,21 +3,15 @@ module AuctionScopes
 
   included do
     scope :accepted, -> { where(status: statuses['accepted']) }
-    scope :accepted_or_rejected, -> { where(status: [statuses['accepted'], statuses['rejected']]) }
     scope :delivery_accepted, -> { where(status: statuses['accepted']).where.not(accepted_at: nil) }
-    scope :c2_not_submitted, -> { where(c2_proposal_url: [nil, '']) }
-    scope :c2_submitted, -> { where.not(c2_proposal_url: [nil, '']) }
-    scope :closed_within_last_24_hours, -> { where(ended_at: last_24_hours..next_24_hours) }
     scope :default_purchase_card, -> { where(purchase_card: 0) }
     scope :delivered, -> { where.not(delivery_url: [nil, '']) }
-    scope :delivery_due_at_expired, -> { where('delivery_due_at < ?', Time.current) }
     scope :ended_at_in_future, -> { where('ended_at > ?', Time.current) }
     scope :ended, -> { where('ended_at < ?', Time.current) }
     scope :evaluated, -> { where(status: [statuses['accepted'], statuses['rejected']]) }
     scope :in_reverse_chron_order, -> { order('ended_at DESC') }
-    scope :not_delivered, -> { where(delivery_url: [nil, '']) }
     scope :pending_acceptance, -> { where(status: statuses['pending_acceptance']) }
-    scope :pending_delivery, -> { where(status: statuses['not_applicable']) }
+    scope :pending_delivery, -> { where(status: statuses['pending_delivery']) }
     scope :not_paid, -> { where(paid_at: nil) }
     scope :paid, -> { where.not(paid_at: nil) }
     scope :published, -> { where(published: publishes['published']) }
