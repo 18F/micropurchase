@@ -2,6 +2,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = false
   config.action_mailer.delivery_method = :letter_opener_web
   config.action_mailer.raise_delivery_errors = false
+  config.action_view.raise_on_missing_translations = true
   config.active_record.migration_error = :page_load
   config.active_support.deprecation = :log
   config.assets.debug = true

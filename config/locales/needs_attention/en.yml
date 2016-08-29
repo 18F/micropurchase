@@ -1,14 +1,15 @@
 en:
   needs_attention:
     index:
-      delivery_past_due: "Delivery past due"
       delivery_needed: "Delivery needed"
+      delivery_past_due: "Delivery past due"
+      drafts: "Drafts"
       evaluation_needed: "Evaluation needed"
-      payment_needed: "Payment needed"
-      null_drafts: "There are no draft auctions"
       null_delivery_needed: "There are no auctions needing delivery"
+      null_drafts: "There are no draft auctions"
       null_evaluation_needed: "There are no auctions needing evaluation"
       null_payment_needed: "There are no auctions needing payment"
+      payment_needed: "Payment needed"
     list_item:
       payment_status:
         pending: "Pending"
