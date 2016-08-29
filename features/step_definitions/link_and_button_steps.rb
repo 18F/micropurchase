@@ -38,7 +38,7 @@ When(/^I click on the update button$/) do
 end
 
 When(/^I click on the I'm done button$/) do
-  button = I18n.t('auctions.show.status.work_in_progress.action')
+  button = I18n.t('statuses.bid_status_presenter.over.winner.work_in_progress.action')
   step("I click on the \"#{button}\" button")
 end
 
@@ -56,7 +56,7 @@ When(/^I click on the confirm received payment button$/) do
   allow(UpdateC2ProposalJob).to receive(:perform_later)
     .with(@auction.id, 'AddReceiptToC2ProposalAttributes')
 
-  link = I18n.t('auctions.show.status.payment_confirmation_needed.action')
+  link = I18n.t('statuses.bid_status_presenter.over.winner.pending_payment_confirmation.action')
   step("I click on the \"#{link}\" button")
 end
 
