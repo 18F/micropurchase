@@ -1,10 +1,13 @@
 class BidStatusPresenter::Over::Vendor::Winner::PendingPaymentConfirmation < BidStatusPresenter::Base
   def header
-    I18n.t('auctions.show.status.payment_confirmation_needed.header')
+    I18n.t('statuses.bid_status_presenter.over.winner.pending_payment_confirmation.header')
   end
 
   def body
-    I18n.t('auctions.show.status.payment_confirmation_needed.body', payment_date: paid_at)
+    I18n.t(
+      'statuses.bid_status_presenter.over.winner.pending_payment_confirmation.body',
+      payment_date: paid_at
+    )
   end
 
   def action_partial

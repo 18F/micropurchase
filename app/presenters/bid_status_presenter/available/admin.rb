@@ -1,5 +1,5 @@
 class BidStatusPresenter::Available::Admin < BidStatusPresenter::Base
   def body
-    "This auction is accepting bids until #{end_date}."
+    I18n.t('statuses.bid_status_presenter.available.admin.body', end_date: end_date)
   end
 end

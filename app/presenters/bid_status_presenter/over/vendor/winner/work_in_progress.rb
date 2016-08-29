@@ -1,14 +1,11 @@
 class BidStatusPresenter::Over::Vendor::Winner::WorkInProgress < BidStatusPresenter::Base
-  include Rails.application.routes.url_helpers
-  include ActionView::Helpers::UrlHelper
-
   def header
-    I18n.t('auctions.show.status.work_in_progress.header')
+    I18n.t('statuses.bid_status_presenter.over.winner.work_in_progress.header')
   end
 
   def body
     I18n.t(
-      'auctions.show.status.work_in_progress.body',
+      'statuses.bid_status_presenter.over.winner.work_in_progress.body',
       ended_at: end_date,
       delivery_deadline: delivery_deadline,
       delivery_url: auction.delivery_url

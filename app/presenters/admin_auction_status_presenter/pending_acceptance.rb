@@ -1,11 +1,11 @@
 class AdminAuctionStatusPresenter::PendingAcceptance < AdminAuctionStatusPresenter::Base
   def header
-    I18n.t('statuses.c2_presenter.pending_acceptance.header')
+    I18n.t('statuses.admin_auction_status_presenter.pending_acceptance.header')
   end
 
   def body
     I18n.t(
-      'statuses.c2_presenter.pending_acceptance.body',
+      'statuses.admin_auction_status_presenter.pending_acceptance.body',
       winner_url: winner_url,
       delivery_url: auction.delivery_url
     )

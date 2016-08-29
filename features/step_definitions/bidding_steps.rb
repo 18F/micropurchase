@@ -39,7 +39,11 @@ Then(/^I should see that I did not have the winning bid$/) do
   bid_amount = Currency.new(bid.amount).to_s
 
   expect(page).to have_content(
-    I18n.t('auctions.status.closed.bidder.body', bid_amount: bid_amount, end_date: end_date)
+    I18n.t(
+      'statuses.bid_status_presenter.over.bidder.body',
+      bid_amount: bid_amount,
+      end_date: end_date
+    )
   )
 end
 
@@ -64,9 +68,13 @@ When(/^I submit a bid for \$(.+)$/) do |amount|
 end
 
 Then(/^I should see the maximum bid amount in the bidding form$/) do
+  max_allowed_bid_as_currency = Currency.new(RulesFactory.new(@auction).create.max_allowed_bid)
   within(".usa-alert-info") do
     expect(page).to have_content(
-      "The maximum you can bid is #{Currency.new(RulesFactory.new(@auction).create.max_allowed_bid)}"
+      I18n.t(
+        'statuses.bid_status_presenter.available.vendor.eligible.body',
+        max_allowed_bid_as_currency: max_allowed_bid_as_currency
+      )
     )
   end
 end

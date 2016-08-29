@@ -1,10 +1,14 @@
 class BidStatusPresenter::Over::Vendor::Bidder < BidStatusPresenter::Base
   def header
-    I18n.t('auctions.status.closed.bidder.header')
+    I18n.t('statuses.bid_status_presenter.over.bidder.header')
   end
 
   def body
-    I18n.t('auctions.status.closed.bidder.body', bid_amount: bid_amount, end_date: end_date)
+    I18n.t(
+      'statuses.bid_status_presenter.over.bidder.body',
+      bid_amount: bid_amount,
+      end_date: end_date
+    )
   end
 
   private

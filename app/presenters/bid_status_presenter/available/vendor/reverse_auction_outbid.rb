@@ -1,24 +1,16 @@
 class BidStatusPresenter::Available::Vendor::ReverseAuctionOutbid < BidStatusPresenter::Base
   def header
-    'Place bid'
+    I18n.t('statuses.bid_status_presenter.available.vendor.reverse_auction_outbid.header')
   end
 
   def body
-    "You've been outbid! The maximum you can bid is
-    #{max_allowed_bid_as_currency}."
+    I18n.t(
+      'statuses.bid_status_presenter.available.vendor.reverse_auction_outbid.body',
+      max_allowed_bid_as_currency: max_allowed_bid_as_currency
+    )
   end
 
   def action_partial
     'auctions/bid_form'
-  end
-
-  private
-
-  def max_allowed_bid_as_currency
-    Currency.new(rules.max_allowed_bid)
-  end
-
-  def rules
-    @_rules ||= RulesFactory.new(auction).create
   end
 end
