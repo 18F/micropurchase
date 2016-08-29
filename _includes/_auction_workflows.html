@@ -281,6 +281,10 @@
     <button class="button button-un-publish">Un-publish</button>    
   </form>
 </section>
+<section class="auction-workflow auction-workflow-draft-vendors">
+  <h1>Draft</h1>
+  <p>This is a preview for internal use only. This is not an official solicitation.</p>
+</section>
 <section class="auction-workflow auction-workflow-coming-soon-vendors">
   <h1>Coming soon</h1>
   <p>This auction is not currently accepting bids. It will open on [auction.startDate].</p>
@@ -308,24 +312,28 @@
 <section class="auction-workflow auction-workflow-place-a-bid-first-vendors">
   <h1>Place a bid</h1>
   <p>The maximum (starting) bid for this auction is $[auction.startPrice].</p>
-  <div class="field"> 
-    <label>
-      <span class="label-text">Amount</span>
-      <input type="number" required></input>
-    </label>
-  </div>
-  <button class="button button-bid">Place bid</button>
+  <form>
+    <div class="field"> 
+      <label>
+        <span class="label-text">Amount</span>
+        <input type="number" required></input>
+      </label>
+    </div>
+    <button class="button button-bid">Place bid</button>
+  </form>
 </section>
 <section class="auction-workflow auction-workflow-place-a-bid-reverse-vendors">
   <h1>Place a bid</h1>
   <p>The maximum (current) bid is $[auction.currentBid].</p>
-  <div class="field"> 
-    <label>
-      <span class="label-text">Amount</span>
-      <input type="number" required></input>
-    </label>
-  </div>
-  <button class="button button-bid">Place bid</button>
+  <form>
+    <div class="field"> 
+      <label>
+        <span class="label-text">Amount</span>
+        <input type="number" required></input>
+      </label>
+    </div>
+    <button class="button button-bid">Place bid</button>
+  </form>
 </section>
 <section class="auction-workflow auction-workflow-youve-been-underbid-vendors">
   <h1>You&rsquo;ve been underbid</h1> 

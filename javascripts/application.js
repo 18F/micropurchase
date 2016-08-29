@@ -44,8 +44,13 @@ $(document).ready(function() {
     $('.auction-workflow form').submit(function(e){
       e.preventDefault();
       var auctionWorkflowState = $(this).data('auction-workflow-state');
-      $('.field-auction-status select').find('option[value="' + auctionWorkflowState + '"]').prop('selected', true);
-      $('.field-auction-status select').change();
+      if (auctionWorkflowState) {
+        $('.field-auction-status select').find('option[value="' + auctionWorkflowState + '"]').prop('selected', true);
+        $('.field-auction-status select').change();
+      } else {
+        var bidVal = $(this).find('input').val();
+        confirm("Are you sure you want to place a bid for $" + bidVal + "?");
+      }
     })
   }
 
