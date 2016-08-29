@@ -656,13 +656,13 @@ table td,
 th{
 	border: 1px solid #ddd;
 	padding: 6px 8px 8px;
-	line-height: 1.2;
+	line-height: 1.2em;
 }
 th{ text-align: left; }
 td .time{
 	display: block;
 	font-size: 14px;
-	padding-top: 4px;
+	padding-top: 1px;
 }
 
 .is-blank{
