@@ -1,0 +1,10 @@
+<%= I18n.t(
+  'mailers.winning_bidder_mailer.auction_rejected.para_1',
+  issue_url: @auction.issue_url,
+  auction_title: @auction.title,
+  rejected_at: DcTimePresenter.convert_and_format(@rejected_timestamp)
+) %>
+
+<%= I18n.t('mailers.winning_bidder_mailer.auction_rejected.sign_off') %>
+
+<%= I18n.t('mailers.winning_bidder_mailer.auction_rejected.from') %>

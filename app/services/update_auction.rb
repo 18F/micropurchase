@@ -65,6 +65,7 @@ class UpdateAuction
   def perform_rejected_auction_tasks
     if auction_rejected? && auction.rejected_at.nil?
       auction.rejected_at = Time.current
+      WinningBidderMailer.auction_rejected(auction: auction).deliver_later
     end
   end
 

@@ -60,3 +60,14 @@ en:
         para_2: "Again, great job! We look forward to working with you again in the future."
         sign_off: "Sincerely,"
         from: "The 18F Micro-purchase team"
+      auction_rejected:
+        subject: "18F Micro-purchase Auction Status"
+        para_1: >-
+          We regret to inform you that your work for %{auction_title} was
+          rejected on %{rejected_at}. For more information please see the GitHub issue:
+          %{issue_url} or contact us at micropurchase@gsa.gov. Please also let us
+          know if you would like us to schedule a retrospective to go over any questions
+          or concerns you may have about the auction. Though this auction did not work
+          out, we hope you will continue to participate in the future.
+        sign_off: "Sincerely,"
+        from: "The 18F Micro-purchase team"

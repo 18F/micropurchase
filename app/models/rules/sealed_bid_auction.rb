@@ -19,7 +19,7 @@ class Rules::SealedBidAuction < Rules::BaseRules
     if auction_available?
       auction.bids.where(bidder: user)
     else
-      auction.bids
+      auction.bids.order(created_at: :desc)
     end
   end
 

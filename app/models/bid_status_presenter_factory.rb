@@ -47,10 +47,8 @@ class BidStatusPresenterFactory
   def over_message
     if user_is_bidder?
       BidStatusPresenter::Over::Vendor::Bidder
-    elsif auction.bids.any?
-      BidStatusPresenter::Over::WithBids
     else
-      BidStatusPresenter::Over::NoBids
+      BidStatusPresenter::Over::NotBidder
     end
   end
 
