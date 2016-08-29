@@ -32,7 +32,7 @@ en:
         body: "%{winner_email}'s delivered code was accepted on %{accepted_at}."
       approved:
         status: "Approved"
-        body: "This auction has been approved in C2: %{link}"
+        body: "This auction has been approved in C2: <a href=%{link}>%{link}</a>"
         header: "Approved in C2"
       c2_paid:
         status: "Awaiting payment confirmation"
