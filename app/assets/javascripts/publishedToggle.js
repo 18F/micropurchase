@@ -9,7 +9,7 @@ $(document).ready(function() {
     if(this.value === "default" && c2_status !== "approved") {
       published_select_element.empty().append(unpublished_option)
     } else {
-      published_select_element.empty().append(published_option, unpublished_option)
+      published_select_element.empty().append(unpublished_option, published_option)
     }
   });
 });

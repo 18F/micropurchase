@@ -57,9 +57,9 @@ When(/^I create and publish an auction for the non-default purchase card$/) do
 
   select("6", from: "auction_due_in_days")
 
-  select("published", from: "auction_published")
-
   select("other", from: "auction_purchase_card")
+
+  select("published", from: "auction_published")
 
   find('.selectize-control.select.optional.multi').click
   find('.selectize-dropdown-content', text: @skill.name).click
