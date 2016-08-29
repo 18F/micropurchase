@@ -39,6 +39,7 @@
   <div class="usa-width-one-half">
     <%= f.input :purchase_card, collection: Auction.purchase_cards.keys.to_a %>
   </div>
+  <%= f.hidden_field :c2_status %>
   <div class="usa-width-one-half">
     <%= f.association :customer, collection: auction.customer_options, label_method: :agency_name %>
   </div>
