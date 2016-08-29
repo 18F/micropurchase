@@ -36,11 +36,8 @@ Feature: Admin publishes auction in the admin panel
     When I sign in
     And I visit the auctions admin page
     When I click on the add auction link
-    And I fill auction form with choosing "other" purchase card
+    And I create and publish an auction for the non-default purchase card
     Then I should see that the auction type is sealed bid
     And I click to create an auction
+    When I visit the home page
     Then I should see the auction's title
-
-    When I click on the auction's title
-    Then I should see the start time I set for the auction
-    And I should see the end time I set for the auction

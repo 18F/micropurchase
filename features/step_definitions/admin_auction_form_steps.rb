@@ -35,7 +35,7 @@ Then(/^I set the auction type to be reverse$/) do
   select("reverse", from: "auction_type")
 end
 
-When(/^I fill auction form with choosing "([^"]*)" purchase card$/) do |purchase_card|
+When(/^I create and publish an auction for the non-default purchase card$/) do
   @title = 'This is the form-edited title'
   fill_in("auction_title", with: @title)
 
@@ -51,27 +51,11 @@ When(/^I fill auction form with choosing "([^"]*)" purchase card$/) do |purchase
   @issue_url = 'https://github.com/18F/calc/issues/255'
   fill_in('auction_issue_url', with: @issue_url)
 
-  @start_day = DcTimePresenter.convert(3.days.from_now)
-  fill_in "auction_started_at", with: @start_day.strftime('%Y-%m-%d')
-  select('11', from: 'auction_started_at_1i')
-  select('30', from: 'auction_started_at_2i')
-  select('AM', from: 'auction_started_at_3i')
-  @start_time = DcTimePresenter.time_zone.parse("#{@start_day.strftime('%Y-%m-%d')} 11:30 AM")
-
-  @end_day = DcTimePresenter.convert(3.days.from_now)
-  fill_in "auction_ended_at", with: @end_day.strftime('%Y-%m-%d')
-  select('4', from: 'auction_ended_at_1i')
-  select('45', from: 'auction_ended_at_2i')
-  select('PM', from: 'auction_ended_at_3i')
-  @end_time = DcTimePresenter.time_zone.parse("#{@start_day.strftime('%Y-%m-%d')} 4:45 PM")
-
-  @time_in_days = 3
-  @deadline_day = DcTimePresenter.convert(@time_in_days.business_days.from_now)
   select("6", from: "auction_due_in_days")
 
   select("published", from: "auction_published")
 
-  select(purchase_card, from: "auction_purchase_card")
+  select("other", from: "auction_purchase_card")
 
   find('.selectize-control.select.optional.multi').click
   find('.selectize-dropdown-content', text: @skill.name).click
