@@ -6,7 +6,7 @@ end
 
 Then(/^I should be able to see the full details for each bid$/) do
   # sort the bids so that newest is first
-  bids = @auction.bids.sort_by(&:created_at).reverse
+  bids = @auction.bids.order(created_at: :desc)
 
   # ensure the table has the correct content, in the correct order
   bids.each_with_index do |bid, i|

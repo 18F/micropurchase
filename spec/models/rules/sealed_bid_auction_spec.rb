@@ -50,7 +50,7 @@ describe Rules::SealedBidAuction do
         auction = create(:auction, :sealed_bid, :with_bids, :closed)
         eligibility = InSamEligibility.new
         rules = Rules::SealedBidAuction.new(auction, eligibility)
-        expect(rules.veiled_bids(user)).to eq(auction.bids)
+        expect(rules.veiled_bids(user)).to match_array(auction.bids)
       end
     end
   end
