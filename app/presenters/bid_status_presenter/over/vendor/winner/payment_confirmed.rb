@@ -1,11 +1,11 @@
 class BidStatusPresenter::Over::Vendor::Winner::PaymentConfirmed < BidStatusPresenter::Base
   def header
-    I18n.t('auctions.show.status.payment_confirmed.header')
+    I18n.t('statuses.bid_status_presenter.over.winner.payment_confirmed.header')
   end
 
   def body
     I18n.t(
-      'auctions.show.status.payment_confirmed.body',
+      'statuses.bid_status_presenter.over.winner.payment_confirmed.body',
       end_date: end_date,
       accepted_date: accepted_date,
       amount: winning_amount,

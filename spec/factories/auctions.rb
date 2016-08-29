@@ -126,7 +126,7 @@ FactoryGirl.define do
     end
 
    trait :pending_c2_approval do
-     c2_status :pending
+     c2_status :pending_approval
      purchase_card :default
      unpublished
    end

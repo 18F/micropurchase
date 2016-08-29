@@ -1,11 +1,11 @@
 class AdminAuctionStatusPresenter::Rejected < AdminAuctionStatusPresenter::Base
   def header
-    I18n.t('statuses.c2_presenter.rejected.header')
+    I18n.t('statuses.admin_auction_status_presenter.rejected.header')
   end
 
   def body
     I18n.t(
-      'statuses.c2_presenter.rejected.body',
+      'statuses.admin_auction_status_presenter.rejected.body',
       delivery_url: auction.delivery_url,
       rejected_at: rejected_at,
       winner_email: winner.email

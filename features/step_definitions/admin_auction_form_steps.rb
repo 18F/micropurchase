@@ -6,6 +6,10 @@ When(/^I select the status as accepted$/) do
   select("accepted", from: "auction_status")
 end
 
+When(/^I select the status as rejected$/) do
+  select("rejected", from: "auction_status")
+end
+
 Then(/^I should see that the auction form has a C2 Proposal URL$/) do
   expect(@auction.c2_proposal_url).to be_present
   field = find_field(I18n.t('simple_form.labels.auction.c2_proposal_url'), disabled: true)
@@ -33,6 +37,35 @@ end
 
 Then(/^I set the auction type to be reverse$/) do
   select("reverse", from: "auction_type")
+end
+
+When(/^I create and publish an auction for the non-default purchase card$/) do
+  @title = 'This is the form-edited title'
+  fill_in("auction_title", with: @title)
+
+  @description = 'and the admin related stuff'
+  fill_in("auction_description", with: @description)
+
+  @repo = 'https://github.com/18F/calc'
+  fill_in('auction_github_repo', with: @repo)
+
+  @summary = 'The Summary!'
+  fill_in('auction_summary', with: @summary)
+
+  @issue_url = 'https://github.com/18F/calc/issues/255'
+  fill_in('auction_issue_url', with: @issue_url)
+
+  select("6", from: "auction_due_in_days")
+
+  select("other", from: "auction_purchase_card")
+
+  select("published", from: "auction_published")
+
+  find('.selectize-control.select.optional.multi').click
+  find('.selectize-dropdown-content', text: @skill.name).click
+
+  find('.selectize-control.select.required.single').click
+  find('.selectize-dropdown-content', text: @billable.to_s).click
 end
 
 When(/^I edit the new auction form$/) do

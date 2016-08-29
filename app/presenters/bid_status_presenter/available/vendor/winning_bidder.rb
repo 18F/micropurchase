@@ -1,9 +1,12 @@
 class BidStatusPresenter::Available::Vendor::WinningBidder < BidStatusPresenter::Base
   def header
-    'Bid placed'
+    I18n.t('statuses.bid_status_presenter.available.vendor.winning_bidder.header')
   end
 
   def body
-    "You are currently the low bidder, with a bid of #{winning_amount}"
+    I18n.t(
+      'statuses.bid_status_presenter.available.vendor.winning_bidder.body',
+      winning_amount: winning_amount
+    )
   end
 end

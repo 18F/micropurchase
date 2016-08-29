@@ -73,10 +73,6 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
     end
   end
 
-  def distance_of_time_to_now
-    "#{HumanTime.new(time: auction.ended_at).distance_of_time_to_now} left"
-  end
-
   def html_description
     MarkdownRender.new(auction.description).to_s
   end

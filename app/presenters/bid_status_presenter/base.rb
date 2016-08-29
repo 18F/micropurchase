@@ -47,4 +47,12 @@ class BidStatusPresenter::Base
   def winning_amount
     Currency.new(WinningBid.new(auction).find.amount)
   end
+
+  def max_allowed_bid_as_currency
+    Currency.new(rules.max_allowed_bid)
+  end
+
+  def rules
+    @_rules ||= RulesFactory.new(auction).create
+  end
 end

@@ -18,6 +18,21 @@ Then(/^I should not receive an email notifying me that I did not win$/) do
   expect(emails).to be_empty
 end
 
+Then(/^the vendor should receive an email notifying them that the work was rejected$/) do
+  winner = WinningBid.new(@auction).find.bidder
+  email = ActionMailer::Base.deliveries.last
+
+  expect(email.to.first).to eq winner.email
+  expect(email.body.encoded).to include(
+    I18n.t(
+      'mailers.winning_bidder_mailer.auction_rejected.para_1',
+      issue_url: @auction.issue_url,
+      auction_title: @auction.title,
+      rejected_at: DcTimePresenter.convert_and_format(@auction.reload.rejected_at)
+    )
+  )
+end
+
 Then(/^I should receive an email notifying me that I did not win$/) do
   emails = ActionMailer::Base.deliveries
   email = emails.find { |sent_email| sent_email.to.include? @user.email }
