@@ -34,27 +34,17 @@ Then(/^I should see the auction had a winning bid$/) do
   expect(page).not_to have_content("Current bid:")
 end
 
-Then(/^I should see the auction had a winning bid with name$/) do
-  winning_bid = WinningBid.new(@auction).find
-  winning_bidder = winning_bid.bidder
-  winning_bid_amount = Currency.new(winning_bid.amount).to_s
+Then(/^I should see that I did not have the winning bid$/) do
+  bid = @auction.bids.where(bidder: @user).last
+  bid_amount = Currency.new(bid.amount).to_s
+
   expect(page).to have_content(
-    "Winning bid (#{winning_bidder.name}): #{winning_bid_amount}"
+    I18n.t('auctions.status.closed.bidder.body', bid_amount: bid_amount, end_date: end_date)
   )
-  expect(page).not_to have_content("Current bid:")
 end
 
 Then(/^I should see I am not the winner$/) do
   expect(page).to have_content("You are not the winner")
-end
-
-Then(/^I should not see a winner alert box$/) do
-  expect(page).to_not have_content("You are not the winner")
-end
-
-Then(/^I should see the auction ended with no bids$/) do
-  expect(page).to have_content("This auction ended with no bids.")
-  expect(page).not_to have_content("Current bid:")
 end
 
 When(/^the winning bidder has a valid DUNS number$/) do
@@ -99,4 +89,8 @@ Then(/^I should not see the bid form$/) do
   within('.auction-show') do
     expect(page).not_to have_selector(:css, '.auction-detail-panel form')
   end
+end
+
+def end_date
+  DcTimePresenter.convert_and_format(@auction.ended_at)
 end
