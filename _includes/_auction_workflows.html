@@ -468,9 +468,17 @@
   <p>18F is working with [auction.customerName] to determine if <a href="#">your pull request</a> meets the auction&rsquo;s acceptance criteria. You will receive an email once this determination is made.
 </p>
 </section>
+<section class="auction-workflow auction-workflow-payment-url-needed-admins">
+  <h1>Payment URL needed</h1>
+  <p>[auction.acceptanceAdmin] accepted <a href="{{site.baseurl}}/people/vendors/show">[auction.winner]&rsquo;s</a> <a href="#">pull request</a> on [auction.acceptanceDate]. However, this vendor cannot be paid until they&rsquo;ve specified a valid payment URL.</p>
+</section>
+<section class="auction-workflow auction-workflow-payment-url-needed-vendors">
+  <h1>Payment URL needed</h1>
+  <p><a href="#">Your pull request</a> was accepted, but 18F and [auction.customerName] cannot pay you until you have specified a valid payment URL. Please <a href="{{site.baseurl}}/profile#payment-url">update your profile</a>.</p>
+</section>
 <section class="auction-workflow auction-workflow-awaiting-18f-payment-admins">
   <h1>Awaiting 18F payment</h1>
-  <p>[if currentUser != [auction.acceptanceAdmin]][auction.acceptanceAdmin][else]You[/endif] accepted <a href="{{site.baseurl}}/people/vendors/show"></a>[auction.winner]&rsquo;s pull request on [auction.acceptanceDate]. The p-card holder has been asked (<a href="#">via C2</a>) to remit payment at <a href="#"><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a>&rsquo;s payment URL</a>. Alternatively, you can manually mark this auction as paid.</p>
+  <p>[if currentUser != [auction.acceptanceAdmin]][auction.acceptanceAdmin][else]You[/endif] accepted <a href="{{site.baseurl}}/people/vendors/show">[auction.winner]&rsquo;s</a> <a href="#">pull request</a> on [auction.acceptanceDate]. The p-card holder has been asked (<a href="#">via C2</a>) to remit payment at <a href="#"><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a>&rsquo;s payment URL</a>. Alternatively, you can manually mark this auction as paid.</p>
   <form data-auction-workflow-state="pending-payment-confirmation-admins">
     <button>Mark as paid</button>  
   </form>
