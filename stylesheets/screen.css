@@ -655,7 +655,8 @@ table{
 table td,
 th{
 	border: 1px solid #ddd;
-	padding: 8px;
+	padding: 6px 8px 8px;
+	line-height: 1.2;
 }
 th{ text-align: left; }
 td .time{
