@@ -53,6 +53,7 @@ describe CreateC2Proposal do
           .to change { auction.c2_proposal_url }
           .from('')
           .to("https://c2-dev.18f.gov/proposals/#{fake_c2_proposal_id}")
+        expect(auction.c2_status).to eq 'pending_approval'
       end
     end
 

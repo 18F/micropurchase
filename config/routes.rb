@@ -46,9 +46,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # Temporarily send JSON requests to web to API
-  match '*path.:format', to: redirect("/api/v0/%{path}"), via: [:get, :post], constraints: { format: :json }
-
   resources :auctions, only: [:index, :update]
 
   resources :auctions, only: [:show] do

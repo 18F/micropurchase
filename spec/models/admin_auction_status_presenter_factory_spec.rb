@@ -20,11 +20,11 @@ describe AdminAuctionStatusPresenterFactory do
   end
 
   context 'when the auction approval request is pending' do
-    it 'should return a AdminAuctionStatusPresenter::Pending' do
-      auction = create(:auction, c2_status: :pending)
+    it 'should return a AdminAuctionStatusPresenter::PendingApproval' do
+      auction = create(:auction, c2_status: :pending_approval)
 
       expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
-        .to be_a(C2StatusPresenter::Pending)
+        .to be_a(C2StatusPresenter::PendingApproval)
     end
   end
 
