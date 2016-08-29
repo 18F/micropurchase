@@ -1,5 +1,6 @@
-class Admin::AuctionsController < Admin::BaseController
+class Admin::AuctionsController < ApplicationController
   layout 'admin', except: [:preview]
+  before_action :require_admin, except: [:show]
 
   def index
     @view_model = Admin::AuctionsIndexViewModel.new
@@ -62,5 +63,13 @@ class Admin::AuctionsController < Admin::BaseController
     Kaminari
       .paginate_array(@view_model.auction_view_models)
       .page(params[:page]).per(10)
+  end
+
+  def user_can_view_auction?(auction)
+    if current_user.is_a?(GuestWithToken)
+      current_user.auction == auction
+    else
+      current_user.admin?
+    end
   end
 end

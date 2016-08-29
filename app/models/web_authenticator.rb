@@ -1,6 +1,14 @@
-class WebAuthenticator < Struct.new(:controller)
+class WebAuthenticator < Struct.new(:controller, :params)
   def current_user
-    @current_user ||= User.where(id: controller.session[:user_id]).first || Guest.new
+    if @current_user.nil?
+      @current_user = if params[:token]
+                        GuestWithToken.new(params[:token])
+                      else
+                        User.where(id: controller.session[:user_id]).first || Guest.new
+                      end
+    end
+
+    @current_user
   end
 
   def api_current_user

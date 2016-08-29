@@ -7,7 +7,7 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
   end
 
   def csv_report_partial
-    if auction_status.over?
+    if current_user.admin? && auction_status.over?
       'admin/auctions/csv_report'
     else
       'components/null'
@@ -24,7 +24,7 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
   end
 
   def admin_auction_status_presenter
-    AdminAuctionStatusPresenterFactory.new(auction: auction).create
+    AdminAuctionStatusPresenterFactory.new(auction: auction, current_user: current_user).create
   end
 
   def status_presenter
@@ -82,7 +82,11 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
   end
 
   def admin_edit_auction_partial
-    'auctions/edit_auction_link'
+    if current_user.admin?
+      'auctions/edit_auction_link'
+    else
+      'components/null'
+    end
   end
 
   private

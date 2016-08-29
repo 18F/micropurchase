@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def authenticator
-    @_authenticator ||= WebAuthenticator.new(self)
+    @_authenticator ||= WebAuthenticator.new(self, params)
   end
 
   def handle_error(message, _code)
