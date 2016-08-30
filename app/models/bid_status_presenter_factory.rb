@@ -35,6 +35,8 @@ class BidStatusPresenterFactory
       BidStatusPresenter::Over::Vendor::Winner::PendingAcceptance
     elsif auction.accepted?
       BidStatusPresenter::Over::Vendor::Winner::PendingPayment
+    elsif auction.rejected?
+      BidStatusPresenter::Over::Vendor::Winner::Rejected
     elsif auction.delivery_url.present?
       BidStatusPresenter::Over::Vendor::Winner::WorkInProgress
     elsif auction.payment_confirmed?
