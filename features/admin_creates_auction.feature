@@ -18,7 +18,6 @@ Feature: Admin creates auctions in the admins panel
     Then I should see the start time I set for the auction
     And I should see the end time I set for the auction
 
-  @freeze_time
   @javascript
   Scenario: Adding an auction with a non-default delivery timeline
     Given I am an administrator
@@ -28,8 +27,8 @@ Feature: Admin creates auctions in the admins panel
     And I visit the auctions admin page
     When I click on the add auction link
     Then I should see an estimated delivery deadline of 12 business days from now
-    When I change the auction end date
-    Then I should see the updated delivery deadline
+    When I change the auction end date on the form
+    Then I should see the updated estimate for the delivery deadline
 
   Scenario: Creating an invalid auction
     Given I am an administrator

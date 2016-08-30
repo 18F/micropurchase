@@ -24,7 +24,7 @@ After('@background_jobs_off') do
 end
 
 Before('@freeze_time') do
-  Timecop.freeze(DateTime.parse("2016-07-26T14:45:44+00:00"))
+  Timecop.freeze(DateTime.parse("2016-08-28T19:45:44-04:00"))
 end
 
 After('@freeze_time') do
