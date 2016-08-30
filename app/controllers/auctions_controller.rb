@@ -34,7 +34,7 @@ class AuctionsController < ApplicationController
 
   def find_auction
     if params[:token]
-      Auction.find_by(token: params[:token])
+      AuctionQuery.new.unpublished_find(params[:token])
     else
       AuctionQuery.new.public_find(params[:id])
     end
