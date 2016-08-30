@@ -4,7 +4,7 @@ Feature: Winning vendor views auction
   So that I can deliver work to be evaluated
 
   @background_jobs_off
-  Scenario: I am the winner
+  Scenario: I am the winner, have not started work
     Given I am an authenticated vendor
     And I am going to win an auction
     Then I should not receive an email notifying me that I won
@@ -13,7 +13,7 @@ Feature: Winning vendor views auction
     And I should see the ready for work status box
     And I should receive an email notifying me that I won
 
-  Scenario: I am the winner
+  Scenario: I am the winner, auction was rejected
     Given I am an authenticated vendor
     And I won an auction that was rejected
     When I visit the auction page
