@@ -74,7 +74,7 @@ describe AuctionQuery do
 
   describe '#public_find' do
     it 'should not return an unpublished auction' do
-      unpublished_auction= create(:auction, :unpublished)
+      unpublished_auction = create(:auction, :unpublished)
 
       expect { query.public_find(unpublished_auction.id) }
         .to raise_error(ActiveRecord::RecordNotFound)
@@ -89,7 +89,7 @@ describe AuctionQuery do
 
   describe '#unpublished_find' do
     it 'returns an unpublished auction' do
-      unpublished_auction= create(:auction, :unpublished)
+      unpublished_auction = create(:auction, :unpublished)
 
       expect(query.unpublished_find(unpublished_auction.token)).to eq(unpublished_auction)
     end
