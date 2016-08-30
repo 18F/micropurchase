@@ -10,7 +10,7 @@
   auction_title: @auction.title
 ) %>
 
-<%= new_auction_receipt_path(@auction) %>
+<%= new_auction_receipt_url(@auction) %>
 
 <%= I18n.t('mailers.auction_mailer.auction_paid_winning_vendor_notification.para_2') %>
 
