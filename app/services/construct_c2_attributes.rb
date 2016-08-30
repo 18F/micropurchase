@@ -52,6 +52,6 @@ class ConstructC2Attributes
   end
 
   def url
-    AuctionUrl.new(auction).find
+    AuctionUrl.new(auction: auction).to_s
   end
 end

@@ -1,3 +1,12 @@
+Then(/^I should see the unpublished auction message for guests$/) do
+  expect(page).to have_content(
+    I18n.t('statuses.bid_status_presenter.unpublished.guest.header')
+  )
+  expect(page).to have_content(
+    I18n.t('statuses.bid_status_presenter.unpublished.guest.body')
+  )
+end
+
 Then(/^I should see the open auction message for guests$/) do
   expect(page).to have_content(
     "This auction is accepting bids until #{end_date}. Sign in or sign up with GitHub to bid."

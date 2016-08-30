@@ -31,7 +31,7 @@ When(/^I visit the admin auction page for that auction$/) do
 end
 
 When(/^I visit the admin auction page with the token/) do
-  visit admin_auction_path(@auction, token: @auction.token)
+  visit auction_path(@auction, token: @auction.token)
 end
 
 When(/^I visit the admin form for that auction$/) do

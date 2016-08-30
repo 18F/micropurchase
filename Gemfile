@@ -33,7 +33,6 @@ gem 'simple_form'
 gem 'timecop'
 gem 'uglifier'
 gem 'validate_url'
-gem 'hana'
 gem 'has_secure_token' # this can be removed in Rails 5
 
 group :test do

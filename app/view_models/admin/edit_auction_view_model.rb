@@ -9,14 +9,6 @@ class Admin::EditAuctionViewModel < Admin::BaseViewModel
     auction
   end
 
-  def auction_id
-    auction.id
-  end
-
-  def auction_token
-    auction.token
-  end
-
   def delivery_due_partial
     'admin/auctions/delivery_due_at'
   end

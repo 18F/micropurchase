@@ -7,7 +7,9 @@ class BidStatusPresenterFactory
   end
 
   def create
-    if future?
+    if auction.unpublished?
+      BidStatusPresenter::Unpublished::Guest
+    elsif future?
       future_message
     elsif over? && user_is_winning_bidder?
       over_winning_bidder_message

@@ -17,8 +17,4 @@ class User < ActiveRecord::Base
       UserPresenter.new(self)
     end
   end
-
-  def admin?
-    Admins.verify(github_id)
-  end
 end

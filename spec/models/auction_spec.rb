@@ -138,23 +138,10 @@ describe Auction do
 
   describe '#token' do
     it 'should automatically be generated when the auction is saved' do
-      u = FactoryGirl.create(:user)
-      a = Auction.new(started_at: Time.now, ended_at: Time.now, delivery_due_at: Time.now,
-                      title: 'foo', user: u, billable_to: 'bar')
-      expect(a.token).to be_blank
-      a.save!
-      expect(a.token).to_not be_blank
-    end
-  end
+      auction = build(:auction)
 
-  describe 'Auction.find_by_token' do
-    it 'should return a matching auction if found' do
-      a = FactoryGirl.create(:auction)
-      expect(Auction.find_by_token(a.token)).to eq(a)
-    end
-
-    it 'should raise ActiveRecord::RecordNotFound error if no auction matches' do
-      expect { Auction.find_by_token('foo') }.to raise_error(ActiveRecord::RecordNotFound)
+      expect(auction.token).to be_nil
+      expect { auction.save! }.to change { auction.token }
     end
   end
 end

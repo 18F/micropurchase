@@ -7,7 +7,7 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
   end
 
   def csv_report_partial
-    if current_user.admin? && auction_status.over?
+    if auction_status.over?
       'admin/auctions/csv_report'
     else
       'components/null'
@@ -24,7 +24,7 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
   end
 
   def admin_auction_status_presenter
-    AdminAuctionStatusPresenterFactory.new(auction: auction, current_user: current_user).create
+    AdminAuctionStatusPresenterFactory.new(auction: auction).create
   end
 
   def status_presenter
@@ -34,6 +34,7 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
   def admin_data
     {
       'Published status' => auction.published,
+      'Share this auction' => share_url,
       'Start date and time' => formatted_date(auction.started_at),
       'End date and time' => formatted_date(auction.ended_at),
       'Delivery deadline date and time' => formatted_date(auction.delivery_due_at),
@@ -82,20 +83,21 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
   end
 
   def admin_edit_auction_partial
-    if current_user.admin?
-      'auctions/edit_auction_link'
-    else
-      'components/null'
-    end
+    'auctions/edit_auction_link'
   end
 
   private
 
   def eligibility_label
-    if AuctionThreshold.new(auction).small_business?
-      'Small-business only'
+    EligibilityFactory.new(auction).create.label
+  end
+
+  def share_url
+    if auction.unpublished?
+      AuctionPreviewUrl.new(auction: auction)
     else
-      'SAM.gov only'
+      url = AuctionUrl.new(auction: auction)
+      Url.new(link_text: url, path_name: 'auction', params: { id: auction.id })
     end
   end
 

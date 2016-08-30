@@ -92,15 +92,3 @@ Then(/^I should see a success message confirming that the auction was unpublishe
     )
   end
 end
-
-Then(/^I should see the token preview status box$/) do
-  within('div.auction-detail-panel div.usa-alert') do
-    within('h3.usa-alert-heading') do
-      expect(page).to have_content(I18n.t('statuses.c2_presenter.guest_with_token.header'))
-    end
-
-    within('p.usa-alert-text') do
-      expect(page).to have_content(I18n.t('statuses.c2_presenter.guest_with_token.body'))
-    end
-  end
-end

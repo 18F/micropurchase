@@ -25,16 +25,4 @@ describe User do
       end
     end
   end
-
-  describe '#admin?' do
-    it 'should return true if the user is an admin' do
-      user = create(:user)
-      expect(user).to_not be_admin
-    end
-
-    it 'should return false if the user is not an admin' do
-      user = create(:admin_user)
-      expect(user).to be_admin
-    end
-  end
 end

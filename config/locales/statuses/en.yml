@@ -1,6 +1,12 @@
 en:
   statuses:
     bid_status_presenter:
+      unpublished:
+        guest:
+          header: "Auction Preview"
+          body: >
+            This is a preview for internal use only. This is not an official
+            solicitation.
       available:
         admin:
           body: "This auction is accepting bids until %{end_date}."
@@ -134,7 +140,3 @@ en:
           %{winner_email}'s pull request was accepted on %{accepted_date}. The
            vendor was paid %{amount} on %{paid_at} and this payment
            was confirmed by %{winner_email}.
-      guest_with_token:
-        status: "Auction Preview"
-        header: "Auction Preview"
-        body: "This is a live preview of how the auction will look when it is published and the other information we have about it."

@@ -71,12 +71,6 @@ class Auction < ActiveRecord::Base
     bids.select { |b| b.amount == lowest_amount }.sort_by(&:created_at)
   end
 
-  def self.find_by_token(token)
-    a = where(token: token).first
-    fail ActiveRecord::RecordNotFound if a.nil?
-    a
-  end
-
   private
 
   def lowest_amount
