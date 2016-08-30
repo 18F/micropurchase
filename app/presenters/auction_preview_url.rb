@@ -1,7 +1,8 @@
-class AuctionUrl
+class AuctionPreviewUrl
   include Rails.application.routes.url_helpers
   include ActionView::Helpers::UrlHelper
   Rails.application.routes.default_url_options[:host] = ENV['ROOT_URL']
+
   attr_reader :auction
 
   def initialize(auction:)
@@ -9,6 +10,12 @@ class AuctionUrl
   end
 
   def to_s
-    auction_url(auction)
+    link_to preview_url, preview_url
+  end
+
+  private
+
+  def preview_url
+    auction_url(auction, token: auction.token)
   end
 end

@@ -1,6 +1,12 @@
 en:
   statuses:
     bid_status_presenter:
+      unpublished:
+        guest:
+          header: "Auction Preview"
+          body: >
+            This is a preview for internal use only. This is not an official
+            solicitation.
       available:
         admin:
           body: "This auction is accepting bids until %{end_date}."

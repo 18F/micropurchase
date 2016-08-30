@@ -11,7 +11,7 @@ class AuctionsController < ApplicationController
   end
 
   def show
-    auction = AuctionQuery.new.public_find(params[:id])
+    auction = find_auction
     @view_model = AuctionShowViewModel.new(auction: auction, current_user: current_user)
   end
 
@@ -31,6 +31,14 @@ class AuctionsController < ApplicationController
   end
 
   private
+
+  def find_auction
+    if params[:token]
+      AuctionQuery.new.unpublished_find(params[:token])
+    else
+      AuctionQuery.new.public_find(params[:id])
+    end
+  end
 
   def paginated_auctions
     Kaminari

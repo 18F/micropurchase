@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160822213934) do
+ActiveRecord::Schema.define(version: 20160826013527) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,10 +42,12 @@ ActiveRecord::Schema.define(version: 20160822213934) do
     t.datetime "rejected_at"
     t.integer  "customer_id"
     t.integer  "c2_status",       default: 0,    null: false
+    t.string   "token"
   end
 
   add_index "auctions", ["customer_id"], name: "index_auctions_on_customer_id", using: :btree
   add_index "auctions", ["status"], name: "index_auctions_on_status", using: :btree
+  add_index "auctions", ["token"], name: "index_auctions_on_token", unique: true, using: :btree
   add_index "auctions", ["user_id"], name: "index_auctions_on_user_id", using: :btree
 
   create_table "auctions_skills", id: false, force: :cascade do |t|

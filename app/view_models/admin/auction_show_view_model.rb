@@ -34,6 +34,7 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
   def admin_data
     {
       'Published status' => auction.published,
+      'Share this auction' => share_url,
       'Start date and time' => formatted_date(auction.started_at),
       'End date and time' => formatted_date(auction.ended_at),
       'Delivery deadline date and time' => formatted_date(auction.delivery_due_at),
@@ -88,10 +89,15 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
   private
 
   def eligibility_label
-    if AuctionThreshold.new(auction).small_business?
-      'Small-business only'
+    EligibilityFactory.new(auction).create.label
+  end
+
+  def share_url
+    if auction.unpublished?
+      AuctionPreviewUrl.new(auction: auction)
     else
-      'SAM.gov only'
+      url = AuctionUrl.new(auction: auction)
+      Url.new(link_text: url, path_name: 'auction', params: { id: auction.id })
     end
   end
 
