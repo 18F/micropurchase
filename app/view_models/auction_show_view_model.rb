@@ -138,6 +138,14 @@ class AuctionShowViewModel
     bids.map { |bid| BidListItem.new(bid: bid, user: current_user) }
   end
 
+  def nofollow_partial
+    if auction.published?
+      'components/null'
+    else
+      'components/nofollow'
+    end
+  end
+
   private
 
   def lowest_bidder_name
