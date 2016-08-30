@@ -156,6 +156,8 @@ GEM
       rest-client
       terminal-table
     hana (1.3.2)
+    has_secure_token (1.0.0)
+      activerecord (>= 3.0)
     hashdiff (0.3.0)
     hashie (3.4.4)
     highline (1.7.8)
@@ -414,6 +416,7 @@ DEPENDENCIES
   foreman
   hakiri
   hana
+  has_secure_token
   holidays
   jasmine
   jquery-rails

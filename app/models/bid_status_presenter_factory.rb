@@ -7,7 +7,9 @@ class BidStatusPresenterFactory
   end
 
   def create
-    if future?
+    if auction.unpublished?
+      BidStatusPresenter::Unpublished::Guest
+    elsif future?
       future_message
     elsif over? && user_is_winning_bidder?
       over_winning_bidder_message
@@ -35,6 +37,8 @@ class BidStatusPresenterFactory
       BidStatusPresenter::Over::Vendor::Winner::PendingAcceptance
     elsif auction.accepted?
       BidStatusPresenter::Over::Vendor::Winner::PendingPayment
+    elsif auction.rejected?
+      BidStatusPresenter::Over::Vendor::Winner::Rejected
     elsif auction.delivery_url.present?
       BidStatusPresenter::Over::Vendor::Winner::WorkInProgress
     elsif auction.payment_confirmed?

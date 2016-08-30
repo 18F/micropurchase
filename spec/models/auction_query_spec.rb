@@ -73,16 +73,25 @@ describe AuctionQuery do
   end
 
   describe '#public_find' do
-    let(:unpublished_auction) { create(:auction, :unpublished) }
-    let(:published_auction) { create(:auction, :published) }
-
     it 'should not return an unpublished auction' do
+      unpublished_auction = create(:auction, :unpublished)
+
       expect { query.public_find(unpublished_auction.id) }
         .to raise_error(ActiveRecord::RecordNotFound)
     end
 
     it 'should return a published auction' do
+      published_auction = create(:auction, :published)
+
       expect(query.public_find(published_auction.id)).to eq(published_auction)
+    end
+  end
+
+  describe '#unpublished_find' do
+    it 'returns an unpublished auction' do
+      unpublished_auction = create(:auction, :unpublished)
+
+      expect(query.unpublished_find(unpublished_auction.token)).to eq(unpublished_auction)
     end
   end
 

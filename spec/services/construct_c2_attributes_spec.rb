@@ -4,7 +4,7 @@ describe ConstructC2Attributes do
   describe '#perform' do
     it 'constructs the correct attributes' do
       auction = create(:auction)
-      url = AuctionUrl.new(auction).find
+      url = AuctionUrl.new(auction: auction).to_s
 
       attributes = ConstructC2Attributes.new(auction).perform
       gsa_attributes = attributes[:gsa18f_procurement]

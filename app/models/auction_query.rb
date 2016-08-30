@@ -13,6 +13,10 @@ class AuctionQuery
     relation.published.find(id)
   end
 
+  def unpublished_find(token)
+    relation.find_by(token: token)
+  end
+
   def upcoming_auction_count
     public_index.started_at_in_future.count
   end

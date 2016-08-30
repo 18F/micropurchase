@@ -1,6 +1,12 @@
 en:
   statuses:
     bid_status_presenter:
+      unpublished:
+        guest:
+          header: "Auction Preview"
+          body: >
+            This is a preview for internal use only. This is not an official
+            solicitation.
       available:
         admin:
           body: "This auction is accepting bids until %{end_date}."
@@ -69,6 +75,9 @@ en:
               18F is working to determine if <a href=%{delivery_url}>your pull
               request</a> meets the auction's acceptance criteria. You will receive an email
               once this determination is made.
+          rejected:
+            header: 'Rejected'
+            body: "Your code submissions was rejected on %{rejected_at}."
           work_in_progress:
             header: 'Work in progress'
             body: >

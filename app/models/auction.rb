@@ -10,6 +10,8 @@ class Auction < ActiveRecord::Base
   has_many :bidders, through: :bids
   has_and_belongs_to_many :skills
 
+  has_secure_token
+
   enum c2_status: {
     not_requested: 0,
     sent: 2,

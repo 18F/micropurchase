@@ -11,7 +11,7 @@ bundle check || bundle install
 
 # Set up configurable environment variables
 if [ ! -f .env ]; then
-  cp .sample.env .env
+  cp .env.example .env
 fi
 
 # Set up database and add any development seed data

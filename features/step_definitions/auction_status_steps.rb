@@ -1,3 +1,12 @@
+Then(/^I should see the unpublished auction message for guests$/) do
+  expect(page).to have_content(
+    I18n.t('statuses.bid_status_presenter.unpublished.guest.header')
+  )
+  expect(page).to have_content(
+    I18n.t('statuses.bid_status_presenter.unpublished.guest.body')
+  )
+end
+
 Then(/^I should see the open auction message for guests$/) do
   expect(page).to have_content(
     "This auction is accepting bids until #{end_date}. Sign in or sign up with GitHub to bid."
@@ -73,6 +82,12 @@ end
 Then(/^I should see the pending payment status box$/) do
   expect(page).to have_content(
     I18n.t('statuses.bid_status_presenter.over.winner.pending_payment.header')
+  )
+end
+
+Then(/^I should see winning bidder status for a rejected auction$/) do
+  expect(page).to have_content(
+    I18n.t('statuses.bid_status_presenter.over.winner.rejected.header')
   )
 end
 

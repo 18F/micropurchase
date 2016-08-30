@@ -135,4 +135,13 @@ describe Auction do
       end
     end
   end
+
+  describe '#token' do
+    it 'should automatically be generated when the auction is saved' do
+      auction = build(:auction)
+
+      expect(auction.token).to be_nil
+      expect { auction.save! }.to change { auction.token }
+    end
+  end
 end

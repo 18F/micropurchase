@@ -8,7 +8,7 @@ class AuctionReceiptShowViewModel
   end
 
   def auction_url
-    AuctionUrl.new(auction).find
+    AuctionUrl.new(auction: auction).to_s
   end
 
   def auction_paid_at

@@ -4,16 +4,6 @@ Feature: Vendor views closed auctions
   So that I see who won
 
   @background_jobs_off
-  Scenario: I am the winner
-    Given I am an authenticated vendor
-    And I am going to win an auction
-    Then I should not receive an email notifying me that I won
-    When the auction ends
-    And I visit the auction page
-    And I should see the ready for work status box
-    And I should receive an email notifying me that I won
-
-  @background_jobs_off
   Scenario: I am not the winner
     Given I am an authenticated vendor
     And I am going to lose an auction
