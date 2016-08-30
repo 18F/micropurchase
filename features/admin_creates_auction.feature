@@ -18,6 +18,7 @@ Feature: Admin creates auctions in the admins panel
     Then I should see the start time I set for the auction
     And I should see the end time I set for the auction
 
+  @freeze_time
   @javascript
   Scenario: Adding an auction with a non-default delivery timeline
     Given I am an administrator
