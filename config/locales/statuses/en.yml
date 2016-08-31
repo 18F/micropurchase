@@ -3,7 +3,7 @@ en:
     bid_status_presenter:
       unpublished:
         guest:
-          header: "Auction Preview"
+          header: "Draft"
           body: >
             This is a preview for internal use only. This is not an official
             solicitation.
