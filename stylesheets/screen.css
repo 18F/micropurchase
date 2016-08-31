@@ -1,5 +1,7 @@
 /* @override http://localhost:4000/stylesheets/screen.css */
 
+/* @override http://localhost:4000/stylesheets/screen.css */
+
 /* @group bootstrap */
 
 html {
@@ -2072,29 +2074,7 @@ main div.wrap > form { max-width: 576px; }
 	top: 40px;
 }
 
-.auction.is-draft .draft{
-	border-radius: 5px 5px 0 0;
-	background: repeating-linear-gradient(
-		  45deg,
-		  #f6d27b,
-		  #f6d27b 10px,
-		  #ffe5a4 10px,
-		  #ffe5a4 20px
-		);
-	color: #400600;
-	font-weight: 600;
-	font-size: 14px;
-	text-transform: uppercase;
-	text-align: center;
-	letter-spacing: 2px;
-	padding: 6px 0;
-	margin-bottom: 6px;
-	position: absolute;
-	left: 0;
-	top: 0;
-	right: 0;
 
-}
 .auction .auction-header a,
 .auction .auction-header a:visited{
 	color: #004a7f;
@@ -2181,7 +2161,7 @@ main div.wrap > form { max-width: 576px; }
 	line-height: 1em;
 	border-radius: 999em;
 	text-decoration: none;
-	color: inherit;
+	color: #333;
 	font-size: 14px;
 }
 
@@ -2556,6 +2536,17 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 /* @group workflow */
 
+.auction-workflow.auction-workflow-draft-vendors{
+	background: #eaf4fc;
+		background: repeating-linear-gradient(
+		  45deg,
+		  #ddeffc,
+		  #ddeffc 10px,
+		  #eaf4fc 10px,
+		  #eaf4fc 20px
+		);
+
+}
 .field.field-delivery-url{
 	margin-top: 18px;
 	margin-bottom: 0;
@@ -2867,6 +2858,8 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
   position: relative;
   padding: 0 36px 0 3.6em;
   border: 1px solid #ccc;
+  border-bottom-color: #c0c0c0;
+  border-right-color: #bbb;
   border-radius: 4px;
   background: #f3f3f3;
   background: linear-gradient(#f3f3f3, #f0f0f0);
@@ -2874,6 +2867,7 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
   line-height: 2em;
   color: #333;
   font-size: 14px;
+	box-shadow: 1px 1px 0 rgba(0,0,0,0.04);
 }
 
 .layout-auctions-show main .auction-footer .share h1,
@@ -2899,7 +2893,7 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 .layout-auctions-show main .auction-footer .share a{
 	left: auto;
-	right: 0;
+	right: 1px;
 	background: url(images/png/clipboard.png) 16px center no-repeat;
 	background-size: 16px 16px;
 	width: 3em;
