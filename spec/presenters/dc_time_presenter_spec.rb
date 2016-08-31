@@ -19,6 +19,16 @@ describe DcTimePresenter do
         expect(converter.convert).to eq(nil)
       end
     end
+
+    context 'when it is already in the DC timezone' do
+      let(:time) { Time.parse('2016-09-01 13:00 -04:00') }
+
+      it 'should stay in the DC timezone' do
+        c = converter.convert
+        expect(c.to_s).to eq(Time.parse('2016-09-01 13:00 -04:00').to_s)
+        expect(c.zone).to eq('EDT')
+      end
+    end
   end
 
   describe '#convert_and_format' do
