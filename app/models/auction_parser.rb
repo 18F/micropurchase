@@ -46,7 +46,7 @@ class AuctionParser
   def delivery_due_at
     if due_in_days.present?
       real_days = due_in_days.to_i
-      DefaultDeadlineDateTime.new(ended_at, real_days).dc_time
+      DefaultDeadlineDateTime.new(start_time: ended_at, day_offset: real_days).dc_time
     else
       parse_datetime("delivery_due_at")
     end
