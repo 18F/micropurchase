@@ -13,8 +13,8 @@ class DcTimePresenter
     new(time).convert
   end
 
-  def self.parse(time_str)
-    time_zone.parse(time_str)
+  def self.parse(time)
+    time_zone.parse(time)
   end
 
   def self.convert_and_format(time, format = FORMAT, timezone_label: true)

@@ -45,8 +45,8 @@ class AuctionParser
 
   def delivery_due_at
     if due_in_days.present?
-      real_days = due_in_days.to_i.business_days
-      end_of_workday(real_days.after(ended_at))
+      real_days = due_in_days.to_i
+      DefaultDeadlineDateTime.new(start_time: ended_at, day_offset: real_days).dc_time
     else
       parse_datetime("delivery_due_at")
     end
@@ -54,11 +54,6 @@ class AuctionParser
 
   def due_in_days
     params[:auction][:due_in_days]
-  end
-
-  def end_of_workday(date)
-    cob = Time.parse(BusinessTime::Config.end_of_workday)
-    Time.mktime(date.year, date.month, date.day, cob.hour, cob.min, cob.sec)
   end
 
   def ended_at
