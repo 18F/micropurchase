@@ -108,9 +108,8 @@ When(/^I edit the new auction form$/) do
   select(@skill.name, from: "auction_skill_ids")
 end
 
-When(/^I change the auction end date$/) do
-  datetime = DefaultDateTime.new(3.business_days.from_now).convert
-  @end_day = DcTimePresenter.convert(datetime)
+When(/^I change the auction end date on the form$/) do
+  @end_day = DefaultDateTime.new(3.business_days.from_now).convert
   fill_in "auction_ended_at", with: @end_day.strftime('%Y-%m-%d')
 end
 
@@ -121,10 +120,10 @@ Then(/^I should see an estimated delivery deadline of 12 business days from now$
   end
 end
 
-Then(/^I should see the updated delivery deadline$/) do
+Then(/^I should see the updated estimate for the delivery deadline$/) do
   within('.estimated-delivery-date') do
-    delivery_date = DefaultDateTime.new(5.business_days.after(@end_day)).convert
-    formatted_delivery_date = DcTimePresenter.convert_and_format(delivery_date)
+    delivery_date = 5.business_days.after(@end_day)
+    formatted_delivery_date = DcTimePresenter.format(delivery_date)
     expect(page).to have_content(
       "Estimated delivery date #{formatted_delivery_date}"
     )
