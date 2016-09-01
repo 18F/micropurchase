@@ -474,7 +474,7 @@
 </section>
 <section class="auction-workflow auction-workflow-payment-url-needed-vendors">
   <h1>Payment URL needed</h1>
-  <p>Please either <a href="{{site.baseurl}}/profile#payment-url">specify a default payment URL</a> (preferred), or provide an auction-specific payment URL below. For more information, see our <a href="{{site.baseurl}}/docs/getting-paid">guide to getting paid</a>.</p>
+  <p>Before 18F can pay you, we&rsquo;ll need a location (URL) we can go to submit our credit card information. Please either <a href="{{site.baseurl}}/profile#payment-url">specify a default payment URL</a> or provide an auction-specific payment URL, below. For more information, see our <a href="{{site.baseurl}}/docs/getting-paid">guide to getting paid</a>.</p>
   <form data-auction-workflow-state="pending-payment-vendors">
     <div class="field">
       <label>
@@ -491,15 +491,18 @@
   <form data-auction-workflow-state="pending-payment-confirmation-admins">
     <button>Mark as paid</button>  
   </form>
-  <form data-auction-workflow-state="pending-payment-method-admins">
+  <form data-auction-workflow-state="pending-payment-url-admins">
     <button>Mark as unpayable</button>  
   </form>
 </section>
 <section class="auction-workflow auction-workflow-pending-payment-from-customer-admins">
   <h1>Pending payment from customer</h1>
-  <p>[if currentUser != [auction.acceptanceAdmin]][auction.acceptanceAdmin][else]You[/endif] accepted <a href="{{site.baseurl}}/people/vendors/show">[auction.winner]&rsquo;s</a> <a href="#">pull request</a> on [auction.acceptanceDate]. [auction.customer] has been asked to remit payment. Alternatively, you can manually mark this auction as paid.</p>
+  <p>[auction.customer] has been asked to remit payment. Alternatively, you can manually mark this auction as paid.</p>
   <form data-auction-workflow-state="pending-payment-confirmation-admins">
     <button>Mark as paid</button>  
+  </form>
+  <form data-auction-workflow-state="pending-payment-url-admins">
+    <button>Mark as unpayable</button>  
   </form>
 </section>
 <section class="auction-workflow auction-workflow-pending-payment-vendors">
