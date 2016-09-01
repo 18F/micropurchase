@@ -2562,6 +2562,11 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	width: 8em;
 }
 
+.auction-workflow-payment-url-needed-vendors .field{
+	margin-top: 20px;
+	margin-bottom: 0;
+}
+
 /* @end */
 
 /* @group fieldset-date-time */
