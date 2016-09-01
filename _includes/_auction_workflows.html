@@ -465,34 +465,40 @@
 </section>
 <section class="auction-workflow auction-workflow-pending-acceptance-vendors">
   <h1>Pending acceptance</h1>
-  <p>18F is working with [auction.customerName] to determine if <a href="#">your pull request</a> meets the auction&rsquo;s acceptance criteria. You will receive an email once this determination is made.
+  <p>18F is working to determine if <a href="#">your pull request</a> meets the auction&rsquo;s acceptance criteria. You will receive an email once this determination is made.
 </p>
 </section>
-<section class="auction-workflow auction-workflow-payment-url-needed-admins">
-  <h1>Payment URL needed</h1>
-  <p>[auction.acceptanceAdmin] accepted <a href="{{site.baseurl}}/people/vendors/show">[auction.winner]&rsquo;s</a> <a href="#">pull request</a> on [auction.acceptanceDate]. However, this vendor cannot be paid until they&rsquo;ve specified a valid payment URL.</p>
+<section class="auction-workflow auction-workflow-pending-payment-method-admins">
+  <h1>Pending payment method</h1>
+  <p>This vendor has been asked to provide <a href="{{site.baseurl}}/docs/getting-paid">an acceptable payment method</a>.</p>
 </section>
-<section class="auction-workflow auction-workflow-payment-url-needed-vendors">
-  <h1>Payment URL needed</h1>
-  <p><a href="#">Your pull request</a> was accepted, but 18F and [auction.customerName] cannot pay you until you have specified a valid payment URL. Please <a href="{{site.baseurl}}/profile#payment-url">update your profile</a>.</p>
+<section class="auction-workflow auction-workflow-payment-method-needed-vendors">
+  <h1>Payment method needed</h1>
+  <p>Please either <a href="{{site.baseurl}}/profile#payment-url">specify a payment URL</a> (preferred), or <a href="mailto:micropurchase@gsa.gov">email an invoice</a> that is payable via a secure credit card form. For more information, see our <a href="{{site.baseurl}}/docs/getting-paid">guide to getting paid</a>.</p>
+  <form data-auction-workflow-state="pending-payment-vendors">
+    <button class="button">Mark as invoiced</button>
+  </form>
 </section>
-<section class="auction-workflow auction-workflow-awaiting-payment-from-18f-admins">
-  <h1>Awaiting payment from 18F</h1>
-  <p>[if currentUser != [auction.acceptanceAdmin]][auction.acceptanceAdmin][else]You[/endif] accepted <a href="{{site.baseurl}}/people/vendors/show">[auction.winner]&rsquo;s</a> <a href="#">pull request</a> on [auction.acceptanceDate]. The p-card holder has been asked (<a href="#">via C2</a>) to remit payment at <a href="#"><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a>&rsquo;s payment URL</a>. Alternatively, you can manually mark this auction as paid.</p>
+<section class="auction-workflow auction-workflow-pending-payment-from-18f-admins">
+  <h1>Pending payment from 18F</h1>
+  <p>The p-card holder has been asked (<a href="#">via C2</a>) to remit payment. Alternatively, you can manually mark this auction as paid.</p>
   <form data-auction-workflow-state="pending-payment-confirmation-admins">
     <button>Mark as paid</button>  
   </form>
+  <form data-auction-workflow-state="pending-payment-method-admins">
+    <button>Mark as unpayable</button>  
+  </form>
 </section>
-<section class="auction-workflow auction-workflow-awaiting-payment-from-customer-admins">
-  <h1>Awaiting payment from customer</h1>
-  <p>[if currentUser != [auction.acceptanceAdmin]][auction.acceptanceAdmin][else]You[/endif] accepted <a href="{{site.baseurl}}/people/vendors/show"></a>[auction.winner]&rsquo;s pull request on [auction.acceptanceDate]. [auction.customer] has been asked to remit payment at [auction.winner]&rsquo;s <a href="#">payment URL</a>. Alternatively, you can manually mark this auction as paid.</p>
+<section class="auction-workflow auction-workflow-pending-payment-from-customer-admins">
+  <h1>Pending payment from customer</h1>
+  <p>[if currentUser != [auction.acceptanceAdmin]][auction.acceptanceAdmin][else]You[/endif] accepted <a href="{{site.baseurl}}/people/vendors/show">[auction.winner]&rsquo;s</a> <a href="#">pull request</a> on [auction.acceptanceDate]. [auction.customer] has been asked to remit payment. Alternatively, you can manually mark this auction as paid.</p>
   <form data-auction-workflow-state="pending-payment-confirmation-admins">
     <button>Mark as paid</button>  
   </form>
 </section>
 <section class="auction-workflow auction-workflow-pending-payment-vendors">
   <h1>Pending payment</h1>
-  <p><a href="#">Your pull request</a> was accepted! 18F is working with [auction.customerName] to issue payment at <a href="#">your payment URL</a>. You will receive an email once we&rsquo;ve issued payment.</p>
+  <p>18F is working to remit payment. You will receive an email once we&rsquo;ve issued payment.</p>
 </section>
 <section class="auction-workflow auction-workflow-pending-payment-confirmation-admins">
   <h1>Pending payment confirmation</h1>
@@ -512,7 +518,7 @@
 </section>
 <section class="auction-workflow auction-workflow-paid-vendors">
   <h1>Paid</h1>
-  <p>You won this auction on <time>[auction.winDate]</time>, <a href="#">your pull request</a> was accepted on <time>[auction.acceptanceDate]</time>, and you were paid $[auction.winAmount] on <time>[auction.paymentDate]</time>.
+  <p>You won this auction on <time>[auction.winDate]</time>; 18F accepted <a href="#">your pull request</a> on <time>[auction.acceptanceDate]</time>; and you were paid $[auction.winAmount] on <time>[auction.paymentDate]</time>.
 </p>
 </section>
 <section class="auction-workflow auction-workflow-rejected-admins">
@@ -521,7 +527,7 @@
 </section>
 <section class="auction-workflow auction-workflow-rejected-vendors">
   <h1>Rejected</h1>
-  <p>Your winning bid was rejected on <time>[auction.rejectionDate]</time>.</p>
+  <p>18F rejected your work on <time>[auction.rejectionDate]</time>.</p>
 </section>
 <section class="auction-workflow auction-workflow-closed-didnt-win-vendors">
   <h1>Closed</h1>
