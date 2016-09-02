@@ -67,6 +67,12 @@ Then(/^I should see the ready for work status box$/) do
   expect(find_field('auction_delivery_url')).not_to be_nil
 end
 
+Then(/^I should see the coming soon status box for admins$/) do
+  expect(page).to have_content(
+    I18n.t('statuses.admin_auction_status_presenter.future_published.header')
+  )
+end
+
 Then(/^I should see the work in progress status box$/) do
   expect(page).to have_content(
     I18n.t('statuses.bid_status_presenter.over.winner.work_in_progress.header')

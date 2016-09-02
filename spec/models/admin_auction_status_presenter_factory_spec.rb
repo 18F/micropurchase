@@ -10,6 +10,15 @@ describe AdminAuctionStatusPresenterFactory do
     end
   end
 
+  context "when the auction has been published but hasn't started yet" do
+    it 'should return a AdminAuctionStatusPresenter::FuturePublished' do
+      auction = create(:auction, :future, :published)
+
+      expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
+        .to be_a(AdminAuctionStatusPresenter::FuturePublished)
+    end
+  end
+
   context 'when the auction has been approved' do
     it 'should return a AdminAuctionStatusPresenter::Accepted' do
       auction = create(:auction, :closed, :with_bids, :delivered, :accepted)
