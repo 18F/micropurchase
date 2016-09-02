@@ -40,6 +40,10 @@ Given(/^I am going to lose an auction$/) do
   end
 end
 
+Given(/^there is an auction with work in progress$/) do
+  @auction = FactoryGirl.create(:auction, :closed, :with_bids, :delivered)
+end
+
 When(/^the auction ends$/) do
   Timecop.return
   Timecop.travel(@auction.ended_at + 5.minutes)

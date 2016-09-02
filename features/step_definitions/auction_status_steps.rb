@@ -79,6 +79,12 @@ Then(/^I should see the work in progress status box$/) do
   )
 end
 
+Then(/^I should see the work in progress status box for admins$/) do
+  expect(page).to have_content(
+    I18n.t('statuses.admin_auction_status_presenter.work_in_progress.header')
+  )
+end
+
 Then(/^I should see the pending acceptance status box$/) do
   expect(page).to have_content(
     I18n.t('statuses.bid_status_presenter.over.winner.pending_acceptance.header')

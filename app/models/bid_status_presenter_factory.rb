@@ -39,7 +39,7 @@ class BidStatusPresenterFactory
       BidStatusPresenter::Over::Vendor::Winner::PendingPayment
     elsif auction.rejected?
       BidStatusPresenter::Over::Vendor::Winner::Rejected
-    elsif auction.delivery_url.present?
+    elsif work_in_progress?
       BidStatusPresenter::Over::Vendor::Winner::WorkInProgress
     elsif auction.payment_confirmed?
       BidStatusPresenter::Over::Vendor::Winner::PaymentConfirmed
@@ -98,6 +98,10 @@ class BidStatusPresenterFactory
 
   def ineligible?
     !EligibilityFactory.new(auction).create.eligible?(user)
+  end
+
+  def work_in_progress?
+    auction_status.work_in_progress?
   end
 
   def over?

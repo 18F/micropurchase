@@ -105,6 +105,12 @@ en:
         header: Coming soon
         actions:
           unpublish: "Unpublish"
+      work_in_progress:
+        header: Work in progress
+        body: >
+          %{winner_url} initiated a <a href=%{delivery_url}>pull
+           request</a>, and should complete their work no later than
+           %{delivery_deadline}.
       pending_acceptance:
         body: >
           %{winner_url} made a <a href=%{delivery_url}>pull request</a> and marked this auction as
