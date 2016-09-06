@@ -1,9 +1,9 @@
-require "factory_girl"
-  require Rails.root.join('spec', 'support', 'helpers', 'factory_girl.rb')
+require 'factory_girl'
+require Rails.root.join('spec', 'support', 'helpers', 'factory_girl.rb')
 
 namespace :dev do
-  desc "Sample data for local development environment"
-  task prime: "db:setup" do
+  desc 'Sample data for local development environment'
+  task prime: 'db:setup' do
     include FactoryGirl::Syntax::Methods
 
     skills = [

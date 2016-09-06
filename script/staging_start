@@ -7,8 +7,6 @@ set -x
 # http://stackoverflow.com/a/6859838/358804
 PORT=${PORT-3000}
 
-bin/rake cf:on_first_instance db:drop
-bin/rake cf:on_first_instance db:create
 bin/rake cf:on_first_instance db:migrate
 bin/rake staging:prime
 foreman start -p $PORT

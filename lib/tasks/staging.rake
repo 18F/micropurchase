@@ -1,9 +1,9 @@
-require "factory_girl"
-  require Rails.root.join('spec', 'support', 'helpers', 'factory_girl.rb')
+require 'factory_girl'
+require Rails.root.join('spec', 'support', 'helpers', 'factory_girl.rb')
 
 namespace :staging do
   desc "Sample data for staging environment"
-  task prime: :environment do
+  task prime: 'db:setup' do
     include FactoryGirl::Syntax::Methods
 
     skills = [
