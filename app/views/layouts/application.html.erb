@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- test content -->
     <meta charset="utf-8">
-    <meta name="ROBOTS" content="NOODP" />
+    <meta name="robots" content="noodp" />
+    <%= yield :nofollow %>
     <title><%= yield(:title).presence || "18F - Micro-purchase" %></title>
     <meta property="og:title" content="<%= yield(:title).presence || "18F - Micro-purchase" %>">
 
