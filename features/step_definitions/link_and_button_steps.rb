@@ -37,6 +37,11 @@ When(/^I click on the update button$/) do
   step("I click on the \"#{update_button}\" button")
 end
 
+When(/^I click on the unpublish button$/) do
+  unpublish_button = I18n.t('statuses.admin_auction_status_presenter.future_published.actions.unpublish')
+  step("I click on the \"#{unpublish_button}\" button")
+end
+
 When(/^I click on the I'm done button$/) do
   button = I18n.t('statuses.bid_status_presenter.over.winner.work_in_progress.action')
   step("I click on the \"#{button}\" button")
@@ -90,12 +95,26 @@ When(/^I click on the create skill button$/) do
   step("I click on the \"#{create_button}\" button")
 end
 
+When(/^I click on the Masquerade link$/) do
+  link = I18n.t('links_and_buttons.users.masquerade')
+  step("I click on the \"#{link}\" link")
+end
+
+Then(/^I should not see the Masquerade link$/) do
+  link = I18n.t('links_and_buttons.users.masquerade')
+  expect(page).not_to have_link(link)
+end
+
+When(/^I click on the Stop Masquerading link$/) do
+  link = I18n.t('links_and_buttons.header.stop_masquerading')
+  step("I click on the \"#{link}\" link")
+end
+
 When(/^I click on the auction's title$/) do
   click_on(@auction.title)
 end
 
 When(/^I click on the name of the first user$/) do
-  @user = User.last
   click_on(@user.name)
 end
 

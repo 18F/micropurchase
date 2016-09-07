@@ -28,6 +28,8 @@ information on setting up the back end of the web app, see below.
 * [Leads tracker] (https://trello.com/b/YoEbAui9/micropurchase-leads)
 * [Backlog](https://waffle.io/18F/micropurchase)
 
+[![Throughput Graph](https://graphs.waffle.io/18F/micropurchase/throughput.svg)](https://waffle.io/18F/micropurchase/metrics/throughput)
+
 ## Documentation
 
 ### Methods and classes

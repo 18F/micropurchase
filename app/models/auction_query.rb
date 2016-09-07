@@ -41,7 +41,7 @@ class AuctionQuery
 
   def complete_and_successful
     relation
-      .delivered
+      .delivery_url
       .delivery_accepted
       .paid
   end

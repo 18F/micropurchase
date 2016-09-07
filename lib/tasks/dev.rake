@@ -1,9 +1,9 @@
-require "factory_girl"
-  require Rails.root.join('spec', 'support', 'helpers', 'factory_girl.rb')
+require 'factory_girl'
+require Rails.root.join('spec', 'support', 'helpers', 'factory_girl.rb')
 
 namespace :dev do
-  desc "Sample data for local development environment"
-  task prime: "db:setup" do
+  desc 'Sample data for local development environment'
+  task prime: 'db:setup' do
     include FactoryGirl::Syntax::Methods
 
     skills = [
@@ -21,7 +21,7 @@ namespace :dev do
     future_reverse = FactoryGirl.create(:auction, :reverse, :future)
     future_reverse.skills << skills
     FactoryGirl.create(:auction, :reverse, :closed, :with_bids, purchase_card: :other)
-    FactoryGirl.create(:auction, :reverse, :closed, :with_bids, :c2_approved, :delivered)
+    FactoryGirl.create(:auction, :reverse, :closed, :with_bids, :c2_approved, :delivery_url)
     FactoryGirl.create(:auction, :sealed_bid, :with_bids)
     FactoryGirl.create(:auction, :sealed_bid, :expiring, :with_bids)
     future_sealed = FactoryGirl.create(:auction, :sealed_bid, :future)

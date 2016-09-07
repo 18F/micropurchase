@@ -5,7 +5,7 @@ class DateTimeParser
   end
 
   def parse
-    DcTimePresenter.time_zone.parse("#{year}-#{month}-#{day} #{hour}:#{minute} #{meridiem}")
+    DcTimePresenter.parse("#{year}-#{month}-#{day} #{hour}:#{minute} #{meridiem}")
   end
 
   private

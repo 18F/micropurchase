@@ -38,6 +38,9 @@ Rails.application.routes.draw do
     scope '/people' do
       resources :admins, only: [:index]
       resources :vendors, only: [:index]
+      resources :vendors, only: [:show] do
+        resources :masquerades, only: [:new, :destroy]
+      end
     end
 
     scope '/settings' do

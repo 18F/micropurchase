@@ -40,6 +40,10 @@ Given(/^I am going to lose an auction$/) do
   end
 end
 
+Given(/^there is an auction with work in progress$/) do
+  @auction = FactoryGirl.create(:auction, :closed, :with_bids, :delivery_url)
+end
+
 When(/^the auction ends$/) do
   Timecop.return
   Timecop.travel(@auction.ended_at + 5.minutes)
@@ -139,7 +143,7 @@ Given(/^there is a complete and successful auction$/) do
 end
 
 Given(/^there is a rejected auction$/) do
-  @auction = FactoryGirl.create(:auction, :closed, :with_bids, :delivered, :rejected)
+  @auction = FactoryGirl.create(:auction, :closed, :with_bids, :delivery_url, :rejected)
 end
 
 Given(/^there is a rejected auction with no bids$/) do
