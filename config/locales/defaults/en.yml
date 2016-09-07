@@ -28,3 +28,4 @@ en:
     auctions:
       show:
         winner_report: "Generate a CSV Report"
+        notes: "Notes"
