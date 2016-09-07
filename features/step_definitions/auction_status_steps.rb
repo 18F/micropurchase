@@ -25,6 +25,13 @@ Then(/^I should see the closed auction message for non-bidders$/) do
   )
 end
 
+Then(/^I should see the closed auction message for bidders$/) do
+  amount = Currency.new(@user.bids.last.amount)
+  expect(page).to have_content(
+    I18n.t('statuses.bid_status_presenter.over.bidder.body', end_date: end_date, bid_amount: amount)
+  )
+end
+
 Then(/^I should see the future auction message for vendors$/) do
   expect(page).to have_content(
     I18n.t('statuses.bid_status_presenter.future.vendor.body', start_date: start_date)

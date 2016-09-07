@@ -95,12 +95,26 @@ When(/^I click on the create skill button$/) do
   step("I click on the \"#{create_button}\" button")
 end
 
+When(/^I click on the Masquerade link$/) do
+  link = I18n.t('links_and_buttons.users.masquerade')
+  step("I click on the \"#{link}\" link")
+end
+
+Then(/^I should not see the Masquerade link$/) do
+  link = I18n.t('links_and_buttons.users.masquerade')
+  expect(page).not_to have_link(link)
+end
+
+When(/^I click on the Stop Masquerading link$/) do
+  link = I18n.t('links_and_buttons.header.stop_masquerading')
+  step("I click on the \"#{link}\" link")
+end
+
 When(/^I click on the auction's title$/) do
   click_on(@auction.title)
 end
 
 When(/^I click on the name of the first user$/) do
-  @user = User.last
   click_on(@user.name)
 end
 

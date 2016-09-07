@@ -20,3 +20,4 @@ applications:
     C2_HOST: 'https://c2-staging.18f.gov'
     ROOT_URL: 'https://micropurchase-staging.18f.gov'
     ANALYTICS: false
+    MASQUERADE: true

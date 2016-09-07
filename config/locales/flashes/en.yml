@@ -1,0 +1,5 @@
+en:
+  flashes:
+    masquerades_controller:
+      new: "Now masquerading as %{user_email}"
+      destroy: "Stopped masquerading"
