@@ -1,5 +1,5 @@
 class Admin::AuctionsController < Admin::BaseController
-  layout 'admin', except: [:preview]
+  layout 'admin'
 
   def index
     @view_model = Admin::AuctionsIndexViewModel.new
@@ -11,12 +11,6 @@ class Admin::AuctionsController < Admin::BaseController
       auction: Auction.find(params[:id]),
       current_user: current_user
     )
-  end
-
-  def preview
-    auction = Auction.find(params[:id])
-    @view_model = ::AuctionShowViewModel.new(auction: auction, current_user: current_user)
-    render 'auctions/show'
   end
 
   def new

@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   get '/faq', to: 'application#faq'
   get '/auctions/rules/sealed-bid', to: 'auctions#sealed_bid_auction_rules'
   get '/auctions/rules/reverse', to: 'auctions#reverse_auction_rules'
-  get '/admin/auctions/:id/preview', to: 'admin/auctions#preview', as: 'admin_preview_auction'
   get '/admin', to: 'admin/auctions#index'
   get '/sign_up', to: 'sign_ups#show'
   get '/sign_in', to: 'sign_ins#show'

@@ -107,10 +107,6 @@ Then(/^I should not see that the auction indicates it is for small business only
   expect(auction_div).to_not have_content('Small-business only')
 end
 
-Then(/^I should see a preview of the auction$/) do
-  expect(page).to have_text(@unpublished_auction.description)
-end
-
 Then(/^I should see the name of the auction$/) do
   expect(page).to have_text(@auction.title)
 end
