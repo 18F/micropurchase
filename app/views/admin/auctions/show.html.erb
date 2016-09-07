@@ -11,8 +11,7 @@
 
   <div class="auction-title issue-title">
     <h1><%= @view_model.title %></h1>
-    <%= render partial: @view_model.admin_edit_auction_partial,
-      locals: { view_model: @view_model } %>
+    <%= render partial: 'auctions/edit_auction_link', locals: { view_model: @view_model } %>
      <%= render partial: @view_model.csv_report_partial,
         locals: { auction: @view_model } %>
     <div class="auction-subtitles">
@@ -32,6 +31,9 @@
   <div class="usa-width-one-third">
     <%= render partial: @view_model.admin_auction_status_partial,
       locals: { status: @view_model.admin_auction_status_presenter  } %>
+
+    <%= render partial: @view_model.admin_notes_partial,
+      locals: { auction: @view_model.auction  } %>
 
     <div class="auction-detail-panel">
       <div class="auction-info">
