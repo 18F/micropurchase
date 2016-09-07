@@ -5,7 +5,7 @@ module AuctionScopes
     scope :accepted, -> { where(status: statuses['accepted']) }
     scope :delivery_accepted, -> { where(status: statuses['accepted']).where.not(accepted_at: nil) }
     scope :default_purchase_card, -> { where(purchase_card: 0) }
-    scope :delivered, -> { where.not(delivery_url: [nil, '']) }
+    scope :delivery_url, -> { where.not(delivery_url: [nil, '']) }
     scope :ended_at_in_future, -> { where('ended_at > ?', Time.current) }
     scope :ended, -> { where('ended_at < ?', Time.current) }
     scope :evaluated, -> { where(status: [statuses['accepted'], statuses['rejected']]) }
