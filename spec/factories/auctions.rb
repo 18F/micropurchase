@@ -79,7 +79,7 @@ FactoryGirl.define do
       ended_at { quartile_minute(Time.now - 2.days) }
     end
 
-    trait :delivered do
+    trait :delivery_url do
       delivery_url 'https://github.com/foo/bar'
     end
 
@@ -138,20 +138,20 @@ FactoryGirl.define do
 
     trait :evaluation_needed do
       with_bids
-      delivered
+      delivery_url
       pending_acceptance
     end
 
     trait :payment_needed do
       with_bids
-      delivered
+      delivery_url
       accepted
       not_paid
     end
 
     trait :complete_and_successful do
       with_bids
-      delivered
+      delivery_url
       accepted
       paid
     end
