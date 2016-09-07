@@ -35,6 +35,14 @@ class UserPresenter < SimpleDelegator
     end
   end
 
+  def masquerade_partial
+    if ENV['MASQUERADE'] == 'true'
+      'admin/vendors/masquerade'
+    else
+      'components/null'
+    end
+  end
+
   def sam_status_label
     in_sam? ? 'Yes' : 'No'
   end

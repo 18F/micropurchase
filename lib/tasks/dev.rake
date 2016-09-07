@@ -1,21 +1,10 @@
-require "factory_girl"
-  require Rails.root.join('spec', 'support', 'helpers', 'factory_girl.rb')
+require 'factory_girl'
+require Rails.root.join('spec', 'support', 'helpers', 'factory_girl.rb')
 
 namespace :dev do
-  desc "Sample data for local development environment"
-  task prime: "db:setup" do
+  desc 'Sample data for local development environment'
+  task prime: 'db:setup' do
     include FactoryGirl::Syntax::Methods
-
-    client_account_name = '100 / Fake Project / Fake Business Unit'
-    ClientAccount.find_or_create_by(name: client_account_name) do |ca|
-      ca.billable = true
-      ca.tock_id = 100
-    end
-
-    Customer.find_or_create_by(agency_name: 'Fake Agency Commission') do |c|
-      c.contact_name = 'Fake Contact Person'
-      c.email = 'fake@fake.gov'
-    end
 
     skills = [
       Skill.find_or_create_by(name: 'rails'),

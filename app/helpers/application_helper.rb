@@ -1,5 +1,9 @@
 module ApplicationHelper
-  def controller_class
-    controller.class.name.include?('Admin') ? 'admin' : 'bidder'
+  def masquerading_partial
+    if session[:admin_id].present?
+      'components/stop_masquerading'
+    else
+      'components/null'
+    end
   end
 end
