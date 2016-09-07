@@ -96,6 +96,15 @@ en:
               <a href=%{issue_url}>the issue associated with this auction</a>.
               Then enter the pull request URL, below, and click "start work."
     admin_auction_status_presenter:
+      future_published:
+        body: >
+          This auction is visible to the public but is not currently
+          accepting bids. It will open on %{start_date}. If you
+          need to take it down for whatever reason, press the
+          “unpublish” button, below.
+        header: Coming soon
+        actions:
+          unpublish: "Unpublish"
       pending_acceptance:
         body: >
           %{winner_url} made a <a href=%{delivery_url}>pull request</a> and marked this auction as
