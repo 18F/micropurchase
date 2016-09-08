@@ -3,6 +3,9 @@
 <% content_for :data_tags do %>
   <%= render partial: '/auctions/data_tags', locals: { auction: @view_model } %>
 <% end %>
+<%= content_for :nofollow do %>
+  <%= render partial: @view_model.nofollow_partial %>
+<% end %>
 
 <div class="usa-grid">
   <%= link_to(

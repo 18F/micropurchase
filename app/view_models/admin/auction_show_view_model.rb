@@ -23,6 +23,14 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
     end
   end
 
+  def admin_notes_partial
+    if auction.notes.present?
+      'admin/auctions/notes'
+    else
+      'components/null'
+    end
+  end
+
   def admin_auction_status_presenter
     AdminAuctionStatusPresenterFactory.new(auction: auction).create
   end
@@ -60,10 +68,6 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
     auction.title
   end
 
-  def summary
-    auction.summary
-  end
-
   def relative_time
     status_presenter.relative_time
   end
@@ -80,10 +84,6 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
 
   def html_summary
     MarkdownRender.new(auction.summary).to_s
-  end
-
-  def admin_edit_auction_partial
-    'auctions/edit_auction_link'
   end
 
   private

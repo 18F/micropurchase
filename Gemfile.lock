@@ -160,6 +160,7 @@ GEM
       activerecord (>= 3.0)
     hashdiff (0.3.0)
     hashie (3.4.4)
+    high_voltage (3.0.0)
     highline (1.7.8)
     holidays (4.6.0)
     http-cookie (1.0.2)
@@ -417,6 +418,7 @@ DEPENDENCIES
   hakiri
   hana
   has_secure_token
+  high_voltage (~> 3.0.0)
   holidays
   jasmine
   jquery-rails

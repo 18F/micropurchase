@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- test content -->
     <meta charset="utf-8">
-    <meta name="ROBOTS" content="NOODP" />
+    <meta name="robots" content="noodp" />
+    <%= yield :nofollow %>
     <title><%= yield(:title).presence || "18F - Micro-purchase" %></title>
     <meta property="og:title" content="<%= yield(:title).presence || "18F - Micro-purchase" %>">
 
-    <!-- Link to FontAwesome -->
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <%= stylesheet_link_tag 'application', media: 'all', debug: true %>
     <%= jquery_include_tag :google %>
     <%= javascript_include_tag "application", debug: true %>

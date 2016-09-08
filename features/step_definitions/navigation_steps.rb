@@ -42,10 +42,6 @@ When(/^I visit the admin needs attention auctions page$/) do
   visit admin_auctions_needs_attention_path
 end
 
-When(/^I visit the preview page for the unpublished auction$/) do
-  visit admin_preview_auction_path(@unpublished_auction)
-end
-
 When(/^I visit the admin admins page$/) do
   visit admin_admins_path
 end

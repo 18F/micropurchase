@@ -9,7 +9,7 @@
       "line": 16,
       "link": "http://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
       "code": "render(partial => Admin::NewAuctionViewModel.new(BuildAuction.new(params, current_user).perform).delivery_due_partial, { :locals => ({ :f => f, :auction => Admin::NewAuctionViewModel.new(BuildAuction.new(params, current_user).perform) }) })",
-      "render_path": [{"type":"controller","class":"Admin::AuctionsController","method":"create","line":35,"file":"app/controllers/admin/auctions_controller.rb"},{"type":"template","name":"admin/auctions/new","line":3,"file":"app/views/admin/auctions/new.html.erb"}],
+      "render_path": [{"type":"controller","class":"Admin::AuctionsController","method":"create","line":29,"file":"app/controllers/admin/auctions_controller.rb"},{"type":"template","name":"admin/auctions/new","line":3,"file":"app/views/admin/auctions/new.html.erb"}],
       "location": {
         "type": "template",
         "template": "admin/auctions/_form"
@@ -19,51 +19,15 @@
       "note": ""
     },
     {
-      "warning_type": "Cross Site Scripting",
-      "warning_code": 4,
-      "fingerprint": "38eaf3a4c38ed941e5397a84c9f95b91a7c3dee9f70c0993131dd3be89180f75",
-      "message": "Unsafe model attribute in link_to href",
-      "file": "app/views/auctions/show.html.erb",
-      "line": 66,
-      "link": "http://brakemanscanner.org/docs/warning_types/link_to_href",
-      "code": "link_to(\"View on GitHub <icon class=\\\"fa fa-angle-double-right\\\"></icon>\".html_safe, ::AuctionShowViewModel.new(:auction => Auction.find(params[:id]), :current_user => current_user).issue_url, :target => \"_blank\")",
-      "render_path": [{"type":"controller","class":"Admin::AuctionsController","method":"preview","line":19,"file":"app/controllers/admin/auctions_controller.rb"}],
-      "location": {
-        "type": "template",
-        "template": "auctions/show"
-      },
-      "user_input": "Auction.find(params[:id])",
-      "confidence": "Medium",
-      "note": ""
-    },
-    {
-      "warning_type": "Cross Site Scripting",
-      "warning_code": 2,
-      "fingerprint": "419be5183daf252542d63068f2584522d2a84311bb27e584b1270a213711c045",
-      "message": "Unescaped model attribute",
-      "file": "app/views/auctions/_status.html.erb",
-      "line": 5,
-      "link": "http://brakemanscanner.org/docs/warning_types/cross_site_scripting",
-      "code": "::AuctionShowViewModel.new(:auction => Auction.find(params[:id]), :current_user => current_user).bid_status_presenter.body",
-      "render_path": [{"type":"controller","class":"Admin::AuctionsController","method":"preview","line":19,"file":"app/controllers/admin/auctions_controller.rb"},{"type":"template","name":"auctions/show","line":47,"file":"app/views/auctions/show.html.erb"}],
-      "location": {
-        "type": "template",
-        "template": "auctions/_status"
-      },
-      "user_input": "Auction.find(params[:id])",
-      "confidence": "Weak",
-      "note": ""
-    },
-    {
       "warning_type": "Dynamic Render Path",
       "warning_code": 15,
       "fingerprint": "58c2c8408dc100de363b034ed029b3aa5ae22ba926590229696b6e7746118734",
       "message": "Render path contains parameter value",
       "file": "app/views/admin/auctions/_form.html.erb",
-      "line": 44,
+      "line": 46,
       "link": "http://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
       "code": "render(partial => Admin::NewAuctionViewModel.new(BuildAuction.new(params, current_user).perform).c2_proposal_partial, { :locals => ({ :f => f }) })",
-      "render_path": [{"type":"controller","class":"Admin::AuctionsController","method":"create","line":35,"file":"app/controllers/admin/auctions_controller.rb"},{"type":"template","name":"admin/auctions/new","line":3,"file":"app/views/admin/auctions/new.html.erb"}],
+      "render_path": [{"type":"controller","class":"Admin::AuctionsController","method":"create","line":29,"file":"app/controllers/admin/auctions_controller.rb"},{"type":"template","name":"admin/auctions/new","line":3,"file":"app/views/admin/auctions/new.html.erb"}],
       "location": {
         "type": "template",
         "template": "admin/auctions/_form"
@@ -78,10 +42,10 @@
       "fingerprint": "84a7c1012234197c3d1e227615807144ea22bd1ad41a4966b993aba9e5129751",
       "message": "Render path contains parameter value",
       "file": "app/views/admin/auctions/_form.html.erb",
-      "line": 32,
+      "line": 33,
       "link": "http://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
       "code": "render(partial => Admin::NewAuctionViewModel.new(BuildAuction.new(params, current_user).perform).delivery_url_partial, { :locals => ({ :f => f }) })",
-      "render_path": [{"type":"controller","class":"Admin::AuctionsController","method":"create","line":35,"file":"app/controllers/admin/auctions_controller.rb"},{"type":"template","name":"admin/auctions/new","line":3,"file":"app/views/admin/auctions/new.html.erb"}],
+      "render_path": [{"type":"controller","class":"Admin::AuctionsController","method":"create","line":29,"file":"app/controllers/admin/auctions_controller.rb"},{"type":"template","name":"admin/auctions/new","line":3,"file":"app/views/admin/auctions/new.html.erb"}],
       "location": {
         "type": "template",
         "template": "admin/auctions/_form"
@@ -91,15 +55,33 @@
       "note": ""
     },
     {
+      "warning_type": "Cross Site Scripting",
+      "warning_code": 2,
+      "fingerprint": "a0f7b19f7527df046b75dd63f969f0474f83f9f7a268b2eb9f8978a0b6fc30fb",
+      "message": "Unescaped model attribute",
+      "file": "app/views/auctions/_status.html.erb",
+      "line": 5,
+      "link": "http://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "AuctionReceiptViewModel.new(:auction => Auction.find(params[:auction_id]), :current_user => current_user).bid_status_presenter.body",
+      "render_path": [{"type":"controller","class":"ReceiptsController","method":"new","line":15,"file":"app/controllers/receipts_controller.rb"},{"type":"template","name":"auctions/show","line":47,"file":"app/views/auctions/show.html.erb"}],
+      "location": {
+        "type": "template",
+        "template": "auctions/_status"
+      },
+      "user_input": "Auction.find(params[:auction_id])",
+      "confidence": "Weak",
+      "note": ""
+    },
+    {
       "warning_type": "Dynamic Render Path",
       "warning_code": 15,
       "fingerprint": "a93586cb007e3addbc3019681b0a4cad163b386dae0c50bf0f944565b08c0a0b",
       "message": "Render path contains parameter value",
       "file": "app/views/admin/auctions/_form.html.erb",
-      "line": 45,
+      "line": 47,
       "link": "http://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
       "code": "render(partial => Admin::NewAuctionViewModel.new(BuildAuction.new(params, current_user).perform).paid_at_partial, { :locals => ({ :f => f }) })",
-      "render_path": [{"type":"controller","class":"Admin::AuctionsController","method":"create","line":35,"file":"app/controllers/admin/auctions_controller.rb"},{"type":"template","name":"admin/auctions/new","line":3,"file":"app/views/admin/auctions/new.html.erb"}],
+      "render_path": [{"type":"controller","class":"Admin::AuctionsController","method":"create","line":29,"file":"app/controllers/admin/auctions_controller.rb"},{"type":"template","name":"admin/auctions/new","line":3,"file":"app/views/admin/auctions/new.html.erb"}],
       "location": {
         "type": "template",
         "template": "admin/auctions/_form"
@@ -107,8 +89,26 @@
       "user_input": "params",
       "confidence": "Weak",
       "note": ""
+    },
+    {
+      "warning_type": "Cross Site Scripting",
+      "warning_code": 4,
+      "fingerprint": "ba7a0560f47ae700fbfa4e1774ee7139784922f7638f9735539e1b8a5d74c911",
+      "message": "Unsafe model attribute in link_to href",
+      "file": "app/views/auctions/show.html.erb",
+      "line": 66,
+      "link": "http://brakemanscanner.org/docs/warning_types/link_to_href",
+      "code": "link_to(\"View on GitHub <icon class=\\\"fa fa-angle-double-right\\\"></icon>\".html_safe, AuctionReceiptViewModel.new(:auction => Auction.find(params[:auction_id]), :current_user => current_user).issue_url, :target => \"_blank\")",
+      "render_path": [{"type":"controller","class":"ReceiptsController","method":"new","line":15,"file":"app/controllers/receipts_controller.rb"}],
+      "location": {
+        "type": "template",
+        "template": "auctions/show"
+      },
+      "user_input": "Auction.find(params[:auction_id])",
+      "confidence": "Medium",
+      "note": ""
     }
   ],
-  "updated": "2016-08-17 13:08:37 -0700",
-  "brakeman_version": "3.2.1"
+  "updated": "2016-09-07 14:36:00 -0700",
+  "brakeman_version": "3.3.5"
 }
