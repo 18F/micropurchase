@@ -19,7 +19,7 @@ Feature: Admin view needs attention auctions
   Scenario: Navigating to the needs attention auctions dashboard
     Given I visit the auctions admin page
     When I click on the needs attention link
-    Then I should be on the Needs Attention page
+    Then I should be on the admin needs attention auctions page
 
   Scenario: Admin sees data for draft auctions on the Needs Attention page
     Given there is an unpublished auction

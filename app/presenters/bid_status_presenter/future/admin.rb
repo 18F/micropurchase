@@ -1,21 +1,22 @@
 class BidStatusPresenter::Future::Admin < BidStatusPresenter::Base
-  include Rails.application.routes.url_helpers
-  include ActionView::Helpers::UrlHelper
+  def header
+    I18n.t('statuses.bid_status_presenter.future.admin.header')
+  end
 
   def body
-    "This auction is visible to the public but is not currently accepting bids.
-    It will open on #{start_date}. If you need to take it down for whatever
-    reason, press the unpublish button below. #{link}"
+    I18n.t(
+      'statuses.bid_status_presenter.future.admin.body',
+      start_date: start_date
+    )
+  end
+
+  def action_partial
+    'admin/auctions/unpublish'
   end
 
   private
 
-  def link
-    link_to(
-      "Un-publish",
-      admin_auction_published_path(auction),
-      method: :patch,
-      class: 'usa-button usa-button-outline action-button'
-    )
+  def start_date
+    DcTimePresenter.convert_and_format(auction.started_at)
   end
 end

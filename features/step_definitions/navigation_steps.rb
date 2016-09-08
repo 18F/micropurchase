@@ -82,10 +82,6 @@ Given(/^I visit the auction receipt page$/) do
   visit auction_receipt_path(@auction)
 end
 
-Then(/^I should be on the Needs Attention page$/) do
-  expect(page.current_path).to eq(admin_auctions_needs_attention_path)
-end
-
 Then(/^I should be on the skills admin page$/) do
   expect(page.current_path).to eq(admin_skills_path)
 end
