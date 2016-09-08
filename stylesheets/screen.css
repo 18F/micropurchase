@@ -2556,10 +2556,22 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	margin: 12px 1px !important;
 }
 
+.auction-workflow .field-select select{
+	line-height: 1.2em;
+	line-height: 28px;
+	min-height: 24px;
+	padding: 0 6px;
+	
+}
+
+.auction-workflow .field-select::after{
+	border-width: 5px;
+	margin-bottom: 8px;
+}
+
 .auction-workflow-delivery-past-due-admins .field{
 	margin-top: 16px;
-	margin-bottom: 16px;
-	width: 8em;
+	margin-bottom: 4px;
 }
 
 .auction-workflow-payment-url-needed-vendors .field{
@@ -2696,10 +2708,6 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 /* @group auction-workflow */
 
-.auction-workflow form {
-	display: inline;
-}
-
 .auction-workflow[class*="bid-placed"]{
 	background: #dcfde9;
 	border-color: #5cbb82;
@@ -2803,14 +2811,50 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 .auction-workflow input{
 	padding: 4px 10px;
-	min-height: 0;
+	min-height: 28px;
 }
 
 .auction-workflow button{ 
-	padding: 6px 10px 6px; 
+	padding: 4px 10px 4px;
+	min-height: 28px; 
 	margin-top: 1em;
 }
 
+.auction-workflow details:first-of-type{
+	border-top: 1px solid #a1c9e5;
+	margin-top: 1em;
+}
+.auction-workflow details{
+	border-bottom: 1px solid #a1c9e5;
+	padding: 6px 0;
+}
+
+.auction-workflow details form{
+	padding: 0 16px 12px;
+}
+
+.auction-workflow details summary {
+	display: block;
+	cursor: pointer;
+	width: 100%;
+	height: 1.2em;
+	line-height: 1.2em;
+}
+
+details summary::-webkit-details-marker {
+  color: #2b4456;
+  font-size: 0.85em;
+  vertical-align: middle;
+  margin-top: -3px;
+  margin-left: 2px;
+}
+
+.auction-workflow details[open]{
+	background: #fff;
+}
+
+.auction-workflow details[open] summary{
+}
 
 .auction-workflow[class*="auction-workflow-place-a-bid"] button,
 .auction-workflow[class*="auction-workflow-bid"] button,

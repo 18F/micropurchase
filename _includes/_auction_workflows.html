@@ -379,6 +379,18 @@
 <section class="auction-workflow auction-workflow-ready-for-work-admins">
   <h1>Ready for work</h1>
   <p><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a> won this auction on [auction.winDate] with a bid of $[auction.winBid]. They&rsquo;ve received <a href="https://docs.google.com/document/d/1G9WboqAi2ESDjZEkVhlrCGL3MbRqW2QodWdtWRhnKnc/edit%23heading%3Dh.nte24vv2a7o&sa=D&ust=1470089121861000&usg=AFQjCNHWlLpesvlsiCJkbs-g6b-u4lxYrQ">an email</a> letting them know the delivery deadline ([auction.deliveryDeadline]) and how to get started.</p>
+  <details>
+    <summary>Mark as started</summary>
+    <form data-auction-workflow-state="work-in-progress-admins">
+      <div class="field field-delivery-url">
+        <label>
+          <span class="label-text">Delivery <abbr title="Uniform resource locator">URL</abbr></span>
+          <input type="text" name="" required>
+        </label>
+      </div>
+      <button class="button button-mark-as-delivered">Update</button>
+    </form>
+  </details>
 </section>
 <section class="auction-workflow auction-workflow-ready-for-work-vendors">
   <h1>Ready for work</h1>
@@ -386,7 +398,7 @@
   <form data-auction-workflow-state="work-in-progress-vendors">
     <div class="field field-delivery-url">
       <label>
-        <span class="label-text">Pull request <abbr title="Uniform resource locator">URL</abbr></span>
+        <span class="label-text">Delivery <abbr title="Uniform resource locator">URL</abbr></span>
         <input type="text" name="" required>
       </label>
     </div>
@@ -409,8 +421,25 @@
 </section>
 <section class="auction-workflow auction-workflow-work-in-progress-admins">
   <h1>Work in progress</h1>
-  <p><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a> <a href="#">initiated a pull request</a> on [auction.startWorkDate], and should complete their work no later than [auction.deliveryDeadline].
-</p>
+  <p><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a> <a href="#">initiated a pull request</a> on [auction.startWorkDate], and should complete their work no later than [auction.deliveryDeadline].</p>
+  <details>
+    <summary>Update delivery URL</summary>
+    <form>
+      <div class="field field-delivery-url">
+        <label>
+          <span class="label-text">Delivery <abbr title="Uniform resource locator">URL</abbr></span>
+          <input type="text" name="" required>
+        </label>
+      </div>
+      <button class="button button-mark-as-delivered">Update</button>
+    </form>
+  </details>
+  <details>
+    <summary>Mark as delivered</summary>
+    <form class="form-mark-as-delivered" data-auction-workflow-state="acceptance-needed-admins">
+      <button class="button button-mark-as-delivered">Mark as delivered</button>
+    </form>
+  </details>
 </section>
 <section class="auction-workflow auction-workflow-work-in-progress-vendors">
   <h1>Work in progress</h1>
@@ -421,23 +450,37 @@
 </section>
 <section class="auction-workflow auction-workflow-delivery-past-due-admins">
   <h1>Delivery past due</h1>
-  <p><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a> was supposed to have delivered this auction before [auction.deliveryDeadline], but has yet to complete their work. You can either issue an extension on this delivery period or reject this vendor.</p>
-  <form>
-    <div class="field field-select">
-      <label>
-        <span class="label-text">Extension length</span>
-        <select>
-          <option>1 day</option>
-          <option>2 days</option>
-          <option>3 days</option>
-          <option>4 days</option>
-          <option>5 days</option>
-        </select>
-      </label>
-    </div>
-    <button class="button button-issue-extension">Issue an extension</button>
-    <button class="button button-reject">Reject vendor</button> 
-  </form>
+  <p><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a> was supposed to have delivered this auction before [auction.deliveryDeadline], but has yet to complete their work. You can either issue an extension or mark this auction as delivered.</p>
+  <details>
+    <summary>Issue extension</summary>
+    <form class="form-issue-extension" data-auction-workflow-state="work-in-progress-admins">
+      <div class="field field-select">
+        <label>
+          <span class="label-text">Extension length</span>
+          <select>
+            <option>1 day</option>
+            <option>2 days</option>
+            <option>3 days</option>
+            <option>4 days</option>
+            <option>5 days</option>
+          </select>
+        </label>
+      </div>
+      <button class="button button-issue-extension">Issue an extension</button>
+    </form>
+  </details>
+  <details>
+    <summary>Mark as delivered</summary>
+    <form class="form-mark-as-delivered">
+      <div class="field field-delivery-url">
+        <label>
+          <span class="label-text">Delivery <abbr title="Uniform resource locator">URL</abbr></span>
+          <input type="text" name="" required>
+        </label>
+      </div>
+      <button class="button button-mark-as-delivered">Mark as delivered</button>
+    </form>
+  </details>
 </section>
 <section class="auction-workflow auction-workflow-delivery-past-due-vendors">
   <h1>Delivery past due</h1>
