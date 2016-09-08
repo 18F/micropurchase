@@ -1,7 +1,7 @@
 class BidStatusPresenter::Base
   attr_reader :auction, :user
 
-  def initialize(auction:, user:nil)
+  def initialize(auction:, user: nil)
     @auction = auction
     @user = user
   end

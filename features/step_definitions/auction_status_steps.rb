@@ -116,14 +116,14 @@ end
 
 Then(/^I should see the admin status for an auction that needs evaluation$/) do
   expect(page).to have_content(
-    I18n.t('statuses.admin_auction_status_presenter.pending_acceptance.header')
+    I18n.t('statuses.bid_status_presenter.over.admin.pending_acceptance.header')
   )
 end
 
 
 Then(/^I should see the admin status for a rejected auction$/) do
   expect(page).to have_content(
-    I18n.t('statuses.admin_auction_status_presenter.rejected.header')
+    I18n.t('statuses.bid_status_presenter.over.admin.rejected.header')
   )
 end
 
@@ -134,7 +134,7 @@ Then(/^I should see the admin status for an accepted auction$/) do
 
   expect(page).to have_content(
     I18n.t(
-      'statuses.admin_auction_status_presenter.accepted.body',
+      'statuses.bid_status_presenter.over.admin.accepted.body',
       winner_email: winner_email,
       accepted_at: accepted_date
     )

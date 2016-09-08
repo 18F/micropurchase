@@ -1,11 +1,11 @@
-class AdminAuctionStatusPresenter::PendingAcceptance < AdminAuctionStatusPresenter::Base
+class BidStatusPresenter::Over::Admin::PendingAcceptance < BidStatusPresenter::Base
   def header
-    I18n.t('statuses.admin_auction_status_presenter.pending_acceptance.header')
+    I18n.t('statuses.bid_status_presenter.over.admin.pending_acceptance.header')
   end
 
   def body
     I18n.t(
-      'statuses.admin_auction_status_presenter.pending_acceptance.body',
+      'statuses.bid_status_presenter.over.admin.pending_acceptance.body',
       winner_url: winner_url,
       delivery_url: auction.delivery_url
     )
@@ -16,6 +16,10 @@ class AdminAuctionStatusPresenter::PendingAcceptance < AdminAuctionStatusPresent
   end
 
   private
+
+  def winner
+    WinningBid.new(auction).find.bidder
+  end
 
   def winner_url
     Url.new(

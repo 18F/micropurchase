@@ -28,21 +28,21 @@ describe AdminAuctionStatusPresenterFactory do
     end
   end
 
-  context 'when the auction has been approved' do
-    it 'should return a AdminAuctionStatusPresenter::Accepted' do
+  context 'when the auction has been accepted' do
+    it 'should return a BidStatusPresenter::Over::Admin::Accepted' do
       auction = create(:auction, :closed, :with_bids, :delivery_url, :accepted)
 
       expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
-        .to be_a(AdminAuctionStatusPresenter::Accepted)
+        .to be_a(BidStatusPresenter::Over::Admin::Accepted)
     end
   end
 
   context 'when the auction has been rejected' do
-    it 'should return a AdminAuctionStatusPresenter::Rejected' do
+    it 'should return a BidStatusPresenter::Over::Admin::Rejected' do
       auction = create(:auction, :closed, :with_bids, :delivery_url, :rejected)
 
       expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
-        .to be_a(AdminAuctionStatusPresenter::Rejected)
+        .to be_a(BidStatusPresenter::Over::Admin::Rejected)
     end
   end
 
