@@ -11,6 +11,7 @@ Feature: Vendor bids on a sealed-bid auction
     When I click on the auction's title
     Then I should see the rules for Sealed-bid auctions
 
+  @javascript
   Scenario: bidding on a sealed-bid auction
     Given there is a sealed-bid auction with bids
     And I am an authenticated vendor
@@ -25,9 +26,7 @@ Feature: Vendor bids on a sealed-bid auction
     And I should see the maximum bid amount in the bidding form
 
     When I submit a bid for $3493
-    Then I should see a confirmation for $3493
-
-    When I click on the "Confirm" button
+    And I click OK on the javascript confirm dialog for a bid amount of $3,493.00
     Then I should see "Your bid: $3,493.00"
 
     When I visit the auction page
@@ -35,19 +34,14 @@ Feature: Vendor bids on a sealed-bid auction
     And I should see "Your bid: $3,493.00"
     And I should see the time I placed my bid
 
+  @javascript
   Scenario: viewing your own bid
     Given there is a sealed-bid auction
     And I am an authenticated vendor
     When I visit the auction page
 
     When I submit a bid for $500
-    Then I should be on the bid confirmation page
-    And I should see a confirmation for $500
-
-    When I click on the "Confirm" button
-    Then I should see "Your bid: $500"
-
-    When I visit the auction page
+    And I click OK on the javascript confirm dialog for a bid amount of $500.00
     And I click on the "Bids" link
     Then I should see "$500"
     And I should not see "$500 *"

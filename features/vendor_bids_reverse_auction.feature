@@ -1,16 +1,9 @@
-Feature: Vendor bids on an open auction
+Feature: Vendor bids on a reverse auction
   As a vendor
   I want to be able to bid on auctions
   So I can be paid for work
 
-  Scenario: Auction has no bids
-    Given there is an open bidless auction
-    And the auction has a start price of 1000
-    And I am a user with a verified SAM account
-    And I sign in
-    When I visit the auction page
-    Then I should see "The maximum you can bid is $999."
-
+  @javascript
   Scenario: Auction already has bids
     Given there is an open auction
     And the auction has a lowest bid amount of 1000
@@ -22,9 +15,7 @@ Feature: Vendor bids on an open auction
     And I click on the auction's title
 
     When I submit a bid for $999
-    Then I should see a confirmation for $999
-
-    When I click on the "Confirm" button
+    And I click OK on the javascript confirm dialog for a bid amount of $999.00
     Then I should see "Your bid: $999"
     And I should not see the bid form
     And I should see I have the winning bid
