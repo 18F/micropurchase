@@ -80,7 +80,7 @@ end
 
 Then(/^I should see the work in progress status box for admins$/) do
   expect(page).to have_content(
-    I18n.t('statuses.admin_auction_status_presenter.work_in_progress.header')
+    I18n.t('statuses.bid_status_presenter.over.admin.work_in_progress.header')
   )
 end
 

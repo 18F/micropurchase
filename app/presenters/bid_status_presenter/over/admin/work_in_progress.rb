@@ -1,11 +1,11 @@
-class AdminAuctionStatusPresenter::WorkInProgress < AdminAuctionStatusPresenter::Base
+class BidStatusPresenter::Over::Admin::WorkInProgress < BidStatusPresenter::Base
   def header
-    I18n.t('statuses.admin_auction_status_presenter.work_in_progress.header')
+    I18n.t('statuses.bid_status_presenter.over.admin.work_in_progress.header')
   end
 
   def body
     I18n.t(
-      'statuses.admin_auction_status_presenter.work_in_progress.body',
+      'statuses.bid_status_presenter.over.admin.work_in_progress.body',
       winner_url: winner_url,
       delivery_url: auction.delivery_url,
       delivery_deadline: delivery_deadline
@@ -20,6 +20,10 @@ class AdminAuctionStatusPresenter::WorkInProgress < AdminAuctionStatusPresenter:
       path_name: 'admin_user',
       params: { id: winner.id }
     )
+  end
+
+  def winner
+    WinningBid.new(auction).find.bidder
   end
 
   def delivery_deadline

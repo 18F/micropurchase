@@ -11,11 +11,20 @@ describe AdminAuctionStatusPresenterFactory do
   end
 
   context "when the auction has been published but hasn't started yet" do
-    it 'should return a AdminAuctionStatusPresenter::FuturePublished' do
+    it 'should return a BidStatusPresenter::Future::Admin' do
       auction = create(:auction, :future, :published)
 
       expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
         .to be_a(BidStatusPresenter::Future::Admin)
+    end
+  end
+
+  context "when the auction is over but a work in progress" do
+    it 'should return a BidStatusPresenter::Over::Admin::WorkInProgress' do
+      auction = create(:auction, :closed, :with_bids, :delivery_url)
+
+      expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
+        .to be_a(BidStatusPresenter::Over::Admin::WorkInProgress)
     end
   end
 

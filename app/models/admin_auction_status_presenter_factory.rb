@@ -11,7 +11,7 @@ class AdminAuctionStatusPresenterFactory
     elsif future? && auction.published?
       BidStatusPresenter::Future::Admin.new(auction: auction)
     elsif work_in_progress?
-      AdminAuctionStatusPresenter::WorkInProgress.new(auction: auction)
+      BidStatusPresenter::Over::Admin::WorkInProgress.new(auction: auction)
     elsif !auction.pending_delivery?
       Object.const_get("AdminAuctionStatusPresenter::#{status}").new(auction: auction)
     else
