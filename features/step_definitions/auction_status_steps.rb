@@ -40,9 +40,7 @@ end
 
 Then(/^I should see the future auction message for admins$/) do
   expect(page).to have_content(
-    "This auction is visible to the public but is not currently accepting bids.
-    It will open on #{start_date}. If you need to take it down for whatever
-    reason, press the unpublish button below."
+    I18n.t('statuses.bid_status_presenter.future.admin.body', start_date: start_date)
   )
 end
 
@@ -74,12 +72,6 @@ Then(/^I should see the ready for work status box$/) do
   expect(find_field('auction_delivery_url')).not_to be_nil
 end
 
-Then(/^I should see the coming soon status box for admins$/) do
-  expect(page).to have_content(
-    I18n.t('statuses.admin_auction_status_presenter.future_published.header')
-  )
-end
-
 Then(/^I should see the work in progress status box$/) do
   expect(page).to have_content(
     I18n.t('statuses.bid_status_presenter.over.winner.work_in_progress.header')
@@ -88,7 +80,7 @@ end
 
 Then(/^I should see the work in progress status box for admins$/) do
   expect(page).to have_content(
-    I18n.t('statuses.admin_auction_status_presenter.work_in_progress.header')
+    I18n.t('statuses.bid_status_presenter.over.admin.work_in_progress.header')
   )
 end
 
@@ -124,14 +116,14 @@ end
 
 Then(/^I should see the admin status for an auction that needs evaluation$/) do
   expect(page).to have_content(
-    I18n.t('statuses.admin_auction_status_presenter.pending_acceptance.header')
+    I18n.t('statuses.bid_status_presenter.over.admin.pending_acceptance.header')
   )
 end
 
 
 Then(/^I should see the admin status for a rejected auction$/) do
   expect(page).to have_content(
-    I18n.t('statuses.admin_auction_status_presenter.rejected.header')
+    I18n.t('statuses.bid_status_presenter.over.admin.rejected.header')
   )
 end
 
@@ -142,7 +134,7 @@ Then(/^I should see the admin status for an accepted auction$/) do
 
   expect(page).to have_content(
     I18n.t(
-      'statuses.admin_auction_status_presenter.accepted.body',
+      'statuses.bid_status_presenter.over.admin.accepted.body',
       winner_email: winner_email,
       accepted_at: accepted_date
     )

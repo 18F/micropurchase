@@ -1,8 +1,8 @@
-<%= link_to I18n.t('statuses.admin_auction_status_presenter.pending_acceptance.actions.accept'),
+<%= link_to I18n.t('statuses.bid_status_presenter.over.admin.pending_acceptance.actions.accept'),
   admin_auction_acceptance_path(status.auction),
   method: :patch,
   class: 'usa-button usa-button-outline action-button' %>
-<%= link_to I18n.t('statuses.admin_auction_status_presenter.pending_acceptance.actions.reject'),
+<%= link_to I18n.t('statuses.bid_status_presenter.over.admin.pending_acceptance.actions.reject'),
   admin_auction_rejection_path(status.auction),
   method: :patch,
   class: 'usa-button usa-button-outline red-action-button' %>
