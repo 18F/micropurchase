@@ -15,7 +15,7 @@ describe AdminAuctionStatusPresenterFactory do
       auction = create(:auction, :future, :published)
 
       expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
-        .to be_a(AdminAuctionStatusPresenter::FuturePublished)
+        .to be_a(AdminAuctionStatusPresenter::Future)
     end
   end
 

@@ -24,7 +24,7 @@ class BidStatusPresenterFactory
 
   def future_message
     if admin?
-      BidStatusPresenter::Future::Admin
+      AdminAuctionStatusPresenter::Future
     elsif guest?
       BidStatusPresenter::Future::Guest
     else
