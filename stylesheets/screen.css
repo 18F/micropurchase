@@ -705,6 +705,48 @@ td.col-title{
 	text-overflow: ellipsis;
 }
 
+
+
+.layout-admins-index main,
+.layout-bids-placed main,
+.layout-customers-index main,
+.layout-payments-received main,
+.layout-vendors-index main{
+	overflow-x: auto;
+}
+
+.layout-admins-index main .wrapper,
+.layout-bids-placed main .wrapper,
+.layout-customers-index main .wrapper,
+.layout-payments-received main .wrapper,
+.layout-vendors-index main .wrapper{
+	min-width: 960px;
+	margin-left: 2.5%;
+	margin-right: 2.5%;
+}
+
+@media screen and (min-width: 568.88){ 
+	.layout-admins-index main .wrapper,
+	.layout-bids-placed main .wrapper,
+	.layout-customers-index main .wrapper,
+	.layout-payments-received main .wrapper,
+	.layout-vendors-index main .wrapper{
+		margin-left: 5%;
+		margin-right: 5%;
+	}
+}
+
+@media screen and (min-width: 1066.66){ 
+	.layout-admins-index main .wrapper,
+	.layout-bids-placed main .wrapper,
+	.layout-customers-index main .wrapper,
+	.layout-payments-received main .wrapper,
+	.layout-vendors-index main .wrapper{
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
 /* @end */
 
 /* @group forms */
@@ -3202,38 +3244,6 @@ details summary::-webkit-details-marker {
 /* @end */
 
 /* @group layout-customers-index */
-
-.layout-admins-index main,
-.layout-customers-index main,
-.layout-vendors-index main{
-	overflow-x: auto;
-}
-
-.layout-admins-index main .wrapper,
-.layout-customers-index main .wrapper,
-.layout-vendors-index main .wrapper{
-	min-width: 960px;
-	margin-left: 2.5%;
-	margin-right: 2.5%;
-}
-
-@media screen and (min-width: 568.88){ 
-	.layout-admins-index main .wrapper,
-	.layout-customers-index main .wrapper,
-	.layout-vendors-index main .wrapper{
-		margin-left: 5%;
-		margin-right: 5%;
-	}
-}
-
-@media screen and (min-width: 1066.66){ 
-	.layout-admins-index main .wrapper,
-	.layout-customers-index main .wrapper,
-	.layout-vendors-index main .wrapper{
-		margin-left: auto;
-		margin-right: auto;
-	}
-}
 
 
 /* @end */
