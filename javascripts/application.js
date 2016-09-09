@@ -19,6 +19,7 @@ $(document).ready(function() {
   
   $('body').removeClass('no-js');
 
+  $('.layout-customers-index main').addClass('overthrow');
 
   if ($('body').hasClass('layout-auctions-show')) {
     $('.auction-workflow').hide();
