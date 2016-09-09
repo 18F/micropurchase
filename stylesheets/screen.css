@@ -2818,7 +2818,7 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 }
 
 .auction-workflow input{
-	padding: 0 10px;
+	padding: 0 6px;
 	min-height: 32px;
 	line-height: 1;
 	height: 32px;
@@ -2827,12 +2827,12 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 }
 
 .auction-workflow button{ 
-	padding: 2px 10px 2px;
-	min-height: 28px;
+	padding: 2px 8px 2px;
+	min-height: 24px;
 	height: auto; 
 	font-size: 14px;
 	font-weight: 600;
-	line-height: 1;
+	line-height: 24px;
 	margin-top: 12px;
 	-webkit-appearance: none;
 	border-radius: 2px;
