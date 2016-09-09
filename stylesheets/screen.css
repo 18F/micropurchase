@@ -3204,7 +3204,7 @@ details summary::-webkit-details-marker {
 /* @group layout-customers-index */
 
 .layout-customers-index main{
-	overflow-x: auto;
+	overflow-x: scroll;
 }
 
 .layout-customers-index main .wrapper{
