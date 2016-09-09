@@ -2818,12 +2818,12 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 }
 
 .auction-workflow input{
-	padding: 0 6px;
-	min-height: 32px;
+	padding: 4px 6px;
+	min-height: 28px;
 	line-height: 1;
-	height: 32px;
 	width: 91%;
 	border-radius: 2px;
+	font-size: 16px;
 }
 
 .auction-workflow button{ 
