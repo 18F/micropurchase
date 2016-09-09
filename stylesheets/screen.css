@@ -2534,55 +2534,6 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 /* @group layout-auctions-show */
 
-/* @group workflow */
-
-.auction-workflow.auction-workflow-draft-vendors{
-	background: #eaf4fc;
-		background: repeating-linear-gradient(
-		  45deg,
-		  #ddeffc,
-		  #ddeffc 10px,
-		  #eaf4fc 10px,
-		  #eaf4fc 20px
-		);
-
-}
-
-.field.field-delivery-url,
-.field.field-payment-url{
-	margin-top: 18px;
-	margin-bottom: 0;
-}
-
-.auction-workflow .p-customize-timeline{
-	margin: 12px 1px !important;
-}
-
-.auction-workflow .field-select select{
-	line-height: 1.2em;
-	line-height: 28px;
-	min-height: 24px;
-	padding: 0 6px;
-	
-}
-
-.auction-workflow .field-select::after{
-	border-width: 5px;
-	margin-bottom: 8px;
-}
-
-.auction-workflow-delivery-past-due-admins .field{
-	margin-top: 16px;
-	margin-bottom: 4px;
-}
-
-.auction-workflow-payment-url-needed-vendors .field{
-	margin-top: 20px;
-	margin-bottom: 0;
-}
-
-/* @end */
-
 /* @group fieldset-date-time */
 
 .layout-auctions-show .fieldset-date-time .fieldset-time .field-time-hours::after,
@@ -2710,6 +2661,56 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 /* @group auction-workflow */
 
+.auction-workflow.auction-workflow-draft-vendors{
+	background: #eaf4fc;
+		background: repeating-linear-gradient(
+		  45deg,
+		  #ddeffc,
+		  #ddeffc 10px,
+		  #eaf4fc 10px,
+		  #eaf4fc 20px
+		);
+
+}
+
+.auction-workflow label span.label-text{
+	font-size: 14px;
+	color: #444;
+}
+
+.field.field-delivery-url,
+.field.field-payment-url{
+	margin-top: 18px;
+	margin-bottom: 0;
+}
+
+.auction-workflow .p-customize-timeline{
+	margin: 12px 1px !important;
+}
+
+.auction-workflow .field-select select{
+	line-height: 1.2em;
+	line-height: 28px;
+	min-height: 24px;
+	padding: 0 6px;
+	
+}
+
+.auction-workflow .field-select::after{
+	border-width: 5px;
+	margin-bottom: 8px;
+}
+
+.auction-workflow-delivery-past-due-admins .field{
+	margin-top: 16px;
+	margin-bottom: 4px;
+}
+
+.auction-workflow-payment-url-needed-vendors .field{
+	margin-top: 20px;
+	margin-bottom: 0;
+}
+
 .auction-workflow[class*="bid-placed"]{
 	background: #dcfde9;
 	border-color: #5cbb82;
@@ -2813,7 +2814,7 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 .auction-workflow.auction-workflow-acceptance-needed-admins form{
 	display: inline-block;
-	
+	vertical-align: middle;
 }
 
 .auction-workflow input{
@@ -2826,9 +2827,10 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 .auction-workflow button{ 
 	padding: 4px 10px 4px;
-	min-height: 28px;
-	height: 28px; 
-	margin-top: 1em;
+	min-height: 32px;
+	height: 32px; 
+	line-height: 1;
+	margin-top: 12px;
 }
 
 .auction-workflow details:first-of-type{
