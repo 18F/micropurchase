@@ -3203,24 +3203,35 @@ details summary::-webkit-details-marker {
 
 /* @group layout-customers-index */
 
-.layout-customers-index main{
-	overflow-x: scroll;
+.layout-admins-index main,
+.layout-customers-index main,
+.layout-vendors-index main{
+	overflow-x: auto;
 }
 
-.layout-customers-index main .wrapper{
+.layout-admins-index main .wrapper,
+.layout-customers-index main .wrapper,
+.layout-vendors-index main .wrapper{
 	min-width: 960px;
-	margin-left: 2.5%
+	margin-left: 2.5%;
+	margin-right: 2.5%;
 }
 
 @media screen and (min-width: 568.88){ 
-	.layout-customers-index main .wrapper{
+	.layout-admins-index main .wrapper,
+	.layout-customers-index main .wrapper,
+	.layout-vendors-index main .wrapper{
 		margin-left: 5%;
+		margin-right: 5%;
 	}
 }
 
 @media screen and (min-width: 1066.66){ 
-	.layout-customers-index main .wrapper{
+	.layout-admins-index main .wrapper,
+	.layout-customers-index main .wrapper,
+	.layout-vendors-index main .wrapper{
 		margin-left: auto;
+		margin-right: auto;
 	}
 }
 
