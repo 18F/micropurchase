@@ -3203,6 +3203,28 @@ details summary::-webkit-details-marker {
 
 /* @group layout-customers-index */
 
+.layout-customers-index main{
+	overflow-x: auto;
+}
+
+.layout-customers-index main .wrapper{
+	min-width: 960px;
+	margin-left: 2.5%
+}
+
+@media screen and (min-width: 568.88){ 
+	.layout-customers-index main .wrapper{
+		margin-left: 5%;
+	}
+}
+
+@media screen and (min-width: 1066.66){ 
+	.layout-customers-index main .wrapper{
+		margin-left: auto;
+	}
+}
+
+
 /* @end */
 
 /* @group auctions new, edit */
