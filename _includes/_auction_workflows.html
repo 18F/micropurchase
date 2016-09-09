@@ -424,7 +424,7 @@
   <p><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a> <a href="#">initiated a pull request</a> on [auction.startWorkDate], and should complete their work no later than [auction.deliveryDeadline].</p>
   <details>
     <summary>Update delivery URL</summary>
-    <form>
+    <form data-auction-workflow-state="work-in-progress-admins">
       <div class="field field-delivery-url">
         <label>
           <span class="label-text">Delivery <abbr title="Uniform resource locator">URL</abbr></span>
@@ -434,23 +434,20 @@
       <button class="button button-mark-as-delivered">Update</button>
     </form>
   </details>
-  <details>
-    <summary>Mark as delivered</summary>
-    <form class="form-mark-as-delivered" data-auction-workflow-state="acceptance-needed-admins">
-      <button class="button button-mark-as-delivered">Mark as delivered</button>
-    </form>
-  </details>
+  <form class="form-mark-as-delivered" data-auction-workflow-state="acceptance-needed-admins">
+    <button class="button button-mark-as-delivered">Mark as delivered</button>
+  </form>
 </section>
 <section class="auction-workflow auction-workflow-work-in-progress-vendors">
   <h1>Work in progress</h1>
-  <p>You won this auction on [auction.winDate] and must complete your work before [auction.deliveryDeadline]. Please update <a href="#">your pull request</a> with any questions, comments, or partial solutions. When you&rsquo;ve completed your work, click &ldquo;I&rsquo;m done,&rdquo; below.</p>
+  <p>You won this auction on [auction.winDate] and must complete your work before [auction.deliveryDeadline]. Please update <a href="#">your pull request</a> with any questions, comments, or partial solutions.</p>
   <form data-auction-workflow-state="pending-acceptance-vendors">
     <button>I&rsquo;m done</button>
   </form>
 </section>
 <section class="auction-workflow auction-workflow-delivery-past-due-admins">
   <h1>Delivery past due</h1>
-  <p><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a> was supposed to have delivered this auction before [auction.deliveryDeadline], but has yet to complete their work. You can either issue an extension or mark this auction as delivered.</p>
+  <p><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a> was supposed to have delivered this auction before [auction.deliveryDeadline], but has yet to complete their work.</p>
   <details>
     <summary>Issue extension</summary>
     <form class="form-issue-extension" data-auction-workflow-state="work-in-progress-admins">
@@ -470,17 +467,20 @@
     </form>
   </details>
   <details>
-    <summary>Mark as delivered</summary>
-    <form class="form-mark-as-delivered">
+    <summary>Update delivery URL</summary>
+    <form data-auction-workflow-state="work-in-progress-admins">
       <div class="field field-delivery-url">
         <label>
           <span class="label-text">Delivery <abbr title="Uniform resource locator">URL</abbr></span>
           <input type="text" name="" required>
         </label>
       </div>
-      <button class="button button-mark-as-delivered">Mark as delivered</button>
+      <button class="button button-mark-as-delivered">Update</button>
     </form>
   </details>
+  <form class="form-mark-as-delivered" data-auction-workflow-state="pending-payment-url-admins">
+    <button class="button button-mark-as-delivered">Mark as delivered</button>
+  </form>
 </section>
 <section class="auction-workflow auction-workflow-delivery-past-due-vendors">
   <h1>Delivery past due</h1>
@@ -497,9 +497,21 @@
   </form>
 </section>
 <section class="auction-workflow auction-workflow-acceptance-needed-admins">
-  <h1>Pending acceptance</h1>
+  <h1>Acceptance needed</h1>
   <p><a href="{{site.baseurl}}/people/vendors/show"><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a></a> made <a href="#">a pull request</a> and marked this auction as having been delivered. If their work meets this auction&rsquo;s acceptance criteria, click &ldquo;accept.&rdquo; Otherwise, click &ldquo;reject.&rdquo;</p>
-  <form data-auction-workflow-state="awaiting-payment-admins">
+  <details>
+    <summary>Update delivery URL</summary>
+    <form data-auction-workflow-state="acceptance-needed-admins">
+      <div class="field field-delivery-url">
+        <label>
+          <span class="label-text">Delivery <abbr title="Uniform resource locator">URL</abbr></span>
+          <input type="text" name="" required>
+        </label>
+      </div>
+      <button class="button button-mark-as-delivered">Update</button>
+    </form>
+  </details>
+  <form data-auction-workflow-state="pending-payment-url-admins">
     <button class="button button-accept">Accept</button>
   </form>
   <form data-auction-workflow-state="rejected-admins">
@@ -514,6 +526,18 @@
 <section class="auction-workflow auction-workflow-pending-payment-url-admins">
   <h1>Pending payment URL</h1>
   <p>This vendor has been asked to <a href="{{site.baseurl}}/docs/getting-paid">provide a payment URL</a>.</p>
+  <details>
+    <summary>Add payment URL</summary>
+    <form data-auction-workflow-state="pending-payment-from-18f-admins">
+      <div class="field field-payment-url">
+        <label>
+          <span class="label-text">Payment <abbr title="Uniform resource locator">URL</abbr></span>
+          <input type="text" name="">
+        </label>
+      </div>
+      <button class="button">Update</button>
+    </form>
+  </details>
 </section>
 <section class="auction-workflow auction-workflow-payment-url-needed-vendors">
   <h1>Payment URL needed</h1>
@@ -531,11 +555,20 @@
 <section class="auction-workflow auction-workflow-pending-payment-from-18f-admins">
   <h1>Pending payment from 18F</h1>
   <p>The p-card holder has been asked (<a href="#">via C2</a>) to remit payment. Alternatively, you can manually mark this auction as paid.</p>
+  <details>
+    <summary>Update payment URL</summary>
+    <form data-auction-workflow-state="pending-payment-from-18f-admins">
+      <div class="field field-payment-url">
+        <label>
+          <span class="label-text">Payment <abbr title="Uniform resource locator">URL</abbr></span>
+          <input type="text" name="">
+        </label>
+      </div>
+      <button class="button">Update</button>
+    </form>
+  </details>
   <form data-auction-workflow-state="pending-payment-confirmation-admins">
     <button>Mark as paid</button>  
-  </form>
-  <form data-auction-workflow-state="pending-payment-url-admins">
-    <button>Mark as unpayable</button>  
   </form>
 </section>
 <section class="auction-workflow auction-workflow-pending-payment-from-customer-admins">
@@ -543,9 +576,6 @@
   <p>[auction.customer] has been asked to remit payment. Alternatively, you can manually mark this auction as paid.</p>
   <form data-auction-workflow-state="pending-payment-confirmation-admins">
     <button>Mark as paid</button>  
-  </form>
-  <form data-auction-workflow-state="pending-payment-url-admins">
-    <button>Mark as unpayable</button>  
   </form>
 </section>
 <section class="auction-workflow auction-workflow-pending-payment-vendors">
@@ -555,6 +585,9 @@
 <section class="auction-workflow auction-workflow-pending-payment-confirmation-admins">
   <h1>Pending payment confirmation</h1>
   <p><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a> was paid by [auction.paymentAdmin] on [auction.paymentDate], and has received an email asking them to confirm that payment.</p>
+  <form data-auction-workflow-state="paid-and-confirmed-admins">
+    <button>Mark as confirmed</button>  
+  </form>
 </section>
 <section class="auction-workflow auction-workflow-payment-confirmation-needed-vendors">
   <h1>Payment confirmation needed</h1>

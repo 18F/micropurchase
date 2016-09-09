@@ -2547,7 +2547,9 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 		);
 
 }
-.field.field-delivery-url{
+
+.field.field-delivery-url,
+.field.field-payment-url{
 	margin-top: 18px;
 	margin-bottom: 0;
 }
@@ -2809,14 +2811,23 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
   display: inline !important;
 }
 
+.auction-workflow.auction-workflow-acceptance-needed-admins form{
+	display: inline-block;
+	
+}
+
 .auction-workflow input{
-	padding: 4px 10px;
-	min-height: 28px;
+	padding: 0 10px;
+	min-height: 32px;
+	line-height: 1;
+	height: 32px;
+	width: 91%;
 }
 
 .auction-workflow button{ 
 	padding: 4px 10px 4px;
-	min-height: 28px; 
+	min-height: 28px;
+	height: 28px; 
 	margin-top: 1em;
 }
 
@@ -2824,6 +2835,7 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	border-top: 1px solid #a1c9e5;
 	margin-top: 1em;
 }
+
 .auction-workflow details{
 	border-bottom: 1px solid #a1c9e5;
 	padding: 6px 0;
@@ -2846,7 +2858,8 @@ details summary::-webkit-details-marker {
   font-size: 0.85em;
   vertical-align: middle;
   margin-top: -3px;
-  margin-left: 2px;
+  margin-left: 4px;
+  margin-right: 4px;
 }
 
 .auction-workflow details[open]{
