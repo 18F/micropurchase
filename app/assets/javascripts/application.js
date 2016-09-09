@@ -6,3 +6,4 @@
 //= require deliveryDueAt.js
 //= require selectize
 //= require selectizer
+//= require bidConfirm.js

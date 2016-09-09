@@ -1,8 +1,8 @@
 <%= simple_form_for Bid.new,
-  url: auction_bid_confirmations_path(status.auction_id), class: "usa-form-large" do |f| %>
+  url: auction_bids_path(status.auction_id), class: "usa-form-large" do |f| %>
   <fieldset>
     <div class="usa-input-grid usa-input-grid-small">
-      <%= f.input :amount %>
+      <%= f.input :amount, required: false %>
     </div>
     <div class="usa-input-grid usa-input-grid-small">
       <%= f.submit class: 'usa-button usa-button-outline action-button' %>
