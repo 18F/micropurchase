@@ -2823,16 +2823,19 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	line-height: 1;
 	height: 32px;
 	width: 91%;
+	border-radius: 2px;
 }
 
 .auction-workflow button{ 
 	padding: 2px 10px 2px;
-	min-height: 30px;
+	min-height: 28px;
 	height: auto; 
 	font-size: 14px;
 	font-weight: 600;
 	line-height: 1;
 	margin-top: 12px;
+	-webkit-appearance: none;
+	border-radius: 2px;
 }
 
 .auction-workflow details:first-of-type{
