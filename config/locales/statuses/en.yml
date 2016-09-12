@@ -101,7 +101,7 @@ en:
           This auction is visible to the public but is not currently
           accepting bids. It will open on %{start_date}. If you
           need to take it down for whatever reason, press the
-          “unpublish” button, below.
+          "unpublish" button, below.
         header: Coming soon
         actions:
           unpublish: "Unpublish"
