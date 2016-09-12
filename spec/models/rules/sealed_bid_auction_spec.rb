@@ -5,7 +5,6 @@ describe Rules::SealedBidAuction do
     context 'if the auction if open' do
       it 'returns a NullBid object' do
         auction = create(:auction, :sealed_bid, :with_bids)
-        eligibility = InSamEligibility.new
         rules = Rules::SealedBidAuction.new(auction, eligibility)
         expect(rules.winning_bid).to be_a(NullBid)
       end
@@ -14,7 +13,6 @@ describe Rules::SealedBidAuction do
     context 'if the auction is over' do
       it "returns the auction's lowest bid" do
         auction = create(:auction, :sealed_bid, :with_bids, :closed)
-        eligibility = InSamEligibility.new
         rules = Rules::SealedBidAuction.new(auction, eligibility)
         expect(rules.winning_bid).to eq(auction.lowest_bid)
       end
@@ -27,7 +25,6 @@ describe Rules::SealedBidAuction do
         it "should return only the user's bid" do
           auction = create(:auction, :sealed_bid, :with_bids)
           user = auction.bids.first.bidder
-          eligibility = InSamEligibility.new
           rules = Rules::SealedBidAuction.new(auction, eligibility)
           expect(rules.veiled_bids(user)).to eq([auction.bids.first])
         end
@@ -37,7 +34,6 @@ describe Rules::SealedBidAuction do
         it 'should return an empty array' do
           auction = create(:auction, :sealed_bid)
           user = create(:user)
-          eligibility = InSamEligibility.new
           rules = Rules::SealedBidAuction.new(auction, eligibility)
           expect(rules.veiled_bids(user)).to eq([])
         end
@@ -48,7 +44,6 @@ describe Rules::SealedBidAuction do
       it 'should return all bids' do
         user = create(:user)
         auction = create(:auction, :sealed_bid, :with_bids, :closed)
-        eligibility = InSamEligibility.new
         rules = Rules::SealedBidAuction.new(auction, eligibility)
         expect(rules.veiled_bids(user)).to match_array(auction.bids)
       end
@@ -60,7 +55,6 @@ describe Rules::SealedBidAuction do
       it 'should return false' do
         auction = create(:auction, :sealed_bid, :with_bids)
         user = auction.bids.first.bidder
-        eligibility = InSamEligibility.new
         rules = Rules::SealedBidAuction.new(auction, eligibility)
         expect(rules.user_can_bid?(user)).to be_falsey
       end
@@ -70,7 +64,6 @@ describe Rules::SealedBidAuction do
       it 'should return true' do
         auction = create(:auction, :sealed_bid)
         user = create(:user, sam_status: :sam_accepted)
-        eligibility = InSamEligibility.new
         rules = Rules::SealedBidAuction.new(auction, eligibility)
         expect(rules.user_can_bid?(user)).to be_truthy
       end
@@ -80,7 +73,6 @@ describe Rules::SealedBidAuction do
   describe '#max_allowed_bid' do
     it 'should return BID_INCREMENT below the start price' do
       auction = create(:auction, :sealed_bid)
-      eligibility = InSamEligibility.new
       rules = Rules::SealedBidAuction.new(auction, eligibility)
       expect(rules.max_allowed_bid).to eq(auction.start_price - PlaceBid::BID_INCREMENT)
     end
@@ -89,9 +81,12 @@ describe Rules::SealedBidAuction do
   describe '#show_bids?' do
     it 'should return true if the auction is closed' do
       auction = create(:auction, :sealed_bid)
-      eligibility = InSamEligibility.new
       rules = Rules::SealedBidAuction.new(auction, eligibility)
       expect(rules.show_bids?).to eq(!AuctionStatus.new(auction).available?)
     end
+  end
+
+  def eligibility
+    @eligibility ||= double(label: '', eligible?: true)
   end
 end
