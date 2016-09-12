@@ -2,6 +2,8 @@
 
 /* @override http://localhost:4000/stylesheets/screen.css */
 
+/* @override http://localhost:4000/stylesheets/screen.css */
+
 /* @group bootstrap */
 
 html {
@@ -290,7 +292,7 @@ a[id]{
 .layout-recent-activity section h1,
 .layout-auctions-drafts section h1,
 .layout-auctions-index section h1,
-.layout-auctions-needs-attention section h1,
+.layout-needs-attention section h1,
 .layout-auctions-closed section h1,
 .layout-admins-index section h1,
 .layout-vendors-show section h1,
@@ -307,7 +309,7 @@ a[id]{
 
 .layout-auctions-drafts section h1,
 .layout-auctions-index section h1,
-.layout-auctions-needs-attention section h1,
+.layout-needs-attention section h1,
 .layout-auctions-closed section h1,
 .layout-admins-index section h1,
 .layout-vendors-show section h1,
@@ -710,6 +712,7 @@ td.col-title{
 .layout-admins-index main,
 .layout-bids-placed main,
 .layout-customers-index main,
+.layout-needs-attention main,
 .layout-payments-received main,
 .layout-vendors-index main{
 	overflow-x: auto;
@@ -718,6 +721,7 @@ td.col-title{
 .layout-admins-index main .wrapper,
 .layout-bids-placed main .wrapper,
 .layout-customers-index main .wrapper,
+.layout-needs-attention main .wrapper,
 .layout-payments-received main .wrapper,
 .layout-vendors-index main .wrapper{
 	min-width: 960px;
@@ -729,6 +733,7 @@ td.col-title{
 	.layout-admins-index main .wrapper,
 	.layout-bids-placed main .wrapper,
 	.layout-customers-index main .wrapper,
+	.layout-needs-attention main .wrapper,
 	.layout-payments-received main .wrapper,
 	.layout-vendors-index main .wrapper{
 		margin-left: 5%;
@@ -740,6 +745,7 @@ td.col-title{
 	.layout-admins-index main .wrapper,
 	.layout-bids-placed main .wrapper,
 	.layout-customers-index main .wrapper,
+	.layout-needs-attention main .wrapper,
 	.layout-payments-received main .wrapper,
 	.layout-vendors-index main .wrapper{
 		margin-left: auto;
@@ -1879,7 +1885,7 @@ main div.wrap > form { max-width: 576px; }
 
 .nav-facets .button,
 .layout-admins-index .button,
-.layout-auctions-needs-attention .button,
+.layout-needs-attention .button,
 .layout-vendors-index .button,
 .layout-customers-index .button,
 .layout-skills-index .button,
@@ -1916,7 +1922,7 @@ main div.wrap > form { max-width: 576px; }
 
 .layout-admins-index main .wrapper > h1,
 .layout-bids-placed main .wrapper > h1,
-.layout-auctions-needs-attention main .wrapper > h1,
+.layout-needs-attention main .wrapper > h1,
 .layout-customers-index main .wrapper > h1,
 .layout-deliveries-rejected main .wrapper > h1,
 .layout-payments-received main .wrapper > h1,
@@ -1930,7 +1936,7 @@ main div.wrap > form { max-width: 576px; }
 .layout-admins-index .a-admins-index,
 .layout-auctions-drafts .nav-auctions-drafts,
 .layout-auctions-index .a-auctions-index,
-.layout-auctions-needs-attention .a-auctions-needs-attention,
+.layout-needs-attention .a-auctions-needs-attention,
 .layout-auctions-closed .a-auctions-closed,
 .layout-bids-placed .a-bids-placed,
 .layout-customers-index .a-customers-index,
@@ -2453,12 +2459,12 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 /* @group layout-auctions-index */
 
 .layout-auctions-index .button,
-.layout-auctions-needs-attention .button,
-.layout-auctions-needs-closed .button{ display: none; }
+.layout-needs-attention .button,
+.layout-needs-closed .button{ display: none; }
 
 .layout-auctions-index.user-type-admin .button,
-.layout-auctions-needs-attention.user-type-admin .button,
-.layout-auctions-needs-closed.user-type-admin .button{ display: block; }
+.layout-needs-attention.user-type-admin .button,
+.layout-needs-closed.user-type-admin .button{ display: block; }
 
 .layout-auctions-index .auction,
 .layout-auctions-closed .auction{
@@ -2523,36 +2529,36 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 /* @end */
 
-/* @group layout-auctions-needs-attention */
+/* @group layout-needs-attention */
 
-.layout-auctions-needs-attention .col-status{
+.layout-needs-attention .col-status{
 	width: 14em;
 }
-.layout-auctions-needs-attention .col-accepted-date,
-.layout-auctions-needs-attention .col-opening-date,
-.layout-auctions-needs-attention .col-closing-date,
-.layout-auctions-needs-attention .col-delivery-deadline{
+.layout-needs-attention .col-accepted-date,
+.layout-needs-attention .col-opening-date,
+.layout-needs-attention .col-closing-date,
+.layout-needs-attention .col-delivery-deadline{
 	width: 8em;	
 }
 
-.layout-auctions-needs-attention .col-low-bid,
-.layout-auctions-needs-attention .col-bid-num{
+.layout-needs-attention .col-low-bid,
+.layout-needs-attention .col-bid-num{
 	width: 5em;
 	
 }
 
-.layout-auctions-needs-attention.user-type-admin .section-open-vendors,
-.layout-auctions-needs-attention.user-type-admin .section-delivery-vendors,
-.layout-auctions-needs-attention.user-type-admin .section-acceptance-vendors,
-.layout-auctions-needs-attention.user-type-admin .section-payment-vendors{
+.layout-needs-attention.user-type-admin .section-open-vendors,
+.layout-needs-attention.user-type-admin .section-delivery-vendors,
+.layout-needs-attention.user-type-admin .section-acceptance-vendors,
+.layout-needs-attention.user-type-admin .section-payment-vendors{
 	display: none;	
 }
 
-.layout-auctions-needs-attention.user-type-vendor .section-coming-soon,
-.layout-auctions-needs-attention.user-type-vendor .section-open-admins,
-.layout-auctions-needs-attention.user-type-vendor .section-delivery-admins,
-.layout-auctions-needs-attention.user-type-vendor .section-acceptance-admins,
-.layout-auctions-needs-attention.user-type-vendor .section-payment-admins{
+.layout-needs-attention.user-type-vendor .section-coming-soon,
+.layout-needs-attention.user-type-vendor .section-open-admins,
+.layout-needs-attention.user-type-vendor .section-delivery-admins,
+.layout-needs-attention.user-type-vendor .section-acceptance-admins,
+.layout-needs-attention.user-type-vendor .section-payment-admins{
 	display: none;
 }
 
@@ -3278,11 +3284,35 @@ details summary::-webkit-details-marker {
 
 /* @end */
 
-.layout-auctions-new main .wrapper,
-.layout-auctions-edit main .wrapper{
+.layout-auctions-new main h1,
+.layout-auctions-edit main h1{
+    max-width: 640px;
+	font-size: 20px;
+	font-family: Merriweather, Georgia, serif;
+	letter-spacing: 0;
+	font-weight: 600;
+	line-height: 1.25em;
+	margin: 0 auto 0.67em;
+}
+
+
+
+@media screen and (min-width: 622.222px){
+	.layout-auctions-new main h1,
+	.layout-auctions-edit main h1{
+		margin-top: 0.4em;
+		font-size: 28px;
+		font-weight: 400;
+	}
+}
+
+
+.layout-auctions-new main form,
+.layout-auctions-edit main form{
 	max-width: 640px;
 	background: #f8f8f8;
 	padding: 20px;
+	margin: 0 auto;
 }
 
 .field.field-starting-bid input{ width: 5.5em; }
@@ -3424,7 +3454,7 @@ details summary::-webkit-details-marker {
 }
 
 
-.layout-auctions-needs-attention .section-bids h1,
+.layout-needs-attention .section-bids h1,
 .layout-auctions-closed .section-delivered h1{
 	margin-top: 0;
 }
@@ -3437,7 +3467,7 @@ details summary::-webkit-details-marker {
 	margin-left: 0.6em;
 }
 
-.layout-auctions-needs-attention table,
+.layout-needs-attention table,
 .layout-auctions-closed table,
 .layout-admins-index table,
 .layout-vendors-index table,
@@ -3487,7 +3517,7 @@ details summary::-webkit-details-marker {
 }
 
 
-.layout-auctions-needs-attention table td.is-overdue{
+.layout-needs-attention table td.is-overdue{
 	border-bottom-color: #ce6246;
 	color: #990017;
 	

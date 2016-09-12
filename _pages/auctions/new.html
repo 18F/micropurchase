@@ -9,14 +9,8 @@ excerpt: None
   {% include site-header.html %}
   <main role="main" id="main">
     <div class="wrapper">
+      <h1>Create an auction</h1>
       <form action="{{site.baseurl}}/auctions/show">
-        <div class="form-errors">
-          <p>The following fields cannot be blank</p>
-          <ul>
-            <li><a href="#title">Title</a></li>
-            <li><a href="#description-and-acceptance-criteria">Description and acceptance criteria</a></li>
-          </ul>
-        </div>
         <div class="fields">
           <div class="field field-title is-error">
             <label>
@@ -29,7 +23,7 @@ excerpt: None
             <label>
               <span class="label-text">Starting bid</span>
               <input type="number" name="" value="3500">
-              <p class="help-text">Auctions with a starting bid higher than $3,500 are restricted to vendors who are registered as small businesses (as determined from their SAM.gov profile). Additionally, these auctions must be approved by an administrator who is also a contracting officer.</p>
+              <p class="help-text">Auctions with a starting bid higher than $3,500 are restricted to vendors who are registered as small businesses (as determined from their SAM.gov profile). Additionally, these auctions must be approved by a contracting officer.</p>
             </label>
           </div>
           <div class="field field-checkbox field-sealed-bid">
@@ -141,7 +135,7 @@ excerpt: None
             <label>
               <span class="label-text">Notes</span>
               <textarea rows="4"></textarea>
-              <p class="help-text">Note are only viewable by admins.</p>
+              <p class="help-text">Note are only viewable by administrators.</p>
             </label>
           </div> 
         </div>
