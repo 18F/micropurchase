@@ -19,3 +19,17 @@ Feature: Vendor bids on a reverse auction
     Then I should see "Your bid: $999"
     And I should not see the bid form
     And I should see I have the winning bid
+
+ @javascript
+ Scenario: Vendor bids too high
+    Given there is an open auction
+    And I am a user with a verified SAM account
+    And I sign in
+    And the auction has a lowest bid amount of 1000
+    When I visit the home page
+    Then I should see "Current winning bid: $1,000"
+
+    When I click on the auction's title
+    And I submit a bid for $1200
+    And I click OK on the javascript confirm dialog for a bid amount of $1,200.00
+    Then I should see my bid is too high

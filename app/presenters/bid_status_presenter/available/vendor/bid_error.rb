@@ -12,6 +12,6 @@ class BidStatusPresenter::Available::Vendor::BidError < BidStatusPresenter::Base
   end
 
   def action_partial
-    'auctions/bid_form'
+    'auctions/bid_error_form'
   end
 end

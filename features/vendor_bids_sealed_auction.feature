@@ -46,3 +46,13 @@ Feature: Vendor bids on a sealed-bid auction
     Then I should see "$500"
     And I should not see "$500 *"
     And I should not see bids from other users
+
+ @javascript
+ Scenario: Vendor bids too high
+    Given there is a sealed-bid auction
+    And I am a user with a verified SAM account
+    And I sign in
+    When I visit the auction page
+    And I submit a bid for $3900
+    And I click OK on the javascript confirm dialog for a bid amount of $3,900.00
+    Then I should see my bid is too high
