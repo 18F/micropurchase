@@ -10,6 +10,10 @@ class AdminAuctionStatusPresenter::Base
     'components/null'
   end
 
+  def alert_css_class
+    'usa-alert-info'
+  end
+
   protected
 
   def winner
