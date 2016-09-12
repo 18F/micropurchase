@@ -20,7 +20,7 @@ class AuctionStatus
   end
 
   def work_in_progress?
-    auction.delivery_url.present? && !(auction.pending_acceptance? || auction.accepted? || auction.rejected?)
+    auction.delivery_url.present? && auction.pending_delivery?
   end
 
   private

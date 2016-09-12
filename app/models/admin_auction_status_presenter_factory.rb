@@ -14,7 +14,7 @@ class AdminAuctionStatusPresenterFactory
       AdminAuctionStatusPresenter::WorkInProgress.new(auction: auction)
     elsif !auction.pending_delivery?
       Object.const_get("AdminAuctionStatusPresenter::#{status}").new(auction: auction)
-    else
+    else # if auction.purchase_card == 'default'
       Object.const_get("C2StatusPresenter::#{c2_status}").new(auction: auction)
     end
   end
