@@ -379,18 +379,6 @@
 <section class="auction-workflow auction-workflow-ready-for-work-admins">
   <h1>Ready for work</h1>
   <p><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a> won this auction on [auction.winDate] with a bid of $[auction.winBid]. They&rsquo;ve received <a href="https://docs.google.com/document/d/1G9WboqAi2ESDjZEkVhlrCGL3MbRqW2QodWdtWRhnKnc/edit%23heading%3Dh.nte24vv2a7o&sa=D&ust=1470089121861000&usg=AFQjCNHWlLpesvlsiCJkbs-g6b-u4lxYrQ">an email</a> letting them know the delivery deadline ([auction.deliveryDeadline]) and how to get started.</p>
-  <details>
-    <summary>Mark as started</summary>
-    <form data-auction-workflow-state="work-in-progress-admins">
-      <div class="field field-delivery-url">
-        <label>
-          <span class="label-text">Delivery <abbr title="Uniform resource locator">URL</abbr></span>
-          <input type="text" name="" required>
-        </label>
-      </div>
-      <button class="button button-mark-as-delivered">Update</button>
-    </form>
-  </details>
 </section>
 <section class="auction-workflow auction-workflow-ready-for-work-vendors">
   <h1>Ready for work</h1>
@@ -622,3 +610,15 @@
   <h1>Bidding closed</h1>
   <p>Bidding for this auction closed on <time>[auction.closedDate]</time>.</p>
 </section>
+<details class="auction-action auction-action-mark-as-started">
+  <summary>Mark as started</summary>
+  <form data-auction-workflow-state="work-in-progress-admins">
+    <div class="field field-delivery-url">
+      <label>
+        <span class="label-text">Delivery <abbr title="Uniform resource locator">URL</abbr></span>
+        <input type="text" name="" required>
+      </label>
+    </div>
+    <button class="button button-mark-as-delivered">Update</button>
+  </form>
+</details>

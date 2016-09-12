@@ -8,8 +8,8 @@ excerpt: None
   <a class="a-skip-to-main" href="#main">Skip to main content</a>
   {% include site-header.html %}
   <main class="auction h-entry" role="main" id="main">
-    <div class="wrapper">
-      <header class="auction-header">
+    <header class="auction-header">
+      <div class="wrapper">
         <h1>Open Opportunities: Create Agency Admin User Role</h1>
         <a href="{{site.baseurl}}/auctions/edit" class="button">Edit</a>
         <dl>
@@ -31,9 +31,12 @@ excerpt: None
           </a>
           <a class="nav-auction-history" href="{{site.baseurl}}/auctions/show-history">History</a>
         </nav>
-      </header>
+      </div>
+    </header>
+    <div class="wrapper">
       <div class="page">
         <p class="issue-description p-summary">Open Opportunities uses the open source sails.js MVC framework (Node.js / Express). Currently, a task creator should receive the following notification if a task they created receives a comment. However, this functionality has broken, without breaking the build's test suite. This issue sees the creation of a failing test (or tests) that will only pass when the notification functionality is restored, along with the fix to make those tests pass.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         <h2>Auction rules</h2>
         <p>Registered users on micropurchase.18f.gov may bid to deliver the requirements in this auction. The lowest bidder at the time the auction closes shall receive the award. The awarded bidder shall have five business days to deliver the requirements. Upon successful completion of the requirements, 18F shall pay the winning bidder. See our <a href="https://micropurchase.18f.gov/faq">rules</a> page</p>
         <h2>Acceptance criteria</h2>
@@ -48,56 +51,46 @@ excerpt: None
         <p>Then test(s) written as part of this micro-purchase will fail.</p>        
       </div>
       <footer class="auction-footer">
-        {% include _auction_workflows.html %}
-        <aside class="notes">
-          <h1>Notes</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum, possimus earum accusantium commodi minima obcaecati tempore sint recusandae iste voluptatibus maxime quidem assumenda optio facere sed dolor. Tempore, quod, voluptate.</p>
-        </aside>
-        <section class="share">
-          <h1>Share</h1>
-          <input type="text" value="https://my.cool.url/hash">
-          <a href="#"><span>Copy to clipboard</span></a>
-        </section>
-        <ul>
-          <li class="auction-project">
-            <h2>Project</h2>
-            <span>Dolores Landingham</span>
-          </li>
-          <li class="auction-issue">
-            <h2>Issue</h2>
-            <span><a href="https://github.com/18F/dolores-landingham-bot/issues/125">#23 Ability to send message to all Dolores users right now</a></span>
-          </li>
-          <li class="auction-delivery-timeline">
-            <h2>Delivery timeline</h2>
-            <span>5 days</span>
-          </li>
-          <li class="auction-eligibility">
-            <h2>Eligibility</h2>
-            <span>SAM.gov</span>
-          </li>
-          <li class="auction-type">
-            <h2>Type</h2>
-            <span>Reverse-auction</span>
-          </li>
-          <li class="auction-skills">
-            <h2>Skills</h2>
-            <ul>
-              <li>Ruby</li>
-              <li>Rails</li>
-              <li>Javascript</li>
-            </ul>
-          </li>
-        </ul>
+        <div class="wrapper">
+          {% include _auction_workflows.html %}
+          <section class="share">
+            <h1>Share</h1>
+            <input type="text" value="https://my.cool.url/hash">
+            <a href="#"><span>Copy to clipboard</span></a>
+          </section>
+          <ul>
+            <li class="auction-project">
+              <h2>Project</h2>
+              <span>Dolores Landingham</span>
+            </li>
+            <li class="auction-issue">
+              <h2>Issue</h2>
+              <span><a href="https://github.com/18F/dolores-landingham-bot/issues/125">#23 Ability to send message to all Dolores users right now</a></span>
+            </li>
+            <li class="auction-delivery-timeline">
+              <h2>Delivery timeline</h2>
+              <span>5 days</span>
+            </li>
+            <li class="auction-eligibility">
+              <h2>Eligibility</h2>
+              <span>SAM.gov</span>
+            </li>
+            <li class="auction-type">
+              <h2>Type</h2>
+              <span>Reverse-auction</span>
+            </li>
+            <li class="auction-skills">
+              <h2>Skills</h2>
+              <ul>
+                <li>Ruby</li>
+                <li>Rails</li>
+                <li>Javascript</li>
+              </ul>
+            </li>
+          </ul>          
+        </div>
       </footer>
     </div>
   </main>
-  <aside class="modal">
-    <h1>Are you sure?</h1>
-    <p>You&rsquo;re about to place a bid for <span class="bid-amount">$3,413.00</span>.</p>
-    <footer>
-      <button>Confirm</button>
-      <a href="#">Cancel</a>
-    </footer>
-  </aside>
   {% include site-footer.html %}
 </body>

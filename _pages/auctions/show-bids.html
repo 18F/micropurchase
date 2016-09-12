@@ -8,8 +8,8 @@ excerpt: None
   <a class="a-skip-to-main" href="#main">Skip to main content</a>
   {% include site-header.html %}
   <main class="auction" role="main" id="main">
-    <div class="wrapper">
-      <header class="auction-header">
+    <header class="auction-header">
+      <div class="wrapper">
         <h1>Open Opportunities: Create Agency Admin User Role</h1>
         <a href="{{site.baseurl}}/auctions/edit" class="button">Edit</a>
         <dl>
@@ -31,7 +31,9 @@ excerpt: None
           </a>
           <a class="nav-auction-history" href="{{site.baseurl}}/auctions/show-history">History</a>
         </nav>
-      </header>
+      </div>
+    </header>
+    <div class="wrapper">
       <div class="boilerplate">
         <p>No vendors have placed bids yet. Check back soon!</p>
       </div>
@@ -83,7 +85,7 @@ excerpt: None
           <td class="col-time">10:48:33 PM</td>
           </tr>
         </tbody>
-      </table>
+      </table>      
     </div>
   </main>
   {% include site-footer.html %}
