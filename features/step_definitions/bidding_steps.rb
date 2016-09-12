@@ -99,6 +99,16 @@ Then(/^I should not see the bid form$/) do
   end
 end
 
+Then(/^I should see my bid is too high$/) do
+  max_allowed_bid = RulesFactory.new(@auction).create.max_allowed_bid
+
+  expect(page).to have_content(
+    I18n.t('activerecord.errors.models.bid.amount.greater_than_max',
+           max_allowed_bid: max_allowed_bid)
+
+  )
+end
+
 def end_date
   DcTimePresenter.convert_and_format(@auction.ended_at)
 end

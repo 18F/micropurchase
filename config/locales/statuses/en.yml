@@ -37,6 +37,8 @@ en:
           winning_bidder:
             header: 'Bid placed'
             body: "You are currently the low bidder, with a bid of %{winning_amount}"
+          bid_error:
+            header: Bid error
       future:
         vendor:
           header: 'Coming soon'

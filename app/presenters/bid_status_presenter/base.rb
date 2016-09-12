@@ -1,9 +1,10 @@
 class BidStatusPresenter::Base
-  attr_reader :auction, :user
+  attr_reader :auction, :user, :bid_error
 
-  def initialize(auction:, user:)
+  def initialize(auction:, user:, bid_error: nil)
     @auction = auction
     @user = user
+    @bid_error = bid_error
   end
 
   def auction_id

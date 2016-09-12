@@ -1,9 +1,10 @@
 class AuctionShowViewModel
   attr_reader :auction, :current_user
 
-  def initialize(auction:, current_user:)
+  def initialize(auction:, current_user:, bid_error: nil)
     @auction = auction
     @current_user = current_user
+    @bid_error = bid_error
   end
 
   def id
@@ -58,7 +59,9 @@ class AuctionShowViewModel
 
   def bid_status_presenter
     @_bid_status_presenter ||=
-      BidStatusPresenterFactory.new(auction: auction, user: current_user).create
+      BidStatusPresenterFactory.new(auction: auction,
+                                    user: current_user,
+                                    bid_error: @bid_error).create
   end
 
   def bid_label

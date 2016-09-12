@@ -1,9 +1,10 @@
 class BidStatusPresenterFactory
-  attr_reader :auction, :user
+  attr_reader :auction, :user, :bid_error
 
-  def initialize(auction:, user:)
+  def initialize(auction:, user:, bid_error: nil)
     @auction = auction
     @user = user
+    @bid_error = bid_error
   end
 
   def create
@@ -17,7 +18,7 @@ class BidStatusPresenterFactory
       over_message
     else
       available_message
-    end.new(auction: auction, user: user)
+    end.new(auction: auction, user: user, bid_error: bid_error)
   end
 
   private
@@ -63,6 +64,8 @@ class BidStatusPresenterFactory
       BidStatusPresenter::Available::Guest
     elsif ineligible?
       ineligible_presenter
+    elsif !bid_error.blank?
+      BidStatusPresenter::Available::Vendor::BidError
     elsif rules.user_can_bid?(user)
       user_can_bid_message
     elsif auction.type == 'reverse'
