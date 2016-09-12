@@ -14,15 +14,6 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
     end
   end
 
-  def admin_auction_status_partial
-    if !auction.pending_delivery? ||
-       auction.purchase_card == 'default'
-      'auctions/status'
-    else
-      'components/null'
-    end
-  end
-
   def admin_notes_partial
     if auction.notes.present?
       'admin/auctions/notes'
