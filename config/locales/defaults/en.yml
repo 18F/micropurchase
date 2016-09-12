@@ -18,7 +18,7 @@ en:
         bid:
           permissions: 'You are not allowed to bid on this auction'
           amount:
-            greater_than_max: 'Amount was not accepted. Please enter a whole number less than %{max_allowed_bid}.'
+            greater_than_max: 'Amount was not accepted. Please enter a whole number less than $%{max_allowed_bid}.'
             below_zero: 'Bid amount out of range'
         user:
           attributes:

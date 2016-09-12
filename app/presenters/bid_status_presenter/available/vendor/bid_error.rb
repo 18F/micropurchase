@@ -7,6 +7,10 @@ class BidStatusPresenter::Available::Vendor::BidError < BidStatusPresenter::Base
     bid_error
   end
 
+  def alert_css_class
+    'usa-alert-error'
+  end
+
   def action_partial
     'auctions/bid_form'
   end
