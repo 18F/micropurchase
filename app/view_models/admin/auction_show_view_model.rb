@@ -109,7 +109,8 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
     if auction.purchase_card == 'default'
       {
         'C2 proposal URL' => auction.c2_proposal_url,
-        'C2 approval status' => auction.c2_status
+        'C2 approval status' => auction.c2_status,
+        'Receipt URL' => receipt_url
       }
     else
       { }
@@ -126,5 +127,13 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
 
   def formatted_date(date)
     DcTimePresenter.convert_and_format(date)
+  end
+
+  def receipt_url
+    if auction.payment_confirmed?
+      ReceiptUrl.new(auction).to_s
+    else
+      "Winning vendor has not confirmed payment"
+    end
   end
 end

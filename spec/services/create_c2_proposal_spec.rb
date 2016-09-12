@@ -7,8 +7,8 @@ describe CreateC2Proposal do
         auction = create(:auction, :with_bids)
 
         fake_c2_attributes = { fake_c2: 'fake' }
-        attributes_double = double(perform: fake_c2_attributes)
-        allow(ConstructC2Attributes).to receive(:new)
+        attributes_double = double(to_h: fake_c2_attributes)
+        allow(C2Attributes).to receive(:new)
           .with(auction)
           .and_return(attributes_double)
 
@@ -33,8 +33,8 @@ describe CreateC2Proposal do
         auction = create(:auction, :with_bids)
 
         fake_c2_attributes = { fake_c2: 'fake' }
-        attributes_double = double(perform: fake_c2_attributes)
-        allow(ConstructC2Attributes).to receive(:new).with(auction).and_return(attributes_double)
+        attributes_double = double(to_h: fake_c2_attributes)
+        allow(C2Attributes).to receive(:new).with(auction).and_return(attributes_double)
 
         fake_c2_proposal_id = 123
         body_double = double(id: fake_c2_proposal_id)
@@ -61,8 +61,8 @@ describe CreateC2Proposal do
       it 'raises a CreateC2Proposal::Error' do
         auction = create(:auction, :with_bids)
 
-        attributes_double = double(perform: { })
-        allow(ConstructC2Attributes).to receive(:new).with(auction).and_return(attributes_double)
+        attributes_double = double(to_h: { })
+        allow(C2Attributes).to receive(:new).with(auction).and_return(attributes_double)
 
         c2_client_double = double
         allow(C2::Client).to receive(:new).and_return(c2_client_double)
