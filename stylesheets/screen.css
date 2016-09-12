@@ -709,7 +709,7 @@ td.col-title{
 
 
 
-.layout-admins-index main,
+/*.layout-admins-index main,
 .layout-bids-placed main,
 .layout-customers-index main,
 .layout-needs-attention main,
@@ -751,7 +751,7 @@ td.col-title{
 		margin-left: auto;
 		margin-right: auto;
 	}
-}
+}*/
 
 /* @end */
 
@@ -1485,9 +1485,10 @@ main div.wrap > form { max-width: 576px; }
 	margin: 0;
 	margin-right: 1em;
 	padding-top: 5px;
-	font: inherit;
-	font-weight: 400;
-	letter-spacing: 0;
+	font: inherit !important;
+	color: white !important;
+	font-weight: 400 !important;
+	letter-spacing: 0 !important;
 }
 
 .prototype-header .field{
@@ -1837,13 +1838,15 @@ main div.wrap > form { max-width: 576px; }
 /* @group .nav-facets */
 
 .nav-facets{
-	position: relative;	
 	border-top: 1px solid #555;
 	padding: 12px 0;
 	display: none;
 	background: white;
 	color: #333;
+	z-index: 2;
 }
+
+.nav-facets .wrapper{ position: relative; }
 
 .signed-in .nav-facets{ display: block; }
 
@@ -1896,7 +1899,8 @@ main div.wrap > form { max-width: 576px; }
   padding: 4px 8px;
   font-size: 14px;
   font-weight: 600;
-  margin-top: -86px;
+  z-index: 2;
+  margin-top: -96px;
 }
 
 .nav-facets .button{
@@ -1911,7 +1915,6 @@ main div.wrap > form { max-width: 576px; }
 .layout-customers-index .button,
 .layout-skills-index .button,
 .layout-vendors-index .button{
-	margin-top: -92px;
 }
 
 
@@ -2124,8 +2127,8 @@ main div.wrap > form { max-width: 576px; }
 }
 
 
-.auction .auction-header a,
-.auction .auction-header a:visited{
+.auction .auction-header a h1,
+.auction .auction-header a:visited h1{
 	color: #004a7f;
 }
 
