@@ -78,7 +78,7 @@ a:visited{  color: #8d0058; }
 
 .a-back{
 	padding: 8px 12px 8px 1.85em;
-	border-radius: 4px;
+	border-radius: 0 0 4px 4px;
 	background: #eee;
 	color: #555;
 	margin-top: -1em;
@@ -331,7 +331,7 @@ a[id]{
 	color: #333;
 }
 
-.page h3{
+.layout-auctions-show main .page h3{
 	font-size: 18px;
 }
 
@@ -340,6 +340,10 @@ a[id]{
 	position: relative;
 	max-width: 640px;
 	margin: 0 auto;
+}
+
+.page blockquote+h3{
+	margin-top: 1.2em;
 }
 
 .page blockquote::after{
@@ -364,8 +368,6 @@ a[id]{
 }
 
 @media screen and (min-width: 568.88px){
-	
-	
 
 	.page .page-title,
 	.page h1,
@@ -2306,6 +2308,10 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 /* @group docs */
 
+	.layout-docs .page{
+		padding-top: 1em;
+		padding-bottom: 2em;
+	}
 	.layout-docs-index h1,
 	.layout-docs-index p,
 	.layout-docs-index section,
