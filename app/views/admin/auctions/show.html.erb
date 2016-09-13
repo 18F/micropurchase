@@ -29,7 +29,7 @@
   </div>
 
   <div class="usa-width-one-third">
-    <%= render partial: @view_model.admin_auction_status_partial,
+    <%= render partial: 'auctions/status',
       locals: { status: @view_model.admin_auction_status_presenter  } %>
 
     <%= render partial: @view_model.admin_notes_partial,
