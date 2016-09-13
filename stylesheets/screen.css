@@ -2658,7 +2658,8 @@ details summary::-webkit-details-marker {
 }
 
 .auction-action details[open] form{
-	padding: 1em 6em 16px 16px;
+	padding: 1em 5.5em 16px 16px;
+	position: relative;
 }
 
 .auction-action details[open] form::after{
@@ -2680,11 +2681,10 @@ details summary::-webkit-details-marker {
 }
 
 .auction-action details[open] form button{
-	float: left;
-	width: 5em;
-	margin-right: -5em;
-	position: relative;
-	left: 0.67em;
+	width: 4.5em;
+	position: absolute;
+	right: 16px;
+	bottom: 16px;
 }
 .auction-workflow details[open] summary{
 }
