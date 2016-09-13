@@ -291,7 +291,7 @@ a[id]{
 .page h2,
 .layout-recent-activity section h1,
 .layout-auctions-drafts section h1,
-.layout-auctions-index section h1,
+.layout-auctions-coming-soon-and-open section h1,
 .layout-needs-attention section h1,
 .layout-auctions-closed section h1,
 .layout-admins-index section h1,
@@ -308,7 +308,7 @@ a[id]{
 }
 
 .layout-auctions-drafts section h1,
-.layout-auctions-index section h1,
+.layout-auctions-coming-soon-and-open section h1,
 .layout-needs-attention section h1,
 .layout-auctions-closed section h1,
 .layout-admins-index section h1,
@@ -1518,7 +1518,12 @@ main div.wrap > form { max-width: 576px; }
 	margin-right: 0.4em;
 }
 
-.prototype-header .field.nav-user{ float: right; }
+.prototype-header .field.nav-user{ 
+	float: right; 
+	display: none;
+}
+
+.signed-in .prototype-header .field.nav-user{ display: block; }
 
 .field-auction-status{ display: none; }
 .layout-auctions-show .field-auction-status{ display: block; }
@@ -1833,7 +1838,6 @@ main div.wrap > form { max-width: 576px; }
 .nav-facets{
 	border-top: 1px solid #555;
 	padding: 12px 0;
-	display: none;
 	background: white;
 	color: #333;
 	z-index: 2;
@@ -1906,19 +1910,6 @@ main div.wrap > form { max-width: 576px; }
 
 .nav-facets .button:hover{ color: white; }
 
-.layout-admins-index .button,
-.layout-customers-index .button,
-.layout-skills-index .button,
-.layout-vendors-index .button{
-}
-
-
-.user-type-admin.signed-in .auction .auction-header .button,
-.signed-in .h-feed-header .button{
-	display: block;
-	right: 0;
-}
-
 .layout-admins-index main .wrapper > h1,
 .layout-bids-placed main .wrapper > h1,
 .layout-needs-attention main .wrapper > h1,
@@ -1932,10 +1923,13 @@ main div.wrap > form { max-width: 576px; }
 	left: -9999em;
 }
 
+.nav-facets .a-needs-attention{ display: none; }
+.signed-in .nav-facets .a-needs-attention{ display: inline; }
+
 .layout-admins-index .a-admins-index,
 .layout-auctions-drafts .nav-auctions-drafts,
-.layout-auctions-index .a-auctions-index,
-.layout-needs-attention .a-auctions-needs-attention,
+.layout-auctions-coming-soon-and-open .a-auctions-coming-soon-and-open,
+.layout-needs-attention .a-needs-attention,
 .layout-auctions-closed .a-auctions-closed,
 .layout-bids-placed .a-bids-placed,
 .layout-customers-index .a-customers-index,
@@ -2452,18 +2446,18 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 /* @end */
 
-/* @group layout-auctions-index */
-.layout-auctions-index main .wrapper{ padding-top: 12px; }
+/* @group layout-auctions-coming-soon-and-open */
+.layout-auctions-coming-soon-and-open main .wrapper{ padding-top: 12px; }
 
-.layout-auctions-index .button,
+.layout-auctions-coming-soon-and-open .button,
 .layout-needs-attention .button,
-.layout-needs-closed .button{ display: none; }
+.layout-auctions-closed .button{ display: none; }
 
-.layout-auctions-index.user-type-admin .button,
+.layout-auctions-coming-soon-and-open.user-type-admin .button,
 .layout-needs-attention.user-type-admin .button,
-.layout-needs-closed.user-type-admin .button{ display: block; }
+.layout-auctions-closed.user-type-admin .button{ display: block; }
 
-.layout-auctions-index .auction,
+.layout-auctions-coming-soon-and-open .auction,
 .layout-auctions-closed .auction{
 	border: 1px solid #c3c3c3;
 	padding: 14px 16px 0;
@@ -2478,20 +2472,20 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	display: block;
 }
 
-.layout-auctions-index.user-type-admin .auction h1{
+.layout-auctions-coming-soon-and-open.user-type-admin .auction h1{
 	margin-right: 2.67em;
 }
 
-.layout-auctions-index .auction.is-draft .draft{
+.layout-auctions-coming-soon-and-open .auction.is-draft .draft{
 	margin: -14px -16px 12px;
 }
 
-.layout-auctions-index .auction a{
+.layout-auctions-coming-soon-and-open .auction a{
 	color: inherit;
 	text-decoration: none;
 }
 
-.layout-auctions-index .auction p{
+.layout-auctions-coming-soon-and-open .auction p{
 	font-size: 16px;
 	line-height: 1.4em;
 }
@@ -2500,27 +2494,27 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	
 	.h-feed-header{ margin-bottom: 12px; }
 	.h-feed-header .button{ top: 16px; }
-	.layout-auctions-index .auction,
+	.layout-auctions-coming-soon-and-open .auction,
 	.layout-auctions-closed .auction{ margin-bottom: 20px; }
 }
 
 @media screen and (min-width: 799.99px){
 
 
-	.layout-auctions-index .auction,
+	.layout-auctions-coming-soon-and-open .auction,
 	.layout-auctions-closed .auction{
 		width: 48.5%;
 		margin-right: 3%;
 		float: left;
 	}
 
-	.layout-auctions-index .auction:nth-child(2n),
+	.layout-auctions-coming-soon-and-open .auction:nth-child(2n),
 	.layout-auctions-closed .auction:nth-child(2n){
 		margin-right: 0;
 	}
 }
 
-.layout-auctions-index main article p{
+.layout-auctions-coming-soon-and-open main article p{
 	line-height: 1.3;
 }
 

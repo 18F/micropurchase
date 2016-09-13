@@ -94,7 +94,10 @@ $(document).ready(function() {
     if (Cookies.get('mpp-signed-in')) {
       $('body').addClass('signed-in');
     } else {
-      $('body').removeClass('signed-in');
+      $('body')
+        .removeClass('signed-in')
+        .removeClass('user-type-vendor')
+        .removeClass('user-type-admin');
     }
   }
 
