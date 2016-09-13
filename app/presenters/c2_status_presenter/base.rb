@@ -20,4 +20,8 @@ class C2StatusPresenter::Base
   def body
     ''
   end
+
+  def alert_css_class
+    'usa-alert-info'
+  end
 end

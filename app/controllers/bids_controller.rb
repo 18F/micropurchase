@@ -12,7 +12,7 @@ class BidsController < ApplicationController
     if @bid.perform
       flash[:bid] = "success"
     else
-      flash[:error] = @bid.errors.full_messages.to_sentence
+      flash[:bid_error] = @bid.errors.full_messages.to_sentence
     end
 
     redirect_to auction_path(@bid.auction)

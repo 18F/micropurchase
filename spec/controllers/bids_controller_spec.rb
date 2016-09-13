@@ -63,7 +63,7 @@ describe BidsController do
 
         it "adds a flash error when the bid is bad" do
           post :create, request_params, user_id: current_bidder.id
-          expect(flash[:error]).to eq("Bid amount out of range")
+          expect(flash[:bid_error]).to eq("Bid amount out of range")
           expect(response).to redirect_to(auction_path(auction))
         end
       end
