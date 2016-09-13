@@ -2681,7 +2681,7 @@ details summary::-webkit-details-marker {
 }
 
 .auction-action details[open] form button{
-	width: 4.5em;
+	width: auto;
 	position: absolute;
 	right: 16px;
 	bottom: 16px;
