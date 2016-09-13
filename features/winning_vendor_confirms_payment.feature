@@ -32,4 +32,3 @@ Feature: Winning vendor confirms payment
     When I visit the new auction receipt page
     And I click on the confirm received payment button
     Then I should see the payment confirmed message
-    And the payment receipt should be sent to C2

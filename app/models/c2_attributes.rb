@@ -1,4 +1,4 @@
-class ConstructC2Attributes
+class C2Attributes
   OFFICE = 'DC'.freeze
   PURCHASE_TYPE = 'Micropurchase'.freeze
   QUANTITY = 1
@@ -9,17 +9,18 @@ class ConstructC2Attributes
     @auction = auction
   end
 
-  def perform
+  def to_h
     {
       gsa18f_procurement: {
-        office: OFFICE,
-        purchase_type: PURCHASE_TYPE,
-        product_name_and_description: product_name_and_description,
-        justification: justification,
         cost_per_unit: cost_per_unit,
+        date_requested: date_requested,
+        justification: justification,
+        link_to_product: url,
+        office: OFFICE,
+        product_name_and_description: product_name_and_description,
+        purchase_type: PURCHASE_TYPE,
         quantity: QUANTITY,
         recurring: RECURRING,
-        date_requested: date_requested,
         urgency: URGENCY
       }
     }
@@ -31,8 +32,6 @@ class ConstructC2Attributes
 
   def product_name_and_description
     %(Micro-purchase for '#{auction.title}'.
-
-      Link: #{url}
 
       Summary:
 

@@ -1,11 +1,11 @@
-class AdminAuctionStatusPresenter::FuturePublished < AdminAuctionStatusPresenter::Base
+class AdminAuctionStatusPresenter::Future < AdminAuctionStatusPresenter::Base
   def header
-    I18n.t('statuses.admin_auction_status_presenter.future_published.header')
+    I18n.t('statuses.admin_auction_status_presenter.future.header')
   end
 
   def body
     I18n.t(
-      'statuses.admin_auction_status_presenter.future_published.body',
+      'statuses.admin_auction_status_presenter.future.body',
       start_date: start_date
     )
   end

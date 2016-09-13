@@ -11,6 +11,7 @@ describe Admin::AuctionShowViewModel do
 
       expect(data).to have_key('C2 proposal URL')
       expect(data).to have_key('C2 approval status')
+      expect(data).to have_key('Receipt URL')
     end
   end
 
@@ -24,6 +25,7 @@ describe Admin::AuctionShowViewModel do
 
       expect(data).not_to have_key('C2 proposal URL')
       expect(data).not_to have_key('C2 approved at')
+      expect(data).not_to have_key('Receipt URL')
     end
   end
 end

@@ -40,9 +40,7 @@ end
 
 Then(/^I should see the future auction message for admins$/) do
   expect(page).to have_content(
-    "This auction is visible to the public but is not currently accepting bids.
-    It will open on #{start_date}. If you need to take it down for whatever
-    reason, press the unpublish button below."
+    I18n.t('statuses.admin_auction_status_presenter.future.header')
   )
 end
 
@@ -72,12 +70,6 @@ Then(/^I should see the ready for work status box$/) do
     I18n.t('statuses.bid_status_presenter.over.winner.work_not_started.header')
   )
   expect(find_field('auction_delivery_url')).not_to be_nil
-end
-
-Then(/^I should see the coming soon status box for admins$/) do
-  expect(page).to have_content(
-    I18n.t('statuses.admin_auction_status_presenter.future_published.header')
-  )
 end
 
 Then(/^I should see the work in progress status box$/) do
@@ -198,11 +190,6 @@ Then(/^I should see the payment confirmed message$/) do
       paid_at: DcTimePresenter.convert_and_format(@auction.paid_at)
     )
   )
-end
-
-Then(/^the payment receipt should be sent to C2$/) do
-  expect(UpdateC2ProposalJob).to have_received(:perform_later)
-    .with(@auction.id, 'AddReceiptToC2ProposalAttributes')
 end
 
 def end_date

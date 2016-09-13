@@ -102,10 +102,6 @@ Then(/^I should be on my profile page$/) do
   expect(page.current_path).to eq(profile_path)
 end
 
-Then(/^I should be on the bid confirmation page$/) do
-  expect(page.current_path).to eq(auction_bid_confirmations_path(@auction))
-end
-
 When(/^I should be on the admin auctions page$/) do
   expect(page.current_path).to eq(admin_auctions_path)
 end

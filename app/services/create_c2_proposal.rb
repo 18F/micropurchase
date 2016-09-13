@@ -27,10 +27,10 @@ class CreateC2Proposal < C2ApiWrapper
   end
 
   def c2_response
-    c2_client.post('proposals', c2_proposal_attributes)
+    c2_client.post('proposals', c2_attributes)
   end
 
-  def c2_proposal_attributes
-    ConstructC2Attributes.new(auction).perform
+  def c2_attributes
+    C2Attributes.new(auction).to_h
   end
 end

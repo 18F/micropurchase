@@ -1,8 +1,9 @@
 class AdminAuctionStatusPresenter::Base
   attr_reader :auction
 
-  def initialize(auction:)
+  def initialize(auction:, user: nil)
     @auction = auction
+    @user = user
   end
 
   def action_partial
