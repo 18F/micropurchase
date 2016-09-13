@@ -19,9 +19,9 @@ $(document).ready(function() {
   
   $('body').removeClass('no-js');
 
-  $('.layout-customers-index main').addClass('overthrow');
-
   if ($('body').hasClass('layout-auctions-show')) {
+    Cookies.set('mpp-signed-in', 'true'); 
+    renderSiteHeaderSignIn();    
     $('.field-auction-status select').change(function(){
       statusCode = $(this).find('option:selected').attr("value");
       userType = $(this).find('option:selected').parent('optgroup').attr('label');
@@ -105,11 +105,12 @@ $(document).ready(function() {
 
   $('.site-header .a-sign-in, .site-header .a-sign-up').click(function(){ 
     Cookies.set('mpp-signed-in', 'true'); 
-    renderSiteHeaderSignIn()
+    renderSiteHeaderSignIn();
   });
   $('.site-header .a-sign-out').click(function(){ 
     Cookies.remove('mpp-signed-in');
-    renderSiteHeaderSignIn()
+    renderSiteHeaderSignIn();
+    return false;
   });
 
   $('.fieldset-start-date-time .field-date input').change(function(){
