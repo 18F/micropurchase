@@ -22,17 +22,17 @@ $(document).ready(function() {
   $('.layout-customers-index main').addClass('overthrow');
 
   if ($('body').hasClass('layout-auctions-show')) {
-    $('.auction-workflow').hide();
-
     $('.field-auction-status select').change(function(){
-      $('.auction-workflow').hide();
       statusCode = $(this).find('option:selected').attr("value");
       userType = $(this).find('option:selected').parent('optgroup').attr('label');
       $('.nav-user select').find('option[value="' + userType + '"]').prop('selected', true);
       $('.nav-user select').change();
       window.history.pushState('Test', 'Title', '?auctionWorkflowState=' + statusCode);
       workflowClass = "auction-workflow-" + statusCode;
-      $('.' + workflowClass).show();
+      $('body').removeClass (function (index, css) {
+        return (css.match (/(^|\s)auction-workflow-\S+/g) || []).join(' ');
+      });
+      $('body').addClass(workflowClass);
     });
 
     var auctionWorkflowState = getQueryVariable("auctionWorkflowState");
@@ -48,6 +48,11 @@ $(document).ready(function() {
       if (auctionWorkflowState) {
         $('.field-auction-status select').find('option[value="' + auctionWorkflowState + '"]').prop('selected', true);
         $('.field-auction-status select').change();
+        workflowClass = "auction-workflow-" + auctionWorkflowState;
+        $('body').removeClass (function (index, css) {
+          return (css.match (/(^|\s)auction-workflow-\S+/g) || []).join(' ');
+        });
+        $('body').addClass(workflowClass);
       } else {
         var bidVal = $(this).find('input').val();
         confirm("Are you sure you want to place a bid for $" + bidVal + "?");

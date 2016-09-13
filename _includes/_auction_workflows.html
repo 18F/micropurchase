@@ -410,18 +410,6 @@
 <section class="auction-workflow auction-workflow-work-in-progress-admins">
   <h1>Work in progress</h1>
   <p><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a> <a href="#">initiated a pull request</a> on [auction.startWorkDate], and should complete work no later than [deadline].</p>
-  <details>
-    <summary>Update delivery URL</summary>
-    <form data-auction-workflow-state="work-in-progress-admins">
-      <div class="field field-delivery-url">
-        <label>
-          <span class="label-text">Delivery <abbr title="Uniform resource locator">URL</abbr></span>
-          <input type="text" name="" required>
-        </label>
-      </div>
-      <button class="button button-mark-as-delivered">Update</button>
-    </form>
-  </details>
   <form class="form-mark-as-delivered" data-auction-workflow-state="acceptance-needed-admins">
     <button class="button button-mark-as-delivered">Mark as delivered</button>
   </form>
@@ -436,36 +424,6 @@
 <section class="auction-workflow auction-workflow-delivery-past-due-admins">
   <h1>Delivery past due</h1>
   <p><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a> was supposed to have delivered this auction before [auction.deliveryDeadline], but has yet to complete their work.</p>
-  <details>
-    <summary>Issue extension</summary>
-    <form class="form-issue-extension" data-auction-workflow-state="work-in-progress-admins">
-      <div class="field field-select">
-        <label>
-          <span class="label-text">Extension length</span>
-          <select>
-            <option>1 day</option>
-            <option>2 days</option>
-            <option>3 days</option>
-            <option>4 days</option>
-            <option>5 days</option>
-          </select>
-        </label>
-      </div>
-      <button class="button button-issue-extension">Issue an extension</button>
-    </form>
-  </details>
-  <details>
-    <summary>Update delivery URL</summary>
-    <form data-auction-workflow-state="work-in-progress-admins">
-      <div class="field field-delivery-url">
-        <label>
-          <span class="label-text">Delivery <abbr title="Uniform resource locator">URL</abbr></span>
-          <input type="text" name="" required>
-        </label>
-      </div>
-      <button class="button button-mark-as-delivered">Update</button>
-    </form>
-  </details>
   <form class="form-mark-as-delivered" data-auction-workflow-state="pending-payment-url-admins">
     <button class="button button-mark-as-delivered">Mark as delivered</button>
   </form>
@@ -487,18 +445,6 @@
 <section class="auction-workflow auction-workflow-acceptance-needed-admins">
   <h1>Acceptance needed</h1>
   <p><a href="{{site.baseurl}}/people/vendors/show"><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a></a> made <a href="#">a pull request</a> and marked this auction as having been delivered. If their work meets this auction&rsquo;s acceptance criteria, click &ldquo;accept.&rdquo; Otherwise, click &ldquo;reject.&rdquo;</p>
-  <details>
-    <summary>Update delivery URL</summary>
-    <form data-auction-workflow-state="acceptance-needed-admins">
-      <div class="field field-delivery-url">
-        <label>
-          <span class="label-text">Delivery <abbr title="Uniform resource locator">URL</abbr></span>
-          <input type="text" name="" required>
-        </label>
-      </div>
-      <button class="button button-mark-as-delivered">Update</button>
-    </form>
-  </details>
   <form data-auction-workflow-state="pending-payment-url-admins">
     <button class="button button-accept">Accept</button>
   </form>
@@ -514,18 +460,6 @@
 <section class="auction-workflow auction-workflow-pending-payment-url-admins">
   <h1>Pending payment URL</h1>
   <p>This vendor has been asked to <a href="{{site.baseurl}}/docs/getting-paid">provide a payment URL</a>.</p>
-  <details>
-    <summary>Add payment URL</summary>
-    <form data-auction-workflow-state="pending-payment-from-18f-admins">
-      <div class="field field-payment-url">
-        <label>
-          <span class="label-text">Payment <abbr title="Uniform resource locator">URL</abbr></span>
-          <input type="text" name="">
-        </label>
-      </div>
-      <button class="button">Update</button>
-    </form>
-  </details>
 </section>
 <section class="auction-workflow auction-workflow-payment-url-needed-vendors">
   <h1>Payment URL needed</h1>
@@ -610,15 +544,3 @@
   <h1>Bidding closed</h1>
   <p>Bidding for this auction closed on <time>[auction.closedDate]</time>.</p>
 </section>
-<details class="auction-action auction-action-mark-as-started">
-  <summary>Mark as started</summary>
-  <form data-auction-workflow-state="work-in-progress-admins">
-    <div class="field field-delivery-url">
-      <label>
-        <span class="label-text">Delivery <abbr title="Uniform resource locator">URL</abbr></span>
-        <input type="text" name="" required>
-      </label>
-    </div>
-    <button class="button button-mark-as-delivered">Update</button>
-  </form>
-</details>

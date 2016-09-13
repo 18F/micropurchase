@@ -2574,7 +2574,135 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 /* @group layout-auctions-show */
 
+/* @group actions */
+
+.auction .auction-actions{
+	margin-bottom: 24px;
+	display: none;
+}
+
+.user-type-admin .auction .auction-actions{
+	display: block;
+}
+
+.auction .auction-actions h1{
+	font: inherit;
+	font-size: 16px;
+	margin-bottom: 0.44em;
+	color: #555;
+	line-height: 1.2em;
+	font-weight: 600;
+}
+
+.auction .auction-actions li:first-of-type{
+	border-top: 1px solid #e3e3e3;
+}
+
+.auction .auction-actions li{
+	border-bottom: 1px solid #e3e3e3;
+	padding: 6px 0;
+}
+
+.auction .auction-actions a{ 
+	color: inherit;
+	text-decoration: none; 
+	padding-left: 17px;
+}
+
+.auction .auction-actions a:hover{
+	text-decoration: underline; 
+}
+
+.auction-workflow details form{
+	padding: 0 16px 12px;
+}
+
+.auction-workflow details summary {
+	display: block;
+	cursor: pointer;
+	width: 100%;
+	height: 1.2em;
+	line-height: 1.2em;
+}
+
+details summary::-webkit-details-marker {
+  color: #999;
+  font-size: 0.85em;
+  vertical-align: middle;
+  margin-top: -3px;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+.auction-workflow details[open]{
+	background: #fff;
+}
+
+.auction-workflow details[open] summary{
+}
+
+/* @end */
+
 /* @group auction-workflow */
+
+.auction-workflow{
+	color: #333;
+	border: 1px solid #a2cae5;
+	box-shadow: 1px 1px 0 0 #f8f8f8;
+	background: #f4fafb;
+	border-radius: 4px;
+	margin-bottom: 1em;
+	padding: 16px 16px 20px;
+	position: relative;
+	display: none;
+}
+
+.auction-workflow h1{ 
+	font: inherit;
+	font-size: 18px;
+	margin-bottom: 0.4em;
+	color: inherit;
+	line-height: 1.2em;
+	font-weight: 600;
+}
+
+.auction-workflow-draft-vendors .auction-workflow.auction-workflow-draft-vendors,
+.auction-workflow-coming-soon-vendors .auction-workflow.auction-workflow-coming-soon-vendors,
+.auction-workflow-please-update-your-profile-vendors .auction-workflow.auction-workflow-please-update-your-profile-vendors,
+.auction-workflow-you-are-ineligible-to-bid-vendors .auction-workflow.auction-workflow-you-are-ineligible-to-bid-vendors,
+.auction-workflow-place-a-bid-first-vendors .auction-workflow.auction-workflow-place-a-bid-first-vendors,
+.auction-workflow-place-a-bid-reverse-vendors .auction-workflow.auction-workflow-place-a-bid-reverse-vendors,
+.auction-workflow-youve-been-underbid-vendors .auction-workflow.auction-workflow-youve-been-underbid-vendors,
+.auction-workflow-bid-rejected-sealed-vendors .auction-workflow.auction-workflow-bid-rejected-sealed-vendors,
+.auction-workflow-bid-rejected-reverse-vendors .auction-workflow.auction-workflow-bid-rejected-reverse-vendors,
+.auction-workflow-bid-placed-sealed-vendors .auction-workflow.auction-workflow-bid-placed-sealed-vendors,
+.auction-workflow-bid-placed-reverse-vendors .auction-workflow.auction-workflow-bid-placed-reverse-vendors,
+.auction-workflow-ready-for-work-vendors .auction-workflow.auction-workflow-ready-for-work-vendors,
+.auction-workflow-work-in-progress-vendors .auction-workflow.auction-workflow-work-in-progress-vendors,
+.auction-workflow-delivery-past-due-vendors .auction-workflow.auction-workflow-delivery-past-due-vendors,
+.auction-workflow-pending-acceptance-vendors .auction-workflow.auction-workflow-pending-acceptance-vendors,
+.auction-workflow-payment-url-needed-vendors .auction-workflow.auction-workflow-payment-url-needed-vendors,
+.auction-workflow-pending-payment-vendors .auction-workflow.auction-workflow-pending-payment-vendors,
+.auction-workflow-payment-confirmation-needed-vendors .auction-workflow.auction-workflow-payment-confirmation-needed-vendors,
+.auction-workflow-paid-vendors .auction-workflow.auction-workflow-paid-vendors,
+.auction-workflow-rejected-vendors .auction-workflow.auction-workflow-rejected-vendors,
+.auction-workflow-closed-didnt-win-vendors .auction-workflow.auction-workflow-closed-didnt-win-vendors,
+.auction-workflow-c2-approval-required-admins .auction-workflow.auction-workflow-c2-approval-required-admins, 
+.auction-workflow-pending-c2-approval-admins .auction-workflow.auction-workflow-pending-c2-approval-admins, 
+.auction-workflow-ready-to-publish-admins .auction-workflow.auction-workflow-ready-to-publish-admins, 
+.auction-workflow-coming-soon-admins .auction-workflow.auction-workflow-coming-soon-admins, 
+.auction-workflow-accepting-bids-no-bids-admins .auction-workflow.auction-workflow-accepting-bids-no-bids-admins, 
+.auction-workflow-accepting-bids-bids-placed-admins .auction-workflow.auction-workflow-accepting-bids-bids-placed-admins, 
+.auction-workflow-ready-for-work-admins .auction-workflow.auction-workflow-ready-for-work-admins, 
+.auction-workflow-work-in-progress-admins .auction-workflow.auction-workflow-work-in-progress-admins, 
+.auction-workflow-delivery-past-due-admins .auction-workflow.auction-workflow-delivery-past-due-admins, 
+.auction-workflow-acceptance-needed-admins .auction-workflow.auction-workflow-acceptance-needed-admins, 
+.auction-workflow-pending-payment-url-admins .auction-workflow.auction-workflow-pending-payment-url-admins, 
+.auction-workflow-pending-payment-from-18f-admins .auction-workflow.auction-workflow-pending-payment-from-18f-admins, 
+.auction-workflow-pending-payment-from-customer-admins .auction-workflow.auction-workflow-pending-payment-from-customer-admins, 
+.auction-workflow-pending-payment-confirmation-admins .auction-workflow.auction-workflow-pending-payment-confirmation-admins, 
+.auction-workflow-paid-and-confirmed-admins .auction-workflow.auction-workflow-paid-and-confirmed-admins, 
+.auction-workflow-rejected-admins .auction-workflow.auction-workflow-rejected-admins{ display: block; }
 
 .auction-workflow.auction-workflow-draft-vendors{
 	background: #eaf4fc;
@@ -2616,7 +2744,7 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	margin-bottom: 8px;
 }
 
-.auction-workflow-delivery-past-due-admins .field{
+.auction-workflow-delivery-past-due-admins .auction-workflow .field{
 	margin-top: 16px;
 	margin-bottom: 4px;
 }
@@ -2702,26 +2830,6 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	background: rgba(255,255,255,0.8);
 }
 
-.auction-workflow{
-	color: #333;
-	border: 1px solid #a2cae5;
-	box-shadow: 1px 1px 0 0 #f8f8f8;
-	background: #f4fafb;
-	border-radius: 4px;
-	margin-bottom: 1em;
-	padding: 16px 16px 20px;
-	position: relative;
-}
-
-.auction-workflow h1{ 
-	font: inherit;
-	font-size: 18px;
-	margin-bottom: 0.4em;
-	color: inherit;
-	line-height: 1.2em;
-	font-weight: 600;
-}
-
 .auction-workflow .bid-amount{
   font-weight: 600;
   display: inline !important;
@@ -2753,43 +2861,7 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	border-radius: 2px;
 }
 
-.auction-workflow details:first-of-type{
-	border-top: 1px solid #a1c9e5;
-	margin-top: 1em;
-}
 
-.auction-workflow details{
-	border-bottom: 1px solid #a1c9e5;
-	padding: 6px 0;
-}
-
-.auction-workflow details form{
-	padding: 0 16px 12px;
-}
-
-.auction-workflow details summary {
-	display: block;
-	cursor: pointer;
-	width: 100%;
-	height: 1.2em;
-	line-height: 1.2em;
-}
-
-details summary::-webkit-details-marker {
-  color: #2b4456;
-  font-size: 0.85em;
-  vertical-align: middle;
-  margin-top: -3px;
-  margin-left: 4px;
-  margin-right: 4px;
-}
-
-.auction-workflow details[open]{
-	background: #fff;
-}
-
-.auction-workflow details[open] summary{
-}
 
 .auction-workflow[class*="auction-workflow-place-a-bid"] button,
 .auction-workflow[class*="auction-workflow-bid"] button,
@@ -2911,10 +2983,6 @@ details summary::-webkit-details-marker {
 		max-width: none;
 	}
 
-	.layout-auctions-show main .wrapper .auction-footer{
-		margin-top: -8px;		
-	}
-	
 	.layout-auctions-show main .wrapper .auction-footer .wrapper{
 		padding-top: 0;
 	}
@@ -2940,13 +3008,10 @@ details summary::-webkit-details-marker {
 	
 }
 
-.layout-auctions-show main .auction-footer {
+.layout-auctions-show .auction-footer {
 	background: none;
 	padding: 0;
-}
-
-.layout-auctions-show main .auction-footer .wrapper{
-	width: auto;
+	margin: 0;
 }
 
 .layout-auctions-show main .page h2{
@@ -3070,18 +3135,16 @@ details summary::-webkit-details-marker {
 	}
 		
 	.layout-auctions-show main .wrapper .page,
-	.layout-auctions-show main .wrapper .auction-footer{
+	.layout-auctions-show main .wrapper .secondary-content{
 		float: left;
 		width: 50%;
 	}
-	
-	.layout-auctions-show main .wrapper .auction-footer .auction-workflow{ margin: 0 0 16px; }
-	
+		
 	.layout-auctions-show main .wrapper .page{
 		width: 55%;
 	}
 	
-	.layout-auctions-show main .wrapper .auction-footer{
+	.layout-auctions-show main .wrapper .secondary-content{
 		font-size: 16px;
 		width: 45%;
 		margin: 0;
@@ -3099,7 +3162,7 @@ details summary::-webkit-details-marker {
 @media screen and (min-width: 1066.66px){	
 
 	.layout-auctions-show main .wrapper .page,
-	.layout-auctions-show main .wrapper .auction-footer{
+	.layout-auctions-show main .wrapper .secondary-content{
 		float: left;
 		width: 100%;
 	}
@@ -3108,7 +3171,7 @@ details summary::-webkit-details-marker {
 		width: 640px;
 	}
 	
-	.layout-auctions-show main .wrapper .auction-footer{
+	.layout-auctions-show main .wrapper .secondary-content{
 		width: 320px;
 		margin: 0;
 	}
