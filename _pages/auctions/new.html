@@ -10,7 +10,7 @@ excerpt: None
   <main role="main" id="main">
     <div class="wrapper">
       <h1>Create an auction</h1>
-      <form action="{{site.baseurl}}/auctions/show">
+      <form method="get" action="{{site.baseurl}}/auctions/show/?auctionWorkflowState=pending-payment-url-admins">
         <div class="fields">
           <div class="field field-title is-error">
             <label>

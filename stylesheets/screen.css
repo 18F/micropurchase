@@ -2574,55 +2574,61 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 /* @group layout-auctions-show */
 
-/* @group actions */
+/* @group auction-actions */
 
-.auction .auction-actions{
-	margin-bottom: 24px;
-	display: none;
-}
-
-.user-type-admin .auction .auction-actions{
-	display: block;
-}
+.auction .auction-actions{ margin-bottom: 24px; }
 
 .auction .auction-actions h1{
 	font: inherit;
 	font-size: 16px;
-	margin-bottom: 0.44em;
+	padding-bottom: 0.44em;
+	border-bottom: 1px solid #e3e3e3;
 	color: #555;
 	line-height: 1.2em;
 	font-weight: 600;
 }
 
-.auction .auction-actions li:first-of-type{
-	border-top: 1px solid #e3e3e3;
-}
-
-.auction .auction-actions li{
-	border-bottom: 1px solid #e3e3e3;
-	padding: 6px 0;
-}
+.auction .auction-actions .auction-action{ display: none; }
 
 .auction .auction-actions a{ 
 	color: inherit;
 	text-decoration: none; 
-	padding-left: 17px;
+	padding: 6px 0 6px 18px;
+	display: block;
 }
 
 .auction .auction-actions a:hover{
 	text-decoration: underline; 
 }
 
-.auction-workflow details form{
-	padding: 0 16px 12px;
+.auction-action input{
+	padding: 2px 6px;
+	min-height: 28px;
+	line-height: 1;
+	border-radius: 2px;
+	font-size: 16px;
+	width: 100%;
 }
 
-.auction-workflow details summary {
+.auction-action button{ 
+	padding: 1px 8px 1px;
+	min-height: 24px;
+	height: auto; 
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 24px;
+	margin-top: 12px;
+	-webkit-appearance: none;
+	border-radius: 2px;
+}
+
+.auction-action details summary {
 	display: block;
 	cursor: pointer;
 	width: 100%;
-	height: 1.2em;
 	line-height: 1.2em;
+	padding: 4px 0;
+	outline: transparent;
 }
 
 details summary::-webkit-details-marker {
@@ -2634,10 +2640,46 @@ details summary::-webkit-details-marker {
   margin-right: 4px;
 }
 
-.auction-workflow details[open]{
-	background: #fff;
+.auction .auction-actions .auction-action-edit,
+.auction-action details{
+	border: 1px solid transparent;
+	border-bottom-color: #e3e3e3;
 }
 
+.auction-action details[open]{
+	border-color: #e3e3e3;
+	border-top-color: transparent;
+}
+
+.auction-action details[open] form{
+	padding: 1em 6em 16px 16px;
+}
+
+.auction-action details[open] form::after{
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.auction-action details[open] form .label-text{
+	position: absolute;
+	left: -9999em;
+}
+
+.auction-action details[open] form .field,
+.auction-action details[open] form button{
+	float: left;
+	width: 100%;
+	margin: 0;
+}
+
+.auction-action details[open] form button{
+	float: left;
+	width: 5em;
+	margin-right: -5em;
+	position: relative;
+	left: 0.67em;
+}
 .auction-workflow details[open] summary{
 }
 
@@ -2703,6 +2745,25 @@ details summary::-webkit-details-marker {
 .auction-workflow-pending-payment-confirmation-admins .auction-workflow.auction-workflow-pending-payment-confirmation-admins, 
 .auction-workflow-paid-and-confirmed-admins .auction-workflow.auction-workflow-paid-and-confirmed-admins, 
 .auction-workflow-rejected-admins .auction-workflow.auction-workflow-rejected-admins{ display: block; }
+
+
+.auction-actions .auction-action.auction-action-share{ display: block;  }
+
+.auction-workflow-c2-approval-required-admins .auction-action.auction-action-edit,
+.auction-workflow-pending-c2-approval-admins .auction-action.auction-action-edit,
+.auction-workflow-ready-to-publish-admins .auction-action.auction-action-edit,
+.auction-workflow-coming-soon-admins .auction-action.auction-action-edit{ display: block; }
+
+.auction-workflow-ready-for-work-admins .auction-action.auction-action-edit-delivery-url,
+.auction-workflow-work-in-progress-admins .auction-action.auction-action-edit-delivery-url,
+.auction-workflow-delivery-past-due-admins .auction-action.auction-action-edit-delivery-url,
+.auction-workflow-work-in-progress-vendors .auction-action.auction-action-edit-delivery-url,
+.auction-workflow-work-in-progress-vendors .auction-action.auction-action-edit-delivery-url{ display: block; }
+
+.auction-workflow-pending-payment-url-admins .auction-action.auction-action-edit-payment-url,
+.auction-workflow-pending-payment-from-18f-admins .auction-action.auction-action-edit-payment-url,
+.auction-workflow-pending-payment-vendors .auction-action.auction-action-edit-payment-url{ display: block; }
+
 
 .auction-workflow.auction-workflow-draft-vendors{
 	background: #eaf4fc;
@@ -2835,30 +2896,11 @@ details summary::-webkit-details-marker {
   display: inline !important;
 }
 
-.auction-workflow.auction-workflow-acceptance-needed-admins form{
+.auction-workflow form{
 	display: inline-block;
 	vertical-align: middle;
-}
-
-.auction-workflow input{
-	padding: 2px 6px;
-	min-height: 28px;
-	line-height: 1;
-	border-radius: 2px;
-	font-size: 16px;
-	width: 100%;
-}
-
-.auction-workflow button{ 
-	padding: 2px 8px 2px;
-	min-height: 24px;
-	height: auto; 
-	font-size: 14px;
-	font-weight: 600;
-	line-height: 24px;
-	margin-top: 12px;
-	-webkit-appearance: none;
-	border-radius: 2px;
+	margin-top: 1em;
+	margin-right: 0.4em;
 }
 
 
@@ -2948,11 +2990,6 @@ details summary::-webkit-details-marker {
 @media (min-width: 568.88px){
 		
 	
-	.layout-auctions-show .auction-header h1,
-	.layout-auctions-bids .auction-header h1,
-	.layout-auctions-history .auction-header h1{
-	}
-	
 	.layout-auctions-show .auction .auction-header dl,
 	.layout-auctions-bids .auction .auction-header dl,
 	.layout-auctions-history .auction .auction-header dl{
@@ -3041,44 +3078,38 @@ details summary::-webkit-details-marker {
 	line-height: 1.33em;
 }
 
-.layout-auctions-show main .auction-footer .share{
+.auction-action-share details[open] div{
   position: relative;
-  padding: 0 36px 0 3.6em;
+  padding: 0 36px 0 0;
   border: 1px solid #ccc;
   border-bottom-color: #c0c0c0;
   border-right-color: #bbb;
   border-radius: 4px;
   background: #f3f3f3;
   background: linear-gradient(#f3f3f3, #f0f0f0);
-  margin-bottom: 1em;
   line-height: 2em;
+  margin-top: 8px;
   color: #333;
   font-size: 14px;
 	box-shadow: 1px 1px 0 rgba(0,0,0,0.04);
 }
 
-.layout-auctions-show main .auction-footer .share h1,
-.layout-auctions-show main .auction-footer .share a{
+.auction-action-share details[open] div a{
 	position: absolute;
 	left: 0;
 	top: 0;
 	bottom: 0;
 }
 
-.layout-auctions-show main .auction-footer .share h1{
-  padding-left: 0.6em;
-  padding-right: 0.4em;
-}
-
-.layout-auctions-show main .auction-footer .share input{
+.auction-action-share details[open] div input{
 	border: none;
-	border-radius: 0;
+	border-radius: 2px 0 0 2px;
 	line-height: 2;
 	padding: 0 0.4em;
 	min-height: 0;
 }
 
-.layout-auctions-show main .auction-footer .share a{
+.auction-action-share details[open] div a{
 	left: auto;
 	right: 1px;
 	background: url(images/png/clipboard.png) 16px center no-repeat;
@@ -3087,7 +3118,7 @@ details summary::-webkit-details-marker {
 	height: 2em;
 }
 
-.layout-auctions-show main .auction-footer .share a span{
+.auction-action-share details[open] div a span{
 	position: absolute;
 	left: -9999em;
 }
@@ -3369,13 +3400,12 @@ details summary::-webkit-details-marker {
     max-width: 640px;
 	font-size: 20px;
 	font-family: Merriweather, Georgia, serif;
-	letter-spacing: 0;
-	font-weight: 600;
-	line-height: 1.25em;
+	letter-spacing: -1px;
+	font-weight: 400;
+	line-height: 1.33em;
 	margin: 0 auto 0.67em;
+	padding-top: 8px;
 }
-
-
 
 @media screen and (min-width: 622.222px){
 	.layout-auctions-new main h1,
