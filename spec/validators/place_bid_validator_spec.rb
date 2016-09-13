@@ -33,9 +33,9 @@ describe PlaceBidValidator do
 
       expect(bid.errors.full_messages).to include(
         I18n.t(
-               'activerecord.errors.models.bid.amount.greater_than_max',
-               max_allowed_bid: 149
-              )
+          'activerecord.errors.models.bid.amount.greater_than_max',
+          max_allowed_bid: 149
+        )
       )
     end
 

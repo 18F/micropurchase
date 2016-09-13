@@ -64,7 +64,7 @@ class BidStatusPresenterFactory
       BidStatusPresenter::Available::Guest
     elsif ineligible?
       ineligible_presenter
-    elsif !bid_error.blank?
+    elsif bid_error.present?
       BidStatusPresenter::Available::Vendor::BidError
     elsif rules.user_can_bid?(user)
       user_can_bid_message
