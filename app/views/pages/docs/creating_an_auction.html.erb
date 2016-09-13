@@ -1,0 +1,181 @@
+<div class="usa-grid docs">
+  <h1>Creating <span class="article">an</span> Auction <span class="preposition">on</span> 18F Micro-purchase</h1>
+
+  <p class="usa-font-lead">This guide builds upon our <a
+    href="/docs/getting_started">getting started</a> guide in order to help
+  18F's Micro-purchase customers solicit small, measurable contributions to open
+  source software projects.</p>
+
+  <p>18F's Micro-purchase platform enables government employees to solicit
+  small, measurable contributions to open source software projects through the
+  use of reverse-auctions. To list auctions for you, 18F's Micro-purchase team
+  will need the following information:</p>
+
+  <ul>
+    <li>The public <strong>link</strong> (URL) to the GitHub repository of the
+    open source project(s) for which you're soliciting contributions.</li>
+    <li>A tentative or suggested <strong>title</strong> for your
+    auction(s).</li>
+    <li>A <strong>summary of the changes</strong> you want made.</li>
+    <li>The <strong>starting price(s)</strong> for your auction(s), up to $3,500. </li>
+    <li>Objective <strong>acceptance criteria</strong> for your auction(s).</li>
+    <li>A list of <strong>skills</strong> or programming languages required to
+    make the changes you're requesting.</li>
+    <li>A <strong>GitHub issue</strong> associated with each change you're
+    requesting.</li>
+    <li>Clarity on whose <strong>purchase card (p-card)</strong> will be used to
+    pay winning vendor(s).</li>
+  </ul>
+
+  <p>This document provides general guidance to help you
+  locate the information listed above. 18F's Micro-purchase team will take it
+  from there, tailoring one or more auctions to fit your needs.</p>
+
+  <p>As we get closer to publishing your auction(s), our team will ask you for
+  the date and time when the auction(s) should start, as well as who within your
+  office or agency will be the primary point of contact for vendors during the
+  bidding and delivery periods. We'll also need to know who within your office
+  or agency will be able to accept the content or code that's ultimately
+  submitted by the vendor.</p>
+
+  <p>Before you get too far along, we recommend looking at <a
+    href="/insights">our insights page</a> and <a
+    href="https://micropurchase.18f.gov/auctions/21">some</a> <a
+    href="https://micropurchase.18f.gov/auctions/25">past</a> <a
+    href="https://micropurchase.18f.gov/auctions/26">auctions</a> to get a sense
+  of what's worked well for recent customers. Once you're ready, read below to
+  get started.</p>
+
+  <h3 id="identify-an-open-source-project">Identify an open source project</h3>
+
+  <p>This is pretty straightforward: in order to solicit contributions, you're
+  going to first need to either create or identify an open source project. All
+  we need is a link to an open source project(s) on GitHub. If you've somehow
+  gotten this far without doing that, our team is happy to help!</p>
+
+  <h3>Summarize the changes you're requesting</h3>
+
+  <p>Next, we'll need a summary of the changes that you'd like to see made. In
+  keeping with the best practices of agile development, our team prefers that
+  these changes come in the form of <a
+    href="https://en.wikipedia.org/wiki/User_story">user stories</a>. (Those
+  stories should also be informed by user research and tie back to product- or
+  feature-level hypotheses.)</p>
+
+  <p>After you've written user stories, be sure to prioritize and socialize them
+  across your team. This ensures that everyone knows the details of what's being
+  requested, and when to expect the delivered work so that they can merge it
+  into the codebase.</p>
+
+  <p>Finally, with regard to the design of 18F's Micro-purchase Platform,
+  specifically: Our team requires a "summary " for each auction that's exactly
+  250 characters or fewer. Note that this is in addition to the user stories
+  identified above. Summaries appear in the  "cards " associated with each
+  auction, like so:</p>
+
+  <figure>
+  <%= image_tag('creating_an_auction_example', alt: 'auction card example')%>
+    <figcaption>
+      <p>Make the sale! Provide a short description of the task to entice people.</p>
+    </figcaption>
+  </figure>
+
+  <h3>Determine the starting bid</h3>
+
+  <p>Auctions on the Micro-purchase platform default to $3,500 because this is
+  the single-purchase limit for GSA's purchase cards. That said, bidding can
+  start anywhere below this amount and should roughly correspond to the amount
+  of work you think it'll take to complete the changes you've requested.</p>
+
+  <h3>Create objective acceptance criteria</h3>
+
+  <p>The next thing you'll want to do is to further break your user stories into
+  scenarios, and create objective acceptance criteria associated with each
+  scenario.</p>
+
+  <p>This is an important step. The clarity and objectivity your auction's
+  acceptance criteria ultimately helps reduce the cost you will incur because it
+  allows vendors to more clearly determine whether or not they will be able to
+  deliver. Moreover, while they're delivering, vendors should be able to refer
+  back to your acceptance criteria to know whether or not they are on the right
+  track or whether they'll need to adjust course.</p>
+
+  <p>Good acceptance criteria should strike a balance between specifying your
+  functional needs  — that is, specifying what the software should <em>do</em>
+  differently after the auction has ended  — with specifying <em>how</em>
+  vendors might achieve that change. In general, the "how" should be left to the
+  vendor. If there is a suggested implementation, this should be noted
+  separately from the acceptance criteria.</p>
+
+  <p>To ensure objective acceptance criteria you might:</p>
+
+  <ul>
+    <li>Leverage existing documentation, past auctions, and any existing
+    automated testing.</li>
+    <li>Write tests (before the auction goes live) that can programmatically
+    determine whether or not your acceptance criteria has been met.</li>
+    <li>Try having someone not involved in your project read over
+    your criteria. See if that person can understand it and explain the
+    requirements back to you.</li>
+    <li>Try to express acceptance criteria for the feature using the <a
+      href="https://en.wikipedia.org/wiki/Behavior-driven_development">BDD
+      style</a>, keeping out any reference to implementation.</li>
+    <li>Have your team review the story as if they were planning their own
+    sprint. If the story is too large to be done in 5 days (the typical
+    Micro-purchase sprint), it's probably too big. Remember to consider time for
+    refactoring (especially if the feature touches many parts of the code) and
+    the time it will take for someone to get up to speed on the codebase.</li>
+    </ul>
+
+    <h3>Identify the skills required to make the changes requested</h3>
+
+    <p>Specifying the skills required for a particular auction will help vendors
+    self qualify. If your code is written in Python, for example, you should
+    specify Python as a skill so that developers with Python experience can more
+    easily find and address your request. You can see a list of the skills
+    requested by past auctions by visiting our insights page.</p>
+
+    <h3>Identify relevant GitHub issue numbers</h3>
+
+    <p>Open source software teams often use GitHub's issues feature
+    to track bugs, note deficiencies, and make feature requests. Please let us
+    know if there are any GitHub issues already associated with the changes you're
+    requesting. If not, please do us a favor and make an issue for each change
+    you'd like to request. That way we can mark those issues as resolved once your
+    auctions are delivered.</p>
+
+    <h3>Clarify whose purchase card we'll use</h3>
+
+    <p>We prefer that customers use their office or agency's purchase card
+    (p-card) to pay vendors for their contributions. That said, if your team is
+    already working with 18F on a project, contact your project lead. We may be
+    able to use 18F's p-card and just bill the total auction expense (final
+    auction, plus our platform fee) to our existing agreement (IAA) with your
+    agency.</p>
+
+    <h2 id="parting-thoughts">Parting thoughts</h2>
+
+    <p>The typical Micro-purchase auction takes one or two days, and vendors are
+    usually asked to deliver within five business days of an auction's closing.
+    While we've had cases where vendors have failed to deliver, our success rate
+    for first-run auctions is 80%.</p>
+
+  <p>Be prepared for the possibility that a requirement might not be
+  successfully delivered after the first try, and that you may need to re-run an
+  auction. Also be prepared to work through unanticipated issues during the
+  delivery period in order to complete the auction.</p>
+
+  <p>We learn more from each auction and work hard to incorporate these
+  learnings into subsequent auctions. We are trying to hit the sweet spot where
+  the vendors feel empowered and the customer gets what they want, and our goal
+  is to do this 100% of the time. Remember to have patience and to be agile.
+  :)</p>
+
+  <p>Auctions on our platform go through a general workflow, from unpublished to
+  published ("coming soon"), and from open to closed. During our initial chats,
+  our team will draft auctions in an  "unpublished " state. As soon as we we
+  have all required information, including budget approvals, and a start date,
+  we will publish your auction in the  "coming soon " state. Auctions can be
+  unpublished only while they've yet to receive a bid. Said differently, we
+  cannot unpublish an auction once it has received a bid.</p>
+</div>
