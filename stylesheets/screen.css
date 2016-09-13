@@ -59,7 +59,7 @@ body{
 	color: #fff;
 }
 
-a{ color: #006fbe; text-decoration: underline; }
+a{ color: #005b9d; text-decoration: underline; }
 a:hover{ color: #00aedf; text-decoration: none; }
 
 a:visited{  color: #8d0058; }
@@ -2988,9 +2988,8 @@ details summary::-webkit-details-marker {
 	color: #111;
 }
 
-.user-type-admin.layout-auctions-show .auction-header h1,
-.user-type-admin.layout-auctions-bids .auction-header h1{
-	margin-right: 72px;
+.layout-auctions-show main .secondary-content{
+	font-size: 16px;
 }
 
 @media (min-width: 568.88px){
@@ -3171,19 +3170,18 @@ details summary::-webkit-details-marker {
 	margin-bottom: 4px;
 	}
 		
-	.layout-auctions-show main .wrapper .page,
-	.layout-auctions-show main .wrapper .secondary-content{
+	.layout-auctions-show .page,
+	.layout-auctions-show .secondary-content{
 		float: left;
 		width: 50%;
 	}
 		
-	.layout-auctions-show main .wrapper .page{
-		width: 55%;
+	.layout-auctions-show .page{
+		width: 60%;
 	}
 	
-	.layout-auctions-show main .wrapper .secondary-content{
-		font-size: 16px;
-		width: 45%;
+	.layout-auctions-show .secondary-content{
+		width: 40%;
 		margin: 0;
 	}
 
