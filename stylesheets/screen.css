@@ -2949,11 +2949,11 @@ details summary::-webkit-details-marker {
 .auction-workflow form{
 	display: inline-block;
 	vertical-align: middle;
-	margin-top: 1em;
-	margin-right: 0.4em;
 }
 
-
+.auction-workflow button{
+	padding: 8px 10px;
+}
 
 .auction-workflow[class*="auction-workflow-place-a-bid"] button,
 .auction-workflow[class*="auction-workflow-bid"] button,
