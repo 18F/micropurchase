@@ -11,6 +11,10 @@ class BidStatusPresenter::Available::Vendor::SealedAuctionBidder < BidStatusPres
     )
   end
 
+  def alert_css_class
+    'usa-alert-success'
+  end
+
   private
 
   def bid_amount
