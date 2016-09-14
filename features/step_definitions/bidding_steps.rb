@@ -63,6 +63,7 @@ Then(/^I should see the winning bid for the auction$/) do
 end
 
 When(/^I submit a bid for \$(.+)$/) do |amount|
+  @bid_amount = amount
   fill_in("Your bid", with: amount)
   step('I click on the "Place bid" button')
 end

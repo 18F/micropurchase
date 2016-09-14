@@ -27,12 +27,12 @@ Feature: Vendor bids on a sealed-bid auction
 
     When I submit a bid for $3493
     And I click OK on the javascript confirm dialog for a bid amount of $3,493.00
-    Then I should see "Your bid: $3,493.00"
+    Then I should see a status confirmation for my sealed bid
 
     When I visit the auction page
     Then I should not see the bid form
     And I should see "Your bid: $3,493.00"
-    And I should see the time I placed my bid
+    And I should see a status confirmation for my sealed bid
 
   @javascript
   Scenario: viewing your own bid

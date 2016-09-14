@@ -53,8 +53,10 @@ Then(/^I should the open auction message for admins$/) do
   )
 end
 
-Then(/^I should see the time I placed my bid$/) do
+Then(/^I should see a status confirmation for my sealed bid$/) do
   bid = @auction.bids.last
+  expect(bid.amount).to eq(@bid_amount.to_i)
+  expect(bid.bidder).to eq(@user)
 
   expect(page).to have_content(
     I18n.t(
