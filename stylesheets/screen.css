@@ -1861,7 +1861,7 @@ main div.wrap > form { max-width: 576px; }
 @media screen and (min-width: 622.222px){
 	.nav-facets h1{
 		font-size: 48px;
-		font-weight: 200;
+		font-weight: 300;
 		letter-spacing: -2px;
     color: black;
 	}
