@@ -1873,17 +1873,21 @@ main div.wrap > form { max-width: 576px; }
   color: #666; 
 }
 
-.nav-facets a:hover{ color: #333; }
+.nav-facets a:hover{ color: #333; text-decoration: underline;}
 
 .nav-facets .count { 
 	color: white;
 	background: #99005c;
 	border-color: #99005c;
-	padding: 1px 8px;
+	padding: 0 8px;
 	border-radius: 99em;
 	font-size: 14px;
+	line-height: 1.67;
 	font-weight: 600;
 	margin-left: 0.2em;
+	text-decoration: none !important;
+	display: inline-block;
+	vertical-align: middle;
 }
 
 .nav-facets .button,
@@ -2641,6 +2645,53 @@ details summary::-webkit-details-marker {
   margin-right: 4px;
 }
 
+/* @group .auction-action-share */
+
+.auction-action-share details[open] div{
+  position: relative;
+  padding: 0 36px 0 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #f3f3f3;
+  background: linear-gradient(#f3f3f3, #f0f0f0);
+  line-height: 2em;
+  margin-top: 8px;
+  color: #333;
+  font-size: 14px;
+	margin: 4px 1em 8px;
+}
+
+.auction-action-share details[open] div a{
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+}
+
+.auction-action-share details[open] div input{
+	border: none;
+	border-radius: 2px 0 0 2px;
+	line-height: 2;
+	padding: 0 0.4em;
+	min-height: 0;
+}
+
+.auction-action-share details[open] div a{
+	left: auto;
+	right: 1px;
+	background: url(images/png/clipboard.png) 16px center no-repeat;
+	background-size: 16px 16px;
+	width: 3em;
+	height: 2em;
+}
+
+.auction-action-share details[open] div a span{
+	position: absolute;
+	left: -9999em;
+}
+
+/* @end */
+
 .auction .auction-actions .auction-action-edit,
 .auction-action details{
 	border: 1px solid transparent;
@@ -2680,8 +2731,6 @@ details summary::-webkit-details-marker {
 	position: absolute;
 	right: 16px;
 	bottom: 16px;
-}
-.auction-workflow details[open] summary{
 }
 
 /* @end */
@@ -3078,54 +3127,9 @@ details summary::-webkit-details-marker {
 	line-height: 1.33em;
 }
 
-.auction-action-share details[open] div{
-  position: relative;
-  padding: 0 36px 0 0;
-  border: 1px solid #ccc;
-  border-bottom-color: #c0c0c0;
-  border-right-color: #bbb;
-  border-radius: 4px;
-  background: #f3f3f3;
-  background: linear-gradient(#f3f3f3, #f0f0f0);
-  line-height: 2em;
-  margin-top: 8px;
-  color: #333;
-  font-size: 14px;
-	box-shadow: 1px 1px 0 rgba(0,0,0,0.04);
-}
-
-.auction-action-share details[open] div a{
-	position: absolute;
-	left: 0;
-	top: 0;
-	bottom: 0;
-}
-
-.auction-action-share details[open] div input{
-	border: none;
-	border-radius: 2px 0 0 2px;
-	line-height: 2;
-	padding: 0 0.4em;
-	min-height: 0;
-}
-
-.auction-action-share details[open] div a{
-	left: auto;
-	right: 1px;
-	background: url(images/png/clipboard.png) 16px center no-repeat;
-	background-size: 16px 16px;
-	width: 3em;
-	height: 2em;
-}
-
-.auction-action-share details[open] div a span{
-	position: absolute;
-	left: -9999em;
-}
-
 .layout-auctions-show main .auction-footer ul{
 	background: none;
-	border: 1px solid #eee;
+	border: 1px solid #e3e3e3;
 	padding: 16px;
 	border-radius: 0 0 4px 4px;
 }
