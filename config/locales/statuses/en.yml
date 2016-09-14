@@ -33,7 +33,7 @@ en:
             body: "You've been outbid! The maximum you can bid is %{max_allowed_bid_as_currency}."
           sealed_auction_bidder:
             header: 'Bid placed'
-            body: "You bid %{bid_amount} on %{bid_date}."
+            body: You placed a bid of %{bid_amount} on %{bid_date}.
           winning_bidder:
             header: 'Bid placed'
             body: "You are currently the low bidder, with a bid of %{winning_amount}"

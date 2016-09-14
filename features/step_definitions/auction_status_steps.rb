@@ -53,7 +53,7 @@ Then(/^I should the open auction message for admins$/) do
   )
 end
 
-Then(/^I should see a status confirmation for my sealed bid$/) do
+Then(/^I should see a status message that confirms I placed a sealed bid$/) do
   bid = @auction.bids.last
   expect(bid.amount).to eq(@bid_amount.to_i)
   expect(bid.bidder).to eq(@user)
