@@ -202,6 +202,7 @@ Given(/^there is an accepted auction where the winning vendor is missing a payme
   @auction = FactoryGirl.create(
     :auction,
     :with_bids,
+    :closed,
     :published,
     status: :accepted,
     accepted_at: nil,

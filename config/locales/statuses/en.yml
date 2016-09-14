@@ -54,6 +54,14 @@ en:
           header: 'Bidding closed'
           body: "Bidding for this auction closed on %{end_date}."
         winner:
+          pending_payment_url:
+            header: "Payment URL needed"
+            body: >
+              Your <a href=%{delivery_url}>pull request</a> was accepted, but we
+              cannot issue payment until you have specified a valid payment URL. Please update
+              the payment URL field on <a href="/profile">your profile</a>, or contact us at
+              micropurchase@gsa.gov with other instructions on how to pay you via credit card
+              for this auction.
           pending_payment_confirmation:
             header: "Payment confirmation needed"
             body: >

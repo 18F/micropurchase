@@ -45,7 +45,8 @@ Feature: Vendor updates Payment URL
     And I am the winning bidder
     And I sign in
     When I visit the auction page
-    Then I should see that the auction was not accepted
+    Then I should see the auction missing payment method status box
+
     When I visit my profile page
     And I fill in the Payment URL field on my profile page
     And I click on the "Update" button

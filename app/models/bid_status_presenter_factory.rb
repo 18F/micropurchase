@@ -34,7 +34,9 @@ class BidStatusPresenterFactory
   end
 
   def over_winning_bidder_message
-    if auction.pending_acceptance?
+    if auction.accepted? && auction.accepted_at.nil?
+      BidStatusPresenter::Over::Vendor::Winner::PendingPaymentUrl
+    elsif auction.pending_acceptance?
       BidStatusPresenter::Over::Vendor::Winner::PendingAcceptance
     elsif auction.accepted?
       BidStatusPresenter::Over::Vendor::Winner::PendingPayment
