@@ -130,6 +130,12 @@ en:
         actions:
           accept: "Accept"
           reject: "Reject"
+      pending_payment_url:
+        header: Payment URL needed
+        body: >
+          The <a href=%{delivery_url}>pull request</a> from %{winner_url}
+          was accepted. However, this vendor cannot
+          be paid until they’ve specified a valid payment URL.
       accepted:
         header: "Accepted"
         body: "%{winner_email}'s delivered code was accepted on %{accepted_at}."
