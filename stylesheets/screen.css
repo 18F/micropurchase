@@ -877,7 +877,7 @@ button,
 	color: #2e8540;
 	font: inherit;
 	padding: 10px 12px;
-	margin: 0;
+	margin: 1em 0 0;
 	line-height: 16px;	
 	cursor: pointer;
 	text-decoration: none;
