@@ -7,7 +7,7 @@ Feature: Admin views closed auction
     And I sign in
     And there is an auction that needs evaluation
     When I visit the admin auction page for that auction
-    Then I should see the admin status for an auction that needs evaluation
+    Then I should see the admin status for an auction that is pending acceptance
 
   Scenario: Auction is paid, winning vendor has not yet confirmed payment
     Given I am an administrator

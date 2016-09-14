@@ -12,7 +12,11 @@ class AuctionsController < ApplicationController
 
   def show
     auction = find_auction
-    @view_model = AuctionShowViewModel.new(auction: auction, current_user: current_user)
+    @view_model = AuctionShowViewModel.new(
+      auction: auction,
+      current_user: current_user,
+      bid_error: flash[:bid_error]
+    )
   end
 
   def update

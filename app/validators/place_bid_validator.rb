@@ -15,8 +15,13 @@ class PlaceBidValidator < ActiveModel::Validator
 
   private
 
-  def add_error(bid, message)
-    bid.errors.add :base, I18n.t("activerecord.errors.models.bid.#{message}")
+  def add_error(bid, error)
+    bid.errors.add :base, error_message(bid, error)
+  end
+
+  def error_message(bid, error)
+    I18n.t "activerecord.errors.models.bid.#{error}",
+           max_allowed_bid: max_allowed_bid(bid)
   end
 
   def user_can_bid?(bid)

@@ -63,7 +63,21 @@
       "line": 5,
       "link": "http://brakemanscanner.org/docs/warning_types/cross_site_scripting",
       "code": "AuctionReceiptViewModel.new(:auction => Auction.find(params[:auction_id]), :current_user => current_user).bid_status_presenter.body",
-      "render_path": [{"type":"controller","class":"ReceiptsController","method":"new","line":15,"file":"app/controllers/receipts_controller.rb"},{"type":"template","name":"auctions/show","line":47,"file":"app/views/auctions/show.html.erb"}],
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "ReceiptsController",
+          "method": "new",
+          "line": 15,
+          "file": "app/controllers/receipts_controller.rb"
+        },
+        {
+          "type": "template",
+          "name": "auctions/show",
+          "line": 47,
+          "file": "app/views/auctions/show.html.erb"
+        }
+      ],
       "location": {
         "type": "template",
         "template": "auctions/_status"
@@ -96,7 +110,7 @@
       "fingerprint": "ba7a0560f47ae700fbfa4e1774ee7139784922f7638f9735539e1b8a5d74c911",
       "message": "Unsafe model attribute in link_to href",
       "file": "app/views/auctions/show.html.erb",
-      "line": 66,
+      "line": 69,
       "link": "http://brakemanscanner.org/docs/warning_types/link_to_href",
       "code": "link_to(\"View on GitHub <icon class=\\\"fa fa-angle-double-right\\\"></icon>\".html_safe, AuctionReceiptViewModel.new(:auction => Auction.find(params[:auction_id]), :current_user => current_user).issue_url, :target => \"_blank\")",
       "render_path": [{"type":"controller","class":"ReceiptsController","method":"new","line":15,"file":"app/controllers/receipts_controller.rb"}],
@@ -107,8 +121,26 @@
       "user_input": "Auction.find(params[:auction_id])",
       "confidence": "Medium",
       "note": ""
+    },
+    {
+      "warning_type": "Cross Site Scripting",
+      "warning_code": 2,
+      "fingerprint": "d245445e565521c1b9d8e425eeda5e9234c206335dfe953127165ac2b57f5015",
+      "message": "Unescaped model attribute",
+      "file": "app/views/auctions/_status.html.erb",
+      "line": 5,
+      "link": "http://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "Admin::AuctionShowViewModel.new(:auction => Auction.find(params[:id]), :current_user => current_user).admin_auction_status_presenter.body",
+      "render_path": [{"type":"controller","class":"Admin::AuctionsController","method":"show","line":11,"file":"app/controllers/admin/auctions_controller.rb"},{"type":"template","name":"admin/auctions/show","line":32,"file":"app/views/admin/auctions/show.html.erb"}],
+      "location": {
+        "type": "template",
+        "template": "auctions/_status"
+      },
+      "user_input": "Auction.find(params[:id])",
+      "confidence": "Weak",
+      "note": ""
     }
   ],
-  "updated": "2016-09-07 14:36:00 -0700",
+  "updated": "2016-09-12 11:35:57 -0700",
   "brakeman_version": "3.3.5"
 }

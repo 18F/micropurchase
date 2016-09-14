@@ -7,9 +7,9 @@ class EligibilityFactory
 
   def create
     if start_price_threshold.small_business?
-      SmallBusinessEligibility.new
+      Eligibilities::SmallBusiness.new
     else
-      InSamEligibility.new
+      Eligibilities::InSam.new
     end
   end
 end
