@@ -1882,12 +1882,13 @@ main div.wrap > form { max-width: 576px; }
 	padding: 0 8px;
 	border-radius: 99em;
 	font-size: 14px;
-	line-height: 1.67;
+	line-height: 20px;
 	font-weight: 600;
 	margin-left: 0.2em;
 	text-decoration: none !important;
 	display: inline-block;
 	vertical-align: middle;
+	margin-top: -1px;
 }
 
 .nav-facets .button,
