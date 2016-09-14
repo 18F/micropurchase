@@ -1863,8 +1863,18 @@ main div.wrap > form { max-width: 576px; }
 		font-size: 48px;
 		font-weight: 300;
 		letter-spacing: -2px;
-    color: black;
+	    color: black;
 	}
+	
+	.layout-auctions-coming-soon-and-open main .wrapper,
+	.layout-auctions-closed main .wrapper,
+	.layout-admins-index main .wrapper,
+	.layout-vendors-index main .wrapper,
+	.layout-skills-index main .wrapper,
+	.layout-vendors-index main .wrapper{
+		padding-top: 8px;
+	}
+
 }
 
 .nav-facets a{ 
@@ -1928,6 +1938,7 @@ main div.wrap > form { max-width: 576px; }
 	position: absolute;
 	left: -9999em;
 }
+
 
 .nav-facets .a-needs-attention{ display: none; }
 .signed-in .nav-facets .a-needs-attention{ display: inline; }
@@ -2453,7 +2464,7 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 /* @end */
 
 /* @group layout-auctions-coming-soon-and-open */
-.layout-auctions-coming-soon-and-open main .wrapper{ padding-top: 12px; }
+
 
 .layout-auctions-coming-soon-and-open .button,
 .layout-needs-attention .button,
