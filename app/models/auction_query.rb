@@ -74,9 +74,9 @@ class AuctionQuery
       .uniq
   end
 
-  def accepted_with_bid_from_user(user_id)
+  def accepted_pending_payment_url_with_bid_from_user(user_id)
     relation
-      .accepted
+      .accepted_pending_payment_url
       .joins(:bids)
       .where(bids: { bidder_id: user_id })
       .uniq

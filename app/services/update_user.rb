@@ -30,7 +30,7 @@ class UpdateUser < Struct.new(:params, :current_user)
 
   def update_auctions
     if added_payment_information?
-      AuctionQuery.new.accepted_with_bid_from_user(user.id).each do |auction|
+      AuctionQuery.new.accepted_pending_payment_url_with_bid_from_user(user.id).each do |auction|
         if user_payment_info_needed_for?(auction)
           accept(auction)
         end
