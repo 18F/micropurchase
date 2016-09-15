@@ -16,6 +16,7 @@ describe CheckPayment do
           CheckPayment.new.perform
 
           expect(auction.reload.paid_at).to be_nil
+          expect(auction.c2_paid?).to eq false
         end
       end
 
@@ -32,6 +33,7 @@ describe CheckPayment do
           CheckPayment.new.perform
 
           expect(auction.reload.paid_at).not_to be_nil
+          expect(auction.c2_paid?).to eq true
         end
 
         it 'sends an email to the vendor' do
