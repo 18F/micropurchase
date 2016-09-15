@@ -6,20 +6,42 @@ class AdminAuctionStatusPresenterFactory
   end
 
   def create
-    if auction.payment_confirmed? || auction.c2_paid?
-      Object.const_get("C2StatusPresenter::#{c2_status}")
-    elsif future? && auction.published?
-      AdminAuctionStatusPresenter::Future
-    elsif work_in_progress?
-      AdminAuctionStatusPresenter::WorkInProgress
-    elsif !auction.pending_delivery?
-      Object.const_get("AdminAuctionStatusPresenter::#{status}")
-    else # if auction.purchase_card == 'default'
-      Object.const_get("C2StatusPresenter::#{c2_status}")
+    if auction.purchase_card == 'default'
+      default_purchase_card_presenter
+    else
+      other_purchase_card_presenter
     end.new(auction: auction)
   end
 
   private
+
+  def default_purchase_card_presenter
+    if auction.payment_confirmed? || auction.c2_paid?
+      Object.const_get("C2StatusPresenter::#{c2_status}")
+    elsif future? && auction.published?
+      AdminAuctionStatusPresenter::Future
+    elsif future? && auction.unpublished?
+      AdminAuctionStatusPresenter::ReadyToPublish
+    elsif work_in_progress?
+      AdminAuctionStatusPresenter::WorkInProgress
+    elsif !auction.pending_delivery?
+      Object.const_get("AdminAuctionStatusPresenter::#{status}")
+    else
+      Object.const_get("C2StatusPresenter::#{c2_status}")
+    end
+  end
+
+  def other_purchase_card_presenter
+    if future? && auction.published?
+      AdminAuctionStatusPresenter::Future
+    elsif future? && auction.unpublished?
+      AdminAuctionStatusPresenter::ReadyToPublish
+    elsif work_in_progress?
+      AdminAuctionStatusPresenter::WorkInProgress
+    else
+      Object.const_get("AdminAuctionStatusPresenter::#{status}")
+    end
+  end
 
   def future?
     AuctionStatus.new(auction).future?

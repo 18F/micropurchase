@@ -7,7 +7,7 @@ class Admin::AuctionPublishedController < Admin::BaseController
         'controllers.admin.auctions.unpublish.success',
         title: auction.title
       )
-      redirect_to admin_auctions_needs_attention_path
+      redirect_to admin_auction_path(auction)
     end
   end
 end

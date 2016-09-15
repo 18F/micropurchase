@@ -107,14 +107,18 @@ en:
               Then enter the pull request URL, below, and click "start work."
     admin_auction_status_presenter:
       future:
-        body: >
-          This auction is visible to the public but is not currently
-          accepting bids. It will open on %{start_date}. If you
-          need to take it down for whatever reason, press the
-          "unpublish" button, below.
-        header: Coming soon
-        actions:
-          unpublish: "Unpublish"
+        published:
+          body: >
+            This auction is visible to the public but is not currently
+            accepting bids. It will open on %{start_date}. If you
+            need to take it down for whatever reason, press the
+            "unpublish" button, below.
+          header: Coming soon
+          actions:
+            unpublish: "Unpublish"
+        unpublished:
+          body: "This auction is ready to publish!"
+          header: "Ready to publish"
       work_in_progress:
         header: Work in progress
         body: >
