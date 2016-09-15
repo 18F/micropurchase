@@ -12,6 +12,8 @@ class AdminAuctionStatusPresenterFactory
       AdminAuctionStatusPresenter::Future.new(auction: auction)
     elsif work_in_progress?
       AdminAuctionStatusPresenter::WorkInProgress.new(auction: auction)
+    elsif auction.accepted? && auction.accepted_at.nil?
+      AdminAuctionStatusPresenter::PendingPaymentUrl.new(auction: auction)
     elsif !auction.pending_delivery?
       Object.const_get("AdminAuctionStatusPresenter::#{status}").new(auction: auction)
     else # if auction.purchase_card == 'default'

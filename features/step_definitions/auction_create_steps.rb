@@ -204,6 +204,7 @@ Given(/^there is an accepted auction where the winning vendor is missing a payme
     :with_bids,
     :closed,
     :published,
+    :delivery_url,
     status: :accepted,
     accepted_at: nil,
     c2_proposal_url: 'https://c2-dev.18f.gov/proposals/2486'

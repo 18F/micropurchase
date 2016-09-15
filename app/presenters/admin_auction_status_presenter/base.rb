@@ -17,6 +17,14 @@ class AdminAuctionStatusPresenter::Base
 
   protected
 
+  def winner_url
+    Url.new(
+      link_text: winner.email,
+      path_name: 'admin_user',
+      params: { id: winner.id }
+    )
+  end
+
   def winner
     WinningBid.new(auction).find.bidder
   end

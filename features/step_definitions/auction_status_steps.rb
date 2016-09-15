@@ -200,6 +200,14 @@ Then(/^I should see the payment confirmed message$/) do
   )
 end
 
+Then(/^I should see an admin status message that the vendor needs to provide a payment URL$/) do
+  expect(page).to have_content(
+    I18n.t(
+      'statuses.admin_auction_status_presenter.pending_payment_url.header'
+    )
+  )
+end
+
 def end_date
   DcTimePresenter.convert_and_format(@auction.ended_at)
 end
