@@ -67,6 +67,12 @@ Then(/^I should see a status message that confirms I placed a sealed bid$/) do
   )
 end
 
+Then(/^I should see the auction missing payment method status box$/) do
+  expect(page).to have_content(
+    I18n.t('statuses.bid_status_presenter.over.winner.pending_payment_url.header')
+  )
+end
+
 Then(/^I should see the ready for work status box$/) do
   expect(page).to have_content(
     I18n.t('statuses.bid_status_presenter.over.winner.work_not_started.header')
