@@ -16,6 +16,6 @@ class Statistics::AverageDeliveryTime
   end
 
   def accepted_auctions
-    @_accepted_auctions ||= Auction.delivery_accepted
+    @_accepted_auctions ||= Auction.accepted
   end
 end

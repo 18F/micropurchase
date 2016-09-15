@@ -42,7 +42,7 @@ class AuctionQuery
   def complete_and_successful
     relation
       .delivery_url
-      .delivery_accepted
+      .accepted
       .paid
   end
 
@@ -57,7 +57,7 @@ class AuctionQuery
   def c2_payment_needed
     relation
       .default_purchase_card
-      .delivery_accepted
+      .accepted
       .not_paid
   end
 
@@ -74,9 +74,9 @@ class AuctionQuery
       .uniq
   end
 
-  def accepted_with_bid_from_user(user_id)
+  def accepted_pending_payment_url_with_bid_from_user(user_id)
     relation
-      .accepted
+      .accepted_pending_payment_url
       .joins(:bids)
       .where(bids: { bidder_id: user_id })
       .uniq

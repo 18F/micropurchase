@@ -7,18 +7,16 @@ class AdminAuctionStatusPresenterFactory
 
   def create
     if auction.payment_confirmed? || auction.c2_paid?
-      Object.const_get("C2StatusPresenter::#{c2_status}").new(auction: auction)
+      Object.const_get("C2StatusPresenter::#{c2_status}")
     elsif future? && auction.published?
-      AdminAuctionStatusPresenter::Future.new(auction: auction)
+      AdminAuctionStatusPresenter::Future
     elsif work_in_progress?
-      AdminAuctionStatusPresenter::WorkInProgress.new(auction: auction)
-    elsif auction.accepted? && auction.accepted_at.nil?
-      AdminAuctionStatusPresenter::PendingPaymentUrl.new(auction: auction)
+      AdminAuctionStatusPresenter::WorkInProgress
     elsif !auction.pending_delivery?
-      Object.const_get("AdminAuctionStatusPresenter::#{status}").new(auction: auction)
+      Object.const_get("AdminAuctionStatusPresenter::#{status}")
     else # if auction.purchase_card == 'default'
-      Object.const_get("C2StatusPresenter::#{c2_status}").new(auction: auction)
-    end
+      Object.const_get("C2StatusPresenter::#{c2_status}")
+    end.new(auction: auction)
   end
 
   private

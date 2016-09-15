@@ -69,7 +69,7 @@ end
 
 Then(/^I should see the auction missing payment method status box$/) do
   expect(page).to have_content(
-    I18n.t('statuses.bid_status_presenter.over.winner.pending_payment_url.header')
+    I18n.t('statuses.bid_status_presenter.over.winner.accepted_pending_payment_url.header')
   )
 end
 
@@ -100,7 +100,7 @@ end
 
 Then(/^I should see the pending payment status box$/) do
   expect(page).to have_content(
-    I18n.t('statuses.bid_status_presenter.over.winner.pending_payment.header')
+    I18n.t('statuses.bid_status_presenter.over.winner.accepted.header')
   )
 end
 
@@ -203,7 +203,7 @@ end
 Then(/^I should see an admin status message that the vendor needs to provide a payment URL$/) do
   expect(page).to have_content(
     I18n.t(
-      'statuses.admin_auction_status_presenter.pending_payment_url.header'
+      'statuses.admin_auction_status_presenter.accepted_pending_payment_url.header'
     )
   )
 end
