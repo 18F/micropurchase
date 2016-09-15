@@ -154,6 +154,6 @@ class UpdateInsightMetrics
   end
 
   def accepted_auctions_count
-    @_accepted_auctions_count ||= Auction.delivery_accepted.count
+    @_accepted_auctions_count ||= Auction.accepted.count
   end
 end
