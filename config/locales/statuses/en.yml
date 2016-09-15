@@ -54,7 +54,7 @@ en:
           header: 'Bidding closed'
           body: "Bidding for this auction closed on %{end_date}."
         winner:
-          pending_payment_url:
+          accepted_pending_payment_url:
             header: "Payment URL needed"
             body: >
               Your <a href=%{delivery_url}>pull request</a> was accepted, but we
@@ -73,7 +73,7 @@ en:
             body: >
               You won this auction on %{end_date}, your pull request was accepted
               on %{accepted_date}, and you were paid %{amount} on %{paid_at}.
-          pending_payment:
+          accepted:
             header: "Pending payment"
             body: >
               Your <a href=%{delivery_url}>pull request</a> was accepted! Payment of %{amount} will be issued
@@ -130,7 +130,7 @@ en:
         actions:
           accept: "Accept"
           reject: "Reject"
-      pending_payment_url:
+      accepted_pending_payment_url:
         header: Payment URL needed
         body: >
           The <a href=%{delivery_url}>pull request</a> from %{winner_url}

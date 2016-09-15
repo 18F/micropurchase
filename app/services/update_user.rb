@@ -45,7 +45,7 @@ class UpdateUser < Struct.new(:params, :current_user)
   end
 
   def user_payment_info_needed_for?(auction)
-    auction.accepted_at.nil? && winning_bidder_for(auction) == user
+    auction.accepted_pending_payment_url? && winning_bidder_for(auction) == user
   end
 
   def winning_bidder_for(auction)

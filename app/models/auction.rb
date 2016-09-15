@@ -24,6 +24,7 @@ class Auction < ActiveRecord::Base
   enum status: {
     pending_delivery: 0,
     pending_acceptance: 3,
+    accepted_pending_payment_url: 4,
     accepted: 1,
     rejected: 2
   }
