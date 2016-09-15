@@ -11,7 +11,7 @@
       <p>
       Before you can bid on an auction, you’ll need to register on SAM.gov, request a
       DUNS number, and link your SAM.gov profile with your DUNS number. See
-      <%= link_to 'our guide for more information', page_path('faq') %>.
+      <%= link_to 'our guide for more information', page_path('docs/placing_a_bid') %>.
       </p>
       <%= f.input :duns_number %>
       <span class=<%= @view_model.sam_status_icon_class %>></span>
@@ -23,7 +23,7 @@
       <p>
       Before we can pay you, we'll need a location we can visit to issue
       payment. If you're unfamiliar with processing payments online, see
-      <%= link_to 'our guide for more information', page_path('faq') %>.
+      <%= link_to 'our guide for more information', page_path('docs/getting_paid') %>.
       </p>
       <%= f.input :payment_url %>
 
