@@ -378,7 +378,7 @@
 </section>
 <section class="auction-workflow auction-workflow-ready-for-work-admins">
   <h1>Ready for work</h1>
-  <p><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a> won this auction on [auction.winDate] with a bid of $[auction.winBid]. They&rsquo;ve received <a href="https://docs.google.com/document/d/1G9WboqAi2ESDjZEkVhlrCGL3MbRqW2QodWdtWRhnKnc/edit%23heading%3Dh.nte24vv2a7o&sa=D&ust=1470089121861000&usg=AFQjCNHWlLpesvlsiCJkbs-g6b-u4lxYrQ">an email</a> letting them know the delivery deadline ([auction.deliveryDeadline]) and how to get started.</p>
+  <p><a href="{{site.baseurl}}/people/vendors/show">[auction.winner.name]</a> won this auction on [auction.winDate] with a bid of $[auction.winBid]. They&rsquo;ve received <a href="https://docs.google.com/document/d/1G9WboqAi2ESDjZEkVhlrCGL3MbRqW2QodWdtWRhnKnc/edit%23heading%3Dh.nte24vv2a7o&sa=D&ust=1470089121861000&usg=AFQjCNHWlLpesvlsiCJkbs-g6b-u4lxYrQ">an email</a> letting them know the delivery deadline ([auction.deliveryDeadline]) and how to get started.</p>
 </section>
 <section class="auction-workflow auction-workflow-ready-for-work-vendors">
   <h1>Ready for work</h1>
@@ -409,7 +409,7 @@
 </section>
 <section class="auction-workflow auction-workflow-work-in-progress-admins">
   <h1>Work in progress</h1>
-  <p><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a> <a href="#">initiated a pull request</a> on [auction.startWorkDate], and should complete work no later than [deadline].</p>
+  <p><a href="{{site.baseurl}}/people/vendors/show">[auction.winner.name]</a> <a href="#">initiated a pull request</a> on [auction.startWorkDate], and should complete work no later than [deadline].</p>
   <form class="form-mark-as-delivered" data-auction-workflow-state="acceptance-needed-admins">
     <button class="button button-mark-as-delivered">Mark as delivered</button>
   </form>
@@ -423,7 +423,7 @@
 </section>
 <section class="auction-workflow auction-workflow-delivery-past-due-admins">
   <h1>Delivery past due</h1>
-  <p><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a> was supposed to have delivered this auction before [auction.deliveryDeadline], but has yet to complete their work.</p>
+  <p><a href="{{site.baseurl}}/people/vendors/show">[auction.winner.name]</a> was supposed to have delivered this auction before [auction.deliveryDeadline], but has yet to complete their work.</p>
   <form class="form-mark-as-delivered" data-auction-workflow-state="pending-payment-url-admins">
     <button class="button button-mark-as-delivered">Mark as delivered</button>
   </form>
@@ -444,7 +444,7 @@
 </section>
 <section class="auction-workflow auction-workflow-acceptance-needed-admins">
   <h1>Acceptance needed</h1>
-  <p><a href="{{site.baseurl}}/people/vendors/show"><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a></a> made <a href="#">a pull request</a> and marked this auction as having been delivered. If their work meets this auction&rsquo;s acceptance criteria, click &ldquo;accept.&rdquo; Otherwise, click &ldquo;reject.&rdquo;</p>
+  <p><a href="{{site.baseurl}}/people/vendors/show"><a href="{{site.baseurl}}/people/vendors/show">[auction.winner.name]</a></a> made <a href="#">a pull request</a> and marked this auction as having been delivered. If their work meets this auction&rsquo;s acceptance criteria, click &ldquo;accept.&rdquo; Otherwise, click &ldquo;reject.&rdquo;</p>
   <form data-auction-workflow-state="pending-payment-url-admins">
     <button class="button button-accept">Accept</button>
   </form>
@@ -494,7 +494,7 @@
 </section>
 <section class="auction-workflow auction-workflow-pending-payment-confirmation-admins">
   <h1>Pending payment confirmation</h1>
-  <p><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a> was paid by [auction.paymentAdmin] on [auction.paymentDate], and has received an email asking them to confirm that payment.</p>
+  <p><a href="{{site.baseurl}}/people/vendors/show">[auction.winner.name]</a> was paid by [auction.paymentAdmin] on [auction.paymentDate], and has received an email asking them to confirm that payment.</p>
   <form data-auction-workflow-state="paid-and-confirmed-admins">
     <button>Mark as confirmed</button>  
   </form>
@@ -509,7 +509,7 @@
 </section>
 <section class="auction-workflow auction-workflow-paid-and-confirmed-admins">
   <h1>Paid and confirmed</h1>
-  <p><a href="#"><a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a> was <a href="">paid</a> $[amount] on [date] and confirmed receipt of that payment on [confirmation date].</p>
+  <p><a href="#"><a href="{{site.baseurl}}/people/vendors/show">[auction.winner.name]</a> was <a href="">paid</a> $[amount] on [date] and confirmed receipt of that payment on [confirmation date].</p>
 </section>
 <section class="auction-workflow auction-workflow-paid-vendors">
   <h1>Paid</h1>
@@ -518,7 +518,7 @@
 </section>
 <section class="auction-workflow auction-workflow-rejected-admins">
   <h1>Rejected</h1>
-  <p>[RejectingAdmin] rejected <a href="{{site.baseurl}}/people/vendors/show">[auction.winner]</a>&rsquo;s bid on <time>[auction.rejectionDate]</time>.</p>
+  <p>[RejectingAdmin] rejected <a href="{{site.baseurl}}/people/vendors/show">[auction.winner.name]</a>&rsquo;s bid on <time>[auction.rejectionDate]</time>.</p>
 </section>
 <section class="auction-workflow auction-workflow-rejected-vendors">
   <h1>Rejected</h1>
