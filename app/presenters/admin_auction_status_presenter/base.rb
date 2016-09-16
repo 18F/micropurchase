@@ -7,6 +7,10 @@ class AdminAuctionStatusPresenter::Base
     @bid_error = bid_error
   end
 
+  def status
+    ''
+  end
+
   def action_partial
     'components/null'
   end
