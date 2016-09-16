@@ -9,6 +9,18 @@ Then(/^I should see the auction as an unpublished auction that is ready to be pu
   )
 end
 
+Then(/^I should see a table listing all payment needed auctions$/) do
+  table_xpath = '//table[@id="table-payment"]'
+  expect(page).to have_xpath(table_xpath)
+end
+
+Then(/^I should see the auction as a payment needed auction$/) do
+  table_xpath = '//table[@id="table-payment"]'
+  within(:xpath, table_xpath) do
+    expect(page).to have_content(@auction.title)
+  end
+end
+
 Then(/^I should see the auction title$/) do
   expect(page).to have_content(@auction.title)
 end

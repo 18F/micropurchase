@@ -96,6 +96,11 @@ FactoryGirl.define do
       accepted_at { Time.now }
     end
 
+    trait :accepted_pending_payment_url do
+      status :accepted_pending_payment_url
+      accepted_at { Time.now }
+    end
+
     trait :rejected do
       status :rejected
       rejected_at { Time.now }
