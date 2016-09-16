@@ -49,14 +49,6 @@ class Admin::NeedsAttentionAuctionListItem < Admin::BaseViewModel
     auction.delivery_url || 'N/A'
   end
 
-  def c2_proposal_url
-    if auction.purchase_card == 'default'
-      auction.c2_proposal_url
-    else
-      'N/A'
-    end
-  end
-
   def paid?
     auction.paid_at.present?
   end
