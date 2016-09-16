@@ -1,3 +1,5 @@
+/* @override http://localhost:5000/stylesheets/screen.css */
+
 /* @override http://localhost:4000/stylesheets/screen.css */
 
 /* @override http://localhost:4000/stylesheets/screen.css */
@@ -2607,15 +2609,25 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 
 .auction .auction-actions .auction-action{ display: none; }
 
-.auction .auction-actions a{ 
+.auction .auction-actions a,
+.auction .auction-action.auction-action-generate-csv-report button{ 
 	color: inherit;
+	font: inherit;
 	text-decoration: none; 
 	padding: 6px 0 6px 18px;
+	line-height: 1;
+	margin: 0;
 	display: block;
+	border: none;
+	cursor: pointer;
 }
 
-.auction .auction-actions a:hover{
-	text-decoration: underline; 
+.auction .auction-actions a:hover,
+.auction .auction-action.auction-action-generate-csv-report button:hover{
+	text-decoration: underline !important; 
+	background: none;
+	border: none;
+	-webkit-box-shadow: none;
 }
 
 .auction-action input{
@@ -2646,6 +2658,10 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 	line-height: 1.2em;
 	padding: 4px 0;
 	outline: transparent;
+}
+
+.auction-action details summary:hover {
+	text-decoration: underline;
 }
 
 details summary::-webkit-details-marker {
@@ -2761,6 +2777,17 @@ details summary::-webkit-details-marker {
 	display: none;
 }
 
+.auction-workflow.auction-workflow-draft-vendors{
+	background: #eaf4fc;
+	background: repeating-linear-gradient(
+	  45deg,
+	  #ddeffc,
+	  #ddeffc 10px,
+	  #eaf4fc 10px,
+	  #eaf4fc 20px
+	);
+}
+
 .auction-workflow h1{ 
 	font: inherit;
 	font-size: 18px;
@@ -2826,18 +2853,8 @@ details summary::-webkit-details-marker {
 .auction-workflow-pending-payment-from-18f-admins .auction-action.auction-action-edit-payment-url,
 .auction-workflow-pending-payment-vendors .auction-action.auction-action-edit-payment-url{ display: block; }
 
+.auction-workflow-paid-and-confirmed-admins .auction-action.auction-action-generate-csv-report{ display: block; }
 
-.auction-workflow.auction-workflow-draft-vendors{
-	background: #eaf4fc;
-		background: repeating-linear-gradient(
-		  45deg,
-		  #ddeffc,
-		  #ddeffc 10px,
-		  #eaf4fc 10px,
-		  #eaf4fc 20px
-		);
-
-}
 
 .auction-workflow label span.label-text{
 	font-size: 14px;

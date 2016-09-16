@@ -1,0 +1,48 @@
+<section class="auction-actions">
+  <h1>Actions</h1>
+  <ul>
+    <li class="auction-action auction-action-edit"><a href="{{site.baseurl}}/auctions/edit">Edit auction</a></li>
+    <li class="auction-action auction-action-share">
+      <details>
+        <summary>Share</summary>
+        <div>
+          <input type="text" value="https://my.cool.url/hash">
+          <a href="#"><span>Copy to clipboard</span></a>
+        </div>
+      </details>
+    </li>
+    <li class="auction-action auction-action-edit-delivery-url">
+      <details>
+        <summary>Edit delivery URL</summary>
+        <form data-auction-workflow-state="acceptance-needed-admins">
+          <div class="field field-delivery-url">
+            <label>
+              <span class="label-text">Delivery <abbr title="Uniform resource locator">URL</abbr></span>
+              <input type="text" name="" required>
+            </label>
+          </div>
+          <button class="button button-mark-as-delivered">Update</button>
+        </form>
+      </details>
+    </li>
+    <li class="auction-action auction-action-edit-payment-url">
+      <details>
+        <summary>Edit payment URL</summary>
+        <form data-auction-workflow-state="pending-payment-from-18f-admins">
+          <div class="field field-payment-url">
+            <label>
+              <span class="label-text">Payment <abbr title="Uniform resource locator">URL</abbr></span>
+              <input type="text" name="">
+            </label>
+          </div>
+          <button class="button">Update</button>
+        </form>
+      </details>
+    </li>
+    <li class="auction-action auction-action-generate-csv-report">
+        <form data-auction-workflow-state="acceptance-needed-admins">
+          <button class="button">Generate CSV Report</button>
+        </form>
+    </li>
+  </ul>
+</section> 
