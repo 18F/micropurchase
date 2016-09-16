@@ -1,7 +1,6 @@
 class Admin::AuctionAcceptancesController < Admin::BaseController
   def update
     @auction = Auction.find(params[:id])
-    @auction.status = :accepted
 
     AcceptAuction.new(
       auction: @auction,
@@ -9,7 +8,6 @@ class Admin::AuctionAcceptancesController < Admin::BaseController
     ).perform
 
     @auction.save!
-
     redirect_to admin_auction_path(@auction)
   end
 

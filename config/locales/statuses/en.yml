@@ -33,7 +33,7 @@ en:
             body: "You've been outbid! The maximum you can bid is %{max_allowed_bid_as_currency}."
           sealed_auction_bidder:
             header: 'Bid placed'
-            body: "You bid %{bid_amount} on %{bid_date}."
+            body: You placed a bid of %{bid_amount} on %{bid_date}.
           winning_bidder:
             header: 'Bid placed'
             body: "You are currently the low bidder, with a bid of %{winning_amount}"
@@ -54,6 +54,14 @@ en:
           header: 'Bidding closed'
           body: "Bidding for this auction closed on %{end_date}."
         winner:
+          accepted_pending_payment_url:
+            header: "Payment URL needed"
+            body: >
+              Your <a href=%{delivery_url}>pull request</a> was accepted, but we
+              cannot issue payment until you have specified a valid payment URL. Please update
+              the payment URL field on <a href="/profile">your profile</a>, or contact us at
+              micropurchase@gsa.gov with other instructions on how to pay you via credit card
+              for this auction.
           pending_payment_confirmation:
             header: "Payment confirmation needed"
             body: >
@@ -65,7 +73,7 @@ en:
             body: >
               You won this auction on %{end_date}, your pull request was accepted
               on %{accepted_date}, and you were paid %{amount} on %{paid_at}.
-          pending_payment:
+          accepted:
             header: "Pending payment"
             body: >
               Your <a href=%{delivery_url}>pull request</a> was accepted! Payment of %{amount} will be issued
@@ -99,14 +107,18 @@ en:
               Then enter the pull request URL, below, and click "start work."
     admin_auction_status_presenter:
       future:
-        body: >
-          This auction is visible to the public but is not currently
-          accepting bids. It will open on %{start_date}. If you
-          need to take it down for whatever reason, press the
-          "unpublish" button, below.
-        header: Coming soon
-        actions:
-          unpublish: "Unpublish"
+        published:
+          body: >
+            This auction is visible to the public but is not currently
+            accepting bids. It will open on %{start_date}. If you
+            need to take it down for whatever reason, press the
+            "unpublish" button, below.
+          header: Coming soon
+          actions:
+            unpublish: "Unpublish"
+        unpublished:
+          body: "This auction is ready to publish!"
+          header: "Ready to publish"
       work_in_progress:
         header: Work in progress
         body: >
@@ -122,6 +134,12 @@ en:
         actions:
           accept: "Accept"
           reject: "Reject"
+      accepted_pending_payment_url:
+        header: Payment URL needed
+        body: >
+          The <a href=%{delivery_url}>pull request</a> from %{winner_url}
+          was accepted. However, this vendor cannot
+          be paid until they’ve specified a valid payment URL.
       accepted:
         header: "Accepted"
         body: "%{winner_email}'s delivered code was accepted on %{accepted_at}."

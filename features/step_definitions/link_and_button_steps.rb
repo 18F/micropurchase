@@ -125,3 +125,7 @@ end
 Then(/^I should not see an "Edit" link for the auction$/) do
   within('.auction-title') { expect(page).not_to have_selector(:link, "Edit") }
 end
+
+Then(/^I should see a link to the delivery URL$/) do
+  expect(page).to have_link('pull request', href: @auction.delivery_url)
+end

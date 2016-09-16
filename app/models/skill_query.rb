@@ -10,6 +10,6 @@ class SkillQuery
   end
 
   def accepted_auction_count
-    Auction.delivery_accepted.includes(:skills).where(skills: { id: skill.id }).count
+    Auction.accepted.includes(:skills).where(skills: { id: skill.id }).count
   end
 end

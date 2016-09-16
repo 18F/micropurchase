@@ -53,8 +53,10 @@ Then(/^I should the open auction message for admins$/) do
   )
 end
 
-Then(/^I should see the time I placed my bid$/) do
+Then(/^I should see a status message that confirms I placed a sealed bid$/) do
   bid = @auction.bids.last
+  expect(bid.amount).to eq(@bid_amount.to_i)
+  expect(bid.bidder).to eq(@user)
 
   expect(page).to have_content(
     I18n.t(
@@ -62,6 +64,12 @@ Then(/^I should see the time I placed my bid$/) do
       bid_amount: Currency.new(bid.amount),
       bid_date: DcTimePresenter.convert_and_format(bid.created_at)
     )
+  )
+end
+
+Then(/^I should see the auction missing payment method status box$/) do
+  expect(page).to have_content(
+    I18n.t('statuses.bid_status_presenter.over.winner.accepted_pending_payment_url.header')
   )
 end
 
@@ -92,7 +100,7 @@ end
 
 Then(/^I should see the pending payment status box$/) do
   expect(page).to have_content(
-    I18n.t('statuses.bid_status_presenter.over.winner.pending_payment.header')
+    I18n.t('statuses.bid_status_presenter.over.winner.accepted.header')
   )
 end
 
@@ -188,6 +196,14 @@ Then(/^I should see the payment confirmed message$/) do
       accepted_date: DcTimePresenter.convert_and_format(@auction.accepted_at),
       amount: Currency.new(WinningBid.new(@auction).find.amount),
       paid_at: DcTimePresenter.convert_and_format(@auction.paid_at)
+    )
+  )
+end
+
+Then(/^I should see an admin status message that the vendor needs to provide a payment URL$/) do
+  expect(page).to have_content(
+    I18n.t(
+      'statuses.admin_auction_status_presenter.accepted_pending_payment_url.header'
     )
   )
 end

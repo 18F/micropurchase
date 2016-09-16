@@ -14,14 +14,6 @@ class AdminAuctionStatusPresenter::WorkInProgress < AdminAuctionStatusPresenter:
 
   private
 
-  def winner_url
-    Url.new(
-      link_text: winner.email,
-      path_name: 'admin_user',
-      params: { id: winner.id }
-    )
-  end
-
   def delivery_deadline
     DcTimePresenter.convert_and_format(auction.delivery_due_at)
   end

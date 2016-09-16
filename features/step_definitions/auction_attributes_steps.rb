@@ -68,7 +68,7 @@ Then(/^I should see the start price for the auction is \$(\d+)$/) do |price|
 end
 
 Then(/^I should see that the auction was accepted$/) do
-  expect(@auction.reload.accepted_at).not_to eq nil
+  expect(@auction.reload).to be_accepted
   expect(page).to have_content(
     DcTimePresenter.convert_and_format(@auction.accepted_at)
   )

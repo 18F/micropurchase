@@ -202,9 +202,10 @@ Given(/^there is an accepted auction where the winning vendor is missing a payme
   @auction = FactoryGirl.create(
     :auction,
     :with_bids,
+    :closed,
     :published,
-    status: :accepted,
-    accepted_at: nil,
+    :delivery_url,
+    status: :accepted_pending_payment_url,
     c2_proposal_url: 'https://c2-dev.18f.gov/proposals/2486'
   )
   @winning_bidder = WinningBid.new(@auction).find.bidder

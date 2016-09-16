@@ -7,10 +7,13 @@ class AcceptAuction
   end
 
   def perform
+    auction.accepted_at = Time.current
+
     if payment_url.blank?
+      auction.status = :accepted_pending_payment_url
       send_winning_bidder_missing_payment_method_email
     else
-      auction.accepted_at = Time.current
+      auction.status = :accepted
       send_auction_accepted_emails
       update_purchase_request
     end

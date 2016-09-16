@@ -8,3 +8,19 @@
     display: list-item;
   }
 }
+
+.docs-list {
+  margin-right: 1em;
+  float: left;
+}
+
+.docs-tile {
+  display: block;
+  min-height: 64px;
+  min-width: 128px;
+  background: image-url('folded_corner_page') center 12px no-repeat $color-gray-lightest;
+  padding: 48px 12px 12px;
+  text-align: center;
+  border-radius: 4px;
+  border: 1px solid $color-gray-lighter;
+}

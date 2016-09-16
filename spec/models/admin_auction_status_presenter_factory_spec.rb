@@ -11,11 +11,20 @@ describe AdminAuctionStatusPresenterFactory do
   end
 
   context "when the auction has been published but hasn't started yet" do
-    it 'should return a AdminAuctionStatusPresenter::FuturePublished' do
+    it 'should return a AdminAuctionStatusPresenter::Future' do
       auction = create(:auction, :future, :published)
 
       expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
         .to be_a(AdminAuctionStatusPresenter::Future)
+    end
+  end
+
+  context "when an auction has been accepted but doesn't have a payment URL yet" do
+    it 'should return a AdminAuctionStatusPresenter::AcceptedPendingPaymentUrl' do
+      auction = create(:auction, :closed, :with_bids, :published, status: :accepted_pending_payment_url)
+
+      expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
+        .to be_a(AdminAuctionStatusPresenter::AcceptedPendingPaymentUrl)
     end
   end
 
