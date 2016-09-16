@@ -15,6 +15,8 @@ namespace :dev do
       Skill.find_or_create_by(name: 'a-language-you-never-heard-of')
     ]
 
+    create(:client_account)
+
     FactoryGirl.create(:auction, :reverse, :pending_c2_approval)
     FactoryGirl.create(:auction, :reverse, :with_bids)
     FactoryGirl.create(:auction, :reverse, :expiring, :with_bids)
