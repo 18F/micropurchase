@@ -63,7 +63,7 @@ class AuctionQuery
 
   def payment_needed
     relation
-      .accepted_and_pending
+      .accepted_or_accepted_and_pending_payment_url
       .not_paid
   end
 
