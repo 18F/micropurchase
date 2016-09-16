@@ -4,6 +4,10 @@ module AuctionScopes
   included do
     scope :accepted, -> { where(status: statuses['accepted']) }
     scope :accepted_pending_payment_url, -> { where(status: statuses['accepted_pending_payment_url']) }
+    scope :accepted_or_accepted_and_pending_payment_url, lambda {
+      where(status: [statuses['accepted'],
+                     statuses['accepted_pending_payment_url']])
+    }
     scope :default_purchase_card, -> { where(purchase_card: 0) }
     scope :delivery_url, -> { where.not(delivery_url: [nil, '']) }
     scope :ended_at_in_future, -> { where('ended_at > ?', Time.current) }

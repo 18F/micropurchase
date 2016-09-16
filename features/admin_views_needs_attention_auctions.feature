@@ -25,7 +25,7 @@ Feature: Admin view needs attention auctions
     Given there is an unpublished auction
     When I visit the admin needs attention auctions page
     Then I should see a table listing all draft auctions
-    And I should see the auction title
+    And I should see the auction as a draft auction
 
   Scenario: Admin sees data for needs evaluation auctions
     Given there is an auction that needs evaluation

@@ -10,3 +10,12 @@ Feature: Admin views missing Payment URL
     When I visit the admin auction page for that auction
     Then I should see an admin status message that the vendor needs to provide a payment URL
     And I should see a link to the delivery URL
+
+  Scenario: Admin sees status in the "Needs Payment" section of needs attention page that a payment URL is needed
+    Given I am an administrator
+    And I sign in
+    And there is an accepted auction where the winning vendor is missing a payment method
+    And I visit the Needs Attention page
+    Then I should see a table listing all payment needed auctions
+    And I should see the auction as a payment needed auction
+    And I should see "Needs Credit Card URL"
