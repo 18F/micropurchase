@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :bid do
     amount 3499
-    association :bidder, factory: :user
+    association :bidder, factory: [:user, :sam_accepted]
     association :auction
 
     trait :from_small_business do
