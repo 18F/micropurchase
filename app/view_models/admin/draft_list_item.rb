@@ -14,7 +14,11 @@ class Admin::DraftListItem < Admin::BaseViewModel
   end
 
   def c2_proposal_status
-    c2_proposal_status_presenter.status
+    if auction.purchase_card == 'default'
+      c2_proposal_status_presenter.status
+    else
+      'N/A'
+    end
   end
 
   def started_at
@@ -32,6 +36,6 @@ class Admin::DraftListItem < Admin::BaseViewModel
   private
 
   def c2_proposal_status_presenter
-    AdminAuctionStatusPresenterFactory.new(auction: auction).create
+    Object.const_get("C2StatusPresenter::#{auction.c2_status.camelize}").new(auction: auction)
   end
 end
