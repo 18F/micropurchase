@@ -1,4 +1,4 @@
-class BidStatusPresenter::Available::Admin < BidStatusPresenter::Base
+class AdminAuctionStatusPresenter::Available < AdminAuctionStatusPresenter::Base
   def header
     I18n.t('statuses.bid_status_presenter.available.admin.header')
   end

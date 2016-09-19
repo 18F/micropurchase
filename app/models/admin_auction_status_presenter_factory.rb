@@ -26,6 +26,8 @@ class AdminAuctionStatusPresenterFactory
       AdminAuctionStatusPresenter::Future
     elsif future? && auction.unpublished?
       AdminAuctionStatusPresenter::ReadyToPublish
+    elsif available?
+      AdminAuctionStatusPresenter::Available
     elsif work_in_progress?
       AdminAuctionStatusPresenter::WorkInProgress
     elsif auction.c2_paid?
@@ -46,9 +48,15 @@ class AdminAuctionStatusPresenterFactory
       AdminAuctionStatusPresenter::ReadyToPublish
     elsif work_in_progress?
       AdminAuctionStatusPresenter::WorkInProgress
-    else
+    elsif !auction.pending_delivery?
       Object.const_get("AdminAuctionStatusPresenter::#{status}")
+    else # available?
+      AdminAuctionStatusPresenter::Available
     end
+  end
+
+  def available?
+    AuctionStatus.new(auction).available?
   end
 
   def future?

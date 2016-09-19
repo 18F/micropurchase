@@ -79,7 +79,7 @@ Given(/^there is an open bidless auction$/) do
 end
 
 Given(/^there is an open auction$/) do
-  @auction = FactoryGirl.create(:auction, :with_bids)
+  @auction = FactoryGirl.create(:auction, :with_bids, :available, :c2_approved)
 end
 
 Given(/^there is an open auction with some skills$/) do
