@@ -36,10 +36,12 @@ FactoryGirl.define do
     end
 
     trait :published do
+      c2_approved
       published :published
     end
 
     trait :unpublished do
+      future
       published :unpublished
     end
 
@@ -88,25 +90,33 @@ FactoryGirl.define do
     end
 
     trait :pending_acceptance do
+      closed
       status :pending_acceptance
     end
 
     trait :accepted do
+      closed
+      c2_approved
       status :accepted
       accepted_at { Time.now }
     end
 
     trait :accepted_pending_payment_url do
+      accepted
+      c2_approved
+      with_bids
       status :accepted_pending_payment_url
-      accepted_at { Time.now }
     end
 
     trait :rejected do
+      closed
+      c2_approved
       status :rejected
       rejected_at { Time.now }
     end
 
     trait :paid do
+      closed
       paid_at { Time.current }
     end
 
@@ -115,6 +125,7 @@ FactoryGirl.define do
     end
 
     trait :payment_confirmed do
+      closed
       c2_status :payment_confirmed
     end
 
@@ -131,6 +142,7 @@ FactoryGirl.define do
     end
 
    trait :pending_c2_approval do
+     future
      c2_status :pending_approval
      purchase_card :default
      unpublished
@@ -142,12 +154,15 @@ FactoryGirl.define do
     end
 
     trait :evaluation_needed do
+      closed
+      c2_approved
       with_bids
       delivery_url
       pending_acceptance
     end
 
     trait :payment_needed do
+      closed
       with_bids
       delivery_url
       accepted
@@ -155,6 +170,7 @@ FactoryGirl.define do
     end
 
     trait :complete_and_successful do
+      closed
       with_bids
       delivery_url
       accepted

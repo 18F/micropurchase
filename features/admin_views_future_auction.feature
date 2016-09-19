@@ -9,7 +9,7 @@ Feature: Admin views future auction
     When I visit the auction page
     Then I should see a "Coming Soon" label
     And I should not see the bid form
-    And I should see the future auction message for admins
+    And I should see the future published auction message for admins
 
     When I click on the unpublish button
     Then I should see a success message confirming that the auction was unpublished
@@ -19,7 +19,7 @@ Feature: Admin views future auction
     And I sign in
     And there is a future auction
     When I visit the admin auction page for that auction
-    Then I should see the future auction message for admins
+    Then I should see the future published auction message for admins
 
     When I click on the unpublish button
     Then I should see a success message confirming that the auction was unpublished
@@ -31,7 +31,7 @@ Feature: Admin views future auction
     And there is a future auction
     And the auction is for a different purchase card
     When I visit the admin auction page for that auction
-    Then I should see the future auction message for admins
+    Then I should see the future published auction message for admins
 
     When I click on the unpublish button
     Then I should see a success message confirming that the auction was unpublished

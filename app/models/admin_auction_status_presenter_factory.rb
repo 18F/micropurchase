@@ -16,18 +16,26 @@ class AdminAuctionStatusPresenterFactory
   private
 
   def default_purchase_card_presenter
-    if auction.payment_confirmed? || auction.c2_paid?
-      Object.const_get("C2StatusPresenter::#{c2_status}")
+    if auction.c2_status == 'not_requested'
+      C2StatusPresenter::NotRequested
+    elsif auction.c2_status == 'sent'
+      C2StatusPresenter::Sent
+    elsif auction.c2_status == 'pending_approval'
+      C2StatusPresenter::PendingApproval
     elsif future? && auction.published?
       AdminAuctionStatusPresenter::Future
     elsif future? && auction.unpublished?
       AdminAuctionStatusPresenter::ReadyToPublish
     elsif work_in_progress?
       AdminAuctionStatusPresenter::WorkInProgress
+    elsif auction.c2_paid?
+      C2StatusPresenter::C2Paid
+    elsif auction.payment_confirmed?
+      C2StatusPresenter::PaymentConfirmed
     elsif !auction.pending_delivery?
       Object.const_get("AdminAuctionStatusPresenter::#{status}")
-    else
-      Object.const_get("C2StatusPresenter::#{c2_status}")
+    else # auction.approved? && auction.pending_delivery?
+      C2StatusPresenter::Approved
     end
   end
 
