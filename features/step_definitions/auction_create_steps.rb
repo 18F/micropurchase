@@ -3,7 +3,7 @@ Given(/^there is an unpublished auction$/) do
 end
 
 Given(/^there is a future auction$/) do
-  @auction = FactoryGirl.create(:auction, :future)
+  @auction = FactoryGirl.create(:auction, :future, :published)
 end
 
 Given(/^there is a closed auction$/) do
@@ -41,7 +41,7 @@ Given(/^I am going to lose an auction$/) do
 end
 
 Given(/^there is an auction with work in progress$/) do
-  @auction = FactoryGirl.create(:auction, :closed, :with_bids, :delivery_url)
+  @auction = FactoryGirl.create(:auction, :c2_approved, :closed, :with_bids, :delivery_url)
 end
 
 When(/^the auction ends$/) do
@@ -199,15 +199,7 @@ Given(/^there is an auction where the winning vendor is missing a payment method
 end
 
 Given(/^there is an accepted auction where the winning vendor is missing a payment method$/) do
-  @auction = FactoryGirl.create(
-    :auction,
-    :with_bids,
-    :closed,
-    :published,
-    :delivery_url,
-    status: :accepted_pending_payment_url,
-    c2_proposal_url: 'https://c2-dev.18f.gov/proposals/2486'
-  )
+  @auction = FactoryGirl.create(:auction, :accepted_pending_payment_url)
   @winning_bidder = WinningBid.new(@auction).find.bidder
   @winning_bidder.update(payment_url: '')
 end
