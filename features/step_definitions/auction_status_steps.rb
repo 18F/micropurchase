@@ -38,9 +38,9 @@ Then(/^I should see the future auction message for vendors$/) do
   )
 end
 
-Then(/^I should see the future auction message for admins$/) do
+Then(/^I should see the future published auction message for admins$/) do
   expect(page).to have_content(
-    I18n.t('statuses.admin_auction_status_presenter.future.header')
+    I18n.t('statuses.admin_auction_status_presenter.future.published.header')
   )
 end
 
