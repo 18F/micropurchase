@@ -7,9 +7,10 @@
 
   <h2 id="request-a-duns-number">Request a DUNS number</h2>
 
-  <p>Start by <a href="http://www.dnb.com/duns-number/lookup.html">looking up
-    your DUNS number</a> on the Dun &amp; Bradstreet website. If you've worked
-  with the government in the past, you may already have one.</p>
+  <p>Start by <%= link_to 'looking up your DUNS number',
+    'http://www.dnb.com/duns-number/lookup.html' %> on the Dun &amp; Bradstreet
+    website. If you've worked with the government in the past, you may already
+    have one.</p>
 
   <p>If you don't yet have a DUNS number, you can start by <a
     href="https://www.dandb.com/product/companyupdate/companyupdateHome?execution=e10s1">creating
@@ -30,12 +31,12 @@
 
   <h2 id="register-on-sam-gov">Register on SAM.gov</h2>
 
-  <p>Once you have your DUNS number, <a href="https://www.sam.gov">visit
-    SAM.gov</a> and create an individual account. The process is demonstrated in
-  the video, below. Note that while registration physically takes about an hour,
-  it can actually take <strong>about a day or two</strong> for the your
-  application to be processed and for your information to propagate across
-  various systems.</p>
+  <p>Once you have your DUNS number, <%= link_to 'visit SAM.gov',
+    'https://www.sam.gov' %> and create an individual account. The process is
+    demonstrated in the video, below. Note that while registration physically
+    takes about an hour, it can actually take <strong>about a day or
+      two</strong> for the your application to be processed and for your
+    information to propagate across various systems.</p>
 
   <figure class="figure-1">
     <iframe width="90%" height="480" src="https://www.youtube.com/embed/YHq9KAdBI6A" frameborder="0" allowfullscreen=""></iframe>
@@ -54,14 +55,13 @@
 
   <h2 id="sign-up-or-complete-an-existing-profile">Sign-up or complete an existing profile</h2>
 
-  <p>Once you have a Sam.gov account, you can either <a
-    href="/micropurchase/sign-up">create a new 18F Micro-purchase account (using
-    GitHub)</a> or you can link your SAM.gov account with your existing 18F
-  Micro-purchase account.</p>
+  <p>Once you have a Sam.gov account, you can either <%= link_to 'create a new
+  18F Micro-purchase account (using GitHub)', sign_in_path %> or you can link
+  your SAM.gov account with your existing 18F Micro-purchase account.</p>
 
   <p>18F Micro-purchase uses your DUNS number to verify your registration on
-  SAM.gov. To initiate this verification, <a href="/micropurchase/profile">visit
-    your profile</a> and update your DUNS number. The verification process
+  SAM.gov. To initiate this verification, <%= link_to 'visit
+    your profile', profile_path %> and update your DUNS number. The verification process
   should take no longer than a hour or so. Once you're verified,  you're ready
   to bid.</p>
 
@@ -73,7 +73,7 @@
   box. If you're eligible to bid, you'll see a form that looks like this:</p>
 
   <figure class="figure-2">
-    <%= image_tag('place_a_bid_example', alt: 'bid box example') %>
+    <%= image_tag(image_path('place_a_bid_example'), alt: 'bid box example') %>
   </figure>
 
   <p>Enter a number less than the maximum bid (or current bid, if the auction's
