@@ -6,6 +6,7 @@ class TockImporter
       tock_project = ClientAccount.find_or_initialize_by(tock_id: project["id"])
       tock_project.name = project["name"]
       tock_project.billable = project["billable"]
+      tock_project.active = project["active"]
       tock_project.save!
     end
   end

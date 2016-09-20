@@ -234,3 +234,11 @@ Given(/^there is a payment confirmed auction$/) do
     :payment_confirmed
   )
 end
+
+Then(/^I should not see the non\-active client account$/) do
+  expect(page).not_to have_content(@non_active.name)
+end
+
+Then(/^I should see the the active client account$/) do
+  expect(page).to have_content(@billable.name)
+end

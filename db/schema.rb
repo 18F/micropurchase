@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20160921135321) do
     t.string   "name",       null: false
     t.boolean  "billable",   null: false
     t.integer  "tock_id",    null: false
+    t.boolean  "active"
   end
 
   add_index "client_accounts", ["tock_id"], name: "index_client_accounts_on_tock_id", unique: true, using: :btree

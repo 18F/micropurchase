@@ -30,7 +30,7 @@ class Admin::EditAuctionViewModel < Admin::BaseViewModel
   end
 
   def billable_to_options
-    ([auction.billable_to] + ClientAccount.all.map(&:to_s)).uniq
+    ([auction.billable_to] + ClientAccountQuery.new.active.map(&:to_s)).uniq
   end
 
   def published
