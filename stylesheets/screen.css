@@ -2116,10 +2116,9 @@ main div.wrap > form { max-width: 576px; }
 
 .auction .auction-header a h1,
 .auction .auction-header a:visited h1{
-	color: #004a7f;
+	color: #006fc0;
 }
 
-.auction .auction-header h1,
 .auction .auction-header h1{
 	font-size: 20px;
 	font-family: Merriweather, Georgia, serif;
@@ -2127,9 +2126,10 @@ main div.wrap > form { max-width: 576px; }
 	font-weight: 600;
 	line-height: 1.25em;
 	margin-bottom: 4px;
+	text-decoration: underline;
 }
 
-.auction .auction-header h1 a:hover{
+.auction .auction-header a:hover h1 {
 	color: #002b7e; 
 	text-decoration: none;
 }
@@ -2487,12 +2487,17 @@ dd.auction-status.auction-status-open{ background: #008a6c; }
 }
 
 .layout-auctions-coming-soon-and-open .auction a{
-	color: inherit;
 	text-decoration: none;
+}
+
+.layout-auctions-coming-soon-and-open .auction a dd.auction-time-remaining,
+.layout-auctions-coming-soon-and-open .auction a dd.auction-current-bid{
+	color: #333;
 }
 
 .layout-auctions-coming-soon-and-open .auction p{
 	font-size: 16px;
+	color: #333;
 	line-height: 1.4em;
 }
 
