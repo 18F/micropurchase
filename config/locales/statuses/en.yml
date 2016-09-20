@@ -9,6 +9,7 @@ en:
             solicitation.
       available:
         admin:
+          header: "Accepting bids"
           body: "This auction is accepting bids until %{end_date}."
         guest:
           body: >
@@ -142,10 +143,10 @@ en:
           be paid until they’ve specified a valid payment URL.
       accepted:
         header: "Accepted"
-        body: "%{winner_email}'s delivered code was accepted on %{accepted_at}."
+        body: "%{winner_url}'s delivered code was accepted on %{accepted_at}."
       rejected:
         header: "Rejected"
-        body: "<a href=%{delivery_url}>%{winner_email}'s work</a> was rejected on %{rejected_at}."
+        body: "<a href=%{delivery_url}>%{winner_name}'s work</a> was rejected on %{rejected_at}."
     c2_presenter:
       approval_not_requested:
         status: "Not requested"
@@ -168,13 +169,13 @@ en:
       c2_paid:
         status: "Awaiting payment confirmation"
         body: >
-          %{winner_email} was paid on %{paid_at}, and has received an email
+          %{winner_url} was paid on %{paid_at}, and has received an email
           asking them to confirm that payment.
         header: "Pending payment confirmation"
       payment_confirmed:
         status: "Payment confirmed"
         header: "Paid"
         body: >
-          %{winner_email}'s pull request was accepted on %{accepted_date}. The
+          %{winner_url}'s pull request was accepted on %{accepted_date}. The
            vendor was paid %{amount} on %{paid_at} and this payment
-           was confirmed by %{winner_email}.
+           was confirmed by %{winner_url}.

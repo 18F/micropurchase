@@ -8,7 +8,7 @@ class AdminAuctionStatusPresenter::Rejected < AdminAuctionStatusPresenter::Base
       'statuses.admin_auction_status_presenter.rejected.body',
       delivery_url: auction.delivery_url,
       rejected_at: rejected_at,
-      winner_email: winner.email
+      winner_name: winner_name
     )
   end
 

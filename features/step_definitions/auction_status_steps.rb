@@ -44,7 +44,7 @@ Then(/^I should see the future published auction message for admins$/) do
   )
 end
 
-Then(/^I should the open auction message for admins$/) do
+Then(/^I should see the open auction message for admins$/) do
   expect(page).to have_content(
     I18n.t(
       'statuses.bid_status_presenter.available.admin.body',
@@ -137,13 +137,11 @@ end
 
 Then(/^I should see the admin status for an accepted auction$/) do
   accepted_date = DcTimePresenter.convert_and_format(@auction.reload.accepted_at)
-  winning_bid = WinningBid.new(@auction).find
-  winner_email = winning_bid.bidder.email
 
-  expect(page).to have_content(
+  expect(page.html).to include(
     I18n.t(
       'statuses.admin_auction_status_presenter.accepted.body',
-      winner_email: winner_email,
+      winner_url: winner_url,
       accepted_at: accepted_date
     )
   )
@@ -152,14 +150,12 @@ end
 Then(/^I should see the C2 status for an auction with payment confirmation$/) do
   paid_at = DcTimePresenter.convert_and_format(@auction.paid_at)
   accepted_date = DcTimePresenter.convert_and_format(@auction.accepted_at)
-  winning_bid = WinningBid.new(@auction).find
-  winner_email = winning_bid.bidder.email
   amount = Currency.new(winning_bid.amount)
 
-  expect(page).to have_content(
+  expect(page.html).to include(
     I18n.t(
       'statuses.c2_presenter.payment_confirmed.body',
-      winner_email: winner_email,
+      winner_url: winner_url,
       accepted_date: accepted_date,
       amount: amount,
       paid_at: paid_at
@@ -206,12 +202,4 @@ Then(/^I should see an admin status message that the vendor needs to provide a p
       'statuses.admin_auction_status_presenter.accepted_pending_payment_url.header'
     )
   )
-end
-
-def end_date
-  DcTimePresenter.convert_and_format(@auction.ended_at)
-end
-
-def start_date
-  DcTimePresenter.convert_and_format(@auction.started_at)
 end

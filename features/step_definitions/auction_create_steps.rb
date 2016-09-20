@@ -79,7 +79,7 @@ Given(/^there is an open bidless auction$/) do
 end
 
 Given(/^there is an open auction$/) do
-  @auction = FactoryGirl.create(:auction, :with_bids)
+  @auction = FactoryGirl.create(:auction, :with_bids, :available, :c2_approved)
 end
 
 Given(/^there is an open auction with some skills$/) do
@@ -153,7 +153,8 @@ end
 Given(/^there is an auction where the winning vendor is not eligible to be paid$/) do
   @auction = FactoryGirl.create(
     :auction,
-    :with_bids,
+    :c2_approved,
+    :pending_acceptance,
     :between_micropurchase_and_sat_threshold,
     :winning_vendor_is_non_small_business
   )

@@ -33,6 +33,38 @@ end
 
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
+module AuctionHelpers
+  def end_date
+    DcTimePresenter.convert_and_format(@auction.ended_at)
+  end
+
+  def start_date
+    DcTimePresenter.convert_and_format(@auction.started_at)
+  end
+
+  def winning_bid
+    WinningBid.new(@auction).find
+  end
+
+  def winner_url
+    Url.new(
+      link_text: winner_name,
+      path_name: 'admin_user',
+      params: { id: winner.id }
+    )
+  end
+
+  def winner_name
+    winner.name || winner.github_login
+  end
+
+  def winner
+    winning_bid.bidder
+  end
+end
+
+World(AuctionHelpers)
+
 Before do
   WebMock.stub_request(:any, /api.data.gov/).to_rack(FakeSamApi)
   WebMock.stub_request(:any, /cap.18f.gov/).to_rack(FakeC2Api)

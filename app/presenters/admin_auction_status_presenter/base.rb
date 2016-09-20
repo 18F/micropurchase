@@ -19,10 +19,14 @@ class AdminAuctionStatusPresenter::Base
 
   def winner_url
     Url.new(
-      link_text: winner.email,
+      link_text: winner_name,
       path_name: 'admin_user',
       params: { id: winner.id }
     )
+  end
+
+  def winner_name
+    winner.name || winner.github_login
   end
 
   def winner

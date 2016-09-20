@@ -15,7 +15,3 @@ Then(/^I should see the winning bidder email$/) do
 
   expect(page).to have_content(winning_bidder_email)
 end
-
-def winning_bid
-  WinningBid.new(@auction).find
-end
