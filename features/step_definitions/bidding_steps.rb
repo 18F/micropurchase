@@ -108,7 +108,3 @@ Then(/^I should see my bid is too high$/) do
 
   )
 end
-
-def end_date
-  DcTimePresenter.convert_and_format(@auction.ended_at)
-end

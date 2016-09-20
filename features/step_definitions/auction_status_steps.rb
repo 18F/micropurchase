@@ -44,7 +44,7 @@ Then(/^I should see the future published auction message for admins$/) do
   )
 end
 
-Then(/^I should the open auction message for admins$/) do
+Then(/^I should see the open auction message for admins$/) do
   expect(page).to have_content(
     I18n.t(
       'statuses.bid_status_presenter.available.admin.body',
@@ -206,12 +206,4 @@ Then(/^I should see an admin status message that the vendor needs to provide a p
       'statuses.admin_auction_status_presenter.accepted_pending_payment_url.header'
     )
   )
-end
-
-def end_date
-  DcTimePresenter.convert_and_format(@auction.ended_at)
-end
-
-def start_date
-  DcTimePresenter.convert_and_format(@auction.started_at)
 end
