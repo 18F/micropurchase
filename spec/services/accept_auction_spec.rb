@@ -105,9 +105,55 @@ describe AcceptAuction do
         Timecop.freeze(time) do
           auction = create(:auction, :with_bids, accepted_at: nil)
 
-          AcceptAuction.new(auction: auction, payment_url: 'test.com').perform
+          AcceptAuction.new(
+            auction: auction,
+            payment_url: 'test.com'
+          ).perform
 
           expect(auction.accepted_at).to eq time
+          expect(auction).to be_accepted
+        end
+      end
+    end
+
+    context 'auction is between micropurchase and SAT threshold' do
+      context 'winning vendor is a small business' do
+        it 'calls the AcceptAuctionJob' do
+          auction = create(
+            :auction,
+            :between_micropurchase_and_sat_threshold,
+            :winning_vendor_is_small_business,
+            :delivery_due_at_expired
+          )
+
+          AcceptAuction.new(
+            auction: auction,
+            payment_url: "https://some-website.com/pay"
+          ).perform
+
+          expect(auction).to be_accepted
+        end
+      end
+
+      context 'winning vendor is not a small business' do
+        it 'returns false' do
+          auction = create(
+            :auction,
+            :between_micropurchase_and_sat_threshold,
+            :winning_vendor_is_non_small_business,
+            :delivery_due_at_expired
+          )
+
+          accept_auction = AcceptAuction.new(
+            auction: auction,
+            payment_url: "https://some-website.com/pay"
+          )
+
+          expect(accept_auction.perform).to eq false
+          expect(auction).not_to be_accepted
+          expect(auction.errors.full_messages).to include(
+            I18n.t('errors.update_auction.vendor_ineligible')
+          )
         end
       end
     end

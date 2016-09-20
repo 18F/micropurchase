@@ -2,14 +2,6 @@ When(/^I click on the link to generate a winning bidder CSV report$/) do
   click_on(I18n.t('admin.auctions.show.winner_report'))
 end
 
-When(/^I select the status as accepted$/) do
-  select("accepted", from: "auction_status")
-end
-
-When(/^I select the status as rejected$/) do
-  select("rejected", from: "auction_status")
-end
-
 Then(/^I should see that the auction form has a C2 Proposal URL$/) do
   expect(@auction.c2_proposal_url).to be_present
   field = find_field(I18n.t('simple_form.labels.auction.c2_proposal_url'), disabled: true)

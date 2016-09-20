@@ -153,7 +153,8 @@ end
 Given(/^there is an auction where the winning vendor is not eligible to be paid$/) do
   @auction = FactoryGirl.create(
     :auction,
-    :with_bids,
+    :c2_approved,
+    :pending_acceptance,
     :between_micropurchase_and_sat_threshold,
     :winning_vendor_is_non_small_business
   )

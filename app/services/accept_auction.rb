@@ -7,6 +7,17 @@ class AcceptAuction
   end
 
   def perform
+    if vendor_ineligible?
+      auction.errors.add(:base, I18n.t('errors.update_auction.vendor_ineligible'))
+      false
+    else
+      accept_auction
+    end
+  end
+
+  private
+
+  def accept_auction
     auction.accepted_at = Time.current
 
     if payment_url.blank?
@@ -19,7 +30,36 @@ class AcceptAuction
     end
   end
 
-  private
+  def vendor_ineligible?
+    !winning_bidder_is_eligible_to_be_paid?
+  end
+
+  def winning_bidder_is_eligible_to_be_paid?
+    if auction_is_small_business?
+      reckoner = SamAccountReckoner.new(winning_bidder)
+      reckoner.set!
+      winning_bidder.reload
+      user_is_eligible_to_bid?
+    else
+      true
+    end
+  end
+
+  def user_is_eligible_to_bid?
+    auction_rules.user_is_eligible_to_bid?(winning_bidder)
+  end
+
+  def auction_rules
+    RulesFactory.new(auction).create
+  end
+
+  def auction_is_small_business?
+    AuctionThreshold.new(auction).small_business?
+  end
+
+  def winning_bidder
+    WinningBid.new(auction).find.bidder
+  end
 
   def send_winning_bidder_missing_payment_method_email
     WinningBidderMailer
