@@ -5,11 +5,12 @@ class AdminAuctionStatusPresenter::Available < AdminAuctionStatusPresenter::Base
 
   def body
     if total_bids > 0
-      I18n.t('statuses.bid_status_presenter.available.admin.has_bids',
-             end_date: end_date,
-             winner_url: winner_url,
-             total_bids: total_bids
-            )
+      I18n.t(
+        'statuses.bid_status_presenter.available.admin.has_bids',
+        end_date: end_date,
+        winner_url: winner_url,
+        total_bids: total_bids
+      )
     else
       I18n.t('statuses.bid_status_presenter.available.admin.body', end_date: end_date)
     end
@@ -25,8 +26,6 @@ class AdminAuctionStatusPresenter::Available < AdminAuctionStatusPresenter::Base
   def winner
     auction.lowest_bid.bidder
   end
-
-  private
 
   def end_date
     DcTimePresenter.convert_and_format(auction.ended_at)
