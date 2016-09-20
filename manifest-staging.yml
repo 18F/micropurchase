@@ -13,6 +13,7 @@ applications:
     - micropurchase-staging-psql
     - micropurchase-smtp
     - new-relic
+    - secrets
   command: script/start
   env:
     RAILS_ENV: production

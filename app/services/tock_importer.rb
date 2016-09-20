@@ -1,5 +1,5 @@
 class TockImporter
-  TOCK_PROJECTS = "https://tock-app.18f.gov/api/projects.json".freeze
+  TOCK_PROJECTS = "https://tock.18f.gov/api/projects.json".freeze
 
   def perform
     projects.each do |project|
