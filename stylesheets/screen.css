@@ -660,9 +660,20 @@ td .time{
 	color: #aaa;
 }
 
-td.col-title{
+.col-title{
 	vertical-align: middle;
 }
+
+.col-title .note{
+	font-size: 14px;
+	display: block;
+	max-width: 24em;
+	line-height: 1.2;
+	padding-top: 0.4em;
+}
+
+.col-title .note strong{ font-weight: 600; }
+.col-title .note em{ font-style: italic; }
 
 .col-actions,
 .col-num-bids{ width: 4.2em; }
