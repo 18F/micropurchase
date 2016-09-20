@@ -1,11 +1,3 @@
-/* @override http://localhost:5000/stylesheets/screen.css */
-
-/* @override http://localhost:4000/stylesheets/screen.css */
-
-/* @override http://localhost:4000/stylesheets/screen.css */
-
-/* @override http://localhost:4000/stylesheets/screen.css */
-
 /* @override http://localhost:4000/stylesheets/screen.css */
 
 /* @group bootstrap */
@@ -1783,13 +1775,9 @@ main div.wrap > form { max-width: 576px; }
 	font-size: 16px;
 }
 
-.site-footer a{ 
-	color: inherit;
-}
+.site-footer a{  color: inherit; }
 
-.site-footer .site-footer-contact{
-	font-size: 14px;
-}
+.site-footer .site-footer-contact{ font-size: 14px; }
 
 .site-footer .site-footer-contact a{
 	margin-right: 16px;
@@ -1798,13 +1786,9 @@ main div.wrap > form { max-width: 576px; }
 }
 
 .site-footer .site-footer-nav li:last-of-type,
-.site-footer .site-footer-contact a:last-of-type{
-	margin-right: 0;
-}
+.site-footer .site-footer-contact a:last-of-type{ margin-right: 0; }
 
-.site-footer .site-footer-contact h2{
-	display: none;
-}
+.site-footer .site-footer-contact h2{ display: none; }
 
 .site-footer ul li{
 	display: inline;
@@ -1816,7 +1800,9 @@ main div.wrap > form { max-width: 576px; }
 		padding-top: 24px; 
 		padding-bottom: 48px;
 	}
+	
 	.site-footer .logo{ float: left; }
+	
 	.site-footer .site-footer-nav,
 	.site-footer .site-footer-contact{ 
 		padding-top: 12px;
