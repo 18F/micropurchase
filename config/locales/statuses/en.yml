@@ -9,6 +9,7 @@ en:
             solicitation.
       available:
         admin:
+          header: "Accepting bids"
           body: "This auction is accepting bids until %{end_date}."
         guest:
           body: >
