@@ -7,7 +7,7 @@ class AdminAuctionStatusPresenter::Accepted < AdminAuctionStatusPresenter::Base
     I18n.t(
       'statuses.admin_auction_status_presenter.accepted.body',
       accepted_at: accepted_at,
-      winner_email: winner.email
+      winner_url: winner_url
     )
   end
 
