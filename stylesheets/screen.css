@@ -894,6 +894,7 @@ button:hover,
 	border-color: #2e8540;
 	color: white;
 	box-shadow: 0 1px 0 #f3f3f3;
+	text-decoration: none !important;
 }
 
 button:active,
@@ -1530,8 +1531,8 @@ main div.wrap > form { max-width: 576px; }
 .field-auction-status{ display: none; }
 .layout-auctions-show .field-auction-status{ display: block; }
 
-.user-type-admin .site-header .nav-header-nav .nav-my-profile,
-.user-type-vendor .site-header .nav-header-nav .nav-people,
+.user-type-admin .site-header .site-header-nav .nav-my-profile,
+.user-type-vendor .site-header .site-header-nav .nav-people,
 .user-type-vendor .nav-auctions-drafts,
 .user-type-vendor .h-feed-header .button,
 .user-type-vendor header .nav-settings{ display: none !important; }
@@ -1670,11 +1671,11 @@ main div.wrap > form { max-width: 576px; }
 	cursor: pointer;
 }
 
-.site-header .nav-header-nav{
+.site-header .site-header-nav{
 	font-size: 16px;
 }
 
-.site-header .nav-header-nav li{
+.site-header .site-header-nav li{
 	display: inline-block;
 	vertical-align: middle;
 }
@@ -1692,9 +1693,9 @@ main div.wrap > form { max-width: 576px; }
 .user-type-admin .site-header .nav-my-account{ display: none; }
 
 
-.site-header .nav-header-nav li a{ color: white; }
-.signed-in .site-header .nav-header-nav a{ margin-right: 0.8em; }
-.signed-in .site-header .nav-header-nav .a-sign-out{ margin-right: 0; }
+.site-header .site-header-nav li a{ color: white; }
+.signed-in .site-header .site-header-nav a{ margin-right: 0.8em; }
+.signed-in .site-header .site-header-nav .a-sign-out{ margin-right: 0; }
 
 @media screen and (min-width: 622.222px){
 	.site-header{ padding: 12px 0; }
@@ -1723,7 +1724,7 @@ main div.wrap > form { max-width: 576px; }
 		margin-top: -4px;
 	}
 	
-	.site-header .nav-header-nav{
+	.site-header .site-header-nav{
 		float: right;
 		padding-top: 14px;
 	}
@@ -1777,7 +1778,7 @@ main div.wrap > form { max-width: 576px; }
 	letter-spacing: -1px;
 }
 
-.site-footer .nav-site-nav{
+.site-footer .site-footer-nav{
 	margin-bottom: 24px;
 	font-size: 16px;
 }
@@ -1786,22 +1787,22 @@ main div.wrap > form { max-width: 576px; }
 	color: inherit;
 }
 
-.site-footer .nav-contact{
+.site-footer .site-footer-contact{
 	font-size: 14px;
 }
 
-.site-footer .nav-contact a{
+.site-footer .site-footer-contact a{
 	margin-right: 16px;
 	text-decoration: none;
 	color: #b1cffe;
 }
 
-.site-footer .nav-site-nav li:last-of-type,
-.site-footer .nav-contact a:last-of-type{
+.site-footer .site-footer-nav li:last-of-type,
+.site-footer .site-footer-contact a:last-of-type{
 	margin-right: 0;
 }
 
-.site-footer .nav-contact h2{
+.site-footer .site-footer-contact h2{
 	display: none;
 }
 
@@ -1816,15 +1817,15 @@ main div.wrap > form { max-width: 576px; }
 		padding-bottom: 48px;
 	}
 	.site-footer .logo{ float: left; }
-	.site-footer .nav-site-nav,
-	.site-footer .nav-contact{ 
+	.site-footer .site-footer-nav,
+	.site-footer .site-footer-contact{ 
 		padding-top: 12px;
 		float: right; 
 		text-align: right;
 		font-size: 18px;
 	}
 	
-	.site-footer .nav-contact{ 
+	.site-footer .site-footer-contact{ 
 		font-size: 14px;
 		float: right;
 		clear: right;
