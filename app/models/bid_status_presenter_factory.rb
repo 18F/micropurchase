@@ -55,7 +55,7 @@ class BidStatusPresenterFactory
 
   def available_message
     if admin?
-      BidStatusPresenter::Available::Admin
+      AdminAuctionStatusPresenter::Available
     elsif guest?
       BidStatusPresenter::Available::Guest
     elsif ineligible?

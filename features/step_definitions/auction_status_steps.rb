@@ -203,3 +203,23 @@ Then(/^I should see an admin status message that the vendor needs to provide a p
     )
   )
 end
+
+Then(/^I should see an admin status message that the auction is available with no bids$/) do
+  expect(page).to have_content(
+    I18n.t(
+      'statuses.bid_status_presenter.available.admin.body',
+      end_date: end_date
+    )
+  )
+end
+
+Then(/^I should see an admin status message that the auction is available with bids$/) do
+  expect(page.html).to include(
+    I18n.t(
+      'statuses.bid_status_presenter.available.admin.has_bids',
+      end_date: end_date,
+      total_bids: @auction.bids.count,
+      winner_url: winner_url
+    )
+  )
+end

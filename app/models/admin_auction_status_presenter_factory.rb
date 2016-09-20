@@ -46,6 +46,8 @@ class AdminAuctionStatusPresenterFactory
       AdminAuctionStatusPresenter::Future
     elsif future? && auction.unpublished?
       AdminAuctionStatusPresenter::ReadyToPublish
+    elsif available?
+      AdminAuctionStatusPresenter::Available
     elsif work_in_progress?
       AdminAuctionStatusPresenter::WorkInProgress
     elsif !auction.pending_delivery?
