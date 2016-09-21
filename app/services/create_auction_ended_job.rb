@@ -23,6 +23,6 @@ class CreateAuctionEndedJob
   end
 
   def auction_not_over?
-    !AuctionStatus.new(auction).over?
+    !BiddingStatus.new(auction).over?
   end
 end

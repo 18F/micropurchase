@@ -132,7 +132,7 @@ the various classes relate:
 7. The `AuctionListItem` class also delegates to methods from an internal
    object. So, a call to `AuctionListItem#available?` within a view
    will actually call an internal variable instance of the
-   [AuctionStatus](../app/models/auction_status.rb) with that
+   [BiddingStatus](../app/models/bidding_status.rb) with that
    method. This approach lets us collect related functions like _all
    the methods for querying the availability of an auction_ in a single
    focused place unlike having them be scattered among many methods in

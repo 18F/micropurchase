@@ -86,7 +86,7 @@ class Admin::EditAuctionViewModel < Admin::BaseViewModel
   end
 
   def closed?
-    AuctionStatus.new(auction).over?
+    BiddingStatus.new(auction).over?
   end
 
   def publishable?

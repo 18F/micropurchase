@@ -54,6 +54,10 @@ class Auction < ActiveRecord::Base
   )
   validate :publishing_auction, on: :update, if: :published_changed?
 
+  def work_in_progress?
+    delivery_url.present? && pending_delivery?
+  end
+
   def publishing_auction
     if published_was == 'unpublished' && purchase_card == 'default' && c2_status != 'approved'
       errors.add(:c2_status, " is not approved.")

@@ -56,7 +56,7 @@ class Admin::UserAuctionViewModel
   end
 
   def auction_over?
-    AuctionStatus.new(auction).over?
+    BiddingStatus.new(auction).over?
   end
 
   def auction_accepted?

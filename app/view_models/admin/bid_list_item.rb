@@ -37,7 +37,7 @@ class Admin::BidListItem
   end
 
   def auction_available?
-    AuctionStatus.new(bid.auction).available?
+    BiddingStatus.new(bid.auction).available?
   end
 
   def bidder_not_user?

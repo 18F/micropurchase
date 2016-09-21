@@ -164,15 +164,15 @@ class AuctionShowViewModel
   end
 
   def over?
-    auction_status.over?
+    bidding_status.over?
   end
 
   def available?
-    auction_status.available?
+    bidding_status.available?
   end
 
-  def auction_status
-    AuctionStatus.new(auction)
+  def bidding_status
+    @_bidding_status ||= BiddingStatus.new(auction)
   end
 
   def rules

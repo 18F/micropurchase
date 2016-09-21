@@ -55,7 +55,7 @@ class AuctionSerializer < ActiveModel::Serializer
   private
 
   def veiled_bids
-    if object.type == 'sealed_bid' && auction_status.available?
+    if object.type == 'sealed_bid' && bidding_status.available?
       object.bids.where(bidder: scope)
     else
       object.bids
@@ -63,7 +63,7 @@ class AuctionSerializer < ActiveModel::Serializer
   end
 
   def find_winning_bid
-    if auction_status.available?
+    if bidding_status.available?
       NullBid.new
     else
       WinningBid.new(object).find
@@ -74,7 +74,7 @@ class AuctionSerializer < ActiveModel::Serializer
     object.customer || NullCustomer.new
   end
 
-  def auction_status
-    @_auction_status ||= AuctionStatus.new(object)
+  def bidding_status
+    @_bidding_status ||= BiddingStatus.new(object)
   end
 end

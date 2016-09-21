@@ -22,7 +22,7 @@ class Rules::BaseRules
   end
 
   def auction_available?
-    AuctionStatus.new(auction).available?
+    BiddingStatus.new(auction).available?
   end
 
   def user_is_eligible_to_bid?(user)
