@@ -22,9 +22,20 @@ class AdminAuctionStatusPresenter::Available < AdminAuctionStatusPresenter::Base
     auction.bids.count
   end
 
-  # winning_bid is a NullBid when sealed-bid auctions are available
-  def winner
-    auction.lowest_bid.bidder
+  def winner_url
+    Url.new(
+      link_text: winner_name,
+      path_name: 'admin_user',
+      params: { id: unmasked_winner_for_admin.id }
+    )
+  end
+
+  def winner_name
+    unmasked_winner_for_admin.name || unmasked_winner_for_admin.github_login
+  end
+
+  def unmasked_winner_for_admin
+    @_bidder ||= auction.lowest_bid.bidder
   end
 
   def end_date

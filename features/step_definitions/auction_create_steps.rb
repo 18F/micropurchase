@@ -92,7 +92,7 @@ Given(/^there is a budget approved auction with bids$/) do
   @auction = FactoryGirl.create(:auction, :c2_approved, :with_bids)
 end
 
-Given(/^there is a budget approved auction$/) do
+Given(/^there is a budget approved auction with no bids$/) do
   @auction = FactoryGirl.create(:auction, :c2_approved)
 end
 

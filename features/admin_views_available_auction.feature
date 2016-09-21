@@ -6,7 +6,7 @@ Feature: Admin views available auction
   Scenario: The auction has no bids yet
     Given I am an administrator
     And I sign in
-    And there is a budget approved auction
+    And there is a budget approved auction with no bids
 
     When I visit the auction page
     Then I should see an admin status message that the auction is available with no bids
