@@ -21,10 +21,10 @@ class AcceptAuction
     auction.accepted_at = Time.current
 
     if payment_url.blank?
-      auction.status = :accepted_pending_payment_url
+      auction.delivery_status = :accepted_pending_payment_url
       send_winning_bidder_missing_payment_method_email
     else
-      auction.status = :accepted
+      auction.delivery_status = :accepted
       send_auction_accepted_emails
       update_purchase_request
     end

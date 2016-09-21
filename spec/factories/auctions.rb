@@ -4,7 +4,7 @@ FactoryGirl.define do
     billable_to "Project (billable)"
     started_at { quartile_minute(Time.now - 3.days) }
     ended_at { quartile_minute(Time.now + 3.days) }
-    status :pending_delivery
+    delivery_status :pending_delivery
     title { Faker::Company.catch_phrase }
     type :reverse
     published :published
@@ -18,7 +18,7 @@ FactoryGirl.define do
     end
 
     after(:create) do |auction, evaluator|
-      evaluator.bidders.each_with_index do |bidder, index|
+      evaluator.bidders.each do |bidder|
         auction.bids << create(:bid, bidder: bidder, auction: auction)
       end
     end
@@ -91,13 +91,13 @@ FactoryGirl.define do
 
     trait :pending_acceptance do
       closed
-      status :pending_acceptance
+      delivery_status :pending_acceptance
     end
 
     trait :accepted do
       closed
       c2_approved
-      status :accepted
+      delivery_status :accepted
       accepted_at { Time.now }
     end
 
@@ -105,13 +105,13 @@ FactoryGirl.define do
       accepted
       c2_approved
       with_bids
-      status :accepted_pending_payment_url
+      delivery_status :accepted_pending_payment_url
     end
 
     trait :rejected do
       closed
       c2_approved
-      status :rejected
+      delivery_status :rejected
       rejected_at { Time.now }
     end
 
@@ -141,12 +141,12 @@ FactoryGirl.define do
       end
     end
 
-   trait :pending_c2_approval do
-     future
-     c2_status :pending_approval
-     purchase_card :default
-     unpublished
-   end
+    trait :pending_c2_approval do
+      future
+      c2_status :pending_approval
+      purchase_card :default
+      unpublished
+    end
 
     trait :c2_approved do
       c2_proposal_url 'https://c2-dev.18f.gov/proposals/2486'

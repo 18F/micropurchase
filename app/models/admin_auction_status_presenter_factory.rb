@@ -35,7 +35,7 @@ class AdminAuctionStatusPresenterFactory
     elsif auction.payment_confirmed?
       C2StatusPresenter::PaymentConfirmed
     elsif !auction.pending_delivery?
-      Object.const_get("AdminAuctionStatusPresenter::#{status}")
+      Object.const_get("AdminAuctionStatusPresenter::#{delivery_status}")
     else # auction.approved? && auction.pending_delivery?
       C2StatusPresenter::Approved
     end
@@ -49,7 +49,7 @@ class AdminAuctionStatusPresenterFactory
     elsif work_in_progress?
       AdminAuctionStatusPresenter::WorkInProgress
     elsif !auction.pending_delivery?
-      Object.const_get("AdminAuctionStatusPresenter::#{status}")
+      Object.const_get("AdminAuctionStatusPresenter::#{delivery_status}")
     else # available?
       AdminAuctionStatusPresenter::Available
     end
@@ -71,8 +71,8 @@ class AdminAuctionStatusPresenterFactory
     @_bidding_status ||= BiddingStatus.new(auction)
   end
 
-  def status
-    auction.status.camelize
+  def delivery_status
+    auction.delivery_status.camelize
   end
 
   def c2_status

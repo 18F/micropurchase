@@ -7,7 +7,7 @@ describe AuctionQuery do
       create(:auction, :complete_and_successful)
     end
     let!(:available_auction) { create(:auction, :available) }
-    let!(:rejected_auction) { create(:auction, status: :rejected) }
+    let!(:rejected_auction) { create(:auction, delivery_status: :rejected) }
     let!(:unpaid_auction) do
       create(:auction, :not_paid)
     end
@@ -23,7 +23,7 @@ describe AuctionQuery do
     let!(:complete_and_successful) do
       create(:auction, :complete_and_successful)
     end
-    let!(:rejected_auction) { create(:auction, status: :rejected) }
+    let!(:rejected_auction) { create(:auction, delivery_status: :rejected) }
 
     it 'should only return unpublished auctions' do
       expect(query.rejected).to match_array([rejected_auction])
@@ -36,13 +36,13 @@ describe AuctionQuery do
       _payment_needed_other_pcard = create(
         :auction,
         purchase_card: :other,
-        status: :accepted,
+        delivery_status: :accepted,
         accepted_at: Time.current
       )
       c2_payment_needed = create(
         :auction,
         purchase_card: :default,
-        status: :accepted,
+        delivery_status: :accepted,
         accepted_at: Time.current
       )
 
@@ -56,13 +56,13 @@ describe AuctionQuery do
       payment_needed_other_pcard = create(
         :auction,
         purchase_card: :other,
-        status: :accepted,
+        delivery_status: :accepted,
         accepted_at: Time.current
       )
       c2_payment_needed = create(
         :auction,
         purchase_card: :default,
-        status: :accepted,
+        delivery_status: :accepted,
         accepted_at: Time.current
       )
 

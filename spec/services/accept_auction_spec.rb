@@ -57,7 +57,7 @@ describe AcceptAuction do
         expect(WinningBidderMailer).to have_received(:auction_accepted_missing_payment_method)
           .with(auction: auction)
         expect(mailer_double).to have_received(:deliver_later)
-        expect(auction.status).to eq 'accepted_pending_payment_url'
+        expect(auction.delivery_status).to eq 'accepted_pending_payment_url'
       end
     end
 
