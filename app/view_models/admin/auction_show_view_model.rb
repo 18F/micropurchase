@@ -26,8 +26,8 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
     AdminAuctionStatusPresenterFactory.new(auction: auction).create
   end
 
-  def status_presenter
-    @_status_presenter ||= StatusPresenterFactory.new(auction).create
+  def bidding_status_presenter
+    @_status_presenter ||= BiddingStatusPresenterFactory.new(auction).create
   end
 
   def admin_data
@@ -60,7 +60,7 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
   end
 
   def relative_time
-    status_presenter.relative_time
+    bidding_status_presenter.relative_time
   end
 
   def veiled_bids

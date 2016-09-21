@@ -27,7 +27,7 @@ Then(/^in that section I should see a table of the user's bids$/) do
 
   values = [
     view_model.title,
-    view_model.status,
+    view_model.bidding_status,
     view_model.skills,
     view_model.user_bid_count,
     view_model.user_won_label,

@@ -1,4 +1,4 @@
-class StatusPresenter::Over < StatusPresenter::Base
+class BiddingStatusPresenter::Over < BiddingStatusPresenter::Base
   def start_label
     "Auction started at"
   end

@@ -33,8 +33,8 @@ class AuctionShowViewModel
 
   def auction_data
     {
-      status_presenter.start_label => formatted_date(auction.started_at),
-      status_presenter.deadline_label => formatted_ended_at,
+      bidding_status_presenter.start_label => formatted_date(auction.started_at),
+      bidding_status_presenter.deadline_label => formatted_ended_at,
       'Delivery deadline' => formatted_date(auction.delivery_due_at),
       'Eligible vendors' => eligibility_label,
       'Customer' => customer.agency_name
@@ -53,8 +53,8 @@ class AuctionShowViewModel
     auction.type.dasherize.capitalize
   end
 
-  def status_presenter
-    @_status_presenter ||= StatusPresenterFactory.new(auction).create
+  def bidding_status_presenter
+    @_status_presenter ||= BiddingStatusPresenterFactory.new(auction).create
   end
 
   def bid_status_presenter
@@ -105,15 +105,15 @@ class AuctionShowViewModel
   end
 
   def tag_data_value_status
-    status_presenter.tag_data_value_status
+    bidding_status_presenter.tag_data_value_status
   end
 
   def tag_data_label_2
-    status_presenter.tag_data_label_2
+    bidding_status_presenter.tag_data_label_2
   end
 
   def tag_data_value_2
-    status_presenter.tag_data_value_2
+    bidding_status_presenter.tag_data_value_2
   end
 
   def highlighted_bid_amount_as_currency
@@ -125,7 +125,7 @@ class AuctionShowViewModel
   end
 
   def relative_time
-    status_presenter.relative_time
+    bidding_status_presenter.relative_time
   end
 
   def sealed_bids_partial

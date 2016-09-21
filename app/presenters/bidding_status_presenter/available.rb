@@ -1,4 +1,4 @@
-class StatusPresenter::Available < StatusPresenter::Base
+class BiddingStatusPresenter::Available < BiddingStatusPresenter::Base
   def start_label
     "Bid start time"
   end

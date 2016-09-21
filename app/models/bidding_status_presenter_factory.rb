@@ -1,4 +1,4 @@
-class StatusPresenterFactory
+class BiddingStatusPresenterFactory
   attr_reader :auction
 
   def initialize(auction)
@@ -6,7 +6,7 @@ class StatusPresenterFactory
   end
 
   def create
-    Object.const_get("StatusPresenter::#{status_name}").new(auction)
+    Object.const_get("BiddingStatusPresenter::#{status_name}").new(auction)
   end
 
   private

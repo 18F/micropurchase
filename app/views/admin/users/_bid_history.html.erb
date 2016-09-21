@@ -15,7 +15,7 @@
     <% view_model.user_auctions.each do |auction| %>
       <tr>
         <td><%= link_to auction.title, admin_auction_path(auction.id) %></td>
-        <td><%= auction.status %></td>
+        <td><%= auction.bidding_status %></td>
         <td><%= auction.skills %></td>
         <td><%= auction.user_bid_count %></td>
         <td><%= auction.user_won_label %></td>
