@@ -19,10 +19,6 @@ class BiddingStatus
     available? && auction.ended_at < (Time.current + 12.hours)
   end
 
-  def work_in_progress?
-    auction.delivery_url.present? && auction.pending_delivery?
-  end
-
   private
 
   attr_reader :auction

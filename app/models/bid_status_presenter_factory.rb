@@ -100,7 +100,7 @@ class BidStatusPresenterFactory
   end
 
   def work_in_progress?
-    bidding_status.work_in_progress?
+    auction.work_in_progress?
   end
 
   def over?
