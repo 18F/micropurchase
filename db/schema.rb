@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160826013527) do
+ActiveRecord::Schema.define(version: 20160921135321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20160826013527) do
     t.datetime "delivery_due_at",                null: false
     t.text     "notes",           default: ""
     t.string   "billable_to",     default: ""
-    t.integer  "status",          default: 0
+    t.integer  "delivery_status", default: 0
     t.integer  "type",            default: 0
     t.string   "delivery_url"
     t.string   "c2_proposal_url", default: ""
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20160826013527) do
   end
 
   add_index "auctions", ["customer_id"], name: "index_auctions_on_customer_id", using: :btree
-  add_index "auctions", ["status"], name: "index_auctions_on_status", using: :btree
+  add_index "auctions", ["delivery_status"], name: "index_auctions_on_delivery_status", using: :btree
   add_index "auctions", ["token"], name: "index_auctions_on_token", unique: true, using: :btree
   add_index "auctions", ["user_id"], name: "index_auctions_on_user_id", using: :btree
 
