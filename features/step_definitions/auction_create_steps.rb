@@ -88,8 +88,12 @@ Given(/^there is an open auction with some skills$/) do
   @auction.skills << skills
 end
 
-Given(/^there is a budget approved auction$/) do
+Given(/^there is a budget approved auction with bids$/) do
   @auction = FactoryGirl.create(:auction, :c2_approved, :with_bids)
+end
+
+Given(/^there is a budget approved auction with no bids$/) do
+  @auction = FactoryGirl.create(:auction, :c2_approved)
 end
 
 Given(/^there is a sealed-bid auction$/) do
