@@ -12,18 +12,18 @@ class StatusPresenterFactory
   private
 
   def status_name
-    if auction_status.expiring?
+    if bidding_status.expiring?
       'Expiring'
-    elsif auction_status.over?
+    elsif bidding_status.over?
       'Over'
-    elsif auction_status.future?
+    elsif bidding_status.future?
       'Future'
     else
       'Available'
     end
   end
 
-  def auction_status
-    AuctionStatus.new(auction)
+  def bidding_status
+    @_bidding_status ||= BiddingStatus.new(auction)
   end
 end

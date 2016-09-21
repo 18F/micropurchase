@@ -1,4 +1,4 @@
-class AuctionStatus
+class BiddingStatus
   def initialize(auction)
     @auction = auction
   end

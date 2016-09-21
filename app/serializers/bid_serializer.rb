@@ -45,6 +45,6 @@ class BidSerializer < ActiveModel::Serializer
   end
 
   def auction_available?
-    AuctionStatus.new(object.auction).available?
+    BiddingStatus.new(object.auction).available?
   end
 end

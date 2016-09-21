@@ -7,7 +7,7 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
   end
 
   def csv_report_partial
-    if auction_status.over?
+    if bidding_status.over?
       'admin/auctions/csv_report'
     else
       'components/null'
@@ -108,8 +108,8 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
     end
   end
 
-  def auction_status
-    AuctionStatus.new(auction)
+  def bidding_status
+    BiddingStatus.new(auction)
   end
 
   def customer

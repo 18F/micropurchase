@@ -82,7 +82,7 @@ describe Rules::SealedBidAuction do
     it 'should return true if the auction is closed' do
       auction = create(:auction, :sealed_bid)
       rules = Rules::SealedBidAuction.new(auction, eligibility)
-      expect(rules.show_bids?).to eq(!AuctionStatus.new(auction).available?)
+      expect(rules.show_bids?).to eq(!BiddingStatus.new(auction).available?)
     end
   end
 

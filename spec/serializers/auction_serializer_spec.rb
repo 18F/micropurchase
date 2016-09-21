@@ -17,7 +17,7 @@ describe AuctionSerializer do
     context 'auction is available' do
       it 'returns null attributes' do
         auction = create(:auction)
-        allow(AuctionStatus).to receive(:new).with(auction).and_return(double(available?: true))
+        allow(BiddingStatus).to receive(:new).with(auction).and_return(double(available?: true))
 
         serializer = AuctionSerializer.new(auction)
 
@@ -30,7 +30,7 @@ describe AuctionSerializer do
         it 'returns winning bid' do
           auction = create(:auction)
           bid = create(:bid, auction: auction)
-          allow(AuctionStatus).to receive(:new).with(auction).and_return(double(available?: false))
+          allow(BiddingStatus).to receive(:new).with(auction).and_return(double(available?: false))
 
           serializer = AuctionSerializer.new(auction)
 

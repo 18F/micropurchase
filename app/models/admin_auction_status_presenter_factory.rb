@@ -56,15 +56,19 @@ class AdminAuctionStatusPresenterFactory
   end
 
   def available?
-    AuctionStatus.new(auction).available?
+    bidding_status.available?
   end
 
   def future?
-    AuctionStatus.new(auction).future?
+    bidding_status.future?
   end
 
   def work_in_progress?
-    AuctionStatus.new(auction).work_in_progress?
+    bidding_status.work_in_progress?
+  end
+
+  def bidding_status
+    @_bidding_status ||= BiddingStatus.new(auction)
   end
 
   def status

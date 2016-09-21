@@ -54,7 +54,7 @@ class MyBidListItem
   private
 
   def available?
-    AuctionStatus.new(auction).available?
+    BiddingStatus.new(auction).available?
   end
 
   def winning_bid
