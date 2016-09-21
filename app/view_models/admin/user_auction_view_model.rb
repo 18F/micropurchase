@@ -17,8 +17,8 @@ class Admin::UserAuctionViewModel
     auction.id
   end
 
-  def status
-    StatusPresenterFactory.new(auction).create.label
+  def bidding_status
+    BiddingStatusPresenterFactory.new(auction).create.label
   end
 
   def skills

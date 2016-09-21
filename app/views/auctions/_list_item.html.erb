@@ -5,7 +5,7 @@
 
       <div class="issue-vitals">
         <div class="issue-bid-deadline">
-          <%= render partial: 'auctions/status_ribbon', locals: { status: auction.status_presenter } %>
+          <%= render partial: 'auctions/status_ribbon', locals: { status: auction.bidding_status_presenter } %>
           <%= auction.relative_time %>
         </div>
         <div class="winning-bid-detail">

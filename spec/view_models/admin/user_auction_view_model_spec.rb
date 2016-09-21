@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 describe Admin::UserAuctionViewModel do
-  describe '#status' do
-    it 'should return the auction status' do
+  describe '#bidding_status' do
+    it 'should return the auction bidding status' do
       auction = create(:auction, :available)
 
-      expect(Admin::UserAuctionViewModel.new(auction, user).status).to eq('Open')
+      expect(Admin::UserAuctionViewModel.new(auction, user).bidding_status).to eq('Open')
     end
   end
 
