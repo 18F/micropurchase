@@ -1,11 +1,13 @@
 a,
 a:visited {
   color: $links-primary;
+  text-decoration: none;
 }
 
 a:hover,
 a:focus {
   color: $links-primary;
+  text-decoration: underline;
 }
 
 .breadcrumb-link {

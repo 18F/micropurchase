@@ -1,26 +1,22 @@
 <%= render partial: 'components/disclaimer' %>
+
 <header class="header">
 <div class="usa-grid">
-  <div class="header-wrap">
-    <div class="usa-grid-one-half">
-      <div class="header-title">
-        <%= link_to auctions_path, title: 'Home' do %>
-          <div class="logo">
-            <%= image_tag '18F-Logo-2016-Blue.svg', alt: '18f-logo', class: 'logo-img' %>
-            <div class="title-wrapper">
-              <div class="title"><%= title ||= "Micro-purchase" %></div>
-              <div class="subtitle">A marketplace for open source work</div>
-            </div>
-          </div>
-        <% end %>
+  <div class="usa-grid-one-half icon">
+    <%= link_to root_path do %>
+      <div class="title">
+        <%= title ||= 'Micro-purchase' %>
+        <div class="subtitle">A marketplace for open source work</div>
       </div>
-    </div>
+    <% end %>
+  </div>
 
-    <div class="usa-grid-one-half">
-      <nav class="header-side">
+  <div class="usa-grid-one-half" >
+    <nav class="header-side">
+      <ul class="nav">
         <%= render partial: current_user.decorate.nav_drawer_partial %>
-      </nav>
-    </div>
+      </ul>
+    </nav>
   </div>
 </div>
 </header>
