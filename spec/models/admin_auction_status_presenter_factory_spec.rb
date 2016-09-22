@@ -37,6 +37,15 @@ describe AdminAuctionStatusPresenterFactory do
     end
   end
 
+  context 'when an auction has been accepted but is for an other pcard' do
+    it 'should return a AdminAuctionStatusPresenter::AcceptedOtherPcard' do
+      auction = create(:auction, :payment_needed, purchase_card: :other)
+
+      expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
+        .to be_a(AdminAuctionStatusPresenter::AcceptedOtherPcard)
+    end
+  end
+
   context 'when the auction has been rejected' do
     it 'should return a AdminAuctionStatusPresenter::Rejected' do
       auction = create(:auction, :rejected)

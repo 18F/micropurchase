@@ -136,8 +136,9 @@ en:
           mark_delivered: Mark as delivered
       pending_acceptance:
         body: >
-          %{winner_url} made a <a href=%{delivery_url}>pull request</a> and marked this auction as
-          delivered. If their work meets this auction's acceptance criteria, click
+          %{winner_url} made a <a href=%{delivery_url}>pull
+          request</a> and marked this auction as delivered. If their
+          work meets this auction's acceptance criteria, click
           "accept." Otherwise, click "reject."
         header: "Pending acceptance"
         actions:
@@ -155,6 +156,15 @@ en:
           %{winner_url}'s delivered code was accepted on
           %{accepted_at}. The p-card holder has been asked (via <a
           href="%{c2_url}">C2</a>) to remit payment.
+      accepted_other_pcard:
+        header: Pending payment from customer
+        body: >
+          %{winner_url}'s delivered code was accepted on
+          %{accepted_at}. %{customer_url} has been asked to remit
+          payment. You must manually mark this auction as paid when it
+          is paid by the customer.
+        actions:
+          mark_paid: Mark as paid
       rejected:
         header: "Rejected"
         body: "<a href=%{delivery_url}>%{winner_name}'s work</a> was rejected on %{rejected_at}."

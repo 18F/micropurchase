@@ -224,3 +224,14 @@ Then(/^I should see an admin status message that the auction is available with b
     )
   )
 end
+
+Then(/^I should see an admin status message that the auction needs payment from a customer$/) do
+  expect(page.html).to include(
+    I18n.t(
+      'statuses.admin_auction_status_presenter.accepted_other_pcard.body',
+      customer_url: customer_url,
+      accepted_at: accept_date,
+      winner_url: winner_url
+    )
+  )
+end
