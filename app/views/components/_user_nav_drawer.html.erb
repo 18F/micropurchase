@@ -1,7 +1,13 @@
-<ul class="nav">
-  <li class="nav-link"><%= render partial: masquerading_partial %></li>
-  <li class="nav-link"><%= link_to('Logout', logout_path) %></li>
-  <li class="nav-link"><%= link_to('My bids', bids_path) %></li>
-  <li class="nav-link"><%= link_to( 'My profile', profile_path) %></li>
-  <%= render partial: current_user.decorate.nav_drawer_admin_link %>
-</ul>
+<%= render partial: current_user.decorate.nav_drawer_admin_link %>
+<li class="nav-link">
+  <%= link_to 'My profile', profile_path %>
+</li>
+<li class="nav-link">
+  <%= link_to 'My bids', bids_path %>
+</li>
+<li class="nav-link">
+  <%= link_to 'Logout', logout_path %>
+</li>
+<li class="nav-link">
+  <%= render partial: masquerading_partial %>
+</li>

@@ -35,6 +35,7 @@ gem 'timecop'
 gem 'uglifier'
 gem 'validate_url'
 gem 'has_secure_token' # this can be removed in Rails 5
+gem 'uswds-rails', github: '18F/uswds-rails-gem'
 
 group :test do
   gem "codeclimate-test-reporter", require: nil
