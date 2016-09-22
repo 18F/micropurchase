@@ -21,7 +21,7 @@ class Auction < ActiveRecord::Base
     payment_confirmed: 5
   }
 
-  enum status: {
+  enum delivery_status: {
     pending_delivery: 0,
     pending_acceptance: 3,
     accepted_pending_payment_url: 4,
@@ -53,6 +53,10 @@ class Auction < ActiveRecord::Base
     allow_blank: true
   )
   validate :publishing_auction, on: :update, if: :published_changed?
+
+  def work_in_progress?
+    delivery_url.present? && pending_delivery?
+  end
 
   def publishing_auction
     if published_was == 'unpublished' && purchase_card == 'default' && c2_status != 'approved'

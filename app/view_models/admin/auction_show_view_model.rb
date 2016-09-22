@@ -7,7 +7,7 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
   end
 
   def csv_report_partial
-    if auction_status.over?
+    if bidding_status.over?
       'admin/auctions/csv_report'
     else
       'components/null'
@@ -26,8 +26,8 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
     AdminAuctionStatusPresenterFactory.new(auction: auction).create
   end
 
-  def status_presenter
-    @_status_presenter ||= StatusPresenterFactory.new(auction).create
+  def bidding_status_presenter
+    @_status_presenter ||= BiddingStatusPresenterFactory.new(auction).create
   end
 
   def admin_data
@@ -60,7 +60,7 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
   end
 
   def relative_time
-    status_presenter.relative_time
+    bidding_status_presenter.relative_time
   end
 
   def veiled_bids
@@ -108,8 +108,8 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
     end
   end
 
-  def auction_status
-    AuctionStatus.new(auction)
+  def bidding_status
+    BiddingStatus.new(auction)
   end
 
   def customer

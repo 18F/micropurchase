@@ -9,8 +9,12 @@ en:
             solicitation.
       available:
         admin:
-          header: "Accepting bids"
-          body: "This auction is accepting bids until %{end_date}."
+          header: Accepting bids
+          body: This auction is accepting bids until %{end_date}.
+          has_bids: >
+            There are %{total_bids} bids on this auction, and
+            %{winner_url} is currently winning. This auction is
+            accepting bids until %{end_date}.
         guest:
           body: >
             This auction is accepting bids until %{end_date}. %{sign_in_link} or

@@ -1,4 +1,4 @@
-class StatusPresenter::Base
+class BiddingStatusPresenter::Base
   attr_reader :auction
 
   def initialize(auction)

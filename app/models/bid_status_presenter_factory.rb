@@ -35,7 +35,7 @@ class BidStatusPresenterFactory
 
   def over_winning_bidder_message
     if !auction.pending_delivery?
-      Object.const_get("BidStatusPresenter::Over::Vendor::Winner::#{auction.status.camelize}")
+      Object.const_get("BidStatusPresenter::Over::Vendor::Winner::#{auction.delivery_status.camelize}")
     elsif work_in_progress?
       BidStatusPresenter::Over::Vendor::Winner::WorkInProgress
     elsif auction.payment_confirmed?
@@ -55,7 +55,7 @@ class BidStatusPresenterFactory
 
   def available_message
     if admin?
-      BidStatusPresenter::Available::Admin
+      AdminAuctionStatusPresenter::Available
     elsif guest?
       BidStatusPresenter::Available::Guest
     elsif ineligible?
@@ -100,23 +100,23 @@ class BidStatusPresenterFactory
   end
 
   def work_in_progress?
-    auction_status.work_in_progress?
+    auction.work_in_progress?
   end
 
   def over?
-    auction_status.over?
+    bidding_status.over?
   end
 
   def available?
-    auction_status.available?
+    bidding_status.available?
   end
 
   def future?
-    auction_status.future?
+    bidding_status.future?
   end
 
-  def auction_status
-    AuctionStatus.new(auction)
+  def bidding_status
+    BiddingStatus.new(auction)
   end
 
   def user_is_winning_bidder?

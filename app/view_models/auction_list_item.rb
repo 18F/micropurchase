@@ -64,7 +64,7 @@ class AuctionListItem
   end
 
   def relative_time
-    status_presenter.relative_time
+    bidding_status_presenter.relative_time
   end
 
   def winning_bid_amount_as_currency
@@ -75,8 +75,8 @@ class AuctionListItem
     end
   end
 
-  def status_presenter
-    @_status_presenter ||= StatusPresenterFactory.new(auction).create
+  def bidding_status_presenter
+    @_status_presenter ||= BiddingStatusPresenterFactory.new(auction).create
   end
 
   private
@@ -86,14 +86,14 @@ class AuctionListItem
   end
 
   def available?
-    auction_status.available?
+    bidding_status.available?
   end
 
   def over?
-    auction_status.over?
+    bidding_status.over?
   end
 
-  def auction_status
-    AuctionStatus.new(auction)
+  def bidding_status
+    BiddingStatus.new(auction)
   end
 end

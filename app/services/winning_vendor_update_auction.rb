@@ -9,7 +9,7 @@ class WinningVendorUpdateAuction
 
   def perform
     if user_is_winning_bidder? && status.present?
-      auction.update(status: :pending_acceptance)
+      auction.update(delivery_status: :pending_acceptance)
     elsif user_is_winning_bidder? && delivery_url.present?
       auction.update(delivery_url: delivery_url)
     else

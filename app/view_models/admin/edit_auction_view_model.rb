@@ -58,7 +58,7 @@ class Admin::EditAuctionViewModel < Admin::BaseViewModel
   end
 
   def paid_at_partial
-    if auction.purchase_card == "default" || auction.status != "accepted"
+    if auction.purchase_card == "default" || auction.delivery_status != "accepted"
       'components/null'
     elsif auction.paid_at.present?
       'admin/auctions/disabled_paid_at'
@@ -86,7 +86,7 @@ class Admin::EditAuctionViewModel < Admin::BaseViewModel
   end
 
   def closed?
-    AuctionStatus.new(auction).over?
+    BiddingStatus.new(auction).over?
   end
 
   def publishable?

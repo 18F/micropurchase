@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-describe StatusPresenter::Expiring do
+describe BiddingStatusPresenter::Expiring do
   describe '#label_class' do
     it 'returns the correct label class' do
       auction = build(:auction)
 
-      presenter = StatusPresenter::Expiring.new(auction)
+      presenter = BiddingStatusPresenter::Expiring.new(auction)
 
       expect(presenter.label_class).to eq 'auction-label-expiring'
     end
@@ -15,7 +15,7 @@ describe StatusPresenter::Expiring do
     it 'returns the correct label' do
       auction = build(:auction)
 
-      presenter = StatusPresenter::Expiring.new(auction)
+      presenter = BiddingStatusPresenter::Expiring.new(auction)
 
       expect(presenter.label).to eq 'Expiring'
     end
