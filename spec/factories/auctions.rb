@@ -109,8 +109,9 @@ FactoryGirl.define do
     end
 
     trait :work_in_progress do
-      closed
       with_bids
+      closed
+      delivery_url
       delivery_status :work_in_progress
     end
 
