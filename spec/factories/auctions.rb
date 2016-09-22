@@ -108,6 +108,12 @@ FactoryGirl.define do
       delivery_status :accepted_pending_payment_url
     end
 
+    trait :work_in_progress do
+      closed
+      with_bids
+      delivery_status :work_in_progress
+    end
+
     trait :rejected do
       closed
       c2_approved
