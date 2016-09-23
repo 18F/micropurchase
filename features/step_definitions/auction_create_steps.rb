@@ -41,7 +41,7 @@ Given(/^I am going to lose an auction$/) do
 end
 
 Given(/^there is an auction with work in progress$/) do
-  @auction = FactoryGirl.create(:auction, :c2_approved, :closed, :with_bids, :delivery_url)
+  @auction = FactoryGirl.create(:auction, :c2_approved, :work_in_progress)
 end
 
 When(/^the auction ends$/) do

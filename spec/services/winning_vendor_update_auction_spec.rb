@@ -18,6 +18,7 @@ describe WinningVendorUpdateAuction do
 
           expect(update).to eq true
           expect(auction.reload.delivery_url).to eq url
+          expect(auction).to be_work_in_progress
         end
       end
 
