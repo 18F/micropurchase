@@ -42,3 +42,13 @@ Feature: Admin creates auctions in the admins panel
     And I click to create an auction
     Then I should see that the form preserves the previously entered values
     And I should see an alert that the start price is invalid
+
+  Scenario: Admin can only assign active Tock projects to new auction
+    Given I am an administrator
+    And there is a client account to bill to
+    And there is a non-active client account
+    And I sign in
+    And I visit the auctions admin page
+    When I click on the add auction link
+    Then I should not see the non-active client account
+    And I should see the the active client account

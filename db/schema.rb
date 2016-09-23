@@ -68,11 +68,12 @@ ActiveRecord::Schema.define(version: 20160921135321) do
   add_index "bids", ["bidder_id"], name: "index_bids_on_bidder_id", using: :btree
 
   create_table "client_accounts", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "name",       null: false
-    t.boolean  "billable",   null: false
-    t.integer  "tock_id",    null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "name",                       null: false
+    t.boolean  "billable",                   null: false
+    t.integer  "tock_id",                    null: false
+    t.boolean  "active",     default: false
   end
 
   add_index "client_accounts", ["tock_id"], name: "index_client_accounts_on_tock_id", unique: true, using: :btree
