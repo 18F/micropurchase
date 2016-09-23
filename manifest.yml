@@ -12,6 +12,7 @@ applications:
     - micropurchase-github
     - micropurchase-psql
     - micropurchase-smtp
+    - micropurchase-tock
     - new-relic
     - secrets
   command: script/start

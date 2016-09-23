@@ -447,6 +447,7 @@ DEPENDENCIES
   rails-erd
   rails_12factor
   redcarpet
+  rest-client
   rspec-rails
   rubocop
   samwise (~> 0.4.0)
