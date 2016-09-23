@@ -6,7 +6,7 @@ $(document).ready(function() {
     published_option = "<option value='published'>published</option>"
     unpublished_option = "<option value='unpublished'>unpublished</option>"
 
-    if(this.value === "default" && c2_status !== "approved") {
+    if(this.value === "default" && c2_status !== "budget_approved") {
       published_select_element.empty().append(unpublished_option)
     } else {
       published_select_element.empty().append(unpublished_option, published_option)

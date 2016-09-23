@@ -41,7 +41,7 @@ Given(/^I am going to lose an auction$/) do
 end
 
 Given(/^there is an auction with work in progress$/) do
-  @auction = FactoryGirl.create(:auction, :c2_approved, :work_in_progress)
+  @auction = FactoryGirl.create(:auction, :c2_budget_approved, :work_in_progress)
 end
 
 When(/^the auction ends$/) do
@@ -79,7 +79,7 @@ Given(/^there is an open bidless auction$/) do
 end
 
 Given(/^there is an open auction$/) do
-  @auction = FactoryGirl.create(:auction, :with_bids, :available, :c2_approved)
+  @auction = FactoryGirl.create(:auction, :with_bids, :available, :c2_budget_approved)
 end
 
 Given(/^there is an open auction with some skills$/) do
@@ -89,11 +89,11 @@ Given(/^there is an open auction with some skills$/) do
 end
 
 Given(/^there is a budget approved auction with bids$/) do
-  @auction = FactoryGirl.create(:auction, :c2_approved, :with_bids)
+  @auction = FactoryGirl.create(:auction, :c2_budget_approved, :with_bids)
 end
 
 Given(/^there is a budget approved auction with no bids$/) do
-  @auction = FactoryGirl.create(:auction, :c2_approved)
+  @auction = FactoryGirl.create(:auction, :c2_budget_approved)
 end
 
 Given(/^there is a sealed-bid auction$/) do
@@ -109,7 +109,7 @@ Given(/^there is a closed sealed-bid auction$/) do
 end
 
 Given(/^there is an auction that needs evaluation$/) do
-   @auction = FactoryGirl.create(:auction, :with_bids, :evaluation_needed, :c2_approved)
+   @auction = FactoryGirl.create(:auction, :with_bids, :evaluation_needed, :c2_budget_approved)
 end
 
 Given(/^there is an auction within the simplified acquisition threshold$/) do
@@ -157,7 +157,7 @@ end
 Given(/^there is an auction where the winning vendor is not eligible to be paid$/) do
   @auction = FactoryGirl.create(
     :auction,
-    :c2_approved,
+    :c2_budget_approved,
     :pending_acceptance,
     :between_micropurchase_and_sat_threshold,
     :winning_vendor_is_non_small_business
@@ -176,11 +176,11 @@ Given(/^the auction is for a different purchase card$/) do
   @auction.update(purchase_card: :other)
 end
 
-Given(/^the c2 proposal for the auction is approved$/) do
-  @auction.update(c2_status: :approved)
+Given(/^the c2 proposal for the auction is budget approved$/) do
+  @auction.update(c2_status: :budget_approved)
 end
 
-Given(/^the c2 proposal for the auction is not approved$/) do
+Given(/^the c2 proposal for the auction is not budget approved$/) do
   @auction.update(c2_status: :not_requested)
 end
 

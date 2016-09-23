@@ -8,7 +8,7 @@ class UpdateAuction
   def perform
     assign_attributes
     update_auction_ended_job
-    perform_approved_auction_tasks
+    perform_budget_approved_auction_tasks
     perform_rejected_auction_tasks
     auction.save
   end
@@ -47,7 +47,7 @@ class UpdateAuction
     parsed_attributes.key?(:ended_at)
   end
 
-  def perform_approved_auction_tasks
+  def perform_budget_approved_auction_tasks
     if auction.accepted? && auction.accepted_at.nil? && auction.bids.any?
       AcceptAuction.new(
         auction: auction,

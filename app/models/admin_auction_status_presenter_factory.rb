@@ -28,16 +28,22 @@ class AdminAuctionStatusPresenterFactory
       AdminAuctionStatusPresenter::ReadyToPublish
     elsif available?
       AdminAuctionStatusPresenter::Available
-    elsif work_in_progress?
+    elsif auction.budget_approved? && auction.pending_delivery?
+      C2StatusPresenter::Approved
+    elsif auction.work_in_progress?
       AdminAuctionStatusPresenter::WorkInProgress
+    elsif auction.pending_acceptance?
+      AdminAuctionStatusPresenter::PendingAcceptance
+    elsif auction.accepted_pending_payment_url?
+      AdminAuctionStatusPresenter::AcceptedPendingPaymentUrl
+    elsif auction.accepted? && !(auction.c2_paid? || auction.payment_confirmed?)
+      AdminAuctionStatusPresenter::Accepted
+    elsif auction.rejected?
+      AdminAuctionStatusPresenter::Rejected
     elsif auction.c2_paid?
       C2StatusPresenter::C2Paid
-    elsif auction.payment_confirmed?
+    else # auction.payment_confirmed?
       C2StatusPresenter::PaymentConfirmed
-    elsif !auction.pending_delivery?
-      Object.const_get("AdminAuctionStatusPresenter::#{delivery_status}")
-    else # auction.approved? && auction.pending_delivery?
-      C2StatusPresenter::Approved
     end
   end
 
@@ -46,12 +52,18 @@ class AdminAuctionStatusPresenterFactory
       AdminAuctionStatusPresenter::Future
     elsif future? && auction.unpublished?
       AdminAuctionStatusPresenter::ReadyToPublish
-    elsif work_in_progress?
-      AdminAuctionStatusPresenter::WorkInProgress
-    elsif !auction.pending_delivery?
-      Object.const_get("AdminAuctionStatusPresenter::#{delivery_status}")
-    else # available?
+    elsif available?
       AdminAuctionStatusPresenter::Available
+    elsif auction.work_in_progress?
+      AdminAuctionStatusPresenter::WorkInProgress
+    elsif auction.pending_acceptance?
+      AdminAuctionStatusPresenter::PendingAcceptance
+    elsif auction.accepted_pending_payment_url?
+      AdminAuctionStatusPresenter::AcceptedPendingPaymentUrl
+    elsif auction.accepted?
+      AdminAuctionStatusPresenter::Accepted
+    else # auction.rejected?
+      AdminAuctionStatusPresenter::Rejected
     end
   end
 
@@ -61,10 +73,6 @@ class AdminAuctionStatusPresenterFactory
 
   def future?
     bidding_status.future?
-  end
-
-  def work_in_progress?
-    auction.work_in_progress?
   end
 
   def bidding_status

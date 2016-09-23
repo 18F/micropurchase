@@ -91,6 +91,6 @@ class Admin::EditAuctionViewModel < Admin::BaseViewModel
 
   def publishable?
     closed? || auction.purchase_card == 'other' ||
-      auction.c2_status == 'approved'
+      auction.c2_status == 'budget_approved'
   end
 end

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Admin::EditAuctionViewModel do
   describe '#published_options' do
-    context 'auction does not have c2 approval' do
+    context 'auction does not have c2 budget approval' do
       context 'auction is closed' do
         it 'returns all options' do
           auction = create(:auction, :closed, c2_status: :not_requested)
@@ -24,9 +24,9 @@ describe Admin::EditAuctionViewModel do
       end
     end
 
-    context 'auction does have c2_approved_at' do
+    context 'auction has c2 budget approval' do
       it 'returns all options' do
-        auction = create(:auction, c2_status: :approved)
+        auction = create(:auction, c2_status: :budget_approved)
 
         view_model = Admin::EditAuctionViewModel.new(auction)
 
