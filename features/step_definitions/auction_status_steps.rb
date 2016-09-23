@@ -142,7 +142,8 @@ Then(/^I should see the admin status for an accepted auction$/) do
     I18n.t(
       'statuses.admin_auction_status_presenter.accepted.body',
       winner_url: winner_url,
-      accepted_at: accepted_date
+      accepted_at: accepted_date,
+      c2_url: @auction.c2_proposal_url
     )
   )
 end
