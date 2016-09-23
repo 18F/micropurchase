@@ -11,7 +11,10 @@ class WinningVendorUpdateAuction
     if user_is_winning_bidder? && status.present?
       auction.update(delivery_status: :pending_acceptance)
     elsif user_is_winning_bidder? && delivery_url.present?
-      auction.update(delivery_url: delivery_url)
+      auction.update(
+        delivery_url: delivery_url,
+        delivery_status: :work_in_progress
+      )
     else
       false
     end

@@ -1,66 +1,76 @@
 .header {
-  background: $primary-darkest;
+  background: $background-color;
+  min-height: 7rem;
 }
 
-.header-wrap {
-  padding-top: 1.875rem;
+.icon {
+  display: table;
+
+  @include media($medium-screen) {
+    display: block;
+  }
 }
 
-.header-title {
+.title {
+  background-image: image-url('18F-Logo-2016-Blue.svg');
+  background-repeat: no-repeat;
+  color: $color-white;
   float: left;
-  padding-bottom: 1rem;
+  font-size: $lead-font-size;
+  font-weight: $font-light;
+  margin-top: 1.25rem;
+  padding-left: 55px;
+
+  a {
+    font-family: 'Merriweather';
+    font-weight: 700;
+    color: $color-white;
+  }
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  font-style: italic;
+}
+
+.nav {
+  @include unstyled-list;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  list-style: none;
+  margin-top: 3.5rem;
+
+  @include media($medium-screen) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
 
 .header-side {
-  padding-top: 1rem;
+  float: left;
+
+  @include media($medium-screen) {
+    float: right;
+  }
+}
+
+
+.nav-link {
+  margin-left: 1.5rem;
+  padding-bottom: .5rem;
   color: $color-white;
+
+  @include media($medium-screen) {
+    padding-bottom: 0;
+  }
 
   a {
     color: $color-white;
-  }
-
-  @include media($medium-screen) {
-    ul {
-      float: right;
-      margin: 0;
-    }
-
-    li {
-      float: right;
-      padding-left: 1em;
-      margin: 0;
-    }
+    font-weight: 500;
   }
 }
 
 .sign-in a {
   color: $color-primary-alt;
-}
-
-
-.logo {
-  display: inline-block;
-  color: $color-white;
-  font-weight: $font-light;
-
-  .title {
-    font-size: $lead-font-size;
-  }
-
-  .subtitle,
-  .title,
-  .logo-img {
-    float: left;
-    margin: 0;
-    margin-right: .5em;
-  }
-
-  .logo-img {
-    width: $logo-18f;
-  }
-
-  .subtitle {
-    font-size: $base-font-size;
-    font-style: italic;
-  }
 }

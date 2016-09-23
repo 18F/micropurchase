@@ -49,7 +49,7 @@ class Admin::NewAuctionViewModel < Admin::BaseViewModel
   end
 
   def billable_to_options
-    ClientAccount.all.map(&:to_s)
+    ClientAccountQuery.new.active.map(&:to_s)
   end
 
   def published

@@ -41,7 +41,7 @@ Given(/^I am going to lose an auction$/) do
 end
 
 Given(/^there is an auction with work in progress$/) do
-  @auction = FactoryGirl.create(:auction, :c2_approved, :closed, :with_bids, :delivery_url)
+  @auction = FactoryGirl.create(:auction, :c2_approved, :work_in_progress)
 end
 
 When(/^the auction ends$/) do
@@ -233,4 +233,12 @@ Given(/^there is a payment confirmed auction$/) do
     :paid,
     :payment_confirmed
   )
+end
+
+Then(/^I should not see the non\-active client account$/) do
+  expect(page).not_to have_content(@non_active.name)
+end
+
+Then(/^I should see the the active client account$/) do
+  expect(page).to have_content(@billable.name)
 end

@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/18F/uswds-rails-gem.git
+  revision: aa12ddd314209ef9e75bb2f2bfcf1454336df049
+  specs:
+    uswds-rails (1.0.0)
+      sass
+
+GIT
   remote: git://github.com/18f/c2-api-client-ruby.git
   revision: 1404abe563c1a1048c91a319a488be5d6a172936
   specs:
@@ -440,6 +447,7 @@ DEPENDENCIES
   rails-erd
   rails_12factor
   redcarpet
+  rest-client
   rspec-rails
   rubocop
   samwise (~> 0.4.0)
@@ -450,6 +458,7 @@ DEPENDENCIES
   sinatra
   timecop
   uglifier
+  uswds-rails!
   validate_url
   web-console (~> 2.0)
   webmock

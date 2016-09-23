@@ -23,6 +23,17 @@ Feature: Admin edits auctions in the admins panel
     And I should see the end time I set for the auction
     And I should see new content on the page
 
+  Scenario: Only show active client accounts
+    Given I am an administrator
+    And I sign in
+    And there is an open auction
+    And there is a client account to bill to
+    And there is a non-active client account
+    And I visit the auctions admin page
+    When I click to edit the auction
+    Then I should not see the non-active client account
+    And I should see the the active client account
+
   Scenario: Associating an auction with a customer
     Given I am an administrator
     And I sign in
