@@ -22,6 +22,13 @@ class TockImporter
   end
 
   def data
-    Net::HTTP.get(URI(TOCK_PROJECTS))
+    request.body
+  end
+
+  def request
+    RestClient.get(
+      TOCK_PROJECTS,
+      { 'Authorization' => "Token #{TockCredentials.api_token}" }
+    )
   end
 end
