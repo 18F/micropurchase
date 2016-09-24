@@ -66,7 +66,7 @@ describe AdminAuctionStatusPresenterFactory do
 
   context 'when auction is available' do
     it 'should return the correct presenter' do
-      auction = create(:auction, :c2_approved, :available)
+      auction = create(:auction, :c2_budget_approved, :available)
 
       expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
         .to be_a(AdminAuctionStatusPresenter::Available)
@@ -75,7 +75,7 @@ describe AdminAuctionStatusPresenterFactory do
 
   context 'when auction is closed, pending delivery' do
     it 'should return the correct presenter' do
-      auction = create(:auction, :c2_approved, :closed, delivery_status: :pending_delivery)
+      auction = create(:auction, :c2_budget_approved, :closed, delivery_status: :pending_delivery)
 
       expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
         .to be_a(C2StatusPresenter::Approved)

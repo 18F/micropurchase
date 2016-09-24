@@ -36,7 +36,7 @@ FactoryGirl.define do
     end
 
     trait :published do
-      c2_approved
+      c2_budget_approved
       published :published
     end
 
@@ -96,14 +96,14 @@ FactoryGirl.define do
 
     trait :accepted do
       closed
-      c2_approved
+      c2_budget_approved
       delivery_status :accepted
       accepted_at { Time.now }
     end
 
     trait :accepted_pending_payment_url do
       accepted
-      c2_approved
+      c2_budget_approved
       with_bids
       delivery_status :accepted_pending_payment_url
     end
@@ -117,7 +117,7 @@ FactoryGirl.define do
 
     trait :rejected do
       closed
-      c2_approved
+      c2_budget_approved
       delivery_status :rejected
       rejected_at { Time.now }
     end
@@ -155,14 +155,14 @@ FactoryGirl.define do
       unpublished
     end
 
-    trait :c2_approved do
+    trait :c2_budget_approved do
       c2_proposal_url 'https://c2-dev.18f.gov/proposals/2486'
-      c2_status :approved
+      c2_status :budget_approved
     end
 
     trait :evaluation_needed do
       closed
-      c2_approved
+      c2_budget_approved
       with_bids
       delivery_url
       pending_acceptance

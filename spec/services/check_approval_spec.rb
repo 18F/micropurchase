@@ -19,8 +19,8 @@ describe CheckApproval do
       end
 
       context 'auction is not published' do
-        context 'c2 proposal is approved' do
-          it 'updates the c2_approved_at field' do
+        context 'c2 proposal is budget_approved' do
+          it 'updates the c2_status field' do
             c2_path = "proposals/#{FakeC2Api::PURCHASED_PROPOSAL_ID}"
             auction = create(
               :auction,
@@ -30,12 +30,12 @@ describe CheckApproval do
 
             CheckApproval.new.perform
 
-            expect(auction.reload.c2_status).to eq 'approved'
+            expect(auction.reload.c2_status).to eq 'budget_approved'
           end
         end
 
-        context 'c2 proposal is not approved' do
-          it 'does not update the c2_approved_at field' do
+        context 'c2 proposal is not budget_approved' do
+          it 'does not update the c2_budget_approved_at field' do
             c2_path = 'proposals/1234'
             auction = create(
               :auction,

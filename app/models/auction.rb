@@ -16,7 +16,7 @@ class Auction < ActiveRecord::Base
     not_requested: 0,
     sent: 2,
     pending_approval: 1,
-    approved: 3,
+    budget_approved: 3,
     c2_paid: 4,
     payment_confirmed: 5
   }
@@ -56,8 +56,8 @@ class Auction < ActiveRecord::Base
   validate :publishing_auction, on: :update, if: :published_changed?
 
   def publishing_auction
-    if published_was == 'unpublished' && purchase_card == 'default' && c2_status != 'approved'
-      errors.add(:c2_status, " is not approved.")
+    if published_was == 'unpublished' && purchase_card == 'default' && c2_status != 'budget_approved'
+      errors.add(:c2_status, " is not budget approved.")
     end
   end
 
