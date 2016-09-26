@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :client_account do
-    name { "#{Faker::Company.profession.capitalize} Pension Benefit Guaranty Corporation" }
+    sequence(:name) { |n| "Client Account #{n}" }
     billable true
     sequence(:tock_id) {|n| n}
   end
