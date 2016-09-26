@@ -28,7 +28,6 @@ class AuctionParser
       :github_repo,
       :issue_url,
       :notes,
-      :published,
       :purchase_card,
       :status,
       :start_price,

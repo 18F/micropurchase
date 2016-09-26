@@ -122,7 +122,9 @@ en:
           actions:
             unpublish: "Unpublish"
         unpublished:
-          body: "This auction is ready to publish!"
+          body: >
+            This auction is ready to publish! Please select a start date, end
+            date, and delivery period for this auction.
           header: "Ready to publish"
       work_in_progress:
         header: Work in progress

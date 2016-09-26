@@ -31,35 +31,6 @@ Then(/^I set the auction type to be reverse$/) do
   select("reverse", from: "auction_type")
 end
 
-When(/^I create and publish an auction for the non-default purchase card$/) do
-  @title = 'This is the form-edited title'
-  fill_in("auction_title", with: @title)
-
-  @description = 'and the admin related stuff'
-  fill_in("auction_description", with: @description)
-
-  @repo = 'https://github.com/18F/calc'
-  fill_in('auction_github_repo', with: @repo)
-
-  @summary = 'The Summary!'
-  fill_in('auction_summary', with: @summary)
-
-  @issue_url = 'https://github.com/18F/calc/issues/255'
-  fill_in('auction_issue_url', with: @issue_url)
-
-  select("6", from: "auction_due_in_days")
-
-  select("other", from: "auction_purchase_card")
-
-  select("published", from: "auction_published")
-
-  find('.selectize-control.select.optional.multi').click
-  find('.selectize-dropdown-content', text: @skill.name).click
-
-  find('.selectize-control.select.required.single').click
-  find('.selectize-dropdown-content', text: @billable.to_s).click
-end
-
 When(/^I edit the new auction form$/) do
   @title = 'This is the form-edited title'
   fill_in("auction_title", with: @title)
@@ -95,7 +66,6 @@ When(/^I edit the new auction form$/) do
   select("6", from: "auction_due_in_days")
 
   select(@billable.to_s, from: "auction_billable_to")
-  select("published", from: "auction_published")
 
   select(@skill.name, from: "auction_skill_ids")
 end
@@ -177,7 +147,6 @@ Then(/^I should be able to edit the existing auction form$/) do
   fill_in "auction_delivery_due_at", with: @deadline_day.strftime('%Y-%m-%d')
 
   select(@billable.to_s, from: "auction_billable_to")
-  select("published", from: "auction_published")
 end
 
 When(/^I click to edit the auction$/) do

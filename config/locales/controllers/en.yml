@@ -11,6 +11,9 @@ en:
       auction_reports:
         show:
           error: "Registration not found for winning bidder DUNS number"
+      auction_publish:
+        update:
+          success: "Auction successfully published!"
       customers:
         create:
           success: "Customer created successfully"

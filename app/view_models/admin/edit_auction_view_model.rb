@@ -33,18 +33,6 @@ class Admin::EditAuctionViewModel < Admin::BaseViewModel
     ([auction.billable_to] + ClientAccountQuery.new.active.map(&:to_s)).uniq
   end
 
-  def published
-    auction.published
-  end
-
-  def published_options
-    if publishable?
-      Auction.publisheds.keys.to_a
-    else
-      ['unpublished']
-    end
-  end
-
   def customer_options
     ([auction.customer] + Customer.sorted).uniq.compact
   end
@@ -87,10 +75,5 @@ class Admin::EditAuctionViewModel < Admin::BaseViewModel
 
   def closed?
     BiddingStatus.new(auction).over?
-  end
-
-  def publishable?
-    closed? || auction.purchase_card == 'other' ||
-      auction.c2_status == 'budget_approved'
   end
 end
