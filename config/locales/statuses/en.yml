@@ -146,8 +146,11 @@ en:
           was accepted. However, this vendor cannot
           be paid until they’ve specified a valid payment URL.
       accepted:
-        header: "Accepted"
-        body: "%{winner_url}'s delivered code was accepted on %{accepted_at}."
+        header: Accepted
+        body: >
+          %{winner_url}'s delivered code was accepted on
+          %{accepted_at}. The p-card holder has been asked (via <a
+          href="%{c2_url}">C2</a>) to remit payment.
       rejected:
         header: "Rejected"
         body: "<a href=%{delivery_url}>%{winner_name}'s work</a> was rejected on %{rejected_at}."
