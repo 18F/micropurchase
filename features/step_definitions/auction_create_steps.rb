@@ -181,7 +181,7 @@ Given(/^the c2 proposal for the auction is budget approved$/) do
 end
 
 Given(/^the c2 proposal for the auction is not budget approved$/) do
-  @auction.update(c2_status: :not_requested)
+  @auction.update(c2_status: :pending_approval)
 end
 
 Given(/^the auction does not have a c2 proposal url$/) do

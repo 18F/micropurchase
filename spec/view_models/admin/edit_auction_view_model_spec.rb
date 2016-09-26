@@ -1,40 +1,6 @@
 require 'rails_helper'
 
 describe Admin::EditAuctionViewModel do
-  describe '#published_options' do
-    context 'auction does not have c2 budget approval' do
-      context 'auction is closed' do
-        it 'returns all options' do
-          auction = create(:auction, :closed, c2_status: :not_requested)
-
-          view_model = Admin::EditAuctionViewModel.new(auction)
-
-          expect(view_model.published_options).to eq(%w(unpublished published))
-        end
-      end
-
-      context 'auction is not closed' do
-        it 'does not return published option' do
-          auction = create(:auction, :future, c2_status: :not_requested)
-
-          view_model = Admin::EditAuctionViewModel.new(auction)
-
-          expect(view_model.published_options).to eq(%w(unpublished))
-        end
-      end
-    end
-
-    context 'auction has c2 budget approval' do
-      it 'returns all options' do
-        auction = create(:auction, c2_status: :budget_approved)
-
-        view_model = Admin::EditAuctionViewModel.new(auction)
-
-        expect(view_model.published_options).to eq(%w(unpublished published))
-      end
-    end
-  end
-
   describe '#hour_default' do
     context 'time present' do
       it 'returns hour in DC time' do

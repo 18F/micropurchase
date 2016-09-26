@@ -37,6 +37,11 @@ When(/^I click on the update button$/) do
   step("I click on the \"#{update_button}\" button")
 end
 
+When(/^I click on the Publish button$/) do
+  button = I18n.t('links_and_buttons.auctions.publish')
+  step("I click on the \"#{button}\" button")
+end
+
 When(/^I click on the unpublish button$/) do
   unpublish_button = I18n.t('statuses.admin_auction_status_presenter.future.published.actions.unpublish')
   step("I click on the \"#{unpublish_button}\" button")
