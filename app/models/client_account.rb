@@ -1,5 +1,5 @@
 class ClientAccount < ActiveRecord::Base
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
   validates :tock_id, presence: true
 
   def to_s
