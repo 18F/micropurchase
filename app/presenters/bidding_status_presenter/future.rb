@@ -12,7 +12,7 @@ class BiddingStatusPresenter::Future < BiddingStatusPresenter::Base
   end
 
   def label_class
-    'auction-label-future'
+    'future'
   end
 
   def label

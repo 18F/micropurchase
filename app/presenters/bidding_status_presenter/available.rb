@@ -12,7 +12,7 @@ class BiddingStatusPresenter::Available < BiddingStatusPresenter::Base
   end
 
   def label_class
-    'auction-label-open'
+    'open'
   end
 
   def label

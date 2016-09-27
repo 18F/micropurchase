@@ -1,4 +1,5 @@
 .auction-show {
+  border: 1px solid $color-gray-neutral;
   margin-top: $site-margins;
 
   .usa-alert {
@@ -18,8 +19,8 @@
   h1 {
     display: inline-block;
     float: left;
-    margin-bottom: 0;
-    margin-top: 0;
+    margin-bottom: .5rem;
+    margin-top: 2rem;
   }
 
   .usa-button-outline {
@@ -33,11 +34,9 @@
   .auction-subtitle {
     float: left;
     font-size: $base-font-size;
-    margin: 2rem 0;
-
-    &:nth-child(1) {
-      margin-right: $site-margins;
-    }
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
   }
 }
 
@@ -47,134 +46,14 @@
   }
 }
 
-.issue-list-item {
-  background-color: $color-white;
-  border: 1px solid $color-gray-neutral;
-  border-radius: $border-radius;
-  -ms-flex-direction: column;
-  -webkit-flex-direction: column;
-  flex-direction: column;
-  font-weight: $font-light;
-  margin-bottom: $site-margins;
-  position: relative;
-
-  .issue-content-wrapper {
-    flex: 1 0 auto;
-  }
-
-  .issue-label {
-    margin-top: .75rem;
-  }
-
-  .issue-bid-details {
-    background-color: $color-gray-lightest;
-    border-bottom-left-radius: $border-radius;
-    border-bottom-right-radius: $border-radius;
-    padding-left: $site-margins;
-    padding-right: $site-margins;
-    width: 100%;
-
-    .current-bid-box {
-      position: relative;
-
-      .current-bid-box-children {
-        position: relative;
-        top: 50%;
-
-        .current-bid-header {
-          font-weight: 400;
-        }
-
-        .current-bid {
-          font-size: 1.3rem;
-          font-weight: 700;
-        }
-
-        .current-bid-link {
-          white-space: nowrap;
-        }
-      }
-    }
-
-    p {
-      display: inline;
-      margin-right: 40px;
-    }
-  }
-}
-
-.issue-title {
-  font-size: 2.5rem;
-}
-
-.issue-list-item-details,
-.issue-bids-info {
-  font-weight: $font-normal;
-}
-
-.issue-bids-info-item {
-  display: inline-block;
-  margin-bottom: $base-padding;
-  margin-right: $site-margins;
-
-  &:last-of-type {
-    margin-right: 0;
-  }
-
-  span {
-    font-weight: $font-normal;
-  }
-}
-
-.issue-icon {
-  max-width: none;
-  width: 25px;
-}
-
-.issue-details-label {
+.details-label {
   font-size: $h6-font-size;
   font-weight: $font-light;
 }
 
-.issue-details-title {
+.details-title {
   margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.issue-details-list-item {
-  @include span-columns(6);
-
-  margin-bottom: 0;
-  margin-top: 0;
-  padding-bottom: $base-padding-lite;
-
-  &:nth-child(2n) {
-    @include omega();
-  }
-
-  &:last-child,
-  &:nth-last-child(2):nth-child(odd) {
-    padding-bottom: 0;
-
-    &::after {
-      margin: 0;
-    }
-  }
-}
-
-.issue-details-list {
-  margin: 0;
-  margin-bottom: $base-padding;
-  margin-top: $base-padding;
-  width: 100%;
-  padding-left: 0;
-  display: table;
-}
-
-.issue-bid-deadline {
-  display: inline-block;
-  margin: 0;
-  margin-bottom: $base-padding-lite;
 }

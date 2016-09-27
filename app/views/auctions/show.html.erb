@@ -14,22 +14,20 @@
     class: 'breadcrumb-link') %>
 </div>
 
-<div class="auction-show usa-grid issue-list-item">
-  <div class="issue-content-wrapper">
-    <div class="usa-width-one-whole issue-label">
-      <h3 class="issue-title">
-        <div class="issue-ribbon">
-          <%= render partial: 'auctions/status_ribbon', locals: { status: @view_model.bidding_status_presenter } %>
-        </div>
-      </h3>
-    </div>
-  </div>
-
-  <div class="auction-title issue-title">
+<div class="auction-show usa-grid">
+  <div class="auction-title">
     <h1><%= @view_model.title %></h1>
+
     <%= render partial: @view_model.admin_edit_auction_partial,
       locals: { view_model: @view_model } %>
+
     <div class="auction-subtitles">
+      <div class="auction-subtitle">
+        <div class="bidding-status">
+          <%= render partial: 'auctions/bidding_status_label',
+            locals: { status: @view_model.bidding_status_presenter } %>
+        </div>
+      </div>
       <div class="auction-subtitle">
         <%= @view_model.relative_time %>
       </div>
