@@ -40,6 +40,15 @@
   }
 }
 
+.admin-edit {
+  display: inline-block;
+
+  @include media($medium-screen) {
+    margin-top: 3rem;
+    float: right;
+  }
+}
+
 .auction-body {
   table {
     margin: 0;
