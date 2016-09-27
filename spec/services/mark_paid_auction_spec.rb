@@ -21,13 +21,13 @@ describe MarkPaidAuction do
         customer: customer
       )
       mailer_double = double(deliver_later: true)
-      allow(AuctionMailer).to receive(:auction_paid_winning_vendor_notification)
+      allow(AuctionMailer).to receive(:auction_paid_winning_vendor_other_pcard)
                                .with(auction: auction)
                                .and_return(mailer_double)
 
       MarkPaidAuction.new(auction: auction).perform
 
-      expect(AuctionMailer).to have_received(:auction_paid_winning_vendor_notification)
+      expect(AuctionMailer).to have_received(:auction_paid_winning_vendor_other_pcard)
                                 .with(auction: auction)
       expect(mailer_double).to have_received(:deliver_later)
     end
