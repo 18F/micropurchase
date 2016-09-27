@@ -37,7 +37,7 @@ Then(/^I should see the auctions in reverse start date order$/) do
 end
 
 def auction_xpath(position)
-  "/html/body/div[2]/div/div[1]/div[#{position}]/div[1]/div/div[1]/h3/a"
+  "/html/body/div[2]/div/div[1]/div[#{position}]/div[1]/div/div[1]/div[1]/h3/a"
 end
 
 Then(/^I should see a page title "([^"]+)"$/) do |title|
