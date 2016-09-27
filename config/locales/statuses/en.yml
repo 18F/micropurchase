@@ -165,6 +165,10 @@ en:
           is paid by the customer.
         actions:
           mark_paid: Mark as paid
+      paid_other_pcard:
+        header: Paid
+        body: >
+          %{winner_url} was paid %{winning_amount} on %{paid_at}.
       rejected:
         header: "Rejected"
         body: "<a href=%{delivery_url}>%{winner_name}'s work</a> was rejected on %{rejected_at}."

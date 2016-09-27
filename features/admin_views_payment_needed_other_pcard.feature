@@ -20,4 +20,4 @@ Feature: Admin views an auction with payment needed from an "other" P-card
 
     When I visit the admin auction page for that auction
     And I mark the auction as paid
-#    Then I should see the C2 status for an auction with payment confirmation
+    Then I should see an admin status message that the auction was paid with another purchase card

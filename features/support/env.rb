@@ -50,6 +50,14 @@ module AuctionHelpers
     WinningBid.new(@auction).find
   end
 
+  def winning_amount
+    Currency.new(winning_bid.amount).to_s
+  end
+
+  def pay_date
+    DcTimePresenter.convert_and_format(@auction.paid_at)
+  end
+
   def winner_url
     Url.new(
       link_text: winner_name,

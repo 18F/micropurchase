@@ -32,4 +32,8 @@ class AdminAuctionStatusPresenter::Base
   def winner
     WinningBid.new(auction).find.bidder || NullBidder.new
   end
+
+  def winning_bid
+    WinningBid.new(auction).find
+  end
 end
