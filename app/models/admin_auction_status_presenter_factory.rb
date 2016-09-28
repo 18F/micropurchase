@@ -77,10 +77,6 @@ class AdminAuctionStatusPresenterFactory
     bidding_status.future?
   end
 
-  def payment_needed?
-    auction.accepted? && auction.delivery_url.present? && auction.paid_at.nil?
-  end
-
   def bidding_status
     @_bidding_status ||= BiddingStatus.new(auction)
   end

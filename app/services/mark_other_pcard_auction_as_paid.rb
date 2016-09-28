@@ -1,4 +1,4 @@
-class MarkPaidAuction
+class MarkOtherPcardAuctionAsPaid
   attr_reader :auction
 
   def initialize(auction:)
