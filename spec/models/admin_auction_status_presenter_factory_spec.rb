@@ -44,6 +44,23 @@ describe AdminAuctionStatusPresenterFactory do
       expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
         .to be_a(AdminAuctionStatusPresenter::Rejected)
     end
+
+    context 'rejected auction has no winner' do
+      it 'should return a AdminAuctionStatusPresenter::Rejected' do
+        auction = create(:auction, :rejected)
+
+        expect(
+          AdminAuctionStatusPresenterFactory.new(auction: auction).create.body
+        ).to eq(
+          I18n.t(
+            'statuses.admin_auction_status_presenter.rejected.body',
+            delivery_url: auction.delivery_url,
+            rejected_at: DcTimePresenter.convert_and_format(auction.rejected_at),
+            winner_name: 'N/A'
+          )
+        )
+      end
+    end
   end
 
   context 'when the auction approval request is sent' do
