@@ -61,9 +61,9 @@ class AdminAuctionStatusPresenterFactory
     elsif auction.accepted_pending_payment_url?
       AdminAuctionStatusPresenter::AcceptedPendingPaymentUrl
     elsif auction.accepted? && auction.paid_at.nil?
-      AdminAuctionStatusPresenter::AcceptedOtherPcard
+      AdminAuctionStatusPresenter::OtherPcard::Accepted
     elsif auction.accepted? && auction.paid_at.present?
-      AdminAuctionStatusPresenter::PaidOtherPcard
+      AdminAuctionStatusPresenter::OtherPcard::Paid
     else # auction.rejected?
       AdminAuctionStatusPresenter::Rejected
     end

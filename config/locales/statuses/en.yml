@@ -156,19 +156,20 @@ en:
           %{winner_url}'s delivered code was accepted on
           %{accepted_at}. The p-card holder has been asked (via <a
           href="%{c2_url}">C2</a>) to remit payment.
-      accepted_other_pcard:
-        header: Pending payment from customer
-        body: >
-          %{winner_url}'s delivered code was accepted on
-          %{accepted_at}. %{customer_url} has been asked to remit
-          payment. You must manually mark this auction as paid when it
-          is paid by the customer.
-        actions:
-          mark_paid: Mark as paid
-      paid_other_pcard:
-        header: Paid
-        body: >
-          %{winner_url} was paid %{winning_amount} on %{paid_at}.
+      other_pcard:
+        accepted:
+          header: Pending payment from customer
+          body: >
+            %{winner_url}'s delivered code was accepted on
+            %{accepted_at}. %{customer_url} has been asked to remit
+            payment. You must manually mark this auction as paid when it
+            is paid by the customer.
+            actions:
+              mark_paid: Mark as paid
+        paid:
+          header: Paid
+          body: >
+            %{winner_url} was paid %{winning_amount} on %{paid_at}.
       rejected:
         header: "Rejected"
         body: "<a href=%{delivery_url}>%{winner_name}'s work</a> was rejected on %{rejected_at}."
