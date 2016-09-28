@@ -77,7 +77,11 @@ end
 
 Then(/^I should see an estimated delivery deadline of 12 business days from now$/) do
   within('.estimated-delivery-date') do
-    default_delivery_date = DefaultDateTime.new(12.business_days.from_now).convert
+    default_start_time = DefaultDateTime.new(5.business_days.from_now).convert
+    default_delivery_date = DefaultDeadlineDateTime.new(
+      start_time: default_start_time,
+      day_offset: 7
+    ).dc_time
     expect(page).to have_content("Estimated delivery date #{DcTimePresenter.convert_and_format(default_delivery_date)}")
   end
 end
