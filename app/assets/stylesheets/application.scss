@@ -15,14 +15,17 @@
 
 @import 'components/accordion';
 @import 'components/admin';
-@import 'components/admin-subnav';
 @import 'components/admin-auctions-index';
+@import 'components/admin-subnav';
 @import 'components/alerts';
+@import 'components/auction-details';
 @import 'components/auction-form';
-@import 'components/auction-show';
-@import 'components/auctions-index';
-@import 'components/auction-sidebar';
 @import 'components/auction-header';
+@import 'components/auction-list-item';
+@import 'components/auction-show';
+@import 'components/auction-sidebar';
+@import 'components/auctions-index';
+@import 'components/bidding-status-label';
 @import 'components/bids';
 @import 'components/disclaimer';
 @import 'components/docs';
@@ -32,12 +35,11 @@
 @import 'components/header';
 @import 'components/insights';
 @import 'components/intro';
-@import 'components/ribbon';
-@import 'components/secondary_nav';
-@import 'components/slabs';
-@import 'components/striped-table';
-@import 'components/sign-up';
 @import 'components/pagination';
 @import 'components/profile';
+@import 'components/secondary_nav';
+@import 'components/sign-up';
+@import 'components/slabs';
+@import 'components/striped-table';
 
 @import 'junk_drawer';

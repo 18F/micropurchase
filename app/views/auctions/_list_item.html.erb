@@ -1,45 +1,48 @@
-<div class="usa-width-one-half issue-list-item">
-  <div class="issue-content-wrapper">
-    <div class="issue-label">
+<div class="usa-width-one-half auction-list-item">
+  <div class="auction-content-wrapper">
+    <div class="auction-stats">
       <%= render partial: auction.auction_title_partial, locals: { auction: auction } %>
 
-      <div class="issue-vitals">
-        <div class="issue-bid-deadline">
-          <%= render partial: 'auctions/status_ribbon', locals: { status: auction.bidding_status_presenter } %>
+      <div class="bidding-status">
+        <%= render partial: 'auctions/bidding_status_label',
+          locals: { status: auction.bidding_status_presenter } %>
+
+        <div class="bidding-deadline">
           <%= auction.relative_time %>
         </div>
+
         <div class="winning-bid-detail">
           <%= render partial: auction.winning_bid_partial,
             locals: { auction: auction } %>
         </div>
       </div>
-      <p class="issue-description">
+      <p>
         <%= auction.html_summary %>
       </p>
     </div>
   </div>
-  <div class="issue-bid-details">
-    <div class="usa-width-one-whole issue-bids-info">
-        <ul class="issue-details-list">
+  <div class="bidding-details">
+    <div class="usa-width-one-whole">
+        <ul class="details-list">
           <%= render partial: auction.project_label_partial,
             locals: { auction: auction } %>
-          <li class="issue-details-list-item">
-            <div class="issue-details-label">Type</div>
-            <div class="issue-details-title">
+          <li class="details-list-item">
+            <div class="details-label">Type</div>
+            <div class="details-title">
               <%= auction.capitalized_formatted_type %>
             </div>
           </li>
 
-          <li class="issue-details-list-item">
-            <div class="issue-details-label">Eligibility</div>
-            <div class="issue-details-title">
+          <li class="details-list-item">
+            <div class="details-label">Eligibility</div>
+            <div class="details-title">
               <%= auction.eligibility_label %>
             </div>
           </li>
 
-          <li class="issue-details-list-item">
-            <div class="issue-details-label">Skills required</div>
-            <div class="issue-details-title">
+          <li class="details-list-item">
+            <div class="details-label">Skills required</div>
+            <div class="details-title">
               <%= auction.skills %>
             </div>
           </li>
