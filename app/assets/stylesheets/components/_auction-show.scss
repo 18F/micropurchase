@@ -14,7 +14,8 @@
 
 .auction-title {
   h1 {
-    display: inline-block;
+    width: 90%; // to make room for admin edit button
+    display: inline;
     float: left;
     margin-bottom: .5rem;
     margin-top: 2rem;
