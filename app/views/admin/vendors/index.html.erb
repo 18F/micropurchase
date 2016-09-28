@@ -1,26 +1,28 @@
-<%= render partial: 'admin/people_subnav', locals: { view_model: @view_model } %>
+<div class="usa-grid">
+  <%= render partial: 'admin/people_subnav', locals: { view_model: @view_model } %>
 
-<table class="usa-table-borderless" id="table-users">
-  <thead>
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Email address</th>
-      <th scope="col">DUNS #</th>
-      <th scope="col">Small business</th>
-      <th scope="col">SAM status</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @view_model.users.each do |user| %>
+  <table class="usa-table-borderless" id="table-users">
+    <thead>
       <tr>
-        <td><%= link_to user.name, admin_user_path(user.id) %></td>
-        <td><%= user.email %></td>
-        <td><%= user.duns_number %></td>
-        <td><%= user.small_business_label %></td>
-        <td><%= user.admin_sam_status %></td>
-        <td><%= render partial: user.masquerade_partial, locals: { user: user } %></td>
+        <th scope="col">Name</th>
+        <th scope="col">Email address</th>
+        <th scope="col">DUNS #</th>
+        <th scope="col">Small business</th>
+        <th scope="col">SAM status</th>
+        <th scope="col"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @view_model.users.each do |user| %>
+        <tr>
+          <td><%= link_to user.name, admin_user_path(user.id) %></td>
+          <td><%= user.email %></td>
+          <td><%= user.duns_number %></td>
+          <td><%= user.small_business_label %></td>
+          <td><%= user.admin_sam_status %></td>
+          <td><%= render partial: user.masquerade_partial, locals: { user: user } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

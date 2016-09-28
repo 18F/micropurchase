@@ -1,30 +1,31 @@
-.auction-header {
-  font-size: $base-font-size;
-  margin: 0 $negative-grid-margins;
-}
-
-.auction-header nav {
+.auction-header-wrapper {
   background: $color-gray-lightest;
   border-bottom: 1px solid $color-gray-light;
-  border-top: 1px solid $color-gray-light;
+}
+
+.auction-subnav {
   clear: both;
   display: block;
-  padding: 8px 16px;
-}
 
-.auction-header .active {
-  background: linear-gradient($color-gray-dark, $color-gray);
-  color: $color-white;
-}
+  .active {
+    background: $color-white;
+    border: 1px solid $color-gray-light;
+    border-bottom: none;
+    text-decoration: none;
+  }
 
-.auction-header nav a:hover {
-  background: $color-gray-light;
-}
+  a {
+    margin-top: 1rem;
+    margin-bottom: -1px;
+    border-bottom: 1px solid $color-gray-light;
+    padding: 1rem;
+    background: $color-gray-lightest;
+    display: inline-block;
+    line-height: $base-line-height;
+    vertical-align: middle;
+  }
 
-.auction-header nav a {
-  border-radius: $round-border-radius;
-  display: inline-block;
-  line-height: $base-line-height;
-  padding: 4px 12px;
-  vertical-align: middle;
+  a:focus {
+    box-shadow: none;
+  }
 }
