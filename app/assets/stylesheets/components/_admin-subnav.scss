@@ -1,6 +1,10 @@
 .settings-new.usa-button {
   display: inline;
   padding: .5em;
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 .site-nav-secondary .new-button {
