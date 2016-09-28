@@ -1,5 +1,16 @@
 en:
   mailers:
+    admin_mailer:
+      vendor_started_work:
+        subject: Work started on %{auction_name}
+        para_1: >
+          %{winner_name} initiated a pull request for
+           “%{auction_name}” and should complete their work no later
+           than %{delivery_due_at}.
+        para_2: >
+          You can view this auction (including a link to
+          %{winner_name}’s pull request) by signing in and visiting
+          %{auction_url}
     auction_mailer:
       losing_bidder_notification:
         para_1: "We regret to inform you that the auction period for %{auction_title} recently
@@ -16,8 +27,8 @@ en:
           If you have any questions about the issue, please add a comment to %{auction_issue_url}."
         para_2: "We encourage delivery of code (even if it's incomplete) early and often
           so that we can work out any issues that arise before the deadline.
-          To get started, please use GitHub to create a pull request and reference 
-          the issue associated with this auction. Then enter the URL to that pull request 
+          To get started, please use GitHub to create a pull request and reference
+          the issue associated with this auction. Then enter the URL to that pull request
           on the auction's page and click \"start work\": %{auction_url}"
         para_3: "Thanks for participating and we look forward to seeing what you can do!"
         sign_off: "Sincerely,"
