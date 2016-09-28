@@ -7,67 +7,63 @@
   <%= render partial: @view_model.nofollow_partial %>
 <% end %>
 
-<div class="usa-grid">
-  <%= link_to(
-    "<icon class='fa fa-angle-double-left'></icon> Back to all auctions".html_safe,
-    root_path,
-    class: 'breadcrumb-link') %>
-</div>
-
-<div class="auction-show usa-grid">
-  <div class="auction-title">
-    <h1><%= @view_model.title %></h1>
-
-    <%= render partial: @view_model.admin_edit_auction_partial,
-      locals: { view_model: @view_model } %>
-
-    <div class="auction-subtitles">
-      <div class="auction-subtitle">
-        <div class="bidding-status">
-          <%= render partial: 'auctions/bidding_status_label',
-            locals: { status: @view_model.bidding_status_presenter } %>
+<div class="auction-show">
+  <div class="auction-header-wrapper">
+    <div class="usa-grid">
+      <div class="auction-title">
+        <h1><%= @view_model.title %></h1>
+        <%= render partial: @view_model.admin_edit_auction_partial,
+          locals: { view_model: @view_model } %>
+        <div class="auction-subtitles">
+          <div class="auction-subtitle">
+            <div class="bidding-status">
+              <%= render partial: 'auctions/bidding_status_label',
+                locals: { status: @view_model.bidding_status_presenter } %>
+            </div>
+          </div>
+          <div class="auction-subtitle">
+            <%= @view_model.relative_time %>
+          </div>
+          <div class="auction-subtitle">
+            <%= @view_model.bid_label %>
+          </div>
         </div>
       </div>
-      <div class="auction-subtitle">
-        <%= @view_model.relative_time %>
-      </div>
-      <div class="auction-subtitle">
-        <%= @view_model.bid_label %>
-      </div>
+
+      <%= render partial: 'auctions/subnav' %>
     </div>
   </div>
 
-  <%= render partial: 'auctions/header' %>
+  <div class="usa-grid">
+    <div class="usa-width-two-thirds">
+      <%= render partial: 'auctions/auction', locals: { auction: @view_model } %>
+      <%= render partial: 'auctions/bids', locals: { auction_bids: @view_model } %>
+    </div>
 
-  <div class="usa-width-two-thirds">
-    <%= render partial: 'auctions/auction', locals: { auction: @view_model } %>
-    <%= render partial: 'auctions/bids', locals: { auction_bids: @view_model } %>
-  </div>
+    <div class="usa-width-one-third">
+      <%= render partial: 'auctions/status', locals: { status: @view_model.bid_status_presenter } %>
 
-  <div class="usa-width-one-third">
-    <%= render partial: 'auctions/status', locals: { status: @view_model.bid_status_presenter } %>
+      <div class="auction-detail-panel">
+        <div class="auction-info">
+          <% @view_model.auction_data.each do |label, data| %>
+            <%= render partial: 'auctions/data',
+              locals: { label: label, data: data } %>
+          <% end %>
 
-    <div class="auction-detail-panel">
-      <div class="auction-info">
-        <% @view_model.auction_data.each do |label, data| %>
-          <%= render partial: 'auctions/data',
-            locals: { label: label, data: data } %>
-        <% end %>
-
-        <h6>Auction type:</h6>
-        <p class="auction-label-info">
-        <%= @view_model.capitalized_type %>
-        (<%= link_to 'rules', @view_model.rules_path %>)
-        </p>
-        <%= render partial: @view_model.paid_at_partial, locals: { auction: @view_model } %>
-        <%= render partial: @view_model.accepted_at_partial, locals: { auction: @view_model } %>
-        <p>
-        <i class="fa fa-github"></i>
-        <%= link_to 'View on GitHub <icon class="fa fa-angle-double-right"></icon>'.html_safe,
-          @view_model.issue_url,
-          target: '_blank' %>
-        </p>
+          <h6>Auction type:</h6>
+          <p class="auction-label-info">
+          <%= @view_model.capitalized_type %>
+          (<%= link_to 'rules', @view_model.rules_path %>)
+          </p>
+          <%= render partial: @view_model.paid_at_partial, locals: { auction: @view_model } %>
+          <%= render partial: @view_model.accepted_at_partial, locals: { auction: @view_model } %>
+          <p>
+          <i class="fa fa-github"></i>
+          <%= link_to 'View on GitHub <icon class="fa fa-angle-double-right"></icon>'.html_safe,
+            @view_model.issue_url,
+            target: '_blank' %>
+          </p>
+        </div>
       </div>
     </div>
   </div>
-</div>

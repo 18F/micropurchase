@@ -1,18 +1,20 @@
-<%= render partial: 'admin/settings_subnav', locals: { view_model: @view_model } %>
+<div class="usa-grid">
+  <%= render partial: 'admin/settings_subnav', locals: { view_model: @view_model } %>
 
-<table class="usa-table-borderless">
-  <thead>
-    <tr>
-      <th scope="col">Skill name</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @view_model.skills.each do |skill| %>
+  <table class="usa-table-borderless">
+    <thead>
       <tr>
-        <td><%= skill.name %></td>
-        <td><%= link_to('Edit', edit_admin_skill_path(skill)) %></td>
+        <th scope="col">Skill name</th>
+        <th scope="col"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @view_model.skills.each do |skill| %>
+        <tr>
+          <td><%= skill.name %></td>
+          <td><%= link_to('Edit', edit_admin_skill_path(skill)) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,22 +1,24 @@
-<%= render partial: 'admin/settings_subnav', locals: { view_model: @view_model } %>
+<div class="usa-grid">
+  <%= render partial: 'admin/settings_subnav', locals: { view_model: @view_model } %>
 
-<table class="usa-table-borderless">
-  <thead>
-    <tr>
-      <th scope="col">Agency Name</th>
-      <th scope="col">Contact Name</th>
-      <th scope="col">Email</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @view_model.customers.each do |customer| %>
+  <table class="usa-table-borderless">
+    <thead>
       <tr>
-        <td><%= customer.agency_name %></td>
-        <td><%= customer.contact_name %></td>
-        <td><%= customer.email %></td>
-        <td><%= link_to('Edit', edit_admin_customer_path(customer)) %></td>
+        <th scope="col">Agency Name</th>
+        <th scope="col">Contact Name</th>
+        <th scope="col">Email</th>
+        <th scope="col"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @view_model.customers.each do |customer| %>
+        <tr>
+          <td><%= customer.agency_name %></td>
+          <td><%= customer.contact_name %></td>
+          <td><%= customer.email %></td>
+          <td><%= link_to('Edit', edit_admin_customer_path(customer)) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,7 +1,7 @@
 $(document).ready(function() {
-  $(".auction-header a").on("click", function(event) {
+  $(".auction-subnav a").on("click", function(event) {
     event.preventDefault();
     $('.js-auction-view').toggle();
-    $('.auction-header a').toggleClass('active');
+    $('.auction-subnav a').toggleClass('active');
   });
 });

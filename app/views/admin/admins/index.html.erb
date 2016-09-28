@@ -1,22 +1,24 @@
-<%= render partial: 'admin/people_subnav', locals: { view_model: @view_model } %>
+<div class="usa-grid">
+  <%= render partial: 'admin/people_subnav', locals: { view_model: @view_model } %>
 
-<table class="usa-table-borderless" id="table-admins">
-  <thead>
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Email address</th>
-      <th scope="col">Contracting officer?</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @view_model.admins.each do |user| %>
+  <table class="usa-table-borderless" id="table-admins">
+    <thead>
       <tr>
-        <td><%= link_to user.name, admin_user_path(user.id) %></td>
-        <td><%= user.email %></td>
-        <td><%= user.contracting_officer? %></td>
-        <td><%= link_to('Edit', edit_admin_user_path(user)) %></td>
+        <th scope="col">Name</th>
+        <th scope="col">Email address</th>
+        <th scope="col">Contracting officer?</th>
+        <th scope="col">Actions</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @view_model.admins.each do |user| %>
+        <tr>
+          <td><%= link_to user.name, admin_user_path(user.id) %></td>
+          <td><%= user.email %></td>
+          <td><%= user.contracting_officer? %></td>
+          <td><%= link_to('Edit', edit_admin_user_path(user)) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
