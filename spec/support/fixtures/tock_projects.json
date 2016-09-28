@@ -1,37 +1,32 @@
+[
 {
-  "count": 3,
-  "next": null,
-  "previous": null,
-  "results": [
-    {
-      "id": 120,
-      "client": "General Services Administration - 18F (Non-Billable)",
-      "name": "18F Branding",
-      "description": "Working on branding for 18F\u00e2\u20ac\u201dinternal branding",
-      "billable": false,
-      "start_date": null,
-      "end_date": null,
-      "active": true
-    },
-    {
-      "id": 97,
-      "client": "General Services Administration - 18F (Non-Billable)",
-      "name": "18F EDU",
-      "description": "Self-directed training materials and proctored workshops to develop the skill sets of 18F and our partners",
-      "billable": false,
-      "start_date": null,
-      "end_date": null,
-      "active": true
-    },
-    {
-      "id": 96,
-      "client": "General Services Administration - 18F (Non-Billable)",
-      "name": "18F Guides",
-      "description": " Aims to disseminate software development and bureaucracy-hacking best practices across 18F and for our partners' digital service teams",
-      "billable": false,
-      "start_date": null,
-      "end_date": null,
-      "active": false
-    }
-  ]
+  "id": 120,
+    "client": "General Services Administration - 18F (Non-Billable)",
+    "name": "18F Branding",
+    "description": "Working on branding for 18F\u00e2\u20ac\u201dinternal branding",
+    "billable": false,
+    "start_date": null,
+    "end_date": null,
+    "active": true
+},
+{
+  "id": 97,
+  "client": "General Services Administration - 18F (Non-Billable)",
+  "name": "18F EDU",
+  "description": "Self-directed training materials and proctored workshops to develop the skill sets of 18F and our partners",
+  "billable": false,
+  "start_date": null,
+  "end_date": null,
+  "active": true
+},
+{
+  "id": 96,
+  "client": "General Services Administration - 18F (Non-Billable)",
+  "name": "18F Guides",
+  "description": " Aims to disseminate software development and bureaucracy-hacking best practices across 18F and for our partners' digital service teams",
+  "billable": false,
+  "start_date": null,
+  "end_date": null,
+  "active": false
 }
+]
