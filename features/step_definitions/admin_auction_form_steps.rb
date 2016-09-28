@@ -78,9 +78,10 @@ end
 Then(/^I should see an estimated delivery deadline of 12 business days from now$/) do
   within('.estimated-delivery-date') do
     default_start_time = DefaultDateTime.new(5.business_days.from_now).convert
+    default_offset = Admin::NewAuctionViewModel::DEFAULT_DELIVERY_DAYS - Admin::NewAuctionViewModel::DEFAULT_START_DAYS
     default_delivery_date = DefaultDeadlineDateTime.new(
       start_time: default_start_time,
-      day_offset: 7
+      day_offset: default_offset
     ).dc_time
     expect(page).to have_content("Estimated delivery date #{DcTimePresenter.convert_and_format(default_delivery_date)}")
   end
