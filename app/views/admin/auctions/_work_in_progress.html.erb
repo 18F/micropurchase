@@ -1,0 +1,4 @@
+<%= link_to I18n.t('statuses.admin_auction_status_presenter.work_in_progress.actions.mark_delivered'),
+    admin_auction_path(status.auction, auction: { delivery_status: 'pending_acceptance' }),
+    method: :patch,
+    class: 'usa-button usa-button-outline action-button' %>
