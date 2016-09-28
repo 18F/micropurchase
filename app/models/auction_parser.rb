@@ -29,7 +29,7 @@ class AuctionParser
       :issue_url,
       :notes,
       :purchase_card,
-      :status,
+      :delivery_status,
       :start_price,
       :summary,
       :title,

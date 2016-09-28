@@ -57,6 +57,11 @@ Then(/^I should see a button to mark as delivered$/) do
   step("I should see a \"#{button}\" button")
 end
 
+When(/^I click the mark as delivered button$/) do
+  button = I18n.t('statuses.admin_auction_status_presenter.work_in_progress.actions.mark_delivered')
+  step("I click on the \"#{button}\" button")
+end
+
 When(/^I click on the add auction link$/) do
   add_link = I18n.t('links_and_buttons.auctions.add')
   step("I click on the \"#{add_link}\" link")
