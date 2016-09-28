@@ -42,8 +42,20 @@ module AuctionHelpers
     DcTimePresenter.convert_and_format(@auction.started_at)
   end
 
+  def accept_date
+    DcTimePresenter.convert_and_format(@auction.accepted_at)
+  end
+
   def winning_bid
     WinningBid.new(@auction).find
+  end
+
+  def winning_amount
+    Currency.new(winning_bid.amount).to_s
+  end
+
+  def pay_date
+    DcTimePresenter.convert_and_format(@auction.paid_at)
   end
 
   def winner_url
@@ -60,6 +72,18 @@ module AuctionHelpers
 
   def winner
     winning_bid.bidder
+  end
+
+  def customer
+    @auction.customer
+  end
+
+  def customer_url
+    Url.new(
+      link_text: customer.agency_name,
+      path_name: 'admin_customer',
+      params: { id: customer.id }
+    )
   end
 end
 

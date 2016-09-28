@@ -224,3 +224,26 @@ Then(/^I should see an admin status message that the auction is available with b
     )
   )
 end
+
+Then(/^I should see an admin status message that the auction needs payment from a customer$/) do
+  expect(page.html).to include(
+    I18n.t(
+      'statuses.admin_auction_status_presenter.other_pcard.accepted.body',
+      customer_url: customer_url,
+      accepted_at: accept_date,
+      winner_url: winner_url
+    )
+  )
+end
+
+Then(/^I should see an admin status message that the auction was paid with another purchase card$/) do
+  @auction.reload # need to update since auction was changed
+  expect(page.html).to include(
+    I18n.t(
+      'statuses.admin_auction_status_presenter.other_pcard.paid.body',
+      paid_at: pay_date,
+      winner_url: winner_url,
+      winning_amount: winning_amount
+    )
+  )
+end

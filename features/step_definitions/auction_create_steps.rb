@@ -142,6 +142,10 @@ Given(/^there is an auction pending acceptance$/) do
   @auction = FactoryGirl.create(:auction, :with_bids, :pending_acceptance)
 end
 
+Given(/^there is an accepted auction that needs payment$/) do
+  @auction = FactoryGirl.create(:auction, :payment_needed)
+end
+
 Given(/^there is a complete and successful auction$/) do
   @auction = FactoryGirl.create(:auction, :complete_and_successful)
 end
@@ -173,11 +177,16 @@ Given(/^the auction is for the default purchase card$/) do
 end
 
 Given(/^the auction is for a different purchase card$/) do
-  @auction.update(purchase_card: :other)
+  @customer = FactoryGirl.create(:customer)
+  @auction.update(purchase_card: :other, customer_id: @customer.id)
 end
 
 Given(/^the c2 proposal for the auction is budget approved$/) do
   @auction.update(c2_status: :budget_approved)
+end
+
+Given(/^the auction needs payment$/) do
+  @auction.update(FactoryGirl.attributes_for(:auction, :payment_needed))
 end
 
 Given(/^the c2 proposal for the auction is not budget approved$/) do

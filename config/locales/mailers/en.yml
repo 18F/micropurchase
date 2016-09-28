@@ -16,8 +16,8 @@ en:
           If you have any questions about the issue, please add a comment to %{auction_issue_url}."
         para_2: "We encourage delivery of code (even if it's incomplete) early and often
           so that we can work out any issues that arise before the deadline.
-          To get started, please use GitHub to create a pull request and reference 
-          the issue associated with this auction. Then enter the URL to that pull request 
+          To get started, please use GitHub to create a pull request and reference
+          the issue associated with this auction. Then enter the URL to that pull request
           on the auction's page and click \"start work\": %{auction_url}"
         para_3: "Thanks for participating and we look forward to seeing what you can do!"
         sign_off: "Sincerely,"
@@ -38,6 +38,16 @@ en:
         para_1: >
           Payment in the amount of %{amount} has recently been made to
           %{payment_url} for %{auction_title}. Please let us know if you've received it:
+        para_2: "Questions? Contact micropurchase@gsa.gov."
+        sign_off: "Sincerely,"
+        from: "The 18F Micro-purchase team"
+      auction_paid_winning_vendor_other_pcard_notification:
+        subject: Payment has been made for %{auction_title}
+        greeting: "Dear %{vendor_name},"
+        para_1: >-
+          Payment in the amount of %{amount} has recently been made to
+          %{payment_url} for %{auction_title}. Please let us know if
+          you have not received it.
         para_2: "Questions? Contact micropurchase@gsa.gov."
         sign_off: "Sincerely,"
         from: "The 18F Micro-purchase team"

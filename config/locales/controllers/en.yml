@@ -14,6 +14,9 @@ en:
       auction_publish:
         update:
           success: "Auction successfully published!"
+      auction_mark_payments:
+        update:
+          success: "The auction was marked as paid"
       customers:
         create:
           success: "Customer created successfully"

@@ -21,3 +21,8 @@ When(/^I mark the auction as accepted$/) do
   button = I18n.t('statuses.admin_auction_status_presenter.pending_acceptance.actions.accept')
   step("I click on the \"#{button}\" button")
 end
+
+When(/^I mark the auction as paid$/) do
+  button = I18n.t('statuses.admin_auction_status_presenter.other_pcard.accepted.actions.mark_paid')
+  step("I click on the \"#{button}\" button")
+end
