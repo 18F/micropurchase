@@ -1,12 +1,12 @@
-.new-button {
-  float: left;
+.settings-new.usa-button {
+  display: inline;
+  padding: .5em;
+}
+
+.site-nav-secondary .new-button {
+  padding-right: 0;
 
   @include media($medium-screen) {
     float: right;
   }
-}
-
-.settings-new.usa-button {
-  display: inline;
-  padding: .5em;
 }
