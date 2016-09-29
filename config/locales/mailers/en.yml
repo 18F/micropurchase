@@ -9,7 +9,17 @@ en:
         sign_off: "Sincerely,"
         from: "The 18F Micro-purchase team"
         subject: "18F Micro-purchase Auction Status"
-      winning_bidder_notification:
+      auction_accepted_customer_notification:
+        subject: "Your auction has been successfully delivered!"
+        para_1: "Your auction \"%{auction_title}\" has been successfully delivered! The
+          winning vendor is %{vendor_name} and the final price of the auction is
+          %{winning_bid_amount}."
+        para_2: "You may examine the delivered code here: %{delivery_url} "
+        para_3: "Questions? Reply to this email."
+        sign_off: "Sincerely,"
+        from: "The 18F Micro-purchase team"
+    winning_bidder_mailer:
+      auction_ended:
         para_1: "Congratulations! You have the winning bid for %{auction_title} (%{auction_url}).
           This means that you have the opportunity to get paid %{bid_amount}
           if you deliver the requested work by %{auction_delivery_deadline} Eastern Time.
@@ -23,35 +33,6 @@ en:
         sign_off: "Sincerely,"
         from: "The 18F Micro-purchase team"
         subject: "Congratulations: You have the winning bid!"
-      auction_accepted_customer_notification:
-        subject: "Your auction has been successfully delivered!"
-        para_1: "Your auction \"%{auction_title}\" has been successfully delivered! The
-          winning vendor is %{vendor_name} and the final price of the auction is
-          %{winning_bid_amount}."
-        para_2: "You may examine the delivered code here: %{delivery_url} "
-        para_3: "Questions? Reply to this email."
-        sign_off: "Sincerely,"
-        from: "The 18F Micro-purchase team"
-      auction_paid_winning_vendor_notification:
-        subject: "Please confirm payment for %{auction_title}"
-        greeting: "Dear %{vendor_name},"
-        para_1: >
-          Payment in the amount of %{amount} has recently been made to
-          %{payment_url} for %{auction_title}. Please let us know if you've received it:
-        para_2: "Questions? Contact micropurchase@gsa.gov."
-        sign_off: "Sincerely,"
-        from: "The 18F Micro-purchase team"
-      auction_paid_winning_vendor_other_pcard_notification:
-        subject: Payment has been made for %{auction_title}
-        greeting: "Dear %{vendor_name},"
-        para_1: >-
-          Payment in the amount of %{amount} has recently been made to
-          %{payment_url} for %{auction_title}. Please let us know if
-          you have not received it.
-        para_2: "Questions? Contact micropurchase@gsa.gov."
-        sign_off: "Sincerely,"
-        from: "The 18F Micro-purchase team"
-    winning_bidder_mailer:
       auction_accepted:
         subject: "18F Micro-purchase Auction Status"
         para_1: >-
@@ -79,5 +60,24 @@ en:
           know if you would like us to schedule a retrospective to go over any questions
           or concerns you may have about the auction. Though this auction did not work
           out, we hope you will continue to participate in the future.
+        sign_off: "Sincerely,"
+        from: "The 18F Micro-purchase team"
+      auction_paid_default_pcard:
+        subject: "Please confirm payment for %{auction_title}"
+        greeting: "Dear %{vendor_name},"
+        para_1: >
+          Payment in the amount of %{amount} has recently been made to
+          %{payment_url} for %{auction_title}. Please let us know if you've received it:
+        para_2: "Questions? Contact micropurchase@gsa.gov."
+        sign_off: "Sincerely,"
+        from: "The 18F Micro-purchase team"
+      auction_paid_other_pcard:
+        subject: Payment has been made for %{auction_title}
+        greeting: "Dear %{vendor_name},"
+        para_1: >-
+          Payment in the amount of %{amount} has recently been made to
+          %{payment_url} for %{auction_title}. Please let us know if
+          you have not received it.
+        para_2: "Questions? Contact micropurchase@gsa.gov."
         sign_off: "Sincerely,"
         from: "The 18F Micro-purchase team"
