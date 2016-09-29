@@ -6,14 +6,9 @@ en:
           success: "Auction created successfully"
         update:
           success: "Auction updated successfully"
-        unpublish:
-          success: "Auction: %{title} has been successfully unpublished"
       auction_reports:
         show:
           error: "Registration not found for winning bidder DUNS number"
-      auction_publish:
-        update:
-          success: "Auction successfully published!"
       auction_mark_payments:
         update:
           success: "The auction was marked as paid"
