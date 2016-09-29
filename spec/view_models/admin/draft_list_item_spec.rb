@@ -1,16 +1,22 @@
 require 'rails_helper'
 
 describe Admin::DraftListItem do
-  describe '#c2_proposal_url' do
+  describe '#c2_proposal_status' do
     context 'auction for default purchase card' do
-      it 'returns c2 proposal URL' do
-        auction = create(:auction, purchase_card: :default)
+      it 'returns c2 proposal status' do
+        Auction.c2_statuses.each do |status|
+          status_string = status[0]
 
-        view_model = Admin::DraftListItem.new(auction)
+          if status_string != 'not_requested'
+            auction = create(:auction, purchase_card: :default, c2_status: status_string)
 
-        expect(view_model.c2_proposal_status).to eq(
-          AdminAuctionStatusPresenterFactory.new(auction: auction).create.status
-        )
+            view_model = Admin::DraftListItem.new(auction)
+
+            expect(view_model.c2_proposal_status).to eq(
+              I18n.t("statuses.c2_presenter.#{status_string}.status")
+            )
+          end
+        end
       end
     end
 

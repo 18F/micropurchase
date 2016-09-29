@@ -104,7 +104,7 @@ describe AdminAuctionStatusPresenterFactory do
       auction = create(:auction, :c2_budget_approved, :closed, delivery_status: :pending_delivery)
 
       expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
-        .to be_a(C2StatusPresenter::Approved)
+        .to be_a(C2StatusPresenter::BudgetApproved)
     end
   end
 end
