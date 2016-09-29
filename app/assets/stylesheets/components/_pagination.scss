@@ -1,8 +1,4 @@
 .pagination {
-  $pagination-border-color: $color-gray-light;
-  $pagination-border: 1px solid $pagination-border-color;
-  $pagination-background: lighten($pagination-border-color, 10);
-
   a {
     padding-left: ($site-margins / 2);
     padding-right: ($site-margins / 2);
@@ -10,9 +6,8 @@
 
   span {
     background: $color-white;
-    border: $pagination-border;
+    border: 1px solid $color-gray-light;
     outline: none;
-    margin: ($site-margins / 4);
 
     &:hover,
     &:focus {
@@ -22,10 +17,14 @@
   }
 
   .current {
-    display: inline-block;
     padding-left: ($site-margins / 2);
     padding-right: ($site-margins / 2);
+    background: $color-primary;
     color: $color-white;
-    background: $color-gray-medium;
+
+    &:hover {
+      background: $color-primary;
+      color: $color-white;
+    }
   }
 }

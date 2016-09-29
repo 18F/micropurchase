@@ -7,6 +7,6 @@ Feature: Vendor views future auction
     Given there is a future auction
     And I am an authenticated vendor
     When I visit the auction page
-    Then I should see a "Coming Soon" label
+    Then I should see a "Coming soon" label
     And I should not see the bid form
     And I should see the future auction message for vendors
