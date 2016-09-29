@@ -7,7 +7,7 @@ Feature: Admin views future auction
     And I sign in
     And there is a future auction
     When I visit the auction page
-    Then I should see a "Coming Soon" label
+    Then I should see a "Coming soon" label
     And I should not see the bid form
     And I should see the future published auction message for admins
 

@@ -6,10 +6,10 @@ Feature: Guest views future auction
   Scenario: There is a future auction
     Given there is a future auction
     When I visit the home page
-    Then I should see a "Coming Soon" status
+    Then I should see a "Coming soon" status
     And there should be meta tags for the index page for 0 open and 1 future auctions
 
     When I visit the auction page
-    Then I should see a "Coming Soon" label
+    Then I should see a "Coming soon" label
     And I should not see the bid form
     And I should see the future auction message for guests
