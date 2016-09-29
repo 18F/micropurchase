@@ -22,6 +22,10 @@
   label {
     clear: both;
   }
+
+  input[type="submit"] {
+    display: inline-block;
+  }
 }
 
 .auction_summary textarea {

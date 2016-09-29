@@ -20,10 +20,8 @@ module AuctionScopes
     scope :pending_delivery, -> { where(delivery_status: delivery_statuses['pending_delivery']) }
     scope :not_paid, -> { where(paid_at: nil) }
     scope :paid, -> { where.not(paid_at: nil) }
-    scope :published, -> { where(published: publishes['published']) }
     scope :started_at_in_future, -> { where('started_at > ?', Time.current) }
     scope :started_at_in_past, -> { where('started_at < ?', Time.current) }
-    scope :unpublished, -> { where(published: [nil, '', publisheds['unpublished']]) }
     scope :with_bids, -> { includes(:bids) }
     scope :with_bids_and_bidders, -> { includes(:bids, :bidders) }
 

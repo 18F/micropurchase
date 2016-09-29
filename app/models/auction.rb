@@ -30,7 +30,7 @@ class Auction < ActiveRecord::Base
     rejected: 2
   }
 
-  enum published: { unpublished: 0, published: 1 }
+  enum published: { unpublished: 0, published: 1, archived: 2 }
   enum purchase_card: { default: 0, other: 1 }
   enum type: { sealed_bid: 0, reverse: 1 }
 
@@ -56,6 +56,7 @@ class Auction < ActiveRecord::Base
   validate :publishing_auction, on: :update, if: :published_changed?
 
   def publishing_auction
+    return if archived?
     if published_was == 'unpublished' && purchase_card == 'default' && c2_status != 'budget_approved'
       errors.add(:c2_status, " is not budget approved.")
     end
