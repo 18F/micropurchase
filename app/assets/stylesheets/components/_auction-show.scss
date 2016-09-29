@@ -22,10 +22,6 @@
     margin-top: 3rem;
   }
 
-  .usa-button-outline {
-    margin-left: $site-margins;
-  }
-
   .auction-subtitles {
     clear: both;
   }
@@ -41,6 +37,7 @@
 
 .admin-edit {
   display: inline-block;
+  margin-top: 3rem;
 
   @include media($medium-screen) {
     margin-top: 4rem;

@@ -8,15 +8,14 @@ Feature: Admin edits auctions in the admins panel
     And there is an open auction
     And there is a client account to bill to
     And there is a skill in the system
-    And I visit the auctions admin page
+    And I visit the auctions page
 
     When I click to edit the auction
     Then I should see the current auction attributes in the form
     And I should be able to edit the existing auction form
 
     When I click on the update button
-    Then I should be on the admin auctions page
-    And I expect my auction changes to have been saved
+    Then I expect my auction changes to have been saved
 
     When I click on the auction's title
     Then I should see the start time I set for the auction
@@ -29,7 +28,7 @@ Feature: Admin edits auctions in the admins panel
     And there is an open auction
     And there is a client account to bill to
     And there is a non-active client account
-    And I visit the auctions admin page
+    And I visit the auctions page
     When I click to edit the auction
     Then I should not see the non-active client account
     And I should see the the active client account

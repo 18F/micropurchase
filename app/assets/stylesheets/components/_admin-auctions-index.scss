@@ -9,8 +9,13 @@
 }
 
 .auction-edit {
-  float: right;
+  @include media($medium-screen) {
+    float: right;
+  }
+
   font-size: $h6-font-size;
   margin: 0;
+  margin-bottom: 1rem;
   padding: .75rem;
+  max-width: 38px;
 }

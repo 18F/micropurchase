@@ -7,7 +7,7 @@ Feature: Admin creates auctions in the admins panel
     And there is a client account to bill to
     And there is a skill in the system
     When I sign in
-    And I visit the auctions admin page
+    And I visit the admin page
     When I click on the add auction link
     And I edit the new auction form
     Then I should see that the auction type is sealed bid
@@ -24,7 +24,7 @@ Feature: Admin creates auctions in the admins panel
     And there is a client account to bill to
     And there is a skill in the system
     When I sign in
-    And I visit the auctions admin page
+    And I visit the admin page
     When I click on the add auction link
     Then I should see an estimated delivery deadline of 12 business days from now
     When I change the auction end date on the form
@@ -35,7 +35,7 @@ Feature: Admin creates auctions in the admins panel
     And there is a client account to bill to
     And there is a skill in the system
     And I sign in
-    And I visit the auctions admin page
+    And I visit the admin page
     When I click on the add auction link
     And I edit the new auction form
     And I set the auction start price to $24000
@@ -48,7 +48,7 @@ Feature: Admin creates auctions in the admins panel
     And there is a client account to bill to
     And there is a non-active client account
     And I sign in
-    And I visit the auctions admin page
+    And I visit the admin page
     When I click on the add auction link
     Then I should not see the non-active client account
     And I should see the the active client account
