@@ -1,6 +1,6 @@
 Feature: Admin accepts delivery of a project
   As an admin
-  I want to set an auction status to be approved
+  I want to set an auction status to be budget approved
   So the vendor can get paid
 
   Scenario: Marking an auction as accepted successfully

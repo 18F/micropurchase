@@ -5,7 +5,7 @@ Then(/^I should see an? "(.+)" status$/) do |label|
 end
 
 Then(/^I should see an? "(.+)" label$/) do |label|
-  within(:css, '.issue-ribbon') do
+  within(:css, '.status-label') do
     expect(page).to have_content(label)
   end
 end

@@ -52,14 +52,6 @@ class Admin::NewAuctionViewModel < Admin::BaseViewModel
     ClientAccountQuery.new.active.map(&:to_s)
   end
 
-  def published
-    'unpublished'
-  end
-
-  def published_options
-    ['unpublished']
-  end
-
   def customer_options
     Customer.sorted
   end

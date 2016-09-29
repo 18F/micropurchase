@@ -1,0 +1,28 @@
+.bidding-status {
+  font-size: $h5-font-size;
+  font-style: oblique;
+  font-weight: $font-normal;
+
+  .status-label {
+    padding: .25em .5em;
+    font-weight: $font-bold;
+  }
+
+  .expiring {
+    background-color: $color-gold;
+  }
+
+  .over {
+    background-color: $color-gray-light;
+  }
+
+  .future {
+    background-color: $color-cool-blue;
+    color: $color-white;
+  }
+
+  .open {
+    background-color: $color-green;
+    color: $color-white;
+  }
+}

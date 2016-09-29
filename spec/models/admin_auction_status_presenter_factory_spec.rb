@@ -37,12 +37,38 @@ describe AdminAuctionStatusPresenterFactory do
     end
   end
 
+  context 'when an auction has been accepted but is for an other pcard' do
+    it 'should return a AdminAuctionStatusPresenter::OtherPcard::Accepted' do
+      auction = create(:auction, :payment_needed, purchase_card: :other)
+
+      expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
+        .to be_a(AdminAuctionStatusPresenter::OtherPcard::Accepted)
+    end
+  end
+
   context 'when the auction has been rejected' do
     it 'should return a AdminAuctionStatusPresenter::Rejected' do
       auction = create(:auction, :rejected)
 
       expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
         .to be_a(AdminAuctionStatusPresenter::Rejected)
+    end
+
+    context 'rejected auction has no winner' do
+      it 'should return a AdminAuctionStatusPresenter::Rejected' do
+        auction = create(:auction, :rejected)
+
+        expect(
+          AdminAuctionStatusPresenterFactory.new(auction: auction).create.body
+        ).to eq(
+          I18n.t(
+            'statuses.admin_auction_status_presenter.rejected.body',
+            delivery_url: auction.delivery_url,
+            rejected_at: DcTimePresenter.convert_and_format(auction.rejected_at),
+            winner_name: 'N/A'
+          )
+        )
+      end
     end
   end
 
@@ -66,7 +92,7 @@ describe AdminAuctionStatusPresenterFactory do
 
   context 'when auction is available' do
     it 'should return the correct presenter' do
-      auction = create(:auction, :c2_approved, :available)
+      auction = create(:auction, :c2_budget_approved, :available)
 
       expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
         .to be_a(AdminAuctionStatusPresenter::Available)
@@ -75,7 +101,7 @@ describe AdminAuctionStatusPresenterFactory do
 
   context 'when auction is closed, pending delivery' do
     it 'should return the correct presenter' do
-      auction = create(:auction, :c2_approved, :closed, delivery_status: :pending_delivery)
+      auction = create(:auction, :c2_budget_approved, :closed, delivery_status: :pending_delivery)
 
       expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
         .to be_a(C2StatusPresenter::Approved)

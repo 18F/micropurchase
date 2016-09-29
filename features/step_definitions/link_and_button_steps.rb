@@ -37,6 +37,11 @@ When(/^I click on the update button$/) do
   step("I click on the \"#{update_button}\" button")
 end
 
+When(/^I click on the Publish button$/) do
+  button = I18n.t('links_and_buttons.auctions.publish')
+  step("I click on the \"#{button}\" button")
+end
+
 When(/^I click on the unpublish button$/) do
   unpublish_button = I18n.t('statuses.admin_auction_status_presenter.future.published.actions.unpublish')
   step("I click on the \"#{unpublish_button}\" button")
@@ -44,6 +49,16 @@ end
 
 When(/^I click on the I'm done button$/) do
   button = I18n.t('statuses.bid_status_presenter.over.winner.work_in_progress.action')
+  step("I click on the \"#{button}\" button")
+end
+
+Then(/^I should see a button to mark as delivered$/) do
+  button = I18n.t('statuses.admin_auction_status_presenter.work_in_progress.actions.mark_delivered')
+  step("I should see a \"#{button}\" button")
+end
+
+When(/^I click the mark as delivered button$/) do
+  button = I18n.t('statuses.admin_auction_status_presenter.work_in_progress.actions.mark_delivered')
   step("I click on the \"#{button}\" button")
 end
 

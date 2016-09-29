@@ -7,11 +7,16 @@ class AdminAuctionStatusPresenter::Accepted < AdminAuctionStatusPresenter::Base
     I18n.t(
       'statuses.admin_auction_status_presenter.accepted.body',
       accepted_at: accepted_at,
-      winner_url: winner_url
+      winner_url: winner_url,
+      c2_url: c2_url
     )
   end
 
   private
+
+  def c2_url
+    auction.c2_proposal_url
+  end
 
   def accepted_at
     DcTimePresenter.convert_and_format(auction.accepted_at)

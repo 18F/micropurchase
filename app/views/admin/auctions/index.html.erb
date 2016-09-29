@@ -1,12 +1,14 @@
-<%= render partial: 'admin/auctions_subnav', locals: { view_model: @view_model } %>
+<div class="usa-grid">
+  <%= render partial: 'admin/auctions_subnav', locals: { view_model: @view_model } %>
 
-<div class="admin-auction-wrapper auction-wrapper">
-  <% @auctions.each do |auction| %>
-    <%= render partial: 'auctions/list_item', locals: { auction: auction } %>
-  <% end %>
-</div>
+  <div class="admin-auction-wrapper auction-wrapper">
+    <% @auctions.each do |auction| %>
+      <%= render partial: 'auctions/list_item', locals: { auction: auction } %>
+    <% end %>
+  </div>
 
-<%= paginate @auctions %>
-<div class="pagination-details">
-  <%= page_entries_info @auctions, entry_name: 'auction' %>
+  <%= paginate @auctions %>
+  <div class="pagination-details">
+    <%= page_entries_info @auctions, entry_name: 'auction' %>
+  </div>
 </div>

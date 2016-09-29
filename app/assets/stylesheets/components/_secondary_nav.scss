@@ -1,8 +1,7 @@
-$width-nav-sidebar: 250px;
 $height-nav-secondary: 5rem;
 
 .site-nav-secondary {
-  @include media($medium-screen + $width-nav-sidebar) {
+  @include media($medium-screen) {
     background-color: $color-white;
     border-bottom: 1px solid $color-gray-light;
     clear: both;
@@ -19,10 +18,13 @@ $height-nav-secondary: 5rem;
 
   ul {
     @include unstyled-list;
+  }
 
-    li {
+  li {
+    padding-right: 3rem;
+
+    @include media($medium-screen) {
       display: inline;
-      padding-right: 3rem;
     }
   }
 

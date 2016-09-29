@@ -12,7 +12,7 @@ class BiddingStatusPresenter::Over < BiddingStatusPresenter::Base
   end
 
   def label_class
-    'auction-label-over'
+    'over'
   end
 
   def label

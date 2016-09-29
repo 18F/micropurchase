@@ -1,0 +1,23 @@
+<div class="date">
+  <div><%= label_tag("Date") %></div>
+  <%= simple_fields_for :auction do |auction_fields| %>
+    <%= auction_fields.input "#{field}_at".to_sym,
+      as: :date,
+      html5: true,
+      label: false,
+      input_html: { value: auction.date(field) } %>
+  <% end %>
+</div>
+
+<div class="time">
+  <div><%= label_tag("Time") %></div>
+  <select class="usa-width-one-third" name="auction[<%=field%>_at(1i)]" id="auction_<%=field%>_at_1i">
+    <%= options_for_select((1..12).to_a, selected: auction.hour_default(field)) %>
+  </select>
+  <select class="usa-width-one-third" name="auction[<%=field%>_at(2i)]" id="auction_<%=field%>_at_2i">
+    <%= options_for_select(['00', '15', '30', '45'], selected: auction.minute_default(field)) %>
+  </select>
+  <select class="usa-width-one-third" name="auction[<%=field%>_at(3i)]" id="auction_<%=field%>_at_3i">
+    <%= options_for_select(['AM', 'PM'], selected: auction.meridiem_default(field)) %>
+  </select>
+</div>

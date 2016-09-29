@@ -1,7 +1,9 @@
-<h2>Editing user</h2>
-<%= simple_form_for [:admin, @view_model.record] do |form| %>
-  <%= form.input :email, disabled: true %>
-  <%= form.input :name, disabled: true %>
-  <%= form.input :contracting_officer, as: :boolean %>
-  <%= form.submit %>
-<% end %>
+<div class="usa-grid">
+  <h2>Editing user</h2>
+  <%= simple_form_for [:admin, @view_model.record] do |form| %>
+    <%= form.input :email, disabled: true %>
+    <%= form.input :name, disabled: true %>
+    <%= form.input :contracting_officer, as: :boolean %>
+    <%= form.submit %>
+  <% end %>
+</div>

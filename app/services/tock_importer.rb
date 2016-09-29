@@ -14,10 +14,6 @@ class TockImporter
   private
 
   def projects
-    @_projects ||= json["results"]
-  end
-
-  def json
     JSON.parse(data)
   end
 

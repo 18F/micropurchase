@@ -7,7 +7,7 @@ class TockCredentials
     if use_env_var?
       ENV['MICROPURCHASE_TOCK_API_KEY']
     else
-      credentials('micropurchase-tock')['api_key']
+      credentials('micropurchase-tock')['api_token']
     end
   end
 end

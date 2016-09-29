@@ -78,7 +78,7 @@ describe Auction do
           auction.published = :published
 
           expect(auction).to be_invalid
-          expect(auction.errors.messages).to eq(c2_status: [" is not approved."])
+          expect(auction.errors.messages).to eq(c2_status: [" is not budget approved."])
         end
       end
 

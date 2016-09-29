@@ -7,7 +7,7 @@ describe BiddingStatusPresenter::Expiring do
 
       presenter = BiddingStatusPresenter::Expiring.new(auction)
 
-      expect(presenter.label_class).to eq 'auction-label-expiring'
+      expect(presenter.label_class).to eq 'expiring'
     end
   end
 

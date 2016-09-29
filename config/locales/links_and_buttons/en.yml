@@ -6,6 +6,7 @@ en:
       draft: 'Draft Auctions'
       closed: 'Closed'
       add: 'Add auction'
+      publish: 'Publish'
     customers:
       add: 'Add customer'
     skills:

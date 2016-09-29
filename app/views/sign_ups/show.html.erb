@@ -2,39 +2,34 @@
   <div class="sign-up-wrapper">
     <h1>Welcome to 18F Micro-purchase</h1>
 
-    <div class="sign-up-welcome">
-      Hi, <%= current_user.name %>, it looks like you’re new around here!
+    <div class="usa-font-lead">
+      Hello, <%= current_user.name %>! It looks like you're new around here.
+      Please take a moment to read the following information (which can also be
+      found in our <%= link_to 'docs', page_path('docs') %> page).
     </div>
 
-    <div class="how-it-works-label">
-      How it works
-    </div>
+    <div class="sign-up-list">
+      <h3>How it works</h3>
 
-    <div class="how-it-works">
       <p>
-      None of the information stored in this application is considered proprietary or
-      procurement-sensitive. Furthermore, all users who submit bids
-      consent to the publication of their GitHub usernames, DUNS numbers, and bid
-      amounts at the end of the auction. Bidders’ email
-      addresses will not be disclosed and will only be used for
-      micro-purchase-related communication on an as-needed basis.
+      We provide an overview of how things work on our <%= link_to 'about page',
+      page_path('about') %>, but some of the specific aspects of winning an auction,
+      delivering work, and collecting payment are covered on our <%= link_to 'policies page',
+      page_path('policies') %>
       </p>
 
+      <h3>Placing a bid</h3>
       <p>
-      In order to bid, all users must be listed as “Active” in SAM.gov on the day the
-      auction opens. The process for SAM.gov activation may take several days, and we
-      encourage interested vendors to sign up at least one week prior to bidding. To
-      check your status with SAM.gov, you may use the SAM Status Tracker. If you need
-      help with SAM.gov, call the toll-free SAM.gov Help Desk: 1-866-606-8220.
+      To place a bid you'll need to register on SAM.gov and obtain a DUNS
+      number. If you haven't done either of those things before, don't despair!
+      We've got <%= link_to 'guide for that', page_path('docs/placing_a_bid') %>.
       </p>
 
+      <h3>Getting paid</h3>
       <p>
-      This platform is the primary method of bidding on micro-purchase opportunities.
-      Vendor organizations may have multiple user accounts registered on this
-      micro-purchase platform and on GitHub, as well as associated with each vendor
-      and the vendor’s DUNS number. Furthermore, vendors may register as either
-      individuals or businesses on SAM.gov. Please file a GitHub issue in this repo
-      if you have any questions.
+      You're probably going to want to get paid for your awesome work. Here's
+      <%= link_to 'a short guide', page_path('docs/getting_paid') %> on how to
+      do that.
       </p>
     </div>
 

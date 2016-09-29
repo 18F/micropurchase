@@ -6,10 +6,10 @@ class CheckApproval < C2ApiWrapper
   def perform
     auctions.each do |auction|
       next if auction.c2_proposal_url.blank? || auction.invalid?
-      approved_at = find_approval_timestamp(proposal_json(auction))
+      budget_approved_at = find_approval_timestamp(proposal_json(auction))
 
-      if approved_at
-        auction.update(c2_status: :approved)
+      if budget_approved_at
+        auction.update(c2_status: :budget_approved)
       end
     end
   end
