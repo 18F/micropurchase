@@ -16,7 +16,7 @@ class BiddingStatusPresenter::Future < BiddingStatusPresenter::Base
   end
 
   def label
-    'Coming Soon'
+    'Coming soon'
   end
 
   def tag_data_value_status
