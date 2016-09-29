@@ -1,4 +1,5 @@
-<%= link_to I18n.t('statuses.admin_auction_status_presenter.future.published.actions.unpublish'),
-  admin_auction_published_path(status.auction),
-  method: :patch,
-  class: 'usa-button usa-button-outline action-button' %>
+<%= simple_form_for [:admin, status.auction], url: admin_auction_path, method: :patch do |f| %>
+  <%= f.hidden_field :published, value: 'unpublished', hidden: true %>
+  <%= f.submit t('statuses.admin_auction_status_presenter.future.published.actions.unpublish'),
+    class: 'usa-button usa-button-outline action-button' %>
+<% end %>

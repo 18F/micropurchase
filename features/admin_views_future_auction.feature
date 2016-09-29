@@ -12,7 +12,7 @@ Feature: Admin views future auction
     And I should see the future published auction message for admins
 
     When I click on the unpublish button
-    Then I should see a success message confirming that the auction was unpublished
+    Then I should see a success message confirming that the auction was updated
 
   Scenario: Viewing the admin auction page
     Given I am an administrator
@@ -22,7 +22,7 @@ Feature: Admin views future auction
     Then I should see the future published auction message for admins
 
     When I click on the unpublish button
-    Then I should see a success message confirming that the auction was unpublished
+    Then I should see a success message confirming that the auction was updated
     And I should see the auction as an unpublished auction that is ready to be published
 
   Scenario: Viewing the admin auction page for an auction that uses a non-default purchase card
@@ -34,5 +34,5 @@ Feature: Admin views future auction
     Then I should see the future published auction message for admins
 
     When I click on the unpublish button
-    Then I should see a success message confirming that the auction was unpublished
+    Then I should see a success message confirming that the auction was updated
     And I should see the auction as an unpublished auction that is ready to be published

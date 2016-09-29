@@ -90,13 +90,13 @@ end
 
 Then(/^I should see the bid form$/) do
   within('.auction-show') do
-    expect(page).to have_selector(:css, '.auction-detail-panel form')
+    expect(page).to have_selector(:css, '.new_bid')
   end
 end
 
 Then(/^I should not see the bid form$/) do
   within('.auction-show') do
-    expect(page).not_to have_selector(:css, '.auction-detail-panel form')
+    expect(page).not_to have_selector(:css, '.new_bid')
   end
 end
 
