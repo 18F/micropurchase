@@ -85,10 +85,10 @@ Then(/^I should not see a flash message$/) do
   expect(page).not_to have_css('.flashes')
 end
 
-Then(/^I should see a success message confirming that the auction was unpublished$/) do
+Then(/^I should see a success message confirming that the auction was updated$/) do
   within("div.usa-alert.usa-alert-success") do
     expect(page).to have_content(
-      "Auction: #{@auction.title} has been successfully unpublished"
+      I18n.t('controllers.admin.auctions.update.success')
     )
   end
 end
