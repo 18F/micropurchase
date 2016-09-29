@@ -19,7 +19,7 @@
     float: left;
     font-family: 'Merriweather';
     margin-bottom: 0;
-    margin-top: 2rem;
+    margin-top: 3rem;
   }
 
   .usa-button-outline {
@@ -43,7 +43,7 @@
   display: inline-block;
 
   @include media($medium-screen) {
-    margin-top: 3rem;
+    margin-top: 4rem;
     float: right;
   }
 }
