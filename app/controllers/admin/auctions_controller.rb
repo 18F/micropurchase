@@ -1,11 +1,6 @@
 class Admin::AuctionsController < Admin::BaseController
   layout 'admin'
 
-  def index
-    @view_model = Admin::AuctionsIndexViewModel.new
-    @auctions = paginated_auctions
-  end
-
   def show
     @view_model = Admin::AuctionShowViewModel.new(
       auction: Auction.find(params[:id]),
@@ -22,7 +17,7 @@ class Admin::AuctionsController < Admin::BaseController
 
     if SaveAuction.new(auction).perform
       flash[:success] = I18n.t('controllers.admin.auctions.create.success')
-      redirect_to admin_auctions_path
+      redirect_to admin_path
     else
       flash.now[:error] = auction.errors.full_messages.to_sentence
       @view_model = Admin::NewAuctionViewModel.new(auction)
