@@ -1,5 +1,16 @@
 en:
   mailers:
+    admin_mailer:
+      vendor_started_work:
+        subject: Work started on %{auction_name}
+        para_1: >
+          %{winner_name} initiated a pull request for
+           “%{auction_name}” and should complete their work no later
+           than %{delivery_due_at}.
+        para_2: >
+          You can view this auction (including a link to
+          %{winner_name}’s pull request) by signing in and visiting
+          %{auction_url}
     auction_mailer:
       losing_bidder_notification:
         para_1: "We regret to inform you that the auction period for %{auction_title} recently

@@ -1,0 +1,12 @@
+<%= I18n.t(
+  'mailers.admin_mailer.vendor_started_work.para_1',
+  winner_name: @winner_name,
+  auction_name: @auction.title,
+  delivery_due_at: DcTimePresenter.convert_and_format(@auction.delivery_due_at)
+) %>
+
+<%= I18n.t(
+  'mailers.admin_mailer.vendor_started_work.para_2',
+  winner_name: @winner_name,
+  auction_url: admin_auction_url(@auction)
+) %>
