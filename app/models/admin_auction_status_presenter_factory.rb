@@ -29,7 +29,7 @@ class AdminAuctionStatusPresenterFactory
     elsif available?
       AdminAuctionStatusPresenter::Available
     elsif auction.budget_approved? && auction.pending_delivery?
-      C2StatusPresenter::Approved
+      C2StatusPresenter::BudgetApproved
     elsif auction.work_in_progress?
       AdminAuctionStatusPresenter::WorkInProgress
     elsif auction.pending_acceptance?
