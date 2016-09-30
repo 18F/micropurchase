@@ -5,8 +5,8 @@ class WinningBidderEmailSender
 
   def perform
     if auction_has_winner?
-      AuctionMailer
-        .winning_bidder_notification(bidder: winning_bidder, auction: auction)
+      WinningBidderMailer
+        .auction_ended(bidder: winning_bidder, auction: auction)
         .deliver_later
     end
   end

@@ -1,8 +1,9 @@
 class AuctionListItem
-  attr_reader :auction
+  attr_reader :auction, :current_user
 
-  def initialize(auction:)
+  def initialize(auction:, current_user:)
     @auction = auction
+    @current_user = current_user
   end
 
   def title
@@ -14,7 +15,11 @@ class AuctionListItem
   end
 
   def auction_title_partial
-    'auctions/title'
+    if current_user.decorate.admin?
+      'admin/auctions/title'
+    else
+      'auctions/title'
+    end
   end
 
   def html_summary

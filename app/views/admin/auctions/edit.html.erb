@@ -3,6 +3,7 @@
     <%= simple_form_for [:admin, @view_model.record] do |f| %>
       <%= render partial: 'form', locals: { f: f, auction: @view_model } %>
       <%= f.submit class: 'usa-button usa-button-outline' %>
+      <%= render partial: @view_model.archive_auction_partial, locals: {auction: @view_model.auction, f: f} %>
     <% end %>
   </div>
 </div>

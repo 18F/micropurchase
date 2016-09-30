@@ -18,12 +18,16 @@ When(/^I visit the auction page$/) do
   visit auction_path(@auction)
 end
 
+When(/^I visit the auctions page$/) do
+  visit auctions_path
+end
+
 When(/^I visit the unpublished auction$/) do
   visit auction_path(@unpublished_auction)
 end
 
-When(/^I visit the auctions admin page$/) do
-  visit admin_auctions_path
+When(/^I visit the admin page$/) do
+  visit admin_path
 end
 
 When(/^I visit the admin auction page for that auction$/) do
@@ -100,10 +104,6 @@ end
 
 Then(/^I should be on my profile page$/) do
   expect(page.current_path).to eq(profile_path)
-end
-
-When(/^I should be on the admin auctions page$/) do
-  expect(page.current_path).to eq(admin_auctions_path)
 end
 
 Then(/^I should be on the admin form for that auction$/) do

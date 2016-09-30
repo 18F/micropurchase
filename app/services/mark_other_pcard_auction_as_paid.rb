@@ -6,7 +6,7 @@ class MarkOtherPcardAuctionAsPaid
   end
 
   def perform
-    auction.update(paid_at: Time.now)
-    AuctionMailer.auction_paid_winning_vendor_other_pcard(auction: auction).deliver_later
+    auction.update(paid_at: Time.current)
+    WinningBidderMailer.auction_paid_other_pcard(auction: auction).deliver_later
   end
 end

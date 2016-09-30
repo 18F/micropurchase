@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get '/logout', to: 'authentications#destroy'
   get '/auctions/rules/sealed-bid', to: 'auctions#sealed_bid_auction_rules'
   get '/auctions/rules/reverse', to: 'auctions#reverse_auction_rules'
-  get '/admin', to: 'admin/auctions#index'
+  get '/admin', to: 'admin/auctions/needs_attention#index'
   get '/sign_up', to: 'sign_ups#show'
   get '/sign_in', to: 'sign_ins#show'
 
@@ -31,7 +31,7 @@ Rails.application.routes.draw do
       get '/needs_attention', to: 'needs_attention#index'
     end
 
-    resources :auctions
+    resources :auctions, except: [:index]
 
     scope '/people' do
       resources :admins, only: [:index]

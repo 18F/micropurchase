@@ -45,13 +45,13 @@ describe CheckPayment do
             c2_proposal_url: "https://c2-dev.18f.gov/#{c2_path}"
           )
           mailer_double = double(deliver_later: true)
-          allow(AuctionMailer).to receive(:auction_paid_winning_vendor_notification)
+          allow(WinningBidderMailer).to receive(:auction_paid_default_pcard)
             .with(auction: auction)
             .and_return(mailer_double)
 
           CheckPayment.new.perform
 
-          expect(AuctionMailer).to have_received(:auction_paid_winning_vendor_notification)
+          expect(WinningBidderMailer).to have_received(:auction_paid_default_pcard)
             .with(auction: auction)
           expect(mailer_double).to have_received(:deliver_later)
         end

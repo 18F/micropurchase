@@ -247,3 +247,12 @@ Then(/^I should see an admin status message that the auction was paid with anoth
     )
   )
 end
+
+Then(/^I should see the admin status message for an archived auction$/) do
+  @auction.reload
+  expect(page.html).to have_content(
+    I18n.t(
+      'statuses.admin_auction_status_presenter.archived.body'
+    )
+  )
+end

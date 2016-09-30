@@ -16,7 +16,7 @@ class AuctionsIndexViewModel
 
   def auction_view_models
     auctions.map do |auction|
-      AuctionListItem.new(auction: auction)
+      AuctionListItem.new(auction: auction, current_user: current_user)
     end
   end
 

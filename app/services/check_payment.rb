@@ -9,7 +9,9 @@ class CheckPayment < C2ApiWrapper
 
       if paid_at
         auction.update(c2_status: :c2_paid, paid_at: DateTime.parse(paid_at))
-        AuctionMailer.auction_paid_winning_vendor_notification(auction: auction).deliver_later
+        WinningBidderMailer.auction_paid_default_pcard(
+          auction: auction
+        ).deliver_later
       end
     end
   end

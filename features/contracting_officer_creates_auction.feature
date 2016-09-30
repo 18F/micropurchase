@@ -7,11 +7,13 @@ Feature: Contracting Officers
     And there is a client account to bill to
     And there is a skill in the system
     And I sign in
-    When I visit the auctions admin page
+    When I visit the admin page
     And I click on the "Add auction" link
     And I edit the new auction form
     And I set the auction start price to $24000
     And I click to create an auction
     Then I should see that my auction was created successfully
-    When I click to edit the auction
+
+    When I click on the auction's title
+    And I click to edit the auction
     Then I should see the start price for the auction is $24000

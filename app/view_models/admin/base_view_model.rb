@@ -1,8 +1,4 @@
 class Admin::BaseViewModel
-  def auctions_nav_class
-    ''
-  end
-
   def closed_auctions_nav_class
     ''
   end
