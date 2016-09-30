@@ -1,0 +1,21 @@
+<%= simple_form_for [:admin, status.auction], url: admin_auction_publish_path, method: :patch do |f| %>
+<fieldset class="datetime">
+  <legend>Auction starts</legend>
+  <%= render partial: 'sidebar_datetime_fields',
+    locals: { field: 'started', auction: status } %>
+</fieldset>
+
+<fieldset class="datetime">
+  <legend>Auction ends</legend>
+  <%= render partial: 'sidebar_datetime_fields',
+    locals: { field: 'ended', auction: status } %>
+</fieldset>
+
+<fieldset class="datetime">
+  <legend>Delivery deadline</legend>
+  <%= render partial: 'sidebar_datetime_fields',
+    locals: { field: 'delivery_due', auction: status } %>
+</fieldset>
+
+  <%= f.submit t('links_and_buttons.auctions.publish'), class: 'usa-button usa-button-outline' %>
+<% end %>

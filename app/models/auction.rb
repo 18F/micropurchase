@@ -39,12 +39,10 @@ class Auction < ActiveRecord::Base
 
   validate :user_is_contracting_officer_if_above_micropurchase
   validates :delivery_due_at, presence: true
-  validates :description, presence: true, if: :published?
   validates :ended_at, presence: true
   validates :purchase_card, presence: true
   validates :start_price, presence: true
   validates :started_at, presence: true
-  validates :summary, presence: true, if: :published?
   validates :title, presence: true
   validates :user, presence: true
   validates :billable_to, presence: true
@@ -53,14 +51,10 @@ class Auction < ActiveRecord::Base
     format: { with: Regexp.new("#{C2_REGEX}[0-9]") },
     allow_blank: true
   )
-  validate :publishing_auction, on: :update, if: :published_changed?
 
-  def publishing_auction
-    return if archived?
-    if published_was == 'unpublished' && purchase_card == 'default' && c2_status != 'budget_approved'
-      errors.add(:c2_status, " is not budget approved.")
-    end
-  end
+  validates :summary, presence: true, if: :published?
+  validates :description, presence: true, if: :published?
+  validates_with PublishedAuctionValidator, on: :update, if: :published_changed?
 
   def sorted_skill_names
     skills.order(name: :asc).map(&:name)
@@ -70,15 +64,7 @@ class Auction < ActiveRecord::Base
     lowest_bids.first
   end
 
-  def lowest_bids
-    bids.select { |b| b.amount == lowest_amount }.sort_by(&:created_at)
-  end
-
   private
-
-  def lowest_amount
-    bids.sort_by(&:amount).first.try(:amount)
-  end
 
   def user_is_contracting_officer_if_above_micropurchase
     if user && !user.contracting_officer? && start_price > AuctionThreshold::MICROPURCHASE
@@ -90,5 +76,24 @@ class Auction < ActiveRecord::Base
         )
       )
     end
+  end
+
+  def publishing_auction
+    if published_was == 'unpublished' && purchase_card == 'default' && c2_status != 'budget_approved'
+      errors.add(:c2_status, "is not budget approved.")
+    end
+
+    if published_was == 'unpubished' && (started_at < Time.current || started_at > ended_at)
+      errors.add(:started_at, "is invalid")
+    end
+  end
+
+  def lowest_bids
+    bids.select { |b| b.amount == lowest_amount }.sort_by(&:created_at)
+  end
+
+
+  def lowest_amount
+    bids.sort_by(&:amount).first.try(:amount)
   end
 end
