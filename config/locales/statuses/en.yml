@@ -177,32 +177,26 @@ en:
         header: "Rejected"
         body: "<a href=%{delivery_url}>%{winner_name}'s work</a> was rejected on %{rejected_at}."
     c2_presenter:
-      approval_not_requested:
-        status: "Not requested"
+      not_requested:
         body: "This auction will be paid for using an 18F purchase card, which cannot be
               used without first being granted approval in C2."
         header: "C2 approval required"
       sent:
-         status: "Sent"
          header: "Pending C2 approval"
          body: "This auction has been sent to C2 for approval."
       pending_approval:
-        status: "Pending"
         header: "Pending C2 approval"
         body: "This auction has been sent to C2 for approval."
         action: "You can check on the status <a href=%{link}>here</a>."
       budget_approved:
-        status: "Approved"
         body: "This auction has been approved in C2: <a href=%{link}>%{link}</a>"
         header: "Approved in C2"
       c2_paid:
-        status: "Awaiting payment confirmation"
         body: >
           %{winner_url} was paid on %{paid_at}, and has received an email
           asking them to confirm that payment.
         header: "Pending payment confirmation"
       payment_confirmed:
-        status: "Payment confirmed"
         header: "Paid"
         body: >
           %{winner_url}'s pull request was accepted on %{accepted_date}. The

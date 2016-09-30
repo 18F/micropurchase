@@ -1,8 +1,4 @@
 class C2StatusPresenter::PaymentConfirmed < C2StatusPresenter::Base
-  def status
-    I18n.t('statuses.c2_presenter.payment_confirmed.status')
-  end
-
   def body
     I18n.t(
       'statuses.c2_presenter.payment_confirmed.body',
