@@ -40,6 +40,10 @@ FactoryGirl.define do
       published :published
     end
 
+    trait :archived do
+      published :archived
+    end
+
     trait :unpublished do
       future
       published :unpublished

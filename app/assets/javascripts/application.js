@@ -6,3 +6,4 @@
 //= require selectize
 //= require selectizer
 //= require bidConfirm.js
+//= require admin/archiveConfirm.js

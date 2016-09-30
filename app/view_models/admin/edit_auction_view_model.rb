@@ -45,6 +45,14 @@ class Admin::EditAuctionViewModel < Admin::BaseViewModel
     end
   end
 
+  def archive_auction_partial
+    if auction.unpublished?
+      'admin/auctions/archive_auction'
+    else
+      'components/null'
+    end
+  end
+
   def paid_at_partial
     if auction.purchase_card == "default" || auction.delivery_status != "accepted"
       'components/null'

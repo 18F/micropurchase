@@ -16,7 +16,9 @@ class AdminAuctionStatusPresenterFactory
   private
 
   def default_purchase_card_presenter
-    if auction.c2_status == 'not_requested'
+    if auction.archived?
+      AdminAuctionStatusPresenter::Archived
+    elsif auction.c2_status == 'not_requested'
       C2StatusPresenter::NotRequested
     elsif auction.c2_status == 'sent'
       C2StatusPresenter::Sent
@@ -48,7 +50,9 @@ class AdminAuctionStatusPresenterFactory
   end
 
   def other_purchase_card_presenter
-    if future? && auction.published?
+    if auction.archived?
+      AdminAuctionStatusPresenter::Archived
+    elsif future? && auction.published?
       AdminAuctionStatusPresenter::Future
     elsif future? && auction.unpublished?
       AdminAuctionStatusPresenter::ReadyToPublish
