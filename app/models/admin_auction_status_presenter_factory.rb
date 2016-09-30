@@ -50,7 +50,7 @@ class AdminAuctionStatusPresenterFactory
   def other_purchase_card_presenter
     if future? && auction.published?
       AdminAuctionStatusPresenter::Future
-    elsif future? && auction.unpublished?
+    elsif auction.unpublished?
       AdminAuctionStatusPresenter::ReadyToPublish
     elsif available?
       AdminAuctionStatusPresenter::Available

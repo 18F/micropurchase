@@ -31,6 +31,10 @@ class AdminAuctionStatusPresenter::ReadyToPublish < AdminAuctionStatusPresenter:
     dc_time(field).strftime('%p').strip
   end
 
+  def estimated_delivery_due_at
+    DcTimePresenter.convert_and_format(auction.delivery_due_at)
+  end
+
   private
 
   def dc_time(field)

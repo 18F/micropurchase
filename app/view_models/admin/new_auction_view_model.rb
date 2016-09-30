@@ -24,10 +24,6 @@ class Admin::NewAuctionViewModel < Admin::BaseViewModel
     'components/null'
   end
 
-  def delivery_due_partial
-    'admin/auctions/due_in_days'
-  end
-
   def estimated_delivery_due_at
     DcTimePresenter.convert_and_format(default_date_time('delivery_due_at').convert)
   end

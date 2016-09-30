@@ -144,7 +144,6 @@ Then(/^I should be able to edit the existing auction form$/) do
   @end_time = DcTimePresenter.time_zone.parse("#{@end_day.strftime('%Y-%m-%d')} 5:30 PM")
 
   @deadline_day = DcTimePresenter.convert(Time.now + 5.days)
-  fill_in "auction_delivery_due_at", with: @deadline_day.strftime('%Y-%m-%d')
 
   select(@billable.to_s, from: "auction_billable_to")
 end
