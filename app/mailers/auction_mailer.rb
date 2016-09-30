@@ -10,17 +10,6 @@ class AuctionMailer < ActionMailer::Base
     )
   end
 
-  def winning_bidder_notification(bidder:, auction:)
-    @auction = auction
-    bidder = bidder
-    mail(
-      to: bidder.email,
-      subject: I18n.t('mailers.auction_mailer.winning_bidder_notification.subject'),
-      from: SMTPCredentials.default_from,
-      reply_to: 'micropurchase@gsa.gov'
-    )
-  end
-
   def auction_accepted_customer_notification(auction:)
     @auction = auction
     customer = auction.customer
@@ -28,36 +17,6 @@ class AuctionMailer < ActionMailer::Base
     mail(
       to: customer.email,
       subject: I18n.t('mailers.auction_mailer.auction_accepted_customer_notification.subject'),
-      from: SMTPCredentials.default_from,
-      reply_to: 'micropurchase@gsa.gov'
-    )
-  end
-
-  def auction_paid_winning_vendor_notification(auction:)
-    @auction = auction
-    @winning_bid = WinningBid.new(@auction).find
-
-    mail(
-      to: @winning_bid.bidder.email,
-      subject: I18n.t(
-        'mailers.auction_mailer.auction_paid_winning_vendor_notification.subject',
-        auction_title: @auction.title
-      ),
-      from: SMTPCredentials.default_from,
-      reply_to: 'micropurchase@gsa.gov'
-    )
-  end
-
-  def auction_paid_winning_vendor_other_pcard(auction:)
-    @auction = auction
-    @winning_bid = WinningBid.new(@auction).find
-
-    mail(
-      to: @winning_bid.bidder.email,
-      subject: I18n.t(
-        'mailers.auction_mailer.auction_paid_winning_vendor_other_pcard.subject',
-        auction_title: @auction.title
-      ),
       from: SMTPCredentials.default_from,
       reply_to: 'micropurchase@gsa.gov'
     )

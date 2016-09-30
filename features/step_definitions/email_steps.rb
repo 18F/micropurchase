@@ -48,7 +48,7 @@ Then(/^I should receive an email notifying me that I won$/) do
   expect(email.to.first).to eq @user.email
   expect(email.body.encoded).to include(
     I18n.t(
-      'mailers.auction_mailer.winning_bidder_notification.para_2',
+      'mailers.winning_bidder_mailer.auction_ended.para_2',
       auction_url: ""
     )
   )

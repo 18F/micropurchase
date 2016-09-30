@@ -1,5 +1,5 @@
 <%= I18n.t(
-  'mailers.auction_mailer.winning_bidder_notification.para_1',
+  'mailers.winning_bidder_mailer.auction_ended.para_1',
   auction_title: @auction.title,
   auction_url: auction_url(@auction),
   bid_amount: Currency.new(WinningBid.new(@auction).find.amount).to_s,
@@ -8,14 +8,14 @@
 ) %>
 
 <%= I18n.t(
-  'mailers.auction_mailer.winning_bidder_notification.para_2',
+  'mailers.winning_bidder_mailer.auction_ended.para_2',
   auction_url: auction_url(@auction)
 ) %>
 
 <%= I18n.t(
-  'mailers.auction_mailer.winning_bidder_notification.para_3'
+  'mailers.winning_bidder_mailer.auction_ended.para_3'
 ) %>
 
-<%= I18n.t('mailers.auction_mailer.winning_bidder_notification.sign_off') %>
+<%= I18n.t('mailers.winning_bidder_mailer.auction_ended.sign_off') %>
 
-<%= I18n.t('mailers.auction_mailer.winning_bidder_notification.from') %>
+<%= I18n.t('mailers.winning_bidder_mailer.auction_ended.from') %>

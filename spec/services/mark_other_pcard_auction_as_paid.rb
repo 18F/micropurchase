@@ -16,21 +16,20 @@ describe MarkOtherPcardAuctionAsPaid do
 
       auction = create(
         :auction,
-        :payment_needed,y
+        :payment_needed,
         purchase_card: :other,
         customer: customer
       )
       mailer_double = double(deliver_later: true)
-      allow(AuctionMailer).to receive(:auction_paid_winning_vendor_other_pcard)
+      allow(WinningBidderMailer).to receive(:auction_paid_other_pcard)
                                .with(auction: auction)
                                .and_return(mailer_double)
 
       MarkOtherPcardAuctionAsPaid.new(auction: auction).perform
 
-      expect(AuctionMailer).to have_received(:auction_paid_winning_vendor_other_pcard)
+      expect(WinningBidderMailer).to have_received(:auction_paid_other_pcard)
                                 .with(auction: auction)
       expect(mailer_double).to have_received(:deliver_later)
     end
-
   end
 end

@@ -9,13 +9,13 @@ describe WinningBidderEmailSender do
         winning_bidder = winning_bid.bidder
 
         mailer_double = double(deliver_later: true)
-        allow(AuctionMailer).to receive(:winning_bidder_notification)
+        allow(WinningBidderMailer).to receive(:auction_ended)
           .with(bidder: winning_bidder, auction: auction)
           .and_return(mailer_double)
 
         WinningBidderEmailSender.new(auction).perform
 
-        expect(AuctionMailer).to have_received(:winning_bidder_notification)
+        expect(WinningBidderMailer).to have_received(:auction_ended)
           .with(bidder: winning_bidder, auction: auction)
       end
     end
