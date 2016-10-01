@@ -9,7 +9,9 @@ Micro-purchase.
 Join the Micro-purchase Slack channels:
 
 * `#micropurchase` for general discussion
-* `#micropurchase-status` for downtime alerts
+* `#micropurchase-dev` for dev-related discussion
+* `#micropurchase-design` for design-related discussion
+* `#micropurchase-bizdev` for businessy discussion
 
 ### Add yourself as an Admin
 
@@ -30,23 +32,29 @@ Don't forget to submit a pull request! See
 
 18F's [deployments](http://12factor.net/codebase) of Micro-purchase live in AWS,
 and are deployed via [Cloud Foundry](http://www.cloudfoundry.org). See [the 18F
-Cloud Foundry documentation](https://docs.cloud.gov) for more details on how to
+Cloud.gov documentation](https://docs.cloud.gov) for more details on how to
 inspect and configure them.
 
-Once you're set up with Cloud Foundry, ask for access to the `18f-acq`
-organization in the Micro-purchase Slack channel.
+Once you're set up with Cloud.gov, ask your fellow developers to [add you as a
+SpaceDeveloper for the staging and
+production spaces](https://docs.cloud.gov/apps/managing-teammates/#give-roles-to-a-teammate).
 
 Read more about deployments in the [deployment docs](deployment.md).
 
 ### Get set up on New Relic
 
 The existing team members all have access to New Relic monitoring for staging
-and production. Ask to be added to the Micro-purchase New Relic organization.
+and production. Ask in Slack to be added to the Micro-purchase New Relic organization.
+Jacob Harris, Alan DeLevie, and Jessie Young are admins and can add you.
 
-Once added, developers should also add themselves to the "Micropurchase devs"
-group on New Relic: <https://rpm.newrelic.com/accounts/1345535/notification_channels>
+Once added, developers should also add their email address as a notification
+channel for the "Default" alert policy. This will ensure that all developers
+receive an email when the error percentage goes above .01%.
 
-New Relic is set up to send alerts to everyone in this group by default.
+To add yourself, visit the "Alerts" area in New Relic. Then view "Alert Policies",
+select "Default" and view the "Notification Channels". There you will see a
+link to add a new channel, which will include a "Users" section where you can
+add your User account's email as a recipient of notifications.
 
 ### Start working on a feature
 
