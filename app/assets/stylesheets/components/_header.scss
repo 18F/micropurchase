@@ -16,14 +16,16 @@
   background-repeat: no-repeat;
   color: $color-white;
   float: left;
-  font-size: $lead-font-size;
+  font-size: 24px;
   font-weight: $font-light;
   margin-top: 1.25rem;
   padding-left: 55px;
 }
 
 .subtitle {
-  font-size: 1.5rem;
+  font-size: 12px;
+  font-weight: 200;
+  font-family: 'Merriweather';
   font-style: italic;
 }
 
@@ -51,6 +53,7 @@
 
 
 .nav-link {
+  font-size: 16px;
   margin-left: 1.5rem;
   padding-bottom: .5rem;
   color: $color-white;
