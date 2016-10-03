@@ -44,6 +44,18 @@ describe Auction do
       end
     end
 
+    context 'when set to archived' do
+      it 'does not run date validations' do
+        start_date = DefaultDateTime.new(2.days.from_now).convert
+        end_date = DefaultDateTime.new(Time.current).convert
+        auction = create(:auction, :unpublished, started_at: start_date, ended_at: end_date)
+
+        auction.published = :archived
+
+        expect(auction).to be_valid
+      end
+    end
+
     context 'when set to published' do
       it 'validates presence of summary' do
         auction = create(:auction, published: :unpublished)

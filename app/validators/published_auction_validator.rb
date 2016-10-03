@@ -1,6 +1,6 @@
 class PublishedAuctionValidator < ActiveModel::Validator
   def validate(auction)
-    if auction.published_was == 'unpublished'
+    if auction.published? && auction.published_was == 'unpublished'
       validate_budget_approval_for_default_pcard(auction)
       validate_start_date_before_end_date(auction)
       validate_start_date_in_future(auction)
