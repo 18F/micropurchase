@@ -8,12 +8,13 @@ describe Auction do
   describe 'Validations' do
     context 'on create' do
       it { should validate_presence_of(:billable_to) }
+      it { should validate_presence_of(:delivery_due_at) }
       it { should validate_presence_of(:ended_at) }
-      it { should validate_presence_of(:started_at) }
+      it { should validate_presence_of(:purchase_card) }
       it { should validate_presence_of(:start_price) }
+      it { should validate_presence_of(:started_at) }
       it { should validate_presence_of(:title) }
       it { should validate_presence_of(:user) }
-      it { should validate_presence_of(:purchase_card) }
       it do
         should_not allow_values(
           ENV['C2_HOST'], 'http://www.example.com'
@@ -43,21 +44,24 @@ describe Auction do
       end
     end
 
+    context 'when set to archived' do
+      it 'does not run date validations' do
+        start_date = DefaultDateTime.new(2.days.from_now).convert
+        end_date = DefaultDateTime.new(Time.current).convert
+        auction = create(:auction, :unpublished, started_at: start_date, ended_at: end_date)
+
+        auction.published = :archived
+
+        expect(auction).to be_valid
+      end
+    end
+
     context 'when set to published' do
       it 'validates presence of summary' do
         auction = create(:auction, published: :unpublished)
 
         auction.published = :published
         auction.summary = nil
-
-        expect(auction).to be_invalid
-      end
-
-      it 'validates presence of delivery deadline' do
-        auction = create(:auction, published: :unpublished)
-
-        auction.published = :published
-        auction.delivery_due_at = nil
 
         expect(auction).to be_invalid
       end
@@ -71,24 +75,53 @@ describe Auction do
         expect(auction).to be_invalid
       end
 
-      context 'auction is not valid and it can not be published' do
-        it 'validates presence of c2_status' do
+      context 'auction is for default purchase card and is not budget approved' do
+        it 'validates c2_status when published' do
           auction = create(:auction, :unpublished, purchase_card: :default)
 
           auction.published = :published
 
           expect(auction).to be_invalid
-          expect(auction.errors.messages).to eq(c2_status: [" is not budget approved."])
+          expect(auction.errors.messages).to eq(c2_status: ["is not budget approved"])
         end
       end
 
-      context 'auction is valid and it can be published' do
-        it 'validates presence of c2_status' do
+      context 'auction is for default purchase card and is budget approved' do
+        it 'validates c2_status when published' do
           auction = create(:auction, :unpublished, purchase_card: :other)
 
           auction.published = :published
 
           expect(auction).to be_valid
+        end
+      end
+
+      context 'start date is after end date' do
+        it 'is invalid' do
+          start_date = DefaultDateTime.new(2.days.from_now).convert
+          end_date = DefaultDateTime.new(Time.current).convert
+          auction = create(:auction, :unpublished, started_at: start_date, ended_at: end_date)
+
+          auction.published = :published
+
+          expect(auction).to be_invalid
+          expect(auction.errors.messages[:base]).to eq(
+            ["You must specify an auction end date/time that comes after the auction start date/time."]
+          )
+        end
+      end
+
+      context 'start date is before today' do
+        it 'is invalid' do
+          start_date = DefaultDateTime.new(2.days.ago).convert
+          auction = create(:auction, :unpublished, started_at: start_date)
+
+          auction.published = :published
+
+          expect(auction).to be_invalid
+          expect(auction.errors.messages[:base]).to eq(
+            ["You must specify an auction start date/time that is after today."]
+          )
         end
       end
     end
