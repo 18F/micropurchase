@@ -1,0 +1,12 @@
+<%= I18n.t(
+  'mailers.admin_mailer.vendor_finished_work.para_1',
+  winner_name: @winner_name,
+  auction_name: @auction.title,
+  delivery_url: @auction.delivery_url
+) %>
+
+<%= I18n.t(
+  'mailers.admin_mailer.vendor_finished_work.para_2',
+  winner_name: @winner_name,
+  auction_url: admin_auction_url(@auction)
+) %>
