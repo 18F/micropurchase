@@ -9,10 +9,6 @@ class C2StatusPresenter::Base
     'components/null'
   end
 
-  def status
-    ''
-  end
-
   def header
     ''
   end

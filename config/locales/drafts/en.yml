@@ -1,0 +1,15 @@
+en:
+  drafts:
+    c2_status:
+      not_requested:
+        status: "Not requested"
+      sent:
+        status: "Sent"
+      pending_approval:
+        status: "Pending"
+      budget_approved:
+        status: "Approved"
+      c2_paid:
+        status: "Awaiting payment confirmation"
+      payment_confirmed:
+        status: "Payment confirmed"

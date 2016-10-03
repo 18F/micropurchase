@@ -15,7 +15,7 @@ class Admin::DraftListItem < Admin::BaseViewModel
 
   def c2_proposal_status
     if auction.purchase_card == 'default'
-      c2_proposal_status_presenter.status
+      I18n.t("drafts.c2_status.#{auction.c2_status}.status")
     else
       'N/A'
     end
@@ -31,11 +31,5 @@ class Admin::DraftListItem < Admin::BaseViewModel
 
   def delivery_due_at
     DcTimePresenter.convert_and_format(auction.delivery_due_at)
-  end
-
-  private
-
-  def c2_proposal_status_presenter
-    Object.const_get("C2StatusPresenter::#{auction.c2_status.camelize}").new(auction: auction)
   end
 end
