@@ -78,20 +78,9 @@ class Auction < ActiveRecord::Base
     end
   end
 
-  def publishing_auction
-    if published_was == 'unpublished' && purchase_card == 'default' && c2_status != 'budget_approved'
-      errors.add(:c2_status, "is not budget approved.")
-    end
-
-    if published_was == 'unpubished' && (started_at < Time.current || started_at > ended_at)
-      errors.add(:started_at, "is invalid")
-    end
-  end
-
   def lowest_bids
     bids.select { |b| b.amount == lowest_amount }.sort_by(&:created_at)
   end
-
 
   def lowest_amount
     bids.sort_by(&:amount).first.try(:amount)
