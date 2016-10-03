@@ -39,7 +39,7 @@ class AdminAuctionStatusPresenterFactory
     elsif auction.accepted_pending_payment_url?
       AdminAuctionStatusPresenter::AcceptedPendingPaymentUrl
     elsif auction.accepted? && !(auction.c2_paid? || auction.payment_confirmed?)
-      AdminAuctionStatusPresenter::Accepted
+      AdminAuctionStatusPresenter::DefaultPcard::Accepted
     elsif auction.rejected?
       AdminAuctionStatusPresenter::Rejected
     elsif auction.c2_paid?

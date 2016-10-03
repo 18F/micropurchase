@@ -29,11 +29,11 @@ describe AdminAuctionStatusPresenterFactory do
   end
 
   context 'when the auction has been accepted' do
-    it 'should return a AdminAuctionStatusPresenter::Accepted' do
+    it 'should return a AdminAuctionStatusPresenter::DefaultPcard::Accepted' do
       auction = create(:auction, :accepted)
 
       expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
-        .to be_a(AdminAuctionStatusPresenter::Accepted)
+        .to be_a(AdminAuctionStatusPresenter::DefaultPcard::Accepted)
     end
   end
 

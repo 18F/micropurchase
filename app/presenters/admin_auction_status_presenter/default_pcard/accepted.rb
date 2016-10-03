@@ -1,11 +1,11 @@
-class AdminAuctionStatusPresenter::Accepted < AdminAuctionStatusPresenter::Base
+class AdminAuctionStatusPresenter::DefaultPcard::Accepted < AdminAuctionStatusPresenter::Base
   def header
-    I18n.t('statuses.admin_auction_status_presenter.accepted.header')
+    I18n.t('statuses.admin_auction_status_presenter.default_pcard.accepted.header')
   end
 
   def body
     I18n.t(
-      'statuses.admin_auction_status_presenter.accepted.body',
+      'statuses.admin_auction_status_presenter.default_pcard.accepted.body',
       accepted_at: accepted_at,
       winner_url: winner_url,
       c2_url: c2_url

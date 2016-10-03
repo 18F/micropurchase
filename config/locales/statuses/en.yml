@@ -153,12 +153,13 @@ en:
           The <a href=%{delivery_url}>pull request</a> from %{winner_url}
           was accepted. However, this vendor cannot
           be paid until they’ve specified a valid payment URL.
-      accepted:
-        header: Accepted
-        body: >
-          %{winner_url}'s delivered code was accepted on
-          %{accepted_at}. The p-card holder has been asked (via <a
-          href="%{c2_url}">C2</a>) to remit payment.
+      default_card:
+        accepted:
+          header: Accepted
+          body: >
+            %{winner_url}'s delivered code was accepted on
+            %{accepted_at}. The p-card holder has been asked (via <a
+            href="%{c2_url}">C2</a>) to remit payment.
       other_pcard:
         accepted:
           header: Pending payment from customer
