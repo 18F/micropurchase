@@ -54,7 +54,7 @@ class AdminAuctionStatusPresenterFactory
       AdminAuctionStatusPresenter::Archived
     elsif future? && auction.published?
       AdminAuctionStatusPresenter::Future
-    elsif future? && auction.unpublished?
+    elsif auction.unpublished?
       AdminAuctionStatusPresenter::ReadyToPublish
     elsif available?
       AdminAuctionStatusPresenter::Available
