@@ -8,6 +8,7 @@ class ArchiveAuction
   def perform
     if auction.unpublished?
       auction.published = :archived
+      update_c2_status
       auction.save
     else
       false
@@ -16,5 +17,14 @@ class ArchiveAuction
 
   def self.archive_submit?(params)
     params.key?(:archive_auction)
+  end
+
+  private
+
+  def update_c2_status
+    return unless auction.c2_proposal_url.present?
+
+    UpdateC2ProposalJob.perform_later(auction.id, 'C2CancelAttributes')
+    auction.c2_status = :c2_cancelled
   end
 end
