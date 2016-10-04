@@ -5,7 +5,7 @@ class C2CancelAttributes
 
   def to_h
     {
-      status: 'cancelled',
+      status: 'canceled',
       gsa18f_procurement: {
         additional_info: additional_info
       }
@@ -17,10 +17,10 @@ class C2CancelAttributes
   attr_accessor :auction
 
   def additional_info
-    "Reason cancelled: #{reason_cancelled}"
+    "Reason canceled: #{reason_canceled}"
   end
 
-  def reason_cancelled
+  def reason_canceled
     if auction.archived?
       'the auction was archived'
     elsif auction.rejected?

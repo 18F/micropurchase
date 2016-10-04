@@ -22,9 +22,9 @@ class ArchiveAuction
   private
 
   def update_c2_status
-    return unless auction.c2_proposal_url.present?
-
-    UpdateC2ProposalJob.perform_later(auction.id, 'C2CancelAttributes')
-    auction.c2_status = :c2_cancelled
+    if auction.c2_proposal_url.present?
+      UpdateC2ProposalJob.perform_later(auction.id, 'C2CancelAttributes')
+      auction.c2_status = :c2_canceled
+    end
   end
 end

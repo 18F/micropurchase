@@ -7,9 +7,9 @@ describe C2CancelAttributes do
 
       attributes = C2CancelAttributes.new(auction).to_h
 
-      expect(attributes[:status]).to eq('cancelled')
+      expect(attributes[:status]).to eq('canceled')
       expect(attributes[:gsa18f_procurement][:additional_info])
-        .to eq('Reason cancelled: the auction was archived')
+        .to eq('Reason canceled: the auction was archived')
     end
 
     it 'constructs the right attributes for rejected auctions' do
@@ -17,9 +17,9 @@ describe C2CancelAttributes do
 
       attributes = C2CancelAttributes.new(auction).to_h
 
-      expect(attributes[:status]).to eq('cancelled')
+      expect(attributes[:status]).to eq('canceled')
       expect(attributes[:gsa18f_procurement][:additional_info])
-        .to eq('Reason cancelled: the auction was rejected')
+        .to eq('Reason canceled: the auction was rejected')
     end
   end
 end

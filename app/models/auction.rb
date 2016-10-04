@@ -19,7 +19,7 @@ class Auction < ActiveRecord::Base
     budget_approved: 3,
     c2_paid: 4,
     payment_confirmed: 5,
-    c2_cancelled: 6
+    c2_canceled: 6
   }
 
   enum delivery_status: {

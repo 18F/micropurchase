@@ -16,7 +16,7 @@ describe ArchiveAuction do
         allow(UpdateC2ProposalJob).to receive(:perform_later)
         ArchiveAuction.new(auction: auction).perform
 
-        expect(auction.reload).to be_c2_cancelled
+        expect(auction.reload).to be_c2_canceled
       end
 
       it 'should enqueue a job to cancel the C2 proposal' do
