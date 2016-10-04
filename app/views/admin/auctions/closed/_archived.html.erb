@@ -1,0 +1,14 @@
+<table class="usa-table-borderless">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @view_model.archived.each do |auction| %>
+      <tr>
+        <td><%= link_to(auction.title, admin_auction_path(auction.id)) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

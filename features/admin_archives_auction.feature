@@ -39,3 +39,9 @@ Feature: Admin archives auction
     When I click on the Archive button
     When I click OK on the javascript confirm dialog to archive the auction
     Then I should see the admin status message for an archived auction
+
+    When I visit the Needs Attention page
+    Then I should not see the auction as a draft auction
+
+    When I visit the admin closed auctions page
+    Then I should see the auction as an archived auction

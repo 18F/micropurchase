@@ -15,6 +15,14 @@ class Admin::ClosedAuctionsViewModel < Admin::BaseViewModel
     end
   end
 
+  def archived_partial
+    if archived.any?
+      'admin/auctions/closed/archived'
+    else
+      'admin/auctions/closed/no_archived'
+    end
+  end
+
   def successfully_delivered
     @_successfully_delivered ||= complete_and_successful_auctions.map do |auction|
       Admin::ClosedAuctionsListItemViewModel.new(auction)
@@ -23,6 +31,12 @@ class Admin::ClosedAuctionsViewModel < Admin::BaseViewModel
 
   def rejected
     @_rejected ||= rejected_auctions.map do |auction|
+      Admin::ClosedAuctionsListItemViewModel.new(auction)
+    end
+  end
+
+  def archived
+    @_archived ||= archived_auctions.map do |auction|
       Admin::ClosedAuctionsListItemViewModel.new(auction)
     end
   end
@@ -39,5 +53,9 @@ class Admin::ClosedAuctionsViewModel < Admin::BaseViewModel
 
   def rejected_auctions
     AuctionQuery.new.rejected
+  end
+
+  def archived_auctions
+    Auction.archived
   end
 end

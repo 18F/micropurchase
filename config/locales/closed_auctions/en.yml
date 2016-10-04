@@ -1,0 +1,6 @@
+en:
+  closed_auctions:
+    index:
+      accepted: Successfully Delivered
+      rejected: Rejected Auctions
+      archived: Archived
