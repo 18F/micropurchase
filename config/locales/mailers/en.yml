@@ -11,6 +11,15 @@ en:
           You can view this auction (including a link to
           %{winner_name}’s pull request) by signing in and visiting
           %{auction_url}
+      vendor_finished_work:
+        subject: "%{winner_name} delivered on auction %{auction_name}"
+        para_1: >
+          %{winner_name} recently finished working on
+           “%{auction_name}”. You can view their work here: %{delivery_url}
+        para_2: >
+          Please review %{winner_name}’s work with the customer, and
+          either accept or reject it by signing in and visiting:
+          %{auction_url}
     auction_mailer:
       losing_bidder_notification:
         para_1: "We regret to inform you that the auction period for %{auction_title} recently
