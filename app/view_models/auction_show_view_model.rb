@@ -71,6 +71,8 @@ class AuctionShowViewModel
       "Your bid: #{Currency.new(lowest_user_bid_amount)}"
     elsif auction.bids.any?
       "Current bid: #{highlighted_bid_amount_as_currency}"
+    elsif future?
+      "Starting price: #{Currency.new(auction.start_price)}"
     else
       ""
     end
@@ -169,6 +171,10 @@ class AuctionShowViewModel
 
   def available?
     bidding_status.available?
+  end
+
+  def future?
+    bidding_status.future?
   end
 
   def bidding_status

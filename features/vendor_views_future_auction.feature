@@ -10,3 +10,4 @@ Feature: Vendor views future auction
     Then I should see a "Coming soon" label
     And I should not see the bid form
     And I should see the future auction message for vendors
+    And I should see the starting price
