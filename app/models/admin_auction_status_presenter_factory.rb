@@ -26,7 +26,7 @@ class AdminAuctionStatusPresenterFactory
       C2StatusPresenter::PendingApproval
     elsif future? && auction.published?
       AdminAuctionStatusPresenter::Future
-    elsif future? && auction.unpublished?
+    elsif auction.unpublished?
       AdminAuctionStatusPresenter::ReadyToPublish
     elsif available?
       AdminAuctionStatusPresenter::Available
@@ -39,7 +39,7 @@ class AdminAuctionStatusPresenterFactory
     elsif auction.accepted_pending_payment_url?
       AdminAuctionStatusPresenter::AcceptedPendingPaymentUrl
     elsif auction.accepted? && !(auction.c2_paid? || auction.payment_confirmed?)
-      AdminAuctionStatusPresenter::Accepted
+      AdminAuctionStatusPresenter::DefaultPcard::Accepted
     elsif auction.rejected?
       AdminAuctionStatusPresenter::Rejected
     elsif auction.c2_paid?
@@ -54,7 +54,7 @@ class AdminAuctionStatusPresenterFactory
       AdminAuctionStatusPresenter::Archived
     elsif future? && auction.published?
       AdminAuctionStatusPresenter::Future
-    elsif future? && auction.unpublished?
+    elsif auction.unpublished?
       AdminAuctionStatusPresenter::ReadyToPublish
     elsif available?
       AdminAuctionStatusPresenter::Available

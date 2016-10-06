@@ -1,8 +1,4 @@
 class C2StatusPresenter::C2Paid < C2StatusPresenter::Base
-  def status
-    I18n.t('statuses.c2_presenter.c2_paid.status')
-  end
-
   def body
     I18n.t(
       'statuses.c2_presenter.c2_paid.body',

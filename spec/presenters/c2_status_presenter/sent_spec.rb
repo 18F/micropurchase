@@ -1,16 +1,6 @@
 require 'rails_helper'
 
 describe C2StatusPresenter::Sent do
-  describe '#status' do
-    it 'returns the status for sent' do
-      auction = build(:auction)
-      presenter = C2StatusPresenter::Sent.new(auction: auction)
-
-      expect(presenter.status)
-        .to eq(I18n.t('statuses.c2_presenter.sent.status'))
-    end
-  end
-
   describe '#body' do
     it 'returns the body for sent' do
       auction = build(:auction)

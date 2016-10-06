@@ -6,16 +6,13 @@ describe Admin::DraftListItem do
       it 'returns c2 proposal status' do
         Auction.c2_statuses.each do |status|
           status_string = status[0]
+          auction = create(:auction, purchase_card: :default, c2_status: status_string)
 
-          if status_string != 'not_requested'
-            auction = create(:auction, purchase_card: :default, c2_status: status_string)
+          view_model = Admin::DraftListItem.new(auction)
 
-            view_model = Admin::DraftListItem.new(auction)
-
-            expect(view_model.c2_proposal_status).to eq(
-              I18n.t("statuses.c2_presenter.#{status_string}.status")
-            )
-          end
+          expect(view_model.c2_proposal_status).to eq(
+            I18n.t("drafts.c2_status.#{status_string}.status")
+          )
         end
       end
     end

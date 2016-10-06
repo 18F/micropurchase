@@ -13,8 +13,18 @@
 
   <fieldset class="datetime">
     <legend>Delivery deadline</legend>
-    <%= render partial: 'sidebar_datetime_fields',
-      locals: { field: 'delivery_due', auction: status } %>
+    <div class="usa-width-one-third">
+      <%= f.input :due_in_days, as: :select, collection: 5..10, default: 5 %>
+    </div>
+
+    <div class="usa-width-two-thirds">
+      <div class="estimated-delivery-date">
+        Estimated delivery date
+        <div class="delivery-date">
+          <%= status.estimated_delivery_due_at %>
+        </div>
+      </div>
+    </div>
   </fieldset>
 
   <%= f.hidden_field :published, value: 'published', hidden: true %>

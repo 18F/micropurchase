@@ -9,8 +9,8 @@ class Admin::EditAuctionViewModel < Admin::BaseViewModel
     auction
   end
 
-  def delivery_due_partial
-    'admin/auctions/delivery_due_at'
+  def estimated_delivery_due_at
+    DcTimePresenter.convert_and_format(auction.delivery_due_at)
   end
 
   def date_default(field)

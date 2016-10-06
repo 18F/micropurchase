@@ -140,7 +140,7 @@ Then(/^I should see the admin status for an accepted auction$/) do
 
   expect(page.html).to include(
     I18n.t(
-      'statuses.admin_auction_status_presenter.accepted.body',
+      'statuses.admin_auction_status_presenter.default_pcard.accepted.body',
       winner_url: winner_url,
       accepted_at: accepted_date,
       c2_url: @auction.c2_proposal_url

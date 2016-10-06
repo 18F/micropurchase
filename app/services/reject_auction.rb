@@ -1,4 +1,4 @@
-class ArchiveAuction
+class RejectAuction
   attr_reader :auction
 
   def initialize(auction:)
@@ -6,17 +6,11 @@ class ArchiveAuction
   end
 
   def perform
-    if auction.unpublished?
-      auction.published = :archived
-      update_c2_status
-      auction.save
-    else
-      false
-    end
-  end
-
-  def self.archive_submit?(params)
-    params.key?(:archive_auction)
+    auction.delivery_status = :rejected
+    auction.rejected_at = Time.current
+    update_c2_status
+    WinningBidderMailer.auction_rejected(auction: auction).deliver_later
+    auction.save
   end
 
   private

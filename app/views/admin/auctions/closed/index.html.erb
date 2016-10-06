@@ -1,11 +1,15 @@
 <div class="usa-grid">
   <%= render partial: 'admin/auctions_subnav', locals: { view_model: @view_model } %>
 
-  <h2>Successfully Delivered</h2>
+  <h2><%= t('closed_auctions.index.accepted') %></h2>
 
   <%= render partial: @view_model.successful_partial, locals: { view_model: @view_model } %>
 
-  <h2>Rejected Auctions</h2>
+  <h2><%= t('closed_auctions.index.rejected') %></h2>
 
   <%= render partial: @view_model.rejected_partial, locals: { view_model: @view_model } %>
+
+  <h2><%= t('closed_auctions.index.archived') %></h2>
+
+  <%= render partial: @view_model.archived_partial, locals: { view_model: @view_model } %>
 </div>
