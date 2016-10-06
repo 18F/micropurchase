@@ -2,20 +2,20 @@
   <thead>
     <tr>
       <th scope="col">Title</th>
-      <th scope="col">Vendor</th>
-      <th scope="col">Delivery URL</th>
-      <th scope="col">Date accepted</th>
-      <th scope="col">Actions</th>
+      <th scope="col">Payment URL</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Date Accepted</th>
+      <th scope="col">C2 URL</th>
     </tr>
   </thead>
   <tbody>
     <% @view_model.successfully_delivered.each do |auction| %>
       <tr>
         <td><%= link_to(auction.title, admin_auction_path(auction.id)) %></td>
-        <td><%= auction.winning_vendor_github_login %></td>
-        <td><%= auction.delivery_url %></td>
+        <td><%= link_to('Payment URL', auction.payment_url) %></td>
+        <td><%= auction.winning_amount %></td>
         <td><%= auction.accepted_at %></td>
-        <td><%= link_to 'edit', edit_admin_auction_path(auction.id) %></td>
+        <td><% if auction.c2_proposal_url.present? %><%= link_to('C2 URL', auction.c2_proposal_url) %><% end %></td>
       </tr>
     <% end %>
   </tbody>
