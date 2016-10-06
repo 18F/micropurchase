@@ -17,6 +17,18 @@ class Admin::ClosedAuctionsListItemViewModel
     auction.delivery_url
   end
 
+  def c2_proposal_url
+    auction.c2_proposal_url
+  end
+
+  def payment_url
+    winning_bidder.payment_url
+  end
+
+  def winning_amount
+    Currency.new(winning_bid.amount).to_s
+  end
+
   def accepted_at
     DcTimePresenter.convert_and_format(auction.accepted_at)
   end
@@ -31,7 +43,11 @@ class Admin::ClosedAuctionsListItemViewModel
 
   private
 
+  def winning_bid
+    @_winning ||= WinningBid.new(auction).find
+  end
+
   def winning_bidder
-    WinningBid.new(auction).find.bidder || NullBidder.new
+    winning_bid.bidder || NullBidder.new
   end
 end

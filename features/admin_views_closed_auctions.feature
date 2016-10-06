@@ -8,7 +8,6 @@ Feature: Admin views closed auctions in the admin panel
     And I sign in
     When I visit the admin closed auctions page
     Then I should see the name of the auction
-    And I should see the edit link for the auction
     And I should see "No auctions have been rejected yet"
 
   Scenario: Viewing closed rejected auctions
