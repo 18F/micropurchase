@@ -8,7 +8,7 @@ class BiddingStatusPresenter::Available < BiddingStatusPresenter::Base
   end
 
   def relative_time
-    "Ending in #{HumanTime.new(time: auction.ended_at).distance_of_time_to_now}"
+    "Closes #{DcTimePresenter.new(auction.ended_at).relative_time}"
   end
 
   def label_class

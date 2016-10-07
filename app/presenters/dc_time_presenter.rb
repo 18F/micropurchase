@@ -1,4 +1,6 @@
 class DcTimePresenter
+  include ActionView::Helpers::TextHelper
+
   NULL = "&nbsp;".html_safe.freeze
   FORMAT = "%B %d, %Y %r".freeze
   TIME_ZONE_NAME = 'Eastern Time (US & Canada)'.freeze
@@ -45,6 +47,29 @@ class DcTimePresenter
       str
     else
       NULL
+    end
+  end
+
+  def relative_time
+    time_diff = (time - Time.now).to_i
+    abs_time_diff = time_diff.abs
+
+    if abs_time_diff < 24.hours
+      relative_time = if abs_time_diff > 3600
+                        pluralize(abs_time_diff / 3600, "hour")
+                      else
+                        pluralize(abs_time_diff / 60, "minute")
+                      end
+
+      if time_diff > 0
+        "in #{relative_time}"
+      else
+        "#{relative_time} ago"
+      end
+    else
+      date = convert_and_format('%b %-d, %Y', timezone_label: false)
+      time = convert_and_format('%-l:%M %p')
+      "on #{date} at #{time}"
     end
   end
 
