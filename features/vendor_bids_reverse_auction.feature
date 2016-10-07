@@ -3,6 +3,15 @@ Feature: Vendor bids on a reverse auction
   I want to be able to bid on auctions
   So I can be paid for work
 
+  Scenario: Viewing an auction when someone else has outbid me
+    Given there is an open auction
+    And I am an authenticated vendor
+    And I have placed a bid that is not the lowest
+    When I visit the home page
+    And I click on the auction's title
+    And I should see the maximum bid amount in the bidding form
+    And I should see I do not have the winning bid
+
   @javascript
   Scenario: Auction already has bids
     Given there is an open auction
