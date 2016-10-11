@@ -21,7 +21,8 @@ Feature: Vendor bids on a sealed-bid auction
     When I click on the auction's title
     Then I should be on the auction page
     And I should not see "Your bid:"
-    And I should see "Current bid:"
+    And I should not see "Current bid:"
+    And I should not see the current winning bid in a header subtitle
     And I should see the bid form
     And I should see the maximum bid amount in the bidding form
 

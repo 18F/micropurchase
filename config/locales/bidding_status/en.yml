@@ -1,0 +1,12 @@
+en:
+  bidding_status:
+    available:
+      start_label: Bid start time
+      deadline_lable: Bid deadline
+      label: Open
+      bid_label:
+        no_bids: ''
+        sealed_bid: "Your bid: %{amount}"
+        reverse:
+          vendor_winning: "You have the lowest bid: %{amount}"
+          default: "Current low bid: %{amount} (%{bidder_name})"
