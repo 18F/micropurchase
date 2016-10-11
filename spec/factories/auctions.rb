@@ -69,7 +69,7 @@ FactoryGirl.define do
     end
 
     trait :future do
-      started_at { quartile_minute(Time.now + 1.day) }
+      started_at { quartile_minute(Time.now + 2.days) }
     end
 
     trait :available do

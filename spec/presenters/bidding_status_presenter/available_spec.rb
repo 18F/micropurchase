@@ -25,7 +25,7 @@ describe BiddingStatusPresenter::Available do
   describe '#relative_time' do
     it 'returns time remaining' do
       presenter = BiddingStatusPresenter::Available.new(auction)
-      expect(presenter.relative_time).to eq("Ending in 2 days")
+      expect(presenter.relative_time).to eq("Closes #{DcTimePresenter.new(auction.ended_at).relative_time}")
     end
   end
 

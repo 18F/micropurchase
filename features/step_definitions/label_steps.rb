@@ -31,3 +31,13 @@ end
 Then(/^I should see a column labeled "([^"]+)"$/) do |text|
   find('th', text: text)
 end
+
+Then(/^I should see a relative opening time for the auction$/) do
+  relative_time = DcTimePresenter.new(@auction.started_at).relative_time
+  expect(page).to have_content("Opens #{relative_time}")
+end
+
+Then(/^I should see a relative closing time for the auction$/) do
+  relative_time = DcTimePresenter.new(@auction.ended_at).relative_time
+  expect(page).to have_content("Closes #{relative_time}")
+end

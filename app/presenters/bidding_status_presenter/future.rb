@@ -8,7 +8,7 @@ class BiddingStatusPresenter::Future < BiddingStatusPresenter::Base
   end
 
   def relative_time
-    "Starting #{HumanTime.new(time: auction.started_at).relative_time}"
+    "Opens #{DcTimePresenter.new(auction.started_at).relative_time}"
   end
 
   def label_class

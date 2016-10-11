@@ -6,6 +6,10 @@ Given(/^there is a future auction$/) do
   @auction = FactoryGirl.create(:auction, :future, :published)
 end
 
+Given(/^there is a future auction that will open today$/) do
+  @auction = FactoryGirl.create(:auction, :published, started_at: 200.minutes.from_now)
+end
+
 Given(/^there is a closed auction$/) do
   @auction = FactoryGirl.create(:auction, :closed, :with_bids)
 end
