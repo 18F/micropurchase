@@ -25,6 +25,10 @@ class BiddingStatusPresenter::Base
     ''
   end
 
+  def bid_label(_user)
+    ''
+  end
+
   def tag_data_value_status
     ''
   end

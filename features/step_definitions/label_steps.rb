@@ -40,6 +40,7 @@ end
 Then(/^I should see a relative closing time for the auction$/) do
   relative_time = DcTimePresenter.new(@auction.ended_at).relative_time
   expect(page).to have_content("Closes #{relative_time}")
+end
 
 Then(/^I should see the current winning bid in a header subtitle$/) do
   within(:css, '.auction-subtitles') do
