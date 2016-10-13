@@ -154,7 +154,7 @@ end
 
 When(/^I click to create an auction$/) do
   click_on("Create")
-  @auction = Auction.where(title: @title).first
+  @auction = Auction.last
 end
 
 Then(/^I should see new content on the page$/) do
