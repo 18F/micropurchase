@@ -1,11 +1,6 @@
 class BidsController < ApplicationController
   before_filter :require_authentication
 
-  def index
-    bids = Bid.where(bidder: current_user).includes(:auction)
-    @bids = bids.map { |bid| MyBidListItem.new(bid) }
-  end
-
   def create
     @bid = PlaceBid.new(params: params, bidder: current_user, via: via)
 

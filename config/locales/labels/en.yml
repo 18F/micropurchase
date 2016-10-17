@@ -5,3 +5,15 @@ en:
         title: My Account
         tabs:
           profile: Profile
+          bids_placed: Bids placed
+        bids_placed:
+          no_bids_html: >
+            This page is blank because you’ve yet to bid on an
+            auction. Peruse our list of %{index_url} to find one
+            that interests you.
+          columns:
+            auction: Auction
+            status: Status
+            number_bids: Number of Bids
+            lowest_bid: Lowest Bid
+            won: Won?

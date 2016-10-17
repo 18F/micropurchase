@@ -121,7 +121,17 @@ Then(/^I should not see bids from other users$/) do
 end
 
 Then(/^I should see my bid history$/) do
-  @user.bids.each do |bid|
-    expect(page).to have_content(Currency.new(bid.amount).to_s)
-  end
+  expect(@user.bids.count).to eq(1)
+  bid = @user.bids.first
+  bid_status = BiddingStatusPresenterFactory.new(@auction).create.label
+
+  expect(page).to have_content("#{@auction.title} #{bid_status} 1 #{Currency.new(bid.amount)} -")
+end
+
+Then(/^I should see I have placed no bids$/) do
+  expect(page.html).to include(
+    I18n.t('labels.vendor.account.bids_placed.no_bids_html',
+            index_url: Url.new(link_text: 'current and upcoming auctions', path_name: 'root')
+    )
+  )
 end

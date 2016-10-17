@@ -6,12 +6,12 @@ When(/^I visit the home page$/) do
   visit "/"
 end
 
-Then(/^I visit my bids page$/) do
-  visit bids_path
-end
-
 When(/^I visit my profile page$/) do
   visit profile_path
+end
+
+When(/^I visit my bid history page$/) do
+  visit bids_placed_path
 end
 
 When(/^I visit the auction page$/) do

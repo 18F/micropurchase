@@ -4,25 +4,6 @@ describe BidsController do
   let(:current_bidder) { create(:user, sam_status: :sam_accepted) }
   let(:auction) { create(:auction) }
 
-  describe '#index' do
-    context 'when logged in' do
-      it 'should assign auctions that current user have bidded on, presented' do
-        bid = create(:bid, bidder: current_bidder, auction: auction)
-        expect(bid).to be_valid
-        get :index, { }, user_id: current_bidder.id
-        assigned_bid = assigns(:bids).first
-        expect(assigned_bid.bid).to eq(bid)
-      end
-
-      it 'should not assign auctions that the current user has not bidded on' do
-        other_person = create(:user)
-        create(:bid, bidder: other_person, auction: auction)
-        get :index, { }, user_id: current_bidder.id
-        expect(assigns(:bids)).to be_empty
-      end
-    end
-  end
-
   describe '#create' do
     context 'when not logged in' do
       it 'redirects to authenticate' do
