@@ -1,0 +1,15 @@
+<div class="user-profile">
+  <div class="user-header-wrapper">
+    <div class="usa-grid">
+      <div class="user-header-title">
+        <h1><%= t 'labels.vendor.account.title' %></h1>
+      </div>
+      <%= render partial: 'users/subnav', locals: {active: :bids_placed} %>
+    </div>
+  </div>
+  <div class="user-body-wrapper">
+    <div class="usa-grid">
+      <%= render partial: @view_model.bids_table_partial, locals: {view_model: @view_model} %>
+    </div>
+  </div>
+</div>
