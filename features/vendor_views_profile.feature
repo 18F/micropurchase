@@ -6,7 +6,6 @@ Feature: Vendor views profile
   Scenario: Vendor navigates to /account/profile page
     Given I am an authenticated vendor
     When I visit my profile page
-    Then I should see a page title "My Account"
+    Then I should see a page header labeled "My Account"
     And the "Profile" subnav should be selected
-    And I should see the profile edit form
     And I should see a profile form with my info

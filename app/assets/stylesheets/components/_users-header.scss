@@ -1,0 +1,31 @@
+.user-header-wrapper {
+  background: $color-gray-lightest;
+  border-bottom: 1px solid $color-gray-light;
+}
+
+.user-subnav {
+  clear: both;
+  display: block;
+
+  .active {
+    background: $color-white;
+    border: 1px solid $color-gray-light;
+    border-bottom: none;
+    text-decoration: none;
+  }
+
+  a {
+    margin-top: 1rem;
+    margin-bottom: -1px;
+    border-bottom: 1px solid $color-gray-light;
+    padding: 1rem;
+    background: $color-gray-lightest;
+    display: inline-block;
+    line-height: $base-line-height;
+    vertical-align: middle;
+  }
+
+  a:focus {
+    box-shadow: none;
+  }
+}

@@ -1,0 +1,7 @@
+en:
+  labels:
+    vendor:
+      account:
+        title: My Account
+        tabs:
+          profile: Profile
