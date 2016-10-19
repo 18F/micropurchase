@@ -64,6 +64,10 @@ Then(/^the "([^"]+)" subnav should be selected$/) do |text|
   page.find('a.nav-auction.active', text: text)
 end
 
+Then(/^I should not see a "([^"]+)" subnav$/) do |text|
+  expect(page.first('a.nav-auction', text: text)).to be_nil
+end
+
 When(/^I click on the "([^"]+)" subnav$/) do |text|
   click_link(text)
 end
