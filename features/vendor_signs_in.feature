@@ -10,6 +10,6 @@ Feature: Signing in and out
     Then I should be on the home page
     And I should see a "Logout" link
 
-    When I click on the "My profile" link
+    When I click on the "Account" link
     Then I should be on my profile page
     Then I should see a profile form with my info
