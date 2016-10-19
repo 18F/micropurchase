@@ -7,9 +7,9 @@ class AccountBidsPlacedViewModel
 
   def bids_table_partial
     if auctions.empty?
-      'users/bids_table_none'
+      'bids/bids_table_none'
     else
-      'users/bids_table'
+      'bids/bids_table'
     end
   end
 

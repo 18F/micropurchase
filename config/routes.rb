@@ -58,7 +58,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:update]
   get 'account/profile', to: 'users#edit', as: 'profile'
-  get 'account/bids_placed', to: 'users#bids_placed', as: 'bids_placed'
+  get 'account/bids', to: 'bids#index', as: 'bids_placed'
 
   resources :insights, only: [:index]
 

@@ -12,4 +12,8 @@ class BidsController < ApplicationController
 
     redirect_to auction_path(@bid.auction)
   end
+
+  def index
+    @view_model = AccountBidsPlacedViewModel.new(current_user: current_user)
+  end
 end
