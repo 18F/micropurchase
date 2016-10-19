@@ -103,10 +103,6 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
     bidding_status.over?
   end
 
-  def available?
-    bidding_status.available?
-  end
-
   def future?
     bidding_status.future?
   end
