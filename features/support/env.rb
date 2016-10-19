@@ -42,6 +42,10 @@ module AuctionHelpers
     DcTimePresenter.convert_and_format(@auction.started_at)
   end
 
+  def delivery_due_date
+    DcTimePresenter.convert_and_format(@auction.delivery_due_at)
+  end
+
   def accept_date
     DcTimePresenter.convert_and_format(@auction.accepted_at)
   end

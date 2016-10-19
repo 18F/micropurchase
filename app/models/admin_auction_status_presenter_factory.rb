@@ -30,8 +30,8 @@ class AdminAuctionStatusPresenterFactory
       AdminAuctionStatusPresenter::ReadyToPublish
     elsif available?
       AdminAuctionStatusPresenter::Available
-    elsif auction.budget_approved? && auction.pending_delivery?
-      C2StatusPresenter::BudgetApproved
+    elsif won? && auction.pending_delivery?
+      AdminAuctionStatusPresenter::WorkNotStarted
     elsif auction.work_in_progress?
       AdminAuctionStatusPresenter::WorkInProgress
     elsif auction.pending_acceptance?
@@ -75,6 +75,18 @@ class AdminAuctionStatusPresenterFactory
 
   def available?
     bidding_status.available?
+  end
+
+  def over?
+    bidding_status.over?
+  end
+
+  def bids?
+    auction.bids.any?
+  end
+
+  def won?
+    over? && bids?
   end
 
   def future?
