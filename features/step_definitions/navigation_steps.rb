@@ -106,6 +106,10 @@ Then(/^I should be on my profile page$/) do
   expect(page.current_path).to eq(profile_path)
 end
 
+Then(/^I should be on the admin auction page for that auction$/) do
+  expect(page.current_path).to eq(admin_auction_path(@auction))
+end
+
 Then(/^I should be on the admin form for that auction$/) do
   expect(page.current_path).to eq(edit_admin_auction_path(@auction))
 end

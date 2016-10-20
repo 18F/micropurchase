@@ -13,7 +13,7 @@ Feature: Contracting Officers
     And I set the auction start price to $24000
     And I click to create an auction
     Then I should see that my auction was created successfully
+    And I should be on the admin auction page for that auction
 
-    When I click on the auction's title
-    And I click to edit the auction
+    When I click to edit the auction
     Then I should see the start price for the auction is $24000
