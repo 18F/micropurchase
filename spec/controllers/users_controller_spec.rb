@@ -28,6 +28,6 @@ describe UsersController do
   end
 
   def user
-    @_user ||=  create(:user)
+    @_user ||= create(:user)
   end
 end

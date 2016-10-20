@@ -1,33 +1,41 @@
-<div class="usa-grid">
-  <div class="profile-wrapper">
-  <h1>Profile</h1>
+<div class="user-profile">
+  <div class="user-header-wrapper">
+    <div class="usa-grid">
+      <div class="user-header-title">
+        <h1><%= t 'labels.vendor.account.title' %></h1>
+      </div>
+      <%= render partial: 'users/subnav', locals: {active: :profile} %>
+    </div>
+  </div>
+  <div class="usa-grid">
+    <div class="user-body-wrapper profile-form">
+      <%= simple_form_for @view_model.record, method: :put do |f| %>
+        <h3>Contact information</h3>
+        <%= f.input :name %>
+        <%= f.input :email %>
 
-  <%= simple_form_for @view_model.record, method: :put do |f| %>
-    <h3>Contact information</h3>
-    <%= f.input :name %>
-    <%= f.input :email %>
+        <h3>Placing a bid</h3>
+        <p>
+          Before you can bid on an auction, you’ll need to register on SAM.gov, request a
+          DUNS number, and link your SAM.gov profile with your DUNS number. See
+          <%= link_to 'our guide for more information', page_path('docs/placing_a_bid') %>.
+        </p>
+        <%= f.input :duns_number %>
+        <span class=<%= @view_model.sam_status_icon_class %>></span>
+        <span class=<%= @view_model.sam_status_text_class%>>
+          <%= @view_model.sam_status_text %>
+        </span>
 
-    <h3>Placing a bid</h3>
-      <p>
-      Before you can bid on an auction, you’ll need to register on SAM.gov, request a
-      DUNS number, and link your SAM.gov profile with your DUNS number. See
-      <%= link_to 'our guide for more information', page_path('docs/placing_a_bid') %>.
-      </p>
-      <%= f.input :duns_number %>
-      <span class=<%= @view_model.sam_status_icon_class %>></span>
-      <span class=<%= @view_model.sam_status_text_class%>>
-        <%= @view_model.sam_status_text %>
-      </span>
+        <h3>Getting paid</h3>
+        <p>
+          Before we can pay you, we'll need a location we can visit to issue
+          payment. If you're unfamiliar with processing payments online, see
+          <%= link_to 'our guide for more information', page_path('docs/getting_paid') %>.
+        </p>
+        <%= f.input :payment_url %>
 
-    <h3>Getting paid</h3>
-      <p>
-      Before we can pay you, we'll need a location we can visit to issue
-      payment. If you're unfamiliar with processing payments online, see
-      <%= link_to 'our guide for more information', page_path('docs/getting_paid') %>.
-      </p>
-      <%= f.input :payment_url %>
-
-    <%= f.submit class: 'usa-button usa-button-outline' %>
-  <% end %>
-</div>
+        <%= f.submit class: 'usa-button usa-button-outline' %>
+      <% end %>
+    </div>
+  </div>
 </div>

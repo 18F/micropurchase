@@ -48,10 +48,22 @@ Then(/^I should see a page title "([^"]+)"$/) do |title|
   expect(page).to have_title title
 end
 
+Then(/^I should see a page header labeled "([^"]+)"$/) do |header|
+  page.find('h1', text: header)
+end
+
 Then(/^I should see a section labeled "([^"]+)"$/) do |header|
   page.find('h2', text: header)
 end
 
 Then(/^I should not see a section labeled "([^"]+)"$/) do |header|
   expect(page.first('h2', text: header)).to be_nil
+end
+
+Then(/^the "([^"]+)" subnav should be selected$/) do |text|
+  page.find('a.nav-auction.active', text: text)
+end
+
+When(/^I click on the "([^"]+)" subnav$/) do |text|
+  click_link(text)
 end

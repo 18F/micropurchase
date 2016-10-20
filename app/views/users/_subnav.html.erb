@@ -1,0 +1,8 @@
+<div class="user-subnav">
+  <%= link_to I18n.t('labels.vendor.account.tabs.profile'),
+      profile_path,
+      class: "nav-auction #{ 'active' if active == :profile }" %>
+  <%= link_to I18n.t('labels.vendor.account.tabs.bids_placed'),
+      bids_placed_path,
+      class: "nav-auction #{ 'active' if active == :bids_placed }" %>
+</div>
