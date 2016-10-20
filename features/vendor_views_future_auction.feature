@@ -20,3 +20,4 @@ Feature: Vendor views future auction
     And I should see a relative opening time for the auction
     And I should not see the bid form
     And I should see the future auction message for vendors
+    And I should see the starting price

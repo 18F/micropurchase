@@ -17,6 +17,10 @@ Then(/^I should see a current bid amount( of \$([\d\.]+))?$/) do |_, amount|
   expect(page).to have_content(amount) unless amount.nil?
 end
 
+Then(/^I should see the starting price$/) do
+  expect(page).to have_content("Starting price: #{Currency.new(@auction.start_price).to_s}")
+end
+
 Then(/^I should see a winning bid amount( of \$([\d\.]+))?$/) do |_, amount|
   expect(page).to have_content(/Winning bid \([^\)]+\): \$[\d,\.]+/)
   expect(page).to have_content(amount) unless amount.nil?
