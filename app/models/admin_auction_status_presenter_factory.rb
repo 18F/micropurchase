@@ -77,16 +77,16 @@ class AdminAuctionStatusPresenterFactory
     bidding_status.available?
   end
 
+  def won?
+    over? && bids?
+  end
+
   def over?
     bidding_status.over?
   end
 
   def bids?
     auction.bids.any?
-  end
-
-  def won?
-    over? && bids?
   end
 
   def future?
