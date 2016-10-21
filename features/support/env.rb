@@ -47,7 +47,7 @@ module AuctionHelpers
   end
 
   def winning_bid
-    WinningBid.new(@auction).find
+    WinningBid.new(@auction.reload).find
   end
 
   def winning_amount
