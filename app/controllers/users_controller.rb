@@ -15,8 +15,4 @@ class UsersController < ApplicationController
       render :edit
     end
   end
-
-  def bids_placed
-    @view_model = AccountBidsPlacedViewModel.new(current_user: current_user)
-  end
 end

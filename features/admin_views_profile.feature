@@ -7,7 +7,7 @@ Feature: Admin views profile
     Given I am an administrator
     And I sign in
     When I visit my profile page
-    Then I should see a page header labeled "My Account"
+    Then I should see a page header for my account page
     And the "Profile" subnav should be selected
     And I should see a profile form with my info
     And I should not see a "Bids placed" subnav

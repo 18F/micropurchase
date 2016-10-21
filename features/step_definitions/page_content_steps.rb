@@ -52,6 +52,11 @@ Then(/^I should see a page header labeled "([^"]+)"$/) do |header|
   page.find('h1', text: header)
 end
 
+Then(/^I should see a page header for my account page$/) do
+  header = I18n.t('labels.vendor.account.title')
+  step("I should see a page header labeled \"#{header}\"")
+end
+
 Then(/^I should see a section labeled "([^"]+)"$/) do |header|
   page.find('h2', text: header)
 end
@@ -64,10 +69,25 @@ Then(/^the "([^"]+)" subnav should be selected$/) do |text|
   page.find('a.nav-auction.active', text: text)
 end
 
+Then(/^the profile subnav should be selected$/) do
+  text = I18n.t('labels.vendor.account.tabs.profile')
+  step("the \"#{text}\" subnav should be selected")
+end
+
+Then(/^the bids placed subnav should be selected$/) do
+  text = I18n.t('labels.vendor.account.tabs.bids_placed')
+  step("the \"#{text}\" subnav should be selected")
+end
+
 Then(/^I should not see a "([^"]+)" subnav$/) do |text|
   expect(page.first('a.nav-auction', text: text)).to be_nil
 end
 
 When(/^I click on the "([^"]+)" subnav$/) do |text|
+  click_link(text)
+end
+
+When(/^I click on the bids placed subnav$/) do
+  text = I18n.t('labels.vendor.account.tabs.bids_placed')
   click_link(text)
 end
