@@ -78,7 +78,17 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
   end
 
   def bid_label
-    bidding_status_presenter.bid_label(current_user)
+    if available?
+      bidding_status_presenter.bid_label(current_user)
+    elsif over? && auction.bids.any?
+      "Winning bid (#{lowest_bidder_name}): #{highlighted_bid_amount_as_currency}"
+    elsif auction.bids.any?
+      "Current bid: #{highlighted_bid_amount_as_currency}"
+    elsif future?
+      "Starting price: #{Currency.new(auction.start_price)}"
+    else
+      ""
+    end
   end
 
   private
@@ -89,6 +99,10 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
 
   def highlighted_bid_amount_as_currency
     Currency.new(rules.highlighted_bid(current_user).amount).to_s
+  end
+
+  def available?
+    bidding_status.available?
   end
 
   def over?

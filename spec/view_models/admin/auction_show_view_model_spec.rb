@@ -49,7 +49,7 @@ describe Admin::AuctionShowViewModel do
       user = create(:user)
       view_model = Admin::AuctionShowViewModel.new(auction: auction, current_user: user)
 
-      expect(view_model.bid_label).to eq("Current bid: #{Currency.new(bid.amount)}")
+      expect(view_model.bid_label).to eq("Current low bid: #{Currency.new(bid.amount)} (#{bid.bidder.name})")
     end
 
     it "should show the starting price when auction hasn't started yet" do
