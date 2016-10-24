@@ -1,10 +1,6 @@
 <div class="user-subnav">
   <%= link_to I18n.t('labels.vendor.account.tabs.profile'),
       profile_path,
-      class: "nav-auction #{ 'active' if active == :profile }" %>
-  <% unless current_user.decorate.admin? %>
-    <%= link_to I18n.t('labels.vendor.account.tabs.bids_placed'),
-        bids_placed_path,
-        class: "nav-auction #{ 'active' if active == :bids_placed }" %>
-  <% end %>
+      class: subnav.profile_tab_class %>
+  <%= render partial: subnav.bids_tab_partial, locals: {subnav: subnav} %>
 </div>

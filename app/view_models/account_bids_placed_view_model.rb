@@ -13,6 +13,10 @@ class AccountBidsPlacedViewModel
     end
   end
 
+  def subnav_view_model
+    AccountSubnavViewModel.new(current_user: current_user, active_tab: :bids_placed)
+  end
+
   def auctions
     @_auctions ||= AuctionQuery.new.with_bid_from_user(current_user.id).map do |auction|
       UserAuctionViewModel.new(auction, current_user)
