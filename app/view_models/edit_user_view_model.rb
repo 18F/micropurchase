@@ -19,6 +19,10 @@ class EditUserViewModel
     user
   end
 
+  def subnav_view_model
+    AccountSubnavViewModel.new(current_user: @user, active_tab: :profile)
+  end
+
   private
 
   attr_reader :user
