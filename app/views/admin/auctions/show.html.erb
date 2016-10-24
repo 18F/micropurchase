@@ -9,8 +9,6 @@
             <%= render partial: @view_model.csv_report_partial,
               locals: { auction: @view_model } %>
           </div>
-        </div>
-        <div class="auction-subtitles">
           <div class="auction-subtitle">
             <div class="bidding-status">
               <%= render partial: 'auctions/bidding_status_label',
