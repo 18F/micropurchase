@@ -11,7 +11,7 @@ Given(/^there is a future auction that will open today$/) do
 end
 
 Given(/^there is a closed auction$/) do
-  @auction = FactoryGirl.create(:auction, :closed, :with_bids, :c2_budget_approved)
+  @auction = FactoryGirl.create(:auction, :closed, :with_bids)
 end
 
 Given(/^I am going to win an auction$/) do
