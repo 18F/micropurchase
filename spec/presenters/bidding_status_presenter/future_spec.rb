@@ -31,6 +31,14 @@ describe BiddingStatusPresenter::Future do
     end
   end
 
+  describe '#bid_label' do
+    it 'should display the starting price of the auction' do
+      presenter = BiddingStatusPresenter::Future.new(auction)
+      user = create(:user)
+      expect(presenter.bid_label(user)).to eq("Starting price: $3,500.00")
+    end
+  end
+
   def auction
     @_auction ||= create(
       :auction,

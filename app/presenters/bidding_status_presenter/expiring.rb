@@ -4,6 +4,6 @@ class BiddingStatusPresenter::Expiring < BiddingStatusPresenter::Available
   end
 
   def label
-    'Expiring'
+    I18n.t('bidding_status.expiring.label')
   end
 end
