@@ -1,14 +1,15 @@
 class BiddingStatusPresenter::Over < BiddingStatusPresenter::Base
   def start_label
-    "Auction started at"
+    I18n.t('bidding_status.over.start_label')
   end
 
   def deadline_label
-    "Auction ended at"
+    I18n.t('bidding_status.over.deadline_label')
   end
 
   def relative_time
-    auction.ended_at.strftime("Ended on: %m/%d/%Y")
+    I18n.t('bidding_status.over.relative_time',
+           time: auction.ended_at.strftime("%m/%d/%Y"))
   end
 
   def label_class
@@ -16,7 +17,17 @@ class BiddingStatusPresenter::Over < BiddingStatusPresenter::Base
   end
 
   def label
-    'Closed'
+    I18n.t('bidding_status.over.label')
+  end
+
+  def bid_label(_user)
+    if bids?
+      I18n.t('bidding_status.over.bid_label',
+             winner_name: winner_name,
+             amount: winning_bid_amount_as_currency)
+    else
+      ''
+    end
   end
 
   def tag_data_value_status
@@ -28,12 +39,24 @@ class BiddingStatusPresenter::Over < BiddingStatusPresenter::Base
   end
 
   def tag_data_value_2
-    Currency.new(lowest_bid.amount).to_s
+    Currency.new(winning_bid.amount).to_s
   end
 
   private
 
-  def lowest_bid
-    auction.lowest_bid || NullBid.new
+  def bids?
+    auction.bids.any?
+  end
+
+  def winning_bid
+    @_bid ||= WinningBid.new(auction).find
+  end
+
+  def winner_name
+    winning_bid.bidder_name
+  end
+
+  def winning_bid_amount_as_currency
+    Currency.new(winning_bid.amount)
   end
 end

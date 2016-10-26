@@ -1,6 +1,53 @@
 require 'rails_helper'
 
 describe BiddingStatusPresenter::Available do
+  describe 'bid_label' do
+    context 'reverse auctions' do
+      it "should show the user's bid when the user is winning" do
+        bid = auction.bids.first
+        user = bid.bidder
+        presenter = BiddingStatusPresenter::Available.new(auction)
+
+        expect(presenter.bid_label(user)).to eq("You have the lowest bid: #{Currency.new(bid.amount)}")
+      end
+
+      it 'should show the current bid when the auction has any bids' do
+        bid = WinningBid.new(auction).find
+        user = create(:user)
+        presenter = BiddingStatusPresenter::Available.new(auction)
+
+        expect(presenter.bid_label(user)).to eq("Current low bid: #{Currency.new(bid.amount)} (#{bid.bidder.name})")
+      end
+
+      it "should show an empty string when the auction has no bids" do
+        auction = create(:auction, :available)
+        user = create(:user)
+        presenter = BiddingStatusPresenter::Available.new(auction)
+
+        expect(presenter.bid_label(user)).to eq("")
+      end
+    end
+
+    context 'sealed-bid auctions' do
+      it 'should be blank when the auction is running' do
+        auction = create(:auction, :with_bids, :sealed_bid, start_price: 2500)
+        user = create(:user)
+        presenter = BiddingStatusPresenter::Available.new(auction)
+
+        expect(presenter.bid_label(user)).to eq("")
+      end
+
+      it "should show the user's bid if the user has bid" do
+        auction = create(:auction, :with_bids, :sealed_bid, start_price: 2500)
+        bid = auction.bids.first
+        user = bid.bidder
+        presenter = BiddingStatusPresenter::Available.new(auction)
+
+        expect(presenter.bid_label(user)).to eq("Your bid: #{Currency.new(bid.amount)}")
+      end
+    end
+  end
+
   describe '#tag_data_value_status' do
     it "has a twitter status data value with human readable time expression" do
       presenter = BiddingStatusPresenter::Available.new(auction)

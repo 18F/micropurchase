@@ -30,42 +30,4 @@ describe Admin::AuctionShowViewModel do
       end
     end
   end
-
-  describe '#bid_label' do
-    it 'should show the winning bid amount and user when the auction has a winner' do
-      auction = create(:auction, :closed, :with_bids)
-      bid = WinningBid.new(auction).find
-      name = bid.bidder.name
-      user = create(:user)
-
-      view_model = Admin::AuctionShowViewModel.new(auction: auction, current_user: user)
-
-      expect(view_model.bid_label).to eq("Winning bid (#{name}): #{Currency.new(bid.amount)}")
-    end
-
-    it 'should show the current bid when the auction has any bids' do
-      auction = create(:auction, :with_bids)
-      bid = WinningBid.new(auction).find
-      user = create(:user)
-      view_model = Admin::AuctionShowViewModel.new(auction: auction, current_user: user)
-
-      expect(view_model.bid_label).to eq("Current low bid: #{Currency.new(bid.amount)} (#{bid.bidder.name})")
-    end
-
-    it "should show the starting price when auction hasn't started yet" do
-      auction = create(:auction, :future, start_price: 1000)
-      user = create(:user)
-      view_model = Admin::AuctionShowViewModel.new(auction: auction, current_user: user)
-
-      expect(view_model.bid_label).to eq("Starting price: $1,000.00")
-    end
-
-    it 'should be blank if auction had no bids' do
-      auction = create(:auction, :closed)
-      user = create(:user)
-      view_model = Admin::AuctionShowViewModel.new(auction: auction, current_user: user)
-
-      expect(view_model.bid_label).to be_blank
-    end
-  end
 end
