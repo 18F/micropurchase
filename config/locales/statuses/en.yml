@@ -129,6 +129,13 @@ en:
             This auction is ready to publish! Please select a start date, end
             date, and delivery period for this auction.
           header: "Ready to publish"
+      work_not_started:
+        header: Ready for work
+        body: >
+          %{winner_url} won this auction on %{ended_at} with a bid of
+           %{winning_amount}. They’ve received an email letting them
+           know the delivery deadline (%{delivery_deadline}) and how to
+           get started.
       work_in_progress:
         header: Work in progress
         body: >

@@ -17,7 +17,7 @@ class Admin::AuctionsController < Admin::BaseController
 
     if SaveAuction.new(auction).perform
       flash[:success] = I18n.t('controllers.admin.auctions.create.success')
-      redirect_to admin_path
+      redirect_to admin_auction_path(auction)
     else
       flash.now[:error] = auction.errors.full_messages.to_sentence
       @view_model = Admin::NewAuctionViewModel.new(auction)

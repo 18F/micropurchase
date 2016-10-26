@@ -1,0 +1,6 @@
+<div class="user-subnav">
+  <%= link_to I18n.t('labels.vendor.account.tabs.profile'),
+      profile_path,
+      class: subnav.profile_tab_class %>
+  <%= render partial: subnav.bids_tab_partial, locals: {subnav: subnav} %>
+</div>

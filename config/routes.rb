@@ -56,9 +56,9 @@ Rails.application.routes.draw do
     get 'receipt', to: 'receipts#show'
   end
 
-  resources :bids, only: [:index]
   resources :users, only: [:update]
-  get 'profile', to: 'users#edit'
+  get 'account/profile', to: 'users#edit', as: 'profile'
+  get 'account/bids', to: 'bids#index', as: 'bids_placed'
 
   resources :insights, only: [:index]
 

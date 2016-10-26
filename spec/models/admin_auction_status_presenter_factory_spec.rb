@@ -21,7 +21,7 @@ describe AdminAuctionStatusPresenterFactory do
 
   context "when an auction has been accepted but doesn't have a payment URL yet" do
     it 'should return a AdminAuctionStatusPresenter::AcceptedPendingPaymentUrl' do
-      auction = create(:auction, :closed, :with_bids, :published, delivery_status: :accepted_pending_payment_url)
+      auction = create(:auction, :closed, :with_bids, :published, :delivery_url, delivery_status: :accepted_pending_payment_url)
 
       expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
         .to be_a(AdminAuctionStatusPresenter::AcceptedPendingPaymentUrl)
@@ -101,10 +101,10 @@ describe AdminAuctionStatusPresenterFactory do
 
   context 'when auction is closed, pending delivery' do
     it 'should return the correct presenter' do
-      auction = create(:auction, :c2_budget_approved, :closed, delivery_status: :pending_delivery)
+      auction = create(:auction, :c2_budget_approved, :closed, :with_bids, delivery_status: :pending_delivery)
 
       expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
-        .to be_a(C2StatusPresenter::BudgetApproved)
+        .to be_a(AdminAuctionStatusPresenter::WorkNotStarted)
     end
   end
 end

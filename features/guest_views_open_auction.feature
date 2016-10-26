@@ -19,7 +19,7 @@ Feature: Guest views open auction
     And I should see an "Open" label
     And I should see when the auction started
     And I should see when the auction ends
-    And I should see a current bid amount
+    And I should see the current winning bid in a header subtitle
     And there should be meta tags for the open auction
     And I should not see the bid form
     And I should see the open auction message for guests
@@ -37,6 +37,7 @@ Feature: Guest views open auction
 
     When I visit the auction page
     Then I should see an "Expiring" label
+    And I should see a relative closing time for the auction
     And I should see when the auction started
     And I should see when the auction ends
     And I should see the delivery deadline

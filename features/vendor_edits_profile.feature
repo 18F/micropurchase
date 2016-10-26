@@ -15,7 +15,7 @@ Feature: Vendor edits profile
     And I click on the "Update" button
     Then I should be on the home page
 
-    When I click on the "My profile" link
+    When I click on the "Account" link
     Then I should see "doris@example.com" in the "Email address" field
     And I should see "Doris Doogooder" in the "Name" field
 
@@ -51,5 +51,5 @@ Feature: Vendor edits profile
     Then I should see an alert that "Email is invalid"
 
     When I visit the home page
-    And I click on the "My profile" link
+    And I click on the "Account" link
     Then I should see my email in the "Email address" field

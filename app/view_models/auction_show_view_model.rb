@@ -65,12 +65,16 @@ class AuctionShowViewModel
   end
 
   def bid_label
-    if over? && auction.bids.any?
+    if available?
+      bidding_status_presenter.bid_label(current_user)
+    elsif over? && auction.bids.any?
       "Winning bid (#{lowest_bidder_name}): #{highlighted_bid_amount_as_currency}"
     elsif user_bids.any?
       "Your bid: #{Currency.new(lowest_user_bid_amount)}"
     elsif auction.bids.any?
       "Current bid: #{highlighted_bid_amount_as_currency}"
+    elsif future?
+      "Starting price: #{Currency.new(auction.start_price)}"
     else
       ""
     end
@@ -169,6 +173,10 @@ class AuctionShowViewModel
 
   def available?
     bidding_status.available?
+  end
+
+  def future?
+    bidding_status.future?
   end
 
   def bidding_status
