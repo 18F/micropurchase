@@ -8,7 +8,7 @@ Feature: Admin archives auction
     And I sign in
     And there is an unpublished auction
     And the auction is for the default purchase card
-    And the c2 proposal for the auction is not budget approved
+    And the c2 proposal for the auction is pending approval
     When I visit the admin form for that auction
     Then I should see the Archive button
 

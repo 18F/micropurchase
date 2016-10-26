@@ -58,6 +58,24 @@ describe UpdateAuction do
       end
     end
 
+    context 'when setting c2_proposal_url and c2_status manually' do
+      it 'should set the c2_proposal_url and c2_status' do
+        auction = create(:auction, c2_status: :sent)
+        c2_proposal_url = 'https://c2-dev.18f.gov/proposals/2486'
+        params = {auction: {c2_proposal_url: c2_proposal_url, c2_status: 'pending_approval'}}
+
+        UpdateAuction.new(
+          auction: auction,
+          params: params,
+          current_user: auction.user
+        ).perform
+
+        auction.reload
+        expect(auction.c2_proposal_url).to eq(c2_proposal_url)
+        expect(auction.c2_status).to eq('pending_approval')
+      end
+    end
+
     context 'when changing the title' do
       it 'updates the title' do
         auction = create(:auction, :delivery_due_at_expired)
