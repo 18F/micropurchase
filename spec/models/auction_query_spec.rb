@@ -134,13 +134,14 @@ describe AuctionQuery do
       _regular = create(:auction)
       _unpublished = create(:auction, :unpublished)
       _pending_delivery = create(:auction, :closed)
+      _work_in_progress = create(:auction, :closed, :work_in_progress)
       _pending_acceptance = create(:auction, :evaluation_needed)
       _payment_needed = create(:auction, :payment_needed)
       _pending_url = create(:auction, :closed, :accepted_pending_payment_url)
 
       query = AuctionQuery.new
 
-      expect(query.needs_attention_count).to eq(5)
+      expect(query.needs_attention_count).to eq(6)
     end
   end
 

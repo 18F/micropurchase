@@ -6,6 +6,10 @@ module AuctionScopes
     scope :accepted_pending_payment_url, lambda {
       where(delivery_status: delivery_statuses['accepted_pending_payment_url'])
     }
+    scope :to_be_delivered, lambda {
+      where(delivery_status: [delivery_statuses['pending_delivery'],
+                              delivery_statuses['work_in_progress']])
+    }
     scope :accepted_or_accepted_and_pending_payment_url, lambda {
       where(delivery_status: [delivery_statuses['accepted'],
                               delivery_statuses['accepted_pending_payment_url']])
