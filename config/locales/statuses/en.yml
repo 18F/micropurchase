@@ -193,7 +193,7 @@ en:
         header: "Pending C2 approval"
         body: "This auction has been sent to C2 for approval."
         actions:
-          set: Set C2
+          set: Set C2 URL
       pending_approval:
         header: "Pending C2 approval"
         body: >

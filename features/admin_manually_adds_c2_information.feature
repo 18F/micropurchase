@@ -13,11 +13,11 @@ Feature: Admin manually adds C2 information for default P-card auctions
     Then I should see that approval has not been requested for the auction
 
     When I click on the "Request approval" button
-    Then I should see "This auction has been sent to C2 for approval."
+    Then I should see the auction was sent to C2 for approval
     And I should see that the auction does not have a C2 Proposal URL
     And I should not see a "Request approval" button
     And I should see a text input for the C2 URL
-    And I should see a "Set C2" button
+    And I should see a "Set C2 URL" button
 
   @background_jobs_off
   Scenario: Admin manually enters C2 URL for pending approval
@@ -28,9 +28,9 @@ Feature: Admin manually adds C2 information for default P-card auctions
     And the C2 proposal was sent for the auction
 
     When I visit the admin auction page for that auction
-    Then I should see "This auction has been sent to C2 for approval."
+    Then I should see the auction was sent to C2 for approval
 
     When I enter a C2 URL in the C2 URL input
-    And I click on the "Set C2" button
+    And I click on the "Set C2 URL" button
     Then I should see that the auction has a C2 Proposal URL
     And I should see that the C2 status for an auction pending C2 approval
