@@ -1,14 +1,15 @@
 class BiddingStatusPresenter::Available < BiddingStatusPresenter::Base
   def start_label
-    "Bid start time"
+    I18n.t('bidding_status.available.start_label')
   end
 
   def deadline_label
-    "Bid deadline"
+    I18n.t('bidding_status.available.deadline_label')
   end
 
   def relative_time
-    "Closes #{DcTimePresenter.new(auction.ended_at).relative_time}"
+    I18n.t('bidding_status.available.relative_time',
+           time: DcTimePresenter.new(auction.ended_at).relative_time)
   end
 
   def label_class
@@ -16,7 +17,7 @@ class BiddingStatusPresenter::Available < BiddingStatusPresenter::Base
   end
 
   def label
-    'Open'
+    I18n.t('bidding_status.available.label')
   end
 
   def bid_label(user)
@@ -44,7 +45,7 @@ class BiddingStatusPresenter::Available < BiddingStatusPresenter::Base
   end
 
   def tag_data_label_2
-    "Bidding"
+    I18n.t('bidding_status.available.tag_data_label_2')
   end
 
   def tag_data_value_2

@@ -22,6 +22,23 @@ describe BiddingStatusPresenter::Over do
     end
   end
 
+  describe 'bid_label' do
+    it 'should display the winning bid if the auction has bids' do
+      bid = auction.bids.first
+      bidder = bid.bidder
+      presenter = BiddingStatusPresenter::Over.new(auction)
+      user = create(:user)
+      expect(presenter.bid_label(user)).to eq("Winning bid (#{bidder.name}): $3,000.00")
+    end
+
+    it 'should be an empty string if the auction has no bids' do
+      auction = create(:auction, :closed)
+      presenter = BiddingStatusPresenter::Over.new(auction)
+      user = create(:user)
+      expect(presenter.bid_label(user)).to eq('')
+    end
+  end
+
   describe '#relative_time' do
     it 'returns date that auction ended' do
       time = Time.local(2008, 9, 1)
@@ -29,7 +46,7 @@ describe BiddingStatusPresenter::Over do
 
       presenter = BiddingStatusPresenter::Over.new(auction)
 
-      expect(presenter.relative_time).to eq 'Ended on: 09/01/2008'
+      expect(presenter.relative_time).to eq 'Ended on 09/01/2008'
     end
   end
 
