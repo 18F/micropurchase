@@ -160,7 +160,7 @@ en:
           The <a href=%{delivery_url}>pull request</a> from %{winner_url}
           was accepted. However, this vendor cannot
           be paid until they’ve specified a valid payment URL.
-      default_card:
+      default_pcard:
         accepted:
           header: Accepted
           body: >
@@ -175,8 +175,8 @@ en:
             %{accepted_at}. %{customer_url} has been asked to remit
             payment. You must manually mark this auction as paid when it
             is paid by the customer.
-            actions:
-              mark_paid: Mark as paid
+          actions:
+            mark_paid: Mark as paid
         paid:
           header: Paid
           body: >

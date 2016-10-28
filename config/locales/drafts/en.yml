@@ -13,3 +13,5 @@ en:
         status: "Awaiting payment confirmation"
       payment_confirmed:
         status: "Payment confirmed"
+      c2_canceled:
+        status: "Canceled"
