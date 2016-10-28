@@ -87,12 +87,13 @@ en:
         greeting: "Dear %{vendor_name},"
         para_1: >
           Payment in the amount of %{amount} has recently been made to
-          %{payment_url} for %{auction_title}. Please let us know if you've received it:
+          %{payment_url} for %{auction_title}. Please let us know if
+          you have received it
         para_2: "Questions? Contact micropurchase@gsa.gov."
         sign_off: "Sincerely,"
         from: "The 18F Micro-purchase team"
       auction_paid_other_pcard:
-        subject: Payment has been made for %{auction_title}
+        subject: "Payment has been made for %{auction_title}"
         greeting: "Dear %{vendor_name},"
         para_1: >-
           Payment in the amount of %{amount} has recently been made to

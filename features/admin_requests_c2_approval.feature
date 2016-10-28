@@ -12,7 +12,7 @@ Feature: Admin requests C2 approval for an auction
     Then I should see that approval has not been requested for the auction
 
     When I click on the "Request approval" button
-    Then I should see "This auction has been sent to C2 for approval."
+    Then I should see the auction was sent to C2 for approval
     And I should see that the auction does not have a C2 Proposal URL
     And I should not see a "Request approval" button
 

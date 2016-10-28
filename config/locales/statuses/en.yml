@@ -160,7 +160,7 @@ en:
           The <a href=%{delivery_url}>pull request</a> from %{winner_url}
           was accepted. However, this vendor cannot
           be paid until they’ve specified a valid payment URL.
-      default_card:
+      default_pcard:
         accepted:
           header: Accepted
           body: >
@@ -175,8 +175,8 @@ en:
             %{accepted_at}. %{customer_url} has been asked to remit
             payment. You must manually mark this auction as paid when it
             is paid by the customer.
-            actions:
-              mark_paid: Mark as paid
+          actions:
+            mark_paid: Mark as paid
         paid:
           header: Paid
           body: >
@@ -190,12 +190,15 @@ en:
               used without first being granted approval in C2."
         header: "C2 approval required"
       sent:
-         header: "Pending C2 approval"
-         body: "This auction has been sent to C2 for approval."
-      pending_approval:
         header: "Pending C2 approval"
         body: "This auction has been sent to C2 for approval."
-        action: "You can check on the status <a href=%{link}>here</a>."
+        actions:
+          set: Set C2 URL
+      pending_approval:
+        header: "Pending C2 approval"
+        body: >
+          This auction has been sent to C2 for approval.
+        action: You can check on the status <a href=%{link}>here</a>.
       budget_approved:
         body: "This auction has been approved in C2: <a href=%{link}>%{link}</a>"
         header: "Approved in C2"

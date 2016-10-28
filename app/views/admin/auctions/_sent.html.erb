@@ -1,0 +1,6 @@
+<%= simple_form_for [:admin, status.auction], url: admin_auction_path, method: :patch do |f| %>
+  <%= f.input :c2_proposal_url %>
+  <%= f.hidden_field :c2_status, value: 'pending_approval', hidden: true %>
+  <%= f.submit t('statuses.c2_presenter.sent.actions.set'),
+      class: 'usa-button usa-button-outline action-button' %>
+<% end %>

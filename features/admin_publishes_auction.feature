@@ -17,7 +17,7 @@ Feature: Admin publishes auction in the admin panel
     And I sign in
     And there is an unpublished auction
     And the auction is for the default purchase card
-    And the c2 proposal for the auction is not budget approved
+    And the c2 proposal for the auction is pending approval
     When I visit the admin auction page for that auction
     Then I should see that the C2 status for an auction pending C2 approval
 

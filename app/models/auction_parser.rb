@@ -22,6 +22,7 @@ class AuctionParser
     strong_params.require(:auction).permit(
       :billable_to,
       :c2_proposal_url,
+      :c2_status,
       :customer_id,
       :delivery_status,
       :delivery_url,

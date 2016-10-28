@@ -15,7 +15,8 @@ class Admin::DraftListItem < Admin::BaseViewModel
 
   def c2_proposal_status
     if auction.purchase_card == 'default'
-      I18n.t("drafts.c2_status.#{auction.c2_status}.status")
+      status_key = "drafts.c2_status.#{auction.c2_status}.status"
+      I18n.t(status_key)
     else
       'N/A'
     end
