@@ -193,8 +193,12 @@ Given(/^the auction needs payment$/) do
   @auction.update(FactoryGirl.attributes_for(:auction, :payment_needed))
 end
 
-Given(/^the c2 proposal for the auction is not budget approved$/) do
+Given(/^the c2 proposal for the auction is pending approval$/) do
   @auction.update(c2_status: :pending_approval)
+end
+
+Given(/^the C2 proposal was sent for the auction$/) do
+  @auction.update(c2_status: :sent)
 end
 
 Given(/^the auction does not have a c2 proposal url$/) do

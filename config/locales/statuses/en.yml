@@ -190,12 +190,15 @@ en:
               used without first being granted approval in C2."
         header: "C2 approval required"
       sent:
-         header: "Pending C2 approval"
-         body: "This auction has been sent to C2 for approval."
-      pending_approval:
         header: "Pending C2 approval"
         body: "This auction has been sent to C2 for approval."
-        action: "You can check on the status <a href=%{link}>here</a>."
+        actions:
+          set: Set C2 URL
+      pending_approval:
+        header: "Pending C2 approval"
+        body: >
+          This auction has been sent to C2 for approval.
+        action: You can check on the status <a href=%{link}>here</a>.
       budget_approved:
         body: "This auction has been approved in C2: <a href=%{link}>%{link}</a>"
         header: "Approved in C2"

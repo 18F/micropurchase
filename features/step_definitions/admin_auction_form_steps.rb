@@ -226,3 +226,12 @@ end
 When(/^I should not see the 'Paid' checkbox$/) do
   expect(page).not_to have_field('auction_paid_at')
 end
+
+Then(/^I should see a text input for the C2 URL$/) do
+  find_field('auction_c2_proposal_url')
+end
+
+When(/^I enter a C2 URL in the C2 URL input$/) do
+  @c2_url = "https://c2-dev.18f.gov/proposals/#{rand(10_000)}"
+  fill_in('auction_c2_proposal_url', with: @c2_url)
+end
