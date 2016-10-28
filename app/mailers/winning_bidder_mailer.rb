@@ -54,7 +54,7 @@ class WinningBidderMailer < ActionMailer::Base
     mail(
       to: @winning_bid.bidder.email,
       subject: I18n.t(
-        'mailers.auction_mailer.auction_paid_default_pcard.subject',
+        'mailers.winning_bidder_mailer.auction_paid_default_pcard.subject',
         auction_title: @auction.title
       ),
       from: SMTPCredentials.default_from,
