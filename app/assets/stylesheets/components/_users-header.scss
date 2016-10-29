@@ -3,6 +3,22 @@
   border-bottom: 1px solid $color-gray-light;
 }
 
+.user-header-title {
+  h1 {
+    width: 90%; // to make room for admin edit button
+    display: inline;
+    float: left;
+    font-family: 'Source Sans Pro', Verdana, sans-serif;
+    font-size: 28px;
+    margin-bottom: 0;
+    margin-top: 3rem;
+    letter-spacing: -2px;
+    line-height: 48px;
+    font-size: 48px;
+    font-weight: 300;
+  }
+}
+
 .user-subnav {
   clear: both;
   display: block;

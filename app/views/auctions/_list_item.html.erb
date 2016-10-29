@@ -8,11 +8,11 @@
           locals: { status: auction.bidding_status_presenter } %>
 
         <div class="bidding-deadline">
-          <%= auction.relative_time %>
+          <%== auction.relative_time %>
         </div>
 
         <div class="winning-bid-detail">
-          <%= render partial: auction.winning_bid_partial,
+          <%== render partial: auction.winning_bid_partial,
             locals: { auction: auction } %>
         </div>
       </div>

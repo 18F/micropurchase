@@ -4,26 +4,26 @@ en:
       bid_label: "Starting price: %{amount}"
       deadline_label: Bid deadline
       label: Coming soon
-      relative_time: "Opens %{time}"
+      relative_time: "<label>Opens:</label> %{time}"
       start_label: Bid start time
       tag_data_label_2: Starting bid
     available:
       bid_label:
         no_bids: ''
-        sealed_bid: "Your bid: %{amount}"
+        sealed_bid: "<label>Your bid:</label> %{amount}"
         reverse:
           vendor_winning: "You have the lowest bid: %{amount}"
-          default: "Current low bid: %{amount} (%{bidder_name})"
+          default: "<label>Current low bid:</label> %{amount} (%{bidder_name})"
       deadline_label: Bid deadline
       label: Open
-      relative_time: "Closes %{time}"
+      relative_time: "<label>Closes:</label> %{time}"
       start_label: Bid start time
       tag_data_label_2: Bidding
     expiring:
       label: Expiring
     over:
-      bid_label: "Winning bid (%{winner_name}): %{amount}"
+      bid_label: "<label>Winning bid:</label> (%{winner_name}): %{amount}"
       deadline_label: Auction ended at
       label: Closed
       start_label: Auction started at
-      relative_time: "Ended on %{time}"
+      relative_time: "<label>Ended on:</label> %{time}"
