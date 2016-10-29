@@ -26,8 +26,8 @@
     letter-spacing: -1px;
     font-size: $base-font-size + .8;
     font-weight: 400;
-    padding: 8px 0px 5px 0px;
-    margin: 0px;
+    padding: 8px 0 5px 0;
+    margin: 0;
   }
 
   .auction-subtitles {
@@ -38,12 +38,12 @@
   .auction-subtitle {
     float: left;
     font-size: $base-font-size;
-    padding: 6px 10px 5px 0px;
+    padding: 6px 10px 5px 0;
+  }
 
-    label {
-      display: inline;
-      font-weight: 600;
-    }
+  label {
+    display: inline;
+    font-weight: 600;
   }
 }
 

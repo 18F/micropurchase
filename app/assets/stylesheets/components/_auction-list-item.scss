@@ -51,11 +51,12 @@
     display: inline-block;
     margin: 0;
     margin-bottom: $base-padding-lite;
-    label {
-      font-weight: 700;
-      display: inline-block;
-      margin-top: 0px;
-    }
+  }
+
+  label {
+    font-weight: 700;
+    display: inline-block;
+    margin-top: 0px;
   }
 
   @include media($medium-screen) {
