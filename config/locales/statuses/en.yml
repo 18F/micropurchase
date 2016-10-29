@@ -197,8 +197,10 @@ en:
       pending_approval:
         header: "Pending C2 approval"
         body: >
-          This auction has been sent to C2 for approval.
-        action: You can check on the status <a href=%{link}>here</a>.
+          This auction has been sent to C2 for approval. You can check
+          on the status <a href="%{link}">here</a>.
+        actions:
+          approve: Approve C2 Request
       budget_approved:
         body: "This auction has been approved in C2: <a href=%{link}>%{link}</a>"
         header: "Approved in C2"

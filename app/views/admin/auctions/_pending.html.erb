@@ -1,1 +1,5 @@
-<%= raw t('statuses.c2_presenter.pending_approval.action', link: status.auction.c2_proposal_url) %>
+<%= simple_form_for [:admin, status.auction], url: admin_auction_path, method: :patch do |f| %>
+  <%= f.hidden_field :c2_status, value: 'budget_approved', hidden: true %>
+  <%= f.submit t('statuses.c2_presenter.pending_approval.actions.approve'),
+      class: 'usa-button usa-button-outline action-button' %>
+<% end %>

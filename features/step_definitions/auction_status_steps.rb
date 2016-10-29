@@ -125,8 +125,9 @@ Then(/^I should see winning bidder status for a rejected auction$/) do
 end
 
 Then(/^I should see that the C2 status for an auction pending C2 approval$/) do
-  expect(page).to have_content(
-    I18n.t('statuses.c2_presenter.pending_approval.body')
+  expect(page.html).to include(
+    I18n.t('statuses.c2_presenter.pending_approval.body',
+           link: @auction.c2_proposal_url)
   )
 end
 
