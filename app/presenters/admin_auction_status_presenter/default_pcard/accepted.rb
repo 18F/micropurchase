@@ -12,6 +12,10 @@ class AdminAuctionStatusPresenter::DefaultPcard::Accepted < AdminAuctionStatusPr
     )
   end
 
+  def action_partial
+    'admin/auctions/mark_paid'
+  end
+
   private
 
   def c2_url

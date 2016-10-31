@@ -2,7 +2,7 @@ class Admin::AuctionMarkPaymentsController < Admin::BaseController
   def update
     @auction = Auction.find(params[:id])
 
-    paid_auction = MarkOtherPcardAuctionAsPaid.new(
+    paid_auction = MarkAuctionAsPaid.new(
       auction: @auction
     )
 

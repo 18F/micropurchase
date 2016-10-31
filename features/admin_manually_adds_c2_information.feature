@@ -34,3 +34,16 @@ Feature: Admin manually adds C2 information for default P-card auctions
     And I click on the "Set C2 URL" button
     Then I should see that the auction has a C2 Proposal URL
     And I should see that the C2 status for an auction pending C2 approval
+
+  Scenario: Admin sees "Mark Auction as Paid" button for C2 auctions
+    Given I am an administrator
+    And I sign in
+    And there is an accepted auction
+    And the auction has a c2 proposal url
+
+    When I visit the admin auction page for that auction
+    Then I should see the admin status for an auction pending payment from the default P-Card
+    And I should see a "Mark as paid" button
+
+    When I mark the auction as paid
+    Then I should see the C2 status for an auction pending payment confirmation
