@@ -81,6 +81,15 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
     bidding_status_presenter.bid_label(current_user)
   end
 
+  def share_url
+    if auction.unpublished?
+      AuctionPreviewUrl.new(auction: auction)
+    else
+      url = AuctionUrl.new(auction: auction)
+      Url.new(link_text: url, path_name: 'auction', params: { id: auction.id })
+    end
+  end
+
   private
 
   def bidding_status
@@ -93,15 +102,6 @@ class Admin::AuctionShowViewModel < Admin::BaseViewModel
 
   def eligibility_label
     EligibilityFactory.new(auction).create.label
-  end
-
-  def share_url
-    if auction.unpublished?
-      AuctionPreviewUrl.new(auction: auction)
-    else
-      url = AuctionUrl.new(auction: auction)
-      Url.new(link_text: url, path_name: 'auction', params: { id: auction.id })
-    end
   end
 
   def capitalized_type
