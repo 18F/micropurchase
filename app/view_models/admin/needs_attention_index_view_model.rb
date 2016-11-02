@@ -11,17 +11,17 @@ class Admin::NeedsAttentionIndexViewModel < Admin::BaseViewModel
     end
   end
 
-  def future
-    @_future ||= AuctionQuery.new.upcoming.map do |auction|
+  def upcoming
+    @_upcoming ||= AuctionQuery.new.upcoming.map do |auction|
       Admin::DraftListItem.new(auction)
     end
   end
 
-  def future_partial
-    if future.any?
-      'future'
+  def upcoming_partial
+    if upcoming.any?
+      'upcoming'
     else
-      'null_future'
+      'null_upcoming'
     end
   end
 
