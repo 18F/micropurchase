@@ -1,23 +1,27 @@
 <div class="usa-grid">
   <%= render partial: 'admin/auctions_subnav', locals: { view_model: @view_model } %>
 
-  <h2><%= t('needs_attention.index.drafts') %></h2>
+  <h2><%= t('needs_attention.index.headers.drafts') %></h2>
   <%= render partial: @view_model.drafts_partial,
     locals: { auctions: @view_model.drafts } %>
 
-  <h2><%= t('needs_attention.index.upcoming') %></h2>
+  <h2><%= t('needs_attention.index.headers.upcoming') %></h2>
   <%= render partial: @view_model.upcoming_partial,
     locals: { auctions: @view_model.upcoming } %>
 
-  <h2><%= t('needs_attention.index.delivery_needed') %></h2>
+  <h2><%= t('needs_attention.index.headers.open') %></h2>
+  <%= render partial: @view_model.open_partial,
+    locals: { auctions: @view_model.open } %>
+
+  <h2><%= t('needs_attention.index.headers.delivery_needed') %></h2>
   <%= render partial: @view_model.delivery_needed_partial,
     locals: { auctions: @view_model.delivery_needed } %>
 
-  <h2><%= t('needs_attention.index.evaluation_needed') %></h2>
+  <h2><%= t('needs_attention.index.headers.evaluation_needed') %></h2>
   <%= render partial: @view_model.evaluation_needed_partial,
     locals: { auctions: @view_model.evaluation_needed } %>
 
-  <h2><%= t('needs_attention.index.payment_needed') %></h2>
+  <h2><%= t('needs_attention.index.headers.payment_needed') %></h2>
   <%= render partial: @view_model.payment_needed_partial,
     locals: { auctions: @view_model.payment_needed } %>
 </div>

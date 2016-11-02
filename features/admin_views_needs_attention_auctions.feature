@@ -18,6 +18,7 @@ Feature: Admin view needs attention auctions
 
     When I visit the admin needs attention auctions page
     Then I should see "There are no auctions that are coming soon"
+    And I should see "There are no open auctions"
     And I should see "There are no auctions needing delivery"
     And I should see "There are no draft auctions"
     And I should see "There are no auctions needing evaluation"
@@ -34,6 +35,12 @@ Feature: Admin view needs attention auctions
     When I visit the admin needs attention auctions page
     Then I should see a table listing all future auctions
     And I should see the auction as a future auction
+
+  Scenario: Admin sees data for open auctions on the Needs Attention page
+    Given there is an open auction
+    When I visit the admin needs attention auctions page
+    Then I should see a table listing all open auctions
+    And I should see the auction as an open auction
 
   Scenario: Admin sees data for needs evaluation auctions
     Given there is an auction that needs evaluation
