@@ -4,12 +4,24 @@ en:
       delivery_needed: "Delivery needed"
       delivery_past_due: "Delivery past due"
       drafts: "Drafts"
+      upcoming: "Coming soon"
       evaluation_needed: "Evaluation needed"
+      null_upcoming: "There are no auctions that are coming soon"
       null_delivery_needed: "There are no auctions needing delivery"
       null_drafts: "There are no draft auctions"
       null_evaluation_needed: "There are no auctions needing evaluation"
       null_payment_needed: "There are no auctions needing payment"
       payment_needed: "Payment needed"
+      columns:
+        title: Title
+        start_date: Starting Date
+        end_date: Ending Date
+        accept_date: Date Accepted
+        delivery_deadline: Delivery Deadline
+        delivery_url: Delivery URL
+        c2_status: C2 Request
+        winner: Winning Vendor
+        payment_status: Status
     list_item:
       payment_status:
         pending: "Pending"

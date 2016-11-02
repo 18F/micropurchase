@@ -5,6 +5,10 @@
   <%= render partial: @view_model.drafts_partial,
     locals: { auctions: @view_model.drafts } %>
 
+  <h2><%= t('needs_attention.index.upcoming') %></h2>
+  <%= render partial: @view_model.upcoming_partial,
+    locals: { auctions: @view_model.upcoming } %>
+
   <h2><%= t('needs_attention.index.delivery_needed') %></h2>
   <%= render partial: @view_model.delivery_needed_partial,
     locals: { auctions: @view_model.delivery_needed } %>
