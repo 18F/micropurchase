@@ -127,7 +127,7 @@ end
 Then(/^I should see that the C2 status for an auction pending C2 approval$/) do
   expect(page.html).to include(
     I18n.t('statuses.c2_presenter.pending_approval.body',
-           link: @auction.c2_proposal_url)
+           link: @auction.reload.c2_proposal_url)
   )
 end
 
