@@ -45,7 +45,7 @@ Given(/^I am going to lose an auction$/) do
 end
 
 Given(/^there is an auction with work in progress$/) do
-  @auction = FactoryGirl.create(:auction, :c2_budget_approved, :work_in_progress)
+  @auction = FactoryGirl.create(:auction, :closed, :c2_budget_approved, :published, :work_in_progress)
 end
 
 When(/^the auction ends$/) do
@@ -144,6 +144,10 @@ end
 
 Given(/^there is an auction pending acceptance$/) do
   @auction = FactoryGirl.create(:auction, :with_bids, :pending_acceptance)
+end
+
+Given(/^there is an auction pending delivery$/) do
+  @auction = FactoryGirl.create(:auction, :with_bids, :closed, delivery_status: :pending_delivery)
 end
 
 Given(/^there is an accepted auction that needs payment$/) do

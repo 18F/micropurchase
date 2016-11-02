@@ -5,7 +5,6 @@
       <th scope="col"><%= t('needs_attention.index.columns.start_date') %></th>
       <th scope="col"><%= t('needs_attention.index.columns.end_date') %></th>
       <th scope="col"><%= t('needs_attention.index.columns.delivery_deadline') %></th>
-      <th scope="col"><%= t('needs_attention.index.columns.c2_status') %></th>
       <th scope="col"></th>
     </tr>
   </thead>
@@ -16,7 +15,6 @@
         <td><%= auction.started_at %></td>
         <td><%= auction.ended_at %></td>
         <td><%= auction.delivery_due_at %></td>
-        <td><%= auction.c2_proposal_status %></td>
         <td><%= link_to 'edit', edit_admin_auction_path(auction.id) %></td>
       </tr>
     <% end %>
