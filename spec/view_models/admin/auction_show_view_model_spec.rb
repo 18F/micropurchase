@@ -30,4 +30,38 @@ describe Admin::AuctionShowViewModel do
       end
     end
   end
+
+  describe "#csv_report_partial" do
+    it 'should return a partial when the auction is over and has a winner' do
+      auction = create(:auction, :with_bids, :closed)
+      user = create(:user)
+      view_model = Admin::AuctionShowViewModel.new(auction: auction, current_user: user)
+
+      expect(view_model.csv_report_partial).to_not eq('components/null')
+    end
+
+    it 'should return a null partial when the auction had no winners' do
+      auction = create(:auction, :closed)
+      user = create(:user)
+      view_model = Admin::AuctionShowViewModel.new(auction: auction, current_user: user)
+
+      expect(view_model.csv_report_partial).to eq('components/null')
+    end
+
+    it 'should be a null partial when the auction has not started' do
+      auction = create(:auction, :future)
+      user = create(:user)
+      view_model = Admin::AuctionShowViewModel.new(auction: auction, current_user: user)
+
+      expect(view_model.csv_report_partial).to eq('components/null')
+    end
+
+    it 'should be a null partial when the auction is still running' do
+      auction = create(:auction, :with_bids)
+      user = create(:user)
+      view_model = Admin::AuctionShowViewModel.new(auction: auction, current_user: user)
+
+      expect(view_model.csv_report_partial).to eq('components/null')
+    end
+  end
 end
