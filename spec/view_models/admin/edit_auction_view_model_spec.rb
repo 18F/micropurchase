@@ -4,7 +4,7 @@ describe Admin::EditAuctionViewModel do
   describe '#hour_default' do
     context 'time present' do
       it 'returns hour in DC time' do
-        Timecop.freeze(Time.parse("10:00:00 UTC")) do
+        Timecop.freeze(Time.parse("09-09-2016 10:00:00 UTC")) do
           auction = build(:auction, delivery_due_at: Time.current)
           view_model = Admin::EditAuctionViewModel.new(auction)
 
