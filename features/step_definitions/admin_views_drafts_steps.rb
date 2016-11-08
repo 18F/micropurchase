@@ -2,6 +2,10 @@ Then(/^I should see a table listing all draft auctions$/) do
   expect(page).to have_xpath(needs_attention_table_xpath('drafts'))
 end
 
+Then(/^I should see a table listing all open auctions$/) do
+  expect(page).to have_xpath(needs_attention_table_xpath('open'))
+end
+
 Then(/^I should see a table listing all future auctions$/) do
   expect(page).to have_xpath(needs_attention_table_xpath('upcoming'))
 end
@@ -14,6 +18,14 @@ end
 
 Then(/^I should see the auction as a draft auction$/) do
   table_xpath = needs_attention_table_xpath('drafts')
+
+  within(:xpath, table_xpath) do
+    expect(page).to have_content(@auction.title)
+  end
+end
+
+Then(/^I should see the auction as an open auction$/) do
+  table_xpath = needs_attention_table_xpath('open')
 
   within(:xpath, table_xpath) do
     expect(page).to have_content(@auction.title)

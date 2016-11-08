@@ -25,11 +25,14 @@ class AuctionQuery
     upcoming.count
   end
 
-  def active_auction_count
+  def active
     public_index
       .started_at_in_past
       .ended_at_in_future
-      .count
+  end
+
+  def active_auction_count
+    active.count
   end
 
   def needs_attention_count

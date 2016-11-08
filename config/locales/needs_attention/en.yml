@@ -1,17 +1,21 @@
 en:
   needs_attention:
     index:
-      delivery_needed: "Delivery needed"
-      delivery_past_due: "Delivery past due"
-      drafts: "Drafts"
-      upcoming: "Coming soon"
-      evaluation_needed: "Evaluation needed"
-      null_upcoming: "There are no auctions that are coming soon"
-      null_delivery_needed: "There are no auctions needing delivery"
-      null_drafts: "There are no draft auctions"
-      null_evaluation_needed: "There are no auctions needing evaluation"
-      null_payment_needed: "There are no auctions needing payment"
-      payment_needed: "Payment needed"
+      headers:
+        delivery_needed: Delivery needed
+        delivery_past_due: Delivery past due
+        drafts: Drafts
+        open: Open auctions
+        upcoming: Coming soon
+        evaluation_needed: Evaluation needed
+        payment_needed: Payment needed
+      null_text:
+        upcoming: There are no auctions that are coming soon
+        delivery_needed: There are no auctions needing delivery
+        drafts: There are no draft auctions
+        open: There are no open auctions
+        evaluation_needed: There are no auctions needing evaluation
+        payment_needed: There are no auctions needing payment
       columns:
         title: Title
         start_date: Starting Date
@@ -20,8 +24,12 @@ en:
         delivery_deadline: Delivery Deadline
         delivery_url: Delivery URL
         c2_status: C2 Request
+        lowest_bid: Current low bid
+        bid_count: Number of bids
         winner: Winning Vendor
         payment_status: Status
+      labels:
+        not_applicable: N/A
     list_item:
       payment_status:
         pending: "Pending"

@@ -25,6 +25,20 @@ class Admin::NeedsAttentionIndexViewModel < Admin::BaseViewModel
     end
   end
 
+  def open
+    @_open ||= AuctionQuery.new.active.map do |auction|
+      Admin::OpenListItem.new(auction)
+    end
+  end
+
+  def open_partial
+    if open.any?
+      'open'
+    else
+      'null_open'
+    end
+  end
+
   def drafts
     @_drafts ||= Auction.unpublished.map do |auction|
       Admin::DraftListItem.new(auction)
