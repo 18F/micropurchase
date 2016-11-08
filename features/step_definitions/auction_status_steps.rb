@@ -148,8 +148,11 @@ Then(/^I should see the admin status for an auction pending payment from the def
 end
 
 Then(/^I should see the admin status for an auction that is pending acceptance$/) do
-  expect(page).to have_content(
-    I18n.t('statuses.admin_auction_status_presenter.pending_acceptance.body')
+  expect(page.html).to include(
+    I18n.t('statuses.admin_auction_status_presenter.pending_acceptance.body',
+           winner_url: winner_url,
+           delivery_url: @auction.delivery_url
+    )
   )
 end
 
