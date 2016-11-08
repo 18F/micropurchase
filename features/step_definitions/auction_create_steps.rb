@@ -213,6 +213,10 @@ Given(/^the auction has a c2 proposal url$/) do
   @auction.update!(c2_proposal_url: 'https://c2-dev.18f.gov/proposals/123')
 end
 
+Given(/^the delivery deadline for that auction has passed$/) do
+  @auction.update!(delivery_due_at: 4.minutes.ago)
+end
+
 Given(/^there is an auction with an associated customer$/) do
   @customer = FactoryGirl.create(:customer)
   @auction = FactoryGirl.create(:auction, customer: @customer)

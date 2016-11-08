@@ -14,14 +14,4 @@ class AdminAuctionStatusPresenter::PendingAcceptance < AdminAuctionStatusPresent
   def action_partial
     'admin/auctions/accept_or_reject'
   end
-
-  private
-
-  def winner_url
-    Url.new(
-      link_text: winner.email,
-      path_name: 'admin_user',
-      params: { id: winner.id }
-    )
-  end
 end

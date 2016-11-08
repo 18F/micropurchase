@@ -19,6 +19,24 @@ describe AdminAuctionStatusPresenterFactory do
     end
   end
 
+  context "when the vendor is late on delivery" do
+    it 'should return a AdminAuctionStatusPresenter::OverdueDelivery' do
+      auction = create(:auction, :closed, :published, :with_bids, delivery_status: :work_in_progress, delivery_due_at: 4.minutes.ago)
+
+      expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
+        .to be_a(AdminAuctionStatusPresenter::OverdueDelivery)
+    end
+  end
+
+  context "when the auction has been marked as a missed delivery" do
+    it 'should return a AdminAuctionStatusPresenter::Future' do
+      auction = create(:auction, :closed, :published, :with_bids, delivery_due_at: 4.minutes.ago, delivery_status: :missed_delivery)
+
+      expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
+        .to be_a(AdminAuctionStatusPresenter::MissedDelivery)
+    end
+  end
+
   context "when an auction has been accepted but doesn't have a payment URL yet" do
     it 'should return a AdminAuctionStatusPresenter::AcceptedPendingPaymentUrl' do
       auction = create(:auction, :closed, :with_bids, :published, :delivery_url, delivery_status: :accepted_pending_payment_url)
