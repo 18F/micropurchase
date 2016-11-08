@@ -149,7 +149,20 @@ end
 
 Then(/^I should see the admin status for an auction that is pending acceptance$/) do
   expect(page).to have_content(
-    I18n.t('statuses.admin_auction_status_presenter.pending_acceptance.header')
+    I18n.t('statuses.admin_auction_status_presenter.pending_acceptance.body')
+  )
+end
+
+Then(/^I should see the admin status for an auction with overdue delivery$/) do
+  expect(page.html).to include(
+    I18n.t('statuses.admin_auction_status_presenter.overdue_delivery.body',
+           winner_url: winner_url)
+  )
+end
+
+Then(/^I should see the admin status for an auction with missed delivery$/) do
+  expect(page).to have_content(
+    I18n.t('statuses.admin_auction_status_presenter.missed_delivery.header')
   )
 end
 

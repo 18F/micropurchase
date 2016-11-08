@@ -144,6 +144,16 @@ en:
            %{delivery_deadline}.
         actions:
           mark_delivered: Mark as delivered
+      overdue_delivery:
+        header: Auction is past due
+        body: >
+          %{winner_url} has not submitted a delivery URL for this
+          auction.
+        actions:
+          mark_not_delivered: Mark as not delivered
+      missed_delivery:
+        header: Not delivered
+        body: This auction has been marked as not delivered
       pending_acceptance:
         body: >
           %{winner_url} made a <a href=%{delivery_url}>pull
