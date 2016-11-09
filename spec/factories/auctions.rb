@@ -154,6 +154,7 @@ FactoryGirl.define do
 
     trait :pending_c2_approval do
       future
+      c2_proposal_url 'https://c2-dev.18f.gov/proposals/2486'
       c2_status :pending_approval
       purchase_card :default
       unpublished

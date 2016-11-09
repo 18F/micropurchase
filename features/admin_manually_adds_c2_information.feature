@@ -47,3 +47,16 @@ Feature: Admin manually adds C2 information for default P-card auctions
 
     When I mark the auction as paid
     Then I should see the C2 status for an auction pending payment confirmation
+
+  Scenario: Admin can manually approve C2 requests
+    Given I am an administrator
+    And I sign in
+    And there is an unpublished auction
+    And the auction has a c2 proposal url
+    And the c2 proposal for the auction is pending approval
+
+    When I visit the admin auction page for that auction
+    Then I should see an "Approve C2 Request" button
+
+    When I click on the "Approve C2 Request" button
+    Then I should see a "Publish" button

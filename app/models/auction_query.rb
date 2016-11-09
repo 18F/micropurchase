@@ -17,15 +17,22 @@ class AuctionQuery
     relation.find_by(token: token)
   end
 
-  def upcoming_auction_count
-    public_index.started_at_in_future.count
+  def upcoming
+    public_index.started_at_in_future.order('started_at ASC')
   end
 
-  def active_auction_count
+  def upcoming_auction_count
+    upcoming.count
+  end
+
+  def active
     public_index
       .started_at_in_past
       .ended_at_in_future
-      .count
+  end
+
+  def active_auction_count
+    active.count
   end
 
   def needs_attention_count

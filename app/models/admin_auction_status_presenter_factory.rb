@@ -32,8 +32,12 @@ class AdminAuctionStatusPresenterFactory
       AdminAuctionStatusPresenter::Available
     elsif won? && auction.pending_delivery?
       AdminAuctionStatusPresenter::WorkNotStarted
+    elsif overdue_delivery?
+      AdminAuctionStatusPresenter::OverdueDelivery
     elsif auction.work_in_progress?
       AdminAuctionStatusPresenter::WorkInProgress
+    elsif auction.missed_delivery?
+      AdminAuctionStatusPresenter::MissedDelivery
     elsif auction.pending_acceptance?
       AdminAuctionStatusPresenter::PendingAcceptance
     elsif auction.accepted_pending_payment_url?
@@ -58,8 +62,12 @@ class AdminAuctionStatusPresenterFactory
       AdminAuctionStatusPresenter::ReadyToPublish
     elsif available?
       AdminAuctionStatusPresenter::Available
+    elsif overdue_delivery?
+      AdminAuctionStatusPresenter::OverdueDelivery
     elsif auction.work_in_progress?
       AdminAuctionStatusPresenter::WorkInProgress
+    elsif auction.missed_delivery?
+      AdminAuctionStatusPresenter::MissedDelivery
     elsif auction.pending_acceptance?
       AdminAuctionStatusPresenter::PendingAcceptance
     elsif auction.accepted_pending_payment_url?
@@ -91,6 +99,12 @@ class AdminAuctionStatusPresenterFactory
 
   def future?
     bidding_status.future?
+  end
+
+  def overdue_delivery?
+    won? &&
+      (auction.pending_delivery? || auction.work_in_progress?) &&
+      auction.delivery_due_at < Time.now
   end
 
   def bidding_status

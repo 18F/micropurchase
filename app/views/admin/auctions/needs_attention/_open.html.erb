@@ -1,0 +1,22 @@
+<table class="usa-table-borderless">
+  <thead>
+    <tr>
+      <th scope="col"><%= t('needs_attention.index.columns.title') %></th>
+      <th scope="col"><%= t('needs_attention.index.columns.end_date') %></th>
+      <th scope="col"><%= t('needs_attention.index.columns.lowest_bid') %></th>
+      <th scope="col"><%= t('needs_attention.index.columns.bid_count') %></th>
+      <th scope="col"><%= t('needs_attention.index.columns.winner') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% auctions.each do |auction| %>
+      <tr>
+        <td><%= link_to(auction.title, admin_auction_path(auction.id)) %></td>
+        <td><%= auction.ended_at %></td>
+        <td><%= auction.lowest_bid_amount %></td>
+        <td><%= auction.bid_count %></td>
+        <td><%= auction.current_winner %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
