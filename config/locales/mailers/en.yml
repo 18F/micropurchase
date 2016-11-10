@@ -82,6 +82,13 @@ en:
           out, we hope you will continue to participate in the future.
         sign_off: "Sincerely,"
         from: "The 18F Micro-purchase team"
+      auction_not_delivered:
+        subject: "%{auction_title} has not been delivered"
+        para_1: >
+          The delivery deadline for %{auction_title} was on %{auction_delivery_deadline} and we have not yet
+          received a delivery URL from you. Therefore you no longer qualify to receive the award.
+        para_2: >
+          If you have any questions, or if you think this is a mistake, please contact us at micropurchase@gsa.gov
       auction_paid_default_pcard:
         subject: "Please confirm payment for %{auction_title}"
         greeting: "Dear %{vendor_name},"
