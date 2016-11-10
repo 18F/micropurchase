@@ -35,6 +35,12 @@ Given(/^I won an auction that was rejected$/) do
   bid.update(bidder: @user)
 end
 
+Given(/^I won an auction but did not deliver the work on time$/) do
+  @auction = FactoryGirl.build(:auction, :closed, :with_bids, delivery_status: :missed_delivery)
+  bid = @auction.bids.sort_by(&:amount).first
+  bid.update(bidder: @user)
+end
+
 Given(/^I am going to lose an auction$/) do
   @auction = FactoryGirl.build(:auction, :available, :with_bids)
   Timecop.freeze(@auction.ended_at - 15.minutes) do

@@ -18,3 +18,9 @@ Feature: Winning vendor views auction
     And I won an auction that was rejected
     When I visit the auction page
     Then I should see winning bidder status for a rejected auction
+
+  Scenario: I am the winner, auction was marked as a missed delivery
+    Given I am an authenticated vendor
+    And I won an auction but did not deliver the work on time
+    When I visit the auction page
+    Then I should see winning bidder status for a missed delivery auction

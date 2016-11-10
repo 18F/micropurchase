@@ -110,6 +110,13 @@ en:
               %{delivery_deadline}. Please use GitHub to create a pull request and reference
               <a href=%{issue_url}>the issue associated with this auction</a>.
               Then enter the pull request URL, below, and click "start work."
+          work_not_delivered:
+            header: Auction not delivered
+            body: >
+              The delivery deadline for this auction was on
+              %{delivery_deadline} and we have not yet received a
+              delivery URL from you. Therefore you no longer qualify
+              to receive the award.
     admin_auction_status_presenter:
       archived:
         header: Archived
