@@ -23,22 +23,28 @@ class Admin::ClosedAuctionsViewModel < Admin::BaseViewModel
     end
   end
 
-  def successfully_delivered
-    @_successfully_delivered ||= complete_and_successful_auctions.map do |auction|
-      Admin::ClosedAuctionsListItemViewModel.new(auction)
+  def delivery_missed_partial
+    if delivery_missed.any?
+      'admin/auctions/closed/delivery_missed'
+    else
+      'admin/auctions/closed/no_delivery_missed'
     end
+  end
+
+  def delivery_missed
+    @_delivery_missed ||= list_items(missed_delivery_auctions)
+  end
+
+  def successfully_delivered
+    @_successfully_delivered ||= list_items(complete_and_successful_auctions)
   end
 
   def rejected
-    @_rejected ||= rejected_auctions.map do |auction|
-      Admin::ClosedAuctionsListItemViewModel.new(auction)
-    end
+    @_rejected ||= list_items(rejected_auctions)
   end
 
   def archived
-    @_archived ||= archived_auctions.map do |auction|
-      Admin::ClosedAuctionsListItemViewModel.new(auction)
-    end
+    @_archived ||= list_items(archived_auctions)
   end
 
   def closed_auctions_nav_class
@@ -46,6 +52,12 @@ class Admin::ClosedAuctionsViewModel < Admin::BaseViewModel
   end
 
   private
+
+  def list_items(auctions)
+    auctions.map do |auction|
+      Admin::ClosedAuctionsListItemViewModel.new(auction)
+    end
+  end
 
   def complete_and_successful_auctions
     AuctionQuery.new.complete_and_successful
@@ -57,5 +69,9 @@ class Admin::ClosedAuctionsViewModel < Admin::BaseViewModel
 
   def archived_auctions
     Auction.archived
+  end
+
+  def missed_delivery_auctions
+    Auction.missed_delivery
   end
 end

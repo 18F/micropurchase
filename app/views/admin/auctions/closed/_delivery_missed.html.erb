@@ -1,0 +1,18 @@
+<table class="usa-table-borderless">
+  <thead>
+    <tr>
+      <th scope="col"><%= t('closed_auctions.index.columns.title') %></th>
+      <th scope="col"><%= t('closed_auctions.index.columns.end_date') %>/th>
+      <th scope="col"><%= t('closed_auctions.index.columns.winner') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% view_model.delivery_missed.each do |auction| %>
+    <tr>
+      <td><%= link_to(auction.title, admin_auction_path(auction.id)) %></td>
+      <td><%= auction.ended_at %></td>
+      <td><%= link_to(auction.winning_bidder, auction.winning_bidder.name) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
