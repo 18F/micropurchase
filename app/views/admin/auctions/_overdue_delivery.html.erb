@@ -1,5 +1,4 @@
-<%= simple_form_for [:admin, status.auction], url: admin_auction_path, method: :patch do |f| %>
-  <%= f.hidden_field :delivery_status, value: 'missed_delivery', hidden: true %>
-  <%= f.submit t('statuses.admin_auction_status_presenter.overdue_delivery.actions.mark_not_delivered'),
-    class: 'usa-button usa-button-outline action-button' %>
-<% end %>
+<%= link_to I18n.t('statuses.admin_auction_status_presenter.overdue_delivery.actions.mark_not_delivered'),
+  admin_missed_delivery_path(status.auction),
+  method: :patch,
+  class: 'usa-button usa-button-outline action-button' %>

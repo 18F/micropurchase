@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     resources :auction_rejections, only: [:update]
     resources :auction_acceptances, only: [:update]
     resources :auction_mark_payments, only: [:update]
+    resources :missed_deliveries, only: [:update]
     resources :user_reports, only: [:index]
     resources :proposals, only: [:create]
     resources :users, only: [:show, :edit, :update]

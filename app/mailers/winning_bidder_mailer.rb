@@ -47,6 +47,20 @@ class WinningBidderMailer < ActionMailer::Base
     )
   end
 
+  def auction_not_delivered(auction:)
+    @auction = auction
+    @winning_bid = WinningBid.new(@auction).find
+    @delivery_timestamp = @auction.delivery_due_at
+
+    mail(
+      to: @winning_bid.bidder.email,
+      subject: I18n.t('mailers.winning_bidder_mailer.auction_not_delivered.subject',
+                      auction_title: @auction.title),
+      from: SMTPCredentials.default_from,
+      reply_to: 'micropurchase@gsa.gov'
+    )
+  end
+
   def auction_paid_default_pcard(auction:)
     @auction = auction
     @winning_bid = WinningBid.new(@auction).find
