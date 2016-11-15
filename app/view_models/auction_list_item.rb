@@ -26,8 +26,12 @@ class AuctionListItem
     MarkdownRender.new(auction.summary).to_s
   end
 
-  def capitalized_formatted_type
-    auction.type.dasherize.capitalize
+  def rules_label
+    rules.rules_label
+  end
+
+  def rules_route
+    rules.rules_route
   end
 
   def starting_price
@@ -100,5 +104,9 @@ class AuctionListItem
 
   def bidding_status
     BiddingStatus.new(auction)
+  end
+
+  def rules
+    @_rules ||= RulesFactory.new(auction).create
   end
 end

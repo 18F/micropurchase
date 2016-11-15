@@ -11,6 +11,20 @@ Feature: Basic Auction Views
     And I should not see the unpublished auction
     And there should be meta tags for the index page for 1 open and 0 future auctions
 
+  Scenario: Navigating to the rules
+    Given there is an open auction
+    And there is a sealed-bid auction
+    When I visit the home page
+    Then I should see a "Reverse" link
+    And I should see a "Sealed bid" link
+
+    When I click on the "Reverse" link
+    Then I should be on the rules page for reverse auctions
+
+    When I visit the home page
+    And I click on the "Sealed bid" link
+    Then I should be on the rules page for sealed-bid auctions
+
   Scenario: There are no auctions
     When I visit the home page
     Then I should see a message about no auctions
