@@ -3,10 +3,6 @@ require 'concerns/user_provided_service'
 class C2Credentials
   extend UserProvidedService
 
-  def self.host
-    ENV['C2_HOST']
-  end
-
   def self.oauth_key
     if use_env_var?
       ENV['MICROPURCHASE_C2_OAUTH_KEY']

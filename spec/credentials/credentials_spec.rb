@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe Credentials do
+  # NOTE: mappings for class methods are in config/initializers/credentials_map.rb
+
   around do |example|
     env_var_names = [
       'VCAP_SERVICES', 'C2_HOST', 'NEW_RELIC_APP_NAME',
@@ -22,6 +24,7 @@ describe Credentials do
     before do
       ENV['NEW_RELIC_APP_NAME'] = 'new-relic-app-name-here-too'
       ENV['DATA_DOT_GOV_API_KEY'] = 'data-gov-api-key'
+      ENV['C2_HOST'] = 'c2-host.something-app.gov.local'
     end
 
     it 'uses converts the names to get an envar directly' do
@@ -33,8 +36,12 @@ describe Credentials do
     end
 
     it "finds that same data dot gov api key via a mapped reference" do
-      Credentials.map(:data_dot_gov_api_key, to: ['data-dot-gov', 'api_key'])
       expect(Credentials.data_dot_gov_api_key).to eq('data-gov-api-key')
+    end
+
+    it 'finds c2 host locally' do
+      expect(Credentials.get('c2_host')).to eq('c2-host.something-app.gov.local')
+      expect(Credentials.c2_host).to eq('c2-host.something-app.gov.local')
     end
   end
 
@@ -60,6 +67,7 @@ describe Credentials do
 
     it 'bypasses cloud foundary config and goes to env vars when necessary' do
       expect(Credentials.get('c2_host')).to eq('c2-host.something-app.gov')
+      expect(Credentials.c2_host).to eq('c2-host.something-app.gov')
     end
   end
 end
