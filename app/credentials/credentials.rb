@@ -7,6 +7,12 @@ class Credentials
     new.get(*name)
   end
 
+  def self.map(method_name, options)
+    define_singleton_method(method_name) do
+      new.get(options[:to])
+    end
+  end
+
   private
 
   def type_delegate
