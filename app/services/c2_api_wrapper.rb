@@ -15,8 +15,8 @@ class C2ApiWrapper
 
   def configure_c2_client
     C2::Client.new(
-      oauth_key:    Credentials.c2_oauth_key,
-      oauth_secret: Credentials.c2_oauth_secret,
+      oauth_key:    Credentials.get('micropurchase-c2', 'oauth_key'),
+      oauth_secret: Credentials.get('micropurchase-c2', 'oauth_secret'),
       host:         Credentials.c2_host,
       debug:        ENV.fetch('C2_DEBUG', false)
     )
