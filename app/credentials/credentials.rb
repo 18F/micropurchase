@@ -3,7 +3,9 @@ class Credentials
     type_delegate.get(*name)
   end
 
-  # method missing for convenience
+  def self.get(*name)
+    new.get(*name)
+  end
 
   private
 

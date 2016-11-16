@@ -21,7 +21,7 @@ describe Credentials do
     end
 
     it 'uses converts the names to get an envar directly' do
-      expect(Credentials.new.get('new-relic', 'app_name')).to eq('new-relic-app-name-here-too')
+      expect(Credentials.get('new-relic', 'app_name')).to eq('new-relic-app-name-here-too')
     end
   end
 
@@ -42,11 +42,11 @@ describe Credentials do
     end
 
     it 'uses the variables found in vcap' do
-      expect(Credentials.new.get('new-relic', 'app_name')).to eq('new-relic-app-name-here')
+      expect(Credentials.get('new-relic', 'app_name')).to eq('new-relic-app-name-here')
     end
 
     it 'bypasses cloud foundary config and goes to env vars when necessary' do
-      expect(Credentials.new.get('c2_host')).to eq('c2-host.something-app.gov')
+      expect(Credentials.get('c2_host')).to eq('c2-host.something-app.gov')
     end
   end
 end
