@@ -1,0 +1,249 @@
+schema_version: 3.0.0
+name: Micro-purchase
+documentation_complete: false
+references:
+- name: New Relic Application Monitoring
+  path: https://newrelic.com/application-monitoring
+  type: URL
+- name: Repository's Github
+  path: https://github.com/18F/micropurchase
+  type: URL
+- name: User Provided Service Documentation
+  path: https://docs.cloudfoundry.org/devguide/services/user-provided.html
+  type: URL
+  type: URL
+- name: OWASP's ZAP
+  path: https://www.owasp.org/index.php/OWASP_Zed_Attack_Proxy_Project
+  type: URL
+satisfies:
+- standard_key: NIST-800-53
+  control_key: AC-2   # Account Management
+  narrative:
+    - text: >
+        Within our application (see cloud.gov for lower-level controls),
+        Contract Officer user accounts are created and managed by a data
+        administrator. Authentication is provided by cloud.gov's User
+        Account and Authentication (UAA) server, while authorization is
+        provided by the Django application; if a data administrator
+        hasn't explicitly created a user account for an individual and
+        associated it with the same government-issued email address that they
+        log in to cloud.gov with, the user is denied access to all parts
+        of the site requiring login.
+- standard_key: NIST-800-53
+  control_key: AC-3   # Access Enforcement
+  narrative:
+    - text: >
+        Information about approved price list data is meant to be accessed
+        by the general public. Submitted price lists that have not yet
+        been reviewed, or which have been rejected, are visible only to
+        data administrators and the Contract Officers who uploaded them.
+- standard_key: NIST-800-53
+  control_key: AC-6   # Least Privilege
+  narrative:
+    - text: >
+        At the application level (see cloud.gov for lower-level controls),
+        only data administrators have the ability to modify approved price
+        list data. Any data modifications made by Contract Officers must be
+        reviewed by a data administrator before they can be made available to
+        the general public.
+- standard_key: NIST-800-53
+  control_key: AU-2   # Audit Events
+  narrative:
+    - text: >
+        Cloud.gov logs requests, failures, warnings, etc. emitted by the
+        application. We also utilize New Relic, which registers Python-level
+        exceptions and periods of down-time.
+  covered_by:
+    - verification_key: new-relic
+- standard_key: NIST-800-53
+  control_key: AU-6   # Audit Review, Analysis, and Reporting
+  narrative:
+    - text: >
+        In addition to the low-level reporting provided by cloud.gov, New Relic
+        sends email alerts to the team after repeated errors or down-time.
+  covered_by:
+    - verification_key: new-relic
+- standard_key: NIST-800-53
+  control_key: CA-8   # Penetration Testing
+  narrative:
+    - text: No controls on top of cloud.gov's
+- standard_key: NIST-800-53
+  control_key: CM-2   # Baseline Configuration
+  narrative:
+    - text: No controls on top of cloud.gov's
+- standard_key: NIST-800-53
+  control_key: CM-3   # Configuration Change Control
+  narrative:
+    - text: >
+        In addition to cloud.gov controls, all code is reviewed on GitHub before
+        being merged into the "master" branch. These changes are tested
+        automatically via Travis CI (which runs unit, integration tests, and
+        static analysis) as well as manual testing for visual regressions.
+        Proposed changes have appropriate justification (describing problems
+        resolved or referencing further details in an issue tracker) in either
+        their commit history or as part of the GitHub Pull Request. Proposed
+        changes which fail automated tests are generally not merged. Only the
+        tested, "master" branch code is deployed, on an ad-hoc basis.
+  references:
+    - verification_key: github
+    - verification_key: travis
+- standard_key: NIST-800-53
+  control_key: CM-6   # Configuration Settings
+  narrative:
+    - text: >
+        As described in README.md and deploy.md, configurable settings are
+        defined in a handful of locations. Configuration for cloud.gov
+        environments is located in the manifests directory and
+        hourglass/settings.py. Configurations which are
+        specific to one cloud.gov environment (i.e. either the staging or
+        production environment) are located in the appropriate manifest-*.yml
+        file or stored in and provided by a cloud.gov "user provided
+        service".
+  references:
+    - verification_key: ups
+- standard_key: NIST-800-53
+  control_key: CM-8   # Information System Component Inventory
+  narrative:
+    - text: >
+        In addition to the controls provided by cloud.gov, the application
+        tracks components through versioned library dependencies
+        (requirements.txt), as well as a listing of relevant cloud.gov services
+        (mentioned in the README and deploy.md)
+- standard_key: NIST-800-53
+  control_key: IA-2   # Identification and Authentication (Organizational
+                      # Users)
+  narrative:
+    - text: >
+        Cloud.gov controls cover the majority, here. Authentication is
+        provided by cloud.gov's User Account and Authentication (UAA) server
+        using an OAuth2-based OpenID Connect handshake.
+- standard_key: NIST-800-53
+  control_key: IA-2 (1)   # Identification and Authentication (Organizational
+                          # Users)
+                          # Network Access to Privileged Accounts
+  narrative:
+    - text: See cloud.gov controls.
+- standard_key: NIST-800-53
+  control_key: IA-2 (2)   # Identification and Authentication (Organizational
+                          # Users)
+                          # Network Access to Non-Privileged Accounts
+  narrative:
+    - text: See cloud.gov controls.
+- standard_key: NIST-800-53
+  control_key: IA-2 (12)  # Identification and Authentication (Organizational
+                          # Users)
+                          # Acceptance of PIV Credentials
+  narrative:
+    - text: See cloud.gov controls.
+- standard_key: NIST-800-53
+  control_key: PL-8   # Information Security Architecture
+  narrative:
+    - text: >
+        In addition to cloud.gov controls, all data in the system comes from
+        Contract Officers and must be approved by a data administrator to
+        be visible to the general public.
+- standard_key: NIST-800-53
+  control_key: RA-5   # Vulnerability Scanning
+  narrative:
+    - text: >
+        In addition to cloud.gov controls, the application layer is scanned with
+        both static and dynamic tooling. Before being merged into "master", all
+        custom code is automatically analyzed by "flake8" (a linting tool to
+        catch syntactic errors), "bandit" (a security-focused static analysis
+        tool), and a handful of custom, security-centric unit
+        tests. Code which does not meet these standards is generally not
+        merged. We also employ Gemnasium to track our dependencies and
+        Code Climate to warn of potentially concerning style.
+
+        For static analysis, we've addressed all critical issues raised by
+        evaluating the application with OWASP ZAP.
+  references:
+    - verification_key: flake8
+    - verification_key: bandit
+    - verification_key: gemnasium
+    - verification_key: code-climate
+    - verification_key: owasp-zap
+- standard_key: NIST-800-53
+  control_key: SA-11 (1)   # Developer Security Testing and Evaluation
+                           # Static Code Analysis
+  narrative:
+    - text: >
+        In addition to cloud.gov controls, the application layer is scanned with
+        both static and dynamic tooling. Before being merged into "master", all
+        custom code is automatically analyzed by "flake8" (a linting tool to
+        catch syntactic errors), "bandit" (a security-focused static analysis
+        tool), and a handful of custom, security-centric unit
+        tests. Code which does not meet these standards is generally not
+        merged. We also employ Gemnasium to track our dependencies and
+        Code Climate to warn of potentially concerning style.
+  references:
+    - verification_key: flake8
+    - verification_key: bandit
+    - verification_key: gemnasium
+    - verification_key: code-climate
+- standard_key: NIST-800-53
+  control_key: SA-22 (1)   # Unsupported System Components
+                           # Alternative Sources for Continued Support
+  narrative:
+    - text: >
+        At the application layer (see cloud.gov controls for lower), one
+        selection criteria for libraries was their support status. Should a
+        library fall in to an unsupported state, 18F has the capacity to
+        maintain it in-house.
+- standard_key: NIST-800-53
+  control_key: SC-7   # Boundary Protection
+  narrative:
+    - text: See cloud.gov controls.
+- standard_key: NIST-800-53
+  control_key: SC-12 (1)  # Cryptographic Key Establishment and Management
+                          # Availability
+  narrative:
+    - text: >
+        At the application layer (see cloud.gov controls for lower), all keys
+        are available to authorized users by querying cloud.gov's "services",
+        including "custom user provided services".
+- standard_key: NIST-800-53
+  control_key: SC-13  # Cryptographic Protection
+  narrative:
+    - text: See cloud.gov controls, which ensure HTTPS throughout.
+- standard_key: NIST-800-53
+  control_key: SC-28 (1)  # Protection of Information at Rest
+                          # Cryptographic Protection
+  narrative:
+    - text: See cloud.gov controls.
+- standard_key: NIST-800-53
+  control_key: SI-2   # Flaw Remediation
+  narrative:
+    - text: >
+        At the application layer (see cloud.gov controls for lower), all custom
+        code passes through a set of automated unit and integration tests via
+        Travis CI. Library dependencies are verified up to date via Gemnasium.
+        Production errors are captured via New Relic and emailed to
+        relevant parties. Further, code is first deployed (automatically) to
+        our staging environment, where we may discover errors before appearing
+        in production.
+  references:
+    - verification_key: travis
+    - verification_key: new-relic
+    - verification_key: gemnasium
+- standard_key: NIST-800-53
+  control_key: SI-4   # Information System Monitoring
+  narrative:
+    - text: See cloud.gov controls.
+- standard_key: NIST-800-53
+  control_key: SI-10  # Information Input Validation
+  narrative:
+    - text: See cloud.gov controls.
+verifications:
+- key: travis
+  name: Repository's Travis CI
+  path: https://travis-ci.org/18F/micropurchase
+  type: URL
+- key: code-climate
+  name: Project's Code Climate Results
+  path: https://codeclimate.com/github/18F/micropurchase
+  type: URL
+- key: gemnasium
+  name: Project's Gemnasium Results
+  path: https://gemnasium.com/github.com/18F/micropurchase
+  type: URL

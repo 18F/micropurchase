@@ -70,6 +70,7 @@ group :development do
   gem 'rails-erd'
   gem 'rubocop'
   gem 'web-console', '~> 2.0'
+  gem 'railroady'
 end
 
 group :production, :staging do
