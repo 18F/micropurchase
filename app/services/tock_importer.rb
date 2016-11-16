@@ -24,7 +24,7 @@ class TockImporter
   def request
     RestClient.get(
       TOCK_PROJECTS,
-      'Authorization' => "Token #{TockCredentials.api_token}"
+      'Authorization' => "Token #{Credentials.get('micropurchase-tock', 'api_token') || Credentials.get('micropurchase-tock', 'api_key')}"
     )
   end
 end
