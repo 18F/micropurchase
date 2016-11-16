@@ -1,14 +1,22 @@
 require 'rails_helper'
 
 describe DataDotGovCredentials do
+  around do |example|
+    env_var = ENV['DATA_DOT_GOV_API_KEY']
+    example.run
+    ENV['DATA_DOT_GOV_API_KEY'] = env_var
+  end
+
+
   context "using env var" do
-    it "returns correct value" do
-      env_var_api_key = "super secret api key"
+    let(:env_var_api_key) { "super secret api key" }
+
+    before do
       ENV['DATA_DOT_GOV_API_KEY'] = env_var_api_key
+    end
 
-      api_key = DataDotGovCredentials.api_key
-
-      expect(api_key).to eq env_var_api_key
+    it "returns correct value" do
+      expect(DataDotGovCredentials.api_key).to eq env_var_api_key
     end
   end
 end
