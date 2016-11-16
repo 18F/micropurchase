@@ -11,7 +11,7 @@
     <tr>
       <td><%= link_to(auction.title, admin_auction_path(auction.id)) %></td>
       <td><%= auction.ended_at %></td>
-      <td><%= link_to(auction.winning_bidder, auction.winning_bidder.name) %></td>
+      <td><%= link_to(auction.winning_bidder.name, admin_user_path(auction.winning_bidder)) %></td>
     </tr>
     <% end %>
   </tbody>
