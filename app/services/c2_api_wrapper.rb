@@ -15,10 +15,10 @@ class C2ApiWrapper
 
   def configure_c2_client
     C2::Client.new(
-      oauth_key: C2Credentials.oauth_key,
-      oauth_secret: C2Credentials.oauth_secret,
-      host: Credentials.c2_host,
-      debug: ENV.fetch('C2_DEBUG', false)
+      oauth_key:    Credentials.c2_oauth_key,
+      oauth_secret: Credentials.c2_oauth_secret,
+      host:         Credentials.c2_host,
+      debug:        ENV.fetch('C2_DEBUG', false)
     )
   end
 end
