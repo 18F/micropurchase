@@ -23,7 +23,7 @@ describe UsersController do
       expect_any_instance_of(UpdateUser).to receive(:save).and_return(true)
       put :update, { id: user.id, user: { duns_number: '222' } }, user_id: user.id
       expect(response).to be_redirect
-      expect(response.location).to eq('http://test.host/')
+      expect(response.location).to eq('http://test.host/account/profile')
     end
   end
 

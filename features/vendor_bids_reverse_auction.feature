@@ -19,6 +19,8 @@ Feature: Vendor bids on a reverse auction
     When I visit the home page
     And I am a user with a verified SAM account
     And I sign in and verify my account information
+
+    When I visit the home page
     And I click on the auction's title
 
     Then I should see the current winning bid in a header subtitle
