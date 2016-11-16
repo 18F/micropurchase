@@ -1,5 +1,5 @@
 common: &default_settings
-  app_name: <%= NewRelicCredentials.app_name %>
+  app_name: <%= Credentials.get('new-relic', 'app_name') %>
   audit_log:
     enabled: false
   browser_monitoring:
@@ -10,7 +10,7 @@ common: &default_settings
     capture_source: true
     enabled: true
     ignore_errors: "ActionController::RoutingError"
-  license_key: <%= NewRelicCredentials.license_key %>
+  license_key: <%= Credentials.get('new-relic', 'license_key') || Credentials.get('new-relic', 'api_key') %>
   log_level: info
   monitor_mode: true
   transaction_tracer:
