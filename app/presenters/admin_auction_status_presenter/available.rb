@@ -4,7 +4,7 @@ class AdminAuctionStatusPresenter::Available < AdminAuctionStatusPresenter::Base
   end
 
   def body
-    if total_bids > 0
+    if total_bids.positive?
       I18n.t(
         'statuses.bid_status_presenter.available.admin.has_bids',
         end_date: end_date,

@@ -62,7 +62,7 @@ describe UpdateAuction do
       it 'should set the c2_proposal_url and c2_status' do
         auction = create(:auction, c2_status: :sent)
         c2_proposal_url = 'https://c2-dev.18f.gov/proposals/2486'
-        params = {auction: {c2_proposal_url: c2_proposal_url, c2_status: 'pending_approval'}}
+        params = { auction: { c2_proposal_url: c2_proposal_url, c2_status: 'pending_approval' } }
 
         UpdateAuction.new(
           auction: auction,

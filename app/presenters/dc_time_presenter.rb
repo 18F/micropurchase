@@ -61,7 +61,7 @@ class DcTimePresenter
                         pluralize(abs_time_diff / 60, "minute")
                       end
 
-      if time_diff > 0
+      if time_diff.positive?
         "in #{relative_time}"
       else
         "#{relative_time} ago"

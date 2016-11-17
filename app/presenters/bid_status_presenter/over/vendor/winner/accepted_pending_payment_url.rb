@@ -6,7 +6,7 @@ class BidStatusPresenter::Over::Vendor::Winner::AcceptedPendingPaymentUrl < BidS
   def body
     I18n.t(
       'statuses.bid_status_presenter.over.winner.accepted_pending_payment_url.body',
-      delivery_url: auction.delivery_url,
+      delivery_url: auction.delivery_url
     )
   end
 end

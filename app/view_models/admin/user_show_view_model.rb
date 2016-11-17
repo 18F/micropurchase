@@ -39,7 +39,7 @@ class Admin::UserShowViewModel < Admin::BaseViewModel
   private
 
   def bids?
-    user_auctions.count > 0
+    user_auctions.count.positive?
   end
 
   def sam_status

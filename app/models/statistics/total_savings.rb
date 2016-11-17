@@ -1,6 +1,6 @@
 class Statistics::TotalSavings
   def to_s
-    if completed_auctions.count > 0
+    if completed_auctions.count.positive?
       Currency.new(total_starting_price - total_winning_bid_amount).to_s
     else
       'n/a'
