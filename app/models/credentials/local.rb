@@ -1,13 +1,11 @@
-class Credentials
-  class Local
-    def get(*name)
-      ENV[normalize(*name)]
-    end
+class Credentials::Local
+  def get(*name)
+    ENV[normalize(*name)]
+  end
 
-    private
+  private
 
-    def normalize(*names)
-      names.join('_').underscore.upcase
-    end
+  def normalize(*names)
+    names.join('_').underscore.upcase
   end
 end

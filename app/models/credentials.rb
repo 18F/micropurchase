@@ -20,6 +20,6 @@ class Credentials
   end
 
   def local?
-    ['development', 'test'].include?(Rails.env)
+    Rails.env == 'development' || Rails.env == 'test'
   end
 end
