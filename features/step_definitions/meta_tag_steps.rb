@@ -22,17 +22,19 @@ end
 
 # FIXME
 Then(/^there should be meta tags for the index page for (\d+) open and (\d+) future auctions$/) do |open_count, future_count|
+  description = "The Micro-purchase Marketplace is the place to bid on open-source issues from the 18F team."
+
   expect(page).to have_css("title", visible: false, text: "18F - Micro-purchase")
   expect(page).to have_css(
     "meta[property='og:title'][content='18F - Micro-purchase']",
     visible: false
   )
   expect(page).to have_css(
-    "meta[name='description'][content='The Micro-purchase Marketplace is the place to bid on open-source issues from the 18F team.']",
+    "meta[name='description'][content='#{description}']",
     visible: false
   )
   expect(page).to have_css(
-    "meta[property='og:description'][content='The Micro-purchase Marketplace is the place to bid on open-source issues from the 18F team.']",
+    "meta[property='og:description'][content='#{description}']",
     visible: false
   )
   expect(page).to have_css(

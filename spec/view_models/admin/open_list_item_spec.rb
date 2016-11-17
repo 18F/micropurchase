@@ -55,7 +55,6 @@ describe Admin::OpenListItem do
 
     it 'should return N/A if there are no bids' do
       auction = create(:auction, :sealed_bid)
-      bid = auction.bids.last
 
       view_model = Admin::OpenListItem.new(auction)
       expect(view_model.current_winner).to eq('N/A')

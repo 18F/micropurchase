@@ -14,7 +14,7 @@ describe MarkAuctionAsPaid do
       end
 
       it 'sends the right email to the vendor for default pcard auctions' do
-        customer = create(:customer)
+        create(:customer)
 
         auction = create(
           :auction,

@@ -53,11 +53,10 @@ Then(/^I should see the auction as a missed delivery auction$/) do
 end
 
 Then(/^I should not see the auction as a draft auction$/) do
-  begin
-    table_xpath = needs_attention_table_xpath('drafts')
-    expect(page).to_not have_selector(table_xpath)
-  rescue Capybara::Poltergeist::InvalidSelector
-  end
+  table_xpath = needs_attention_table_xpath('drafts')
+  expect do
+    page.find(table_xpath)
+  end.to raise_error(Capybara::Poltergeist::InvalidSelector)
 end
 
 Then(/^I should see the auction as an archived auction$/) do
