@@ -52,8 +52,8 @@
 
           <h6>Auction type:</h6>
           <p class="auction-label-info">
-          <%= @view_model.capitalized_type %>
-          (<%= link_to 'rules', @view_model.rules_path %>)
+          <%= @view_model.rules_label %>
+          (<%= link_to 'rules', polymorphic_path(@view_model.rules_route) %>)
           </p>
           <%= render partial: @view_model.paid_at_partial, locals: { auction: @view_model } %>
           <%= render partial: @view_model.accepted_at_partial, locals: { auction: @view_model } %>
