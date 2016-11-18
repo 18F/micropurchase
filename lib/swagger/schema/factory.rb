@@ -49,7 +49,7 @@ class Swagger::Schema::Factory
   end
 
   def object
-    return if !(type == 'object') && type.nil?
+    return if !(type == 'object') && !type.nil?
     Swagger::Schema::Object.new(name, fields, specification)
   end
 
