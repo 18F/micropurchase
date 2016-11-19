@@ -80,7 +80,8 @@ class AuctionListItem
     if auction.lowest_bid
       Currency.new(auction.lowest_bid.amount).to_s
     else
-      'No bids'
+      # TODO: move to i18n
+      'There are no bids'
     end
   end
 
