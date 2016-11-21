@@ -10,15 +10,15 @@ class C2ApiWrapper
   end
 
   def c2_proposal_path(auction)
-    auction.c2_proposal_url.gsub("#{C2Credentials.host}/", "")
+    auction.c2_proposal_url.gsub("#{Credentials.c2_host}/", "")
   end
 
   def configure_c2_client
     C2::Client.new(
-      oauth_key: C2Credentials.oauth_key,
-      oauth_secret: C2Credentials.oauth_secret,
-      host: C2Credentials.host,
-      debug: ENV.fetch('C2_DEBUG', false)
+      oauth_key:    Credentials.get('micropurchase-c2', 'oauth_key'),
+      oauth_secret: Credentials.get('micropurchase-c2', 'oauth_secret'),
+      host:         Credentials.c2_host,
+      debug:        ENV.fetch('C2_DEBUG', false)
     )
   end
 end
