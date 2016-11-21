@@ -1,3 +1,6 @@
+require 'credentials/cloud_foundry'
+require 'credentials/local'
+
 class Credentials
   def get(*name)
     type_delegate.get(*name)
@@ -16,7 +19,7 @@ class Credentials
   private
 
   def type_delegate
-    @credentials_delegate ||= local? ? Local.new : CloudFoundry.new
+    @credentials_delegate ||= local? ? Credentials::Local.new : Credentials::CloudFoundry.new
   end
 
   def local?
