@@ -19,7 +19,7 @@ class CreateC2Proposal < C2ApiWrapper
   attr_reader :auction
 
   def proposal_url
-    "#{Credentials.c2_host}/proposals/#{proposal.id}"
+    "#{C2Credentials.host}/proposals/#{proposal.id}"
   end
 
   def proposal
