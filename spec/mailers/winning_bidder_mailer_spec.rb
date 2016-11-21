@@ -14,7 +14,7 @@ describe WinningBidderMailer do
         I18n.t('mailers.winning_bidder_mailer.auction_ended.subject')
       )
 
-      expect(email.from).to eq [Credentials.smtp_default_from]
+      expect(email.from).to eq [SMTPCredentials.default_from]
       expect(email.body.encoded).to include(
         I18n.t(
           'mailers.winning_bidder_mailer.auction_ended.para_1',

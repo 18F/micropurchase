@@ -44,21 +44,35 @@ directly in your system.
 
 Steps to set new environment variables:
 
-A `Credentials` class handles the abstraction and differences in
-locations between Cloud Foundry and local environmental variables. You
-can choose to use the class directly with your new environmental
-variable:
+1. Create a credentials class for accessing the value. Example:
 
-    Credentials.get('micropurchase-github', 'client_id')
-    Credentials.get('micropurchase-github', 'secret')
+  ```ruby
+  # app/credentials/github_credentials.rb
 
-You can also setup mapping to easy class methods:
+  class GithubCredentials
 
-    Credentials.map(:github_client_id, to: ['micropurchase-github', 'client_id'])
-    Credentials.map(:github_secret,    to: ['micropurchase-github', 'secret'])
+    def self.client_id
+      ENV['MICROPURCHASE_GITHUB_CLIENT_ID']
+    end
 
-For development and test environments locally and on CI it will look
-for `ENV['MICROPURCHASE_GITHUB_CLIENT_ID']` and `ENV['MICROPURCHASE_SECRET']` respectively. Using `cups` on Cloud Foundry, see below #2.
+    def self.secret
+      ENV['MICROPURCHASE_GITHUB_SECRET']
+    end
+  end
+  ```
+
+1. Access the value with the class. Example:
+
+  ```ruby
+  Rails.application.config.middleware.use OmniAuth::Builder do
+    provider(
+      :github,
+      GithubCredentials.client_id,
+      GithubCredentials.secret,
+      scope: "user:email"
+    )
+  end
+  ```
 
 1. If the environment variable is needed to run the application locally, add the
   environment variable to your local `.env` file for local usage. Also add it
