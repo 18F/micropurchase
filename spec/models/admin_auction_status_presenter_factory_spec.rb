@@ -67,7 +67,7 @@ describe AdminAuctionStatusPresenterFactory do
 
   context 'when the auction has been accepted' do
     it 'should return a AdminAuctionStatusPresenter::DefaultPcard::Accepted' do
-      auction = create(:auction, :accepted)
+      auction = create(:auction, :accepted, :with_bids)
 
       expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
         .to be_a(AdminAuctionStatusPresenter::DefaultPcard::Accepted)
@@ -85,27 +85,25 @@ describe AdminAuctionStatusPresenterFactory do
 
   context 'when the auction has been rejected' do
     it 'should return a AdminAuctionStatusPresenter::Rejected' do
-      auction = create(:auction, :rejected)
+      auction = create(:auction, :rejected, :with_bids)
 
       expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
         .to be_a(AdminAuctionStatusPresenter::Rejected)
     end
+  end
 
-    context 'rejected auction has no winner' do
-      it 'should return a AdminAuctionStatusPresenter::Rejected' do
-        auction = create(:auction, :rejected)
+  context 'when there are no bids' do
+    it 'should return a AdminAuctionStatusPresenter::NoBids' do
+      auction = create(:auction, :closed)
 
-        expect(
-          AdminAuctionStatusPresenterFactory.new(auction: auction).create.body
-        ).to eq(
-          I18n.t(
-            'statuses.admin_auction_status_presenter.rejected.body',
-            delivery_url: auction.delivery_url,
-            rejected_at: DcTimePresenter.convert_and_format(auction.rejected_at),
-            winner_name: 'N/A'
-          )
+      expect(
+        AdminAuctionStatusPresenterFactory.new(auction: auction).create.body
+      ).to eq(
+        I18n.t(
+          'statuses.admin_auction_status_presenter.no_bids.body',
+          end_date: DcTimePresenter.convert_and_format(auction.ended_at)
         )
-      end
+      )
     end
   end
 

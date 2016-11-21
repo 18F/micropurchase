@@ -18,6 +18,8 @@ class AdminAuctionStatusPresenterFactory
   def default_purchase_card_presenter
     if auction.archived?
       AdminAuctionStatusPresenter::Archived
+    elsif over_and_no_bids?
+      AdminAuctionStatusPresenter::NoBids
     elsif auction.c2_status == 'not_requested'
       C2StatusPresenter::NotRequested
     elsif auction.c2_status == 'sent'
@@ -83,6 +85,10 @@ class AdminAuctionStatusPresenterFactory
 
   def available?
     bidding_status.available?
+  end
+
+  def over_and_no_bids?
+    over? && !bids?
   end
 
   def won?
