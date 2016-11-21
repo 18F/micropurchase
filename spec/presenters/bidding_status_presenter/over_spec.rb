@@ -35,7 +35,7 @@ describe BiddingStatusPresenter::Over do
       auction = create(:auction, :closed)
       presenter = BiddingStatusPresenter::Over.new(auction)
       user = create(:user)
-      expect(presenter.bid_label(user)).to eq('')
+      expect(presenter.bid_label(user)).to eq("There are no bids")
     end
   end
 

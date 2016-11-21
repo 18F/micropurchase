@@ -16,7 +16,10 @@ Feature: Guest views closed auction
   Scenario: There is an auction that ended without any bids
     Given there is a closed auction with no bids
     When I visit the home page
-    Then I should see a messages that the auction has no bids
+    Then I should see a message that the auction has no bids
+
+    When I visit the auction page
+    Then I should see a message that the auction has no bids
 
   Scenario: Winning vendor was paid
     Given there is a paid auction
