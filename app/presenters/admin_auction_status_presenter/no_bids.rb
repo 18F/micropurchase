@@ -16,4 +16,3 @@ class AdminAuctionStatusPresenter::NoBids < AdminAuctionStatusPresenter::Base
     DcTimePresenter.convert_and_format(auction.ended_at)
   end
 end
-
