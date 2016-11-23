@@ -44,7 +44,7 @@ class AdminAuctionStatusPresenterFactory
       AdminAuctionStatusPresenter::PendingAcceptance,
       AdminAuctionStatusPresenter::AcceptedPendingPaymentUrl,
       AdminAuctionStatusPresenter::OtherPcard::Accepted,
-      AdminAuctionStatusPresenter::OtherPcard::Paid,
+      AdminAuctionStatusPresenter::OtherPcard::Paid
     ]
   end
 
@@ -78,10 +78,19 @@ class AdminAuctionStatusPresenterFactory
       @bid_status = BiddingStatus.new(auction)
     end
 
-    delegate :archived?, :published?, :unpublished?, :pending_delivery?, :work_in_progress?,
-      :pending_acceptance?, :accepted_pending_payment_url?, :missed_delivery?, :accepted?,
-      :c2_paid?, :payment_confirmed?, :rejected?,
-        to: :auction
+    delegate  :archived?,
+              :published?,
+              :unpublished?,
+              :pending_delivery?,
+              :work_in_progress?,
+              :pending_acceptance?,
+              :accepted_pending_payment_url?,
+              :missed_delivery?,
+              :accepted?,
+              :c2_paid?,
+              :payment_confirmed?,
+              :rejected?,
+              to: :auction
 
     def available?
       bid_status.available?
