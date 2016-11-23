@@ -13,4 +13,8 @@ class AdminAuctionStatusPresenter::OverdueDelivery < AdminAuctionStatusPresenter
   def action_partial
     'admin/auctions/overdue_delivery'
   end
+
+  def self.relevant?(status)
+    status.overdue_delivery?
+  end
 end

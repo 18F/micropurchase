@@ -10,6 +10,10 @@ class AdminAuctionStatusPresenter::NoBids < AdminAuctionStatusPresenter::Base
     )
   end
 
+  def self.relevant?(status)
+    status.over_and_no_bids?
+  end
+
   private
 
   def end_date

@@ -12,6 +12,10 @@ class AdminAuctionStatusPresenter::OtherPcard::Paid < AdminAuctionStatusPresente
     )
   end
 
+  def self.relevant?(status)
+    status.accepted? && status.paid_at_info?
+  end
+
   private
 
   def paid_at

@@ -14,6 +14,10 @@ class AdminAuctionStatusPresenter::Future < AdminAuctionStatusPresenter::Base
     'admin/auctions/unpublish'
   end
 
+  def self.relevant?(status)
+    status.published? && status.future?
+  end
+
   private
 
   def start_date

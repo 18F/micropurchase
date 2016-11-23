@@ -10,4 +10,8 @@ class C2StatusPresenter::NotRequested < C2StatusPresenter::Base
   def action_partial
     'admin/auctions/request_approval'
   end
+
+  def self.relevant?(status)
+    status.c2_not_requested?
+  end
 end
