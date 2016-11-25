@@ -14,7 +14,7 @@ describe MarkAuctionAsPaid do
       end
 
       it 'sends the right email to the vendor for default pcard auctions' do
-        customer = create(:customer)
+        create(:customer)
 
         auction = create(
           :auction,
@@ -22,13 +22,13 @@ describe MarkAuctionAsPaid do
         )
         mailer_double = double(deliver_later: true)
         allow(WinningBidderMailer).to receive(:auction_paid_default_pcard)
-                                       .with(auction: auction)
-                                       .and_return(mailer_double)
+          .with(auction: auction)
+          .and_return(mailer_double)
 
         MarkAuctionAsPaid.new(auction: auction).perform
 
         expect(WinningBidderMailer).to have_received(:auction_paid_default_pcard)
-                                        .with(auction: auction)
+          .with(auction: auction)
         expect(mailer_double).to have_received(:deliver_later)
       end
     end

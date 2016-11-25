@@ -30,7 +30,11 @@ module RequestHelpers
   def handle_request(request, response_body: nil)
     response_headers = { 'Content-Type' => 'application/json' }
     bad_credentials  = "{\"message\":\"Bad Credentials\"}"
-    token = request.headers['Authorization'].split[1] rescue nil
+    token = begin
+              request.headers['Authorization'].split[1]
+            rescue
+              nil
+            end
 
     if token != FakeGitHubApi::VALID_API_KEY
       response_body = bad_credentials
@@ -40,11 +44,11 @@ module RequestHelpers
     { status: response_status, body: response_body, headers: response_headers }
   end
 
-  def stub_github(path, &block)
+  def stub_github(path)
     url = "https://api.github.com#{path}"
     request_headers_without_auth = github_request_headers
     request_headers_with_auth = github_request_headers.merge('Authorization' => /token ()/)
-    default_response_body = JSON.generate(block.call)
+    default_response_body = JSON.generate(yield)
 
     # stub requests where no Authorization header is set
     WebMock

@@ -9,7 +9,8 @@ end
 Then(/^I should see a message about no auctions$/) do
   expect(page).to have_content(
     "There are no current open auctions on the site. " \
-    "Please check back soon to view micropurchase opportunities.")
+    "Please check back soon to view micropurchase opportunities."
+  )
 end
 
 Then(/^I should see a current bid amount( of \$([\d\.]+))?$/) do |_, amount|
@@ -18,7 +19,7 @@ Then(/^I should see a current bid amount( of \$([\d\.]+))?$/) do |_, amount|
 end
 
 Then(/^I should see the starting price$/) do
-  expect(page).to have_content("Starting price: #{Currency.new(@auction.start_price).to_s}")
+  expect(page).to have_content("Starting price: #{Currency.new(@auction.start_price)}")
 end
 
 Then(/^I should see a winning bid amount( of \$([\d\.]+))?$/) do |_, amount|

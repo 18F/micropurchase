@@ -8,21 +8,17 @@ class Swagger::Schema::String < Swagger::Schema
   end
 
   def default_sample_value
-    case format
-    when 'date-time'
-      '"2016-01-01T13:00:00Z"'
-    when 'email'
-      '"user@example.com"'
-    when 'hostname'
-      '"example.com"'
-    when 'url'
-      '"http://example.com/"'
-    when 'markdown'
-      '"A **markdown** string"'
-    when 'duns'
-      '"123456789"'
-    else
-      '"example"'
-    end
+    value_for_format(format) || '"example"'
+  end
+
+  def value_for_format(format)
+    {
+      'date-time' => '"2016-01-01T13:00:00Z"',
+      'email'     => '"user@example.com"',
+      'hostname'  => '"example.com"',
+      'url'       => '"http://example.com/"',
+      'markdown'  => '"A **markdown** string"',
+      'duns'      => '"123456789"'
+    }[format]
   end
 end

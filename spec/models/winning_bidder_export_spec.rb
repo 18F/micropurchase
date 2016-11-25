@@ -4,8 +4,8 @@ describe WinningBidderExport do
   describe '#export_csv' do
     context 'DUNs number valid' do
       it 'include the correct information in the CSV' do
-        end_date = DateTime.new(2016, 07, 11, 00, 00, 0)
-        delivery_date = DateTime.new(2016, 07, 17, 00, 00, 0)
+        end_date = DateTime.new(2016, 7, 11, 0, 0, 0)
+        delivery_date = DateTime.new(2016, 7, 17, 0, 0, 0)
         auction = create(
           :auction,
           :closed,

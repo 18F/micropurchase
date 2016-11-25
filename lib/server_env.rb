@@ -6,6 +6,6 @@ module ServerEnv
   end
 
   def self.first_instance?
-    instance_index == 0
+    instance_index.zero?
   end
 end

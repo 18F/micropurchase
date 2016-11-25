@@ -7,12 +7,11 @@ class CheckPayment < C2ApiWrapper
     auctions.each do |auction|
       paid_at = find_purchase_timestamp(proposal_json(auction))
 
-      if paid_at
-        auction.update(c2_status: :c2_paid, paid_at: DateTime.parse(paid_at))
-        WinningBidderMailer.auction_paid_default_pcard(
-          auction: auction
-        ).deliver_later
-      end
+      next unless paid_at
+      auction.update(c2_status: :c2_paid, paid_at: DateTime.parse(paid_at))
+      WinningBidderMailer.auction_paid_default_pcard(
+        auction: auction
+      ).deliver_later
     end
   end
 

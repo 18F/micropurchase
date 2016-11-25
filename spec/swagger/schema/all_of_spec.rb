@@ -9,7 +9,7 @@ describe Swagger::Schema::AllOf do
   describe 'properties' do
     it 'should concatenate properties from its members' do
       properties = all_of.properties
-      expect(properties.map(&:name)).to eq(['name', 'numbers', 'added_field'])
+      expect(properties.map(&:name)).to eq(%w(name numbers added_field))
     end
   end
 end

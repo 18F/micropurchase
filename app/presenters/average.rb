@@ -8,7 +8,7 @@ class Average
   end
 
   def to_s
-    if count > 0
+    if count.positive?
       calculate
     else
       'n/a'

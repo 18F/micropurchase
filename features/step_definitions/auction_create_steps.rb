@@ -119,7 +119,7 @@ Given(/^there is a closed sealed-bid auction$/) do
 end
 
 Given(/^there is an auction that needs evaluation$/) do
-   @auction = FactoryGirl.create(:auction, :with_bids, :evaluation_needed, :c2_budget_approved)
+  @auction = FactoryGirl.create(:auction, :with_bids, :evaluation_needed, :c2_budget_approved)
 end
 
 Given(/^there is an auction within the simplified acquisition threshold$/) do
