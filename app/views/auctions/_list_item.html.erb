@@ -8,7 +8,7 @@
           locals: { status: auction.bidding_status_presenter } %>
 
         <div class="bidding-deadline">
-          <%= auction.relative_time %>
+          <%= raw auction.relative_time %>
         </div>
 
         <div class="winning-bid-detail">

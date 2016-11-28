@@ -13,35 +13,50 @@
 }
 
 .auction-title {
+  padding-top: 10px;
+  display: inline-block;
+  width: 100%;
+
   h1 {
     width: 90%; // to make room for admin edit button
     display: inline;
     float: left;
-    font-family: 'Merriweather';
-    margin-bottom: 0;
-    margin-top: 3rem;
+    font-family: 'Merriweather', Georgia, serif;
+    line-height: 1.3;
+    letter-spacing: -1px;
+    font-size: $base-font-size + .8;
+    font-weight: 400;
+    padding: 8px 0 5px 0;
+    margin: 0;
   }
 
   .auction-subtitles {
     clear: both;
+    padding: 0 0 8px;
   }
 
   .auction-subtitle {
     float: left;
     font-size: $base-font-size;
-    margin-right: 1rem;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
+    padding: 6px 10px 5px 0;
+  }
+
+  label {
+    display: inline;
+    font-weight: 600;
   }
 }
 
 .admin-edit {
   display: inline-block;
-  margin-top: 3rem;
+  margin-top: 10px;
+  margin-right: 2px;
+
 
   @include media($medium-screen) {
-    margin-top: 4rem;
     float: right;
+    margin-top: 10px;
+    margin-right: 2px;
   }
 }
 
