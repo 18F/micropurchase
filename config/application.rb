@@ -18,7 +18,7 @@ module Micropurchase
     config.time_zone = 'Etc/UTC'
     config.active_record.raise_in_transactional_callbacks = true
     config.active_job.queue_adapter = :delayed_job
-    config.assets.precompile += %w( *-bundle.js )
+    config.assets.precompile += %w(*-bundle.js)
 
     config.middleware.insert_before 0, 'Rack::Cors' do
       allow do

@@ -186,7 +186,9 @@ describe 'API bid requests' do
 
           it 'returns a json error' do
             post api_v0_auction_bids_path(auction), params, headers
-            expect(json_response['error']).to eq("Amount was not accepted. Please enter a whole number less than $#{ current_auction_price - 1}.")
+            amount_limit = current_auction_price - 1
+            message = "Amount was not accepted. Please enter a whole number less than $#{amount_limit}."
+            expect(json_response['error']).to eq(message)
           end
 
           it 'returns a 403 status code' do

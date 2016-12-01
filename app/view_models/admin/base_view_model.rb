@@ -24,7 +24,7 @@ class Admin::BaseViewModel
   end
 
   def needs_attention_count_partial
-    if needs_attention_auctions_count > 0
+    if needs_attention_auctions_count.positive?
       'admin/needs_attention_auction_count'
     else
       'components/null'

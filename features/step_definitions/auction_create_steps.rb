@@ -35,6 +35,12 @@ Given(/^I won an auction that was rejected$/) do
   bid.update(bidder: @user)
 end
 
+Given(/^I won an auction but did not deliver the work on time$/) do
+  @auction = FactoryGirl.build(:auction, :closed, :with_bids, delivery_status: :missed_delivery)
+  bid = @auction.bids.sort_by(&:amount).first
+  bid.update(bidder: @user)
+end
+
 Given(/^I am going to lose an auction$/) do
   @auction = FactoryGirl.build(:auction, :available, :with_bids)
   Timecop.freeze(@auction.ended_at - 15.minutes) do
@@ -113,7 +119,7 @@ Given(/^there is a closed sealed-bid auction$/) do
 end
 
 Given(/^there is an auction that needs evaluation$/) do
-   @auction = FactoryGirl.create(:auction, :with_bids, :evaluation_needed, :c2_budget_approved)
+  @auction = FactoryGirl.create(:auction, :with_bids, :evaluation_needed, :c2_budget_approved)
 end
 
 Given(/^there is an auction within the simplified acquisition threshold$/) do
@@ -215,6 +221,10 @@ end
 
 Given(/^the delivery deadline for that auction has passed$/) do
   @auction.update!(delivery_due_at: 4.minutes.ago)
+end
+
+Given(/^the auction has been marked as missing delivery$/) do
+  @auction.update!(delivery_status: :missed_delivery)
 end
 
 Given(/^there is an auction with an associated customer$/) do

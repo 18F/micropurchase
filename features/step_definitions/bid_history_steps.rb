@@ -131,7 +131,6 @@ end
 Then(/^I should see I have placed no bids$/) do
   expect(page.html).to include(
     I18n.t('labels.vendor.account.bids_placed.no_bids_html',
-            index_url: Url.new(link_text: 'current and upcoming auctions', path_name: 'root')
-    )
+           index_url: Url.new(link_text: 'current and upcoming auctions', path_name: 'root'))
   )
 end

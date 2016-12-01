@@ -3,7 +3,7 @@ $height-nav-secondary: 5rem;
 .site-nav-secondary {
   @include media($medium-screen) {
     background-color: $color-white;
-    border-bottom: 1px solid $color-gray-light;
+    border-bottom: 1px solid $color-gray-neutral;
     clear: both;
     display: block;
     height: $height-nav-secondary;
@@ -53,7 +53,7 @@ $height-nav-secondary: 5rem;
     margin-right: 0.5rem;
     margin-left: 0.5rem;
     padding: 0.1rem 0.7rem;
-    background-color: $color-secondary-darkest;
+    background-color: $color-secondary-dark;
     color: $color-white;
   }
 }

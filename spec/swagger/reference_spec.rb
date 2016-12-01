@@ -44,5 +44,4 @@ describe Swagger::Reference do
       expect(ref).to be_dereferenced
     end
   end
-
 end

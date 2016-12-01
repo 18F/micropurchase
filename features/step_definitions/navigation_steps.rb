@@ -145,3 +145,11 @@ end
 Then(/^I should be on the auction receipt page$/) do
   expect(page.current_path).to eq(new_auction_receipt_path(@auction))
 end
+
+Then(/^I should be on the rules page for reverse auctions$/) do
+  expect(page.current_path).to eq('/auctions/rules/reverse')
+end
+
+Then(/^I should be on the rules page for sealed-bid auctions$/) do
+  expect(page.current_path).to eq('/auctions/rules/sealed-bid')
+end

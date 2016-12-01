@@ -10,6 +10,10 @@ Then(/^I should see a table listing all future auctions$/) do
   expect(page).to have_xpath(needs_attention_table_xpath('upcoming'))
 end
 
+Then(/^I should see a table listing all missed delivery auctions$/) do
+  expect(page).to have_xpath(closed_auctions_table_xpath('delivery_missed'))
+end
+
 Then(/^I should see the auction as an unpublished auction that is ready to be published$/) do
   expect(page).to have_content(
     I18n.t('statuses.admin_auction_status_presenter.future.unpublished.header')
@@ -40,12 +44,19 @@ Then(/^I should see the auction as a future auction$/) do
   end
 end
 
-Then(/^I should not see the auction as a draft auction$/) do
-  begin
-    table_xpath = needs_attention_table_xpath('drafts')
-    expect(page).to_not have_selector(table_xpath)
-  rescue Capybara::Poltergeist::InvalidSelector
+Then(/^I should see the auction as a missed delivery auction$/) do
+  table_xpath = closed_auctions_table_xpath('delivery_missed')
+
+  within(:xpath, table_xpath) do
+    expect(page).to have_content(@auction.title)
   end
+end
+
+Then(/^I should not see the auction as a draft auction$/) do
+  table_xpath = needs_attention_table_xpath('drafts')
+  expect do
+    page.find(table_xpath)
+  end.to raise_error(Capybara::Poltergeist::InvalidSelector)
 end
 
 Then(/^I should see the auction as an archived auction$/) do

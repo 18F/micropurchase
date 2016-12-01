@@ -16,6 +16,10 @@ Then(/^I should see an error that "([^"]*)"$/) do |message|
   end
 end
 
+Then(/^I should not see an alert$/) do
+  expect(page).not_to have_css('div.usa-alert')
+end
+
 Then(/^I should see an alert that$/) do |message|
   step("I should see an alert that \"#{message}\"")
 end

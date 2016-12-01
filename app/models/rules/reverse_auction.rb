@@ -22,4 +22,12 @@ class Rules::ReverseAuction < Rules::BaseRules
   def show_bids?
     true
   end
+
+  def rules_label
+    'Reverse'
+  end
+
+  def rules_route
+    'auctions_rules_reverse'
+  end
 end

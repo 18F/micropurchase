@@ -1,6 +1,24 @@
 en:
   closed_auctions:
     index:
-      accepted: Successfully Delivered
-      rejected: Rejected Auctions
-      archived: Archived
+      headers:
+        accepted: Successfully Delivered
+        rejected: Rejected Auctions
+        archived: Archived
+        delivery_missed: Not Delivered
+      null_text:
+        accepted: No auctions have been successfully delivered yet
+        rejected: No auctions have been rejected yet
+        archived: No auctions have been archived yet
+        delivery_missed: There are no auctions that have not been delivered
+      columns:
+        title: Title
+        end_date: Ending Date
+        winner: Winning Vendor
+        payment_url: Payment URL
+        delivery_url: Delivery URL
+        amount: Amount
+        accepted_at: Date Accepted
+        rejected_at: Date Rejected
+        c2_url: C2 URL
+        actions: Actions

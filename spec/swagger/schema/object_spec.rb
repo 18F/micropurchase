@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'swagger'
 
 describe Swagger::Schema::Object do
-  let(:object) { Swagger::Schema::Object.new('Name', {"description" => 'description', "title" => 'title'}, nil) }
+  let(:object) { Swagger::Schema::Object.new('Name', { "description" => 'description', "title" => 'title' }, nil) }
 
   describe '#title' do
     it 'should return the title of the object' do

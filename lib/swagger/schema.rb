@@ -8,6 +8,7 @@ require_relative 'schema/number'
 require_relative 'schema/string'
 require_relative 'schema/array'
 require_relative 'schema/object'
+require_relative 'schema/factory'
 
 class Swagger::Schema
   include Swagger::Mixins::Description
@@ -74,31 +75,6 @@ class Swagger::Schema
   end
 
   def self.factory(name, fields, specification)
-    if fields.key?('$ref')
-      Swagger::Reference.new(name, fields, specification)
-    elsif fields.key?('allOf')
-      Swagger::Schema::AllOf.new(name, fields, specification)
-    else
-      case fields['type']
-      when ::Array
-        if fields['type'].size == 2 && fields['type'].last == 'null'
-          factory(name, fields.merge('nullable' => true, 'type' => fields['type'].first), specification)
-        else
-          fail "Unhandled array type: #{fields.inspect}"
-        end
-      when 'string'
-        Swagger::Schema::String.new(name, fields, specification)
-      when 'integer', 'number', 'boolean'
-        Swagger::Schema::Number.new(name, fields, specification)
-      when 'boolean'
-        Swagger::Schema::Boolean.new(name, fields, specification)
-      when 'array'
-        Swagger::Schema::Array.new(name, fields, specification)
-      when 'object', nil
-        Swagger::Schema::Object.new(name, fields, specification)
-      else
-        fail "Unhandled property type: #{fields.inspect}"
-      end
-    end
+    Swagger::Schema::Factory.new(name, fields, specification).call
   end
 end

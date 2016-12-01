@@ -29,6 +29,10 @@ class Admin::ClosedAuctionsListItemViewModel
     Currency.new(winning_bid.amount).to_s
   end
 
+  def ended_at
+    DcTimePresenter.convert_and_format(auction.ended_at)
+  end
+
   def accepted_at
     DcTimePresenter.convert_and_format(auction.accepted_at)
   end
@@ -40,8 +44,6 @@ class Admin::ClosedAuctionsListItemViewModel
   def winning_vendor_github_login
     winning_bidder.github_login
   end
-
-  private
 
   def winning_bid
     @_winning ||= WinningBid.new(auction).find

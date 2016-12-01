@@ -13,17 +13,20 @@ describe AuctionsController do
         create(
           :auction,
           started_at: date_start,
-          ended_at: date_middle)
+          ended_at: date_middle
+        )
 
         create(
           :auction,
           started_at: date_start,
-          ended_at: date_latest)
+          ended_at: date_latest
+        )
 
         create(
           :auction,
           started_at: date_start,
-          ended_at: date_first)
+          ended_at: date_first
+        )
 
         get :index
         auctions = assigns(:auction_collection).auctions

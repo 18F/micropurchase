@@ -34,7 +34,9 @@ class BidStatusPresenterFactory
   end
 
   def over_winning_bidder_message
-    if !auction.pending_delivery?
+    if auction.missed_delivery?
+      BidStatusPresenter::Over::Vendor::Winner::MissedDelivery
+    elsif !auction.pending_delivery?
       Object.const_get("BidStatusPresenter::Over::Vendor::Winner::#{auction.delivery_status.camelize}")
     elsif auction.payment_confirmed?
       BidStatusPresenter::Over::Vendor::Winner::PaymentConfirmed

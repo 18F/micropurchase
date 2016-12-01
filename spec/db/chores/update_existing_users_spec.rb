@@ -8,9 +8,9 @@ describe UpdateExistingUsers do
       it 'does not update user' do
         create(:user, github_login: 'abc')
 
-        expect {
+        expect do
           UpdateExistingUsers.new.perform
-        }.not_to raise_error
+        end.not_to raise_error
       end
     end
 
@@ -19,9 +19,9 @@ describe UpdateExistingUsers do
         user = build(:user, github_login: nil, github_id: FakeGitHubApi::DELETED_USER_ID)
         user.save(validate: false)
 
-        expect {
+        expect do
           UpdateExistingUsers.new.perform
-        }.not_to raise_error
+        end.not_to raise_error
       end
     end
 
@@ -30,9 +30,9 @@ describe UpdateExistingUsers do
         user = build(:user, github_login: nil, github_id: FakeGitHubApi::NO_NAME_USER_ID)
         user.save(validate: false)
 
-        expect {
+        expect do
           UpdateExistingUsers.new.perform
-        }.not_to raise_error
+        end.not_to raise_error
       end
     end
 
@@ -42,9 +42,9 @@ describe UpdateExistingUsers do
         user.save(validate: false)
         github_login_from_fixture = 'pjhyett'
 
-        expect {
+        expect do
           UpdateExistingUsers.new.perform
-        }.not_to raise_error
+        end.not_to raise_error
 
         expect(user.reload.github_login).to eq github_login_from_fixture
       end

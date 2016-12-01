@@ -6,10 +6,10 @@ Feature: Vendor bids on a sealed-bid auction
   Scenario: viewing the rules page
     Given there is a sealed-bid auction
     When I visit the home page
-    Then I should see that the auction is Sealed-bid
+    Then I should see that the auction is Sealed bid
 
     When I click on the auction's title
-    Then I should see the rules for Sealed-bid auctions
+    Then I should see the rules for Sealed bid auctions
 
   @javascript
   Scenario: bidding on a sealed-bid auction

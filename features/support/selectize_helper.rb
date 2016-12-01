@@ -6,5 +6,5 @@ end
 
 def select_selectize_option(field, text)
   find(".#{field} .selectize-input input").native.send_keys(text) # fill the input text
-  find(:xpath, ("//div[@data-selectable and contains(., '#{text}')]")).click # wait for the input and then click on it
+  find(:xpath, "//div[@data-selectable and contains(., '#{text}')]").click # wait for the input and then click on it
 end

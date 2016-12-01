@@ -39,6 +39,14 @@ class Rules::SealedBidAuction < Rules::BaseRules
     !auction_available?
   end
 
+  def rules_label
+    'Sealed bid'
+  end
+
+  def rules_route
+    'auctions_rules_sealed_bid'
+  end
+
   private
 
   def lowest_user_bid(user)

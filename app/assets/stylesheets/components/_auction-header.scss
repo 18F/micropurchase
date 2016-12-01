@@ -1,6 +1,6 @@
 .auction-header-wrapper {
   background: $color-gray-lightest;
-  border-bottom: 1px solid $color-gray-light;
+  border-bottom: 1px solid $color-gray-neutral;
 }
 
 .auction-subnav {
@@ -9,7 +9,7 @@
 
   .active {
     background: $color-white;
-    border: 1px solid $color-gray-light;
+    border: 1px solid $color-gray-neutral;
     border-bottom: none;
     text-decoration: none;
   }
@@ -17,7 +17,7 @@
   a {
     margin-top: 1rem;
     margin-bottom: -1px;
-    border-bottom: 1px solid $color-gray-light;
+    border-bottom: 1px solid $color-gray-neutral;
     padding: 1rem;
     background: $color-gray-lightest;
     display: inline-block;

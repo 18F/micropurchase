@@ -124,6 +124,13 @@ Then(/^I should see winning bidder status for a rejected auction$/) do
   )
 end
 
+Then(/^I should see winning bidder status for a missed delivery auction$/) do
+  expect(page).to have_content(
+    I18n.t('statuses.bid_status_presenter.over.winner.work_not_delivered.body',
+           delivery_deadline: delivery_due_date)
+  )
+end
+
 Then(/^I should see that the C2 status for an auction pending C2 approval$/) do
   expect(page.html).to include(
     I18n.t('statuses.c2_presenter.pending_approval.body',
@@ -152,8 +159,7 @@ Then(/^I should see the admin status for an auction that is pending acceptance$/
   expect(page.html).to include(
     I18n.t('statuses.admin_auction_status_presenter.pending_acceptance.body',
            winner_url: winner_url,
-           delivery_url: @auction.delivery_url
-    )
+           delivery_url: @auction.delivery_url)
   )
 end
 

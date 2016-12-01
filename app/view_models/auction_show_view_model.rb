@@ -41,12 +41,22 @@ class AuctionShowViewModel
     }.compact
   end
 
+  def sam_status_message_for(flash)
+    if available?
+      current_user.decorate.sam_status_message_for(flash)
+    end
+  end
+
   def issue_url
     auction.issue_url
   end
 
-  def rules_path
-    rules.path
+  def rules_route
+    rules.rules_route
+  end
+
+  def rules_label
+    rules.rules_label
   end
 
   def capitalized_type

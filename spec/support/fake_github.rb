@@ -3,8 +3,8 @@ require 'sinatra/base'
 class FakeGitHubApi < Sinatra::Base
   INVALID_API_KEY = "invalidKey5678ijklmnop".freeze
   VALID_API_KEY = "validKeyAbcdfgh123".freeze
-  DELETED_USER_ID = '1'
-  NO_NAME_USER_ID = '2'
+  DELETED_USER_ID = '1'.freeze
+  NO_NAME_USER_ID = '2'.freeze
 
   get '/user/:id' do
     if params[:id] == DELETED_USER_ID
