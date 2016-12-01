@@ -29,7 +29,7 @@
           <li class="details-list-item">
             <div class="details-label">Type</div>
             <div class="details-title">
-              <%= auction.capitalized_formatted_type %>
+              <%= link_to auction.rules_label, polymorphic_path(auction.rules_route) %>
             </div>
           </li>
 

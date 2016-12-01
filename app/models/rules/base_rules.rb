@@ -7,10 +7,6 @@ class Rules::BaseRules
     @eligibility = eligibility
   end
 
-  def path
-    "/auctions/rules/#{auction.type.dasherize}"
-  end
-
   def eligibility_label
     eligibility.label
   end
