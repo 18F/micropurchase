@@ -21,3 +21,12 @@ Feature: Admin creates skills in the admins panel
     And I fill the "skill_name" field with "baking"
     And I click on the create skill button
     Then I should see an error that the skill name is invalid
+
+  Scenario: Skill is blank
+    Given I am an administrator
+    When I sign in
+    And I visit the skills admin page
+    And I click on the add skill link
+    And I leave the "skill_name" field blank
+    And I click on the create skill button
+    Then I should see an error that the skill name is required
