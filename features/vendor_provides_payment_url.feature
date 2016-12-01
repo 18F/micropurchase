@@ -15,9 +15,7 @@ Feature: Vendor updates Payment URL
     When I visit my profile page
     And I fill in the Payment URL field on my profile page
     And I click on the "Update" button
-    Then I should be on the home page
-
-    When I visit my profile page
+    Then I should be on my profile page
     Then I should see my payment URL in the "Payment url" field
 
   Scenario: Vendor edits an existing Payment URL
@@ -26,9 +24,7 @@ Feature: Vendor updates Payment URL
     And I visit my profile page
     When I fill in the Payment URL field on my profile page
     And I click on the "Update" button
-    Then I should be on the home page
-
-    When I visit my profile page
+    Then I should be on my profile page
     Then the new value should be stored as my Payment URL
 
   Scenario: Vendor cannot save payment URL with invalid format

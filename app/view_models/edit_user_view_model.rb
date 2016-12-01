@@ -23,6 +23,10 @@ class EditUserViewModel
     AccountSubnavViewModel.new(current_user: @user, active_tab: :profile)
   end
 
+  def sam_status_message_for(flash)
+    @user.decorate.sam_status_message_for(flash)
+  end
+
   private
 
   attr_reader :user

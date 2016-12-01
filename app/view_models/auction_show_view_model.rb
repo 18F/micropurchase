@@ -41,6 +41,12 @@ class AuctionShowViewModel
     }.compact
   end
 
+  def sam_status_message_for(flash)
+    if available?
+      current_user.decorate.sam_status_message_for(flash)
+    end
+  end
+
   def issue_url
     auction.issue_url
   end
