@@ -71,3 +71,15 @@
 .sign-in a {
   color: $color-primary-alt;
 }
+
+.label-beta {
+    background-color: $color-primary-alt;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    position: absolute;
+    margin-left: .9rem;
+    margin-top: 1rem;
+    text-decoration: none;
+}
