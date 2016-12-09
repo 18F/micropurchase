@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-- ruby-2.3.1
+- ruby-2.3.3
 cache: bundler
 bundler_args: "--without production --binstubs"
 before_install:
