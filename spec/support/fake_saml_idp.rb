@@ -24,7 +24,7 @@ class FakeSamlIdp < Sinatra::Base
       session_index,
       SamlIdp.config.base_saml_location,
       'foo/bar/logout',
-      user.uid,
+      user.id,
       OpenSSL::Digest::SHA256
     )
   end
@@ -37,7 +37,7 @@ class FakeSamlIdp < Sinatra::Base
       # but in real-life these would be different.
       # NOTE that x509_certificate fingerprint is defined in config/secrets.yml
       # so that the SP can correctly decode our response.
-      config.x509_certificate = File.read("#{Rails.root}/certs/sp/demo_sp.crt")
+      config.x509_certificate = File.read("#{Rails.root}/certs/sp/micropurchase_sp.crt")
       config.secret_key = File.read("#{Rails.root}/keys/saml_test_sp.key")
 
       config.base_saml_location = "#{idp_base_url}/saml"
@@ -72,6 +72,6 @@ class FakeSamlIdp < Sinatra::Base
   end
 
   def user
-    User.new(email: 'fakeuser@example.com', uid: SecureRandom.uuid)
+    FactoryGirl.build(:user, email: 'fakeuser@example.com')
   end
 end
