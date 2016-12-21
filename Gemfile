@@ -24,9 +24,11 @@ gem 'kaminari'
 gem 'octokit', '~> 4.0'
 gem 'omniauth'
 gem 'omniauth-github'
+gem 'omniauth-saml'
 gem 'puma'
 gem 'rack-cors', require: 'rack/cors'
 gem 'redcarpet'
+gem 'ruby-saml'
 gem 'samwise', '~> 0.4.0'
 gem 'sass-rails', '~> 5.0'
 gem 'selectize-rails'
@@ -62,6 +64,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'jasmine'
   gem 'apivore'
+  gem 'saml_idp', git: 'https://github.com/18F/saml_idp.git', branch: 'master'
 end
 
 group :development do

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   root 'auctions#index'
 
-  get '/auth/:provider/callback', to: 'authentications#create'
+  get '/auth/github/callback', to: 'authentications#create'
   get '/logout', to: 'authentications#destroy'
   get '/auctions/rules/sealed-bid', to: 'auctions#sealed_bid_auction_rules'
   get '/auctions/rules/reverse', to: 'auctions#reverse_auction_rules'
