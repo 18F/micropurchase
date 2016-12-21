@@ -7,8 +7,14 @@ Rails.application.routes.draw do
 
   root 'auctions#index'
 
-  get '/auth/:provider/callback', to: 'authentications#create'
+  get '/auth/github/callback', to: 'authentications#create'
   get '/logout', to: 'authentications#destroy'
+
+  post 'auth/saml/callback', to: 'sessions#create'
+  post 'auth/saml/logout', to: 'sessions#destroy'
+  delete 'auth/saml/logout', to: 'sessions#destroy'
+  match 'auth/saml/setup', to: 'sessions#setup', via: [:get, :post]
+
   get '/auctions/rules/sealed-bid', to: 'auctions#sealed_bid_auction_rules'
   get '/auctions/rules/reverse', to: 'auctions#reverse_auction_rules'
   get '/admin', to: 'admin/auctions/needs_attention#index'
