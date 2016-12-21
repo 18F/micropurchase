@@ -72,6 +72,10 @@ class FakeSamlIdp < Sinatra::Base
   end
 
   def user
-    FactoryGirl.build(:user, email: 'fakeuser@example.com')
+    FactoryGirl.build(
+      :user,
+      uid: SecureRandom.uuid,
+      email: 'fakeuser@example.com'
+    )
   end
 end
