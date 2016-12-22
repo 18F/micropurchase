@@ -70,7 +70,7 @@ class FakeSamlIdp < Sinatra::Base
 
   def user
     if saml_request && saml_request.name_id
-      add_asserted_attributes User.find_by_uid(saml_request.name_id)
+      add_asserted_attributes(User.find_by_uid(saml_request.name_id))
     else
       add_asserted_attributes(FactoryGirl.build(:user, email: 'fakeuser@example.com', uid: SecureRandom.uuid))
     end
