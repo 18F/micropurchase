@@ -1,0 +1,6 @@
+en:
+  omniauth_callbacks:
+    failure: 'Could not authenticate you due to: %{reason}.'
+    success: 'Successfully authenticated from IdP account.'
+    logout_ok: 'Logout successful'
+    logout_fail: 'Logout failed'

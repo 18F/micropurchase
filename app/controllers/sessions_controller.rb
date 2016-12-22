@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
     session[:user_id] = user.id
 
     redirect_to(
-      success_url,
+      admin_path,
       notice: t('omniauth_callbacks.success')
     )
   end
@@ -77,7 +77,6 @@ class SessionsController < ApplicationController
   end
 
   def sp_logout_request
-    current_user = User.find(session[:user_id])
     settings = saml_settings.dup
     settings.name_identifier_value = current_user.uid
     logout_request = OneLogin::RubySaml::Logoutrequest.new.create(settings)

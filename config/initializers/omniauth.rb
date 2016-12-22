@@ -7,7 +7,7 @@ SAML_SETTINGS = {
   name_identifier_format: 'urn:oasis:names:tc:SAML:1.1:nameid-format:persistent',
   authn_context: 'http://idmanagement.gov/ns/assurance/loa/1',
   allowed_clock_drift: 60,
-  certificate: File.read("#{Rails.root}/certs/sp/micropurchase_sp.crt"),
+  certificate: File.read("#{Rails.root}/certs/sp/demo_sp.crt"),
   private_key: File.read("#{Rails.root}/keys/saml_test_sp.key"),
   security: { authn_requests_signed: true,
               logout_requests_signed: true,

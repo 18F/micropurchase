@@ -1,19 +1,28 @@
 require 'rails_helper'
 
 describe 'SSO' do
-  it 'uses external SAML IdP' do
+  before do
     OmniAuth.config.test_mode = false
-    expect(User.count).to eq 0
+  end
 
-    get '/auth/saml'
-    expect(response).to redirect_to(/idp\.example\.com\/saml\/auth/)
+  context 'LOA1' do
+    it 'uses external SAML IdP' do
+      expect(User.count).to eq 0
 
-    idp_uri = URI(response.headers['Location'])
-    saml_idp_resp = Net::HTTP.get(idp_uri)
+      get '/auth/saml'
+      expect(response).to redirect_to(%r{idp\.example\.com\/saml\/auth})
 
-    post '/auth/saml/callback', SAMLResponse: saml_idp_resp
+      idp_uri = URI(response.headers['Location'])
+      saml_idp_resp = Net::HTTP.get(idp_uri)
 
-    expect(response).to redirect_to('http://www.example.com/success')
-    expect(User.count).to eq 1
+      saml_response = OneLogin::RubySaml::Response.new(saml_idp_resp)
+      asserted_attributes = saml_response.attributes.attributes.keys.map(&:to_sym)
+      expect(asserted_attributes).to match_array([:uid, :email])
+
+      post '/auth/saml/callback', SAMLResponse: saml_idp_resp
+
+      expect(response).to redirect_to('http://www.example.com/admin')
+      expect(User.count).to eq 1
+    end
   end
 end

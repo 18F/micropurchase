@@ -10,11 +10,30 @@ class User < ActiveRecord::Base
 
   enum sam_status: { duns_blank: 0, sam_accepted: 1, sam_rejected: 2, sam_pending: 3 }
 
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.assign_from_auth(auth)
+    end
+  end
+
   def decorate
     if Admins.verify?(github_id)
       AdminUserPresenter.new(self)
     else
       UserPresenter.new(self)
     end
+  end
+
+  def assign_from_auth(auth)
+    self.uid = auth.uid
+
+    assign_attrs(auth.info)
+  end
+
+  private
+
+  def assign_attrs(auth_attrs)
+    self.email = auth_attrs.email
+    self.name = "#{auth_attrs.first_name} #{auth_attrs.last_name}"
   end
 end
