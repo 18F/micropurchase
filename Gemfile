@@ -64,7 +64,10 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'jasmine'
   gem 'apivore'
-  gem 'saml_idp', git: 'https://github.com/18F/saml_idp.git', branch: 'master', ref: '8de60fc64199bc6e56eb808e0aa9fa9180eabd7a'
+  gem 'saml_idp',
+      git: 'https://github.com/18F/saml_idp.git',
+      branch: 'master',
+      ref: '8de60fc64199bc6e56eb808e0aa9fa9180eabd7a'
 end
 
 group :development do
