@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
     if params.key?(:loa)
       request.env['omniauth.strategy'].options[:authn_context] = [
         "http://idmanagement.gov/ns/assurance/loa/#{params[:loa]}",
-        'http://idmanagement.gov/ns/requested_attributes?ReqAttr=email,phone,first_name,last_name,ssn'
+        'http://idmanagement.gov/ns/requested_attributes?ReqAttr=email,first_name,last_name'
       ]
     end
     render text: 'Omniauth setup phase.', status: 404
