@@ -11,6 +11,10 @@ class Url
   end
 
   def to_s
-    link_to link_text, send("#{path_name}_path", params)
+    link_to link_text, url
+  end
+
+  def url
+    send("#{path_name}_path", params)
   end
 end

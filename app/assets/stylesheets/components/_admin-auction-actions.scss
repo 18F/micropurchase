@@ -1,0 +1,71 @@
+.clipboard-control {
+  .clipboard-input {
+    padding-top: 5px;
+    padding-bottom: 0;
+    -webkit-appearance: none;
+    border-bottom-right-radius: 0;
+    border-right: none;
+    border-top-right-radius: 0;
+    box-sizing: border-box;
+    float: left;
+    font-size: 1.4rem;
+    height: 3.3rem;
+    margin: 0;
+    width: calc(100% - 4.5rem);
+    max-width: 100%;
+  }
+
+  .clipboard-button {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    height: 3.3rem;
+    margin: 0;
+    padding: 0;
+    width: 4.5rem;
+  }
+}
+
+$expander-arrow-width: 0.7em;
+$expander-toggle-size: 1em;
+$expander-toggle-arrow-size: $expander-toggle-size;
+$expander-toggle-margin: 1em;
+
+.expander {
+  .expander-trigger {
+    cursor: pointer;
+    display: block;
+    font-size: $expander-toggle-size;
+    margin-left: 0;
+    text-decoration: none;
+    user-select: none;
+
+    &::before {
+      content: '\25BC';
+      font-size: $expander-arrow-width;
+    }
+  }
+
+  .expander-hidden {
+    &::before {
+      content: '\25BA';
+      font-size: $expander-arrow-width;
+    }
+  }
+
+  .expander-hidden + .expander-content {
+    display: none;
+  }
+}
+
+.auction-actions-panel {
+  margin-bottom: 1em;
+
+  ul {
+    padding-left: 0;
+    margin-left: $expander-toggle-margin;
+  }
+
+  li {
+    list-style-type: none;
+  }
+}

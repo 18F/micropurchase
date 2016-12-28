@@ -10,12 +10,10 @@ class AuctionPreviewUrl
   end
 
   def to_s
-    link_to preview_url, preview_url
+    link_to url, url
   end
 
-  private
-
-  def preview_url
+  def url
     auction_url(auction, token: auction.token)
   end
 end

@@ -3,12 +3,7 @@
     <div class="usa-grid">
       <div class="auction-title">
         <h1><%= @view_model.title %></h1>
-        <%= render partial: 'auctions/edit_auction_link', locals: { view_model: @view_model } %>
         <div class="auction-subtitles">
-          <div class="auction-subtitle">
-            <%= render partial: @view_model.csv_report_partial,
-              locals: { auction: @view_model } %>
-          </div>
           <div class="auction-subtitle">
             <div class="bidding-status">
               <%= render partial: 'auctions/bidding_status_label',
@@ -37,6 +32,8 @@
     <div class="usa-width-one-third">
       <%= render partial: 'auctions/status',
         locals: { status: @view_model.admin_auction_status_presenter  } %>
+
+      <%= render partial: 'admin/auctions/actions', locals: { auction: @view_model } %>
 
       <%= render partial: @view_model.admin_notes_partial,
         locals: { auction: @view_model.auction  } %>
