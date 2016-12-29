@@ -1,20 +1,39 @@
-language: ruby
-rvm:
-- ruby-2.3.3
-cache: bundler
-bundler_args: "--without production --binstubs"
+# language: ruby
+# rvm:
+# - ruby-2.3.3
+# cache: bundler
+# bundler_args: "--without production --binstubs"
+# before_install:
+# - export PATH=$PWD/travis_phantomjs/phantomjs-2.1.1-linux-x86_64/bin:$PATH
+# - if [ $(phantomjs --version) != '2.1.1' ]; then rm -rf $PWD/travis_phantomjs; mkdir
+#   -p $PWD/travis_phantomjs; fi
+# - if [ $(phantomjs --version) != '2.1.1' ]; then wget https://assets.membergetmember.co/software/phantomjs-2.1.1-linux-x86_64.tar.bz2
+#   -O $PWD/travis_phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2; fi
+# - if [ $(phantomjs --version) != '2.1.1' ]; then tar -xvf $PWD/travis_phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2
+#   -C $PWD/travis_phantomjs; fi
+# before_script:
+# - bundle exec rake db:create
+# - bundle exec rake db:migrate
+# script: bundle exec rake $TASK
+
+language: node
+
+services:
+  - docker
+
 before_install:
-- export PATH=$PWD/travis_phantomjs/phantomjs-2.1.1-linux-x86_64/bin:$PATH
-- if [ $(phantomjs --version) != '2.1.1' ]; then rm -rf $PWD/travis_phantomjs; mkdir
-  -p $PWD/travis_phantomjs; fi
-- if [ $(phantomjs --version) != '2.1.1' ]; then wget https://assets.membergetmember.co/software/phantomjs-2.1.1-linux-x86_64.tar.bz2
-  -O $PWD/travis_phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2; fi
-- if [ $(phantomjs --version) != '2.1.1' ]; then tar -xvf $PWD/travis_phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2
-  -C $PWD/travis_phantomjs; fi
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/1.4.2/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+
 before_script:
-- bundle exec rake db:create
-- bundle exec rake db:migrate
-script: bundle exec rake $TASK
+  - cp .env.example .env
+  - docker-compose build
+
+script:
+  - docker-compose run web bundle exec rake
+
 notifications:
   email: false
 env:
@@ -25,16 +44,16 @@ addons:
   postgresql: '9.3'
   code_climate:
     repo_token: 2ad0d3196c872832cf5d6b34c83bf21dbf0a30e2191ba036be003b01e417a6a1
-after_script:
-- "./bin/codeclimate-batch --groups 2"
-- npm install -g pa11y-crawl
-- pa11y-crawl --run "bundle exec puma" --ci http://localhost:3000
+# after_script:
+# - "./bin/codeclimate-batch --groups 2"
+# - npm install -g pa11y-crawl
+# - pa11y-crawl --run "bundle exec puma" --ci http://localhost:3000
 before_deploy:
 - export PATH=$HOME:$PATH
 - travis_retry curl -L -o $HOME/cf.tgz "https://cli.run.pivotal.io/stable?release=linux64-binary&version=6.22.2"
 - tar xzvf $HOME/cf.tgz -C $HOME
 - cf install-plugin autopilot -f -r CF-Community
-- bundle exec rake git:dump_sha
+# - bundle exec rake git:dump_sha
 deploy:
 - provider: script
   script: "./bin/deploy.sh staging"
