@@ -67,10 +67,10 @@ end
 group :development do
   gem 'letter_opener'
   gem 'letter_opener_web'
+  gem 'railroady'
   gem 'rails-erd'
   gem 'rubocop'
   gem 'web-console', '~> 2.0'
-  gem 'railroady'
 end
 
 group :production, :staging do
