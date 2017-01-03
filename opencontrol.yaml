@@ -1,0 +1,24 @@
+schema_version: "1.0.0"
+name: Micropurchase
+metadata:
+  description: >
+    An platform for bidding and completing small IT projects for the government.
+  maintainers:
+    - alan.delevie@gsa.gov
+components:
+  - ./compliance
+certifications:
+  # paths
+standards:
+  # paths
+dependencies:
+  certifications:
+    # LATO
+    - url: https://github.com/18F/GSA-Certifications
+      revision: master
+  systems:
+    # Cloud.gov
+    - url: https://github.com/18F/cg-compliance
+      revision: master
+  standards:
+    # data

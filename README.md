@@ -50,6 +50,16 @@ local development instructions below if you don't have the app setup locally):
 Updating the ERD requires Graphiz. Installation instructions are
 [here](http://voormedia.github.io/rails-erd/install.html).
 
+### ATO Documentation
+
+As part of 18F's ATO process, you may need to update the Compliance Masonry documentation.
+
+With docker-compose, all you need to run is:
+
+```
+docker-compose run compliance-masonry compliance-masonry get
+```
+
 ## Local Development
 
 See the [local development docs](docs/local_development.md) for information on
