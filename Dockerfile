@@ -4,7 +4,8 @@ RUN apt-get update -qq && apt-get install -y \
   libpq-dev \
   nodejs \
   nodejs-legacy \
-  npm
+  npm \
+  graphviz
 RUN npm install -g phantomjs-prebuilt
 RUN mkdir /app
 WORKDIR /app

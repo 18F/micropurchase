@@ -44,7 +44,7 @@ to this diagram. You can automatically update the diagram by running (follow the
 local development instructions below if you don't have the app setup locally):
 
 ```
-bundle exec erd
+[docker-compose run web] bundle exec erd
 ```
 
 Updating the ERD requires Graphiz. Installation instructions are
