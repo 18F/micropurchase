@@ -59,8 +59,8 @@ components:
 
 
 # these will be the same unless your architecture is especially complex
-system-diagram: <link>
-network-diagram: <link>
+system-diagram: https://github.com/18F/micropurchase/issues/94
+network-diagram: https://github.com/18F/micropurchase/issues/94
 
 environments:
 - Cloud Foundry
@@ -70,5 +70,12 @@ user-types:
     functions:
     - deployment
     - engineering
+  bidder:
+    functions:
+      - bidding
+  admin:
+    functions:
+      - auction creation
+      - auction acceptance
 controls:
 - <links to your security documentation>
