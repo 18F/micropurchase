@@ -11,9 +11,7 @@ class User < ActiveRecord::Base
   enum sam_status: { duns_blank: 0, sam_accepted: 1, sam_rejected: 2, sam_pending: 3 }
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.assign_from_auth(auth)
-    end
+    where(provider: auth.provider, uid: auth.uid).first
   end
 
   def decorate
@@ -28,6 +26,14 @@ class User < ActiveRecord::Base
     self.uid = auth.uid
 
     assign_attrs(auth.info)
+  end
+
+  def saml_enabled?
+    self.uid != "" && self.provider != nil
+  end
+
+  def guest?
+    false
   end
 
   private

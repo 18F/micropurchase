@@ -1,13 +1,25 @@
 class SessionsController < ApplicationController
   skip_before_action :verify_authenticity_token
   def create
+    if !current_user.guest? && !current_user.saml_enabled?
+      current_user.uid = request.env['omniauth.auth'].uid
+      current_user.provider = request.env['omniauth.auth'].provider
+      current_user.save
+    end
     user = User.from_omniauth(request.env['omniauth.auth'])
-    session[:user_id] = user.id
+    if(user)
+      session[:user_id] = user.id
 
-    redirect_to(
-      admin_path,
-      notice: t('omniauth_callbacks.success')
-    )
+      redirect_to(
+        root_path,
+        notice: t('omniauth_callbacks.success')
+      )
+    else
+      redirect_to(
+        root_path,
+        notice: t('omniauth_callbacks.no_account')
+      )
+    end
   end
 
   def destroy

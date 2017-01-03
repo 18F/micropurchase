@@ -4,3 +4,4 @@ en:
     success: 'Successfully authenticated from IdP account.'
     logout_ok: 'Logout successful'
     logout_fail: 'Logout failed'
+    no_account: 'No account associated with this Login.gov profile. Please use Github and setup Login.gov on your profile.'
