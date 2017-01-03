@@ -78,4 +78,5 @@ user-types:
       - auction creation
       - auction acceptance
 controls:
-- <links to your security documentation>
+- https://hakiri.io/github/18F/micropurchase/master
+- https://gemnasium.com/18F/micropurchase
