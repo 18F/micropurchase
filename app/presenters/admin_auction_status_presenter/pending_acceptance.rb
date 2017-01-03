@@ -14,4 +14,8 @@ class AdminAuctionStatusPresenter::PendingAcceptance < AdminAuctionStatusPresent
   def action_partial
     'admin/auctions/accept_or_reject'
   end
+
+  def self.relevant?(status)
+    status.pending_acceptance?
+  end
 end

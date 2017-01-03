@@ -136,6 +136,9 @@ en:
             This auction is ready to publish! Please select a start date, end
             date, and delivery period for this auction.
           header: "Ready to publish"
+      no_bids:
+        header: There are no bids
+        body: "This auction ended on %{end_date} and there were no bids."
       work_not_started:
         header: Ready for work
         body: >

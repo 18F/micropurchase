@@ -8,4 +8,8 @@ class AdminAuctionStatusPresenter::MissedDelivery < AdminAuctionStatusPresenter:
       'statuses.admin_auction_status_presenter.missed_delivery.body'
     )
   end
+
+  def self.relevant?(status)
+    status.missed_delivery?
+  end
 end

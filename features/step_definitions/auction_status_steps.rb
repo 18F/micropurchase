@@ -309,3 +309,9 @@ Then(/^I should see the auction was sent to C2 for approval$/) do
     I18n.t('statuses.c2_presenter.sent.body')
   )
 end
+
+Then(/^I should see a message that the auction has no bids$/) do
+  expect(page).to have_content(
+    I18n.t('bidding_status.over.no_bids')
+  )
+end

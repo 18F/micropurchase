@@ -10,6 +10,14 @@ Feature: Admin views closed auctions in the admin panel
     And I should see "No auctions have been successfully delivered yet"
     And I should see "There are no auctions that have not been delivered"
 
+  Scenario: Viewing closed auction with no bids
+    Given I am an administrator
+    And there is a closed auction with no bids
+    And I sign in
+    When I visit the admin auction page for that auction
+    Then I should see the name of the auction
+    And I should see the message that the auction is closed without bids
+
   Scenario: Viewing closed successful auctions
     Given I am an administrator
     And there is a complete and successful auction

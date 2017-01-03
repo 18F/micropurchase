@@ -13,6 +13,10 @@ class AdminAuctionStatusPresenter::WorkNotStarted < AdminAuctionStatusPresenter:
     )
   end
 
+  def self.relevant?(status)
+    status.won? && status.pending_delivery?
+  end
+
   private
 
   def ended_at

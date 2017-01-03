@@ -10,4 +10,8 @@ class AdminAuctionStatusPresenter::AcceptedPendingPaymentUrl < AdminAuctionStatu
       delivery_url: auction.delivery_url
     )
   end
+
+  def self.relevant?(status)
+    status.accepted_pending_payment_url?
+  end
 end

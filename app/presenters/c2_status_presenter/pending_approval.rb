@@ -11,4 +11,8 @@ class C2StatusPresenter::PendingApproval < C2StatusPresenter::Base
   def action_partial
     'admin/auctions/pending'
   end
+
+  def self.relevant?(status)
+    status.c2_pending?
+  end
 end
