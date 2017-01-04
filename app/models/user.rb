@@ -14,6 +14,11 @@ class User < ActiveRecord::Base
     where(provider: auth.provider, uid: auth.uid).first
   end
 
+  def add_saml(auth)
+    self.uid = auth.uid
+    self.provider = auth.provider
+  end
+
   def decorate
     if Admins.verify?(github_id)
       AdminUserPresenter.new(self)

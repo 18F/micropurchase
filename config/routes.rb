@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   post 'auth/saml/logout', to: 'sessions#destroy'
   delete 'auth/saml/logout', to: 'sessions#destroy'
   match 'auth/saml/setup', to: 'sessions#setup', via: [:get, :post]
+  put 'auth/saml/remove', to: 'sessions#remove'
 
   get '/auctions/rules/sealed-bid', to: 'auctions#sealed_bid_auction_rules'
   get '/auctions/rules/reverse', to: 'auctions#reverse_auction_rules'

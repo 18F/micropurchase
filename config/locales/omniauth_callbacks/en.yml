@@ -1,7 +1,10 @@
 en:
   omniauth_callbacks:
     failure: 'Could not authenticate you due to: %{reason}.'
-    success: 'Successfully authenticated from IdP account.'
+    success: 'Successfully authenticated from Login.gov.'
+    add_account: 'Successfully added Login.gov account'
+    remove_account: 'Successfully removed Login.gov account'
     logout_ok: 'Logout successful'
     logout_fail: 'Logout failed'
     no_account: 'No account associated with this Login.gov profile. Please use Github and setup Login.gov on your profile.'
+    duplicate: 'Login account associated with another account'

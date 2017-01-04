@@ -1,24 +1,17 @@
 class SessionsController < ApplicationController
   skip_before_action :verify_authenticity_token
   def create
-    if !current_user.guest? && !current_user.saml_enabled?
-      current_user.uid = request.env['omniauth.auth'].uid
-      current_user.provider = request.env['omniauth.auth'].provider
-      current_user.save
-    end
-    user = User.from_omniauth(request.env['omniauth.auth'])
-    if(user)
-      session[:user_id] = user.id
-
-      redirect_to(
-        root_path,
-        notice: t('omniauth_callbacks.success')
-      )
+    if add_saml_to_user?
+      if User.from_omniauth(request.env['omniauth.auth'])
+        redirect_to(
+          profile_path, 
+          notice: t('omniauth_callbacks.duplicate')
+        )
+      else
+        add_saml_to_user
+      end
     else
-      redirect_to(
-        root_path,
-        notice: t('omniauth_callbacks.no_account')
-      )
+      login_saml_user
     end
   end
 
@@ -42,7 +35,54 @@ class SessionsController < ApplicationController
     render text: 'Omniauth setup phase.', status: 404
   end
 
+  def remove
+    if !current_user.guest?
+      current_user.uid = ""
+      current_user.provider = nil
+      current_user.save
+    end
+    redirect_to(
+      profile_path,
+      notice: t('omniauth_callbacks.remove_account')
+    )
+  end
+
   private
+
+  def login_saml_user
+    user = User.from_omniauth(request.env['omniauth.auth'])
+    if(user)
+      session[:user_id] = user.id
+      redirect_to(
+        root_path,
+        notice: t('omniauth_callbacks.success')
+      )
+    else
+      redirect_to(
+        root_path,
+        notice: t('omniauth_callbacks.no_account')
+      )
+    end
+  end
+
+  def add_saml_to_user?
+    !current_user.guest? && !current_user.saml_enabled?
+  end
+
+  def add_saml_to_user
+    current_user.add_saml(request.env['omniauth.auth'])
+    if current_user.save
+      redirect_to(
+        profile_path,
+        notice: t('omniauth_callbacks.add_account')
+      )
+    else
+      redirect_to(
+        profile_path,
+        notice: t('omniauth_callbacks.error')
+      )
+    end
+  end
 
   def idp_logout_request
     logout_request = OneLogin::RubySaml::SloLogoutrequest.new(
