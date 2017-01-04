@@ -1,8 +1,8 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider(
     :github,
-    GithubCredentials.client_id,
-    GithubCredentials.secret,
+    Credentials.get('micropurchase-github', 'client_id'),
+    Credentials.get('micropurchase-github', 'secret'),
     scope: "user:email"
   )
 end

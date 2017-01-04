@@ -5,7 +5,7 @@ class AuctionMailer < ActionMailer::Base
     mail(
       to: bidder.email,
       subject: I18n.t('mailers.auction_mailer.losing_bidder_notification.subject'),
-      from: SMTPCredentials.default_from,
+      from: Credentials.smtp_default_from,
       reply_to: 'micropurchase@gsa.gov'
     )
   end
@@ -17,7 +17,7 @@ class AuctionMailer < ActionMailer::Base
     mail(
       to: customer.email,
       subject: I18n.t('mailers.auction_mailer.auction_accepted_customer_notification.subject'),
-      from: SMTPCredentials.default_from,
+      from: Credentials.smtp_default_from,
       reply_to: 'micropurchase@gsa.gov'
     )
   end
