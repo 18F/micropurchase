@@ -11,7 +11,7 @@ class AdminMailer < ActionMailer::Base
       to: ADMIN_EMAIL_ADDRESS,
       subject: I18n.t('mailers.admin_mailer.vendor_started_work.subject',
                       auction_name: @auction.title),
-      from: SMTPCredentials.default_from,
+      from: Credentials.smtp_default_from,
       reply_to: 'micropurchase@gsa.gov'
     )
   end
@@ -27,7 +27,7 @@ class AdminMailer < ActionMailer::Base
       subject: I18n.t('mailers.admin_mailer.vendor_finished_work.subject',
                       winner_name: @winner_name,
                       auction_name: @auction.title),
-      from: SMTPCredentials.default_from,
+      from: Credentials.smtp_default_from,
       reply_to: 'micropurchase@gsa.gov'
     )
   end

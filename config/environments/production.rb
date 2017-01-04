@@ -5,8 +5,8 @@ Rails.application.configure do
     address: 'smtp.mandrillapp.com',
     port: 587,
     domain: ENV['SMTP_DOMAIN'] || "18f.gsa.gov",
-    user_name: SMTPCredentials.smtp_username,
-    password: SMTPCredentials.smtp_password,
+    user_name: Credentials.get('micropurchase-smtp', 'smtp_username'),
+    password:  Credentials.get('micropurchase-smtp', 'smtp_password'),
     authentication: 'login',
     enable_starttls_auto: true
   }
