@@ -53,13 +53,10 @@ class SessionsController < ApplicationController
     user = User.from_omniauth(request.env['omniauth.auth'])
     if(user)
       session[:user_id] = user.id
-      redirect_to(
-        root_path,
-        notice: t('omniauth_callbacks.success')
-      )
+      redirect_back_or_root_path
     else
       redirect_to(
-        root_path,
+        sign_in_admin_path,
         notice: t('omniauth_callbacks.no_account')
       )
     end
@@ -142,5 +139,29 @@ class SessionsController < ApplicationController
 
   def sign_out
     # no-op
+  end
+
+  def redirect_back_or_root_path
+    if Admins.verify?(current_user.github_id)
+      redirect_to(return_to || admin_auctions_needs_attention_path)
+    else
+      redirect_to(return_to || root_path)
+    end
+    clear_return_to
+  end
+
+  def return_to
+    if return_to_url
+      uri = URI.parse(return_to_url)
+      "#{uri.path}?#{uri.query}".chomp('?')
+    end
+  end
+
+  def return_to_url
+    session[:return_to]
+  end
+
+  def clear_return_to
+    session[:return_to] = nil
   end
 end

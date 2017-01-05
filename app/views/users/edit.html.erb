@@ -9,31 +9,7 @@
   </div>
   <div class="usa-grid">
     <div class="user-body-wrapper profile-form">
-      <h3>Login.gov account</h3>
-      <% if current_user.saml_enabled? %>
-        <%= form_tag('../auth/saml/remove', method: :put) do %>
-          <button type="submit" class="usa-button-secondary">
-            Remove Login.gov account
-          </button>
-        <% end %>
-      <% else %> 
-      <div class="mb1 login_gov">
-        <% is_loa_3 = params[:loa] == '3' %>
-        <%= form_tag('../auth/saml', method: :get) do %>
-          <div class="mb1 sr-only" hidden>
-            <%= label_tag 'loa_1' do %>
-              <%= radio_button_tag 'loa', '1', !is_loa_3 %> LOA1
-            <% end %>
-            <%= label_tag 'loa_3' do %>
-              <%= radio_button_tag 'loa', '3', is_loa_3 %> LOA3
-            <% end %>
-          </div>
-          <button type="submit" class="usa-button">
-            Add Login.gov to your account
-          </button>
-        <% end %>
-      </div>
-      <% end %>
+      <%= render partial: current_user.decorate.profile_edit_admin_link %>
       <%= simple_form_for @view_model.record, method: :put do |f| %>
         <h3>Contact information</h3>
         <%= f.input :name %>

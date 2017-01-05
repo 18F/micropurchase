@@ -15,8 +15,10 @@ class User < ActiveRecord::Base
   end
 
   def add_saml(auth)
-    self.uid = auth.uid
-    self.provider = auth.provider
+    if admin?
+      self.uid = auth.uid
+      self.provider = auth.provider
+    end
   end
 
   def decorate
@@ -39,6 +41,10 @@ class User < ActiveRecord::Base
 
   def guest?
     false
+  end
+
+  def admin?
+    Admins.verify?(github_id)
   end
 
   private

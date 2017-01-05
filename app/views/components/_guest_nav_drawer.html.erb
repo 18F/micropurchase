@@ -6,19 +6,3 @@
   <%= link_to 'Sign up', '/auth/github' %>
   </li>
 <% end %>
-<div class="mb1 right-align login_gov">
-  <% is_loa_3 = params[:loa] == '3' %>
-  <%= form_tag('auth/saml', method: :get) do %>
-    <div class="mb1 sr-only" hidden>
-      <%= label_tag 'loa_1' do %>
-        <%= radio_button_tag 'loa', '1', !is_loa_3 %> LOA1
-      <% end %>
-      <%= label_tag 'loa_3' do %>
-        <%= radio_button_tag 'loa', '3', is_loa_3 %> LOA3
-      <% end %>
-    </div>
-    <button type="submit" class="btn btn-outline bg-white navy">
-      <%= image_tag 'login-gov.svg', class: "align-middle", width:"125" %>
-    </button>
-  <% end %>
-</div>

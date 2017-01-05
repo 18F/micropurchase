@@ -19,6 +19,10 @@ class UserPresenter < SimpleDelegator
     "components/null"
   end
 
+  def profile_edit_admin_link
+    "components/null"
+  end
+
   def welcome_message_partial
     'components/null'
   end
