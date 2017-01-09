@@ -14,6 +14,10 @@ Given(/^there is a closed auction$/) do
   @auction = FactoryGirl.create(:auction, :closed, :with_bids)
 end
 
+Given(/^there is a closed auction with no bids$/) do
+  @auction = FactoryGirl.create(:auction, :closed)
+end
+
 Given(/^I am going to win an auction$/) do
   @auction = FactoryGirl.build(:auction, :available, :with_bids)
   Timecop.freeze(@auction.ended_at - 15.minutes) do

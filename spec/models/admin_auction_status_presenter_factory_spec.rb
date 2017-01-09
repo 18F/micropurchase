@@ -1,6 +1,22 @@
 require 'rails_helper'
 
 describe AdminAuctionStatusPresenterFactory do
+  context 'when the auction is archived' do
+    it 'should return a Archived presenter' do
+      auction = create(:auction, :archived, :with_bids)
+      expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
+        .to be_a(AdminAuctionStatusPresenter::Archived)
+    end
+  end
+
+  context 'when the auction is unpublished' do
+    it 'should return a ReadyToPublish presenter' do
+      auction = create(:auction, :unpublished, :accepted, ended_at: Time.now + 1.year)
+      expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
+        .to be_a(AdminAuctionStatusPresenter::ReadyToPublish)
+    end
+  end
+
   context 'when the auction approval is not requested' do
     it 'should return a C2StatusPresenter::NotRequested' do
       auction = create(:auction, c2_status: :not_requested)
@@ -16,6 +32,15 @@ describe AdminAuctionStatusPresenterFactory do
 
       expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
         .to be_a(AdminAuctionStatusPresenter::Future)
+    end
+  end
+
+  context "when the vendor is working on the job" do
+    it 'should return a AdminAuctionStatusPresenter::WorkInProgress' do
+      auction = create(:auction, :closed, :published, :with_bids, delivery_status: :work_in_progress)
+
+      expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
+        .to be_a(AdminAuctionStatusPresenter::WorkInProgress)
     end
   end
 
@@ -35,17 +60,43 @@ describe AdminAuctionStatusPresenterFactory do
   end
 
   context "when the auction has been marked as a missed delivery" do
-    it 'should return a AdminAuctionStatusPresenter::Future' do
-      auction = create(
-        :auction,
-        :closed,
-        :published,
-        :with_bids,
-        delivery_due_at: 4.minutes.ago, delivery_status: :missed_delivery
-      )
+    it 'should return a AdminAuctionStatusPresenter::MissedDelivery' do
+      auction = create(:auction,
+                       :closed,
+                       :published,
+                       :with_bids,
+                       delivery_due_at: 4.minutes.ago,
+                       delivery_status: :missed_delivery)
 
       expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
         .to be_a(AdminAuctionStatusPresenter::MissedDelivery)
+    end
+  end
+
+  context "when the vendor has delivered the job, but it has not been accepted" do
+    it 'should return a AdminAuctionStatusPresenter::PendingAcceptance' do
+      auction = create(:auction, :closed, :published, :with_bids, :pending_acceptance)
+
+      expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
+        .to be_a(AdminAuctionStatusPresenter::PendingAcceptance)
+    end
+  end
+
+  context "when the vendor is paid" do
+    it 'should return a C2StatusPresenter::C2Paid' do
+      auction = create(:auction, :closed, :published, :accepted, :with_bids, :paid, c2_status: :c2_paid)
+
+      expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
+        .to be_a(C2StatusPresenter::C2Paid)
+    end
+  end
+
+  context "when the vendor is paid and payment confirmed" do
+    it 'should return a C2StatusPresenter::PaymentConfirmed' do
+      auction = create(:auction, :closed, :published, :accepted, :with_bids, :paid, c2_status: :payment_confirmed)
+
+      expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
+        .to be_a(C2StatusPresenter::PaymentConfirmed)
     end
   end
 
@@ -67,45 +118,29 @@ describe AdminAuctionStatusPresenterFactory do
 
   context 'when the auction has been accepted' do
     it 'should return a AdminAuctionStatusPresenter::DefaultPcard::Accepted' do
-      auction = create(:auction, :accepted)
+      auction = create(:auction, :accepted, :with_bids)
 
       expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
         .to be_a(AdminAuctionStatusPresenter::DefaultPcard::Accepted)
     end
   end
 
-  context 'when an auction has been accepted but is for an other pcard' do
-    it 'should return a AdminAuctionStatusPresenter::OtherPcard::Accepted' do
-      auction = create(:auction, :payment_needed, purchase_card: :other)
-
-      expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
-        .to be_a(AdminAuctionStatusPresenter::OtherPcard::Accepted)
-    end
-  end
-
   context 'when the auction has been rejected' do
     it 'should return a AdminAuctionStatusPresenter::Rejected' do
-      auction = create(:auction, :rejected)
+      auction = create(:auction, :rejected, :with_bids)
 
       expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
         .to be_a(AdminAuctionStatusPresenter::Rejected)
     end
+  end
 
-    context 'rejected auction has no winner' do
-      it 'should return a AdminAuctionStatusPresenter::Rejected' do
-        auction = create(:auction, :rejected)
+  context 'when there are no bids' do
+    it 'should return a AdminAuctionStatusPresenter::NoBids' do
+      auction = create(:auction, :closed)
 
-        expect(
-          AdminAuctionStatusPresenterFactory.new(auction: auction).create.body
-        ).to eq(
-          I18n.t(
-            'statuses.admin_auction_status_presenter.rejected.body',
-            delivery_url: auction.delivery_url,
-            rejected_at: DcTimePresenter.convert_and_format(auction.rejected_at),
-            winner_name: 'N/A'
-          )
-        )
-      end
+      expect(
+        AdminAuctionStatusPresenterFactory.new(auction: auction).create
+      ).to be_a(AdminAuctionStatusPresenter::NoBids)
     end
   end
 
@@ -148,6 +183,121 @@ describe AdminAuctionStatusPresenterFactory do
 
       expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
         .to be_a(AdminAuctionStatusPresenter::WorkNotStarted)
+    end
+  end
+
+  context 'when using the non-default pcard' do
+    context 'when an auction is archived' do
+      it 'uses the Archived presenter' do
+        auction = create(:auction, :archived, purchase_card: :other)
+          expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
+            .to be_a(AdminAuctionStatusPresenter::Archived)
+      end
+    end
+
+    context 'when an auction is published and in the future' do
+      it 'uses the Future presenter' do
+        auction = create(:auction, :future, :published, purchase_card: :other)
+          expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
+            .to be_a(AdminAuctionStatusPresenter::Future)
+      end
+    end
+
+    context 'when an auction is unpublished' do
+      it 'uses the ReadyToPublish presenter' do
+        auction = create(:auction, :unpublished, purchase_card: :other)
+          expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
+            .to be_a(AdminAuctionStatusPresenter::ReadyToPublish)
+      end
+    end
+
+    context 'when an auction is unpublished' do
+      it 'uses the ReadyToPublish presenter' do
+        auction = create(:auction, :unpublished, purchase_card: :other)
+          expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
+            .to be_a(AdminAuctionStatusPresenter::ReadyToPublish)
+      end
+    end
+
+    context 'when auction is available' do
+      it 'should return the correct presenter' do
+        auction = create(:auction, :available, purchase_card: :other)
+
+        expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
+          .to be_a(AdminAuctionStatusPresenter::Available)
+      end
+    end
+
+    context "when the vendor is late on delivery" do
+      it 'should return a AdminAuctionStatusPresenter::OverdueDelivery' do
+        auction = create(:auction, :closed, :published, :with_bids, purchase_card: :other, delivery_status: :work_in_progress, delivery_due_at: 4.minutes.ago)
+
+        expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
+          .to be_a(AdminAuctionStatusPresenter::OverdueDelivery)
+      end
+    end
+
+    context "when the vendor is working on the job" do
+      it 'should return a AdminAuctionStatusPresenter::WorkInProgress' do
+        auction = create(:auction, :closed, :published, :with_bids, purchase_card: :other, delivery_status: :work_in_progress)
+
+        expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
+          .to be_a(AdminAuctionStatusPresenter::WorkInProgress)
+      end
+    end
+
+    context "when the auction has been marked as a missed delivery" do
+      it 'should return a AdminAuctionStatusPresenter::MissedDelivery' do
+        auction = create(:auction, :closed, :published, :with_bids, purchase_card: :other, delivery_due_at: 4.minutes.ago, delivery_status: :missed_delivery)
+
+        expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
+          .to be_a(AdminAuctionStatusPresenter::MissedDelivery)
+      end
+    end
+
+    context "when the vendor has delivered the job, but it has not been accepted" do
+      it 'should return a AdminAuctionStatusPresenter::PendingAcceptance' do
+        auction = create(:auction, :closed, :published, :with_bids, :pending_acceptance, purchase_card: :other)
+
+        expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
+          .to be_a(AdminAuctionStatusPresenter::PendingAcceptance)
+      end
+    end
+
+    context "when an auction has been accepted but doesn't have a payment URL yet" do
+      it 'should return a AdminAuctionStatusPresenter::AcceptedPendingPaymentUrl' do
+        auction = create(:auction, :closed, :with_bids, :published, :delivery_url, delivery_status: :accepted_pending_payment_url, purchase_card: :other)
+
+        expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
+          .to be_a(AdminAuctionStatusPresenter::AcceptedPendingPaymentUrl)
+      end
+    end
+
+    context 'when an auction has been accepted' do
+      it 'should return a AdminAuctionStatusPresenter::OtherPcard::Accepted' do
+        auction = create(:auction, :payment_needed, purchase_card: :other)
+
+        expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
+          .to be_a(AdminAuctionStatusPresenter::OtherPcard::Accepted)
+      end
+    end
+
+    context 'when an auction has been accepted' do
+      it 'should return a AdminAuctionStatusPresenter::OtherPcard::Paid' do
+        auction = create(:auction, :payment_needed, purchase_card: :other, paid_at: Time.now - 3.days)
+
+        expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
+          .to be_a(AdminAuctionStatusPresenter::OtherPcard::Paid)
+      end
+    end
+
+    context 'when an auction has been accepted' do
+      it 'should return a AdminAuctionStatusPresenter::OtherPcard::Paid' do
+        auction = create(:auction, :with_bids, :rejected, purchase_card: :other)
+
+        expect(AdminAuctionStatusPresenterFactory.new(auction: auction).create)
+          .to be_a(AdminAuctionStatusPresenter::Rejected)
+      end
     end
   end
 end

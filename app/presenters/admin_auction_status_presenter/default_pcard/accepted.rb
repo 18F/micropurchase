@@ -16,6 +16,10 @@ class AdminAuctionStatusPresenter::DefaultPcard::Accepted < AdminAuctionStatusPr
     'admin/auctions/mark_paid'
   end
 
+  def self.relevant?(status)
+    status.accepted? && !(status.c2_paid? || status.payment_confirmed?)
+  end
+
   private
 
   def c2_url

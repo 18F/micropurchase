@@ -8,4 +8,8 @@ class AdminAuctionStatusPresenter::Archived < AdminAuctionStatusPresenter::Base
       'statuses.admin_auction_status_presenter.archived.body'
     )
   end
+
+  def self.relevant?(status)
+    status.archived?
+  end
 end

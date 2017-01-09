@@ -19,10 +19,6 @@ class Guest
     "components/guest_user_nav_drawer"
   end
 
-  def saml_enabled?
-    false
-  end
-
   def guest?
     true
   end

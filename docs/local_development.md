@@ -43,6 +43,13 @@ MICROPURCHASE_GITHUB_SECRET="your-client-secret"
 
 Make sure to restart the server to register those environment variables.
 
+### Setting up and testing SAML OAuth
+
+SAML OAuth is currently available for admin users only.
+
+To test SAML OAuth locally, run the [Login.gov
+IDP](https://github.com/18F/identity-idp) at port 3004.
+
 ### Understanding / viewing transactional emails
 
 We are using [Mandrill](https://mandrillapp.com/) to send transactional emails.

@@ -16,6 +16,10 @@ class AdminAuctionStatusPresenter::WorkInProgress < AdminAuctionStatusPresenter:
     'admin/auctions/work_in_progress'
   end
 
+  def self.relevant?(status)
+    status.work_in_progress?
+  end
+
   private
 
   def delivery_deadline

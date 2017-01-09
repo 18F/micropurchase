@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
 
   enum sam_status: { duns_blank: 0, sam_accepted: 1, sam_rejected: 2, sam_pending: 3 }
 
-  def self.from_omniauth(auth)
+  def self.from_saml_omniauth(auth)
     existing_login_user = find_by(uid: auth.uid)
     if !existing_login_user
       new_login_user = find_by(email: auth.email)
@@ -41,10 +41,6 @@ class User < ActiveRecord::Base
     assign_attrs(auth.info)
   end
 
-  def saml_enabled?
-    self.uid != "" && self.provider != nil
-  end
-
   def guest?
     false
   end
@@ -52,7 +48,7 @@ class User < ActiveRecord::Base
   def admin?
     Admins.verify?(github_id)
   end
-
+  
   private
 
   def not_login_user?

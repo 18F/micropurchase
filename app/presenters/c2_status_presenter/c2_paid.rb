@@ -10,4 +10,8 @@ class C2StatusPresenter::C2Paid < C2StatusPresenter::Base
   def header
     I18n.t('statuses.c2_presenter.c2_paid.header')
   end
+
+  def self.relevant?(status)
+    status.c2_paid?
+  end
 end

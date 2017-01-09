@@ -26,7 +26,7 @@ class BiddingStatusPresenter::Over < BiddingStatusPresenter::Base
              winner_name: winner_name,
              amount: winning_bid_amount_as_currency)
     else
-      ''
+      I18n.t('bidding_status.over.no_bids')
     end
   end
 

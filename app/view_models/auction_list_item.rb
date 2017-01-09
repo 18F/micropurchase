@@ -80,7 +80,7 @@ class AuctionListItem
     if auction.lowest_bid
       Currency.new(auction.lowest_bid.amount).to_s
     else
-      'No bids'
+      I18n.t('bidding_status.over.no_bids')
     end
   end
 

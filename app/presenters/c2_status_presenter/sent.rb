@@ -10,4 +10,8 @@ class C2StatusPresenter::Sent < C2StatusPresenter::Base
   def action_partial
     'admin/auctions/sent'
   end
+
+  def self.relevant?(status)
+    status.c2_sent?
+  end
 end

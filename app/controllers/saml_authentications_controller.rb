@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
   private
 
   def login_saml_user
-    user = User.from_omniauth(request.env['omniauth.auth'])
+    user = User.from_saml_omniauth(request.env['omniauth.auth'])
     if(user)
       session[:user_id] = user.id
       session[:auth] = "saml"
