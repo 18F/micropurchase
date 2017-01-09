@@ -6,7 +6,7 @@
 <li class="nav-link">
   <% if session[:auth] == "saml" %>
     <form action="/auth/saml/logout" method="POST" class="right sm-show">
-        <button type="submit" class="btn p0 h6 white">Log out</button>
+        <button type="submit" class="login_logout_btn">Log out</button>
     </form>
   <% else %>
     <%= link_to 'Logout', logout_path %>

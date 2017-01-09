@@ -11,13 +11,19 @@ class User < ActiveRecord::Base
   enum sam_status: { duns_blank: 0, sam_accepted: 1, sam_rejected: 2, sam_pending: 3 }
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first
+    existing_login_user = find_by(uid: auth.uid)
+    if !existing_login_user
+      new_login_user = find_by(email: auth.email)
+      if new_login_user
+        new_login_user.add_saml(auth)
+      end
+    end
+    existing_login_user || new_login_user
   end
 
   def add_saml(auth)
     if admin?
       self.uid = auth.uid
-      self.provider = auth.provider
     end
   end
 

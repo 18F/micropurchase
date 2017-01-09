@@ -9,7 +9,6 @@
   </div>
   <div class="usa-grid">
     <div class="user-body-wrapper profile-form">
-      <%= render partial: current_user.decorate.profile_edit_admin_link %>
       <%= simple_form_for @view_model.record, method: :put do |f| %>
         <h3>Contact information</h3>
         <%= f.input :name %>

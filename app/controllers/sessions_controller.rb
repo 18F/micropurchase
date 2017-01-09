@@ -1,18 +1,7 @@
 class SessionsController < ApplicationController
   skip_before_action :verify_authenticity_token
   def create
-    if add_saml_to_user?
-      if User.from_omniauth(request.env['omniauth.auth'])
-        redirect_to(
-          profile_path, 
-          notice: t('omniauth_callbacks.duplicate')
-        )
-      else
-        add_saml_to_user
-      end
-    else
-      login_saml_user
-    end
+    login_saml_user
   end
 
   def destroy
@@ -23,6 +12,7 @@ class SessionsController < ApplicationController
     else
       sp_logout_request
     end
+    reset_session
   end
 
   def setup
@@ -33,18 +23,6 @@ class SessionsController < ApplicationController
       ]
     end
     render text: 'Omniauth setup phase.', status: 404
-  end
-
-  def remove
-    if !current_user.guest?
-      current_user.uid = ""
-      current_user.provider = nil
-      current_user.save
-    end
-    redirect_to(
-      profile_path,
-      notice: t('omniauth_callbacks.remove_account')
-    )
   end
 
   private
@@ -59,25 +37,6 @@ class SessionsController < ApplicationController
       redirect_to(
         sign_in_admin_path,
         notice: t('omniauth_callbacks.no_account')
-      )
-    end
-  end
-
-  def add_saml_to_user?
-    !current_user.guest? && !current_user.saml_enabled?
-  end
-
-  def add_saml_to_user
-    current_user.add_saml(request.env['omniauth.auth'])
-    if current_user.save
-      redirect_to(
-        profile_path,
-        notice: t('omniauth_callbacks.add_account')
-      )
-    else
-      redirect_to(
-        profile_path,
-        notice: t('omniauth_callbacks.error')
       )
     end
   end

@@ -77,4 +77,18 @@
 
 }
 
+.nav-link .login_logout_btn{
+  color: #ffffff;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  font-size: 16px;
+  line-height: 24px;
+  font-family: "Source Sans Pro", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
+  &:hover{
+    text-decoration: underline;
+  }
+}
+
 
