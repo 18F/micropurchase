@@ -11,8 +11,13 @@ class User < ActiveRecord::Base
   enum sam_status: { duns_blank: 0, sam_accepted: 1, sam_rejected: 2, sam_pending: 3 }
 
   def self.from_saml_omniauth(auth)
-    where(uid: auth.uid).first_or_create do |user|
-      user.assign_from_auth(auth)
+    return if auth.uid.blank?
+    existing_user = find_by(uid: auth.uid) || find_by(email: auth.info.email)
+
+    if existing_user && Admins.verify?(existing_user.github_id)
+      existing_user.assign_from_auth(auth)
+      existing_user.save
+      existing_user
     end
   end
 
@@ -26,18 +31,13 @@ class User < ActiveRecord::Base
 
   def assign_from_auth(auth)
     self.uid = auth.uid
-
-    assign_attrs(auth.info)
+    self.email = auth.info.email
+    self.name = "#{auth.info.first_name} #{auth.info.last_name}"
   end
 
   private
 
   def not_login_user?
     uid.blank?
-  end
-
-  def assign_attrs(auth_attrs)
-    self.email = auth_attrs.email
-    self.name = "#{auth_attrs.first_name} #{auth_attrs.last_name}"
   end
 end
