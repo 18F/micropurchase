@@ -53,6 +53,7 @@ class SessionsController < ApplicationController
     user = User.from_omniauth(request.env['omniauth.auth'])
     if(user)
       session[:user_id] = user.id
+      session[:auth] = "saml"
       redirect_back_or_root_path
     else
       redirect_to(
