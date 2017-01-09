@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20161221235638) do
-=======
 ActiveRecord::Schema.define(version: 20161221232955) do
->>>>>>> develop
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,10 +136,6 @@ ActiveRecord::Schema.define(version: 20161221232955) do
     t.boolean  "contracting_officer", default: false, null: false
     t.boolean  "small_business",      default: false, null: false
     t.string   "uid",                 default: "",    null: false
-<<<<<<< HEAD
-    t.string   "provider"
-=======
->>>>>>> develop
   end
 
   add_index "users", ["contracting_officer"], name: "index_users_on_contracting_officer", where: "(contracting_officer = true)", using: :btree

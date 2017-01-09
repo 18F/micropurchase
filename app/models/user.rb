@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   def self.from_saml_omniauth(auth)
     existing_login_user = find_by(uid: auth.uid)
     if !existing_login_user
-      new_login_user = find_by(email: auth.email)
+      new_login_user = find_by(email: auth.info.email)
       if new_login_user
         new_login_user.add_saml(auth)
       end
@@ -24,6 +24,7 @@ class User < ActiveRecord::Base
   def add_saml(auth)
     if admin?
       self.uid = auth.uid
+      self.save
     end
   end
 

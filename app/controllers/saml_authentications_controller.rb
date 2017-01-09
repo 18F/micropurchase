@@ -1,4 +1,4 @@
-class SessionsController < ApplicationController
+class SamlAuthenticationsController < ApplicationController
   skip_before_action :verify_authenticity_token
   def create
     login_saml_user
