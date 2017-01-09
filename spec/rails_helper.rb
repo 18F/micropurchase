@@ -25,6 +25,7 @@ RSpec.configure do |config|
     WebMock.stub_request(:any, /cap.18f.gov/).to_rack(FakeC2Api)
     WebMock.stub_request(:any, /c2-dev.18f.gov/).to_rack(FakeC2Api)
     WebMock.stub_request(:any, /api.github.com/).to_rack(FakeGitHubApi)
+    WebMock.stub_request(:any, /idp.example.com/).to_rack(FakeSamlIdp)
   end
 end
 
