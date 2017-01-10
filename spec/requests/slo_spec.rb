@@ -9,6 +9,9 @@ describe 'SLO' do
     get '/auth/saml'
     idp_uri = URI(response.headers['Location'])
     saml_idp_resp = Net::HTTP.get(idp_uri)
+    saml_response = OneLogin::RubySaml::Response.new(saml_idp_resp)
+    uid = saml_response.attributes['uid']
+    _admin_user = create(:admin_user, uid: uid)
     post '/auth/saml/callback', SAMLResponse: saml_idp_resp
   end
 
