@@ -20,6 +20,7 @@ applications:
     RAILS_ENV: production
     RACK_ENV: production
     SAML_ENV: staging
+    IDP_ENV: dev
     C2_HOST: 'https://c2-staging.18f.gov'
     ROOT_URL: 'https://micropurchase-staging.18f.gov'
     ANALYTICS: false
