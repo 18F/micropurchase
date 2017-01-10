@@ -5,7 +5,7 @@ describe 'SSO' do
     OmniAuth.config.test_mode = false
   end
 
-  context 'user is an admin' do
+  context 'user is not an admin' do
     it 'does not sign in the user' do
       get '/auth/saml'
       expect(response).to redirect_to(%r{idp\.example\.com\/saml\/auth})
@@ -25,7 +25,7 @@ describe 'SSO' do
     end
   end
 
-  context 'user is not an admin' do
+  context 'user is an admin' do
     it 'uses external SAML IdP to sign in the user' do
       get '/auth/saml'
       expect(response).to redirect_to(%r{idp\.example\.com\/saml\/auth})
