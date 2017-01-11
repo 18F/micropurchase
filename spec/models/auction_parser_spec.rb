@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe AuctionParser do
-  describe '#perform' do
+  describe '#attributes' do
     context 'attributes in params' do
       it 'assigns attributes correctly' do
         user = create(:user)
