@@ -31,7 +31,7 @@ class SamlAuthenticationsController < ApplicationController
     if params.key?(:loa)
       request.env['omniauth.strategy'].options[:authn_context] = [
         "http://idmanagement.gov/ns/assurance/loa/#{params[:loa]}",
-        'http://idmanagement.gov/ns/requested_attributes?ReqAttr=email,first_name,last_name'
+        'http://idmanagement.gov/ns/requested_attributes?ReqAttr=email'
       ]
     end
     render text: 'Omniauth setup phase.', status: 404
