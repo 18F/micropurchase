@@ -1,6 +1,8 @@
 db:
    image: postgres:9
 web:
+    tty: true
+    stdin_open: true
     build: .
     env_file: .env
     environment:

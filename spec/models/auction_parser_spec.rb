@@ -1,6 +1,25 @@
 require 'rails_helper'
 
 describe AuctionParser do
+  describe '#publishing?' do
+    it 'returns true' do
+      user = create(:user)
+      params = {
+        auction: {
+          title: 'title',
+          description: 'description',
+          github_repo: 'github url',
+          issue_url: 'issue url',
+          published: 'published'
+        }
+      }
+      parser = AuctionParser.new(params, user)
+      publishing = parser.publishing?
+
+      expect(publishing).to be true
+    end
+  end
+
   describe '#attributes' do
     context 'attributes in params' do
       it 'assigns attributes correctly' do

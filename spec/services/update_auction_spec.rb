@@ -2,6 +2,43 @@ require 'rails_helper'
 
 describe UpdateAuction do
   describe '#perform' do
+    context 'when publishing an auction' do
+      it 'creates an AuctionState record' do
+        auction = create(:auction, :unpublished)
+
+        params = {
+          auction: {"published" => "published"}
+        }
+
+        expect do
+          UpdateAuction.new(
+            auction: auction,
+            params: params,
+            current_user: auction.user
+          ).perform
+        end.to change { AuctionState.count }.by(1)
+
+        auction.reload
+
+        # do we want to low-level test for the published state object, like this?
+        published_state = auction.states.find {|state| state.name == 'published'}
+        expect(published_state.state_value).to eq('published')
+
+        # and/or this?:
+        # expect(auction.published?).to be true
+
+        # and/or this?:
+        # published = AuctionPublishedState.new(auction).perform
+        # expect(published).to be true
+
+        # and/or this?:
+        # published = FindAuctionState.new(auction, name: 'published').perform
+        # expect(published).to be true
+
+        # maybe all or some of the above assertions are needed, but in a different test venue?
+      end
+    end
+
     context 'when changing ended_at' do
       context 'job not enqueued' do
         it 'creates the Auction Ended Job' do

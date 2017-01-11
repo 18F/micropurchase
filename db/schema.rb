@@ -11,10 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161221232955) do
-
+ActiveRecord::Schema.define(version: 20170111193433) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "auction_states", force: :cascade do |t|
+    t.integer "auction_id"
+    t.string  "state_value"
+    t.string  "name"
+  end
 
   create_table "auctions", force: :cascade do |t|
     t.string   "issue_url",       default: ""

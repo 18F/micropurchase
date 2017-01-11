@@ -7,6 +7,7 @@ class UpdateAuction
 
   def perform
     assign_attributes
+    create_auction_states
     update_auction_ended_job
     perform_accepted_auction_tasks
     perform_rejected_auction_tasks
@@ -16,6 +17,20 @@ class UpdateAuction
   private
 
   attr_reader :auction, :params, :current_user
+
+  def create_auction_states
+    create_published_state
+    # add more state creation here, as needed
+  end
+
+  def create_published_state
+    if parser.publishing?
+      auction_state = AuctionState.new(auction_id: auction.id,
+                                       name: 'published',
+                                       state_value: 'published')
+      auction_state.save
+    end
+  end
 
   def assign_attributes
     auction.assign_attributes(parsed_attributes)
@@ -71,8 +86,12 @@ class UpdateAuction
     parsed_attributes[:status] == 'rejected'
   end
 
+  def parser
+    @_parser ||= AuctionParser.new(params, user)
+  end
+
   def parsed_attributes
-    @_parsed_attributes ||= AuctionParser.new(params, user).attributes
+    parser.attributes
   end
 
   def user
