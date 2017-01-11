@@ -32,6 +32,5 @@ class User < ActiveRecord::Base
   def assign_from_auth(auth)
     self.uid = auth.uid
     self.email = auth.info.email
-    self.name = "#{auth.info.first_name} #{auth.info.last_name}"
   end
 end

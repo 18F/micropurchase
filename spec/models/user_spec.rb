@@ -32,7 +32,7 @@ describe User do
         context 'provided auth uid is not empty' do
           it 'returns the user' do
             uid = '1234'
-            info = double(email: '', first_name: '', last_name: '')
+            info = double(email: '')
             auth_data = double(uid: uid, info: info)
             admin = create(:admin_user, uid: uid)
 
@@ -43,7 +43,7 @@ describe User do
         context 'provied auth uid is empty string' do
           it 'returns nil' do
             uid = ''
-            info = double(email: '', first_name: '', last_name: '')
+            info = double(email: '')
             auth_data = double(uid: uid, info: info)
             _admin = create(:admin_user, uid: uid)
 
@@ -55,7 +55,7 @@ describe User do
       context 'user is not an admin' do
         it 'returns nil' do
           uid = '1234'
-          info = double(email: '', first_name: '', last_name: '')
+          info = double(email: '')
           auth_data = double(uid: uid, info: info)
           _user = create(:user, uid: uid)
 
@@ -70,7 +70,7 @@ describe User do
           it 'updates the existing user with the uid and returns the user' do
             uid = '1234'
             email = 'test@example.com'
-            info = double(email: email, first_name: '', last_name: '')
+            info = double(email: email)
             auth_data = double(uid: uid, info: info)
             admin = create(:admin_user, uid: '', email: email)
 
@@ -82,7 +82,7 @@ describe User do
         context 'user with auth email is not an admin' do
           it 'returns nil' do
             email = 'test@example.com'
-            info = double(email: email, first_name: '', last_name: '')
+            info = double(email: email)
             auth_data = double(uid: '', info: info)
             _user = create(:user, email: email)
 
@@ -94,7 +94,7 @@ describe User do
       context 'user with auth email does not exist' do
         it 'returns nil' do
           email = 'test@example.com'
-          info = double(email: email, first_name: '', last_name: '')
+          info = double(email: email)
           auth_data = double(uid: '', info: info)
 
           expect(User.from_saml_omniauth(auth_data)).to eq nil
