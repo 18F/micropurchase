@@ -1,0 +1,17 @@
+<% content_for :title do %>18F Micro-purchase - Admin Login<% end %>
+
+<div class="usa-grid">
+  <div class="usa-width-one-half">
+    <h1>Admin sign in</h1>
+    <p>
+      <%= link_to 'Authorize with GitHub',
+        '/auth/github',
+        class: 'usa-button usa-button usa-button-outline' %>
+    </p>
+    <div class="mb1 right-align login_gov">
+      <button type="submit" class="btn btn-outline bg-white navy">
+        Authorize with Login.gov
+      </button>
+    </div>
+  </div>
+</div>

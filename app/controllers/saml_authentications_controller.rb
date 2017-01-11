@@ -4,11 +4,7 @@ class SamlAuthenticationsController < ApplicationController
 
     if user
       session[:user_id] = user.id
-
-      redirect_to(
-        admin_path,
-        notice: t('omniauth_callbacks.success')
-      )
+      redirect_to admin_path, notice: t('omniauth_callbacks.success')
     else
       redirect_to(
         root_path,

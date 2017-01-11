@@ -6,3 +6,7 @@ Feature: Admin signs in
     Given I am an administrator
     And I sign in
     Then I should be on the admin needs attention auctions page
+
+  Scenario: Logged out admin tries to visit admin path
+    When I visit the admin page
+    Then I should on the admin login page
