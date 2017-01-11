@@ -20,6 +20,7 @@ applications:
     RAILS_ENV: production
     RACK_ENV: production
     SAML_ENV: production
+    IDP_ENV: demo
     C2_HOST: 'https://cap.18f.gov'
     ROOT_URL: 'https://micropurchase.18f.gov'
     ANALYTICS: true
