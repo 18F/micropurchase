@@ -44,6 +44,12 @@ Given(/^I am an administrator$/) do
   mock_sign_in(@user.github_id, @user.name)
 end
 
+Given(/^I am an administrator with a login.gov account$/) do
+  @user = FactoryGirl.create(:admin_user, uid: "12345")
+  @uid = @user.uid
+  mock_saml_sign_in(@uid)
+end
+
 Given(/^I am a contracting officer$/) do
   @user = FactoryGirl.create(:contracting_officer)
   @github_id = @user.github_id

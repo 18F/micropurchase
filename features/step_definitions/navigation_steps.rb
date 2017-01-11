@@ -30,6 +30,10 @@ When(/^I visit the admin page$/) do
   visit admin_path
 end
 
+When(/^I visit the admin sign in page$/) do
+  visit admin_sign_in_path
+end
+
 When(/^I visit the admin auction page for that auction$/) do
   visit admin_auction_path(@auction)
 end

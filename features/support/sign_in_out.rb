@@ -11,3 +11,13 @@ def mock_sign_in(github_id, name)
     }
   )
 end
+
+def mock_saml_sign_in(uid)
+  OmniAuth.config.mock_auth[:saml] = OmniAuth::AuthHash.new(
+    provider: 'saml',
+    uid: uid,
+    info: {
+      email: 'email@example.com'
+    }
+  )
+end

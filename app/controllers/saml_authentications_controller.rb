@@ -1,14 +1,16 @@
 class SamlAuthenticationsController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def create
     user = User.from_saml_omniauth(request.env['omniauth.auth'])
 
     if user
       session[:user_id] = user.id
-      redirect_to admin_path, notice: t('omniauth_callbacks.success')
+      redirect_to admin_auctions_needs_attention_path, notice: t('omniauth_callbacks.success')
     else
       redirect_to(
         root_path,
-        error: t('omniauth_callbacks.failure', reason: 'no admin account found.')
+        notice: t('omniauth_callbacks.failure', reason: 'no admin account found')
       )
     end
   end
