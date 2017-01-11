@@ -9,4 +9,4 @@ Feature: Admin signs in
 
   Scenario: Logged out admin tries to visit admin path
     When I visit the admin page
-    Then I should on the admin login page
+    Then I should be on the admin login page
