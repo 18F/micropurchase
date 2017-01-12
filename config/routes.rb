@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get '/auth/github/callback', to: 'authentications#create'
   get '/logout', to: 'authentications#destroy'
 
-  post 'auth/saml/callback', to: 'saml_authentications#create'
+  match 'auth/saml/callback', to: 'saml_authentications#create', via: [:get, :post]
   post 'auth/saml/logout', to: 'saml_authentications#destroy'
   delete 'auth/saml/logout', to: 'saml_authentications#destroy'
   match 'auth/saml/setup', to: 'saml_authentications#setup', via: [:get, :post]
