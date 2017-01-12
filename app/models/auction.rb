@@ -8,7 +8,7 @@ class Auction < ActiveRecord::Base
   belongs_to :customer
   has_many :bids
   has_many :bidders, through: :bids
-  has_many :states, foreign_key: 'auction_id', class_name: 'AuctionState'
+  has_many :states, class_name: 'AuctionState'
   has_and_belongs_to_many :skills
 
   has_secure_token
