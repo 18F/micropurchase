@@ -7,6 +7,10 @@ Given(/^I am signed in$/) do
   step("I sign in")
 end
 
+Then(/^I should be logged out$/) do
+  expect(page).not_to have_content("Logout")
+end
+
 Given(/^I am an authenticated vendor$/) do
   step("I am a user with a verified SAM account")
   step("I sign in")
