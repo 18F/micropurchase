@@ -6,6 +6,7 @@ class SamlAuthenticationsController < ApplicationController
 
     if user
       session[:user_id] = user.id
+      session[:auth_type] = "saml"
       redirect_to admin_auctions_needs_attention_path, notice: t('omniauth_callbacks.success')
     else
       flash[:error] = t('omniauth_callbacks.failure', reason: 'no admin account found')
@@ -61,6 +62,7 @@ class SamlAuthenticationsController < ApplicationController
       RelayState: params[:RelayState]
     )
     redirect_to logout_response
+    reset_session
   end
 
   def render_logout_error(logout_request)

@@ -9,8 +9,7 @@ Rails.application.routes.draw do
   get '/logout', to: 'authentications#destroy'
 
   match 'auth/saml/callback', to: 'saml_authentications#create', via: [:get, :post]
-  post 'auth/saml/logout', to: 'saml_authentications#destroy'
-  delete 'auth/saml/logout', to: 'saml_authentications#destroy'
+  match 'auth/saml/logout', to: 'saml_authentications#destroy', via: [:get, :post, :delete]
   match 'auth/saml/setup', to: 'saml_authentications#setup', via: [:get, :post]
 
   get '/auctions/rules/sealed-bid', to: 'auctions#sealed_bid_auction_rules'
