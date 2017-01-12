@@ -6,4 +6,12 @@ module ApplicationHelper
       'components/null'
     end
   end
+
+  def logout_path_for_auth_type
+    if session[:auth_type] == 'saml'
+      auth_saml_logout_path
+    else
+      logout_path
+    end
+  end
 end
