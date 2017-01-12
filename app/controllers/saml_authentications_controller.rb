@@ -8,10 +8,8 @@ class SamlAuthenticationsController < ApplicationController
       session[:user_id] = user.id
       redirect_to admin_auctions_needs_attention_path, notice: t('omniauth_callbacks.success')
     else
-      redirect_to(
-        root_path,
-        notice: t('omniauth_callbacks.failure', reason: 'no admin account found')
-      )
+      flash[:error] = t('omniauth_callbacks.failure', reason: 'no admin account found')
+      redirect_to root_path
     end
   end
 
