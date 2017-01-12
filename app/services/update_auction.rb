@@ -6,12 +6,17 @@ class UpdateAuction
   end
 
   def perform
-    assign_attributes
     create_auction_states
-    update_auction_ended_job
-    perform_accepted_auction_tasks
-    perform_rejected_auction_tasks
-    auction.save
+
+    if ArchiveAuction.archive_submit?(params)
+      ArchiveAuction.new(auction: auction).perform
+    else
+      assign_attributes
+      update_auction_ended_job
+      perform_accepted_auction_tasks
+      perform_rejected_auction_tasks
+      auction.save
+    end
   end
 
   private
@@ -20,6 +25,7 @@ class UpdateAuction
 
   def create_auction_states
     create_published_state
+    create_archived_state
     # add more state creation here, as needed
   end
 
@@ -28,6 +34,21 @@ class UpdateAuction
       auction_state = AuctionState.new(auction_id: auction.id,
                                        name: 'published',
                                        state_value: 'published')
+      auction_state.save
+    end
+  end
+
+  def create_archived_state
+    if parser.archiving?
+      auction_state = auction.states.find {|state| state.name == 'published'}
+
+      if auction_state.nil?
+        auction_state = AuctionState.new(auction_id: auction.id,
+                                         name: 'published',
+                                         state_value: 'archived')
+      end
+
+      auction_state.state_value = 'archived'
       auction_state.save
     end
   end

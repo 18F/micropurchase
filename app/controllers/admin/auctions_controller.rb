@@ -33,11 +33,9 @@ class Admin::AuctionsController < Admin::BaseController
   def update
     auction = Auction.find(params[:id])
 
-    update_auction = if ArchiveAuction.archive_submit?(params)
-                       ArchiveAuction.new(auction: auction)
-                     else
-                       UpdateAuction.new(auction: auction, params: params, current_user: current_user)
-                     end
+    update_auction = UpdateAuction.new(auction: auction,
+                                       params: params,
+                                       current_user: current_user)
 
     if update_auction.perform
       flash[:success] = I18n.t('controllers.admin.auctions.update.success')

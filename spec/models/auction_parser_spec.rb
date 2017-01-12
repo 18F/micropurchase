@@ -1,22 +1,72 @@
 require 'rails_helper'
 
 describe AuctionParser do
-  describe '#publishing?' do
-    it 'returns true' do
-      user = create(:user)
-      params = {
-        auction: {
-          title: 'title',
-          description: 'description',
-          github_repo: 'github url',
-          issue_url: 'issue url',
-          published: 'published'
+  describe '#archiving?' do
+    context 'when the params contains archive_auction' do
+      it 'returns true' do
+        user = create(:user)
+        params = {
+          auction: {},
+          archive_auction: :Auction
         }
-      }
-      parser = AuctionParser.new(params, user)
-      publishing = parser.publishing?
+        parser = AuctionParser.new(params, user)
+        archiving = parser.archiving?
 
-      expect(publishing).to be true
+        expect(archiving).to be true
+      end
+    end
+
+    context 'when the params does not contain archive_auction' do
+      it 'returns false' do
+        user = create(:user)
+        params = {
+          auction: {}
+        }
+        parser = AuctionParser.new(params, user)
+        archiving = parser.archiving?
+
+        expect(archiving).to be false
+      end
+    end
+  end
+
+  describe '#publishing?' do
+    context 'when the params contains {published => published}' do
+      it 'returns true' do
+        user = create(:user)
+        params = {
+          auction: {
+            title: 'title',
+            description: 'description',
+            github_repo: 'github url',
+            issue_url: 'issue url',
+            published: 'published'
+          }
+        }
+        parser = AuctionParser.new(params, user)
+        publishing = parser.publishing?
+
+        expect(publishing).to be true
+      end
+    end
+
+    context 'when the params contains {published => unpublished}' do
+      it 'returns false' do
+        user = create(:user)
+        params = {
+          auction: {
+            title: 'title',
+            description: 'description',
+            github_repo: 'github url',
+            issue_url: 'issue url',
+            published: 'unpublished'
+          }
+        }
+        parser = AuctionParser.new(params, user)
+        publishing = parser.publishing?
+
+        expect(publishing).to be false
+      end
     end
   end
 

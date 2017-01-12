@@ -17,13 +17,17 @@ class AuctionParser
   end
 
   def publishing?
-    changing?('published', 'published')
+    attributes['published'] == 'published'
+  end
+
+  def archiving?
+    archive_params.key? :archive_auction
   end
 
   private
 
-  def changing?(key, value)
-    attributes[key] == value
+  def archive_params
+    strong_params.permit(:archive_auction)
   end
 
   def auction_params
