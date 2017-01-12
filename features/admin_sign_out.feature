@@ -14,4 +14,3 @@ Feature: Admin signs out
     And I click on the "Authorize with Login.gov" button
     When I click on the "Logout" link
     Then I should be logged out
-    
