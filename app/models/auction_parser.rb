@@ -21,14 +21,10 @@ class AuctionParser
   end
 
   def archiving?
-    archive_params.key? :archive_auction
+    params.key? :archive_auction
   end
 
   private
-
-  def archive_params
-    strong_params.permit(:archive_auction)
-  end
 
   def auction_params
     strong_params.require(:auction).permit(
