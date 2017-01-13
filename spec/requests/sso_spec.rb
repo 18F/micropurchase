@@ -8,7 +8,7 @@ describe 'SSO' do
   context 'user is not an admin' do
     it 'does not sign in the user' do
       get '/auth/saml'
-      expect(response).to redirect_to(%r{idp\.example\.com\/saml\/auth})
+      expect(response).to redirect_to(%r{idp\.example\.com\/api\/saml\/auth})
 
       idp_uri = URI(response.headers['Location'])
       saml_idp_resp = Net::HTTP.get(idp_uri)
@@ -28,7 +28,7 @@ describe 'SSO' do
   context 'user is an admin' do
     it 'uses external SAML IdP to sign in the user' do
       get '/auth/saml'
-      expect(response).to redirect_to(%r{idp\.example\.com\/saml\/auth})
+      expect(response).to redirect_to(%r{idp\.example\.com\/api\/saml\/auth})
 
       idp_uri = URI(response.headers['Location'])
       saml_idp_resp = Net::HTTP.get(idp_uri)

@@ -18,14 +18,14 @@ describe 'SLO' do
   describe 'IdP-initiated' do
     it 'uses external SAML IdP' do
       # ask the IdP to initiate a SLO
-      idp_uri = URI('http://idp.example.com/saml/logout')
+      idp_uri = URI('http://idp.example.com/api/saml/logout')
       saml_idp_resp = Net::HTTP.get(idp_uri)
 
       # send the SAMLRequest to our logout endpoint
       post '/auth/saml/logout', SAMLRequest: saml_idp_resp, RelayState: 'the_idp_session_id'
 
       # redirect to complete the sign-out at the IdP
-      expect(response).to redirect_to(%r{idp.example.com/saml/logout})
+      expect(response).to redirect_to(%r{idp.example.com/api/saml/logout})
     end
   end
 
@@ -37,9 +37,11 @@ describe 'SLO' do
       # ask the SP to initiate a SLO
       delete '/auth/saml/logout'
 
-      expect(response).to redirect_to(%r{idp.example.com/saml/logout})
+      # redirects to the fake idp
+      expect(response).to redirect_to(%r{idp.example.com/api/saml/logout})
 
-      # send the SAMLRequest to IdP
+      # send the SAMLRequest to fake IdP
+      # gets url from response
       idp_uri = URI(response.headers['Location'])
       saml_idp_resp = Net::HTTP.get(idp_uri)
 

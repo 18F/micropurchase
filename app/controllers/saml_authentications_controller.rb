@@ -3,7 +3,6 @@ class SamlAuthenticationsController < ApplicationController
 
   def create
     user = User.from_saml_omniauth(request.env['omniauth.auth'])
-
     if user
       session[:user_id] = user.id
       session[:auth_type] = "saml"
