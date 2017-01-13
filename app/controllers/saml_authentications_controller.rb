@@ -78,7 +78,7 @@ class SamlAuthenticationsController < ApplicationController
       flash[:alert] = t('omniauth_callbacks.logout_fail')
     end
 
-     redirect_to root_url
+    redirect_to root_url
   end
 
   def idp_logout_response
