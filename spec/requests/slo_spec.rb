@@ -51,4 +51,12 @@ describe 'SLO' do
       expect(flash[:notice]).to eq I18n.t('omniauth_callbacks.logout_ok')
     end
   end
+
+  describe 'failure' do
+    it 'returns error' do
+      post '/auth/saml/logout', SAMLResponse: 'test'
+
+      expect(flash[:alert]).to eq I18n.t('omniauth_callbacks.logout_fail')
+    end
+  end
 end

@@ -71,13 +71,14 @@ class SamlAuthenticationsController < ApplicationController
 
   def validate_slo_response
     slo_response = idp_logout_response
+
     if slo_response.validate
       flash[:notice] = t('omniauth_callbacks.logout_ok')
-      redirect_to root_url
     else
       flash[:alert] = t('omniauth_callbacks.logout_fail')
-      redirect_to failure_url
     end
+
+     redirect_to root_url
   end
 
   def idp_logout_response
