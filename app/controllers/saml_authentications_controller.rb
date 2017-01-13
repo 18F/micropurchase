@@ -62,7 +62,6 @@ class SamlAuthenticationsController < ApplicationController
       RelayState: params[:RelayState]
     )
     redirect_to logout_response
-    reset_session
   end
 
   def render_logout_error(logout_request)
@@ -73,7 +72,9 @@ class SamlAuthenticationsController < ApplicationController
 
   def validate_slo_response
     slo_response = idp_logout_response
+
     if slo_response.validate
+      reset_session
       flash[:notice] = t('omniauth_callbacks.logout_ok')
       redirect_to root_url
     else
