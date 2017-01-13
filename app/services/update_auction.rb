@@ -25,18 +25,13 @@ class UpdateAuction
 
   def create_auction_states
     create_published_state
-    create_archived_state
     # add more state creation here, as needed
   end
 
   def create_published_state
     if parser.publishing?
       ChangeState.new(auction, 'published', 'published').perform
-    end
-  end
-
-  def create_archived_state
-    if parser.archiving?
+    elsif parser.archiving?
       ChangeState.new(auction, 'published', 'archived').perform
     end
   end
