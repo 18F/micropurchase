@@ -31,25 +31,13 @@ class UpdateAuction
 
   def create_published_state
     if parser.publishing?
-      auction_state = AuctionState.new(auction_id: auction.id,
-                                       name: 'published',
-                                       state_value: 'published')
-      auction_state.save
+      ChangeState.new(auction, 'published', 'published').perform
     end
   end
 
   def create_archived_state
     if parser.archiving?
-      auction_state = auction.states.find {|state| state.name == 'published'}
-
-      if auction_state.nil?
-        auction_state = AuctionState.new(auction_id: auction.id,
-                                         name: 'published',
-                                         state_value: 'archived')
-      end
-
-      auction_state.state_value = 'archived'
-      auction_state.save
+      ChangeState.new(auction, 'published', 'archived').perform
     end
   end
 
