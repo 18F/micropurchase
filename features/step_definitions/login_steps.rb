@@ -8,7 +8,7 @@ Given(/^I am signed in$/) do
 end
 
 Then(/^I should be logged out$/) do
-  expect(page).not_to have_content("Logout")
+  expect(page).not_to have_link("Logout")
 end
 
 Given(/^I am an authenticated vendor$/) do

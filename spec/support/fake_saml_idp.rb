@@ -7,13 +7,13 @@ class FakeSamlIdp < Sinatra::Base
 
   ASSERTED_ATTRIBUTES_URI_PATTERN = 'http://idmanagement.gov/ns/requested_attributes?ReqAttr='.freeze
 
-  get '/saml/auth' do
+  get '/api/saml/auth' do
     build_configs
     validate_saml_request
     encode_response(user)
   end
 
-  get '/saml/logout' do
+  get '/api/saml/logout' do
     build_configs
     if params[:SAMLRequest]
       validate_saml_request
