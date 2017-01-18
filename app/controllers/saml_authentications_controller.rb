@@ -53,7 +53,6 @@ class SamlAuthenticationsController < ApplicationController
 
   def redirect_to_logout(logout_request)
     Rails.logger.info "IdP initiated Logout for #{logout_request.nameid}"
-    sign_out
     logout_response = OneLogin::RubySaml::SloLogoutresponse.new.create(
       saml_settings,
       logout_request.id,
@@ -91,9 +90,5 @@ class SamlAuthenticationsController < ApplicationController
     settings.name_identifier_value = current_user.uid
     logout_request = OneLogin::RubySaml::Logoutrequest.new.create(settings)
     redirect_to logout_request
-  end
-
-  def sign_out
-    # no-op
   end
 end
