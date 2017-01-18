@@ -20,8 +20,8 @@ the Micro-purchase staging site.
   profile](https://micropurchase-staging.18f.gov/account/profile) while signed in.
 * Sign out of the application by clicking the "Logout" link.
 * Visit the [admin sign in
-  page](https://micropurchase-staging.18f.gov/admin/sign_in)
-* Click on the "Login.gov" logo
+  page](https://micropurchase-staging.18f.gov/admin/sign_in).
+* Click on the "Login.gov" logo.
 * You will be redirected to the [Identity IDP dev
   application](https://idp.dev.login.gov/). If you already have an account, you
   can sign in with your email and password. Otherwise, click on the "Create
