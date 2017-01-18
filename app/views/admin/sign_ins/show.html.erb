@@ -8,10 +8,14 @@
         '/auth/github',
         class: 'usa-button usa-button usa-button-outline' %>
     </p>
-    <div class="mb1 right-align login_gov">
-      <%= link_to 'Authorize with Login.gov',
-        '/auth/saml',
-        class: 'usa-button usa-button usa-button-outline' %>
-    </div>
+    <p>
+      <%= link_to '/auth/saml',
+        class: 'usa-button usa-button usa-button-outline' do %>
+        <%= image_tag 'login-gov.svg', 
+          class: 'align-middle', 
+          width: '125',
+          alt: 'Authorize with Login.gov' %>
+      <% end %>
+    </p>
   </div>
 </div>
