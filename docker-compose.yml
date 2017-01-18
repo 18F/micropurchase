@@ -13,3 +13,8 @@ web:
       - "3000:3000"
     links:
       - db
+compliance-masonry:
+  build: .
+  volumes:
+    - .:/app
+  dockerfile: Dockerfile.compliance-masonry

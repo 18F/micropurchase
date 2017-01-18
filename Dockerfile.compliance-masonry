@@ -1,0 +1,10 @@
+FROM ubuntu:16.04
+
+RUN apt-get update
+RUN apt-get install curl git -y
+RUN curl -L https://github.com/opencontrol/compliance-masonry/releases/download/v1.1.2/compliance-masonry_1.1.2_linux_amd64.tar.gz -o compliance-masonry.tar.gz
+RUN tar -xf compliance-masonry.tar.gz
+RUN cp compliance-masonry_1.1.2_linux_amd64/compliance-masonry /usr/local/bin
+
+RUN mkdir -p /app
+WORKDIR /app
