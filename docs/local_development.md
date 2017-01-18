@@ -50,7 +50,7 @@ SAML OAuth with Login.gov is currently available for admin users only.
 To test SAML OAuth locally, run the [Login.gov
 IDP](https://github.com/18F/identity-idp) at port 3004.
 
-Read our [document on the Login.gov integration](docs/login_integration.md) to
+Read our [document on the Login.gov integration](login_integration.md) to
 learn more.
 
 ### Understanding / viewing transactional emails

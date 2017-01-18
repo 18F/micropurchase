@@ -10,7 +10,7 @@ the Micro-purchase staging site.
 ### Requirements
 
 * If you haven't already, [add yourself as an
-  admin](docs/onboarding.md#add-yourself-as-an-admin).
+  admin](onboarding.md#add-yourself-as-an-admin).
 * Sign in as an admin by visiting https://micropurchase-staging.18f.gov/ (this creates a user account in the database).
 
 ### Steps to test Login.gov authentication on staging
