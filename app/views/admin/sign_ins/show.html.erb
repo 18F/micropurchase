@@ -9,12 +9,13 @@
         class: 'usa-button usa-button usa-button-outline' %>
     </p>
     <p>
-      <a href='/auth/saml' class='usa-button usa-button usa-button-outline'>
+      <%= link_to '/auth/saml',
+        class: 'usa-button usa-button usa-button-outline' do %>
         <%= image_tag 'login-gov.svg', 
           class: 'align-middle', 
           width: '125',
           alt: 'Authorize with Login.gov' %>
-      </a>
+      <% end %>
     </p>
   </div>
 </div>
