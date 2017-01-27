@@ -79,6 +79,25 @@ describe CreateAuction do
 
         expect(published_state.state_value).to eq('unpublished')
       end
+
+      it "creates a work state of 'not_started'" do
+        params = HashWithIndifferentAccess.new({
+          auction: valid_auction_params,
+          commit: "Create",
+          controller: "admin/auctions",
+          action: "create"
+        })
+
+        current_user = create(:user)
+
+        auction = CreateAuction.new(params, current_user).perform
+
+        published_state = auction
+                            .states
+                            .find {|state| state.name == 'work'}
+
+        expect(published_state.state_value).to eq('not_started')
+      end
     end
 
     context 'when the auction is not valid' do

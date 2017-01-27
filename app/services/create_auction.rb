@@ -18,11 +18,17 @@ class CreateAuction
 
   def create_auction_states
     create_published_state
+    create_work_state
     # add more states as needed
   end
 
   def create_published_state
     change_state = ChangeState.new(auction, 'published', 'unpublished')
+    change_state.perform
+  end
+
+  def create_work_state
+    change_state = ChangeState.new(auction, 'work', 'not_started')
     change_state.perform
   end
 
