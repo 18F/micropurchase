@@ -7,6 +7,8 @@ Refactoring data pattern:
 * Remove old writes (in code)
 * Remove old fields (in database)
 
+
+
 ---------
 # try this one first:
 Published: draft => published | archived
