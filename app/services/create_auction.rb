@@ -7,6 +7,7 @@ class CreateAuction
   def perform
     build_auction
     save_auction
+    create_auction_states
 
     auction
   end
@@ -14,6 +15,16 @@ class CreateAuction
   private
 
   attr_reader :params, :current_user, :auction
+
+  def create_auction_states
+    create_published_state
+    # add more states as needed
+  end
+
+  def create_published_state
+    change_state = ChangeState.new(auction, 'published', 'unpublished')
+    change_state.perform
+  end
 
   def build_auction
     @auction ||= BuildAuction.new(params, current_user).perform

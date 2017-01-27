@@ -16,8 +16,8 @@ describe CreateAuction do
     end
 
     context 'when the auction is valid' do
-      it 'saves the auction' do
-        auction_params = {
+      let(:valid_auction_params) do
+        {
           "title"=>"This is the form-edited title",
           "started_at"=>"2017-01-30",
           "started_at(1i)"=>"11",
@@ -42,9 +42,11 @@ describe CreateAuction do
           "billable_to"=>"Client Account 1 (Billable)",
           "notes"=>""
         }
+      end
 
+      it 'saves the auction' do
         params = HashWithIndifferentAccess.new({
-          auction: auction_params,
+          auction: valid_auction_params,
           commit: "Create",
           controller: "admin/auctions",
           action: "create"
@@ -57,6 +59,25 @@ describe CreateAuction do
         expect {
           create_auction.perform
         }.to change { Auction.count }.by(1)
+      end
+
+      it "creates a published state of 'unpublished'" do
+        params = HashWithIndifferentAccess.new({
+          auction: valid_auction_params,
+          commit: "Create",
+          controller: "admin/auctions",
+          action: "create"
+        })
+
+        current_user = create(:user)
+
+        auction = CreateAuction.new(params, current_user).perform
+
+        published_state = auction
+                            .states
+                            .find {|state| state.name == 'published'}
+
+        expect(published_state.state_value).to eq('unpublished')
       end
     end
 
