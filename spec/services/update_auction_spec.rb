@@ -66,32 +66,16 @@ describe UpdateAuction do
           auction: {"published" => "published"}
         }
 
-        expect do
-          UpdateAuction.new(
-            auction: auction,
-            params: params,
-            current_user: auction.user
-          ).perform
-        end.to change { AuctionState.count }.by(1)
+        UpdateAuction.new(
+          auction: auction,
+          params: params,
+          current_user: auction.user
+        ).perform
 
         auction.reload
 
-        # do we want to low-level test for the published state object, like this?
         published_state = auction.states.find {|state| state.name == 'published'}
         expect(published_state.state_value).to eq('published')
-
-        # and/or this?:
-        # expect(auction.published?).to be true
-
-        # and/or this?:
-        # published = AuctionPublishedState.new(auction).perform
-        # expect(published).to be true
-
-        # and/or this?:
-        # published = FindAuctionState.new(auction, name: 'published').perform
-        # expect(published).to be true
-
-        # maybe all or some of the above assertions are needed, but in a different test venue?
       end
     end
 

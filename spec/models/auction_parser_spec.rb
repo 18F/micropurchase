@@ -1,38 +1,34 @@
 require 'rails_helper'
 
 describe AuctionParser do
-  describe '#archiving?' do
+  describe '#published_params' do
     context 'when the params contains archive_auction' do
-      it 'returns true' do
+      it 'returns archived' do
         user = create(:user)
         params = {
-          auction: {},
+          auction: {title: 'the title'},
           archive_auction: :Auction
         }
         parser = AuctionParser.new(params, user)
-        archiving = parser.archiving?
 
-        expect(archiving).to be true
+        expect(parser.published_param).to eq('archived')
       end
     end
 
     context 'when the params does not contain archive_auction' do
-      it 'returns false' do
+      it 'returns nil' do
         user = create(:user)
         params = {
-          auction: {}
+          auction: {title: 'the title'}
         }
         parser = AuctionParser.new(params, user)
-        archiving = parser.archiving?
 
-        expect(archiving).to be false
+        expect(parser.published_param).to be nil
       end
     end
-  end
 
-  describe '#publishing?' do
     context 'when the params contains {published => published}' do
-      it 'returns true' do
+      it 'returns published' do
         user = create(:user)
         params = {
           auction: {
@@ -44,14 +40,13 @@ describe AuctionParser do
           }
         }
         parser = AuctionParser.new(params, user)
-        publishing = parser.publishing?
 
-        expect(publishing).to be true
+        expect(parser.published_param).to eq('published')
       end
     end
 
     context 'when the params contains {published => unpublished}' do
-      it 'returns false' do
+      it 'returns nil' do
         user = create(:user)
         params = {
           auction: {
@@ -63,9 +58,8 @@ describe AuctionParser do
           }
         }
         parser = AuctionParser.new(params, user)
-        publishing = parser.publishing?
 
-        expect(publishing).to be false
+        expect(parser.published_param).to be nil
       end
     end
   end

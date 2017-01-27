@@ -1,65 +1,29 @@
 require 'rails_helper'
 
-describe ChangeState do
-  describe '#initialize' do
-    context 'when passing an instance of an unsupported class to the constructor' do
-      it 'raises an error' do
-        instance_of_unsupported_class = 'a_string_instance'
+describe ChangeState, '#perform' do
+  it 'when there is no associated state record, it creates a new record' do
+    auction = create(:auction)
+    service = ChangeState.new(auction, 'visibility', 'published')
 
-        expect do
-          ChangeState.new(instance_of_unsupported_class, 'a_name', 'a_value')
-        end.to raise_error(ChangeState::Error)
-      end
-    end
+    expect {
+      service.perform
+    }.to change { auction.states.to_a.length }.by(1)
+
+    service.state.reload
+    expect(service.state.name).to eq('visibility')
+    expect(service.state.state_value).to eq('published')
   end
 
-  describe '#perform' do
-    context 'when passing an Auction to the constructor' do
-      context 'when there is no associated AuctionState' do
-        it 'creates a new AuctionState record' do
-          auction = create(:auction)
+  it 'will update of the state record when the state with that name already exsits' do
+    auction = create(:auction)
+    auction.states.create(name: 'visibility', state_value: 'draft')
+    service = ChangeState.new(auction, 'visibility', 'published')
 
-          state_name = 'a_state_name'
-          state_value = 'a_state_value'
+    expect {
+      service.perform
+    }.to change { auction.states.to_a.length }.by(0)
 
-          change_state = ChangeState.new(auction, state_name, state_value)
-
-          expect do
-            change_state.perform
-          end.to change { AuctionState.count }.by (1)
-
-          auction.reload
-
-          state = auction.states.find {|state| state.name == state_name}
-
-          expect(state.state_value).to eq state_value
-        end
-      end
-
-      context 'when there is an associated AuctionState' do
-        it 'updates the existing AuctionState record' do
-          auction = create(:auction)
-
-          state_name = 'a_state_name'
-          state_value = 'a_state_value'
-          new_state_value = 'a_new_state_value'
-
-          auction.states.build(name: state_name, state_value: state_value)
-          auction.save
-
-          change_state = ChangeState.new(auction, state_name, new_state_value)
-
-          expect do
-            change_state.perform
-          end.to change { AuctionState.count }.by(0)
-
-          auction.reload
-
-          state = auction.states.find {|state| state.name == state_name}
-
-          expect(state.state_value).to eq new_state_value
-        end
-      end
-    end
+    service.state.reload
+    expect(service.state.state_value).to eq('published')
   end
 end

@@ -16,6 +16,16 @@ class AuctionParser
     ).delete_if { |_key, value| value.nil? }
   end
 
+  def published_param
+    if publishing?
+      'published'
+    elsif archiving?
+      'archived'
+    end
+  end
+
+  private
+
   def publishing?
     attributes['published'] == 'published'
   end
@@ -23,8 +33,6 @@ class AuctionParser
   def archiving?
     params.key? :archive_auction
   end
-
-  private
 
   def auction_params
     strong_params.require(:auction).permit(

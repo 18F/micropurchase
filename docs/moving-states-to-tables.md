@@ -72,3 +72,5 @@ class PublishedAuctionStates
     state._value = value;
   end
 end
+
+set_state('visibility', 'published')

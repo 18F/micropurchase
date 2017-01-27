@@ -29,11 +29,8 @@ class UpdateAuction
   end
 
   def create_published_state
-    if parser.publishing?
-      ChangeState.new(auction, 'published', 'published').perform
-    elsif parser.archiving?
-      ChangeState.new(auction, 'published', 'archived').perform
-    end
+    change_state = ChangeState.new(auction, 'published', parser.published_param)
+    change_state.perform
   end
 
   def assign_attributes
