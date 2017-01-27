@@ -57,7 +57,7 @@ group :development, :test do
   gem 'capybara'
   gem 'poltergeist'
   gem 'byebug'
-  gem 'pry'
+  gem 'pry-rails', group: :development
   gem 'database_cleaner'
   gem 'brakeman', require: false
   gem 'hakiri', require: false
