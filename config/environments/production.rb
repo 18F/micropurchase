@@ -11,6 +11,7 @@ Rails.application.configure do
     enable_starttls_auto: true
   }
 
+  config.action_controller.default_url_options = { host: ENV['HOST'] }
   config.action_controller.perform_caching = true
   config.active_record.dump_schema_after_migration = false
   config.active_support.deprecation = :notify
