@@ -3,7 +3,6 @@ applications:
 - name: micropurchase-staging
   memory: 1G
   instances: 1
-  domain: 18f.gov
   host: micropurchase-staging
   buildpack: https://github.com/cloudfoundry/ruby-buildpack.git
   services:
