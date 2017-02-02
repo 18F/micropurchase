@@ -26,3 +26,6 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   )
   provider(:saml, SAML_SETTINGS)
 end
+
+# Probably want to do if/else check in case ROOT_URL doesn't exist, don't override.
+OmniAuth.config.full_host = ENV['ROOT_URL']
