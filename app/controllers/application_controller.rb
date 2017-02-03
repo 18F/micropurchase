@@ -21,9 +21,11 @@ class ApplicationController < ActionController::Base
   rescue_from 'UnauthorizedError::RedirectToLogin' do
     store_location
     if store_location == "/admin"
-      redirect_to admin_sign_in_url
+      puts "*" * 100
+      Rails.logger.info request.inspect
+      redirect_to admin_sign_in_path
     else
-      redirect_to sign_in_url
+      redirect_to sign_in_path
     end
   end
 

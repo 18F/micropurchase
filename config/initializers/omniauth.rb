@@ -26,7 +26,3 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   )
   provider(:saml, SAML_SETTINGS)
 end
-
-if ENV.has_key?('ROOT_URL')
-  OmniAuth.config.full_host = ENV['ROOT_URL']
-end
