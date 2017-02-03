@@ -23,5 +23,7 @@ applications:
     C2_HOST: 'https://c2-staging.18f.gov'
     ROOT_URL: 'https://micropurchase-staging.18f.gov'
     HOST: 'micropurchase-staging.18f.gov'
+    SERVER_NAME: 'micropurchase-staging.18f.gov'
+    HTTP_HOST: 'micropurchase-staging.18f.gov'
     ANALYTICS: false
     MASQUERADE: true
