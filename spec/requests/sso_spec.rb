@@ -21,7 +21,7 @@ describe 'SSO' do
 
       post '/auth/saml/callback', SAMLResponse: saml_idp_resp
 
-      expect(response).to redirect_to('http://www.example.com/')
+      expect(response).to redirect_to('http://test.host/')
     end
   end
 
@@ -41,7 +41,7 @@ describe 'SSO' do
 
       post '/auth/saml/callback', SAMLResponse: saml_idp_resp
 
-      expect(response).to redirect_to('http://www.example.com/admin/auctions/needs_attention')
+      expect(response).to redirect_to('http://test.host/admin/auctions/needs_attention')
     end
   end
 end

@@ -19,6 +19,7 @@ module Micropurchase
     config.active_record.raise_in_transactional_callbacks = true
     config.active_job.queue_adapter = :delayed_job
     config.assets.precompile += %w(*-bundle.js)
+    config.action_controller.default_url_options = { host: ENV['HOST'] }
 
     config.middleware.insert_before 0, 'Rack::Cors' do
       allow do
