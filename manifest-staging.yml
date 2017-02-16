@@ -5,6 +5,9 @@ applications:
   instances: 1
   host: micropurchase-staging
   buildpack: https://github.com/cloudfoundry/ruby-buildpack.git
+  no-hostname: true
+  domains:
+    - micropurchase-staging.18f.gov
   services:
     - data-dot-gov
     - micropurchase-c2
