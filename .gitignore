@@ -21,3 +21,12 @@
 .foreman
 
 cf-ssh.yml
+
+# Ignore the user-provided-services files
+data-dot-gov.json
+micropurchase-c2.json
+micropurchase-github.json
+micropurchase-smtp.json
+micropurchase-tock.json
+new-relic.json
+secrets.json

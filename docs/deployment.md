@@ -9,8 +9,10 @@ Pull requests merged into the `master` branch will be automatically deployed to
 [production](https://micropurchase.18f.gov).
 
 If you see an error on [Travis CI](https://travis-ci.org/18F/micropurchase)
-related to the Cloud.gov password being expired, post in the
-`#cloud-gov-support` Slack channel to get the password reset. Then you can
+related to the Cloud.gov password being expired, delete the old `space-deployer`
+service and
+[create a new one](https://cloud.gov/docs/services/cloud-gov-service-account/).
+Then you can
 [encrypt the new password](https://docs.travis-ci.com/user/encryption-keys/) and
 add it to `.travis.yml`.
 
@@ -19,14 +21,14 @@ add it to `.travis.yml`.
 Staging: (live at https://micropurchase-staging.18f.gov/)
 
 ```
-$ cf target -o 18f-acq -s staging
+$ cf target -o gsa-acq-micropurchase -s staging
 $ cf push
 ```
 
 Production (live at https://micropurchase.18f.gov/)
 
 ```
-$ cf target -o 18f-acq -s production
+$ cf target -o gsa-acq-micropurchase -s production
 $ cf push
 ```
 
@@ -42,7 +44,27 @@ The classes pick up environment variables set in the shell by the
 If you're not using Cloud Foundry to deploy, just set the environment variables
 directly in your system.
 
-Steps to set new environment variables:
+#### Steps to setting the existing environment variables for the first time:
+
+1. Create copies of the user-provided-service JSON templates. Afterwards, fill
+in the files with their appropriate values.
+  ```bash
+  $ find docs/ups-examples -name "*.example.json" -exec sh -c 'cp "$1" "${1%.example.json}.json"' _ {} \;
+  ```
+
+1. Create the [user-provided
+services](https://docs.cloudfoundry.org/devguide/services/user-provided.html)
+  ```bash
+  cf create-user-provided-service data-dot-gov -p docs/ups-examples/data-dot-gov.json
+  cf create-user-provided-service micropurchase-c2 -p docs/ups-examples/micropurchase-c2.json
+  cf create-user-provided-service micropurchase-github -p docs/ups-examples/micropurchase-github.json
+  cf create-user-provided-service micropurchase-smtp -p docs/ups-examples/micropurchase-smtp.json
+  cf create-user-provided-service micropurchase-tock -p docs/ups-examples/micropurchase-tock.json
+  cf create-user-provided-service new-relic -p docs/ups-examples/new-relic.json
+  cf create-user-provided-service secrets -p docs/ups-examples/secrets.json
+  ```
+
+#### Steps to set new environment variables:
 
 1. Create a credentials class for accessing the value. Example:
 
@@ -92,15 +114,33 @@ Steps to set new environment variables:
   MICROPURCHASE_GITHUB_SECRET=super_secret_secret
   ```
 
+1. Create a new credential template file in the `docs/ups-examples` folder. Make
+sure the template file has the extension `.example.json`. Add the `.json` file
+to the `.gitignore`.
+
+  Example `docs/ups-examples/micropurchase-github.example.json`
+  that contains placeholder credentials.
+  ```json
+  {
+    "client_id": "insert_github_client_id_here",
+    "secret": "insert_github_client_secret_here"
+  }
+  ```
+
+  Example `docs/ups-examples/micropurchase-github.json` that contains the
+  real credentials.
+  ```json
+  {
+    "client_id": "actual_github_client_id_here",
+    "secret": "actual_github_client_secret_here"
+  }
+  ```
+
 1. Create a [user-provided service](https://docs.cloudfoundry.org/devguide/services/user-provided.html):
 
   ```bash
-  $ cf cups micropurchase-github -p "client_id, secret"
+  $ cf cups micropurchase-github -p "docs/ups-examples/micropurchase-github.json"
   ```
-
-  The above command will interactively prompt you for your GitHub application
-  keys. **Important**: do not put quotes around input values. Cloud Foundry will
-  do this for you, so if you add a value with quotes it will have double quotes.
 
   The naming convention strings together and dasherizes the user-provided
   service name and the parameter names to produce environment variables. In the
