@@ -27,3 +27,4 @@ en:
       label: Closed
       start_label: Auction started at
       relative_time: "Ended on %{time}"
+      no_bids: There are no bids

@@ -5,6 +5,8 @@ engines:
     enabled: true
   eslint:
     enabled: true
+    exclude_fingerprints:
+    - 93b6c216c8bfa6396128d0ed844521e4
   csslint:
     enabled: true
   scss-lint:

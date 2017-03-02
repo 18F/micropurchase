@@ -1,0 +1,11 @@
+<div class="auction-actions-panel">
+  <h4>Actions</h4>
+
+  <ul>
+    <li><%= link_to 'Edit auction', edit_admin_auction_path(auction.id) %></li>
+  <%= render partial: 'share_url',
+      locals: { auction: auction } %>
+  <%= render partial: @view_model.csv_report_partial,
+      locals: { auction: auction } %>
+  </ul>
+</div>

@@ -3,9 +3,11 @@ applications:
 - name: micropurchase
   memory: 1G
   instances: 2
-  domain: 18f.gov
   host: micropurchase
-  buildpack: https://github.com/cloudfoundry/ruby-buildpack.git
+  buildpack: ruby_buildpack
+  no-hostname: true
+  domains:
+    - micropurchase.18f.gov
   services:
     - data-dot-gov
     - micropurchase-c2
@@ -19,6 +21,8 @@ applications:
   env:
     RAILS_ENV: production
     RACK_ENV: production
+    SAML_ENV: production
+    IDP_ENV: demo
     C2_HOST: 'https://cap.18f.gov'
     ROOT_URL: 'https://micropurchase.18f.gov'
     ANALYTICS: true

@@ -30,6 +30,10 @@ When(/^I visit the admin page$/) do
   visit admin_path
 end
 
+When(/^I visit the admin sign in page$/) do
+  visit admin_sign_in_path
+end
+
 When(/^I visit the admin auction page for that auction$/) do
   visit admin_auction_path(@auction)
 end
@@ -152,4 +156,8 @@ end
 
 Then(/^I should be on the rules page for sealed-bid auctions$/) do
   expect(page.current_path).to eq('/auctions/rules/sealed-bid')
+end
+
+Then(/^I should be on the admin login page$/) do
+  expect(page.current_path).to eq(admin_sign_in_path)
 end

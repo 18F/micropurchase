@@ -1,0 +1,82 @@
+---
+name: Micro-purchase
+uniqueID: <MB number – see https://docs.google.com/spreadsheets/d/1v4QfXGaJVy9-CZ0n6cFLHGGs_5TL1l8uCh6ZyNYjMDk/edit#gid=2047916505>
+version: 2.0
+# descriptions:
+# https://18f.gsa.gov/dashboard/
+phase: live
+# `D26 Civilian Operations` is most common for 18F projects.
+# http://csrc.nist.gov/publications/nistpubs/800-60-rev1/SP800-60_Vol1-Rev1.pdf#page=23
+information-types:
+- D26 Civilian Operations
+
+# https://pages.18f.gov/before-you-ship/ato/levels/
+confidentiality: none
+integrity: low
+availability: low
+security-baseline: low
+
+system-type: minor
+level-of-identity-assurance: <0 if no authentication, or a link to SSP of the forthcoming identity system>
+staff:
+  authorizing-official:
+    name: Noah Kunin
+    title: TTS Infrastructure Director
+    org: General Services Administration
+    unit: TTS
+    email: devops@gsa.gov
+  system-owner:
+    name: Noah Kunin
+    title: TTS Infrastructure Director
+    org: General Services Administration
+    unit: TTS
+    email: devops@gsa.gov
+  system-management:
+    name: Noah Kunin
+    title: TTS Infrastructure Director
+    org: General Services Administration
+    unit: TTS
+    email: devops@gsa.gov
+  system-security-officer:
+    name: Noah Kunin
+    title: TTS Infrastructure Director
+    org: General Services Administration
+    unit: TTS
+    email: devops@gsa.gov
+  technical-lead:
+    name: Alan deLevie
+    title: Technical Lead
+    org: General Services Administration
+    unit: 18F
+    email: alan.delevie@gsa.gov
+leveraged-authorizations:
+- https://www.fedramp.gov/marketplace/compliant-systems/amazon-web-services-aws-eastwest-us-public-cloud/
+purpose: https://github.com/18F/micropurchase/blob/develop/README.md#micro-purchase
+components:
+- https://github.com/18f/micropurchase
+- https://github.com/18f/samwise
+- https://github.com/rails/rails
+
+
+# these will be the same unless your architecture is especially complex
+system-diagram: https://github.com/18F/micropurchase/issues/94
+network-diagram: https://github.com/18F/micropurchase/issues/94
+
+environments:
+- Cloud Foundry
+- Amazon Web Services East
+user-types:
+  developer:
+    functions:
+    - deployment
+    - engineering
+  bidder:
+    functions:
+      - bidding
+  admin:
+    functions:
+      - auction creation
+      - auction acceptance
+controls:
+- https://hakiri.io/github/18F/micropurchase/master
+- https://gemnasium.com/18F/micropurchase

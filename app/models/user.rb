@@ -10,11 +10,27 @@ class User < ActiveRecord::Base
 
   enum sam_status: { duns_blank: 0, sam_accepted: 1, sam_rejected: 2, sam_pending: 3 }
 
+  def self.from_saml_omniauth(auth)
+    return if auth.uid.blank?
+    existing_user = find_by(uid: auth.uid) || find_by(email: auth.info.email)
+
+    if existing_user && Admins.verify?(existing_user.github_id)
+      existing_user.assign_from_auth(auth)
+      existing_user.save
+      existing_user
+    end
+  end
+
   def decorate
     if Admins.verify?(github_id)
       AdminUserPresenter.new(self)
     else
       UserPresenter.new(self)
     end
+  end
+
+  def assign_from_auth(auth)
+    self.uid = auth.uid
+    self.email = auth.info.email
   end
 end

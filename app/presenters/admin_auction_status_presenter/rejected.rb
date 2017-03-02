@@ -12,6 +12,10 @@ class AdminAuctionStatusPresenter::Rejected < AdminAuctionStatusPresenter::Base
     )
   end
 
+  def self.relevant?(status)
+    status.rejected?
+  end
+
   private
 
   def rejected_at

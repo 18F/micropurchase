@@ -1,0 +1,6 @@
+{
+  "default_from": "micropurchase@18f.gov",
+  "default_url_host": "micropurchase.18f.gov",
+  "smtp_password": "insert_email_password_here",
+  "smtp_username": "insert_email_username_here"
+}

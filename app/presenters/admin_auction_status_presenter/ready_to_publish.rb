@@ -35,6 +35,10 @@ class AdminAuctionStatusPresenter::ReadyToPublish < AdminAuctionStatusPresenter:
     DcTimePresenter.convert_and_format(auction.delivery_due_at)
   end
 
+  def self.relevant?(status)
+    status.unpublished?
+  end
+
   private
 
   def dc_time(field)

@@ -13,6 +13,10 @@ class C2StatusPresenter::PaymentConfirmed < C2StatusPresenter::Base
     I18n.t('statuses.c2_presenter.payment_confirmed.header')
   end
 
+  def self.relevant?(status)
+    status.c2_payment_confirmed?
+  end
+
   private
 
   def paid_at

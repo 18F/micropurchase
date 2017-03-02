@@ -1,40 +1,49 @@
-language: ruby
-rvm:
-- ruby-2.3.1
-cache: bundler
-bundler_args: "--without production --binstubs"
+language: generic
+
+services:
+  - docker
+
 before_install:
-- export PATH=$PWD/travis_phantomjs/phantomjs-2.1.1-linux-x86_64/bin:$PATH
-- if [ $(phantomjs --version) != '2.1.1' ]; then rm -rf $PWD/travis_phantomjs; mkdir
-  -p $PWD/travis_phantomjs; fi
-- if [ $(phantomjs --version) != '2.1.1' ]; then wget https://assets.membergetmember.co/software/phantomjs-2.1.1-linux-x86_64.tar.bz2
-  -O $PWD/travis_phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2; fi
-- if [ $(phantomjs --version) != '2.1.1' ]; then tar -xvf $PWD/travis_phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2
-  -C $PWD/travis_phantomjs; fi
-before_script:
-- bundle exec rake db:create
-- bundle exec rake db:migrate
-script: bundle exec rake $TASK
+  - cp .env.test .env
+  - rm .ruby-version
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/1.4.2/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+
+script:
+  - docker-compose build
+  - docker-compose up -d
+  - docker-compose run web bundle exec rake
+
 notifications:
   email: false
+
 env:
   global:
-  - CF_USERNAME=18f-acq_deployer
-  - secure: POa0/y3A+tSlSYuO8n8ahvSmsNhnbhNF9yZGjQSNFQ1DR3u/FmjTZNeuS5EV4aH2+jyFtYVBhl0Dl01ufPJCxL1TAjaNkKxP3s63iHCVPvY47DX1EdW6nlwJG1O9NprVBv3sRdYHc10s/Kl7K04ixBbbx3kFm84aIqOFRFifgnenVkZoqS/3gfzSgzCH8N0I/pI5i9dLQ9CCNg956sMBmOL0OvM+t1WD8jjtPdA4f8KEgkQq+Pyacpdl/vSXNrA61ajktuQ6+bHyqP2OVW/dI+rkSbssiy8rJyd9IBgo9zhMXjl5GxG/ZJHmbvLta7gpn3qWi5o7Ny7b58BwLmzkTfo/fWJ5Kn9O9JcQGh1p9v6KJDFMjpSaQXPBqXAenN7Y3UpaqSm3DJSoPOa4s3jPzIYp4vDEmYN03n7QGezu7p9MVaNnZoB+sn63gpUCPEK0U5aqe45SCbxkFMFO/EHynxx62Jt8aJtx/aUmu/aaiL8VpH1kOV0AzjYJXoQeM3NJg9sfW5Ti9HJ/D9vI6Y+py8f47kchr7IS9kT2An0Rpke8aOPQ0jbp+X26QU8IlNZ7xIDH8JthedSvg7f2TGeOq+PjKjBVbvPgMzjPmINCE4oFpomxgqz/S7aiXp0YgsslddRsiv338yWiLM130PGpF1xBIb2I+ayxuNKndPTEE/A=
+  # GovCloud Credentials via deployer account broker for Staging Space
+  - CF_USERNAME_STAGING=77ed1fde-7fc7-452d-8478-58ceb506f303
+  - secure: "d4pHBNkO8iNtd1ZMLsJ7ew/w+GDccjgszjM0jbzmkf1o8RqIJLo3DR8RJDv8dn0rO8bbCEIfQfGcxloEpvdOIbuv6I6JIVELXs9UOmAYC/H/wq1NfBW1iGy5k4QTP3kOQliIDF65llyE44ny+7pCxWbPKDqfFx9lE5FD+djfHT1IIVn+1uwooVdUuIOZAVvdmsS1VP5ZXIyKYdA2uGg9clJy8Sokkxx2kie7S4oI8JQh8xREuC3ID5pNHNq7tPK17/D9sij7BL31zrdEcwvT7eklJ+SjicMWA8k10/H4DX4qHwAvDfFtKlfussSeIkRiVyy/b+LaAy60LQvAwFVGqCWuh0apJFdfDCC1wRwNy0u6Fg3EpoGe+7Ocmupty0BIe4mXA199YUnWW6JgUnCnZVBPNYOWwSpTYBY2AcekPf6sl7GujAZFDqVqGhS7svdvbJHNdTaef/qJyTXtIqXHdhcRLBEyIC6HtmSNbVgdnSDj1Ynq3j/AC8CABGGEGbOFPJuBrY1bQLwcoCom5PZES4TwCP3OQ+zPXh/hUUEHbc69Cp6nQ+1RrSWIyOHA28p3TA6Qj5zPe1NOmpBxNAZwa0a5F6CbnidVibk+n1JZMsPprr5YHSaHPXRPBypNrdfCa9lYRi5hq/FHFBD7grEstARnSCV209fujNHCp5JQntA="
+  # GovCloud Credentials via deployer account broker for Production Space
+  - CF_USERNAME_PRODUCTION=506a2750-d298-4361-babb-2d3be4e4afd0
+  - secure: "G0Lu5ERix3HkXY7VS+eeFIJoH7pMrSTc8cQUzkVmz0BVEyT31+Nxq3ByMMZM1K0oXj2T7uhxXgkTODrk3dcD2vfY3932tdtNJkiEimWdwXyUIMzqqdCQTDtmXjrwc3AQvcYiIwCSctjbuvo0ce+VRVIUyuXjtWKrVXdZ5WLXLuv8+A7tK5C8YNLHauFTaklW9kR45BdU3VdrtjurMNfEJ5aClWT7RIrbzu4pY4P71pxOnPxrPNnvH7nmE3XKBlrB1dPnMziUKdFAGsndKoYRN8T/Nv/TOdDXgSo5mIDabHSqPkIblJQKSUOdXrzBaMWivYO5DAKjSYBmDUSfnTaT0rF4/ptpmvq8wejTn6npYl3nz7kIrMwbCVJ1jJWB4DmafomF/PMlxw4HsjOlaMduuZKC/VDuwcppBNrMjJc81tKacolwGNaU6jIa8TYonJeT77G1WlJy/LECG26iIc4DTFP1yReP/PK+stJSiHywzLPHOKJc3wPxn5cRf2tEIXbtWYXRKns5kHGqU+31PoU7Ca9L5GIEvp2qj0QYRvR+BM7/kX7cWapC88oxp1INhuGQJ9THkOhdbKE4/ZCL+gD92MGKYxu4nyhrlFxMJgj39/tp4HB2IyBBwOutYSZPKYcALozbEOyqrooR8PDOZxZXa3CN6PZ3XNBgyMfO1Y6XJZM="
+
 addons:
-  postgresql: '9.3'
   code_climate:
     repo_token: 2ad0d3196c872832cf5d6b34c83bf21dbf0a30e2191ba036be003b01e417a6a1
+
 after_script:
 - "./bin/codeclimate-batch --groups 2"
-- npm install -g pa11y-crawl
-- pa11y-crawl --run "bundle exec puma" --ci http://localhost:3000
+- docker pull 18fgsa/pa11y-crawl-docker
+- docker-compose up -d
+- docker run -t --net="host" 18fgsa/pa11y-crawl-docker pa11y-crawl http://localhost:3000
+
 before_deploy:
 - export PATH=$HOME:$PATH
 - travis_retry curl -L -o $HOME/cf.tgz "https://cli.run.pivotal.io/stable?release=linux64-binary&version=6.22.2"
 - tar xzvf $HOME/cf.tgz -C $HOME
 - cf install-plugin autopilot -f -r CF-Community
-- bundle exec rake git:dump_sha
+- docker-compose run web bundle exec rake git:dump_sha
 deploy:
 - provider: script
   script: "./bin/deploy.sh staging"

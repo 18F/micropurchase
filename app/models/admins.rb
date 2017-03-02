@@ -1,7 +1,7 @@
 class Admins
-  def verify?(uid)
-    return false if uid.nil?
-    github_ids.include?(uid.to_s)
+  def verify?(github_id)
+    return false if github_id.nil?
+    github_ids.include?(github_id.to_s)
   end
 
   def github_ids

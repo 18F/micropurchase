@@ -6,116 +6,148 @@ class AdminAuctionStatusPresenterFactory
   end
 
   def create
-    if auction.purchase_card == 'default'
-      default_purchase_card_presenter
-    else
-      other_purchase_card_presenter
-    end.new(auction: auction)
+    presenter_class.new(auction: auction)
   end
 
   private
 
-  def default_purchase_card_presenter
-    if auction.archived?
-      AdminAuctionStatusPresenter::Archived
-    elsif auction.c2_status == 'not_requested'
-      C2StatusPresenter::NotRequested
-    elsif auction.c2_status == 'sent'
-      C2StatusPresenter::Sent
-    elsif auction.c2_status == 'pending_approval'
-      C2StatusPresenter::PendingApproval
-    elsif future? && auction.published?
-      AdminAuctionStatusPresenter::Future
-    elsif auction.unpublished?
-      AdminAuctionStatusPresenter::ReadyToPublish
-    elsif available?
-      AdminAuctionStatusPresenter::Available
-    elsif won? && auction.pending_delivery?
-      AdminAuctionStatusPresenter::WorkNotStarted
-    elsif overdue_delivery?
-      AdminAuctionStatusPresenter::OverdueDelivery
-    elsif auction.work_in_progress?
-      AdminAuctionStatusPresenter::WorkInProgress
-    elsif auction.missed_delivery?
-      AdminAuctionStatusPresenter::MissedDelivery
-    elsif auction.pending_acceptance?
-      AdminAuctionStatusPresenter::PendingAcceptance
-    elsif auction.accepted_pending_payment_url?
-      AdminAuctionStatusPresenter::AcceptedPendingPaymentUrl
-    elsif auction.accepted? && !(auction.c2_paid? || auction.payment_confirmed?)
-      AdminAuctionStatusPresenter::DefaultPcard::Accepted
-    elsif auction.rejected?
-      AdminAuctionStatusPresenter::Rejected
-    elsif auction.c2_paid?
-      C2StatusPresenter::C2Paid
-    else # auction.payment_confirmed?
-      C2StatusPresenter::PaymentConfirmed
+  def presenter_class
+    if auction.purchase_card == 'default'
+      default_purchase_card_presenter_class
+    else
+      other_purchase_card_presenter_class
     end
   end
 
-  def other_purchase_card_presenter
-    if auction.archived?
-      AdminAuctionStatusPresenter::Archived
-    elsif future? && auction.published?
-      AdminAuctionStatusPresenter::Future
-    elsif auction.unpublished?
-      AdminAuctionStatusPresenter::ReadyToPublish
-    elsif available?
-      AdminAuctionStatusPresenter::Available
-    elsif overdue_delivery?
-      AdminAuctionStatusPresenter::OverdueDelivery
-    elsif auction.work_in_progress?
-      AdminAuctionStatusPresenter::WorkInProgress
-    elsif auction.missed_delivery?
-      AdminAuctionStatusPresenter::MissedDelivery
-    elsif auction.pending_acceptance?
-      AdminAuctionStatusPresenter::PendingAcceptance
-    elsif auction.accepted_pending_payment_url?
-      AdminAuctionStatusPresenter::AcceptedPendingPaymentUrl
-    elsif auction.accepted? && auction.paid_at.nil?
-      AdminAuctionStatusPresenter::OtherPcard::Accepted
-    elsif auction.accepted? && auction.paid_at.present?
+  def default_purchase_card_presenter_class
+    ordered_default_pcard_presenter_classes.detect do |presenter_class|
+      presenter_class.relevant?(BidStatusInformation.new(auction))
+    end || C2StatusPresenter::PaymentConfirmed
+  end
+
+  def other_purchase_card_presenter_class
+    ordered_other_pcard_classes.detect do |presenter_class|
+      presenter_class.relevant?(BidStatusInformation.new(auction))
+    end || AdminAuctionStatusPresenter::Rejected
+  end
+
+  def ordered_other_pcard_classes
+    [
+      AdminAuctionStatusPresenter::Archived,
+      AdminAuctionStatusPresenter::NoBids,
+      AdminAuctionStatusPresenter::Future,
+      AdminAuctionStatusPresenter::ReadyToPublish,
+      AdminAuctionStatusPresenter::Available,
+      AdminAuctionStatusPresenter::OverdueDelivery,
+      AdminAuctionStatusPresenter::WorkInProgress,
+      AdminAuctionStatusPresenter::MissedDelivery,
+      AdminAuctionStatusPresenter::PendingAcceptance,
+      AdminAuctionStatusPresenter::AcceptedPendingPaymentUrl,
+      AdminAuctionStatusPresenter::OtherPcard::Accepted,
       AdminAuctionStatusPresenter::OtherPcard::Paid
-    else # auction.rejected?
-      AdminAuctionStatusPresenter::Rejected
+    ]
+  end
+
+  def ordered_default_pcard_presenter_classes
+    [
+      AdminAuctionStatusPresenter::Archived,
+      AdminAuctionStatusPresenter::NoBids,
+      C2StatusPresenter::NotRequested,
+      C2StatusPresenter::Sent,
+      C2StatusPresenter::PendingApproval,
+      AdminAuctionStatusPresenter::Future,
+      AdminAuctionStatusPresenter::ReadyToPublish,
+      AdminAuctionStatusPresenter::Available,
+      AdminAuctionStatusPresenter::WorkNotStarted,
+      AdminAuctionStatusPresenter::OverdueDelivery,
+      AdminAuctionStatusPresenter::WorkInProgress,
+      AdminAuctionStatusPresenter::MissedDelivery,
+      AdminAuctionStatusPresenter::PendingAcceptance,
+      AdminAuctionStatusPresenter::AcceptedPendingPaymentUrl,
+      AdminAuctionStatusPresenter::DefaultPcard::Accepted,
+      AdminAuctionStatusPresenter::Rejected,
+      C2StatusPresenter::C2Paid
+    ]
+  end
+
+  class BidStatusInformation
+    attr_reader :auction, :bid_status
+
+    def initialize(auction)
+      @auction = auction
+      @bid_status = BiddingStatus.new(auction)
     end
-  end
 
-  def available?
-    bidding_status.available?
-  end
+    delegate  :archived?,
+              :published?,
+              :unpublished?,
+              :pending_delivery?,
+              :work_in_progress?,
+              :pending_acceptance?,
+              :accepted_pending_payment_url?,
+              :missed_delivery?,
+              :accepted?,
+              :c2_paid?,
+              :payment_confirmed?,
+              :rejected?,
+              to: :auction
 
-  def won?
-    over? && bids?
-  end
+    def available?
+      bid_status.available?
+    end
 
-  def over?
-    bidding_status.over?
-  end
+    def over_and_no_bids?
+      over? && !bids?
+    end
 
-  def bids?
-    auction.bids.any?
-  end
+    def c2_not_requested?
+      auction.c2_status == 'not_requested'
+    end
 
-  def future?
-    bidding_status.future?
-  end
+    def c2_sent?
+      auction.c2_status == 'sent'
+    end
 
-  def overdue_delivery?
-    won? &&
-      (auction.pending_delivery? || auction.work_in_progress?) &&
-      auction.delivery_due_at < Time.now
-  end
+    def c2_pending?
+      auction.c2_status == 'pending_approval'
+    end
 
-  def bidding_status
-    @_bidding_status ||= BiddingStatus.new(auction)
-  end
+    def won?
+      over? && bids?
+    end
 
-  def delivery_status
-    auction.delivery_status.camelize
-  end
+    def over?
+      bid_status.over?
+    end
 
-  def c2_status
-    auction.c2_status.camelize
+    def bids?
+      auction.bids.any?
+    end
+
+    def future?
+      bid_status.future?
+    end
+
+    def pending_delivery?
+      auction.pending_delivery?
+    end
+
+    def overdue_delivery?
+      won? &&
+        (auction.pending_delivery? || auction.work_in_progress?) &&
+        auction.delivery_due_at < Time.now
+    end
+
+    def delivery_status
+      auction.delivery_status.camelize
+    end
+
+    def c2_status
+      auction.c2_status.camelize
+    end
+
+    def paid_at_info?
+      !auction.paid_at.nil?
+    end
   end
 end

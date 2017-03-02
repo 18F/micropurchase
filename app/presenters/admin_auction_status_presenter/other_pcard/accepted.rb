@@ -16,6 +16,10 @@ class AdminAuctionStatusPresenter::OtherPcard::Accepted < AdminAuctionStatusPres
     'admin/auctions/mark_paid'
   end
 
+  def self.relevant?(status)
+    status.accepted? && !status.paid_at_info?
+  end
+
   private
 
   def accepted_at

@@ -29,12 +29,15 @@ that appears in the footer of the Micro-purchase site.
 Check out on the [onboarding docs](docs/onboarding.md) for instructions on how to
 get going.
 
-## Instructions for Contributors
+## Instructions for contributors
+
+See the [local development docs](docs/local_development.md) for information on
+setting up the codebase and running tests locally or with Docker.
 
 There are a few specific requirements that your pull requests must follow to be
-accepted into the project
+accepted into the project.
 
-### Testing and Style Compliance
+### Testing and style compliance
 
 We believe in a test-driven approach for this project and any new features must
 include corresponding tests. We use the
@@ -76,7 +79,7 @@ sorts of different reasons. We want to prevent this as much as we can. Read our
 [document on technical debt](docs/technical_debt.md) to understand how things are
 organized.
 
-## Public domain
+## Public Domain
 
 This project is in the public domain within the United States, and
 copyright and related rights in the work worldwide are waived through

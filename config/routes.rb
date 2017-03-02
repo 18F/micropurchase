@@ -3,15 +3,19 @@ Rails.application.routes.draw do
     mount LetterOpenerWeb::Engine => "letter_opener"
   end
 
-  # Web requests
-
   root 'auctions#index'
 
-  get '/auth/:provider/callback', to: 'authentications#create'
+  get '/auth/github/callback', to: 'authentications#create'
   get '/logout', to: 'authentications#destroy'
+
+  match 'auth/saml/callback', to: 'saml_authentications#create', via: [:get, :post]
+  match 'auth/saml/logout', to: 'saml_authentications#destroy', via: [:get, :post, :delete]
+  match 'auth/saml/setup', to: 'saml_authentications#setup', via: [:get, :post]
+
   get '/auctions/rules/sealed-bid', to: 'auctions#sealed_bid_auction_rules'
   get '/auctions/rules/reverse', to: 'auctions#reverse_auction_rules'
   get '/admin', to: 'admin/auctions/needs_attention#index'
+  get '/admin/sign_in', to: 'admin/sign_ins#show'
   get '/sign_up', to: 'sign_ups#show'
   get '/sign_in', to: 'sign_ins#show'
 

@@ -16,6 +16,10 @@ class AdminAuctionStatusPresenter::Available < AdminAuctionStatusPresenter::Base
     end
   end
 
+  def self.relevant?(status)
+    status.available?
+  end
+
   private
 
   def total_bids

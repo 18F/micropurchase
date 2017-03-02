@@ -32,9 +32,10 @@ information on setting up the back end of the web app, see below.
 
 ## Documentation
 
-### Methods and classes
+## Local Development
 
-Currently, there is no RDoc-style documentation for the methods and classes in this Rails app. We anticipate fixing this.
+See the [CONTRIBUTING.md](CONTRIBUTING.md) for a full run-down of how to
+contribute to this application.
 
 ### Database Schema
 
@@ -44,16 +45,11 @@ to this diagram. You can automatically update the diagram by running (follow the
 local development instructions below if you don't have the app setup locally):
 
 ```
-bundle exec erd
+[docker-compose run web] bundle exec erd
 ```
 
 Updating the ERD requires Graphiz. Installation instructions are
 [here](http://voormedia.github.io/rails-erd/install.html).
-
-## Local Development
-
-See the [local development docs](docs/local_development.md) for information on
-setting up the codebase and running tests locally or with Docker.
 
 ### Coverage and CodeClimate
 
