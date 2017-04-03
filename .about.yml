@@ -40,15 +40,15 @@ testable: true
 #   id: Internal team identifier/user name
 #   role: Team member's role; leads should be designated as 'lead'
 team:
-- github: mtorres253
-  id: Michael Torres
+- github: stvnrlly
+  id: Steven Reilly
   role: Product Manager
 
-- github: vzvenyach
-  id: V. David Zvenyach
+- github: stvnrlly
+  id: Steven Reilly
   role: Product Owner
 
-- github: adelevieb
+- github: adelevie
   id: Alan DeLevie
   role: Developer
 
@@ -67,10 +67,6 @@ team:
 - github: andrewmaier
   id: Andrew Maier
   role: User Experience Lead
-  
-- github: baccigalupi
-  id: Kane Baccigalupi
-  role: Strategist
 
 # Partners for whom the project is developed
 partners:
@@ -149,5 +145,5 @@ links:
 
 # Email addresses of points-of-contact
 contact:
-- url: mailto:michael.torres@gsa.gov
+- url: mailtosteven.reilly@gsa.gov
   text: Michael Torres
