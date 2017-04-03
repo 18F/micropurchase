@@ -1,7 +1,70 @@
 require 'rails_helper'
 
 describe AuctionParser do
-  describe '#perform' do
+  describe '#published_params' do
+    context 'when the params contains archive_auction' do
+      it 'returns archived' do
+        user = create(:user)
+        params = {
+          auction: {title: 'the title'},
+          archive_auction: :Auction
+        }
+        parser = AuctionParser.new(params, user)
+
+        expect(parser.published_param).to eq('archived')
+      end
+    end
+
+    context 'when the params does not contain archive_auction' do
+      it 'returns nil' do
+        user = create(:user)
+        params = {
+          auction: {title: 'the title'}
+        }
+        parser = AuctionParser.new(params, user)
+
+        expect(parser.published_param).to be nil
+      end
+    end
+
+    context 'when the params contains {published => published}' do
+      it 'returns published' do
+        user = create(:user)
+        params = {
+          auction: {
+            title: 'title',
+            description: 'description',
+            github_repo: 'github url',
+            issue_url: 'issue url',
+            published: 'published'
+          }
+        }
+        parser = AuctionParser.new(params, user)
+
+        expect(parser.published_param).to eq('published')
+      end
+    end
+
+    context 'when the params contains {published => unpublished}' do
+      it 'returns nil' do
+        user = create(:user)
+        params = {
+          auction: {
+            title: 'title',
+            description: 'description',
+            github_repo: 'github url',
+            issue_url: 'issue url',
+            published: 'unpublished'
+          }
+        }
+        parser = AuctionParser.new(params, user)
+
+        expect(parser.published_param).to be nil
+      end
+    end
+  end
+
+  describe '#attributes' do
     context 'attributes in params' do
       it 'assigns attributes correctly' do
         user = create(:user)

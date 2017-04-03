@@ -7,7 +7,7 @@ class AuctionParser
   end
 
   def attributes
-    auction_params.merge(
+    @_attributes ||= auction_params.merge(
       delivery_due_at: delivery_due_at,
       ended_at: ended_at,
       started_at: started_at,
@@ -16,7 +16,23 @@ class AuctionParser
     ).delete_if { |_key, value| value.nil? }
   end
 
+  def published_param
+    if publishing?
+      'published'
+    elsif archiving?
+      'archived'
+    end
+  end
+
   private
+
+  def publishing?
+    attributes['published'] == 'published'
+  end
+
+  def archiving?
+    params.key? :archive_auction
+  end
 
   def auction_params
     strong_params.require(:auction).permit(

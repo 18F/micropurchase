@@ -2,6 +2,83 @@ require 'rails_helper'
 
 describe UpdateAuction do
   describe '#perform' do
+    context 'when archiving an auction' do
+      context 'when there is no associated auction_state' do
+        it 'creates a new AuctionState and sets value to archived' do
+          auction = create(:auction, :unpublished)
+
+          params = {
+            auction: {"foo" => "bar"},
+            archive_auction: :Archive
+          }
+
+          expect do
+            UpdateAuction.new(
+              auction: auction,
+              params: params,
+              current_user: auction.user
+            ).perform
+          end.to change { AuctionState.count }.by(1)
+
+          auction.reload
+
+          published_state = auction.states.find {|state| state.name == 'published'}
+          expect(published_state.state_value).to eq('archived')
+        end
+      end
+
+      context 'when there is an associated auction_state' do
+        it 'updates the AuctionState and sets value to archived' do
+          auction = create(:auction, :unpublished)
+
+          # adding the existing auction_state
+          # not using a factory since we want to use less of them
+          # this could eventually be pulled into a builder class/method
+          auction.states.build(name: 'published', state_value: 'unpublished')
+          auction.save
+
+          params = {
+            auction: {"foo" => "bar"},
+            archive_auction: :Archive
+          }
+
+          expect do
+            UpdateAuction.new(
+              auction: auction,
+              params: params,
+              current_user: auction.user
+            ).perform
+          end.to change { AuctionState.count }.by(0)
+
+          auction.reload
+
+          published_state = auction.states.find {|state| state.name == 'published'}
+          expect(published_state.state_value).to eq('archived')
+        end
+      end
+    end
+
+    context 'when publishing an auction' do
+      it 'creates an AuctionState record' do
+        auction = create(:auction, :unpublished)
+
+        params = {
+          auction: {"published" => "published"}
+        }
+
+        UpdateAuction.new(
+          auction: auction,
+          params: params,
+          current_user: auction.user
+        ).perform
+
+        auction.reload
+
+        published_state = auction.states.find {|state| state.name == 'published'}
+        expect(published_state.state_value).to eq('published')
+      end
+    end
+
     context 'when changing ended_at' do
       context 'job not enqueued' do
         it 'creates the Auction Ended Job' do

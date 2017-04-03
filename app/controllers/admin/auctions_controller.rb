@@ -13,9 +13,9 @@ class Admin::AuctionsController < Admin::BaseController
   end
 
   def create
-    auction = BuildAuction.new(params, current_user).perform
+    auction = CreateAuction.new(params, current_user).perform
 
-    if SaveAuction.new(auction).perform
+    if auction.persisted?
       flash[:success] = I18n.t('controllers.admin.auctions.create.success')
       redirect_to admin_auction_path(auction)
     else
@@ -33,11 +33,9 @@ class Admin::AuctionsController < Admin::BaseController
   def update
     auction = Auction.find(params[:id])
 
-    update_auction = if ArchiveAuction.archive_submit?(params)
-                       ArchiveAuction.new(auction: auction)
-                     else
-                       UpdateAuction.new(auction: auction, params: params, current_user: current_user)
-                     end
+    update_auction = UpdateAuction.new(auction: auction,
+                                       params: params,
+                                       current_user: current_user)
 
     if update_auction.perform
       flash[:success] = I18n.t('controllers.admin.auctions.update.success')
