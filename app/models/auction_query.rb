@@ -68,6 +68,25 @@ class AuctionQuery
       .not_paid
   end
 
+  def paid_within_month(month)
+    month_name = Date::MONTHNAMES[month.to_i]
+    date = Date.parse(month_name)
+
+    relation
+      .paid
+      .where('paid_at >= ? AND paid_at <= ?', date.beginning_of_month, date.end_of_month)
+  end
+
+  def obligated_within_month(month)
+    month_name = Date::MONTHNAMES[month.to_i]
+    date = Date.parse(month_name)
+
+    public_index
+      .started_at_in_past
+      .ended_at_in_future
+      .where('delivery_due_at >= ? AND delivery_due_at <= ?', date.beginning_of_month, date.end_of_month)
+  end
+
   def payment_needed
     relation
       .accepted_or_accepted_and_pending_payment_url
