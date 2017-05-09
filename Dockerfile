@@ -13,6 +13,7 @@ ADD Gemfile /app/Gemfile
 ADD Gemfile.lock /app/Gemfile.lock
 RUN bundle install
 RUN gem install foreman
+RUN gem install travis
 RUN curl https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh > /usr/local/bin/wait-for-it
 RUN chmod +x /usr/local/bin/wait-for-it
 CMD wait-for-it db:5432 && bundle exec rake dev:prime && \
