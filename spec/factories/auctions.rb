@@ -109,6 +109,7 @@ FactoryGirl.define do
       accepted
       c2_budget_approved
       with_bids
+      delivery_url
       delivery_status :accepted_pending_payment_url
     end
 

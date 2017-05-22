@@ -227,3 +227,7 @@ auctions that will be paid for with the 18F purchase card), follow these steps:
   if you are creating keys for prod, create the keys at
   `https://cap.18f.gov/oauth/applications` and set `C2_HOST` to
   `'https://cap.18f.gov'`
+
+### Travis Deployment
+
+All environment variables needed to deploy the application to cloud.gov are stored via the Travis-CI environment variable UI 9and not as encrypted keys in the .travis.yml file)
