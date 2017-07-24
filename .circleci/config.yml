@@ -61,9 +61,10 @@ jobs:
                             --out /tmp/test-results/rspec.xml \
                             --format progress
             ./cc-test-reporter format-coverage --output coverage/codeclimate.rspec.json
-            bundle exec cucumber
+            bundle exec rake cucumber
             ./cc-test-reporter format-coverage --output coverage/codeclimate.cucumber.json
-            ./cc-test-reporter sum-coverage coverage/codeclimate.*.json | ./cc-test-reporter upload-coverage
+            ./cc-test-reporter sum-coverage --output -- --parts 2 coverage/codeclimate.*.json > coverage/codeclimate.json
+            ./cc-test-reporter upload-coverage -d
 
       # --format CircleCICucumberFormatter::CircleCIJson
       # collect reports
