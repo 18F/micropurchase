@@ -64,7 +64,7 @@ jobs:
             bundle exec cucumber --format junit --out /tmp/test-results/cucumber.xml
             ./cc-test-reporter format-coverage --output coverage/codeclimate.cucumber.json
             ./cc-test-reporter sum-coverage --parts 2 --output coverage/codeclimate.json coverage/codeclimate.*.json
-            ./cc-test-reporter upload-coverage --debug
+            ./cc-test-reporter upload-coverage
 
       # --format CircleCICucumberFormatter::CircleCIJson
       # collect reports
