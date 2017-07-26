@@ -41,8 +41,8 @@ gem 'uswds-rails', github: '18F/uswds-rails-gem'
 gem 'rest-client'
 
 group :test do
-  gem "simplecov", require: nil
   gem 'dotenv'
+  gem "simplecov", require: nil
   gem 'db-query-matchers'
   gem 'json-schema'
   gem 'shoulda-matchers'
@@ -51,8 +51,8 @@ group :test do
 end
 
 group :development, :test do
-  gem 'rspec_junit_formatter'
   gem 'rspec-rails'
+  gem 'rspec_junit_formatter'
   gem 'cucumber-rails', require: false
   gem 'capybara'
   gem 'poltergeist'
