@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.3.3'
+ruby '2.3.4'
 
 gem 'rails', '4.2.7.1'
 gem 'pg'
@@ -41,9 +41,8 @@ gem 'uswds-rails', github: '18F/uswds-rails-gem'
 gem 'rest-client'
 
 group :test do
-  gem "codeclimate-test-reporter", require: nil
-  gem 'codeclimate_batch', require: nil
   gem 'dotenv'
+  gem "simplecov", require: nil
   gem 'db-query-matchers'
   gem 'json-schema'
   gem 'shoulda-matchers'
@@ -53,6 +52,7 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'rspec_junit_formatter'
   gem 'cucumber-rails', require: false
   gem 'capybara'
   gem 'poltergeist'

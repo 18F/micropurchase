@@ -1,0 +1,75 @@
+#
+version: 2
+jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/ruby:2.3.4-node-browsers
+        environment:
+          CC_TEST_REPORTER_ID: 2ad0d3196c872832cf5d6b34c83bf21dbf0a30e2191ba036be003b01e417a6a1
+          PG_HOST: localhost
+          PG_USER: postgres
+          RAILS_ENV: test
+          RACK_ENV: test
+          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/micropurchase_test"
+
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      - image: postgres:9.6.2
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: micropurchase_test
+          POSTGRES_PASSWORD: postgres
+
+    working_directory: ~/micropurchase
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "Gemfile.lock" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run:
+          name: install dependencies
+          command: |
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+
+      - save_cache:
+          paths:
+            - ./venv
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      # Database setup
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:schema:load
+
+      # run tests!
+      # TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+      - run:
+          name: run tests
+          command: |
+            mkdir /tmp/test-results
+            ./cc-test-reporter before-build
+            bundle exec rspec --format progress \
+                            --format RspecJunitFormatter \
+                            --out /tmp/test-results/rspec.xml \
+                            --format progress
+            ./cc-test-reporter format-coverage --output coverage/codeclimate.rspec.json
+            bundle exec cucumber --format junit --out /tmp/test-results/cucumber.xml
+            ./cc-test-reporter format-coverage --output coverage/codeclimate.cucumber.json
+            ./cc-test-reporter sum-coverage --parts 2 --output coverage/codeclimate.json coverage/codeclimate.*.json
+            ./cc-test-reporter upload-coverage
+
+      # --format CircleCICucumberFormatter::CircleCIJson
+      # collect reports
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
